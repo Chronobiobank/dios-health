@@ -273,7 +273,7 @@ export function PatientSignupWizard() {
           familyName: draft.familyName.trim(),
           age,
           biologicalSex: draft.biologicalSex,
-          acceptTerms: !termsAlreadyRecorded && acceptedTerms,
+          acceptTerms: termsAlreadyRecorded || acceptedTerms,
         }),
       })
 
@@ -479,7 +479,11 @@ export function PatientSignupWizard() {
               onChange={setAcceptedTerms}
               disabled={loading}
             />
-          ) : null}
+          ) : (
+            <p className="type-body text-sm text-black/55">
+              Terms and Privacy Policy already accepted for this account.
+            </p>
+          )}
           {error ? (
             <p className="type-body text-sm text-red-600" role="alert">
               {error}

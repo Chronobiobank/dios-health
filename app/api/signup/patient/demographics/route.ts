@@ -1,18 +1,43 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { buildFullName } from '@/lib/auth/parse-oauth-names'
-import { hasAcceptedTerms, recordTermsAcceptance } from '@/lib/auth/terms'
 import { createClient } from '@/lib/supabase/server'
 
 function mapDemographicsError(message: string): string {
   const lower = message.toLowerCase()
-  if (lower.includes('does not exist') || lower.includes('schema cache') || lower.includes('column')) {
-    return 'Profile fields are not set up in the database yet. Run migrations 006 and 009 in Supabase.'
+
+  if (lower.includes('terms of service') || lower.includes('privacy policy')) {
+    return 'You must accept the Terms of Service and Privacy Policy.'
   }
+
+  if (lower.includes('first and family name')) {
+    return 'First and family name are required.'
+  }
+
+  if (lower.includes('biological sex')) {
+    return 'Biological sex is required.'
+  }
+
+  if (lower.includes('valid age')) {
+    return 'Enter a valid age between 13 and 120.'
+  }
+
+  if (lower.includes('not authenticated')) {
+    return 'Unauthorised'
+  }
+
+  if (lower.includes('save_patient_demographics') || lower.includes('could not find the function')) {
+    return 'Signup save function missing. Run supabase/run-patient-signup-fields.sql in Supabase SQL Editor.'
+  }
+
+  if (lower.includes('schema cache')) {
+    return 'Database schema cache is stale. Re-run supabase/run-patient-signup-fields.sql in Supabase SQL Editor.'
+  }
+
   if (lower.includes('row-level security') || lower.includes('policy')) {
     return 'Could not save your profile. Please sign out and sign in again.'
   }
-  return 'Something went wrong. Please try again.'
+
+  return message || 'Something went wrong. Please try again.'
 }
 
 export async function POST(request: NextRequest) {
@@ -58,52 +83,19 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Enter a valid age between 13 and 120.' }, { status: 400 })
   }
 
-  const termsAccepted = await hasAcceptedTerms(supabase, user.id)
-  if (!termsAccepted) {
-    if (!body.acceptTerms) {
-      return NextResponse.json(
-        { error: 'You must accept the Terms of Service and Privacy Policy.' },
-        { status: 400 }
-      )
-    }
+  const { error: rpcError } = await supabase.rpc('save_patient_demographics', {
+    p_first_name: firstName,
+    p_family_name: familyName,
+    p_age: age,
+    p_biological_sex: biologicalSex,
+    p_accept_terms: Boolean(body.acceptTerms),
+  })
 
-    const { error: termsError } = await recordTermsAcceptance(supabase, user.id)
-    if (termsError) {
-      console.error('Demographics terms acceptance error:', termsError)
-      return NextResponse.json({ error: mapDemographicsError(termsError.message) }, { status: 500 })
-    }
-  }
-
-  const fullName = buildFullName(firstName, familyName)
-
-  const { error: profileError } = await supabase.from('profiles').upsert(
-    {
-      id: user.id,
-      role: 'patient',
-      full_name: fullName,
-    },
-    { onConflict: 'id' }
-  )
-
-  if (profileError) {
-    console.error('Demographics profile upsert error:', profileError)
-    return NextResponse.json({ error: mapDemographicsError(profileError.message) }, { status: 500 })
-  }
-
-  const { error: patientError } = await supabase.from('patient_profiles').upsert(
-    {
-      id: user.id,
-      first_name: firstName,
-      family_name: familyName,
-      age,
-      biological_sex: biologicalSex,
-    },
-    { onConflict: 'id' }
-  )
-
-  if (patientError) {
-    console.error('Demographics patient upsert error:', patientError)
-    return NextResponse.json({ error: mapDemographicsError(patientError.message) }, { status: 500 })
+  if (rpcError) {
+    console.error('Demographics RPC error:', rpcError)
+    const message = mapDemographicsError(rpcError.message)
+    const status = message === 'Unauthorised' ? 401 : 500
+    return NextResponse.json({ error: message }, { status })
   }
 
   return NextResponse.json({
