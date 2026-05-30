@@ -2,6 +2,8 @@
 
 import { useCallback, useState } from 'react'
 
+import { isPdfFile } from '@/lib/tiptraq/extraction'
+
 export interface TipTraQUploadResult {
   night: {
     date: string
@@ -51,7 +53,7 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
 
   const processFile = useCallback(
     async (file: File) => {
-      if (file.type !== 'application/pdf') {
+      if (!isPdfFile(file)) {
         setState({
           status: 'error',
           progress: 0,

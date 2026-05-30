@@ -1,64 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Anthropic from '@anthropic-ai/sdk'
 
 import { calculateNightDLMO, calculateRollingDLMO } from '@/lib/dlmo'
 import { createClient } from '@/lib/supabase/server'
+import {
+  extractTipTraQFromPdf,
+  getAnthropicApiKey,
+  TIPTRAQ_EXTRACTION_MODEL,
+} from '@/lib/tiptraq/anthropic-client'
+import {
+  isPdfFile,
+  mapInsertError,
+  mapStorageUploadError,
+  parseExtractedJson,
+  toNightInput,
+  validateReportDate,
+} from '@/lib/tiptraq/extraction'
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
-})
+export const maxDuration = 60
+export const dynamic = 'force-dynamic'
 
-const EXTRACTION_PROMPT = `You are extracting structured data from a PranaQ TipTraQ nightly sleep report PDF.
-
-Extract the following values exactly as they appear. If a value is not present return null.
-
-Return ONLY valid JSON. No preamble. No markdown. No explanation. No code blocks.
-
-{
-  "patient_name": string,
-  "report_date": "YYYY-MM-DD",
-  "recording_start": "HH:MM",
-  "recording_end": "HH:MM",
-  "trt_minutes": number,
-  "signal_quality_pct": number,
-  "sleep_onset": "HH:MM",
-  "sleep_offset": "HH:MM",
-  "sleep_latency_minutes": number,
-  "tst_minutes": number,
-  "waso_minutes": number,
-  "sleep_efficiency_pct": number,
-  "rem_duration_minutes": number,
-  "rem_pct_tst": number,
-  "nrem_duration_minutes": number,
-  "first_rem_onset": "HH:MM or null",
-  "ahi": number,
-  "ahi_severity": string,
-  "rdi": number,
-  "odi_3pct": number,
-  "odi_4pct": number,
-  "t90_pct": number,
-  "min_spo2": number,
-  "mean_spo2": number,
-  "hypoxic_burden": number,
-  "event_count": number,
-  "mean_pr": number,
-  "min_pr": number,
-  "max_pr": number,
-  "sns_pct": number,
-  "pns_pct": number,
-  "snoring_minutes": number,
-  "algorithm_version": string
+function errorResponse(message: string, status: number) {
+  return NextResponse.json({ error: message }, { status })
 }
 
-Important notes:
-- Sleep onset is when sleep actually starts, not recording start
-- first_rem_onset is the clock time of first REM epoch
-- If REM onset cannot be determined from the report return null
-- sns_pct and pns_pct should sum to 100
-- All times in 24h format HH:MM
-- waso_minutes: convert hours and minutes to total minutes`
-
 export async function POST(request: NextRequest) {
+  if (!getAnthropicApiKey()) {
+    console.error('TipTraQ extract: ANTHROPIC_API_KEY is not configured')
+    return errorResponse(
+      'Report extraction is not configured on the server. Please try again later or contact support.',
+      503
+    )
+  }
+
   try {
     const supabase = await createClient()
 
@@ -67,21 +40,21 @@ export async function POST(request: NextRequest) {
       error: authError,
     } = await supabase.auth.getUser()
     if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
+      return errorResponse('Unauthorised', 401)
     }
 
     const formData = await request.formData()
-    const file = formData.get('pdf') as File
-    if (!file) {
-      return NextResponse.json({ error: 'No PDF provided' }, { status: 400 })
+    const file = formData.get('pdf')
+    if (!(file instanceof File)) {
+      return errorResponse('No PDF provided', 400)
     }
 
-    if (file.type !== 'application/pdf') {
-      return NextResponse.json({ error: 'File must be a PDF' }, { status: 400 })
+    if (!isPdfFile(file)) {
+      return errorResponse('File must be a PDF', 400)
     }
 
     if (file.size > 10 * 1024 * 1024) {
-      return NextResponse.json({ error: 'PDF must be under 10MB' }, { status: 400 })
+      return errorResponse('PDF must be under 10MB', 400)
     }
 
     const fileBytes = await file.arrayBuffer()
@@ -96,70 +69,22 @@ export async function POST(request: NextRequest) {
 
     if (uploadError) {
       console.error('Storage upload error:', uploadError)
-      return NextResponse.json({ error: 'Failed to store PDF' }, { status: 500 })
+      return errorResponse(mapStorageUploadError(uploadError.message), 500)
     }
 
-    const base64PDF = Buffer.from(fileBytes).toString('base64')
-
-    const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      messages: [
-        {
-          role: 'user',
-          content: [
-            {
-              type: 'document',
-              source: {
-                type: 'base64',
-                media_type: 'application/pdf',
-                data: base64PDF,
-              },
-            },
-            {
-              type: 'text',
-              text: EXTRACTION_PROMPT,
-            },
-          ],
-        },
-      ],
-    })
-
-    const rawText = message.content
-      .filter((block) => block.type === 'text')
-      .map((block) => (block as { type: 'text'; text: string }).text)
-      .join('')
+    const { rawText } = await extractTipTraQFromPdf(Buffer.from(fileBytes).toString('base64'))
 
     let extracted: Record<string, unknown>
     try {
-      extracted = JSON.parse(rawText.trim())
+      extracted = parseExtractedJson(rawText)
     } catch {
       console.error('JSON parse error:', rawText)
-      return NextResponse.json({ error: 'Failed to parse report data' }, { status: 422 })
+      return errorResponse('Could not read this TipTraQ report. Check the PDF and try again.', 422)
     }
 
-    const nightData = {
-      sleep_onset: extracted.sleep_onset as string,
-      sleep_offset: extracted.sleep_offset as string,
-      sleep_latency_minutes: extracted.sleep_latency_minutes as number,
-      tst_minutes: extracted.tst_minutes as number,
-      waso_minutes: extracted.waso_minutes as number,
-      sleep_efficiency_pct: extracted.sleep_efficiency_pct as number,
-      rem_duration_minutes: extracted.rem_duration_minutes as number,
-      rem_pct_tst: extracted.rem_pct_tst as number,
-      first_rem_onset: extracted.first_rem_onset as string | null,
-      ahi: extracted.ahi as number,
-      sns_pct: extracted.sns_pct as number,
-      pns_pct: extracted.pns_pct as number,
-      mean_pr: extracted.mean_pr as number,
-      min_pr: extracted.min_pr as number,
-      min_spo2: extracted.min_spo2 as number,
-      hypoxic_burden: extracted.hypoxic_burden as number,
-      signal_quality_pct: extracted.signal_quality_pct as number,
-    }
-
-    const dlmoResult = calculateNightDLMO(nightData)
-    const reportDate = extracted.report_date as string
+    const reportDate = validateReportDate(extracted.report_date)
+    const nightInput = toNightInput(extracted)
+    const dlmoResult = calculateNightDLMO(nightInput)
 
     const { error: insertError } = await supabase.from('tiptraq_nights').insert({
       patient_id: user.id,
@@ -210,12 +135,12 @@ export async function POST(request: NextRequest) {
       high_sympathetic_flag: dlmoResult.high_sympathetic_flag,
       rem_delay_flag: dlmoResult.rem_delay_flag,
       apnea_confound_flag: dlmoResult.apnea_confound_flag,
-      extraction_model: 'claude-sonnet-4-20250514',
+      extraction_model: TIPTRAQ_EXTRACTION_MODEL,
     })
 
     if (insertError) {
       console.error('Insert error:', insertError)
-      return NextResponse.json({ error: 'Failed to save night data' }, { status: 500 })
+      return errorResponse(mapInsertError(insertError.message), 500)
     }
 
     const { data: allNights, error: fetchError } = await supabase
@@ -225,7 +150,8 @@ export async function POST(request: NextRequest) {
       .order('report_date', { ascending: true })
 
     if (fetchError || !allNights) {
-      return NextResponse.json({ error: 'Failed to fetch night history' }, { status: 500 })
+      console.error('Fetch nights error:', fetchError)
+      return errorResponse('Failed to fetch night history', 500)
     }
 
     const nightResults = allNights.map((n) => ({
@@ -309,6 +235,27 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Extraction pipeline error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+
+    if (error instanceof Error) {
+      if (error.message === 'ANTHROPIC_API_KEY is not configured') {
+        return errorResponse(
+          'Report extraction is not configured on the server. Please try again later or contact support.',
+          503
+        )
+      }
+
+      if (error.message.startsWith('Report is missing') || error.message.startsWith('Report has an invalid')) {
+        return errorResponse(error.message, 422)
+      }
+
+      if (error.message.includes('authentication') || error.message.includes('api_key')) {
+        return errorResponse(
+          'Report extraction service is misconfigured. Please contact support.',
+          503
+        )
+      }
+    }
+
+    return errorResponse('Internal server error', 500)
   }
 }
