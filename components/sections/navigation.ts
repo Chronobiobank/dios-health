@@ -4,10 +4,13 @@ export const NAV_LINKS = [
   { label: 'Pricing', href: '/#pricing' },
 ] as const
 
-export const AUTH_LINKS = [
+/** Always visible in the marketing site header */
+export const NAV_ACCOUNT_LINKS = [
   { label: 'Sign in', href: '/signin' },
-  { label: 'Sign up', href: '/signup' },
+  { label: 'Go to dashboard', href: '/dashboard', mobileLabel: 'Dashboard' },
 ] as const
+
+export const AUTH_LINKS = [{ label: 'Sign up', href: '/signup' }] as const
 
 export const NAV_MENU_LINKS = [
   ...NAV_LINKS,
