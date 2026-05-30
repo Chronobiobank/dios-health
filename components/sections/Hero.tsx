@@ -29,11 +29,11 @@ export function Hero() {
             <SectionLabel title="Why DIOS?" light />
 
             <h1 className="type-hero-overlay mt-4 !text-[clamp(2.25rem,6.5vw,4.5rem)] leading-[1.05] text-white">
-              Timing is the missing medicine
+              Timing matters
             </h1>
 
             <p className="type-hero-meta mt-6 max-w-2xl !text-[clamp(1.125rem,2.2vw,1.625rem)] leading-snug text-white/85">
-              DIOS synchronizes dosing with your biology to unlock better results
+              DIOS synchronises dosing with your biology to unlock better results
             </p>
 
             <HashLink href="#demo" className={`${BTN_HERO} mt-8`}>
