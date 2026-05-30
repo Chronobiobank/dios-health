@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Fragment } from 'react'
 
@@ -8,6 +9,13 @@ import {
 
 import { BODY, CONTAINER, SECTION, SECTION_ALT, SECTION_TITLE } from './layout'
 import { SectionLabel } from './SectionLabel'
+
+const SECTION_IMAGE = {
+  src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+  alt: 'Academic research environment — Oxford-validated chronodosing science',
+  width: 1200,
+  height: 675,
+} as const
 
 function RichText({ text }: { text: string }) {
   const parts = text.split(/(\*[^*]+\*)/g)
@@ -43,16 +51,36 @@ export function ResearchersHome() {
     <section id="researchers" className={`${SECTION} ${SECTION_ALT}`}>
       <div className={CONTAINER}>
         <SectionLabel title="The researchers" />
-        <h2 className={`${SECTION_TITLE} mt-4 max-w-xl`}>
-          The science exists.
-          <br />
-          The tool didn&apos;t.
-        </h2>
-        <p className={`${BODY} mt-4 max-w-xl`}>
-          Dose timing is Oxford-validated and trial-evidenced.
-          <br />
-          DIOS puts it in your consultation room.
-        </p>
+
+        <div className="mt-4 grid grid-cols-1 items-center gap-6 lg:grid-cols-2 lg:gap-12">
+          <div>
+            <h2 className={`${SECTION_TITLE} max-w-xl`}>
+              The science exists.
+              <br />
+              The tool didn&apos;t.
+            </h2>
+            <p className={`${BODY} mt-4 hidden max-w-xl lg:block`}>
+              Dose timing is Oxford-validated and trial-evidenced.
+              <br />
+              DIOS puts it in your consultation room.
+            </p>
+          </div>
+
+          <Image
+            src={SECTION_IMAGE.src}
+            alt={SECTION_IMAGE.alt}
+            width={SECTION_IMAGE.width}
+            height={SECTION_IMAGE.height}
+            loading="lazy"
+            className="aspect-video w-full rounded-lg object-cover lg:rounded-xl"
+          />
+
+          <p className={`${BODY} max-w-xl lg:hidden`}>
+            Dose timing is Oxford-validated and trial-evidenced.
+            <br />
+            DIOS puts it in your consultation room.
+          </p>
+        </div>
 
         <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3">
           {getHomepageResearchers().map((researcher) => (
