@@ -11,16 +11,21 @@ export function Nav() {
       <div className={`${CONTAINER} flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]`}>
         <Link
           href="/"
-          className="inline-flex shrink-0 items-baseline gap-2.5 sm:gap-3"
+          className="inline-flex shrink-0 items-baseline gap-x-2 sm:gap-x-2.5"
           aria-label="DIʘS — Make Time Count"
         >
-          <span className="dios-wordmark text-[28px] leading-none text-black sm:text-[32px]">
+          <span className="dios-wordmark nav-brand-wordmark text-[28px] leading-none text-black sm:text-[32px]">
             {DIOS_WORDMARK}
           </span>
-          <span className="type-logo-tagline text-[21px] leading-none sm:text-[24px]" aria-hidden>
-            |
+          <span
+            className="nav-brand-tagline text-[20px] leading-none sm:text-[23px]"
+            aria-hidden
+          >
+            &gt;
           </span>
-          <span className="type-logo-tagline text-[21px] leading-none sm:text-[24px]">Make Time Count</span>
+          <span className="nav-brand-tagline text-[20px] leading-none sm:text-[23px]">
+            Make Time Count
+          </span>
         </Link>
 
         <NavMenu />

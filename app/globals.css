@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -355,6 +355,24 @@
   a:hover .type-logo-tagline,
   a:focus-visible .type-logo-tagline {
     color: var(--text-muted);
+  }
+
+  /* Top nav: DIʘS > Make Time Count */
+  .nav-brand-wordmark {
+    font-weight: 600;
+  }
+
+  .nav-brand-tagline {
+    font-family: var(--font-family-sans);
+    font-weight: var(--font-weight-regular);
+    color: rgb(13 13 13 / 0.42);
+    letter-spacing: var(--tracking-normal);
+  }
+
+  a .nav-brand-tagline,
+  a:hover .nav-brand-tagline,
+  a:focus-visible .nav-brand-tagline {
+    color: rgb(13 13 13 / 0.42);
   }
 
   .type-tile-overlay-label {
