@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { AuthShell } from '@/components/auth/auth-shell'
 import { AuthToggle } from '@/components/auth/auth-toggle'
 import { SignupProgress } from '@/components/auth/signup-progress'
+import { SignupSessionBanner } from '@/components/auth/signup-session-banner'
 import { TermsConsentField } from '@/components/auth/terms-consent-field'
 import { BTN_PRIMARY, CARD, LABEL, LIST_LINE } from '@/components/sections/layout'
 import { guessCountryFromLocale, COUNTRIES } from '@/lib/auth/countries'
@@ -315,6 +316,8 @@ export function PatientSignupWizard() {
   return (
     <AuthShell maxWidthClass={step === 3 ? 'max-w-2xl' : 'max-w-[400px]'}>
       <SignupProgress step={step} total={TOTAL_STEPS} />
+
+      {userId && draft.email ? <SignupSessionBanner email={draft.email} /> : null}
 
       {step > 1 && (step !== 2 || !signedUpWithOAuth) ? (
         <button

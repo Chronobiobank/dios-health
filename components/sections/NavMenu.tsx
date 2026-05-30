@@ -3,12 +3,17 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useId, useRef, useState } from 'react'
 
+import { SignOutButton } from '@/components/auth/sign-out-button'
 import { HashLink } from '@/components/sections/HashLink'
 import { cn } from '@/lib/utils'
 
 import { AUTH_LINKS, NAV_MENU_LINKS } from './navigation'
 
-export function NavMenu() {
+type NavMenuProps = {
+  isAuthenticated?: boolean
+}
+
+export function NavMenu({ isAuthenticated = false }: NavMenuProps) {
   const [open, setOpen] = useState(false)
   const menuId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
@@ -82,17 +87,27 @@ export function NavMenu() {
             <div className="my-3 border-t border-black/10 md:mx-2" />
 
             <ul className="flex flex-col gap-1">
-              {AUTH_LINKS.map((link) => (
-                <li key={link.label}>
-                  <HashLink
-                    href={link.href}
-                    className="type-nav block rounded-lg px-3 py-2.5 transition-colors hover:bg-black/[0.03] hover:text-black md:py-2"
-                    onClick={() => setOpen(false)}
-                  >
-                    {link.label}
-                  </HashLink>
+              {isAuthenticated ? (
+                <li>
+                  <SignOutButton
+                    variant="inline"
+                    className="block w-full px-3 py-2.5 text-left md:py-2"
+                    label="Sign out"
+                  />
                 </li>
-              ))}
+              ) : (
+                AUTH_LINKS.map((link) => (
+                  <li key={link.label}>
+                    <HashLink
+                      href={link.href}
+                      className="type-nav block rounded-lg px-3 py-2.5 transition-colors hover:bg-black/[0.03] hover:text-black md:py-2"
+                      onClick={() => setOpen(false)}
+                    >
+                      {link.label}
+                    </HashLink>
+                  </li>
+                ))
+              )}
             </ul>
           </nav>
         </>

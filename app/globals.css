@@ -581,6 +581,50 @@
     }
   }
 
+  .dios-site-nav__sign-out {
+    display: none;
+  }
+
+  .dios-site-nav__sign-out-btn {
+    display: inline-flex;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 9999px;
+    border: 1px solid rgb(13 13 13 / 0.15);
+    background: transparent;
+    padding-inline: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1;
+    color: #0d0d0d;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .dios-site-nav__sign-out-btn:hover:not(:disabled) {
+    background: rgb(13 13 13 / 0.05);
+    border-color: rgb(13 13 13 / 0.25);
+  }
+
+  .dios-site-nav__sign-out-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  @media (min-width: 640px) {
+    .dios-site-nav__sign-out {
+      display: block;
+    }
+
+    .dios-site-nav__sign-out-btn {
+      height: 2.25rem;
+      padding-inline: 1rem;
+      font-size: 0.875rem;
+    }
+  }
+
   .dios-site-nav__menu-trigger {
     display: inline-flex;
     height: 2.5rem;

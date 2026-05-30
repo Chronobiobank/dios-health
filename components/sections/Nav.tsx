@@ -2,8 +2,7 @@ import Link from 'next/link'
 
 import { DIOS_WORDMARK } from '@/components/DiosLogo'
 
-import { NavMenu } from './NavMenu'
-import { NAV_DASHBOARD_LINK } from './navigation'
+import { NavActions } from './NavActions'
 
 export function Nav() {
   return (
@@ -18,12 +17,7 @@ export function Nav() {
         </Link>
 
         <div className="dios-site-nav__actions">
-          <Link href={NAV_DASHBOARD_LINK.href} className="dios-site-nav__cta type-button">
-            <span className="dios-site-nav__cta-short">{NAV_DASHBOARD_LINK.mobileLabel}</span>
-            <span className="dios-site-nav__cta-long">{NAV_DASHBOARD_LINK.label}</span>
-          </Link>
-
-          <NavMenu />
+          <NavActions />
         </div>
       </div>
     </header>
