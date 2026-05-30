@@ -255,14 +255,14 @@ export function ClinicianSignupWizard() {
 
   if (checkingSession) {
     return (
-      <AuthShell>
+      <AuthShell withSiteNav>
         <p className="type-body text-center text-black/60">Loading…</p>
       </AuthShell>
     )
   }
 
   return (
-    <AuthShell maxWidthClass="max-w-[400px]">
+    <AuthShell withSiteNav maxWidthClass="max-w-[400px]">
       <SignupProgress step={step} total={TOTAL_STEPS} />
 
       {step > 1 ? (

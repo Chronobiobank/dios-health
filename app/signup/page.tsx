@@ -3,7 +3,7 @@ import { SignUpChoice } from '@/components/auth/sign-up-choice'
 
 export default function SignUpPage() {
   return (
-    <AuthShell headline="Who are you joining as?" maxWidthClass="max-w-3xl">
+    <AuthShell withSiteNav headline="Who are you joining as?" maxWidthClass="max-w-3xl">
       <SignUpChoice />
     </AuthShell>
   )

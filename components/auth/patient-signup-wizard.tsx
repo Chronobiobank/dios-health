@@ -170,14 +170,14 @@ export function PatientSignupWizard() {
 
   if (checkingSession) {
     return (
-      <AuthShell>
+      <AuthShell withSiteNav>
         <p className="type-body text-center text-black/60">Loading…</p>
       </AuthShell>
     )
   }
 
   return (
-    <AuthShell maxWidthClass={step === 2 ? 'max-w-2xl' : 'max-w-[400px]'}>
+    <AuthShell withSiteNav maxWidthClass={step === 2 ? 'max-w-2xl' : 'max-w-[400px]'}>
       <SignupProgress step={step} total={TOTAL_STEPS} />
 
       {step > 1 ? (

@@ -7,7 +7,7 @@ export function SignupProgress({ step, total }: SignupProgressProps) {
   const percent = Math.round((step / total) * 100)
 
   return (
-    <div className="mb-6">
+    <div className="mb-4 sm:mb-5">
       <p className="type-caption font-mono text-black/50">
         Step {step} of {total}
       </p>
