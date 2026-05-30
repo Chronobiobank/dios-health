@@ -49,6 +49,13 @@ export const SHIFT_PATTERNS = [
   'Other',
 ] as const
 
+export const BIOLOGICAL_SEX_OPTIONS = [
+  { value: 'female', label: 'Female' },
+  { value: 'male', label: 'Male' },
+  { value: 'intersex', label: 'Intersex' },
+  { value: 'prefer_not_to_say', label: 'Prefer not to say' },
+] as const
+
 export const WEARABLE_OPTIONS = [
   {
     id: 'tiptraq',

@@ -7,7 +7,7 @@ import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { SeededInsightCard } from '@/components/dashboard/seeded-insight-card'
 import { StreamsStatus } from '@/components/dashboard/streams-status'
 import { buildSeededInsight } from '@/lib/auth/chronotype-insight'
-import { getFirstName, getTimeGreeting } from '@/lib/auth/greeting'
+import { getPatientFirstName, getTimeGreeting } from '@/lib/auth/greeting'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import { buildBodyClockModel } from '@/lib/dashboard/body-clock'
 import {
@@ -30,7 +30,10 @@ export default async function DashboardPage() {
   const hasDlmoProfile = Boolean(profileRow?.nights_count && profileRow.nights_count > 0)
 
   const greeting = getTimeGreeting()
-  const firstName = getFirstName(profile.full_name ?? 'Patient')
+  const firstName = getPatientFirstName({
+    firstName: patient.first_name,
+    fullName: profile.full_name,
+  })
   const insight = buildSeededInsight(
     patient.chronotype_q1 ?? '',
     patient.chronotype_q2 ?? '',

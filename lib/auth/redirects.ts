@@ -75,11 +75,11 @@ export async function hasPatientProfile(
 ): Promise<boolean> {
   const { data } = await supabase
     .from('patient_profiles')
-    .select('id')
+    .select('id, first_name')
     .eq('id', userId)
-    .maybeSingle()
+    .maybeSingle<{ id: string; first_name: string | null }>()
 
-  return Boolean(data)
+  return Boolean(data?.id && data.first_name)
 }
 
 export async function hasCompletedClinicianOnboarding(

@@ -13,6 +13,7 @@ import { guessCountryFromLocale, COUNTRIES } from '@/lib/auth/countries'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
 import {
   ALERTNESS_OPTIONS,
+  BIOLOGICAL_SEX_OPTIONS,
   FITZPATRICK_TYPES,
   SHIFT_PATTERNS,
   SLEEP_TIME_OPTIONS,
@@ -20,8 +21,10 @@ import {
   WEARABLE_OPTIONS,
 } from '@/lib/auth/patient-signup-data'
 import {
+  buildFullName,
   draftToPatientProfile,
   INITIAL_PATIENT_SIGNUP_DRAFT,
+  patientProfileToDraft,
   type PatientSignupDraft,
 } from '@/lib/auth/patient-signup-types'
 import { AUTH_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
@@ -29,7 +32,32 @@ import { mapSignUpError, SIGN_UP_EMAIL_EXISTS_MESSAGE } from '@/lib/auth/sign-up
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 
-const TOTAL_STEPS = 5
+const TOTAL_STEPS = 6
+
+function parseOAuthNames(metadata: {
+  full_name?: string
+  name?: string
+  given_name?: string
+  family_name?: string
+}) {
+  const given = metadata.given_name?.trim() ?? ''
+  const family = metadata.family_name?.trim() ?? ''
+
+  if (given || family) {
+    return { firstName: given, familyName: family }
+  }
+
+  const combined = metadata.full_name?.trim() || metadata.name?.trim() || ''
+  if (!combined) {
+    return { firstName: '', familyName: '' }
+  }
+
+  const parts = combined.split(/\s+/).filter(Boolean)
+  return {
+    firstName: parts[0] ?? '',
+    familyName: parts.slice(1).join(' '),
+  }
+}
 
 export function PatientSignupWizard() {
   const router = useRouter()
@@ -40,6 +68,8 @@ export function PatientSignupWizard() {
   const [checkingSession, setCheckingSession] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
+  const [signedUpWithOAuth, setSignedUpWithOAuth] = useState(false)
+  const [resumingProfile, setResumingProfile] = useState(false)
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 })
@@ -54,25 +84,47 @@ export function PatientSignupWizard() {
     const supabase = createClient()
     void supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (user) {
-        const metadata = user.user_metadata as { full_name?: string; name?: string }
-        const fullName =
-          metadata.full_name?.trim() ||
-          metadata.name?.trim() ||
-          user.email?.split('@')[0] ||
-          'Patient'
+        const metadata = user.user_metadata as {
+          full_name?: string
+          name?: string
+          given_name?: string
+          family_name?: string
+        }
+        const { firstName, familyName } = parseOAuthNames(metadata)
 
         await supabase.from('profiles').upsert(
-          { id: user.id, role: 'patient', full_name: fullName },
+          { id: user.id, role: 'patient' },
           { onConflict: 'id' }
         )
 
-        if (user.email) {
-          updateDraft({ email: user.email, fullName })
-        } else {
-          updateDraft({ fullName })
+        const { data: existingPatient } = await supabase
+          .from('patient_profiles')
+          .select('*')
+          .eq('id', user.id)
+          .maybeSingle()
+
+        if (existingPatient?.first_name) {
+          router.replace(PATIENT_ROUTES.dashboard)
+          return
         }
 
+        const draftPatch: Partial<PatientSignupDraft> = {
+          ...(user.email ? { email: user.email } : {}),
+          firstName,
+          familyName,
+        }
+
+        if (existingPatient) {
+          Object.assign(draftPatch, patientProfileToDraft(existingPatient))
+          if (!draftPatch.firstName) draftPatch.firstName = firstName
+          if (!draftPatch.familyName) draftPatch.familyName = familyName
+          setResumingProfile(Boolean(existingPatient.fitzpatrick_type))
+        }
+
+        updateDraft(draftPatch)
+
         setUserId(user.id)
+        setSignedUpWithOAuth(true)
         setStep(2)
       }
       setCheckingSession(false)
@@ -92,9 +144,6 @@ export function PatientSignupWizard() {
     const { data, error: signUpError } = await supabase.auth.signUp({
       email: draft.email.trim(),
       password: draft.password,
-      options: {
-        data: { full_name: draft.fullName.trim() },
-      },
     })
 
     if (signUpError) {
@@ -127,7 +176,6 @@ export function PatientSignupWizard() {
     const { error: profileError } = await supabase.from('profiles').insert({
       id: user.id,
       role: 'patient',
-      full_name: draft.fullName.trim(),
     })
 
     if (profileError && profileError.code !== '23505') {
@@ -149,6 +197,19 @@ export function PatientSignupWizard() {
     setError(null)
 
     const supabase = createClient()
+    const fullName = buildFullName(draft.firstName, draft.familyName)
+
+    const { error: profileNameError } = await supabase
+      .from('profiles')
+      .update({ full_name: fullName })
+      .eq('id', userId)
+
+    if (profileNameError) {
+      setError('Something went wrong. Please try again.')
+      setLoading(false)
+      return
+    }
+
     const { error: saveError } = await supabase
       .from('patient_profiles')
       .upsert(draftToPatientProfile(userId, draft))
@@ -161,6 +222,65 @@ export function PatientSignupWizard() {
 
     router.refresh()
     router.push(PATIENT_ROUTES.dashboard)
+  }
+
+  function canContinueAboutYou() {
+    const age = Number.parseInt(draft.age, 10)
+    return (
+      draft.firstName.trim().length > 0 &&
+      draft.familyName.trim().length > 0 &&
+      draft.biologicalSex !== '' &&
+      Number.isFinite(age) &&
+      age >= 13 &&
+      age <= 120
+    )
+  }
+
+  async function handleAboutYouContinue() {
+    if (!userId || !canContinueAboutYou()) return
+
+    setError(null)
+    setLoading(true)
+
+    const supabase = createClient()
+    const fullName = buildFullName(draft.firstName, draft.familyName)
+    const { error: profileNameError } = await supabase
+      .from('profiles')
+      .update({ full_name: fullName })
+      .eq('id', userId)
+
+    if (profileNameError) {
+      setLoading(false)
+      setError('Something went wrong. Please try again.')
+      return
+    }
+
+    if (resumingProfile) {
+      const age = Number.parseInt(draft.age, 10)
+      const { error: demographicsError } = await supabase
+        .from('patient_profiles')
+        .update({
+          first_name: draft.firstName.trim(),
+          family_name: draft.familyName.trim(),
+          age: Number.isFinite(age) ? age : null,
+          biological_sex: draft.biologicalSex || null,
+        })
+        .eq('id', userId)
+
+      setLoading(false)
+
+      if (demographicsError) {
+        setError('Something went wrong. Please try again.')
+        return
+      }
+
+      router.refresh()
+      router.push(PATIENT_ROUTES.dashboard)
+      return
+    }
+
+    setLoading(false)
+    setStep(3)
   }
 
   function goBack() {
@@ -177,10 +297,10 @@ export function PatientSignupWizard() {
   }
 
   return (
-    <AuthShell withSiteNav maxWidthClass={step === 2 ? 'max-w-2xl' : 'max-w-[400px]'}>
+    <AuthShell withSiteNav maxWidthClass={step === 3 ? 'max-w-2xl' : 'max-w-[400px]'}>
       <SignupProgress step={step} total={TOTAL_STEPS} />
 
-      {step > 1 ? (
+      {step > 1 && (step !== 2 || !signedUpWithOAuth) ? (
         <button
           type="button"
           onClick={goBack}
@@ -191,24 +311,8 @@ export function PatientSignupWizard() {
         </button>
       ) : null}
 
-      {step === 1 ? (
+      {step === 1 && !userId ? (
         <form onSubmit={handleAccountSubmit} className={`${CARD} space-y-4 rounded-2xl p-6 sm:p-8`}>
-          <div>
-            <label htmlFor="full_name" className={`${LABEL} mb-2 block`}>
-              Full name
-            </label>
-            <input
-              id="full_name"
-              name="full_name"
-              type="text"
-              required
-              autoComplete="name"
-              value={draft.fullName}
-              onChange={(event) => updateDraft({ fullName: event.target.value })}
-              className={AUTH_INPUT_CLASS}
-              disabled={loading}
-            />
-          </div>
           <div>
             <label htmlFor="email" className={`${LABEL} mb-2 block`}>
               Email
@@ -274,6 +378,93 @@ export function PatientSignupWizard() {
       ) : null}
 
       {step === 2 ? (
+        <div className={`${CARD} space-y-4 rounded-2xl p-6 sm:p-8`}>
+          <div>
+            <label htmlFor="first_name" className={`${LABEL} mb-2 block`}>
+              First name
+            </label>
+            <input
+              id="first_name"
+              name="first_name"
+              type="text"
+              required
+              autoComplete="given-name"
+              value={draft.firstName}
+              onChange={(event) => updateDraft({ firstName: event.target.value })}
+              className={AUTH_INPUT_CLASS}
+              disabled={loading}
+            />
+          </div>
+          <div>
+            <label htmlFor="family_name" className={`${LABEL} mb-2 block`}>
+              Family name
+            </label>
+            <input
+              id="family_name"
+              name="family_name"
+              type="text"
+              required
+              autoComplete="family-name"
+              value={draft.familyName}
+              onChange={(event) => updateDraft({ familyName: event.target.value })}
+              className={AUTH_INPUT_CLASS}
+              disabled={loading}
+            />
+          </div>
+          <div>
+            <label htmlFor="age" className={`${LABEL} mb-2 block`}>
+              Age
+            </label>
+            <input
+              id="age"
+              name="age"
+              type="number"
+              required
+              min={13}
+              max={120}
+              inputMode="numeric"
+              autoComplete="off"
+              value={draft.age}
+              onChange={(event) => updateDraft({ age: event.target.value })}
+              className={AUTH_INPUT_CLASS}
+              disabled={loading}
+            />
+          </div>
+          <div>
+            <p className={`${LABEL} mb-3`}>Biological sex</p>
+            <div className="grid grid-cols-2 gap-2">
+              {BIOLOGICAL_SEX_OPTIONS.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => updateDraft({ biologicalSex: option.value })}
+                  className={cn(
+                    `${CARD} rounded-full px-4 py-2.5 text-sm font-medium transition-colors`,
+                    draft.biologicalSex === option.value && 'border-black bg-black text-white'
+                  )}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          {error ? (
+            <p className="type-body text-sm text-red-600" role="alert">
+              {error}
+            </p>
+          ) : null}
+          <button
+            type="button"
+            disabled={!canContinueAboutYou() || loading}
+            onClick={handleAboutYouContinue}
+            className={`${BTN_PRIMARY} h-11 w-full disabled:cursor-not-allowed disabled:opacity-60`}
+          >
+            {loading ? 'Saving…' : 'Continue →'}
+          </button>
+        </div>
+      ) : null}
+
+      {step === 3 ? (
         <div className="space-y-6">
           <div>
             <p className={`${LABEL} mb-3`}>
@@ -384,7 +575,7 @@ export function PatientSignupWizard() {
             disabled={!draft.fitzpatrickType || !draft.locationCity.trim() || (draft.shiftWorker && !draft.shiftPattern)}
             onClick={() => {
               setError(null)
-              setStep(3)
+              setStep(4)
             }}
             className={`${BTN_PRIMARY} h-11 w-full disabled:cursor-not-allowed disabled:opacity-60`}
           >
@@ -393,7 +584,7 @@ export function PatientSignupWizard() {
         </div>
       ) : null}
 
-      {step === 3 ? (
+      {step === 4 ? (
         <div className="space-y-6">
           <div>
             <label htmlFor="chronotype_q1" className={`${LABEL} mb-2 block`}>
@@ -455,7 +646,7 @@ export function PatientSignupWizard() {
           <button
             type="button"
             disabled={!draft.chronotypeQ1 || !draft.chronotypeQ2 || !draft.chronotypeQ3}
-            onClick={() => setStep(4)}
+            onClick={() => setStep(5)}
             className={`${BTN_PRIMARY} h-11 w-full disabled:cursor-not-allowed disabled:opacity-60`}
           >
             Continue →
@@ -463,7 +654,7 @@ export function PatientSignupWizard() {
         </div>
       ) : null}
 
-      {step === 4 ? (
+      {step === 5 ? (
         <div className="space-y-4">
           {WEARABLE_OPTIONS.map((option) => (
             <button
@@ -471,7 +662,7 @@ export function PatientSignupWizard() {
               type="button"
               onClick={() => {
                 updateDraft({ wearableConnected: option.id })
-                setStep(5)
+                setStep(6)
               }}
               className={`${CARD} w-full rounded-2xl p-5 text-left text-[#0D0D0D] transition-colors hover:border-black/25`}
             >
@@ -492,7 +683,7 @@ export function PatientSignupWizard() {
             type="button"
             onClick={() => {
               updateDraft({ wearableConnected: null })
-              setStep(5)
+              setStep(6)
             }}
             className="w-full rounded-2xl border border-dashed border-black/20 px-5 py-5 text-left text-[#0D0D0D] transition-colors hover:border-black/40"
           >
@@ -505,7 +696,7 @@ export function PatientSignupWizard() {
         </div>
       ) : null}
 
-      {step === 5 ? (
+      {step === 6 ? (
         <div className="space-y-4">
           <AuthToggle
             label="Share with my GP"

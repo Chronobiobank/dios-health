@@ -5,6 +5,10 @@ import { createClient } from '@/lib/supabase/server'
 
 export type PatientProfileRow = {
   id: string
+  first_name: string | null
+  family_name: string | null
+  age: number | null
+  biological_sex: string | null
   fitzpatrick_type: number | null
   location_city: string | null
   location_country: string | null
