@@ -48,7 +48,7 @@ export function DrugModules() {
         <div className="mt-4 grid grid-cols-1 items-center gap-6 lg:grid-cols-2 lg:gap-12">
           <div>
             <h2 className={`${SECTION_TITLE} max-w-2xl`}>
-              We start with four drugs that need personalised scheduling
+              Four drugs. The strongest timing evidence in primary care.
             </h2>
             <p className={`${BODY} mt-4 hidden max-w-lg lg:block`}>
               These four carry the strongest published evidence for dose timing in primary care today

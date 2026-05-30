@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { DIOS_WORDMARK } from '@/components/DiosLogo'
+
 import { CONTAINER } from './layout'
 import { NavMenu } from './NavMenu'
 
@@ -12,7 +14,7 @@ export function Nav() {
           className="inline-flex shrink-0 items-baseline gap-2 text-lg sm:gap-2.5 sm:text-xl"
           aria-label="DIOS — Dose Intelligence OS"
         >
-          <span className="type-logo leading-none text-black">DIOS</span>
+          <span className="dios-wordmark leading-none text-black">{DIOS_WORDMARK}</span>
           <span className="type-logo-tagline whitespace-nowrap">Dose Intelligence OS</span>
         </Link>
 

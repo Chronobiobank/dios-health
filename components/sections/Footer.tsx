@@ -1,10 +1,12 @@
 import Link from 'next/link'
 
+import { DIOS_WORDMARK } from '@/components/DiosLogo'
+
 import { CONTAINER, SECTION } from './layout'
 import { FOOTER_EXPLORE_LINKS, FOOTER_LEGAL_LINKS } from './navigation'
 
 const MISSION =
-  'DIOS reads your body clock and finds the right time for every treatment — dose intelligence for clinicians, researchers, and patients.'
+  'Your body clock decides when every dose works. DIOS finds the window.'
 
 function FooterLinkList({ links, label }: { links: readonly { label: string; href: string }[]; label: string }) {
   return (
@@ -23,8 +25,8 @@ export function Footer() {
     <footer className={`${SECTION} ${CONTAINER}`}>
       <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8 lg:gap-14">
         <div className="max-w-sm">
-          <Link href="/" className="type-logo text-lg text-black sm:text-xl" aria-label="DIOS — home">
-            DIOS
+          <Link href="/" className="dios-wordmark text-lg text-black sm:text-xl" aria-label="DIOS — home">
+            {DIOS_WORDMARK}
           </Link>
           <p className="type-body mt-4 text-sm leading-relaxed">{MISSION}</p>
         </div>

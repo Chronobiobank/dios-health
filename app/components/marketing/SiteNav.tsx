@@ -1,5 +1,6 @@
 'use client'
 
+import { DIOS_WORDMARK } from '@/components/DiosLogo'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -19,8 +20,8 @@ export function SiteNav() {
       <div className="dios-nav-bar">
         <div className="dios-nav-inner">
           <div className="dios-nav-row">
-          <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
-            <img src="/DIOS Health logo black.png" alt="DIOS Health" style={{ height: '28px', width: 'auto' }} />
+          <Link href="/" className="shrink-0" onClick={() => setOpen(false)} aria-label="DIOS — home">
+            <span className="dios-wordmark text-[28px] leading-none text-black">{DIOS_WORDMARK}</span>
           </Link>
 
           <nav className="ml-auto hidden items-center gap-10 md:flex">

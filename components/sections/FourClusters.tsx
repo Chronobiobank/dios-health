@@ -53,7 +53,7 @@ export function FourClusters() {
     <section id="how-it-works" className={`${SECTION} ${CONTAINER}`}>
       <SectionLabel title="Four clusters" />
       <h2 className={`${SECTION_TITLE} mt-4 max-w-3xl`}>
-        DIOS syncs with your body clock to time light, food, medicine, and movement perfectly
+        DIOS reads your body clock to find the right time for light, food, medicine, and movement.
       </h2>
 
       <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-2">

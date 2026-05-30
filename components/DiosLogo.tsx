@@ -1,68 +1,42 @@
-import Image from 'next/image'
-
 import { cn } from '@/lib/utils'
 
-/** Official brand assets in /public — matches DIOS Health logo black.png */
-const WORDMARK = {
-  black: {
-    src: '/DIOS Health logo black.png',
-    width: 3840,
-    height: 2160,
-  },
-  white: {
-    src: '/DIOS Health logo white.png',
-    width: 3840,
-    height: 2160,
-  },
+/** Official wordmark — ʘ is U+0298 LATIN LETTER BILABIAL CLICK */
+export const DIOS_WORDMARK = 'DI\u0298S'
+
+const SIZE_CLASSES = {
+  sm: 'text-[18px] leading-none',
+  xl: 'text-[28px] leading-none',
+  '4xl': 'text-[56px] leading-none',
+  '7xl': 'text-[96px] leading-none',
 } as const
 
-/** Zoom the mark — PNG includes padding; scale up for legibility in nav/footer */
-const GRAPHIC_SCALE = 1.35
-
-const HEIGHT_CLASSES = {
-  sm: 'h-[18px]',
-  xl: 'h-7',
-  '4xl': 'h-14',
-  '7xl': 'h-24',
-} as const
-
-export type DiosLogoSize = keyof typeof HEIGHT_CLASSES
+export type DiosLogoSize = keyof typeof SIZE_CLASSES
 
 export interface DiosLogoProps {
-  /** Preset height — xl matches 28px nav (SiteNav reference) */
+  /** Preset size — xl matches 28px nav reference */
   size?: DiosLogoSize
   /** Black on light backgrounds; white on dark */
-  variant?: keyof typeof WORDMARK
-  /** Height override, e.g. `h-8 sm:h-9` */
+  variant?: 'black' | 'white'
+  /** Size override, e.g. `text-xl md:text-2xl` */
   className?: string
-  priority?: boolean
 }
 
 export function DiosLogo({
   size = 'xl',
   variant = 'black',
   className,
-  priority = false,
 }: DiosLogoProps) {
-  const asset = WORDMARK[variant]
-
   return (
     <span
       className={cn(
-        'inline-flex shrink-0 items-center overflow-visible',
-        HEIGHT_CLASSES[size],
+        'dios-wordmark inline-flex shrink-0 items-baseline',
+        variant === 'white' ? 'text-white' : 'text-black',
+        SIZE_CLASSES[size],
         className
       )}
+      aria-hidden
     >
-      <Image
-        src={asset.src}
-        alt="DIOS Health"
-        width={asset.width}
-        height={asset.height}
-        priority={priority || size === 'xl'}
-        className="h-full w-auto max-w-none origin-left object-contain object-left"
-        style={{ transform: `scale(${GRAPHIC_SCALE})` }}
-      />
+      {DIOS_WORDMARK}
     </span>
   )
 }
@@ -71,26 +45,26 @@ const GALLERY_SCALES: { label: string; size: DiosLogoSize; note: string }[] = [
   {
     label: 'Mobile navigation',
     size: 'sm',
-    note: 'h-[18px] — footer & compact header',
+    note: '18px — footer & compact header',
   },
   {
     label: 'Desktop navigation',
     size: 'xl',
-    note: 'h-7 (28px) — primary nav wordmark',
+    note: '28px — primary nav wordmark',
   },
   {
     label: 'Hero callout',
     size: '4xl',
-    note: 'h-14 — section headlines',
+    note: '56px — section headlines',
   },
   {
     label: 'Display impact',
     size: '7xl',
-    note: 'h-24 — brand display environments',
+    note: '96px — brand display environments',
   },
 ]
 
-/** Side-by-side scale verification using official brand PNGs */
+/** Side-by-side scale verification for the text wordmark */
 export function DiosLogoGallery() {
   return (
     <div className="min-h-screen bg-[#FAFAF7] font-sans text-[#0D0D0D]">
@@ -102,9 +76,8 @@ export function DiosLogoGallery() {
           Official wordmark — scale gallery
         </h1>
         <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-black/60">
-          Rendered from <code className="font-mono text-xs">DIOS Health logo black.png</code> in{' '}
-          <code className="font-mono text-xs">/public</code>. The target O, stroke weight, and
-          letter alignment match the brand file at every size.
+          Rendered with <code className="font-mono text-xs">.dios-wordmark</code> (Montserrat, 500).
+          The ʘ glyph is U+0298 — independent of site body Geist.
         </p>
 
         <ul className="mt-16 divide-y divide-black/10 border-t border-black/10">
@@ -150,10 +123,10 @@ export function DiosLogoGallery() {
             Responsive className
           </p>
           <div className="mt-8 flex items-center border border-black/5 bg-white px-8 py-10">
-            <DiosLogo className="h-5 w-auto md:h-7 lg:h-14" />
+            <DiosLogo className="text-xl leading-none md:text-[28px] lg:text-[56px]" />
           </div>
           <p className="mt-2 font-mono text-xs text-black/40">
-            h-5 → md:h-7 → lg:h-14 (resize viewport to verify)
+            text-xl → md:28px → lg:56px (resize viewport to verify)
           </p>
         </div>
       </div>

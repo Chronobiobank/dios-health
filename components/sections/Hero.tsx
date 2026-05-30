@@ -33,11 +33,13 @@ export function Hero() {
             <SectionLabel title="Our Edge" light />
 
             <h1 className="type-hero-overlay mt-4 !text-[clamp(2.25rem,6.5vw,4.5rem)] leading-[1.05] text-white">
-              Precision Chronomedicine
+              Your body clock decides
+              <br />
+              when every dose works.
             </h1>
 
             <p className="type-hero-meta mt-6 max-w-2xl !text-[clamp(1.125rem,2.2vw,1.625rem)] leading-snug text-white/85">
-              DIOS reads your body clock and finds the right time for every treatment.
+              DIOS reads your body clock and finds the right time for every dose.
             </p>
 
             <Link href="#demo" className={`${BTN_HERO} mt-8`}>
