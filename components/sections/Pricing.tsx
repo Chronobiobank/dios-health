@@ -43,11 +43,7 @@ export function Pricing() {
           ))}
         </div>
 
-        <p className={`${BODY} mt-10 max-w-lg`}>
-          Researchers and insurers see only
-          <br />
-          what patients choose to share.
-        </p>
+        <p className={`${BODY} mt-10 max-w-lg`}>No opt-in. No access. Simple.</p>
       </div>
     </section>
   )
