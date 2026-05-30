@@ -61,7 +61,7 @@ export default async function DashboardStreamsPage() {
         </section>
       ) : null}
 
-      <StreamsStatus wearableConnected={patient.wearable_connected} />
+      <StreamsStatus wearableConnected={patient.wearable_connected} tipTraqNightsCount={nightHistory.length} />
     </>
   )
 }

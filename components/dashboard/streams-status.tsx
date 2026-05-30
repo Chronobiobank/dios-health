@@ -16,16 +16,19 @@ type StreamRow = {
 
 type StreamsStatusProps = {
   wearableConnected: string | null
+  tipTraqNightsCount?: number
 }
 
-export function StreamsStatus({ wearableConnected }: StreamsStatusProps) {
+export function StreamsStatus({ wearableConnected, tipTraqNightsCount = 0 }: StreamsStatusProps) {
+  const tipTraqLive = tipTraqNightsCount > 0
+
   const streams: StreamRow[] = [
     {
       name: 'TipTraQ',
-      fill: wearableConnected === 'tiptraq' ? 0.85 : 0,
-      status: wearableConnected === 'tiptraq' ? 'Connected · Live' : 'Not connected',
-      href: wearableConnected === 'tiptraq' ? undefined : PATIENT_ROUTES.streams,
-      actionLabel: wearableConnected === 'tiptraq' ? undefined : 'Connect →',
+      fill: tipTraqLive ? 0.85 : 0,
+      status: tipTraqLive ? 'Connected · Live' : 'Not connected',
+      href: tipTraqLive ? undefined : PATIENT_ROUTES.streams,
+      actionLabel: tipTraqLive ? undefined : 'Connect →',
     },
     {
       name: 'City Labs',

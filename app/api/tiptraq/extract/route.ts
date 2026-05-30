@@ -1,15 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { calculateNightDLMO, calculateRollingDLMO } from '@/lib/dlmo'
+import { calculateNightDLMO, calculateRollingDLMO, type DLMOResult } from '@/lib/dlmo'
 import { createClient } from '@/lib/supabase/server'
 import {
   extractTipTraQFromPdf,
   getAnthropicApiKey,
+  mapAnthropicError,
   TIPTRAQ_EXTRACTION_MODEL,
 } from '@/lib/tiptraq/anthropic-client'
 import {
   isPdfFile,
+  mapFetchError,
   mapInsertError,
+  mapProfileUpsertError,
   mapStorageUploadError,
   parseExtractedJson,
   toNightInput,
@@ -23,11 +26,34 @@ function errorResponse(message: string, status: number) {
   return NextResponse.json({ error: message }, { status })
 }
 
+function toRollingNightResults(nights: Array<{
+  proxy_dlmo_minutes_from_midnight: number | null
+  confidence_score: number | null
+  confidence_band_minutes: number | null
+}>): DLMOResult[] {
+  return nights.map((night) => ({
+    proxy_dlmo_minutes: night.proxy_dlmo_minutes_from_midnight ?? 0,
+    proxy_dlmo_time: '',
+    baseline_estimate: '',
+    rem_correction_min: 0,
+    ans_correction_min: 0,
+    ahi_modifier_min: 0,
+    confidence_score: night.confidence_score ?? 0,
+    confidence_band_minutes: night.confidence_band_minutes ?? 75,
+    confidence_label: '',
+    chronotype_signal: '',
+    non_dipper_flag: false,
+    high_sympathetic_flag: false,
+    rem_delay_flag: false,
+    apnea_confound_flag: false,
+  }))
+}
+
 export async function POST(request: NextRequest) {
   if (!getAnthropicApiKey()) {
     console.error('TipTraQ extract: ANTHROPIC_API_KEY is not configured')
     return errorResponse(
-      'Report extraction is not configured on the server. Please try again later or contact support.',
+      'Report extraction is not configured on the server. Add ANTHROPIC_API_KEY in Vercel environment variables.',
       503
     )
   }
@@ -149,27 +175,13 @@ export async function POST(request: NextRequest) {
       .eq('patient_id', user.id)
       .order('report_date', { ascending: true })
 
-    if (fetchError || !allNights) {
+    if (fetchError) {
       console.error('Fetch nights error:', fetchError)
-      return errorResponse('Failed to fetch night history', 500)
+      return errorResponse(mapFetchError(fetchError.message), 500)
     }
 
-    const nightResults = allNights.map((n) => ({
-      proxy_dlmo_minutes: n.proxy_dlmo_minutes_from_midnight,
-      proxy_dlmo_time: '',
-      baseline_estimate: '',
-      rem_correction_min: 0,
-      ans_correction_min: 0,
-      ahi_modifier_min: 0,
-      confidence_score: n.confidence_score,
-      confidence_band_minutes: n.confidence_band_minutes,
-      confidence_label: '',
-      chronotype_signal: '',
-      non_dipper_flag: false,
-      high_sympathetic_flag: false,
-      rem_delay_flag: false,
-      apnea_confound_flag: false,
-    }))
+    const nightResults =
+      allNights && allNights.length > 0 ? toRollingNightResults(allNights) : [dlmoResult]
 
     const rolling = calculateRollingDLMO(nightResults)
 
@@ -198,6 +210,7 @@ export async function POST(request: NextRequest) {
 
     if (upsertError) {
       console.error('Upsert error:', upsertError)
+      return errorResponse(mapProfileUpsertError(upsertError.message), 500)
     }
 
     return NextResponse.json({
@@ -236,23 +249,14 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Extraction pipeline error:', error)
 
-    if (error instanceof Error) {
-      if (error.message === 'ANTHROPIC_API_KEY is not configured') {
-        return errorResponse(
-          'Report extraction is not configured on the server. Please try again later or contact support.',
-          503
-        )
-      }
+    const anthropicMessage = mapAnthropicError(error)
+    if (anthropicMessage) {
+      return errorResponse(anthropicMessage, 503)
+    }
 
+    if (error instanceof Error) {
       if (error.message.startsWith('Report is missing') || error.message.startsWith('Report has an invalid')) {
         return errorResponse(error.message, 422)
-      }
-
-      if (error.message.includes('authentication') || error.message.includes('api_key')) {
-        return errorResponse(
-          'Report extraction service is misconfigured. Please contact support.',
-          503
-        )
       }
     }
 
