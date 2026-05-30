@@ -1,7 +1,6 @@
 import { BodyClockVisualization } from '@/components/dashboard/body-clock-visualization'
 import { DashboardPageTransition } from '@/components/dashboard/dashboard-page-transition'
 import { DASHBOARD_HEADLINE } from '@/components/dashboard/dashboard-styles'
-import { DataControlsSummary } from '@/components/dashboard/data-controls-summary'
 import { DlmoScoreCard } from '@/components/dashboard/dlmo-score-card'
 import { DlmoUploadPrompt } from '@/components/dashboard/dlmo-upload-prompt'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
@@ -78,12 +77,6 @@ export default async function DashboardPage() {
       </div>
 
       <StreamsStatus wearableConnected={patient.wearable_connected} />
-
-      <DataControlsSummary
-        dataShareGp={patient.data_share_gp}
-        dataShareResearch={patient.data_share_research}
-        dataSharePolicy={patient.data_share_policy}
-      />
     </DashboardPageTransition>
   )
 }
