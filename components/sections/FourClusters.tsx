@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 import { MatchedLines } from './MatchedLines'
@@ -14,6 +16,10 @@ const CLUSTERS = [
       'and tells you what to correct.',
     ],
     example: ['Light therapy ·', 'Seasonal affective disorder'],
+    image: {
+      src: 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=600&q=80',
+      alt: 'Morning sunlight through a window — light as the primary body clock signal',
+    },
   },
   {
     headline: ['Food.', 'Eat at the', 'right time.'],
@@ -24,6 +30,10 @@ const CLUSTERS = [
       'they eat.',
     ],
     example: ['Meal timing ·', 'Metabolic health'],
+    image: {
+      src: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80',
+      alt: 'Clean whole food meal in natural light — food timing and circadian rhythm',
+    },
   },
   {
     headline: ['Medicine.', 'Land it when', 'it works.'],
@@ -34,6 +44,10 @@ const CLUSTERS = [
       'guideline.',
     ],
     example: ['Ramipril · Simvastatin ·', 'Prednisolone'],
+    image: {
+      src: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80',
+      alt: 'Single capsule on neutral background — medication timing and dose intelligence',
+    },
   },
   {
     headline: ['Movement.', 'Move at the', 'right time.'],
@@ -44,6 +58,10 @@ const CLUSTERS = [
       'window.',
     ],
     example: ['Cardiac rehab ·', 'Metabolic syndrome'],
+    image: {
+      src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+      alt: 'Person running at dawn — exercise timing and circadian entrainment',
+    },
   },
 ] as const
 
@@ -54,7 +72,15 @@ export function FourClusters() {
 
       <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-2">
         {CLUSTERS.map((cluster) => (
-          <Card key={cluster.headline.join('-')} className={`${CARD} gap-0 py-0`}>
+          <Card key={cluster.headline.join('-')} className={`${CARD} gap-0 overflow-hidden py-0`}>
+            <Image
+              src={cluster.image.src}
+              alt={cluster.image.alt}
+              width={1200}
+              height={800}
+              loading="lazy"
+              className="aspect-[3/2] w-full rounded-t-lg object-cover"
+            />
             <CardHeader className="gap-3 px-6 pt-6">
               <MatchedLines lines={cluster.headline} variant="headline" slots={3} />
             </CardHeader>
