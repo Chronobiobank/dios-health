@@ -37,7 +37,23 @@ export async function middleware(request: NextRequest) {
       return supabaseResponse
     }
 
-    if (isSignupRoleChoicePath(pathname) || pathname === AUTH_ROUTES.signIn) {
+    if (isSignupRoleChoicePath(pathname)) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('id', user.id)
+        .maybeSingle()
+
+      // New OAuth users have a session but no profile yet — let them pick a role.
+      if (!profile) {
+        return supabaseResponse
+      }
+
+      const destination = await getPostAuthPath(supabase, user.id)
+      return NextResponse.redirect(new URL(destination, request.url))
+    }
+
+    if (pathname === AUTH_ROUTES.signIn) {
       const destination = await getPostAuthPath(supabase, user.id)
       return NextResponse.redirect(new URL(destination, request.url))
     }
