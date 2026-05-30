@@ -357,7 +357,7 @@
     color: var(--text-muted);
   }
 
-  /* Top nav: DIʘS > Make Time Count */
+  /* Top nav: DIʘS (large) + Make Time Count (text-xl, aligned to menu icon) */
   .nav-brand-wordmark {
     font-weight: 600;
   }
