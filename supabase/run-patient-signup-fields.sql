@@ -1,6 +1,58 @@
 -- Run this entire file in Supabase → SQL Editor (production project for dios.health)
 -- Safe to re-run.
 
+-- ─── 011: profiles base columns (required — fixes "column role does not exist") ─
+alter table public.profiles
+  add column if not exists role text,
+  add column if not exists full_name text,
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists terms_accepted_at timestamptz,
+  add column if not exists avatar_path text;
+
+update public.profiles
+set role = 'patient'
+where role is null;
+
+do $$
+begin
+  alter table public.profiles
+    add constraint profiles_role_check check (role in ('patient', 'clinician'));
+exception
+  when duplicate_object then null;
+end $$;
+
+alter table public.profiles
+  alter column role set not null;
+
+alter table public.profiles enable row level security;
+
+do $$
+begin
+  create policy "Users can read own profile"
+    on public.profiles for select
+    using (auth.uid() = id);
+exception
+  when duplicate_object then null;
+end $$;
+
+do $$
+begin
+  create policy "Users can update own profile"
+    on public.profiles for update
+    using (auth.uid() = id);
+exception
+  when duplicate_object then null;
+end $$;
+
+do $$
+begin
+  create policy "Users can insert own profile"
+    on public.profiles for insert
+    with check (auth.uid() = id);
+exception
+  when duplicate_object then null;
+end $$;
+
 -- ─── 006: patient demographics ───────────────────────────────────────────────
 alter table public.patient_profiles
   add column if not exists first_name text,
@@ -13,9 +65,6 @@ alter table public.patient_profiles
 -- ─── 009: onboarding + terms consent ─────────────────────────────────────────
 alter table public.patient_profiles
   add column if not exists onboarding_complete boolean not null default false;
-
-alter table public.profiles
-  add column if not exists terms_accepted_at timestamptz;
 
 -- ─── 010: RPC (bypasses PostgREST stale column cache) ──────────────────────────
 create or replace function public.save_patient_demographics(
@@ -121,7 +170,9 @@ where table_schema = 'public'
     (table_name = 'patient_profiles' and column_name in (
       'first_name', 'family_name', 'age', 'biological_sex', 'onboarding_complete'
     ))
-    or (table_name = 'profiles' and column_name = 'terms_accepted_at')
+    or (table_name = 'profiles' and column_name in (
+      'role', 'full_name', 'terms_accepted_at'
+    ))
   )
 order by table_name, column_name;
 
