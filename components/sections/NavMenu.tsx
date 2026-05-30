@@ -1,9 +1,9 @@
 'use client'
 
 import { Menu, X } from 'lucide-react'
-import Link from 'next/link'
 import { useEffect, useId, useRef, useState } from 'react'
 
+import { HashLink } from '@/components/sections/HashLink'
 import { cn } from '@/lib/utils'
 
 import { AUTH_LINKS, NAV_MENU_LINKS } from './navigation'
@@ -75,13 +75,13 @@ export function NavMenu() {
             <ul className="flex flex-col gap-1">
               {NAV_MENU_LINKS.map((link) => (
                 <li key={link.label}>
-                  <Link
+                  <HashLink
                     href={link.href}
                     className="type-nav block rounded-lg px-3 py-2.5 transition-colors hover:bg-black/[0.03] hover:text-black md:py-2"
                     onClick={() => setOpen(false)}
                   >
                     {link.label}
-                  </Link>
+                  </HashLink>
                 </li>
               ))}
             </ul>
@@ -91,13 +91,13 @@ export function NavMenu() {
             <ul className="flex flex-col gap-1">
               {AUTH_LINKS.map((link) => (
                 <li key={link.label}>
-                  <Link
+                  <HashLink
                     href={link.href}
                     className="type-nav block rounded-lg px-3 py-2.5 transition-colors hover:bg-black/[0.03] hover:text-black md:py-2"
                     onClick={() => setOpen(false)}
                   >
                     {link.label}
-                  </Link>
+                  </HashLink>
                 </li>
               ))}
             </ul>

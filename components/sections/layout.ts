@@ -1,4 +1,5 @@
-export const SECTION = 'border-t border-black/10 py-14 sm:py-20'
+export const SECTION =
+  'scroll-mt-[calc(4rem+1rem)] border-t border-black/10 py-14 sm:scroll-mt-[calc(4.5rem+1rem)] sm:py-20'
 export const CONTAINER = 'mx-auto max-w-[76rem] px-5 sm:px-6'
 export const SECTION_TITLE = 'type-section'
 export const BODY = 'type-body'

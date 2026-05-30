@@ -8,8 +8,8 @@ import { SectionLabel } from './SectionLabel'
 const CLUSTERS = [
   {
     id: 'light',
-    headline: 'Time light right to set your patient\'s body clock',
-    body: 'DIOS maps your patient\'s light diet and tells you what morning and evening exposure to correct',
+    headline: 'Time light right to set your patient\'s clock',
+    body: 'DIOS maps your patient\'s light diet and which morning evening exposures to correct',
     caption: 'Light therapy for seasonal affective disorder',
     image: {
       src: 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=600&q=80',
@@ -18,8 +18,8 @@ const CLUSTERS = [
   },
   {
     id: 'food',
-    headline: 'Eat at the right time for metabolic rhythm',
-    body: 'When your patient eats changes insulin, cortisol, and cholesterol handling — not just what they eat',
+    headline: 'Time food right to align metabolic rhythm',
+    body: 'Meal timing changes insulin, cortisol, and cholesterol for patients — not food alone',
     caption: 'Meal timing for metabolic health',
     image: {
       src: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80',
@@ -29,7 +29,7 @@ const CLUSTERS = [
   {
     id: 'medicine',
     headline: 'Land every medicine when it actually works',
-    body: 'DIOS finds each medicine\'s window from your patient\'s body clock — not a generic guideline',
+    body: 'DIOS finds each medicine window from your patient body clock — not guidelines',
     caption: 'Ramipril, simvastatin, and prednisolone timing',
     image: {
       src: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80',
@@ -38,8 +38,8 @@ const CLUSTERS = [
   },
   {
     id: 'movement',
-    headline: 'Move at the right time for sleep and recovery',
-    body: 'Exercise timing shapes sleep, blood sugar, and cardiovascular recovery when DIOS maps the optimal window',
+    headline: 'Time movement right for sleep and recovery',
+    body: 'Exercise timing shapes sleep, blood sugar, and recovery when DIOS maps optimal windows',
     caption: 'Cardiac rehab and metabolic syndrome programmes',
     image: {
       src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',

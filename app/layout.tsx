@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { HashLink } from '@/components/sections/HashLink'
+import { ScrollToHash } from '@/components/sections/ScrollToHash'
 import './globals.css'
 
 /** Geist — https://fonts.google.com/specimen/Geist */
@@ -48,9 +50,12 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${geistSans.variable} ${geistMono.variable} h-full`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-pt-[calc(4rem+1rem)] sm:scroll-pt-[calc(4.5rem+1rem)]`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <ScrollToHash />
+        {children}
+      </body>
     </html>
   )
 }

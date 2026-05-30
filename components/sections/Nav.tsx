@@ -7,15 +7,20 @@ import { NavMenu } from './NavMenu'
 
 export function Nav() {
   return (
-    <header className="sticky top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur-md">
+    <header id="site-nav" className="sticky top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur-md">
       <div className={`${CONTAINER} flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]`}>
         <Link
           href="/"
-          className="inline-flex shrink-0 items-baseline gap-2 text-lg sm:gap-2.5 sm:text-xl"
-          aria-label="DIOS — Dose Intelligence OS"
+          className="inline-flex shrink-0 items-baseline gap-2.5 sm:gap-3"
+          aria-label="DIʘS — Make Time Count"
         >
-          <span className="dios-wordmark leading-none text-black">{DIOS_WORDMARK}</span>
-          <span className="type-logo-tagline whitespace-nowrap">Dose Intelligence OS</span>
+          <span className="dios-wordmark text-[28px] leading-none text-black sm:text-[32px]">
+            {DIOS_WORDMARK}
+          </span>
+          <span className="type-logo-tagline text-[21px] leading-none sm:text-[24px]" aria-hidden>
+            |
+          </span>
+          <span className="type-logo-tagline text-[21px] leading-none sm:text-[24px]">Make Time Count</span>
         </Link>
 
         <NavMenu />

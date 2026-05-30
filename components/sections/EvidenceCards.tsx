@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { HashLink } from '@/components/sections/HashLink'
 
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -72,7 +72,7 @@ export function EvidenceCards({ showCta = false }: EvidenceCardsProps) {
 
       {showCta ? (
         <div className="mt-12 text-center">
-          <Link
+          <HashLink
             href="/#demo"
             className="btn-primary type-button inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white transition-colors hover:bg-black/80"
           >

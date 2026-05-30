@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { HashLink } from '@/components/sections/HashLink'
+
 import { DIOS_WORDMARK } from '@/components/DiosLogo'
 
 import { CONTAINER, SECTION } from './layout'
@@ -11,11 +13,17 @@ const MISSION =
 function FooterLinkList({ links, label }: { links: readonly { label: string; href: string }[]; label: string }) {
   return (
     <nav className="flex flex-col gap-3" aria-label={label}>
-      {links.map((link) => (
-        <Link key={link.label} href={link.href} className="type-nav w-fit transition-colors hover:text-black">
-          {link.label}
-        </Link>
-      ))}
+      {links.map((link) =>
+        link.href.includes('#') ? (
+          <HashLink key={link.label} href={link.href} className="type-nav w-fit transition-colors hover:text-black">
+            {link.label}
+          </HashLink>
+        ) : (
+          <Link key={link.label} href={link.href} className="type-nav w-fit transition-colors hover:text-black">
+            {link.label}
+          </Link>
+        )
+      )}
     </nav>
   )
 }
