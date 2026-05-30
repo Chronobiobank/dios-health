@@ -1,7 +1,5 @@
 import Image from 'next/image'
 
-import { SITE_IMAGES } from '@/lib/site-images'
-
 import { MatchedLines } from './MatchedLines'
 import { CONTAINER, SECTION, SECTION_TITLE } from './layout'
 import { SectionLabel } from './SectionLabel'
@@ -10,17 +8,32 @@ const CLIENTS = [
   {
     tag: 'GPs',
     headline: ['GPs · You prescribe.', 'DIOS informs.'],
-    image: { src: SITE_IMAGES.buyers.clinicians, alt: 'GP in consultation with a patient' },
+    image: {
+      src: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&q=80',
+      alt: 'GP in consultation — dose timing intelligence for prescribing clinicians',
+      width: 1200,
+      height: 800,
+    },
   },
   {
     tag: 'Researchers',
     headline: ['Researchers · The dataset', 'doesn\'t exist elsewhere.'],
-    image: { src: SITE_IMAGES.buyers.research, alt: 'Researcher reviewing clinical data' },
+    image: {
+      src: 'https://images.unsplash.com/photo-1532094349884-543559a8f9c1?w=600&q=80',
+      alt: 'Research team reviewing data — chronotype-stratified population dataset',
+      width: 1200,
+      height: 800,
+    },
   },
   {
     tag: 'Workforce',
     headline: ['Workforce · Shift-work', 'timing at scale.'],
-    image: { src: SITE_IMAGES.buyers.workforce, alt: 'Shift workers on a clinical ward' },
+    image: {
+      src: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80',
+      alt: 'Shift workers at night — circadian disruption and workforce health',
+      width: 1200,
+      height: 800,
+    },
   },
 ] as const
 
@@ -37,15 +50,14 @@ export function Buyers() {
       <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
         {CLIENTS.map((client) => (
           <article key={client.tag} className="flex flex-col">
-            <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-lg bg-[#F5F5F5]">
-              <Image
-                src={client.image.src}
-                alt={client.image.alt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 33vw"
-                className="object-cover transition-transform duration-700 ease-out hover:scale-[1.02]"
-              />
-            </div>
+            <Image
+              src={client.image.src}
+              alt={client.image.alt}
+              width={client.image.width}
+              height={client.image.height}
+              loading="lazy"
+              className="mb-4 aspect-[3/2] w-full rounded-lg object-cover"
+            />
             <p className="type-label mb-2">{client.tag}</p>
             <MatchedLines lines={client.headline} variant="headline" slots={2} />
           </article>
