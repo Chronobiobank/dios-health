@@ -1,7 +1,16 @@
+import Image from 'next/image'
+
 import { Badge } from '@/components/ui/badge'
 
 import { BODY, CARD, CONTAINER, SECTION, SECTION_TITLE } from './layout'
 import { SectionLabel } from './SectionLabel'
+
+const SECTION_IMAGE = {
+  src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80',
+  alt: 'Clinician reviewing patient data — dose timing intelligence at point of care',
+  width: 1200,
+  height: 675,
+} as const
 
 const ROWS = [
   {
@@ -46,14 +55,28 @@ export function ClinicianPanel() {
   return (
     <section id="panel" className={`${SECTION} ${CONTAINER}`}>
       <SectionLabel title="Clinician panel" />
-      <h2 className={`${SECTION_TITLE} mt-4 max-w-md`}>
-        Who needs acting on.
-        <br />
-        Right now.
-      </h2>
-      <p className={`${BODY} mt-4 max-w-sm`}>
-        Your patients, ranked by what needs attention today.
-      </p>
+
+      <div className="mt-4 grid grid-cols-1 items-center gap-6 lg:grid-cols-2 lg:gap-12">
+        <Image
+          src={SECTION_IMAGE.src}
+          alt={SECTION_IMAGE.alt}
+          width={SECTION_IMAGE.width}
+          height={SECTION_IMAGE.height}
+          loading="lazy"
+          className="aspect-video w-full rounded-lg object-cover lg:rounded-xl"
+        />
+
+        <div>
+          <h2 className={`${SECTION_TITLE} max-w-md`}>
+            Who needs acting on.
+            <br />
+            Right now.
+          </h2>
+          <p className={`${BODY} mt-4 max-w-sm`}>
+            Your patients, ranked by what needs attention today.
+          </p>
+        </div>
+      </div>
 
       <div className={`${CARD} mt-8 overflow-x-auto rounded-xl`}>
         <table className="w-full min-w-[640px] border-collapse text-left text-sm">
