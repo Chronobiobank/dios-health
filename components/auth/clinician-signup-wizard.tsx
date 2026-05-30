@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 
 import { AuthShell } from '@/components/auth/auth-shell'
 import { SignupProgress } from '@/components/auth/signup-progress'
+import { TermsConsentField } from '@/components/auth/terms-consent-field'
 import { BTN_PRIMARY, CARD, LABEL } from '@/components/sections/layout'
 import { guessCountryFromLocale, COUNTRIES } from '@/lib/auth/countries'
 import { REGISTRATION_BODIES } from '@/lib/auth/clinician-signup-data'
@@ -20,6 +21,7 @@ import {
 import { buildFullName, parseOAuthNames } from '@/lib/auth/parse-oauth-names'
 import { AUTH_ROUTES } from '@/lib/auth/routes'
 import { mapSignUpError } from '@/lib/auth/sign-up-errors'
+import { recordTermsAcceptance } from '@/lib/auth/terms'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
@@ -36,6 +38,8 @@ export function ClinicianSignupWizard() {
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [signedUpWithOAuth, setSignedUpWithOAuth] = useState(false)
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [termsAlreadyRecorded, setTermsAlreadyRecorded] = useState(false)
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 })
@@ -66,6 +70,16 @@ export function ClinicianSignupWizard() {
         { id: user.id, role: 'clinician' },
         { onConflict: 'id' }
       )
+
+      const { data: profileRow } = await supabase
+        .from('profiles')
+        .select('terms_accepted_at')
+        .eq('id', user.id)
+        .maybeSingle<{ terms_accepted_at: string | null }>()
+
+      const hasTerms = Boolean(profileRow?.terms_accepted_at)
+      setTermsAlreadyRecorded(hasTerms)
+      setAcceptedTerms(hasTerms)
 
       const { data: clinician } = await supabase
         .from('clinician_profiles')
@@ -112,6 +126,12 @@ export function ClinicianSignupWizard() {
 
   async function handleAccountSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+
+    if (!acceptedTerms) {
+      setError('Please accept the Terms of Service and Privacy Policy.')
+      return
+    }
+
     setLoading(true)
     setError(null)
 
@@ -159,6 +179,14 @@ export function ClinicianSignupWizard() {
       return
     }
 
+    const { error: termsError } = await recordTermsAcceptance(supabase, user.id)
+    if (termsError) {
+      setError('Something went wrong. Please try again.')
+      setLoading(false)
+      return
+    }
+
+    setTermsAlreadyRecorded(true)
     setUserId(user.id)
     setLoading(false)
     setStep(2)
@@ -166,12 +194,15 @@ export function ClinicianSignupWizard() {
   }
 
   function canContinueAboutYou() {
+    const termsOk = termsAlreadyRecorded || acceptedTerms
+
     return (
       draft.firstName.trim().length > 0 &&
       draft.familyName.trim().length > 0 &&
       draft.practiceName.trim().length > 0 &&
       draft.practiceCity.trim().length > 0 &&
-      draft.practiceCountry.trim().length > 0
+      draft.practiceCountry.trim().length > 0 &&
+      termsOk
     )
   }
 
@@ -182,6 +213,24 @@ export function ClinicianSignupWizard() {
     setError(null)
 
     const supabase = createClient()
+
+    if (!termsAlreadyRecorded) {
+      if (!acceptedTerms) {
+        setError('Please accept the Terms of Service and Privacy Policy.')
+        setLoading(false)
+        return
+      }
+
+      const { error: termsError } = await recordTermsAcceptance(supabase, userId)
+      if (termsError) {
+        setError('Something went wrong. Please try again.')
+        setLoading(false)
+        return
+      }
+
+      setTermsAlreadyRecorded(true)
+    }
+
     const fullName = buildFullName(draft.firstName, draft.familyName)
 
     const { error: profileNameError } = await supabase
@@ -361,7 +410,16 @@ export function ClinicianSignupWizard() {
               {error}
             </p>
           ) : null}
-          <button type="submit" disabled={loading} className={`${BTN_PRIMARY} h-11 w-full disabled:opacity-60`}>
+          <TermsConsentField
+            checked={acceptedTerms}
+            onChange={setAcceptedTerms}
+            disabled={loading || termsAlreadyRecorded}
+          />
+          <button
+            type="submit"
+            disabled={loading || !acceptedTerms}
+            className={`${BTN_PRIMARY} h-11 w-full disabled:opacity-60`}
+          >
             {loading ? 'Creating account…' : 'Continue →'}
           </button>
         </form>
@@ -446,6 +504,13 @@ export function ClinicianSignupWizard() {
               ))}
             </select>
           </div>
+          {!termsAlreadyRecorded ? (
+            <TermsConsentField
+              checked={acceptedTerms}
+              onChange={setAcceptedTerms}
+              disabled={loading}
+            />
+          ) : null}
           {error ? (
             <p className="type-body text-sm text-red-600" role="alert">
               {error}

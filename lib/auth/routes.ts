@@ -1,5 +1,7 @@
 export const AUTH_ROUTES = {
   signIn: '/signin',
+  forgotPassword: '/signin/forgot-password',
+  resetPassword: '/signin/reset-password',
   signUp: '/signup',
   signUpPatient: '/signup/patient',
   signUpClinician: '/signup/clinician',

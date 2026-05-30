@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import { AuthShell } from '@/components/auth/auth-shell'
+import { SignOutButton } from '@/components/auth/sign-out-button'
 import { VerificationStatusPoller } from '@/components/auth/verification-status-poller'
 import { VerificationTimeline } from '@/components/auth/verification-timeline'
 import { AUTH_ROUTES, CLINIC_ROUTES } from '@/lib/auth/routes'
@@ -69,6 +70,10 @@ export default async function PendingVerificationPage() {
         >
           Questions? Contact us →
         </Link>
+      </p>
+
+      <p className="type-body mt-6 text-center text-sm">
+        <SignOutButton />
       </p>
     </AuthShell>
   )

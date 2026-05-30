@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { AuthShell } from '@/components/auth/auth-shell'
 import { AuthToggle } from '@/components/auth/auth-toggle'
 import { SignupProgress } from '@/components/auth/signup-progress'
+import { TermsConsentField } from '@/components/auth/terms-consent-field'
 import { BTN_PRIMARY, CARD, LABEL, LIST_LINE } from '@/components/sections/layout'
 import { guessCountryFromLocale, COUNTRIES } from '@/lib/auth/countries'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
@@ -27,8 +28,13 @@ import {
   type PatientSignupDraft,
 } from '@/lib/auth/patient-signup-types'
 import { buildFullName, parseOAuthNames } from '@/lib/auth/parse-oauth-names'
+import {
+  getPatientResumeStep,
+  isPatientOnboardingComplete,
+} from '@/lib/auth/patient-onboarding'
 import { AUTH_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
 import { mapSignUpError, SIGN_UP_EMAIL_EXISTS_MESSAGE } from '@/lib/auth/sign-up-errors'
+import { recordTermsAcceptance } from '@/lib/auth/terms'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 
@@ -44,6 +50,8 @@ export function PatientSignupWizard() {
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [signedUpWithOAuth, setSignedUpWithOAuth] = useState(false)
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [termsAlreadyRecorded, setTermsAlreadyRecorded] = useState(false)
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 })
@@ -71,13 +79,23 @@ export function PatientSignupWizard() {
           { onConflict: 'id' }
         )
 
+        const { data: profileRow } = await supabase
+          .from('profiles')
+          .select('terms_accepted_at')
+          .eq('id', user.id)
+          .maybeSingle<{ terms_accepted_at: string | null }>()
+
+        const hasTerms = Boolean(profileRow?.terms_accepted_at)
+        setTermsAlreadyRecorded(hasTerms)
+        setAcceptedTerms(hasTerms)
+
         const { data: existingPatient } = await supabase
           .from('patient_profiles')
           .select('*')
           .eq('id', user.id)
           .maybeSingle()
 
-        if (existingPatient?.first_name) {
+        if (isPatientOnboardingComplete(existingPatient)) {
           router.replace(PATIENT_ROUTES.dashboard)
           return
         }
@@ -98,7 +116,19 @@ export function PatientSignupWizard() {
 
         setUserId(user.id)
         setSignedUpWithOAuth(true)
-        setStep(2)
+        setStep(
+          getPatientResumeStep(
+            existingPatient
+              ? {
+                  first_name: existingPatient.first_name ?? null,
+                  fitzpatrick_type: existingPatient.fitzpatrick_type ?? null,
+                  chronotype_q1: existingPatient.chronotype_q1 ?? null,
+                  onboarding_complete: Boolean(existingPatient.onboarding_complete),
+                }
+              : null,
+            true
+          )
+        )
       }
       setCheckingSession(false)
     })
@@ -110,6 +140,12 @@ export function PatientSignupWizard() {
 
   async function handleAccountSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+
+    if (!acceptedTerms) {
+      setError('Please accept the Terms of Service and Privacy Policy.')
+      return
+    }
+
     setLoading(true)
     setError(null)
 
@@ -157,6 +193,14 @@ export function PatientSignupWizard() {
       return
     }
 
+    const { error: termsError } = await recordTermsAcceptance(supabase, user.id)
+    if (termsError) {
+      setError('Something went wrong. Please try again.')
+      setLoading(false)
+      return
+    }
+
+    setTermsAlreadyRecorded(true)
     setUserId(user.id)
     setLoading(false)
     setStep(2)
@@ -199,13 +243,16 @@ export function PatientSignupWizard() {
 
   function canContinueAboutYou() {
     const age = Number.parseInt(draft.age, 10)
+    const termsOk = termsAlreadyRecorded || acceptedTerms
+
     return (
       draft.firstName.trim().length > 0 &&
       draft.familyName.trim().length > 0 &&
       draft.biologicalSex !== '' &&
       Number.isFinite(age) &&
       age >= 13 &&
-      age <= 120
+      age <= 120 &&
+      termsOk
     )
   }
 
@@ -226,19 +273,18 @@ export function PatientSignupWizard() {
           familyName: draft.familyName.trim(),
           age,
           biologicalSex: draft.biologicalSex,
+          acceptTerms: !termsAlreadyRecorded && acceptedTerms,
         }),
       })
 
-      const payload = (await response.json()) as { error?: string; next?: string }
+      const payload = (await response.json()) as { error?: string }
 
       if (!response.ok) {
         throw new Error(payload.error || 'Something went wrong. Please try again.')
       }
 
-      if (payload.next === PATIENT_ROUTES.dashboard) {
-        router.refresh()
-        router.push(PATIENT_ROUTES.dashboard)
-        return
+      if (!termsAlreadyRecorded) {
+        setTermsAlreadyRecorded(true)
       }
 
       setStep(3)
@@ -341,7 +387,16 @@ export function PatientSignupWizard() {
               ) : null}
             </div>
           ) : null}
-          <button type="submit" disabled={loading} className={`${BTN_PRIMARY} h-11 w-full disabled:opacity-60`}>
+          <TermsConsentField
+            checked={acceptedTerms}
+            onChange={setAcceptedTerms}
+            disabled={loading || termsAlreadyRecorded}
+          />
+          <button
+            type="submit"
+            disabled={loading || !acceptedTerms}
+            className={`${BTN_PRIMARY} h-11 w-full disabled:opacity-60`}
+          >
             {loading ? 'Creating account…' : 'Continue →'}
           </button>
         </form>
@@ -418,6 +473,13 @@ export function PatientSignupWizard() {
               ))}
             </div>
           </div>
+          {!termsAlreadyRecorded ? (
+            <TermsConsentField
+              checked={acceptedTerms}
+              onChange={setAcceptedTerms}
+              disabled={loading}
+            />
+          ) : null}
           {error ? (
             <p className="type-body text-sm text-red-600" role="alert">
               {error}

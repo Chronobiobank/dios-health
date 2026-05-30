@@ -10,7 +10,7 @@ import { GoogleSignInButton } from '@/components/auth/google-sign-in-button'
 import { BTN_PRIMARY, CARD, LABEL } from '@/components/sections/layout'
 import { mapSignInError } from '@/lib/auth/errors'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
-import { getPostAuthPath } from '@/lib/auth/redirects'
+import { resolveSignInDestination } from '@/lib/auth/post-sign-in-redirect'
 import { AUTH_ROUTES } from '@/lib/auth/routes'
 import { createClient } from '@/lib/supabase/client'
 
@@ -53,7 +53,11 @@ export function SignInForm() {
       return
     }
 
-    const destination = await getPostAuthPath(supabase, authData.user.id)
+    const destination = await resolveSignInDestination(
+      supabase,
+      authData.user.id,
+      searchParams.get('next')
+    )
     router.refresh()
     router.push(destination)
   }
@@ -106,6 +110,14 @@ export function SignInForm() {
               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           </div>
+          <p className="text-right">
+            <Link
+              href={AUTH_ROUTES.forgotPassword}
+              className="type-body text-sm text-black/60 underline-offset-2 hover:text-black hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </p>
         </div>
 
         {error ? (

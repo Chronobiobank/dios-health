@@ -10,6 +10,11 @@ type ClinicianRow = {
   verified: boolean
 }
 
+type PatientCompletionRow = {
+  id: string
+  onboarding_complete: boolean
+}
+
 export async function getPostAuthPath(
   supabase: SupabaseClient,
   userId: string
@@ -75,11 +80,11 @@ export async function hasPatientProfile(
 ): Promise<boolean> {
   const { data } = await supabase
     .from('patient_profiles')
-    .select('id, first_name')
+    .select('id, onboarding_complete')
     .eq('id', userId)
-    .maybeSingle<{ id: string; first_name: string | null }>()
+    .maybeSingle<PatientCompletionRow>()
 
-  return Boolean(data?.id && data.first_name)
+  return Boolean(data?.id && data.onboarding_complete)
 }
 
 export async function hasCompletedClinicianOnboarding(

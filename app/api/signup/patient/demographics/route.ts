@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { buildFullName } from '@/lib/auth/parse-oauth-names'
-import { PATIENT_ROUTES } from '@/lib/auth/routes'
+import { hasAcceptedTerms, recordTermsAcceptance } from '@/lib/auth/terms'
 import { createClient } from '@/lib/supabase/server'
 
 function mapDemographicsError(message: string): string {
   const lower = message.toLowerCase()
   if (lower.includes('does not exist') || lower.includes('schema cache') || lower.includes('column')) {
-    return 'Profile fields are not set up in the database yet. Run migration 006_patient_demographics.sql in Supabase.'
+    return 'Profile fields are not set up in the database yet. Run migrations 006 and 009 in Supabase.'
   }
   if (lower.includes('row-level security') || lower.includes('policy')) {
     return 'Could not save your profile. Please sign out and sign in again.'
@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
     familyName?: string
     age?: number
     biologicalSex?: string
+    acceptTerms?: boolean
   }
 
   try {
@@ -57,6 +58,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Enter a valid age between 13 and 120.' }, { status: 400 })
   }
 
+  const termsAccepted = await hasAcceptedTerms(supabase, user.id)
+  if (!termsAccepted) {
+    if (!body.acceptTerms) {
+      return NextResponse.json(
+        { error: 'You must accept the Terms of Service and Privacy Policy.' },
+        { status: 400 }
+      )
+    }
+
+    const { error: termsError } = await recordTermsAcceptance(supabase, user.id)
+    if (termsError) {
+      console.error('Demographics terms acceptance error:', termsError)
+      return NextResponse.json({ error: mapDemographicsError(termsError.message) }, { status: 500 })
+    }
+  }
+
   const fullName = buildFullName(firstName, familyName)
 
   const { error: profileError } = await supabase.from('profiles').upsert(
@@ -72,12 +89,6 @@ export async function POST(request: NextRequest) {
     console.error('Demographics profile upsert error:', profileError)
     return NextResponse.json({ error: mapDemographicsError(profileError.message) }, { status: 500 })
   }
-
-  const { data: existingPatient } = await supabase
-    .from('patient_profiles')
-    .select('fitzpatrick_type, chronotype_q1')
-    .eq('id', user.id)
-    .maybeSingle<{ fitzpatrick_type: number | null; chronotype_q1: string | null }>()
 
   const { error: patientError } = await supabase.from('patient_profiles').upsert(
     {
@@ -95,12 +106,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: mapDemographicsError(patientError.message) }, { status: 500 })
   }
 
-  const resumeToDashboard = Boolean(
-    existingPatient?.fitzpatrick_type && existingPatient.chronotype_q1
-  )
-
   return NextResponse.json({
     success: true,
-    next: resumeToDashboard ? PATIENT_ROUTES.dashboard : 'continue',
+    next: 'continue',
   })
 }

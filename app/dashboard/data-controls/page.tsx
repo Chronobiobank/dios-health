@@ -1,5 +1,6 @@
 import { DataControlsPanel } from '@/components/dashboard/data-controls-panel'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
+import { SignOutButton } from '@/components/auth/sign-out-button'
 import { ProfileAvatarUpload } from '@/components/profile/profile-avatar-upload'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 
@@ -36,6 +37,11 @@ export default async function DashboardDataControlsPage() {
           dataSharePolicy={patient.data_share_policy}
         />
       </div>
+
+      <section className="mt-12 border-t border-black/10 pt-8">
+        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">Account</h2>
+        <SignOutButton className="mt-4" />
+      </section>
     </>
   )
 }

@@ -83,6 +83,13 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL(CLINIC_ROUTES.panel, request.url))
     }
 
+    if (pathname.startsWith('/dashboard') && profile.role === 'patient') {
+      const completed = await hasPatientProfile(supabase, user.id)
+      if (!completed) {
+        return NextResponse.redirect(new URL(AUTH_ROUTES.signUpPatient, request.url))
+      }
+    }
+
     if (pathname.startsWith('/clinic') && profile.role !== 'clinician') {
       return NextResponse.redirect(new URL(PATIENT_ROUTES.dashboard, request.url))
     }

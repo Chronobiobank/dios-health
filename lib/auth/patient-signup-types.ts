@@ -88,5 +88,6 @@ export function draftToPatientProfile(userId: string, draft: PatientSignupDraft)
     data_share_gp: draft.dataShareGp,
     data_share_research: draft.dataShareResearch,
     data_share_policy: draft.dataSharePolicy,
+    onboarding_complete: true,
   }
 }

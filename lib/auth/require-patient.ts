@@ -29,6 +29,7 @@ export type PatientProfileRow = {
   data_share_gp: boolean
   data_share_research: boolean
   data_share_policy: boolean
+  onboarding_complete: boolean
 }
 
 export async function requirePatientSession() {
@@ -66,6 +67,10 @@ export async function requirePatientSession() {
     .maybeSingle<PatientProfileRow>()
 
   if (!patient) {
+    redirect(AUTH_ROUTES.signUpPatient)
+  }
+
+  if (!patient.onboarding_complete) {
     redirect(AUTH_ROUTES.signUpPatient)
   }
 
