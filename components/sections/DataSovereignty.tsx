@@ -1,12 +1,29 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { CONTAINER, LIST_LINE, SECTION, SECTION_TITLE } from './layout'
 import { SectionLabel } from './SectionLabel'
 
+const SECTION_IMAGE = {
+  src: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1200&q=80',
+  alt: 'Open landscape — global indigenous data sovereignty and inclusion',
+  width: 1200,
+  height: 675,
+} as const
+
 export function DataSovereignty() {
   return (
     <section id="sovereignty" className={`${SECTION} ${CONTAINER}`}>
-      <SectionLabel title="Data sovereignty" />
+      <Image
+        src={SECTION_IMAGE.src}
+        alt={SECTION_IMAGE.alt}
+        width={SECTION_IMAGE.width}
+        height={SECTION_IMAGE.height}
+        loading="lazy"
+        className="aspect-video w-full rounded-xl object-cover lg:aspect-[21/9]"
+      />
+
+      <SectionLabel title="Data sovereignty" className="mt-8" />
       <h2 className={`${SECTION_TITLE} mt-4 max-w-md`}>
         Left out of the science.
         <br />
