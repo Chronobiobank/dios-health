@@ -42,6 +42,10 @@ export function PatientSignupWizard() {
   const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0 })
+  }, [step])
+
+  useEffect(() => {
     setDraft((current) => ({
       ...current,
       locationCountry: guessCountryFromLocale(),
@@ -166,18 +170,14 @@ export function PatientSignupWizard() {
 
   if (checkingSession) {
     return (
-      <AuthShell headline="Create your account." subtext="Free forever. No card needed.">
+      <AuthShell>
         <p className="type-body text-center text-black/60">Loading…</p>
       </AuthShell>
     )
   }
 
   return (
-    <AuthShell
-      headline={STEP_COPY[step].headline}
-      subtext={STEP_COPY[step].subtext}
-      maxWidthClass={step === 2 ? 'max-w-2xl' : 'max-w-[400px]'}
-    >
+    <AuthShell maxWidthClass={step === 2 ? 'max-w-2xl' : 'max-w-[400px]'}>
       <SignupProgress step={step} total={TOTAL_STEPS} />
 
       {step > 1 ? (
@@ -473,16 +473,18 @@ export function PatientSignupWizard() {
                 updateDraft({ wearableConnected: option.id })
                 setStep(5)
               }}
-              className={`${CARD} w-full rounded-2xl p-5 text-left transition-colors hover:border-black/25`}
+              className={`${CARD} w-full rounded-2xl p-5 text-left text-[#0D0D0D] transition-colors hover:border-black/25`}
             >
               <div className="flex items-start justify-between gap-3">
                 <p className={`${LIST_LINE} text-lg`}>{option.name}</p>
                 {option.recommended ? (
-                  <span className="type-caption rounded-full bg-black px-2 py-1 text-white">Recommended</span>
+                  <span className="shrink-0 rounded-full bg-black px-2.5 py-1 text-xs font-medium leading-none text-white">
+                    Recommended
+                  </span>
                 ) : null}
               </div>
               <p className="type-body mt-2 text-sm text-black/70">{option.body}</p>
-              <span className="type-button mt-4 inline-block text-black">{option.cta}</span>
+              <span className="mt-4 inline-block text-sm font-medium text-black">{option.cta}</span>
             </button>
           ))}
 
@@ -492,13 +494,13 @@ export function PatientSignupWizard() {
               updateDraft({ wearableConnected: null })
               setStep(5)
             }}
-            className="w-full rounded-2xl border border-dashed border-black/20 px-5 py-5 text-left transition-colors hover:border-black/40"
+            className="w-full rounded-2xl border border-dashed border-black/20 px-5 py-5 text-left text-[#0D0D0D] transition-colors hover:border-black/40"
           >
             <p className={`${LIST_LINE} text-lg`}>Skip for now</p>
             <p className="type-body mt-2 text-sm text-black/70">
               You can connect a device later in your dashboard.
             </p>
-            <span className="type-button mt-4 inline-block text-black/70">Skip →</span>
+            <span className="mt-4 inline-block text-sm font-medium text-black/70">Skip →</span>
           </button>
         </div>
       ) : null}
@@ -547,27 +549,4 @@ export function PatientSignupWizard() {
       ) : null}
     </AuthShell>
   )
-}
-
-const STEP_COPY: Record<number, { headline: string; subtext: string }> = {
-  1: {
-    headline: 'Create your account.',
-    subtext: 'Free forever. No card needed.',
-  },
-  2: {
-    headline: 'Tell us about your body.',
-    subtext: 'This personalises your dose timing to you — not a population average.',
-  },
-  3: {
-    headline: 'Three quick questions.',
-    subtext: 'These seed your body clock estimate before your wearable connects.',
-  },
-  4: {
-    headline: 'Connect your body clock data.',
-    subtext: 'TipTraQ gives the most accurate reading. Others give a starting estimate.',
-  },
-  5: {
-    headline: 'Your data. Your call.',
-    subtext: 'Change these any time in your settings.',
-  },
 }

@@ -255,18 +255,14 @@ export function ClinicianSignupWizard() {
 
   if (checkingSession) {
     return (
-      <AuthShell headline="Create your clinical account." subtext="Free to start. No procurement needed.">
+      <AuthShell>
         <p className="type-body text-center text-black/60">Loading…</p>
       </AuthShell>
     )
   }
 
   return (
-    <AuthShell
-      headline={STEP_COPY[step].headline}
-      subtext={STEP_COPY[step].subtext}
-      maxWidthClass="max-w-[400px]"
-    >
+    <AuthShell maxWidthClass="max-w-[400px]">
       <SignupProgress step={step} total={TOTAL_STEPS} />
 
       {step > 1 ? (
@@ -488,19 +484,4 @@ export function ClinicianSignupWizard() {
       ) : null}
     </AuthShell>
   )
-}
-
-const STEP_COPY: Record<number, { headline: string; subtext: string }> = {
-  1: {
-    headline: 'Create your clinical account.',
-    subtext: 'Free to start. No procurement needed.',
-  },
-  2: {
-    headline: 'Verify your registration.',
-    subtext: 'We check every clinician before granting patient access.',
-  },
-  3: {
-    headline: 'Invite a patient to connect.',
-    subtext: 'They join free. You see their body clock data once they consent.',
-  },
 }
