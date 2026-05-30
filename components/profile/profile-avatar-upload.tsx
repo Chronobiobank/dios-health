@@ -26,7 +26,7 @@ export function ProfileAvatarUpload({ fullName, initialAvatarUrl }: ProfileAvata
 
   async function uploadFile(file: File) {
     if (!isAllowedAvatarFile(file)) {
-      setError('Use a JPG, PNG, or WebP image.')
+      setError('Use a JPG, PNG, WebP, or HEIC image.')
       return
     }
 
@@ -42,13 +42,13 @@ export function ProfileAvatarUpload({ fullName, initialAvatarUrl }: ProfileAvata
         body: formData,
       })
 
-      const payload = (await response.json()) as { error?: string }
+      const payload = (await response.json()) as { error?: string; avatar_url?: string | null }
 
       if (!response.ok) {
         throw new Error(payload.error || 'Upload failed')
       }
 
-      setAvatarUrl(URL.createObjectURL(file))
+      setAvatarUrl(payload.avatar_url ?? URL.createObjectURL(file))
       router.refresh()
     } catch (uploadError) {
       setError(uploadError instanceof Error ? uploadError.message : 'Upload failed')
@@ -85,7 +85,7 @@ export function ProfileAvatarUpload({ fullName, initialAvatarUrl }: ProfileAvata
         <ProfileAvatar name={fullName} src={avatarUrl} size="lg" />
         <div className="min-w-0 flex-1">
           <p className="text-sm font-medium text-black">{fullName}</p>
-          <p className="mt-1 text-sm text-black/55">JPG, PNG, or WebP · Max 2MB</p>
+          <p className="mt-1 text-sm text-black/55">JPG, PNG, WebP, or HEIC · Max 5MB</p>
         </div>
       </div>
 
@@ -113,7 +113,7 @@ export function ProfileAvatarUpload({ fullName, initialAvatarUrl }: ProfileAvata
       <input
         ref={inputRef}
         type="file"
-        accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
+        accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif"
         className="hidden"
         onChange={(event) => {
           const file = event.target.files?.[0]

@@ -1,5 +1,5 @@
--- Profile photos for patients and clinicians (stored on shared profiles row)
--- Run in Supabase SQL Editor or via: supabase db push
+-- Profile photo storage for dios.health
+-- Run in Supabase → SQL Editor (safe to re-run)
 
 alter table public.profiles
   add column if not exists avatar_path text;
@@ -45,3 +45,17 @@ revoke all on function public.save_avatar_path(text) from public;
 grant execute on function public.save_avatar_path(text) to authenticated;
 
 notify pgrst, 'reload schema';
+
+-- Verify
+select id, name, public from storage.buckets where id = 'avatars';
+
+select column_name
+from information_schema.columns
+where table_schema = 'public'
+  and table_name = 'profiles'
+  and column_name = 'avatar_path';
+
+select routine_name
+from information_schema.routines
+where routine_schema = 'public'
+  and routine_name = 'save_avatar_path';

@@ -160,6 +160,47 @@ $$;
 revoke all on function public.save_patient_demographics(text, text, integer, text, boolean) from public;
 grant execute on function public.save_patient_demographics(text, text, integer, text, boolean) to authenticated;
 
+-- ─── 008: profile photo storage ────────────────────────────────────────────────
+insert into storage.buckets (id, name, public)
+values ('avatars', 'avatars', false)
+on conflict (id) do nothing;
+
+drop policy if exists "Users manage own avatar files" on storage.objects;
+
+create policy "Users manage own avatar files"
+on storage.objects for all
+to authenticated
+using (
+  bucket_id = 'avatars'
+  and auth.uid()::text = (storage.foldername(name))[1]
+)
+with check (
+  bucket_id = 'avatars'
+  and auth.uid()::text = (storage.foldername(name))[1]
+);
+
+create or replace function public.save_avatar_path(p_avatar_path text)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if auth.uid() is null then
+    raise exception 'Not authenticated';
+  end if;
+
+  update public.profiles
+  set avatar_path = p_avatar_path
+  where id = auth.uid();
+
+  return jsonb_build_object('success', true);
+end;
+$$;
+
+revoke all on function public.save_avatar_path(text) from public;
+grant execute on function public.save_avatar_path(text) to authenticated;
+
 notify pgrst, 'reload schema';
 
 -- ─── Verify columns ────────────────────────────────────────────────────────────
@@ -171,7 +212,7 @@ where table_schema = 'public'
       'first_name', 'family_name', 'age', 'biological_sex', 'onboarding_complete'
     ))
     or (table_name = 'profiles' and column_name in (
-      'role', 'full_name', 'terms_accepted_at'
+      'role', 'full_name', 'terms_accepted_at', 'avatar_path'
     ))
   )
 order by table_name, column_name;
@@ -180,4 +221,7 @@ order by table_name, column_name;
 select routine_name
 from information_schema.routines
 where routine_schema = 'public'
-  and routine_name = 'save_patient_demographics';
+  and routine_name in ('save_patient_demographics', 'save_avatar_path');
+
+-- ─── Verify avatars bucket ─────────────────────────────────────────────────────
+select id, name, public from storage.buckets where id = 'avatars';

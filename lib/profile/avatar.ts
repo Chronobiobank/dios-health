@@ -1,23 +1,49 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 
 export const AVATAR_BUCKET = 'avatars'
-export const AVATAR_MAX_BYTES = 2 * 1024 * 1024
+export const AVATAR_MAX_BYTES = 5 * 1024 * 1024
 
-const ALLOWED_AVATAR_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp'])
+const ALLOWED_AVATAR_TYPES = new Set([
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/heic',
+  'image/heif',
+])
+
+export type AvatarExtension = 'jpg' | 'png' | 'webp' | 'heic'
 
 export function isAllowedAvatarFile(file: File): boolean {
-  if (ALLOWED_AVATAR_TYPES.has(file.type)) return true
+  if (file.type && ALLOWED_AVATAR_TYPES.has(file.type)) return true
   const lower = file.name.toLowerCase()
-  return lower.endsWith('.jpg') || lower.endsWith('.jpeg') || lower.endsWith('.png') || lower.endsWith('.webp')
+  return (
+    lower.endsWith('.jpg') ||
+    lower.endsWith('.jpeg') ||
+    lower.endsWith('.png') ||
+    lower.endsWith('.webp') ||
+    lower.endsWith('.heic') ||
+    lower.endsWith('.heif')
+  )
 }
 
-export function avatarExtensionForFile(file: File): 'jpg' | 'png' | 'webp' {
-  if (file.type === 'image/png' || file.name.toLowerCase().endsWith('.png')) return 'png'
-  if (file.type === 'image/webp' || file.name.toLowerCase().endsWith('.webp')) return 'webp'
+export function avatarExtensionForFile(file: File): AvatarExtension {
+  const lower = file.name.toLowerCase()
+  if (file.type === 'image/png' || lower.endsWith('.png')) return 'png'
+  if (file.type === 'image/webp' || lower.endsWith('.webp')) return 'webp'
+  if (file.type === 'image/heic' || file.type === 'image/heif' || lower.endsWith('.heic') || lower.endsWith('.heif')) {
+    return 'heic'
+  }
   return 'jpg'
 }
 
-export function buildAvatarStoragePath(userId: string, extension: 'jpg' | 'png' | 'webp'): string {
+export function avatarContentTypeForFile(file: File, extension: AvatarExtension): string {
+  if (file.type) return file.type
+  if (extension === 'jpg') return 'image/jpeg'
+  if (extension === 'heic') return 'image/heic'
+  return `image/${extension}`
+}
+
+export function buildAvatarStoragePath(userId: string, extension: AvatarExtension): string {
   return `${userId}/avatar.${extension}`
 }
 
