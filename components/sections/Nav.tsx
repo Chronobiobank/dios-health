@@ -22,10 +22,15 @@ export function Nav() {
           <span className={`dios-wordmark nav-brand-wordmark shrink-0 ${LOGO_SIZE} text-black`}>
             {DIOS_WORDMARK}
           </span>
-          <span className={`nav-brand-tagline shrink-0 ${TAGLINE_SIZE}`} aria-hidden>
+          <span
+            className={`nav-brand-tagline hidden shrink-0 sm:inline ${TAGLINE_SIZE}`}
+            aria-hidden
+          >
             –
           </span>
-          <span className={`nav-brand-tagline min-w-0 truncate ${TAGLINE_SIZE}`}>Make Time Count</span>
+          <span className={`nav-brand-tagline hidden min-w-0 truncate sm:inline ${TAGLINE_SIZE}`}>
+            Make Time Count
+          </span>
         </Link>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
