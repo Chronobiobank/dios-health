@@ -5,12 +5,16 @@ export const NAV_LINKS = [
 ] as const
 
 /** Always visible in the marketing site header */
-export const NAV_ACCOUNT_LINKS = [
-  { label: 'Sign in', href: '/signin' },
-  { label: 'Go to dashboard', href: '/dashboard', mobileLabel: 'Dashboard' },
-] as const
+export const NAV_DASHBOARD_LINK = {
+  label: 'Go to dashboard',
+  href: '/dashboard',
+  mobileLabel: 'Dashboard',
+} as const
 
-export const AUTH_LINKS = [{ label: 'Sign up', href: '/signup' }] as const
+export const AUTH_LINKS = [
+  { label: 'Sign in', href: '/signin' },
+  { label: 'Sign up', href: '/signup' },
+] as const
 
 export const NAV_MENU_LINKS = [
   ...NAV_LINKS,

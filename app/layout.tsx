@@ -24,11 +24,11 @@ const siteUrl = process.env.VERCEL_URL
   : 'https://dios-health.vercel.app'
 
 export const metadata: Metadata = {
-  title: 'DIOS Health — Dose Intelligence Operating System',
+  title: 'DIOS – Make Time Count',
   description:
     "The world's first clinical decision support platform personalising medicine timing to individual body clock variation, not European population norms. Free for every patient. Free for every GP.",
   openGraph: {
-    title: 'DI⊙S.health — Dose Intelligence Operating System',
+    title: 'DIOS – Make Time Count',
     description:
       'Medicine timing personalised to your body clock, not European norms. Free for every patient and GP. Built on Oxford-validated chronodosing science.',
     type: 'website',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DI⊙S — Dose Intelligence OS',
+    title: 'DIOS – Make Time Count',
     description:
       "The world's first platform personalising medicine timing to individual body clock variation. Not European population averages.",
   },
