@@ -25,12 +25,12 @@ export default async function DashboardStreamsPage() {
       <section>
         <h1 className="text-2xl font-medium text-black">Data streams</h1>
         <p className="mt-2 text-sm text-black/55">
-          Connect wearables and upload TipTraQ reports to refine your body clock.
+          Connect wearables and upload TipTraQ channel data (.edf) to refine your body clock.
         </p>
       </section>
 
       <section className="mt-8">
-        <h2 className={SECTION_LABEL}>Upload TipTraQ report</h2>
+        <h2 className={SECTION_LABEL}>Upload TipTraQ recording</h2>
         <div className="mt-4">
           <TipTraQUploadPanel />
         </div>

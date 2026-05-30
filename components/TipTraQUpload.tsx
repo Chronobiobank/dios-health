@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
-import { isPdfFile } from '@/lib/tiptraq/extraction'
+import { isEdfFile } from '@/lib/tiptraq/edf-parser'
 
 export interface TipTraQUploadResult {
   night: {
@@ -33,8 +33,8 @@ interface UploadState {
 
 const STATUS_MESSAGES: Record<UploadState['status'], string | null> = {
   idle: null,
-  uploading: 'Uploading your report...',
-  extracting: 'Reading your sleep data...',
+  uploading: 'Uploading channel data...',
+  extracting: 'Reading your sleep signals...',
   calculating: 'Calculating your body clock...',
   complete: null,
   error: null,
@@ -53,11 +53,11 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
 
   const processFile = useCallback(
     async (file: File) => {
-      if (!isPdfFile(file)) {
+      if (!isEdfFile(file)) {
         setState({
           status: 'error',
           progress: 0,
-          error: 'Please upload a PDF file.',
+          error: 'Please upload a TipTraQ channel export (.edf file).',
         })
         return
       }
@@ -65,7 +65,7 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
       setState({ status: 'uploading', progress: 20 })
 
       const formData = new FormData()
-      formData.append('pdf', file)
+      formData.append('file', file)
 
       try {
         setState({ status: 'extracting', progress: 50 })
@@ -145,21 +145,21 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-xl">
             ↑
           </div>
-          <div className="mt-4 text-lg font-medium">Upload TipTraQ report</div>
+          <div className="mt-4 text-lg font-medium">Upload TipTraQ channel data</div>
           <div className="mt-2 text-sm text-white/60">
-            Drag and drop your PDF nightly report, or tap to choose
+            Drag and drop your EDF nightly recording, or tap to choose
           </div>
           <label className="mt-6 inline-flex cursor-pointer items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition-transform duration-100 active:scale-[0.97] hover:bg-white/90">
-            Choose PDF
+            Choose EDF file
             <input
               type="file"
-              accept=".pdf,application/pdf"
+              accept=".edf,application/edf,application/octet-stream"
               onChange={handleFileInput}
               className="hidden"
             />
           </label>
           <div className="mt-4 font-mono text-[11px] text-white/40">
-            One night at a time · Confidence grows with each upload
+            European Data Format (.edf) · One night at a time · Max 50MB
           </div>
         </div>
       )}
@@ -174,7 +174,7 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
             />
           </div>
           <div className="mt-3 text-xs text-black/50">
-            {state.status === 'extracting' && 'AI is reading your sleep report...'}
+            {state.status === 'extracting' && 'Parsing PPG, SpO₂, and activity channels...'}
             {state.status === 'calculating' && 'Applying the proxy DLMO algorithm...'}
           </div>
         </div>

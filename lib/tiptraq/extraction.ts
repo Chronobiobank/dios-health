@@ -246,7 +246,7 @@ export function mapStorageUploadError(message: string): string {
     return 'TipTraQ storage permissions are missing. Run supabase/run-tiptraq-setup.sql in Supabase SQL Editor.'
   }
 
-  return 'Failed to store PDF. Please try again.'
+  return 'Failed to store EDF file. Please try again.'
 }
 
 export function mapInsertError(message: string): string {
@@ -265,7 +265,7 @@ export function mapInsertError(message: string): string {
   }
 
   if (lower.includes('invalid input syntax') && lower.includes('time')) {
-    return 'Could not read sleep times from this report. Check the PDF and try again.'
+    return 'Could not read sleep times from this recording. Check the EDF file and try again.'
   }
 
   return 'Failed to save night data. Please try again.'

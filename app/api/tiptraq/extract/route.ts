@@ -3,20 +3,18 @@ import { NextRequest, NextResponse } from 'next/server'
 import { calculateNightDLMO, calculateRollingDLMO, type DLMOResult } from '@/lib/dlmo'
 import { createClient } from '@/lib/supabase/server'
 import {
-  extractTipTraQFromPdf,
-  getAnthropicApiKey,
-  mapAnthropicError,
-  TIPTRAQ_EXTRACTION_MODEL,
-} from '@/lib/tiptraq/anthropic-client'
+  extractNightDataFromEdf,
+  getTipTraqUploadMaxBytes,
+  isEdfFile,
+  mapEdfParseError,
+} from '@/lib/tiptraq/edf-parser'
 import {
-  isPdfFile,
   mapFetchError,
   mapInsertError,
   mapProfileUpsertError,
   mapStorageUploadError,
-  parseExtractedJson,
-  toNightInput,
   resolveReportDate,
+  toNightInput,
 } from '@/lib/tiptraq/extraction'
 
 export const maxDuration = 60
@@ -50,14 +48,6 @@ function toRollingNightResults(nights: Array<{
 }
 
 export async function POST(request: NextRequest) {
-  if (!getAnthropicApiKey()) {
-    console.error('TipTraQ extract: ANTHROPIC_API_KEY is not configured')
-    return errorResponse(
-      'Report extraction is not configured on the server. Add ANTHROPIC_API_KEY in Vercel environment variables.',
-      503
-    )
-  }
-
   try {
     const supabase = await createClient()
 
@@ -70,26 +60,27 @@ export async function POST(request: NextRequest) {
     }
 
     const formData = await request.formData()
-    const file = formData.get('pdf')
+    const file = formData.get('file') ?? formData.get('edf') ?? formData.get('pdf')
     if (!(file instanceof File)) {
-      return errorResponse('No PDF provided', 400)
+      return errorResponse('No EDF file provided', 400)
     }
 
-    if (!isPdfFile(file)) {
-      return errorResponse('File must be a PDF', 400)
+    if (!isEdfFile(file)) {
+      return errorResponse('File must be a TipTraQ channel export (.edf)', 400)
     }
 
-    if (file.size > 10 * 1024 * 1024) {
-      return errorResponse('PDF must be under 10MB', 400)
+    const maxBytes = getTipTraqUploadMaxBytes()
+    if (file.size > maxBytes) {
+      return errorResponse('EDF file must be under 50MB', 400)
     }
 
     const fileBytes = await file.arrayBuffer()
-    const fileName = `${user.id}/${Date.now()}-tiptraq.pdf`
+    const fileName = `${user.id}/${Date.now()}-tiptraq.edf`
 
     const { error: uploadError } = await supabase.storage
       .from('tiptraq-reports')
       .upload(fileName, fileBytes, {
-        contentType: 'application/pdf',
+        contentType: 'application/octet-stream',
         upsert: false,
       })
 
@@ -98,14 +89,13 @@ export async function POST(request: NextRequest) {
       return errorResponse(mapStorageUploadError(uploadError.message), 500)
     }
 
-    const { rawText } = await extractTipTraQFromPdf(Buffer.from(fileBytes).toString('base64'))
-
     let extracted: Record<string, unknown>
     try {
-      extracted = parseExtractedJson(rawText)
-    } catch {
-      console.error('JSON parse error:', rawText)
-      return errorResponse('Could not read this TipTraQ report. Check the PDF and try again.', 422)
+      extracted = extractNightDataFromEdf(fileBytes)
+    } catch (parseError) {
+      const message = parseError instanceof Error ? parseError.message : 'Could not parse EDF file'
+      console.error('EDF parse error:', message)
+      return errorResponse(mapEdfParseError(message), 422)
     }
 
     const reportDate = resolveReportDate(extracted)
@@ -161,7 +151,7 @@ export async function POST(request: NextRequest) {
       high_sympathetic_flag: dlmoResult.high_sympathetic_flag,
       rem_delay_flag: dlmoResult.rem_delay_flag,
       apnea_confound_flag: dlmoResult.apnea_confound_flag,
-      extraction_model: TIPTRAQ_EXTRACTION_MODEL,
+      extraction_model: String(extracted.algorithm_version ?? 'edf-channel-v1'),
     })
 
     if (insertError) {
@@ -247,12 +237,7 @@ export async function POST(request: NextRequest) {
       },
     })
   } catch (error) {
-    console.error('Extraction pipeline error:', error)
-
-    const anthropicMessage = mapAnthropicError(error)
-    if (anthropicMessage) {
-      return errorResponse(anthropicMessage, 503)
-    }
+    console.error('TipTraQ EDF pipeline error:', error)
 
     if (error instanceof Error) {
       if (error.message.startsWith('Report is missing') || error.message.startsWith('Report has an invalid')) {
