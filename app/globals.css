@@ -337,6 +337,19 @@
     letter-spacing: var(--tracking-tight);
   }
 
+  /* Mixed-case tagline scaled so lowercase x-height matches logo cap height (Geist ~cap/x ≈ 1.36) */
+  .type-logo-tagline {
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--tracking-normal);
+    color: var(--text-muted);
+  }
+
+  a .type-logo-tagline,
+  a:hover .type-logo-tagline,
+  a:focus-visible .type-logo-tagline {
+    color: var(--text-muted);
+  }
+
   .type-tile-overlay-label {
     font-family: var(--font-family-sans);
     font-size: var(--text-caption-size);
@@ -403,6 +416,16 @@
     font-size: var(--text-nav-size);
     font-weight: var(--font-weight-medium);
     line-height: 1;
+  }
+
+  /* Marketing CTAs — width hugs label; never stretches to tile or container */
+  .btn-primary,
+  .btn-hero {
+    display: inline-flex;
+    width: fit-content;
+    max-width: 100%;
+    align-self: flex-start;
+    flex-shrink: 0;
   }
 }
 

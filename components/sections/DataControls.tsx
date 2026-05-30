@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-import { MatchedLines } from './MatchedLines'
 import { BODY, CARD, CONTAINER, SECTION, SECTION_ALT, SECTION_TITLE } from './layout'
 import { SectionLabel } from './SectionLabel'
 
@@ -15,9 +14,9 @@ const SECTION_IMAGE = {
 } as const
 
 const TOGGLES = [
-  { id: 'gp', label: ['Share with', 'my GP'], defaultOn: true },
-  { id: 'research', label: ['Share with', 'researchers'], defaultOn: false },
-  { id: 'policy', label: ['Share with', 'policy teams'], defaultOn: false },
+  { id: 'gp', label: 'Share my data with my GP', defaultOn: true },
+  { id: 'research', label: 'Share my data with researchers', defaultOn: false },
+  { id: 'policy', label: 'Share my data with policy teams', defaultOn: false },
 ] as const
 
 export function DataControls() {
@@ -29,12 +28,10 @@ export function DataControls() {
     <section id="data-controls" className={`${SECTION} ${SECTION_ALT}`}>
       <div className={CONTAINER}>
         <SectionLabel title="Data controls" />
-        <h2 className={`${SECTION_TITLE} mt-4 max-w-md`}>
-          Your data.
-          <br />
-          Your call.
-        </h2>
-        <p className={`${BODY} mt-4 max-w-sm`}>One toggle. Change it any time.</p>
+        <h2 className={`${SECTION_TITLE} mt-4 max-w-lg`}>You decide who sees your data</h2>
+        <p className={`${BODY} mt-4 max-w-lg`}>
+          Each toggle controls one sharing preference and you can change it any time
+        </p>
 
         <div className="mt-10 grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="order-2 lg:order-1">
@@ -44,17 +41,12 @@ export function DataControls() {
                   key={toggle.id}
                   className={`${CARD} flex items-center justify-between gap-4 rounded-lg px-5 py-4`}
                 >
-                  <MatchedLines
-                    lines={toggle.label}
-                    variant="headline"
-                    slots={2}
-                    className="[&_span]:text-sm [&_span]:font-medium"
-                  />
+                  <span className="text-sm font-medium">{toggle.label}</span>
                   <button
                     type="button"
                     role="switch"
                     aria-checked={state[toggle.id]}
-                    aria-label={`${toggle.label.join(' ')} — ${state[toggle.id] ? 'on' : 'off'}`}
+                    aria-label={`${toggle.label} — ${state[toggle.id] ? 'on' : 'off'}`}
                     onClick={() =>
                       setState((prev) => ({ ...prev, [toggle.id]: !prev[toggle.id] }))
                     }
@@ -72,7 +64,9 @@ export function DataControls() {
               ))}
             </ul>
 
-            <p className={`${BODY} mt-6 max-w-sm`}>Off means off. Immediately.</p>
+            <p className={`${BODY} mt-6 max-w-lg`}>
+              Turning a toggle off revokes access immediately with no delay
+            </p>
           </div>
 
           <div className="order-1 w-full lg:order-2">

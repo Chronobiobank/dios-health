@@ -2,7 +2,6 @@ import Image from 'next/image'
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
-import { MatchedLines } from './MatchedLines'
 import { BODY, CARD, CONTAINER, SECTION, SECTION_ALT, SECTION_TITLE } from './layout'
 import { SectionLabel } from './SectionLabel'
 
@@ -15,33 +14,28 @@ const SECTION_IMAGE = {
 
 const PROOFS = [
   {
-    headline: ['Night is right', 'for blood pressure.'],
-    body: [
-      'For patients whose pressure doesn\'t drop',
-      'during sleep, bedtime beats morning.',
-    ],
-    drugs: ['Ramipril · Lisinopril ·', 'Amlodipine'],
+    id: 'bp',
+    headline: 'Bedtime beats morning when blood pressure won\'t dip overnight',
+    body: 'For non-dippers, moving ramipril or lisinopril to bedtime matches the window the trials proved',
+    caption: 'Ramipril, lisinopril, and amlodipine',
   },
   {
-    headline: ['The liver works', 'at midnight.'],
-    body: ['A morning statin misses the window.', 'An evening one doesn\'t.'],
-    drugs: ['Simvastatin', ''],
+    id: 'statin',
+    headline: 'Evening statins match the window when the liver works hardest',
+    body: 'A morning statin misses midnight liver activity — an evening dose lands when cholesterol synthesis peaks',
+    caption: 'Simvastatin',
   },
   {
-    headline: ['Pain peaks before', 'you wake.'],
-    body: [
-      'Standard morning dosing arrives too late.',
-      'DIOS finds your patient\'s actual peak.',
-    ],
-    drugs: ['Prednisolone · Naproxen ·', 'Ibuprofen'],
+    id: 'pain',
+    headline: 'Pain relief should arrive before your patient wakes, not after',
+    body: 'DIOS finds each patient\'s inflammatory peak so prednisolone or naproxen lands before they wake',
+    caption: 'Prednisolone, naproxen, and ibuprofen',
   },
   {
-    headline: ['Airways narrow in', 'the early hours.'],
-    body: [
-      'An evening dose covers the window.',
-      'DIOS finds when that window opens.',
-    ],
-    drugs: ['Salmeterol ·', 'Fluticasone'],
+    id: 'asthma',
+    headline: 'Evening dosing covers the airway narrowing that hits before dawn',
+    body: 'An evening salmeterol or fluticasone dose covers the pre-dawn bronchospasm window DIOS tracks',
+    caption: 'Salmeterol and fluticasone',
   },
 ] as const
 
@@ -53,15 +47,11 @@ export function DrugModules() {
 
         <div className="mt-4 grid grid-cols-1 items-center gap-6 lg:grid-cols-2 lg:gap-12">
           <div>
-            <h2 className={`${SECTION_TITLE} max-w-md`}>
-              Four drugs.
-              <br />
-              Proven timing.
-              <br />
-              Shown here first.
+            <h2 className={`${SECTION_TITLE} max-w-2xl`}>
+              We start with four drugs that need personalised scheduling
             </h2>
-            <p className={`${BODY} mt-4 hidden max-w-sm lg:block`}>
-              The strongest clinical evidence for dose timing — today.
+            <p className={`${BODY} mt-4 hidden max-w-lg lg:block`}>
+              These four carry the strongest published evidence for dose timing in primary care today
             </p>
           </div>
 
@@ -74,29 +64,27 @@ export function DrugModules() {
             className="aspect-video w-full rounded-lg object-cover lg:rounded-xl"
           />
 
-          <p className={`${BODY} max-w-sm lg:hidden`}>
-            The strongest clinical evidence for dose timing — today.
+          <p className={`${BODY} max-w-lg lg:hidden`}>
+            These four carry the strongest published evidence for dose timing in primary care today
           </p>
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-2">
           {PROOFS.map((item) => (
-            <Card key={item.headline.join('-')} className={`${CARD} gap-0 py-0`}>
+            <Card key={item.id} className={`${CARD} gap-0 py-0`}>
               <CardHeader className="gap-3 px-6 pt-6">
-                <MatchedLines lines={item.headline} variant="headline" slots={2} />
+                <p className="type-tile-title">{item.headline}</p>
               </CardHeader>
-              <CardContent className="space-y-4 px-6 pb-6">
-                <MatchedLines lines={item.body} variant="body" slots={2} />
-                <MatchedLines lines={item.drugs} variant="footer" slots={2} />
+              <CardContent className="space-y-3 px-6 pb-6">
+                <p className={BODY}>{item.body}</p>
+                <p className="type-caption">{item.caption}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
         <p className={`${BODY} mt-10 text-center`}>
-          Hundreds of treatments have a timing window.
-          <br />
-          These four are where we start.
+          Hundreds of other treatments have a timing window — these four are where DIOS starts
         </p>
       </div>
     </section>

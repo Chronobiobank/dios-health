@@ -7,38 +7,38 @@ import { cn } from '@/lib/utils'
 import { CONTAINER, SECTION } from './layout'
 
 const MARKERS = [
-  'Social jetlag',
-  'Metabolic strain',
-  'Cancer risk',
-  'Neural decline',
+  'Social jetlag from misaligned social and biological clocks',
+  'Metabolic strain from sustained circadian drift',
+  'Elevated cancer risk in long-term shift cohorts',
+  'Neural decline linked to broken sleep architecture',
 ] as const
 
 const STAGES = [
   {
-    tag: 'Mild / Acute',
-    title: 'Social jetlag and shift-work disorder',
-    body: 'Behavioural misalignment between social and biological clocks. Shift-work sleep disorder is the earliest signal detectable at population scale.',
+    tag: 'Mild acute disruption detected at population scale',
+    title: 'Social jetlag and shift-work disorder sit at the earliest point on the curve',
+    body: 'Behavioural misalignment between social and biological clocks is the first signal DIOS can detect before pathology develops',
     bg: 'bg-[#EDE8F7]/50',
     dark: false,
   },
   {
-    tag: 'Intermediate',
-    title: 'Metabolic and cardiovascular strain',
-    body: 'Sustained disruption impairs insulin sensitivity and vascular function. Population-level metabolic drift precedes formal clinical diagnosis by years.',
+    tag: 'Intermediate metabolic disruption before formal diagnosis',
+    title: 'Metabolic and cardiovascular strain follows months of sustained clock drift',
+    body: 'Population-level insulin and vascular dysfunction often precedes a formal diabetes or heart disease diagnosis by years',
     bg: 'bg-[#FAFAFA]',
     dark: false,
   },
   {
-    tag: 'Severe',
-    title: 'Oncological risk and cancer burden',
-    body: 'Chronic clock disruption dysregulates DNA repair and cell-cycle control in tissue. Night-shift populations show measurably elevated cancer incidence.',
+    tag: 'Severe systemic risk in chronically misaligned cohorts',
+    title: 'Oncological burden rises when DNA repair cycles lose circadian control',
+    body: 'Night-shift populations show measurably higher cancer incidence when clock-driven cell repair fails',
     bg: 'bg-[#FDF6E8]',
     dark: false,
   },
   {
-    tag: 'Chronic',
-    title: "Dementia and Alzheimer's pathway",
-    body: 'Glymphatic clearance depends on intact circadian sleep architecture nightly. Drift velocity correlates with neurodegenerative disease onset in cohorts.',
+    tag: 'Chronic neurological decline at the far end of the spectrum',
+    title: "Dementia risk grows when glymphatic clearance loses nightly circadian drive",
+    body: 'Broken sleep architecture stops the brain clearing toxic waste and drift velocity tracks neurodegenerative onset in cohorts',
     bg: 'bg-[#3B1F35]',
     dark: true,
   },
@@ -60,10 +60,9 @@ export function DisruptionSpectrum() {
     <section id="spectrum" className={`${SECTION} bg-[#FAFAFA] py-16 sm:py-20`}>
       <div className={CONTAINER}>
         <p className="font-mono text-xs uppercase tracking-widest text-black/50">The evidence</p>
-        <h2 className="type-section mt-4">The circadian disruption spectrum.</h2>
+        <h2 className="type-section mt-4">The circadian disruption spectrum runs from mild jetlag to chronic pathology</h2>
         <p className="type-body mt-4 max-w-2xl">
-          From mild behavioural misalignment to severe chronic pathology — where shift-worker
-          populations sit on the curve, and where DIOS intervenes.
+          DIOS intervenes where shift-worker populations sit on the curve from mild jetlag to chronic disease
         </p>
 
         <div className="mt-12">
@@ -143,13 +142,7 @@ export function DisruptionSpectrum() {
 
         <blockquote className="mt-12 border-l-2 border-[#C9973A] bg-white px-6 py-8 sm:px-8">
           <p className="font-sans text-xl font-medium leading-snug text-black sm:text-2xl">
-            DIOS detects circadian disruption at the behavioural stage — before it progresses to
-            metabolic, oncological, or neurological pathology.
-          </p>
-          <p className="type-body mt-4 max-w-2xl text-black/70">
-            Early chronotype correction is clinically essential — and untranslated into everyday
-            prescribing. DIOS informs the clinician&apos;s prescribing decision; it does not
-            prescribe or dose.
+            DIOS catches circadian disruption at the behavioural stage — before metabolic, cancer, or neurological pathology — and informs the prescribing decision without prescribing or dosing
           </p>
         </blockquote>
 

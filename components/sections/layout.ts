@@ -7,9 +7,9 @@ export const CARD = 'border border-black/10 bg-white shadow-none ring-0'
 export const LIST_LINE = 'font-sans text-lg font-medium leading-snug text-black sm:text-xl'
 
 export const BTN_PRIMARY =
-  'type-button inline-flex h-10 items-center justify-center rounded-full bg-black px-5 text-white transition-colors hover:bg-black/80 sm:h-11 sm:px-6'
+  'btn-primary type-button inline-flex h-10 items-center justify-center rounded-full bg-black px-5 text-white transition-colors hover:bg-black/80 sm:h-11 sm:px-6'
 
 export const BTN_HERO =
-  'type-button inline-flex items-center justify-center rounded-full bg-white px-6 py-2.5 text-black transition-colors hover:bg-white/90'
+  'btn-hero type-button inline-flex items-center justify-center rounded-full bg-white px-6 py-2.5 text-black transition-colors hover:bg-white/90'
 
 export const LABEL = 'type-label'

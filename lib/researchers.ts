@@ -108,41 +108,17 @@ export function getHomepageResearchers(): Researcher[] {
   return HOMEPAGE_RESEARCHER_IDS.map((id) => RESEARCHERS.find((r) => r.id === id)!)
 }
 
-/** Plain-English relevance lines for the GP homepage only — two matched lines each */
-export const HOMEPAGE_RESEARCHER_RELEVANCE: Record<string, readonly [string, string]> = {
-  foster: [
-    'Wrote the book on when to take medication.',
-    '*Life Time*, Chapter 10. Oxford, 2022.',
-  ],
-  manfredini: [
-    'His trials show when you take',
-    'blood pressure pills changes heart outcomes.',
-  ],
-  pigazzani: [
-    'Proved live timing beats a',
-    'one-off sleep questionnaire.',
-  ],
-  levi: [
-    'Showed timed care at home works.',
-    'DIOS brings that to GP care.',
-  ],
-  roenneberg: [
-    'Defined natural sleep timing.',
-    'DIOS tracks it from the wrist.',
-  ],
-  hermida: [
-    'Found bedtime blood pressure pills',
-    'can cut stroke risk.',
-  ],
-  smolensky: [
-    'Mapped why arthritis and steroid',
-    'pills work better at night.',
-  ],
-  cajochen: [
-    'Named the gap between published',
-    'science and what GPs actually do.',
-  ],
+/** Plain-English relevance — one sentence per researcher on the GP homepage */
+export const HOMEPAGE_RESEARCHER_RELEVANCE: Record<string, string> = {
+  foster: 'He wrote *Life Time* Chapter 10 on when to take medication — Oxford, 2022',
+  manfredini: 'His trials show bedtime blood pressure pills change heart outcomes',
+  pigazzani: 'He proved live wearable timing beats a one-off sleep questionnaire',
+  levi: 'He showed timed home care works and DIOS brings that model to GP practice',
+  roenneberg: 'He defined natural sleep timing and DIOS tracks it from the wrist',
+  hermida: 'He found bedtime blood pressure pills can cut stroke risk in trials',
+  smolensky: 'He mapped why arthritis and steroid pills work better at night',
+  cajochen: 'He named the gap between published chronodosing science and GP practice',
 }
 
 export const RESEARCHERS_INTRO =
-  'Chronodosing is not a startup idea. It is the conclusion of decades of work by some of the world\'s leading circadian scientists. DIOS is the clinical tool they argued should exist.'
+  'Chronodosing is the conclusion of decades of circadian science — DIOS is the clinical tool they argued should exist'

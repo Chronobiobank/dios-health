@@ -1,56 +1,49 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
-import { BTN_PRIMARY, CONTAINER } from './layout'
+import { BTN_HERO, CONTAINER } from './layout'
 import { SectionLabel } from './SectionLabel'
 
-const HERO_IMAGE = {
-  src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
-  alt: 'Person in morning light — body clock entrainment through natural light exposure',
-  width: 1200,
-  height: 675,
+const HERO_VIDEO = {
+  src: '/chronotherapy.mp4',
+  poster: '/hero.jpg',
+  label: 'Chronotherapy and dose timing — body clock entrainment through light',
 } as const
 
 export function Hero() {
   return (
-    <section
-      id="our-edge"
-      className="w-full py-14 sm:py-20 lg:py-24"
-    >
-      <div className={`${CONTAINER} grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12`}>
-        <div className="order-2 text-left lg:order-1">
-          <SectionLabel title="Our Edge" />
+    <section id="our-edge" className="w-full py-14 sm:py-20 lg:py-24">
+      <div className={CONTAINER}>
+        <div className="relative flex min-h-[min(100dvh,32rem)] items-end overflow-hidden rounded-lg sm:min-h-[28rem] sm:items-center lg:min-h-[32rem] lg:rounded-xl">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster={HERO_VIDEO.poster}
+            aria-label={HERO_VIDEO.label}
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src={HERO_VIDEO.src} type="video/mp4" />
+          </video>
 
-          <h1 className="type-hero mt-4">
-            The World&apos;s First
-            <br />
-            Dose Intelligence Platform
-          </h1>
+          <div className="absolute inset-0 bg-black/55" aria-hidden />
 
-          <ul className="type-body mt-8 space-y-2">
-            <li>Light sets your clock.</li>
-            <li>Food feeds your rhythm.</li>
-            <li>Medicine needs your window.</li>
-          </ul>
+          <div className="relative z-10 max-w-3xl px-6 py-10 text-left text-white sm:px-10 sm:py-12 lg:max-w-4xl lg:px-14 lg:py-16">
+            <SectionLabel title="Our Edge" light />
 
-          <p className="type-body mt-6 max-w-xl">
-            DIOS reads your body clock and finds the right time for every treatment.
-          </p>
+            <h1 className="type-hero-overlay mt-4 !text-[clamp(2.25rem,6.5vw,4.5rem)] leading-[1.05] text-white">
+              Precision Chronomedicine
+            </h1>
 
-          <Link href="#demo" className={`${BTN_PRIMARY} mt-8`}>
-            See it in action in 30 minutes →
-          </Link>
-        </div>
+            <p className="type-hero-meta mt-6 max-w-2xl !text-[clamp(1.125rem,2.2vw,1.625rem)] leading-snug text-white/85">
+              DIOS reads your body clock and finds the right time for every treatment.
+            </p>
 
-        <div className="order-1 w-full lg:order-2">
-          <Image
-            src={HERO_IMAGE.src}
-            alt={HERO_IMAGE.alt}
-            width={HERO_IMAGE.width}
-            height={HERO_IMAGE.height}
-            className="aspect-video w-full rounded-lg object-cover lg:aspect-auto lg:min-h-[28rem] lg:rounded-xl"
-            priority
-          />
+            <Link href="#demo" className={`${BTN_HERO} mt-8`}>
+              See live demo →
+            </Link>
+          </div>
         </div>
       </div>
     </section>

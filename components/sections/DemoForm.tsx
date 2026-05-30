@@ -52,16 +52,14 @@ export function DemoForm() {
     <section id="demo" className={`${SECTION} ${SECTION_ALT}`}>
       <div className={`${CONTAINER} mx-auto max-w-lg text-center`}>
         <SectionLabel title="Book a demo" className="text-center" />
-        <h2 className={`${SECTION_TITLE} mt-4`}>
-          See it with
-          <br />
-          your own patients.
-        </h2>
-        <p className={`${BODY} mt-4`}>30 minutes. Real data. No procurement needed.</p>
+        <h2 className={`${SECTION_TITLE} mt-4`}>See DIOS in action</h2>
+        <p className={`${BODY} mt-4`}>
+          You get a live walkthrough with real timing data and no procurement process
+        </p>
 
         {success ? (
           <p className={`${CARD} type-body mt-10 rounded-2xl p-6 text-black/80`}>
-            Thank you — we will be in touch within one business day.
+            Thank you — we will reply within one business day
           </p>
         ) : (
           <form
@@ -121,9 +119,9 @@ export function DemoForm() {
             <button
               type="submit"
               disabled={loading}
-              className={`${BTN_PRIMARY} h-11 w-full disabled:cursor-not-allowed disabled:opacity-60`}
+              className={`${BTN_PRIMARY} h-11 disabled:cursor-not-allowed disabled:opacity-60`}
             >
-              {loading ? 'Submitting…' : 'Book a demo'}
+              {loading ? 'Sending…' : 'Book a demo'}
             </button>
           </form>
         )}

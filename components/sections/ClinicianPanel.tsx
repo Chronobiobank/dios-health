@@ -15,38 +15,38 @@ const SECTION_IMAGE = {
 const ROWS = [
   {
     patient: 'Margaret T, 58',
-    finding: 'Blood pressure not dipping at night',
-    bodyClock: 'Night owl · 1.2h late',
-    data: '6 of 7 nights',
+    finding: 'Blood pressure is not dipping overnight on current morning dosing',
+    bodyClock: 'Night owl chronotype running 1.2 hours late',
+    data: 'Wearable shows non-dipping on six of seven nights',
     status: 'Act now',
-    action: 'Move Ramipril to bedtime',
+    action: 'Move ramipril to bedtime tonight',
     urgent: true,
   },
   {
     patient: 'James O., 44',
-    finding: 'Statin taken too early in the day',
-    bodyClock: 'Standard · on track',
-    data: 'Wearable complete',
+    finding: 'Statin is being taken too early for his liver clock',
+    bodyClock: 'Standard chronotype and on track otherwise',
+    data: 'Wearable stream complete and current',
     status: 'Earlier dose',
-    action: 'Shift Simvastatin to evening',
+    action: 'Shift simvastatin to evening dosing',
     urgent: true,
   },
   {
     patient: 'Priya N., 61',
-    finding: 'Vitamin D result missing',
-    bodyClock: 'Unknown until panel in',
-    data: 'Blood panel pending',
+    finding: 'Vitamin D result is missing before timing can be confirmed',
+    bodyClock: 'Chronotype unknown until blood panel returns',
+    data: 'City Labs blood panel still pending',
     status: 'Need bloods',
-    action: 'Order City Labs panel',
+    action: 'Order City Labs panel before next review',
     urgent: false,
   },
   {
     patient: 'David K., 52',
-    finding: 'Timing matches body clock',
-    bodyClock: 'Aligned · stable',
-    data: 'All streams live',
+    finding: 'Current medicine timing matches his body clock',
+    bodyClock: 'Aligned chronotype and stable drift index',
+    data: 'All data streams live and complete',
     status: 'On track',
-    action: 'No change today',
+    action: 'No dose timing change needed today',
     urgent: false,
   },
 ] as const
@@ -68,12 +68,10 @@ export function ClinicianPanel() {
 
         <div>
           <h2 className={`${SECTION_TITLE} max-w-md`}>
-            Who needs acting on.
-            <br />
-            Right now.
+            See which patients need acting on right now
           </h2>
-          <p className={`${BODY} mt-4 max-w-sm`}>
-            Your patients, ranked by what needs attention today.
+          <p className={`${BODY} mt-4 max-w-lg`}>
+            Every row is ranked by clinical urgency so you know who needs a timing change today
           </p>
         </div>
       </div>

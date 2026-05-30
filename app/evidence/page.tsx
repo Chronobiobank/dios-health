@@ -14,8 +14,7 @@ export default function EvidencePage() {
         <p className="font-mono text-xs uppercase tracking-widest text-black/50">Evidence</p>
         <h1 className="type-section mt-4 max-w-3xl">The science behind dose timing</h1>
         <p className="type-body mt-4 max-w-3xl">
-          Chronodosing is not emerging science. It is Oxford-validated, trial-evidenced, and
-          untranslated into clinical practice. DIOS closes that gap.
+          Oxford-validated chronodosing is trial-evidenced but still untranslated in everyday practice — DIOS closes that gap
         </p>
 
         <EvidenceCards showCta />

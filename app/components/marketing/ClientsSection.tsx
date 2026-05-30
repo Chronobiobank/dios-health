@@ -3,10 +3,10 @@ import { SectionIntro } from './SectionIntro'
 
 const CLIENTS = [
   {
-    tag: 'For Clinicians',
-    headline: 'Pre-computed SWSD signal and differential — before the patient walks in.',
-    body: 'DIOS delivers chronotype-informed dose timing intelligence. The GP sees wearable-derived MSFsc, timing recommendations, and audit-ready outputs — informing the prescribing decision.',
-    metric: 'Output: pre-computed biological profiles',
+    tag: 'Clinicians who need timing intelligence before the patient walks in',
+    headline: 'Pre-computed SWSD signal and differential arrive before the consultation starts',
+    body: 'The GP sees wearable MSFsc, timing recommendations, and audit-ready outputs that inform the prescribing decision',
+    metric: 'Each profile is pre-computed from passive patient streams',
     image: {
       src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=85',
       alt: 'Healthcare consultant speaking with a patient during a clinical consultation',
@@ -14,10 +14,10 @@ const CLIENTS = [
     },
   },
   {
-    tag: 'Workforce & institutions',
-    headline: 'Population-level coherence intelligence across your workforce.',
-    body: 'Identify which teams, shifts, and roles are at highest circadian risk — before incidents, absenteeism, and attrition compound.',
-    metric: 'Output: coherence intelligence by role, shift, and team',
+    tag: 'Workforce leaders who need population-level circadian coherence',
+    headline: 'Population coherence intelligence shows which teams and shifts carry the highest drift risk',
+    body: 'Leaders see which roles need intervention before incidents, absenteeism, and attrition compound',
+    metric: 'Outputs are grouped by role, shift pattern, and team',
     image: {
       src: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=85',
       alt: 'Leadership team in a boardroom reviewing workforce strategy',
@@ -25,10 +25,10 @@ const CLIENTS = [
     },
   },
   {
-    tag: 'Excluded — insurers',
-    headline: 'Exposure risk modelling before the claim is filed.',
-    body: 'Insurer access to patient or population risk data is permanently excluded — by design, not policy.',
-    metric: 'Output: exposure risk score and claims probability',
+    tag: 'Insurers who are permanently excluded from patient and population data',
+    headline: 'Insurer access to exposure modelling is excluded by platform design rather than policy',
+    body: 'Patient and population risk data never flows to underwriting teams regardless of contract terms',
+    metric: 'Exposure scoring remains unavailable to insurance buyers by design',
     image: {
       src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=85',
       alt: 'Analytics dashboard showing population risk trends and metrics',
@@ -43,8 +43,8 @@ export function ClientsSection() {
       <div className="dios-container">
         <SectionIntro
           eyebrow="Our clients"
-          title="One platform. Three value propositions."
-          subtitle="Built for three buyers"
+          title="One platform with a different value proposition for each buyer"
+          subtitle="Clinicians, workforce leaders, and researchers each get a dedicated outcome from the same consent model"
           className="mb-14 text-center md:mb-16 [&_.dios-lead]:mx-auto"
           titleClassName="mx-auto"
         />
@@ -52,7 +52,7 @@ export function ClientsSection() {
         <div className="grid gap-8 md:grid-cols-3 md:gap-6 lg:gap-8">
           {CLIENTS.map((client) => (
             <article
-              key={client.tag}
+              key={client.headline}
               className="flex flex-col border border-dios-border bg-white p-8 md:p-9"
             >
               <div className="dios-photo relative mb-6 aspect-[4/3] w-full overflow-hidden">

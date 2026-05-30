@@ -1,27 +1,27 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-import { CONTAINER, SECTION } from './layout'
+import { BODY, CONTAINER, SECTION } from './layout'
 
 const STEPS = [
   {
     num: '01',
-    title: 'Detect',
-    body: 'Passive multi-stream capture across wearable, lab, retinal, and smartphone — zero additional patient burden.',
+    title: 'Detect rhythm from wearable, lab, retinal, and phone data',
+    body: 'Passive capture across four streams adds zero burden for the patient or the clinic',
   },
   {
     num: '02',
-    title: 'Diagnose',
-    body: 'Chronotype-informed dose timing modules surface when to take medicines already prescribed — informing the clinician\'s prescribing decision.',
+    title: 'Diagnose the dose window from your patient\'s body clock',
+    body: 'Timing modules surface when to take medicines already prescribed — informing your decision, not replacing it',
   },
   {
     num: '03',
-    title: 'Deliver',
-    body: 'Pre-computed timing intelligence for clinicians, optional workforce programmes, and consented research datasets — insurer access permanently excluded.',
+    title: 'Deliver timing intelligence to clinicians and consented research',
+    body: 'Pre-computed intelligence reaches the desk, workforce programmes, and opt-in research with insurers permanently excluded',
   },
   {
     num: '04',
-    title: 'Close the loop',
-    body: 'Longitudinal monitoring tracks population velocity and deterioration — intervention before threshold crossing.',
+    title: 'Close the loop before biological thresholds cross',
+    body: 'Longitudinal monitoring flags drift velocity before deterioration needs a reactive intervention',
   },
 ] as const
 
@@ -30,10 +30,11 @@ export function ClosedLoop() {
     <section id="closed-loop" className={`${SECTION} bg-white py-16 sm:py-20`}>
       <div className={CONTAINER}>
         <p className="font-mono text-xs uppercase tracking-widest text-black/50">The closed loop</p>
-        <h2 className="type-section mt-4">Detect · Diagnose · Deliver.</h2>
-        <p className="type-body mt-4 max-w-2xl">
-          DIOS closes the loop when biological thresholds cross — from passive capture to
-          population-level intervention, without adding operational friction.
+        <h2 className="type-section mt-4 max-w-3xl">
+          Detect, diagnose, and deliver dose timing in one closed loop
+        </h2>
+        <p className={`${BODY} mt-4 max-w-2xl`}>
+          DIOS moves from passive capture to population intervention when biological thresholds cross — without operational friction
         </p>
 
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -46,12 +47,12 @@ export function ClosedLoop() {
                 <span className="font-mono text-2xl font-medium tabular-nums text-[#C9973A]">
                   {step.num}
                 </span>
-                <CardTitle className="min-h-[2.75rem] font-sans text-lg font-semibold leading-snug text-black">
+                <CardTitle className="font-sans text-lg font-semibold leading-snug text-black">
                   {step.title}
                 </CardTitle>
               </CardHeader>
               <CardContent className="px-6 pb-6">
-                <p className="type-body min-h-[4.5em] text-pretty text-black/70">{step.body}</p>
+                <p className={`${BODY} text-pretty`}>{step.body}</p>
               </CardContent>
             </Card>
           ))}

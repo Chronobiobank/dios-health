@@ -80,7 +80,7 @@ export function ResearchersSection({ variant }: ResearchersSectionProps) {
         id="researchers-heading"
         className={variant === 'full' ? 'type-section' : `${SECTION_TITLE}`}
       >
-        The researchers behind chronodosing
+        The researchers who established chronodosing as clinical science
       </h2>
       <p className={`${BODY} mt-4 max-w-3xl text-[var(--text-secondary)]`}>{RESEARCHERS_INTRO}</p>
 

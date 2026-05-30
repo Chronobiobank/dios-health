@@ -1,10 +1,10 @@
 import { CONTAINER } from './layout'
 
 const PLATFORM_STATS = [
-  { value: 'Free', label: 'for every patient — always' },
-  { value: 'Oxford', label: 'validated chronodosing science' },
-  { value: 'MSFsc', label: 'wearable-derived chronotype' },
-  { value: '0', label: 'insurer data access — by design' },
+  { value: 'Free', label: 'Every patient uses DIOS at no cost forever' },
+  { value: 'Oxford', label: 'Chronodosing science validated at Oxford and in trials' },
+  { value: 'MSFsc', label: 'Wearable-derived chronotype from the wrist' },
+  { value: '0', label: 'Insurer data access by deliberate platform design' },
 ] as const
 
 export function StatsBar() {

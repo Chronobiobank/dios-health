@@ -2,44 +2,44 @@ import { SectionIntro } from './SectionIntro'
 
 const STAGES = [
   {
-    stage: 'Stage 1: Behavioural',
+    stage: 'Stage one is behavioural disruption before organ damage begins',
     bg: 'bg-dios-lilac-light',
-    tag: 'Mild / Acute',
-    headline: 'Social Jetlag & Shift Work Disorder',
-    body: 'Your cells work fine but your daily habits do not match your internal clock. Social jetlag causes mild weekly clock confusion. Shift Work Sleep Disorder forces you to sleep when your brain wants to be awake.',
+    tag: 'Mild acute misalignment at population scale',
+    headline: 'Social jetlag and shift-work disorder are the earliest signals on the curve',
+    body: 'Daily habits fall out of sync with the internal clock long before metabolic or neurological disease appears',
     dark: false,
   },
   {
-    stage: 'Stage 2: Metabolic',
+    stage: 'Stage two is metabolic strain after months of sustained drift',
     bg: 'bg-dios-surface',
-    tag: 'Intermediate',
-    headline: 'Diabetes & Heart Disease',
-    body: 'When clock disruption lasts months or years it breaks down your metabolism and blood vessels. Your body master clock controls how you use sugar — when it is broken your cells stop responding to insulin.',
+    tag: 'Intermediate cardiovascular and insulin disruption',
+    headline: 'Diabetes and heart disease follow when the master clock stops regulating metabolism',
+    body: 'Insulin resistance and vascular damage build quietly for years before a formal diagnosis is made',
     dark: false,
   },
   {
-    stage: 'Stage 3: Systemic',
+    stage: 'Stage three is systemic cancer risk in chronically misaligned cohorts',
     bg: 'bg-[#FDF6E8]',
-    tag: 'Severe',
-    headline: 'Cancer',
-    body: 'The body clock controls cell growth and fixes damaged DNA. When the clock stops working mutated cells can grow out of control. Night shift workers carry measurably elevated cancer risk.',
+    tag: 'Severe DNA repair failure in shift populations',
+    headline: 'Cancer incidence rises when circadian control of cell growth breaks down',
+    body: 'Night-shift workers carry higher cancer burden when clock-driven DNA repair fails',
     dark: false,
   },
   {
-    stage: 'Stage 4: Neurological',
+    stage: 'Stage four is neurological decline at the chronic end of the spectrum',
     bg: 'bg-dios-aubergine',
-    tag: 'Chronic',
-    headline: "Dementia & Alzheimer's",
-    body: "Your brain clears dangerous waste products during sleep. Chronic clock disruption stops this cleaning process causing toxic plaques to build up. Circadian dysfunction is now linked to Alzheimer's disease onset.",
+    tag: 'Chronic glymphatic failure and dementia risk',
+    headline: "Dementia risk grows when sleep architecture stops clearing toxic brain waste",
+    body: 'Circadian sleep disruption blocks glymphatic clearance and tracks neurodegenerative onset in cohorts',
     dark: true,
   },
 ] as const
 
 const SPECTRUM_MARKERS = [
-  'Social Jetlag',
-  'Shift Work Disorder',
-  'Diabetes & Heart Disease',
-  'Cancer & Dementia',
+  'Social jetlag starts when habits and biology diverge',
+  'Shift-work disorder forces sleep against the clock',
+  'Metabolic disease follows sustained insulin drift',
+  'Cancer and dementia sit at the chronic end',
 ] as const
 
 const REFERENCES = [
@@ -57,18 +57,17 @@ export function SpectrumSection() {
       <div className="dios-container">
         <SectionIntro
           eyebrow="The evidence"
-          title="Circadian dysfunction is not just tiredness. It is a pathway to serious disease."
-          subtitle="Scientists now view body clock disruption as a core driver of major illness — not just a cause of fatigue. The disruption spectrum runs from mild behavioural misalignment to cancer and dementia."
+          title="Circadian dysfunction is a pathway to serious disease — not just tiredness"
+          subtitle="Body clock disruption drives major illness across a spectrum from mild jetlag to cancer and dementia"
           className="mb-16 md:mb-20"
         />
 
         <div className="mb-16 md:mb-24">
           <div className="mb-3 flex justify-between dios-tag text-dios-muted">
-            <span>Mild / Acute</span>
-            <span>Severe / Chronic</span>
+            <span>Mild acute disruption</span>
+            <span>Severe chronic pathology</span>
           </div>
           <div className="relative">
-            {/* Full-width track — vertically centred on dots */}
             <div
               className="pointer-events-none absolute inset-x-0 top-[0.5625rem] z-0 -translate-y-1/2"
               aria-hidden
@@ -115,12 +114,8 @@ export function SpectrumSection() {
         </div>
 
         <blockquote className="border-l-2 border-dios-gold bg-dios-lilac-light px-8 py-10 md:px-12 md:py-14 mb-12">
-          <p className="dios-display text-[clamp(1.375rem,2.5vw,2rem)] leading-snug text-dios-aubergine mb-4">
-            DIOS detects circadian disruption at Stage 1 — before it progresses to Stage 2, 3, or 4.
-          </p>
-          <p className="dios-body max-w-2xl">
-            Early chronotype-informed dose timing is clinically essential — and untranslated into
-            everyday prescribing. DIOS informs the clinician&apos;s prescribing decision.
+          <p className="dios-display text-[clamp(1.375rem,2.5vw,2rem)] leading-snug text-dios-aubergine">
+            DIOS detects circadian disruption at stage one — before metabolic, cancer, or neurological pathology — and informs the prescribing decision without prescribing or dosing
           </p>
         </blockquote>
 

@@ -30,9 +30,9 @@ const GEOGRAPHIES = [
 const DRIFT_PCT = { low: 0.45, medium: 0.33, high: 0.22 } as const
 
 const STAT_PILLS = [
-  '2.1h · Mean social jetlag',
-  '55% · Vitamin D deficiency',
-  '£1,545 · Employee loss p/a',
+  'Mean social jetlag is 2.1 hours in shift cohorts',
+  'Vitamin D deficiency affects fifty-five percent of night workers',
+  'Each misaligned employee costs about £1,545 per year',
 ] as const
 
 const inputClassName =
@@ -122,10 +122,9 @@ export function WorkforceModel() {
     <section id="model" className={`${SECTION} bg-[#FAFAFA] py-16 sm:py-20`}>
       <div className={CONTAINER}>
         <p className="font-mono text-xs uppercase tracking-widest text-black/50">Explore</p>
-        <h2 className="type-section mt-4">Model your workforce.</h2>
+        <h2 className="type-section mt-4">Model chronotype drift and risk across your shift-work workforce</h2>
         <p className="type-body mt-4 max-w-2xl">
-          Tertiary tier — shift-work population intelligence. Published epidemiology for
-          demonstration only; not your data. Not available to insurers.
+          Tertiary workforce intelligence uses published epidemiology for demonstration — your institution needs its own data and insurers are excluded by design
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2 sm:gap-3">
@@ -206,7 +205,7 @@ export function WorkforceModel() {
                 Clinical lens
               </p>
               <CardTitle className="font-sans text-lg font-semibold text-black">
-                Population chronotype distribution
+                Population chronotype distribution across your workforce
               </CardTitle>
             </CardHeader>
             <CardContent className="px-6 pb-6">
@@ -235,7 +234,7 @@ export function WorkforceModel() {
                 Institution lens
               </p>
               <CardTitle className="font-sans text-lg font-semibold text-black">
-                Shift-work workforce aggregate
+                Shift-work workforce risk in aggregate view
               </CardTitle>
             </CardHeader>
             <CardContent className="px-6 pb-6">
@@ -258,7 +257,7 @@ export function WorkforceModel() {
                 Research lens
               </p>
               <CardTitle className="font-sans text-lg font-semibold text-white">
-                Consented chronotype stratification
+                Consented chronotype stratification for research only
               </CardTitle>
             </CardHeader>
             <CardContent className="px-6 pb-6">
@@ -276,12 +275,12 @@ export function WorkforceModel() {
         </div>
 
         <p className="type-body mt-10 text-center">
-          Projections from published distributions. Your numbers require your data.
+          Projections come from published distributions until your institution connects its own workforce data
         </p>
         <div className="mt-8 text-center">
           <Link
             href="#demo"
-            className="type-button inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white transition-colors hover:bg-black/80"
+            className="btn-primary type-button inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white transition-colors hover:bg-black/80"
           >
             Talk to us about your institution →
           </Link>
