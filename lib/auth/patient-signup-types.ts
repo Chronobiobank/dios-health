@@ -1,3 +1,5 @@
+import { buildFullName } from '@/lib/auth/parse-oauth-names'
+
 export type BiologicalSex = 'female' | 'male' | 'intersex' | 'prefer_not_to_say'
 
 export type PatientSignupDraft = {
@@ -40,10 +42,6 @@ export const INITIAL_PATIENT_SIGNUP_DRAFT: PatientSignupDraft = {
   dataShareGp: false,
   dataShareResearch: false,
   dataSharePolicy: false,
-}
-
-export function buildFullName(firstName: string, familyName: string): string {
-  return [firstName.trim(), familyName.trim()].filter(Boolean).join(' ')
 }
 
 export function patientProfileToDraft(

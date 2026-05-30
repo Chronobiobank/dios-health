@@ -10,7 +10,7 @@ type Props = {
 }
 
 export default async function ClinicConsultPage({ params }: Props) {
-  const { profile } = await requireClinicianSession()
+  const { profile, clinician } = await requireClinicianSession()
   const { id } = await params
 
   const patient = getDemoPatientTwin(id)
@@ -19,7 +19,10 @@ export default async function ClinicConsultPage({ params }: Props) {
   }
 
   const insight = getPrimaryInsight(patient)
-  const clinicianDisplayName = getClinicianSurname(profile.full_name ?? 'Clinician')
+  const clinicianDisplayName = getClinicianSurname(
+    profile.full_name ?? 'Clinician',
+    clinician.family_name
+  )
 
   return (
     <ConsultationMode

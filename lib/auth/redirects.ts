@@ -88,11 +88,11 @@ export async function hasCompletedClinicianOnboarding(
 ): Promise<boolean> {
   const { data } = await supabase
     .from('clinician_profiles')
-    .select('onboarding_complete')
+    .select('onboarding_complete, first_name')
     .eq('id', userId)
-    .maybeSingle<{ onboarding_complete: boolean }>()
+    .maybeSingle<{ onboarding_complete: boolean; first_name: string | null }>()
 
-  return Boolean(data?.onboarding_complete)
+  return Boolean(data?.onboarding_complete && data.first_name)
 }
 
 /** Avoid ERR_TOO_MANY_REDIRECTS when destination is already the current path */

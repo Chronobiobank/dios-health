@@ -25,9 +25,9 @@ export async function requireClinicianSession() {
 
   const { data: clinician } = await supabase
     .from('clinician_profiles')
-    .select('verified, onboarding_complete')
+    .select('verified, onboarding_complete, family_name')
     .eq('id', user.id)
-    .maybeSingle<{ verified: boolean; onboarding_complete: boolean }>()
+    .maybeSingle<{ verified: boolean; onboarding_complete: boolean; family_name: string | null }>()
 
   if (!clinician?.onboarding_complete) {
     redirect(AUTH_ROUTES.signUpClinician)
@@ -44,7 +44,10 @@ export async function requireClinicianSession() {
   }
 }
 
-export function getClinicianSurname(fullName: string): string {
+export function getClinicianSurname(fullName: string, familyName?: string | null): string {
+  const direct = familyName?.trim()
+  if (direct) return direct
+
   const parts = fullName.trim().split(/\s+/).filter(Boolean)
   if (parts.length === 0) return 'Clinician'
   return parts[parts.length - 1] ?? 'Clinician'

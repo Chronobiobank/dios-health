@@ -12,10 +12,10 @@ import {
 } from '@/lib/clinic/demo-patients'
 
 export default async function ClinicPage() {
-  const { user, profile } = await requireClinicianSession()
+  const { user, profile, clinician } = await requireClinicianSession()
 
   const greeting = getTimeGreeting()
-  const surname = getClinicianSurname(profile.full_name ?? 'Clinician')
+  const surname = getClinicianSurname(profile.full_name ?? 'Clinician', clinician.family_name)
   const patients = DEMO_CLINIC_PATIENTS
   const needsAction = getNeedsActionPatients(patients)
   const needsActionCount = getNeedsActionCount(patients)

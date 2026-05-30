@@ -21,43 +21,18 @@ import {
   WEARABLE_OPTIONS,
 } from '@/lib/auth/patient-signup-data'
 import {
-  buildFullName,
   draftToPatientProfile,
   INITIAL_PATIENT_SIGNUP_DRAFT,
   patientProfileToDraft,
   type PatientSignupDraft,
 } from '@/lib/auth/patient-signup-types'
+import { buildFullName, parseOAuthNames } from '@/lib/auth/parse-oauth-names'
 import { AUTH_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
 import { mapSignUpError, SIGN_UP_EMAIL_EXISTS_MESSAGE } from '@/lib/auth/sign-up-errors'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 
 const TOTAL_STEPS = 6
-
-function parseOAuthNames(metadata: {
-  full_name?: string
-  name?: string
-  given_name?: string
-  family_name?: string
-}) {
-  const given = metadata.given_name?.trim() ?? ''
-  const family = metadata.family_name?.trim() ?? ''
-
-  if (given || family) {
-    return { firstName: given, familyName: family }
-  }
-
-  const combined = metadata.full_name?.trim() || metadata.name?.trim() || ''
-  if (!combined) {
-    return { firstName: '', familyName: '' }
-  }
-
-  const parts = combined.split(/\s+/).filter(Boolean)
-  return {
-    firstName: parts[0] ?? '',
-    familyName: parts.slice(1).join(' '),
-  }
-}
 
 export function PatientSignupWizard() {
   const router = useRouter()
