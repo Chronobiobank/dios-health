@@ -5,8 +5,8 @@ export const NAV_LINKS = [
 ] as const
 
 export const AUTH_LINKS = [
-  { label: 'Sign in', href: '/sign-in' },
-  { label: 'Sign up', href: '/sign-up' },
+  { label: 'Sign in', href: '/signin' },
+  { label: 'Sign up', href: '/signup' },
 ] as const
 
 export const NAV_MENU_LINKS = [
