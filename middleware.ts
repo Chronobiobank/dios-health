@@ -1,8 +1,25 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
-import { getPostAuthPath, hasCompletedClinicianOnboarding, hasPatientProfile, isClinicianOnboardingPath, isPatientOnboardingPath, isProtectedPath, isPublicAuthPath, isSignupRoleChoicePath } from '@/lib/auth/redirects'
+import {
+  getPostAuthPath,
+  hasCompletedClinicianOnboarding,
+  hasPatientProfile,
+  isClinicianOnboardingPath,
+  isPatientOnboardingPath,
+  isProtectedPath,
+  isPublicAuthPath,
+  isSignupRoleChoicePath,
+  shouldRedirectTo,
+} from '@/lib/auth/redirects'
 import { AUTH_ROUTES, CLINIC_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
 import { updateSession } from '@/lib/supabase/middleware'
+
+function redirectIfNeeded(request: NextRequest, destination: string) {
+  if (!shouldRedirectTo(request.nextUrl.pathname, destination)) {
+    return null
+  }
+  return NextResponse.redirect(new URL(destination, request.url))
+}
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -23,7 +40,9 @@ export async function middleware(request: NextRequest) {
     if (isPatientOnboardingPath(pathname)) {
       const completed = await hasPatientProfile(supabase, user.id)
       if (completed) {
-        return NextResponse.redirect(new URL(PATIENT_ROUTES.dashboard, request.url))
+        return (
+          redirectIfNeeded(request, PATIENT_ROUTES.dashboard) ?? supabaseResponse
+        )
       }
       return supabaseResponse
     }
@@ -32,30 +51,20 @@ export async function middleware(request: NextRequest) {
       const completed = await hasCompletedClinicianOnboarding(supabase, user.id)
       if (completed) {
         const destination = await getPostAuthPath(supabase, user.id)
-        return NextResponse.redirect(new URL(destination, request.url))
+        return redirectIfNeeded(request, destination) ?? supabaseResponse
       }
       return supabaseResponse
     }
 
     if (isSignupRoleChoicePath(pathname)) {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('id', user.id)
-        .maybeSingle()
-
-      // New OAuth users have a session but no profile yet — let them pick a role.
-      if (!profile) {
-        return supabaseResponse
-      }
-
       const destination = await getPostAuthPath(supabase, user.id)
-      return NextResponse.redirect(new URL(destination, request.url))
+      // New OAuth users: destination is /signup — must not redirect to the same URL.
+      return redirectIfNeeded(request, destination) ?? supabaseResponse
     }
 
     if (pathname === AUTH_ROUTES.signIn) {
       const destination = await getPostAuthPath(supabase, user.id)
-      return NextResponse.redirect(new URL(destination, request.url))
+      return redirectIfNeeded(request, destination) ?? supabaseResponse
     }
   }
 
@@ -64,7 +73,7 @@ export async function middleware(request: NextRequest) {
       .from('profiles')
       .select('role')
       .eq('id', user.id)
-      .single<{ role: 'patient' | 'clinician' }>()
+      .maybeSingle<{ role: 'patient' | 'clinician' }>()
 
     if (!profile) {
       return supabaseResponse
@@ -83,7 +92,7 @@ export async function middleware(request: NextRequest) {
         .from('clinician_profiles')
         .select('verified')
         .eq('id', user.id)
-        .single<{ verified: boolean }>()
+        .maybeSingle<{ verified: boolean }>()
 
       const verified = clinician?.verified ?? false
 
@@ -107,6 +116,7 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/signin',
+    '/signup',
     '/signup/:path*',
     '/pending-verification',
     '/dashboard/:path*',

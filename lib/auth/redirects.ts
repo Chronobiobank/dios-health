@@ -18,7 +18,7 @@ export async function getPostAuthPath(
     .from('profiles')
     .select('role')
     .eq('id', userId)
-    .single<ProfileRow>()
+    .maybeSingle<ProfileRow>()
 
   if (!profile) return AUTH_ROUTES.signUp
 
@@ -36,7 +36,7 @@ export async function getPostAuthPath(
     .from('clinician_profiles')
     .select('verified')
     .eq('id', userId)
-    .single<ClinicianRow>()
+    .maybeSingle<ClinicianRow>()
 
   if (clinician?.verified) {
     return CLINIC_ROUTES.panel
@@ -58,7 +58,7 @@ export function isPublicAuthPath(pathname: string): boolean {
 }
 
 export function isSignupRoleChoicePath(pathname: string): boolean {
-  return pathname === '/signup'
+  return pathname === '/signup' || pathname === '/signup/'
 }
 
 export function isPatientOnboardingPath(pathname: string): boolean {
@@ -93,4 +93,12 @@ export async function hasCompletedClinicianOnboarding(
     .maybeSingle<{ onboarding_complete: boolean }>()
 
   return Boolean(data?.onboarding_complete)
+}
+
+/** Avoid ERR_TOO_MANY_REDIRECTS when destination is already the current path */
+export function shouldRedirectTo(pathname: string, destination: string): boolean {
+  const normalize = (path: string) =>
+    path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
+
+  return normalize(pathname) !== normalize(destination)
 }
