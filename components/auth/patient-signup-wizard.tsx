@@ -44,7 +44,6 @@ export function PatientSignupWizard() {
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [signedUpWithOAuth, setSignedUpWithOAuth] = useState(false)
-  const [resumingProfile, setResumingProfile] = useState(false)
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 })
@@ -93,7 +92,6 @@ export function PatientSignupWizard() {
           Object.assign(draftPatch, patientProfileToDraft(existingPatient))
           if (!draftPatch.firstName) draftPatch.firstName = firstName
           if (!draftPatch.familyName) draftPatch.familyName = familyName
-          setResumingProfile(Boolean(existingPatient.fitzpatrick_type))
         }
 
         updateDraft(draftPatch)
@@ -217,45 +215,42 @@ export function PatientSignupWizard() {
     setError(null)
     setLoading(true)
 
-    const supabase = createClient()
-    const fullName = buildFullName(draft.firstName, draft.familyName)
-    const { error: profileNameError } = await supabase
-      .from('profiles')
-      .update({ full_name: fullName })
-      .eq('id', userId)
+    const age = Number.parseInt(draft.age, 10)
 
-    if (profileNameError) {
-      setLoading(false)
-      setError('Something went wrong. Please try again.')
-      return
-    }
+    try {
+      const response = await fetch('/api/signup/patient/demographics', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: draft.firstName.trim(),
+          familyName: draft.familyName.trim(),
+          age,
+          biologicalSex: draft.biologicalSex,
+        }),
+      })
 
-    if (resumingProfile) {
-      const age = Number.parseInt(draft.age, 10)
-      const { error: demographicsError } = await supabase
-        .from('patient_profiles')
-        .update({
-          first_name: draft.firstName.trim(),
-          family_name: draft.familyName.trim(),
-          age: Number.isFinite(age) ? age : null,
-          biological_sex: draft.biologicalSex || null,
-        })
-        .eq('id', userId)
+      const payload = (await response.json()) as { error?: string; next?: string }
 
-      setLoading(false)
+      if (!response.ok) {
+        throw new Error(payload.error || 'Something went wrong. Please try again.')
+      }
 
-      if (demographicsError) {
-        setError('Something went wrong. Please try again.')
+      if (payload.next === PATIENT_ROUTES.dashboard) {
+        router.refresh()
+        router.push(PATIENT_ROUTES.dashboard)
         return
       }
 
-      router.refresh()
-      router.push(PATIENT_ROUTES.dashboard)
-      return
+      setStep(3)
+    } catch (continueError) {
+      setError(
+        continueError instanceof Error
+          ? continueError.message
+          : 'Something went wrong. Please try again.'
+      )
+    } finally {
+      setLoading(false)
     }
-
-    setLoading(false)
-    setStep(3)
   }
 
   function goBack() {
