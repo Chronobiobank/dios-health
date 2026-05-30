@@ -46,7 +46,7 @@ export function NavMenu() {
     <div ref={rootRef} className="relative shrink-0">
       <button
         type="button"
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full text-black transition-colors hover:bg-black/5 sm:h-11 sm:w-11"
+        className="dios-site-nav__menu-trigger"
         aria-expanded={open}
         aria-controls={menuId}
         aria-haspopup="menu"
@@ -58,19 +58,12 @@ export function NavMenu() {
 
       {open ? (
         <>
-          <div
-            className="fixed inset-0 top-16 z-40 bg-black/20 sm:top-[4.5rem] md:bg-transparent"
-            aria-hidden
-            onClick={() => setOpen(false)}
-          />
+          <div className="dios-site-nav__menu-backdrop md:hidden" aria-hidden onClick={() => setOpen(false)} />
 
           <nav
             id={menuId}
             aria-label="Menu"
-            className={cn(
-              'fixed inset-x-0 top-16 z-50 border-b border-black/10 bg-white px-5 py-6 sm:top-[4.5rem] sm:px-6',
-              'md:absolute md:inset-x-auto md:right-0 md:top-full md:mt-2 md:w-64 md:rounded-xl md:border md:px-0 md:py-2 md:shadow-lg',
-            )}
+            className={cn('dios-site-nav__menu-panel', 'md:shadow-lg')}
           >
             <ul className="flex flex-col gap-1">
               {NAV_MENU_LINKS.map((link) => (

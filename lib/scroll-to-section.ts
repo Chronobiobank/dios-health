@@ -2,7 +2,15 @@ const SCROLL_BUFFER_PX = 12
 
 export function getSiteNavHeight(): number {
   const header = document.getElementById('site-nav')
-  return header?.getBoundingClientRect().height ?? 64
+  if (header) {
+    return header.getBoundingClientRect().height
+  }
+
+  const root = document.documentElement
+  const height = getComputedStyle(root).getPropertyValue('--dios-site-nav-height').trim()
+  const parsed = Number.parseFloat(height)
+
+  return Number.isFinite(parsed) ? parsed * (height.endsWith('rem') ? 16 : 1) : 64
 }
 
 export function scrollToSectionId(id: string, behavior: ScrollBehavior = 'smooth'): boolean {

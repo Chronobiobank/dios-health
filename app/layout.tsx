@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { HashLink } from '@/components/sections/HashLink'
+import { Nav } from '@/components/sections/Nav'
 import { ScrollToHash } from '@/components/sections/ScrollToHash'
 import './globals.css'
 
@@ -50,11 +50,12 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-pt-[calc(4rem+1rem)] sm:scroll-pt-[calc(4.5rem+1rem)]`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-pt-[calc(var(--dios-site-nav-height)+1rem)]`}
     >
       <body className="flex min-h-full flex-col">
         <ScrollToHash />
-        {children}
+        <Nav />
+        <div className="dios-app-shell">{children}</div>
       </body>
     </html>
   )

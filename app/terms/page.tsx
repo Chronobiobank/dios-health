@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 
 import { Footer } from '@/components/sections/Footer'
-import { Nav } from '@/components/sections/Nav'
 
 export const metadata: Metadata = {
   title: 'Terms of Service — DIOS Health',
@@ -11,8 +10,6 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-white text-[#0D0D0D]">
-      <Nav />
-
       <main className="mx-auto max-w-[76rem] px-5 py-16 sm:px-6 sm:py-20">
         <p className="type-label">Legal</p>
         <h1 className="type-section mt-4 max-w-3xl">Terms of service</h1>

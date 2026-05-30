@@ -306,14 +306,14 @@ export function PatientSignupWizard() {
 
   if (checkingSession) {
     return (
-      <AuthShell withSiteNav>
+      <AuthShell>
         <p className="type-body text-center text-black/60">Loading…</p>
       </AuthShell>
     )
   }
 
   return (
-    <AuthShell withSiteNav maxWidthClass={step === 3 ? 'max-w-2xl' : 'max-w-[400px]'}>
+    <AuthShell maxWidthClass={step === 3 ? 'max-w-2xl' : 'max-w-[400px]'}>
       <SignupProgress step={step} total={TOTAL_STEPS} />
 
       {step > 1 && (step !== 2 || !signedUpWithOAuth) ? (

@@ -341,14 +341,14 @@ export function ClinicianSignupWizard() {
 
   if (checkingSession) {
     return (
-      <AuthShell withSiteNav>
+      <AuthShell>
         <p className="type-body text-center text-black/60">Loading…</p>
       </AuthShell>
     )
   }
 
   return (
-    <AuthShell withSiteNav maxWidthClass="max-w-[400px]">
+    <AuthShell maxWidthClass="max-w-[400px]">
       <SignupProgress step={step} total={TOTAL_STEPS} />
 
       {step > 1 && (step !== 2 || !signedUpWithOAuth) ? (

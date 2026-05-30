@@ -7,15 +7,12 @@ import { DrugModules } from '@/components/sections/DrugModules'
 import { Footer } from '@/components/sections/Footer'
 import { FourClusters } from '@/components/sections/FourClusters'
 import { Hero } from '@/components/sections/Hero'
-import { Nav } from '@/components/sections/Nav'
 import { Pricing } from '@/components/sections/Pricing'
 import { ResearchersHome } from '@/components/sections/ResearchersHome'
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-[#0D0D0D]">
-      <Nav />
-
       <main>
         <Hero />
         <FourClusters />
