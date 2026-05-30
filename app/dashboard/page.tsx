@@ -50,7 +50,7 @@ export default async function DashboardPage() {
 
   return (
     <DashboardPageTransition>
-      <PatientTopBar fullName={profile.full_name ?? firstName} />
+      <PatientTopBar fullName={profile.full_name ?? firstName} avatarUrl={profile.avatar_url} />
 
       <section>
         <h1 className={`${DASHBOARD_HEADLINE} capitalize`}>Good {greeting}, {firstName}.</h1>

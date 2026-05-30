@@ -1,5 +1,6 @@
 import { DataControlsPanel } from '@/components/dashboard/data-controls-panel'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
+import { ProfileAvatarUpload } from '@/components/profile/profile-avatar-upload'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 
 export default async function DashboardDataControlsPage() {
@@ -7,21 +8,34 @@ export default async function DashboardDataControlsPage() {
 
   return (
     <>
-      <PatientTopBar fullName={profile.full_name ?? 'Patient'} />
+      <PatientTopBar fullName={profile.full_name ?? 'Patient'} avatarUrl={profile.avatar_url} />
 
       <section>
-        <h1 className="text-2xl font-medium text-black">Data controls</h1>
+        <h1 className="text-2xl font-medium text-black">Settings</h1>
+        <p className="mt-2 text-sm text-black/55">
+          Your profile and data sharing preferences.
+        </p>
+      </section>
+
+      <section className="mt-8">
+        <ProfileAvatarUpload fullName={profile.full_name ?? 'Patient'} initialAvatarUrl={profile.avatar_url} />
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">Data controls</h2>
         <p className="mt-2 text-sm text-black/55">
           You decide who sees your data. Each toggle saves immediately when you change it.
         </p>
       </section>
 
-      <DataControlsPanel
-        patientId={user.id}
-        dataShareGp={patient.data_share_gp}
-        dataShareResearch={patient.data_share_research}
-        dataSharePolicy={patient.data_share_policy}
-      />
+      <div className="mt-4">
+        <DataControlsPanel
+          patientId={user.id}
+          dataShareGp={patient.data_share_gp}
+          dataShareResearch={patient.data_share_research}
+          dataSharePolicy={patient.data_share_policy}
+        />
+      </div>
     </>
   )
 }

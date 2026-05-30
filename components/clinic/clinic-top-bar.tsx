@@ -2,20 +2,15 @@ import Link from 'next/link'
 import { Search, UserPlus } from 'lucide-react'
 
 import { DIOS_WORDMARK } from '@/components/DiosLogo'
+import { ProfileAvatar } from '@/components/profile/profile-avatar'
 import { CLINIC_ROUTES } from '@/lib/auth/routes'
-
-function initialsFromName(name: string): string {
-  const parts = name.trim().split(/\s+/).filter(Boolean)
-  if (parts.length === 0) return '?'
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
-  return `${parts[0][0] ?? ''}${parts[parts.length - 1][0] ?? ''}`.toUpperCase()
-}
 
 type ClinicTopBarProps = {
   fullName: string
+  avatarUrl?: string | null
 }
 
-export function ClinicTopBar({ fullName }: ClinicTopBarProps) {
+export function ClinicTopBar({ fullName, avatarUrl }: ClinicTopBarProps) {
   return (
     <header className="flex items-center justify-between gap-4 py-4">
       <Link href={CLINIC_ROUTES.panel} className="dios-wordmark text-lg text-black" aria-label="DIOS — home">
@@ -36,12 +31,9 @@ export function ClinicTopBar({ fullName }: ClinicTopBarProps) {
         >
           <UserPlus className="h-5 w-5" strokeWidth={1.75} />
         </a>
-        <span
-          className="flex h-9 w-9 items-center justify-center rounded-full bg-black text-xs font-medium text-white"
-          aria-label={`Signed in as ${fullName}`}
-        >
-          {initialsFromName(fullName)}
-        </span>
+        <Link href={CLINIC_ROUTES.settings} aria-label="Profile and settings">
+          <ProfileAvatar name={fullName} src={avatarUrl} size="sm" />
+        </Link>
       </div>
     </header>
   )

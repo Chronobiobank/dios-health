@@ -17,6 +17,7 @@ export const PATIENT_ROUTES = {
 export const CLINIC_ROUTES = {
   panel: '/clinic',
   patients: '/clinic/patients',
+  settings: '/clinic/settings',
   patient: (id: string) => `/clinic/patients/${id}`,
   consult: (id: string) => `/clinic/patients/${id}/consult`,
 } as const

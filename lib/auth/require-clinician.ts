@@ -1,7 +1,15 @@
 import { redirect } from 'next/navigation'
 
 import { AUTH_ROUTES } from '@/lib/auth/routes'
+import { getProfileAvatarUrl } from '@/lib/profile/avatar'
 import { createClient } from '@/lib/supabase/server'
+
+export type ClinicianUserProfileRow = {
+  full_name: string | null
+  role: 'clinician'
+  avatar_path: string | null
+  avatar_url: string | null
+}
 
 export async function requireClinicianSession() {
   const supabase = await createClient()
@@ -13,14 +21,22 @@ export async function requireClinicianSession() {
     redirect(AUTH_ROUTES.signIn)
   }
 
-  const { data: profile } = await supabase
+  const { data: profileRow } = await supabase
     .from('profiles')
-    .select('full_name, role')
+    .select('full_name, role, avatar_path')
     .eq('id', user.id)
-    .maybeSingle<{ full_name: string | null; role: 'patient' | 'clinician' }>()
+    .maybeSingle<{ full_name: string | null; role: 'patient' | 'clinician'; avatar_path: string | null }>()
 
-  if (profile?.role !== 'clinician') {
+  if (profileRow?.role !== 'clinician') {
     redirect('/dashboard')
+  }
+
+  const avatar_url = await getProfileAvatarUrl(supabase, profileRow?.avatar_path)
+  const profile: ClinicianUserProfileRow = {
+    full_name: profileRow?.full_name ?? 'Clinician',
+    role: 'clinician',
+    avatar_path: profileRow?.avatar_path ?? null,
+    avatar_url,
   }
 
   const { data: clinician } = await supabase
@@ -39,7 +55,7 @@ export async function requireClinicianSession() {
 
   return {
     user,
-    profile: profile ?? { full_name: 'Clinician', role: 'clinician' as const },
+    profile,
     clinician,
   }
 }

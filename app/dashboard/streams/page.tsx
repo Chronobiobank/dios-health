@@ -20,7 +20,7 @@ export default async function DashboardStreamsPage() {
 
   return (
     <>
-      <PatientTopBar fullName={profile.full_name ?? 'Patient'} />
+      <PatientTopBar fullName={profile.full_name ?? 'Patient'} avatarUrl={profile.avatar_url} />
 
       <section>
         <h1 className="text-2xl font-medium text-black">Data streams</h1>

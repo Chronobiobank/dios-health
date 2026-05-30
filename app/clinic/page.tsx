@@ -22,7 +22,7 @@ export default async function ClinicPage() {
 
   return (
     <>
-      <ClinicTopBar fullName={profile.full_name ?? 'Clinician'} />
+      <ClinicTopBar fullName={profile.full_name ?? 'Clinician'} avatarUrl={profile.avatar_url} />
 
       <section>
         <h1 className={`${DASHBOARD_HEADLINE} capitalize`}>Good {greeting}, Dr {surname}.</h1>

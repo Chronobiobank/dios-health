@@ -15,8 +15,8 @@ const TABS = [
   },
   {
     label: 'Settings',
-    href: CLINIC_ROUTES.panel,
-    match: () => false,
+    href: CLINIC_ROUTES.settings,
+    match: (path: string) => path === CLINIC_ROUTES.settings,
   },
 ] as const
 
