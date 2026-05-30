@@ -1,7 +1,17 @@
 import type { TipTraQNight } from '@/lib/dlmo'
 
 const TIME_PATTERN = /^\d{2}:\d{2}$/
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/
+
+const REPORT_DATE_ALIASES = [
+  'report_date',
+  'reportDate',
+  'date',
+  'study_date',
+  'test_date',
+  'recording_date',
+  'session_date',
+  'night_date',
+] as const
 
 const NUMERIC_FIELDS = [
   'trt_minutes',
@@ -87,7 +97,90 @@ export function normalizeExtractedFields(extracted: Record<string, unknown>): Re
     }
   }
 
+  for (const key of REPORT_DATE_ALIASES) {
+    const iso = parseReportDateToIso(normalized[key])
+    if (iso) {
+      normalized.report_date = iso
+      break
+    }
+  }
+
   return normalized
+}
+
+function pad2(value: number): string {
+  return value.toString().padStart(2, '0')
+}
+
+function toIsoDate(year: number, month: number, day: number): string | null {
+  if (month < 1 || month > 12 || day < 1 || day > 31 || year < 1900 || year > 2100) {
+    return null
+  }
+
+  const date = new Date(Date.UTC(year, month - 1, day))
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) {
+    return null
+  }
+
+  return `${year}-${pad2(month)}-${pad2(day)}`
+}
+
+export function parseReportDateToIso(value: unknown): string | null {
+  if (value === null || value === undefined) return null
+  if (typeof value !== 'string') return null
+
+  const trimmed = value.trim()
+  if (!trimmed) return null
+
+  const isoPrefix = trimmed.match(/^(\d{4})-(\d{2})-(\d{2})/)
+  if (isoPrefix) {
+    return toIsoDate(Number(isoPrefix[1]), Number(isoPrefix[2]), Number(isoPrefix[3]))
+  }
+
+  const dmyMatch = trimmed.match(/^(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})$/)
+  if (dmyMatch) {
+    return toIsoDate(Number(dmyMatch[3]), Number(dmyMatch[2]), Number(dmyMatch[1]))
+  }
+
+  const ymdMatch = trimmed.match(/^(\d{4})[/.-](\d{1,2})[/.-](\d{1,2})$/)
+  if (ymdMatch) {
+    return toIsoDate(Number(ymdMatch[1]), Number(ymdMatch[2]), Number(ymdMatch[3]))
+  }
+
+  const textMonthMatch = trimmed.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/)
+  if (textMonthMatch) {
+    const parsed = Date.parse(`${textMonthMatch[2]} ${textMonthMatch[1]}, ${textMonthMatch[3]}`)
+    if (!Number.isNaN(parsed)) {
+      const date = new Date(parsed)
+      return toIsoDate(date.getFullYear(), date.getMonth() + 1, date.getDate())
+    }
+  }
+
+  const parsed = Date.parse(trimmed)
+  if (!Number.isNaN(parsed)) {
+    const date = new Date(parsed)
+    return toIsoDate(date.getFullYear(), date.getMonth() + 1, date.getDate())
+  }
+
+  return null
+}
+
+export function resolveReportDate(extracted: Record<string, unknown>): string {
+  for (const key of REPORT_DATE_ALIASES) {
+    const iso = parseReportDateToIso(extracted[key])
+    if (iso) return iso
+  }
+
+  for (const key of ['recording_start', 'recording_end', 'sleep_onset'] as const) {
+    const iso = parseReportDateToIso(extracted[key])
+    if (iso) return iso
+  }
+
+  throw new Error('Report is missing a valid report date.')
 }
 
 function requiredTime(value: unknown, field: string): string {
@@ -113,10 +206,11 @@ function optionalTime(value: unknown): string | null {
 }
 
 export function validateReportDate(value: unknown): string {
-  if (typeof value !== 'string' || !DATE_PATTERN.test(value)) {
+  const iso = parseReportDateToIso(value)
+  if (!iso) {
     throw new Error('Report is missing a valid report date.')
   }
-  return value
+  return iso
 }
 
 export function toNightInput(extracted: Record<string, unknown>): TipTraQNight {

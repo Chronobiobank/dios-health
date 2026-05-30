@@ -16,7 +16,7 @@ import {
   mapStorageUploadError,
   parseExtractedJson,
   toNightInput,
-  validateReportDate,
+  resolveReportDate,
 } from '@/lib/tiptraq/extraction'
 
 export const maxDuration = 60
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
       return errorResponse('Could not read this TipTraQ report. Check the PDF and try again.', 422)
     }
 
-    const reportDate = validateReportDate(extracted.report_date)
+    const reportDate = resolveReportDate(extracted)
     const nightInput = toNightInput(extracted)
     const dlmoResult = calculateNightDLMO(nightInput)
 

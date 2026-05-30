@@ -59,6 +59,7 @@ Return ONLY valid JSON. No preamble. No markdown. No explanation. No code blocks
 }
 
 Important notes:
+- report_date is REQUIRED. Find it in the report header (labels like "Report Date", "Study Date", "Date", or "Night of"). Convert DD/MM/YYYY to YYYY-MM-DD.
 - Sleep onset is when sleep actually starts, not recording start
 - first_rem_onset is the clock time of first REM epoch
 - If REM onset cannot be determined from the report return null
