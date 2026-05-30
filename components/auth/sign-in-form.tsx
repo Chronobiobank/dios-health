@@ -2,9 +2,11 @@
 
 import { Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, type FormEvent } from 'react'
 
+import { AuthDivider } from '@/components/auth/auth-divider'
+import { GoogleSignInButton } from '@/components/auth/google-sign-in-button'
 import { BTN_PRIMARY, CARD, LABEL } from '@/components/sections/layout'
 import { mapSignInError } from '@/lib/auth/errors'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
@@ -14,8 +16,12 @@ import { createClient } from '@/lib/supabase/client'
 
 export function SignInForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const authError = searchParams.get('error') === 'auth'
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(
+    authError ? 'Google sign-in could not be completed. Try again or use email.' : null
+  )
   const [showPassword, setShowPassword] = useState(false)
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -53,73 +59,79 @@ export function SignInForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`${CARD} space-y-4 rounded-2xl p-6 sm:p-8`}>
-      <div>
-        <label htmlFor="email" className={`${LABEL} mb-2 block`}>
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          placeholder="you@example.com"
-          className={AUTH_INPUT_CLASS}
-          disabled={loading}
-        />
-      </div>
+    <div className={`${CARD} space-y-0 rounded-2xl p-6 sm:p-8`}>
+      <GoogleSignInButton />
 
-      <div>
-        <label htmlFor="password" className={`${LABEL} mb-2 block`}>
-          Password
-        </label>
-        <div className="relative">
+      <AuthDivider label="or sign in with email" />
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="email" className={`${LABEL} mb-2 block`}>
+            Email
+          </label>
           <input
-            id="password"
-            name="password"
-            type={showPassword ? 'text' : 'password'}
+            id="email"
+            name="email"
+            type="email"
             required
-            autoComplete="current-password"
-            minLength={8}
-            className={`${AUTH_INPUT_CLASS} pr-11`}
+            autoComplete="email"
+            placeholder="you@example.com"
+            className={AUTH_INPUT_CLASS}
             disabled={loading}
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword((value) => !value)}
-            className="absolute top-1/2 right-3 -translate-y-1/2 text-black/40 transition-colors hover:text-black"
-            aria-label={showPassword ? 'Hide password' : 'Show password'}
-            disabled={loading}
-          >
-            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-          </button>
         </div>
-      </div>
 
-      {error ? (
-        <p className="type-body text-sm text-red-600" role="alert">
-          {error}
-        </p>
-      ) : null}
+        <div>
+          <label htmlFor="password" className={`${LABEL} mb-2 block`}>
+            Password
+          </label>
+          <div className="relative">
+            <input
+              id="password"
+              name="password"
+              type={showPassword ? 'text' : 'password'}
+              required
+              autoComplete="current-password"
+              minLength={8}
+              className={`${AUTH_INPUT_CLASS} pr-11`}
+              disabled={loading}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((value) => !value)}
+              className="absolute top-1/2 right-3 -translate-y-1/2 text-black/40 transition-colors hover:text-black"
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+              disabled={loading}
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
+        </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className={`${BTN_PRIMARY} h-11 w-full disabled:cursor-not-allowed disabled:opacity-60`}
-      >
-        {loading ? 'Signing in…' : 'Sign in'}
-      </button>
+        {error ? (
+          <p className="type-body text-sm text-red-600" role="alert">
+            {error}
+          </p>
+        ) : null}
 
-      <p className="type-body pt-2 text-center text-sm text-black/60">
-        New to DIOS?{' '}
-        <Link
-          href={AUTH_ROUTES.signUp}
-          className="font-medium text-black underline-offset-2 hover:underline"
+        <button
+          type="submit"
+          disabled={loading}
+          className={`${BTN_PRIMARY} h-11 w-full disabled:cursor-not-allowed disabled:opacity-60`}
         >
-          Create account →
-        </Link>
-      </p>
-    </form>
+          {loading ? 'Signing in…' : 'Sign in with email'}
+        </button>
+
+        <p className="type-body pt-2 text-center text-sm text-black/60">
+          New to DIOS?{' '}
+          <Link
+            href={AUTH_ROUTES.signUp}
+            className="font-medium text-black underline-offset-2 hover:underline"
+          >
+            Create account →
+          </Link>
+        </p>
+      </form>
+    </div>
   )
 }

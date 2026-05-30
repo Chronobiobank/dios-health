@@ -1,5 +1,8 @@
 import type { AuthError } from '@supabase/supabase-js'
 
+export const SIGN_UP_EMAIL_EXISTS_MESSAGE =
+  'An account with this email already exists.'
+
 export function mapSignUpError(error: AuthError): string {
   const message = error.message.toLowerCase()
 
@@ -8,7 +11,7 @@ export function mapSignUpError(error: AuthError): string {
   }
 
   if (message.includes('already registered') || message.includes('already exists')) {
-    return 'An account with this email already exists. Sign in instead.'
+    return SIGN_UP_EMAIL_EXISTS_MESSAGE
   }
 
   if (message.includes('password')) {

@@ -20,10 +20,16 @@ export async function getPostAuthPath(
     .eq('id', userId)
     .single<ProfileRow>()
 
-  if (!profile) return PATIENT_ROUTES.dashboard
+  if (!profile) return AUTH_ROUTES.signUp
 
   if (profile.role === 'patient') {
-    return PATIENT_ROUTES.dashboard
+    const completed = await hasPatientProfile(supabase, userId)
+    return completed ? PATIENT_ROUTES.dashboard : AUTH_ROUTES.signUpPatient
+  }
+
+  const onboardingComplete = await hasCompletedClinicianOnboarding(supabase, userId)
+  if (!onboardingComplete) {
+    return AUTH_ROUTES.signUpClinician
   }
 
   const { data: clinician } = await supabase

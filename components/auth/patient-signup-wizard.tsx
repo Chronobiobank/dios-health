@@ -24,8 +24,8 @@ import {
   INITIAL_PATIENT_SIGNUP_DRAFT,
   type PatientSignupDraft,
 } from '@/lib/auth/patient-signup-types'
-import { PATIENT_ROUTES } from '@/lib/auth/routes'
-import { mapSignUpError } from '@/lib/auth/sign-up-errors'
+import { AUTH_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
+import { mapSignUpError, SIGN_UP_EMAIL_EXISTS_MESSAGE } from '@/lib/auth/sign-up-errors'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 
@@ -48,8 +48,26 @@ export function PatientSignupWizard() {
     }))
 
     const supabase = createClient()
-    supabase.auth.getUser().then(({ data: { user } }) => {
+    void supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (user) {
+        const metadata = user.user_metadata as { full_name?: string; name?: string }
+        const fullName =
+          metadata.full_name?.trim() ||
+          metadata.name?.trim() ||
+          user.email?.split('@')[0] ||
+          'Patient'
+
+        await supabase.from('profiles').upsert(
+          { id: user.id, role: 'patient', full_name: fullName },
+          { onConflict: 'id' }
+        )
+
+        if (user.email) {
+          updateDraft({ email: user.email, fullName })
+        } else {
+          updateDraft({ fullName })
+        }
+
         setUserId(user.id)
         setStep(2)
       }
@@ -235,9 +253,19 @@ export function PatientSignupWizard() {
             </div>
           </div>
           {error ? (
-            <p className="type-body text-sm text-red-600" role="alert">
-              {error}
-            </p>
+            <div role="alert">
+              <p className="type-body text-sm text-red-600">{error}</p>
+              {error === SIGN_UP_EMAIL_EXISTS_MESSAGE ? (
+                <p className="type-body mt-1 text-sm text-red-600">
+                  <Link
+                    href={AUTH_ROUTES.signIn}
+                    className="font-medium text-black underline-offset-2 hover:underline"
+                  >
+                    Sign in instead
+                  </Link>
+                </p>
+              ) : null}
+            </div>
           ) : null}
           <button type="submit" disabled={loading} className={`${BTN_PRIMARY} h-11 w-full disabled:opacity-60`}>
             {loading ? 'Creating account…' : 'Continue →'}

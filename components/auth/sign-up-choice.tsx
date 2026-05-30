@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { AuthDivider } from '@/components/auth/auth-divider'
+import { GoogleSignInButton } from '@/components/auth/google-sign-in-button'
 import { BODY, CARD, LIST_LINE } from '@/components/sections/layout'
 import { AUTH_ROUTES } from '@/lib/auth/routes'
 
@@ -21,7 +23,12 @@ const ROLES = [
 export function SignUpChoice() {
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className={`${CARD} rounded-2xl p-6 sm:p-8`}>
+        <GoogleSignInButton />
+        <AuthDivider label="or choose your role" />
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {ROLES.map((role) => (
           <Link
             key={role.href}

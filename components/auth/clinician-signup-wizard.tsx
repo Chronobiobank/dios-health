@@ -40,24 +40,30 @@ export function ClinicianSignupWizard() {
     }))
 
     const supabase = createClient()
-    supabase.auth.getUser().then(async ({ data: { user } }) => {
+    void supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (!user) {
         setCheckingSession(false)
         return
       }
 
+      const metadata = user.user_metadata as { full_name?: string; name?: string }
+      const fullName =
+        metadata.full_name?.trim() ||
+        metadata.name?.trim() ||
+        user.email?.split('@')[0] ||
+        'Clinician'
+
       setUserId(user.id)
-      setDraft((current) => ({ ...current, email: user.email ?? current.email }))
+      setDraft((current) => ({
+        ...current,
+        email: user.email ?? current.email,
+        fullName: fullName || current.fullName,
+      }))
 
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('full_name')
-        .eq('id', user.id)
-        .maybeSingle()
-
-      if (profile?.full_name) {
-        setDraft((current) => ({ ...current, fullName: profile.full_name ?? current.fullName }))
-      }
+      await supabase.from('profiles').upsert(
+        { id: user.id, role: 'clinician', full_name: fullName },
+        { onConflict: 'id' }
+      )
 
       const { data: clinician } = await supabase
         .from('clinician_profiles')
@@ -70,9 +76,22 @@ export function ClinicianSignupWizard() {
         return
       }
 
-      if (clinician?.registration_number) {
+      if (!clinician) {
+        await supabase.from('clinician_profiles').upsert(
+          draftToClinicianProfileStep1(user.id, {
+            ...INITIAL_CLINICIAN_SIGNUP_DRAFT,
+            fullName,
+            email: user.email ?? '',
+          })
+        )
+        setStep(2)
+        setCheckingSession(false)
+        return
+      }
+
+      if (clinician.registration_number) {
         setStep(3)
-      } else if (clinician) {
+      } else {
         setStep(2)
       }
 
