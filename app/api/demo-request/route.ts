@@ -7,36 +7,31 @@ export async function POST(request: Request) {
     const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
     if (!url || !key) {
-      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
-    }
-
-    const body = await request.json()
-    const { full_name, email, role, message, organisation } = body as {
-      full_name?: string
-      email?: string
-      role?: string
-      message?: string
-      organisation?: string
-    }
-
-    const resolvedRole = role?.trim() || organisation?.trim()
-
-    if (!full_name?.trim() || !email?.trim() || !resolvedRole) {
       return NextResponse.json(
-        { error: 'Full name, email, and role are required' },
-        { status: 400 }
+        { error: 'Server configuration error' },
+        { status: 500 }
       )
     }
 
-    const organisationValue = message?.trim()
-      ? `${resolvedRole} — ${message.trim()}`
-      : resolvedRole
+    const body = await request.json()
+    const { full_name, organisation, email } = body as {
+      full_name?: string
+      organisation?: string
+      email?: string
+    }
+
+    if (!full_name?.trim() || !organisation?.trim() || !email?.trim()) {
+      return NextResponse.json(
+        { error: 'full_name, organisation, and email are required' },
+        { status: 400 }
+      )
+    }
 
     const supabase = createClient(url, key)
 
     const { error } = await supabase.from('demo_requests').insert({
       full_name: full_name.trim(),
-      organisation: organisationValue,
+      organisation: organisation.trim(),
       email: email.trim(),
     })
 
