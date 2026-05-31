@@ -33,7 +33,7 @@ export function Hero() {
             </h1>
 
             <p className="type-hero-meta mt-6 max-w-2xl !text-[clamp(1.125rem,2.2vw,1.625rem)] leading-snug text-white/85">
-              DIOS tells you and your support team exactly when your body clock is ready for each dose.
+              Tell DIOS what you take. It tells you exactly when — timed to your body clock.
             </p>
 
             <HashLink href="#demo" className={`${BTN_HERO} mt-8`}>

@@ -7,6 +7,7 @@ import { DrugModules } from '@/components/sections/DrugModules'
 import { Footer } from '@/components/sections/Footer'
 import { FourClusters } from '@/components/sections/FourClusters'
 import { Hero } from '@/components/sections/Hero'
+import { TimebotHome } from '@/components/sections/TimebotHome'
 import { Pricing } from '@/components/sections/Pricing'
 import { ResearchersHome } from '@/components/sections/ResearchersHome'
 
@@ -16,6 +17,7 @@ export default function Home() {
       <main>
         <Hero />
         <FourClusters />
+        <TimebotHome />
         <DrugModules />
         <ClinicianPanel />
         <DataControls />
