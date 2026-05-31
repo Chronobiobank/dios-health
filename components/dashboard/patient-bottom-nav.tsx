@@ -1,6 +1,6 @@
 'use client'
 
-import { Activity, House, Lightbulb, SlidersHorizontal } from 'lucide-react'
+import { Bot, House, Lightbulb, SlidersHorizontal } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { LucideIcon } from 'lucide-react'
@@ -23,10 +23,10 @@ const TABS: NavTab[] = [
     match: (path) => path === PATIENT_ROUTES.dashboard,
   },
   {
-    label: 'Twin',
-    href: PATIENT_ROUTES.twin,
-    icon: Activity,
-    match: (path) => path === PATIENT_ROUTES.twin,
+    label: 'Timebot',
+    href: PATIENT_ROUTES.timebot,
+    icon: Bot,
+    match: (path) => path === PATIENT_ROUTES.timebot,
   },
   {
     label: 'Insights',

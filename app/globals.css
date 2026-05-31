@@ -778,6 +778,108 @@
     background: rgb(13 13 13 / 0.05);
     color: #0d0d0d;
   }
+
+  /* DIʘS Timebot — clinical sonar pulse */
+  .timebot-pulse {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+
+  .timebot-pulse__core {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family-sans);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #0d9488;
+    z-index: 2;
+  }
+
+  .timebot-pulse__ring {
+    position: absolute;
+    inset: 18%;
+    border-radius: 50%;
+    border: 1px solid rgb(13 148 136 / 0.2);
+    opacity: 0;
+    animation: timebot-ripple-idle 3s ease-in-out infinite;
+  }
+
+  .timebot-pulse__ring:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .timebot-pulse__ring:nth-child(2) {
+    animation-delay: 1s;
+  }
+
+  .timebot-pulse__ring:nth-child(3) {
+    animation-delay: 2s;
+  }
+
+  .timebot-pulse--thinking .timebot-pulse__ring {
+    inset: 28%;
+    animation-name: timebot-ripple-thinking;
+    animation-duration: 1s;
+  }
+
+  .timebot-pulse[data-state='responding'] .timebot-pulse__ring {
+    inset: 22%;
+    animation-name: timebot-ripple-respond;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+
+  .timebot-pulse[data-state='responding'] .timebot-pulse__ring:nth-child(2),
+  .timebot-pulse[data-state='responding'] .timebot-pulse__ring:nth-child(3) {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+@keyframes timebot-ripple-idle {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.28;
+  }
+  70% {
+    opacity: 0.06;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+@keyframes timebot-ripple-thinking {
+  0% {
+    transform: scale(0.65);
+    opacity: 0.32;
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 0;
+  }
+}
+
+@keyframes timebot-ripple-respond {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.3;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 0.08;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
 }
 
 @keyframes dios-marquee {

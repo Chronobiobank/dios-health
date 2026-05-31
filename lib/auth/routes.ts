@@ -10,7 +10,7 @@ export const AUTH_ROUTES = {
 
 export const PATIENT_ROUTES = {
   dashboard: '/dashboard',
-  twin: '/dashboard/twin',
+  timebot: '/dashboard/timebot',
   insights: '/dashboard/insights',
   streams: '/dashboard/streams',
   dataControls: '/dashboard/data-controls',

@@ -1,25 +1,7 @@
-import { DashboardPageTransition } from '@/components/dashboard/dashboard-page-transition'
-import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
-import { buildPatientDashboardHeader } from '@/lib/auth/patient-dashboard-header'
-import { requirePatientSession } from '@/lib/auth/require-patient'
+import { redirect } from 'next/navigation'
 
-export default async function DashboardTwinPage() {
-  const { profile, patient } = await requirePatientSession()
+import { PATIENT_ROUTES } from '@/lib/auth/routes'
 
-  const header = buildPatientDashboardHeader({
-    profile,
-    patient,
-    subtitle: 'Your live body clock twin — coming soon.',
-  })
-
-  return (
-    <DashboardPageTransition className="gap-6">
-      <PatientTopBar {...header} />
-      <section className="rounded-lg border border-black/10 bg-[#FAFAFA] px-6 py-12 text-center">
-        <p className="text-[15px] leading-relaxed text-black/60">
-          Patient twin view — placeholder.
-        </p>
-      </section>
-    </DashboardPageTransition>
-  )
+export default function DashboardTwinRedirectPage() {
+  redirect(PATIENT_ROUTES.timebot)
 }
