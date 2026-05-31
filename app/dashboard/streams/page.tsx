@@ -7,6 +7,8 @@ import { requirePatientSession } from '@/lib/auth/require-patient'
 import { type TipTraqNightRow } from '@/lib/dashboard/dlmo-profile'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+
 export default async function DashboardStreamsPage() {
   const { user, profile, patient } = await requirePatientSession()
   const supabase = await createClient()

@@ -1,6 +1,8 @@
 import { createClient } from '@/lib/supabase/client'
 import { getTipTraqUploadMaxBytes, isEdfFile } from '@/lib/tiptraq/edf-parser'
 
+export const TIPTRAQ_UPLOAD_FLOW = 'signed-storage-v3'
+
 export type TipTraqUploadResult = {
   night: {
     date: string
@@ -22,6 +24,11 @@ export type TipTraqUploadResult = {
 }
 
 const EXTRACT_MAX_JSON_BYTES = 4096
+
+const FLOW_HEADERS = {
+  Accept: 'application/json',
+  'X-DIOS-Upload-Flow': TIPTRAQ_UPLOAD_FLOW,
+} as const
 
 async function readJsonResponse<T extends { error?: string }>(
   response: Response,
@@ -54,7 +61,7 @@ async function requestSignedUploadUrl(): Promise<{
   const response = await fetch('/api/tiptraq/signed-upload', {
     method: 'POST',
     credentials: 'same-origin',
-    headers: { Accept: 'application/json' },
+    headers: FLOW_HEADERS,
   })
 
   const payload = await readJsonResponse<{
@@ -76,23 +83,23 @@ async function requestSignedUploadUrl(): Promise<{
 }
 
 /** Step 2 — PUT file bytes directly to Supabase (bypasses Next.js body limits). */
-async function uploadFileToSupabase(
-  storagePath: string,
-  token: string,
-  file: File
-): Promise<void> {
-  const supabase = createClient()
-  const fileBytes = await file.arrayBuffer()
+async function uploadFileToSupabase(signedUrl: string, file: File): Promise<void> {
+  const uploadResponse = await fetch(signedUrl, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/octet-stream',
+      'x-upsert': 'false',
+      'X-DIOS-Upload-Flow': TIPTRAQ_UPLOAD_FLOW,
+    },
+    body: file,
+  })
 
-  const { error } = await supabase.storage
-    .from('tiptraq-reports')
-    .uploadToSignedUrl(storagePath, token, fileBytes, {
-      contentType: 'application/octet-stream',
-      upsert: false,
-    })
-
-  if (error) {
-    throw new Error(`Step 2 (storage upload): ${error.message}`)
+  if (!uploadResponse.ok) {
+    const detail = (await uploadResponse.text()).slice(0, 200)
+    if (uploadResponse.status === 413 || /entity too large|payload too large/i.test(detail)) {
+      throw new Error('Step 2 (storage upload): EDF file must be under 50MB')
+    }
+    throw new Error(detail || `Step 2 (storage upload) failed (HTTP ${uploadResponse.status})`)
   }
 }
 
@@ -108,7 +115,7 @@ async function processUploadedFile(storagePath: string): Promise<TipTraqUploadRe
     method: 'POST',
     credentials: 'same-origin',
     headers: {
-      Accept: 'application/json',
+      ...FLOW_HEADERS,
       'Content-Type': 'application/json',
     },
     body: jsonBody,
@@ -143,7 +150,7 @@ export async function runTipTraqEdfUpload(file: File): Promise<TipTraqUploadResu
   const signed = await requestSignedUploadUrl()
 
   try {
-    await uploadFileToSupabase(signed.storagePath, signed.token, file)
+    await uploadFileToSupabase(signed.signedUrl, file)
     return await processUploadedFile(signed.storagePath)
   } catch (error) {
     const supabase = createClient()
