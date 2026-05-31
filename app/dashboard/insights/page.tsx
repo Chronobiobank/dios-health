@@ -1,5 +1,7 @@
+import { DashboardPageTransition } from '@/components/dashboard/dashboard-page-transition'
 import { InsightsView } from '@/components/dashboard/insights-view'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
+import { buildPatientDashboardHeader } from '@/lib/auth/patient-dashboard-header'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
 import { buildInsightsData } from '@/lib/dashboard/insights-data'
@@ -33,10 +35,18 @@ export default async function DashboardInsightsPage() {
     locationCountry: patient.location_country,
   })
 
+  const header = buildPatientDashboardHeader({
+    profile,
+    patient,
+    subtitle: insights.hasTipTraqData
+      ? `Personalised from your proxy DLMO at ${insights.dlmoTimeLabel}.`
+      : 'Estimated from your onboarding answers until TipTraQ refines your DLMO.',
+  })
+
   return (
-    <>
-      <PatientTopBar fullName={profile.full_name ?? 'Patient'} avatarUrl={profile.avatar_url} />
+    <DashboardPageTransition className="gap-6">
+      <PatientTopBar {...header} />
       <InsightsView data={insights} />
-    </>
+    </DashboardPageTransition>
   )
 }

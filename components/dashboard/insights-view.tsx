@@ -45,20 +45,8 @@ const RISK_ICONS: Record<string, typeof Wind> = {
 export function InsightsView({ data }: InsightsViewProps) {
   return (
     <div className="pb-6">
-      <header className="pt-2">
-        <p className="font-mono text-xs uppercase tracking-[0.14em] text-black/45">Insights</p>
-        <h1 className="type-section mt-3 text-[1.75rem] leading-[1.15] tracking-tight sm:text-[2rem]">
-          Your circadian timing plan
-        </h1>
-        <p className="type-body mt-4 max-w-md text-black/60">
-          {data.hasTipTraqData
-            ? `Personalised from your proxy DLMO at ${data.dlmoTimeLabel}.`
-            : `Estimated from your onboarding answers until TipTraQ refines your DLMO.`}
-        </p>
-      </header>
-
       {/* Section 1 — Risk indicators */}
-      <section className="mt-12">
+      <section>
         <p className="font-mono text-xs uppercase tracking-[0.14em] text-black/45">
           Your circadian risk indicators
         </p>

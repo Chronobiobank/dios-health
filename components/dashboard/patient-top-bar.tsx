@@ -19,7 +19,7 @@ export function PatientTopBar({ fullName, avatarUrl, greeting, subtitle }: Patie
     <div className={cn('dios-page-actions', hasGreeting && 'dios-page-actions--with-greeting')}>
       {hasGreeting ? (
         <div className="min-w-0 flex-1 pr-3">
-          <p className="truncate text-lg font-semibold leading-tight tracking-tight text-black capitalize sm:text-xl">
+          <p className="truncate text-lg font-semibold leading-tight tracking-tight text-black sm:text-xl">
             {greeting}
           </p>
           {subtitle ? (
