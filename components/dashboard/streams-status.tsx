@@ -15,15 +15,15 @@ type StreamRow = {
 }
 
 type StreamsStatusProps = {
-  wearableConnected: string | null
   tipTraqNightsCount?: number
   bloodPanelsCount?: number
+  smartphoneActive?: boolean
 }
 
 export function StreamsStatus({
-  wearableConnected,
   tipTraqNightsCount = 0,
   bloodPanelsCount = 0,
+  smartphoneActive = false,
 }: StreamsStatusProps) {
   const tipTraqLive = tipTraqNightsCount > 0
   const cityLabsConnected = bloodPanelsCount > 0
@@ -52,14 +52,8 @@ export function StreamsStatus({
     },
     {
       name: 'Smartphone',
-      fill:
-        wearableConnected === 'apple_health' || wearableConnected === 'google_fit' ? 0.65 : 0.15,
-      status:
-        wearableConnected === 'apple_health' || wearableConnected === 'google_fit'
-          ? 'Partial'
-          : 'Not active',
-      href: PATIENT_ROUTES.streams,
-      actionLabel: wearableConnected ? undefined : 'Connect →',
+      fill: smartphoneActive ? 0.55 : 0.12,
+      status: smartphoneActive ? 'Active' : 'Not active',
     },
   ]
 

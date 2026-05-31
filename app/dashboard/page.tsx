@@ -31,9 +31,25 @@ export default async function DashboardPage() {
     .select('id', { count: 'exact', head: true })
     .eq('patient_id', user.id)
 
+  const { count: bloodPanelsCount } = await supabase
+    .from('blood_circadian_panels')
+    .select('id', { count: 'exact', head: true })
+    .eq('patient_id', user.id)
+
+  const { data: latestSmartphone } = await supabase
+    .from('smartphone_circadian_observations')
+    .select('observed_at')
+    .eq('patient_id', user.id)
+    .order('observed_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+
   const profileRow = dlmoProfile as DlmoProfileRow | null
   const nightsUploaded = tipTraqNightsCount ?? 0
   const hasTipTraqData = nightsUploaded > 0
+  const smartphoneActive =
+    latestSmartphone?.observed_at != null &&
+    Date.now() - new Date(latestSmartphone.observed_at).getTime() <= 7 * 24 * 60 * 60 * 1000
 
   const firstName = getPatientFirstName({
     firstName: patient.first_name,
@@ -92,8 +108,9 @@ export default async function DashboardPage() {
       <SeededInsightCard insight={insight} hasTipTraqData={hasTipTraqData} />
 
       <StreamsStatus
-        wearableConnected={patient.wearable_connected}
         tipTraqNightsCount={nightsUploaded}
+        bloodPanelsCount={bloodPanelsCount ?? 0}
+        smartphoneActive={smartphoneActive}
       />
     </DashboardPageTransition>
   )
