@@ -15,6 +15,7 @@ import {
   summarizeDbValue,
   toNightInput,
 } from '@/lib/tiptraq/extraction'
+import { mergeDlmoLayers } from '@/lib/dashboard/dlmo-merge'
 import { syncDlmoProfileForPatient } from '@/lib/tiptraq/sync-dlmo-profile'
 
 export const maxDuration = 60
@@ -254,6 +255,17 @@ export async function POST(request: NextRequest) {
         syncError,
       })
       return errorResponse(syncError ?? 'Failed to update body clock profile', 500)
+    }
+
+    const { error: mergeError } = await mergeDlmoLayers(supabase, user.id)
+
+    if (mergeError) {
+      console.error('[TipTraQ] DLMO layer merge failed after insert', {
+        userId: user.id,
+        reportDate,
+        mergeError,
+      })
+      return errorResponse(mergeError, 500)
     }
 
     return jsonResponse({
