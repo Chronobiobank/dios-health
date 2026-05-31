@@ -2,28 +2,9 @@
 
 import { useCallback, useState } from 'react'
 
-import { getTipTraqUploadMaxBytes, isEdfFile } from '@/lib/tiptraq/edf-parser'
-import { createClient } from '@/lib/supabase/client'
+import { runTipTraqEdfUpload, type TipTraqUploadResult } from '@/lib/tiptraq/run-edf-upload'
 
-export type TipTraqUploadResult = {
-  night: {
-    date: string
-    dlmo_time: string
-    confidence_score: number
-    confidence_label: string
-    confidence_band_minutes: number
-    chronotype_signal: string
-  }
-  rolling: {
-    nights_count: number
-    dlmo_time: string
-    confidence_score: number
-    confidence_label: string
-    confidence_band_minutes: number
-    chronotype: string
-    dose_windows: Record<string, string>
-  }
-}
+export type { TipTraqUploadResult }
 
 type UploadState = {
   status: 'idle' | 'uploading' | 'processing' | 'complete' | 'error'
@@ -34,8 +15,8 @@ type UploadState = {
 
 const STATUS_MESSAGES: Record<UploadState['status'], string | null> = {
   idle: null,
-  uploading: 'Uploading to secure storage...',
-  processing: 'Calculating your body clock...',
+  uploading: 'Step 1–2: Uploading to secure storage...',
+  processing: 'Step 3: Calculating your body clock...',
   complete: null,
   error: null,
 }
@@ -44,80 +25,10 @@ function friendlyError(error: unknown): string {
   const message = error instanceof Error ? error.message : String(error)
 
   if (/not valid JSON|Unexpected token|Request Entity Too Large|413/i.test(message)) {
-    return 'Upload failed — your EDF file may be too large (max 50MB). If the file is small, hard-refresh this page (Ctrl+Shift+R) and try again.'
+    return 'Upload failed — hard-refresh this page (Ctrl+Shift+R) and try again. Your EDF must upload to storage first, not directly to the extract API.'
   }
 
   return message || 'Upload failed. Please try again.'
-}
-
-async function readJson<T extends { error?: string }>(response: Response): Promise<T> {
-  const text = await response.text()
-  if (!text) {
-    throw new Error(`Server returned empty response (HTTP ${response.status})`)
-  }
-  try {
-    return JSON.parse(text) as T
-  } catch {
-    if (/request entity too large|413/i.test(text)) {
-      throw new Error('File is too large. EDF uploads must be under 50MB.')
-    }
-    throw new Error(text.slice(0, 200))
-  }
-}
-
-async function runTipTraqUpload(file: File): Promise<TipTraqUploadResult> {
-  if (!isEdfFile(file)) {
-    throw new Error('Please upload a TipTraQ channel export (.edf file).')
-  }
-
-  const maxBytes = getTipTraqUploadMaxBytes()
-  if (file.size > maxBytes) {
-    throw new Error(`EDF file must be under 50MB (yours is ${(file.size / (1024 * 1024)).toFixed(1)}MB).`)
-  }
-
-  const signResponse = await fetch('/api/tiptraq/signed-upload', { method: 'POST' })
-  const signed = await readJson<{
-    error?: string
-    storagePath?: string
-    signedUrl?: string
-  }>(signResponse)
-
-  if (!signResponse.ok || !signed.storagePath || !signed.signedUrl) {
-    throw new Error(signed.error || 'Could not prepare upload. Check Supabase storage is set up.')
-  }
-
-  const putResponse = await fetch(signed.signedUrl, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/octet-stream',
-      'x-upsert': 'false',
-    },
-    body: file,
-  })
-
-  if (!putResponse.ok) {
-    const detail = (await putResponse.text()).slice(0, 200)
-    throw new Error(detail || `Storage upload failed (HTTP ${putResponse.status})`)
-  }
-
-  const extractResponse = await fetch('/api/tiptraq/extract', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ storagePath: signed.storagePath }),
-  })
-
-  const result = await readJson<TipTraqUploadResult & { error?: string }>(extractResponse)
-
-  if (!extractResponse.ok) {
-    await createClient().storage.from('tiptraq-reports').remove([signed.storagePath])
-    throw new Error(result.error || 'Body clock processing failed')
-  }
-
-  if (!result.night || !result.rolling) {
-    throw new Error('Upload completed but the response was incomplete.')
-  }
-
-  return result
 }
 
 type TipTraqEdfUploadProps = {
@@ -133,11 +44,11 @@ export function TipTraqEdfUpload({ onComplete }: TipTraqEdfUploadProps) {
 
   const processFile = useCallback(
     async (file: File) => {
-      setState({ status: 'uploading', progress: 30 })
+      setState({ status: 'uploading', progress: 35 })
 
       try {
-        setState({ status: 'processing', progress: 70 })
-        const result = await runTipTraqUpload(file)
+        setState({ status: 'processing', progress: 75 })
+        const result = await runTipTraqEdfUpload(file)
         setState({ status: 'complete', progress: 100, result })
         onComplete?.(result)
       } catch (error) {
@@ -168,7 +79,7 @@ export function TipTraqEdfUpload({ onComplete }: TipTraqEdfUploadProps) {
   const reset = () => setState({ status: 'idle', progress: 0 })
 
   return (
-    <div className="w-full">
+    <div className="w-full" data-tiptraq-upload="signed-flow-v2">
       {state.status === 'idle' && (
         <div
           className={`rounded-2xl border border-dashed px-6 py-10 text-center transition-colors ${
@@ -248,7 +159,7 @@ export function TipTraqEdfUpload({ onComplete }: TipTraqEdfUploadProps) {
                 <span>
                   {' '}
                   · Upload {3 - state.result.rolling.nights_count} more night
-                  {3 - state.result.rolling.nights_count !== 1 ? 's' : ''} for clinical confidence
+                  {state.result.rolling.nights_count !== 1 ? 's' : ''} for clinical confidence
                 </span>
               )}
             </div>

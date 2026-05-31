@@ -30,10 +30,13 @@ export async function POST() {
     )
   }
 
-  return NextResponse.json({
-    success: true,
-    storagePath,
-    signedUrl: data.signedUrl,
-    token: data.token,
-  })
+  return NextResponse.json(
+    {
+      success: true,
+      storagePath,
+      signedUrl: data.signedUrl,
+      token: data.token,
+    },
+    { headers: { 'Content-Type': 'application/json' } }
+  )
 }

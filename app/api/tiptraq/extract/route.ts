@@ -37,6 +37,14 @@ async function parseRequestBody(
   request: NextRequest
 ): Promise<{ storagePath?: string } | NextResponse> {
   const contentType = request.headers.get('content-type') ?? ''
+  const contentLength = Number(request.headers.get('content-length') ?? 0)
+
+  if (contentLength > 4096) {
+    return errorResponse(
+      'Request body too large. Upload the EDF to Supabase storage first, then POST only { "storagePath": "..." }.',
+      413
+    )
+  }
 
   if (contentType.includes('multipart/form-data')) {
     return errorResponse(
