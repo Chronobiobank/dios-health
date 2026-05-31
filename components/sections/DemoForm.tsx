@@ -2,11 +2,25 @@
 
 import { useState, type FormEvent } from 'react'
 
-import { BTN_PRIMARY, BODY, CARD, CONTAINER, LABEL, SECTION, SECTION_ALT, SECTION_TITLE } from './layout'
+import { BTN_HERO, CONTAINER, LABEL, SECTION_TITLE } from './layout'
 import { SectionLabel } from './SectionLabel'
 
+const ROLES = [
+  'GP',
+  'Care home manager',
+  'NHS commissioner',
+  'Pharmacist',
+  'Employer',
+  'Insurer',
+  'Researcher',
+  'Other',
+] as const
+
 const inputClassName =
-  'type-body w-full rounded-lg border border-black/10 bg-white px-4 py-3 text-black outline-none transition-colors placeholder:text-black/40 focus:border-black focus:outline-none focus:ring-1 focus:ring-black/10'
+  'type-body w-full rounded-lg border border-white/20 bg-white px-4 py-3 text-black outline-none transition-colors placeholder:text-black/40 focus:border-white focus:outline-none focus:ring-1 focus:ring-white/20'
+
+const selectClassName =
+  'type-body w-full rounded-lg border border-white/20 bg-white px-4 py-3 text-black outline-none focus:border-white focus:outline-none focus:ring-1 focus:ring-white/20'
 
 export function DemoForm() {
   const [loading, setLoading] = useState(false)
@@ -27,8 +41,11 @@ export function DemoForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           full_name: data.get('full_name'),
-          organisation: data.get('organisation'),
           email: data.get('email'),
+          role: data.get('role'),
+          organisation: data.get('organisation'),
+          patient_count: data.get('patient_count'),
+          message: data.get('message'),
         }),
       })
 
@@ -49,26 +66,23 @@ export function DemoForm() {
   }
 
   return (
-    <section id="demo" className={`${SECTION} ${SECTION_ALT}`}>
-      <div className={`${CONTAINER} mx-auto max-w-lg text-center`}>
-        <SectionLabel title="Book a demo" className="text-center" />
-        <h2 className={`${SECTION_TITLE} mt-4`}>See DIOS in action</h2>
-        <p className={`${BODY} mt-4`}>
-          You get a live walkthrough with real timing data and no procurement process
+    <section id="demo" className="scroll-mt-[calc(var(--dios-site-nav-height)+1rem)] bg-black py-14 text-white sm:py-20">
+      <div className={`${CONTAINER} mx-auto max-w-lg`}>
+        <SectionLabel title="Book a demo" light className="text-center" />
+        <h2 className={`${SECTION_TITLE} mt-4 text-center text-white`}>20 minutes. Live demo.</h2>
+        <p className="type-hero-meta mt-4 text-center text-white/75">
+          See a real patient body clock report.
         </p>
 
         {success ? (
-          <p className={`${CARD} type-body mt-10 rounded-2xl p-6 text-black/80`}>
-            Thank you — we will reply within one business day
+          <p className="type-body mt-10 rounded-2xl border border-white/15 bg-white/10 p-6 text-center text-white">
+            Thank you. One business day.
           </p>
         ) : (
-          <form
-            onSubmit={handleSubmit}
-            className={`${CARD} mt-8 space-y-4 rounded-2xl p-6 text-left sm:p-8`}
-          >
+          <form onSubmit={handleSubmit} className="mt-8 space-y-4 text-left">
             <div>
-              <label htmlFor="full_name" className={`${LABEL} mb-2 block`}>
-                Name
+              <label htmlFor="full_name" className={`${LABEL} mb-2 block text-white/80`}>
+                Full name
               </label>
               <input
                 id="full_name"
@@ -76,28 +90,12 @@ export function DemoForm() {
                 type="text"
                 required
                 autoComplete="name"
-                placeholder="Dr Jane Smith"
                 className={inputClassName}
                 disabled={loading}
               />
             </div>
             <div>
-              <label htmlFor="organisation" className={`${LABEL} mb-2 block`}>
-                Practice
-              </label>
-              <input
-                id="organisation"
-                name="organisation"
-                type="text"
-                required
-                autoComplete="organization"
-                placeholder="Auckland Medical Centre"
-                className={inputClassName}
-                disabled={loading}
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className={`${LABEL} mb-2 block`}>
+              <label htmlFor="email" className={`${LABEL} mb-2 block text-white/80`}>
                 Email
               </label>
               <input
@@ -106,22 +104,72 @@ export function DemoForm() {
                 type="email"
                 required
                 autoComplete="email"
-                placeholder="jane@practice.nz"
+                className={inputClassName}
+                disabled={loading}
+              />
+            </div>
+            <div>
+              <label htmlFor="role" className={`${LABEL} mb-2 block text-white/80`}>
+                Role
+              </label>
+              <select id="role" name="role" required className={selectClassName} disabled={loading}>
+                <option value="">Select role</option>
+                {ROLES.map((role) => (
+                  <option key={role} value={role}>
+                    {role}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="organisation" className={`${LABEL} mb-2 block text-white/80`}>
+                Organisation
+              </label>
+              <input
+                id="organisation"
+                name="organisation"
+                type="text"
+                required
+                autoComplete="organization"
+                className={inputClassName}
+                disabled={loading}
+              />
+            </div>
+            <div>
+              <label htmlFor="patient_count" className={`${LABEL} mb-2 block text-white/80`}>
+                Number of patients or residents (optional)
+              </label>
+              <input
+                id="patient_count"
+                name="patient_count"
+                type="text"
+                className={inputClassName}
+                disabled={loading}
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className={`${LABEL} mb-2 block text-white/80`}>
+                Message (optional)
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={3}
                 className={inputClassName}
                 disabled={loading}
               />
             </div>
             {error ? (
-              <p className="type-body text-sm text-red-600" role="alert">
+              <p className="type-body text-sm text-red-300" role="alert">
                 {error}
               </p>
             ) : null}
             <button
               type="submit"
               disabled={loading}
-              className={`${BTN_PRIMARY} h-11 disabled:cursor-not-allowed disabled:opacity-60`}
+              className={`${BTN_HERO} h-11 w-full disabled:cursor-not-allowed disabled:opacity-60`}
             >
-              {loading ? 'Sending…' : 'Book a demo'}
+              {loading ? 'Sending…' : 'Book a clinical demo →'}
             </button>
           </form>
         )}

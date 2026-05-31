@@ -1,30 +1,28 @@
-import { Buyers } from '@/components/sections/Buyers'
-import { ClinicianPanel } from '@/components/sections/ClinicianPanel'
-import { DataControls } from '@/components/sections/DataControls'
-import { DataSovereignty } from '@/components/sections/DataSovereignty'
 import { DemoForm } from '@/components/sections/DemoForm'
-import { DrugModules } from '@/components/sections/DrugModules'
 import { Footer } from '@/components/sections/Footer'
-import { FourClusters } from '@/components/sections/FourClusters'
 import { Hero } from '@/components/sections/Hero'
+import { HomeEvidence } from '@/components/sections/HomeEvidence'
+import { HomeGap } from '@/components/sections/HomeGap'
+import { HomeHowItWorks } from '@/components/sections/HomeHowItWorks'
+import { HomeMedicationCoverage } from '@/components/sections/HomeMedicationCoverage'
+import { HomeWhoItIsFor } from '@/components/sections/HomeWhoItIsFor'
+import { RoiCalculator } from '@/components/sections/RoiCalculator'
+import { StatsBar } from '@/components/sections/StatsBar'
 import { TimebotHome } from '@/components/sections/TimebotHome'
-import { Pricing } from '@/components/sections/Pricing'
-import { ResearchersHome } from '@/components/sections/ResearchersHome'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-[#0D0D0D]">
+    <div className="min-h-screen bg-white text-black">
       <main>
         <Hero />
-        <FourClusters />
+        <StatsBar />
+        <HomeGap />
         <TimebotHome />
-        <DrugModules />
-        <ClinicianPanel />
-        <DataControls />
-        <DataSovereignty />
-        <Pricing />
-        <Buyers />
-        <ResearchersHome />
+        <HomeHowItWorks />
+        <HomeMedicationCoverage />
+        <RoiCalculator />
+        <HomeWhoItIsFor />
+        <HomeEvidence />
         <DemoForm />
         <Footer />
       </main>

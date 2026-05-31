@@ -1,25 +1,24 @@
 import { CONTAINER } from './layout'
 
-const PLATFORM_STATS = [
-  { value: 'Free', label: 'Every patient uses DIOS at no cost forever' },
-  { value: 'Oxford', label: 'Chronodosing science validated at Oxford and in trials' },
-  { value: 'MSFsc', label: 'Wearable-derived chronotype from the wrist' },
-  { value: '0', label: 'Insurer data access by deliberate platform design' },
+const STATS = [
+  { value: '£500M', label: 'avoidable NHS admissions annually' },
+  { value: '73M', label: 'atorvastatin prescriptions last year' },
+  { value: '40%', label: 'efficacy gain from optimal timing' },
 ] as const
 
 export function StatsBar() {
   return (
-    <div className="bg-[#FAFAFA] pb-16 sm:pb-20">
+    <section className="bg-black pb-14 text-white sm:pb-20" aria-label="Key statistics">
       <div className={CONTAINER}>
-        <dl className="mt-12 grid grid-cols-2 gap-8 border-t border-black/10 pt-12 sm:grid-cols-4">
-          {PLATFORM_STATS.map((stat) => (
+        <dl className="grid grid-cols-1 gap-8 border-t border-white/15 pt-10 sm:grid-cols-3 sm:gap-6">
+          {STATS.map((stat) => (
             <div key={stat.label} className="text-center sm:text-left">
-              <dt className="type-mono text-2xl text-black sm:text-3xl">{stat.value}</dt>
-              <dd className="type-label mt-2">{stat.label}</dd>
+              <dt className="type-mono text-2xl text-white sm:text-3xl">{stat.value}</dt>
+              <dd className="type-label mt-2 text-white/60">{stat.label}</dd>
             </div>
           ))}
         </dl>
       </div>
-    </div>
+    </section>
   )
 }
