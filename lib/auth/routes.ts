@@ -14,6 +14,7 @@ export const PATIENT_ROUTES = {
   insights: '/dashboard/insights',
   streams: '/dashboard/streams',
   dataControls: '/dashboard/data-controls',
+  profile: '/dashboard/profile',
   report: '/dashboard/report',
 } as const
 

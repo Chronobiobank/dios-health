@@ -18,7 +18,9 @@ const TABS = [
     label: 'Settings',
     href: PATIENT_ROUTES.dataControls,
     match: (path: string) =>
-      path === PATIENT_ROUTES.dataControls || path === PATIENT_ROUTES.streams,
+      path === PATIENT_ROUTES.dataControls ||
+      path === PATIENT_ROUTES.streams ||
+      path === PATIENT_ROUTES.profile,
   },
 ] as const
 

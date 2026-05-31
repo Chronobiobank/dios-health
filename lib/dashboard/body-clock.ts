@@ -36,16 +36,16 @@ export function buildBodyClockModel(
 
   const doseWindows: DoseWindow[] = isEvening
     ? [
-        { label: 'Statin', minutes: 21 * 60 + 30 },
+        { label: 'Simvastatin', minutes: 21 * 60 + 30 },
         { label: 'Ramipril', minutes: 22 * 60 },
       ]
     : isMorning
       ? [
-          { label: 'Statin', minutes: 7 * 60 },
+          { label: 'Simvastatin', minutes: 7 * 60 },
           { label: 'Ramipril', minutes: 7 * 60 + 30 },
         ]
       : [
-          { label: 'Statin', minutes: 21 * 60 },
+          { label: 'Simvastatin', minutes: 21 * 60 },
           { label: 'Ramipril', minutes: 8 * 60 },
         ]
 

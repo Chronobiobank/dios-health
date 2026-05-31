@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { DataControlsPanel } from '@/components/dashboard/data-controls-panel'
 import { GpReportButton } from '@/components/dashboard/gp-report-button'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
@@ -5,6 +7,7 @@ import { TipTraqNightList } from '@/components/dashboard/tiptraq-night-list'
 import { SignOutButton } from '@/components/auth/sign-out-button'
 import { ProfileAvatarUpload } from '@/components/profile/profile-avatar-upload'
 import { requirePatientSession } from '@/lib/auth/require-patient'
+import { PATIENT_ROUTES } from '@/lib/auth/routes'
 import { type TipTraqNightRow } from '@/lib/dashboard/dlmo-profile'
 import { createClient } from '@/lib/supabase/server'
 
@@ -33,6 +36,22 @@ export default async function DashboardDataControlsPage() {
 
       <section className="mt-8">
         <ProfileAvatarUpload fullName={profile.full_name ?? 'Patient'} initialAvatarUrl={profile.avatar_url} />
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">Profile</h2>
+        <Link
+          href={PATIENT_ROUTES.profile}
+          className="mt-4 flex items-center justify-between rounded-2xl border-[0.5px] border-black/[0.08] bg-white px-5 py-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-colors hover:border-black/15"
+        >
+          <div>
+            <p className="text-sm font-medium text-black">Demographic details</p>
+            <p className="mt-1 text-sm text-black/55">
+              Skin type, location, shift work, and body clock questions
+            </p>
+          </div>
+          <span className="font-mono text-[11px] text-black/45">Edit →</span>
+        </Link>
       </section>
 
       {nightHistory.length > 0 ? (

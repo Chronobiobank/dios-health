@@ -43,10 +43,10 @@ export function buildBodyClockFromDlmoProfile(profile: DlmoProfileRow): BodyCloc
   const lightEndMinutes = timeToMinutes(profile.light_dose_window_end) ?? dlmoMinutes + 660
 
   const doseWindows = [
-    { label: 'Statin', minutes: timeToMinutes(profile.simvastatin_optimal_time) },
+    { label: 'Simvastatin', minutes: timeToMinutes(profile.simvastatin_optimal_time) },
     { label: 'Ramipril', minutes: timeToMinutes(profile.ramipril_optimal_time) },
-    { label: 'Pred', minutes: timeToMinutes(profile.prednisolone_optimal_time) },
-    { label: 'Salm', minutes: timeToMinutes(profile.salmeterol_optimal_time) },
+    { label: 'Prednisolone', minutes: timeToMinutes(profile.prednisolone_optimal_time) },
+    { label: 'Salmeterol', minutes: timeToMinutes(profile.salmeterol_optimal_time) },
   ].flatMap((window) => (window.minutes !== null ? [{ label: window.label, minutes: window.minutes }] : []))
 
   const dlmoLabel = profile.proxy_dlmo_rolling
