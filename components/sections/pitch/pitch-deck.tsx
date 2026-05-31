@@ -95,13 +95,13 @@ export function PitchDeck() {
       <PitchScreen id="pitch-world-changed" background={<PitchBgWorldChanged />}>
         <PitchEyebrow>THE WORLD HAS CHANGED</PitchEyebrow>
         <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
-          The human body clock has been optimised over 400,000 years. We decoupled it in 60.
+          89,000 people. 13 million hours of light data.
         </h1>
         <p
           className="mt-6 max-w-2xl text-[15px] leading-relaxed lg:text-lg"
           style={{ color: 'var(--color-text-secondary)' }}
         >
-          The chronic disease burden of every developed nation is the consequence.
+          The largest light-health study ever run proved it. More light by day, more dark by night — less disease. DIʘS measures it.
         </p>
       </PitchScreen>
 
@@ -125,12 +125,23 @@ export function PitchDeck() {
             avoidable NHS admissions annually from medication mistiming
           </p>
         </div>
+        <div className="mt-4 max-w-2xl" style={{ ...glassCardStyle, borderRadius: 'var(--radius-md)', padding: '1.25rem' }}>
+          <p className="font-mono text-[11px] uppercase tracking-widest mb-3" style={{ color: 'var(--color-brand)' }}>
+            UK BIOBANK · POPULATION VALIDATION
+          </p>
+          <p className="text-sm leading-relaxed text-white/70">
+            89,000 participants. 13 million hours of personal light sensor data. Published in PNAS, The Lancet, and JAMA Network Open. Conclusion: more light by day, more dark by night — independently predicts lower rates of T2DM, heart failure, AF, stroke, and psychiatric disorders.
+          </p>
+          <p className="mt-3 font-mono text-[11px] text-white/40">
+            DIʘS is the clinical infrastructure that delivers what the evidence demands.
+          </p>
+        </div>
       </PitchScreen>
 
       <PitchScreen id="pitch-why-now" background={<PitchBgWhyNow />}>
         <PitchEyebrow>WHY NOW</PitchEyebrow>
         <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
-          The camera in your pocket can now read your biology.
+          The camera in your pocket measures your most powerful medicine.
         </h1>
         <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/70 lg:text-lg">
           AI made this possible in 2026. Not 2020. Now.
@@ -138,35 +149,35 @@ export function PitchDeck() {
         <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
           <SignalCard
             icon={<Eye className="h-5 w-5" strokeWidth={1.5} aria-hidden />}
-            title="Pupillometry"
-            body="Melanopsin activity from your front camera"
+            title="Melanopic Lux"
+            body="The direct entraining signal to your master clock — measured from your front camera, not estimated."
           />
           <SignalCard
             icon={<Sun className="h-5 w-5" strokeWidth={1.5} aria-hidden />}
             title="Solar zenith"
-            body="Vitamin D receptor activation from GPS"
+            body="GPS + time of day gives your expected outdoor light dose as a personalised reference baseline."
           />
           <SignalCard
             icon={<Activity className="h-5 w-5" strokeWidth={1.5} aria-hidden />}
-            title="Blood pulse"
-            body="Autonomic state from your rear camera"
+            title="Autonomic state"
+            body="HRV and sympathetic balance from TipTraQ — the downstream biological response to your light dose."
           />
         </div>
         <p className="mt-6 font-mono text-[13px] text-white/40">
-          Four signals. One body clock reading. No lab. No wearable. No appointment.
+          Melanopic lux. Validated by CIE S026. Proven at population scale. Measured from your pocket.
         </p>
       </PitchScreen>
 
       <PitchScreen id="pitch-solution" background={<PitchBgSolution />}>
         <PitchEyebrow>THE SOLUTION</PitchEyebrow>
         <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
-          DIOS times every dose to your body clock.
+          DIʘS times every dose to your body clock.
         </h1>
         <ul className="mt-8 flex max-w-2xl flex-col gap-4">
           {[
-            'Passive measurement. Phone. Bloods. TipTraQ.',
-            'Personal protocol. Gominak. Coimbra. Chronodosing.',
-            'No forms. Just a conversation with your DIOS timebot.',
+            'Measures melanopic lux — the biomarker identified in 89,000-person UK Biobank studies as the primary modifiable driver of chronic disease.',
+            'Personal protocol. Gominak nutrient panel. Coimbra VDR. Chronodosing for 8 key medications.',
+            'No forms. Just a conversation with your DIʘS timebot.',
           ].map((line) => (
             <li key={line} className="flex gap-3 text-[15px] leading-relaxed text-white lg:text-lg">
               <span style={{ color: 'var(--color-brand)' }} aria-hidden>
@@ -177,7 +188,7 @@ export function PitchDeck() {
           ))}
         </ul>
         <p className="mt-8 font-mono text-[13px] text-white/40">
-          Eight medications. Expanding quarterly. NHS-ready.
+          Passive capture. Predictive power. NHS-ready.
         </p>
       </PitchScreen>
 
@@ -187,9 +198,7 @@ export function PitchDeck() {
           Every person on a prescription is a potential user.
         </h1>
         <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/70 lg:text-lg">
-          The data asset that accumulates is worth more than the platform. A population-level
-          chronotype dataset linked to medication outcomes — the dataset that makes precision medicine
-          real.
+          UK Biobank proved the biomarker at 89,000 people. DIʘS measures it continuously at the individual level and closes the loop with a personalised correction protocol. The data asset that accumulates is the world's first longitudinal melanopic lux dataset linked to medication outcomes.
         </p>
         <div className="mt-10 text-center">
           <p
