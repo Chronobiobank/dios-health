@@ -7,7 +7,7 @@ import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { SeededInsightCard } from '@/components/dashboard/seeded-insight-card'
 import { StreamsStatus } from '@/components/dashboard/streams-status'
 import { buildSeededInsight } from '@/lib/auth/chronotype-insight'
-import { buildPatientDashboardHeader } from '@/lib/auth/patient-dashboard-header'
+import { getLocalizedPatientGreeting, getPatientFirstName } from '@/lib/auth/greeting'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import { buildBodyClockModel } from '@/lib/dashboard/body-clock'
 import {
@@ -35,13 +35,15 @@ export default async function DashboardPage() {
   const nightsUploaded = tipTraqNightsCount ?? 0
   const hasTipTraqData = nightsUploaded > 0
 
-  const header = buildPatientDashboardHeader({
-    profile,
-    patient,
-    subtitle: hasTipTraqData
-      ? `Body clock from ${profileRow?.nights_count ?? nightsUploaded} TipTraQ night${(profileRow?.nights_count ?? nightsUploaded) === 1 ? '' : 's'}`
-      : 'Body clock estimate · Based on your answers · Upload TipTraQ for precision',
+  const firstName = getPatientFirstName({
+    firstName: patient.first_name,
+    fullName: profile.full_name,
   })
+  const greeting = getLocalizedPatientGreeting(
+    firstName,
+    patient.location_city,
+    patient.location_country
+  )
   const insight = buildSeededInsight(
     patient.chronotype_q1 ?? '',
     patient.chronotype_q2 ?? '',
@@ -59,7 +61,16 @@ export default async function DashboardPage() {
 
   return (
     <DashboardPageTransition className="gap-6">
-      <PatientTopBar {...header} />
+      <PatientTopBar
+        fullName={profile.full_name ?? firstName}
+        avatarUrl={profile.avatar_url}
+        greeting={greeting}
+        subtitle={
+          hasTipTraqData
+            ? `Body clock from ${profileRow?.nights_count ?? nightsUploaded} TipTraQ night${(profileRow?.nights_count ?? nightsUploaded) === 1 ? '' : 's'}`
+            : 'Body clock estimate · Based on your answers · Upload TipTraQ for precision'
+        }
+      />
 
       {hasTipTraqData ? (
         <>

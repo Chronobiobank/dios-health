@@ -1,29 +1,23 @@
-import { Buyers } from '@/components/sections/Buyers'
-import { ClinicianPanel } from '@/components/sections/ClinicianPanel'
-import { DataControls } from '@/components/sections/DataControls'
-import { DataSovereignty } from '@/components/sections/DataSovereignty'
 import { DemoForm } from '@/components/sections/DemoForm'
-import { DrugModules } from '@/components/sections/DrugModules'
 import { Footer } from '@/components/sections/Footer'
-import { FourClusters } from '@/components/sections/FourClusters'
-import { Hero } from '@/components/sections/Hero'
-import { Pricing } from '@/components/sections/Pricing'
-import { ResearchersHome } from '@/components/sections/ResearchersHome'
+import { LandingClinicians } from '@/components/sections/landing/LandingClinicians'
+import { LandingFooterCta } from '@/components/sections/landing/LandingFooterCta'
+import { LandingHero } from '@/components/sections/landing/LandingHero'
+import { LandingHowItWorks } from '@/components/sections/landing/LandingHowItWorks'
+import { LandingMedications } from '@/components/sections/landing/LandingMedications'
+import { LandingProblem } from '@/components/sections/landing/LandingProblem'
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-[#0D0D0D]">
       <main>
-        <Hero />
-        <FourClusters />
-        <DrugModules />
-        <ClinicianPanel />
-        <DataControls />
-        <DataSovereignty />
-        <Pricing />
-        <Buyers />
-        <ResearchersHome />
+        <LandingHero />
+        <LandingProblem />
+        <LandingHowItWorks />
+        <LandingMedications />
+        <LandingClinicians />
         <DemoForm />
+        <LandingFooterCta />
         <Footer />
       </main>
     </div>
