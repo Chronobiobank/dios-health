@@ -54,7 +54,9 @@ export function buildTimebotData(input: {
   })
 
   const { fromRolling } = resolveTimelineDlmoMinutes(input.profile, fallbackSleepTime)
-  const hasDlmoData = fromRolling || Boolean(input.profile) || Boolean(input.fallbackSleepTime)
+  // hasDlmoData: Vaya can always respond — questionnaire fallback gives an ESTIMATED DLMO.
+  // The precisionLabel (ESTIMATED / PRECISION / CONFIRMED) communicates quality to the user.
+  const hasDlmoData = true
 
   return {
     hasDlmoData,

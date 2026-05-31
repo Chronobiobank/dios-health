@@ -1,11 +1,9 @@
 'use client'
 
-import Link from 'next/link'
 import { Check } from 'lucide-react'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 
 import { TimebotPulse, type TimebotPulseState } from '@/components/dashboard/timebot-pulse'
-import { PATIENT_ROUTES } from '@/lib/auth/routes'
 import type {
   TimebotData,
   TimebotTimelineEvent,
@@ -50,6 +48,14 @@ const STATUS_LABEL: Record<ScheduleStatus, string> = {
   now: 'Now',
   done: 'Done',
 }
+
+const ONBOARDING_PROMPTS = [
+  'I take vitamin D and magnesium',
+  'I take ramipril in the morning',
+  'I take simvastatin at night',
+  'I take metformin with meals',
+  'I take levothyroxine on waking',
+]
 
 function StatusPill({ status }: { status: ScheduleStatus }) {
   if (status === 'done') {
@@ -112,26 +118,33 @@ function TimelineGroup({ group }: { group: TimebotTimelineGroup }) {
   )
 }
 
-function VayaWelcome({ data }: { data: TimebotData }) {
+function VayaWelcome({ data, onPrompt }: { data: TimebotData; onPrompt: (text: string) => void }) {
   return (
-    <div className="mt-6 px-2 text-center">
-      <p className="font-mono text-[11px] uppercase tracking-widest text-black/40">Vaya session</p>
-      <p className="mt-3 text-[15px] leading-relaxed text-black/60">
-        Hi {data.firstName} — I&apos;m Vaya. Tell me what supplements and medications you take.
-        I&apos;ll build today&apos;s light targets and dose timing around your body clock
-        {data.precisionLabel === 'ESTIMATED' ? ' (estimated from your questionnaire)' : ''}.
-      </p>
-      <p className="mt-3 text-[14px] leading-relaxed text-black/45">
-        Try: &ldquo;I take vitamin D, magnesium, and ramipril&rdquo;
-      </p>
-      {data.precisionLabel === 'ESTIMATED' ? (
-        <Link
-          href={PATIENT_ROUTES.streams}
-          className="mt-4 inline-flex text-sm font-medium text-teal-800 underline-offset-2 hover:underline"
-        >
-          Connect TipTraQ or add streams for sharper timing →
-        </Link>
-      ) : null}
+    <div className="mx-auto mt-8 w-full max-w-lg px-2">
+      <div className="rounded-2xl border border-black/[0.07] bg-neutral-50 p-6">
+        <p className="text-[15px] leading-relaxed text-black/70">
+          Hi {data.firstName} — I&apos;m Vaya. Tell me what medications and supplements you take,
+          and I&apos;ll build your personalised timing schedule around your body clock.
+        </p>
+        {data.precisionLabel === 'ESTIMATED' ? (
+          <p className="mt-2 text-[13px] leading-relaxed text-black/45">
+            Your DLMO is estimated at {data.dlmoTimeLabel} — connect TipTraQ for a precision reading.
+          </p>
+        ) : null}
+        <div className="mt-5 flex flex-col gap-2">
+          <p className="font-mono text-[11px] uppercase tracking-widest text-black/30">Try asking</p>
+          {ONBOARDING_PROMPTS.map((prompt) => (
+            <button
+              key={prompt}
+              type="button"
+              onClick={() => onPrompt(prompt)}
+              className="w-full rounded-xl border border-black/[0.08] bg-white px-4 py-3 text-left text-[14px] text-black/70 transition-colors hover:border-black/20 hover:text-black"
+            >
+              &ldquo;{prompt}&rdquo;
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
@@ -151,10 +164,8 @@ export function TimebotView({ data }: TimebotViewProps) {
     }
   }, [])
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const question = input.trim()
-    if (!question || loading || !data.hasDlmoData) return
+  async function sendMessage(question: string) {
+    if (!question || loading) return
 
     setInput('')
     setError(null)
@@ -201,8 +212,17 @@ export function TimebotView({ data }: TimebotViewProps) {
     }
   }
 
-  const showWelcome = !data.hasTimeline
-  const showChatInWelcome = showWelcome && messages.length > 0
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    await sendMessage(input.trim())
+  }
+
+  function handlePrompt(text: string) {
+    setInput(text)
+    window.setTimeout(() => {
+      void sendMessage(text)
+    }, 50)
+  }
 
   return (
     <div className="flex min-h-0 flex-1 flex-col pb-36">
@@ -222,64 +242,56 @@ export function TimebotView({ data }: TimebotViewProps) {
         </div>
       </div>
 
-      {showWelcome ? (
-        <>
-          <VayaWelcome data={data} />
-          {showChatInWelcome ? (
-            <div className="chat-thread mt-8 border-t border-black/[0.06] pt-6">
-              <div className="chat-messages" role="log" aria-live="polite">
-                {messages.map((message) => (
-                  <div
-                    key={message.id}
-                    data-role={message.role}
-                    className={cn(
-                      'message-bubble',
-                      loading &&
-                        message.role === 'assistant' &&
-                        message.id === messages[messages.length - 1]?.id &&
-                        'streaming-cursor'
-                    )}
-                  >
-                    {message.text}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : null}
-        </>
-      ) : (
-        <>
-          {trackedSupplements.length > 0 ? (
-            <p className="mt-4 text-center text-[12px] leading-relaxed text-black/45">
-              Supplements: {trackedSupplements.join(', ')}
-            </p>
-          ) : null}
+      {messages.length === 0 ? <VayaWelcome data={data} onPrompt={handlePrompt} /> : null}
 
-          {messages.length > 0 ? (
-            <div className="chat-thread mt-8 border-t border-black/[0.06] pt-6">
-              <div className="chat-messages" role="log" aria-live="polite">
-                {messages.map((message) => (
-                  <div
-                    key={message.id}
-                    data-role={message.role}
-                    className={cn(
-                      'message-bubble',
-                      loading &&
-                        message.role === 'assistant' &&
-                        message.id === messages[messages.length - 1]?.id &&
-                        'streaming-cursor'
-                    )}
-                  >
-                    {message.text}
-                  </div>
-                ))}
+      {messages.length > 0 ? (
+        <div className="chat-thread mt-8 border-t border-black/[0.06] pt-6">
+          <div className="chat-messages" role="log" aria-live="polite">
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                data-role={message.role}
+                className={cn(
+                  'message-bubble',
+                  loading &&
+                    message.role === 'assistant' &&
+                    message.id === messages[messages.length - 1]?.id &&
+                    'streaming-cursor'
+                )}
+              >
+                {message.text}
               </div>
-            </div>
-          ) : null}
-        </>
-      )}
+            ))}
+            {loading ? (
+              <div className="message-bubble" data-role="assistant" style={{ opacity: 0.5 }}>
+                <span className="font-mono text-[13px]">Vaya is thinking…</span>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+
+      {data.hasTimeline && data.timelineGroups.length > 0 ? (
+        <div className="mt-8 border-t border-black/[0.06] pt-6">
+          <p className="mb-4 font-mono text-[11px] uppercase tracking-widest text-black/40">
+            Today&apos;s schedule
+          </p>
+          <div className="flex flex-col gap-6">
+            {data.timelineGroups.map((group) => (
+              <TimelineGroup key={group.minutes} group={group} />
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {trackedSupplements.length > 0 ? (
+        <p className="mt-4 text-center text-[12px] leading-relaxed text-black/45">
+          Tracking: {trackedSupplements.join(', ')}
+        </p>
+      ) : null}
 
       <form
+        id="vaya-form"
         onSubmit={handleSubmit}
         className="input-sticky-dock fixed inset-x-0 bottom-[4.25rem] sm:bottom-[4.25rem]"
       >

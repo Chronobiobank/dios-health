@@ -28,6 +28,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
     }
 
+    // Pre-flight: check API key is configured
+    if (!process.env.ANTHROPIC_API_KEY?.trim()) {
+      return NextResponse.json(
+        {
+          error:
+            'Vaya is not yet configured on this server. The ANTHROPIC_API_KEY environment variable is missing. Add it in Vercel → Settings → Environment Variables.',
+        },
+        { status: 503 }
+      )
+    }
+
     const body = (await request.json()) as { message?: string }
     const message = body.message?.trim()
 
