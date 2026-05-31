@@ -26,14 +26,14 @@ export function Hero() {
           <div className="absolute inset-0 z-[1] bg-black/55" aria-hidden />
 
           <div className="relative z-[2] max-w-3xl px-6 py-10 text-left text-white sm:px-10 sm:py-12 lg:max-w-4xl lg:px-14 lg:py-16">
-            <SectionLabel title="Why DIOS?" light />
+            <SectionLabel title="Why DIʘS?" light />
 
             <h1 className="type-hero-overlay mt-4 !text-[clamp(2.25rem,6.5vw,4.5rem)] leading-[1.05] text-white">
-              Timing matters
+              The right medication at the wrong time is the wrong medication.
             </h1>
 
             <p className="type-hero-meta mt-6 max-w-2xl !text-[clamp(1.125rem,2.2vw,1.625rem)] leading-snug text-white/85">
-              DIOS synchronises dosing with your biology to unlock better results
+              DIʘS tells you — and your care team — exactly when your body clock is ready for each dose.
             </p>
 
             <HashLink href="#demo" className={`${BTN_HERO} mt-8`}>

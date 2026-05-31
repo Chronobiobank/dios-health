@@ -58,6 +58,37 @@ export interface RollingDLMO {
   light_window_end: string
 }
 
+/** DLMO before 19:00 → Morning type */
+export const CHRONOTYPE_MORNING_BEFORE_MINUTES = 19 * 60
+
+/** DLMO after 21:00 → Evening type; 19:00–21:00 inclusive → Intermediate */
+export const CHRONOTYPE_EVENING_AFTER_MINUTES = 21 * 60
+
+/** Minutes after proxy DLMO for zeitgeber / entrainment windows (local wall clock). */
+export const ZEITGEber_LIGHT_START_OFFSET = 600 // +10h ≈ wake
+export const ZEITGEber_LIGHT_END_OFFSET = 720 // +12h
+export const ZEITGEber_FOOD_OFFSET = 660 // +11h
+export const ZEITGEber_MOVEMENT_OFFSET = 780 // +13h
+export const ZEITGEber_DARKNESS_OFFSET = -90 // −1.5h before melatonin rise
+
+export function normalizeMinutesFromMidnight(minutes: number): number {
+  return ((minutes % 1440) + 1440) % 1440
+}
+
+export function classifyChronotypeFromDlmoMinutes(minutes: number): string {
+  const normalized = normalizeMinutesFromMidnight(minutes)
+
+  if (normalized < CHRONOTYPE_MORNING_BEFORE_MINUTES) {
+    return 'Morning type'
+  }
+
+  if (normalized > CHRONOTYPE_EVENING_AFTER_MINUTES) {
+    return 'Evening type'
+  }
+
+  return 'Intermediate type'
+}
+
 // Convert "HH:MM" to minutes from midnight
 function toMinutes(time: string): number {
   const [h, m] = time.split(':').map(Number)
@@ -170,14 +201,7 @@ export function calculateNightDLMO(night: TipTraQNight): DLMOResult {
   if (confidence >= 55) confidenceLabel = 'Moderate'
 
   // Chronotype from DLMO estimate
-  let chronotypeSignal = 'Intermediate type'
-  if (dlmoMinutes < 1260) {
-    // before 21:00
-    chronotypeSignal = 'Morning type'
-  } else if (dlmoMinutes > 1380) {
-    // after 23:00
-    chronotypeSignal = 'Evening type'
-  }
+  const chronotypeSignal = classifyChronotypeFromDlmoMinutes(dlmoMinutes)
 
   // Non-dipper flag
   // Requires HRV dip data — not in summary report
@@ -214,8 +238,11 @@ export function calculateRollingDLMO(nights: DLMOResult[]): RollingDLMO {
 
   const weightedDLMO =
     nights.reduce((sum, night, i) => {
-      return sum + night.proxy_dlmo_minutes * weights[i]
+      const normalized = normalizeMinutesFromMidnight(night.proxy_dlmo_minutes)
+      return sum + normalized * weights[i]
     }, 0) / totalWeight
+
+  const roundedDlmo = normalizeMinutesFromMidnight(Math.round(weightedDLMO))
 
   // Rolling confidence
   // Night 1: max 65
@@ -237,40 +264,37 @@ export function calculateRollingDLMO(nights: DLMOResult[]): RollingDLMO {
   if (rollingConfidence >= 80) confidenceLabel = 'High'
   else if (rollingConfidence >= 65) confidenceLabel = 'Moderate'
 
-  const dlmoTime = toTime(Math.round(weightedDLMO))
+  const dlmoTime = toTime(roundedDlmo)
 
-  // Chronotype
-  let chronotype = 'Intermediate type'
-  if (weightedDLMO < 1260) chronotype = 'Morning type'
-  else if (weightedDLMO > 1380) chronotype = 'Evening type'
+  const chronotype = classifyChronotypeFromDlmoMinutes(roundedDlmo)
 
   // ── DOSE TIMING OUTPUTS ──
   // All calculated from rolling DLMO
 
   // Simvastatin: DLMO + 3h
   // (liver cholesterol synthesis peak)
-  const simva = toTime(Math.round(weightedDLMO) + 180)
+  const simva = toTime(roundedDlmo + 180)
 
   // Ramipril: DLMO + 1h
   // (cardiovascular dip window)
-  const ramipril = toTime(Math.round(weightedDLMO) + 60)
+  const ramipril = toTime(roundedDlmo + 60)
 
   // Prednisolone: DLMO + 6h
   // (pre-dawn inflammatory peak)
-  const pred = toTime(Math.round(weightedDLMO) + 360)
+  const pred = toTime(roundedDlmo + 360)
 
   // Salmeterol: DLMO + 4h
   // (pre-dawn lung function nadir)
-  const salm = toTime(Math.round(weightedDLMO) + 240)
+  const salm = toTime(roundedDlmo + 240)
 
-  // Light dose window: DLMO + 9h to DLMO + 11h
-  // (optimal morning entrainment window)
-  const lightStart = toTime(Math.round(weightedDLMO) + 540)
-  const lightEnd = toTime(Math.round(weightedDLMO) + 660)
+  // Light dose window: DLMO + 10h to DLMO + 12h
+  // (morning entrainment around wake)
+  const lightStart = toTime(roundedDlmo + ZEITGEber_LIGHT_START_OFFSET)
+  const lightEnd = toTime(roundedDlmo + ZEITGEber_LIGHT_END_OFFSET)
 
   return {
     proxy_dlmo_time: dlmoTime,
-    proxy_dlmo_minutes: Math.round(weightedDLMO),
+    proxy_dlmo_minutes: roundedDlmo,
     nights_count: n,
     confidence_score: rollingConfidence,
     confidence_band_minutes: bandMinutes,

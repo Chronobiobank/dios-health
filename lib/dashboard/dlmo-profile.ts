@@ -1,4 +1,10 @@
 import type { BodyClockModel } from '@/lib/dashboard/body-clock'
+import {
+  ZEITGEber_LIGHT_END_OFFSET,
+  ZEITGEber_LIGHT_START_OFFSET,
+  classifyChronotypeFromDlmoMinutes,
+  normalizeMinutesFromMidnight,
+} from '@/lib/dlmo'
 import { formatMinutesLabel, parseDbTimeToMinutes } from '@/lib/dashboard/time-utils'
 
 export type DlmoProfileRow = {
@@ -29,18 +35,35 @@ function timeToMinutes(value: string | null): number | null {
   return parseDbTimeToMinutes(value)
 }
 
+export function resolveChronotypeLabel(profile: DlmoProfileRow): string {
+  const dlmoMinutes =
+    parseDbTimeToMinutes(profile.proxy_dlmo_rolling) ??
+    (profile.proxy_dlmo_minutes_from_midnight != null
+      ? normalizeMinutesFromMidnight(profile.proxy_dlmo_minutes_from_midnight)
+      : null)
+
+  if (dlmoMinutes !== null) {
+    return classifyChronotypeFromDlmoMinutes(dlmoMinutes)
+  }
+
+  return profile.chronotype ?? 'Intermediate type'
+}
+
 export function buildBodyClockFromDlmoProfile(profile: DlmoProfileRow): BodyClockModel {
   const dlmoMinutes =
-    profile.proxy_dlmo_minutes_from_midnight ??
-    timeToMinutes(profile.proxy_dlmo_rolling) ??
+    parseDbTimeToMinutes(profile.proxy_dlmo_rolling) ??
+    (profile.proxy_dlmo_minutes_from_midnight != null
+      ? normalizeMinutesFromMidnight(profile.proxy_dlmo_minutes_from_midnight)
+      : null) ??
     22 * 60
 
   const sleepStartMinutes = dlmoMinutes + 120
   const sleepEndMinutes = sleepStartMinutes + 480
 
   const lightStartMinutes =
-    timeToMinutes(profile.light_dose_window_start) ?? dlmoMinutes + 540
-  const lightEndMinutes = timeToMinutes(profile.light_dose_window_end) ?? dlmoMinutes + 660
+    timeToMinutes(profile.light_dose_window_start) ?? dlmoMinutes + ZEITGEber_LIGHT_START_OFFSET
+  const lightEndMinutes =
+    timeToMinutes(profile.light_dose_window_end) ?? dlmoMinutes + ZEITGEber_LIGHT_END_OFFSET
 
   const doseWindows = [
     { label: 'Simvastatin', minutes: timeToMinutes(profile.simvastatin_optimal_time) },
@@ -54,7 +77,7 @@ export function buildBodyClockFromDlmoProfile(profile: DlmoProfileRow): BodyCloc
     : formatMinutesLabel(dlmoMinutes)
 
   return {
-    chronotypeLabel: profile.chronotype ?? 'Intermediate type',
+    chronotypeLabel: resolveChronotypeLabel(profile),
     msfscLabel: `DLMO ${dlmoLabel}`,
     sleepStartMinutes,
     sleepEndMinutes,

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-import { SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
+import { DASHBOARD_BODY, MONO_DATA, SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
 
 type StreamRow = {
@@ -62,25 +62,24 @@ export function StreamsStatus({ wearableConnected, tipTraqNightsCount = 0 }: Str
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2, ease: 'easeOut', delay: 0.05 }}
-      className="mt-10"
     >
       <h2 className={SECTION_LABEL}>Your data streams</h2>
 
-      <ul className="mt-4 space-y-4">
+      <ul className="mt-4 space-y-5">
         {streams.map((stream) => (
           <li key={stream.name}>
-            <div className="flex items-center justify-between gap-3">
-              <p className="w-24 shrink-0 text-xs font-medium text-black">{stream.name}</p>
-              <div className="h-2 flex-1 overflow-hidden rounded-full bg-black/5">
+            <div className="flex items-center justify-between gap-4">
+              <p className={`${DASHBOARD_BODY} w-24 shrink-0 font-medium text-black`}>{stream.name}</p>
+              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-black/5">
                 <div
                   className="h-full rounded-full bg-teal-600 transition-all duration-200 ease-out"
                   style={{ width: `${Math.round(stream.fill * 100)}%` }}
                 />
               </div>
-              <div className="min-w-[7.5rem] text-right">
-                <p className="font-mono text-[11px] text-black/50">{stream.status}</p>
+              <div className="min-w-[7rem] text-right">
+                <p className={MONO_DATA}>{stream.status}</p>
                 {stream.href && stream.actionLabel ? (
-                  <Link href={stream.href} className="font-mono text-[11px] text-black/60 hover:text-black">
+                  <Link href={stream.href} className={`${MONO_DATA} hover:text-black/70`}>
                     {stream.actionLabel}
                   </Link>
                 ) : null}

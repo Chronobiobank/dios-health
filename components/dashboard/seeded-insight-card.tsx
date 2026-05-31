@@ -6,9 +6,10 @@ import { PATIENT_ROUTES } from '@/lib/auth/routes'
 
 type SeededInsightCardProps = {
   insight: SeededInsight
+  hasTipTraqData?: boolean
 }
 
-export function SeededInsightCard({ insight }: SeededInsightCardProps) {
+export function SeededInsightCard({ insight, hasTipTraqData = false }: SeededInsightCardProps) {
   return (
     <InsightCard
       headline={insight.headline}
@@ -21,12 +22,14 @@ export function SeededInsightCard({ insight }: SeededInsightCardProps) {
         </InsightCardLink>
       }
       footer={
-        <>
-          Connect TipTraQ to get a precise reading, not an estimate.{' '}
-          <Link href={PATIENT_ROUTES.streams} className="text-black/60 underline-offset-2 hover:text-black hover:underline">
-            Connect now →
-          </Link>
-        </>
+        hasTipTraqData ? null : (
+          <>
+            Connect TipTraQ to get a precise reading, not an estimate.{' '}
+            <Link href={PATIENT_ROUTES.streams} className="text-black/60 underline-offset-2 hover:text-black hover:underline">
+              Connect now →
+            </Link>
+          </>
+        )
       }
     />
   )

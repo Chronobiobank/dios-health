@@ -10,6 +10,7 @@ import {
   CARD_HEADLINE,
   CTA_BUTTON,
   INSIGHT_CARD,
+  SECTION_LABEL,
 } from '@/components/dashboard/dashboard-styles'
 
 type InsightCardProps = {
@@ -41,11 +42,11 @@ export function InsightCard({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
-      className={`${INSIGHT_CARD} p-5 sm:p-6`}
+      className={`${INSIGHT_CARD} p-5`}
     >
       <div className="flex items-start justify-between gap-3">
-        <p className="text-xs font-medium text-black/50">{eyebrow}</p>
-        <span className="rounded-full bg-teal-50 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-teal-800">
+        <p className={SECTION_LABEL}>{eyebrow}</p>
+        <span className="rounded-full bg-teal-50 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-teal-800">
           {badge}
         </span>
       </div>
@@ -53,14 +54,14 @@ export function InsightCard({
       <h2 className={`${CARD_HEADLINE} mt-4`}>{headline}</h2>
       <p className={`${CARD_BODY} mt-3`}>{trimmedBody}</p>
 
-      <div className="mt-5 grid grid-cols-2 gap-2">
+      <div className="mt-5 grid grid-cols-2 gap-3">
         <DiffCell label="Standard" value={standardGuidance} />
         <DiffCell label="DIOS" value={diosRecommendation} highlight />
       </div>
 
       <div className="mt-6">{cta}</div>
 
-      {footer ? <div className={`${CAPTION} mt-4 text-center font-mono`}>{footer}</div> : null}
+      {footer ? <div className={`${CAPTION} mt-5 text-center`}>{footer}</div> : null}
     </motion.article>
   )
 }
@@ -75,9 +76,9 @@ function DiffCell({
   highlight?: boolean
 }) {
   return (
-    <div className={`rounded-xl px-3 py-2.5 ${highlight ? 'bg-teal-50' : 'bg-neutral-50'}`}>
-      <p className="font-mono text-xs text-black/45">{label}</p>
-      <p className="mt-1 font-mono text-xs font-medium text-black/80">{value}</p>
+    <div className={`rounded-2xl px-3 py-3 ${highlight ? 'bg-teal-50' : 'bg-neutral-50'}`}>
+      <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-black/40">{label}</p>
+      <p className="mt-1.5 font-mono text-[11px] font-medium text-black/80">{value}</p>
     </div>
   )
 }

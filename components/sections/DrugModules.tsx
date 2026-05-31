@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
-import { BODY, CARD, CONTAINER, SECTION, SECTION_ALT, SECTION_TITLE } from './layout'
+import { BODY, CONTAINER, SECTION, SECTION_ALT, SECTION_TITLE, TILE_BODY, TILE_CARD, TILE_GRID, TILE_HEADER } from './layout'
 import { SectionLabel } from './SectionLabel'
 
 const SECTION_IMAGE = {
@@ -69,13 +69,13 @@ export function DrugModules() {
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className={TILE_GRID}>
           {PROOFS.map((item) => (
-            <Card key={item.id} className={`${CARD} gap-0 py-0`}>
-              <CardHeader className="gap-3 px-6 pt-6">
+            <Card key={item.id} className={TILE_CARD}>
+              <CardHeader className={TILE_HEADER}>
                 <p className="type-tile-title">{item.headline}</p>
               </CardHeader>
-              <CardContent className="space-y-3 px-6 pb-6">
+              <CardContent className={TILE_BODY}>
                 <p className={BODY}>{item.body}</p>
                 <p className="type-caption">{item.caption}</p>
               </CardContent>

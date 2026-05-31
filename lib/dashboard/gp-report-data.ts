@@ -1,5 +1,5 @@
 import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
-import { formatDbTime, formatReportDate } from '@/lib/dashboard/dlmo-profile'
+import { formatDbTime, formatReportDate, resolveChronotypeLabel } from '@/lib/dashboard/dlmo-profile'
 
 export type GpReportNight = {
   report_date: string
@@ -72,7 +72,7 @@ export function buildGpReportData(input: {
     confidenceScore: profile?.confidence_score ?? null,
     confidenceLabel: profile?.confidence_label ?? null,
     confidenceBandMinutes: profile?.confidence_band_minutes ?? null,
-    chronotype: profile?.chronotype ?? null,
+    chronotype: profile ? resolveChronotypeLabel(profile) : null,
     doseWindows,
     nights: input.nights.map((night) => ({
       ...night,

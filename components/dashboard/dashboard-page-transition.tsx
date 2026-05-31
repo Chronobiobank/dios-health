@@ -2,12 +2,21 @@
 
 import { motion } from 'framer-motion'
 
-export function DashboardPageTransition({ children }: { children: React.ReactNode }) {
+import { cn } from '@/lib/utils'
+
+export function DashboardPageTransition({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.15 }}
+      className={cn('flex flex-col gap-8', className)}
     >
       {children}
     </motion.div>

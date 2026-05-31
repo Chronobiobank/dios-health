@@ -1,5 +1,6 @@
 import { EDF } from 'edfjs'
 
+import { dateToLocalClock, dateToLocalIsoDate } from '@/lib/patient/timezone'
 import { resolveReportDate, toNightInput } from '@/lib/tiptraq/extraction'
 
 type EdfChannel = {
@@ -81,8 +82,8 @@ function minutesToClock(totalMinutes: number): string {
   return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
 }
 
-function dateToClock(date: Date): string {
-  return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`
+function dateToClock(date: Date, timeZone: string): string {
+  return dateToLocalClock(date, timeZone)
 }
 
 function addMinutesToClock(clock: string, minutes: number): string {
@@ -229,7 +230,7 @@ function buildEpochsFromStageChannel(parsed: ParsedEdfFile): SleepEpoch[] | null
   return epochs
 }
 
-function summarizeSleep(parsed: ParsedEdfFile, epochs: SleepEpoch[]) {
+function summarizeSleep(parsed: ParsedEdfFile, epochs: SleepEpoch[], timeZone: string) {
   const sleepEpochs = epochs.filter((epoch) => epoch.stage !== 'wake')
   if (sleepEpochs.length === 0) {
     throw new Error('Could not detect sleep in this EDF recording.')
@@ -237,7 +238,7 @@ function summarizeSleep(parsed: ParsedEdfFile, epochs: SleepEpoch[]) {
 
   const firstSleep = sleepEpochs[0]
   const lastSleep = sleepEpochs[sleepEpochs.length - 1]
-  const recordingStartMinutes = clockToMinutes(dateToClock(parsed.startDateTime))
+  const recordingStartMinutes = clockToMinutes(dateToClock(parsed.startDateTime, timeZone))
   const sleepOnsetMinutes = recordingStartMinutes + firstSleep.startSeconds / 60
   const sleepOffsetMinutes = recordingStartMinutes + lastSleep.endSeconds / 60
   const sleepLatencyMinutes = Math.max(0, Math.round(firstSleep.startSeconds / 60))
@@ -276,8 +277,8 @@ function summarizeSleep(parsed: ParsedEdfFile, epochs: SleepEpoch[]) {
   const trtMinutes = Math.round(parsed.durationSeconds / 60)
 
   return {
-    recording_start: dateToClock(parsed.startDateTime),
-    recording_end: addMinutesToClock(dateToClock(parsed.startDateTime), trtMinutes),
+    recording_start: dateToClock(parsed.startDateTime, timeZone),
+    recording_end: addMinutesToClock(dateToClock(parsed.startDateTime, timeZone), trtMinutes),
     sleep_onset: minutesToClock(sleepOnsetMinutes),
     sleep_offset: minutesToClock(sleepOffsetMinutes),
     sleep_latency_minutes: sleepLatencyMinutes,
@@ -427,7 +428,15 @@ function computeSignalQuality(parsed: ParsedEdfFile): number {
   return Math.max(50, Math.min(99, Math.round((valid / samples.length) * 100)))
 }
 
-export function extractNightDataFromEdf(buffer: ArrayBuffer): Record<string, unknown> {
+export type ExtractNightDataOptions = {
+  timeZone: string
+}
+
+export function extractNightDataFromEdf(
+  buffer: ArrayBuffer,
+  options: ExtractNightDataOptions
+): Record<string, unknown> {
+  const { timeZone } = options
   const parsed = parseEdfBuffer(buffer)
 
   const epochs =
@@ -435,14 +444,12 @@ export function extractNightDataFromEdf(buffer: ArrayBuffer): Record<string, unk
     buildEpochsFromStageChannel(parsed) ??
     buildEpochsFromActivity(parsed)
 
-  const sleep = summarizeSleep(parsed, epochs)
+  const sleep = summarizeSleep(parsed, epochs, timeZone)
   const spo2 = computeSpo2Metrics(parsed, sleep.sleepStartSeconds, sleep.sleepEndSeconds)
   const pulse = computePulseMetrics(parsed, sleep.sleepStartSeconds, sleep.sleepEndSeconds)
   const signalQuality = computeSignalQuality(parsed)
 
-  const reportDate = `${parsed.startDateTime.getUTCFullYear()}-${(parsed.startDateTime.getUTCMonth() + 1)
-    .toString()
-    .padStart(2, '0')}-${parsed.startDateTime.getUTCDate().toString().padStart(2, '0')}`
+  const reportDate = dateToLocalIsoDate(parsed.startDateTime, timeZone)
 
   const extracted: Record<string, unknown> = {
     report_date: reportDate,
@@ -476,7 +483,7 @@ export function extractNightDataFromEdf(buffer: ArrayBuffer): Record<string, unk
     sns_pct: pulse.sns_pct,
     pns_pct: pulse.pns_pct,
     snoring_minutes: 0,
-    algorithm_version: `edf-channel-v1 (${parsed.type})`,
+    algorithm_version: `edf-channel-v1 (${parsed.type}; tz=${timeZone})`,
     edf_channels: parsed.channelLabels,
   }
 

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { calculateNightDLMO } from '@/lib/dlmo'
+import { resolvePatientTimeZone } from '@/lib/patient/timezone'
 import { createClient } from '@/lib/supabase/server'
 import {
   extractNightDataFromEdf,
@@ -122,9 +123,20 @@ export async function POST(request: NextRequest) {
       return errorResponse('EDF file must be under 50MB', 400)
     }
 
+    const { data: patientProfile } = await supabase
+      .from('patient_profiles')
+      .select('location_city, location_country')
+      .eq('id', user.id)
+      .maybeSingle<{ location_city: string | null; location_country: string | null }>()
+
+    const patientTimeZone = resolvePatientTimeZone(
+      patientProfile?.location_city,
+      patientProfile?.location_country
+    )
+
     let extracted: Record<string, unknown>
     try {
-      extracted = extractNightDataFromEdf(fileBytes)
+      extracted = extractNightDataFromEdf(fileBytes, { timeZone: patientTimeZone })
     } catch (parseError) {
       const message = parseError instanceof Error ? parseError.message : 'Could not parse EDF file'
       console.error('EDF parse error:', message)
@@ -191,6 +203,7 @@ export async function POST(request: NextRequest) {
       userId: user.id,
       storagePath,
       reportDate,
+      patientTimeZone,
       edfType: extracted.algorithm_version,
       channelCount: Array.isArray(extracted.edf_channels) ? extracted.edf_channels.length : null,
       timeFields: {

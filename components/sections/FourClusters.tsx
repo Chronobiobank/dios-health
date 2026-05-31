@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
-import { BODY, CARD, CONTAINER, SECTION, SECTION_TITLE } from './layout'
+import { BODY, CONTAINER, SECTION, SECTION_TITLE, TILE_BODY, TILE_CARD, TILE_GRID, TILE_HEADER, TILE_IMAGE } from './layout'
 import { SectionLabel } from './SectionLabel'
 
 const CLUSTERS = [
@@ -56,21 +56,21 @@ export function FourClusters() {
         DIOS reads your body clock to find the right time for light, food, medicine, and movement.
       </h2>
 
-      <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className={TILE_GRID}>
         {CLUSTERS.map((cluster) => (
-          <Card key={cluster.id} className={`${CARD} gap-0 overflow-hidden py-0`}>
+          <Card key={cluster.id} className={TILE_CARD}>
             <Image
               src={cluster.image.src}
               alt={cluster.image.alt}
               width={1200}
               height={800}
               loading="lazy"
-              className="aspect-[3/2] w-full rounded-t-lg object-cover"
+              className={TILE_IMAGE}
             />
-            <CardHeader className="gap-3 px-6 pt-6">
+            <CardHeader className={TILE_HEADER}>
               <p className="type-tile-title">{cluster.headline}</p>
             </CardHeader>
-            <CardContent className="space-y-3 px-6 pb-6">
+            <CardContent className={TILE_BODY}>
               <p className={BODY}>{cluster.body}</p>
               <p className="type-caption">{cluster.caption}</p>
             </CardContent>

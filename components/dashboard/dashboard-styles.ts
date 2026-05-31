@@ -1,14 +1,19 @@
-export const INSIGHT_CARD =
-  'rounded-2xl border-[0.5px] border-black/[0.08] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)]'
+export const DASHBOARD_CARD =
+  'rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm'
 
-export const DASHBOARD_HEADLINE = 'text-2xl font-medium leading-tight text-black'
-export const SECTION_LABEL =
-  'font-mono text-[11px] uppercase tracking-[0.08em] text-black/45'
-export const CARD_HEADLINE = 'text-[20px] font-medium leading-[1.3] text-black'
-export const CARD_BODY = 'text-sm font-normal leading-[1.6] text-black/55'
-export const DATA_VALUE = 'text-base font-medium text-black'
-export const MONO_DATA = 'font-mono text-[13px] text-black/70'
-export const CAPTION = 'text-[11px] text-black/45'
+export const INSIGHT_CARD = `${DASHBOARD_CARD}`
+
+export const DASHBOARD_H1 = 'type-dashboard-h1'
+export const DASHBOARD_H2 = 'type-dashboard-h2'
+export const DASHBOARD_BODY = 'type-dashboard-body'
+export const SECTION_LABEL = 'type-dashboard-label'
+
+export const DASHBOARD_HEADLINE = DASHBOARD_H1
+export const CARD_HEADLINE = 'text-xl font-medium leading-snug text-black'
+export const CARD_BODY = DASHBOARD_BODY
+export const DATA_VALUE = 'text-[15px] font-medium text-black'
+export const MONO_DATA = 'font-mono text-[11px] text-black/40'
+export const CAPTION = 'font-mono text-[11px] text-black/40'
 
 export const CTA_BUTTON =
   'inline-flex h-11 w-full items-center justify-center rounded-full bg-black text-sm font-medium text-white transition-transform duration-100 active:scale-[0.97] hover:bg-black/85'

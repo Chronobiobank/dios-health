@@ -1,6 +1,5 @@
 import { BodyClockVisualization } from '@/components/dashboard/body-clock-visualization'
 import { DashboardPageTransition } from '@/components/dashboard/dashboard-page-transition'
-import { DASHBOARD_HEADLINE } from '@/components/dashboard/dashboard-styles'
 import { DlmoScoreCard } from '@/components/dashboard/dlmo-score-card'
 import { DlmoUploadPrompt } from '@/components/dashboard/dlmo-upload-prompt'
 import { GpReportButton } from '@/components/dashboard/gp-report-button'
@@ -27,8 +26,14 @@ export default async function DashboardPage() {
     .eq('patient_id', user.id)
     .maybeSingle()
 
+  const { count: tipTraqNightsCount } = await supabase
+    .from('tiptraq_nights')
+    .select('id', { count: 'exact', head: true })
+    .eq('patient_id', user.id)
+
   const profileRow = dlmoProfile as DlmoProfileRow | null
-  const hasDlmoProfile = Boolean(profileRow?.nights_count && profileRow.nights_count > 0)
+  const nightsUploaded = tipTraqNightsCount ?? 0
+  const hasTipTraqData = nightsUploaded > 0
 
   const greeting = getTimeGreeting()
   const firstName = getPatientFirstName({
@@ -41,37 +46,38 @@ export default async function DashboardPage() {
     patient.chronotype_q3 ?? ''
   )
 
-  const bodyClock = hasDlmoProfile
-    ? buildBodyClockFromDlmoProfile(profileRow!)
-    : buildBodyClockModel(
-        patient.chronotype_q1 ?? '',
-        patient.chronotype_q3 ?? '',
-        insight.chronotypeLabel
-      )
+  const bodyClock =
+    profileRow && hasTipTraqData
+      ? buildBodyClockFromDlmoProfile(profileRow)
+      : buildBodyClockModel(
+          patient.chronotype_q1 ?? '',
+          patient.chronotype_q3 ?? '',
+          insight.chronotypeLabel
+        )
 
   return (
-    <DashboardPageTransition>
-      <PatientTopBar fullName={profile.full_name ?? firstName} avatarUrl={profile.avatar_url} />
+    <DashboardPageTransition className="gap-6">
+      <PatientTopBar
+        fullName={profile.full_name ?? firstName}
+        avatarUrl={profile.avatar_url}
+        greeting={`Good ${greeting}, ${firstName}.`}
+        subtitle={
+          hasTipTraqData
+            ? `Body clock from ${profileRow?.nights_count ?? nightsUploaded} TipTraQ night${(profileRow?.nights_count ?? nightsUploaded) === 1 ? '' : 's'}`
+            : 'Body clock estimate · Based on your answers · Upload TipTraQ for precision'
+        }
+      />
 
-      <section>
-        <h1 className={`${DASHBOARD_HEADLINE} capitalize`}>Good {greeting}, {firstName}.</h1>
-        <p className="mt-2 font-mono text-[11px] text-black/45">
-          {hasDlmoProfile
-            ? `Body clock from ${profileRow!.nights_count} TipTraQ night${profileRow!.nights_count === 1 ? '' : 's'}`
-            : 'Body clock estimate · Based on your answers · Upload TipTraQ for precision'}
-        </p>
-      </section>
-
-      {hasDlmoProfile ? (
+      {hasTipTraqData ? (
         <>
           <BodyClockVisualization
             model={bodyClock}
-            nightsCount={profileRow!.nights_count ?? undefined}
-            confidenceScore={profileRow!.confidence_score ?? undefined}
-            confidenceLabel={profileRow!.confidence_label ?? undefined}
+            nightsCount={profileRow?.nights_count ?? nightsUploaded}
+            confidenceScore={profileRow?.confidence_score ?? undefined}
+            confidenceLabel={profileRow?.confidence_label ?? undefined}
           />
-          <DlmoScoreCard profile={profileRow!} />
-          <div className="mt-4">
+          {profileRow ? <DlmoScoreCard profile={profileRow} /> : null}
+          <div>
             <GpReportButton />
           </div>
         </>
@@ -79,11 +85,12 @@ export default async function DashboardPage() {
         <DlmoUploadPrompt />
       )}
 
-      <div className="mt-8">
-        <SeededInsightCard insight={insight} />
-      </div>
+      <SeededInsightCard insight={insight} hasTipTraqData={hasTipTraqData} />
 
-      <StreamsStatus wearableConnected={patient.wearable_connected} />
+      <StreamsStatus
+        wearableConnected={patient.wearable_connected}
+        tipTraqNightsCount={nightsUploaded}
+      />
     </DashboardPageTransition>
   )
 }
