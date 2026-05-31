@@ -1,4 +1,5 @@
 import { DataControlsPanel } from '@/components/dashboard/data-controls-panel'
+import { GpReportButton } from '@/components/dashboard/gp-report-button'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { TipTraqNightList } from '@/components/dashboard/tiptraq-night-list'
 import { SignOutButton } from '@/components/auth/sign-out-button'
@@ -37,6 +38,9 @@ export default async function DashboardDataControlsPage() {
       {nightHistory.length > 0 ? (
         <div className="mt-10">
           <TipTraqNightList nights={nightHistory} title="Your TipTraQ recordings" />
+          <div className="mt-6">
+            <GpReportButton />
+          </div>
         </div>
       ) : null}
 

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
+import { PATIENT_ROUTES } from '@/lib/auth/routes'
 import { formatDbTime, formatReportDate, type TipTraqNightRow } from '@/lib/dashboard/dlmo-profile'
 
 type TipTraqNightListProps = {
@@ -37,7 +38,7 @@ export function TipTraqNightList({ nights, title = 'Uploaded recordings' }: TipT
         throw new Error(payload.error || 'Could not delete recording')
       }
 
-      router.refresh()
+      router.push(PATIENT_ROUTES.streams)
     } catch (deleteError) {
       setError(deleteError instanceof Error ? deleteError.message : 'Could not delete recording')
     } finally {

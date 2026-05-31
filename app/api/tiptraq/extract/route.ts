@@ -5,12 +5,10 @@ import { createClient } from '@/lib/supabase/server'
 import {
   extractNightDataFromEdf,
   getTipTraqUploadMaxBytes,
-  isEdfFile,
   mapEdfParseError,
 } from '@/lib/tiptraq/edf-parser'
 import {
   mapInsertError,
-  mapStorageUploadError,
   resolveReportDate,
   toNightInput,
 } from '@/lib/tiptraq/extraction'
@@ -19,12 +17,67 @@ import { syncDlmoProfileForPatient } from '@/lib/tiptraq/sync-dlmo-profile'
 export const maxDuration = 60
 export const dynamic = 'force-dynamic'
 
+/** EDF processing only — does not call Anthropic (ANTHROPIC_API_KEY not required). */
+function jsonResponse(body: Record<string, unknown>, status = 200) {
+  return NextResponse.json(body, {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  })
+}
+
 function errorResponse(message: string, status: number) {
-  return NextResponse.json({ error: message }, { status })
+  return jsonResponse({ success: false, error: message }, status)
+}
+
+function isOwnedStoragePath(userId: string, storagePath: string): boolean {
+  return storagePath.startsWith(`${userId}/`) && !storagePath.includes('..')
+}
+
+async function parseRequestBody(
+  request: NextRequest
+): Promise<{ storagePath?: string } | NextResponse> {
+  const contentType = request.headers.get('content-type') ?? ''
+
+  if (contentType.includes('multipart/form-data')) {
+    return errorResponse(
+      'Do not upload the EDF file to this endpoint. Upload to storage first, then send JSON: { "storagePath": "..." }.',
+      400
+    )
+  }
+
+  let raw = ''
+  try {
+    raw = await request.text()
+  } catch (readError) {
+    console.error('TipTraQ extract body read error:', readError)
+    return errorResponse('Could not read request body', 400)
+  }
+
+  if (!raw.trim()) {
+    return errorResponse('Missing request body. Expected JSON: { "storagePath": "user-id/timestamp-tiptraq.edf" }', 400)
+  }
+
+  try {
+    return JSON.parse(raw) as { storagePath?: string }
+  } catch (parseError) {
+    console.error('TipTraQ extract JSON parse error:', parseError)
+    if (/request entity too large|payload too large/i.test(raw)) {
+      return errorResponse(
+        'Request body too large. Upload the EDF via /api/tiptraq/signed-upload, not directly to /api/tiptraq/extract.',
+        413
+      )
+    }
+    return errorResponse('Invalid JSON body. Expected { "storagePath": "..." }', 400)
+  }
 }
 
 export async function POST(request: NextRequest) {
   try {
+    const parsed = await parseRequestBody(request)
+    if (parsed instanceof NextResponse) {
+      return parsed
+    }
+
     const supabase = await createClient()
 
     const {
@@ -35,34 +88,28 @@ export async function POST(request: NextRequest) {
       return errorResponse('Unauthorised', 401)
     }
 
-    const formData = await request.formData()
-    const file = formData.get('file') ?? formData.get('edf') ?? formData.get('pdf')
-    if (!(file instanceof File)) {
-      return errorResponse('No EDF file provided', 400)
+    const storagePath = parsed.storagePath?.trim()
+
+    if (!storagePath) {
+      return errorResponse('Missing uploaded file reference (storagePath)', 400)
     }
 
-    if (!isEdfFile(file)) {
-      return errorResponse('File must be a TipTraQ channel export (.edf)', 400)
+    if (!isOwnedStoragePath(user.id, storagePath)) {
+      return errorResponse('Invalid file path', 400)
     }
 
-    const maxBytes = getTipTraqUploadMaxBytes()
-    if (file.size > maxBytes) {
-      return errorResponse('EDF file must be under 50MB', 400)
-    }
-
-    const fileBytes = await file.arrayBuffer()
-    const fileName = `${user.id}/${Date.now()}-tiptraq.edf`
-
-    const { error: uploadError } = await supabase.storage
+    const { data: storedFile, error: downloadError } = await supabase.storage
       .from('tiptraq-reports')
-      .upload(fileName, fileBytes, {
-        contentType: 'application/octet-stream',
-        upsert: false,
-      })
+      .download(storagePath)
 
-    if (uploadError) {
-      console.error('Storage upload error:', uploadError)
-      return errorResponse(mapStorageUploadError(uploadError.message), 500)
+    if (downloadError || !storedFile) {
+      console.error('Storage download error:', downloadError)
+      return errorResponse('Could not read uploaded EDF file', 404)
+    }
+
+    const fileBytes = await storedFile.arrayBuffer()
+    if (fileBytes.byteLength > getTipTraqUploadMaxBytes()) {
+      return errorResponse('EDF file must be under 50MB', 400)
     }
 
     let extracted: Record<string, unknown>
@@ -81,7 +128,7 @@ export async function POST(request: NextRequest) {
     const { error: insertError } = await supabase.from('tiptraq_nights').insert({
       patient_id: user.id,
       report_date: reportDate,
-      pdf_path: fileName,
+      pdf_path: storagePath,
       recording_start: extracted.recording_start,
       recording_end: extracted.recording_end,
       trt_minutes: extracted.trt_minutes,
@@ -142,7 +189,7 @@ export async function POST(request: NextRequest) {
       return errorResponse(syncError ?? 'Failed to update body clock profile', 500)
     }
 
-    return NextResponse.json({
+    return jsonResponse({
       success: true,
       night: {
         date: reportDate,

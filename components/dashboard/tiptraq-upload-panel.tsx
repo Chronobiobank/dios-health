@@ -2,13 +2,13 @@
 
 import { useRouter } from 'next/navigation'
 
-import TipTraQUpload from '@/components/TipTraQUpload'
+import { TipTraqEdfUpload } from '@/components/dashboard/tiptraq-edf-upload'
 
 export function TipTraQUploadPanel() {
   const router = useRouter()
 
   return (
-    <TipTraQUpload
+    <TipTraqEdfUpload
       onComplete={() => {
         router.refresh()
       }}

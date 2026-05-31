@@ -743,3 +743,26 @@
     transform: translateX(-50%);
   }
 }
+
+@media print {
+  .dios-site-nav,
+  .gp-report-actions,
+  .dios-page-actions,
+  .patient-bottom-nav {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .dios-app-shell {
+    padding: 0 !important;
+  }
+
+  .gp-report {
+    max-width: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+}

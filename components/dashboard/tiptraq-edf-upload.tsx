@@ -2,31 +2,129 @@
 
 import { useCallback, useState } from 'react'
 
-import { uploadTipTraqEdf, type TipTraQUploadResult } from '@/lib/tiptraq/upload-edf-client'
+import { getTipTraqUploadMaxBytes, isEdfFile } from '@/lib/tiptraq/edf-parser'
+import { createClient } from '@/lib/supabase/client'
 
-export type { TipTraQUploadResult }
+export type TipTraqUploadResult = {
+  night: {
+    date: string
+    dlmo_time: string
+    confidence_score: number
+    confidence_label: string
+    confidence_band_minutes: number
+    chronotype_signal: string
+  }
+  rolling: {
+    nights_count: number
+    dlmo_time: string
+    confidence_score: number
+    confidence_label: string
+    confidence_band_minutes: number
+    chronotype: string
+    dose_windows: Record<string, string>
+  }
+}
 
-interface UploadState {
-  status: 'idle' | 'uploading' | 'extracting' | 'calculating' | 'complete' | 'error'
+type UploadState = {
+  status: 'idle' | 'uploading' | 'processing' | 'complete' | 'error'
   progress: number
-  result?: TipTraQUploadResult
+  result?: TipTraqUploadResult
   error?: string
 }
 
 const STATUS_MESSAGES: Record<UploadState['status'], string | null> = {
   idle: null,
-  uploading: 'Uploading channel data...',
-  extracting: 'Reading your sleep signals...',
-  calculating: 'Calculating your body clock...',
+  uploading: 'Uploading to secure storage...',
+  processing: 'Calculating your body clock...',
   complete: null,
   error: null,
 }
 
-type TipTraQUploadProps = {
-  onComplete?: (result: TipTraQUploadResult) => void
+function friendlyError(error: unknown): string {
+  const message = error instanceof Error ? error.message : String(error)
+
+  if (/not valid JSON|Unexpected token|Request Entity Too Large|413/i.test(message)) {
+    return 'Upload failed — your EDF file may be too large (max 50MB). If the file is small, hard-refresh this page (Ctrl+Shift+R) and try again.'
+  }
+
+  return message || 'Upload failed. Please try again.'
 }
 
-export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
+async function readJson<T extends { error?: string }>(response: Response): Promise<T> {
+  const text = await response.text()
+  if (!text) {
+    throw new Error(`Server returned empty response (HTTP ${response.status})`)
+  }
+  try {
+    return JSON.parse(text) as T
+  } catch {
+    if (/request entity too large|413/i.test(text)) {
+      throw new Error('File is too large. EDF uploads must be under 50MB.')
+    }
+    throw new Error(text.slice(0, 200))
+  }
+}
+
+async function runTipTraqUpload(file: File): Promise<TipTraqUploadResult> {
+  if (!isEdfFile(file)) {
+    throw new Error('Please upload a TipTraQ channel export (.edf file).')
+  }
+
+  const maxBytes = getTipTraqUploadMaxBytes()
+  if (file.size > maxBytes) {
+    throw new Error(`EDF file must be under 50MB (yours is ${(file.size / (1024 * 1024)).toFixed(1)}MB).`)
+  }
+
+  const signResponse = await fetch('/api/tiptraq/signed-upload', { method: 'POST' })
+  const signed = await readJson<{
+    error?: string
+    storagePath?: string
+    signedUrl?: string
+  }>(signResponse)
+
+  if (!signResponse.ok || !signed.storagePath || !signed.signedUrl) {
+    throw new Error(signed.error || 'Could not prepare upload. Check Supabase storage is set up.')
+  }
+
+  const putResponse = await fetch(signed.signedUrl, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/octet-stream',
+      'x-upsert': 'false',
+    },
+    body: file,
+  })
+
+  if (!putResponse.ok) {
+    const detail = (await putResponse.text()).slice(0, 200)
+    throw new Error(detail || `Storage upload failed (HTTP ${putResponse.status})`)
+  }
+
+  const extractResponse = await fetch('/api/tiptraq/extract', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ storagePath: signed.storagePath }),
+  })
+
+  const result = await readJson<TipTraqUploadResult & { error?: string }>(extractResponse)
+
+  if (!extractResponse.ok) {
+    await createClient().storage.from('tiptraq-reports').remove([signed.storagePath])
+    throw new Error(result.error || 'Body clock processing failed')
+  }
+
+  if (!result.night || !result.rolling) {
+    throw new Error('Upload completed but the response was incomplete.')
+  }
+
+  return result
+}
+
+type TipTraqEdfUploadProps = {
+  onComplete?: (result: TipTraqUploadResult) => void
+}
+
+export function TipTraqEdfUpload({ onComplete }: TipTraqEdfUploadProps) {
   const [state, setState] = useState<UploadState>({
     status: 'idle',
     progress: 0,
@@ -35,31 +133,15 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
 
   const processFile = useCallback(
     async (file: File) => {
-      setState({ status: 'uploading', progress: 25 })
+      setState({ status: 'uploading', progress: 30 })
 
       try {
-        setState({ status: 'extracting', progress: 55 })
-
-        const result = await uploadTipTraqEdf(file)
-
-        setState({
-          status: 'complete',
-          progress: 100,
-          result,
-        })
-
+        setState({ status: 'processing', progress: 70 })
+        const result = await runTipTraqUpload(file)
+        setState({ status: 'complete', progress: 100, result })
         onComplete?.(result)
       } catch (error) {
-        const message = error instanceof Error ? error.message : 'Something went wrong. Try again.'
-        const friendly = /not valid JSON|Unexpected token/i.test(message)
-          ? 'Upload failed — your EDF may be too large (max 50MB) or the connection was interrupted. Try again.'
-          : message
-
-        setState({
-          status: 'error',
-          progress: 0,
-          error: friendly,
-        })
+        setState({ status: 'error', progress: 0, error: friendlyError(error) })
       }
     },
     [onComplete]
@@ -69,16 +151,16 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
     (e: React.DragEvent) => {
       e.preventDefault()
       setIsDragging(false)
-      const file = e.dataTransfer.files[0]
-      if (file) processFile(file)
+      const picked = e.dataTransfer.files[0]
+      if (picked) void processFile(picked)
     },
     [processFile]
   )
 
   const handleFileInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0]
-      if (file) processFile(file)
+      const picked = e.target.files?.[0]
+      if (picked) void processFile(picked)
     },
     [processFile]
   )
@@ -123,7 +205,7 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
         </div>
       )}
 
-      {['uploading', 'extracting', 'calculating'].includes(state.status) && (
+      {['uploading', 'processing'].includes(state.status) && (
         <div className="rounded-2xl border border-black/[0.08] bg-white px-6 py-8 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
           <div className="text-sm font-medium text-black">{STATUS_MESSAGES[state.status]}</div>
           <div className="mt-4 h-2 overflow-hidden rounded-full bg-black/5">
@@ -131,10 +213,6 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
               className="h-full rounded-full bg-teal-600 transition-all duration-300 ease-out"
               style={{ width: `${state.progress}%` }}
             />
-          </div>
-          <div className="mt-3 text-xs text-black/50">
-            {state.status === 'extracting' && 'Parsing PPG, SpO₂, and activity channels...'}
-            {state.status === 'calculating' && 'Applying the proxy DLMO algorithm...'}
           </div>
         </div>
       )}
@@ -153,9 +231,7 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
 
           <div className="mt-5">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-black/70">
-                {state.result.rolling.confidence_label} confidence
-              </span>
+              <span className="text-black/70">{state.result.rolling.confidence_label} confidence</span>
               <span className="font-mono font-medium text-black">
                 {state.result.rolling.confidence_score}%
               </span>
@@ -163,7 +239,7 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
             <div className="mt-2 h-2 overflow-hidden rounded-full bg-black/5">
               <div
                 className="h-full rounded-full bg-teal-600 transition-all duration-300"
-                style={{ width: `${state.result.rolling.confidence_score}%` }}
+                style={{ width: `${Math.min(100, state.result.rolling.confidence_score)}%` }}
               />
             </div>
             <div className="mt-2 font-mono text-[11px] text-black/45">
@@ -177,22 +253,6 @@ export default function TipTraQUpload({ onComplete }: TipTraQUploadProps) {
               )}
             </div>
           </div>
-
-          {state.result.rolling.nights_count >= 3 && (
-            <div className="mt-5 border-t border-black/5 pt-5">
-              <div className="font-mono text-[11px] uppercase tracking-[0.08em] text-black/45">
-                Dose windows
-              </div>
-              {Object.entries(state.result.rolling.dose_windows)
-                .filter(([key]) => !key.includes('light'))
-                .map(([drug, time]) => (
-                  <div key={drug} className="mt-2 flex items-center justify-between text-sm">
-                    <span className="capitalize text-black/70">{drug}</span>
-                    <span className="font-mono font-medium text-black">{time}</span>
-                  </div>
-                ))}
-            </div>
-          )}
 
           <button
             type="button"

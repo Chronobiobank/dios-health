@@ -3,6 +3,7 @@ import { DashboardPageTransition } from '@/components/dashboard/dashboard-page-t
 import { DASHBOARD_HEADLINE } from '@/components/dashboard/dashboard-styles'
 import { DlmoScoreCard } from '@/components/dashboard/dlmo-score-card'
 import { DlmoUploadPrompt } from '@/components/dashboard/dlmo-upload-prompt'
+import { GpReportButton } from '@/components/dashboard/gp-report-button'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { SeededInsightCard } from '@/components/dashboard/seeded-insight-card'
 import { StreamsStatus } from '@/components/dashboard/streams-status'
@@ -70,6 +71,9 @@ export default async function DashboardPage() {
             confidenceLabel={profileRow!.confidence_label ?? undefined}
           />
           <DlmoScoreCard profile={profileRow!} />
+          <div className="mt-4">
+            <GpReportButton />
+          </div>
         </>
       ) : (
         <DlmoUploadPrompt />
