@@ -1,4 +1,5 @@
 import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
+import { resolveTimebotDlmoMinutes } from '@/lib/dashboard/timebot-supplements'
 import { formatMinutesLabel, parseDbTimeToMinutes } from '@/lib/dashboard/time-utils'
 import {
   ZEITGEber_DARKNESS_OFFSET,
@@ -29,10 +30,12 @@ export type TimebotScheduleItem = {
 
 export type TimebotData = {
   hasDlmoData: boolean
+  dlmoEstimated: boolean
   firstName: string
   dlmoTimeLabel: string
   chronotype: string | null
   confidenceLabel: string | null
+  currentSupplements: string[]
   items: TimebotScheduleItem[]
 }
 
@@ -42,15 +45,6 @@ const MEDICATIONS = [
   { key: 'prednisolone_optimal_time', label: 'Prednisolone' },
   { key: 'salmeterol_optimal_time', label: 'Salmeterol' },
 ] as const
-
-function resolveDlmoMinutes(profile: DlmoProfileRow): number | null {
-  const fromRolling = parseDbTimeToMinutes(profile.proxy_dlmo_rolling)
-  if (fromRolling !== null) return fromRolling
-  if (profile.proxy_dlmo_minutes_from_midnight != null) {
-    return normalizeMinutesFromMidnight(profile.proxy_dlmo_minutes_from_midnight)
-  }
-  return null
-}
 
 function getNowMinutesInTimeZone(timeZone: string, now = new Date()): number {
   const clock = dateToLocalClock(now, timeZone)
@@ -120,29 +114,32 @@ export function buildTimebotData(input: {
   firstName: string
   locationCity?: string | null
   locationCountry?: string | null
+  fallbackSleepTime?: string
+  currentSupplements?: string[]
   now?: Date
 }): TimebotData {
-  if (!input.hasTipTraqData || !input.profile) {
-    return {
-      hasDlmoData: false,
-      firstName: input.firstName,
-      dlmoTimeLabel: '—',
-      chronotype: null,
-      confidenceLabel: null,
-      items: [],
-    }
+  const { minutes: dlmoMinutes, estimated: dlmoEstimated } = resolveTimebotDlmoMinutes(
+    input.profile,
+    input.fallbackSleepTime ?? '11:00pm'
+  )
+
+  const dlmoTimeLabel = dlmoEstimated
+    ? `${formatMinutesLabel(dlmoMinutes)} (ESTIMATED)`
+    : formatMinutesLabel(dlmoMinutes)
+
+  const emptyBase: TimebotData = {
+    hasDlmoData: true,
+    dlmoEstimated,
+    firstName: input.firstName,
+    dlmoTimeLabel,
+    chronotype: input.profile?.chronotype ?? null,
+    confidenceLabel: input.profile?.confidence_label ?? null,
+    currentSupplements: input.currentSupplements ?? [],
+    items: [],
   }
 
-  const dlmoMinutes = resolveDlmoMinutes(input.profile)
-  if (dlmoMinutes === null) {
-    return {
-      hasDlmoData: false,
-      firstName: input.firstName,
-      dlmoTimeLabel: '—',
-      chronotype: input.profile.chronotype,
-      confidenceLabel: input.profile.confidence_label,
-      items: [],
-    }
+  if (!input.profile) {
+    return emptyBase
   }
 
   const timeZone = resolvePatientTimeZone(input.locationCity, input.locationCountry)
@@ -222,15 +219,21 @@ export function buildTimebotData(input: {
 
   return {
     hasDlmoData: true,
+    dlmoEstimated,
     firstName: input.firstName,
-    dlmoTimeLabel: formatMinutesLabel(dlmoMinutes),
+    dlmoTimeLabel,
     chronotype: input.profile.chronotype,
     confidenceLabel: input.profile.confidence_label,
+    currentSupplements: input.currentSupplements ?? [],
     items,
   }
 }
 
-export function buildTimebotContext(profile: DlmoProfileRow, data: TimebotData): string {
+export function buildTimebotContext(
+  profile: DlmoProfileRow | null,
+  data: TimebotData,
+  supplementContext?: string
+): string {
   const medLines = data.items
     .filter((item) => item.kind === 'medication')
     .map((item) => `- ${item.label}: ${item.timeLabel} (${item.status})`)
@@ -241,15 +244,25 @@ export function buildTimebotContext(profile: DlmoProfileRow, data: TimebotData):
     .map((item) => `- ${item.label}: ${item.timeLabel} (${item.status})`)
     .join('\n')
 
+  const profileBlock = profile
+    ? `- Confidence: ${data.confidenceLabel ?? 'unknown'} (${profile.confidence_score ?? 'n/a'}%)
+- Nights uploaded: ${profile.nights_count ?? 0}`
+    : '- No dlmo_profiles row yet (using questionnaire estimate)'
+
+  const supplementBlock = supplementContext
+    ? `\n\n${supplementContext}`
+    : data.currentSupplements.length > 0
+      ? `\n\nCurrent supplements on profile: ${data.currentSupplements.join(', ')}`
+      : ''
+
   return `Patient DLMO profile:
-- Proxy DLMO: ${data.dlmoTimeLabel}
+- Proxy DLMO: ${data.dlmoTimeLabel}${data.dlmoEstimated ? ' — ESTIMATED from chronotype questionnaire' : ''}
 - Chronotype: ${data.chronotype ?? 'unknown'}
-- Confidence: ${data.confidenceLabel ?? 'unknown'} (${profile.confidence_score ?? 'n/a'}%)
-- Nights uploaded: ${profile.nights_count ?? 0}
+${profileBlock}
 
 Today's medication windows:
-${medLines || '- none calculated'}
+${medLines || '- none calculated (TipTraQ refines these)'}
 
 Today's cue schedule:
-${cueLines || '- none calculated'}`
+${cueLines || '- none calculated yet'}${supplementBlock}`
 }

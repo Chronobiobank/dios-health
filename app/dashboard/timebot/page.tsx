@@ -30,6 +30,8 @@ export default async function DashboardTimebotPage() {
     firstName,
     locationCity: patient.location_city,
     locationCountry: patient.location_country,
+    fallbackSleepTime: patient.chronotype_q3 ?? '11:00pm',
+    currentSupplements: (patient.current_supplements as string[] | null) ?? [],
   })
 
   return <TimebotView data={timebot} />

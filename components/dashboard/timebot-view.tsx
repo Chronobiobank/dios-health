@@ -67,6 +67,7 @@ function ScheduleRow({ item }: { item: TimebotScheduleItem }) {
 export function TimebotView({ data }: TimebotViewProps) {
   const [pulseState, setPulseState] = useState<TimebotPulseState>('idle')
   const [messages, setMessages] = useState<ChatMessage[]>([])
+  const [trackedSupplements, setTrackedSupplements] = useState(data.currentSupplements)
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -96,12 +97,20 @@ export function TimebotView({ data }: TimebotViewProps) {
         body: JSON.stringify({ message: question }),
       })
 
-      const result = (await response.json()) as { answer?: string; error?: string }
+      const result = (await response.json()) as {
+        answer?: string
+        error?: string
+        supplementsSaved?: string[]
+      }
 
       if (!response.ok) {
         setError(result.error ?? 'Timebot could not answer right now.')
         setPulseState('idle')
         return
+      }
+
+      if (result.supplementsSaved?.length) {
+        setTrackedSupplements(result.supplementsSaved)
       }
 
       setPulseState('responding')
@@ -120,25 +129,9 @@ export function TimebotView({ data }: TimebotViewProps) {
     }
   }
 
-  if (!data.hasDlmoData) {
-    return (
-      <div className="flex flex-col items-center px-2 py-10 text-center">
-        <TimebotPulse state="idle" />
-        <p className="mt-6 max-w-xs text-[15px] leading-relaxed text-black/60">
-          Upload your first TipTraQ night to activate your Timebot.
-        </p>
-        <Link
-          href={PATIENT_ROUTES.streams}
-          className="mt-6 inline-flex h-11 items-center rounded-full bg-black px-5 text-sm font-medium text-white"
-        >
-          Connect TipTraQ →
-        </Link>
-      </div>
-    )
-  }
-
   const medications = data.items.filter((item) => item.kind === 'medication')
   const cues = data.items.filter((item) => item.kind === 'cue')
+  const hasSchedule = medications.length > 0 || cues.length > 0
 
   return (
     <div className="flex min-h-0 flex-1 flex-col pb-36">
@@ -146,30 +139,61 @@ export function TimebotView({ data }: TimebotViewProps) {
         <TimebotPulse state={pulseState} />
         <p className="mt-4 text-[15px] font-semibold text-black">{data.firstName}</p>
         <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.08em] text-black/40">
-          Your DIʘS timebot is active
+          {data.dlmoEstimated ? 'Proxy DLMO (estimated)' : 'Your DIʘS timebot is active'}
         </p>
+        {data.dlmoTimeLabel !== '—' ? (
+          <p className="mt-2 font-mono text-[13px] text-teal-800">DLMO {data.dlmoTimeLabel}</p>
+        ) : null}
       </div>
 
-      <div className="relative mt-10 px-1">
-        <div
-          className="pointer-events-none absolute bottom-0 left-[calc(4.5rem+0.3125rem)] top-0 w-px bg-black/10"
-          aria-hidden
-        />
+      {trackedSupplements.length > 0 ? (
+        <p className="mt-6 text-center text-[13px] leading-relaxed text-black/55">
+          Tracking: {trackedSupplements.join(', ')}
+        </p>
+      ) : null}
 
-        <section className="mb-10">
-          <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.08em] text-black/40">
-            Today&apos;s timing schedule
+      {!hasSchedule ? (
+        <div className="mt-8 px-2 text-center">
+          <p className="text-[15px] leading-relaxed text-black/60">
+            {data.dlmoEstimated
+              ? 'Tell me which supplements you take — I’ll map optimal timing to your estimated body clock. Upload TipTraQ later to sharpen every window.'
+              : 'Your medication and cue schedule will appear here once timing modules are calculated.'}
           </p>
-          <ol>{medications.map((item) => <ScheduleRow key={item.id} item={item} />)}</ol>
-        </section>
+          {data.dlmoEstimated ? (
+            <Link
+              href={PATIENT_ROUTES.streams}
+              className="mt-4 inline-flex text-sm font-medium text-teal-800 underline-offset-2 hover:underline"
+            >
+              Connect TipTraQ for sharper timing →
+            </Link>
+          ) : null}
+        </div>
+      ) : (
+        <div className="relative mt-10 px-1">
+          <div
+            className="pointer-events-none absolute bottom-0 left-[calc(4.5rem+0.3125rem)] top-0 w-px bg-black/10"
+            aria-hidden
+          />
 
-        <section>
-          <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.08em] text-black/40">
-            Cue schedule
-          </p>
-          <ol>{cues.map((item) => <ScheduleRow key={item.id} item={item} />)}</ol>
-        </section>
-      </div>
+          {medications.length > 0 ? (
+            <section className="mb-10">
+              <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.08em] text-black/40">
+                Today&apos;s timing schedule
+              </p>
+              <ol>{medications.map((item) => <ScheduleRow key={item.id} item={item} />)}</ol>
+            </section>
+          ) : null}
+
+          {cues.length > 0 ? (
+            <section>
+              <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.08em] text-black/40">
+                Cue schedule
+              </p>
+              <ol>{cues.map((item) => <ScheduleRow key={item.id} item={item} />)}</ol>
+            </section>
+          ) : null}
+        </div>
+      )}
 
       {messages.length > 0 ? (
         <div className="mt-8 space-y-3 border-t border-black/[0.06] pt-6">
