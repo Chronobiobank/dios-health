@@ -4,13 +4,7 @@ import type { ReactNode } from 'react'
 
 import { BTN_PRIMARY } from '@/components/sections/layout'
 
-import {
-  PitchBgInsight,
-  PitchBgScale,
-  PitchBgSolution,
-  PitchBgWhyNow,
-  PitchBgWorldChanged,
-} from './pitch-backgrounds'
+import { PitchShadowBackdrop, PitchShadowStyles } from './pitch-backgrounds'
 
 const glassCardStyle = {
   backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -53,7 +47,7 @@ function PitchScreen({
       id={id}
       className="relative flex min-h-svh snap-start flex-col bg-black"
     >
-      <div className="pointer-events-none absolute inset-0 opacity-[0.15]" aria-hidden>
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
         {background}
       </div>
       <div className="relative z-10 mx-auto flex w-full max-w-[76rem] flex-1 flex-col justify-center px-5 py-16 sm:px-6 sm:py-20">
@@ -92,27 +86,27 @@ function SignalCard({
 export function PitchDeck() {
   return (
     <div className="h-svh snap-y snap-mandatory overflow-y-auto lg:h-auto lg:snap-none lg:overflow-visible">
-      <PitchScreen id="pitch-world-changed" background={<PitchBgWorldChanged />}>
+      <PitchShadowStyles />
+      <PitchScreen id="pitch-world-changed" background={<PitchShadowBackdrop variant={0} />}>
         <PitchEyebrow>THE WORLD HAS CHANGED</PitchEyebrow>
         <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
-          89,000 people. 13 million hours of light data.
+          89,000 people. 13 million hours of light.
         </h1>
         <p
           className="mt-6 max-w-2xl text-[15px] leading-relaxed lg:text-lg"
           style={{ color: 'var(--color-text-secondary)' }}
         >
-          The largest light-health study ever run proved it. More light by day, more dark by night — less disease. DIʘS measures it.
+          More light by day. More dark by night. Less disease. DIʘS measures it.
         </p>
       </PitchScreen>
 
-      <PitchScreen id="pitch-insight" background={<PitchBgInsight />}>
+      <PitchScreen id="pitch-insight" background={<PitchShadowBackdrop variant={1} />}>
         <PitchEyebrow>THE INSIGHT</PitchEyebrow>
         <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
-          Every medication has a biological clock. Nobody acts on it.
+          Every drug has a clock. Nobody uses it.
         </h1>
         <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/70 lg:text-lg">
-          The optimal dose window for every common medication has been in peer-reviewed literature for
-          40 years. The tool that acts on it has never been built.
+          Optimal dose windows have been published for 40 years. The tool to act on them still doesn&apos;t exist.
         </p>
         <div className="mt-8" style={{ ...glassCardStyle, borderRadius: 'var(--radius-lg)', padding: '1.5rem' }}>
           <p
@@ -122,7 +116,7 @@ export function PitchDeck() {
             £500M
           </p>
           <p className="mt-2 text-sm text-white/60 lg:text-sm">
-            avoidable NHS admissions annually from medication mistiming
+            avoidable NHS admissions from mistimed medication
           </p>
         </div>
         <div className="mt-4 max-w-2xl" style={{ ...glassCardStyle, borderRadius: 'var(--radius-md)', padding: '1.25rem' }}>
@@ -130,54 +124,56 @@ export function PitchDeck() {
             UK BIOBANK · POPULATION VALIDATION
           </p>
           <p className="text-sm leading-relaxed text-white/70">
-            89,000 participants. 13 million hours of personal light sensor data. Published in PNAS, The Lancet, and JAMA Network Open. Conclusion: more light by day, more dark by night — independently predicts lower rates of T2DM, heart failure, AF, stroke, and psychiatric disorders.
+            89,000 participants · 13M sensor hours · PNAS · Lancet · JAMA. More daylight, more darkness — less T2DM, heart failure, AF, stroke, and psychiatric disease.
           </p>
           <p className="mt-3 font-mono text-[11px] text-white/40">
-            DIʘS is the clinical infrastructure that delivers what the evidence demands.
+            Vaya measures the biomarker. DIʘS delivers the correction. No clinic visit required.
           </p>
         </div>
       </PitchScreen>
 
-      <PitchScreen id="pitch-why-now" background={<PitchBgWhyNow />}>
+      <PitchScreen id="pitch-why-now" background={<PitchShadowBackdrop variant={2} />}>
         <PitchEyebrow>WHY NOW</PitchEyebrow>
         <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
-          The camera in your pocket measures your most powerful medicine.
+          Vaya reads your light biology. In 60 seconds. From your front camera.
         </h1>
         <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/70 lg:text-lg">
-          AI made this possible in 2026. Not 2020. Now.
+          Vaya is the DIʘS camera session. It measures Melanopic Lux — the direct entraining
+          signal to your master clock — using your smartphone, GPS, and time of day.
+          No wearable. No lab. No appointment.
         </p>
         <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
           <SignalCard
             icon={<Eye className="h-5 w-5" strokeWidth={1.5} aria-hidden />}
             title="Melanopic Lux"
-            body="The direct entraining signal to your master clock — measured from your front camera, not estimated."
+            body="Master clock signal from your front camera. Measured, not estimated."
           />
           <SignalCard
             icon={<Sun className="h-5 w-5" strokeWidth={1.5} aria-hidden />}
             title="Solar zenith"
-            body="GPS + time of day gives your expected outdoor light dose as a personalised reference baseline."
+            body="GPS + time of day — your outdoor light baseline."
           />
           <SignalCard
             icon={<Activity className="h-5 w-5" strokeWidth={1.5} aria-hidden />}
             title="Autonomic state"
-            body="HRV and sympathetic balance from TipTraQ — the downstream biological response to your light dose."
+            body="HRV from TipTraQ — your body&apos;s response to light dose."
           />
         </div>
         <p className="mt-6 font-mono text-[13px] text-white/40">
-          Melanopic lux. Validated by CIE S026. Proven at population scale. Measured from your pocket.
+          Vaya · Melanopic Lux · CIE S026 · Validated at 89,000-person scale
         </p>
       </PitchScreen>
 
-      <PitchScreen id="pitch-solution" background={<PitchBgSolution />}>
+      <PitchScreen id="pitch-solution" background={<PitchShadowBackdrop variant={3} />}>
         <PitchEyebrow>THE SOLUTION</PitchEyebrow>
         <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
-          DIʘS times every dose to your body clock.
+          Vaya measures your clock. DIʘS times your doses.
         </h1>
         <ul className="mt-8 flex max-w-2xl flex-col gap-4">
           {[
-            'Measures melanopic lux — the biomarker identified in 89,000-person UK Biobank studies as the primary modifiable driver of chronic disease.',
-            'Personal protocol. Gominak nutrient panel. Coimbra VDR. Chronodosing for 8 key medications.',
-            'No forms. Just a conversation with your DIʘS timebot.',
+            'Melanopic lux — the UK Biobank biomarker for chronic disease.',
+            'Personal protocol: Gominak · Coimbra · chronodosing for 8 medications.',
+            'No forms. Vaya asks the questions. Your camera does the measuring.',
           ].map((line) => (
             <li key={line} className="flex gap-3 text-[15px] leading-relaxed text-white lg:text-lg">
               <span style={{ color: 'var(--color-brand)' }} aria-hidden>
@@ -188,17 +184,17 @@ export function PitchDeck() {
           ))}
         </ul>
         <p className="mt-8 font-mono text-[13px] text-white/40">
-          Passive capture. Predictive power. NHS-ready.
+          Passive. Predictive. NHS-ready.
         </p>
       </PitchScreen>
 
-      <PitchScreen id="pitch-scale" background={<PitchBgScale />}>
+      <PitchScreen id="pitch-scale" background={<PitchShadowBackdrop variant={4} />}>
         <PitchEyebrow>THE SCALE</PitchEyebrow>
         <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
-          Every person on a prescription is a potential user.
+          Every prescription is a potential user.
         </h1>
         <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/70 lg:text-lg">
-          UK Biobank proved the biomarker at 89,000 people. DIʘS measures it continuously at the individual level and closes the loop with a personalised correction protocol. The data asset that accumulates is the world's first longitudinal melanopic lux dataset linked to medication outcomes.
+          UK Biobank validated the biomarker at scale. DIʘS measures it continuously — and corrects it. The first longitudinal melanopic lux dataset linked to medication outcomes.
         </p>
         <div className="mt-10 text-center">
           <p
@@ -207,7 +203,7 @@ export function PitchDeck() {
           >
             4.5Bn
           </p>
-          <p className="mt-2 text-base text-white/60">prescriptions dispensed in England last year</p>
+          <p className="mt-2 text-base text-white/60">prescriptions in England last year</p>
         </div>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Link
@@ -235,6 +231,10 @@ export function PitchDeck() {
           <span className="mx-3">·</span>
           <Link href="/evidence#spectrum" className="underline-offset-2 hover:underline">
             See the cascade
+          </Link>
+          <span className="mx-3">·</span>
+          <Link href="/signup" className="underline-offset-2 hover:underline">
+            Try Vaya free
           </Link>
           <span className="mx-3">·</span>
           <Link href="/signup/clinician" className="underline-offset-2 hover:underline">

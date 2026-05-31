@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Nav } from '@/components/sections/Nav'
 import { ScrollToHash } from '@/components/sections/ScrollToHash'
@@ -27,6 +27,17 @@ export const metadata: Metadata = {
   title: 'DIOS – Make Time Count',
   description:
     "The world's first clinical decision support platform personalising medicine timing to individual body clock variation, not European population norms. Free for every patient. Free for every GP.",
+  manifest: '/manifest.webmanifest',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Vaya',
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+  },
   openGraph: {
     title: 'DIOS – Make Time Count',
     description:
@@ -40,6 +51,10 @@ export const metadata: Metadata = {
     description:
       "The world's first platform personalising medicine timing to individual body clock variation. Not European population averages.",
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#000000',
 }
 
 export default function RootLayout({

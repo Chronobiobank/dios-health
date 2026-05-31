@@ -1,8 +1,8 @@
-import { BodyClockVisualization } from '@/components/dashboard/body-clock-visualization'
 import { DashboardPageTransition } from '@/components/dashboard/dashboard-page-transition'
-import { DlmoScoreCard } from '@/components/dashboard/dlmo-score-card'
 import { DlmoUploadPrompt } from '@/components/dashboard/dlmo-upload-prompt'
 import { GpReportButton } from '@/components/dashboard/gp-report-button'
+import { MedicationTimeline } from '@/components/dashboard/medication-timeline'
+import { MLuxDial } from '@/components/dashboard/mlux-dial'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { SeededInsightCard } from '@/components/dashboard/seeded-insight-card'
 import { StreamsStatus } from '@/components/dashboard/streams-status'
@@ -88,22 +88,31 @@ export default async function DashboardPage() {
         }
       />
 
-      {hasTipTraqData ? (
-        <>
-          <BodyClockVisualization
-            model={bodyClock}
-            nightsCount={profileRow?.nights_count ?? nightsUploaded}
-            confidenceScore={profileRow?.confidence_score ?? undefined}
-            confidenceLabel={profileRow?.confidence_label ?? undefined}
-          />
-          {profileRow ? <DlmoScoreCard profile={profileRow} /> : null}
-          <div>
-            <GpReportButton />
-          </div>
-        </>
+      <MLuxDial
+        mluxScore={Math.round((profileRow?.confidence_score ?? 20) * 3.5)}
+        morningAdequacy={smartphoneActive ? 'low' : 'none'}
+        eveningAdequacy={smartphoneActive ? 'low' : 'none'}
+        nocturnalAdequacy={smartphoneActive ? 'good' : 'none'}
+        chronotypeLabel={bodyClock.chronotypeLabel}
+        confidenceScore={profileRow?.confidence_score ?? undefined}
+        confidenceLabel={profileRow?.confidence_label ?? undefined}
+      />
+
+      {hasTipTraqData && bodyClock.doseWindows.length > 0 ? (
+        <MedicationTimeline
+          doseWindows={bodyClock.doseWindows}
+          wakeMinutes={bodyClock.sleepEndMinutes}
+          sleepMinutes={bodyClock.sleepStartMinutes}
+        />
       ) : (
         <DlmoUploadPrompt />
       )}
+
+      {hasTipTraqData && profileRow ? (
+        <div>
+          <GpReportButton />
+        </div>
+      ) : null}
 
       <SeededInsightCard insight={insight} hasTipTraqData={hasTipTraqData} />
 

@@ -1,6 +1,6 @@
 import { DASHBOARD_CARD, DASHBOARD_BODY, MONO_DATA, SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
 import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
-import { formatDbTime, resolveChronotypeLabel } from '@/lib/dashboard/dlmo-profile'
+import { resolveChronotypeLabel } from '@/lib/dashboard/dlmo-profile'
 
 type DlmoScoreCardProps = {
   profile: DlmoProfileRow
@@ -11,7 +11,6 @@ export function DlmoScoreCard({ profile }: DlmoScoreCardProps) {
   const band = profile.confidence_band_minutes ?? 75
   const label = profile.confidence_label ?? 'Low'
   const nights = profile.nights_count ?? 0
-  const dlmoTime = formatDbTime(profile.proxy_dlmo_rolling)
   const chronotype = resolveChronotypeLabel(profile)
 
   return (
@@ -19,9 +18,9 @@ export function DlmoScoreCard({ profile }: DlmoScoreCardProps) {
       <div className={DASHBOARD_CARD}>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className={SECTION_LABEL}>Body clock confidence</p>
+            <p className={SECTION_LABEL}>Circadian signal confidence</p>
             <p className="mt-3 text-[15px] font-medium text-black">
-              Proxy DLMO · {dlmoTime}
+              MLux score · {score} m-EDI
             </p>
             <p className="mt-1 text-[15px] capitalize text-black/60">{chronotype}</p>
           </div>

@@ -11,6 +11,7 @@ export const AUTH_ROUTES = {
 export const PATIENT_ROUTES = {
   dashboard: '/dashboard',
   timebot: '/dashboard/timebot',
+  vaya: '/dashboard/timebot',
   insights: '/dashboard/insights',
   streams: '/dashboard/streams',
   streamsBloods: '/dashboard/streams/bloods',

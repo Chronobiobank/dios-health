@@ -8,9 +8,9 @@ import { AUTH_ROUTES } from '@/lib/auth/routes'
 const ROLES = [
   {
     href: AUTH_ROUTES.signUpPatient,
-    title: 'I am a patient.',
-    body: 'Track your body clock and get dose timing insights.',
-    cta: 'Join as a patient →',
+    title: 'Start Vaya.',
+    body: 'Measure your Melanopic Lux score and get your personalised light and medication protocol.',
+    cta: 'Begin your first session →',
   },
   {
     href: AUTH_ROUTES.signUpClinician,

@@ -1,220 +1,249 @@
-/** Editorial SVG backdrops — stroke uses Calmer brand token via currentColor on wrapper */
+/** Soft drifting shadow layers — replaces editorial line-art SVGs */
 
-export function PitchBgWorldChanged() {
+type PitchShadowVariant = 0 | 1 | 2 | 3 | 4
+
+type ShadowOrb = {
+  top: string
+  left: string
+  width: string
+  height: string
+  gradient: string
+  animation: string
+  duration: number
+  delay: number
+}
+
+const ORB_PRESETS: ShadowOrb[][] = [
+  [
+    {
+      top: '-18%',
+      left: '-12%',
+      width: '72%',
+      height: '68%',
+      gradient: 'radial-gradient(ellipse at center, rgba(12, 22, 20, 0.95) 0%, transparent 72%)',
+      animation: 'pitch-shadow-drift-a',
+      duration: 32,
+      delay: 0,
+    },
+    {
+      top: '42%',
+      left: '58%',
+      width: '64%',
+      height: '58%',
+      gradient: 'radial-gradient(ellipse at center, rgba(8, 14, 18, 0.88) 0%, transparent 70%)',
+      animation: 'pitch-shadow-drift-b',
+      duration: 38,
+      delay: 4,
+    },
+    {
+      top: '68%',
+      left: '8%',
+      width: '52%',
+      height: '48%',
+      gradient:
+        'radial-gradient(ellipse at center, rgba(16, 163, 127, 0.07) 0%, rgba(6, 10, 12, 0.75) 42%, transparent 72%)',
+      animation: 'pitch-shadow-drift-c',
+      duration: 28,
+      delay: 9,
+    },
+  ],
+  [
+    {
+      top: '-8%',
+      left: '38%',
+      width: '68%',
+      height: '62%',
+      gradient: 'radial-gradient(ellipse at center, rgba(10, 18, 16, 0.92) 0%, transparent 71%)',
+      animation: 'pitch-shadow-drift-b',
+      duration: 34,
+      delay: 2,
+    },
+    {
+      top: '48%',
+      left: '-16%',
+      width: '58%',
+      height: '54%',
+      gradient: 'radial-gradient(ellipse at center, rgba(14, 12, 20, 0.85) 0%, transparent 68%)',
+      animation: 'pitch-shadow-drift-c',
+      duration: 40,
+      delay: 7,
+    },
+    {
+      top: '62%',
+      left: '52%',
+      width: '56%',
+      height: '50%',
+      gradient:
+        'radial-gradient(ellipse at center, rgba(16, 163, 127, 0.06) 0%, rgba(5, 8, 10, 0.8) 45%, transparent 74%)',
+      animation: 'pitch-shadow-drift-a',
+      duration: 30,
+      delay: 11,
+    },
+  ],
+  [
+    {
+      top: '12%',
+      left: '-14%',
+      width: '70%',
+      height: '64%',
+      gradient: 'radial-gradient(ellipse at center, rgba(11, 20, 18, 0.9) 0%, transparent 70%)',
+      animation: 'pitch-shadow-drift-c',
+      duration: 36,
+      delay: 1,
+    },
+    {
+      top: '36%',
+      left: '62%',
+      width: '60%',
+      height: '56%',
+      gradient: 'radial-gradient(ellipse at center, rgba(9, 12, 16, 0.87) 0%, transparent 69%)',
+      animation: 'pitch-shadow-drift-a',
+      duration: 42,
+      delay: 6,
+    },
+    {
+      top: '72%',
+      left: '22%',
+      width: '54%',
+      height: '46%',
+      gradient:
+        'radial-gradient(ellipse at center, rgba(16, 163, 127, 0.08) 0%, rgba(4, 6, 8, 0.78) 40%, transparent 73%)',
+      animation: 'pitch-shadow-drift-b',
+      duration: 26,
+      delay: 13,
+    },
+  ],
+  [
+    {
+      top: '-12%',
+      left: '52%',
+      width: '66%',
+      height: '60%',
+      gradient: 'radial-gradient(ellipse at center, rgba(13, 19, 17, 0.93) 0%, transparent 72%)',
+      animation: 'pitch-shadow-drift-a',
+      duration: 37,
+      delay: 3,
+    },
+    {
+      top: '52%',
+      left: '-10%',
+      width: '62%',
+      height: '58%',
+      gradient: 'radial-gradient(ellipse at center, rgba(7, 11, 15, 0.86) 0%, transparent 67%)',
+      animation: 'pitch-shadow-drift-b',
+      duration: 33,
+      delay: 8,
+    },
+    {
+      top: '58%',
+      left: '48%',
+      width: '50%',
+      height: '52%',
+      gradient:
+        'radial-gradient(ellipse at center, rgba(16, 163, 127, 0.05) 0%, rgba(8, 10, 12, 0.82) 44%, transparent 75%)',
+      animation: 'pitch-shadow-drift-c',
+      duration: 29,
+      delay: 15,
+    },
+  ],
+  [
+    {
+      top: '6%',
+      left: '18%',
+      width: '74%',
+      height: '66%',
+      gradient: 'radial-gradient(ellipse at center, rgba(10, 16, 14, 0.91) 0%, transparent 71%)',
+      animation: 'pitch-shadow-drift-b',
+      duration: 35,
+      delay: 5,
+    },
+    {
+      top: '44%',
+      left: '-18%',
+      width: '56%',
+      height: '52%',
+      gradient: 'radial-gradient(ellipse at center, rgba(12, 10, 18, 0.84) 0%, transparent 68%)',
+      animation: 'pitch-shadow-drift-c',
+      duration: 41,
+      delay: 10,
+    },
+    {
+      top: '70%',
+      left: '56%',
+      width: '58%',
+      height: '48%',
+      gradient:
+        'radial-gradient(ellipse at center, rgba(16, 163, 127, 0.07) 0%, rgba(6, 8, 10, 0.76) 43%, transparent 72%)',
+      animation: 'pitch-shadow-drift-a',
+      duration: 31,
+      delay: 17,
+    },
+  ],
+]
+
+export function PitchShadowStyles() {
   return (
-    <svg
-      viewBox="0 0 1200 800"
-      className="h-full w-full"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden
-    >
-      <circle cx="600" cy="400" r="220" fill="none" stroke="white" strokeWidth="0.75" opacity="0.9" />
-      <circle cx="600" cy="400" r="180" fill="none" stroke="white" strokeWidth="0.5" opacity="0.6" />
-      {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => (
-        <line
-          key={deg}
-          x1="600"
-          y1="400"
-          x2={600 + 220 * Math.cos((deg * Math.PI) / 180)}
-          y2={400 + 220 * Math.sin((deg * Math.PI) / 180)}
-          stroke="white"
-          strokeWidth="0.5"
-          opacity="0.35"
-        />
-      ))}
-      <path
-        d="M420 280 Q520 180 600 200 T780 320 Q860 420 720 480 T480 520 Q360 540 420 280"
-        fill="none"
-        stroke="white"
-        strokeWidth="0.6"
-        opacity="0.5"
+    <style>{`
+      @keyframes pitch-shadow-drift-a {
+        0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+        35% { transform: translate3d(6%, -4%, 0) scale(1.06); }
+        70% { transform: translate3d(-5%, 5%, 0) scale(0.96); }
+      }
+      @keyframes pitch-shadow-drift-b {
+        0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+        40% { transform: translate3d(-7%, 3%, 0) scale(1.04); }
+        75% { transform: translate3d(5%, -6%, 0) scale(0.98); }
+      }
+      @keyframes pitch-shadow-drift-c {
+        0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+        30% { transform: translate3d(4%, 6%, 0) scale(1.08); }
+        65% { transform: translate3d(-6%, -3%, 0) scale(0.94); }
+      }
+      .pitch-shadow-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(72px);
+        will-change: transform;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .pitch-shadow-orb { animation: none !important; }
+      }
+    `}</style>
+  )
+}
+
+export function PitchShadowBackdrop({ variant = 0 }: { variant?: PitchShadowVariant }) {
+  const orbs = ORB_PRESETS[variant]
+
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-black">
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 120% 80% at 50% 100%, rgba(0, 0, 0, 0.65) 0%, transparent 55%)',
+        }}
+        aria-hidden
       />
-      <path
-        d="M450 520 Q580 620 720 560 T900 420"
-        fill="none"
-        stroke="white"
-        strokeWidth="0.4"
-        opacity="0.35"
-      />
-      {Array.from({ length: 24 }).map((_, i) => (
-        <circle
+      {orbs.map((orb, i) => (
+        <div
           key={i}
-          cx={200 + (i % 6) * 160 + (i % 3) * 12}
-          cy={120 + Math.floor(i / 6) * 140}
-          r={4 + (i % 4)}
-          fill="none"
-          stroke="white"
-          strokeWidth="0.35"
-          opacity={0.2 + (i % 5) * 0.08}
+          className="pitch-shadow-orb"
+          style={{
+            top: orb.top,
+            left: orb.left,
+            width: orb.width,
+            height: orb.height,
+            background: orb.gradient,
+            animationName: orb.animation,
+            animationDuration: `${orb.duration}s`,
+            animationDelay: `${orb.delay}s`,
+          }}
+          aria-hidden
         />
       ))}
-    </svg>
-  )
-}
-
-export function PitchBgInsight() {
-  return (
-    <svg
-      viewBox="0 0 1200 800"
-      className="h-full w-full"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden
-    >
-      <rect x="380" y="200" width="440" height="120" rx="60" fill="none" stroke="white" strokeWidth="1" />
-      <line x1="380" y1="260" x2="820" y2="260" stroke="white" strokeWidth="0.5" opacity="0.5" />
-      <circle cx="600" cy="320" r="48" fill="none" stroke="white" strokeWidth="0.75" />
-      <circle cx="600" cy="320" r="36" fill="none" stroke="white" strokeWidth="0.5" opacity="0.6" />
-      <line x1="600" y1="320" x2="600" y2="272" stroke="var(--color-brand)" strokeWidth="2" />
-      <line x1="600" y1="320" x2="632" y2="300" stroke="var(--color-brand)" strokeWidth="1.5" />
-      <circle cx="600" cy="320" r="4" fill="var(--color-brand)" />
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
-        <line
-          key={deg}
-          x1="600"
-          y1="320"
-          x2={600 + 34 * Math.cos(((deg - 90) * Math.PI) / 180)}
-          y2={320 + 34 * Math.sin(((deg - 90) * Math.PI) / 180)}
-          stroke="white"
-          strokeWidth="0.4"
-          opacity="0.45"
-        />
-      ))}
-      <path d="M420 200 L420 180 L440 180" stroke="white" strokeWidth="0.5" fill="none" />
-      <path d="M780 320 L800 320 L800 340" stroke="white" strokeWidth="0.5" fill="none" />
-    </svg>
-  )
-}
-
-export function PitchBgWhyNow() {
-  return (
-    <svg
-      viewBox="0 0 1200 800"
-      className="h-full w-full"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden
-    >
-      <circle cx="600" cy="400" r="200" fill="none" stroke="white" strokeWidth="0.5" />
-      {Array.from({ length: 48 }).map((_, i) => {
-        const angle = (i / 48) * Math.PI * 2
-        return (
-          <line
-            key={i}
-            x1={600 + 40 * Math.cos(angle)}
-            y1={400 + 40 * Math.sin(angle)}
-            x2={600 + 200 * Math.cos(angle)}
-            y2={400 + 200 * Math.sin(angle)}
-            stroke="white"
-            strokeWidth={i % 3 === 0 ? 0.6 : 0.35}
-            opacity={0.25 + (i % 4) * 0.1}
-          />
-        )
-      })}
-      <circle cx="600" cy="400" r="28" fill="none" stroke="var(--color-brand)" strokeWidth="1.5" />
-      <circle cx="600" cy="400" r="12" fill="var(--color-brand)" opacity="0.6" />
-      <circle cx="600" cy="400" r="4" fill="var(--color-brand)" />
-    </svg>
-  )
-}
-
-export function PitchBgSolution() {
-  return (
-    <svg
-      viewBox="0 0 1200 800"
-      className="h-full w-full"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden
-    >
-      <path
-        d="M520 160 L520 620 Q600 640 680 620 L680 160 Q600 140 520 160 Z"
-        fill="none"
-        stroke="white"
-        strokeWidth="0.75"
-      />
-      <path d="M560 200 Q600 180 640 200" fill="none" stroke="white" strokeWidth="0.5" opacity="0.5" />
-      <path
-        d="M600 200 L600 120"
-        stroke="white"
-        strokeWidth="0.6"
-        opacity="0.7"
-        strokeDasharray="4 6"
-      />
-      <path
-        d="M600 620 L600 700"
-        stroke="var(--color-brand)"
-        strokeWidth="0.8"
-        strokeDasharray="2 4"
-      />
-      <path
-        d="M520 360 Q400 340 320 400"
-        fill="none"
-        stroke="white"
-        strokeWidth="0.55"
-        opacity="0.65"
-      />
-      <path
-        d="M680 360 Q800 380 880 320"
-        fill="none"
-        stroke="var(--color-brand)"
-        strokeWidth="0.55"
-        opacity="0.8"
-      />
-      <path
-        d="M600 480 L720 520 L600 560 L480 520 Z"
-        fill="none"
-        stroke="white"
-        strokeWidth="0.45"
-        opacity="0.5"
-      />
-      <circle cx="320" cy="400" r="6" fill="none" stroke="white" strokeWidth="0.5" />
-      <circle cx="880" cy="320" r="6" fill="none" stroke="var(--color-brand)" strokeWidth="0.5" />
-    </svg>
-  )
-}
-
-export function PitchBgScale() {
-  return (
-    <svg
-      viewBox="0 0 1200 800"
-      className="h-full w-full"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden
-    >
-      {[-60, -30, 0, 30, 60].map((lat) => (
-        <line
-          key={`lat-${lat}`}
-          x1="80"
-          y1={400 + lat * 5.5}
-          x2="1120"
-          y2={400 + lat * 5.5}
-          stroke="white"
-          strokeWidth="0.4"
-          opacity="0.35"
-        />
-      ))}
-      {[-120, -90, -60, -30, 0, 30, 60, 90, 120].map((lon) => (
-        <path
-          key={`lon-${lon}`}
-          d={`M ${600 + 480 * Math.sin((lon * Math.PI) / 180)} 80 Q ${600 + 200 * Math.sin((lon * Math.PI) / 180)} 400 ${600 + 480 * Math.sin((lon * Math.PI) / 180)} 720`}
-          fill="none"
-          stroke="white"
-          strokeWidth="0.35"
-          opacity="0.3"
-        />
-      ))}
-      {Array.from({ length: 120 }).map((_, i) => {
-        const x = 120 + (i % 15) * 68 + ((i * 17) % 40)
-        const y = 100 + Math.floor(i / 15) * 52 + ((i * 13) % 30)
-        return (
-          <circle
-            key={i}
-            cx={x}
-            cy={y}
-            r="1.5"
-            fill="var(--color-brand)"
-            opacity={0.4 + (i % 3) * 0.2}
-          />
-        )
-      })}
-    </svg>
+    </div>
   )
 }
