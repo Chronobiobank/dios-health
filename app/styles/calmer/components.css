@@ -1,0 +1,110 @@
+/* Calmer UX — reusable controls (does not override marketing .btn-primary layout helpers) */
+
+@layer components {
+  .btn-brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-brand);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md-calmer);
+    border: none;
+    font-family: var(--font-family-sans);
+    font-size: var(--text-nav-size);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+  }
+
+  .btn-brand:hover {
+    filter: brightness(0.92);
+  }
+
+  .btn-brand:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .calmer-input {
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border-calmer);
+    background-color: var(--color-bg-main);
+    padding: 0.625rem 1rem;
+    font-family: var(--font-family-sans);
+    font-size: var(--text-body-size);
+    line-height: 1.5;
+    color: var(--color-text-primary);
+    outline: none;
+    transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+  }
+
+  .calmer-input::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  .calmer-input:focus {
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 1px rgb(16 163 127 / 0.25);
+  }
+
+  .calmer-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .calmer-submit {
+    display: inline-flex;
+    height: 2.5rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: none;
+    background-color: var(--text-primary);
+    padding-inline: 1rem;
+    font-family: var(--font-family-sans);
+    font-size: var(--text-nav-size);
+    font-weight: var(--font-weight-medium);
+    color: #fff;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+  }
+
+  .calmer-submit:hover:not(:disabled) {
+    background-color: rgb(13 13 13 / 0.85);
+  }
+
+  .calmer-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  pre {
+    background-color: #0d0d0d;
+    color: #f8f8f2;
+    padding: 1rem;
+    border-radius: var(--radius-sm-calmer);
+    overflow-x: auto;
+    max-width: 100%;
+    line-height: 1.5;
+  }
+
+  pre code {
+    background: transparent;
+    padding: 0;
+  }
+
+  :not(pre) > code {
+    font-family: var(--font-family-mono);
+    font-size: 0.875em;
+    padding: 0.125rem 0.375rem;
+    border-radius: var(--radius-sm-calmer);
+    background-color: var(--color-bg-surface);
+    color: var(--color-text-primary);
+  }
+}

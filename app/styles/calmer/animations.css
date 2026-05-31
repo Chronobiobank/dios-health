@@ -1,0 +1,37 @@
+/* Calmer UX — subtle motion for hierarchy (not decorative noise) */
+
+@keyframes calmer-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@layer utilities {
+  .streaming-cursor::after {
+    content: '▋';
+    margin-left: 0.25rem;
+    color: var(--color-text-primary);
+    animation: calmer-blink 1s step-start infinite;
+  }
+
+  @keyframes calmer-shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .skeleton-card {
+    border-radius: var(--radius-md-calmer);
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-surface) 25%,
+      var(--color-border-calmer) 50%,
+      var(--color-bg-surface) 75%
+    );
+    background-size: 200% 100%;
+    animation: calmer-shimmer 1.5s infinite linear;
+  }
+}

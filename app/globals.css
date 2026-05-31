@@ -3,6 +3,13 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* Calmer UX — legibility, responsive rhythm, chat layout */
+@import "./styles/calmer/variables.css";
+@import "./styles/calmer/base.css";
+@import "./styles/calmer/components.css";
+@import "./styles/calmer/chat-interface.css";
+@import "./styles/calmer/animations.css";
+
 @custom-variant dark (&:is(.dark *));
 
 .dios-wordmark {
