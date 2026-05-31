@@ -1,11 +1,17 @@
 'use client'
 
 import Link from 'next/link'
+import { Check } from 'lucide-react'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 
 import { TimebotPulse, type TimebotPulseState } from '@/components/dashboard/timebot-pulse'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
-import type { TimebotData, TimebotScheduleItem, ScheduleStatus } from '@/lib/dashboard/timebot-data'
+import type {
+  TimebotData,
+  TimebotTimelineEvent,
+  TimebotTimelineGroup,
+} from '@/lib/dashboard/timebot-data'
+import type { ScheduleStatus, TimebotEventCategory } from '@/lib/dashboard/timebot-timeline'
 import { cn } from '@/lib/utils'
 
 type ChatMessage = {
@@ -18,49 +24,114 @@ type TimebotViewProps = {
   data: TimebotData
 }
 
+const PRECISION_HEADER: Record<TimebotData['precisionLabel'], string> = {
+  ESTIMATED: 'ESTIMATED',
+  PRECISION: 'PRECISION',
+  CONFIRMED: 'CONFIRMED',
+}
+
+const PRECISION_STYLE: Record<TimebotData['precisionLabel'], string> = {
+  ESTIMATED: 'bg-amber-500/10 text-amber-900',
+  PRECISION: 'bg-teal-600/10 text-teal-900',
+  CONFIRMED: 'bg-emerald-600/10 text-emerald-900',
+}
+
+const CATEGORY_STYLE: Record<TimebotEventCategory, string> = {
+  Light: 'bg-amber-500/10 text-amber-900',
+  Meal: 'bg-orange-500/10 text-orange-900',
+  Movement: 'bg-sky-500/10 text-sky-900',
+  Medication: 'bg-violet-500/10 text-violet-900',
+  Supplement: 'bg-teal-600/10 text-teal-900',
+  Darkness: 'bg-indigo-500/10 text-indigo-900',
+}
+
 const STATUS_LABEL: Record<ScheduleStatus, string> = {
   upcoming: 'Upcoming',
   now: 'Now',
   done: 'Done',
 }
 
-const STATUS_STYLE: Record<ScheduleStatus, string> = {
-  upcoming: 'bg-black/[0.04] text-black/50',
-  now: 'bg-teal-600/10 text-teal-800',
-  done: 'bg-black/[0.03] text-black/35',
+function StatusPill({ status }: { status: ScheduleStatus }) {
+  if (status === 'done') {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-600/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-emerald-800">
+        <Check className="h-3 w-3" aria-hidden />
+        Done
+      </span>
+    )
+  }
+
+  if (status === 'now') {
+    return (
+      <span className="inline-flex items-center rounded-full bg-teal-600/15 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-teal-800">
+        <span className="mr-1.5 inline-flex h-1.5 w-1.5 animate-pulse rounded-full bg-teal-600" aria-hidden />
+        Now
+      </span>
+    )
+  }
+
+  return (
+    <span className="rounded-full bg-black/[0.04] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-black/45">
+      {STATUS_LABEL.upcoming}
+    </span>
+  )
 }
 
-function ScheduleRow({ item }: { item: TimebotScheduleItem }) {
+function TimelineEventRow({ event }: { event: TimebotTimelineEvent }) {
   return (
-    <li className="relative flex gap-4 pb-8 last:pb-0">
-      <div className="relative z-[1] flex w-[4.5rem] shrink-0 flex-col items-end pt-0.5">
-        <span className="font-mono text-[11px] leading-tight text-black/45">{item.timeLabel}</span>
+    <li className="border-t border-black/[0.05] py-3 first:border-t-0 first:pt-0">
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <p className="text-[15px] font-medium leading-snug text-black">{event.name}</p>
+        <StatusPill status={event.status} />
       </div>
-
-      <div className="relative flex shrink-0 flex-col items-center">
+      <div className="mt-2 flex flex-wrap items-center gap-2">
         <span
           className={cn(
-            'relative z-[1] mt-1 h-2.5 w-2.5 rounded-full border-2 border-white',
-            item.status === 'now' ? 'bg-teal-600' : 'bg-black/15'
+            'rounded-full px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide',
+            CATEGORY_STYLE[event.category]
           )}
-        />
+        >
+          {event.category}
+        </span>
       </div>
-
-      <div className="min-w-0 flex-1 pb-1">
-        <div className="flex flex-wrap items-center gap-2">
-          <p className="text-[15px] font-medium leading-snug text-black">{item.label}</p>
-          <span
-            className={cn(
-              'rounded-full px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide',
-              STATUS_STYLE[item.status]
-            )}
-          >
-            {STATUS_LABEL[item.status]}
-          </span>
-        </div>
-        {item.detail ? <p className="mt-1 text-[13px] leading-relaxed text-black/55">{item.detail}</p> : null}
-      </div>
+      <p className="mt-2 text-[13px] leading-relaxed text-black/55">{event.instruction}</p>
     </li>
+  )
+}
+
+function TimelineGroup({ group }: { group: TimebotTimelineGroup }) {
+  return (
+    <section className="relative pl-0">
+      <p className="font-mono text-[15px] font-bold tabular-nums text-black">{group.timeDisplay}</p>
+      <ul className="mt-2">
+        {group.events.map((event) => (
+          <TimelineEventRow key={event.id} event={event} />
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+function TimebotWelcome({ data }: { data: TimebotData }) {
+  return (
+    <div className="mt-6 px-2 text-center">
+      <p className="text-[15px] leading-relaxed text-black/60">
+        Hi {data.firstName} — tell me which supplements and medications you take. I&apos;ll build
+        today&apos;s timing schedule around your body clock
+        {data.precisionLabel === 'ESTIMATED' ? ' (estimated from your questionnaire)' : ''}.
+      </p>
+      <p className="mt-3 text-[14px] leading-relaxed text-black/45">
+        Try: &ldquo;I take vitamin D, magnesium, and ramipril&rdquo;
+      </p>
+      {data.precisionLabel === 'ESTIMATED' ? (
+        <Link
+          href={PATIENT_ROUTES.streams}
+          className="mt-4 inline-flex text-sm font-medium text-teal-800 underline-offset-2 hover:underline"
+        >
+          Connect TipTraQ or add streams for sharper timing →
+        </Link>
+      ) : null}
+    </div>
   )
 }
 
@@ -129,96 +200,82 @@ export function TimebotView({ data }: TimebotViewProps) {
     }
   }
 
-  const medications = data.items.filter((item) => item.kind === 'medication')
-  const cues = data.items.filter((item) => item.kind === 'cue')
-  const hasSchedule = medications.length > 0 || cues.length > 0
+  const showWelcome = !data.hasTimeline
+  const showChatInWelcome = showWelcome && messages.length > 0
 
   return (
     <div className="flex min-h-0 flex-1 flex-col pb-36">
       <div className="flex flex-col items-center px-2 pt-2 text-center">
         <TimebotPulse state={pulseState} />
         <p className="mt-4 text-[15px] font-semibold text-black">{data.firstName}</p>
-        <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.08em] text-black/40">
-          {data.dlmoEstimated ? 'Proxy DLMO (estimated)' : 'Your DIʘS timebot is active'}
-        </p>
-        {data.dlmoTimeLabel !== '—' ? (
-          <p className="mt-2 font-mono text-[13px] text-teal-800">DLMO {data.dlmoTimeLabel}</p>
-        ) : null}
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+          <span
+            className={cn(
+              'rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.1em]',
+              PRECISION_STYLE[data.precisionLabel]
+            )}
+          >
+            {PRECISION_HEADER[data.precisionLabel]}
+          </span>
+          <span className="font-mono text-[12px] text-black/50">DLMO {data.dlmoTimeLabel}</span>
+        </div>
       </div>
 
-      {trackedSupplements.length > 0 ? (
-        <p className="mt-6 text-center text-[13px] leading-relaxed text-black/55">
-          Tracking: {trackedSupplements.join(', ')}
-        </p>
-      ) : null}
-
-      {!hasSchedule ? (
-        <div className="mt-8 px-2 text-center">
-          <p className="text-[15px] leading-relaxed text-black/60">
-            {data.dlmoEstimated
-              ? 'Tell me which supplements you take — I’ll map optimal timing to your estimated body clock. Upload TipTraQ later to sharpen every window.'
-              : 'Your medication and cue schedule will appear here once timing modules are calculated.'}
-          </p>
-          {data.dlmoEstimated ? (
-            <Link
-              href={PATIENT_ROUTES.streams}
-              className="mt-4 inline-flex text-sm font-medium text-teal-800 underline-offset-2 hover:underline"
-            >
-              Connect TipTraQ for sharper timing →
-            </Link>
-          ) : null}
-        </div>
-      ) : (
-        <div className="relative mt-10 px-1">
-          <div
-            className="pointer-events-none absolute bottom-0 left-[calc(4.5rem+0.3125rem)] top-0 w-px bg-black/10"
-            aria-hidden
-          />
-
-          {medications.length > 0 ? (
-            <section className="mb-10">
-              <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.08em] text-black/40">
-                Today&apos;s timing schedule
-              </p>
-              <ol>{medications.map((item) => <ScheduleRow key={item.id} item={item} />)}</ol>
-            </section>
-          ) : null}
-
-          {cues.length > 0 ? (
-            <section>
-              <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.08em] text-black/40">
-                Cue schedule
-              </p>
-              <ol>{cues.map((item) => <ScheduleRow key={item.id} item={item} />)}</ol>
-            </section>
-          ) : null}
-        </div>
-      )}
-
-      {messages.length > 0 ? (
-        <div className="mt-8 space-y-3 border-t border-black/[0.06] pt-6">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={cn(
-                'max-w-[92%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed',
-                message.role === 'user'
-                  ? 'ml-auto bg-black text-white'
-                  : 'mr-auto border border-black/[0.06] bg-[#F9F9F9] text-black/80'
-              )}
-            >
-              {message.text}
+      {showWelcome ? (
+        <>
+          <TimebotWelcome data={data} />
+          {showChatInWelcome ? (
+            <div className="mt-8 space-y-3 border-t border-black/[0.06] px-1 pt-6">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={cn(
+                    'max-w-[92%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed',
+                    message.role === 'user'
+                      ? 'ml-auto bg-black text-white'
+                      : 'mr-auto border border-black/[0.06] bg-[#F9F9F9] text-black/80'
+                  )}
+                >
+                  {message.text}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      ) : null}
+          ) : null}
+        </>
+      ) : (
+        <>
+          {trackedSupplements.length > 0 ? (
+            <p className="mt-4 text-center text-[12px] leading-relaxed text-black/45">
+              Supplements: {trackedSupplements.join(', ')}
+            </p>
+          ) : null}
+
+          {messages.length > 0 ? (
+            <div className="mt-8 space-y-3 border-t border-black/[0.06] px-1 pt-6">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={cn(
+                    'max-w-[92%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed',
+                    message.role === 'user'
+                      ? 'ml-auto bg-black text-white'
+                      : 'mr-auto border border-black/[0.06] bg-[#F9F9F9] text-black/80'
+                  )}
+                >
+                  {message.text}
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </>
+      )}
 
       <form
         onSubmit={handleSubmit}
         className="fixed inset-x-0 bottom-[calc(4.25rem+env(safe-area-inset-bottom))] z-30 border-t border-black/10 bg-white/95 px-5 py-3 backdrop-blur-md sm:mx-auto sm:max-w-[640px]"
       >
         <label htmlFor="timebot-input" className="sr-only">
-          Ask DIʘS anything about your timing
+          Ask DIOS anything about your timing
         </label>
         <div className="flex gap-2">
           <input
@@ -226,7 +283,7 @@ export function TimebotView({ data }: TimebotViewProps) {
             type="text"
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            placeholder="Ask DIʘS anything about your timing"
+            placeholder="Ask DIOS anything about your timing"
             disabled={loading}
             className="type-body min-w-0 flex-1 rounded-full border border-black/10 bg-white px-4 py-2.5 text-[15px] outline-none placeholder:text-black/35 focus:border-teal-700/40 focus:ring-1 focus:ring-teal-700/20"
           />

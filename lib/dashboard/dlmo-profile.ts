@@ -7,10 +7,13 @@ import {
 } from '@/lib/dlmo'
 import { formatMinutesLabel, parseDbTimeToMinutes } from '@/lib/dashboard/time-utils'
 
+export type DlmoDominantLayer = 'smartphone' | 'blood' | 'tiptraq' | null
+
 export type DlmoProfileRow = {
   nights_count: number | null
   proxy_dlmo_rolling: string | null
   proxy_dlmo_minutes_from_midnight: number | null
+  dominant_layer?: DlmoDominantLayer
   confidence_score: number | null
   confidence_band_minutes: number | null
   confidence_label: string | null

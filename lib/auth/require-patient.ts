@@ -26,6 +26,7 @@ export type PatientProfileRow = {
   chronotype_q2: string | null
   chronotype_q3: string | null
   current_supplements: string[] | null
+  current_medications: string[] | null
   wearable_connected: string | null
   data_share_gp: boolean
   data_share_research: boolean

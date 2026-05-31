@@ -39,7 +39,9 @@ export async function POST(request: Request) {
       supabase.from('dlmo_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
       supabase
         .from('patient_profiles')
-        .select('first_name, location_city, location_country, chronotype_q3, current_supplements')
+        .select(
+          'first_name, location_city, location_country, chronotype_q3, current_supplements, current_medications'
+        )
         .eq('id', user.id)
         .maybeSingle(),
       supabase
@@ -105,7 +107,7 @@ export async function POST(request: Request) {
     })
 
     const context = buildTimebotContext(profileRow, schedule, supplementContext)
-    const isFirstTimeUser = !hasTipTraqData || schedule.dlmoEstimated
+    const isFirstTimeUser = schedule.precisionLabel === 'ESTIMATED'
 
     const anthropic = createAnthropicClient()
 

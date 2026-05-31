@@ -28,6 +28,14 @@ export function formatMinutesLabel(minutes: number): string {
   return `${hours12}:${mins.toString().padStart(2, '0')}${period}`
 }
 
+/** 24-hour clock for timeline headers (e.g. 07:30). */
+export function formatMinutes24h(minutes: number): string {
+  const normalized = ((minutes % 1440) + 1440) % 1440
+  const hours24 = Math.floor(normalized / 60)
+  const mins = normalized % 60
+  return `${hours24.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`
+}
+
 export function minutesToAngle(minutes: number): number {
   const normalized = ((minutes % 1440) + 1440) % 1440
   return (normalized / 1440) * 360 - 90

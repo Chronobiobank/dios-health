@@ -55,9 +55,31 @@ type SupplementTimingTemplate = {
   buildMessage: (timeLabel: string, estimated: boolean) => string
 }
 
+export const SUPPLEMENT_OFFSET_MINUTES: Record<CanonicalSupplement, number> = {
+  'Vitamin D3': -540,
+  Magnesium: -90,
+  'Vitamin B2': -600,
+  'Vitamin B12': -600,
+  'Vitamin B5': -480,
+  Zinc: -180,
+  'Omega-3': -540,
+  Melatonin: -30,
+}
+
+export const SUPPLEMENT_SHORT_INSTRUCTIONS: Record<CanonicalSupplement, string> = {
+  'Vitamin D3': 'Take with your largest meal',
+  Magnesium: 'Take with water',
+  'Vitamin B2': 'Take with breakfast',
+  'Vitamin B12': 'Take with breakfast',
+  'Vitamin B5': 'Take with lunch',
+  Zinc: 'Take with dinner',
+  'Omega-3': 'Take with your largest meal',
+  Melatonin: 'Take in your melatonin window only',
+}
+
 const SUPPLEMENT_TIMING: Record<CanonicalSupplement, SupplementTimingTemplate> = {
   'Vitamin D3': {
-    offsetMinutes: -540,
+    offsetMinutes: SUPPLEMENT_OFFSET_MINUTES['Vitamin D3'],
     buildMessage: (time, estimated) =>
       `${estimated ? '[ESTIMATED] ' : ''}Take with your largest meal. Your window is ${time} — when your VDR activation from morning sunlight is peaking.`,
   },
@@ -67,17 +89,17 @@ const SUPPLEMENT_TIMING: Record<CanonicalSupplement, SupplementTimingTemplate> =
       `${estimated ? '[ESTIMATED] ' : ''}Take ${time}. Supports the parasympathetic shift that starts melatonin production.`,
   },
   'Vitamin B2': {
-    offsetMinutes: -600,
+    offsetMinutes: SUPPLEMENT_OFFSET_MINUTES['Vitamin B2'],
     buildMessage: (time, estimated) =>
       `${estimated ? '[ESTIMATED] ' : ''}Take with breakfast. ${time}.`,
   },
   'Vitamin B12': {
-    offsetMinutes: -600,
+    offsetMinutes: SUPPLEMENT_OFFSET_MINUTES['Vitamin B12'],
     buildMessage: (time, estimated) =>
       `${estimated ? '[ESTIMATED] ' : ''}Take with breakfast. ${time}. Avoid in the evening — B12 can delay sleep onset.`,
   },
   'Vitamin B5': {
-    offsetMinutes: -480,
+    offsetMinutes: SUPPLEMENT_OFFSET_MINUTES['Vitamin B5'],
     buildMessage: (time, estimated) =>
       `${estimated ? '[ESTIMATED] ' : ''}Take with lunch. ${time}.`,
   },
@@ -87,12 +109,12 @@ const SUPPLEMENT_TIMING: Record<CanonicalSupplement, SupplementTimingTemplate> =
       `${estimated ? '[ESTIMATED] ' : ''}Take with dinner. ${time}.`,
   },
   'Omega-3': {
-    offsetMinutes: -540,
+    offsetMinutes: SUPPLEMENT_OFFSET_MINUTES['Omega-3'],
     buildMessage: (time, estimated) =>
       `${estimated ? '[ESTIMATED] ' : ''}Take with your largest meal. ${time} — fat absorption peaks mid-day.`,
   },
   Melatonin: {
-    offsetMinutes: -30,
+    offsetMinutes: SUPPLEMENT_OFFSET_MINUTES.Melatonin,
     buildMessage: (time, estimated) =>
       `${estimated ? '[ESTIMATED] ' : ''}Take ${time}. Do not take earlier or later than this window.`,
   },
@@ -239,7 +261,7 @@ This patient is new — they may not have TipTraQ data yet. Use ESTIMATED DLMO f
 SUPPLEMENT EXTRACTION (critical):
 Recognised supplements: ${supplementList}.
 When the patient mentions any supplement — including aliases like "vitamin D", "fish oil", "magnesium glycinate", "B12" — the server extracts and saves canonical names automatically.
-When new supplements were extracted, confirm what was saved and give optimal timing using the supplement timing guidance lines in context (verbatim wording, including ESTIMATED if present).
+When new supplements were extracted, confirm what was saved and give optimal timing using Today's unified schedule in context (exact times).
 
 MEDICATION EXTRACTION:
 Also note medications mentioned (atorvastatin, ramipril, sertraline, metformin, etc.). Explain medication windows will personalise after TipTraQ or more data layers.
@@ -250,9 +272,10 @@ Keep answers under 150 words. Never diagnose or change prescriptions. Encourage 
   return `You are DIOS Timebot — a calm, clinical timing assistant for patients on chronotherapy.
 
 Recognised supplements: ${supplementList}. When supplements are mentioned, use the supplement timing guidance in context.
-When new supplements were extracted this turn, confirm they were saved and share optimal timing lines from context.
+When new supplements were extracted this turn, confirm they were saved and quote exact times from Today's unified schedule.
 
-Answer in plain English using the patient's DLMO profile and today's schedule.
+Answer using the patient's DLMO profile and Today's unified schedule in context.
+When asked when to take a medication or supplement, quote the exact time from that schedule (do not invent times).
 Keep answers under 120 words. Never diagnose or change prescriptions. Encourage discussing changes with their GP.
-If asked about medications or supplements not in context, explain what you can track and suggest adding them in chat or Settings.`
+If asked about medications or supplements not on today's schedule, explain what you can track and suggest adding them in chat.`
 }
