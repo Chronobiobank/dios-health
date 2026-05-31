@@ -8,8 +8,10 @@ import {
   mapEdfParseError,
 } from '@/lib/tiptraq/edf-parser'
 import {
+  logPostgrestError,
   mapInsertError,
   resolveReportDate,
+  summarizeDbValue,
   toNightInput,
 } from '@/lib/tiptraq/extraction'
 import { syncDlmoProfileForPatient } from '@/lib/tiptraq/sync-dlmo-profile'
@@ -133,7 +135,7 @@ export async function POST(request: NextRequest) {
     const nightInput = toNightInput(extracted)
     const dlmoResult = calculateNightDLMO(nightInput)
 
-    const { error: insertError } = await supabase.from('tiptraq_nights').insert({
+    const insertRow = {
       patient_id: user.id,
       report_date: reportDate,
       pdf_path: storagePath,
@@ -183,17 +185,61 @@ export async function POST(request: NextRequest) {
       rem_delay_flag: dlmoResult.rem_delay_flag,
       apnea_confound_flag: dlmoResult.apnea_confound_flag,
       extraction_model: String(extracted.algorithm_version ?? 'edf-channel-v1'),
+    }
+
+    console.info('[TipTraQ] EDF parsed — inserting tiptraq_nights row', {
+      userId: user.id,
+      storagePath,
+      reportDate,
+      edfType: extracted.algorithm_version,
+      channelCount: Array.isArray(extracted.edf_channels) ? extracted.edf_channels.length : null,
+      timeFields: {
+        recording_start: summarizeDbValue(insertRow.recording_start),
+        recording_end: summarizeDbValue(insertRow.recording_end),
+        sleep_onset: summarizeDbValue(insertRow.sleep_onset),
+        sleep_offset: summarizeDbValue(insertRow.sleep_offset),
+        first_rem_onset: summarizeDbValue(insertRow.first_rem_onset),
+        proxy_dlmo_time: summarizeDbValue(insertRow.proxy_dlmo_time),
+        dlmo_baseline_estimate: summarizeDbValue(insertRow.dlmo_baseline_estimate),
+      },
+      keyMetrics: {
+        tst_minutes: summarizeDbValue(insertRow.tst_minutes),
+        ahi: summarizeDbValue(insertRow.ahi),
+        rem_pct_tst: summarizeDbValue(insertRow.rem_pct_tst),
+        hypoxic_burden: summarizeDbValue(insertRow.hypoxic_burden),
+        confidence_score: summarizeDbValue(insertRow.confidence_score),
+      },
     })
 
+    const { error: insertError } = await supabase.from('tiptraq_nights').insert(insertRow)
+
     if (insertError) {
-      console.error('Insert error:', insertError)
+      logPostgrestError('tiptraq_nights insert failed', insertError, {
+        userId: user.id,
+        reportDate,
+        storagePath,
+        mappedClientMessage: mapInsertError(insertError.message),
+        invalidFields: Object.fromEntries(
+          Object.entries(insertRow).map(([key, value]) => [key, summarizeDbValue(value)])
+        ),
+      })
       return errorResponse(mapInsertError(insertError.message), 500)
     }
+
+    console.info('[TipTraQ] tiptraq_nights insert succeeded', {
+      userId: user.id,
+      reportDate,
+      storagePath,
+    })
 
     const { error: syncError, rolling } = await syncDlmoProfileForPatient(supabase, user.id)
 
     if (syncError || !rolling) {
-      console.error('DLMO profile sync error:', syncError)
+      console.error('[TipTraQ] DLMO profile sync failed after insert', {
+        userId: user.id,
+        reportDate,
+        syncError,
+      })
       return errorResponse(syncError ?? 'Failed to update body clock profile', 500)
     }
 

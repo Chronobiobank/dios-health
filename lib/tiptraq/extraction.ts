@@ -235,6 +235,43 @@ export function toNightInput(extracted: Record<string, unknown>): TipTraQNight {
   }
 }
 
+export type PostgrestErrorLike = {
+  code?: string | null
+  message?: string
+  details?: string | null
+  hint?: string | null
+}
+
+export function summarizeDbValue(value: unknown): string {
+  if (value === null) return 'null'
+  if (value === undefined) return 'undefined'
+  if (typeof value === 'number') {
+    return Number.isFinite(value) ? `number(${value})` : `number(NaN/Infinity)`
+  }
+  if (typeof value === 'boolean') return `boolean(${value})`
+  if (typeof value === 'string') {
+    const preview = value.length > 48 ? `${value.slice(0, 48)}…` : value
+    return `string("${preview}")`
+  }
+  return typeof value
+}
+
+export function logPostgrestError(
+  context: string,
+  error: PostgrestErrorLike | null,
+  meta?: Record<string, unknown>
+) {
+  if (!error) return
+
+  console.error(`[TipTraQ] ${context}`, {
+    pgCode: error.code ?? null,
+    message: error.message ?? null,
+    details: error.details ?? null,
+    hint: error.hint ?? null,
+    ...meta,
+  })
+}
+
 export function mapStorageUploadError(message: string): string {
   const lower = message.toLowerCase()
 
@@ -264,8 +301,20 @@ export function mapInsertError(message: string): string {
     return 'This report date has already been uploaded.'
   }
 
+  if (lower.includes('row-level security') || lower.includes('violates row-level security')) {
+    return 'TipTraQ insert permissions are missing. Run supabase/run-tiptraq-setup.sql in Supabase SQL Editor.'
+  }
+
   if (lower.includes('invalid input syntax') && lower.includes('time')) {
     return 'Could not read sleep times from this recording. Check the EDF file and try again.'
+  }
+
+  if (lower.includes('numeric field overflow') || lower.includes('out of range')) {
+    return 'Sleep metrics from this EDF are out of range. Check the file and try again.'
+  }
+
+  if (lower.includes('null value') && lower.includes('not-null')) {
+    return 'Required sleep data is missing from this EDF recording.'
   }
 
   return 'Failed to save night data. Please try again.'
