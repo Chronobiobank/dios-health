@@ -112,12 +112,13 @@ function TimelineGroup({ group }: { group: TimebotTimelineGroup }) {
   )
 }
 
-function TimebotWelcome({ data }: { data: TimebotData }) {
+function VayaWelcome({ data }: { data: TimebotData }) {
   return (
     <div className="mt-6 px-2 text-center">
-      <p className="text-[15px] leading-relaxed text-black/60">
-        Hi {data.firstName} — tell me which supplements and medications you take. I&apos;ll build
-        today&apos;s timing schedule around your body clock
+      <p className="font-mono text-[11px] uppercase tracking-widest text-black/40">Vaya session</p>
+      <p className="mt-3 text-[15px] leading-relaxed text-black/60">
+        Hi {data.firstName} — I&apos;m Vaya. Tell me what supplements and medications you take.
+        I&apos;ll build today&apos;s light targets and dose timing around your body clock
         {data.precisionLabel === 'ESTIMATED' ? ' (estimated from your questionnaire)' : ''}.
       </p>
       <p className="mt-3 text-[14px] leading-relaxed text-black/45">
@@ -175,7 +176,7 @@ export function TimebotView({ data }: TimebotViewProps) {
       }
 
       if (!response.ok) {
-        setError(result.error ?? 'Timebot could not answer right now.')
+        setError(result.error ?? 'Vaya could not answer right now.')
         setPulseState('idle')
         return
       }
@@ -193,7 +194,7 @@ export function TimebotView({ data }: TimebotViewProps) {
       if (respondTimer.current) window.clearTimeout(respondTimer.current)
       respondTimer.current = window.setTimeout(() => setPulseState('idle'), 3000)
     } catch {
-      setError('Timebot could not answer right now.')
+      setError('Vaya could not answer right now.')
       setPulseState('idle')
     } finally {
       setLoading(false)
@@ -223,7 +224,7 @@ export function TimebotView({ data }: TimebotViewProps) {
 
       {showWelcome ? (
         <>
-          <TimebotWelcome data={data} />
+          <VayaWelcome data={data} />
           {showChatInWelcome ? (
             <div className="chat-thread mt-8 border-t border-black/[0.06] pt-6">
               <div className="chat-messages" role="log" aria-live="polite">
@@ -282,16 +283,16 @@ export function TimebotView({ data }: TimebotViewProps) {
         onSubmit={handleSubmit}
         className="input-sticky-dock fixed inset-x-0 bottom-[4.25rem] sm:bottom-[4.25rem]"
       >
-        <label htmlFor="timebot-input" className="sr-only">
-          Ask DIOS anything about your timing
+        <label htmlFor="vaya-input" className="sr-only">
+          Ask Vaya about your light and timing
         </label>
         <div className="input-sticky-dock__inner">
           <input
-            id="timebot-input"
+            id="vaya-input"
             type="text"
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            placeholder="Ask DIOS anything about your timing"
+            placeholder="Ask Vaya about your light and timing"
             disabled={loading}
             className="calmer-input"
           />

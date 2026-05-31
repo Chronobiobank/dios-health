@@ -46,7 +46,7 @@ export default function VayaPage() {
             Start your first Vaya session →
           </Link>
           <Link
-            href="/signin"
+            href="/signin?next=/dashboard/vaya"
             className="inline-flex h-12 items-center justify-center rounded-full border px-8 text-[15px] font-medium text-white/70 transition-colors hover:text-white"
             style={{ borderColor: 'rgba(255,255,255,0.2)' }}
           >

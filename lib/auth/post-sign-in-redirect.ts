@@ -18,7 +18,7 @@ export async function resolveSignInDestination(
     return defaultDestination
   }
 
-  if (defaultDestination === PATIENT_ROUTES.dashboard && nextParam.startsWith('/dashboard')) {
+  if (defaultDestination === PATIENT_ROUTES.vaya && nextParam.startsWith('/dashboard')) {
     return nextParam
   }
 

@@ -10,8 +10,9 @@ export const AUTH_ROUTES = {
 
 export const PATIENT_ROUTES = {
   dashboard: '/dashboard',
+  /** Legacy URL — redirects to {@link PATIENT_ROUTES.vaya}. */
   timebot: '/dashboard/timebot',
-  vaya: '/dashboard/timebot',
+  vaya: '/dashboard/vaya',
   insights: '/dashboard/insights',
   streams: '/dashboard/streams',
   streamsBloods: '/dashboard/streams/bloods',

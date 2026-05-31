@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
         headers: [{ key: 'Content-Type', value: 'application/manifest+json' }],
       },
       {
+        source: '/dashboard/vaya',
+        headers: [{ key: 'Permissions-Policy', value: 'camera=self' }],
+      },
+      {
         source: '/dashboard/timebot',
         headers: [{ key: 'Permissions-Policy', value: 'camera=self' }],
       },

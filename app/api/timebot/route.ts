@@ -130,7 +130,7 @@ export async function POST(request: Request) {
       .trim()
 
     if (!answer) {
-      return NextResponse.json({ error: 'Timebot returned an empty response. Try again.' }, { status: 502 })
+      return NextResponse.json({ error: 'Vaya returned an empty response. Try again.' }, { status: 502 })
     }
 
     return NextResponse.json({
@@ -140,8 +140,8 @@ export async function POST(request: Request) {
   } catch (error) {
     const mapped = mapAnthropicError(error)
     if (mapped) {
-      return NextResponse.json({ error: mapped.replace('Report extraction', 'Timebot') }, { status: 502 })
+      return NextResponse.json({ error: mapped.replace('Report extraction', 'Vaya') }, { status: 502 })
     }
-    return NextResponse.json({ error: 'Could not reach Timebot. Please try again.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not reach Vaya. Please try again.' }, { status: 500 })
   }
 }

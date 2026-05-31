@@ -23,10 +23,11 @@ const TABS: NavTab[] = [
     match: (path) => path === PATIENT_ROUTES.dashboard,
   },
   {
-    label: 'Timebot',
-    href: PATIENT_ROUTES.timebot,
+    label: 'Vaya',
+    href: PATIENT_ROUTES.vaya,
     icon: Bot,
-    match: (path) => path === PATIENT_ROUTES.timebot,
+    match: (path) =>
+      path === PATIENT_ROUTES.vaya || path === PATIENT_ROUTES.timebot,
   },
   {
     label: 'Insights',

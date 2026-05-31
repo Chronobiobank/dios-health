@@ -97,7 +97,7 @@ export function PatientSignupWizard() {
           .maybeSingle()
 
         if (isPatientOnboardingComplete(existingPatient)) {
-          router.replace(PATIENT_ROUTES.dashboard)
+          router.replace(PATIENT_ROUTES.vaya)
           return
         }
 
@@ -239,7 +239,7 @@ export function PatientSignupWizard() {
     }
 
     router.refresh()
-    router.push(PATIENT_ROUTES.dashboard)
+    router.push(PATIENT_ROUTES.vaya)
   }
 
   function canContinueAboutYou() {
