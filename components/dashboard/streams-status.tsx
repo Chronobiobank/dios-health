@@ -17,10 +17,16 @@ type StreamRow = {
 type StreamsStatusProps = {
   wearableConnected: string | null
   tipTraqNightsCount?: number
+  bloodPanelsCount?: number
 }
 
-export function StreamsStatus({ wearableConnected, tipTraqNightsCount = 0 }: StreamsStatusProps) {
+export function StreamsStatus({
+  wearableConnected,
+  tipTraqNightsCount = 0,
+  bloodPanelsCount = 0,
+}: StreamsStatusProps) {
   const tipTraqLive = tipTraqNightsCount > 0
+  const cityLabsConnected = bloodPanelsCount > 0
 
   const streams: StreamRow[] = [
     {
@@ -32,10 +38,10 @@ export function StreamsStatus({ wearableConnected, tipTraqNightsCount = 0 }: Str
     },
     {
       name: 'City Labs',
-      fill: 0,
-      status: 'Order panel',
-      href: PATIENT_ROUTES.streams,
-      actionLabel: 'Order panel →',
+      fill: cityLabsConnected ? 0.7 : 0,
+      status: cityLabsConnected ? 'Connected' : 'Not connected',
+      href: PATIENT_ROUTES.streamsBloods,
+      actionLabel: 'Enter results →',
     },
     {
       name: 'Siloton',

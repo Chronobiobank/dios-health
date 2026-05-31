@@ -19,6 +19,11 @@ export default async function DashboardStreamsPage() {
     .eq('patient_id', user.id)
     .order('report_date', { ascending: false })
 
+  const { count: bloodPanelsCount } = await supabase
+    .from('blood_circadian_panels')
+    .select('id', { count: 'exact', head: true })
+    .eq('patient_id', user.id)
+
   const nightHistory = (nights ?? []) as TipTraqNightRow[]
 
   return (
@@ -45,7 +50,11 @@ export default async function DashboardStreamsPage() {
         </div>
       ) : null}
 
-      <StreamsStatus wearableConnected={patient.wearable_connected} tipTraqNightsCount={nightHistory.length} />
+      <StreamsStatus
+        wearableConnected={patient.wearable_connected}
+        tipTraqNightsCount={nightHistory.length}
+        bloodPanelsCount={bloodPanelsCount ?? 0}
+      />
     </>
   )
 }

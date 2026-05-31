@@ -13,6 +13,7 @@ export const PATIENT_ROUTES = {
   timebot: '/dashboard/timebot',
   insights: '/dashboard/insights',
   streams: '/dashboard/streams',
+  streamsBloods: '/dashboard/streams/bloods',
   dataControls: '/dashboard/data-controls',
   profile: '/dashboard/profile',
   report: '/dashboard/report',

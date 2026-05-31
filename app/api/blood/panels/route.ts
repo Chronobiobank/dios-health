@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 
+import { calculateBloodPanelDlmo } from '@/lib/dashboard/blood-panel-gominak'
 import { mergeDlmoLayers } from '@/lib/dashboard/dlmo-merge'
 import { createClient } from '@/lib/supabase/server'
 
@@ -38,18 +39,54 @@ export async function POST(request: Request) {
 
     const body = (await request.json()) as BloodPanelBody
 
+    const hasCoreMarkers =
+      body.vitamin_d3_nmoll != null &&
+      body.vitamin_b12_pmoll != null &&
+      body.ferritin_ugl != null
+
     if (body.proxy_dlmo_minutes_from_midnight == null || body.confidence_score == null) {
-      return errorResponse('proxy_dlmo_minutes_from_midnight and confidence_score are required', 400)
+      if (!hasCoreMarkers) {
+        return errorResponse(
+          'Vitamin D3, B12, ferritin, or explicit proxy_dlmo_minutes_from_midnight and confidence_score are required',
+          400
+        )
+      }
+    }
+
+    let proxyDlmoMinutes = body.proxy_dlmo_minutes_from_midnight ?? null
+    let confidenceScore = body.confidence_score ?? null
+    let confidenceBandMinutes = body.confidence_band_minutes ?? null
+    let confidenceLabel = body.confidence_label ?? null
+
+    if (proxyDlmoMinutes == null || confidenceScore == null) {
+      const { data: profile } = await supabase
+        .from('dlmo_profiles')
+        .select('proxy_dlmo_minutes_from_midnight')
+        .eq('patient_id', user.id)
+        .maybeSingle()
+
+      const computed = calculateBloodPanelDlmo({
+        vitamin_d3_nmoll: body.vitamin_d3_nmoll!,
+        vitamin_b12_pmoll: body.vitamin_b12_pmoll!,
+        ferritin_ugl: body.ferritin_ugl!,
+        vitamin_b5_umoll: body.vitamin_b5_umoll ?? null,
+        baselineDlmoMinutes: profile?.proxy_dlmo_minutes_from_midnight ?? null,
+      })
+
+      proxyDlmoMinutes = computed.proxy_dlmo_minutes_from_midnight
+      confidenceScore = computed.confidence_score
+      confidenceBandMinutes = computed.confidence_band_minutes
+      confidenceLabel = computed.confidence_label
     }
 
     const { data: panel, error: insertError } = await supabase
       .from('blood_circadian_panels')
       .insert({
         patient_id: user.id,
-        proxy_dlmo_minutes_from_midnight: body.proxy_dlmo_minutes_from_midnight,
-        confidence_score: body.confidence_score,
-        confidence_band_minutes: body.confidence_band_minutes ?? null,
-        confidence_label: body.confidence_label ?? null,
+        proxy_dlmo_minutes_from_midnight: proxyDlmoMinutes,
+        confidence_score: confidenceScore,
+        confidence_band_minutes: confidenceBandMinutes,
+        confidence_label: confidenceLabel,
         vitamin_d3_nmoll: body.vitamin_d3_nmoll ?? null,
         vitamin_b12_pmoll: body.vitamin_b12_pmoll ?? null,
         ferritin_ugl: body.ferritin_ugl ?? null,
