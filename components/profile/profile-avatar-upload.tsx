@@ -59,6 +59,10 @@ export function ProfileAvatarUpload({ fullName, initialAvatarUrl }: ProfileAvata
   }
 
   async function removePhoto() {
+    if (!window.confirm('Delete your profile photo?')) {
+      return
+    }
+
     setRemoving(true)
     setError(null)
 
@@ -105,7 +109,7 @@ export function ProfileAvatarUpload({ fullName, initialAvatarUrl }: ProfileAvata
             onClick={removePhoto}
             className="h-10 rounded-full border border-black/10 px-5 text-sm font-medium text-black transition-colors hover:bg-black/5 disabled:opacity-60"
           >
-            {removing ? 'Removing…' : 'Remove'}
+            {removing ? 'Deleting…' : 'Delete photo'}
           </button>
         ) : null}
       </div>

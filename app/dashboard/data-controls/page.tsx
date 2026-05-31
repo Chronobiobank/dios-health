@@ -1,11 +1,23 @@
 import { DataControlsPanel } from '@/components/dashboard/data-controls-panel'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
+import { TipTraqNightList } from '@/components/dashboard/tiptraq-night-list'
 import { SignOutButton } from '@/components/auth/sign-out-button'
 import { ProfileAvatarUpload } from '@/components/profile/profile-avatar-upload'
 import { requirePatientSession } from '@/lib/auth/require-patient'
+import { type TipTraqNightRow } from '@/lib/dashboard/dlmo-profile'
+import { createClient } from '@/lib/supabase/server'
 
 export default async function DashboardDataControlsPage() {
   const { user, profile, patient } = await requirePatientSession()
+  const supabase = await createClient()
+
+  const { data: nights } = await supabase
+    .from('tiptraq_nights')
+    .select('id, report_date, proxy_dlmo_time, confidence_score, confidence_label')
+    .eq('patient_id', user.id)
+    .order('report_date', { ascending: false })
+
+  const nightHistory = (nights ?? []) as TipTraqNightRow[]
 
   return (
     <>
@@ -21,6 +33,12 @@ export default async function DashboardDataControlsPage() {
       <section className="mt-8">
         <ProfileAvatarUpload fullName={profile.full_name ?? 'Patient'} initialAvatarUrl={profile.avatar_url} />
       </section>
+
+      {nightHistory.length > 0 ? (
+        <div className="mt-10">
+          <TipTraqNightList nights={nightHistory} title="Your TipTraQ recordings" />
+        </div>
+      ) : null}
 
       <section className="mt-10">
         <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">Data controls</h2>

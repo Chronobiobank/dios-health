@@ -93,6 +93,13 @@ create policy "Patients can insert own tiptraq nights"
   to authenticated
   with check (auth.uid() = patient_id);
 
+drop policy if exists "Patients can delete own tiptraq nights" on public.tiptraq_nights;
+
+create policy "Patients can delete own tiptraq nights"
+  on public.tiptraq_nights for delete
+  to authenticated
+  using (auth.uid() = patient_id);
+
 -- ─── Rolling DLMO summary per patient ─────────────────────────────────────────
 create table if not exists public.dlmo_profiles (
   id uuid primary key default gen_random_uuid(),
