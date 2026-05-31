@@ -225,20 +225,24 @@ export function TimebotView({ data }: TimebotViewProps) {
         <>
           <TimebotWelcome data={data} />
           {showChatInWelcome ? (
-            <div className="mt-8 space-y-3 border-t border-black/[0.06] px-1 pt-6">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={cn(
-                    'max-w-[92%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed',
-                    message.role === 'user'
-                      ? 'ml-auto bg-black text-white'
-                      : 'mr-auto border border-black/[0.06] bg-[#F9F9F9] text-black/80'
-                  )}
-                >
-                  {message.text}
-                </div>
-              ))}
+            <div className="chat-thread mt-8 border-t border-black/[0.06] pt-6">
+              <div className="chat-messages" role="log" aria-live="polite">
+                {messages.map((message) => (
+                  <div
+                    key={message.id}
+                    data-role={message.role}
+                    className={cn(
+                      'message-bubble',
+                      loading &&
+                        message.role === 'assistant' &&
+                        message.id === messages[messages.length - 1]?.id &&
+                        'streaming-cursor'
+                    )}
+                  >
+                    {message.text}
+                  </div>
+                ))}
+              </div>
             </div>
           ) : null}
         </>
@@ -251,20 +255,24 @@ export function TimebotView({ data }: TimebotViewProps) {
           ) : null}
 
           {messages.length > 0 ? (
-            <div className="mt-8 space-y-3 border-t border-black/[0.06] px-1 pt-6">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={cn(
-                    'max-w-[92%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed',
-                    message.role === 'user'
-                      ? 'ml-auto bg-black text-white'
-                      : 'mr-auto border border-black/[0.06] bg-[#F9F9F9] text-black/80'
-                  )}
-                >
-                  {message.text}
-                </div>
-              ))}
+            <div className="chat-thread mt-8 border-t border-black/[0.06] pt-6">
+              <div className="chat-messages" role="log" aria-live="polite">
+                {messages.map((message) => (
+                  <div
+                    key={message.id}
+                    data-role={message.role}
+                    className={cn(
+                      'message-bubble',
+                      loading &&
+                        message.role === 'assistant' &&
+                        message.id === messages[messages.length - 1]?.id &&
+                        'streaming-cursor'
+                    )}
+                  >
+                    {message.text}
+                  </div>
+                ))}
+              </div>
             </div>
           ) : null}
         </>
@@ -272,12 +280,12 @@ export function TimebotView({ data }: TimebotViewProps) {
 
       <form
         onSubmit={handleSubmit}
-        className="fixed inset-x-0 bottom-[calc(4.25rem+env(safe-area-inset-bottom))] z-30 border-t border-black/10 bg-white/95 px-5 py-3 backdrop-blur-md sm:mx-auto sm:max-w-[640px]"
+        className="input-sticky-dock fixed inset-x-0 bottom-[4.25rem] sm:bottom-[4.25rem]"
       >
         <label htmlFor="timebot-input" className="sr-only">
           Ask DIOS anything about your timing
         </label>
-        <div className="flex gap-2">
+        <div className="input-sticky-dock__inner">
           <input
             id="timebot-input"
             type="text"
@@ -285,18 +293,18 @@ export function TimebotView({ data }: TimebotViewProps) {
             onChange={(event) => setInput(event.target.value)}
             placeholder="Ask DIOS anything about your timing"
             disabled={loading}
-            className="type-body min-w-0 flex-1 rounded-full border border-black/10 bg-white px-4 py-2.5 text-[15px] outline-none placeholder:text-black/35 focus:border-teal-700/40 focus:ring-1 focus:ring-teal-700/20"
+            className="calmer-input"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="inline-flex h-10 shrink-0 items-center rounded-full bg-black px-4 text-sm font-medium text-white disabled:opacity-40"
+            className="calmer-submit"
           >
             {loading ? '…' : 'Send'}
           </button>
         </div>
         {error ? (
-          <p className="mt-2 text-center text-xs text-red-600" role="alert">
+          <p className="type-caption mt-2 text-center text-red-600" role="alert">
             {error}
           </p>
         ) : null}
