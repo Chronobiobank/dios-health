@@ -1,18 +1,18 @@
-import { calculateRollingDLMO, type DLMOResult, type RollingDLMO } from '@/lib/dlmo'
+import { calculateRollingMLux, type MLuxResult, type RollingMLux } from '@/lib/mlux'
 import { mapFetchError, mapProfileUpsertError } from '@/lib/tiptraq/extraction'
 import type { createClient } from '@/lib/supabase/server'
 
 type SupabaseServerClient = Awaited<ReturnType<typeof createClient>>
 
 type NightSummaryRow = {
-  proxy_dlmo_minutes_from_midnight: number | null
+  mlux_phase_minutes: number | null
   confidence_score: number | null
   confidence_band_minutes: number | null
 }
 
-export function toRollingNightResults(nights: NightSummaryRow[]): DLMOResult[] {
+export function toRollingNightResults(nights: NightSummaryRow[]): MLuxResult[] {
   return nights.map((night) => ({
-    proxy_dlmo_minutes: night.proxy_dlmo_minutes_from_midnight ?? 0,
+    proxy_dlmo_minutes: night.mlux_phase_minutes ?? 0,
     proxy_dlmo_time: '',
     baseline_estimate: '',
     rem_correction_min: 0,
@@ -29,13 +29,13 @@ export function toRollingNightResults(nights: NightSummaryRow[]): DLMOResult[] {
   }))
 }
 
-export async function syncDlmoProfileForPatient(
+export async function syncMLuxProfileForPatient(
   supabase: SupabaseServerClient,
   patientId: string
-): Promise<{ error: string | null; rolling: RollingDLMO | null }> {
+): Promise<{ error: string | null; rolling: RollingMLux | null }> {
   const { data: allNights, error: fetchError } = await supabase
     .from('tiptraq_nights')
-    .select('proxy_dlmo_minutes_from_midnight, confidence_score, confidence_band_minutes')
+    .select('mlux_phase_minutes, confidence_score, confidence_band_minutes')
     .eq('patient_id', patientId)
     .order('report_date', { ascending: true })
 
@@ -48,8 +48,8 @@ export async function syncDlmoProfileForPatient(
       {
         patient_id: patientId,
         nights_count: 0,
-        proxy_dlmo_rolling: null,
-        proxy_dlmo_minutes_from_midnight: null,
+        mlux_phase_time: null,
+        mlux_phase_minutes: null,
         confidence_score: null,
         confidence_band_minutes: null,
         confidence_label: null,
@@ -72,14 +72,14 @@ export async function syncDlmoProfileForPatient(
     return { error: null, rolling: null }
   }
 
-  const rolling = calculateRollingDLMO(toRollingNightResults(allNights))
+  const rolling = calculateRollingMLux(toRollingNightResults(allNights))
 
   const { error: upsertError } = await supabase.from('mlux_profiles').upsert(
     {
       patient_id: patientId,
       nights_count: rolling.nights_count,
-      proxy_dlmo_rolling: rolling.proxy_dlmo_time,
-      proxy_dlmo_minutes_from_midnight: rolling.proxy_dlmo_minutes,
+      mlux_phase_time: rolling.proxy_dlmo_time,
+      mlux_phase_minutes: rolling.proxy_dlmo_minutes,
       confidence_score: rolling.confidence_score,
       confidence_band_minutes: rolling.confidence_band_minutes,
       confidence_label: rolling.confidence_label,

@@ -1,6 +1,8 @@
-// lib/dlmo.ts
-// Proxy DLMO Algorithm v1.0
+// lib/mlux.ts
+// Melanopic Lux Phase Algorithm v2.0
 // DIOS Health — The Circadian Foundation
+// Chronobiobank infrastructure layer
+// Internal phase anchor derived from MLux input signal
 // Based on: Burgess et al. 2016,
 // van der Meijden et al. 2022,
 // Hannay & Moreno 2020
@@ -25,7 +27,7 @@ export interface TipTraQNight {
   signal_quality_pct: number
 }
 
-export interface DLMOResult {
+export interface MLuxResult {
   proxy_dlmo_time: string // "HH:MM"
   proxy_dlmo_minutes: number // minutes from midnight
   baseline_estimate: string
@@ -42,7 +44,7 @@ export interface DLMOResult {
   apnea_confound_flag: boolean
 }
 
-export interface RollingDLMO {
+export interface RollingMLux {
   proxy_dlmo_time: string
   proxy_dlmo_minutes: number
   nights_count: number
@@ -75,7 +77,7 @@ export function normalizeMinutesFromMidnight(minutes: number): number {
   return ((minutes % 1440) + 1440) % 1440
 }
 
-export function classifyChronotypeFromDlmoMinutes(minutes: number): string {
+export function classifyChronotypeFromPhaseMinutes(minutes: number): string {
   const normalized = normalizeMinutesFromMidnight(minutes)
 
   if (normalized < CHRONOTYPE_MORNING_BEFORE_MINUTES) {
@@ -114,7 +116,7 @@ function remLatency(sleepOnset: string, firstRem: string | null): number | null 
   return rem - onset
 }
 
-export function calculateNightDLMO(night: TipTraQNight): DLMOResult {
+export function calculateNightMLux(night: TipTraQNight): MLuxResult {
   // ── STEP 1: Baseline from sleep onset ──
   // DLMO typically 2h before sleep onset
   // Population baseline offset: -120 min
@@ -201,7 +203,7 @@ export function calculateNightDLMO(night: TipTraQNight): DLMOResult {
   if (confidence >= 55) confidenceLabel = 'Moderate'
 
   // Chronotype from DLMO estimate
-  const chronotypeSignal = classifyChronotypeFromDlmoMinutes(dlmoMinutes)
+  const chronotypeSignal = classifyChronotypeFromPhaseMinutes(dlmoMinutes)
 
   // Non-dipper flag
   // Requires HRV dip data — not in summary report
@@ -228,7 +230,7 @@ export function calculateNightDLMO(night: TipTraQNight): DLMOResult {
 
 // Rolling average across multiple nights
 // Confidence grows with each night
-export function calculateRollingDLMO(nights: DLMOResult[]): RollingDLMO {
+export function calculateRollingMLux(nights: MLuxResult[]): RollingMLux {
   const n = nights.length
 
   // Weighted average — more recent nights
@@ -266,7 +268,7 @@ export function calculateRollingDLMO(nights: DLMOResult[]): RollingDLMO {
 
   const dlmoTime = toTime(roundedDlmo)
 
-  const chronotype = classifyChronotypeFromDlmoMinutes(roundedDlmo)
+  const chronotype = classifyChronotypeFromPhaseMinutes(roundedDlmo)
 
   // ── DOSE TIMING OUTPUTS ──
   // All calculated from rolling DLMO

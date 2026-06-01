@@ -4,7 +4,7 @@ import { requirePatientSession } from '@/lib/auth/require-patient'
 import {
   buildInsightsData,
   type BloodPanelSnapshot,
-  type InsightsDlmoProfile,
+  type InsightsMLuxProfile,
   type PatientProtocolRow,
 } from '@/lib/dashboard/insights-data'
 import { createClient } from '@/lib/supabase/server'
@@ -54,7 +54,7 @@ export default async function DashboardInsightsPage() {
   ])
 
   const insights = buildInsightsData({
-    profile: (mluxProfile as InsightsDlmoProfile | null) ?? null,
+    profile: (mluxProfile as InsightsMLuxProfile | null) ?? null,
     latestNight: latestNight?.[0] ?? null,
     nightsCount: nightsCount ?? 0,
     currentMedications: readCurrentMedications(patient as unknown as Record<string, unknown>),
@@ -63,10 +63,10 @@ export default async function DashboardInsightsPage() {
     latestBloodPanel: (bloodPanel as BloodPanelSnapshot | null) ?? null,
   })
 
-  const subtitle = insights.hasDlmoProfile
+  const subtitle = insights.hasMLuxProfile
     ? insights.dominantLayerLabel
-      ? `Personalised from ${insights.dominantLayerLabel.toLowerCase()} · DLMO ${insights.dlmoTimeLabel}`
-      : `Proxy DLMO ${insights.dlmoTimeLabel}`
+      ? `Personalised from ${insights.dominantLayerLabel.toLowerCase()} · MLux phase ${insights.phaseTimeLabel}`
+      : `MLux phase ${insights.phaseTimeLabel}`
     : 'Log sleep on Streams or upload TipTraQ to build your body clock reading.'
 
   return (

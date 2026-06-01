@@ -1,4 +1,4 @@
-import { normalizeMinutesFromMidnight } from '@/lib/dlmo'
+import { normalizeMinutesFromMidnight } from '@/lib/mlux'
 
 export type GominakRangeStatus = 'low' | 'in_range' | 'high' | 'missing'
 
@@ -47,7 +47,7 @@ export type BloodPanelInput = {
 }
 
 export type BloodPanelDlmoResult = {
-  proxy_dlmo_minutes_from_midnight: number
+  mlux_phase_minutes: number
   confidence_score: number
   confidence_band_minutes: number
   confidence_label: string
@@ -72,7 +72,7 @@ function countCoreInRange(input: BloodPanelInput): number {
 /** Layer 2 proxy DLMO estimate from Gominak panel + optional existing baseline. */
 export function calculateBloodPanelDlmo(input: BloodPanelInput): BloodPanelDlmoResult {
   const baseline = input.baselineDlmoMinutes ?? DEFAULT_DLMO_MINUTES
-  let dlmoMinutes = baseline
+  let phaseMinutes = baseline
 
   const d3Status = getGominakRangeStatus(
     input.vitamin_d3_nmoll,
@@ -90,14 +90,14 @@ export function calculateBloodPanelDlmo(input: BloodPanelInput): BloodPanelDlmoR
     GOMINAK_TARGETS.ferritin.max
   )
 
-  if (d3Status === 'low') dlmoMinutes += 30
-  else if (d3Status === 'high') dlmoMinutes -= 15
+  if (d3Status === 'low') phaseMinutes += 30
+  else if (d3Status === 'high') phaseMinutes -= 15
 
-  if (b12Status === 'low') dlmoMinutes += 20
-  else if (b12Status === 'high') dlmoMinutes -= 10
+  if (b12Status === 'low') phaseMinutes += 20
+  else if (b12Status === 'high') phaseMinutes -= 10
 
-  if (ferritinStatus === 'low') dlmoMinutes += 15
-  else if (ferritinStatus === 'high') dlmoMinutes -= 10
+  if (ferritinStatus === 'low') phaseMinutes += 15
+  else if (ferritinStatus === 'high') phaseMinutes -= 10
 
   let confidence = 22
   if (d3Status === 'in_range') confidence += 14
@@ -119,7 +119,7 @@ export function calculateBloodPanelDlmo(input: BloodPanelInput): BloodPanelDlmoR
   const confidenceBandMinutes = coreInRange >= 2 ? 55 : 75
 
   return {
-    proxy_dlmo_minutes_from_midnight: normalizeMinutesFromMidnight(Math.round(dlmoMinutes)),
+    mlux_phase_minutes: normalizeMinutesFromMidnight(Math.round(phaseMinutes)),
     confidence_score: confidence,
     confidence_band_minutes: confidenceBandMinutes,
     confidence_label: confidenceLabel,

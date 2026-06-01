@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { calculateNightDLMO } from '@/lib/dlmo'
+import { calculateNightMLux } from '@/lib/mlux'
 import { resolvePatientTimeZone } from '@/lib/patient/timezone'
 import { createClient } from '@/lib/supabase/server'
 import {
@@ -16,7 +16,7 @@ import {
   toNightInput,
 } from '@/lib/tiptraq/extraction'
 import { mergeDlmoLayers } from '@/lib/dashboard/dlmo-merge'
-import { syncDlmoProfileForPatient } from '@/lib/tiptraq/sync-dlmo-profile'
+import { syncMLuxProfileForPatient } from '@/lib/tiptraq/sync-dlmo-profile'
 
 export const maxDuration = 60
 export const dynamic = 'force-dynamic'
@@ -146,7 +146,7 @@ export async function POST(request: NextRequest) {
 
     const reportDate = resolveReportDate(extracted)
     const nightInput = toNightInput(extracted)
-    const dlmoResult = calculateNightDLMO(nightInput)
+    const dlmoResult = calculateNightMLux(nightInput)
 
     const insertRow = {
       patient_id: user.id,
@@ -184,7 +184,7 @@ export async function POST(request: NextRequest) {
       snoring_minutes: extracted.snoring_minutes,
       algorithm_version: extracted.algorithm_version,
       mlux_phase_time: dlmoResult.proxy_dlmo_time,
-      proxy_dlmo_minutes_from_midnight: dlmoResult.proxy_dlmo_minutes,
+      mlux_phase_minutes: dlmoResult.proxy_dlmo_minutes,
       dlmo_baseline_estimate: dlmoResult.baseline_estimate,
       dlmo_rem_correction_min: dlmoResult.rem_correction_min,
       dlmo_ans_correction_min: dlmoResult.ans_correction_min,
@@ -246,7 +246,7 @@ export async function POST(request: NextRequest) {
       storagePath,
     })
 
-    const { error: syncError, rolling } = await syncDlmoProfileForPatient(supabase, user.id)
+    const { error: syncError, rolling } = await syncMLuxProfileForPatient(supabase, user.id)
 
     if (syncError || !rolling) {
       console.error('[TipTraQ] DLMO profile sync failed after insert', {

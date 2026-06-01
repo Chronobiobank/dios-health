@@ -106,7 +106,7 @@ export async function POST(request: Request) {
       .from('smartphone_circadian_observations')
       .insert({
         patient_id: user.id,
-        proxy_dlmo_minutes_from_midnight: result.proxy_dlmo_minutes_from_midnight,
+        mlux_phase_minutes: result.mlux_phase_minutes,
         confidence_score: result.confidence_score,
         confidence_band_minutes: result.confidence_band_minutes,
         confidence_label: result.confidence_label,

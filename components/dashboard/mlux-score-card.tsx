@@ -1,12 +1,12 @@
 import { DASHBOARD_CARD, DASHBOARD_BODY, MONO_DATA, SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
-import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
-import { resolveChronotypeLabel } from '@/lib/dashboard/dlmo-profile'
+import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
+import { resolveChronotypeLabel } from '@/lib/dashboard/mlux-profile'
 
-type DlmoScoreCardProps = {
-  profile: DlmoProfileRow
+type MLuxScoreCardProps = {
+  profile: MLuxProfileRow
 }
 
-export function DlmoScoreCard({ profile }: DlmoScoreCardProps) {
+export function MLuxScoreCard({ profile }: MLuxScoreCardProps) {
   const score = profile.confidence_score ?? 0
   const band = profile.confidence_band_minutes ?? 75
   const label = profile.confidence_label ?? 'Low'
@@ -29,21 +29,9 @@ export function DlmoScoreCard({ profile }: DlmoScoreCardProps) {
             <p className={`${MONO_DATA} mt-1`}>{label}</p>
           </div>
         </div>
-
-        <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-black/5">
-          <div
-            className="h-full rounded-full bg-teal-600 transition-all duration-300"
-            style={{ width: `${Math.min(100, score)}%` }}
-          />
-        </div>
-
-        <div className={`${MONO_DATA} mt-3 flex flex-wrap items-center justify-between gap-2`}>
-          <span>± {band} minutes</span>
-          <span>
-            {nights} night{nights === 1 ? '' : 's'} uploaded
-            {nights < 3 && ` · ${3 - nights} more for clinical confidence`}
-          </span>
-        </div>
+        <p className={`${DASHBOARD_BODY} mt-4`}>
+          Based on {nights} TipTraQ night{nights === 1 ? '' : 's'}. Confidence band ±{band} minutes.
+        </p>
       </div>
     </section>
   )

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { createClient } from '@/lib/supabase/server'
 import { mergeDlmoLayers } from '@/lib/dashboard/dlmo-merge'
-import { mapTipTraqDeleteError, syncDlmoProfileForPatient } from '@/lib/tiptraq/sync-dlmo-profile'
+import { mapTipTraqDeleteError, syncMLuxProfileForPatient } from '@/lib/tiptraq/sync-dlmo-profile'
 
 export const dynamic = 'force-dynamic'
 
@@ -60,7 +60,7 @@ export async function DELETE(_request: NextRequest, context: RouteContext) {
       return errorResponse(mapTipTraqDeleteError(deleteError.message), 500)
     }
 
-    const { error: syncError } = await syncDlmoProfileForPatient(supabase, user.id)
+    const { error: syncError } = await syncMLuxProfileForPatient(supabase, user.id)
 
     if (syncError) {
       console.error('DLMO profile sync error after delete:', syncError)

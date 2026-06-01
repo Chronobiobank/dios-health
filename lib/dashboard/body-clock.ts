@@ -7,10 +7,10 @@ export type DoseWindow = {
 
 export type BodyClockModel = {
   chronotypeLabel: string
-  msfscLabel: string
+  phaseLabel: string
   sleepStartMinutes: number
   sleepEndMinutes: number
-  dlmoMinutes: number
+  phaseMinutes: number
   lightStartMinutes: number
   lightEndMinutes: number
   doseWindows: DoseWindow[]
@@ -51,10 +51,10 @@ export function buildBodyClockModel(
 
   return {
     chronotypeLabel,
-    msfscLabel: `${formatMinutesLabel(msfsc)} estimated`,
+    phaseLabel: `${formatMinutesLabel(msfsc)} estimated`,
     sleepStartMinutes: sleep,
     sleepEndMinutes: wake,
-    dlmoMinutes: ((dlmo % 1440) + 1440) % 1440,
+    phaseMinutes: ((dlmo % 1440) + 1440) % 1440,
     lightStartMinutes: lightStart,
     lightEndMinutes: lightEnd,
     doseWindows,

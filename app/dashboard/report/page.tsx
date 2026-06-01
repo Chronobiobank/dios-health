@@ -4,7 +4,7 @@ import { GpReportView } from '@/components/dashboard/gp-report-view'
 import { PrintGpReportActions } from '@/components/dashboard/print-gp-report-actions'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { buildGpReportData } from '@/lib/dashboard/gp-report-data'
-import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
+import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import { createClient } from '@/lib/supabase/server'
 
@@ -21,13 +21,13 @@ export default async function DashboardGpReportPage() {
       .order('report_date', { ascending: false }),
   ])
 
-  const profileRow = mluxProfile as DlmoProfileRow | null
+  const profileRow = mluxProfile as MLuxProfileRow | null
   const report = buildGpReportData({
     patientName: profile.full_name ?? 'Patient',
     age: patient.age,
     biologicalSex: patient.biological_sex,
     dataShareGp: patient.data_share_gp,
-    dlmoProfile: profileRow,
+    mluxProfile: profileRow,
     nights: nights ?? [],
   })
 

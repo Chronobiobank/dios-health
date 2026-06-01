@@ -1,4 +1,4 @@
-import { normalizeMinutesFromMidnight } from '@/lib/dlmo'
+import { normalizeMinutesFromMidnight } from '@/lib/mlux'
 
 export type SmartphoneDlmoPayload = {
   sleep_onset_local: string
@@ -11,7 +11,7 @@ export type SmartphoneDlmoPayload = {
 }
 
 export type SmartphoneDlmoResult = {
-  proxy_dlmo_minutes_from_midnight: number
+  mlux_phase_minutes: number
   confidence_score: number
   confidence_band_minutes: number
   confidence_label: string
@@ -114,7 +114,7 @@ export function calculateSmartphoneDlmo(payload: SmartphoneDlmoPayload): Smartph
   const confidenceBandMinutes = BASE_BAND_MINUTES + vdrBandPenalty(payload.vdr_dose_today)
 
   return {
-    proxy_dlmo_minutes_from_midnight: proxyDlmoMinutes,
+    mlux_phase_minutes: proxyDlmoMinutes,
     confidence_score: confidenceScore,
     confidence_band_minutes: confidenceBandMinutes,
     confidence_label: labelConfidence(confidenceScore),

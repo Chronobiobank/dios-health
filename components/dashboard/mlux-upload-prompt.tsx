@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { DASHBOARD_BODY, DASHBOARD_CARD, SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
 
-export function DlmoUploadPrompt() {
+export function MLuxUploadPrompt() {
   return (
     <section>
       <h2 className={SECTION_LABEL}>Your body clock</h2>

@@ -1,4 +1,4 @@
-import type { DlmoDominantLayer, DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
+import type { MLuxDominantLayer, MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import {
   CANONICAL_SUPPLEMENTS,
   SUPPLEMENT_OFFSET_MINUTES,
@@ -11,7 +11,7 @@ import {
   parseDbTimeToMinutes,
   parseTimeToMinutes,
 } from '@/lib/dashboard/time-utils'
-import { normalizeMinutesFromMidnight } from '@/lib/dlmo'
+import { normalizeMinutesFromMidnight } from '@/lib/mlux'
 import {
   approximateEarliestOutdoorLightMinutes,
   dateToLocalClock,
@@ -88,7 +88,7 @@ type MedicationTimelineDef = {
   name: string
   instruction: string
   profileTimeKey?: keyof Pick<
-    DlmoProfileRow,
+    MLuxProfileRow,
     'simvastatin_optimal_time' | 'ramipril_optimal_time' | 'prednisolone_optimal_time' | 'salmeterol_optimal_time'
   >
   estimatedOffsetMinutes?: number
@@ -153,7 +153,7 @@ const MEDICATION_TIMELINE: MedicationTimelineDef[] = [
 
 const LEGACY_MEDICATION_KEYS: {
   key: keyof Pick<
-    DlmoProfileRow,
+    MLuxProfileRow,
     'simvastatin_optimal_time' | 'ramipril_optimal_time' | 'prednisolone_optimal_time' | 'salmeterol_optimal_time'
   >
   name: string
@@ -170,19 +170,19 @@ function normalizeMedicationToken(value: string): string {
 }
 
 export function resolveTimebotPrecisionLabel(
-  dominantLayer: DlmoDominantLayer | null | undefined
+  dominantLayer: MLuxDominantLayer | null | undefined
 ): TimebotPrecisionLabel {
   if (dominantLayer === 'tiptraq') return 'PRECISION'
   if (dominantLayer === 'blood') return 'CONFIRMED'
   return 'ESTIMATED'
 }
 
-/** All timeline times derive from proxy_dlmo_rolling, with questionnaire fallback. */
-export function resolveTimelineDlmoMinutes(
-  profile: DlmoProfileRow | null,
+/** All timeline times derive from mlux_phase_time, with questionnaire fallback. */
+export function resolveTimelinePhaseMinutes(
+  profile: MLuxProfileRow | null,
   fallbackSleepTime: string
 ): { minutes: number; fromRolling: boolean } {
-  const fromRolling = parseDbTimeToMinutes(profile?.proxy_dlmo_rolling ?? null)
+  const fromRolling = parseDbTimeToMinutes(profile?.mlux_phase_time ?? null)
   if (fromRolling !== null) {
     return { minutes: fromRolling, fromRolling: true }
   }
@@ -209,22 +209,22 @@ function clampMorningMinutes(minutes: number, earliestLightMinutes: number): num
 }
 
 function buildZeitgeberEvents(
-  dlmoMinutes: number,
+  phaseMinutes: number,
   nowMinutes: number,
   timeZone: string
 ): TimebotTimelineEvent[] {
   const earliestLight = approximateEarliestOutdoorLightMinutes(timeZone)
 
   const lightMinutes = clampMorningMinutes(
-    normalizeMinutesFromMidnight(dlmoMinutes - 600),
+    normalizeMinutesFromMidnight(phaseMinutes - 600),
     earliestLight
   )
   const foodMinutes = clampMorningMinutes(
-    normalizeMinutesFromMidnight(dlmoMinutes - 540),
+    normalizeMinutesFromMidnight(phaseMinutes - 540),
     earliestLight
   )
-  const movementMinutes = normalizeMinutesFromMidnight(dlmoMinutes - 420)
-  const darknessMinutes = normalizeMinutesFromMidnight(dlmoMinutes - 90)
+  const movementMinutes = normalizeMinutesFromMidnight(phaseMinutes - 420)
+  const darknessMinutes = normalizeMinutesFromMidnight(phaseMinutes - 90)
 
   const defs: {
     id: string
@@ -280,7 +280,7 @@ function buildZeitgeberEvents(
 
 function buildSupplementEvents(
   supplements: string[],
-  dlmoMinutes: number,
+  phaseMinutes: number,
   nowMinutes: number
 ): TimebotTimelineEvent[] {
   return supplements
@@ -289,7 +289,7 @@ function buildSupplementEvents(
     )
     .map((supplement) => {
       const minutes = normalizeMinutesFromMidnight(
-        dlmoMinutes + SUPPLEMENT_OFFSET_MINUTES[supplement]
+        phaseMinutes + SUPPLEMENT_OFFSET_MINUTES[supplement]
       )
       return {
         id: `supplement-${supplement}`,
@@ -304,8 +304,8 @@ function buildSupplementEvents(
 }
 
 function buildMedicationEvents(
-  profile: DlmoProfileRow | null,
-  dlmoMinutes: number,
+  profile: MLuxProfileRow | null,
+  phaseMinutes: number,
   nowMinutes: number,
   currentMedications: string[] | null | undefined
 ): TimebotTimelineEvent[] {
@@ -326,7 +326,7 @@ function buildMedicationEvents(
         minutes = parseDbTimeToMinutes(profile[definition.profileTimeKey] as string | null)
       }
       if (minutes === null && definition.estimatedOffsetMinutes != null) {
-        minutes = normalizeMinutesFromMidnight(dlmoMinutes + definition.estimatedOffsetMinutes)
+        minutes = normalizeMinutesFromMidnight(phaseMinutes + definition.estimatedOffsetMinutes)
       }
       if (minutes === null) continue
 
@@ -364,24 +364,24 @@ function buildMedicationEvents(
 }
 
 export function buildTimebotTimeline(input: {
-  profile: DlmoProfileRow | null
+  profile: MLuxProfileRow | null
   fallbackSleepTime: string
   currentSupplements: string[]
   currentMedications?: string[] | null
   locationCity?: string | null
   locationCountry?: string | null
   now?: Date
-}): { events: TimebotTimelineEvent[]; groups: TimebotTimelineGroup[]; dlmoMinutes: number } {
-  const { minutes: dlmoMinutes } = resolveTimelineDlmoMinutes(input.profile, input.fallbackSleepTime)
+}): { events: TimebotTimelineEvent[]; groups: TimebotTimelineGroup[]; phaseMinutes: number } {
+  const { minutes: phaseMinutes } = resolveTimelinePhaseMinutes(input.profile, input.fallbackSleepTime)
   const timeZone = resolvePatientTimeZone(input.locationCity, input.locationCountry)
   const nowMinutes = getNowMinutesInTimeZone(timeZone, input.now)
 
   const events = [
-    ...buildZeitgeberEvents(dlmoMinutes, nowMinutes, timeZone),
-    ...buildSupplementEvents(input.currentSupplements, dlmoMinutes, nowMinutes),
+    ...buildZeitgeberEvents(phaseMinutes, nowMinutes, timeZone),
+    ...buildSupplementEvents(input.currentSupplements, phaseMinutes, nowMinutes),
     ...buildMedicationEvents(
       input.profile,
-      dlmoMinutes,
+      phaseMinutes,
       nowMinutes,
       input.currentMedications
     ),
@@ -390,7 +390,7 @@ export function buildTimebotTimeline(input: {
   return {
     events,
     groups: groupTimelineEvents(events),
-    dlmoMinutes,
+    phaseMinutes,
   }
 }
 
@@ -410,9 +410,9 @@ export function formatTimelineForContext(groups: TimebotTimelineGroup[]): string
     .join('\n')
 }
 
-export function formatDlmoHeaderTime(profile: DlmoProfileRow | null, fallbackSleepTime: string): string {
-  const fromRolling = parseDbTimeToMinutes(profile?.proxy_dlmo_rolling ?? null)
+export function formatPhaseHeaderTime(profile: MLuxProfileRow | null, fallbackSleepTime: string): string {
+  const fromRolling = parseDbTimeToMinutes(profile?.mlux_phase_time ?? null)
   if (fromRolling !== null) return formatMinutesLabel(fromRolling)
-  const { minutes } = resolveTimelineDlmoMinutes(profile, fallbackSleepTime)
+  const { minutes } = resolveTimelinePhaseMinutes(profile, fallbackSleepTime)
   return formatMinutesLabel(minutes)
 }

@@ -10,7 +10,7 @@ import { ProfileAvatarUpload } from '@/components/profile/profile-avatar-upload'
 import { buildPatientDashboardHeader } from '@/lib/auth/patient-dashboard-header'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
-import { type TipTraqNightRow } from '@/lib/dashboard/dlmo-profile'
+import { type TipTraqNightRow } from '@/lib/dashboard/mlux-profile'
 import { createClient } from '@/lib/supabase/server'
 
 export default async function DashboardDataControlsPage() {

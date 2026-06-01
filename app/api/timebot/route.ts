@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
+import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import { buildTimebotContext, buildTimebotData } from '@/lib/dashboard/timebot-data'
 import {
   buildSupplementContextBlock,
@@ -8,7 +8,7 @@ import {
   extractMedicationsFromMessage,
   extractSupplementsFromMessage,
   mergeSupplementLists,
-  resolveTimebotDlmoMinutes,
+  resolveTimebotPhaseMinutes,
 } from '@/lib/dashboard/timebot-supplements'
 import { formatMinutesLabel } from '@/lib/dashboard/time-utils'
 import { getPatientFirstName } from '@/lib/auth/greeting'
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     ])
 
     const hasTipTraqData = (nightsCount ?? 0) > 0
-    const profileRow = (mluxProfile as DlmoProfileRow | null) ?? null
+    const profileRow = (mluxProfile as MLuxProfileRow | null) ?? null
     const fallbackSleepTime = patient?.chronotype_q3 ?? '11:00pm'
     const currentSupplements = (patient?.current_supplements as string[] | null) ?? []
 
@@ -103,7 +103,7 @@ export async function POST(request: Request) {
       currentSupplements: mergedSupplements,
     })
 
-    const { minutes: dlmoMinutes, estimated } = resolveTimebotDlmoMinutes(
+    const { minutes: phaseMinutes, estimated } = resolveTimebotPhaseMinutes(
       profileRow,
       fallbackSleepTime
     )
@@ -112,8 +112,8 @@ export async function POST(request: Request) {
       currentSupplements: mergedSupplements,
       newlyExtracted: extractedSupplements,
       extractedMedications,
-      dlmoMinutes,
-      dlmoTimeLabel: formatMinutesLabel(dlmoMinutes),
+      phaseMinutes,
+      phaseTimeLabel: formatMinutesLabel(phaseMinutes),
       estimated,
     })
 

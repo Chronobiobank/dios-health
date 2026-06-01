@@ -2,7 +2,7 @@
  * Sean James TipTraQ validation — run with: npx tsx scripts/test-sean-james-dlmo.ts
  * Expected: DLMO ~22:57, confidence ~38%, band ±75, high_sympathetic + rem_delay true
  */
-import { calculateNightDLMO, type TipTraQNight } from '../lib/dlmo'
+import { calculateNightMLux, type TipTraQNight } from '../lib/mlux'
 
 const seanJamesNight: TipTraQNight = {
   sleep_onset: '00:36',
@@ -24,7 +24,7 @@ const seanJamesNight: TipTraQNight = {
   signal_quality_pct: 84,
 }
 
-const result = calculateNightDLMO(seanJamesNight)
+const result = calculateNightMLux(seanJamesNight)
 
 console.log('Sean James DLMO test results:')
 console.log(JSON.stringify(result, null, 2))

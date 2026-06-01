@@ -11,7 +11,7 @@ function errorResponse(message: string, status: number) {
 }
 
 type BloodPanelBody = {
-  proxy_dlmo_minutes_from_midnight?: number
+  mlux_phase_minutes?: number
   confidence_score?: number
   confidence_band_minutes?: number
   confidence_label?: string
@@ -44,16 +44,16 @@ export async function POST(request: Request) {
       body.vitamin_b12_pmoll != null &&
       body.ferritin_ugl != null
 
-    if (body.proxy_dlmo_minutes_from_midnight == null || body.confidence_score == null) {
+    if (body.mlux_phase_minutes == null || body.confidence_score == null) {
       if (!hasCoreMarkers) {
         return errorResponse(
-          'Vitamin D3, B12, ferritin, or explicit proxy_dlmo_minutes_from_midnight and confidence_score are required',
+          'Vitamin D3, B12, ferritin, or explicit mlux_phase_minutes and confidence_score are required',
           400
         )
       }
     }
 
-    let proxyDlmoMinutes = body.proxy_dlmo_minutes_from_midnight ?? null
+    let proxyDlmoMinutes = body.mlux_phase_minutes ?? null
     let confidenceScore = body.confidence_score ?? null
     let confidenceBandMinutes = body.confidence_band_minutes ?? null
     let confidenceLabel = body.confidence_label ?? null
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     if (proxyDlmoMinutes == null || confidenceScore == null) {
       const { data: profile } = await supabase
         .from('mlux_profiles')
-        .select('proxy_dlmo_minutes_from_midnight')
+        .select('mlux_phase_minutes')
         .eq('patient_id', user.id)
         .maybeSingle()
 
@@ -70,10 +70,10 @@ export async function POST(request: Request) {
         vitamin_b12_pmoll: body.vitamin_b12_pmoll!,
         ferritin_ugl: body.ferritin_ugl!,
         vitamin_b5_umoll: body.vitamin_b5_umoll ?? null,
-        baselineDlmoMinutes: profile?.proxy_dlmo_minutes_from_midnight ?? null,
+        baselineDlmoMinutes: profile?.mlux_phase_minutes ?? null,
       })
 
-      proxyDlmoMinutes = computed.proxy_dlmo_minutes_from_midnight
+      proxyDlmoMinutes = computed.mlux_phase_minutes
       confidenceScore = computed.confidence_score
       confidenceBandMinutes = computed.confidence_band_minutes
       confidenceLabel = computed.confidence_label
@@ -83,7 +83,7 @@ export async function POST(request: Request) {
       .from('blood_circadian_panels')
       .insert({
         patient_id: user.id,
-        proxy_dlmo_minutes_from_midnight: proxyDlmoMinutes,
+        mlux_phase_minutes: proxyDlmoMinutes,
         confidence_score: confidenceScore,
         confidence_band_minutes: confidenceBandMinutes,
         confidence_label: confidenceLabel,

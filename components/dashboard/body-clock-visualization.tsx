@@ -56,8 +56,8 @@ export function BodyClockVisualization({
   const nowPoint = polarToCartesian(CX, CY, R, nowAngle)
   const sleepArc = describeArc(CX, CY, R, model.sleepStartMinutes, model.sleepEndMinutes)
   const lightArc = describeArc(CX, CY, R, model.lightStartMinutes, model.lightEndMinutes)
-  const dlmoPoint = polarToCartesian(CX, CY, R, minutesToAngle(model.dlmoMinutes))
-  const dlmoTime = parseDlmoTime(model.msfscLabel)
+  const dlmoPoint = polarToCartesian(CX, CY, R, minutesToAngle(model.phaseMinutes))
+  const phaseTime = parsePhaseLabelTime(model.phaseLabel)
 
   return (
     <section>
@@ -132,7 +132,7 @@ export function BodyClockVisualization({
             letterSpacing="0.08em"
             className="fill-black/40 font-mono uppercase"
           >
-            DLMO
+            MLux phase
           </text>
           <text
             x={CX}
@@ -142,7 +142,7 @@ export function BodyClockVisualization({
             fontWeight={700}
             className="fill-black"
           >
-            {dlmoTime}
+            {phaseTime}
           </text>
           <text
             x={CX}
@@ -359,8 +359,8 @@ function getNowMinutes(): number {
   return now.getHours() * 60 + now.getMinutes()
 }
 
-function parseDlmoTime(msfscLabel: string): string {
-  const match = msfscLabel.match(/^DLMO\s+(.+)$/i)
+function parsePhaseLabelTime(phaseLabel: string): string {
+  const match = phaseLabel.match(/^MLux phase\s+(.+)$/i)
   if (match) return match[1]
-  return msfscLabel.replace(/\s+estimated$/i, '').trim()
+  return phaseLabel.replace(/\s+estimated$/i, '').trim()
 }

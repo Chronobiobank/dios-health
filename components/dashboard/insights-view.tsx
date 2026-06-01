@@ -61,7 +61,7 @@ function SectionEyebrow({ children }: { children: string }) {
 }
 
 function BodyClockHeader({ data }: { data: InsightsData }) {
-  if (!data.hasDlmoProfile) {
+  if (!data.hasMLuxProfile) {
     return (
       <section className={DASHBOARD_CARD}>
         <p className={`${DASHBOARD_BODY} text-black/70`}>
@@ -85,9 +85,9 @@ function BodyClockHeader({ data }: { data: InsightsData }) {
   return (
     <section className={DASHBOARD_CARD}>
       <p className="font-mono text-3xl font-medium tracking-tight text-black sm:text-4xl">
-        {data.dlmoTimeLabel}
+        {data.phaseTimeLabel}
       </p>
-      <p className={`${MONO_DATA} mt-1`}>Proxy DLMO</p>
+      <p className={`${MONO_DATA} mt-1`}>MLux phase</p>
 
       {data.dominantLayerLabel ? (
         <span className="mt-4 inline-flex rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-800">

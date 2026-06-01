@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { TimebotView } from '@/components/dashboard/timebot-view'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import { getPatientFirstName, getVayaIntroMessage } from '@/lib/auth/greeting'
-import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
+import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import { buildTimebotData } from '@/lib/dashboard/timebot-data'
 import { createClient } from '@/lib/supabase/server'
 
@@ -37,7 +37,7 @@ export default async function DashboardVayaPage() {
     patient.location_country
   )
 
-  const profileRow = mluxProfile as DlmoProfileRow | null
+  const profileRow = mluxProfile as MLuxProfileRow | null
   const mluxScore = Math.round((profileRow?.confidence_score ?? 20) * 3.5)
 
   const session = buildTimebotData({

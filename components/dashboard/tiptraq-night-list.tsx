@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 import { SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
-import { formatDbTime, formatReportDate, type TipTraqNightRow } from '@/lib/dashboard/dlmo-profile'
+import { formatDbTime, formatReportDate, type TipTraqNightRow } from '@/lib/dashboard/mlux-profile'
 
 type TipTraqNightListProps = {
   nights: TipTraqNightRow[]
@@ -59,7 +59,7 @@ export function TipTraqNightList({ nights, title = 'Uploaded recordings' }: TipT
             <div className="min-w-0">
               <p className="text-sm font-medium text-black">{formatReportDate(night.report_date)}</p>
               <p className="mt-0.5 font-mono text-[11px] text-black/45">
-                DLMO {formatDbTime(night.mlux_phase_time ?? null)}
+                MLux {formatDbTime(night.mlux_phase_time ?? null)}
               </p>
             </div>
 

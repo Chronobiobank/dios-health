@@ -1,6 +1,6 @@
-import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
+import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import { LAYER_BIT_BLOOD, LAYER_BIT_SMARTPHONE, LAYER_BIT_TIPTRAQ } from '@/lib/dashboard/dlmo-merge'
-import { normalizeMinutesFromMidnight } from '@/lib/dlmo'
+import { normalizeMinutesFromMidnight } from '@/lib/mlux'
 import { GOMINAK_TARGETS, getGominakRangeStatus } from '@/lib/dashboard/blood-panel-gominak'
 import {
   formatMinutesLabel,
@@ -12,7 +12,7 @@ export type RiskSeverity = 'watch' | 'moderate' | 'act'
 
 export type DominantLayer = 'smartphone' | 'blood' | 'tiptraq' | null
 
-export type InsightsDlmoProfile = DlmoProfileRow & {
+export type InsightsMLuxProfile = MLuxProfileRow & {
   dominant_layer: DominantLayer
   layers_active: number | null
 }
@@ -69,9 +69,9 @@ export type LayerPill = {
 }
 
 export type InsightsData = {
-  hasDlmoProfile: boolean
+  hasMLuxProfile: boolean
   hasTipTraqData: boolean
-  dlmoTimeLabel: string | null
+  phaseTimeLabel: string | null
   dominantLayer: DominantLayer
   dominantLayerLabel: string | null
   confidenceScore: number | null
@@ -118,7 +118,7 @@ type MedicationDefinition = {
   standardGuidance: string
   explanation: string
   profileTimeKey?: keyof Pick<
-    DlmoProfileRow,
+    MLuxProfileRow,
     'simvastatin_optimal_time' | 'ramipril_optimal_time' | 'prednisolone_optimal_time' | 'salmeterol_optimal_time'
   >
   estimatedOffsetMinutes?: number
@@ -194,12 +194,12 @@ function normalizeMedicationToken(value: string): string {
   return value.trim().toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '')
 }
 
-function resolveDlmoMinutes(profile: InsightsDlmoProfile | null, fallbackSleepTime: string): number {
-  const fromRolling = parseDbTimeToMinutes(profile?.proxy_dlmo_rolling ?? null)
+function resolvePhaseMinutes(profile: InsightsMLuxProfile | null, fallbackSleepTime: string): number {
+  const fromRolling = parseDbTimeToMinutes(profile?.mlux_phase_time ?? null)
   if (fromRolling !== null) return fromRolling
 
-  if (profile?.proxy_dlmo_minutes_from_midnight != null) {
-    return normalizeMinutesFromMidnight(profile.proxy_dlmo_minutes_from_midnight)
+  if (profile?.mlux_phase_minutes != null) {
+    return normalizeMinutesFromMidnight(profile.mlux_phase_minutes)
   }
 
   const sleepMinutes = parseTimeToMinutes(fallbackSleepTime) ?? 23 * 60
@@ -210,11 +210,11 @@ function formatClock(minutes: number): string {
   return formatMinutesLabel(normalizeMinutesFromMidnight(minutes))
 }
 
-function hasUsableDlmo(profile: InsightsDlmoProfile | null): boolean {
+function hasUsableMLux(profile: InsightsMLuxProfile | null): boolean {
   if (!profile) return false
   return (
-    profile.proxy_dlmo_rolling != null ||
-    profile.proxy_dlmo_minutes_from_midnight != null ||
+    profile.mlux_phase_time != null ||
+    profile.mlux_phase_minutes != null ||
     (profile.layers_active ?? 0) > 0
   )
 }
@@ -278,20 +278,20 @@ export function riskFlagsFromLatestNight(night: NightFlagsRow | null): Circadian
 
 function resolveMedicationTime(
   definition: MedicationDefinition,
-  profile: InsightsDlmoProfile | null,
-  dlmoMinutes: number,
+  profile: InsightsMLuxProfile | null,
+  phaseMinutes: number,
   estimated: boolean
 ): { window: string; isEstimated: boolean } {
   if (definition.profileTimeKey && profile) {
     const fromProfile = profile[definition.profileTimeKey]
     if (fromProfile) {
-      return { window: formatDbTimeLabel(fromProfile), isEstimated: estimated && !profile.proxy_dlmo_rolling }
+      return { window: formatDbTimeLabel(fromProfile), isEstimated: estimated && !profile.mlux_phase_time }
     }
   }
 
   const offset = definition.estimatedOffsetMinutes ?? 180
   return {
-    window: formatClock(dlmoMinutes + offset),
+    window: formatClock(phaseMinutes + offset),
     isEstimated: true,
   }
 }
@@ -304,8 +304,8 @@ function formatDbTimeLabel(time: string): string {
 
 function buildMedicationWindows(
   currentMedications: string[] | null | undefined,
-  profile: InsightsDlmoProfile | null,
-  dlmoMinutes: number,
+  profile: InsightsMLuxProfile | null,
+  phaseMinutes: number,
   hasDlmoTiming: boolean,
   confidenceScore: number | null
 ): MedicationWindowCard[] {
@@ -322,7 +322,7 @@ function buildMedicationWindows(
       const { window, isEstimated } = resolveMedicationTime(
         definition,
         profile,
-        dlmoMinutes,
+        phaseMinutes,
         !hasDlmoTiming
       )
 
@@ -339,11 +339,11 @@ function buildMedicationWindows(
   )
 }
 
-function buildZeitgebers(dlmoMinutes: number): ZeitgeberCard[] {
-  const lightMinutes = normalizeMinutesFromMidnight(dlmoMinutes - 600)
-  const foodMinutes = normalizeMinutesFromMidnight(dlmoMinutes - 540)
-  const movementMinutes = normalizeMinutesFromMidnight(dlmoMinutes - 420)
-  const darknessMinutes = normalizeMinutesFromMidnight(dlmoMinutes - 90)
+function buildZeitgebers(phaseMinutes: number): ZeitgeberCard[] {
+  const lightMinutes = normalizeMinutesFromMidnight(phaseMinutes - 600)
+  const foodMinutes = normalizeMinutesFromMidnight(phaseMinutes - 540)
+  const movementMinutes = normalizeMinutesFromMidnight(phaseMinutes - 420)
+  const darknessMinutes = normalizeMinutesFromMidnight(phaseMinutes - 90)
 
   return [
     {
@@ -396,7 +396,7 @@ function buildProtocolIdleMessage(blood: BloodPanelSnapshot | null): string {
 }
 
 export function buildInsightsData(input: {
-  profile: InsightsDlmoProfile | null
+  profile: InsightsMLuxProfile | null
   latestNight: NightFlagsRow | null
   nightsCount: number
   currentMedications?: string[] | null
@@ -405,12 +405,12 @@ export function buildInsightsData(input: {
   latestBloodPanel?: BloodPanelSnapshot | null
 }): InsightsData {
   const hasTipTraqData = input.nightsCount > 0
-  const hasDlmoProfile = hasUsableDlmo(input.profile)
+  const hasMLuxProfile = hasUsableMLux(input.profile)
   const hasDlmoTiming = Boolean(
-    input.profile?.proxy_dlmo_rolling ?? input.profile?.proxy_dlmo_minutes_from_midnight
+    input.profile?.mlux_phase_time ?? input.profile?.mlux_phase_minutes
   )
-  const dlmoMinutes = resolveDlmoMinutes(input.profile, input.fallbackSleepTime)
-  const dlmoTimeLabel = hasDlmoProfile ? formatClock(dlmoMinutes) : null
+  const phaseMinutes = resolvePhaseMinutes(input.profile, input.fallbackSleepTime)
+  const phaseTimeLabel = hasMLuxProfile ? formatClock(phaseMinutes) : null
 
   const dominantLayer = input.profile?.dominant_layer ?? null
   const dominantLayerLabel = dominantLayer ? DOMINANT_LAYER_LABEL[dominantLayer] : null
@@ -418,15 +418,15 @@ export function buildInsightsData(input: {
   const medicationWindows = buildMedicationWindows(
     input.currentMedications,
     input.profile,
-    dlmoMinutes,
+    phaseMinutes,
     hasDlmoTiming,
     input.profile?.confidence_score ?? null
   )
 
   return {
-    hasDlmoProfile,
+    hasMLuxProfile,
     hasTipTraqData,
-    dlmoTimeLabel,
+    phaseTimeLabel,
     dominantLayer,
     dominantLayerLabel,
     confidenceScore: input.profile?.confidence_score ?? null,
@@ -437,10 +437,10 @@ export function buildInsightsData(input: {
     medicationWindows,
     hasMedicationSelection: (input.currentMedications?.length ?? 0) > 0,
     hasDlmoTiming,
-    zeitgebers: buildZeitgebers(dlmoMinutes),
+    zeitgebers: buildZeitgebers(phaseMinutes),
     activeProtocols: input.activeProtocols ?? [],
     latestBloodPanel: input.latestBloodPanel ?? null,
     protocolIdleMessage: buildProtocolIdleMessage(input.latestBloodPanel ?? null),
-    canShareReport: hasDlmoProfile || hasTipTraqData,
+    canShareReport: hasMLuxProfile || hasTipTraqData,
   }
 }

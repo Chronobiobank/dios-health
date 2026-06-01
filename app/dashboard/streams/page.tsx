@@ -5,7 +5,7 @@ import { StreamsStatus } from '@/components/dashboard/streams-status'
 import { TipTraqNightList } from '@/components/dashboard/tiptraq-night-list'
 import { TipTraQUploadPanel } from '@/components/dashboard/tiptraq-upload-panel'
 import { requirePatientSession } from '@/lib/auth/require-patient'
-import { type TipTraqNightRow } from '@/lib/dashboard/dlmo-profile'
+import { type TipTraqNightRow } from '@/lib/dashboard/mlux-profile'
 import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'

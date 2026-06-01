@@ -1,6 +1,6 @@
-import { normalizeMinutesFromMidnight } from '@/lib/dlmo'
+import { normalizeMinutesFromMidnight } from '@/lib/mlux'
 import { formatMinutesLabel, parseDbTimeToMinutes, parseTimeToMinutes } from '@/lib/dashboard/time-utils'
-import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
+import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 
 export const CANONICAL_SUPPLEMENTS = [
   'Vitamin D3',
@@ -167,18 +167,18 @@ export function mergeSupplementLists(
   return CANONICAL_SUPPLEMENTS.filter((name) => merged.has(name))
 }
 
-export function resolveTimebotDlmoMinutes(
-  profile: DlmoProfileRow | null,
+export function resolveTimebotPhaseMinutes(
+  profile: MLuxProfileRow | null,
   fallbackSleepTime: string
 ): { minutes: number; estimated: boolean } {
-  const fromRolling = parseDbTimeToMinutes(profile?.proxy_dlmo_rolling ?? null)
+  const fromRolling = parseDbTimeToMinutes(profile?.mlux_phase_time ?? null)
   if (fromRolling !== null) {
     return { minutes: fromRolling, estimated: false }
   }
 
-  if (profile?.proxy_dlmo_minutes_from_midnight != null) {
+  if (profile?.mlux_phase_minutes != null) {
     return {
-      minutes: normalizeMinutesFromMidnight(profile.proxy_dlmo_minutes_from_midnight),
+      minutes: normalizeMinutesFromMidnight(profile.mlux_phase_minutes),
       estimated: false,
     }
   }
@@ -192,12 +192,12 @@ export function resolveTimebotDlmoMinutes(
 
 export function buildSupplementTimingGuidance(
   supplements: CanonicalSupplement[],
-  dlmoMinutes: number,
+  phaseMinutes: number,
   estimated: boolean
 ): { supplement: CanonicalSupplement; guidance: string }[] {
   return supplements.map((supplement) => {
     const template = SUPPLEMENT_TIMING[supplement]
-    const targetMinutes = normalizeMinutesFromMidnight(dlmoMinutes + template.offsetMinutes)
+    const targetMinutes = normalizeMinutesFromMidnight(phaseMinutes + template.offsetMinutes)
     const timeLabel = formatMinutesLabel(targetMinutes)
     return {
       supplement,
@@ -210,8 +210,8 @@ export function buildSupplementContextBlock(input: {
   currentSupplements: string[]
   newlyExtracted: CanonicalSupplement[]
   extractedMedications: string[]
-  dlmoMinutes: number
-  dlmoTimeLabel: string
+  phaseMinutes: number
+  phaseTimeLabel: string
   estimated: boolean
 }): string {
   const supplementsToTime = mergeSupplementLists(
@@ -223,7 +223,7 @@ export function buildSupplementContextBlock(input: {
     supplementsToTime.filter((name): name is CanonicalSupplement =>
       CANONICAL_SUPPLEMENTS.includes(name as CanonicalSupplement)
     ),
-    input.dlmoMinutes,
+    input.phaseMinutes,
     input.estimated
   )
 
@@ -244,7 +244,7 @@ export function buildSupplementContextBlock(input: {
 
   return `${newlyExtractedBlock}
 ${medicationBlock}
-Proxy DLMO: ${input.dlmoTimeLabel}${input.estimated ? ' (ESTIMATED from questionnaire / Layer 1)' : ''}
+MLux phase time: ${input.phaseTimeLabel}${input.estimated ? ' (ESTIMATED from questionnaire / Layer 1)' : ''}
 
 Supplement timing guidance (use these lines verbatim when responding about supplements):
 ${timingBlock}`
@@ -264,7 +264,7 @@ export function buildTimebotSystemPrompt(isFirstTimeUser: boolean): string {
 
 ${TIMEBOT_VOICE}
 
-This patient is new — they may not have TipTraQ data yet. Use ESTIMATED DLMO from the context when marked.
+This patient is new — they may not have TipTraQ data yet. Use ESTIMATED MLux phase from the context when marked.
 
 SUPPLEMENT EXTRACTION (critical):
 Recognised supplements: ${supplementList}.
@@ -282,7 +282,7 @@ ${TIMEBOT_VOICE}
 Recognised supplements: ${supplementList}. When supplements are mentioned, use the supplement timing guidance in context.
 When new supplements were extracted this turn, confirm they were saved and quote exact times from Today's unified schedule.
 
-Answer using the patient's DLMO profile and Today's unified schedule in context.
+Answer using the patient's MLux profile and Today's unified schedule in context.
 When asked when to take a medication or supplement, quote the exact time from that schedule (do not invent times).
 If asked about medications or supplements not on today's schedule, explain what you can track and suggest adding them in chat.`
 }

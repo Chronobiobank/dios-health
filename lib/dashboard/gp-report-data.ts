@@ -1,5 +1,5 @@
-import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
-import { formatDbTime, formatReportDate, resolveChronotypeLabel } from '@/lib/dashboard/dlmo-profile'
+import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
+import { formatDbTime, formatReportDate, resolveChronotypeLabel } from '@/lib/dashboard/mlux-profile'
 
 export type GpReportNight = {
   report_date: string
@@ -14,7 +14,7 @@ export type GpReportData = {
   generatedAt: string
   hasTipTraqData: boolean
   nightsCount: number
-  dlmoTime: string
+  phaseTime: string
   confidenceScore: number | null
   confidenceLabel: string | null
   confidenceBandMinutes: number | null
@@ -40,10 +40,10 @@ export function buildGpReportData(input: {
   age: number | null
   biologicalSex: string | null
   dataShareGp: boolean
-  dlmoProfile: DlmoProfileRow | null
+  mluxProfile: MLuxProfileRow | null
   nights: GpReportNight[]
 }): GpReportData {
-  const profile = input.dlmoProfile
+  const profile = input.mluxProfile
   const hasTipTraqData = Boolean(profile?.nights_count && profile.nights_count > 0)
 
   const doseWindows = [
@@ -68,7 +68,7 @@ export function buildGpReportData(input: {
     }),
     hasTipTraqData,
     nightsCount: profile?.nights_count ?? 0,
-    dlmoTime: hasTipTraqData ? formatDbTime(profile?.proxy_dlmo_rolling ?? null) : '—',
+    phaseTime: hasTipTraqData ? formatDbTime(profile?.mlux_phase_time ?? null) : '—',
     confidenceScore: profile?.confidence_score ?? null,
     confidenceLabel: profile?.confidence_label ?? null,
     confidenceBandMinutes: profile?.confidence_band_minutes ?? null,

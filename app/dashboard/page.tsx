@@ -3,7 +3,7 @@ import {
   type SpectrumConfidence,
 } from '@/components/dashboard/circadian-risk-spectrum'
 import { DashboardPageTransition } from '@/components/dashboard/dashboard-page-transition'
-import { DlmoUploadPrompt } from '@/components/dashboard/dlmo-upload-prompt'
+import { MLuxUploadPrompt } from '@/components/dashboard/mlux-upload-prompt'
 import { GpReportButton } from '@/components/dashboard/gp-report-button'
 import { MedicationTimeline } from '@/components/dashboard/medication-timeline'
 import { MLuxDial } from '@/components/dashboard/mlux-dial'
@@ -16,13 +16,13 @@ import { getLocalizedPatientGreeting, getPatientFirstName } from '@/lib/auth/gre
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import { buildBodyClockModel } from '@/lib/dashboard/body-clock'
 import {
-  buildBodyClockFromDlmoProfile,
-  type DlmoProfileRow,
-} from '@/lib/dashboard/dlmo-profile'
+  buildBodyClockFromMLuxProfile,
+  type MLuxProfileRow,
+} from '@/lib/dashboard/mlux-profile'
 import { buildSpectrumNodes } from '@/lib/dashboard/spectrum-builder'
 import { createClient } from '@/lib/supabase/server'
 
-type MluxProfileRow = DlmoProfileRow & {
+type MluxProfileRow = MLuxProfileRow & {
   mlux_score?: number | null
 }
 
@@ -83,7 +83,7 @@ export default async function DashboardPage() {
 
   const bodyClock =
     profileRow && hasTipTraqData
-      ? buildBodyClockFromDlmoProfile(profileRow)
+      ? buildBodyClockFromMLuxProfile(profileRow)
       : buildBodyClockModel(
           patient.chronotype_q1 ?? '',
           patient.chronotype_q3 ?? '',
@@ -148,7 +148,7 @@ export default async function DashboardPage() {
           sleepMinutes={bodyClock.sleepStartMinutes}
         />
       ) : (
-        <DlmoUploadPrompt />
+        <MLuxUploadPrompt />
       )}
 
       {hasTipTraqData && profileRow ? (

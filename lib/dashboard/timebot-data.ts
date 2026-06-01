@@ -1,10 +1,10 @@
-import type { DlmoProfileRow } from '@/lib/dashboard/dlmo-profile'
+import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import {
   buildTimebotTimeline,
-  formatDlmoHeaderTime,
+  formatPhaseHeaderTime,
   formatTimelineForContext,
   resolveTimebotPrecisionLabel,
-  resolveTimelineDlmoMinutes,
+  resolveTimelinePhaseMinutes,
   type ScheduleStatus,
   type TimebotTimelineEvent,
   type TimebotTimelineGroup,
@@ -19,7 +19,7 @@ export type TimebotData = {
   hasDlmoData: boolean
   precisionLabel: TimebotPrecisionLabel
   firstName: string
-  dlmoTimeLabel: string
+  phaseTimeLabel: string
   chronotype: string | null
   confidenceLabel: string | null
   currentSupplements: string[]
@@ -29,7 +29,7 @@ export type TimebotData = {
 }
 
 export function buildTimebotData(input: {
-  profile: DlmoProfileRow | null
+  profile: MLuxProfileRow | null
   hasTipTraqData: boolean
   firstName: string
   locationCity?: string | null
@@ -41,7 +41,7 @@ export function buildTimebotData(input: {
 }): TimebotData {
   const fallbackSleepTime = input.fallbackSleepTime ?? '11:00pm'
   const precisionLabel = resolveTimebotPrecisionLabel(input.profile?.dominant_layer)
-  const dlmoTimeLabel = formatDlmoHeaderTime(input.profile, fallbackSleepTime)
+  const phaseTimeLabel = formatPhaseHeaderTime(input.profile, fallbackSleepTime)
 
   const { events, groups } = buildTimebotTimeline({
     profile: input.profile,
@@ -53,7 +53,7 @@ export function buildTimebotData(input: {
     now: input.now,
   })
 
-  const { fromRolling } = resolveTimelineDlmoMinutes(input.profile, fallbackSleepTime)
+  const { fromRolling } = resolveTimelinePhaseMinutes(input.profile, fallbackSleepTime)
   // hasDlmoData: Vaya can always respond — questionnaire fallback gives an estimated MLux / timing basis.
   // The precisionLabel (ESTIMATED / PRECISION / CONFIRMED) communicates quality to the user.
   const hasDlmoData = true
@@ -62,7 +62,7 @@ export function buildTimebotData(input: {
     hasDlmoData,
     precisionLabel,
     firstName: input.firstName,
-    dlmoTimeLabel: `${dlmoTimeLabel}${fromRolling ? '' : ' (estimated)'}`,
+    phaseTimeLabel: `${phaseTimeLabel}${fromRolling ? '' : ' (estimated)'}`,
     chronotype: input.profile?.chronotype ?? null,
     confidenceLabel: input.profile?.confidence_label ?? null,
     currentSupplements: input.currentSupplements ?? [],
@@ -73,7 +73,7 @@ export function buildTimebotData(input: {
 }
 
 export function buildTimebotContext(
-  profile: DlmoProfileRow | null,
+  profile: MLuxProfileRow | null,
   data: TimebotData,
   supplementContext?: string
 ): string {
@@ -91,8 +91,8 @@ export function buildTimebotContext(
       ? `\n\nSupplements on profile: ${data.currentSupplements.join(', ')}`
       : ''
 
-  return `Patient DLMO profile:
-- Proxy DLMO: ${data.dlmoTimeLabel}
+  return `Patient MLux profile:
+- MLux phase time: ${data.phaseTimeLabel}
 - Schedule precision: ${data.precisionLabel}
 - Chronotype: ${data.chronotype ?? 'unknown'}
 ${profileBlock}

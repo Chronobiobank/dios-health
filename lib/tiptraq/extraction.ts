@@ -1,4 +1,4 @@
-import type { TipTraQNight } from '@/lib/dlmo'
+import type { TipTraQNight } from '@/lib/mlux'
 
 const TIME_PATTERN = /^\d{2}:\d{2}$/
 
