@@ -59,7 +59,7 @@ export function TipTraqNightList({ nights, title = 'Uploaded recordings' }: TipT
             <div className="min-w-0">
               <p className="text-sm font-medium text-black">{formatReportDate(night.report_date)}</p>
               <p className="mt-0.5 font-mono text-[11px] text-black/45">
-                DLMO {formatDbTime(night.proxy_dlmo_time)}
+                DLMO {formatDbTime(night.mlux_phase_time ?? null)}
               </p>
             </div>
 

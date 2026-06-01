@@ -18,7 +18,7 @@ export default async function DashboardStreamsPage() {
 
   const { data: nights } = await supabase
     .from('tiptraq_nights')
-    .select('id, report_date, proxy_dlmo_time, confidence_score, confidence_label')
+    .select('id, report_date, mlux_phase_time, confidence_score, confidence_label')
     .eq('patient_id', user.id)
     .order('report_date', { ascending: false })
 
@@ -35,8 +35,8 @@ export default async function DashboardStreamsPage() {
     .limit(1)
     .maybeSingle()
 
-  const { data: dlmoProfile } = await supabase
-    .from('dlmo_profiles')
+  const { data: mluxProfile } = await supabase
+    .from('mlux_profiles')
     .select('layer1_confidence_score')
     .eq('patient_id', user.id)
     .maybeSingle()
@@ -48,7 +48,7 @@ export default async function DashboardStreamsPage() {
     lastObservedAt != null && Date.now() - new Date(lastObservedAt).getTime() <= SEVEN_DAYS_MS
 
   const layer1Confidence =
-    dlmoProfile?.layer1_confidence_score ?? latestSmartphone?.confidence_score ?? null
+    mluxProfile?.layer1_confidence_score ?? latestSmartphone?.confidence_score ?? null
 
   return (
     <>

@@ -20,8 +20,8 @@ export default async function DashboardPage() {
   const { user, profile, patient } = await requirePatientSession()
   const supabase = await createClient()
 
-  const { data: dlmoProfile } = await supabase
-    .from('dlmo_profiles')
+  const { data: mluxProfile } = await supabase
+    .from('mlux_profiles')
     .select('*')
     .eq('patient_id', user.id)
     .maybeSingle()
@@ -44,7 +44,7 @@ export default async function DashboardPage() {
     .limit(1)
     .maybeSingle()
 
-  const profileRow = dlmoProfile as DlmoProfileRow | null
+  const profileRow = mluxProfile as DlmoProfileRow | null
   const nightsUploaded = tipTraqNightsCount ?? 0
   const hasTipTraqData = nightsUploaded > 0
   const smartphoneActive =

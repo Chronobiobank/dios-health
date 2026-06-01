@@ -29,7 +29,7 @@ export type DlmoProfileRow = {
 export type TipTraqNightRow = {
   id: string
   report_date: string
-  proxy_dlmo_time: string | null
+  mlux_phase_time?: string | null
   confidence_score: number | null
   confidence_label: string | null
 }
