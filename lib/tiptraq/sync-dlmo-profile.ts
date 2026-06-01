@@ -44,7 +44,7 @@ export async function syncDlmoProfileForPatient(
   }
 
   if (!allNights || allNights.length === 0) {
-    const { error: upsertError } = await supabase.from('dlmo_profiles').upsert(
+    const { error: upsertError } = await supabase.from('mlux_profiles').upsert(
       {
         patient_id: patientId,
         nights_count: 0,
@@ -74,7 +74,7 @@ export async function syncDlmoProfileForPatient(
 
   const rolling = calculateRollingDLMO(toRollingNightResults(allNights))
 
-  const { error: upsertError } = await supabase.from('dlmo_profiles').upsert(
+  const { error: upsertError } = await supabase.from('mlux_profiles').upsert(
     {
       patient_id: patientId,
       nights_count: rolling.nights_count,

@@ -19,7 +19,7 @@ export default async function DashboardDataControlsPage() {
 
   const { data: nights } = await supabase
     .from('tiptraq_nights')
-    .select('id, report_date, proxy_dlmo_time, confidence_score, confidence_label')
+    .select('id, report_date, mlux_phase_time, confidence_score, confidence_label')
     .eq('patient_id', user.id)
     .order('report_date', { ascending: false })
 

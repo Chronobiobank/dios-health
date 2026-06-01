@@ -93,7 +93,7 @@ export function GpReportView({ report }: GpReportViewProps) {
                 {report.nights.map((night) => (
                   <li key={night.report_date} className="flex justify-between gap-4 border-b border-black/5 py-2">
                     <span className="text-black">{night.report_date}</span>
-                    <span className="font-mono text-black/60">DLMO {night.proxy_dlmo_time}</span>
+                    <span className="font-mono text-black/60">MLux {night.mlux_phase_time}</span>
                   </li>
                 ))}
               </ul>

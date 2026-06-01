@@ -183,7 +183,7 @@ export async function POST(request: NextRequest) {
       pns_pct: extracted.pns_pct,
       snoring_minutes: extracted.snoring_minutes,
       algorithm_version: extracted.algorithm_version,
-      proxy_dlmo_time: dlmoResult.proxy_dlmo_time,
+      mlux_phase_time: dlmoResult.proxy_dlmo_time,
       proxy_dlmo_minutes_from_midnight: dlmoResult.proxy_dlmo_minutes,
       dlmo_baseline_estimate: dlmoResult.baseline_estimate,
       dlmo_rem_correction_min: dlmoResult.rem_correction_min,
@@ -213,7 +213,7 @@ export async function POST(request: NextRequest) {
         sleep_onset: summarizeDbValue(insertRow.sleep_onset),
         sleep_offset: summarizeDbValue(insertRow.sleep_offset),
         first_rem_onset: summarizeDbValue(insertRow.first_rem_onset),
-        proxy_dlmo_time: summarizeDbValue(insertRow.proxy_dlmo_time),
+        mlux_phase_time: summarizeDbValue(insertRow.mlux_phase_time),
         dlmo_baseline_estimate: summarizeDbValue(insertRow.dlmo_baseline_estimate),
       },
       keyMetrics: {

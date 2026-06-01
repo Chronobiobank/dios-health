@@ -18,8 +18,8 @@ export default async function DashboardVayaPage() {
   const { user, profile, patient } = await requirePatientSession()
   const supabase = await createClient()
 
-  const [{ data: dlmoProfile }, { count: nightsCount }] = await Promise.all([
-    supabase.from('dlmo_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
+  const [{ data: mluxProfile }, { count: nightsCount }] = await Promise.all([
+    supabase.from('mlux_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
     supabase
       .from('tiptraq_nights')
       .select('id', { count: 'exact', head: true })
@@ -37,7 +37,7 @@ export default async function DashboardVayaPage() {
     patient.location_country
   )
 
-  const profileRow = dlmoProfile as DlmoProfileRow | null
+  const profileRow = mluxProfile as DlmoProfileRow | null
   const mluxScore = Math.round((profileRow?.confidence_score ?? 20) * 3.5)
 
   const session = buildTimebotData({

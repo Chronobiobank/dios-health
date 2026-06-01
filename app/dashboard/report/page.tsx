@@ -12,16 +12,16 @@ export default async function DashboardGpReportPage() {
   const { user, profile, patient } = await requirePatientSession()
   const supabase = await createClient()
 
-  const [{ data: dlmoProfile }, { data: nights }] = await Promise.all([
-    supabase.from('dlmo_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
+  const [{ data: mluxProfile }, { data: nights }] = await Promise.all([
+    supabase.from('mlux_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
     supabase
       .from('tiptraq_nights')
-      .select('report_date, proxy_dlmo_time, confidence_score')
+      .select('report_date, mlux_phase_time, confidence_score')
       .eq('patient_id', user.id)
       .order('report_date', { ascending: false }),
   ])
 
-  const profileRow = dlmoProfile as DlmoProfileRow | null
+  const profileRow = mluxProfile as DlmoProfileRow | null
   const report = buildGpReportData({
     patientName: profile.full_name ?? 'Patient',
     age: patient.age,

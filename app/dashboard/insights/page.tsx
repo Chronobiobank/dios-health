@@ -22,12 +22,12 @@ export default async function DashboardInsightsPage() {
   const supabase = await createClient()
 
   const [
-    { data: dlmoProfile },
+    { data: mluxProfile },
     { data: latestNight, count: nightsCount },
     { data: bloodPanel },
     { data: protocols },
   ] = await Promise.all([
-    supabase.from('dlmo_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
+    supabase.from('mlux_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
     supabase
       .from('tiptraq_nights')
       .select(
@@ -54,7 +54,7 @@ export default async function DashboardInsightsPage() {
   ])
 
   const insights = buildInsightsData({
-    profile: (dlmoProfile as InsightsDlmoProfile | null) ?? null,
+    profile: (mluxProfile as InsightsDlmoProfile | null) ?? null,
     latestNight: latestNight?.[0] ?? null,
     nightsCount: nightsCount ?? 0,
     currentMedications: readCurrentMedications(patient as unknown as Record<string, unknown>),

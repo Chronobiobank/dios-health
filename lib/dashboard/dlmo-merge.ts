@@ -134,7 +134,7 @@ export async function mergeDlmoLayers(
       .limit(1)
       .maybeSingle<BloodRow>(),
     supabase
-      .from('dlmo_profiles')
+      .from('mlux_profiles')
       .select(
         'nights_count, proxy_dlmo_rolling, proxy_dlmo_minutes_from_midnight, confidence_score, confidence_band_minutes, confidence_label, last_updated'
       )
@@ -199,7 +199,7 @@ export async function mergeDlmoLayers(
   }
 
   const { error: upsertError } = await supabase
-    .from('dlmo_profiles')
+    .from('mlux_profiles')
     .upsert(mergePayload, { onConflict: 'patient_id' })
 
   if (upsertError) {

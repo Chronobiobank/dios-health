@@ -3,7 +3,7 @@ import { formatDbTime, formatReportDate, resolveChronotypeLabel } from '@/lib/da
 
 export type GpReportNight = {
   report_date: string
-  proxy_dlmo_time: string | null
+  mlux_phase_time: string | null
   confidence_score: number | null
 }
 
@@ -77,7 +77,7 @@ export function buildGpReportData(input: {
     nights: input.nights.map((night) => ({
       ...night,
       report_date: formatReportDate(night.report_date),
-      proxy_dlmo_time: formatDbTime(night.proxy_dlmo_time),
+      mlux_phase_time: formatDbTime(night.mlux_phase_time),
     })),
     dataShareGpEnabled: input.dataShareGp,
   }

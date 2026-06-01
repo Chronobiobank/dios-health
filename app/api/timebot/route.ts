@@ -46,8 +46,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 })
     }
 
-    const [{ data: dlmoProfile }, { data: patient }, { count: nightsCount }] = await Promise.all([
-      supabase.from('dlmo_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
+    const [{ data: mluxProfile }, { data: patient }, { count: nightsCount }] = await Promise.all([
+      supabase.from('mlux_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
       supabase
         .from('patient_profiles')
         .select(
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     ])
 
     const hasTipTraqData = (nightsCount ?? 0) > 0
-    const profileRow = (dlmoProfile as DlmoProfileRow | null) ?? null
+    const profileRow = (mluxProfile as DlmoProfileRow | null) ?? null
     const fallbackSleepTime = patient?.chronotype_q3 ?? '11:00pm'
     const currentSupplements = (patient?.current_supplements as string[] | null) ?? []
 

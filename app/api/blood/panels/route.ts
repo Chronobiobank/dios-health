@@ -60,7 +60,7 @@ export async function POST(request: Request) {
 
     if (proxyDlmoMinutes == null || confidenceScore == null) {
       const { data: profile } = await supabase
-        .from('dlmo_profiles')
+        .from('mlux_profiles')
         .select('proxy_dlmo_minutes_from_midnight')
         .eq('patient_id', user.id)
         .maybeSingle()

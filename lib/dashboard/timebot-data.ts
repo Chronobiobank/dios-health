@@ -81,7 +81,7 @@ export function buildTimebotContext(
     ? `- Confidence: ${data.confidenceLabel ?? 'unknown'} (${profile.confidence_score ?? 'n/a'}%)
 - Nights uploaded: ${profile.nights_count ?? 0}
 - Dominant layer: ${profile.dominant_layer ?? 'none'}`
-    : '- No dlmo_profiles row yet (questionnaire estimate for DLMO)'
+    : '- No mlux_profiles row yet (questionnaire estimate for MLux phase)'
 
   const scheduleBlock = formatTimelineForContext(data.timelineGroups)
 
