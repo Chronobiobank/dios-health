@@ -1,3 +1,7 @@
+import {
+  CircadianRiskSpectrum,
+  type SpectrumConfidence,
+} from '@/components/dashboard/circadian-risk-spectrum'
 import { DashboardPageTransition } from '@/components/dashboard/dashboard-page-transition'
 import { DlmoUploadPrompt } from '@/components/dashboard/dlmo-upload-prompt'
 import { GpReportButton } from '@/components/dashboard/gp-report-button'
@@ -5,6 +9,7 @@ import { MedicationTimeline } from '@/components/dashboard/medication-timeline'
 import { MLuxDial } from '@/components/dashboard/mlux-dial'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { SeededInsightCard } from '@/components/dashboard/seeded-insight-card'
+import { SpectrumUpgradePaths } from '@/components/dashboard/spectrum-upgrade-paths'
 import { StreamsStatus } from '@/components/dashboard/streams-status'
 import { buildSeededInsight } from '@/lib/auth/chronotype-insight'
 import { getLocalizedPatientGreeting, getPatientFirstName } from '@/lib/auth/greeting'
@@ -14,7 +19,12 @@ import {
   buildBodyClockFromDlmoProfile,
   type DlmoProfileRow,
 } from '@/lib/dashboard/dlmo-profile'
+import { buildSpectrumNodes } from '@/lib/dashboard/spectrum-builder'
 import { createClient } from '@/lib/supabase/server'
+
+type MluxProfileRow = DlmoProfileRow & {
+  mlux_score?: number | null
+}
 
 export default async function DashboardPage() {
   const { user, profile, patient } = await requirePatientSession()
@@ -44,7 +54,12 @@ export default async function DashboardPage() {
     .limit(1)
     .maybeSingle()
 
-  const profileRow = mluxProfile as DlmoProfileRow | null
+  const { count: vayaSessionCount } = await supabase
+    .from('vaya_sessions')
+    .select('id', { count: 'exact', head: true })
+    .eq('patient_id', user.id)
+
+  const profileRow = mluxProfile as MluxProfileRow | null
   const nightsUploaded = tipTraqNightsCount ?? 0
   const hasTipTraqData = nightsUploaded > 0
   const smartphoneActive =
@@ -75,6 +90,25 @@ export default async function DashboardPage() {
           insight.chronotypeLabel
         )
 
+  const isFirstOpen = (vayaSessionCount ?? 0) <= 3
+
+  const mluxScoreFromProfile =
+    profileRow?.mlux_score ?? Math.round((profileRow?.confidence_score ?? 20) * 3.5)
+
+  const spectrumNodes = buildSpectrumNodes({
+    mluxScore: mluxScoreFromProfile,
+    chronotype: profileRow?.chronotype ?? insight.chronotypeLabel ?? null,
+    hasTipTraqData,
+    hasBloodData: (bloodPanelsCount ?? 0) > 0,
+    currentMedications: (patient.current_medications as string[] | null) ?? [],
+  })
+
+  const overallConfidence: SpectrumConfidence = hasTipTraqData
+    ? 'CONFIRMED'
+    : (bloodPanelsCount ?? 0) > 0
+      ? 'PRECISION'
+      : 'ESTIMATED'
+
   return (
     <DashboardPageTransition className="gap-6">
       <PatientTopBar
@@ -87,6 +121,15 @@ export default async function DashboardPage() {
             : 'Body clock estimate · Based on your answers · Upload TipTraQ for precision'
         }
       />
+
+      <CircadianRiskSpectrum
+        nodes={spectrumNodes}
+        overallConfidence={overallConfidence}
+        mluxScore={mluxScoreFromProfile}
+        isFirstOpen={isFirstOpen}
+      />
+
+      {overallConfidence === 'ESTIMATED' ? <SpectrumUpgradePaths /> : null}
 
       <MLuxDial
         mluxScore={Math.round((profileRow?.confidence_score ?? 20) * 3.5)}
