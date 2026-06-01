@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Vaya by DIʘS',
+    name: 'Vaya by DIOS',
     short_name: 'Vaya',
     description:
       'Measure your Melanopic Lux. Get your personalised light and medication protocol.',

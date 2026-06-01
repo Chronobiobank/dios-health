@@ -1,4 +1,3 @@
-import { DIOS_WORDMARK } from '@/components/DiosLogo'
 import type { GpReportData } from '@/lib/dashboard/gp-report-data'
 
 type GpReportViewProps = {
@@ -9,7 +8,7 @@ export function GpReportView({ report }: GpReportViewProps) {
   return (
     <article className="gp-report mx-auto max-w-[48rem] bg-white px-6 py-10 text-[#0d0d0d] sm:px-10 sm:py-12">
       <header className="border-b border-black/10 pb-6">
-        <p className="dios-wordmark text-lg text-black">{DIOS_WORDMARK}</p>
+        <p className="text-lg font-medium text-black">DIOS Health</p>
         <h1 className="mt-4 text-2xl font-medium text-black">Body clock summary for GP review</h1>
         <p className="mt-2 text-sm text-black/60">
           Generated {report.generatedAt} · dios.health

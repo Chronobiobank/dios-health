@@ -10,7 +10,7 @@ import { createClient } from '@/lib/supabase/server'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Vaya — DIʘS',
+  title: 'Vaya — DIOS',
   description: 'Your Vaya session — measure your light biology and time your doses.',
 }
 
@@ -31,8 +31,11 @@ export default async function DashboardVayaPage() {
     fullName: profile.full_name,
   })
 
+  const profileRow = dlmoProfile as DlmoProfileRow | null
+  const mluxScore = Math.round((profileRow?.confidence_score ?? 20) * 3.5)
+
   const session = buildTimebotData({
-    profile: (dlmoProfile as DlmoProfileRow | null) ?? null,
+    profile: profileRow,
     hasTipTraqData: (nightsCount ?? 0) > 0,
     firstName,
     locationCity: patient.location_city,
@@ -42,5 +45,5 @@ export default async function DashboardVayaPage() {
     currentMedications: (patient.current_medications as string[] | null) ?? [],
   })
 
-  return <TimebotView data={session} />
+  return <TimebotView data={session} mluxScore={mluxScore} />
 }

@@ -3,7 +3,7 @@
 import { Check } from 'lucide-react'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 
-import { TimebotPulse, type TimebotPulseState } from '@/components/dashboard/timebot-pulse'
+import { VayaLottie, type VayaLottieState } from '@/components/dashboard/vaya-lottie'
 import type {
   TimebotData,
   TimebotTimelineEvent,
@@ -20,6 +20,7 @@ type ChatMessage = {
 
 type TimebotViewProps = {
   data: TimebotData
+  mluxScore: number
 }
 
 const PRECISION_HEADER: Record<TimebotData['precisionLabel'], string> = {
@@ -118,7 +119,15 @@ function TimelineGroup({ group }: { group: TimebotTimelineGroup }) {
   )
 }
 
-function VayaWelcome({ data, onPrompt }: { data: TimebotData; onPrompt: (text: string) => void }) {
+function VayaWelcome({
+  data,
+  mluxScore,
+  onPrompt,
+}: {
+  data: TimebotData
+  mluxScore: number
+  onPrompt: (text: string) => void
+}) {
   return (
     <div className="mx-auto mt-8 w-full max-w-lg px-2">
       <div className="rounded-2xl border border-black/[0.07] bg-neutral-50 p-6">
@@ -128,9 +137,14 @@ function VayaWelcome({ data, onPrompt }: { data: TimebotData; onPrompt: (text: s
         </p>
         {data.precisionLabel === 'ESTIMATED' ? (
           <p className="mt-2 text-[13px] leading-relaxed text-black/45">
-            Your DLMO is estimated at {data.dlmoTimeLabel} — connect TipTraQ for a precision reading.
+            Your MLux score is estimated at {mluxScore} m-EDI — a Vaya camera session measures it
+            directly.
           </p>
-        ) : null}
+        ) : (
+          <p className="mt-2 text-[13px] leading-relaxed text-black/45">
+            MLux {mluxScore} m-EDI — melanopic lux, your primary body-clock signal.
+          </p>
+        )}
         <div className="mt-5 flex flex-col gap-2">
           <p className="font-mono text-[11px] uppercase tracking-widest text-black/30">Try asking</p>
           {ONBOARDING_PROMPTS.map((prompt) => (
@@ -149,8 +163,8 @@ function VayaWelcome({ data, onPrompt }: { data: TimebotData; onPrompt: (text: s
   )
 }
 
-export function TimebotView({ data }: TimebotViewProps) {
-  const [pulseState, setPulseState] = useState<TimebotPulseState>('idle')
+export function TimebotView({ data, mluxScore }: TimebotViewProps) {
+  const [pulseState, setPulseState] = useState<VayaLottieState>('idle')
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [trackedSupplements, setTrackedSupplements] = useState(data.currentSupplements)
   const [input, setInput] = useState('')
@@ -227,7 +241,7 @@ export function TimebotView({ data }: TimebotViewProps) {
   return (
     <div className="flex min-h-0 flex-1 flex-col pb-36">
       <div className="flex flex-col items-center px-2 pt-2 text-center">
-        <TimebotPulse state={pulseState} />
+        <VayaLottie state={pulseState} />
         <p className="mt-4 text-[15px] font-semibold text-black">{data.firstName}</p>
         <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
           <span
@@ -238,11 +252,15 @@ export function TimebotView({ data }: TimebotViewProps) {
           >
             {PRECISION_HEADER[data.precisionLabel]}
           </span>
-          <span className="font-mono text-[12px] text-black/50">DLMO {data.dlmoTimeLabel}</span>
+          <span className="font-mono text-[12px] text-black/50">
+            {mluxScore} m-EDI lux
+          </span>
         </div>
       </div>
 
-      {messages.length === 0 ? <VayaWelcome data={data} onPrompt={handlePrompt} /> : null}
+      {messages.length === 0 ? (
+        <VayaWelcome data={data} mluxScore={mluxScore} onPrompt={handlePrompt} />
+      ) : null}
 
       {messages.length > 0 ? (
         <div className="chat-thread mt-8 border-t border-black/[0.06] pt-6">

@@ -96,7 +96,7 @@ export function PitchDeck() {
           className="mt-6 max-w-2xl text-[15px] leading-relaxed lg:text-lg"
           style={{ color: 'var(--color-text-secondary)' }}
         >
-          More light by day. More dark by night. Less disease. DIʘS measures it.
+          More light by day. More dark by night. Less disease. DIOS measures it.
         </p>
       </PitchScreen>
 
@@ -127,7 +127,7 @@ export function PitchDeck() {
             89,000 participants · 13M sensor hours · PNAS · Lancet · JAMA. More daylight, more darkness — less T2DM, heart failure, AF, stroke, and psychiatric disease.
           </p>
           <p className="mt-3 font-mono text-[11px] text-white/40">
-            Vaya measures the biomarker. DIʘS delivers the correction. No clinic visit required.
+            Vaya measures the biomarker. DIOS delivers the correction. No clinic visit required.
           </p>
         </div>
       </PitchScreen>
@@ -138,7 +138,7 @@ export function PitchDeck() {
           Vaya reads your light biology. In 60 seconds. From your front camera.
         </h1>
         <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/70 lg:text-lg">
-          Vaya is the DIʘS camera session. It measures Melanopic Lux — the direct entraining
+          Vaya is the DIOS camera session. It measures Melanopic Lux — the direct entraining
           signal to your master clock — using your smartphone, GPS, and time of day.
           No wearable. No lab. No appointment.
         </p>
@@ -167,7 +167,7 @@ export function PitchDeck() {
       <PitchScreen id="pitch-solution" background={<PitchShadowBackdrop variant={3} />}>
         <PitchEyebrow>THE SOLUTION</PitchEyebrow>
         <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
-          Vaya measures your clock. DIʘS times your doses.
+          Vaya measures your clock. DIOS times your doses.
         </h1>
         <ul className="mt-8 flex max-w-2xl flex-col gap-4">
           {[
@@ -194,7 +194,7 @@ export function PitchDeck() {
           Every prescription is a potential user.
         </h1>
         <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/70 lg:text-lg">
-          UK Biobank validated the biomarker at scale. DIʘS measures it continuously — and corrects it. The first longitudinal melanopic lux dataset linked to medication outcomes.
+          UK Biobank validated the biomarker at scale. DIOS measures it continuously — and corrects it. The first longitudinal melanopic lux dataset linked to medication outcomes.
         </p>
         <div className="mt-10 text-center">
           <p

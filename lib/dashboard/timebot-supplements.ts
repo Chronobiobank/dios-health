@@ -260,7 +260,7 @@ export function buildTimebotSystemPrompt(isFirstTimeUser: boolean): string {
   const supplementList = CANONICAL_SUPPLEMENTS.join(', ')
 
   if (isFirstTimeUser) {
-    return `You are Vaya — the DIʘS camera session and timing guide for chronotherapy and supplement timing.
+    return `You are Vaya — the DIOS camera session and timing guide for chronotherapy and supplement timing.
 
 ${TIMEBOT_VOICE}
 
@@ -275,7 +275,7 @@ MEDICATION EXTRACTION:
 Also note medications mentioned (atorvastatin, ramipril, sertraline, metformin, etc.). Explain medication windows will personalise after TipTraQ or more data layers.`
   }
 
-  return `You are Vaya — the DIʘS camera session and timing guide for patients on chronotherapy.
+  return `You are Vaya — the DIOS camera session and timing guide for patients on chronotherapy.
 
 ${TIMEBOT_VOICE}
 

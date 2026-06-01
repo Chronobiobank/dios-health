@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+import { VayaHeroLottie } from '@/components/vaya/vaya-hero-lottie'
 import { AUTH_ROUTES } from '@/lib/auth/routes'
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default function VayaPage() {
           className="font-mono text-[11px] uppercase tracking-widest"
           style={{ color: 'var(--color-brand)' }}
         >
-          By DIʘS · Web-based · Free
+          By DIOS · Web-based · Free
         </p>
 
         <h1 className="mt-6 max-w-2xl text-[36px] font-medium leading-tight sm:text-[52px]">
@@ -30,6 +31,8 @@ export default function VayaPage() {
           <br />
           Time your doses.
         </h1>
+
+        <VayaHeroLottie />
 
         <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-white/60 sm:text-lg">
           Vaya is a 60-second camera session that measures your Melanopic Lux score — the direct
@@ -104,7 +107,7 @@ export default function VayaPage() {
           On Android: tap the browser menu → Install app.
         </p>
         <p className="mt-4 font-mono text-[11px] text-white/30">
-          Vaya · dios.health/vaya · Powered by DIʘS Health
+          Vaya · dios.health/vaya · Powered by DIOS Health
         </p>
       </section>
     </main>
