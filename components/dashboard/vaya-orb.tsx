@@ -9,10 +9,12 @@ export type VayaOrbState = 'idle' | 'thinking' | 'responding'
 type VayaOrbProps = {
   state: VayaOrbState
   volume?: number
+  /** Pixel width/height of the orb (default 168). */
+  size?: number
   className?: string
 }
 
-export function VayaOrb({ state, volume = 0, className }: VayaOrbProps) {
+export function VayaOrb({ state, volume = 0, size, className }: VayaOrbProps) {
   const [reducedMotion, setReducedMotion] = useState(false)
   const level = Math.max(0, Math.min(volume, 1))
   const scale = 1 + level * 0.14
@@ -29,6 +31,7 @@ export function VayaOrb({ state, volume = 0, className }: VayaOrbProps) {
   const style = {
     '--vaya-orb-scale': scale,
     '--vaya-orb-glow': glow,
+    ...(size != null ? { width: size, height: size } : {}),
   } as CSSProperties
 
   return (

@@ -10,6 +10,7 @@ import type {
   TimebotTimelineGroup,
 } from '@/lib/dashboard/timebot-data'
 import { buildDemoProtocolGroup } from '@/lib/dashboard/vaya-demo-protocol'
+import { runSilentMluxCapture, startVayaSession } from '@/lib/vaya/mlux-capture'
 import type { ScheduleStatus, TimebotEventCategory } from '@/lib/dashboard/timebot-timeline'
 import { cn } from '@/lib/utils'
 
@@ -169,50 +170,17 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
   }, [])
 
   useEffect(() => {
-    async function captureMluxOnOpen() {
-      if (cameraCaptureDoneRef.current) return
-      cameraCaptureDoneRef.current = true
-      try {
-        const cameraStream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: 'user' },
-          audio: false,
-        })
-
-        if (videoRef.current) {
-          videoRef.current.srcObject = cameraStream
-          void videoRef.current.play().catch(() => {})
-        }
-
-        const now = new Date()
-        const hour = now.getHours().toString().padStart(2, '0')
-        const minute = now.getMinutes().toString().padStart(2, '0')
-
-        void fetch('/api/smartphone/observations', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            sleep_onset_local: `${hour}:${minute}`,
-            sleep_onset_estimated: true,
-            outdoor_light_before_10am: now.getHours() < 10,
-          }),
-        }).catch(() => {})
-
-        window.setTimeout(() => {
-          cameraStream.getTracks().forEach((track) => track.stop())
-        }, 800)
-      } catch {
-        // Silent fail by design.
-      }
-    }
-
-    void captureMluxOnOpen()
+    if (cameraCaptureDoneRef.current) return
+    cameraCaptureDoneRef.current = true
+    startVayaSession()
+    void runSilentMluxCapture({ videoRef })
   }, [])
 
   async function speakWithVaya(text: string) {
     if (voiceMode !== 'voice' || !text.trim()) return
 
     try {
-      const response = await fetch('/api/vaya/tts', {
+      const response = await fetch('/api/vaya/speak', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),

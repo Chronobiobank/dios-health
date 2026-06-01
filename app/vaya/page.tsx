@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
-import { VayaHeroLottie } from '@/components/vaya/vaya-hero-lottie'
+import { VayaHeroOrb } from '@/components/vaya/vaya-hero-orb'
 import { AUTH_ROUTES } from '@/lib/auth/routes'
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function VayaPage() {
           Time your doses.
         </h1>
 
-        <VayaHeroLottie />
+        <VayaHeroOrb />
 
         <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-white/60 sm:text-lg">
           Vaya is a 60-second camera session that measures your Melanopic Lux score — the direct

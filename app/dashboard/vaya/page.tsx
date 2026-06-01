@@ -24,7 +24,6 @@ export default async function DashboardVayaPage() {
       .from('tiptraq_nights')
       .select('id', { count: 'exact', head: true })
       .eq('patient_id', user.id),
-    supabase.from('vaya_sessions').insert({ patient_id: user.id }),
   ])
 
   const firstName = getPatientFirstName({

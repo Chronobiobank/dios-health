@@ -1,10 +1,26 @@
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
-import { CircadianDesynchronySpectrum } from '@/components/sections/CircadianDesynchronySpectrum'
 import { DisruptionSpectrum } from '@/components/sections/DisruptionSpectrum'
 import { EvidenceCards } from '@/components/sections/EvidenceCards'
 import { Footer } from '@/components/sections/Footer'
 import { DEMO_SPECTRUM_SCORES } from '@/lib/spectrum/spectrum-builder'
+
+const CircadianDesynchronySpectrum = dynamic(
+  () =>
+    import('@/components/sections/CircadianDesynchronySpectrum').then((mod) => ({
+      default: mod.CircadianDesynchronySpectrum,
+    })),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="mt-4 h-[520px] w-full animate-pulse rounded-2xl bg-black/[0.04]"
+        aria-hidden
+      />
+    ),
+  }
+)
 
 export default function EvidencePage() {
   return (
