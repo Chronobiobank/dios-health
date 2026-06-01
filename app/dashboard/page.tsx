@@ -1,7 +1,4 @@
-import {
-  CircadianRiskSpectrum,
-  type SpectrumConfidence,
-} from '@/components/dashboard/circadian-risk-spectrum'
+import { CircadianDesynchronySpectrum } from '@/components/sections/CircadianDesynchronySpectrum'
 import { DashboardPageTransition } from '@/components/dashboard/dashboard-page-transition'
 import { MLuxUploadPrompt } from '@/components/dashboard/mlux-upload-prompt'
 import { GpReportButton } from '@/components/dashboard/gp-report-button'
@@ -19,7 +16,8 @@ import {
   buildBodyClockFromMLuxProfile,
   type MLuxProfileRow,
 } from '@/lib/dashboard/mlux-profile'
-import { buildSpectrumNodes } from '@/lib/dashboard/spectrum-builder'
+import { buildSpectrumScores } from '@/lib/spectrum/spectrum-builder'
+import type { SpectrumConfidence } from '@/lib/spectrum/spectrum-types'
 import { createClient } from '@/lib/supabase/server'
 
 type MluxProfileRow = MLuxProfileRow & {
@@ -54,11 +52,6 @@ export default async function DashboardPage() {
     .limit(1)
     .maybeSingle()
 
-  const { count: vayaSessionCount } = await supabase
-    .from('vaya_sessions')
-    .select('id', { count: 'exact', head: true })
-    .eq('patient_id', user.id)
-
   const profileRow = mluxProfile as MluxProfileRow | null
   const nightsUploaded = tipTraqNightsCount ?? 0
   const hasTipTraqData = nightsUploaded > 0
@@ -90,13 +83,11 @@ export default async function DashboardPage() {
           insight.chronotypeLabel
         )
 
-  const isFirstOpen = (vayaSessionCount ?? 0) <= 3
-
-  const mluxScoreFromProfile =
+  const mluxScoreValue =
     profileRow?.mlux_score ?? Math.round((profileRow?.confidence_score ?? 20) * 3.5)
 
-  const spectrumNodes = buildSpectrumNodes({
-    mluxScore: mluxScoreFromProfile,
+  const spectrumScores = buildSpectrumScores({
+    mluxScore: mluxScoreValue,
     chronotype: profileRow?.chronotype ?? insight.chronotypeLabel ?? null,
     hasTipTraqData,
     hasBloodData: (bloodPanelsCount ?? 0) > 0,
@@ -111,6 +102,12 @@ export default async function DashboardPage() {
 
   return (
     <DashboardPageTransition className="gap-6">
+      <CircadianDesynchronySpectrum
+        scores={spectrumScores}
+        mluxScore={mluxScoreValue}
+        patientName={firstName}
+      />
+
       <PatientTopBar
         fullName={profile.full_name ?? firstName}
         avatarUrl={profile.avatar_url}
@@ -120,13 +117,6 @@ export default async function DashboardPage() {
             ? `Body clock from ${profileRow?.nights_count ?? nightsUploaded} TipTraQ night${(profileRow?.nights_count ?? nightsUploaded) === 1 ? '' : 's'}`
             : 'Body clock estimate · Based on your answers · Upload TipTraQ for precision'
         }
-      />
-
-      <CircadianRiskSpectrum
-        nodes={spectrumNodes}
-        overallConfidence={overallConfidence}
-        mluxScore={mluxScoreFromProfile}
-        isFirstOpen={isFirstOpen}
       />
 
       {overallConfidence === 'ESTIMATED' ? <SpectrumUpgradePaths /> : null}

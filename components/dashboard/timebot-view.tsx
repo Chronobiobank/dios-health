@@ -3,12 +3,13 @@
 import { Check, Mic, MicOff, Type } from 'lucide-react'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 
-import { VayaOrb } from '@/components/dashboard/vaya-orb'
-import type { VayaLottieState } from '@/components/dashboard/vaya-lottie'
+import { VayaOrb, type VayaOrbState } from '@/components/dashboard/vaya-orb'
 import type {
   TimebotData,
   TimebotTimelineEvent,
+  TimebotTimelineGroup,
 } from '@/lib/dashboard/timebot-data'
+import { buildDemoProtocolGroup } from '@/lib/dashboard/vaya-demo-protocol'
 import type { ScheduleStatus, TimebotEventCategory } from '@/lib/dashboard/timebot-timeline'
 import { cn } from '@/lib/utils'
 
@@ -133,7 +134,7 @@ function ProtocolCard({
 }
 
 export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps) {
-  const [pulseState, setPulseState] = useState<VayaLottieState>('idle')
+  const [pulseState, setPulseState] = useState<VayaOrbState>('idle')
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [trackedSupplements, setTrackedSupplements] = useState(data.currentSupplements)
   const [input, setInput] = useState('')
@@ -151,6 +152,12 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
   const speakingAudioRef = useRef<HTMLAudioElement | null>(null)
   const cameraCaptureDoneRef = useRef(false)
   const showIntro = messages.length === 0
+  const hasMedicationOnProtocol = data.timelineEvents.some((e) => e.category === 'Medication')
+  const protocolGroups: TimebotTimelineGroup[] = hasMedicationOnProtocol
+    ? data.timelineGroups
+    : data.timelineGroups.length > 0
+      ? [buildDemoProtocolGroup(), ...data.timelineGroups]
+      : [buildDemoProtocolGroup()]
 
   useEffect(() => {
     return () => {
@@ -327,7 +334,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
       const stop = startDeepgramStream(
         (text, isFinal) => {
           setLiveTranscript(text)
-          setOrbVolume(text.trim() ? 0.6 : 0)
+          setOrbVolume(text.trim() ? 0.7 : 0.28)
           if (isFinal && text.trim()) {
             stopStreamRef.current?.()
             stopStreamRef.current = null
@@ -381,7 +388,18 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
           )}
         </div>
 
-        <VayaOrb state={pulseState} volume={orbVolume} greeting={showIntro ? introMessage : undefined} />
+        <VayaOrb state={pulseState} volume={isListening ? Math.max(orbVolume, 0.22) : orbVolume} />
+
+        {showIntro ? (
+          <p
+            className="animate-in fade-in mt-5 max-w-md px-2 text-center text-[15px] leading-relaxed text-black/70 duration-500 sm:text-[16px] sm:leading-relaxed"
+            style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
+            role="status"
+            aria-live="polite"
+          >
+            {introMessage}
+          </p>
+        ) : null}
 
         {isListening && liveTranscript ? (
           <p
@@ -415,38 +433,34 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 pb-4 pt-2">
-        {data.timelineGroups.length > 0 ? (
-          <div className="mt-4">
-            <p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-black/35">
-              Today&apos;s protocol
-            </p>
-            <div className="flex flex-col gap-2">
-              {data.timelineGroups.map((group) => (
-                <div key={group.minutes}>
-                  {group.events.map((event) => (
-                    <ProtocolCard
-                      key={event.id}
-                      event={event}
-                      initialConfirmed={confirmedDoses.has(event.id)}
-                      onConfirm={
-                        event.category === 'Medication'
-                          ? () => void handleConfirmDose(event.id, event.name)
-                          : undefined
-                      }
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
+        <div className="mt-4">
+          <p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-black/35">
+            Today&apos;s protocol
+          </p>
+          <div className="flex flex-col gap-2">
+            {protocolGroups.map((group) => (
+              <div key={group.minutes}>
+                {group.events.map((event) => (
+                  <ProtocolCard
+                    key={event.id}
+                    event={event}
+                    initialConfirmed={confirmedDoses.has(event.id)}
+                    onConfirm={
+                      event.category === 'Medication'
+                        ? () => void handleConfirmDose(event.id, event.name)
+                        : undefined
+                    }
+                  />
+                ))}
+              </div>
+            ))}
           </div>
-        ) : (
-          <div className="mt-6 rounded-2xl border border-black/[0.06] bg-white px-5 py-8 text-center">
-            <p className="text-[15px] font-medium text-black">Tell Vaya what you take.</p>
-            <p className="mt-2 text-[13px] leading-relaxed text-black/50">
-              Say your medications and supplements out loud. Your protocol builds in real time.
+          {!hasMedicationOnProtocol ? (
+            <p className="mt-3 text-center text-[12px] leading-relaxed text-black/45">
+              Example timing — tell Vaya what you take to personalise your protocol.
             </p>
-          </div>
-        )}
+          ) : null}
+        </div>
 
         {trackedSupplements.length > 0 ? (
           <p className="mt-4 text-center font-mono text-[11px] text-black/35">
