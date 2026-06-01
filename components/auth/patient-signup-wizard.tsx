@@ -1,782 +1,322 @@
 'use client'
 
-import { ChevronLeft, Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { AuthShell } from '@/components/auth/auth-shell'
-import { AuthToggle } from '@/components/auth/auth-toggle'
-import { SignupProgress } from '@/components/auth/signup-progress'
-import { SignupSessionBanner } from '@/components/auth/signup-session-banner'
-import { TermsConsentField } from '@/components/auth/terms-consent-field'
-import { BTN_PRIMARY, CARD, LABEL, LIST_LINE } from '@/components/sections/layout'
-import { guessCountryFromLocale, COUNTRIES } from '@/lib/auth/countries'
+import { BTN_PRIMARY } from '@/components/sections/layout'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
-import {
-  ALERTNESS_OPTIONS,
-  BIOLOGICAL_SEX_OPTIONS,
-  FITZPATRICK_TYPES,
-  SHIFT_PATTERNS,
-  SLEEP_TIME_OPTIONS,
-  WAKE_TIME_OPTIONS,
-  WEARABLE_OPTIONS,
-} from '@/lib/auth/patient-signup-data'
-import {
-  draftToPatientProfile,
-  INITIAL_PATIENT_SIGNUP_DRAFT,
-  patientProfileToDraft,
-  type PatientSignupDraft,
-} from '@/lib/auth/patient-signup-types'
-import { buildFullName, parseOAuthNames } from '@/lib/auth/parse-oauth-names'
-import {
-  getPatientResumeStep,
-  isPatientOnboardingComplete,
-} from '@/lib/auth/patient-onboarding'
 import { AUTH_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
-import { mapSignUpError, SIGN_UP_EMAIL_EXISTS_MESSAGE } from '@/lib/auth/sign-up-errors'
-import { recordTermsAcceptance } from '@/lib/auth/terms'
 import { createClient } from '@/lib/supabase/client'
-import { cn } from '@/lib/utils'
 
-const TOTAL_STEPS = 6
+const TOTAL_STEPS = 2
 
 export function PatientSignupWizard() {
   const router = useRouter()
   const [step, setStep] = useState(1)
-  const [draft, setDraft] = useState<PatientSignupDraft>(INITIAL_PATIENT_SIGNUP_DRAFT)
-  const [userId, setUserId] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [checkingSession, setCheckingSession] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [firstName, setFirstName] = useState('')
+  const [familyName, setFamilyName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [signedUpWithOAuth, setSignedUpWithOAuth] = useState(false)
-  const [acceptedTerms, setAcceptedTerms] = useState(false)
-  const [termsAlreadyRecorded, setTermsAlreadyRecorded] = useState(false)
+  const [researchConsent, setResearchConsent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0 })
-  }, [step])
-
-  useEffect(() => {
-    setDraft((current) => ({
-      ...current,
-      locationCountry: guessCountryFromLocale(),
-    }))
-
-    const supabase = createClient()
-    void supabase.auth.getUser().then(async ({ data: { user } }) => {
-      if (user) {
-        const metadata = user.user_metadata as {
-          full_name?: string
-          name?: string
-          given_name?: string
-          family_name?: string
-        }
-        const { firstName, familyName } = parseOAuthNames(metadata)
-
-        await supabase.from('profiles').upsert(
-          { id: user.id, role: 'patient' },
-          { onConflict: 'id' }
-        )
-
-        const { data: profileRow } = await supabase
-          .from('profiles')
-          .select('terms_accepted_at')
-          .eq('id', user.id)
-          .maybeSingle<{ terms_accepted_at: string | null }>()
-
-        const hasTerms = Boolean(profileRow?.terms_accepted_at)
-        setTermsAlreadyRecorded(hasTerms)
-        setAcceptedTerms(hasTerms)
-
-        const { data: existingPatient } = await supabase
-          .from('patient_profiles')
-          .select('*')
-          .eq('id', user.id)
-          .maybeSingle()
-
-        if (isPatientOnboardingComplete(existingPatient)) {
-          router.replace(PATIENT_ROUTES.vaya)
-          return
-        }
-
-        const draftPatch: Partial<PatientSignupDraft> = {
-          ...(user.email ? { email: user.email } : {}),
-          firstName,
-          familyName,
-        }
-
-        if (existingPatient) {
-          Object.assign(draftPatch, patientProfileToDraft(existingPatient))
-          if (!draftPatch.firstName) draftPatch.firstName = firstName
-          if (!draftPatch.familyName) draftPatch.familyName = familyName
-        }
-
-        updateDraft(draftPatch)
-
-        setUserId(user.id)
-        setSignedUpWithOAuth(true)
-        setStep(
-          getPatientResumeStep(
-            existingPatient
-              ? {
-                  first_name: existingPatient.first_name ?? null,
-                  fitzpatrick_type: existingPatient.fitzpatrick_type ?? null,
-                  chronotype_q1: existingPatient.chronotype_q1 ?? null,
-                  onboarding_complete: Boolean(existingPatient.onboarding_complete),
-                }
-              : null,
-            true
-          )
-        )
-      }
-      setCheckingSession(false)
-    })
-  }, [])
-
-  function updateDraft(partial: Partial<PatientSignupDraft>) {
-    setDraft((current) => ({ ...current, ...partial }))
-  }
-
-  async function handleAccountSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    if (!acceptedTerms) {
-      setError('Please accept the Terms of Service and Privacy Policy.')
+  async function handleStep1(e: React.FormEvent) {
+    e.preventDefault()
+    if (!firstName.trim() || !email.trim() || !password.trim()) {
+      setError('Please fill in all fields.')
       return
     }
+    setError(null)
+    setStep(2)
+  }
 
+  async function handleStep2(e: React.FormEvent) {
+    e.preventDefault()
     setLoading(true)
     setError(null)
 
-    const supabase = createClient()
-    const { data, error: signUpError } = await supabase.auth.signUp({
-      email: draft.email.trim(),
-      password: draft.password,
-    })
+    try {
+      const supabase = createClient()
 
-    if (signUpError) {
-      setError(mapSignUpError(signUpError))
-      setLoading(false)
-      return
-    }
+      const full_name = `${firstName.trim()} ${familyName.trim()}`.trim()
 
-    let user = data.user
-
-    if (!data.session && user) {
-      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-        email: draft.email.trim(),
-        password: draft.password,
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name,
+            first_name: firstName.trim(),
+          },
+        },
       })
-      if (signInError) {
-        setError(mapSignUpError(signInError))
+
+      if (authError) {
+        setError(authError.message)
         setLoading(false)
         return
       }
-      user = signInData.user
-    }
 
-    if (!user) {
-      setError('Something went wrong. Please try again.')
-      setLoading(false)
-      return
-    }
+      let user = authData.user
 
-    const { error: profileError } = await supabase.from('profiles').insert({
-      id: user.id,
-      role: 'patient',
-    })
+      if (!authData.session && user) {
+        const { data: signInData, error: signInError } =
+          await supabase.auth.signInWithPassword({
+            email,
+            password,
+          })
 
-    if (profileError && profileError.code !== '23505') {
-      setError('Something went wrong. Please try again.')
-      setLoading(false)
-      return
-    }
+        if (signInError) {
+          setError(signInError.message)
+          setLoading(false)
+          return
+        }
 
-    const { error: termsError } = await recordTermsAcceptance(supabase, user.id)
-    if (termsError) {
-      setError('Something went wrong. Please try again.')
-      setLoading(false)
-      return
-    }
+        user = signInData.user
+      }
 
-    setTermsAlreadyRecorded(true)
-    setUserId(user.id)
-    setLoading(false)
-    setStep(2)
-    router.refresh()
-  }
+      if (!user) {
+        setError('Account creation failed. Please try again.')
+        setLoading(false)
+        return
+      }
 
-  async function handleFinish() {
-    if (!userId) return
+      await supabase.from('profiles').upsert(
+        {
+          id: user.id,
+          role: 'patient',
+          full_name,
+        },
+        { onConflict: 'id' }
+      )
 
-    setLoading(true)
-    setError(null)
+      await supabase.from('patient_profiles').upsert(
+        {
+          id: user.id,
+          first_name: firstName.trim(),
+          family_name: familyName.trim() || null,
+          onboarding_complete: true,
+        },
+        { onConflict: 'id' }
+      )
 
-    const supabase = createClient()
-    const fullName = buildFullName(draft.firstName, draft.familyName)
-
-    const { error: profileNameError } = await supabase
-      .from('profiles')
-      .update({ full_name: fullName })
-      .eq('id', userId)
-
-    if (profileNameError) {
-      setError('Something went wrong. Please try again.')
-      setLoading(false)
-      return
-    }
-
-    const { error: saveError } = await supabase
-      .from('patient_profiles')
-      .upsert(draftToPatientProfile(userId, draft))
-
-    if (saveError) {
-      setError('Something went wrong. Please try again.')
-      setLoading(false)
-      return
-    }
-
-    router.refresh()
-    router.push(PATIENT_ROUTES.vaya)
-  }
-
-  function canContinueAboutYou() {
-    const age = Number.parseInt(draft.age, 10)
-    const termsOk = termsAlreadyRecorded || acceptedTerms
-
-    return (
-      draft.firstName.trim().length > 0 &&
-      draft.familyName.trim().length > 0 &&
-      draft.biologicalSex !== '' &&
-      Number.isFinite(age) &&
-      age >= 13 &&
-      age <= 120 &&
-      termsOk
-    )
-  }
-
-  async function handleAboutYouContinue() {
-    if (!userId || !canContinueAboutYou()) return
-
-    setError(null)
-    setLoading(true)
-
-    const age = Number.parseInt(draft.age, 10)
-
-    try {
-      const response = await fetch('/api/signup/patient/demographics', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName: draft.firstName.trim(),
-          familyName: draft.familyName.trim(),
-          age,
-          biologicalSex: draft.biologicalSex,
-          acceptTerms: termsAlreadyRecorded || acceptedTerms,
-        }),
+      await supabase.from('chronobiobank_consent').upsert({
+        patient_id: user.id,
+        clinical_consent: true,
+        research_consent: researchConsent,
+        consent_version: 'v1.0',
       })
 
-      const payload = (await response.json()) as { error?: string }
-
-      if (!response.ok) {
-        throw new Error(payload.error || 'Something went wrong. Please try again.')
-      }
-
-      if (!termsAlreadyRecorded) {
-        setTermsAlreadyRecorded(true)
-      }
-
-      setStep(3)
-    } catch (continueError) {
-      setError(
-        continueError instanceof Error
-          ? continueError.message
-          : 'Something went wrong. Please try again.'
-      )
+      router.push(PATIENT_ROUTES.vaya)
+    } catch {
+      setError('Something went wrong. Please try again.')
     } finally {
       setLoading(false)
     }
   }
 
-  function goBack() {
-    setError(null)
-    setStep((current) => Math.max(1, current - 1))
-  }
-
-  if (checkingSession) {
-    return (
-      <AuthShell>
-        <p className="type-body text-center text-black/60">Loading…</p>
-      </AuthShell>
-    )
-  }
-
   return (
-    <AuthShell maxWidthClass={step === 3 ? 'max-w-2xl' : 'max-w-[400px]'}>
-      <SignupProgress step={step} total={TOTAL_STEPS} />
-
-      {userId && draft.email ? <SignupSessionBanner email={draft.email} /> : null}
-
-      {step > 1 && (step !== 2 || !signedUpWithOAuth) ? (
-        <button
-          type="button"
-          onClick={goBack}
-          className="type-body mb-6 inline-flex items-center gap-1 text-sm text-black/60 transition-colors hover:text-black"
-        >
-          <ChevronLeft className="h-4 w-4" />
-          Back
-        </button>
-      ) : null}
-
-      {step === 1 && !userId ? (
-        <form onSubmit={handleAccountSubmit} className={`${CARD} space-y-4 rounded-2xl p-6 sm:p-8`}>
+    <AuthShell>
+      {step === 1 ? (
+        <form onSubmit={handleStep1} className="flex flex-col gap-5">
           <div>
-            <label htmlFor="email" className={`${LABEL} mb-2 block`}>
-              Email
-            </label>
+            <p className="font-mono text-[11px] uppercase tracking-widest text-black/40">
+              Step 1 of {TOTAL_STEPS}
+            </p>
+            <h1 className="mt-3 text-2xl font-semibold text-black">Create your account.</h1>
+            <p className="mt-2 text-sm text-black/60">Your body clock data stays on your device.</p>
+          </div>
+
+          <div className="flex gap-3">
+            <div className="flex-1">
+              <label className="mb-1 block text-sm font-medium text-black/70">First name</label>
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Grant"
+                className={AUTH_INPUT_CLASS}
+                required
+                autoComplete="given-name"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="mb-1 block text-sm font-medium text-black/70">Last name</label>
+              <input
+                type="text"
+                value={familyName}
+                onChange={(e) => setFamilyName(e.target.value)}
+                placeholder="Munro"
+                className={AUTH_INPUT_CLASS}
+                autoComplete="family-name"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium text-black/70">Email address</label>
             <input
-              id="email"
-              name="email"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="grant@circadian.nz"
+              className={AUTH_INPUT_CLASS}
               required
               autoComplete="email"
-              value={draft.email}
-              onChange={(event) => updateDraft({ email: event.target.value })}
-              className={AUTH_INPUT_CLASS}
-              disabled={loading}
             />
           </div>
+
           <div>
-            <label htmlFor="password" className={`${LABEL} mb-2 block`}>
-              Password
-            </label>
+            <label className="mb-1 block text-sm font-medium text-black/70">Password</label>
             <div className="relative">
               <input
-                id="password"
-                name="password"
                 type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Min. 8 characters"
+                className={AUTH_INPUT_CLASS}
                 required
                 minLength={8}
                 autoComplete="new-password"
-                value={draft.password}
-                onChange={(event) => updateDraft({ password: event.target.value })}
-                className={`${AUTH_INPUT_CLASS} pr-11`}
-                disabled={loading}
               />
               <button
                 type="button"
-                onClick={() => setShowPassword((value) => !value)}
-                className="absolute top-1/2 right-3 -translate-y-1/2 text-black/40 hover:text-black"
+                onClick={() => setShowPassword((p) => !p)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-black/40 hover:text-black"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
           </div>
-          {error ? (
-            <div role="alert">
-              <p className="type-body text-sm text-red-600">{error}</p>
-              {error === SIGN_UP_EMAIL_EXISTS_MESSAGE ? (
-                <p className="type-body mt-1 text-sm text-red-600">
-                  <Link
-                    href={AUTH_ROUTES.signIn}
-                    className="font-medium text-black underline-offset-2 hover:underline"
-                  >
-                    Sign in instead
-                  </Link>
-                </p>
-              ) : null}
-            </div>
-          ) : null}
-          <TermsConsentField
-            checked={acceptedTerms}
-            onChange={setAcceptedTerms}
-            disabled={loading || termsAlreadyRecorded}
-          />
-          <button
-            type="submit"
-            disabled={loading || !acceptedTerms}
-            className={`${BTN_PRIMARY} h-11 w-full disabled:opacity-60`}
-          >
-            {loading ? 'Creating account…' : 'Continue →'}
-          </button>
-        </form>
-      ) : null}
 
-      {step === 2 ? (
-        <div className={`${CARD} space-y-4 rounded-2xl p-6 sm:p-8`}>
-          <div>
-            <label htmlFor="first_name" className={`${LABEL} mb-2 block`}>
-              First name
-            </label>
-            <input
-              id="first_name"
-              name="first_name"
-              type="text"
-              required
-              autoComplete="given-name"
-              value={draft.firstName}
-              onChange={(event) => updateDraft({ firstName: event.target.value })}
-              className={AUTH_INPUT_CLASS}
-              disabled={loading}
-            />
-          </div>
-          <div>
-            <label htmlFor="family_name" className={`${LABEL} mb-2 block`}>
-              Family name
-            </label>
-            <input
-              id="family_name"
-              name="family_name"
-              type="text"
-              required
-              autoComplete="family-name"
-              value={draft.familyName}
-              onChange={(event) => updateDraft({ familyName: event.target.value })}
-              className={AUTH_INPUT_CLASS}
-              disabled={loading}
-            />
-          </div>
-          <div>
-            <label htmlFor="age" className={`${LABEL} mb-2 block`}>
-              Age
-            </label>
-            <input
-              id="age"
-              name="age"
-              type="number"
-              required
-              min={13}
-              max={120}
-              inputMode="numeric"
-              autoComplete="off"
-              value={draft.age}
-              onChange={(event) => updateDraft({ age: event.target.value })}
-              className={AUTH_INPUT_CLASS}
-              disabled={loading}
-            />
-          </div>
-          <div>
-            <p className={`${LABEL} mb-3`}>Biological sex</p>
-            <div className="grid grid-cols-2 gap-2">
-              {BIOLOGICAL_SEX_OPTIONS.map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => updateDraft({ biologicalSex: option.value })}
-                  className={cn(
-                    `${CARD} rounded-full px-4 py-2.5 text-sm font-medium transition-colors`,
-                    draft.biologicalSex === option.value && 'border-black bg-black text-white'
-                  )}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          {!termsAlreadyRecorded ? (
-            <TermsConsentField
-              checked={acceptedTerms}
-              onChange={setAcceptedTerms}
-              disabled={loading}
-            />
-          ) : (
-            <p className="type-body text-sm text-black/55">
-              Terms and Privacy Policy already accepted for this account.
-            </p>
-          )}
           {error ? (
-            <p className="type-body text-sm text-red-600" role="alert">
+            <p className="text-sm text-red-600" role="alert">
               {error}
             </p>
           ) : null}
-          <button
-            type="button"
-            disabled={!canContinueAboutYou() || loading}
-            onClick={handleAboutYouContinue}
-            className={`${BTN_PRIMARY} h-11 w-full disabled:cursor-not-allowed disabled:opacity-60`}
-          >
-            {loading ? 'Saving…' : 'Continue →'}
+
+          <button type="submit" className={BTN_PRIMARY}>
+            Continue →
           </button>
-        </div>
-      ) : null}
 
-      {step === 3 ? (
-        <div className="space-y-6">
+          <p className="text-center text-sm text-black/50">
+            Already have an account?{' '}
+            <Link href={AUTH_ROUTES.signIn} className="text-black underline-offset-2 hover:underline">
+              Sign in
+            </Link>
+          </p>
+        </form>
+      ) : (
+        <form onSubmit={handleStep2} className="flex flex-col gap-6">
           <div>
-            <p className={`${LABEL} mb-3`}>
-              What best describes your skin tone in winter, away from sun exposure?
+            <p className="font-mono text-[11px] uppercase tracking-widest text-black/40">
+              Step 2 of {TOTAL_STEPS}
             </p>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {FITZPATRICK_TYPES.map((type) => (
-                <button
-                  key={type.value}
-                  type="button"
-                  onClick={() => updateDraft({ fitzpatrickType: type.value })}
-                  className={cn(
-                    `${CARD} rounded-xl p-3 text-left transition-colors`,
-                    draft.fitzpatrickType === type.value && 'border-black ring-1 ring-black'
-                  )}
-                >
-                  <span
-                    className="mb-2 block h-10 w-full rounded-lg border border-black/10"
-                    style={{ backgroundColor: type.color }}
+            <h1 className="mt-3 text-2xl font-semibold text-black">How your data works.</h1>
+          </div>
+
+          <div className="rounded-2xl border border-black/[0.08] bg-neutral-50 p-5">
+            <div className="flex items-start gap-4">
+              <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-black">
+                <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 12 12">
+                  <path
+                    d="M10 3L5 8.5 2 5.5"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
-                  <span className="type-caption font-mono text-black/50">{type.value}</span>
-                  <span className="type-body mt-1 block text-sm font-medium">{type.label}</span>
-                  <span className="type-caption block text-black/50">{type.swatch}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="location_city" className={`${LABEL} mb-2 block`}>
-              What city are you based in?
-            </label>
-            <input
-              id="location_city"
-              type="text"
-              required
-              placeholder="e.g. London, Auckland, Toronto"
-              value={draft.locationCity}
-              onChange={(event) => updateDraft({ locationCity: event.target.value })}
-              className={AUTH_INPUT_CLASS}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="location_country" className={`${LABEL} mb-2 block`}>
-              Country
-            </label>
-            <select
-              id="location_country"
-              value={draft.locationCountry}
-              onChange={(event) => updateDraft({ locationCountry: event.target.value })}
-              className={AUTH_INPUT_CLASS}
-            >
-              {COUNTRIES.map((country) => (
-                <option key={country} value={country}>
-                  {country}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <p className={`${LABEL} mb-3`}>Do you work shifts?</p>
-            <div className="flex gap-3">
-              {[
-                { label: 'No', value: false },
-                { label: 'Yes', value: true },
-              ].map((option) => (
-                <button
-                  key={option.label}
-                  type="button"
-                  onClick={() => updateDraft({ shiftWorker: option.value, shiftPattern: '' })}
-                  className={cn(
-                    `${CARD} flex-1 rounded-full px-4 py-2.5 text-sm font-medium transition-colors`,
-                    draft.shiftWorker === option.value && 'border-black bg-black text-white'
-                  )}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {draft.shiftWorker ? (
-            <div>
-              <p className={`${LABEL} mb-3`}>Shift pattern</p>
-              <div className="flex flex-wrap gap-2">
-                {SHIFT_PATTERNS.map((pattern) => (
-                  <button
-                    key={pattern}
-                    type="button"
-                    onClick={() => updateDraft({ shiftPattern: pattern })}
-                    className={cn(
-                      'rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition-colors',
-                      draft.shiftPattern === pattern && 'border-black bg-black text-white'
-                    )}
-                  >
-                    {pattern}
-                  </button>
-                ))}
+                </svg>
+              </div>
+              <div>
+                <p className="text-[15px] font-medium text-black">Clinical use</p>
+                <p className="mt-1 text-sm leading-relaxed text-black/60">
+                  Your session data personalises your dose timing and light protocol. Required to use Vaya.
+                </p>
               </div>
             </div>
-          ) : null}
+          </div>
 
-          {error ? <p className="type-body text-sm text-red-600">{error}</p> : null}
-          <button
-            type="button"
-            disabled={!draft.fitzpatrickType || !draft.locationCity.trim() || (draft.shiftWorker && !draft.shiftPattern)}
-            onClick={() => {
-              setError(null)
-              setStep(4)
+          <div
+            className={`cursor-pointer rounded-2xl border p-5 transition-colors ${
+              researchConsent ? 'border-black bg-black text-white' : 'border-black/[0.08] bg-white text-black'
+            }`}
+            onClick={() => setResearchConsent((r) => !r)}
+            role="checkbox"
+            aria-checked={researchConsent}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault()
+                setResearchConsent((r) => !r)
+              }
             }}
-            className={`${BTN_PRIMARY} h-11 w-full disabled:cursor-not-allowed disabled:opacity-60`}
           >
-            Continue →
-          </button>
-        </div>
-      ) : null}
-
-      {step === 4 ? (
-        <div className="space-y-6">
-          <div>
-            <label htmlFor="chronotype_q1" className={`${LABEL} mb-2 block`}>
-              Without an alarm, what time would you naturally wake up?
-            </label>
-            <select
-              id="chronotype_q1"
-              value={draft.chronotypeQ1}
-              onChange={(event) => updateDraft({ chronotypeQ1: event.target.value })}
-              className={AUTH_INPUT_CLASS}
-            >
-              <option value="">Select a time</option>
-              {WAKE_TIME_OPTIONS.map((time) => (
-                <option key={time} value={time}>
-                  {time}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <p className={`${LABEL} mb-3`}>When do you feel most alert and focused?</p>
-            <div className="space-y-2">
-              {ALERTNESS_OPTIONS.map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => updateDraft({ chronotypeQ2: option.label })}
-                  className={cn(
-                    `${CARD} w-full rounded-full px-4 py-3 text-left text-sm font-medium transition-colors`,
-                    draft.chronotypeQ2 === option.label && 'border-black bg-black text-white'
-                  )}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="chronotype_q3" className={`${LABEL} mb-2 block`}>
-              What time do you prefer to fall asleep?
-            </label>
-            <select
-              id="chronotype_q3"
-              value={draft.chronotypeQ3}
-              onChange={(event) => updateDraft({ chronotypeQ3: event.target.value })}
-              className={AUTH_INPUT_CLASS}
-            >
-              <option value="">Select a time</option>
-              {SLEEP_TIME_OPTIONS.map((time) => (
-                <option key={time} value={time}>
-                  {time}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button
-            type="button"
-            disabled={!draft.chronotypeQ1 || !draft.chronotypeQ2 || !draft.chronotypeQ3}
-            onClick={() => setStep(5)}
-            className={`${BTN_PRIMARY} h-11 w-full disabled:cursor-not-allowed disabled:opacity-60`}
-          >
-            Continue →
-          </button>
-        </div>
-      ) : null}
-
-      {step === 5 ? (
-        <div className="space-y-4">
-          {WEARABLE_OPTIONS.map((option) => (
-            <button
-              key={option.id}
-              type="button"
-              onClick={() => {
-                updateDraft({ wearableConnected: option.id })
-                setStep(6)
-              }}
-              className={`${CARD} w-full rounded-2xl p-5 text-left text-[#0D0D0D] transition-colors hover:border-black/25`}
-            >
-              <div className="flex items-start justify-between gap-3">
-                <p className={`${LIST_LINE} text-lg`}>{option.name}</p>
-                {option.recommended ? (
-                  <span className="shrink-0 rounded-full bg-black px-2.5 py-1 text-xs font-medium leading-none text-white">
-                    Recommended
-                  </span>
+            <div className="flex items-start gap-4">
+              <div
+                className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+                  researchConsent ? 'border-white bg-white' : 'border-black/20'
+                }`}
+              >
+                {researchConsent ? (
+                  <svg className="h-3 w-3 text-black" fill="currentColor" viewBox="0 0 12 12">
+                    <path
+                      d="M10 3L5 8.5 2 5.5"
+                      stroke="black"
+                      strokeWidth="1.5"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 ) : null}
               </div>
-              <p className="type-body mt-2 text-sm text-black/70">{option.body}</p>
-              <span className="mt-4 inline-block text-sm font-medium text-black">{option.cta}</span>
-            </button>
-          ))}
+              <div>
+                <p className={`text-[15px] font-medium ${researchConsent ? 'text-white' : 'text-black'}`}>
+                  Join the Chronobiobank
+                </p>
+                <p className={`mt-1 text-sm leading-relaxed ${researchConsent ? 'text-white/70' : 'text-black/60'}`}>
+                  Anonymised data contributes to the world&apos;s first longitudinal melanopic lux dataset — helping
+                  reshape how medications are prescribed globally. You can change this any time.
+                </p>
+                {researchConsent ? (
+                  <p className="mt-2 font-mono text-[11px] text-white/50">You are not a patient. You are a founder.</p>
+                ) : null}
+              </div>
+            </div>
+          </div>
 
-          <button
-            type="button"
-            onClick={() => {
-              updateDraft({ wearableConnected: null })
-              setStep(6)
-            }}
-            className="w-full rounded-2xl border border-dashed border-black/20 px-5 py-5 text-left text-[#0D0D0D] transition-colors hover:border-black/40"
-          >
-            <p className={`${LIST_LINE} text-lg`}>Skip for now</p>
-            <p className="type-body mt-2 text-sm text-black/70">
-              You can connect a device later in your dashboard.
-            </p>
-            <span className="mt-4 inline-block text-sm font-medium text-black/70">Skip →</span>
-          </button>
-        </div>
-      ) : null}
-
-      {step === 6 ? (
-        <div className="space-y-4">
-          <AuthToggle
-            label="Share with my GP"
-            description="Your doctor sees your body clock data to inform your prescriptions."
-            checked={draft.dataShareGp}
-            onChange={(checked) => updateDraft({ dataShareGp: checked })}
-            disabled={loading}
-          />
-          <AuthToggle
-            label="Contribute to research"
-            description="Anonymised data shared with researchers. You are never identifiable."
-            checked={draft.dataShareResearch}
-            onChange={(checked) => updateDraft({ dataShareResearch: checked })}
-            disabled={loading}
-          />
-          <AuthToggle
-            label="Contribute to health policy"
-            description="Anonymised population data shared with policy organisations and insurers developing timing-based health models. You are never identifiable."
-            checked={draft.dataSharePolicy}
-            onChange={(checked) => updateDraft({ dataSharePolicy: checked })}
-            disabled={loading}
-          />
-
-          <p className="type-body text-center text-sm text-black/60">Off means off. Immediately.</p>
+          <p className="text-[12px] leading-relaxed text-black/40">
+            Anonymised research data may be licensed to academic and pharmaceutical research partners under strict
+            governance. Your identifiable data is never shared.
+          </p>
 
           {error ? (
-            <p className="type-body text-sm text-red-600" role="alert">
+            <p className="text-sm text-red-600" role="alert">
               {error}
             </p>
           ) : null}
 
+          <button type="submit" className={BTN_PRIMARY} disabled={loading}>
+            {loading ? 'Creating account…' : 'Begin your first Vaya session →'}
+          </button>
+
           <button
             type="button"
-            disabled={loading}
-            onClick={handleFinish}
-            className={`${BTN_PRIMARY} h-11 w-full disabled:opacity-60`}
+            onClick={() => setStep(1)}
+            className="text-center text-sm text-black/50 hover:text-black"
           >
-            {loading ? 'Saving…' : 'Go to my dashboard →'}
+            ← Back
           </button>
-        </div>
-      ) : null}
+        </form>
+      )}
     </AuthShell>
   )
 }
