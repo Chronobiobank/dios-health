@@ -142,6 +142,34 @@ const TWIN_DETAILS: Record<string, Omit<DemoPatientTwin, keyof DemoClinicPatient
       confidenceBand: 'High · stable drift index',
     },
   },
+  'demo-sarah-b': {
+    fitzpatrickType: 2,
+    medications: ['Metformin 500mg', 'Ramipril 2.5mg'],
+    lastDataSync: '6 hours ago',
+    insights: [
+      {
+        drugName: 'Metformin 500mg',
+        headline: 'Morning light critically low — T2DM risk elevated',
+        body: 'MLux 54 m-EDI for 11 consecutive days. Light protocol indicated before dose timing review.',
+        standardGuidance: 'Standard metformin timing',
+        diosRecommendation: '30 min outdoor light before 09:00 daily',
+        confidenceScore: 54,
+        urgency: 1,
+      },
+    ],
+    streams: {
+      tiptraq: false,
+      cityLabs: 'Not ordered',
+      siloton: false,
+      smartphone: true,
+    },
+    bodyClockSummary: {
+      chronotype: 'Evening type',
+      msfsc: '05:18 (+2.1h vs population)',
+      nonDipper: 'unknown',
+      confidenceBand: 'Low · Vaya estimated only',
+    },
+  },
 }
 
 export function getDemoPatientTwin(id: string): DemoPatientTwin | null {
