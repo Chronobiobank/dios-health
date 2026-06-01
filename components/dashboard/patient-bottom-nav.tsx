@@ -46,42 +46,91 @@ const TABS: NavTab[] = [
   },
 ]
 
+type NavLinkProps = {
+  tab: NavTab
+  active: boolean
+  variant: 'bottom' | 'side'
+}
+
+function NavLink({ tab, active, variant }: NavLinkProps) {
+  const Icon = tab.icon
+  const isBottom = variant === 'bottom'
+
+  return (
+    <Link
+      href={tab.href}
+      className={cn(
+        'transition-colors',
+        isBottom
+          ? cn(
+              'flex min-h-[var(--patient-nav-height)] flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1.5',
+              'sm:gap-1 sm:py-2',
+              'md:flex-row md:gap-2.5 md:px-4'
+            )
+          : 'flex w-full items-center gap-3 rounded-xl px-3 py-2.5',
+        active
+          ? isBottom
+            ? 'text-black'
+            : 'bg-black/[0.05] text-black'
+          : isBottom
+            ? 'text-black/45 hover:text-black/70'
+            : 'text-black/50 hover:bg-black/[0.03] hover:text-black/80'
+      )}
+      aria-current={active ? 'page' : undefined}
+    >
+      <Icon
+        className={cn(
+          'shrink-0',
+          isBottom ? 'h-[22px] w-[22px] sm:h-6 sm:w-6' : 'h-5 w-5',
+          active ? 'text-black' : 'text-black/45'
+        )}
+        strokeWidth={active ? 2 : 1.75}
+        aria-hidden
+      />
+      <span
+        className={cn(
+          'font-medium leading-none',
+          isBottom
+            ? 'text-[10px] sm:text-[11px] md:text-[13px]'
+            : 'text-[14px]'
+        )}
+      >
+        {tab.label}
+      </span>
+    </Link>
+  )
+}
+
 export function PatientBottomNav() {
   const pathname = usePathname()
 
   return (
-    <nav
-      className="patient-bottom-nav fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/95 backdrop-blur-md md:static md:mt-8 md:border-t md:bg-transparent md:backdrop-blur-none"
-      aria-label="Patient dashboard"
-    >
-      <ul className="mx-auto flex max-w-[640px] items-stretch justify-around px-1 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-1 md:justify-start md:gap-8 md:px-0 md:pb-0 md:pt-0">
-        {TABS.map((tab) => {
-          const active = tab.match(pathname)
-          const Icon = tab.icon
-
-          return (
-            <li key={tab.href} className="flex-1 md:flex-none">
-              <Link
-                href={tab.href}
-                className={cn(
-                  'flex flex-col items-center justify-center gap-1 rounded-lg px-2 py-2 transition-colors md:flex-row md:gap-2 md:px-0 md:py-2',
-                  active ? 'text-black' : 'text-black/40 hover:text-black/70'
-                )}
-                aria-current={active ? 'page' : undefined}
-              >
-                <Icon
-                  className={cn('h-[22px] w-[22px] shrink-0', active ? 'text-black' : 'text-black/40')}
-                  strokeWidth={active ? 2 : 1.75}
-                  aria-hidden
-                />
-                <span className={cn('text-[10px] font-medium leading-none', active && 'text-black')}>
-                  {tab.label}
-                </span>
-              </Link>
+    <>
+      <nav
+        className="patient-bottom-nav fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/95 backdrop-blur-md lg:hidden"
+        aria-label="Patient dashboard"
+      >
+        <ul className="mx-auto flex max-w-[640px] items-stretch justify-around px-2 pb-[env(safe-area-inset-bottom,0px)] pt-1 sm:px-4 md:max-w-[42rem] md:justify-evenly md:px-6">
+          {TABS.map((tab) => (
+            <li key={tab.href} className="flex min-w-0 flex-1 md:max-w-[9rem]">
+              <NavLink tab={tab} active={tab.match(pathname)} variant="bottom" />
             </li>
-          )
-        })}
-      </ul>
-    </nav>
+          ))}
+        </ul>
+      </nav>
+
+      <nav
+        className="patient-side-nav fixed inset-y-0 left-0 z-40 hidden w-[var(--patient-sidebar-width)] flex-col border-r border-black/10 bg-white lg:flex"
+        aria-label="Patient dashboard"
+      >
+        <ul className="flex flex-col gap-1 px-3 py-6">
+          {TABS.map((tab) => (
+            <li key={tab.href}>
+              <NavLink tab={tab} active={tab.match(pathname)} variant="side" />
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
   )
 }

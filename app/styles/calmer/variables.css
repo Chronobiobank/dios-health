@@ -18,6 +18,30 @@
 
   /* Readable line length for long-form copy */
   --calmer-measure: 65ch;
+
+  /* Patient dashboard navigation — bottom bar (mobile/tablet) + sidebar (desktop) */
+  --patient-nav-height: 3.75rem;
+  --patient-nav-offset: calc(var(--patient-nav-height) + env(safe-area-inset-bottom, 0px));
+  --patient-sidebar-width: 13.5rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --patient-nav-height: 4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --patient-nav-height: 4.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --patient-nav-height: 0px;
+    --patient-nav-offset: 0px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

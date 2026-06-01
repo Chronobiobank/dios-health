@@ -21,6 +21,7 @@ type ChatMessage = {
 type TimebotViewProps = {
   data: TimebotData
   mluxScore: number
+  introMessage: string
 }
 
 const PRECISION_HEADER: Record<TimebotData['precisionLabel'], string> = {
@@ -49,14 +50,6 @@ const STATUS_LABEL: Record<ScheduleStatus, string> = {
   now: 'Now',
   done: 'Done',
 }
-
-const ONBOARDING_PROMPTS = [
-  'I take vitamin D and magnesium',
-  'I take ramipril in the morning',
-  'I take simvastatin at night',
-  'I take metformin with meals',
-  'I take levothyroxine on waking',
-]
 
 function StatusPill({ status }: { status: ScheduleStatus }) {
   if (status === 'done') {
@@ -119,51 +112,7 @@ function TimelineGroup({ group }: { group: TimebotTimelineGroup }) {
   )
 }
 
-function VayaWelcome({
-  data,
-  mluxScore,
-  onPrompt,
-}: {
-  data: TimebotData
-  mluxScore: number
-  onPrompt: (text: string) => void
-}) {
-  return (
-    <div className="mx-auto mt-8 w-full max-w-lg px-2">
-      <div className="rounded-2xl border border-black/[0.07] bg-neutral-50 p-6">
-        <p className="text-[15px] leading-relaxed text-black/70">
-          Hi {data.firstName} — I&apos;m Vaya. Tell me what medications and supplements you take,
-          and I&apos;ll build your personalised timing schedule around your body clock.
-        </p>
-        {data.precisionLabel === 'ESTIMATED' ? (
-          <p className="mt-2 text-[13px] leading-relaxed text-black/45">
-            Your MLux score is estimated at {mluxScore} m-EDI — a Vaya camera session measures it
-            directly.
-          </p>
-        ) : (
-          <p className="mt-2 text-[13px] leading-relaxed text-black/45">
-            MLux {mluxScore} m-EDI — melanopic lux, your primary body-clock signal.
-          </p>
-        )}
-        <div className="mt-5 flex flex-col gap-2">
-          <p className="font-mono text-[11px] uppercase tracking-widest text-black/30">Try asking</p>
-          {ONBOARDING_PROMPTS.map((prompt) => (
-            <button
-              key={prompt}
-              type="button"
-              onClick={() => onPrompt(prompt)}
-              className="w-full rounded-xl border border-black/[0.08] bg-white px-4 py-3 text-left text-[14px] text-black/70 transition-colors hover:border-black/20 hover:text-black"
-            >
-              &ldquo;{prompt}&rdquo;
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export function TimebotView({ data, mluxScore }: TimebotViewProps) {
+export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps) {
   const [pulseState, setPulseState] = useState<VayaLottieState>('idle')
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [trackedSupplements, setTrackedSupplements] = useState(data.currentSupplements)
@@ -171,6 +120,7 @@ export function TimebotView({ data, mluxScore }: TimebotViewProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const respondTimer = useRef<number | null>(null)
+  const showIntro = messages.length === 0
 
   useEffect(() => {
     return () => {
@@ -231,19 +181,16 @@ export function TimebotView({ data, mluxScore }: TimebotViewProps) {
     await sendMessage(input.trim())
   }
 
-  function handlePrompt(text: string) {
-    setInput(text)
-    window.setTimeout(() => {
-      void sendMessage(text)
-    }, 50)
-  }
-
   return (
-    <div className="flex min-h-0 flex-1 flex-col pb-36">
+    <div className="flex min-h-0 flex-1 flex-col pb-[calc(var(--patient-nav-offset)+5.5rem)] lg:pb-8">
       <div className="flex flex-col items-center px-2 pt-2 text-center">
-        <VayaLottie state={pulseState} />
-        <p className="mt-4 text-[15px] font-semibold text-black">{data.firstName}</p>
-        <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+        <VayaLottie
+          state={pulseState}
+          size="lg"
+          bubbleVariant="intro"
+          greeting={showIntro ? introMessage : undefined}
+        />
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
           <span
             className={cn(
               'rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.1em]',
@@ -257,10 +204,6 @@ export function TimebotView({ data, mluxScore }: TimebotViewProps) {
           </span>
         </div>
       </div>
-
-      {messages.length === 0 ? (
-        <VayaWelcome data={data} mluxScore={mluxScore} onPrompt={handlePrompt} />
-      ) : null}
 
       {messages.length > 0 ? (
         <div className="chat-thread mt-8 border-t border-black/[0.06] pt-6">
@@ -311,7 +254,7 @@ export function TimebotView({ data, mluxScore }: TimebotViewProps) {
       <form
         id="vaya-form"
         onSubmit={handleSubmit}
-        className="input-sticky-dock fixed inset-x-0 bottom-[4.25rem] sm:bottom-[4.25rem]"
+        className="input-sticky-dock fixed inset-x-0 bottom-[var(--patient-nav-offset)] z-30 lg:static lg:z-auto lg:mx-auto lg:max-w-[var(--max-width-chat)]"
       >
         <label htmlFor="vaya-input" className="sr-only">
           Ask Vaya about your light and timing

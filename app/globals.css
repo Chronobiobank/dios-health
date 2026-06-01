@@ -899,7 +899,8 @@
   .dios-site-nav,
   .gp-report-actions,
   .dios-page-actions,
-  .patient-bottom-nav {
+  .patient-bottom-nav,
+  .patient-side-nav {
     display: none !important;
   }
 
