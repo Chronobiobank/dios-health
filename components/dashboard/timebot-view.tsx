@@ -1,13 +1,13 @@
 'use client'
 
-import { Check, Mic, MicOff } from 'lucide-react'
+import { Check, Mic, MicOff, Type } from 'lucide-react'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 
-import { VayaLottie, type VayaLottieState } from '@/components/dashboard/vaya-lottie'
+import { VayaOrb } from '@/components/dashboard/vaya-orb'
+import type { VayaLottieState } from '@/components/dashboard/vaya-lottie'
 import type {
   TimebotData,
   TimebotTimelineEvent,
-  TimebotTimelineGroup,
 } from '@/lib/dashboard/timebot-data'
 import type { ScheduleStatus, TimebotEventCategory } from '@/lib/dashboard/timebot-timeline'
 import { cn } from '@/lib/utils'
@@ -77,38 +77,58 @@ function StatusPill({ status }: { status: ScheduleStatus }) {
   )
 }
 
-function TimelineEventRow({ event }: { event: TimebotTimelineEvent }) {
-  return (
-    <li className="border-t border-black/[0.05] py-3 first:border-t-0 first:pt-0">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <p className="text-[15px] font-medium leading-snug text-black">{event.name}</p>
-        <StatusPill status={event.status} />
-      </div>
-      <div className="mt-2 flex flex-wrap items-center gap-2">
-        <span
-          className={cn(
-            'rounded-full px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide',
-            CATEGORY_STYLE[event.category]
-          )}
-        >
-          {event.category}
-        </span>
-      </div>
-      <p className="mt-2 text-[13px] leading-relaxed text-black/55">{event.instruction}</p>
-    </li>
-  )
-}
+function ProtocolCard({
+  event,
+  initialConfirmed = false,
+  onConfirm,
+}: {
+  event: TimebotTimelineEvent
+  initialConfirmed?: boolean
+  onConfirm?: () => void
+}) {
+  const [confirmed, setConfirmed] = useState(initialConfirmed)
 
-function TimelineGroup({ group }: { group: TimebotTimelineGroup }) {
   return (
-    <section className="relative pl-0">
-      <p className="font-mono text-[15px] font-bold tabular-nums text-black">{group.timeDisplay}</p>
-      <ul className="mt-2">
-        {group.events.map((event) => (
-          <TimelineEventRow key={event.id} event={event} />
-        ))}
-      </ul>
-    </section>
+    <div
+      className={cn(
+        'flex items-start justify-between gap-3 rounded-2xl border px-4 py-3 transition-colors',
+        confirmed ? 'border-emerald-200 bg-emerald-50' : 'border-black/[0.06] bg-white'
+      )}
+    >
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <p className={cn('text-[15px] font-medium', confirmed ? 'text-emerald-800' : 'text-black')}>
+            {event.name}
+          </p>
+          <span
+            className={cn(
+              'rounded-full px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide',
+              CATEGORY_STYLE[event.category]
+            )}
+          >
+            {event.category}
+          </span>
+          <StatusPill status={event.status} />
+        </div>
+        <p className="mt-1 font-mono text-[13px] font-medium text-black/60">{event.timeDisplay}</p>
+        <p className="mt-1 text-[12px] leading-relaxed text-black/45">{event.instruction}</p>
+      </div>
+
+      {onConfirm && !confirmed ? (
+        <button
+          type="button"
+          onClick={() => {
+            setConfirmed(true)
+            onConfirm()
+          }}
+          className="shrink-0 rounded-full border border-black/10 px-3 py-1.5 text-[12px] font-medium text-black/60 transition-colors hover:border-emerald-400 hover:bg-emerald-50 hover:text-emerald-800"
+        >
+          Taken ✓
+        </button>
+      ) : confirmed ? (
+        <span className="shrink-0 font-mono text-[11px] text-emerald-600">✓ Done</span>
+      ) : null}
+    </div>
   )
 }
 
@@ -117,86 +137,72 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [trackedSupplements, setTrackedSupplements] = useState(data.currentSupplements)
   const [input, setInput] = useState('')
-  const [voiceModeEnabled, setVoiceModeEnabled] = useState(true)
-  const [voiceAvailable, setVoiceAvailable] = useState(false)
-  const [isRecording, setIsRecording] = useState(false)
-  const [isTranscribing, setIsTranscribing] = useState(false)
+  const [lastVayaResponse, setLastVayaResponse] = useState<string | null>(null)
+  const [confirmedDoses, setConfirmedDoses] = useState<Set<string>>(new Set())
+  const [voiceMode, setVoiceMode] = useState<'voice' | 'text'>('voice')
+  const [isListening, setIsListening] = useState(false)
+  const [liveTranscript, setLiveTranscript] = useState('')
+  const [orbVolume, setOrbVolume] = useState(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const respondTimer = useRef<number | null>(null)
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null)
-  const streamRef = useRef<MediaStream | null>(null)
-  const audioChunksRef = useRef<BlobPart[]>([])
-  const cameraCaptureDoneRef = useRef(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const stopStreamRef = useRef<(() => void) | null>(null)
   const speakingAudioRef = useRef<HTMLAudioElement | null>(null)
+  const cameraCaptureDoneRef = useRef(false)
   const showIntro = messages.length === 0
 
   useEffect(() => {
     return () => {
       if (respondTimer.current) window.clearTimeout(respondTimer.current)
-      mediaRecorderRef.current?.stop()
-      streamRef.current?.getTracks().forEach((track) => track.stop())
+      stopStreamRef.current?.()
       if (window.speechSynthesis) window.speechSynthesis.cancel()
       speakingAudioRef.current?.pause()
     }
   }, [])
 
   useEffect(() => {
-    let mounted = true
-
-    async function initMediaAndCaptureMlux() {
+    async function captureMluxOnOpen() {
+      if (cameraCaptureDoneRef.current) return
+      cameraCaptureDoneRef.current = true
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          audio: true,
+        const cameraStream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: 'user' },
+          audio: false,
         })
 
-        if (!mounted) {
-          stream.getTracks().forEach((track) => track.stop())
-          return
+        if (videoRef.current) {
+          videoRef.current.srcObject = cameraStream
+          void videoRef.current.play().catch(() => {})
         }
 
-        streamRef.current = stream
-        setVoiceAvailable(true)
-        setVoiceModeEnabled(true)
+        const now = new Date()
+        const hour = now.getHours().toString().padStart(2, '0')
+        const minute = now.getMinutes().toString().padStart(2, '0')
 
-        if (!cameraCaptureDoneRef.current) {
-          cameraCaptureDoneRef.current = true
-          const now = new Date()
-          const hour = now.getHours().toString().padStart(2, '0')
-          const minute = now.getMinutes().toString().padStart(2, '0')
+        void fetch('/api/smartphone/observations', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sleep_onset_local: `${hour}:${minute}`,
+            sleep_onset_estimated: true,
+            outdoor_light_before_10am: now.getHours() < 10,
+          }),
+        }).catch(() => {})
 
-          // Silent one-time MLux phase capture; never blocks the session if it fails.
-          void fetch('/api/smartphone/observations', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              sleep_onset_local: `${hour}:${minute}`,
-              sleep_onset_estimated: true,
-              outdoor_light_before_10am: now.getHours() < 10,
-            }),
-          }).catch(() => {
-            // swallow: capture is best-effort
-          })
-        }
+        window.setTimeout(() => {
+          cameraStream.getTracks().forEach((track) => track.stop())
+        }, 800)
       } catch {
-        // Permission denied/unavailable -> degrade gracefully to text-only session.
-        if (mounted) {
-          setVoiceAvailable(false)
-          setVoiceModeEnabled(false)
-        }
+        // Silent fail by design.
       }
     }
 
-    void initMediaAndCaptureMlux()
-
-    return () => {
-      mounted = false
-    }
+    void captureMluxOnOpen()
   }, [])
 
   async function speakWithVaya(text: string) {
-    if (!voiceModeEnabled || !text.trim()) return
+    if (voiceMode !== 'voice' || !text.trim()) return
 
     try {
       const response = await fetch('/api/vaya/tts', {
@@ -228,63 +234,19 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
     }
   }
 
-  async function transcribeAndSendVoice(blob: Blob) {
-    setIsTranscribing(true)
-    setError(null)
+  async function handleConfirmDose(eventId: string, medicationName: string) {
+    setConfirmedDoses((prev) => new Set(prev).add(eventId))
     try {
-      const formData = new FormData()
-      formData.append('audio', blob, 'vaya-input.webm')
-      const response = await fetch('/api/vaya/stt', {
+      await fetch('/api/vaya/confirm-dose', {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          medicationName,
+          confirmedAt: new Date().toISOString(),
+        }),
       })
-      const result = (await response.json()) as { transcript?: string; error?: string }
-      if (!response.ok || !result.transcript?.trim()) {
-        setError(result.error ?? 'Could not transcribe voice. Please type your message.')
-        return
-      }
-      await sendMessage(result.transcript.trim())
     } catch {
-      setError('Could not transcribe voice. Please type your message.')
-    } finally {
-      setIsTranscribing(false)
-    }
-  }
-
-  async function toggleRecording() {
-    if (!voiceAvailable || loading || isTranscribing) return
-
-    if (isRecording) {
-      mediaRecorderRef.current?.stop()
-      setIsRecording(false)
-      return
-    }
-
-    const stream = streamRef.current
-    if (!stream) {
-      setVoiceAvailable(false)
-      setVoiceModeEnabled(false)
-      return
-    }
-
-    try {
-      audioChunksRef.current = []
-      const recorder = new MediaRecorder(stream, { mimeType: 'audio/webm' })
-      mediaRecorderRef.current = recorder
-      recorder.ondataavailable = (event: BlobEvent) => {
-        if (event.data.size > 0) {
-          audioChunksRef.current.push(event.data)
-        }
-      }
-      recorder.onstop = () => {
-        const blob = new Blob(audioChunksRef.current, { type: 'audio/webm' })
-        if (blob.size > 0) void transcribeAndSendVoice(blob)
-      }
-      recorder.start()
-      setIsRecording(true)
-    } catch {
-      setVoiceAvailable(false)
-      setVoiceModeEnabled(false)
+      // Silent fail — UI already shows confirmed.
     }
   }
 
@@ -321,11 +283,14 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
       }
 
       setPulseState('responding')
-      setMessages((prev) => [
-        ...prev,
-        { id: `a-${Date.now()}`, role: 'assistant', text: result.answer ?? '' },
-      ])
-      void speakWithVaya(result.answer ?? '')
+      if (result.answer) {
+        setLastVayaResponse(result.answer)
+        setMessages((prev) => [
+          ...prev,
+          { id: `a-${Date.now()}`, role: 'assistant', text: result.answer ?? '' },
+        ])
+        void speakWithVaya(result.answer)
+      }
 
       if (respondTimer.current) window.clearTimeout(respondTimer.current)
       respondTimer.current = window.setTimeout(() => setPulseState('idle'), 3000)
@@ -342,16 +307,56 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
     await sendMessage(input.trim())
   }
 
+  async function toggleVoice() {
+    if (isListening) {
+      stopStreamRef.current?.()
+      stopStreamRef.current = null
+      setIsListening(false)
+      setOrbVolume(0)
+      if (liveTranscript.trim()) {
+        await sendMessage(liveTranscript.trim())
+        setLiveTranscript('')
+      }
+      return
+    }
+
+    setIsListening(true)
+    setLiveTranscript('')
+    try {
+      const { startDeepgramStream } = await import('@/lib/vaya/deepgram')
+      const stop = startDeepgramStream(
+        (text, isFinal) => {
+          setLiveTranscript(text)
+          setOrbVolume(text.trim() ? 0.6 : 0)
+          if (isFinal && text.trim()) {
+            stopStreamRef.current?.()
+            stopStreamRef.current = null
+            setIsListening(false)
+            setOrbVolume(0)
+            void sendMessage(text.trim())
+            setLiveTranscript('')
+          }
+        },
+        () => {
+          setIsListening(false)
+          setVoiceMode('text')
+          setOrbVolume(0)
+        }
+      )
+      stopStreamRef.current = stop
+    } catch {
+      setIsListening(false)
+      setVoiceMode('text')
+      setOrbVolume(0)
+    }
+  }
+
   return (
-    <div className="flex min-h-0 flex-1 flex-col pb-[calc(var(--patient-nav-offset)+5.5rem)] lg:pb-8">
-      <div className="flex flex-col items-center px-2 pt-2 text-center">
-        <VayaLottie
-          state={pulseState}
-          size="lg"
-          bubbleVariant="intro"
-          greeting={showIntro ? introMessage : undefined}
-        />
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+    <div className="flex min-h-0 flex-1 flex-col bg-[var(--color-bg-main)]">
+      <video ref={videoRef} className="hidden" muted playsInline aria-hidden />
+
+      <div className="flex flex-col items-center px-4 pb-2 pt-6">
+        <div className="mb-5 flex items-center gap-2">
           <span
             className={cn(
               'rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.1em]',
@@ -360,114 +365,160 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
           >
             {PRECISION_HEADER[data.precisionLabel]}
           </span>
-          <span className="font-mono text-[12px] text-black/50">
-            {mluxScore} m-EDI lux
-          </span>
+          <span className="font-mono text-[12px] text-black/50">{mluxScore} m-EDI lux</span>
+          {mluxScore < 100 ? (
+            <span className="rounded-full bg-red-50 px-2 py-0.5 font-mono text-[10px] text-red-600">
+              Low — get outside
+            </span>
+          ) : mluxScore < 250 ? (
+            <span className="rounded-full bg-amber-50 px-2 py-0.5 font-mono text-[10px] text-amber-700">
+              Below target
+            </span>
+          ) : (
+            <span className="rounded-full bg-emerald-50 px-2 py-0.5 font-mono text-[10px] text-emerald-700">
+              On target
+            </span>
+          )}
         </div>
-      </div>
 
-      {messages.length > 0 ? (
-        <div className="chat-thread mt-8 border-t border-black/[0.06] pt-6">
-          <div className="chat-messages" role="log" aria-live="polite">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                data-role={message.role}
-                className={cn(
-                  'message-bubble',
-                  loading &&
-                    message.role === 'assistant' &&
-                    message.id === messages[messages.length - 1]?.id &&
-                    'streaming-cursor'
-                )}
-              >
-                {message.text}
-              </div>
-            ))}
-            {loading ? (
-              <div className="message-bubble" data-role="assistant" style={{ opacity: 0.5 }}>
-                <span className="font-mono text-[13px]">Vaya is thinking…</span>
-              </div>
-            ) : null}
-          </div>
-        </div>
-      ) : null}
+        <VayaOrb state={pulseState} volume={orbVolume} greeting={showIntro ? introMessage : undefined} />
 
-      {data.hasTimeline && data.timelineGroups.length > 0 ? (
-        <div className="mt-8 border-t border-black/[0.06] pt-6">
-          <p className="mb-4 font-mono text-[11px] uppercase tracking-widest text-black/40">
-            Today&apos;s schedule
-          </p>
-          <div className="flex flex-col gap-6">
-            {data.timelineGroups.map((group) => (
-              <TimelineGroup key={group.minutes} group={group} />
-            ))}
-          </div>
-        </div>
-      ) : null}
-
-      {trackedSupplements.length > 0 ? (
-        <p className="mt-4 text-center text-[12px] leading-relaxed text-black/45">
-          Tracking: {trackedSupplements.join(', ')}
-        </p>
-      ) : null}
-
-      <form
-        id="vaya-form"
-        onSubmit={handleSubmit}
-        className="input-sticky-dock fixed inset-x-0 bottom-[var(--patient-nav-offset)] z-30 lg:static lg:z-auto lg:mx-auto lg:max-w-[var(--max-width-chat)]"
-      >
-        <label htmlFor="vaya-input" className="sr-only">
-          Ask Vaya about your light and timing
-        </label>
-        <div className="input-sticky-dock__inner">
-          <input
-            id="vaya-input"
-            type="text"
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            placeholder="Ask Vaya about your light and timing"
-            disabled={loading}
-            className="calmer-input"
-          />
-          {voiceModeEnabled && voiceAvailable ? (
-            <button
-              type="button"
-              onClick={() => void toggleRecording()}
-              disabled={loading || isTranscribing}
-              className={cn(
-                'inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors',
-                isRecording && 'border-red-600/50 bg-red-50 text-red-700',
-                (loading || isTranscribing) && 'cursor-not-allowed opacity-50'
-              )}
-              aria-label={isRecording ? 'Stop recording' : 'Start voice input'}
-            >
-              {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-            </button>
-          ) : null}
-          <button
-            type="submit"
-            disabled={loading || !input.trim()}
-            className="calmer-submit"
+        {isListening && liveTranscript ? (
+          <p
+            className="animate-in fade-in mt-4 max-w-xs text-center text-[14px] leading-relaxed text-black/50 duration-200"
+            aria-live="polite"
           >
-            {loading || isTranscribing ? '…' : 'Send'}
-          </button>
-        </div>
-        {voiceModeEnabled && voiceAvailable ? (
-          <p className="type-caption mt-2 text-center text-black/45">
-            Voice mode on by default. Type anytime if preferred.
+            {liveTranscript}
           </p>
-        ) : (
-          <p className="type-caption mt-2 text-center text-black/45">
-            Voice unavailable — using text input.
-          </p>
-        )}
+        ) : null}
+
+        {lastVayaResponse ? (
+          <div
+            key={lastVayaResponse}
+            className="animate-in fade-in slide-in-from-bottom-2 mt-4 w-full max-w-sm rounded-2xl border border-black/[0.07] bg-white px-5 py-4 text-[15px] leading-relaxed text-black shadow-[0_2px_12px_rgba(0,0,0,0.06)] duration-300"
+            role="status"
+            aria-live="polite"
+          >
+            {lastVayaResponse}
+          </div>
+        ) : null}
+
+        {loading ? (
+          <p className="mt-3 animate-pulse font-mono text-[12px] text-black/35">Vaya is thinking…</p>
+        ) : null}
+
         {error ? (
-          <p className="type-caption mt-2 text-center text-red-600" role="alert">
+          <p className="mt-3 text-[13px] text-red-500" role="alert">
             {error}
           </p>
         ) : null}
-      </form>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-4 pb-4 pt-2">
+        {data.timelineGroups.length > 0 ? (
+          <div className="mt-4">
+            <p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-black/35">
+              Today&apos;s protocol
+            </p>
+            <div className="flex flex-col gap-2">
+              {data.timelineGroups.map((group) => (
+                <div key={group.minutes}>
+                  {group.events.map((event) => (
+                    <ProtocolCard
+                      key={event.id}
+                      event={event}
+                      initialConfirmed={confirmedDoses.has(event.id)}
+                      onConfirm={
+                        event.category === 'Medication'
+                          ? () => void handleConfirmDose(event.id, event.name)
+                          : undefined
+                      }
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="mt-6 rounded-2xl border border-black/[0.06] bg-white px-5 py-8 text-center">
+            <p className="text-[15px] font-medium text-black">Tell Vaya what you take.</p>
+            <p className="mt-2 text-[13px] leading-relaxed text-black/50">
+              Say your medications and supplements out loud. Your protocol builds in real time.
+            </p>
+          </div>
+        )}
+
+        {trackedSupplements.length > 0 ? (
+          <p className="mt-4 text-center font-mono text-[11px] text-black/35">
+            Tracking: {trackedSupplements.join(' · ')}
+          </p>
+        ) : null}
+
+        <p className="mt-6 text-center font-mono text-[11px] uppercase tracking-widest text-black/20">
+          Make Time Count
+        </p>
+      </div>
+
+      <div className="sticky bottom-[var(--patient-nav-offset)] z-30 border-t border-black/[0.06] bg-[var(--color-bg-main)] px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3">
+        {voiceMode === 'voice' ? (
+          <div className="flex items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={() => setVoiceMode('text')}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 text-black/30 transition-colors hover:text-black"
+              aria-label="Switch to text input"
+            >
+              <Type className="h-4 w-4" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => void toggleVoice()}
+              className={cn(
+                'flex h-16 w-16 items-center justify-center rounded-full transition-all duration-200',
+                isListening
+                  ? 'scale-110 bg-red-500 text-white shadow-[0_0_0_8px_rgba(239,68,68,0.15)]'
+                  : 'bg-black text-white shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:scale-105'
+              )}
+              aria-label={isListening ? 'Stop — send to Vaya' : 'Speak to Vaya'}
+            >
+              {isListening ? <MicOff className="h-7 w-7" /> : <Mic className="h-7 w-7" />}
+            </button>
+
+            <div className="h-10 w-10" aria-hidden />
+          </div>
+        ) : (
+          <form id="vaya-form" onSubmit={handleSubmit}>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setVoiceMode('voice')}
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/10 text-black/40 hover:text-black"
+                aria-label="Switch to voice"
+              >
+                <Mic className="h-4 w-4" />
+              </button>
+              <input
+                id="vaya-input"
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type to Vaya"
+                disabled={loading}
+                className="calmer-input"
+                autoFocus
+              />
+              <button
+                type="submit"
+                disabled={loading || !input.trim()}
+                className="calmer-submit shrink-0"
+              >
+                {loading ? '…' : 'Send'}
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
   )
 }
