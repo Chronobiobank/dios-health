@@ -18,10 +18,10 @@ import {
 import { SectionLabel } from './SectionLabel'
 
 const GOLD_STANDARD = [
-  'Dim Light Melatonin Onset (DLMO) is the moment melatonin begins rising in the evening — the most reliable circadian biomarker in clinical research.',
-  'Traditional DLMO requires hourly saliva samples under dim light over 6-8 hours. Clinically impractical at scale.',
-  'DIOS derives a proxy DLMO passively — from sleep architecture, autonomic data, and smartphone sensors. No saliva sample required.',
-  'Every personalised output in DIOS — medication windows, supplement timing, zeitgeber cues — is driven by proxy DLMO.',
+  'Melanopic Lux phase time (MLux) is the moment melatonin begins rising in the evening — the most reliable circadian biomarker in clinical research.',
+  'Traditional MLux phase time requires hourly saliva samples under dim light over 6-8 hours. Clinically impractical at scale.',
+  'DIOS derives a MLux phase time passively — from sleep architecture, autonomic data, and smartphone sensors. No saliva sample required.',
+  'Every personalised output in DIOS — medication windows, supplement timing, zeitgeber cues — is driven by MLux phase time.',
 ] as const
 
 const LAYERS = [
@@ -43,8 +43,8 @@ const LAYERS = [
 ] as const
 
 const CALCULATION_STEPS = [
-  'Sleep onset anchor: DLMO typically occurs 2 hours before sleep onset.',
-  'REM latency correction: Delayed REM beyond 85 minutes shifts DLMO estimate later by 0.25 minutes per minute of delay.',
+  'Sleep onset anchor: MLux phase time typically occurs 2 hours before sleep onset.',
+  'REM latency correction: Delayed REM beyond 85 minutes shifts MLux phase time estimate later by 0.25 minutes per minute of delay.',
   'ANS correction: Low parasympathetic activity at sleep onset indicates melatonin has not fully risen.',
   'AHI modifier: Apnea events above AHI 15 reduce confidence score — sympathetic activation suppresses the PNS signal.',
   'Rolling average: Each additional night narrows the confidence band.',
@@ -64,14 +64,14 @@ const VDR_STATEMENTS = [
 ] as const
 
 const MEDICATIONS = [
-  { name: 'Atorvastatin', standard: 'Take at night', dios: '3h after DLMO' },
-  { name: 'Ramipril', standard: 'Take in morning', dios: '1h after DLMO' },
-  { name: 'Amlodipine', standard: 'Take at night', dios: '2h after DLMO' },
-  { name: 'Sertraline', standard: 'Take in morning', dios: '6h after DLMO' },
-  { name: 'Metformin', standard: 'Take with meals', dios: 'First meal post-DLMO+9h' },
-  { name: 'Prednisolone', standard: 'Take in morning', dios: '6h after DLMO' },
-  { name: 'Salmeterol', standard: 'Take at night', dios: '4h after DLMO' },
-  { name: 'Levothyroxine', standard: 'Take in morning fasting', dios: '5h after DLMO' },
+  { name: 'Atorvastatin', standard: 'Take at night', dios: '3h after MLux phase' },
+  { name: 'Ramipril', standard: 'Take in morning', dios: '1h after MLux phase' },
+  { name: 'Amlodipine', standard: 'Take at night', dios: '2h after MLux phase' },
+  { name: 'Sertraline', standard: 'Take in morning', dios: '6h after MLux phase' },
+  { name: 'Metformin', standard: 'Take with meals', dios: 'First meal post-MLux phase +9h' },
+  { name: 'Prednisolone', standard: 'Take in morning', dios: '6h after MLux phase' },
+  { name: 'Salmeterol', standard: 'Take at night', dios: '4h after MLux phase' },
+  { name: 'Levothyroxine', standard: 'Take in morning fasting', dios: '5h after MLux phase' },
 ] as const
 
 const REFERENCES = [
@@ -117,7 +117,7 @@ export function TipTraqScience() {
       <section className={`${SECTION} ${CONTAINER}`}>
         <SectionLabel title="The gold standard" />
         <h2 className={`${SECTION_TITLE} mt-4 max-w-3xl`}>
-          DLMO is the most accurate measure of your body clock.
+          MLux phase time is the most accurate measure of your body clock.
         </h2>
         <StatementList items={GOLD_STANDARD} />
       </section>
@@ -145,7 +145,7 @@ export function TipTraqScience() {
 
       <section className={`${SECTION} ${CONTAINER}`}>
         <SectionLabel title="The calculation" />
-        <h2 className={`${SECTION_TITLE} mt-4 max-w-3xl`}>How proxy DLMO is calculated.</h2>
+        <h2 className={`${SECTION_TITLE} mt-4 max-w-3xl`}>How MLux phase time is calculated.</h2>
         <ol className="mt-8 max-w-3xl space-y-4">
           {CALCULATION_STEPS.map((step, index) => (
             <li key={step} className="flex gap-4">

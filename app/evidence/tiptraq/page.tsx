@@ -6,7 +6,7 @@ import { TipTraqScience } from '@/components/sections/TipTraqScience'
 export const metadata: Metadata = {
   title: 'The science | DIOS',
   description:
-    'How DIOS derives proxy DLMO from smartphone, blood, and TipTraQ data — peer-reviewed foundations for medication and supplement timing.',
+    'How DIOS derives MLux phase time from Vaya, blood panel, and TipTraQ data — peer-reviewed foundations for medication and supplement timing.',
 }
 
 export default function EvidenceTipTraqPage() {
