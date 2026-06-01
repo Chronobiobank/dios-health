@@ -270,8 +270,8 @@ export function CircadianDesynchronySpectrum({
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-3 gap-3">
-        <div className="rounded-xl border border-black/[0.08] bg-white px-4 py-3">
+      <div className="mt-4 grid grid-cols-1 gap-3 xs:grid-cols-3">
+        <div className="calm-spectrum-card border border-black/[0.08] bg-white px-4 py-3">
           <p className="font-mono text-[10px] uppercase tracking-widest text-black/40">
             Overall score
           </p>
@@ -289,7 +289,7 @@ export function CircadianDesynchronySpectrum({
             <span className="ml-1 text-[11px] font-normal text-black/40">/ 100</span>
           </p>
         </div>
-        <div className="rounded-xl border border-[#D53F8C]/20 bg-[#D53F8C]/5 px-4 py-3">
+        <div className="calm-spectrum-card border border-[#D53F8C]/20 bg-[#D53F8C]/5 px-4 py-3">
           <p className="font-mono text-[10px] uppercase tracking-widest text-[#D53F8C]/60">
             ★ Critical nodes
           </p>
@@ -298,7 +298,7 @@ export function CircadianDesynchronySpectrum({
             <span className="ml-1 text-[11px] font-normal text-[#D53F8C]/50">/ 7</span>
           </p>
         </div>
-        <div className="rounded-xl border border-[#ED8936]/20 bg-[#ED8936]/5 px-4 py-3">
+        <div className="calm-spectrum-card border border-[#ED8936]/20 bg-[#ED8936]/5 px-4 py-3">
           <p className="font-mono text-[10px] uppercase tracking-widest text-[#ED8936]/60">
             ● Optimal nodes
           </p>
@@ -332,7 +332,7 @@ export function CircadianDesynchronySpectrum({
         })}
       </div>
 
-      <div className="mt-4 h-[340px] w-full">
+      <div className="mt-4 h-[min(340px,55vw)] min-h-[260px] w-full xs:min-h-[300px] lg:h-[340px]">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart data={chartData} margin={{ top: 20, right: 30, bottom: 20, left: 30 }}>
             <defs>
@@ -384,7 +384,7 @@ export function CircadianDesynchronySpectrum({
               role="button"
               tabIndex={0}
               className={cn(
-                'cursor-pointer rounded-2xl border p-4 transition-all',
+                'calm-spectrum-card cursor-pointer border p-4 transition-all',
                 activeNode === node.id
                   ? 'border-black shadow-md'
                   : 'border-black/[0.08] hover:border-black/20',

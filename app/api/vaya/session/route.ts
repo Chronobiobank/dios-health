@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 
+import { melSessionsTable } from '@/lib/dios/core/mel-sessions'
 import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
@@ -16,7 +17,7 @@ export async function POST() {
   }
 
   const { data, error } = await supabase
-    .from('vaya_sessions')
+    .from(melSessionsTable())
     .insert({ patient_id: user.id })
     .select('id, started_at')
     .single()
@@ -43,7 +44,7 @@ export async function GET() {
   }
 
   const { count, error: countError } = await supabase
-    .from('vaya_sessions')
+    .from(melSessionsTable())
     .select('id', { count: 'exact', head: true })
     .eq('patient_id', user.id)
 
@@ -52,7 +53,7 @@ export async function GET() {
   }
 
   const { data: latest, error: latestError } = await supabase
-    .from('vaya_sessions')
+    .from(melSessionsTable())
     .select('id, started_at')
     .eq('patient_id', user.id)
     .order('started_at', { ascending: false })

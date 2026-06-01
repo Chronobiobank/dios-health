@@ -3,7 +3,7 @@ import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
 
 export default function Home() {
   return (
-    <div className="bg-black text-white">
+    <div className="calm-landing min-h-svh bg-calm-bg text-white">
       <PitchDeck />
       <PitchFooter />
     </div>

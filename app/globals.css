@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
 @import "tailwindcss";
+@config "../tailwind.config.ts";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+
+/* Calm UI — landing & clinical spectrum */
+@import "./styles/calm-ui.css";
 
 /* Calmer UX — legibility, responsive rhythm, chat layout */
 @import "./styles/calmer/variables.css";
@@ -66,6 +70,15 @@
   --lilac-light: #EDE8F7;
   --gold: #C9973A;
   --gold-light: #F0D9A8;
+
+  /* Calm UI (see app/styles/calm-ui.css) */
+  --calm-bg: #080808;
+  --calm-surface: #0f0f0f;
+  --calm-brand: #c9973a;
+  --calm-risk: #1a365d;
+  --calm-optimal: #ed8936;
+  --calm-critical: #d53f8c;
+  --calm-radius-card: 16px;
   --cream: #FAFAF7;
   --cream-100: #F3F3EE;
 

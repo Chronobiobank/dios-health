@@ -1,0 +1,51 @@
+/* Calm UI — DIOS dark landing & clinical spectrum tokens */
+
+:root {
+  --calm-bg: #080808;
+  --calm-surface: #0f0f0f;
+  --calm-brand: #c9973a;
+  --calm-risk: #1a365d;
+  --calm-optimal: #ed8936;
+  --calm-critical: #d53f8c;
+  --calm-radius-card: 16px;
+  --calm-screen-pad-y: clamp(4rem, 12vh, 7rem);
+  --calm-screen-pad-x: clamp(1.25rem, 5vw, 1.5rem);
+}
+
+.calm-landing {
+  background-color: var(--calm-bg);
+  color: #fafaf7;
+}
+
+.calm-landing .calm-card {
+  border-radius: var(--calm-radius-card);
+  background-color: rgb(15 15 15 / 0.72);
+  border: 0.5px solid rgb(255 255 255 / 0.12);
+}
+
+.calm-landing .calm-eyebrow {
+  font-family: var(--font-family-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--calm-brand);
+}
+
+.calm-landing .calm-body {
+  font-family: var(--font-family-sans);
+  font-size: clamp(0.9375rem, 2.5vw, 1.125rem);
+  line-height: 1.65;
+  color: rgb(250 250 247 / 0.72);
+}
+
+.calm-landing .calm-headline {
+  font-family: var(--font-family-sans);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.15;
+  color: #fafaf7;
+}
+
+.calm-spectrum-card {
+  border-radius: var(--calm-radius-card);
+}

@@ -5,7 +5,7 @@ import { DIOS_WORDMARK } from '@/components/DiosLogo'
 export function PitchFooter() {
   return (
     <footer
-      className="border-t border-white/10 bg-black px-5 py-6 sm:px-6"
+      className="border-t border-white/10 bg-calm-bg px-5 py-6 sm:px-6"
       style={{ color: 'var(--color-text-secondary)' }}
     >
       <div className="mx-auto flex max-w-[76rem] flex-col gap-4 text-[13px] sm:flex-row sm:items-center sm:justify-between">

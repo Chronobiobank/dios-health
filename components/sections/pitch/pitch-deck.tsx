@@ -6,9 +6,12 @@ import { BTN_PRIMARY } from '@/components/sections/layout'
 
 import { PitchShadowBackdrop, PitchShadowStyles } from './pitch-backgrounds'
 
+const CALM_CARD_RADIUS = 'var(--calm-radius-card, 16px)'
+
 const glassCardStyle = {
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  border: '0.5px solid rgba(255, 255, 255, 0.15)',
+  backgroundColor: 'rgb(15 15 15 / 0.72)',
+  border: '0.5px solid rgb(255 255 255 / 0.12)',
+  borderRadius: CALM_CARD_RADIUS,
 } as const
 
 function ScrollIndicator() {
@@ -23,14 +26,7 @@ function ScrollIndicator() {
 }
 
 function PitchEyebrow({ children }: { children: string }) {
-  return (
-    <p
-      className="font-mono text-[11px] uppercase tracking-widest"
-      style={{ color: 'var(--color-brand)' }}
-    >
-      {children}
-    </p>
-  )
+  return <p className="calm-eyebrow">{children}</p>
 }
 
 function PitchScreen({
@@ -45,12 +41,14 @@ function PitchScreen({
   return (
     <section
       id={id}
-      className="relative flex min-h-svh snap-start flex-col bg-black"
+      className="relative flex min-h-svh snap-start flex-col bg-calm-bg"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         {background}
       </div>
-      <div className="relative z-10 mx-auto flex w-full max-w-[76rem] flex-1 flex-col justify-center px-5 py-16 sm:px-6 sm:py-20">
+      <div
+        className="relative z-10 mx-auto flex w-full max-w-[76rem] flex-1 flex-col justify-center px-[var(--calm-screen-pad-x)] py-[var(--calm-screen-pad-y)] sm:px-6"
+      >
         {children}
       </div>
       <ScrollIndicator />
@@ -68,17 +66,10 @@ function SignalCard({
   body: string
 }) {
   return (
-    <div
-      className="flex flex-col gap-3"
-      style={{
-        ...glassCardStyle,
-        borderRadius: 'var(--radius-md)',
-        padding: '1.25rem',
-      }}
-    >
-      <div style={{ color: 'var(--color-brand)' }}>{icon}</div>
-      <p className="text-base font-medium text-white lg:text-lg">{title}</p>
-      <p className="text-sm leading-relaxed text-white/70 lg:text-[15px]">{body}</p>
+    <div className="calm-card flex flex-col gap-4 p-6 lg:p-7">
+      <div className="text-calm-brand">{icon}</div>
+      <p className="calm-headline text-base lg:text-lg">{title}</p>
+      <p className="calm-body text-sm lg:text-[15px]">{body}</p>
     </div>
   )
 }
@@ -89,44 +80,38 @@ export function PitchDeck() {
       <PitchShadowStyles />
       <PitchScreen id="pitch-world-changed" background={<PitchShadowBackdrop variant={0} />}>
         <PitchEyebrow>THE WORLD HAS CHANGED</PitchEyebrow>
-        <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
+        <h1 className="calm-headline mt-6 max-w-3xl text-[28px] lg:mt-8 lg:text-[42px]">
           89,000 people. 13 million hours of light.
         </h1>
-        <p
-          className="mt-6 max-w-2xl text-[15px] leading-relaxed lg:text-lg"
-          style={{ color: 'var(--color-text-secondary)' }}
-        >
+        <p className="calm-body mt-8 max-w-2xl lg:mt-10">
           More light by day. More dark by night. Less disease. DIOS measures it.
         </p>
       </PitchScreen>
 
       <PitchScreen id="pitch-insight" background={<PitchShadowBackdrop variant={1} />}>
         <PitchEyebrow>THE INSIGHT</PitchEyebrow>
-        <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
+        <h1 className="calm-headline mt-6 max-w-3xl text-[28px] lg:mt-8 lg:text-[42px]">
           Every drug has a clock. Nobody uses it.
         </h1>
-        <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/70 lg:text-lg">
+        <p className="calm-body mt-8 max-w-2xl lg:mt-10">
           Optimal dose windows have been published for 40 years. The tool to act on them still doesn&apos;t exist.
         </p>
-        <div className="mt-8" style={{ ...glassCardStyle, borderRadius: 'var(--radius-lg)', padding: '1.5rem' }}>
-          <p
-            className="font-mono text-[28px] leading-none lg:text-4xl"
-            style={{ color: 'var(--color-brand)' }}
-          >
+        <div className="calm-card mt-10 p-6 lg:mt-12 lg:p-8">
+          <p className="font-mono text-[28px] leading-none text-calm-brand lg:text-4xl">
             £500M
           </p>
-          <p className="mt-2 text-sm text-white/60 lg:text-sm">
+          <p className="calm-body mt-3 text-sm">
             avoidable NHS admissions from mistimed medication
           </p>
         </div>
-        <div className="mt-4 max-w-2xl" style={{ ...glassCardStyle, borderRadius: 'var(--radius-md)', padding: '1.25rem' }}>
-          <p className="font-mono text-[11px] uppercase tracking-widest mb-3" style={{ color: 'var(--color-brand)' }}>
+        <div className="calm-card mt-6 max-w-2xl p-6 lg:mt-8">
+          <p className="calm-eyebrow mb-4">
             UK BIOBANK · POPULATION VALIDATION
           </p>
-          <p className="text-sm leading-relaxed text-white/70">
+          <p className="calm-body text-sm">
             89,000 participants · 13M sensor hours · PNAS · Lancet · JAMA. More daylight, more darkness — less T2DM, heart failure, AF, stroke, and psychiatric disease.
           </p>
-          <p className="mt-3 font-mono text-[11px] text-white/40">
+          <p className="mt-4 font-mono text-[11px] text-white/40">
             Vaya measures the biomarker. DIOS delivers the correction. No clinic visit required.
           </p>
         </div>
@@ -134,15 +119,15 @@ export function PitchDeck() {
 
       <PitchScreen id="pitch-why-now" background={<PitchShadowBackdrop variant={2} />}>
         <PitchEyebrow>WHY NOW</PitchEyebrow>
-        <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
+        <h1 className="calm-headline mt-6 max-w-3xl text-[28px] lg:mt-8 lg:text-[42px]">
           Vaya reads your light biology. In 60 seconds. From your front camera.
         </h1>
-        <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/70 lg:text-lg">
+        <p className="calm-body mt-8 max-w-2xl lg:mt-10">
           Vaya is the DIOS camera session. It measures Melanopic Lux — the direct entraining
           signal to your master clock — using your smartphone, GPS, and time of day.
           No wearable. No lab. No appointment.
         </p>
-        <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-5 xs:grid-cols-1 lg:mt-12 lg:grid-cols-3 lg:gap-6">
           <SignalCard
             icon={<Eye className="h-5 w-5" strokeWidth={1.5} aria-hidden />}
             title="Melanopic Lux"
@@ -166,17 +151,17 @@ export function PitchDeck() {
 
       <PitchScreen id="pitch-solution" background={<PitchShadowBackdrop variant={3} />}>
         <PitchEyebrow>THE SOLUTION</PitchEyebrow>
-        <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
+        <h1 className="calm-headline mt-6 max-w-3xl text-[28px] lg:mt-8 lg:text-[42px]">
           Vaya measures your clock. DIOS times your doses.
         </h1>
-        <ul className="mt-8 flex max-w-2xl flex-col gap-4">
+        <ul className="mt-10 flex max-w-2xl flex-col gap-5 lg:mt-12">
           {[
             'Melanopic lux — the UK Biobank biomarker for chronic disease.',
             'Personal protocol: Gominak · Coimbra · chronodosing for 8 medications.',
             'No forms. Vaya asks the questions. Your camera does the measuring.',
           ].map((line) => (
-            <li key={line} className="flex gap-3 text-[15px] leading-relaxed text-white lg:text-lg">
-              <span style={{ color: 'var(--color-brand)' }} aria-hidden>
+            <li key={line} className="calm-body flex gap-3 lg:text-lg">
+              <span className="text-calm-brand" aria-hidden>
                 —
               </span>
               <span>{line}</span>
@@ -190,20 +175,17 @@ export function PitchDeck() {
 
       <PitchScreen id="pitch-scale" background={<PitchShadowBackdrop variant={4} />}>
         <PitchEyebrow>THE SCALE</PitchEyebrow>
-        <h1 className="mt-4 max-w-3xl text-[28px] font-medium leading-tight text-white lg:text-[42px]">
+        <h1 className="calm-headline mt-6 max-w-3xl text-[28px] lg:mt-8 lg:text-[42px]">
           Every prescription is a potential user.
         </h1>
-        <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/70 lg:text-lg">
+        <p className="calm-body mt-8 max-w-2xl lg:mt-10">
           UK Biobank validated the biomarker at scale. DIOS measures it continuously — and corrects it. The first longitudinal melanopic lux dataset linked to medication outcomes.
         </p>
         <div className="mt-10 text-center">
-          <p
-            className="font-mono text-[40px] leading-none lg:text-[56px]"
-            style={{ color: 'var(--color-brand)' }}
-          >
+          <p className="font-mono text-[40px] leading-none text-calm-brand lg:text-[56px]">
             4.5Bn
           </p>
-          <p className="mt-2 text-base text-white/60">prescriptions in England last year</p>
+          <p className="calm-body mt-3 text-base">prescriptions in England last year</p>
         </div>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Link
@@ -214,12 +196,7 @@ export function PitchDeck() {
           </Link>
           <Link
             href="/signup"
-            className="type-button inline-flex h-10 w-full items-center justify-center rounded-full border px-5 transition-colors sm:h-11 sm:w-auto sm:px-6"
-            style={{
-              borderColor: 'var(--color-brand)',
-              color: 'var(--color-brand)',
-              backgroundColor: 'transparent',
-            }}
+            className="type-button inline-flex h-10 w-full items-center justify-center rounded-full border border-calm-brand bg-transparent px-5 text-calm-brand transition-colors sm:h-11 sm:w-auto sm:px-6"
           >
             I am a patient → Get started free
           </Link>
