@@ -66,24 +66,23 @@ export function PitchMediaTile({
   return (
     <article
       className={cn(
-        'pitch-media-tile relative w-full overflow-hidden rounded-[var(--pitch-radius,24px)]',
-        'border border-white/[0.08] bg-[#0D0D0D] shadow-[0_12px_40px_rgb(0_0_0/0.45)]',
+        'pitch-media-tile relative w-full overflow-hidden rounded-[var(--pitch-radius,var(--calm-radius-card,8px))]',
+        'border border-white/[0.05] bg-[#0D0D0D] shadow-[0_8px_28px_rgb(0_0_0/0.14)]',
         className
       )}
     >
       <div className={cn('relative w-full', FRAME_CLASS[size])}>
         <div className="absolute inset-0">
-          <Image
-            src={image}
-            alt={imageAlt}
-            fill
-            priority={priority}
-            sizes={sizes}
-            className={cn(
-              'object-cover object-center transition-opacity duration-700',
-              videoSrc && videoActive ? 'opacity-0' : 'brightness-[0.55] saturate-[0.9]'
-            )}
-          />
+          {!videoSrc || usePosterOnly ? (
+            <Image
+              src={image}
+              alt={imageAlt}
+              fill
+              priority={priority}
+              sizes={sizes}
+              className="object-cover object-center brightness-[0.55] saturate-[0.9]"
+            />
+          ) : null}
 
           {videoSrc && !usePosterOnly ? (
             <video
@@ -93,7 +92,6 @@ export function PitchMediaTile({
               loop
               playsInline
               preload="auto"
-              poster={image}
               aria-label={imageAlt}
               onCanPlay={() => {
                 setVideoActive(true)
@@ -130,6 +128,14 @@ export function PitchMediaTile({
           >
             {children}
           </div>
+        ) : null}
+
+        {size === 'hero' ? (
+          <div
+            className="pointer-events-none absolute inset-0 z-[4] rounded-[var(--pitch-radius,var(--calm-radius-card,8px))] ring-1 ring-white/[0.07]"
+            style={{ boxShadow: 'inset 0 1px 0 rgb(255 255 255 / 0.1)' }}
+            aria-hidden
+          />
         ) : null}
       </div>
     </article>

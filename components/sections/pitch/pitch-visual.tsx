@@ -38,7 +38,7 @@ export function PitchVisual({
     <div
       className={cn(
         'pitch-visual relative h-full w-full overflow-hidden bg-[#0f0f0f]',
-        rounded && 'rounded-[var(--pitch-radius,24px)]',
+        rounded && 'rounded-[var(--pitch-radius,var(--calm-radius-card,8px))]',
         ASPECT[aspect],
         className
       )}

@@ -1,6 +1,7 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
-import { DiosLogo, DIOS_TAGLINE } from '@/components/DiosLogo'
+import { DIOS_TAGLINE } from '@/components/DiosLogo'
 import { HashLink } from '@/components/sections/HashLink'
 import {
   DIOS_MISSION_STATEMENT,
@@ -10,7 +11,7 @@ import {
 
 function FooterNavItem({ link }: { link: FooterNavLink }) {
   const className =
-    'text-[13px] leading-snug text-white/55 transition-colors hover:text-white/90'
+    'text-[13px] leading-snug text-[#0D0D0D]/60 transition-colors hover:text-[#0D0D0D]/90'
 
   if (link.href.includes('#')) {
     return (
@@ -29,17 +30,24 @@ function FooterNavItem({ link }: { link: FooterNavLink }) {
 
 export function PitchFooter() {
   return (
-    <footer className="pitch-footer border-t border-white/10 bg-calm-bg">
-      <div className="mx-auto max-w-[76rem] px-4 py-12 sm:px-6 sm:py-14">
+    <footer className="pitch-footer relative overflow-hidden border-t border-black/10 bg-transparent">
+      <div className="relative z-10 mx-auto max-w-[76rem] px-4 py-12 sm:px-6 sm:py-14">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,2fr)] lg:gap-12">
           <div className="flex max-w-md flex-col gap-4">
             <Link href="/" className="w-fit" aria-label={`DIOS — ${DIOS_TAGLINE}`}>
-              <DiosLogo variant="white" size="xl" />
-              <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.12em] text-white/45">
+              <Image
+                src="/DIOS icon black.png"
+                alt="DIOS icon"
+                width={68}
+                height={68}
+                className="h-[68px] w-[68px]"
+                priority
+              />
+              <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.12em] text-[#0D0D0D]/45">
                 {DIOS_TAGLINE}
               </span>
             </Link>
-            <p className="text-[14px] leading-relaxed text-white/55 sm:text-[15px]">
+            <p className="text-[14px] leading-relaxed text-[#0D0D0D]/60 sm:text-[15px]">
               {DIOS_MISSION_STATEMENT}
             </p>
           </div>
@@ -50,7 +58,7 @@ export function PitchFooter() {
           >
             {LANDING_FOOTER_SECTIONS.map((section) => (
               <div key={section.title}>
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#0D0D0D]/40">
                   {section.title}
                 </p>
                 <ul className="mt-3 flex flex-col gap-2.5">
@@ -65,9 +73,9 @@ export function PitchFooter() {
           </nav>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[12px] text-white/40">© {new Date().getFullYear()} DIOS Health</p>
-          <p className="text-[12px] text-white/35">
+        <div className="mt-10 flex flex-col gap-3 border-t border-black/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-[12px] text-[#0D0D0D]/45">© {new Date().getFullYear()} DIOS Health</p>
+          <p className="text-[12px] text-[#0D0D0D]/45">
             Medicine timed to your body clock — not European population averages.
           </p>
         </div>

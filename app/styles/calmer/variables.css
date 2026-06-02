@@ -4,9 +4,9 @@
   --max-width-desktop: 76rem;
   --max-width-chat: 48rem;
 
-  --radius-sm-calmer: 0.375rem;
-  --radius-md-calmer: 0.75rem;
-  --radius-lg-calmer: 1rem;
+  --radius-sm-calmer: 0.25rem;
+  --radius-md-calmer: 0.375rem;
+  --radius-lg-calmer: 0.5rem;
   --transition-smooth: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   --color-bg-main: #ffffff;

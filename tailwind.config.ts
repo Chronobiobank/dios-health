@@ -21,7 +21,7 @@ const config: Config = {
         },
       },
       borderRadius: {
-        card: '16px',
+        card: 'var(--calm-radius-card, 8px)',
       },
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],

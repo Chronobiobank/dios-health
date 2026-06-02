@@ -10,10 +10,9 @@ export function Nav() {
       <div className="dios-site-nav__inner">
         <Link href="/" className="dios-site-nav__brand" aria-label={`DIOS – ${DIOS_TAGLINE}`}>
           <span className="dios-site-nav__wordmark dios-wordmark nav-brand-wordmark">{DIOS_WORDMARK}</span>
-          <span className="nav-brand-tagline hidden shrink-0 sm:inline" aria-hidden>
-            –
+          <span className="nav-brand-tagline nav-brand-tagline--animated hidden min-w-0 truncate sm:inline">
+            {DIOS_TAGLINE}
           </span>
-          <span className="nav-brand-tagline hidden min-w-0 truncate sm:inline">{DIOS_TAGLINE}</span>
         </Link>
 
         <div className="dios-site-nav__actions">

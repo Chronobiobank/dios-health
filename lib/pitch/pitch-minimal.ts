@@ -65,7 +65,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     title: 'Dose Intelligence.',
     subtitle:
       'DIOS uses smartphone circadian signals to move beyond population-average dosing and delivers personalised timing for each patient.',
-    image: '/tiptraq-wearable.jpg',
+    image: '/dose-intelligence.jpeg',
     imageAlt: 'Phone camera session',
     href: '/pitch/how-it-works',
     ctaLabel: 'How it works',

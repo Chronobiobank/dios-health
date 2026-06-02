@@ -51,7 +51,7 @@ export function HeroFeatureTile({
   return (
     <article
       className={cn(
-        'relative w-full overflow-hidden rounded-2xl bg-[#0D0D0D] sm:rounded-3xl',
+        'relative w-full overflow-hidden rounded-[var(--calm-radius-card,8px)] bg-[#0D0D0D]',
         className
       )}
     >

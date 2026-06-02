@@ -10,14 +10,10 @@
   /* Pitch landing — single spot family (clinical views may still use risk/critical) */
   --pitch-spot: var(--calm-brand);
   --pitch-spot-bright: var(--calm-optimal);
-  --calm-radius-card: 16px;
+  --calm-radius-card: 8px;
+  --pitch-radius: var(--calm-radius-card);
   --calm-screen-pad-y: clamp(4rem, 12vh, 7rem);
   --calm-screen-pad-x: clamp(1.25rem, 5vw, 1.5rem);
-}
-
-.calm-landing {
-  background-color: var(--calm-bg);
-  color: #fafaf7;
 }
 
 .calm-landing .calm-card {
@@ -54,8 +50,36 @@
 }
 
 /* Landing pitch — mobile-first snap deck */
+.calm-landing {
+  margin-top: calc(-1 * var(--dios-site-nav-height));
+  padding-top: var(--dios-site-nav-height);
+  background-color: #f7fafc;
+  color: #0d0d0d;
+}
+
+/* Frosted translucent nav — pastel backdrop visible through the bar */
+body:has(.calm-landing) {
+  --dios-site-nav-bg: rgb(247 250 252 / 0.58);
+  --dios-site-nav-border: rgb(13 13 13 / 0.06);
+}
+
+body:has(.calm-landing) .dios-site-nav {
+  -webkit-backdrop-filter: blur(20px) saturate(1.25);
+  backdrop-filter: blur(20px) saturate(1.25);
+}
+
+body:has(.calm-landing) .dios-site-nav__menu-panel {
+  background: rgb(247 250 252 / 0.88);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+}
+
 .calm-landing .pitch-deck {
   -webkit-overflow-scrolling: touch;
+}
+
+.calm-landing .pitch-landing-backdrop {
+  isolation: isolate;
 }
 
 .calm-landing .pitch-screen .calm-eyebrow {

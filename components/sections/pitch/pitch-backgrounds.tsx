@@ -1,8 +1,6 @@
-/** Soft drifting shadow layers — replaces editorial line-art SVGs */
+/** Soft drifting pastel hues — full landing ambient layer */
 
-type PitchShadowVariant = 0 | 1 | 2 | 3 | 4
-
-type ShadowOrb = {
+type LandingOrb = {
   top: string
   left: string
   width: string
@@ -11,174 +9,94 @@ type ShadowOrb = {
   animation: string
   duration: number
   delay: number
+  opacity: number
 }
 
-const ORB_PRESETS: ShadowOrb[][] = [
-  [
-    {
-      top: '-18%',
-      left: '-12%',
-      width: '72%',
-      height: '68%',
-      gradient: 'radial-gradient(ellipse at center, rgba(12, 22, 20, 0.95) 0%, transparent 72%)',
-      animation: 'pitch-shadow-drift-a',
-      duration: 32,
-      delay: 0,
-    },
-    {
-      top: '42%',
-      left: '58%',
-      width: '64%',
-      height: '58%',
-      gradient: 'radial-gradient(ellipse at center, rgba(8, 14, 18, 0.88) 0%, transparent 70%)',
-      animation: 'pitch-shadow-drift-b',
-      duration: 38,
-      delay: 4,
-    },
-    {
-      top: '68%',
-      left: '8%',
-      width: '52%',
-      height: '48%',
-      gradient:
-        'radial-gradient(ellipse at center, rgba(16, 163, 127, 0.07) 0%, rgba(6, 10, 12, 0.75) 42%, transparent 72%)',
-      animation: 'pitch-shadow-drift-c',
-      duration: 28,
-      delay: 9,
-    },
-  ],
-  [
-    {
-      top: '-8%',
-      left: '38%',
-      width: '68%',
-      height: '62%',
-      gradient: 'radial-gradient(ellipse at center, rgba(10, 18, 16, 0.92) 0%, transparent 71%)',
-      animation: 'pitch-shadow-drift-b',
-      duration: 34,
-      delay: 2,
-    },
-    {
-      top: '48%',
-      left: '-16%',
-      width: '58%',
-      height: '54%',
-      gradient: 'radial-gradient(ellipse at center, rgba(14, 12, 20, 0.85) 0%, transparent 68%)',
-      animation: 'pitch-shadow-drift-c',
-      duration: 40,
-      delay: 7,
-    },
-    {
-      top: '62%',
-      left: '52%',
-      width: '56%',
-      height: '50%',
-      gradient:
-        'radial-gradient(ellipse at center, rgba(16, 163, 127, 0.06) 0%, rgba(5, 8, 10, 0.8) 45%, transparent 74%)',
-      animation: 'pitch-shadow-drift-a',
-      duration: 30,
-      delay: 11,
-    },
-  ],
-  [
-    {
-      top: '12%',
-      left: '-14%',
-      width: '70%',
-      height: '64%',
-      gradient: 'radial-gradient(ellipse at center, rgba(11, 20, 18, 0.9) 0%, transparent 70%)',
-      animation: 'pitch-shadow-drift-c',
-      duration: 36,
-      delay: 1,
-    },
-    {
-      top: '36%',
-      left: '62%',
-      width: '60%',
-      height: '56%',
-      gradient: 'radial-gradient(ellipse at center, rgba(9, 12, 16, 0.87) 0%, transparent 69%)',
-      animation: 'pitch-shadow-drift-a',
-      duration: 42,
-      delay: 6,
-    },
-    {
-      top: '72%',
-      left: '22%',
-      width: '54%',
-      height: '46%',
-      gradient:
-        'radial-gradient(ellipse at center, rgba(16, 163, 127, 0.08) 0%, rgba(4, 6, 8, 0.78) 40%, transparent 73%)',
-      animation: 'pitch-shadow-drift-b',
-      duration: 26,
-      delay: 13,
-    },
-  ],
-  [
-    {
-      top: '-12%',
-      left: '52%',
-      width: '66%',
-      height: '60%',
-      gradient: 'radial-gradient(ellipse at center, rgba(13, 19, 17, 0.93) 0%, transparent 72%)',
-      animation: 'pitch-shadow-drift-a',
-      duration: 37,
-      delay: 3,
-    },
-    {
-      top: '52%',
-      left: '-10%',
-      width: '62%',
-      height: '58%',
-      gradient: 'radial-gradient(ellipse at center, rgba(7, 11, 15, 0.86) 0%, transparent 67%)',
-      animation: 'pitch-shadow-drift-b',
-      duration: 33,
-      delay: 8,
-    },
-    {
-      top: '58%',
-      left: '48%',
-      width: '50%',
-      height: '52%',
-      gradient:
-        'radial-gradient(ellipse at center, rgba(16, 163, 127, 0.05) 0%, rgba(8, 10, 12, 0.82) 44%, transparent 75%)',
-      animation: 'pitch-shadow-drift-c',
-      duration: 29,
-      delay: 15,
-    },
-  ],
-  [
-    {
-      top: '6%',
-      left: '18%',
-      width: '74%',
-      height: '66%',
-      gradient: 'radial-gradient(ellipse at center, rgba(10, 16, 14, 0.91) 0%, transparent 71%)',
-      animation: 'pitch-shadow-drift-b',
-      duration: 35,
-      delay: 5,
-    },
-    {
-      top: '44%',
-      left: '-18%',
-      width: '56%',
-      height: '52%',
-      gradient: 'radial-gradient(ellipse at center, rgba(12, 10, 18, 0.84) 0%, transparent 68%)',
-      animation: 'pitch-shadow-drift-c',
-      duration: 41,
-      delay: 10,
-    },
-    {
-      top: '70%',
-      left: '56%',
-      width: '58%',
-      height: '48%',
-      gradient:
-        'radial-gradient(ellipse at center, rgba(16, 163, 127, 0.07) 0%, rgba(6, 8, 10, 0.76) 43%, transparent 72%)',
-      animation: 'pitch-shadow-drift-a',
-      duration: 31,
-      delay: 17,
-    },
-  ],
+const LANDING_ORBS: LandingOrb[] = [
+  {
+    top: '-8%',
+    left: '-6%',
+    width: '58%',
+    height: '42%',
+    gradient:
+      'radial-gradient(ellipse at center, rgba(255, 154, 162, 0.82) 0%, rgba(255, 183, 197, 0.45) 38%, transparent 72%)',
+    animation: 'pitch-shadow-drift-a',
+    duration: 26,
+    delay: 0,
+    opacity: 0.72,
+  },
+  {
+    top: '8%',
+    left: '52%',
+    width: '52%',
+    height: '40%',
+    gradient:
+      'radial-gradient(ellipse at center, rgba(255, 214, 102, 0.78) 0%, rgba(255, 223, 140, 0.42) 36%, transparent 70%)',
+    animation: 'pitch-shadow-drift-b',
+    duration: 30,
+    delay: 4,
+    opacity: 0.68,
+  },
+  {
+    top: '28%',
+    left: '8%',
+    width: '48%',
+    height: '38%',
+    gradient:
+      'radial-gradient(ellipse at center, rgba(144, 205, 244, 0.8) 0%, rgba(179, 229, 252, 0.4) 34%, transparent 72%)',
+    animation: 'pitch-shadow-drift-c',
+    duration: 28,
+    delay: 8,
+    opacity: 0.7,
+  },
+  {
+    top: '42%',
+    left: '58%',
+    width: '54%',
+    height: '44%',
+    gradient:
+      'radial-gradient(ellipse at center, rgba(196, 181, 253, 0.76) 0%, rgba(216, 191, 255, 0.38) 36%, transparent 71%)',
+    animation: 'pitch-shadow-drift-a',
+    duration: 32,
+    delay: 2,
+    opacity: 0.66,
+  },
+  {
+    top: '58%',
+    left: '-4%',
+    width: '50%',
+    height: '40%',
+    gradient:
+      'radial-gradient(ellipse at center, rgba(154, 230, 180, 0.74) 0%, rgba(193, 240, 221, 0.36) 35%, transparent 70%)',
+    animation: 'pitch-shadow-drift-b',
+    duration: 34,
+    delay: 11,
+    opacity: 0.64,
+  },
+  {
+    top: '72%',
+    left: '44%',
+    width: '56%',
+    height: '42%',
+    gradient:
+      'radial-gradient(ellipse at center, rgba(255, 183, 197, 0.7) 0%, rgba(255, 214, 230, 0.34) 38%, transparent 72%)',
+    animation: 'pitch-shadow-drift-c',
+    duration: 27,
+    delay: 6,
+    opacity: 0.62,
+  },
+  {
+    top: '88%',
+    left: '12%',
+    width: '62%',
+    height: '38%',
+    gradient:
+      'radial-gradient(ellipse at center, rgba(129, 212, 250, 0.72) 0%, rgba(179, 229, 252, 0.34) 36%, transparent 71%)',
+    animation: 'pitch-shadow-drift-a',
+    duration: 31,
+    delay: 14,
+    opacity: 0.6,
+  },
 ]
 
 export function PitchShadowStyles() {
@@ -186,26 +104,34 @@ export function PitchShadowStyles() {
     <style>{`
       @keyframes pitch-shadow-drift-a {
         0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-        35% { transform: translate3d(6%, -4%, 0) scale(1.06); }
-        70% { transform: translate3d(-5%, 5%, 0) scale(0.96); }
+        33% { transform: translate3d(9%, -6%, 0) scale(1.1); }
+        66% { transform: translate3d(-7%, 8%, 0) scale(0.94); }
       }
       @keyframes pitch-shadow-drift-b {
         0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-        40% { transform: translate3d(-7%, 3%, 0) scale(1.04); }
-        75% { transform: translate3d(5%, -6%, 0) scale(0.98); }
+        38% { transform: translate3d(-10%, 5%, 0) scale(1.08); }
+        72% { transform: translate3d(8%, -8%, 0) scale(0.96); }
       }
       @keyframes pitch-shadow-drift-c {
         0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-        30% { transform: translate3d(4%, 6%, 0) scale(1.08); }
-        65% { transform: translate3d(-6%, -3%, 0) scale(0.94); }
+        28% { transform: translate3d(6%, 9%, 0) scale(1.12); }
+        62% { transform: translate3d(-9%, -5%, 0) scale(0.92); }
       }
       .pitch-shadow-orb {
         position: absolute;
         border-radius: 50%;
-        filter: blur(72px);
+        filter: blur(56px);
         will-change: transform;
         animation-timing-function: ease-in-out;
         animation-iteration-count: infinite;
+      }
+      .pitch-landing-backdrop {
+        background-color: #f7fafc;
+        background-image:
+          radial-gradient(ellipse 140% 90% at 50% -10%, rgba(186, 230, 253, 0.35) 0%, transparent 55%),
+          radial-gradient(ellipse 120% 70% at 80% 40%, rgba(254, 215, 170, 0.28) 0%, transparent 52%),
+          radial-gradient(ellipse 100% 80% at 10% 70%, rgba(251, 207, 232, 0.26) 0%, transparent 50%),
+          radial-gradient(ellipse 130% 60% at 50% 100%, rgba(144, 205, 244, 0.22) 0%, transparent 58%);
       }
       @media (prefers-reduced-motion: reduce) {
         .pitch-shadow-orb { animation: none !important; }
@@ -214,20 +140,11 @@ export function PitchShadowStyles() {
   )
 }
 
-export function PitchShadowBackdrop({ variant = 0 }: { variant?: PitchShadowVariant }) {
-  const orbs = ORB_PRESETS[variant]
-
+/** Tall document layer — orbs span full scroll height (footer included) */
+export function PitchLandingBackdrop() {
   return (
-    <div className="absolute inset-0 overflow-hidden bg-black">
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(ellipse 120% 80% at 50% 100%, rgba(0, 0, 0, 0.65) 0%, transparent 55%)',
-        }}
-        aria-hidden
-      />
-      {orbs.map((orb, i) => (
+    <div className="pitch-landing-backdrop absolute inset-0 min-h-full overflow-hidden" aria-hidden>
+      {LANDING_ORBS.map((orb, i) => (
         <div
           key={i}
           className="pitch-shadow-orb"
@@ -237,11 +154,11 @@ export function PitchShadowBackdrop({ variant = 0 }: { variant?: PitchShadowVari
             width: orb.width,
             height: orb.height,
             background: orb.gradient,
+            opacity: orb.opacity,
             animationName: orb.animation,
             animationDuration: `${orb.duration}s`,
             animationDelay: `${orb.delay}s`,
           }}
-          aria-hidden
         />
       ))}
     </div>

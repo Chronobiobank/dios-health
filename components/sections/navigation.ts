@@ -21,7 +21,7 @@ export const NAV_MENU_LINKS = [
 ] as const
 
 export const DIOS_MISSION_STATEMENT =
-  'Medicine timed to your body clock — not European population averages. Free for every patient. Free for every GP.'
+  'DIOS times medicine to your body clock — not European population averages. Free for every patient. Free for every GP.'
 
 export const FOOTER_LINKS = [
   { label: 'How it works', href: '/#pitch-how' },

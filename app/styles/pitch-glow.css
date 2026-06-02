@@ -1,7 +1,7 @@
 /* Pitch deck — OpenAI calm UX: media tiles + section heads + subsection panels */
 
 .calm-landing {
-  --pitch-radius: 24px;
+  --pitch-radius: var(--calm-radius-card, 8px);
 }
 
 /* Section head (above subsection tiles) */
@@ -38,9 +38,9 @@
 .calm-landing .pitch-subsection-tile {
   overflow: hidden;
   border-radius: var(--pitch-radius);
-  border: 1px solid rgb(255 255 255 / 0.08);
+  border: 1px solid rgb(255 255 255 / 0.05);
   background: rgb(13 13 13 / 0.72);
-  box-shadow: 0 8px 28px rgb(0 0 0 / 0.35);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.12);
   backdrop-filter: blur(12px);
 }
 
@@ -176,7 +176,7 @@
 
 .calm-landing .pitch-glass-note {
   border-radius: var(--pitch-radius);
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid rgb(255 255 255 / 0.05);
   background: rgb(255 255 255 / 0.05);
   padding: 0.875rem 1rem;
   font-size: 0.8125rem;
@@ -185,7 +185,7 @@
 }
 
 .calm-landing .pitch-spectrum-row {
-  border-radius: 12px;
+  border-radius: calc(var(--calm-radius-card, 8px) + 2px);
   border: 1px solid rgb(201 151 58 / 0.12);
   background: rgb(0 0 0 / 0.25);
   padding: 0.75rem 1rem;
