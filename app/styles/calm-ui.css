@@ -51,9 +51,39 @@
 
 /* Landing pitch — mobile-first snap deck */
 .calm-landing {
-  margin-top: calc(-1 * var(--dios-site-nav-height));
+  --pitch-screen-inset: clamp(1rem, 4vw, 1.5rem);
+  --pitch-screen-inset-top: calc(var(--pitch-screen-inset) + var(--dios-site-nav-height));
   background-color: #f7fafc;
   color: #0d0d0d;
+}
+
+.calm-landing .pitch-screen {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  height: 100dvh;
+  min-height: 100dvh;
+  padding: var(--pitch-screen-inset-top) var(--pitch-screen-inset) var(--pitch-screen-inset)
+    var(--pitch-screen-inset);
+}
+
+.calm-landing .pitch-screen > .pitch-screen__tile {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+}
+
+.calm-landing .pitch-screen .pitch-media-tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.calm-landing .pitch-screen .pitch-media-tile__frame {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
 }
 
 /* Landing nav — fully transparent (no bar, no bottom rule); pastel shows through from fixed layer */

@@ -9,7 +9,7 @@ import { PitchMinimalTileCard } from './pitch-minimal-tile'
 function ScrollIndicator() {
   return (
     <div
-      className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex justify-center md:bottom-8"
+      className="pointer-events-none absolute inset-x-[var(--pitch-screen-inset)] bottom-[var(--pitch-screen-inset)] z-20 flex justify-center"
       aria-hidden
     >
       <ChevronDown className="h-5 w-5 animate-bounce text-[#0D0D0D]/30" />
@@ -19,11 +19,8 @@ function ScrollIndicator() {
 
 function PitchScreen({ id, children }: { id: string; children: ReactNode }) {
   return (
-    <section
-      id={id}
-      className="pitch-screen relative box-border flex min-h-[100dvh] snap-start snap-always flex-col justify-center bg-transparent px-4 pb-16 pt-[var(--dios-site-nav-height)] sm:px-6 sm:pb-20"
-    >
-      <div className="relative z-10 mx-auto w-full max-w-[76rem]">{children}</div>
+    <section id={id} className="pitch-screen relative snap-start snap-always bg-transparent">
+      <div className="pitch-screen__tile relative z-10">{children}</div>
       <ScrollIndicator />
     </section>
   )

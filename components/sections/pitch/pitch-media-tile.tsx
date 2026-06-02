@@ -9,8 +9,7 @@ import { cn } from '@/lib/utils'
 export type PitchMediaTileSize = 'hero' | 'card' | 'metric' | 'feature'
 
 const FRAME_CLASS: Record<PitchMediaTileSize, string> = {
-  hero:
-    'aspect-[4/3] w-full min-h-[min(48dvh,380px)] max-h-[calc(100dvh-var(--dios-site-nav-height)-6rem)] sm:aspect-[16/10] sm:min-h-[400px] sm:max-h-[calc(100dvh-var(--dios-site-nav-height)-5.5rem)]',
+  hero: 'pitch-media-tile__frame h-full min-h-0 w-full',
   card: 'min-h-[200px] aspect-[4/3] sm:min-h-[220px]',
   metric: 'min-h-[140px] aspect-square sm:min-h-[168px]',
   feature: 'min-h-[min(52dvh,420px)] aspect-[16/10] sm:min-h-[380px]',
@@ -69,6 +68,7 @@ export function PitchMediaTile({
       className={cn(
         'pitch-media-tile relative w-full overflow-hidden rounded-[var(--pitch-radius,var(--calm-radius-card,8px))]',
         'border border-white/[0.05] bg-[#0D0D0D] shadow-[0_8px_28px_rgb(0_0_0/0.14)]',
+        size === 'hero' && 'h-full min-h-0',
         className
       )}
     >
