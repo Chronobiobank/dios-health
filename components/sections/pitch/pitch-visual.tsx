@@ -11,6 +11,9 @@ type PitchVisualProps = {
   priority?: boolean
   className?: string
   aspect?: 'video' | 'square' | 'wide'
+  /** When false, parent tile controls corner radius (glow tiles). */
+  rounded?: boolean
+  overlay?: boolean
 }
 
 const ASPECT = {
@@ -26,13 +29,16 @@ export function PitchVisual({
   priority = false,
   className,
   aspect = 'video',
+  rounded = true,
+  overlay = true,
 }: PitchVisualProps) {
   const [failed, setFailed] = useState(false)
 
   return (
     <div
       className={cn(
-        'pitch-visual relative w-full overflow-hidden rounded-[var(--calm-radius-card)] bg-[#0f0f0f]',
+        'pitch-visual relative h-full w-full overflow-hidden bg-[#0f0f0f]',
+        rounded && 'rounded-[var(--pitch-radius,24px)]',
         ASPECT[aspect],
         className
       )}
@@ -53,10 +59,12 @@ export function PitchVisual({
           aria-hidden
         />
       )}
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080808]/80 via-transparent to-transparent"
-        aria-hidden
-      />
+      {overlay ? (
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080808]/80 via-transparent to-transparent"
+          aria-hidden
+        />
+      ) : null}
     </div>
   )
 }

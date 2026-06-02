@@ -1,6 +1,7 @@
 /** Landing pitch deck — concise copy and primary sources (Calm UI). */
 
 import { PITCH_IMAGES } from '@/lib/pitch/landing-images'
+import type { PitchGlowVariant } from '@/lib/pitch/tile-gradients'
 
 export type PitchCitation = {
   label: string
@@ -21,8 +22,9 @@ export const PITCH_HOOK_CITATIONS: PitchCitation[] = [
 export const PITCH_PROBLEM_CARDS = [
   {
     id: 'hygia',
+    gradient: 'blue' as PitchGlowVariant,
     image: PITCH_IMAGES.problem.hygia,
-    imageAlt: 'Abstract evening medication and cardiovascular rhythm',
+    imageAlt: 'Bedtime blood pressure medication at night',
     finding: 'Bedtime antihypertensives cut major cardiovascular events.',
     href: 'https://doi.org/10.1093/eurheartj/ehz754',
     label: 'EHJ · Hygia',
@@ -32,24 +34,27 @@ export const PITCH_PROBLEM_CARDS = [
   },
   {
     id: 'biobank-mortality',
+    gradient: 'magenta' as PitchGlowVariant,
     image: PITCH_IMAGES.problem['biobank-mortality'],
-    imageAlt: 'Wrist-worn light sensor in soft amber glow',
+    imageAlt: 'Bright nights versus dark days light exposure contrast',
     finding: 'Brighter nights, darker days — higher mortality.',
     href: 'https://www.pnas.org/doi/10.1073/pnas.2405924121',
     label: 'PNAS 2024',
   },
   {
     id: 'biobank-t2dm',
+    gradient: 'magenta' as PitchGlowVariant,
     image: PITCH_IMAGES.problem['biobank-t2dm'],
-    imageAlt: 'Circadian light and metabolic health',
+    imageAlt: 'Light exposure and type 2 diabetes risk',
     finding: 'Light exposure predicts type 2 diabetes.',
     href: 'https://www.thelancet.com/journals/lanepe/article/PIIS2666-7762(24)00110-8/fulltext',
     label: 'Lancet 2024',
   },
   {
     id: 'elliott',
+    gradient: 'orange' as PitchGlowVariant,
     image: PITCH_IMAGES.problem.elliott,
-    imageAlt: 'Medication safety in primary care',
+    imageAlt: 'Medication errors in primary care pharmacy',
     finding: '237M medication errors in England yearly.',
     href: 'https://doi.org/10.1136/bmjqs-2019-010206',
     label: 'BMJ QS',
@@ -59,35 +64,39 @@ export const PITCH_PROBLEM_CARDS = [
 export const PITCH_BIOMARKER_STATS = [
   {
     value: '89k',
+    gradient: 'teal' as PitchGlowVariant,
     label: 'UK Biobank with light sensors',
     href: 'https://www.pnas.org/doi/10.1073/pnas.2405924121',
     cite: 'PNAS',
-    image: PITCH_IMAGES.biomarker,
-    imageAlt: 'Melanopic lux light field',
+    image: PITCH_IMAGES.biomarker.uk,
+    imageAlt: 'UK Biobank participant wearing a light sensor',
   },
   {
     value: '13M',
+    gradient: 'magenta' as PitchGlowVariant,
     label: 'Hours of sensor data',
     href: 'https://www.thelancet.com/journals/lanepe/article/PIIS2666-7762(24)00110-8/fulltext',
     cite: 'Lancet',
-    image: PITCH_IMAGES.biomarker,
-    imageAlt: 'Population light exposure study',
+    image: PITCH_IMAGES.biomarker.hours,
+    imageAlt: 'Millions of hours of personal light sensor data',
   },
   {
     value: 'CIE',
+    gradient: 'blue' as PitchGlowVariant,
     label: 'S026 melanopic standard',
     href: 'https://cie.co.at/publications/cie-systems/cie-s026-e2018-melanopic-action-spectrum',
     cite: 'S026:2018',
-    image: PITCH_IMAGES.biomarker,
-    imageAlt: 'Photometric standard spectrum',
+    image: PITCH_IMAGES.biomarker.cie,
+    imageAlt: 'CIE S026 melanopic action spectrum',
   },
   {
     value: 'MLux',
+    gradient: 'orange' as PitchGlowVariant,
     label: 'Smartphone-measurable biomarker',
     href: 'https://www.pnas.org/doi/10.1073/pnas.2301608120',
     cite: 'PNAS',
-    image: PITCH_IMAGES.biomarker,
-    imageAlt: 'Phone camera circadian capture',
+    image: PITCH_IMAGES.biomarker.mlux,
+    imageAlt: 'Smartphone measuring melanopic lux from the front camera',
   },
 ] as const
 
@@ -119,6 +128,7 @@ export const PITCH_CONFIDENCE_LAYERS = [
 export const PITCH_HOW_IT_WORKS = [
   {
     step: '01',
+    gradient: 'teal' as PitchGlowVariant,
     title: 'Mel',
     body: 'Measures melanopic lux — your clock signal.',
     image: PITCH_IMAGES.steps.mel,
@@ -126,6 +136,7 @@ export const PITCH_HOW_IT_WORKS = [
   },
   {
     step: '02',
+    gradient: 'blue' as PitchGlowVariant,
     title: 'Camera',
     body: '60 seconds. No wearable.',
     image: PITCH_IMAGES.steps.camera,
@@ -133,6 +144,7 @@ export const PITCH_HOW_IT_WORKS = [
   },
   {
     step: '03',
+    gradient: 'orange' as PitchGlowVariant,
     title: 'Protocol',
     body: 'Timed doses and zeitgebers.',
     image: PITCH_IMAGES.steps.protocol,
@@ -146,6 +158,7 @@ export const PITCH_CLINICAL_DISCLAIMER =
 export const PITCH_FOUR_SIDES = [
   {
     audience: 'Patients',
+    gradient: 'teal' as PitchGlowVariant,
     line: 'Free Mel sessions and protocols.',
     emphasis: 'Free',
     image: PITCH_IMAGES.sides.Patients,
@@ -153,6 +166,7 @@ export const PITCH_FOUR_SIDES = [
   },
   {
     audience: 'Clinicians',
+    gradient: 'blue' as PitchGlowVariant,
     line: 'Spectrum review and exports.',
     emphasis: 'Free',
     image: PITCH_IMAGES.sides.Clinicians,
@@ -160,6 +174,7 @@ export const PITCH_FOUR_SIDES = [
   },
   {
     audience: 'NHS',
+    gradient: 'blue' as PitchGlowVariant,
     line: 'Population dose-timing infrastructure.',
     emphasis: 'Partnership',
     image: PITCH_IMAGES.sides.NHS,
@@ -167,6 +182,7 @@ export const PITCH_FOUR_SIDES = [
   },
   {
     audience: 'Pharma',
+    gradient: 'magenta' as PitchGlowVariant,
     line: 'Governed anonymised research data.',
     emphasis: 'Licensing',
     image: PITCH_IMAGES.sides.Pharma,

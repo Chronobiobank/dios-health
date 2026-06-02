@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
 import type { ReactNode } from 'react'
 
-import { BTN_PRIMARY } from '@/components/sections/layout'
 import {
   PITCH_BIOMARKER_STATS,
   PITCH_CHRONOBIOBANK_STEPS,
@@ -22,9 +21,12 @@ import {
   PitchCtaRow,
   PitchEvidenceCard,
   PitchInlineCitations,
+  PitchMediaTile,
   PitchStatCard,
   PitchStepCard,
 } from './pitch-primitives'
+import { PitchFooter } from './pitch-footer'
+import { PitchHookTile } from './pitch-hook-tile'
 import { PitchSpectrumBars } from './pitch-spectrum-bars'
 import { PitchVisual } from './pitch-visual'
 
@@ -40,7 +42,11 @@ function ScrollIndicator() {
 }
 
 function PitchEyebrow({ children }: { children: string }) {
-  return <p className="calm-eyebrow">{children}</p>
+  return (
+    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/40 sm:text-[11px]">
+      {children}
+    </p>
+  )
 }
 
 function PitchScreen({
@@ -77,11 +83,7 @@ function PitchScreen({
 }
 
 function PitchTitle({ children }: { children: ReactNode }) {
-  return (
-    <h2 className="calm-headline max-w-xl text-[clamp(1.375rem,5.5vw,2.25rem)] leading-[1.12] tracking-tight">
-      {children}
-    </h2>
-  )
+  return <h2 className="pitch-screen-title max-w-xl">{children}</h2>
 }
 
 const SCREEN_VARIANTS = [0, 1, 2, 3, 4, 0, 1] as const satisfies readonly (0 | 1 | 2 | 3 | 4)[]
@@ -91,39 +93,27 @@ export function PitchDeck() {
     <div className="pitch-deck h-[100dvh] snap-y snap-mandatory overflow-y-auto overscroll-y-contain scroll-smooth md:h-auto md:snap-none md:overflow-visible">
       <PitchShadowStyles />
 
-      <PitchScreen id="pitch-hook" backgroundVariant={SCREEN_VARIANTS[0]}>
-        <PitchVisual
-          src={PITCH_IMAGES.hook}
-          alt="Abstract clinical timing and light"
-          priority
-          aspect="wide"
-          className="max-h-[min(42vw,200px)] md:max-h-[280px]"
-        />
-        <PitchEyebrow>The hook</PitchEyebrow>
-        <h1 className="calm-headline max-w-xl text-[clamp(1.5rem,6vw,2.625rem)] leading-[1.1]">
-          £300M in wasted NHS medicines yearly.
-        </h1>
-        <p className="calm-body max-w-md text-[clamp(0.9375rem,4vw,1.125rem)] text-white/80">
-          None of it fixes timing.
-        </p>
-        <PitchInlineCitations citations={PITCH_HOOK_CITATIONS} />
-        <PitchCtaRow>
-          <Link href="/signup" className={`${BTN_PRIMARY} h-11 w-full justify-center text-sm sm:w-auto`}>
-            Patients — free
-          </Link>
-          <Link
-            href="/signup/clinician"
-            className="type-button inline-flex h-11 w-full items-center justify-center rounded-full border border-calm-brand px-5 text-sm text-calm-brand sm:w-auto"
-          >
-            Clinicians — demo
-          </Link>
-          <Link
-            href="/evidence"
-            className="type-button inline-flex h-11 w-full items-center justify-center rounded-full border border-white/15 px-5 text-sm text-white/75 sm:w-auto"
-          >
-            Science
-          </Link>
-        </PitchCtaRow>
+      <PitchScreen id="pitch-hook" backgroundVariant={SCREEN_VARIANTS[0]} compact>
+        <div className="flex flex-col gap-5">
+          <PitchEyebrow>The hook</PitchEyebrow>
+          <div className="pitch-hero-copy max-w-xl">
+            <h1>£300M in wasted NHS medicines yearly.</h1>
+            <p className="calm-body mt-2 max-w-md">None of it fixes timing.</p>
+          </div>
+          <PitchHookTile />
+          <PitchInlineCitations citations={PITCH_HOOK_CITATIONS} />
+          <PitchCtaRow>
+            <Link href="/signup" className="pitch-btn-primary">
+              Patients — free
+            </Link>
+            <Link href="/signup/clinician" className="pitch-btn-secondary">
+              Clinicians — demo
+            </Link>
+            <Link href="/evidence" className="pitch-btn-ghost">
+              Science
+            </Link>
+          </PitchCtaRow>
+        </div>
       </PitchScreen>
 
       <PitchScreen id="pitch-problem" backgroundVariant={SCREEN_VARIANTS[1]} compact>
@@ -133,6 +123,7 @@ export function PitchDeck() {
           {PITCH_PROBLEM_CARDS.map((card) => (
             <PitchEvidenceCard
               key={card.id}
+              gradient={card.gradient}
               image={card.image}
               imageAlt={card.imageAlt}
               finding={card.finding}
@@ -153,6 +144,7 @@ export function PitchDeck() {
           {PITCH_BIOMARKER_STATS.map((stat) => (
             <PitchStatCard
               key={stat.value + stat.cite}
+              gradient={stat.gradient}
               image={stat.image}
               imageAlt={stat.imageAlt}
               value={stat.value}
@@ -162,24 +154,29 @@ export function PitchDeck() {
             />
           ))}
         </div>
-        <p className="calm-body max-w-lg border-l-2 border-calm-brand/30 pl-3 text-xs leading-relaxed sm:text-sm">
-          {PITCH_VALIDATION_GAP}
-        </p>
+        <p className="pitch-glass-note max-w-lg">{PITCH_VALIDATION_GAP}</p>
       </PitchScreen>
 
       <PitchScreen id="pitch-spectrum" backgroundVariant={SCREEN_VARIANTS[3]} compact>
         <PitchEyebrow>The spectrum</PitchEyebrow>
         <PitchTitle>Seven nodes. One cascade.</PitchTitle>
-        <PitchVisual
-          src={PITCH_IMAGES.spectrum}
-          alt="Circadian desynchrony spectrum visualization"
-          aspect="wide"
-          className="max-h-[140px] sm:max-h-[180px]"
+        <PitchMediaTile
+          variant="magenta"
+          wide
+          media={
+            <PitchVisual
+              src={PITCH_IMAGES.spectrum}
+              alt="Circadian desynchrony spectrum visualization"
+              aspect="wide"
+              rounded={false}
+              overlay={false}
+            />
+          }
         />
         <PitchSpectrumBars />
         <Link
           href="/evidence#spectrum"
-          className="font-mono text-[10px] text-calm-brand underline underline-offset-2 sm:text-[11px]"
+          className="font-mono text-[10px] text-white/55 underline underline-offset-2 hover:text-white/80 sm:text-[11px]"
         >
           Interactive spectrum →
         </Link>
@@ -192,6 +189,7 @@ export function PitchDeck() {
           {PITCH_HOW_IT_WORKS.map((item) => (
             <PitchStepCard
               key={item.step}
+              gradient={item.gradient}
               step={item.step}
               title={item.title}
               body={item.body}
@@ -200,11 +198,9 @@ export function PitchDeck() {
             />
           ))}
         </ol>
-        <p className="calm-body rounded-[var(--calm-radius-card)] border border-white/10 bg-white/5 px-4 py-3 text-xs sm:text-sm">
-          {PITCH_CLINICAL_DISCLAIMER}
-        </p>
+        <p className="pitch-glass-note">{PITCH_CLINICAL_DISCLAIMER}</p>
         <PitchCtaRow>
-          <Link href="/mel" className={`${BTN_PRIMARY} h-11 w-full justify-center text-sm sm:w-auto`}>
+          <Link href="/mel" className="pitch-btn-primary">
             Try Mel free →
           </Link>
         </PitchCtaRow>
@@ -217,6 +213,7 @@ export function PitchDeck() {
           {PITCH_FOUR_SIDES.map((side) => (
             <PitchAudienceCard
               key={side.audience}
+              gradient={side.gradient}
               emphasis={side.emphasis}
               audience={side.audience}
               line={side.line}
@@ -227,22 +224,29 @@ export function PitchDeck() {
         </div>
       </PitchScreen>
 
-      <PitchScreen id="pitch-model" backgroundVariant={SCREEN_VARIANTS[6]}>
-        <PitchVisual
-          src={PITCH_IMAGES.model}
-          alt="Chronobiobank consent and data governance"
-          aspect="wide"
-          className="max-h-[min(36vw,180px)] md:max-h-[220px]"
-        />
+      <PitchScreen id="pitch-model" backgroundVariant={SCREEN_VARIANTS[6]} compact>
         <PitchEyebrow>The model</PitchEyebrow>
         <PitchTitle>Chronobiobank.</PitchTitle>
-        <p className="calm-body max-w-md text-sm">
+        <PitchMediaTile
+          variant="blue"
+          wide
+          media={
+            <PitchVisual
+              src={PITCH_IMAGES.model}
+              alt="Chronobiobank consent and data governance"
+              aspect="wide"
+              rounded={false}
+              overlay={false}
+            />
+          }
+        />
+        <p className="calm-body max-w-md text-sm text-white/60">
           Clinical consent separate from optional research. You control identifiable data.
         </p>
         <ul className="flex max-w-md flex-col gap-2">
           {PITCH_CHRONOBIOBANK_STEPS.map((step) => (
-            <li key={step} className="calm-body flex gap-2 text-xs sm:text-sm">
-              <span className="text-calm-brand" aria-hidden>
+            <li key={step} className="calm-body flex gap-2 text-xs text-white/55 sm:text-sm">
+              <span className="text-white/30" aria-hidden>
                 —
               </span>
               <span>{step}</span>
@@ -250,23 +254,27 @@ export function PitchDeck() {
           ))}
         </ul>
         <PitchCtaRow>
-          <Link href="/signup" className={`${BTN_PRIMARY} h-11 w-full justify-center text-sm sm:w-auto`}>
+          <Link href="/signup" className="pitch-btn-primary">
             Get started
           </Link>
           <a
             href={`mailto:${RESEARCH_ENQUIRIES_EMAIL}?subject=Chronobiobank%20research%20enquiry`}
-            className="type-button inline-flex h-11 w-full items-center justify-center rounded-full border border-calm-brand px-5 text-sm text-calm-brand sm:w-auto"
+            className="pitch-btn-secondary"
           >
             Research →
           </a>
         </PitchCtaRow>
         <a
           href={`mailto:${RESEARCH_ENQUIRIES_EMAIL}`}
-          className="font-mono text-[10px] text-calm-brand underline underline-offset-2"
+          className="font-mono text-[10px] text-white/45 underline underline-offset-2 hover:text-white/70"
         >
           {RESEARCH_ENQUIRIES_EMAIL}
         </a>
       </PitchScreen>
+
+      <div className="snap-none">
+        <PitchFooter />
+      </div>
     </div>
   )
 }

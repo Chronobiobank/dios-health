@@ -29,9 +29,9 @@ export function PitchSpectrumBars() {
         const cite = PITCH_SPECTRUM_NODE_CITATIONS[node.id]
 
         return (
-          <div key={node.id} className="calm-spectrum-card border border-white/10 bg-[rgb(15_15_15/0.72)] px-3 py-2.5 sm:px-4 sm:py-3">
+          <div key={node.id} className="pitch-spectrum-row">
             <div className="flex flex-wrap items-baseline justify-between gap-1.5">
-              <p className="calm-headline text-[13px] sm:text-sm">{node.shortLabel}</p>
+              <p className="text-[13px] font-medium text-white sm:text-sm">{node.shortLabel}</p>
               <div className="flex items-center gap-3">
                 <span className="font-mono text-[12px] text-white/50">{pct}</span>
                 {cite ? (
@@ -39,7 +39,7 @@ export function PitchSpectrumBars() {
                     href={cite.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-[10px] text-calm-brand underline underline-offset-2"
+                    className="font-mono text-[10px] text-white/55 underline underline-offset-2 hover:text-white/80"
                   >
                     {cite.label}
                   </a>
@@ -62,8 +62,10 @@ export function PitchSpectrumBars() {
 
       <div className="grid grid-cols-3 gap-2">
         {PITCH_CONFIDENCE_LAYERS.map((layer) => (
-          <div key={layer.key} className="calm-card border border-white/10 px-2 py-2 sm:px-3 sm:py-3">
-            <p className="calm-eyebrow text-[9px] sm:text-[10px]">{layer.key}</p>
+          <div key={layer.key} className="pitch-spectrum-row px-2 py-2 sm:px-3 sm:py-3">
+            <p className="font-mono text-[9px] uppercase tracking-wider text-white/40 sm:text-[10px]">
+              {layer.key}
+            </p>
             <p className="mt-0.5 font-mono text-[10px] font-medium text-white/90 sm:text-[11px]">{layer.title}</p>
             <p className="mt-0.5 font-mono text-[9px] text-white/45 sm:text-[10px]">{layer.body}</p>
           </div>

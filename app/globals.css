@@ -6,6 +6,7 @@
 
 /* Calm UI — landing & clinical spectrum */
 @import "./styles/calm-ui.css";
+@import "./styles/pitch-glow.css";
 
 /* Calmer UX — legibility, responsive rhythm, chat layout */
 @import "./styles/calmer/variables.css";

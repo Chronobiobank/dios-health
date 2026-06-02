@@ -1,0 +1,275 @@
+/* Pitch deck — glowing dashboard tiles (mobile-first) */
+
+.calm-landing {
+  --pitch-radius: 24px;
+  --pitch-radius-lg: 28px;
+}
+
+.calm-landing .pitch-glow-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--pitch-radius);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  background-color: rgb(12 12 12 / 0.9);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.04) inset,
+    0 12px 40px rgb(0 0 0 / 0.45);
+}
+
+.calm-landing .pitch-glow-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--pitch-tile-gradient);
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+.calm-landing .pitch-glow-tile::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  z-index: 0;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, var(--pitch-tile-glow) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* Video tiles: keep media crisp — glow only on the card chrome */
+.calm-landing .pitch-glow-tile--video::before {
+  opacity: 0.35;
+}
+
+.calm-landing .pitch-glow-tile--video::after {
+  opacity: 0.4;
+  top: auto;
+  bottom: -10%;
+  left: 50%;
+  width: 80%;
+  height: 50%;
+  transform: translateX(-50%);
+}
+
+.calm-landing .pitch-glow-tile__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.calm-landing .pitch-glow-tile__media {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.calm-landing .pitch-glow-tile__media--short {
+  aspect-ratio: 2 / 1;
+  max-height: 100px;
+}
+
+.calm-landing .pitch-glow-tile__media--hero {
+  aspect-ratio: 16 / 10;
+  min-height: min(42vw, 280px);
+}
+
+@media (min-width: 640px) {
+  .calm-landing .pitch-glow-tile__media--hero {
+    min-height: min(36vw, 360px);
+  }
+}
+
+.calm-landing .pitch-glow-tile__media--wide {
+  aspect-ratio: 21 / 9;
+  min-height: 120px;
+}
+
+.calm-landing .pitch-glow-tile__media--video img,
+.calm-landing .pitch-glow-tile__media--video video,
+.calm-landing .pitch-glow-tile__media--video .pitch-tile-video {
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+
+.calm-landing .pitch-glow-tile__media .pitch-visual,
+.calm-landing .pitch-glow-tile__media .pitch-tile-video {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  height: 100%;
+}
+
+.calm-landing .pitch-glow-tile__media img {
+  object-fit: cover;
+  opacity: 0.92;
+  mix-blend-mode: normal;
+}
+
+.calm-landing .pitch-glow-tile__body {
+  flex: 1;
+  padding: 0.875rem 1rem 1rem;
+}
+
+.calm-landing .pitch-glow-tile__metric {
+  font-family: var(--font-family-sans);
+  font-size: clamp(1.75rem, 6vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.calm-landing .pitch-glow-tile__label {
+  margin-top: 0.35rem;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: rgb(255 255 255 / 0.55);
+}
+
+.calm-landing .pitch-glow-tile__link {
+  margin-top: 0.5rem;
+  font-family: var(--font-family-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.75);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.calm-landing .pitch-glow-tile__link:hover {
+  color: #fff;
+}
+
+/* Metric-only tiles (biomarker grid) */
+.calm-landing .pitch-glow-tile--metric {
+  min-height: 9.5rem;
+  aspect-ratio: 1;
+}
+
+.calm-landing .pitch-glow-tile--metric .pitch-glow-tile__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100%;
+}
+
+.calm-landing .pitch-glow-tile--metric .pitch-glow-tile__media {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  max-height: none;
+  opacity: 0.35;
+}
+
+.calm-landing .pitch-glow-tile--metric .pitch-glow-tile__media img {
+  opacity: 0.4;
+}
+
+/* Hero */
+.calm-landing .pitch-hero-copy h1 {
+  font-size: clamp(1.75rem, 7vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.calm-landing .pitch-hero-copy .calm-body {
+  color: rgb(255 255 255 / 0.6);
+  font-size: 0.9375rem;
+}
+
+.calm-landing .pitch-btn-primary {
+  display: inline-flex;
+  height: 3rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: #fff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #080808;
+  transition: opacity 0.2s;
+}
+
+.calm-landing .pitch-btn-primary:hover {
+  opacity: 0.92;
+}
+
+.calm-landing .pitch-btn-secondary {
+  display: inline-flex;
+  height: 3rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  background: rgb(255 255 255 / 0.06);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgb(255 255 255 / 0.88);
+  backdrop-filter: blur(12px);
+}
+
+.calm-landing .pitch-btn-ghost {
+  display: inline-flex;
+  height: 2.75rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  color: rgb(255 255 255 / 0.5);
+}
+
+.calm-landing .pitch-screen-title {
+  font-size: clamp(1.375rem, 5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+.calm-landing .pitch-glass-note {
+  border-radius: var(--pitch-radius);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  background: rgb(255 255 255 / 0.05);
+  padding: 0.875rem 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.55);
+  backdrop-filter: blur(8px);
+}
+
+/* Spectrum rows — glow style */
+.calm-landing .pitch-spectrum-row {
+  border-radius: var(--pitch-radius);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  background: rgb(15 15 15 / 0.75);
+  padding: 0.75rem 1rem;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+}
+
+@media (min-width: 640px) {
+  .calm-landing .pitch-btn-primary,
+  .calm-landing .pitch-btn-secondary {
+    width: auto;
+    min-width: 10rem;
+    padding-inline: 1.5rem;
+  }
+}
+
+.calm-landing .pitch-footer a:focus-visible {
+  outline: 2px solid rgb(255 255 255 / 0.35);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
