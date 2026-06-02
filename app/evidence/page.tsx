@@ -1,45 +1,64 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
 
 import { DisruptionSpectrum } from '@/components/sections/DisruptionSpectrum'
 import { EvidenceCards } from '@/components/sections/EvidenceCards'
+import {
+  CircadianModelHero,
+  DrugsDontWorkSection,
+  PersonalisationPayoffSection,
+} from '@/components/sections/evidence/circadian-model-sections'
 import { EvidenceSpectrumSection } from '@/components/sections/evidence-spectrum-section'
-import { Footer } from '@/components/sections/Footer'
+
+export const metadata: Metadata = {
+  title: 'Our circadian model — DIOS Evidence',
+  description:
+    'Why medicines waste and overprescribing meet a timing problem — and how DIOS personalises dose timing to each patient’s body clock.',
+}
 
 export default function EvidencePage() {
   return (
-    <div className="min-h-screen bg-white text-[#0D0D0D]">
-      <main id="evidence" className="mx-auto max-w-[76rem] px-5 py-16 sm:px-6 sm:py-20">
-        <p className="font-mono text-xs uppercase tracking-widest text-black/50">Evidence</p>
-        <h1 className="type-section mt-4 max-w-3xl">The science behind dose timing</h1>
-        <p className="type-body mt-4 max-w-3xl">
-          Oxford-validated chronodosing is trial-evidenced but still untranslated in everyday practice — DIOS closes that gap
-        </p>
+    <main id="evidence">
+      <div className="mx-auto max-w-[76rem] px-5 pb-8 sm:px-6">
+        <CircadianModelHero />
+      </div>
 
-        <EvidenceCards showCta />
+        <DrugsDontWorkSection />
+        <PersonalisationPayoffSection />
 
-        <section className="mt-20 border-t border-black/[0.06] pt-16">
-          <p className="font-mono text-xs uppercase tracking-widest text-black/50">
-            The clinical framework
-          </p>
-          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-black/60">
-            Every patient Mel sees is scored across seven circadian disease nodes. This is what
-            a clinician sees. Tap any node for the full clinical detail.
-          </p>
-          <div className="mt-8">
-            <EvidenceSpectrumSection />
+        <section id="spectrum" className="scroll-mt-[calc(var(--dios-site-nav-height)+1rem)] border-t border-black/[0.06] py-14 sm:py-20">
+          <div className="mx-auto max-w-[76rem] px-5 sm:px-6">
+            <p className="font-mono text-xs uppercase tracking-widest text-black/50">
+              The circadian model
+            </p>
+            <h2 className="type-section mt-4 max-w-3xl">Seven nodes. One body clock.</h2>
+            <p className="type-body mt-4 max-w-2xl text-black/60">
+              Every patient is scored across circadian disease nodes — what a clinician reviews before
+              adjusting timing. Tap any node for mechanism, drug clusters, and signals.
+            </p>
+            <div className="mt-8">
+              <EvidenceSpectrumSection />
+            </div>
           </div>
         </section>
 
         <DisruptionSpectrum />
 
-        <p className="type-body mt-12 text-center">
-          <Link href="/" className="text-black underline-offset-4 hover:underline">
-            ← Back to homepage
-          </Link>
-        </p>
-      </main>
+        <div className="mx-auto max-w-[76rem] border-t border-black/[0.06] px-5 py-14 sm:px-6 sm:py-20">
+          <p className="font-mono text-xs uppercase tracking-widest text-black/50">
+            Peer-reviewed tiers
+          </p>
+          <p className="type-body mt-4 max-w-2xl text-black/60">
+            Foundational chronotherapy trials and drug-specific timing evidence behind the model.
+          </p>
+          <EvidenceCards showCta />
+        </div>
 
-      <Footer />
-    </div>
+      <p className="type-body border-t border-black/[0.06] py-10 text-center">
+        <Link href="/" className="text-black underline-offset-4 hover:underline">
+          ← Back to homepage
+        </Link>
+      </p>
+    </main>
   )
 }

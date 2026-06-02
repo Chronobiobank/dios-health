@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 
-import { Footer } from '@/components/sections/Footer'
 import { TipTraqScience } from '@/components/sections/TipTraqScience'
 
 export const metadata: Metadata = {
@@ -11,11 +10,8 @@ export const metadata: Metadata = {
 
 export default function EvidenceTipTraqPage() {
   return (
-    <div className="min-h-screen bg-white text-[#0D0D0D]">
-      <main>
-        <TipTraqScience />
-      </main>
-      <Footer />
-    </div>
+    <main>
+      <TipTraqScience />
+    </main>
   )
 }

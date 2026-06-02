@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import { Footer } from '@/components/sections/Footer'
 import { RESEARCH_ENQUIRIES_EMAIL } from '@/lib/pitch/landing-content'
 
 export const metadata: Metadata = {
@@ -49,8 +48,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
       : 'DIOS%20enquiry'
 
   return (
-    <div className="min-h-screen bg-white text-[#0D0D0D]">
-      <main className="mx-auto max-w-[76rem] px-5 py-16 sm:px-6 sm:py-20">
+    <main className="mx-auto max-w-[76rem] px-5 pb-16 sm:px-6">
         <p className="type-label">Contact</p>
         <h1 className="type-section mt-4 max-w-3xl">
           {intentBlock?.title ?? 'Get in touch'}
@@ -100,9 +98,6 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             </Link>
           </li>
         </ul>
-      </main>
-
-      <Footer />
-    </div>
+    </main>
   )
 }

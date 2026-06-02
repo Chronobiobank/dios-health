@@ -18,7 +18,7 @@ export function AuthShell({
   return (
     <main
       className={cn(
-        'flex flex-1 justify-center bg-white px-5 pb-12 pt-4 text-[#0D0D0D] sm:pt-5'
+        'flex flex-1 justify-center px-5 pb-12 pt-4 text-[#0D0D0D] sm:pt-5'
       )}
     >
       <div className={`w-full ${maxWidthClass}`}>

@@ -50,6 +50,17 @@
 }
 
 /* Landing pitch — mobile-first snap deck */
+/* Scrollable marketing pages — clear transparent top nav */
+.calm-landing .marketing-main {
+  padding-top: calc(var(--dios-site-nav-height) + 1rem);
+}
+
+@media (min-width: 640px) {
+  .calm-landing .marketing-main {
+    padding-top: calc(var(--dios-site-nav-height) + 1.25rem);
+  }
+}
+
 .calm-landing {
   --pitch-screen-gap: clamp(1rem, 4vw, 1.5rem);
   /* Side + bottom gutter (top gutter lives below nav in the deck, not stacked on nav twice) */

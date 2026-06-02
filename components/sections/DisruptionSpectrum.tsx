@@ -57,7 +57,7 @@ const PMC_SCIENCE_HREF = `https://pmc.ncbi.nlm.nih.gov/search/?term=${PMC_IDS.jo
 
 export function DisruptionSpectrum() {
   return (
-    <section id="spectrum" className={`${SECTION} bg-[#FAFAFA] py-16 sm:py-20`}>
+    <section id="disruption-spectrum" className={`${SECTION} bg-[#FAFAFA] py-16 sm:py-20`}>
       <div className={CONTAINER}>
         <p className="font-mono text-xs uppercase tracking-widest text-black/50">The evidence</p>
         <h2 className="type-section mt-4">The circadian disruption spectrum runs from mild jetlag to chronic pathology</h2>
