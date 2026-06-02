@@ -9,7 +9,7 @@ import { PitchMinimalTileCard } from './pitch-minimal-tile'
 function ScrollIndicator() {
   return (
     <div
-      className="pointer-events-none absolute inset-x-[var(--pitch-screen-inset)] bottom-[var(--pitch-screen-inset)] z-20 flex justify-center"
+      className="pointer-events-none absolute inset-x-[var(--pitch-screen-inset)] bottom-[var(--pitch-screen-inset-bottom)] z-20 flex justify-center"
       aria-hidden
     >
       <ChevronDown className="h-5 w-5 animate-bounce text-[#0D0D0D]/30" />
@@ -28,7 +28,7 @@ function PitchScreen({ id, children }: { id: string; children: ReactNode }) {
 
 export function PitchDeck() {
   return (
-    <div className="pitch-deck relative h-[100dvh] snap-y snap-mandatory overflow-y-auto overscroll-y-contain scroll-smooth md:h-auto md:snap-none md:overflow-visible">
+    <div className="pitch-deck relative snap-y snap-mandatory overflow-y-auto scroll-smooth md:snap-none md:overflow-visible">
       {PITCH_MINIMAL_TILES.map((tile) => (
         <PitchScreen key={tile.id} id={tile.id}>
           <PitchMinimalTileCard tile={tile} />

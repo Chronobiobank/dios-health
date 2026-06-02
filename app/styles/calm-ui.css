@@ -51,20 +51,33 @@
 
 /* Landing pitch — mobile-first snap deck */
 .calm-landing {
-  --pitch-screen-inset: clamp(1rem, 4vw, 1.5rem);
-  --pitch-screen-inset-top: calc(var(--pitch-screen-inset) + var(--dios-site-nav-height));
+  --pitch-screen-gap: clamp(1rem, 4vw, 1.5rem);
+  /* Side + bottom gutter (top gutter lives below nav in the deck, not stacked on nav twice) */
+  --pitch-screen-inset: var(--pitch-screen-gap);
+  --pitch-screen-inset-bottom: calc(
+    var(--pitch-screen-gap) + var(--dios-site-nav-height) + env(safe-area-inset-bottom, 0px)
+  );
   background-color: #f7fafc;
   color: #0d0d0d;
+}
+
+.calm-landing .pitch-deck {
+  /* Fill viewport below sticky nav — stable height on iPhone (svh) */
+  height: calc(100svh - var(--dios-site-nav-height));
+  max-height: calc(100svh - var(--dios-site-nav-height));
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
 }
 
 .calm-landing .pitch-screen {
   box-sizing: border-box;
   display: grid;
   grid-template-rows: minmax(0, 1fr);
-  height: 100dvh;
-  min-height: 100dvh;
-  padding: var(--pitch-screen-inset-top) var(--pitch-screen-inset) var(--pitch-screen-inset)
+  height: 100%;
+  min-height: 100%;
+  padding: var(--pitch-screen-gap) var(--pitch-screen-inset) var(--pitch-screen-inset-bottom)
     var(--pitch-screen-inset);
+  scroll-snap-stop: always;
 }
 
 .calm-landing .pitch-screen > .pitch-screen__tile {
@@ -106,8 +119,50 @@ body:has(.calm-landing) .dios-site-nav__menu-panel {
   backdrop-filter: blur(20px) saturate(1.2);
 }
 
-.calm-landing .pitch-deck {
-  -webkit-overflow-scrolling: touch;
+@media (max-width: 767px) {
+  body:has(.calm-landing) {
+    overflow: hidden;
+    height: 100svh;
+  }
+
+  body:has(.calm-landing) .dios-app-shell {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .calm-landing {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .calm-landing .calm-landing__deck {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .calm-landing .pitch-deck {
+    flex: 1;
+    min-height: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .calm-landing .pitch-deck {
+    height: auto;
+    max-height: none;
+  }
+
+  .calm-landing .pitch-screen {
+    height: 100svh;
+    min-height: 100svh;
+    padding: var(--pitch-screen-gap);
+    padding-bottom: var(--pitch-screen-inset-bottom);
+  }
 }
 
 .calm-landing .pitch-screen .calm-eyebrow {

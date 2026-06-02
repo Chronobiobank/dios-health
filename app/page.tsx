@@ -6,7 +6,7 @@ export default function Home() {
     <div className="calm-landing relative min-h-svh bg-[#F7FAFC] text-[#0D0D0D]">
       <PitchShadowStyles />
       <PitchLandingBackdrop fixed />
-      <div className="relative z-10">
+      <div className="calm-landing__deck relative z-10 flex min-h-0 flex-1 flex-col">
         <PitchDeck />
       </div>
     </div>
