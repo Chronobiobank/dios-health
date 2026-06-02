@@ -60,7 +60,7 @@ export function PitchDeck() {
         </PitchScreen>
       ))}
 
-      <div className="snap-none">
+      <div className="snap-start">
         <PitchFooter />
       </div>
     </div>

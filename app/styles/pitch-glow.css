@@ -57,7 +57,7 @@
 /* In-tile typography */
 .calm-landing .pitch-tile-eyebrow {
   font-family: var(--font-family-mono);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgb(255 255 255 / 0.4);
@@ -68,7 +68,7 @@
 }
 
 .calm-landing .pitch-tile-title {
-  font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+  font-size: clamp(1.5rem, 6.2vw, 1.9rem);
   font-weight: 600;
   line-height: 1.12;
   letter-spacing: -0.02em;
@@ -76,15 +76,15 @@
 }
 
 .calm-landing .pitch-tile-title--light {
-  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  font-size: clamp(1.75rem, 8vw, 2.75rem);
   line-height: 1.08;
   letter-spacing: -0.03em;
   color: #fff;
 }
 
 .calm-landing .pitch-tile-sub {
-  font-size: 0.9375rem;
-  line-height: 1.45;
+  font-size: 1rem;
+  line-height: 1.5;
   color: rgb(255 255 255 / 0.55);
 }
 
@@ -109,7 +109,7 @@
 .calm-landing .pitch-glow-tile__link {
   margin-top: 0.25rem;
   font-family: var(--font-family-mono);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: rgb(201 151 58 / 0.85);
@@ -129,12 +129,14 @@
 .calm-landing .pitch-btn-primary {
   display: inline-flex;
   height: 3rem;
-  width: 100%;
+  width: auto;
+  min-width: 8.25rem;
+  padding-inline: 1rem;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
   background: #fff;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 500;
   color: #080808;
   transition: opacity 0.2s;
@@ -147,13 +149,15 @@
 .calm-landing .pitch-btn-secondary {
   display: inline-flex;
   height: 3rem;
-  width: 100%;
+  width: auto;
+  min-width: 8.25rem;
+  padding-inline: 1rem;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
   border: 1px solid rgb(255 255 255 / 0.25);
   background: rgb(255 255 255 / 0.08);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 500;
   color: #fff;
   backdrop-filter: blur(12px);
