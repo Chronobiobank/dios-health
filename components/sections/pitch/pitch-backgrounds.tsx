@@ -140,10 +140,22 @@ export function PitchShadowStyles() {
   )
 }
 
-/** Tall document layer — orbs span full scroll height (footer included) */
-export function PitchLandingBackdrop() {
+type PitchLandingBackdropProps = {
+  /** Pinned to viewport — sits behind sticky nav (landing only) */
+  fixed?: boolean
+}
+
+/** Pastel orb field — use `fixed` on home so the nav blurs real hues, not white body */
+export function PitchLandingBackdrop({ fixed = false }: PitchLandingBackdropProps) {
   return (
-    <div className="pitch-landing-backdrop absolute inset-0 min-h-full overflow-hidden" aria-hidden>
+    <div
+      className={
+        fixed
+          ? 'pitch-landing-backdrop pointer-events-none fixed inset-0 z-0 overflow-hidden'
+          : 'pitch-landing-backdrop absolute inset-0 min-h-full overflow-hidden'
+      }
+      aria-hidden
+    >
       {LANDING_ORBS.map((orb, i) => (
         <div
           key={i}

@@ -57,15 +57,18 @@
   color: #0d0d0d;
 }
 
-/* Frosted translucent nav — pastel backdrop visible through the bar */
+/* Landing nav — fully transparent (no bar, no bottom rule); pastel shows through from fixed layer */
 body:has(.calm-landing) {
-  --dios-site-nav-bg: rgb(247 250 252 / 0.58);
-  --dios-site-nav-border: rgb(13 13 13 / 0.06);
+  background-color: #f7fafc;
+  --dios-site-nav-bg: transparent;
+  --dios-site-nav-border: transparent;
 }
 
 body:has(.calm-landing) .dios-site-nav {
-  -webkit-backdrop-filter: blur(20px) saturate(1.25);
-  backdrop-filter: blur(20px) saturate(1.25);
+  background-color: transparent;
+  border-bottom: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body:has(.calm-landing) .dios-site-nav__menu-panel {
@@ -76,10 +79,6 @@ body:has(.calm-landing) .dios-site-nav__menu-panel {
 
 .calm-landing .pitch-deck {
   -webkit-overflow-scrolling: touch;
-}
-
-.calm-landing .pitch-landing-backdrop {
-  isolation: isolate;
 }
 
 .calm-landing .pitch-screen .calm-eyebrow {

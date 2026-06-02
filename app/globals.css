@@ -98,7 +98,7 @@
   --dios-site-nav-height: 4rem;
   --dios-site-nav-max-width: 76rem;
   --dios-site-nav-border: transparent;
-  --dios-site-nav-bg: rgb(255 255 255 / 0.72);
+  --dios-site-nav-bg: transparent;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -550,19 +550,9 @@
     top: 0;
     z-index: 50;
     border-bottom: 1px solid var(--dios-site-nav-border);
-    background: var(--dios-site-nav-bg);
+    background-color: var(--dios-site-nav-bg);
     -webkit-backdrop-filter: blur(16px) saturate(1.1);
     backdrop-filter: blur(16px) saturate(1.1);
-  }
-
-  @supports not (backdrop-filter: blur(1px)) {
-    .dios-site-nav {
-      background: rgb(255 255 255 / 0.94);
-    }
-
-    body:has(.calm-landing) .dios-site-nav {
-      background: rgb(247 250 252 / 0.94);
-    }
   }
 
   .dios-site-nav__inner {

@@ -3,7 +3,6 @@ import type { ReactNode } from 'react'
 
 import { PITCH_MINIMAL_TILES } from '@/lib/pitch/pitch-minimal'
 
-import { PitchLandingBackdrop, PitchShadowStyles } from './pitch-backgrounds'
 import { PitchFooter } from './pitch-footer'
 import { PitchMinimalTileCard } from './pitch-minimal-tile'
 
@@ -35,24 +34,14 @@ function PitchScreen({ id, children }: { id: string; children: ReactNode }) {
 export function PitchDeck() {
   return (
     <div className="pitch-deck relative h-[100dvh] snap-y snap-mandatory overflow-y-auto overscroll-y-contain scroll-smooth md:h-auto md:snap-none md:overflow-visible">
-      <PitchShadowStyles />
+      {PITCH_MINIMAL_TILES.map((tile) => (
+        <PitchScreen key={tile.id} id={tile.id}>
+          <PitchMinimalTileCard tile={tile} />
+        </PitchScreen>
+      ))}
 
-      <div className="relative">
-        <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-          <PitchLandingBackdrop />
-        </div>
-
-        <div className="relative z-10">
-          {PITCH_MINIMAL_TILES.map((tile) => (
-            <PitchScreen key={tile.id} id={tile.id}>
-              <PitchMinimalTileCard tile={tile} />
-            </PitchScreen>
-          ))}
-
-          <div className="snap-start">
-            <PitchFooter />
-          </div>
-        </div>
+      <div className="snap-start">
+        <PitchFooter />
       </div>
     </div>
   )
