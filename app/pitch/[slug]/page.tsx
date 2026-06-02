@@ -2,7 +2,11 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { Footer } from '@/components/sections/Footer'
-import { getPitchDetailPage } from '@/lib/pitch/pitch-minimal'
+import { getPitchDetailPage, PITCH_DETAIL_PAGES } from '@/lib/pitch/pitch-minimal'
+
+export function generateStaticParams() {
+  return PITCH_DETAIL_PAGES.map((page) => ({ slug: page.slug }))
+}
 
 type PitchDetailPageProps = {
   params: Promise<{ slug: string }>

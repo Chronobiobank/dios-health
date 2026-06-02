@@ -54,6 +54,7 @@
   --pitch-screen-gap: clamp(1rem, 4vw, 1.5rem);
   /* Side + bottom gutter (top gutter lives below nav in the deck, not stacked on nav twice) */
   --pitch-screen-inset: var(--pitch-screen-gap);
+  --pitch-screen-inset-top: calc(var(--pitch-screen-gap) + 0.75rem);
   --pitch-screen-inset-bottom: calc(
     var(--pitch-screen-gap) + var(--dios-site-nav-height) + env(safe-area-inset-bottom, 0px)
   );
@@ -75,7 +76,7 @@
   grid-template-rows: minmax(0, 1fr);
   height: 100%;
   min-height: 100%;
-  padding: var(--pitch-screen-gap) var(--pitch-screen-inset) var(--pitch-screen-inset-bottom)
+  padding: var(--pitch-screen-inset-top) var(--pitch-screen-inset) var(--pitch-screen-inset-bottom)
     var(--pitch-screen-inset);
   scroll-snap-stop: always;
 }

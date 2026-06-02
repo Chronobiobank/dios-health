@@ -92,6 +92,12 @@
   color: rgb(255 255 255 / 0.78);
 }
 
+/* One column for eyebrow, title, subtitle, and CTAs (width set on .pitch-tile-copy in JSX) */
+.calm-landing .pitch-tile-copy .pitch-tile-title,
+.calm-landing .pitch-tile-copy .pitch-tile-sub {
+  max-width: none;
+}
+
 .calm-landing .pitch-glow-tile__metric {
   font-size: clamp(1.5rem, 5vw, 2rem);
   font-weight: 600;
