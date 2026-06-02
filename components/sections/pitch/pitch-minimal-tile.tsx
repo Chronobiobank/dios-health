@@ -8,10 +8,16 @@ import { PitchMediaTile } from './pitch-media-tile'
 import { PitchTileEyebrow, PitchTileSub, PitchTileTitle } from './pitch-primitives'
 
 export function PitchMinimalTileCard({ tile }: { tile: PitchMinimalTile }) {
+  const isPrimaryHero = tile.id === 'pitch-hook'
+
   return (
     <PitchMediaTile image={tile.image} imageAlt={tile.imageAlt} videoSrc={tile.videoSrc} size="hero">
       <PitchTileEyebrow light>{tile.eyebrow}</PitchTileEyebrow>
-      <PitchTileTitle as="h2" light className="mt-2 max-w-xl">
+      <PitchTileTitle
+        as="h2"
+        light
+        className={isPrimaryHero ? 'mt-2 max-w-3xl text-4xl leading-tight sm:text-6xl' : 'mt-2 max-w-xl'}
+      >
         {tile.title}
       </PitchTileTitle>
       <PitchTileSub light className="mt-2 max-w-lg">

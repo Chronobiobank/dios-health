@@ -68,7 +68,7 @@ export function PitchFooter() {
         <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[12px] text-white/40">© {new Date().getFullYear()} DIOS Health</p>
           <p className="text-[12px] text-white/35">
-            Medicine timing for your body clock — not population averages.
+            Medicine timed to your body clock — not European population averages.
           </p>
         </div>
       </div>

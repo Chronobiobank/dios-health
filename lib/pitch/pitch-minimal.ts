@@ -36,17 +36,15 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
   {
     id: 'pitch-hook',
     slug: 'hook',
-    eyebrow: 'Medication timing',
-    title: 'Medicine works differently depending on when you take it.',
+    eyebrow: 'What we know',
+    title: 'Timing matters.',
     subtitle:
-      'DIOS uses smartphone circadian signals to move beyond population-average dosing and delivers personalised timing for each patient.',
+      'Medicine works differently depending on when you take it. DIOS uses a circadian model to guide risk analysis and zeitgeber prompts.',
     image: PITCH_HERO.poster,
     imageAlt: 'Medicines and tablets',
     videoSrc: '/first-light.mp4',
-    href: '/pitch/hook',
-    ctaLabel: 'Request pilot',
-    secondaryHref: '/mel',
-    secondaryCtaLabel: 'Watch demo',
+    href: '/evidence#spectrum',
+    ctaLabel: 'Our circadian model',
   },
   {
     id: 'pitch-problem',
@@ -97,10 +95,11 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
   {
     id: 'pitch-pilot-structure',
     slug: 'chronobiobank',
-    eyebrow: 'Chronobiobank',
-    title: 'Building chronomedicine research infrastructure from the ground up.',
-    subtitle: 'DIOS is designed as a research and innovation system, not just a point solution.',
-    image: PITCH_IMAGES.model,
+    eyebrow: 'Our vision',
+    title: "The world's first Chronobiobank.",
+    subtitle:
+      'Building user-owned chronomedicine infrastructure to drive health equity, accelerate drug design, and unlock continuous therapeutic innovation.',
+    image: '/chronobiobank.png',
     imageAlt: 'Chronobiobank research infrastructure',
     href: '/contact',
     ctaLabel: 'Contact DIOS',
@@ -111,7 +110,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     eyebrow: 'Credibility',
     title: 'Built for clinical governance from day one.',
     subtitle: 'Safety framing, standards, and accountable rollout.',
-    image: PITCH_IMAGES.governance.regulatory,
+    image: '/consent-firewall.jpg',
     imageAlt: 'Governance and compliance',
     href: '/pitch/credibility',
     ctaLabel: 'View credibility',
@@ -121,7 +120,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
 export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
   {
     slug: 'hook',
-    eyebrow: 'Medication timing',
+    eyebrow: 'What we know',
     title: 'DIOS tells patients the best time to take medication.',
     subtitle: 'It turns circadian signal into practical medication timing recommendations.',
     image: PITCH_HERO.poster,
@@ -240,10 +239,11 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
   },
   {
     slug: 'chronobiobank',
-    eyebrow: 'Chronobiobank',
-    title: 'Research and innovation infrastructure for precision chronomedicine.',
-    subtitle: 'DIOS builds a governed foundation for continuous clinical learning and translational research.',
-    image: PITCH_IMAGES.model,
+    eyebrow: 'Our vision',
+    title: "The world's first Chronobiobank.",
+    subtitle:
+      'DIOS builds user-owned infrastructure for continuous clinical learning, equitable precision care, and next-generation drug design and innovation.',
+    image: '/chronobiobank.png',
     imageAlt: 'Chronobiobank model',
     sections: [
       {
@@ -270,7 +270,7 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     eyebrow: 'Credibility',
     title: 'Governance and safety are part of the product.',
     subtitle: 'Clinical risk, IG, and regulatory framing are built into rollout.',
-    image: PITCH_IMAGES.governance.regulatory,
+    image: '/consent-firewall.jpg',
     imageAlt: 'Governance',
     sections: [
       { title: 'Governance', body: 'DPIA starter, subprocessor transparency, and rollout controls.' },
