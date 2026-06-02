@@ -9,7 +9,8 @@ import { cn } from '@/lib/utils'
 export type PitchMediaTileSize = 'hero' | 'card' | 'metric' | 'feature'
 
 const FRAME_CLASS: Record<PitchMediaTileSize, string> = {
-  hero: 'h-[calc(100dvh-var(--dios-site-nav-height)-6.5rem)] min-h-[420px] sm:h-[calc(100dvh-var(--dios-site-nav-height)-7.5rem)] sm:min-h-[480px]',
+  hero:
+    'aspect-[4/3] w-full min-h-[min(48dvh,380px)] max-h-[calc(100dvh-var(--dios-site-nav-height)-6rem)] sm:aspect-[16/10] sm:min-h-[400px] sm:max-h-[calc(100dvh-var(--dios-site-nav-height)-5.5rem)]',
   card: 'min-h-[200px] aspect-[4/3] sm:min-h-[220px]',
   metric: 'min-h-[140px] aspect-square sm:min-h-[168px]',
   feature: 'min-h-[min(52dvh,420px)] aspect-[16/10] sm:min-h-[380px]',

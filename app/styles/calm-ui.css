@@ -52,7 +52,6 @@
 /* Landing pitch — mobile-first snap deck */
 .calm-landing {
   margin-top: calc(-1 * var(--dios-site-nav-height));
-  padding-top: var(--dios-site-nav-height);
   background-color: #f7fafc;
   color: #0d0d0d;
 }

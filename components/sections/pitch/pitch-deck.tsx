@@ -21,11 +21,9 @@ function PitchScreen({ id, children }: { id: string; children: ReactNode }) {
   return (
     <section
       id={id}
-      className="pitch-screen relative flex min-h-[100dvh] snap-start snap-always flex-col bg-transparent"
+      className="pitch-screen relative box-border flex min-h-[100dvh] snap-start snap-always flex-col justify-center bg-transparent px-4 pb-16 pt-[var(--dios-site-nav-height)] sm:px-6 sm:pb-20"
     >
-      <div className="relative z-10 mx-auto flex w-full max-w-[76rem] flex-1 flex-col justify-start gap-3 px-4 pb-20 pt-[calc(var(--dios-site-nav-height)+1rem)] sm:gap-4 sm:px-6 sm:pt-[calc(var(--dios-site-nav-height)+1.25rem)]">
-        {children}
-      </div>
+      <div className="relative z-10 mx-auto w-full max-w-[76rem]">{children}</div>
       <ScrollIndicator />
     </section>
   )
