@@ -1,17 +1,11 @@
 'use client'
 
+import Link from 'next/link'
+
+import { PITCH_CONFIDENCE_LAYERS, PITCH_SPECTRUM_PAGE } from '@/lib/pitch/landing-content'
+import { pitchSpectrumBarColor } from '@/lib/pitch/pitch-palette'
 import { DEMO_SPECTRUM_SCORES } from '@/lib/spectrum/spectrum-builder'
 import { SPECTRUM_NODES } from '@/lib/spectrum/spectrum-data'
-import {
-  PITCH_CONFIDENCE_LAYERS,
-  PITCH_SPECTRUM_NODE_CITATIONS,
-} from '@/lib/pitch/landing-content'
-
-const C = {
-  highRisk: '#1A365D',
-  optimal: '#ED8936',
-  spotAlert: '#D53F8C',
-} as const
 
 export function PitchSpectrumBars() {
   const scoreByNode = Object.fromEntries(
@@ -23,31 +17,23 @@ export function PitchSpectrumBars() {
       {SPECTRUM_NODES.map((node) => {
         const score = scoreByNode[node.id]?.score ?? 0.5
         const pct = Math.round(score * 100)
-        const isAlert = score < 0.35
-        const isOptimal = score >= 0.7
-        const barColor = isAlert ? C.spotAlert : isOptimal ? C.optimal : C.highRisk
-        const cite = PITCH_SPECTRUM_NODE_CITATIONS[node.id]
+        const barColor = pitchSpectrumBarColor(score)
 
         return (
-          <div key={node.id} className="pitch-spectrum-row">
+          <Link
+            key={node.id}
+            href={PITCH_SPECTRUM_PAGE}
+            className="pitch-spectrum-row block transition-colors hover:border-[rgb(201_151_58/0.28)]"
+          >
             <div className="flex flex-wrap items-baseline justify-between gap-1.5">
               <p className="text-[13px] font-medium text-white sm:text-sm">{node.shortLabel}</p>
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[12px] text-white/50">{pct}</span>
-                {cite ? (
-                  <a
-                    href={cite.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-mono text-[10px] text-white/55 underline underline-offset-2 hover:text-white/80"
-                  >
-                    {cite.label}
-                  </a>
-                ) : null}
+                <span className="font-mono text-[12px] text-[var(--calm-brand)]/80">{pct}</span>
+                <span className="font-mono text-[10px] text-[var(--calm-brand)]/90">Spectrum →</span>
               </div>
             </div>
             <div
-              className="mt-2 h-2 w-full overflow-hidden rounded-full bg-white/8"
+              className="mt-2 h-2 w-full overflow-hidden rounded-full bg-white/[0.08]"
               role="img"
               aria-label={`${node.label} score ${pct} out of 100`}
             >
@@ -56,19 +42,23 @@ export function PitchSpectrumBars() {
                 style={{ width: `${pct}%`, backgroundColor: barColor }}
               />
             </div>
-          </div>
+          </Link>
         )
       })}
 
       <div className="grid grid-cols-3 gap-2">
         {PITCH_CONFIDENCE_LAYERS.map((layer) => (
-          <div key={layer.key} className="pitch-spectrum-row px-2 py-2 sm:px-3 sm:py-3">
-            <p className="font-mono text-[9px] uppercase tracking-wider text-white/40 sm:text-[10px]">
+          <Link
+            key={layer.key}
+            href={PITCH_SPECTRUM_PAGE}
+            className="pitch-spectrum-row pitch-spectrum-row--layer block transition-colors hover:border-[rgb(201_151_58/0.28)]"
+          >
+            <p className="font-mono text-[9px] uppercase tracking-wider text-[var(--calm-brand)]/70 sm:text-[10px]">
               {layer.key}
             </p>
             <p className="mt-0.5 font-mono text-[10px] font-medium text-white/90 sm:text-[11px]">{layer.title}</p>
             <p className="mt-0.5 font-mono text-[9px] text-white/45 sm:text-[10px]">{layer.body}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

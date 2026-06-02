@@ -7,6 +7,9 @@
   --calm-risk: #1a365d;
   --calm-optimal: #ed8936;
   --calm-critical: #d53f8c;
+  /* Pitch landing — single spot family (clinical views may still use risk/critical) */
+  --pitch-spot: var(--calm-brand);
+  --pitch-spot-bright: var(--calm-optimal);
   --calm-radius-card: 16px;
   --calm-screen-pad-y: clamp(4rem, 12vh, 7rem);
   --calm-screen-pad-x: clamp(1.25rem, 5vw, 1.5rem);

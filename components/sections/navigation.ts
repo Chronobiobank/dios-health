@@ -51,9 +51,13 @@ export const LANDING_FOOTER_SECTIONS: readonly FooterNavSection[] = [
     title: 'Explore',
     links: [
       { label: 'The hook', href: '/#pitch-hook' },
+      { label: 'System outcomes', href: '/#pitch-outcomes' },
       { label: 'The problem', href: '/#pitch-problem' },
+      { label: 'For NHS leaders', href: '/#pitch-nhs-leaders' },
+      { label: 'Governance', href: '/#pitch-governance' },
       { label: 'How it works', href: '/#pitch-how' },
       { label: 'Chronobiobank', href: '/#pitch-model' },
+      { label: 'Clinical briefing', href: '/#pitch-cmo-cta' },
     ],
   },
   {

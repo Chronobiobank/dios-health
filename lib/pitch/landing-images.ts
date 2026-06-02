@@ -8,6 +8,13 @@ export const PITCH_HERO = {
 
 export const PITCH_IMAGES = {
   hook: '/pitch/hook.jpg',
+  evidence: '/evidence.jpg',
+  outcomes: {
+    waste: '/Medicines-waste.jpeg',
+    cardiovascular: '/Cardiovascular-prevention.jpg',
+    metabolic: '/metabolic-risk.jpg',
+    safety: '/medicines-safety.jpg',
+  },
   problem: {
     hygia: '/pitch/problem-hygia.jpg',
     'biobank-mortality': '/pitch/problem-light.jpg',
@@ -33,4 +40,8 @@ export const PITCH_IMAGES = {
     Pharma: '/pitch/side-pharma.jpg',
   },
   model: '/pitch/model.jpg',
+  governance: {
+    regulatory: '/governance-regulatory.jpeg',
+    consentFirewall: '/consent-firewall.jpg',
+  },
 } as const

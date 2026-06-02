@@ -1,145 +1,102 @@
 'use client'
 
-import type { CSSProperties, ReactNode } from 'react'
+import Link from 'next/link'
+import type { ReactNode } from 'react'
 
 import type { PitchCitation } from '@/lib/pitch/landing-content'
-import { PITCH_GLOW_GRADIENT, type PitchGlowVariant } from '@/lib/pitch/tile-gradients'
+import { cn } from '@/lib/utils'
 
-import { PitchVisual } from './pitch-visual'
+import { PitchMediaTile } from './pitch-media-tile'
 
-function glowStyle(variant: PitchGlowVariant): CSSProperties {
-  const g = PITCH_GLOW_GRADIENT[variant]
-  return {
-    ['--pitch-tile-gradient' as string]: g.css,
-    ['--pitch-tile-glow' as string]: g.glow,
-  }
-}
-
-export function PitchGlowTile({
-  variant,
-  className,
-  metric,
-  video,
+export function PitchTileEyebrow({
   children,
+  light,
 }: {
-  variant: PitchGlowVariant
-  className?: string
-  metric?: boolean
-  /** Video tiles skip full-card gradient wash so media stays visible */
-  video?: boolean
-  children: ReactNode
+  children: string
+  light?: boolean
 }) {
   return (
-    <article
-      className={`pitch-glow-tile${metric ? ' pitch-glow-tile--metric' : ''}${video ? ' pitch-glow-tile--video' : ''}${className ? ` ${className}` : ''}`}
-      style={glowStyle(variant)}
-    >
-      <div className="pitch-glow-tile__inner">{children}</div>
-    </article>
+    <p className={cn('pitch-tile-eyebrow', light && 'pitch-tile-eyebrow--light')}>{children}</p>
   )
 }
 
-type PitchMediaTileProps = {
-  variant: PitchGlowVariant
-  media: ReactNode
-  /** Taller 16/10 media area (hook, feature tiles) */
-  hero?: boolean
-  /** Wide shallow tile (spectrum, model) */
-  wide?: boolean
-  /** Full-opacity video — no image blend */
-  video?: boolean
-  children?: ReactNode
-  className?: string
-}
-
-/** OpenAI-style tile: media on top, optional copy in the card body. */
-export function PitchMediaTile({
-  variant,
-  media,
-  hero,
-  wide,
-  video,
+export function PitchTileTitle({
   children,
+  as: Tag = 'h2',
+  light,
   className,
-}: PitchMediaTileProps) {
-  const mediaClass = [
-    'pitch-glow-tile__media',
-    hero ? 'pitch-glow-tile__media--hero' : '',
-    wide ? 'pitch-glow-tile__media--wide' : '',
-    video ? 'pitch-glow-tile__media--video' : '',
-  ]
-    .filter(Boolean)
-    .join(' ')
-
+}: {
+  children: ReactNode
+  as?: 'h1' | 'h2' | 'h3'
+  light?: boolean
+  className?: string
+}) {
   return (
-    <PitchGlowTile variant={variant} video={video} className={className}>
-      <div className={mediaClass}>{media}</div>
-      {children ? <div className="pitch-glow-tile__body">{children}</div> : null}
-    </PitchGlowTile>
+    <Tag className={cn('pitch-tile-title', light && 'pitch-tile-title--light', className)}>
+      {children}
+    </Tag>
   )
 }
 
-export function PitchCiteLink({ citation }: { citation: PitchCitation }) {
+export function PitchTileSub({
+  children,
+  light,
+  className,
+}: {
+  children: ReactNode
+  light?: boolean
+  className?: string
+}) {
+  return (
+    <p className={cn('pitch-tile-sub', light && 'pitch-tile-sub--light', className)}>{children}</p>
+  )
+}
+
+export function PitchCiteLink({
+  citation,
+  light,
+}: {
+  citation: PitchCitation
+  light?: boolean
+}) {
   return (
     <a
       href={citation.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="font-mono text-[10px] text-white/55 underline decoration-white/25 underline-offset-2 hover:text-white/80 sm:text-[11px]"
+      className={cn('pitch-glow-tile__link', light && 'pitch-glow-tile__link--light')}
     >
       {citation.label}
     </a>
   )
 }
 
+/** Single-idea evidence tile — same calm media stack as the hook. */
 export function PitchEvidenceCard({
-  gradient,
   image,
   imageAlt,
   finding,
   href,
   label,
-  caveat,
-  caveatHref,
-  caveatLabel,
 }: {
-  gradient: PitchGlowVariant
   image: string
   imageAlt: string
   finding: string
   href: string
   label: string
-  caveat?: string
-  caveatHref?: string
-  caveatLabel?: string
 }) {
   return (
-    <PitchGlowTile variant={gradient}>
-      <div className="pitch-glow-tile__media pitch-glow-tile__media--short">
-        <PitchVisual src={image} alt={imageAlt} aspect="video" rounded={false} overlay={false} />
-      </div>
-      <div className="pitch-glow-tile__body">
-        <p className="text-[15px] font-medium leading-snug text-white sm:text-base">{finding}</p>
-        <a href={href} target="_blank" rel="noopener noreferrer" className="pitch-glow-tile__link">
-          {label} →
-        </a>
-        {caveat ? (
-          <p className="mt-2 font-mono text-[10px] leading-relaxed text-white/40">
-            {caveat}{' '}
-            {caveatHref && caveatLabel ? (
-              <a href={caveatHref} target="_blank" rel="noopener noreferrer" className="text-white/60 underline">
-                {caveatLabel}
-              </a>
-            ) : null}
-          </p>
-        ) : null}
-      </div>
-    </PitchGlowTile>
+    <PitchMediaTile image={image} imageAlt={imageAlt} size="card">
+      <p className="text-[15px] font-medium leading-snug text-white sm:text-base">{finding}</p>
+      <a href={href} target="_blank" rel="noopener noreferrer" className="pitch-glow-tile__link">
+        {label} →
+      </a>
+    </PitchMediaTile>
   )
 }
 
+/** Biomarker stat — compact square media tile. */
 export function PitchStatCard({
-  gradient,
   image,
   imageAlt,
   value,
@@ -147,7 +104,6 @@ export function PitchStatCard({
   href,
   cite,
 }: {
-  gradient: PitchGlowVariant
   image: string
   imageAlt: string
   value: string
@@ -156,96 +112,113 @@ export function PitchStatCard({
   cite: string
 }) {
   return (
-    <PitchGlowTile variant={gradient} metric>
-      <div className="pitch-glow-tile__media" aria-hidden>
-        <PitchVisual src={image} alt={imageAlt} aspect="square" rounded={false} overlay={false} />
-      </div>
-      <div className="pitch-glow-tile__body">
-        <p className="pitch-glow-tile__metric">{value}</p>
-        <p className="pitch-glow-tile__label">{label}</p>
-        <a href={href} target="_blank" rel="noopener noreferrer" className="pitch-glow-tile__link">
-          {cite} →
-        </a>
-      </div>
-    </PitchGlowTile>
+    <PitchMediaTile image={image} imageAlt={imageAlt} size="metric">
+      <p className="pitch-glow-tile__metric">{value}</p>
+      <p className="pitch-glow-tile__label max-sm:hidden">{label}</p>
+      <a href={href} target="_blank" rel="noopener noreferrer" className="pitch-glow-tile__link">
+        {cite} →
+      </a>
+    </PitchMediaTile>
   )
 }
 
+/** How-it-works step subsection tile. */
 export function PitchStepCard({
-  gradient,
   step,
   title,
   body,
   image,
   imageAlt,
+  detailsHref,
 }: {
-  gradient: PitchGlowVariant
   step: string
   title: string
   body: string
   image: string
   imageAlt: string
+  detailsHref: string
 }) {
   return (
     <li>
-      <PitchGlowTile variant={gradient}>
-        <div className="pitch-glow-tile__media">
-          <PitchVisual src={image} alt={imageAlt} aspect="video" rounded={false} overlay={false} />
-        </div>
-        <div className="pitch-glow-tile__body">
-          <span className="font-mono text-[11px] text-white/45">{step}</span>
-          <p className="mt-1 text-base font-medium text-white">{title}</p>
-          <p className="pitch-glow-tile__label mt-1">{body}</p>
-        </div>
-      </PitchGlowTile>
+      <PitchMediaTile image={image} imageAlt={imageAlt} size="card">
+        <span className="font-mono text-[11px] text-[var(--calm-brand)]/75">{step}</span>
+        <p className="mt-1 text-base font-medium text-white">{title}</p>
+        <p className="pitch-glow-tile__label mt-1 max-sm:hidden">{body}</p>
+        <Link href={detailsHref} className="pitch-glow-tile__link mt-1 inline-block">
+          View details →
+        </Link>
+      </PitchMediaTile>
     </li>
   )
 }
 
+/** Four-sides audience subsection tile. */
 export function PitchAudienceCard({
-  gradient,
   emphasis,
   audience,
   line,
   image,
   imageAlt,
+  detailsHref,
 }: {
-  gradient: PitchGlowVariant
   emphasis: string
   audience: string
   line: string
   image: string
   imageAlt: string
+  detailsHref: string
 }) {
   return (
-    <PitchGlowTile variant={gradient}>
-      <div className="pitch-glow-tile__media pitch-glow-tile__media--short">
-        <PitchVisual src={image} alt={imageAlt} aspect="video" rounded={false} overlay={false} />
-      </div>
-      <div className="pitch-glow-tile__body">
-        <p className="font-mono text-[10px] uppercase tracking-wider text-white/45">{emphasis}</p>
-        <p className="mt-1.5 text-base font-medium text-white">{audience}</p>
-        <p className="pitch-glow-tile__label mt-1">{line}</p>
-      </div>
-    </PitchGlowTile>
+    <PitchMediaTile image={image} imageAlt={imageAlt} size="card">
+      <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--calm-brand)]/75">{emphasis}</p>
+      <p className="mt-1.5 text-base font-medium text-white">{audience}</p>
+      <p className="pitch-glow-tile__label mt-1 max-sm:hidden">{line}</p>
+      <Link href={detailsHref} className="pitch-glow-tile__link mt-1 inline-block">
+        View details →
+      </Link>
+    </PitchMediaTile>
   )
 }
 
-export function PitchInlineCitations({ citations }: { citations: PitchCitation[] }) {
+export function PitchInlineCitations({
+  citations,
+  light,
+}: {
+  citations: PitchCitation[]
+  light?: boolean
+}) {
   return (
-    <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-white/50 sm:mt-5 sm:text-sm">
+    <p
+      className={cn(
+        'mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:mt-5 sm:text-sm',
+        light ? 'text-white/65' : 'text-white/50'
+      )}
+    >
       {citations.map((c, i) => (
         <span key={c.href} className="inline-flex items-center gap-2">
-          {i > 0 ? <span className="text-white/25" aria-hidden>·</span> : null}
-          <PitchCiteLink citation={c} />
+          {i > 0 ? <span className={light ? 'text-white/35' : 'text-white/25'} aria-hidden>·</span> : null}
+          <PitchCiteLink citation={c} light={light} />
         </span>
       ))}
     </p>
   )
 }
 
-export function PitchCtaRow({ children }: { children: ReactNode }) {
+export function PitchCtaRow({
+  children,
+  compact,
+}: {
+  children: ReactNode
+  compact?: boolean
+}) {
   return (
-    <div className="mt-6 flex w-full flex-col gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-3">{children}</div>
+    <div
+      className={cn(
+        'flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3',
+        compact ? 'mt-5' : 'mt-6 sm:mt-8'
+      )}
+    >
+      {children}
+    </div>
   )
 }
