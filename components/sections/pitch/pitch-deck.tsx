@@ -14,23 +14,27 @@ import {
   PITCH_VALIDATION_GAP,
   RESEARCH_ENQUIRIES_EMAIL,
 } from '@/lib/pitch/landing-content'
+import { PITCH_IMAGES } from '@/lib/pitch/landing-images'
 
 import { PitchShadowBackdrop, PitchShadowStyles } from './pitch-backgrounds'
 import {
+  PitchAudienceCard,
   PitchCtaRow,
   PitchEvidenceCard,
   PitchInlineCitations,
   PitchStatCard,
+  PitchStepCard,
 } from './pitch-primitives'
 import { PitchSpectrumBars } from './pitch-spectrum-bars'
+import { PitchVisual } from './pitch-visual'
 
 function ScrollIndicator() {
   return (
     <div
-      className="pointer-events-none absolute inset-x-0 bottom-8 z-10 flex justify-center lg:hidden"
+      className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex justify-center md:bottom-8"
       aria-hidden
     >
-      <ChevronDown className="h-6 w-6 animate-bounce text-white/40" />
+      <ChevronDown className="h-5 w-5 animate-bounce text-white/35" />
     </div>
   )
 }
@@ -43,20 +47,28 @@ function PitchScreen({
   id,
   backgroundVariant,
   children,
+  compact,
 }: {
   id: string
   backgroundVariant: 0 | 1 | 2 | 3 | 4
   children: ReactNode
+  compact?: boolean
 }) {
   return (
     <section
       id={id}
-      className="relative flex min-h-svh snap-start flex-col bg-calm-bg"
+      className="pitch-screen relative flex min-h-[100dvh] snap-start snap-always flex-col bg-calm-bg"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <PitchShadowBackdrop variant={backgroundVariant} />
       </div>
-      <div className="relative z-10 mx-auto flex w-full max-w-[76rem] flex-1 flex-col justify-center px-[var(--calm-screen-pad-x)] py-[var(--calm-screen-pad-y)] sm:px-6">
+      <div
+        className={`relative z-10 mx-auto flex w-full max-w-[76rem] flex-1 flex-col px-4 pb-20 pt-[calc(var(--dios-site-nav-height)+1.25rem)] sm:px-6 ${
+          compact
+            ? 'justify-start gap-6'
+            : 'justify-start gap-6 md:justify-center md:py-[var(--calm-screen-pad-y)]'
+        }`}
+      >
         {children}
       </div>
       <ScrollIndicator />
@@ -64,54 +76,66 @@ function PitchScreen({
   )
 }
 
+function PitchTitle({ children }: { children: ReactNode }) {
+  return (
+    <h2 className="calm-headline max-w-xl text-[clamp(1.375rem,5.5vw,2.25rem)] leading-[1.12] tracking-tight">
+      {children}
+    </h2>
+  )
+}
+
 const SCREEN_VARIANTS = [0, 1, 2, 3, 4, 0, 1] as const satisfies readonly (0 | 1 | 2 | 3 | 4)[]
 
 export function PitchDeck() {
   return (
-    <div className="h-svh snap-y snap-mandatory overflow-y-auto lg:h-auto lg:snap-none lg:overflow-visible">
+    <div className="pitch-deck h-[100dvh] snap-y snap-mandatory overflow-y-auto overscroll-y-contain scroll-smooth md:h-auto md:snap-none md:overflow-visible">
       <PitchShadowStyles />
 
-      {/* Screen 1 — The hook */}
       <PitchScreen id="pitch-hook" backgroundVariant={SCREEN_VARIANTS[0]}>
-        <PitchEyebrow>THE HOOK</PitchEyebrow>
-        <h1 className="calm-headline mt-6 max-w-3xl text-[28px] lg:mt-8 lg:text-[42px]">
-          £300 million in wasted NHS medications every year.
+        <PitchVisual
+          src={PITCH_IMAGES.hook}
+          alt="Abstract clinical timing and light"
+          priority
+          aspect="wide"
+          className="max-h-[min(42vw,200px)] md:max-h-[280px]"
+        />
+        <PitchEyebrow>The hook</PitchEyebrow>
+        <h1 className="calm-headline max-w-xl text-[clamp(1.5rem,6vw,2.625rem)] leading-[1.1]">
+          £300M in wasted NHS medicines yearly.
         </h1>
-        <p className="calm-headline mt-4 max-w-2xl text-[22px] font-normal text-white/85 lg:text-[28px]">
-          Not one pound of it addresses the timing.
+        <p className="calm-body max-w-md text-[clamp(0.9375rem,4vw,1.125rem)] text-white/80">
+          None of it fixes timing.
         </p>
         <PitchInlineCitations citations={PITCH_HOOK_CITATIONS} />
         <PitchCtaRow>
-          <Link href="/signup" className={`${BTN_PRIMARY} w-full justify-center sm:w-auto`}>
-            I am a patient → Get started free
+          <Link href="/signup" className={`${BTN_PRIMARY} h-11 w-full justify-center text-sm sm:w-auto`}>
+            Patients — free
           </Link>
           <Link
             href="/signup/clinician"
-            className="type-button inline-flex h-10 w-full items-center justify-center rounded-full border border-calm-brand bg-transparent px-5 text-calm-brand transition-colors sm:h-11 sm:w-auto sm:px-6"
+            className="type-button inline-flex h-11 w-full items-center justify-center rounded-full border border-calm-brand px-5 text-sm text-calm-brand sm:w-auto"
           >
-            I am a clinician → Book a demo
+            Clinicians — demo
           </Link>
           <Link
             href="/evidence"
-            className="type-button inline-flex h-10 w-full items-center justify-center rounded-full border border-white/20 bg-transparent px-5 text-white/80 transition-colors hover:border-white/40 sm:h-11 sm:w-auto sm:px-6"
+            className="type-button inline-flex h-11 w-full items-center justify-center rounded-full border border-white/15 px-5 text-sm text-white/75 sm:w-auto"
           >
-            Read the science
+            Science
           </Link>
         </PitchCtaRow>
       </PitchScreen>
 
-      {/* Screen 2 — The problem */}
-      <PitchScreen id="pitch-problem" backgroundVariant={SCREEN_VARIANTS[1]}>
-        <PitchEyebrow>THE PROBLEM</PitchEyebrow>
-        <h2 className="calm-headline mt-6 max-w-2xl text-[26px] lg:mt-8 lg:text-[36px]">
-          Timing is evidence-based. Delivery is not.
-        </h2>
-        <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mt-12 lg:gap-5">
+      <PitchScreen id="pitch-problem" backgroundVariant={SCREEN_VARIANTS[1]} compact>
+        <PitchEyebrow>The problem</PitchEyebrow>
+        <PitchTitle>Evidence exists. Delivery doesn&apos;t.</PitchTitle>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
           {PITCH_PROBLEM_CARDS.map((card) => (
             <PitchEvidenceCard
               key={card.id}
+              image={card.image}
+              imageAlt={card.imageAlt}
               finding={card.finding}
-              detail={card.detail}
               href={card.href}
               label={card.label}
               caveat={'caveat' in card ? card.caveat : undefined}
@@ -122,16 +146,15 @@ export function PitchDeck() {
         </div>
       </PitchScreen>
 
-      {/* Screen 3 — The biomarker */}
-      <PitchScreen id="pitch-biomarker" backgroundVariant={SCREEN_VARIANTS[2]}>
-        <PitchEyebrow>THE BIOMARKER</PitchEyebrow>
-        <h2 className="calm-headline mt-6 max-w-3xl text-[26px] lg:mt-8 lg:text-[36px]">
-          Melanopic Lux — measured at population scale.
-        </h2>
-        <div className="mt-10 grid grid-cols-1 gap-4 xs:grid-cols-2 lg:mt-12 lg:grid-cols-4 lg:gap-5">
+      <PitchScreen id="pitch-biomarker" backgroundVariant={SCREEN_VARIANTS[2]} compact>
+        <PitchEyebrow>The biomarker</PitchEyebrow>
+        <PitchTitle>Melanopic Lux at population scale.</PitchTitle>
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
           {PITCH_BIOMARKER_STATS.map((stat) => (
             <PitchStatCard
-              key={stat.value}
+              key={stat.value + stat.cite}
+              image={stat.image}
+              imageAlt={stat.imageAlt}
               value={stat.value}
               label={stat.label}
               href={stat.href}
@@ -139,90 +162,86 @@ export function PitchDeck() {
             />
           ))}
         </div>
-        <p className="calm-body mt-8 max-w-3xl border-l-2 border-calm-brand/40 pl-4 text-sm lg:mt-10">
+        <p className="calm-body max-w-lg border-l-2 border-calm-brand/30 pl-3 text-xs leading-relaxed sm:text-sm">
           {PITCH_VALIDATION_GAP}
         </p>
       </PitchScreen>
 
-      {/* Screen 4 — The spectrum */}
-      <PitchScreen id="pitch-spectrum" backgroundVariant={SCREEN_VARIANTS[3]}>
-        <PitchEyebrow>THE SPECTRUM</PitchEyebrow>
-        <h2 className="calm-headline mt-6 max-w-3xl text-[26px] lg:mt-8 lg:text-[36px]">
-          Seven nodes. One circadian cascade.
-        </h2>
-        <p className="calm-body mt-4 max-w-2xl text-sm">
-          Circadian Desynchrony Spectrum — demo profile from Vaya Layer 1 data. Each node links to
-          its primary evidence base.
-        </p>
+      <PitchScreen id="pitch-spectrum" backgroundVariant={SCREEN_VARIANTS[3]} compact>
+        <PitchEyebrow>The spectrum</PitchEyebrow>
+        <PitchTitle>Seven nodes. One cascade.</PitchTitle>
+        <PitchVisual
+          src={PITCH_IMAGES.spectrum}
+          alt="Circadian desynchrony spectrum visualization"
+          aspect="wide"
+          className="max-h-[140px] sm:max-h-[180px]"
+        />
         <PitchSpectrumBars />
-        <p className="mt-6">
-          <Link
-            href="/evidence#spectrum"
-            className="font-mono text-[11px] text-calm-brand underline underline-offset-2"
-          >
-            Full interactive spectrum on the evidence page →
-          </Link>
-        </p>
+        <Link
+          href="/evidence#spectrum"
+          className="font-mono text-[10px] text-calm-brand underline underline-offset-2 sm:text-[11px]"
+        >
+          Interactive spectrum →
+        </Link>
       </PitchScreen>
 
-      {/* Screen 5 — How it works */}
-      <PitchScreen id="pitch-how" backgroundVariant={SCREEN_VARIANTS[4]}>
-        <PitchEyebrow>HOW IT WORKS</PitchEyebrow>
-        <h2 className="calm-headline mt-6 max-w-2xl text-[26px] lg:mt-8 lg:text-[36px]">
-          Three steps from light to protocol.
-        </h2>
-        <ol className="mt-10 flex max-w-3xl flex-col gap-5 lg:mt-12">
+      <PitchScreen id="pitch-how" backgroundVariant={SCREEN_VARIANTS[4]} compact>
+        <PitchEyebrow>How it works</PitchEyebrow>
+        <PitchTitle>Light → measure → protocol.</PitchTitle>
+        <ol className="flex flex-col gap-3">
           {PITCH_HOW_IT_WORKS.map((item) => (
-            <li key={item.step} className="calm-card flex gap-5 p-6 lg:p-7">
-              <span className="font-mono text-[13px] text-calm-brand">{item.step}</span>
-              <div>
-                <p className="calm-headline text-lg">{item.title}</p>
-                <p className="calm-body mt-2 text-sm">{item.body}</p>
-              </div>
-            </li>
+            <PitchStepCard
+              key={item.step}
+              step={item.step}
+              title={item.title}
+              body={item.body}
+              image={item.image}
+              imageAlt={item.imageAlt}
+            />
           ))}
         </ol>
-        <p className="calm-body mt-8 max-w-2xl border border-white/10 rounded-[var(--calm-radius-card)] bg-white/5 px-5 py-4 text-sm">
+        <p className="calm-body rounded-[var(--calm-radius-card)] border border-white/10 bg-white/5 px-4 py-3 text-xs sm:text-sm">
           {PITCH_CLINICAL_DISCLAIMER}
         </p>
         <PitchCtaRow>
-          <Link href="/vaya" className={`${BTN_PRIMARY} w-full justify-center sm:w-auto`}>
-            Try Vaya free →
+          <Link href="/mel" className={`${BTN_PRIMARY} h-11 w-full justify-center text-sm sm:w-auto`}>
+            Try Mel free →
           </Link>
         </PitchCtaRow>
       </PitchScreen>
 
-      {/* Screen 6 — Four sides */}
-      <PitchScreen id="pitch-four-sides" backgroundVariant={SCREEN_VARIANTS[5]}>
-        <PitchEyebrow>FOUR SIDES</PitchEyebrow>
-        <h2 className="calm-headline mt-6 max-w-2xl text-[26px] lg:mt-8 lg:text-[36px]">
-          One platform. Four stakeholders.
-        </h2>
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-12 lg:gap-5">
+      <PitchScreen id="pitch-four-sides" backgroundVariant={SCREEN_VARIANTS[5]} compact>
+        <PitchEyebrow>Four sides</PitchEyebrow>
+        <PitchTitle>One platform.</PitchTitle>
+        <div className="grid grid-cols-1 gap-3 xs:grid-cols-2 sm:gap-4">
           {PITCH_FOUR_SIDES.map((side) => (
-            <div key={side.audience} className="calm-card p-6 lg:p-7">
-              <p className="calm-eyebrow">{side.emphasis}</p>
-              <p className="calm-headline mt-3 text-lg">{side.audience}</p>
-              <p className="calm-body mt-3 text-sm">{side.line}</p>
-            </div>
+            <PitchAudienceCard
+              key={side.audience}
+              emphasis={side.emphasis}
+              audience={side.audience}
+              line={side.line}
+              image={side.image}
+              imageAlt={side.imageAlt}
+            />
           ))}
         </div>
       </PitchScreen>
 
-      {/* Screen 7 — The model */}
       <PitchScreen id="pitch-model" backgroundVariant={SCREEN_VARIANTS[6]}>
-        <PitchEyebrow>THE MODEL</PitchEyebrow>
-        <h2 className="calm-headline mt-6 max-w-3xl text-[26px] lg:mt-8 lg:text-[36px]">
-          Chronobiobank infrastructure.
-        </h2>
-        <p className="calm-body mt-6 max-w-2xl">
-          Dynamic consent separates clinical use from optional research contribution. Identifiable
-          health data stays under patient control; anonymised streams may support governed research
-          licensing.
+        <PitchVisual
+          src={PITCH_IMAGES.model}
+          alt="Chronobiobank consent and data governance"
+          aspect="wide"
+          className="max-h-[min(36vw,180px)] md:max-h-[220px]"
+        />
+        <PitchEyebrow>The model</PitchEyebrow>
+        <PitchTitle>Chronobiobank.</PitchTitle>
+        <p className="calm-body max-w-md text-sm">
+          Clinical consent separate from optional research. You control identifiable data.
         </p>
-        <ul className="mt-8 flex max-w-2xl flex-col gap-4">
+        <ul className="flex max-w-md flex-col gap-2">
           {PITCH_CHRONOBIOBANK_STEPS.map((step) => (
-            <li key={step} className="calm-body flex gap-3 text-sm lg:text-base">
+            <li key={step} className="calm-body flex gap-2 text-xs sm:text-sm">
               <span className="text-calm-brand" aria-hidden>
                 —
               </span>
@@ -231,24 +250,22 @@ export function PitchDeck() {
           ))}
         </ul>
         <PitchCtaRow>
-          <Link href="/signup" className={`${BTN_PRIMARY} w-full justify-center sm:w-auto`}>
-            Get started free
+          <Link href="/signup" className={`${BTN_PRIMARY} h-11 w-full justify-center text-sm sm:w-auto`}>
+            Get started
           </Link>
           <a
             href={`mailto:${RESEARCH_ENQUIRIES_EMAIL}?subject=Chronobiobank%20research%20enquiry`}
-            className="type-button inline-flex h-10 w-full items-center justify-center rounded-full border border-calm-brand bg-transparent px-5 text-calm-brand transition-colors sm:h-11 sm:w-auto sm:px-6"
+            className="type-button inline-flex h-11 w-full items-center justify-center rounded-full border border-calm-brand px-5 text-sm text-calm-brand sm:w-auto"
           >
-            Research enquiries →
+            Research →
           </a>
         </PitchCtaRow>
-        <p className="mt-6 font-mono text-[11px] text-white/40">
-          <a
-            href={`mailto:${RESEARCH_ENQUIRIES_EMAIL}`}
-            className="text-calm-brand underline underline-offset-2"
-          >
-            {RESEARCH_ENQUIRIES_EMAIL}
-          </a>
-        </p>
+        <a
+          href={`mailto:${RESEARCH_ENQUIRIES_EMAIL}`}
+          className="font-mono text-[10px] text-calm-brand underline underline-offset-2"
+        >
+          {RESEARCH_ENQUIRIES_EMAIL}
+        </a>
       </PitchScreen>
     </div>
   )

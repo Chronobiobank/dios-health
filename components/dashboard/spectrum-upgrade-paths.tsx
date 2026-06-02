@@ -9,7 +9,7 @@ export function SpectrumUpgradePaths() {
         Sharpen your picture
       </p>
       <p className="mt-1 text-[13px] leading-relaxed text-black/55">
-        Each layer adds precision. Start with Vaya daily — add bloods or TipTraQ when ready.
+        Each layer adds precision. Start with Mel daily — add bloods or TipTraQ when ready.
       </p>
 
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">

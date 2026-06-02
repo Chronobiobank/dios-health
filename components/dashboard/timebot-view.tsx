@@ -3,14 +3,15 @@
 import { Check, Mic, MicOff, Type } from 'lucide-react'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 
-import { VayaOrb, type VayaOrbState } from '@/components/dashboard/vaya-orb'
+import { DIOS_TAGLINE } from '@/components/DiosLogo'
+import { MelOrb, type MelOrbState } from '@/components/dashboard/mel-orb'
 import type {
   TimebotData,
   TimebotTimelineEvent,
   TimebotTimelineGroup,
 } from '@/lib/dashboard/timebot-data'
-import { buildDemoProtocolGroup } from '@/lib/dashboard/vaya-demo-protocol'
-import { runSilentMluxCapture, startVayaSession } from '@/lib/vaya/mlux-capture'
+import { buildDemoProtocolGroup } from '@/lib/dashboard/mel-demo-protocol'
+import { runSilentMluxCapture, startMelSession } from '@/lib/mel/mlux-capture'
 import type { ScheduleStatus, TimebotEventCategory } from '@/lib/dashboard/timebot-timeline'
 import { cn } from '@/lib/utils'
 
@@ -135,11 +136,11 @@ function ProtocolCard({
 }
 
 export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps) {
-  const [pulseState, setPulseState] = useState<VayaOrbState>('idle')
+  const [pulseState, setPulseState] = useState<MelOrbState>('idle')
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [trackedSupplements, setTrackedSupplements] = useState(data.currentSupplements)
   const [input, setInput] = useState('')
-  const [lastVayaResponse, setLastVayaResponse] = useState<string | null>(null)
+  const [lastMelResponse, setLastMelResponse] = useState<string | null>(null)
   const [confirmedDoses, setConfirmedDoses] = useState<Set<string>>(new Set())
   const [voiceMode, setVoiceMode] = useState<'voice' | 'text'>('voice')
   const [isListening, setIsListening] = useState(false)
@@ -172,15 +173,15 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
   useEffect(() => {
     if (cameraCaptureDoneRef.current) return
     cameraCaptureDoneRef.current = true
-    startVayaSession()
+    startMelSession()
     void runSilentMluxCapture({ videoRef })
   }, [])
 
-  async function speakWithVaya(text: string) {
+  async function speakWithMel(text: string) {
     if (voiceMode !== 'voice' || !text.trim()) return
 
     try {
-      const response = await fetch('/api/vaya/speak', {
+      const response = await fetch('/api/mel/speak', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),
@@ -212,7 +213,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
   async function handleConfirmDose(eventId: string, medicationName: string) {
     setConfirmedDoses((prev) => new Set(prev).add(eventId))
     try {
-      await fetch('/api/vaya/confirm-dose', {
+      await fetch('/api/mel/confirm-dose', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -248,7 +249,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
       }
 
       if (!response.ok) {
-        setError(result.error ?? 'Vaya could not answer right now.')
+        setError(result.error ?? 'Mel could not answer right now.')
         setPulseState('idle')
         return
       }
@@ -259,18 +260,18 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
 
       setPulseState('responding')
       if (result.answer) {
-        setLastVayaResponse(result.answer)
+        setLastMelResponse(result.answer)
         setMessages((prev) => [
           ...prev,
           { id: `a-${Date.now()}`, role: 'assistant', text: result.answer ?? '' },
         ])
-        void speakWithVaya(result.answer)
+        void speakWithMel(result.answer)
       }
 
       if (respondTimer.current) window.clearTimeout(respondTimer.current)
       respondTimer.current = window.setTimeout(() => setPulseState('idle'), 3000)
     } catch {
-      setError('Vaya could not answer right now.')
+      setError('Mel could not answer right now.')
       setPulseState('idle')
     } finally {
       setLoading(false)
@@ -298,7 +299,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
     setIsListening(true)
     setLiveTranscript('')
     try {
-      const { startDeepgramStream } = await import('@/lib/vaya/deepgram')
+      const { startDeepgramStream } = await import('@/lib/mel/deepgram')
       const stop = startDeepgramStream(
         (text, isFinal) => {
           setLiveTranscript(text)
@@ -356,7 +357,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
           )}
         </div>
 
-        <VayaOrb state={pulseState} volume={isListening ? Math.max(orbVolume, 0.22) : orbVolume} />
+        <MelOrb state={pulseState} volume={isListening ? Math.max(orbVolume, 0.22) : orbVolume} />
 
         {showIntro ? (
           <p
@@ -378,19 +379,19 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
           </p>
         ) : null}
 
-        {lastVayaResponse ? (
+        {lastMelResponse ? (
           <div
-            key={lastVayaResponse}
+            key={lastMelResponse}
             className="animate-in fade-in slide-in-from-bottom-2 mt-4 w-full max-w-sm rounded-2xl border border-black/[0.07] bg-white px-5 py-4 text-[15px] leading-relaxed text-black shadow-[0_2px_12px_rgba(0,0,0,0.06)] duration-300"
             role="status"
             aria-live="polite"
           >
-            {lastVayaResponse}
+            {lastMelResponse}
           </div>
         ) : null}
 
         {loading ? (
-          <p className="mt-3 animate-pulse font-mono text-[12px] text-black/35">Vaya is thinking…</p>
+          <p className="mt-3 animate-pulse font-mono text-[12px] text-black/35">Mel is thinking…</p>
         ) : null}
 
         {error ? (
@@ -425,7 +426,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
           </div>
           {!hasMedicationOnProtocol ? (
             <p className="mt-3 text-center text-[12px] leading-relaxed text-black/45">
-              Example timing — tell Vaya what you take to personalise your protocol.
+              Example timing — tell Mel what you take to personalise your protocol.
             </p>
           ) : null}
         </div>
@@ -437,7 +438,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
         ) : null}
 
         <p className="mt-6 text-center font-mono text-[11px] uppercase tracking-widest text-black/20">
-          Make Time Count
+          {DIOS_TAGLINE}
         </p>
       </div>
 
@@ -462,7 +463,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
                   ? 'scale-110 bg-red-500 text-white shadow-[0_0_0_8px_rgba(239,68,68,0.15)]'
                   : 'bg-black text-white shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:scale-105'
               )}
-              aria-label={isListening ? 'Stop — send to Vaya' : 'Speak to Vaya'}
+              aria-label={isListening ? 'Stop — send to Mel' : 'Speak to Mel'}
             >
               {isListening ? <MicOff className="h-7 w-7" /> : <Mic className="h-7 w-7" />}
             </button>
@@ -470,7 +471,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
             <div className="h-10 w-10" aria-hidden />
           </div>
         ) : (
-          <form id="vaya-form" onSubmit={handleSubmit}>
+          <form id="mel-form" onSubmit={handleSubmit}>
             <div className="flex items-center gap-2">
               <button
                 type="button"
@@ -481,11 +482,11 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
                 <Mic className="h-4 w-4" />
               </button>
               <input
-                id="vaya-input"
+                id="mel-input"
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Type to Vaya"
+                placeholder="Type to Mel"
                 disabled={loading}
                 className="calmer-input"
                 autoFocus

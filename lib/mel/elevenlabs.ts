@@ -13,7 +13,7 @@ export function isElevenLabsConfigured(): boolean {
   return Boolean(process.env.ELEVENLABS_API_KEY?.trim())
 }
 
-/** Server-side ElevenLabs TTS — used by /api/vaya/speak and /api/vaya/tts. */
+/** Server-side ElevenLabs TTS — used by /api/mel/speak and /api/mel/tts. */
 export async function synthesizeSpeech(text: string): Promise<ElevenLabsSynthesisResult> {
   const trimmed = text.trim()
   if (!trimmed) {

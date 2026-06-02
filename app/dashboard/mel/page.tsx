@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import { TimebotView } from '@/components/dashboard/timebot-view'
 import { requirePatientSession } from '@/lib/auth/require-patient'
-import { getPatientFirstName, getVayaIntroMessage } from '@/lib/auth/greeting'
+import { getMelIntroMessage, getPatientFirstName } from '@/lib/auth/greeting'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import { buildTimebotData } from '@/lib/dashboard/timebot-data'
 import { createClient } from '@/lib/supabase/server'
@@ -10,11 +10,11 @@ import { createClient } from '@/lib/supabase/server'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Vaya — DIOS',
-  description: 'Your Vaya session — measure your light biology and time your doses.',
+  title: 'Mel — DIOS',
+  description: 'Your Mel session — measure your light biology and time your doses.',
 }
 
-export default async function DashboardVayaPage() {
+export default async function DashboardMelPage() {
   const { user, profile, patient } = await requirePatientSession()
   const supabase = await createClient()
 
@@ -31,7 +31,7 @@ export default async function DashboardVayaPage() {
     fullName: profile.full_name,
   })
 
-  const introMessage = getVayaIntroMessage(
+  const introMessage = getMelIntroMessage(
     firstName,
     patient.location_city,
     patient.location_country

@@ -1,6 +1,14 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      { source: '/vaya', destination: '/mel', permanent: true },
+      { source: '/dashboard/vaya', destination: '/dashboard/mel', permanent: true },
+      { source: '/dashboard/timebot', destination: '/dashboard/mel', permanent: true },
+      { source: '/api/vaya/:path*', destination: '/api/mel/:path*', permanent: false },
+    ]
+  },
   images: {
     remotePatterns: [
       {
@@ -17,7 +25,7 @@ const nextConfig: NextConfig = {
         headers: [{ key: 'Content-Type', value: 'application/manifest+json' }],
       },
       {
-        source: '/dashboard/vaya',
+        source: '/dashboard/mel',
         headers: [{ key: 'Permissions-Policy', value: 'camera=self' }],
       },
       {

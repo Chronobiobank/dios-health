@@ -1,21 +1,21 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
-import { VayaHeroOrb } from '@/components/vaya/vaya-hero-orb'
-import { AUTH_ROUTES } from '@/lib/auth/routes'
+import { MelHeroOrb } from '@/components/mel/mel-hero-orb'
+import { AUTH_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
 
 export const metadata: Metadata = {
-  title: 'Vaya — Know your light. Time your doses.',
+  title: 'Mel — Know your light. Time your doses.',
   description:
     'A 60-second camera session that measures your Melanopic Lux score and delivers a personalised light and medication protocol. Free. Web-based. No download required.',
   openGraph: {
-    title: 'Vaya — Know your light. Time your doses.',
+    title: 'Mel — Know your light. Time your doses.',
     description:
       'Measure your body clock from your smartphone camera. No wearable. No app download. No clinic visit.',
   },
 }
 
-export default function VayaPage() {
+export default function MelPage() {
   return (
     <main className="flex min-h-svh flex-col bg-black text-white">
       <section className="flex flex-1 flex-col items-center justify-center px-5 py-20 text-center sm:px-6">
@@ -32,10 +32,10 @@ export default function VayaPage() {
           Time your doses.
         </h1>
 
-        <VayaHeroOrb />
+        <MelHeroOrb />
 
         <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-white/60 sm:text-lg">
-          Vaya is a 60-second camera session that measures your Melanopic Lux score — the direct
+          Mel is a 60-second camera session that measures your Melanopic Lux score — the direct
           signal to your master body clock. Your personalised light targets and medication timing
           protocol arrive instantly.
         </p>
@@ -46,10 +46,10 @@ export default function VayaPage() {
             className="inline-flex h-12 items-center justify-center rounded-full px-8 text-[15px] font-medium transition-opacity hover:opacity-90"
             style={{ backgroundColor: 'var(--color-brand)', color: '#000' }}
           >
-            Start your first Vaya session →
+            Start your first Mel session →
           </Link>
           <Link
-            href="/signin?next=/dashboard/vaya"
+            href={`/signin?next=${PATIENT_ROUTES.mel}`}
             className="inline-flex h-12 items-center justify-center rounded-full border px-8 text-[15px] font-medium text-white/70 transition-colors hover:text-white"
             style={{ borderColor: 'rgba(255,255,255,0.2)' }}
           >
@@ -70,7 +70,7 @@ export default function VayaPage() {
           {[
             {
               label: '60 seconds',
-              body: 'Front camera session. Vaya asks the questions. Your phone does the measuring.',
+              body: 'Front camera session. Mel asks the questions. Your phone does the measuring.',
             },
             {
               label: 'Melanopic Lux',
@@ -107,7 +107,7 @@ export default function VayaPage() {
           On Android: tap the browser menu → Install app.
         </p>
         <p className="mt-4 font-mono text-[11px] text-white/30">
-          Vaya · dios.health/vaya · Powered by DIOS Health
+          Mel · dios.health/mel · Powered by DIOS Health
         </p>
       </section>
     </main>

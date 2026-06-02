@@ -6,10 +6,10 @@ import { useEffect, useRef, useState } from 'react'
 import animationData from '@/public/lottie/vaya-assistant.json'
 import { cn } from '@/lib/utils'
 
-export type VayaLottieState = 'idle' | 'thinking' | 'responding'
+export type MelLottieState = 'idle' | 'thinking' | 'responding'
 
-type VayaLottieProps = {
-  state?: VayaLottieState
+type MelLottieProps = {
+  state?: MelLottieState
   size?: 'sm' | 'md' | 'lg'
   greeting?: string
   bubbleVariant?: 'compact' | 'intro'
@@ -28,7 +28,7 @@ const COMPACT_BUBBLE_TEXT: Record<keyof typeof SIZE_PX, string> = {
   lg: 'text-[17px] leading-snug',
 }
 
-const STATE_SPEED: Record<VayaLottieState, number> = {
+const STATE_SPEED: Record<MelLottieState, number> = {
   idle: 1,
   thinking: 1.75,
   responding: 1.15,
@@ -91,13 +91,13 @@ function SpeechBubble({
   )
 }
 
-export function VayaLottie({
+export function MelLottie({
   state = 'idle',
   size = 'md',
   greeting,
   bubbleVariant = 'compact',
   className,
-}: VayaLottieProps) {
+}: MelLottieProps) {
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const [reducedMotion, setReducedMotion] = useState(false)
   const dimension = SIZE_PX[size]
@@ -124,7 +124,7 @@ export function VayaLottie({
   return (
     <div
       className={cn(
-        'vaya-lottie flex w-full flex-col items-center',
+        'mel-lottie flex w-full flex-col items-center',
         isIntro ? 'gap-3' : 'relative mx-auto shrink-0',
         !isIntro && !reducedMotion && state === 'thinking' && 'scale-105',
         !isIntro && !reducedMotion && state === 'responding' && 'scale-[1.02]',
@@ -161,3 +161,9 @@ export function VayaLottie({
     </div>
   )
 }
+
+/** @deprecated Use {@link MelLottie}. */
+export const VayaLottie = MelLottie
+
+/** @deprecated Use {@link MelLottieState}. */
+export type VayaLottieState = MelLottieState

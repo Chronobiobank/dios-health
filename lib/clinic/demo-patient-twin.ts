@@ -167,7 +167,7 @@ const TWIN_DETAILS: Record<string, Omit<DemoPatientTwin, keyof DemoClinicPatient
       chronotype: 'Evening type',
       msfsc: '05:18 (+2.1h vs population)',
       nonDipper: 'unknown',
-      confidenceBand: 'Low · Vaya estimated only',
+      confidenceBand: 'Low · Mel estimated only',
     },
   },
 }

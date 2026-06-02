@@ -41,7 +41,7 @@ export async function middleware(request: NextRequest) {
       const completed = await hasPatientProfile(supabase, user.id)
       if (completed) {
         return (
-          redirectIfNeeded(request, PATIENT_ROUTES.vaya) ?? supabaseResponse
+          redirectIfNeeded(request, PATIENT_ROUTES.mel) ?? supabaseResponse
         )
       }
       return supabaseResponse

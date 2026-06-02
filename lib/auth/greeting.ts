@@ -43,7 +43,7 @@ function getLocalizedSalutation(
   return isNewZealand(locationCity, locationCountry) ? 'Kia ora' : 'Hello'
 }
 
-/** Salutation for Vaya speech bubble — same locale rules, exclamation for warmth. */
+/** Salutation for Mel speech bubble — same locale rules, exclamation for warmth. */
 export function getLocalizedPatientGreetingBubble(
   firstName: string,
   locationCity?: string | null,
@@ -52,20 +52,26 @@ export function getLocalizedPatientGreetingBubble(
   return getLocalizedPatientGreeting(firstName, locationCity, locationCountry).replace(/\.$/, '!')
 }
 
-/** Full Vaya session intro — shown in the chatbot speech bubble on first load. */
-export function getVayaIntroMessage(
+/** Full Mel session intro — shown in the chatbot speech bubble on first load. */
+export function getMelIntroMessage(
   firstName: string,
   locationCity?: string | null,
   locationCountry?: string | null
 ): string {
   const salutation = getLocalizedSalutation(locationCity, locationCountry)
-  return `${salutation} ${firstName}, I'm Vaya – tell me what pills you take and I'll tailor a plan that suits your body clock.`
+  return `${salutation} ${firstName}, I'm Mel – tell me what pills you take and I'll tailor a plan that suits your body clock.`
 }
 
-/** Generic Vaya intro for unauthenticated / marketing surfaces. */
-export function getVayaIntroMessageGeneric(): string {
-  return "Hello, I'm Vaya – tell me what pills you take and I'll tailor a plan that suits your body clock."
+/** Generic Mel intro for unauthenticated / marketing surfaces. */
+export function getMelIntroMessageGeneric(): string {
+  return "Hello, I'm Mel – tell me what pills you take and I'll tailor a plan that suits your body clock."
 }
+
+/** @deprecated Use {@link getMelIntroMessage}. */
+export const getVayaIntroMessage = getMelIntroMessage
+
+/** @deprecated Use {@link getMelIntroMessageGeneric}. */
+export const getVayaIntroMessageGeneric = getMelIntroMessageGeneric
 
 export function getFirstName(fullName: string): string {
   return fullName.trim().split(/\s+/)[0] || 'there'

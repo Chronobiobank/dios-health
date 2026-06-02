@@ -19,7 +19,7 @@ export function PitchSpectrumBars() {
   )
 
   return (
-    <div className="mt-8 flex w-full max-w-3xl flex-col gap-4 lg:mt-10">
+    <div className="flex w-full max-w-3xl flex-col gap-2.5 sm:gap-3">
       {SPECTRUM_NODES.map((node) => {
         const score = scoreByNode[node.id]?.score ?? 0.5
         const pct = Math.round(score * 100)
@@ -29,9 +29,9 @@ export function PitchSpectrumBars() {
         const cite = PITCH_SPECTRUM_NODE_CITATIONS[node.id]
 
         return (
-          <div key={node.id} className="calm-spectrum-card border border-white/10 bg-[rgb(15_15_15/0.72)] px-4 py-3">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="calm-headline text-sm">{node.label}</p>
+          <div key={node.id} className="calm-spectrum-card border border-white/10 bg-[rgb(15_15_15/0.72)] px-3 py-2.5 sm:px-4 sm:py-3">
+            <div className="flex flex-wrap items-baseline justify-between gap-1.5">
+              <p className="calm-headline text-[13px] sm:text-sm">{node.shortLabel}</p>
               <div className="flex items-center gap-3">
                 <span className="font-mono text-[12px] text-white/50">{pct}</span>
                 {cite ? (
@@ -60,15 +60,12 @@ export function PitchSpectrumBars() {
         )
       })}
 
-      <div className="mt-4 grid grid-cols-1 gap-3 xs:grid-cols-3">
+      <div className="grid grid-cols-3 gap-2">
         {PITCH_CONFIDENCE_LAYERS.map((layer) => (
-          <div
-            key={layer.key}
-            className="calm-card border border-white/10 px-3 py-3"
-          >
-            <p className="calm-eyebrow text-[10px]">{layer.key}</p>
-            <p className="mt-1 font-mono text-[11px] font-medium text-white/90">{layer.title}</p>
-            <p className="mt-1 font-mono text-[10px] leading-relaxed text-white/45">{layer.body}</p>
+          <div key={layer.key} className="calm-card border border-white/10 px-2 py-2 sm:px-3 sm:py-3">
+            <p className="calm-eyebrow text-[9px] sm:text-[10px]">{layer.key}</p>
+            <p className="mt-0.5 font-mono text-[10px] font-medium text-white/90 sm:text-[11px]">{layer.title}</p>
+            <p className="mt-0.5 font-mono text-[9px] text-white/45 sm:text-[10px]">{layer.body}</p>
           </div>
         ))}
       </div>

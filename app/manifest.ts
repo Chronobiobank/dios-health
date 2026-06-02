@@ -2,11 +2,11 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Vaya by DIOS',
-    short_name: 'Vaya',
+    name: 'Mel by DIOS',
+    short_name: 'Mel',
     description:
       'Measure your Melanopic Lux. Get your personalised light and medication protocol.',
-    start_url: '/vaya',
+    start_url: '/mel',
     display: 'standalone',
     background_color: '#000000',
     theme_color: '#000000',

@@ -13,7 +13,7 @@ Foundational **Operating System for Dose Intelligence** logic — separate from 
 
 | Path | Responsibility |
 |------|----------------|
-| `lib/vaya/` | Vaya voice, MLux capture, ElevenLabs |
+| `lib/mel/` | Mel voice, MLux capture, ElevenLabs |
 | `lib/dashboard/` | Patient dashboard, MLux profiles, protocols |
 | `lib/clinic/` | Clinician panel and demo data |
 | `lib/spectrum/` | Circadian Desynchrony Spectrum scoring |

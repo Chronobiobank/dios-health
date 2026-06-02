@@ -4,17 +4,17 @@ import { useEffect, useState, type CSSProperties } from 'react'
 
 import { cn } from '@/lib/utils'
 
-export type VayaOrbState = 'idle' | 'thinking' | 'responding'
+export type MelOrbState = 'idle' | 'thinking' | 'responding'
 
-type VayaOrbProps = {
-  state: VayaOrbState
+type MelOrbProps = {
+  state: MelOrbState
   volume?: number
   /** Pixel width/height of the orb (default 168). */
   size?: number
   className?: string
 }
 
-export function VayaOrb({ state, volume = 0, size, className }: VayaOrbProps) {
+export function MelOrb({ state, volume = 0, size, className }: MelOrbProps) {
   const [reducedMotion, setReducedMotion] = useState(false)
   const level = Math.max(0, Math.min(volume, 1))
   const scale = 1 + level * 0.14
@@ -29,30 +29,36 @@ export function VayaOrb({ state, volume = 0, size, className }: VayaOrbProps) {
   }, [])
 
   const style = {
-    '--vaya-orb-scale': scale,
-    '--vaya-orb-glow': glow,
+    '--mel-orb-scale': scale,
+    '--mel-orb-glow': glow,
     ...(size != null ? { width: size, height: size } : {}),
   } as CSSProperties
 
   return (
     <div
       className={cn(
-        'vaya-orb',
-        `vaya-orb--${state}`,
-        reducedMotion && 'vaya-orb--reduced-motion',
+        'mel-orb',
+        `mel-orb--${state}`,
+        reducedMotion && 'mel-orb--reduced-motion',
         className
       )}
       data-state={state}
       style={style}
       aria-hidden
     >
-      <div className="vaya-orb__halo" />
-      <span className="vaya-orb__ring" />
-      <span className="vaya-orb__ring" />
-      <span className="vaya-orb__ring" />
-      <div className="vaya-orb__core">
-        <span className="vaya-orb__highlight" />
+      <div className="mel-orb__halo" />
+      <span className="mel-orb__ring" />
+      <span className="mel-orb__ring" />
+      <span className="mel-orb__ring" />
+      <div className="mel-orb__core">
+        <span className="mel-orb__highlight" />
       </div>
     </div>
   )
 }
+
+/** @deprecated Use {@link MelOrb}. */
+export const VayaOrb = MelOrb
+
+/** @deprecated Use {@link MelOrbState}. */
+export type VayaOrbState = MelOrbState

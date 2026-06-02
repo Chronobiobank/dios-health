@@ -112,7 +112,7 @@ export function PatientSignupWizard() {
         consent_version: 'v1.0',
       })
 
-      router.push(PATIENT_ROUTES.vaya)
+      router.push(PATIENT_ROUTES.mel)
     } catch {
       setError('Something went wrong. Please try again.')
     } finally {
@@ -238,7 +238,7 @@ export function PatientSignupWizard() {
               <div>
                 <p className="text-[15px] font-medium text-black">Clinical use</p>
                 <p className="mt-1 text-sm leading-relaxed text-black/60">
-                  Your session data personalises your dose timing and light protocol. Required to use Vaya.
+                  Your session data personalises your dose timing and light protocol. Required to use Mel.
                 </p>
               </div>
             </div>
@@ -305,7 +305,7 @@ export function PatientSignupWizard() {
           ) : null}
 
           <button type="submit" className={BTN_PRIMARY} disabled={loading}>
-            {loading ? 'Creating account…' : 'Begin your first Vaya session →'}
+            {loading ? 'Creating account…' : 'Begin your first Mel session →'}
           </button>
 
           <button

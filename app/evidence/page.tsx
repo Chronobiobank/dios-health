@@ -22,7 +22,7 @@ export default function EvidencePage() {
             The clinical framework
           </p>
           <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-black/60">
-            Every patient Vaya sees is scored across seven circadian disease nodes. This is what
+            Every patient Mel sees is scored across seven circadian disease nodes. This is what
             a clinician sees. Tap any node for the full clinical detail.
           </p>
           <div className="mt-8">
