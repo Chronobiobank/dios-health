@@ -10,7 +10,7 @@ export const PITCH_SPOT = {
   optimalRgb: '237 137 54',
 } as const
 
-/** Media tile tint at 50% — warm gold wash over photography */
+/** Media tile tint at 35% layer opacity — warm gold wash over photography */
 export const PITCH_TILE_TINT_GRADIENT = `linear-gradient(
   145deg,
   rgb(${PITCH_SPOT.optimalRgb} / 0.45) 0%,

@@ -40,7 +40,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     eyebrow: 'What we know',
     title: 'Timing matters.',
     subtitle:
-      'Medicine works differently when taken; DIOS uses a circadian model for risk analysis and zeitgeber prompts.',
+      'Timing medical treatments to match your internal biological clock maximises efficacy and minimises side effects.',
     image: PITCH_HERO.poster,
     imageAlt: 'Medicines and tablets',
     videoSrc: '/first-light.mp4',
@@ -51,7 +51,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     id: 'pitch-problem',
     slug: 'problem',
     eyebrow: 'The core problem',
-    title: 'Standardised Medication',
+    title: 'Standardised meds.',
     subtitle:
       'Poor NHS medication timing wastes over £300 million yearly, cuts efficacy, and drives avoidable admissions.',
     image: '/Medicines-waste.jpeg',
@@ -101,7 +101,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     eyebrow: 'Our bold vision',
     title: 'The Chronobiobank.',
     subtitle:
-      'Building user-owned chronomedicine infrastructure to drive health equity, accelerate drug design, and unlock continuous therapeutic innovation.',
+      'Building user-owned chronomedicine infrastructure to fuel drug research, therapeutic innovation and health equity.',
     image: '/chronobiobank.png',
     imageAlt: 'Chronobiobank research infrastructure',
     href: '/contact',

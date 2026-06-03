@@ -28,7 +28,7 @@ type PitchMediaTileProps = {
 
 /**
  * OpenAI calm hero tile (see HeroFeatureTile / PitchHookTile): image or video fill,
- * 50% brand tint, calm scrim, copy overlaid at the bottom of the card.
+ * 35% brand tint, calm scrim, copy overlaid at the bottom of the card.
  */
 export function PitchMediaTile({
   image,
@@ -110,7 +110,7 @@ export function PitchMediaTile({
         </div>
 
         <div
-          className="pointer-events-none absolute inset-0 z-[2] opacity-50"
+          className="pointer-events-none absolute inset-0 z-[2] opacity-[0.35]"
           style={{ background: PITCH_TILE_TINT_GRADIENT }}
           aria-hidden
         />
