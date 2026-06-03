@@ -43,17 +43,14 @@ export function PitchFooter() {
                 className="h-[68px] w-[68px]"
                 priority
               />
-              <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.12em] text-[#0D0D0D]/45">
-                {DIOS_TAGLINE}
-              </span>
             </Link>
-            <p className="text-[14px] leading-relaxed text-[#0D0D0D]/60 sm:text-[15px]">
+            <p className="text-xl font-medium tracking-tight text-[#0D0D0D]/90 sm:text-2xl">
               {DIOS_MISSION_STATEMENT}
             </p>
           </div>
 
           <nav
-            className="grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-6"
+            className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6"
             aria-label="Site"
           >
             {LANDING_FOOTER_SECTIONS.map((section) => (
@@ -74,10 +71,8 @@ export function PitchFooter() {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 border-t border-black/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[12px] text-[#0D0D0D]/45">© {new Date().getFullYear()} DIOS Health</p>
-          <p className="text-[12px] text-[#0D0D0D]/45">
-            Medicine timed to your body clock — not European population averages.
-          </p>
+          <p className="text-[12px] text-[#0D0D0D]/45">© {new Date().getFullYear()} DIOS</p>
+          <p className="text-[12px] text-[#0D0D0D]/45">{DIOS_TAGLINE}</p>
         </div>
       </div>
     </footer>

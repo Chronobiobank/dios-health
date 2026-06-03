@@ -26,9 +26,9 @@ const GOLD_STANDARD = [
 
 const LAYERS = [
   {
-    id: 'smartphone',
-    title: 'Layer 1 Smartphone',
-    body: 'Sleep timing. Morning light. Solar zenith for VDR activation. Fitzpatrick skin calibration. Confidence: up to 60%.',
+    id: 'tiptraq',
+    title: 'Layer 1 TipTraQ',
+    body: 'FDA 510(k)-cleared clinical-grade home monitoring. Sleep onset, REM latency, ANS balance, AHI, SpO₂. Confidence: 38% night one to 94% night seven.',
   },
   {
     id: 'bloods',
@@ -36,9 +36,9 @@ const LAYERS = [
     body: 'Gominak panel — D3, B12, ferritin, B5. Metabolic substrate of the circadian system. D3 target: 150-200 nmol/L. Confidence: up to 75%.',
   },
   {
-    id: 'tiptraq',
-    title: 'Layer 3 TipTraQ',
-    body: 'FDA 510(k)-cleared OSA monitor. Sleep onset, REM latency, ANS balance, AHI, SpO2. Confidence: 38% night one to 94% night seven.',
+    id: 'smartphone',
+    title: 'Layer 3 Smartphone',
+    body: 'Sleep timing. Morning light. Solar zenith for VDR activation. Fitzpatrick skin calibration. Confidence: up to 60%.',
   },
 ] as const
 
@@ -101,14 +101,14 @@ export function TipTraqScience() {
     <>
       <section className="bg-black py-14 text-white sm:py-20 lg:py-24">
         <div className={CONTAINER}>
-          <SectionLabel title="The science" light />
+          <SectionLabel title="Technology" light />
           <h1 className="type-hero-overlay mt-4 max-w-3xl text-white">
             How DIOS reads your body clock.
           </h1>
           <p className="type-hero-meta mt-6 max-w-2xl text-white/85">
-            Peer-reviewed foundations. Passive measurement. Clinical-grade output.
+            TipTraQ clinical monitoring, blood panels, then smartphone sensors — one MLux phase reading.
           </p>
-          <HashLink href="/#demo" className={`${BTN_HERO} mt-8`}>
+          <HashLink href="/contact?intent=clinical-briefing" className={`${BTN_HERO} mt-8`}>
             Book a clinical demo →
           </HashLink>
         </div>
@@ -126,7 +126,7 @@ export function TipTraqScience() {
         <div className={CONTAINER}>
           <SectionLabel title="The DIOS method" />
           <h2 className={`${SECTION_TITLE} mt-4 max-w-3xl`}>
-            Three data sources. One body clock reading.
+            Clinical grade first — three layers, one body clock reading.
           </h2>
           <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3">
             {LAYERS.map((layer) => (
@@ -225,3 +225,6 @@ export function TipTraqScience() {
     </>
   )
 }
+
+/** DIOS three-layer measurement stack (formerly bundled under TipTraQ route) */
+export const DiosTechnology = TipTraqScience

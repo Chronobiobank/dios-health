@@ -67,7 +67,7 @@ export default function RootLayout({
       lang="en-GB"
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-pt-[calc(var(--dios-site-nav-height)+1rem)]`}
     >
-      <body className="flex min-h-full flex-col">
+      <body className={`${geistSans.className} flex min-h-full flex-col`}>
         <ScrollToHash />
         <Nav />
         <div className="dios-app-shell">{children}</div>

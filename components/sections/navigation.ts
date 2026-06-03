@@ -1,6 +1,6 @@
 export const NAV_LINKS = [
-  { label: 'How it works', href: '/#how-it-works' },
-  { label: 'The science', href: '/evidence/tiptraq' },
+  { label: 'How it works', href: '/#pitch-how' },
+  { label: 'Technology', href: '/technology' },
 ] as const
 
 /** Always visible in the marketing site header */
@@ -17,11 +17,10 @@ export const AUTH_LINKS = [
 
 export const NAV_MENU_LINKS = [
   ...NAV_LINKS,
-  { label: 'Request demo', href: '/#demo' },
+  { label: 'Contact DIOS', href: '/contact' },
 ] as const
 
-export const DIOS_MISSION_STATEMENT =
-  'DIOS times medicine to your body clock — not European population averages. Free for every patient. Free for every GP.'
+export const DIOS_MISSION_STATEMENT = 'Precision Chronotherapy'
 
 export const FOOTER_LINKS = [
   { label: 'How it works', href: '/#pitch-how' },
@@ -45,42 +44,31 @@ export type FooterNavSection = {
   links: readonly FooterNavLink[]
 }
 
-/** Landing page footer — grouped key routes */
+/** Landing page footer — 12 links, 3 columns × 4 */
 export const LANDING_FOOTER_SECTIONS: readonly FooterNavSection[] = [
-  {
-    title: 'Explore',
-    links: [
-      { label: 'The hook', href: '/#pitch-hook' },
-      { label: 'System outcomes', href: '/#pitch-outcomes' },
-      { label: 'The problem', href: '/#pitch-problem' },
-      { label: 'For NHS leaders', href: '/#pitch-nhs-leaders' },
-      { label: 'Governance', href: '/#pitch-governance' },
-      { label: 'How it works', href: '/#pitch-how' },
-      { label: 'Chronobiobank', href: '/#pitch-model' },
-      { label: 'Clinical briefing', href: '/#pitch-cmo-cta' },
-    ],
-  },
   {
     title: 'Product',
     links: [
-      { label: 'Try Mel', href: '/mel' },
-      { label: 'Patient signup', href: '/signup' },
+      { label: 'How it works', href: '/technology' },
       { label: 'Clinician demo', href: '/signup/clinician' },
+      { label: 'Patient signup', href: '/signup' },
       { label: 'Dashboard', href: '/dashboard' },
     ],
   },
   {
     title: 'Science',
     links: [
-      { label: 'Evidence', href: '/evidence' },
-      { label: 'Circadian spectrum', href: '/evidence#spectrum' },
-      { label: 'TipTraq validation', href: '/evidence/tiptraq' },
+      { label: 'Clinical evidence', href: '/evidence' },
+      { label: 'Technology', href: '/technology' },
+      { label: 'TipTraQ', href: '/tiptraq' },
+      { label: 'Founder paper', href: '/pitch/problem' },
     ],
   },
   {
-    title: 'Account & legal',
+    title: 'Company',
     links: [
-      { label: 'Sign in', href: '/signin' },
+      { label: 'Contact DIOS', href: '/contact' },
+      { label: 'Credibility', href: '/pitch/credibility' },
       { label: 'Privacy', href: '/privacy' },
       { label: 'Terms', href: '/terms' },
     ],

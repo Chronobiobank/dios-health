@@ -1,4 +1,5 @@
 import { PITCH_HERO, PITCH_IMAGES } from '@/lib/pitch/landing-images'
+import { GRANT_MUNRO_PAPER_TITLE } from '@/lib/pitch/grant-munro-founder'
 
 export type PitchMinimalTile = {
   id: string
@@ -39,20 +40,20 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     eyebrow: 'What we know',
     title: 'Timing matters.',
     subtitle:
-      'Medicine works differently depending on when you take it. DIOS uses a circadian model to guide risk analysis and zeitgeber prompts.',
+      'Medicine works differently when taken; DIOS uses a circadian model for risk analysis and zeitgeber prompts.',
     image: PITCH_HERO.poster,
     imageAlt: 'Medicines and tablets',
     videoSrc: '/first-light.mp4',
-    href: '/evidence#spectrum',
-    ctaLabel: 'Our circadian model',
+    href: '/circadian-digital-twin',
+    ctaLabel: 'View circadian model',
   },
   {
     id: 'pitch-problem',
     slug: 'problem',
-    eyebrow: 'The problem',
-    title: 'Population dosing misses biology.',
+    eyebrow: 'The core problem',
+    title: 'Standardised Medication',
     subtitle:
-      'In the NHS alone, poor medication timing contributes to over £300 million in wasted medicines annually — while also reducing efficacy and increasing avoidable hospital admissions.',
+      'Poor NHS medication timing wastes over £300 million yearly, cuts efficacy, and drives avoidable admissions.',
     image: '/Medicines-waste.jpeg',
     imageAlt: 'Clinical evidence',
     href: '/pitch/problem',
@@ -64,58 +65,67 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     eyebrow: 'The DIOS Solution',
     title: 'Dose Intelligence.',
     subtitle:
-      'DIOS uses smartphone circadian signals to move beyond population-average dosing and delivers personalised timing for each patient.',
+      'TipTraQ, blood panels, and smartphone sensors deliver personalised medication timing for every patient.',
     image: '/dose-intelligence.jpeg',
     imageAlt: 'Phone camera session',
-    href: '/pitch/how-it-works',
+    href: '/technology',
     ctaLabel: 'How it works',
   },
   {
     id: 'pitch-why-now',
     slug: 'why-now',
-    eyebrow: 'Why now',
-    title: 'Phones are now passive circadian sensors.',
-    subtitle: 'This makes precision medication timing deployable at scale.',
-    image: '/why-now-phones.jpg',
-    imageAlt: 'Smartphone biomarker measurement',
-    href: '/pitch/why-now',
-    ctaLabel: 'Why now',
+    eyebrow: 'Why this matters',
+    title: 'AI-driven tracking.',
+    subtitle:
+      'FDA-cleared TipTraQ home sleep monitoring allows clinicians to monitor body-clock timing from home.',
+    image: '/tiptraq-wearable.jpg',
+    imageAlt: 'TipTraQ wearable home sleep monitor',
+    href: '/tiptraq',
+    ctaLabel: 'Explore TipTraQ product',
   },
   {
     id: 'pitch-clinical-proof',
     slug: 'clinical-proof',
-    eyebrow: 'Clinical proof',
-    title: 'Dose timing directly impacts cardiovascular, metabolic, and safety outcomes.',
-    subtitle: 'The evidence base is now strong enough for deployment.',
+    eyebrow: 'Strong clinical proof',
+    title: 'Evidence converges.',
+    subtitle:
+      'Dose timing shapes cardiovascular, metabolic, and safety outcomes; evidence now supports clinical deployment.',
     image: PITCH_IMAGES.evidence,
     imageAlt: 'Clinical evidence overview',
     href: '/pitch/clinical-proof',
-    ctaLabel: 'View evidence',
+    ctaLabel: 'View the evidence',
   },
   {
     id: 'pitch-pilot-structure',
     slug: 'chronobiobank',
-    eyebrow: 'Our vision',
-    title: "The world's first Chronobiobank.",
+    eyebrow: 'Our bold vision',
+    title: 'The Chronobiobank.',
     subtitle:
       'Building user-owned chronomedicine infrastructure to drive health equity, accelerate drug design, and unlock continuous therapeutic innovation.',
     image: '/chronobiobank.png',
     imageAlt: 'Chronobiobank research infrastructure',
     href: '/contact',
-    ctaLabel: 'Contact DIOS',
+    ctaLabel: 'Contact DIOS team',
   },
   {
     id: 'pitch-credibility',
     slug: 'credibility',
-    eyebrow: 'Credibility',
-    title: 'Built for governance from day one.',
-    subtitle: 'Safety framing, standards, and accountable rollout.',
+    eyebrow: 'Built for credibility',
+    title: 'Safety first.',
+    subtitle:
+      'Clinical safety framing, recognised standards, and accountable rollout are built into DIOS from day one.',
     image: '/consent-firewall.jpg',
     imageAlt: 'Governance and compliance',
     href: '/pitch/credibility',
-    ctaLabel: 'View credibility',
+    ctaLabel: 'Explore our credibility',
   },
 ] as const
+
+/** Footer / in-page nav — kept in sync with snap-deck section ids */
+export const PITCH_LANDING_HASH_LINKS = PITCH_MINIMAL_TILES.map((tile) => ({
+  label: tile.eyebrow,
+  href: `/#${tile.id}`,
+})) as readonly { label: string; href: string }[]
 
 export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
   {
@@ -152,20 +162,16 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     imageAlt: 'Clinical burden',
     sections: [
       {
-        title: 'Clinical impact',
-        body: 'Mistimed dosing can worsen tolerability, reduce efficacy, and erode adherence.',
-      },
-      {
-        title: 'System impact',
-        body: 'When timing is not addressed, care pathways absorb avoidable waste and repeat workload.',
-        bullets: [
-          'More medication switches and escalations',
-          'Higher review burden',
-          'Avoidable medicines waste',
-        ],
+        title: 'Founder paper',
+        body: `Grant Munro’s founder position paper, ${GRANT_MUNRO_PAPER_TITLE}, is published on this page with a downloadable PDF.`,
+        bullets: ['Full text on web', 'PDF for sharing with clinical and system leaders'],
       },
     ],
     sources: [
+      {
+        label: `Grant Munro — ${GRANT_MUNRO_PAPER_TITLE} (PDF)`,
+        href: '/papers/grant-munro-population-dosing-misses-biology.pdf',
+      },
       {
         label: 'NHS medicines optimisation',
         href: 'https://www.england.nhs.uk/medicines-2/medicines-optimisation/',

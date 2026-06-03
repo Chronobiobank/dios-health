@@ -1,7 +1,11 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
+import { CARD } from '@/components/sections/layout'
 import { RESEARCH_ENQUIRIES_EMAIL } from '@/lib/pitch/landing-content'
+import { GRANT_MUNRO_FOUNDER } from '@/lib/pitch/grant-munro-founder'
+import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Contact — DIOS Health',
@@ -69,6 +73,61 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             ))}
           </ul>
         ) : null}
+        <section
+          className={cn(
+            CARD,
+            'mt-10 max-w-3xl rounded-[var(--calm-radius-card,8px)] p-5 sm:mt-12 sm:p-6'
+          )}
+        >
+          <div className="flex items-stretch gap-4 sm:gap-5">
+            <div className="relative w-20 shrink-0 overflow-hidden rounded-[var(--calm-radius-card,8px)] sm:w-24">
+              <Image
+                src={GRANT_MUNRO_FOUNDER.profileImage}
+                alt={GRANT_MUNRO_FOUNDER.profileImageAlt}
+                fill
+                sizes="(max-width: 640px) 80px, 96px"
+                className="object-cover object-top"
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-xl font-medium tracking-tight text-black sm:text-2xl">
+                {GRANT_MUNRO_FOUNDER.name}
+              </h2>
+              <p className="mt-1 text-sm text-black/60">{GRANT_MUNRO_FOUNDER.role}</p>
+              <p className="mt-0.5 font-mono text-xs leading-relaxed text-black/45">
+                {GRANT_MUNRO_FOUNDER.affiliation}
+              </p>
+            </div>
+          </div>
+          <div className="type-body mt-4 space-y-3 text-[15px] leading-relaxed text-black/70">
+            {GRANT_MUNRO_FOUNDER.overview.map((paragraph) => (
+              <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+            ))}
+          </div>
+          <ul className="mt-5 flex flex-col gap-2">
+            {GRANT_MUNRO_FOUNDER.links.map((link) => (
+              <li key={link.href}>
+                {link.external ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-black/80 underline underline-offset-4 hover:text-black sm:text-[15px]"
+                  >
+                    {link.label} →
+                  </a>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className="text-sm font-medium text-black/80 underline underline-offset-4 hover:text-black sm:text-[15px]"
+                  >
+                    {link.label} →
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
         <ul className="type-body mt-8 flex max-w-3xl flex-col gap-4">
           <li>
             <span className="type-label block text-[#0D0D0D]/50">Email</span>

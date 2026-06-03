@@ -21,8 +21,8 @@ export function HomeEvidence() {
           </li>
         ))}
       </ul>
-      <Link href="/evidence/tiptraq" className={`${BTN_PRIMARY} mt-10`}>
-        Read the science →
+      <Link href="/technology" className={`${BTN_PRIMARY} mt-10`}>
+        Read the technology →
       </Link>
     </section>
   )
