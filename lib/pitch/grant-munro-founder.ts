@@ -18,7 +18,7 @@ export const GRANT_MUNRO_FOUNDER = {
     `His founder position paper, ${GRANT_MUNRO_PAPER_TITLE}, sets out the clinical and system case for personalised medicine timing. The full text is on the problem page, with a downloadable PDF.`,
   ],
   links: [
-    { label: 'Read the founder paper', href: '/pitch/problem' },
-    { label: 'NIHI, University of Auckland', href: 'https://www.nihi.org.nz/', external: true },
+    { label: 'Read the founder paper', href: '/pitch/problem', external: false as const },
+    { label: 'NIHI, University of Auckland', href: 'https://www.nihi.org.nz/', external: true as const },
   ],
 } as const
