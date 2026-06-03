@@ -169,7 +169,7 @@ export function PersonalisationPayoffSection() {
         <p className="mt-10">
           <Link
             href="/circadian-digital-twin"
-            className="btn-primary type-button inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white transition-colors hover:bg-black/80"
+            className="btn-primary type-button inline-flex items-center justify-center rounded-full bg-black py-3 text-white transition-colors hover:bg-black/80"
           >
             Explore the circadian digital twin →
           </Link>

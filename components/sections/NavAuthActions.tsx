@@ -25,7 +25,7 @@ export function NavAuthActions({ isAuthenticated }: NavAuthActionsProps) {
   }
 
   return (
-    <Link href={AUTH_ROUTES.signIn} className="dios-site-nav__cta type-button">
+    <Link href={AUTH_ROUTES.signIn} className="dios-site-nav__cta dios-site-nav__cta-bar type-button">
       Sign in
     </Link>
   )

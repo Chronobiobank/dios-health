@@ -74,7 +74,7 @@ export function EvidenceCards({ showCta = false }: EvidenceCardsProps) {
         <div className="mt-12 text-center">
           <HashLink
             href="/#demo"
-            className="btn-primary type-button inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white transition-colors hover:bg-black/80"
+            className="btn-primary type-button inline-flex items-center justify-center rounded-full bg-black py-3 text-white transition-colors hover:bg-black/80"
           >
             See how DIOS implements chronodosing in your practice →
           </HashLink>

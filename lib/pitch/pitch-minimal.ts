@@ -54,8 +54,8 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     title: 'Standardised meds.',
     subtitle:
       'Poor NHS medication timing wastes over £300 million yearly, cuts efficacy, and drives avoidable admissions.',
-    image: '/Medicines-waste.jpeg',
-    imageAlt: 'Clinical evidence',
+    image: '/standardised.jpg',
+    imageAlt: 'Standardised medication packaging',
     href: '/pitch/problem',
     ctaLabel: 'See the problem',
   },
@@ -66,7 +66,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     title: 'Dose Intelligence.',
     subtitle:
       'TipTraQ, blood panels, and smartphone sensors deliver personalised medication timing for every patient.',
-    image: '/dose-intelligence.jpeg',
+    image: '/dose-intelligence.jpg',
     imageAlt: 'Phone camera session',
     href: '/technology',
     ctaLabel: 'How it works',

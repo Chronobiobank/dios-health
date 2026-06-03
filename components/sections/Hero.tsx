@@ -20,7 +20,7 @@ export function Hero() {
           </HashLink>
           <Link
             href="/technology"
-            className="btn-hero type-button inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-2.5 text-white transition-colors hover:bg-white/10"
+            className="btn-hero type-button inline-flex items-center justify-center rounded-full border border-white/30 py-2.5 text-white transition-colors hover:bg-white/10"
           >
             See the technology →
           </Link>

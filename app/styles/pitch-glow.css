@@ -136,8 +136,8 @@
   display: inline-flex;
   height: 3rem;
   width: auto;
-  min-width: 8.25rem;
-  padding-inline: 1rem;
+  min-width: 9rem;
+  padding-inline: var(--dios-btn-padding-inline);
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
@@ -156,8 +156,8 @@
   display: inline-flex;
   height: 3rem;
   width: auto;
-  min-width: 8.25rem;
-  padding-inline: 1rem;
+  min-width: 9rem;
+  padding-inline: var(--dios-btn-padding-inline);
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
@@ -206,8 +206,8 @@
   .calm-landing .pitch-btn-primary,
   .calm-landing .pitch-btn-secondary {
     width: auto;
-    min-width: 10rem;
-    padding-inline: 1.5rem;
+    min-width: 11rem;
+    padding-inline: var(--dios-btn-padding-inline-sm);
   }
 }
 
