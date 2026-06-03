@@ -96,6 +96,8 @@ type NightFlagsRow = {
   apnea_confound_flag: boolean | null
 }
 
+export type { NightFlagsRow }
+
 const SEVERITY_LABEL: Record<RiskSeverity, string> = {
   watch: 'Watch',
   moderate: 'Moderate',
