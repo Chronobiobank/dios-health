@@ -46,7 +46,7 @@ function PaperSection({ section }: { section: GrantMunroProblemPaper['sections']
           </p>
         ))}
       </div>
-      {section.bullets ? (
+      {'bullets' in section && section.bullets ? (
         <ul className="mt-4 flex flex-col gap-2.5 border-l border-[#C9973A]/35 pl-4">
           {section.bullets.map((bullet) => (
             <li key={bullet} className="type-body text-sm leading-relaxed text-black/70 sm:text-base">
