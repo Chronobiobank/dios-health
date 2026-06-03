@@ -661,7 +661,7 @@
   }
 
   @media (max-width: 767px) {
-    .dios-site-nav__cta-bar {
+    .dios-site-nav__cta-desktop {
       display: none;
     }
   }

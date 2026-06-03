@@ -3,7 +3,6 @@
 import Link from 'next/link'
 
 import { SignOutButton } from '@/components/auth/sign-out-button'
-import { AUTH_ROUTES } from '@/lib/auth/routes'
 
 import { NAV_DASHBOARD_LINK } from './navigation'
 
@@ -15,7 +14,10 @@ export function NavAuthActions({ isAuthenticated }: NavAuthActionsProps) {
   if (isAuthenticated) {
     return (
       <>
-        <Link href={NAV_DASHBOARD_LINK.href} className="dios-site-nav__cta type-button">
+        <Link
+          href={NAV_DASHBOARD_LINK.href}
+          className="dios-site-nav__cta dios-site-nav__cta-desktop type-button"
+        >
           <span className="dios-site-nav__cta-short">{NAV_DASHBOARD_LINK.mobileLabel}</span>
           <span className="dios-site-nav__cta-long">{NAV_DASHBOARD_LINK.label}</span>
         </Link>
@@ -24,9 +26,5 @@ export function NavAuthActions({ isAuthenticated }: NavAuthActionsProps) {
     )
   }
 
-  return (
-    <Link href={AUTH_ROUTES.signIn} className="dios-site-nav__cta dios-site-nav__cta-bar type-button">
-      Sign in
-    </Link>
-  )
+  return null
 }

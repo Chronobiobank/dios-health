@@ -7,7 +7,7 @@ import { SignOutButton } from '@/components/auth/sign-out-button'
 import { HashLink } from '@/components/sections/HashLink'
 import { cn } from '@/lib/utils'
 
-import { AUTH_LINKS, NAV_MENU_LINKS } from './navigation'
+import { AUTH_LINKS, NAV_DASHBOARD_LINK, NAV_MENU_LINKS } from './navigation'
 
 type NavMenuProps = {
   isAuthenticated?: boolean
@@ -88,13 +88,24 @@ export function NavMenu({ isAuthenticated = false }: NavMenuProps) {
 
             <ul className="flex flex-col gap-1">
               {isAuthenticated ? (
-                <li>
-                  <SignOutButton
-                    variant="inline"
-                    className="block w-full px-3 py-2.5 text-left md:py-2"
-                    label="Sign out"
-                  />
-                </li>
+                <>
+                  <li>
+                    <HashLink
+                      href={NAV_DASHBOARD_LINK.href}
+                      className="type-nav block rounded-lg px-3 py-2.5 transition-colors hover:bg-black/[0.03] hover:text-black md:hidden"
+                      onClick={() => setOpen(false)}
+                    >
+                      {NAV_DASHBOARD_LINK.label}
+                    </HashLink>
+                  </li>
+                  <li>
+                    <SignOutButton
+                      variant="inline"
+                      className="block w-full px-3 py-2.5 text-left md:py-2"
+                      label="Sign out"
+                    />
+                  </li>
+                </>
               ) : (
                 AUTH_LINKS.map((link) => (
                   <li key={link.label}>
