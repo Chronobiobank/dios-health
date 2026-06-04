@@ -141,7 +141,7 @@ export function PitchShadowStyles() {
 }
 
 type PitchLandingBackdropProps = {
-  /** Pinned to viewport — sits behind sticky nav (landing only) */
+  /** Pinned to viewport — global ambient layer behind all pages (root layout) */
   fixed?: boolean
 }
 

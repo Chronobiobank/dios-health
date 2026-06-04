@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from 'react'
 
-import { DashboardBackground } from '@/components/patient-dashboard/dashboard-background'
 import { DashboardNav } from '@/components/patient-dashboard/dashboard-nav'
 import { MeasureTile } from '@/components/patient-dashboard/measure-tile'
 import { Section, TileGrid } from '@/components/patient-dashboard/section'
@@ -43,8 +42,6 @@ export function DashboardClient({
 
   return (
     <div className="patient-dashboard-shell relative min-h-screen" data-dashboard="patient-v2">
-      <DashboardBackground />
-
       <div className="relative z-10 pb-[var(--patient-nav-offset)]">
         <DashboardNav
           greeting={greeting}
@@ -53,7 +50,7 @@ export function DashboardClient({
           onOpenCoach={openCoach}
         />
 
-        <main className="mx-auto w-full max-w-[480px] space-y-6 px-4 py-4 sm:max-w-[640px]">
+        <main className="mx-auto w-full max-w-[480px] space-y-7 px-4 py-5 sm:max-w-[640px]">
           <Section label="Daily snapshot">
             <SnapshotTile
               snapshot={snapshot}

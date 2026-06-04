@@ -56,32 +56,35 @@ export function ToolTile({
       <button
         type="button"
         onClick={onToggle}
-        className={cn('glass-tile flex h-full min-h-[168px] w-full flex-col rounded-3xl p-3 text-left', isOpen && 'ring-1 ring-white/70')}
+        className={cn(
+          'glass-tile flex h-full min-h-[172px] w-full flex-col p-5 text-left',
+          isOpen && 'glass-tile--open'
+        )}
         aria-expanded={isOpen}
       >
         <div
           className={cn(
-            'mb-3 inline-flex h-9 w-9 items-center justify-center rounded-xl',
+            'tool-tile-icon mb-4',
             isCoach ? 'bg-[var(--lilac-light)] text-[var(--aubergine-mid)]' : 'bg-[var(--researcher-avatar-bg)] text-[var(--color-brand)]'
           )}
         >
           {isCoach ? <MessageCircle className="h-5 w-5" /> : <Pill className="h-5 w-5" />}
         </div>
 
-        <p className="text-[15px] font-medium text-[var(--text-primary)]">
+        <p className="text-[15px] font-semibold leading-snug text-[var(--dash-metric-brown)]">
           {isCoach ? 'DIOS Coach' : 'Medication timing'}
         </p>
-        <p className="mt-1 flex-1 text-[13px] leading-snug text-[var(--researcher-avatar-text)]">
+        <p className="mt-1.5 flex-1 text-[13px] leading-snug text-[var(--dash-section-label)]">
           {isCoach
             ? 'Ask anything about your body clock, results, or plan'
             : 'When to take each medicine for your body clock today'}
         </p>
 
-        <div className="mt-3 flex items-center justify-between text-[12px]">
-          <span className={isCoach ? 'text-[var(--color-brand)]' : 'text-[var(--gold)]'}>
+        <div className="mt-4 flex items-center justify-between text-[12px] font-medium">
+          <span className={isCoach ? 'text-[var(--researcher-avatar-text)]' : 'text-[var(--gold)]'}>
             {isCoach ? 'Online now' : `${snapshot.medicationsDueTonight} due tonight`}
           </span>
-          <ArrowRight className="h-4 w-4 text-[var(--color-brand)]" aria-hidden />
+          <ArrowRight className="h-4 w-4 text-[var(--researcher-avatar-text)]" aria-hidden />
         </div>
       </button>
 
@@ -93,7 +96,7 @@ export function ToolTile({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="glass-panel rounded-3xl p-4"
+            className="glass-panel p-5"
           >
             {isCoach ? (
               <CoachPanel
@@ -122,7 +125,7 @@ function CoachPanel({
 }) {
   return (
     <div className="space-y-3">
-      <div className="rounded-2xl bg-white/50 px-3 py-2 text-[14px] text-[var(--text-primary)]">
+      <div className="rounded-2xl border border-white/70 bg-white/60 px-3 py-2.5 text-[14px] text-[var(--text-primary)]">
         Kia ora — I&apos;m here to help with your body clock, results, and plan.
       </div>
       <div className="flex flex-wrap gap-2">
@@ -131,7 +134,7 @@ function CoachPanel({
             key={prompt}
             type="button"
             onClick={() => onSendPrompt(prompt)}
-            className="rounded-full border border-[var(--color-border)] bg-white/45 px-3 py-1 text-[12px] text-[var(--text-primary)] hover:bg-white/65"
+            className="rounded-full border border-white/75 bg-white/55 px-3 py-1 text-[12px] text-[var(--text-primary)] hover:bg-white/70"
           >
             {prompt}
           </button>
@@ -148,7 +151,7 @@ function CoachPanel({
           value={draft}
           onChange={(event) => onDraftChange(event.target.value)}
           placeholder="Ask DIOS anything…"
-          className="min-w-0 flex-1 rounded-xl border border-[var(--color-border)] bg-white/55 px-3 py-2 text-[14px] outline-none"
+          className="min-w-0 flex-1 rounded-xl border border-white/75 bg-white/60 px-3 py-2 text-[14px] outline-none"
         />
         <Button type="submit" size="sm" className="bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand)]/90">
           Send

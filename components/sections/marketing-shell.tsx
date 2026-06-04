@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 
-import { PitchLandingBackdrop, PitchShadowStyles } from '@/components/sections/pitch/pitch-backgrounds'
 import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
 import { PitchLandingPrefetch } from '@/components/sections/pitch/pitch-landing-prefetch'
 import { cn } from '@/lib/utils'
@@ -13,8 +12,8 @@ type MarketingShellProps = {
 }
 
 /**
- * Public marketing pages — same pastel ambient layer, transparent nav (root layout),
- * and pitch footer as the landing deck.
+ * Public marketing pages — transparent nav (root layout), global ambient backdrop,
+ * and pitch footer aligned with the landing deck.
  */
 export function MarketingShell({
   children,
@@ -23,10 +22,8 @@ export function MarketingShell({
   prefetchRoutes = true,
 }: MarketingShellProps) {
   return (
-    <div className={cn('calm-landing relative min-h-svh bg-[#F7FAFC] text-[#0D0D0D]', className)}>
-      <PitchShadowStyles />
+    <div className={cn('calm-landing relative min-h-svh text-[#0D0D0D]', className)}>
       {prefetchRoutes ? <PitchLandingPrefetch /> : null}
-      <PitchLandingBackdrop fixed />
       <div className="relative z-10 flex min-h-svh flex-col">
         <div className="marketing-main flex-1">{children}</div>
         {showFooter ? <PitchFooter /> : null}

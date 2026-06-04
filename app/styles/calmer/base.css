@@ -6,7 +6,7 @@
   }
 
   body {
-    background-color: var(--color-bg-main);
+    background-color: transparent;
     color: var(--color-text-primary);
   }
 

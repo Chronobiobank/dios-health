@@ -52,24 +52,27 @@ export function MeasureTile({ tile, isOpen, onToggle, onSendPrompt, onOpenCoach 
       <button
         type="button"
         onClick={onToggle}
-        className={cn('glass-tile flex h-full min-h-[190px] w-full flex-col rounded-3xl p-3 text-left', isOpen && 'ring-1 ring-white/70')}
+        className={cn(
+          'glass-tile flex h-full min-h-[196px] w-full flex-col p-5 text-left',
+          isOpen && 'glass-tile--open'
+        )}
         aria-expanded={isOpen}
       >
-        <div className={cn('mb-3 inline-flex h-8 w-8 items-center justify-center rounded-xl', ICON_TONES[tile.id])}>
+        <div className={cn('tool-tile-icon mb-4', ICON_TONES[tile.id])}>
           <Icon className="h-4 w-4" aria-hidden />
         </div>
 
-        <p className="text-3xl font-medium leading-none text-[var(--text-primary)]">{tile.value}</p>
-        <p className="mt-2 text-[15px] font-medium leading-snug text-[var(--text-primary)]">{tile.label}</p>
-        <p className="mt-1 flex-1 text-[13px] leading-snug text-[var(--researcher-avatar-text)]">{tile.subtitle}</p>
+        <p className="text-[1.75rem] font-medium leading-none text-[var(--dash-metric-brown)]">{tile.value}</p>
+        <p className="mt-2 text-[15px] font-semibold leading-snug text-[var(--dash-metric-brown)]">{tile.label}</p>
+        <p className="mt-1.5 flex-1 text-[13px] leading-snug text-[var(--dash-section-label)]">{tile.subtitle}</p>
 
-        <div className="mt-3 space-y-2">
+        <div className="mt-4 space-y-2">
           <Badge variant="outline" className={cn('rounded-full text-[11px]', badgeClass(tile.badgeTone))}>
             {tile.badge}
           </Badge>
-          <div className="flex items-center justify-between text-[12px] text-[var(--text-muted)]">
+          <div className="flex items-center justify-between text-[12px] text-[var(--dash-section-label)]">
             <span>{tile.source}</span>
-            <ArrowRight className="h-4 w-4 text-[var(--color-brand)]" aria-hidden />
+            <ArrowRight className="h-4 w-4 text-[var(--researcher-avatar-text)]" aria-hidden />
           </div>
         </div>
       </button>
@@ -82,7 +85,7 @@ export function MeasureTile({ tile, isOpen, onToggle, onSendPrompt, onOpenCoach 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="glass-panel rounded-3xl p-4"
+            className="glass-panel p-5"
           >
             <div className="space-y-2">
               {tile.panelRows.map((row) => (

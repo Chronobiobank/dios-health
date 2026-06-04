@@ -69,7 +69,7 @@
   --pitch-screen-inset-bottom: calc(
     var(--pitch-screen-gap) + var(--dios-site-nav-height) + env(safe-area-inset-bottom, 0px)
   );
-  background-color: #f7fafc;
+  background-color: transparent;
   color: #0d0d0d;
 }
 
@@ -113,7 +113,7 @@
 
 /* Landing nav — fully transparent (no bar, no bottom rule); pastel shows through from fixed layer */
 body:has(.calm-landing) {
-  background-color: #f7fafc;
+  background-color: transparent;
   --dios-site-nav-bg: transparent;
   --dios-site-nav-border: transparent;
 }

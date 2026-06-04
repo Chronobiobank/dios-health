@@ -328,7 +328,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col bg-[var(--color-bg-main)]">
+    <div className="flex min-h-0 flex-1 flex-col bg-transparent">
       <video ref={videoRef} className="hidden" muted playsInline aria-hidden />
 
       <div className="flex flex-col items-center px-4 pb-2 pt-6">
@@ -442,7 +442,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
         </p>
       </div>
 
-      <div className="sticky bottom-[var(--patient-nav-offset)] z-30 border-t border-black/[0.06] bg-[var(--color-bg-main)] px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3">
+      <div className="sticky bottom-[var(--patient-nav-offset)] z-30 border-t border-black/[0.06] bg-white/55 px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md">
         {voiceMode === 'voice' ? (
           <div className="flex items-center justify-center gap-4">
             <button
