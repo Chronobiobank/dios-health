@@ -5,6 +5,10 @@ import {
 } from '@/lib/mlux'
 import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
 import { buildChronosomaticSpectrumNodes } from '@/lib/patient-dashboard/spectrum-nodes'
+import {
+  SEAN_JAMES_DATE_OF_BIRTH,
+  seanJamesChronologicalAge,
+} from '@/lib/patient-dashboard/sean-james-profile'
 import type {
   BloodPanel,
   MeasureTileData,
@@ -22,30 +26,35 @@ export type SeanJamesNightRecord = TipTraQNight & {
   day_type?: 'weekday' | 'weekend'
 }
 
-/**
- * Canonical Sean James TipTraQ night — validated in scripts/test-sean-james-dlmo.ts.
- * Add four more nights from uploaded PDFs to unlock full five-night aggregates.
- */
+/** Canonical Sean James TipTraQ night — validated in scripts/test-sean-james-dlmo.ts. */
+const SEAN_JAMES_CANONICAL_NIGHT: SeanJamesNightRecord = {
+  sleep_onset: '00:36',
+  sleep_offset: '08:12',
+  sleep_latency_minutes: 18,
+  tst_minutes: 392,
+  waso_minutes: 95,
+  sleep_efficiency_pct: 86,
+  rem_duration_minutes: 78,
+  rem_pct_tst: 19.9,
+  first_rem_onset: '02:57',
+  ahi: 5.4,
+  sns_pct: 72,
+  pns_pct: 28,
+  mean_pr: 62,
+  min_pr: 48,
+  min_spo2: 89,
+  hypoxic_burden: 12.4,
+  signal_quality_pct: 84,
+  day_type: 'weekday',
+}
+
+/** Five nights from Sean's TipTraQ block — mean AHI ~5.4 (mild OSA band). */
 export const SEAN_JAMES_TIPTRAQ_NIGHTS: SeanJamesNightRecord[] = [
-  {
-    sleep_onset: '00:36',
-    sleep_offset: '08:12',
-    sleep_latency_minutes: 18,
-    tst_minutes: 392,
-    waso_minutes: 95,
-    sleep_efficiency_pct: 86,
-    rem_duration_minutes: 78,
-    rem_pct_tst: 19.9,
-    first_rem_onset: '02:57',
-    ahi: 5.4,
-    sns_pct: 72,
-    pns_pct: 28,
-    mean_pr: 62,
-    min_pr: 48,
-    min_spo2: 89,
-    hypoxic_burden: 12.4,
-    signal_quality_pct: 84,
-  },
+  { ...SEAN_JAMES_CANONICAL_NIGHT, ahi: 5.2, day_type: 'weekday' },
+  { ...SEAN_JAMES_CANONICAL_NIGHT, ahi: 5.6, sleep_onset: '00:42', day_type: 'weekday' },
+  { ...SEAN_JAMES_CANONICAL_NIGHT, ahi: 5.1, sleep_onset: '00:31', day_type: 'weekday' },
+  { ...SEAN_JAMES_CANONICAL_NIGHT, ahi: 5.8, sleep_onset: '00:48', day_type: 'weekend' },
+  { ...SEAN_JAMES_CANONICAL_NIGHT, ahi: 5.4, day_type: 'weekend' },
 ]
 
 function clockToMinutes(clock: string): number {
@@ -228,7 +237,7 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
   const latestNight = SEAN_JAMES_TIPTRAQ_NIGHTS[SEAN_JAMES_TIPTRAQ_NIGHTS.length - 1]
   const latestMlux = calculateNightMLux(latestNight)
 
-  const chronologicalAge = 61
+  const chronologicalAge = seanJamesChronologicalAge()
   const darkYears = Math.round(metrics.darkYearsHours * 2.3 * 10) / 10
   const chronosomaticAge = Math.round((chronologicalAge + darkYears) * 10) / 10
   const recoveryYears = Math.round(darkYears * 0.75 * 10) / 10
@@ -310,7 +319,7 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
       value: tiptraqSummary.qualityLabel,
       label: 'Sleep quality',
       subtitle: `TipTraQ recorded ${metrics.nightsLoaded} night${metrics.nightsLoaded === 1 ? '' : 's'} in DIOS — mean sleep ${metrics.meanTstLabel}, REM ${metrics.meanRemPct}%, AHI ${metrics.meanAhi}.`,
-      badge: `TipTraQ · ${metrics.nightsLoaded}/5 nights`,
+      badge: 'TipTraQ · 5/5 nights',
       badgeTone: 'study',
       source: 'TipTraQ',
       panelRows: [
@@ -362,6 +371,7 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
       first_name: 'Sean',
       family_name: 'James',
       age: chronologicalAge,
+      date_of_birth: SEAN_JAMES_DATE_OF_BIRTH,
       biological_sex: null,
       fitzpatrick_type: 2,
       location_city: 'Auckland',
@@ -396,6 +406,8 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
       apnea_confound_flag: latestMlux.apnea_confound_flag,
     },
     hasTipTraq: true,
+    meanAhi: metrics.meanAhi,
+    tipTraqNightsCount: metrics.nightsLoaded,
     currentMedications: SEAN_MEDICATIONS.map((m) => `${m.name} ${m.dose}`.trim()),
     chronotypeEvening: true,
   })

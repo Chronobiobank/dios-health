@@ -1,19 +1,20 @@
-/* Patient dashboard + /how-it-works — no marketing header; site pastel backdrop */
-body:has([data-dashboard='patient-v2']) #site-nav,
+/* Authenticated dashboard — no duplicate marketing header; site pastel backdrop */
 body:has(.patient-dashboard-route) #site-nav,
-body:has(.how-it-works-route) #site-nav,
 body:has(.dashboard-route-shell) #site-nav {
   display: none;
 }
 
-body:has([data-dashboard='patient-v2']) .dios-app-shell,
-body:has(.patient-dashboard-route) .dios-app-shell,
-body:has(.how-it-works-route) .dios-app-shell {
+body:has(.patient-dashboard-route) .dios-app-shell {
   min-height: 100svh;
 }
 
-html:has(.patient-dashboard-route),
-html:has(.how-it-works-route) {
+.how-it-works-route__inner {
+  box-sizing: border-box;
+  max-width: 40rem;
+  padding-inline: 1rem;
+}
+
+html:has(.patient-dashboard-route) {
   scroll-padding-top: 1rem;
 }
 
@@ -31,12 +32,7 @@ html:has(.how-it-works-route) {
   }
 }
 
-.patient-dashboard-shell {
-  position: relative;
-  min-height: 100vh;
-  color: var(--text-primary);
-  font-size: var(--text-body-size);
-  line-height: var(--text-body-leading);
+:root {
   --dash-tile-bg: rgba(255, 255, 255, 0.24);
   --dash-tile-bg-hover: rgba(255, 255, 255, 0.32);
   --dash-tile-border: rgba(255, 255, 255, 0.42);
@@ -46,6 +42,24 @@ html:has(.how-it-works-route) {
   --dash-section-label: #5c6b5e;
   --dash-circadian-bg: #f5efe6;
   --dash-circadian-border: rgba(210, 190, 165, 0.55);
+  --dash-chrono-accent: rgb(29 78 216);
+  --dash-chrono-accent-deep: rgb(30 64 175);
+  --dash-chrono-accent-muted: rgb(30 64 175 / 0.72);
+  --dash-chrono-border: rgb(37 99 235 / 0.28);
+  --dash-chrono-shadow: rgb(37 99 235 / 0.12);
+}
+
+.patient-dashboard-shell,
+.how-it-works-route,
+.patient-dashboard-content {
+  color: var(--text-primary);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
+}
+
+.patient-dashboard-shell {
+  position: relative;
+  min-height: 100vh;
 }
 
 .patient-dashboard-nav {
@@ -147,28 +161,28 @@ html:has(.how-it-works-route) {
 .snapshot-age-value-cell--chrono {
   background: linear-gradient(
     165deg,
-    rgb(153 246 228 / 0.92) 0%,
-    rgb(204 251 241 / 0.88) 45%,
-    rgb(240 253 250 / 0.85) 100%
+    rgb(191 219 254 / 0.92) 0%,
+    rgb(219 234 254 / 0.88) 45%,
+    rgb(239 246 255 / 0.85) 100%
   );
-  border: 1px solid rgb(13 148 136 / 0.28);
+  border: 1px solid var(--dash-chrono-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.65),
-    0 2px 12px rgb(13 148 136 / 0.12);
+    0 2px 12px var(--dash-chrono-shadow);
 }
 
 .snapshot-age-value-cell--chrono .snapshot-age-years-old-number {
-  color: rgb(15 118 110);
+  color: var(--dash-chrono-accent);
 }
 
 .snapshot-age-value-cell--chrono .snapshot-age-card-title {
-  color: rgb(17 94 89);
+  color: var(--dash-chrono-accent-deep);
 }
 
 .snapshot-age-value-cell--chrono .snapshot-age-card-note {
-  color: rgb(17 94 89 / 0.72);
+  color: var(--dash-chrono-accent-muted);
 }
 
 .snapshot-age-value-cell--circadian {
@@ -594,39 +608,67 @@ html:has(.how-it-works-route) {
 }
 
 .chronosomatic-spectrum {
+  padding: 0.25rem 0 0;
+}
+
+/* Dot row only — dashed line through circle centres (first ↔ last column). */
+.chronosomatic-spectrum__rail {
   position: relative;
-  padding: 0.75rem 0 0.25rem;
+  min-height: 2rem;
 }
 
 .chronosomatic-spectrum__track {
   position: absolute;
-  left: 7%;
-  right: 7%;
-  top: 1.375rem;
-  border-top: 2px dotted rgba(160, 160, 160, 0.3);
+  left: calc(100% / 14);
+  right: calc(100% / 14);
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 2px dotted rgba(160, 160, 160, 0.35);
   pointer-events: none;
+  z-index: 0;
 }
 
-.chronosomatic-spectrum__nodes {
+.chronosomatic-spectrum__dots {
   position: relative;
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 0.25rem;
-  align-items: start;
+  align-items: center;
+  min-height: 2rem;
 }
 
-.chronosomatic-spectrum__node-btn {
+.chronosomatic-spectrum__dot-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.chronosomatic-spectrum__labels {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.chronosomatic-spectrum__label-btn {
   min-width: 0;
   padding: 0;
   background: transparent;
   border: none;
   cursor: pointer;
   text-align: center;
+  font-size: 0.625rem;
+  line-height: 1.25;
+  color: var(--text-muted);
+  max-width: 3.25rem;
+  margin-inline: auto;
+  word-break: break-word;
 }
 
 .chronosomatic-spectrum__dot-wrap {
@@ -666,14 +708,6 @@ html:has(.how-it-works-route) {
 .chronosomatic-spectrum__pulse-ring--legend {
   width: 1.5rem;
   height: 1.5rem;
-}
-
-.chronosomatic-spectrum__label {
-  font-size: 0.625rem;
-  line-height: 1.25;
-  color: var(--text-muted);
-  max-width: 3.25rem;
-  word-break: break-word;
 }
 
 .chronosomatic-spectrum__label--concern {

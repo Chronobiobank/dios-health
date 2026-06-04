@@ -16,6 +16,7 @@ export type PatientProfileRow = {
   first_name: string | null
   family_name: string | null
   age: number | null
+  date_of_birth: string | null
   biological_sex: string | null
   fitzpatrick_type: number | null
   location_city: string | null

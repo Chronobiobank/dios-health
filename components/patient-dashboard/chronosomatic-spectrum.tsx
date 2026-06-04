@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 
 import {
   dotStyleForSeverity,
+  isElevatedSeverity,
   type DotStyle,
 } from '@/lib/patient-dashboard/dashboard-indicators'
 import type { SpectrumNode, SpectrumNodeId } from '@/lib/patient-dashboard/types'
@@ -15,13 +16,7 @@ type ChronosomaticSpectrumProps = {
   onSelectNode: (id: SpectrumNodeId) => void
 }
 
-function normalDotSize(node: SpectrumNode): 'sm' | 'md' {
-  if (node.severity !== 'normal') return 'sm'
-  if (node.id === 'cancer-risk') return 'md'
-  return 'sm'
-}
-
-function SpectrumDot({
+function SpectrumDotButton({
   node,
   isOpen,
   onSelect,
@@ -30,19 +25,19 @@ function SpectrumDot({
   isOpen: boolean
   onSelect: () => void
 }) {
-  const style: DotStyle = dotStyleForSeverity(node.severity, normalDotSize(node))
-  const isCritical = node.severity === 'critical'
+  const style: DotStyle = dotStyleForSeverity(node.severity)
+  const isSevere = node.severity === 'severe'
 
   return (
     <button
       type="button"
       onClick={onSelect}
-      className="chronosomatic-spectrum__node-btn"
+      className="chronosomatic-spectrum__dot-btn"
       aria-expanded={isOpen}
       aria-label={`${node.label}, ${node.severity}`}
     >
       <span className="chronosomatic-spectrum__dot-wrap">
-        {isCritical ? (
+        {isSevere ? (
           <>
             <motion.span
               className="chronosomatic-spectrum__pulse-ring"
@@ -80,14 +75,6 @@ function SpectrumDot({
           }}
         />
       </span>
-      <span
-        className={cn(
-          'chronosomatic-spectrum__label',
-          node.severity !== 'normal' && 'chronosomatic-spectrum__label--concern'
-        )}
-      >
-        {node.label}
-      </span>
     </button>
   )
 }
@@ -95,15 +82,32 @@ function SpectrumDot({
 export function ChronosomaticSpectrum({ nodes, openNodeId, onSelectNode }: ChronosomaticSpectrumProps) {
   return (
     <div className="chronosomatic-spectrum">
-      <div className="chronosomatic-spectrum__track" aria-hidden />
-      <div className="chronosomatic-spectrum__nodes">
+      <div className="chronosomatic-spectrum__rail">
+        <div className="chronosomatic-spectrum__track" aria-hidden />
+        <div className="chronosomatic-spectrum__dots">
+          {nodes.map((node) => (
+            <SpectrumDotButton
+              key={node.id}
+              node={node}
+              isOpen={openNodeId === node.id}
+              onSelect={() => onSelectNode(node.id)}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="chronosomatic-spectrum__labels">
         {nodes.map((node) => (
-          <SpectrumDot
-            key={node.id}
-            node={node}
-            isOpen={openNodeId === node.id}
-            onSelect={() => onSelectNode(node.id)}
-          />
+          <button
+            key={`${node.id}-label`}
+            type="button"
+            onClick={() => onSelectNode(node.id)}
+            className={cn(
+              'chronosomatic-spectrum__label-btn',
+              isElevatedSeverity(node.severity) && 'chronosomatic-spectrum__label--concern'
+            )}
+          >
+            {node.label}
+          </button>
         ))}
       </div>
     </div>

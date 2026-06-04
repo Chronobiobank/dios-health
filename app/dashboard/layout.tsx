@@ -1,8 +1,6 @@
 import { PatientBottomNav } from '@/components/dashboard/patient-bottom-nav'
 import { cn } from '@/lib/utils'
 
-import './patient-dashboard.css'
-
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div

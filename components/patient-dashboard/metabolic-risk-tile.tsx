@@ -7,11 +7,13 @@ import { ChronosomaticSpectrum } from '@/components/patient-dashboard/chronosoma
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
-  DASH_GREEN,
-  DASH_RED,
+  dotStyleForSeverity,
   isElevatedSeverity,
+  SPECTRUM_SEVERITY_LABELS,
+  SPECTRUM_SEVERITY_STYLES,
 } from '@/lib/patient-dashboard/dashboard-indicators'
 import type { DashboardPanelId, SpectrumNode, SpectrumNodeId } from '@/lib/patient-dashboard/types'
+import type { SpectrumSeverity } from '@/lib/patient-dashboard/types'
 
 type MetabolicRiskTileProps = {
   nodes: SpectrumNode[]
@@ -24,9 +26,8 @@ function elevatedCount(nodes: SpectrumNode[]): number {
   return nodes.filter((node) => isElevatedSeverity(node.severity)).length
 }
 
-function severityBarFill(severity: SpectrumNode['severity']): string {
-  if (severity === 'normal') return DASH_GREEN.border
-  return DASH_RED[severity === 'watch' ? 'watch' : severity].border
+function severityBarFill(severity: SpectrumSeverity): string {
+  return SPECTRUM_SEVERITY_STYLES[severity].border
 }
 
 function LegendItem({
@@ -72,7 +73,7 @@ export function MetabolicRiskTile({
               variant="outline"
               className="shrink-0 rounded-full border-[#A32D2D] bg-[#FCEBEB] px-2.5 py-0.5 text-[0.6875rem] font-medium text-[#A32D2D]"
             >
-              {elevated} elevated
+              {elevated} at risk
             </Badge>
           ) : null}
         </div>
@@ -88,63 +89,47 @@ export function MetabolicRiskTile({
         </div>
 
         <div className="chronosomatic-spectrum__legend mt-4">
-          <LegendItem
-            dot={
+          {SPECTRUM_SEVERITY_LABELS.map(({ severity, label }) => {
+            const style = dotStyleForSeverity(severity)
+            const dot = (
               <span
                 className="chronosomatic-spectrum__legend-dot"
                 style={{
-                  width: 14,
-                  height: 14,
-                  backgroundColor: DASH_GREEN.fill,
-                  borderColor: DASH_GREEN.border,
-                  borderWidth: 2,
+                  width: style.size,
+                  height: style.size,
+                  backgroundColor: style.fill,
+                  borderColor: style.border,
+                  borderWidth: style.borderWidth,
                 }}
               />
+            )
+            if (severity === 'severe') {
+              return (
+                <LegendItem
+                  key={severity}
+                  dot={
+                    <span className="chronosomatic-spectrum__legend-dot-wrap">
+                      <motion.span
+                        className="chronosomatic-spectrum__pulse-ring chronosomatic-spectrum__pulse-ring--legend"
+                        style={{ borderColor: style.border }}
+                        animate={{ scale: [0.75, 1.75], opacity: [0.85, 0] }}
+                        transition={{ duration: 2.2, ease: 'easeOut', repeat: Infinity }}
+                        aria-hidden
+                      />
+                      {dot}
+                    </span>
+                  }
+                >
+                  {label} · largest dot
+                </LegendItem>
+              )
             }
-          >
-            Normal
-          </LegendItem>
-          <LegendItem
-            dot={
-              <span
-                className="chronosomatic-spectrum__legend-dot"
-                style={{
-                  width: 16,
-                  height: 16,
-                  backgroundColor: DASH_RED.watch.fill,
-                  borderColor: DASH_RED.watch.border,
-                  borderWidth: 2,
-                }}
-              />
-            }
-          >
-            Watch · size = severity
-          </LegendItem>
-          <LegendItem
-            dot={
-              <span className="chronosomatic-spectrum__legend-dot-wrap">
-                <motion.span
-                  className="chronosomatic-spectrum__pulse-ring chronosomatic-spectrum__pulse-ring--legend"
-                  style={{ borderColor: DASH_RED.critical.border }}
-                  animate={{ scale: [0.75, 1.75], opacity: [0.85, 0] }}
-                  transition={{ duration: 2.2, ease: 'easeOut', repeat: Infinity }}
-                  aria-hidden
-                />
-                <span
-                  className="chronosomatic-spectrum__legend-dot"
-                  style={{
-                    width: 16,
-                    height: 16,
-                    backgroundColor: DASH_RED.critical.fill,
-                    borderColor: DASH_RED.critical.border,
-                    borderWidth: 2,
-                  }}
-                />
-              </span>
-            }
-          >
-            Critical
-          </LegendItem>
+            return (
+              <LegendItem key={severity} dot={dot}>
+                {label}
+              </LegendItem>
+            )
+          })}
         </div>
 
         <Button
@@ -185,7 +170,7 @@ export function MetabolicRiskTile({
               <span className="font-medium text-[var(--text-primary)]">Action: </span>
               {openNode.action}
             </p>
-            <p className="mt-3 text-[0.6875rem] text-[var(--text-muted)]">
+            <p className="mt-3 text-[0.6875rem] text-[var(--text-muted)] capitalize">
               Chronosomatic Spectrum · {openNode.severity}
             </p>
           </motion.div>

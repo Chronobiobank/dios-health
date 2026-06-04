@@ -14,6 +14,10 @@ import type {
 import { formatCompletenessValue, formatOpenGapsLabel } from '@/lib/patient-dashboard/tile-copy'
 import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
 import { buildChronosomaticSpectrumNodes } from '@/lib/patient-dashboard/spectrum-nodes'
+import {
+  resolveChronologicalAge,
+  seanJamesProfilePatch,
+} from '@/lib/patient-dashboard/sean-james-profile'
 
 type InsightsMLuxProfile = MLuxProfileRow & {
   dominant_layer?: 'smartphone' | 'blood' | 'tiptraq' | null
@@ -283,7 +287,7 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     latestBloodPanel: input.latestBloodPanel,
   })
 
-  const chronologicalAge = input.patient.age ?? 58
+  const chronologicalAge = resolveChronologicalAge(input.patient)
   const darkYearsHours = estimateDarkYearsHours(
     input.patient.chronotype_q1 ?? '',
     input.patient.chronotype_q3 ?? ''
@@ -343,16 +347,7 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     chronotypeEvening,
   })
 
-  const calibrationPatient =
-    input.patient.first_name?.trim().toLowerCase() === 'sean' &&
-    input.patient.family_name?.trim().toLowerCase() === 'james'
-      ? {
-          ...input.patient,
-          fitzpatrick_type: 2,
-          location_city: 'Auckland',
-          location_country: input.patient.location_country ?? 'New Zealand',
-        }
-      : input.patient
+  const calibrationPatient = seanJamesProfilePatch(input.patient)
 
   const calibration = buildPatientCalibration({
     patient: calibrationPatient,

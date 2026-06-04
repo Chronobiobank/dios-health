@@ -23,7 +23,7 @@ export type TiptraqSummary = {
   lastStudyDate: string | null
 }
 
-export type SpectrumSeverity = 'normal' | 'watch' | 'elevated' | 'high' | 'critical'
+export type SpectrumSeverity = 'weak' | 'mild' | 'moderate' | 'severe'
 
 export type SpectrumNodeId =
   | 'sleep-rhythm'
