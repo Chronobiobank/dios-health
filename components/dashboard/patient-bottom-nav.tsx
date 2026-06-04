@@ -109,7 +109,7 @@ export function PatientBottomNav() {
   return (
     <>
       <nav
-        className="patient-bottom-nav fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/95 backdrop-blur-md lg:hidden"
+        className="patient-bottom-nav fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/95 backdrop-blur-md md:hidden"
         aria-label="Patient dashboard"
       >
         <ul className="mx-auto flex max-w-[640px] items-stretch justify-around px-2 pb-[env(safe-area-inset-bottom,0px)] pt-1 sm:px-4 md:max-w-[42rem] md:justify-evenly md:px-6">
@@ -122,7 +122,7 @@ export function PatientBottomNav() {
       </nav>
 
       <nav
-        className="patient-side-nav fixed inset-y-0 left-0 z-40 hidden w-[var(--patient-sidebar-width)] flex-col border-r border-black/10 bg-white lg:flex"
+        className="patient-side-nav fixed inset-y-0 left-0 z-40 hidden w-[var(--patient-sidebar-width)] flex-col border-r border-black/10 bg-white md:flex"
         aria-label="Patient dashboard"
       >
         <ul className="flex flex-col gap-1 px-3 py-6">

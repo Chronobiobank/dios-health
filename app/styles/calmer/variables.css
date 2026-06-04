@@ -19,28 +19,32 @@
   /* Readable line length for long-form copy */
   --calmer-measure: 65ch;
 
-  /* Patient dashboard navigation — bottom bar (mobile/tablet) + sidebar (desktop) */
+  /* Patient dashboard — bottom bar (phone) + sidebar (tablet landscape / iPad+) */
   --patient-nav-height: 3.75rem;
   --patient-nav-offset: calc(var(--patient-nav-height) + env(safe-area-inset-bottom, 0px));
-  --patient-sidebar-width: 13.5rem;
+  --patient-sidebar-width: 12.5rem;
+  --patient-dashboard-content-max: 30rem;
 }
 
 @media (min-width: 640px) {
   :root {
     --patient-nav-height: 4rem;
+    --patient-dashboard-content-max: 40rem;
   }
 }
 
 @media (min-width: 768px) {
   :root {
-    --patient-nav-height: 4.25rem;
+    --patient-nav-height: 0px;
+    --patient-nav-offset: 0px;
+    --patient-sidebar-width: 13.5rem;
+    --patient-dashboard-content-max: min(52rem, calc(100vw - var(--patient-sidebar-width) - 2.5rem));
   }
 }
 
 @media (min-width: 1024px) {
   :root {
-    --patient-nav-height: 0px;
-    --patient-nav-offset: 0px;
+    --patient-dashboard-content-max: min(56rem, calc(100vw - var(--patient-sidebar-width) - 3rem));
   }
 }
 

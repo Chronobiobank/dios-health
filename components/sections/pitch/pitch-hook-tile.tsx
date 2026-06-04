@@ -38,15 +38,17 @@ export function PitchHookTile({
       size="hero"
       priority
     >
-      <PitchTileEyebrow light>{eyebrow}</PitchTileEyebrow>
-      <PitchTileTitle as="h1" light className="mt-2 max-w-xl">
-        {title}
-      </PitchTileTitle>
-      <PitchTileSub light className="mt-2 max-w-md">
-        {subtitle}
-      </PitchTileSub>
-      <PitchInlineCitations citations={citations} light />
-      <PitchCtaRow compact>{children}</PitchCtaRow>
+      <div className="pitch-tile-copy">
+        <PitchTileEyebrow light>{eyebrow}</PitchTileEyebrow>
+        <PitchTileTitle as="h1" light className="mt-2 pitch-tile-title--hero">
+          {title}
+        </PitchTileTitle>
+        <PitchTileSub light className="mt-2">
+          {subtitle}
+        </PitchTileSub>
+        <PitchInlineCitations citations={citations} light />
+        <PitchCtaRow compact>{children}</PitchCtaRow>
+      </div>
     </PitchMediaTile>
   )
 }

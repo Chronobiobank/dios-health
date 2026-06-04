@@ -2,6 +2,8 @@
 
 .calm-landing {
   --pitch-radius: var(--calm-radius-card, 8px);
+  /* Shared measure for all landing tile eyebrows, titles, and subs */
+  --pitch-tile-copy-max: 40rem;
 }
 
 /* Section head (above subsection tiles) */
@@ -203,10 +205,18 @@
   }
 }
 
-/* One column for eyebrow, title, subtitle, and CTAs (width set on .pitch-tile-copy in JSX) */
+/* One copy column per tile — same left edge and rag-right measure on every screen */
+.calm-landing .pitch-tile-copy {
+  width: min(100%, var(--pitch-tile-copy-max));
+  max-width: var(--pitch-tile-copy-max);
+  text-align: left;
+}
+
+.calm-landing .pitch-tile-copy .pitch-tile-eyebrow,
 .calm-landing .pitch-tile-copy .pitch-tile-title,
 .calm-landing .pitch-tile-copy .pitch-tile-sub {
   max-width: none;
+  text-wrap: pretty;
 }
 
 .calm-landing .pitch-glow-tile__metric {

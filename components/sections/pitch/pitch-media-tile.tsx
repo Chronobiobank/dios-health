@@ -129,6 +129,7 @@ export function PitchMediaTile({
           <div
             className={cn(
               'absolute inset-0 z-[3] flex flex-col justify-end',
+              size !== 'metric' && 'items-start',
               size === 'metric'
                 ? 'px-3.5 pb-3.5 pt-10 sm:px-4 sm:pb-4 md:px-5 md:pb-5'
                 : 'px-4 pb-4 pt-12 sm:px-5 sm:pb-5 sm:pt-14 md:px-7 md:pb-7 md:pt-16'

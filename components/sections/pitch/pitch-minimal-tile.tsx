@@ -11,13 +11,7 @@ export function PitchMinimalTileCard({ tile }: { tile: PitchMinimalTile }) {
 
   return (
     <PitchMediaTile image={tile.image} imageAlt={tile.imageAlt} videoSrc={tile.videoSrc} size="hero">
-      <div
-        className={
-          isPrimaryHero
-            ? 'pitch-tile-copy w-full max-w-3xl'
-            : 'pitch-tile-copy w-full max-w-lg'
-        }
-      >
+      <div className="pitch-tile-copy">
         <PitchTileEyebrow light>{tile.eyebrow}</PitchTileEyebrow>
         <PitchTileTitle
           as="h2"
