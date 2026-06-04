@@ -299,7 +299,7 @@ html:has(.patient-dashboard-route) {
 
 .patient-dashboard-nav__greeting {
   font-size: clamp(1.25rem, 3.5vw + 0.85rem, 1.5rem);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-medium, 500);
   line-height: 1.2;
   color: var(--text-primary);
 }
