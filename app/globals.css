@@ -100,7 +100,8 @@
   --dios-nav-offset: calc(3 * var(--nav-logo-mark-h));
   --dios-site-nav-height: 4rem;
   --dios-site-nav-max-width: 76rem;
-  --dios-site-nav-padding-inline: clamp(1rem, 4vw, 1.25rem);
+  /* Minimal edge gutter — nav is full-bleed; do not centre a max-width bar */
+  --dios-site-nav-padding-inline: 1rem;
   --dios-site-nav-border: transparent;
   --dios-site-nav-bg: transparent;
   --dios-btn-padding-inline: 1.375rem;
@@ -659,7 +660,9 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    box-sizing: border-box;
     width: 100%;
+    max-width: none;
     height: var(--dios-site-nav-height);
     margin-inline: 0;
     padding-inline-start: max(
@@ -675,22 +678,6 @@
   @media (min-width: 640px) {
     .dios-site-nav__inner {
       gap: 1rem;
-    }
-  }
-
-  /* Tablet — logo flush to viewport left; avoid centred max-width bar inset */
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .dios-site-nav__inner {
-      --dios-site-nav-padding-inline: clamp(1rem, 3vw, 1.25rem);
-      max-width: none;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .dios-site-nav__inner {
-      max-width: var(--dios-site-nav-max-width);
-      margin-inline: auto;
-      padding-inline: 1.5rem;
     }
   }
 

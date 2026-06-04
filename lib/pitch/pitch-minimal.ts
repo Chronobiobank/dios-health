@@ -40,7 +40,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     eyebrow: 'What we know',
     title: 'Light determines how fast you age.',
     subtitle:
-      'The UK Biobank study of 80,000 people found that the rhythm of your light and dark cycle — not diet or exercise alone — determines your metabolic health and how long you live.',
+      'The UK Biobank study of 80,000 people found that the rhythm of your light and dark cycle — not diet or exercise alone — determines health and how long you live.',
     image: PITCH_HERO.poster,
     imageAlt: 'Medicines and tablets',
     videoSrc: '/first-light.mp4',
