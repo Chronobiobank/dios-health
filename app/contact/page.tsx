@@ -57,15 +57,15 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
         <h1 className="type-section mt-4 max-w-3xl">
           {intentBlock?.title ?? 'Get in touch'}
         </h1>
-        <p className="type-body mt-4 max-w-3xl">
+        <p className="type-body mt-4 max-w-3xl text-[#0D0D0D]">
           {intentBlock?.lead ??
             'For Chronobiobank research, clinical partnerships, or product questions, reach the DIOS team by email or book a demo.'}
         </p>
         {intentBlock?.bullets ? (
-          <ul className="type-body mt-6 max-w-3xl list-none space-y-2 pl-0">
+          <ul className="type-body mt-6 max-w-3xl list-none space-y-2 pl-0 text-[#0D0D0D]">
             {intentBlock.bullets.map((item) => (
-              <li key={item} className="flex gap-2 text-[15px] leading-relaxed text-black/70">
-                <span className="text-black/40" aria-hidden>
+              <li key={item} className="flex gap-2 text-[15px] leading-relaxed">
+                <span className="text-[#0D0D0D]/40" aria-hidden>
                   —
                 </span>
                 <span>{item}</span>
@@ -76,7 +76,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
         <section
           className={cn(
             CARD,
-            'mt-10 max-w-3xl rounded-[var(--calm-radius-card,8px)] p-5 sm:mt-12 sm:p-6'
+            'mt-10 max-w-3xl rounded-[var(--calm-radius-card,8px)] p-5 text-[#0D0D0D] sm:mt-12 sm:p-6'
           )}
         >
           <div className="flex items-stretch gap-4 sm:gap-5">
@@ -93,13 +93,13 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               <h2 className="text-xl font-medium tracking-tight text-black sm:text-2xl">
                 {GRANT_MUNRO_FOUNDER.name}
               </h2>
-              <p className="mt-1 text-sm text-black/60">{GRANT_MUNRO_FOUNDER.role}</p>
-              <p className="mt-0.5 font-mono text-xs leading-relaxed text-black/45">
+              <p className="mt-1 text-sm">{GRANT_MUNRO_FOUNDER.role}</p>
+              <p className="mt-0.5 font-mono text-xs leading-relaxed">
                 {GRANT_MUNRO_FOUNDER.affiliation}
               </p>
             </div>
           </div>
-          <div className="type-body mt-4 space-y-3 text-[15px] leading-relaxed text-black/70">
+          <div className="type-body mt-4 space-y-3 text-[15px] leading-relaxed text-[#0D0D0D]">
             {GRANT_MUNRO_FOUNDER.overview.map((paragraph) => (
               <p key={paragraph.slice(0, 48)}>{paragraph}</p>
             ))}
@@ -112,14 +112,14 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-medium text-black/80 underline underline-offset-4 hover:text-black sm:text-[15px]"
+                    className="text-sm font-medium text-[#0D0D0D] underline underline-offset-4 hover:opacity-80 sm:text-[15px]"
                   >
                     {link.label} →
                   </a>
                 ) : (
                   <Link
                     href={link.href}
-                    className="text-sm font-medium text-black/80 underline underline-offset-4 hover:text-black sm:text-[15px]"
+                    className="text-sm font-medium text-[#0D0D0D] underline underline-offset-4 hover:opacity-80 sm:text-[15px]"
                   >
                     {link.label} →
                   </Link>
@@ -128,12 +128,12 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             ))}
           </ul>
         </section>
-        <ul className="type-body mt-8 flex max-w-3xl flex-col gap-4">
+        <ul className="type-body mt-8 flex max-w-3xl flex-col gap-4 text-[#0D0D0D]">
           <li>
             <span className="type-label block text-[#0D0D0D]/50">Email</span>
             <a
               href={`mailto:${RESEARCH_ENQUIRIES_EMAIL}?subject=${mailSubject}`}
-              className="mt-1 inline-block font-medium underline underline-offset-4 hover:opacity-80"
+              className="mt-1 inline-block font-medium text-[#0D0D0D] underline underline-offset-4 hover:opacity-80"
             >
               {RESEARCH_ENQUIRIES_EMAIL}
             </a>
@@ -142,7 +142,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             <span className="type-label block text-[#0D0D0D]/50">Clinician demo</span>
             <Link
               href="/signup/clinician"
-              className="mt-1 inline-block font-medium underline underline-offset-4 hover:opacity-80"
+              className="mt-1 inline-block font-medium text-[#0D0D0D] underline underline-offset-4 hover:opacity-80"
             >
               Request a clinician demo →
             </Link>
@@ -151,7 +151,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             <span className="type-label block text-[#0D0D0D]/50">Evidence</span>
             <Link
               href="/evidence"
-              className="mt-1 inline-block font-medium underline underline-offset-4 hover:opacity-80"
+              className="mt-1 inline-block font-medium text-[#0D0D0D] underline underline-offset-4 hover:opacity-80"
             >
               Clinical evidence overview →
             </Link>

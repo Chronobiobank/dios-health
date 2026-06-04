@@ -1,3 +1,10 @@
+import { cn } from '@/lib/utils'
+
+/** Whole years only — avoids decimals in the age tiles. */
+export function formatAgeYears(value: number): number {
+  return Math.round(value)
+}
+
 /** Title + descriptor — shared by stat pills below the age row. */
 export function SnapshotMetricLabel({ title, description }: { title: string; description: string }) {
   return (
@@ -5,6 +12,35 @@ export function SnapshotMetricLabel({ title, description }: { title: string; des
       <span className="snapshot-age-label-title">{title}</span>
       <span className="snapshot-age-label-desc">{description}</span>
     </p>
+  )
+}
+
+type AgeValueCellProps = {
+  years: number
+  title: string
+  note: string
+  variant: 'chrono' | 'circadian'
+}
+
+function AgeValueCell({ years, title, note, variant }: AgeValueCellProps) {
+  const displayYears = formatAgeYears(years)
+
+  return (
+    <div
+      className={cn(
+        'snapshot-age-value-cell',
+        variant === 'chrono' && 'snapshot-age-value-cell--chrono',
+        variant === 'circadian' && 'snapshot-age-value-cell--circadian'
+      )}
+    >
+      <div className="snapshot-age-years-block">
+        <p className="snapshot-age-years-old-number" aria-label={`${displayYears} years`}>
+          {displayYears}
+        </p>
+        <p className="snapshot-age-card-title">{title}</p>
+        <p className="snapshot-age-card-note">{note}</p>
+      </div>
+    </div>
   )
 }
 
@@ -19,65 +55,35 @@ export function SnapshotAgeRow({
   chronosomaticAge,
   darkYears,
 }: SnapshotAgeRowProps) {
+  const displayDarkYears = formatAgeYears(darkYears)
+
   return (
-    <div className="grid grid-cols-3 items-stretch gap-2.5">
-      <div
-        className="rounded-[14px] px-2 py-4 text-center"
-        style={{
-          background: 'rgba(255,255,255,0.38)',
-          border: '0.5px solid rgba(255,255,255,0.72)',
-        }}
-      >
-        <p className="snapshot-age-card-eyebrow text-[var(--text-muted)]">Chronological Age</p>
-        <p className="snapshot-age-card-value text-[var(--text-primary)]">{chronologicalAge}</p>
-        <p className="snapshot-age-card-note text-[var(--text-muted)]">
-          (the age on your birth certificate)
-        </p>
+    <div className="snapshot-age-row">
+      <AgeValueCell
+        years={chronologicalAge}
+        title="Chronological"
+        note="(Age on your birth certificate)"
+        variant="chrono"
+      />
+
+      <div className="snapshot-age-value-cell snapshot-age-value-cell--center">
+        <div className="snapshot-age-years-block">
+          <p className="snapshot-dark-years-value" aria-label={`${displayDarkYears} dark years`}>
+            {displayDarkYears}
+          </p>
+          <p className="snapshot-dark-years-label">Dark years</p>
+          <p className="snapshot-age-card-note snapshot-age-card-note--center">
+            (time out of sync with your body clock)
+          </p>
+        </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center gap-1 bg-transparent px-1">
-        <svg width="22" height="14" viewBox="0 0 22 14" style={{ opacity: 0.55 }} aria-hidden>
-          <line x1="2" y1="7" x2="17" y2="7" stroke="#A32D2D" strokeWidth="1.8" />
-          <polyline
-            points="12,2 20,7 12,12"
-            fill="none"
-            stroke="#A32D2D"
-            strokeWidth="1.8"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-        </svg>
-        <p
-          className="snapshot-age-card-eyebrow"
-          style={{ color: '#A32D2D' }}
-        >
-          Dark Years
-        </p>
-        <p className="snapshot-age-card-value" style={{ color: '#A32D2D' }}>
-          {darkYears}
-        </p>
-        <p className="snapshot-age-card-note text-center" style={{ color: '#791F1F' }}>
-          (time out of sync with your body clock)
-        </p>
-      </div>
-
-      <div
-        className="rounded-[14px] px-2 py-4 text-center"
-        style={{
-          background: 'rgba(250,175,70,0.16)',
-          border: '0.5px solid rgba(250,175,70,0.35)',
-        }}
-      >
-        <p className="snapshot-age-card-eyebrow" style={{ color: '#7a4a08' }}>
-          Chronosomatic Age
-        </p>
-        <p className="snapshot-age-card-value" style={{ color: '#7a3810' }}>
-          {chronosomaticAge}
-        </p>
-        <p className="snapshot-age-card-note" style={{ color: '#8a5a28' }}>
-          (the age your body is actually living)
-        </p>
-      </div>
+      <AgeValueCell
+        years={chronosomaticAge}
+        title="Chronosomatic"
+        note="(Age on your cellular clocks)"
+        variant="circadian"
+      />
     </div>
   )
 }
