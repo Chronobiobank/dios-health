@@ -1,5 +1,10 @@
+import { DashboardSettingsPage } from '@/components/dashboard/dashboard-settings-page'
+import {
+  SECTION_LABEL,
+  SETTINGS_HEADER,
+  SETTINGS_SECTION,
+} from '@/components/dashboard/dashboard-styles'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
-import { SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
 import { SmartphoneStreamPanel } from '@/components/dashboard/smartphone-stream-panel'
 import { StreamsStatus } from '@/components/dashboard/streams-status'
 import { TipTraqNightList } from '@/components/dashboard/tiptraq-night-list'
@@ -51,41 +56,43 @@ export default async function DashboardStreamsPage() {
     mluxProfile?.layer1_confidence_score ?? latestSmartphone?.confidence_score ?? null
 
   return (
-    <>
+    <DashboardSettingsPage>
       <PatientTopBar fullName={profile.full_name ?? 'Patient'} avatarUrl={profile.avatar_url} />
 
-      <section>
-        <h1 className="text-2xl font-medium text-black">Data streams</h1>
+      <header className={SETTINGS_HEADER}>
+        <h1>Data streams</h1>
         <p className="mt-2 text-sm text-black/55">
           Start free with your phone, add bloods, then TipTraQ — each layer refines your body clock.
         </p>
-      </section>
+      </header>
 
-      <SmartphoneStreamPanel
-        fitzpatrickType={patient.fitzpatrick_type}
-        isActive={smartphoneActive}
-        lastRecordedAt={lastObservedAt}
-        layer1Confidence={layer1Confidence}
-      />
+      <div className="dashboard-settings-streams-stack">
+        <SmartphoneStreamPanel
+          fitzpatrickType={patient.fitzpatrick_type}
+          isActive={smartphoneActive}
+          lastRecordedAt={lastObservedAt}
+          layer1Confidence={layer1Confidence}
+        />
 
-      <section className="mt-10">
-        <h2 className={SECTION_LABEL}>Upload TipTraQ recording</h2>
-        <div className="mt-4">
-          <TipTraQUploadPanel />
-        </div>
-      </section>
+        <section className={SETTINGS_SECTION}>
+          <h2 className={SECTION_LABEL}>Upload TipTraQ recording</h2>
+          <div className="mt-4">
+            <TipTraQUploadPanel />
+          </div>
+        </section>
 
-      {nightHistory.length > 0 ? (
-        <div className="mt-10">
-          <TipTraqNightList nights={nightHistory} />
-        </div>
-      ) : null}
+        {nightHistory.length > 0 ? (
+          <section className={SETTINGS_SECTION}>
+            <TipTraqNightList nights={nightHistory} />
+          </section>
+        ) : null}
 
-      <StreamsStatus
-        tipTraqNightsCount={nightHistory.length}
-        bloodPanelsCount={bloodPanelsCount ?? 0}
-        smartphoneActive={smartphoneActive}
-      />
-    </>
+        <StreamsStatus
+          tipTraqNightsCount={nightHistory.length}
+          bloodPanelsCount={bloodPanelsCount ?? 0}
+          smartphoneActive={smartphoneActive}
+        />
+      </div>
+    </DashboardSettingsPage>
   )
 }

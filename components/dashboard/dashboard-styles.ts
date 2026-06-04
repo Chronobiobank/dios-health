@@ -23,3 +23,11 @@ export const CTA_BUTTON =
 
 export const CONSULT_CTA =
   'inline-flex h-14 w-full items-center justify-center rounded-full bg-black text-sm font-medium text-white transition-transform duration-100 active:scale-[0.97] hover:bg-black/85'
+
+/** Settings / profile routes — pair with dashboard-settings-page in patient-dashboard.css */
+export const SETTINGS_PAGE = 'dashboard-settings-page'
+export const SETTINGS_HEADER = 'dashboard-settings-header'
+export const SETTINGS_PROFILE_HERO = 'dashboard-settings-profile-hero'
+export const SETTINGS_DATA_LAYOUT = 'dashboard-settings-data-layout'
+export const SETTINGS_TOGGLES = 'dashboard-settings-toggles'
+export const SETTINGS_SECTION = 'dashboard-settings-section'

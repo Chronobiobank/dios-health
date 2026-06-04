@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { AuthToggle } from '@/components/auth/auth-toggle'
+import { SETTINGS_TOGGLES } from '@/components/dashboard/dashboard-styles'
 import {
   DATA_SHARING_TOGGLES,
   dataSharingValuesFromPatient,
@@ -78,7 +79,8 @@ export function DataControlsPanel({
   )
 
   return (
-    <div className="mt-8 space-y-4">
+    <div className="space-y-4">
+      <div className={SETTINGS_TOGGLES}>
       {DATA_SHARING_TOGGLES.map((toggle) => (
         <AuthToggle
           key={toggle.key}
@@ -89,15 +91,16 @@ export function DataControlsPanel({
           disabled={savingKey === toggle.key}
         />
       ))}
+      </div>
 
-      <p className="type-body text-center text-sm text-black/60">Off means off. Immediately.</p>
+      <p className="type-body text-sm text-black/60 md:col-span-2">Off means off. Immediately.</p>
 
-      <p role="status" aria-live="polite" className="min-h-5 text-center text-sm text-black/70">
+      <p role="status" aria-live="polite" className="min-h-5 text-sm text-black/70 md:col-span-2">
         {savedMessage}
       </p>
 
       {error ? (
-        <p role="alert" className="text-center text-sm text-red-600">
+        <p role="alert" className="text-sm text-red-600 md:col-span-2">
           {error}
         </p>
       ) : null}

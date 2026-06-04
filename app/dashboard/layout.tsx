@@ -10,11 +10,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <PatientBottomNav />
       <div
         className={cn(
-          'dashboard-route-shell mx-auto w-full',
+          'dashboard-route-shell mx-auto w-full min-h-0 flex-1',
           'pb-[var(--patient-nav-offset)] md:pb-8'
         )}
       >
-        {children}
+        <div className="patient-dashboard-content w-full">{children}</div>
       </div>
     </div>
   )

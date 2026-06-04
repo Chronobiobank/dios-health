@@ -47,8 +47,7 @@ export function DashboardClient({
 
   return (
     <div className="patient-dashboard-shell relative min-h-screen" data-dashboard="patient-v2">
-      <div className={reserveBottomNav ? 'relative z-10 pb-[var(--patient-nav-offset)]' : 'relative z-10 pb-8'}>
-        <div className="patient-dashboard-content">
+      <div className={reserveBottomNav ? 'relative z-10 pb-[var(--patient-nav-offset)] md:pb-0' : 'relative z-10 pb-8 md:pb-0'}>
           <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
 
           <main className="dash-dashboard-main">
@@ -115,7 +114,6 @@ export function DashboardClient({
             </TileGrid>
           </Section>
           </main>
-        </div>
 
         <PitchFooter />
       </div>
