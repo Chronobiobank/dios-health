@@ -13,11 +13,7 @@ export function Nav() {
         </Link>
 
         <div className="dios-site-nav__actions">
-          <NavActions
-            tagline={
-              <span className="nav-brand-tagline nav-brand-tagline--animated">{DIOS_TAGLINE}</span>
-            }
-          />
+          <NavActions />
         </div>
       </div>
     </header>

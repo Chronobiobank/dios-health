@@ -68,7 +68,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
       'TipTraQ, blood panels, and smartphone sensors deliver personalised medication timing for every patient.',
     image: '/dose-intelligence.jpg',
     imageAlt: 'Phone camera session',
-    href: '/technology',
+    href: '/how-it-works',
     ctaLabel: 'How it works',
   },
   {

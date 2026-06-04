@@ -21,7 +21,7 @@ const LANDING_ORBS: LandingOrb[] = [
     gradient:
       'radial-gradient(ellipse at center, rgba(255, 154, 162, 0.82) 0%, rgba(255, 183, 197, 0.45) 38%, transparent 72%)',
     animation: 'pitch-shadow-drift-a',
-    duration: 26,
+    duration: 18,
     delay: 0,
     opacity: 0.72,
   },
@@ -33,7 +33,7 @@ const LANDING_ORBS: LandingOrb[] = [
     gradient:
       'radial-gradient(ellipse at center, rgba(255, 214, 102, 0.78) 0%, rgba(255, 223, 140, 0.42) 36%, transparent 70%)',
     animation: 'pitch-shadow-drift-b',
-    duration: 30,
+    duration: 20,
     delay: 4,
     opacity: 0.68,
   },
@@ -45,7 +45,7 @@ const LANDING_ORBS: LandingOrb[] = [
     gradient:
       'radial-gradient(ellipse at center, rgba(144, 205, 244, 0.8) 0%, rgba(179, 229, 252, 0.4) 34%, transparent 72%)',
     animation: 'pitch-shadow-drift-c',
-    duration: 28,
+    duration: 19,
     delay: 8,
     opacity: 0.7,
   },
@@ -57,7 +57,7 @@ const LANDING_ORBS: LandingOrb[] = [
     gradient:
       'radial-gradient(ellipse at center, rgba(196, 181, 253, 0.76) 0%, rgba(216, 191, 255, 0.38) 36%, transparent 71%)',
     animation: 'pitch-shadow-drift-a',
-    duration: 32,
+    duration: 21,
     delay: 2,
     opacity: 0.66,
   },
@@ -69,7 +69,7 @@ const LANDING_ORBS: LandingOrb[] = [
     gradient:
       'radial-gradient(ellipse at center, rgba(154, 230, 180, 0.74) 0%, rgba(193, 240, 221, 0.36) 35%, transparent 70%)',
     animation: 'pitch-shadow-drift-b',
-    duration: 34,
+    duration: 23,
     delay: 11,
     opacity: 0.64,
   },
@@ -81,7 +81,7 @@ const LANDING_ORBS: LandingOrb[] = [
     gradient:
       'radial-gradient(ellipse at center, rgba(255, 183, 197, 0.7) 0%, rgba(255, 214, 230, 0.34) 38%, transparent 72%)',
     animation: 'pitch-shadow-drift-c',
-    duration: 27,
+    duration: 17,
     delay: 6,
     opacity: 0.62,
   },
@@ -93,7 +93,7 @@ const LANDING_ORBS: LandingOrb[] = [
     gradient:
       'radial-gradient(ellipse at center, rgba(129, 212, 250, 0.72) 0%, rgba(179, 229, 252, 0.34) 36%, transparent 71%)',
     animation: 'pitch-shadow-drift-a',
-    duration: 31,
+    duration: 22,
     delay: 14,
     opacity: 0.6,
   },
@@ -104,37 +104,57 @@ export function PitchShadowStyles() {
     <style>{`
       @keyframes pitch-shadow-drift-a {
         0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-        33% { transform: translate3d(9%, -6%, 0) scale(1.1); }
-        66% { transform: translate3d(-7%, 8%, 0) scale(0.94); }
+        33% { transform: translate3d(14%, -10%, 0) scale(1.14); }
+        66% { transform: translate3d(-12%, 12%, 0) scale(0.9); }
       }
       @keyframes pitch-shadow-drift-b {
         0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-        38% { transform: translate3d(-10%, 5%, 0) scale(1.08); }
-        72% { transform: translate3d(8%, -8%, 0) scale(0.96); }
+        38% { transform: translate3d(-16%, 8%, 0) scale(1.12); }
+        72% { transform: translate3d(12%, -12%, 0) scale(0.92); }
       }
       @keyframes pitch-shadow-drift-c {
         0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-        28% { transform: translate3d(6%, 9%, 0) scale(1.12); }
-        62% { transform: translate3d(-9%, -5%, 0) scale(0.92); }
+        28% { transform: translate3d(10%, 14%, 0) scale(1.16); }
+        62% { transform: translate3d(-14%, -8%, 0) scale(0.88); }
+      }
+      @keyframes pitch-backdrop-mesh {
+        0%, 100% {
+          transform: translate3d(0, 0, 0) scale(1);
+          opacity: 0.92;
+        }
+        50% {
+          transform: translate3d(2%, -2%, 0) scale(1.06);
+          opacity: 1;
+        }
       }
       .pitch-shadow-orb {
         position: absolute;
         border-radius: 50%;
-        filter: blur(56px);
+        filter: blur(52px);
         will-change: transform;
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
       }
       .pitch-landing-backdrop {
         background-color: #f7fafc;
+        overflow: hidden;
+      }
+      .pitch-landing-backdrop__mesh {
+        position: absolute;
+        inset: -12%;
         background-image:
-          radial-gradient(ellipse 140% 90% at 50% -10%, rgba(186, 230, 253, 0.35) 0%, transparent 55%),
-          radial-gradient(ellipse 120% 70% at 80% 40%, rgba(254, 215, 170, 0.28) 0%, transparent 52%),
-          radial-gradient(ellipse 100% 80% at 10% 70%, rgba(251, 207, 232, 0.26) 0%, transparent 50%),
-          radial-gradient(ellipse 130% 60% at 50% 100%, rgba(144, 205, 244, 0.22) 0%, transparent 58%);
+          radial-gradient(ellipse 140% 90% at 50% -10%, rgba(186, 230, 253, 0.38) 0%, transparent 55%),
+          radial-gradient(ellipse 120% 70% at 80% 40%, rgba(254, 215, 170, 0.32) 0%, transparent 52%),
+          radial-gradient(ellipse 100% 80% at 10% 70%, rgba(251, 207, 232, 0.3) 0%, transparent 50%),
+          radial-gradient(ellipse 130% 60% at 50% 100%, rgba(144, 205, 244, 0.26) 0%, transparent 58%);
+        animation: pitch-backdrop-mesh 22s ease-in-out infinite;
+        will-change: transform, opacity;
       }
       @media (prefers-reduced-motion: reduce) {
-        .pitch-shadow-orb { animation: none !important; }
+        .pitch-shadow-orb,
+        .pitch-landing-backdrop__mesh {
+          animation: none !important;
+        }
       }
     `}</style>
   )
@@ -156,6 +176,7 @@ export function PitchLandingBackdrop({ fixed = false }: PitchLandingBackdropProp
       }
       aria-hidden
     >
+      <div className="pitch-landing-backdrop__mesh" aria-hidden />
       {LANDING_ORBS.map((orb, i) => (
         <div
           key={i}
@@ -167,9 +188,7 @@ export function PitchLandingBackdrop({ fixed = false }: PitchLandingBackdropProp
             height: orb.height,
             background: orb.gradient,
             opacity: orb.opacity,
-            animationName: orb.animation,
-            animationDuration: `${orb.duration}s`,
-            animationDelay: `${orb.delay}s`,
+            animation: `${orb.animation} ${orb.duration}s ease-in-out ${orb.delay}s infinite`,
           }}
         />
       ))}

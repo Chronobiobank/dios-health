@@ -7,6 +7,7 @@ import { MeasureTile } from '@/components/patient-dashboard/measure-tile'
 import { Section, TileGrid } from '@/components/patient-dashboard/section'
 import { SnapshotTile } from '@/components/patient-dashboard/snapshot-tile'
 import { ToolTile } from '@/components/patient-dashboard/tool-tile'
+import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
 import type { PatientDashboardProps } from '@/lib/patient-dashboard/types'
 
 type PanelId =
@@ -18,12 +19,18 @@ type PanelId =
   | 'tiptraq'
   | 'completeness'
 
+type DashboardClientProps = PatientDashboardProps & {
+  /** Reserve space for mobile patient bottom nav (authenticated dashboard). */
+  reserveBottomNav?: boolean
+}
+
 export function DashboardClient({
   greeting,
   fullName,
   avatarUrl,
   snapshot,
-}: PatientDashboardProps) {
+  reserveBottomNav = true,
+}: DashboardClientProps) {
   const [openPanel, setOpenPanel] = useState<PanelId | null>(null)
   const [coachDraft, setCoachDraft] = useState('')
 
@@ -42,13 +49,8 @@ export function DashboardClient({
 
   return (
     <div className="patient-dashboard-shell relative min-h-screen" data-dashboard="patient-v2">
-      <div className="relative z-10 pb-[var(--patient-nav-offset)]">
-        <DashboardNav
-          greeting={greeting}
-          fullName={fullName}
-          avatarUrl={avatarUrl}
-          onOpenCoach={openCoach}
-        />
+      <div className={reserveBottomNav ? 'relative z-10 pb-[var(--patient-nav-offset)]' : 'relative z-10 pb-8'}>
+        <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
 
         <main className="mx-auto w-full max-w-[480px] space-y-7 px-4 py-5 sm:max-w-[640px]">
           <Section label="Daily snapshot">
@@ -97,6 +99,8 @@ export function DashboardClient({
             </TileGrid>
           </Section>
         </main>
+
+        <PitchFooter />
       </div>
     </div>
   )

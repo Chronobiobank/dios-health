@@ -24,11 +24,11 @@ const ICONS: Record<MeasureTileData['id'], LucideIcon> = {
   completeness: ShieldAlert,
 }
 
-const ICON_TONES: Record<MeasureTileData['id'], string> = {
-  sleep: 'bg-[var(--researcher-avatar-bg)] text-[var(--researcher-avatar-text)]',
-  vitd: 'bg-[var(--lilac-light)] text-[var(--aubergine-mid)]',
-  tiptraq: 'bg-[var(--gold-light)] text-[var(--gold)]',
-  completeness: 'bg-white/60 text-[var(--calm-optimal)]',
+const ICON_CLASS: Record<MeasureTileData['id'], string> = {
+  sleep: 'dash-tile-icon--sleep',
+  vitd: 'dash-tile-icon--vitd',
+  tiptraq: 'dash-tile-icon--tiptraq',
+  completeness: 'dash-tile-icon--completeness',
 }
 
 function badgeClass(tone: MeasureTileData['badgeTone']) {
@@ -52,27 +52,24 @@ export function MeasureTile({ tile, isOpen, onToggle, onSendPrompt, onOpenCoach 
       <button
         type="button"
         onClick={onToggle}
-        className={cn(
-          'glass-tile flex h-full min-h-[196px] w-full flex-col p-5 text-left',
-          isOpen && 'glass-tile--open'
-        )}
+        className={cn('glass-tile dash-tile flex w-full flex-col p-5 text-left', isOpen && 'glass-tile--open')}
         aria-expanded={isOpen}
       >
-        <div className={cn('tool-tile-icon mb-4', ICON_TONES[tile.id])}>
-          <Icon className="h-4 w-4" aria-hidden />
+        <div className={cn('tool-tile-icon', ICON_CLASS[tile.id])}>
+          <Icon className="h-[1.125rem] w-[1.125rem]" strokeWidth={1.75} aria-hidden />
         </div>
 
-        <p className="text-[1.75rem] font-medium leading-none text-[var(--dash-metric-brown)]">{tile.value}</p>
-        <p className="mt-2 text-[15px] font-semibold leading-snug text-[var(--dash-metric-brown)]">{tile.label}</p>
-        <p className="mt-1.5 flex-1 text-[13px] leading-snug text-[var(--dash-section-label)]">{tile.subtitle}</p>
+        <p className="dash-tile-metric">{tile.value}</p>
+        <p className="dash-tile-title">{tile.label}</p>
+        <p className="dash-tile-subtitle">{tile.subtitle}</p>
 
-        <div className="mt-4 space-y-2">
+        <div className="dash-tile-footer space-y-2">
           <Badge variant="outline" className={cn('rounded-full text-[11px]', badgeClass(tile.badgeTone))}>
             {tile.badge}
           </Badge>
-          <div className="flex items-center justify-between text-[12px] text-[var(--dash-section-label)]">
+          <div className="dash-tile-footer-meta">
             <span>{tile.source}</span>
-            <ArrowRight className="h-4 w-4 text-[var(--researcher-avatar-text)]" aria-hidden />
+            <ArrowRight className="h-4 w-4 shrink-0 text-[var(--researcher-avatar-text)]" aria-hidden />
           </div>
         </div>
       </button>

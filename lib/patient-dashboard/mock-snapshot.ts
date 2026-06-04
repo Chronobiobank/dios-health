@@ -1,4 +1,7 @@
 import type { PatientDashboardProps, PatientSnapshot } from '@/lib/patient-dashboard/types'
+import { formatCompletenessValue, formatOpenGapsLabel } from '@/lib/patient-dashboard/tile-copy'
+import { DEFAULT_DASHBOARD_AVATAR } from '@/components/patient-dashboard/constants'
+import { getPatientDashboardGreeting } from '@/lib/auth/greeting'
 
 /** Static demo data for local design preview — matches reference dashboard numbers. */
 export const MOCK_PATIENT_SNAPSHOT: PatientSnapshot = {
@@ -95,14 +98,14 @@ export const MOCK_PATIENT_SNAPSHOT: PatientSnapshot = {
     },
     {
       id: 'completeness',
-      value: '1 gaps',
+      value: formatCompletenessValue(1),
       label: 'Data completeness',
       subtitle: 'One unresolved issue is reducing how precise your personalised plan can be right now',
       badge: 'Action needed',
       badgeTone: 'action',
       source: 'DIOS layers',
       panelRows: [
-        { key: 'Open gaps', value: '1' },
+        { key: formatOpenGapsLabel(1), value: '1' },
         { key: 'Sync score', value: '74' },
         { key: 'Priority', value: 'Connect missing streams' },
       ],
@@ -114,9 +117,9 @@ export const MOCK_PATIENT_SNAPSHOT: PatientSnapshot = {
 }
 
 export const MOCK_DASHBOARD_PROPS: PatientDashboardProps = {
-  greeting: 'Good morning, Alex',
+  greeting: getPatientDashboardGreeting('Alex'),
   firstName: 'Alex',
   fullName: 'Alex Morgan',
-  avatarUrl: null,
+  avatarUrl: DEFAULT_DASHBOARD_AVATAR,
   snapshot: MOCK_PATIENT_SNAPSHOT,
 }

@@ -11,6 +11,7 @@ import type {
   PatientSnapshot,
   TiptraqSummary,
 } from '@/lib/patient-dashboard/types'
+import { formatCompletenessValue, formatOpenGapsLabel } from '@/lib/patient-dashboard/tile-copy'
 
 type InsightsMLuxProfile = MLuxProfileRow & {
   dominant_layer?: 'smartphone' | 'blood' | 'tiptraq' | null
@@ -219,14 +220,14 @@ function buildMeasureTiles(input: {
     },
     {
       id: 'completeness',
-      value: input.completenessGaps === 0 ? 'Complete' : `${input.completenessGaps} gaps`,
+      value: formatCompletenessValue(input.completenessGaps),
       label: 'Data completeness',
       subtitle: completenessSubtitle,
       badge: input.completenessGaps > 0 ? 'Action needed' : 'Complete',
       badgeTone: input.completenessGaps > 0 ? 'action' : 'watch',
       source: 'DIOS layers',
       panelRows: [
-        { key: 'Open gaps', value: String(input.completenessGaps) },
+        { key: formatOpenGapsLabel(input.completenessGaps), value: String(input.completenessGaps) },
         { key: 'Sync score', value: 'See snapshot' },
         { key: 'Priority', value: input.completenessGaps > 0 ? 'Connect missing streams' : 'Maintain streams' },
       ],

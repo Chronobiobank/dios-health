@@ -1,5 +1,6 @@
 import { DashboardClient } from '@/components/patient-dashboard/dashboard-client'
-import { getLocalizedPatientGreeting, getPatientFirstName } from '@/lib/auth/greeting'
+import { getPatientDashboardGreeting, getPatientFirstName } from '@/lib/auth/greeting'
+import { resolveDashboardAvatar } from '@/components/patient-dashboard/constants'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import type { BloodPanelSnapshot } from '@/lib/dashboard/insights-data'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
@@ -74,11 +75,7 @@ export default async function PatientDashboardPage() {
     fullName: profile.full_name,
   })
 
-  const greeting = getLocalizedPatientGreeting(
-    firstName,
-    patient.location_city,
-    patient.location_country
-  )
+  const greeting = getPatientDashboardGreeting(firstName)
 
   const snapshot = buildPatientSnapshot({
     patient,
@@ -97,7 +94,7 @@ export default async function PatientDashboardPage() {
       greeting={greeting}
       firstName={firstName}
       fullName={profile.full_name ?? firstName}
-      avatarUrl={profile.avatar_url}
+      avatarUrl={resolveDashboardAvatar(profile.avatar_url)}
       snapshot={snapshot}
     />
   )

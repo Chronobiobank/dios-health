@@ -56,35 +56,34 @@ export function ToolTile({
       <button
         type="button"
         onClick={onToggle}
-        className={cn(
-          'glass-tile flex h-full min-h-[172px] w-full flex-col p-5 text-left',
-          isOpen && 'glass-tile--open'
-        )}
+        className={cn('glass-tile dash-tile flex w-full flex-col p-5 text-left', isOpen && 'glass-tile--open')}
         aria-expanded={isOpen}
       >
-        <div
-          className={cn(
-            'tool-tile-icon mb-4',
-            isCoach ? 'bg-[var(--lilac-light)] text-[var(--aubergine-mid)]' : 'bg-[var(--researcher-avatar-bg)] text-[var(--color-brand)]'
+        <div className={cn('tool-tile-icon', isCoach ? 'dash-tile-icon--coach' : 'dash-tile-icon--meds')}>
+          {isCoach ? (
+            <MessageCircle className="h-[1.125rem] w-[1.125rem]" strokeWidth={1.75} aria-hidden />
+          ) : (
+            <Pill className="h-[1.125rem] w-[1.125rem]" strokeWidth={1.75} aria-hidden />
           )}
-        >
-          {isCoach ? <MessageCircle className="h-5 w-5" /> : <Pill className="h-5 w-5" />}
         </div>
 
-        <p className="text-[15px] font-semibold leading-snug text-[var(--dash-metric-brown)]">
-          {isCoach ? 'DIOS Coach' : 'Medication timing'}
+        <p className="dash-tile-metric dash-tile-metric--spacer" aria-hidden>
+          &nbsp;
         </p>
-        <p className="mt-1.5 flex-1 text-[13px] leading-snug text-[var(--dash-section-label)]">
+        <p className="dash-tile-title">{isCoach ? 'DIOS Coach' : 'Medication timing'}</p>
+        <p className="dash-tile-subtitle">
           {isCoach
-            ? 'Ask anything about your body clock, results, or plan'
-            : 'When to take each medicine for your body clock today'}
+            ? 'Ask about your body clock, results, and personalised plan.'
+            : 'When to take each medicine for your body clock today.'}
         </p>
 
-        <div className="mt-4 flex items-center justify-between text-[12px] font-medium">
-          <span className={isCoach ? 'text-[var(--researcher-avatar-text)]' : 'text-[var(--gold)]'}>
-            {isCoach ? 'Online now' : `${snapshot.medicationsDueTonight} due tonight`}
-          </span>
-          <ArrowRight className="h-4 w-4 text-[var(--researcher-avatar-text)]" aria-hidden />
+        <div className="dash-tile-footer">
+          <div className="dash-tile-footer-meta">
+            <span className={isCoach ? 'text-[var(--researcher-avatar-text)]' : 'text-[var(--gold)]'}>
+              {isCoach ? 'Online now' : `${snapshot.medicationsDueTonight} due tonight`}
+            </span>
+            <ArrowRight className="h-4 w-4 shrink-0 text-[var(--researcher-avatar-text)]" aria-hidden />
+          </div>
         </div>
       </button>
 

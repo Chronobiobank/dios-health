@@ -14,7 +14,7 @@ type SnapshotTileProps = {
 
 function ArrowGlyph() {
   return (
-    <svg viewBox="0 0 24 16" className="mx-auto mb-1 h-3.5 w-5 text-[var(--dash-metric-loss)]" aria-hidden>
+    <svg viewBox="0 0 24 16" className="h-3 w-5 text-[var(--dash-metric-loss)]" aria-hidden>
       <path
         d="M2 8h16M14 3l7 5-7 5"
         fill="none"
@@ -47,24 +47,23 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
         className={cn('glass-tile w-full p-5 text-left', isOpen && 'glass-tile--open')}
         aria-expanded={isOpen}
       >
-        <div className="grid grid-cols-3 items-stretch gap-2.5">
-          <div className="snapshot-subtile snapshot-subtile--chrono">
-            <p className="snapshot-metric-label">Chronological</p>
-            <p className="snapshot-metric-value mt-2">{Math.round(chronologicalAge)}</p>
-            <p className="snapshot-metric-caption">years old</p>
+        <div className="snapshot-age-row">
+          <div className="snapshot-age-value-cell snapshot-age-value-cell--chrono">
+            <p className="snapshot-metric-value">{Math.round(chronologicalAge)}</p>
           </div>
-
-          <div className="snapshot-center-metric">
-            <ArrowGlyph />
+          <div className="snapshot-age-value-cell snapshot-age-value-cell--center">
+            <div className="snapshot-center-arrow" aria-hidden>
+              <ArrowGlyph />
+            </div>
             <p className="snapshot-loss-value">{yearsLost}</p>
-            <p className="snapshot-metric-caption text-center">years lost to jetlag</p>
+          </div>
+          <div className="snapshot-age-value-cell snapshot-age-value-cell--circadian">
+            <p className="snapshot-metric-value">{Math.round(circadianAge)}</p>
           </div>
 
-          <div className="snapshot-subtile snapshot-subtile--circadian">
-            <p className="snapshot-metric-label">Circadian</p>
-            <p className="snapshot-metric-value mt-2">{Math.round(circadianAge)}</p>
-            <p className="snapshot-metric-caption">years old</p>
-          </div>
+          <p className="snapshot-metric-caption snapshot-metric-caption--years">Calendar years</p>
+          <p className="snapshot-metric-caption">years lost to jetlag</p>
+          <p className="snapshot-metric-caption snapshot-metric-caption--years">Circadian years</p>
         </div>
 
         <div className="snapshot-stat-row">
@@ -103,11 +102,11 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
             <p className="text-[15px] font-medium text-[var(--text-primary)]">Age breakdown</p>
             <div className="mt-3 space-y-2 text-[14px]">
               <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--text-muted)]">Chronological age</span>
+                <span className="text-[var(--text-muted)]">Calendar years</span>
                 <span className="font-medium">{Math.round(chronologicalAge)} years</span>
               </div>
               <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--text-muted)]">Circadian age</span>
+                <span className="text-[var(--text-muted)]">Circadian years</span>
                 <span className="font-medium">{circadianAge} years</span>
               </div>
               <div className="flex items-center justify-between gap-3">

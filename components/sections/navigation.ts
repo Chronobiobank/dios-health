@@ -10,6 +10,11 @@ export const NAV_DASHBOARD_LINK = {
   mobileLabel: 'Dashboard',
 } as const
 
+export const NAV_COACH_LINK = {
+  label: 'Ask DIOS',
+  href: '/dashboard/coach',
+} as const
+
 export const AUTH_LINKS = [
   { label: 'Sign in', href: '/signin' },
   { label: 'Sign up', href: '/signup' },

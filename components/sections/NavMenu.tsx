@@ -1,19 +1,21 @@
 'use client'
 
 import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect, useId, useRef, useState } from 'react'
 
 import { SignOutButton } from '@/components/auth/sign-out-button'
 import { HashLink } from '@/components/sections/HashLink'
 import { cn } from '@/lib/utils'
 
-import { AUTH_LINKS, NAV_DASHBOARD_LINK, NAV_MENU_LINKS } from './navigation'
+import { AUTH_LINKS, NAV_COACH_LINK, NAV_DASHBOARD_LINK, NAV_MENU_LINKS } from './navigation'
 
 type NavMenuProps = {
   isAuthenticated?: boolean
+  coachHref: string
 }
 
-export function NavMenu({ isAuthenticated = false }: NavMenuProps) {
+export function NavMenu({ isAuthenticated = false, coachHref }: NavMenuProps) {
   const [open, setOpen] = useState(false)
   const menuId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
@@ -48,7 +50,10 @@ export function NavMenu({ isAuthenticated = false }: NavMenuProps) {
   }, [open])
 
   return (
-    <div ref={rootRef} className="relative shrink-0">
+    <div ref={rootRef} className="dios-site-nav__coach-menu">
+      <Link href={coachHref} className="dios-site-nav__ask-dios type-button">
+        {NAV_COACH_LINK.label}
+      </Link>
       <button
         type="button"
         className="dios-site-nav__menu-trigger"
