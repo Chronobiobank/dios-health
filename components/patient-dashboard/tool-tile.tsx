@@ -30,7 +30,7 @@ function MedStatusBadge({ status }: { status: Medication['status'] }) {
     <Badge
       variant="outline"
       className={cn(
-        'rounded-full text-[11px]',
+        'rounded-full dash-tile-badge',
         status === 'tonight' && 'border-[var(--gold)] text-[var(--gold)]',
         status === 'taken' && 'border-[var(--color-brand)] text-[var(--color-brand)]'
       )}
@@ -124,7 +124,7 @@ function CoachPanel({
 }) {
   return (
     <div className="space-y-3">
-      <div className="rounded-2xl border border-white/70 bg-white/60 px-3 py-2.5 text-[14px] text-[var(--text-primary)]">
+      <div className="rounded-2xl border border-white/70 bg-white/60 px-3 py-2.5 dash-panel-body">
         Kia ora — I&apos;m here to help with your body clock, results, and plan.
       </div>
       <div className="flex flex-wrap gap-2">
@@ -133,7 +133,7 @@ function CoachPanel({
             key={prompt}
             type="button"
             onClick={() => onSendPrompt(prompt)}
-            className="rounded-full border border-white/75 bg-white/55 px-3 py-1 text-[12px] text-[var(--text-primary)] hover:bg-white/70"
+            className="rounded-full border border-white/75 bg-white/55 px-3 py-1.5 dash-panel-chip text-[var(--text-primary)] hover:bg-white/70"
           >
             {prompt}
           </button>
@@ -150,7 +150,7 @@ function CoachPanel({
           value={draft}
           onChange={(event) => onDraftChange(event.target.value)}
           placeholder="Ask DIOS anything…"
-          className="min-w-0 flex-1 rounded-xl border border-white/75 bg-white/60 px-3 py-2 text-[14px] outline-none"
+          className="min-w-0 flex-1 rounded-xl border border-white/75 bg-white/60 px-3 py-2.5 dash-panel-body outline-none"
         />
         <Button type="submit" size="sm" className="bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand)]/90">
           Send
@@ -170,19 +170,19 @@ function MedsPanel({
   return (
     <div className="space-y-3">
       {vdrUnresolved ? (
-        <p className="text-[14px] text-[var(--text-muted)]">
+        <p className="dash-panel-muted">
           Moderate confidence — an unresolved VDR flag may shift tonight&apos;s vitamin D timing.
         </p>
       ) : null}
 
       {medications.length === 0 ? (
-        <p className="text-[14px] text-[var(--text-muted)]">
+        <p className="dash-panel-muted">
           Add your medications during onboarding to see personalised timing windows.
         </p>
       ) : (
         <ul className="space-y-3">
           {medications.map((med) => (
-            <li key={`${med.name}-${med.time}`} className="flex items-start justify-between gap-3 text-[14px]">
+            <li key={`${med.name}-${med.time}`} className="flex items-start justify-between gap-3 dash-panel-row">
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <span
@@ -196,7 +196,7 @@ function MedsPanel({
                   </span>
                   <span className="text-[var(--text-muted)]">{med.time}</span>
                 </div>
-                <p className="mt-1 pl-[18px] text-[13px] text-[var(--text-muted)]">{med.reason}</p>
+                <p className="mt-1 pl-[18px] dash-panel-muted">{med.reason}</p>
               </div>
               <MedStatusBadge status={med.status} />
             </li>

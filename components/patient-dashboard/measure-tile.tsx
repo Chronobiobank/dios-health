@@ -64,7 +64,7 @@ export function MeasureTile({ tile, isOpen, onToggle, onSendPrompt, onOpenCoach 
         <p className="dash-tile-subtitle">{tile.subtitle}</p>
 
         <div className="dash-tile-footer space-y-2">
-          <Badge variant="outline" className={cn('rounded-full text-[11px]', badgeClass(tile.badgeTone))}>
+          <Badge variant="outline" className={cn('rounded-full dash-tile-badge', badgeClass(tile.badgeTone))}>
             {tile.badge}
           </Badge>
           <div className="dash-tile-footer-meta">
@@ -86,7 +86,7 @@ export function MeasureTile({ tile, isOpen, onToggle, onSendPrompt, onOpenCoach 
           >
             <div className="space-y-2">
               {tile.panelRows.map((row) => (
-                <div key={row.key} className="flex items-start justify-between gap-3 text-[14px]">
+                <div key={row.key} className="flex items-start justify-between gap-3 dash-panel-row">
                   <span className="text-[var(--text-muted)]">{row.key}</span>
                   <span className="text-right font-medium text-[var(--text-primary)]">{row.value}</span>
                 </div>
@@ -99,7 +99,7 @@ export function MeasureTile({ tile, isOpen, onToggle, onSendPrompt, onOpenCoach 
                   type="button"
                   size="sm"
                   variant="outline"
-                  className="border-[var(--color-border)] bg-white/45 text-[13px]"
+                  className="dash-panel-action border-[var(--color-border)] bg-white/45"
                   onClick={() => {
                     if (action.opensCoach) {
                       onOpenCoach()

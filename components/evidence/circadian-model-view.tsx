@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { SnapshotAgeRow } from '@/components/patient-dashboard/snapshot-age-row'
 import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
 import { MOCK_PATIENT_SNAPSHOT } from '@/lib/patient-dashboard/mock-snapshot'
+import { formatBodyClockCta } from '@/lib/patient-dashboard/tile-copy'
 
 const {
   chronologicalAge,
@@ -12,6 +13,8 @@ const {
   socialJetlag,
   syncScore,
 } = MOCK_PATIENT_SNAPSHOT
+
+const bodyClockCta = formatBodyClockCta(recoveryYears)
 
 const EXPLAINERS = [
   {
@@ -54,11 +57,11 @@ export function CircadianModelView() {
   return (
     <div className="min-h-screen pb-12">
       <main className="mx-auto max-w-2xl px-5 pb-8 pt-20 sm:px-6 sm:pt-24">
-        <p className="font-mono text-xs uppercase tracking-widest text-black/50">Circadian model</p>
-        <h1 className="mt-2 text-2xl font-medium tracking-tight text-[var(--text-primary)] sm:text-3xl">
+        <p className="font-mono text-sm uppercase tracking-widest text-black/50">Circadian model</p>
+        <h1 className="mt-2 text-[1.625rem] font-medium leading-tight tracking-tight text-[var(--text-primary)] sm:text-3xl">
           Understanding circadian age
         </h1>
-        <p className="mt-3 text-[15px] leading-relaxed text-[var(--text-muted)]">
+        <p className="mt-3 dash-panel-body leading-relaxed text-[var(--text-muted)]">
           Your DIOS dashboard compares two ages side by side.{' '}
           <strong className="font-medium text-[var(--text-primary)]">Calendar age</strong> is how
           long you have lived.{' '}
@@ -74,14 +77,16 @@ export function CircadianModelView() {
           />
           <div className="snapshot-cta-bar mt-4">
             <span>
-              Fix your body clock · recover <em>{recoveryYears} years</em> in 90 days
+              {bodyClockCta.before}
+              <em>{bodyClockCta.highlight}</em>
+              {bodyClockCta.after}
             </span>
           </div>
         </div>
 
-        <p className="mt-4 text-[13px] leading-relaxed text-[var(--text-muted)]">
+        <p className="mt-4 dash-panel-muted leading-relaxed">
           On your dashboard, circadian age appears as{' '}
-          <span className="font-mono text-[11px] uppercase tracking-wider text-black/55">
+          <span className="font-mono text-xs uppercase tracking-wider text-black/55">
             circadian years
           </span>{' '}
           — the same number, in the language of your snapshot tile.
@@ -90,30 +95,30 @@ export function CircadianModelView() {
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {EXPLAINERS.map((item) => (
             <article key={item.label} className="glass-tile p-5">
-              <p className="font-mono text-[10px] uppercase tracking-wider text-black/45">
+              <p className="font-mono text-xs uppercase tracking-wider text-black/45">
                 {item.label}
               </p>
-              <p className="mt-2 text-[14px] leading-relaxed text-[var(--text-muted)]">{item.body}</p>
+              <p className="mt-2 dash-panel-muted leading-relaxed">{item.body}</p>
             </article>
           ))}
         </div>
 
         <section className="mt-8">
-          <p className="font-mono text-[10px] uppercase tracking-wider text-black/45">
+          <p className="font-mono text-xs uppercase tracking-wider text-black/45">
             What drives circadian age
           </p>
-          <p className="mt-2 text-[14px] leading-relaxed text-[var(--text-muted)]">
+          <p className="mt-2 dash-panel-muted leading-relaxed">
             DIOS combines signals from your phone, wearables, and blood panels to estimate phase —
             not a single test score, but a living measure that updates as your rhythm changes.
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {SIGNALS.map((signal) => (
               <div key={signal.label} className="glass-panel p-4 text-center">
-                <p className="text-lg font-medium text-[var(--dash-metric-brown)]">{signal.value}</p>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-black/45">
+                <p className="text-xl font-medium text-[var(--dash-metric-brown)]">{signal.value}</p>
+                <p className="mt-1 font-mono text-xs uppercase tracking-wider text-black/45">
                   {signal.label}
                 </p>
-                <p className="mt-2 text-[12px] leading-snug text-[var(--text-muted)]">
+                <p className="mt-2 dash-panel-muted leading-snug">
                   {signal.detail}
                 </p>
               </div>
@@ -122,10 +127,10 @@ export function CircadianModelView() {
         </section>
 
         <div className="glass-tile mt-8 p-5">
-          <p className="text-[15px] font-medium text-[var(--text-primary)]">
+          <p className="dash-panel-heading">
             See it on your dashboard
           </p>
-          <p className="mt-2 text-[14px] leading-relaxed text-[var(--text-muted)]">
+          <p className="mt-2 dash-panel-muted leading-relaxed">
             The snapshot tile is the starting point — calendar years on the left, circadian years on
             the right, and years lost to jetlag in the middle. Everything else on the dashboard
             explains what is pushing your circadian age up or down.
@@ -133,13 +138,13 @@ export function CircadianModelView() {
           <div className="mt-4 flex flex-wrap gap-4">
             <Link
               href="/how-it-works"
-              className="text-[13px] font-medium text-[var(--researcher-avatar-text)] transition-opacity hover:opacity-80"
+              className="dash-panel-action font-medium text-[var(--researcher-avatar-text)] transition-opacity hover:opacity-80"
             >
               Live dashboard demo →
             </Link>
             <Link
               href="/signup/patient"
-              className="text-[13px] font-medium text-[var(--text-primary)] transition-opacity hover:opacity-70"
+              className="dash-panel-action font-medium text-[var(--text-primary)] transition-opacity hover:opacity-70"
             >
               Get your circadian age →
             </Link>

@@ -9,3 +9,15 @@ export function formatCompletenessValue(gapCount: number): string {
 export function formatOpenGapsLabel(gapCount: number): string {
   return gapCount === 1 ? 'Open gap' : 'Open gaps'
 }
+
+export function formatBodyClockCta(recoveryYears: number): {
+  before: string
+  highlight: string
+  after: string
+} {
+  return {
+    before: 'Fix your body clock · recover ',
+    highlight: `${recoveryYears} years`,
+    after: ' in 90 days with sleep and light timing',
+  }
+}

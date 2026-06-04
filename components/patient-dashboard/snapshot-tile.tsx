@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 
 import { SnapshotAgeRow } from '@/components/patient-dashboard/snapshot-age-row'
+import { formatBodyClockCta } from '@/lib/patient-dashboard/tile-copy'
 import type { PatientSnapshot } from '@/lib/patient-dashboard/types'
 import { cn } from '@/lib/utils'
 
@@ -24,6 +25,8 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
     phaseDrift,
     dlmoEstimate,
   } = snapshot
+
+  const bodyClockCta = formatBodyClockCta(recoveryYears)
 
   return (
     <div className="col-span-2 space-y-3">
@@ -56,7 +59,9 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
 
         <div className="snapshot-cta-bar">
           <span>
-            Fix your body clock · recover <em>{recoveryYears} years</em> in 90 days
+            {bodyClockCta.before}
+            <em>{bodyClockCta.highlight}</em>
+            {bodyClockCta.after}
           </span>
           <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
         </div>
@@ -72,8 +77,8 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
             transition={{ duration: 0.2 }}
             className="glass-panel p-5"
           >
-            <p className="text-[15px] font-medium text-[var(--text-primary)]">Age breakdown</p>
-            <div className="mt-3 space-y-2 text-[14px]">
+            <p className="dash-panel-heading">Age breakdown</p>
+            <div className="mt-3 space-y-2 dash-panel-row">
               <div className="flex items-center justify-between gap-3">
                 <span className="text-[var(--text-muted)]">Calendar years</span>
                 <span className="font-medium">{Math.round(chronologicalAge)} years</span>
@@ -95,7 +100,7 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
                 <span className="font-medium">{socialJetlag}h</span>
               </div>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-[13px] font-medium text-[var(--researcher-avatar-text)]">
+            <div className="mt-4 flex items-center gap-1 dash-panel-action font-medium text-[var(--researcher-avatar-text)]">
               <span>See re-entrainment plan</span>
               <ArrowRight className="h-4 w-4" aria-hidden />
             </div>

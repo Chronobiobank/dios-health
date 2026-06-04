@@ -14,9 +14,9 @@
 }
 
 .dashboard-section-label {
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--dash-section-label);
 }
@@ -125,7 +125,7 @@
 
 .snapshot-age-label {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.5625rem;
+  font-size: 0.625rem;
   font-weight: 400;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -177,14 +177,14 @@
 
 .snapshot-stat {
   text-align: center;
-  font-size: 0.75rem;
-  line-height: 1.35;
+  font-size: 0.875rem;
+  line-height: 1.4;
   color: rgb(74 55 40 / 0.68);
 }
 
 .snapshot-stat strong {
   display: block;
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   color: var(--dash-metric-brown);
 }
@@ -201,10 +201,11 @@
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 2px 12px rgb(13 13 13 / 0.18);
-  padding: 0.75rem 1rem;
-  font-size: 0.8125rem;
-  line-height: 1.4;
+  padding: 0.875rem 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.45;
   color: rgb(255 255 255 / 0.88);
+  text-align: center;
 }
 
 .snapshot-cta-bar em {
@@ -279,11 +280,11 @@
 }
 
 .dash-tile-metric {
-  font-size: 1.0625rem;
+  font-size: 1.1875rem;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.3;
   color: var(--dash-metric-brown);
-  min-height: 1.3125rem;
+  min-height: 1.5rem;
   margin-bottom: 0.375rem;
 }
 
@@ -292,7 +293,7 @@
 }
 
 .dash-tile-title {
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   line-height: 1.35;
   color: var(--dash-metric-brown);
@@ -300,21 +301,21 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  min-height: 2.53125rem;
+  min-height: 2.875rem;
 }
 
 .dash-tile-subtitle {
   margin-top: 0.375rem;
   flex: 1;
-  font-size: 0.8125rem;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--dash-section-label);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  min-height: 3.54375rem;
+  min-height: 4.5rem;
 }
 
 .dash-tile-footer {
@@ -326,10 +327,47 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  line-height: 1.25;
+  line-height: 1.35;
   color: var(--dash-section-label);
+}
+
+.dash-tile-badge {
+  font-size: 0.8125rem;
+}
+
+.dash-panel-heading {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+
+.dash-panel-body {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.dash-panel-muted {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.dash-panel-row {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.dash-panel-action {
+  font-size: 0.9375rem;
+}
+
+.dash-panel-chip {
+  font-size: 0.875rem;
+  line-height: 1.4;
 }
 
 .patient-dashboard-skeleton {
