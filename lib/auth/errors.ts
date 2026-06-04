@@ -7,13 +7,24 @@ export function mapSignInError(error: AuthError): string {
     return 'Too many attempts. Wait 60 seconds.'
   }
 
-  if (
-    message.includes('invalid login credentials') ||
-    message.includes('invalid email or password') ||
-    error.status === 400
-  ) {
-    return 'Wrong email or password. Try again.'
+  if (message.includes('email not confirmed') || message.includes('confirm your email')) {
+    return 'Confirm your email first — check your inbox and spam, then try again.'
   }
 
-  return 'Wrong email or password. Try again.'
+  if (message.includes('user not found') || message.includes('no user found')) {
+    return 'No account for this email. Create one at Sign up → Patient.'
+  }
+
+  if (
+    message.includes('invalid login credentials') ||
+    message.includes('invalid email or password')
+  ) {
+    return 'Wrong email or password. Try again or reset your password.'
+  }
+
+  if (error.status === 400) {
+    return error.message || 'Sign-in failed. Check your email and password.'
+  }
+
+  return 'Sign-in failed. Try again or use Forgot password.'
 }

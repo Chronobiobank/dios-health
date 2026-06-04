@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 
 import { ProfileAvatar } from '@/components/profile/profile-avatar'
-import { BTN_PRIMARY, CARD } from '@/components/sections/layout'
+import { BTN_PRIMARY } from '@/components/sections/layout'
 import { isAllowedAvatarFile } from '@/lib/profile/avatar'
 
 type ProfileAvatarUploadProps = {
@@ -84,7 +84,7 @@ export function ProfileAvatarUpload({ fullName, initialAvatarUrl }: ProfileAvata
   }
 
   return (
-    <div className={`${CARD} rounded-2xl p-5 sm:p-6`}>
+    <div className="dios-glass-outer rounded-2xl p-5 sm:p-6">
       <div className="flex items-center gap-4">
         <ProfileAvatar name={fullName} src={avatarUrl} size="lg" />
         <div className="min-w-0 flex-1">

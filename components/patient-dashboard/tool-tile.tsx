@@ -1,12 +1,12 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, MessageCircle, Pill } from 'lucide-react'
+import { MessageCircle, Pill } from 'lucide-react'
 
+import { DashCompactTile } from '@/components/patient-dashboard/dash-compact-tile'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { tileSubhead } from '@/lib/patient-dashboard/tile-copy'
 import type { Medication, PatientSnapshot } from '@/lib/patient-dashboard/types'
-import { cn } from '@/lib/utils'
 
 type ToolTileProps = {
   id: 'coach' | 'meds'
@@ -30,14 +30,7 @@ function coachQuickPrompts() {
 function MedStatusBadge({ status }: { status: Medication['status'] }) {
   const label = status === 'taken' ? 'Taken' : status === 'tonight' ? 'Tonight' : 'Upcoming'
   return (
-    <Badge
-      variant="outline"
-      className={cn(
-        'rounded-full dash-tile-badge',
-        status === 'tonight' && 'border-[var(--gold)] text-[var(--gold)]',
-        status === 'taken' && 'border-[var(--color-brand)] text-[var(--color-brand)]'
-      )}
-    >
+    <Badge variant="outline" className="dash-tile-badge rounded-full border-[var(--color-border)]">
       {label}
     </Badge>
   )
@@ -56,66 +49,37 @@ export function ToolTile({
   const isCoach = id === 'coach'
 
   return (
-    <div className="space-y-3">
-      <button
-        type="button"
-        onClick={onToggle}
-        className={cn('glass-tile dash-tile flex w-full flex-col p-5 text-left', isOpen && 'glass-tile--open')}
-        aria-expanded={isOpen}
-      >
-        <div className={cn('tool-tile-icon', isCoach ? 'dash-tile-icon--coach' : 'dash-tile-icon--meds')}>
-          {isCoach ? (
-            <MessageCircle className="h-[1.125rem] w-[1.125rem]" strokeWidth={1.75} aria-hidden />
-          ) : (
-            <Pill className="h-[1.125rem] w-[1.125rem]" strokeWidth={1.75} aria-hidden />
-          )}
-        </div>
-
-        <p className="dash-tile-metric dash-tile-metric--spacer" aria-hidden>
-          &nbsp;
-        </p>
-        <p className="dash-tile-title">{isCoach ? 'DIOS Coach' : 'Medication timing'}</p>
-        <p className="dash-tile-subtitle">
-          {isCoach
-            ? 'Ask about your body clock, results, and personalised plan.'
-            : 'When to take each medicine for your body clock today.'}
-        </p>
-
-        <div className="dash-tile-footer">
-          <div className="dash-tile-footer-meta">
-            <span className={isCoach ? 'text-[var(--researcher-avatar-text)]' : 'text-[var(--gold)]'}>
-              {isCoach ? 'Online now' : `${snapshot.medicationsDueTonight} due tonight`}
-            </span>
-            <ArrowRight className="h-4 w-4 shrink-0 text-[var(--researcher-avatar-text)]" aria-hidden />
-          </div>
-        </div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen ? (
-          <motion.div
-            key={`${id}-panel`}
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="glass-panel p-5"
-          >
-            {isCoach ? (
-              <CoachPanel
-                firstName={firstName}
-                snapshot={snapshot}
-                draft={coachDraft}
-                onDraftChange={onCoachDraftChange}
-                onSendPrompt={onSendPrompt}
-              />
-            ) : (
-              <MedsPanel medications={snapshot.medications} vdrUnresolved={snapshot.bloodPanel.vdrFlagUnresolved} />
-            )}
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
-    </div>
+    <DashCompactTile
+      icon={
+        isCoach ? (
+          <MessageCircle strokeWidth={1.75} aria-hidden />
+        ) : (
+          <Pill strokeWidth={1.75} aria-hidden />
+        )
+      }
+      iconClassName={isCoach ? 'dash-tile-icon--coach' : 'dash-tile-icon--meds'}
+      title={isCoach ? 'DIOS Coach' : 'Medication timing'}
+      subtitle={tileSubhead(
+        isCoach
+          ? 'Ask about your body clock, results, and your care plan.'
+          : `${snapshot.medicationsDueTonight} meds due tonight aligned to your body clock schedule.`
+      )}
+      isOpen={isOpen}
+      onToggle={onToggle}
+      panel={
+        isCoach ? (
+          <CoachPanel
+            firstName={firstName}
+            snapshot={snapshot}
+            draft={coachDraft}
+            onDraftChange={onCoachDraftChange}
+            onSendPrompt={onSendPrompt}
+          />
+        ) : (
+          <MedsPanel medications={snapshot.medications} vdrUnresolved={snapshot.bloodPanel.vdrFlagUnresolved} />
+        )
+      }
+    />
   )
 }
 
@@ -135,26 +99,26 @@ function CoachPanel({
   const prompts = coachQuickPrompts()
 
   return (
-    <div className="space-y-3">
-      <div className="rounded-2xl border border-white/70 bg-white/60 px-3 py-2.5 dash-panel-body">
-        Hi {firstName}. Your body clock is running {snapshot.darkYearsHours} hours late — you are
-        accumulating {snapshot.darkYears} Dark Years of metabolic hibernation. Want to know how to
-        turn that around?
+    <div className="dash-panel-stack">
+      <div className="dash-panel-body rounded-2xl border border-white/70 bg-white/60 px-3 py-2.5">
+        Hi {firstName}. Across your TipTraQ nights you fell asleep about {snapshot.clockDrift} minutes
+        after your body-clock target ({snapshot.dlmoEstimate}) — that rhythm slip contributes{' '}
+        {snapshot.darkYears} Dark Years to your metabolic age. Want to know how to turn that around?
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="dash-panel-actions">
         {prompts.map((prompt) => (
           <button
             key={prompt}
             type="button"
             onClick={() => onSendPrompt(prompt)}
-            className="rounded-full border border-white/75 bg-white/55 px-3 py-1.5 dash-panel-chip text-[var(--text-primary)] hover:bg-white/70"
+            className="dash-head rounded-full border border-white/75 bg-white/55 px-3 py-1.5 dash-panel-chip hover:bg-white/70"
           >
             {prompt}
           </button>
         ))}
       </div>
       <form
-        className="flex gap-2"
+        className="dash-panel-inline"
         onSubmit={(event) => {
           event.preventDefault()
           if (draft.trim()) onSendPrompt(draft.trim())
@@ -164,7 +128,7 @@ function CoachPanel({
           value={draft}
           onChange={(event) => onDraftChange(event.target.value)}
           placeholder="Ask anything about your body clock…"
-          className="min-w-0 flex-1 rounded-xl border border-white/75 bg-white/60 px-3 py-2.5 dash-panel-body outline-none"
+          className="dash-head min-w-0 flex-1 rounded-xl border border-white/75 bg-white/60 px-3 py-2.5 dash-panel-body outline-none"
         />
         <Button type="submit" size="sm" className="bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand)]/90">
           Send
@@ -182,7 +146,7 @@ function MedsPanel({
   vdrUnresolved: boolean
 }) {
   return (
-    <div className="space-y-3">
+    <div className="dash-panel-stack">
       {vdrUnresolved ? (
         <p className="dash-panel-muted">
           Moderate confidence — an unresolved VDR flag may shift tonight&apos;s vitamin D timing.
@@ -194,21 +158,21 @@ function MedsPanel({
           Add your medications during onboarding to see personalised timing windows.
         </p>
       ) : (
-        <ul className="space-y-3">
+        <ul className="dash-panel-stack list-none p-0">
           {medications.map((med) => (
-            <li key={`${med.name}-${med.time}`} className="flex items-start justify-between gap-3 dash-panel-row">
+            <li key={`${med.name}-${med.time}`} className="flex items-start justify-between dash-panel-row dash-panel-inline">
               <div className="min-w-0">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center dash-panel-inline">
                   <span
                     className="h-2.5 w-2.5 shrink-0 rounded-full"
                     style={{ background: med.colour }}
                     aria-hidden
                   />
-                  <span className="font-medium text-[var(--text-primary)]">
+                  <span className="dash-head font-medium">
                     {med.name}
                     {med.dose ? ` · ${med.dose}` : ''}
                   </span>
-                  <span className="text-[var(--text-muted)]">{med.time}</span>
+                  <span className="dash-sub">{med.time}</span>
                 </div>
                 <p className="mt-1 pl-[18px] dash-panel-muted">{med.reason}</p>
               </div>

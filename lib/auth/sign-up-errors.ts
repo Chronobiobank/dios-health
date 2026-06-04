@@ -18,5 +18,13 @@ export function mapSignUpError(error: AuthError): string {
     return 'Password must be at least 8 characters.'
   }
 
+  if (message.includes('database error')) {
+    return (
+      'Server database setup is incomplete. In Supabase SQL Editor, run ' +
+      'supabase/migrations/018_complete_patient_signup.sql and ' +
+      '019_fix_auth_signup_trigger.sql, then try signup again.'
+    )
+  }
+
   return 'Something went wrong. Please try again.'
 }

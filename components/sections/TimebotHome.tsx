@@ -22,7 +22,7 @@ export function TimebotHome() {
             </li>
           ))}
         </ul>
-        <Link href="/signup" className={`${BTN_PRIMARY} mt-10`}>
+        <Link href="/signup/patient" className={`${BTN_PRIMARY} mt-10`}>
           Try it free →
         </Link>
       </div>

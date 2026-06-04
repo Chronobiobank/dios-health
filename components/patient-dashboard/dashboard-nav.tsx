@@ -1,23 +1,22 @@
 'use client'
 
-import { Bell } from 'lucide-react'
+import Link from 'next/link'
+import { Bell, SlidersHorizontal } from 'lucide-react'
 
-import { initialsFromName } from '@/lib/profile/avatar'
+import { ProfileAvatar } from '@/components/profile/profile-avatar'
+import { PATIENT_ROUTES } from '@/lib/auth/routes'
 
 type DashboardNavProps = {
-  firstName: string
+  greeting: string
   fullName: string
+  avatarUrl: string | null
 }
 
-export function DashboardNav({ firstName, fullName }: DashboardNavProps) {
-  const initials = initialsFromName(fullName)
-
+export function DashboardNav({ greeting, fullName, avatarUrl }: DashboardNavProps) {
   return (
     <header className="patient-dashboard-nav relative z-10 bg-transparent">
       <div className="flex w-full min-w-0 items-center justify-between gap-3 py-4">
-        <span className="patient-dashboard-nav__greeting min-w-0 truncate">
-          Kia ora, {firstName}.
-        </span>
+        <span className="patient-dashboard-nav__greeting min-w-0 truncate">{greeting}</span>
         <div className="flex shrink-0 items-center gap-2">
           <button
             type="button"
@@ -26,13 +25,16 @@ export function DashboardNav({ firstName, fullName }: DashboardNavProps) {
           >
             <Bell size={18} strokeWidth={1.75} />
           </button>
-          <div
-            className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold text-white"
-            style={{ background: 'linear-gradient(135deg, #1D9E75, #0a6a52)' }}
-            aria-hidden
+          <Link
+            href={PATIENT_ROUTES.profile}
+            className="inline-flex items-center justify-center text-[var(--text-primary)]"
+            aria-label="Profile and settings"
           >
-            {initials}
-          </div>
+            <SlidersHorizontal size={18} strokeWidth={1.75} />
+          </Link>
+          <Link href={PATIENT_ROUTES.profile} aria-label="Your profile photo">
+            <ProfileAvatar name={fullName} src={avatarUrl} size="sm" />
+          </Link>
         </div>
       </div>
     </header>

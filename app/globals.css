@@ -15,7 +15,7 @@
 @import "./styles/calmer/chat-interface.css";
 @import "./styles/calmer/animations.css";
 
-/* Patient dashboard — glass tiles, age row, metabolic spectrum (site-wide) */
+/* Patient dashboard — dios-glass-outer / dios-glass-inner tiles (site-wide via globals) */
 @import "./dashboard/patient-dashboard.css";
 
 @custom-variant dark (&:is(.dark *));

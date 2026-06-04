@@ -2,7 +2,7 @@
 export default function HowItWorksLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="how-it-works-route min-h-screen">
-      <div className="how-it-works-route__inner mx-auto w-full pb-8 pt-[calc(var(--dios-site-nav-height)+1rem)] sm:pt-[calc(var(--dios-site-nav-height)+1.25rem)]">
+      <div className="how-it-works-route__inner mx-auto w-full pb-8">
         {children}
       </div>
     </div>

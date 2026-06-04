@@ -101,7 +101,7 @@ export function buildChronosomaticSpectrumNodes(
       reason:
         sleepRhythmSeverity === 'weak'
           ? 'Your sleep onset is close to your estimated body-clock window.'
-          : `Your sleep slipped ${input.clockDrift} minutes last night — your rhythm is running behind schedule.`,
+          : `Your mean sleep onset is about ${input.clockDrift} minutes after your DLMO window — your rhythm is running behind schedule.`,
       action:
         sleepRhythmSeverity === 'weak'
           ? 'Keep your morning light routine steady to hold this pattern.'
@@ -163,7 +163,9 @@ export function buildChronosomaticSpectrumNodes(
       severity: immuneSeverity,
       reason:
         immuneSeverity === 'mild'
-          ? 'Vitamin D is not absorbing properly — VDR activation stays suppressed and adds Dark Years.'
+          ? input.bloodPanel.collectedAt
+            ? 'Vitamin D is not absorbing properly — VDR activation stays suppressed and adds Dark Years.'
+            : 'No blood panel yet — vitamin D and VDR are unconfirmed; immune risk is provisional until GP bloods.'
           : 'Vitamin D and cofactor markers support immune clock signalling on available labs.',
       action:
         immuneSeverity === 'mild'

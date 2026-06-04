@@ -73,8 +73,8 @@ export async function requirePatientSession() {
     redirect(AUTH_ROUTES.signUpPatient)
   }
 
-  if (!patient.onboarding_complete) {
-    redirect(AUTH_ROUTES.signUpPatient)
+  if (!patient.onboarding_complete || !patient.fitzpatrick_type || !patient.chronotype_q1) {
+    redirect(AUTH_ROUTES.patientChronoprofile)
   }
 
   return {

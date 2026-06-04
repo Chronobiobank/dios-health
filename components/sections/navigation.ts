@@ -12,7 +12,7 @@ export const NAV_COACH_LINK = {
 
 export const AUTH_LINKS = [
   { label: 'Sign in', href: '/signin' },
-  { label: 'Sign up', href: '/signup' },
+  { label: 'Sign up', href: '/signup/patient' },
 ] as const
 
 /** Off-canvas / hamburger menu — keep to primary routes only */

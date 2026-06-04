@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import {
   dotStyleForSeverity,
   isElevatedSeverity,
+  spectrumDotWrapStyle,
   type DotStyle,
 } from '@/lib/patient-dashboard/dashboard-indicators'
 import type { SpectrumNode, SpectrumNodeId } from '@/lib/patient-dashboard/types'
@@ -36,7 +37,7 @@ function SpectrumDotButton({
       aria-expanded={isOpen}
       aria-label={`${node.label}, ${node.severity}`}
     >
-      <span className="chronosomatic-spectrum__dot-wrap">
+      <span className="chronosomatic-spectrum__dot-wrap" style={spectrumDotWrapStyle(style.size)}>
         {isSevere ? (
           <>
             <motion.span
@@ -67,8 +68,7 @@ function SpectrumDotButton({
         <span
           className={cn('chronosomatic-spectrum__dot', isOpen && 'chronosomatic-spectrum__dot--open')}
           style={{
-            width: style.size,
-            height: style.size,
+            ...spectrumDotWrapStyle(style.size),
             backgroundColor: style.fill,
             borderColor: style.border,
             borderWidth: style.borderWidth,

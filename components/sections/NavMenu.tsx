@@ -8,6 +8,8 @@ import { SignOutButton } from '@/components/auth/sign-out-button'
 import { HashLink } from '@/components/sections/HashLink'
 import { cn } from '@/lib/utils'
 
+import { PATIENT_ROUTES } from '@/lib/auth/routes'
+
 import { AUTH_LINKS, NAV_COACH_LINK, NAV_DASHBOARD_LINK, NAV_MENU_LINKS } from './navigation'
 
 type NavMenuProps = {
@@ -101,6 +103,15 @@ export function NavMenu({ isAuthenticated = false, coachHref }: NavMenuProps) {
                       onClick={() => setOpen(false)}
                     >
                       {NAV_DASHBOARD_LINK.label}
+                    </HashLink>
+                  </li>
+                  <li>
+                    <HashLink
+                      href={PATIENT_ROUTES.profile}
+                      className="type-nav block rounded-lg px-3 py-2.5 transition-colors hover:bg-black/[0.03] hover:text-black"
+                      onClick={() => setOpen(false)}
+                    >
+                      Profile & settings
                     </HashLink>
                   </li>
                   <li>

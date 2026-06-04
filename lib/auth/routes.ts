@@ -2,8 +2,11 @@ export const AUTH_ROUTES = {
   signIn: '/signin',
   forgotPassword: '/signin/forgot-password',
   resetPassword: '/signin/reset-password',
-  signUp: '/signup',
+  /** Patient account creation (email + password). */
+  signUp: '/signup/patient',
   signUpPatient: '/signup/patient',
+  /** Demographics wizard — builds chronoprofile before dashboard. */
+  patientChronoprofile: '/signup/patient/chronoprofile',
   signUpClinician: '/signup/clinician',
   pendingVerification: '/pending-verification',
 } as const

@@ -6,7 +6,6 @@ import { GpReportButton } from '@/components/dashboard/gp-report-button'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { TipTraqNightList } from '@/components/dashboard/tiptraq-night-list'
 import { SignOutButton } from '@/components/auth/sign-out-button'
-import { ProfileAvatarUpload } from '@/components/profile/profile-avatar-upload'
 import { buildPatientDashboardHeader } from '@/lib/auth/patient-dashboard-header'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
@@ -28,7 +27,7 @@ export default async function DashboardDataControlsPage() {
   const header = buildPatientDashboardHeader({
     profile,
     patient,
-    subtitle: 'Your profile and data sharing preferences.',
+    subtitle: 'Data sharing and TipTraQ preferences.',
   })
 
   return (
@@ -36,23 +35,20 @@ export default async function DashboardDataControlsPage() {
       <PatientTopBar {...header} />
 
       <section>
-        <ProfileAvatarUpload fullName={profile.full_name ?? 'Patient'} initialAvatarUrl={profile.avatar_url} />
-      </section>
-
-      <section className="mt-8">
-        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">Profile</h2>
         <Link
           href={PATIENT_ROUTES.profile}
-          className="mt-4 flex items-center justify-between rounded-2xl border-[0.5px] border-black/[0.08] bg-white px-5 py-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-colors hover:border-black/15"
+          className="font-mono text-[11px] text-black/45 transition-colors hover:text-black"
         >
-          <div>
-            <p className="text-sm font-medium text-black">Demographic details</p>
-            <p className="mt-1 text-sm text-black/55">
-              Skin type, location, shift work, and body clock questions
-            </p>
-          </div>
-          <span className="font-mono text-[11px] text-black/45">Edit →</span>
+          ← Profile & settings
         </Link>
+        <h1 className="mt-3 text-2xl font-medium text-black">Data controls</h1>
+        <p className="mt-2 text-sm text-black/55">
+          Manage sharing preferences and recordings. For your photo and personal details, open{' '}
+          <Link href={PATIENT_ROUTES.profile} className="text-black underline underline-offset-2">
+            Profile & settings
+          </Link>
+          .
+        </p>
       </section>
 
       {nightHistory.length > 0 ? (

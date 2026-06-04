@@ -1,9 +1,10 @@
 import { DashboardClient } from '@/components/patient-dashboard/dashboard-client'
-import { getPatientDashboardGreeting, getPatientFirstName } from '@/lib/auth/greeting'
+import { getLocalizedPatientGreeting, getPatientFirstName } from '@/lib/auth/greeting'
 import { resolveDashboardAvatar } from '@/components/patient-dashboard/constants'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import type { BloodPanelSnapshot } from '@/lib/dashboard/insights-data'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
+import { meanAhiFromValues } from '@/lib/patient-dashboard/dashboard-indicators'
 import { buildPatientSnapshot } from '@/lib/patient-dashboard/build-patient-snapshot'
 import { createClient } from '@/lib/supabase/server'
 
@@ -26,6 +27,7 @@ export default async function PatientDashboardPage() {
     { data: latestSmartphone },
     { data: latestBloodPanel },
     { data: latestTiptraqNight },
+    { data: recentTiptraqAhi },
   ] = await Promise.all([
     supabase.from('mlux_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
     supabase
@@ -64,7 +66,18 @@ export default async function PatientDashboardPage() {
       .order('report_date', { ascending: false })
       .limit(1)
       .maybeSingle<{ report_date: string; rem_delay_flag: boolean | null }>(),
+    supabase
+      .from('tiptraq_nights')
+      .select('ahi')
+      .eq('patient_id', user.id)
+      .not('ahi', 'is', null)
+      .order('report_date', { ascending: false })
+      .limit(5),
   ])
+
+  const meanTipTraqAhi = meanAhiFromValues(
+    (recentTiptraqAhi ?? []).map((row) => Number(row.ahi))
+  )
 
   const smartphoneActive =
     latestSmartphone?.observed_at != null &&
@@ -75,7 +88,11 @@ export default async function PatientDashboardPage() {
     fullName: profile.full_name,
   })
 
-  const greeting = getPatientDashboardGreeting(firstName)
+  const greeting = getLocalizedPatientGreeting(
+    firstName,
+    patient.location_city,
+    patient.location_country
+  )
 
   const snapshot = buildPatientSnapshot({
     patient,
@@ -87,6 +104,7 @@ export default async function PatientDashboardPage() {
     latestBloodPanel: latestBloodPanel ?? null,
     latestTiptraqDate: latestTiptraqNight?.report_date ?? null,
     sleepOnsetDelayMinutes: latestTiptraqNight?.rem_delay_flag ? 38 : null,
+    meanTipTraqAhi,
   })
 
   return (
@@ -94,7 +112,7 @@ export default async function PatientDashboardPage() {
       greeting={greeting}
       firstName={firstName}
       fullName={profile.full_name ?? firstName}
-      avatarUrl={resolveDashboardAvatar(profile.avatar_url)}
+      avatarUrl={profile.avatar_url ?? resolveDashboardAvatar(null)}
       snapshot={snapshot}
     />
   )

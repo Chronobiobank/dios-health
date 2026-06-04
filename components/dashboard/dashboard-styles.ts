@@ -1,7 +1,10 @@
-export const DASHBOARD_CARD =
-  'rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm'
+/** Largest dashboard / settings tiles — pearlescent outer glass (see patient-dashboard.css). */
+export const DASHBOARD_CARD = 'dios-glass-outer rounded-2xl p-5 sm:p-6'
 
-export const INSIGHT_CARD = `${DASHBOARD_CARD}`
+/** Nested tiles inside a DASHBOARD_CARD section. */
+export const DASHBOARD_CARD_INNER = 'dios-glass-inner rounded-xl p-4 sm:p-5'
+
+export const INSIGHT_CARD = DASHBOARD_CARD
 
 export const DASHBOARD_H1 = 'type-dashboard-h1'
 export const DASHBOARD_H2 = 'type-dashboard-h2'

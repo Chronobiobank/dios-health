@@ -203,6 +203,8 @@ grant execute on function public.save_avatar_path(text) to authenticated;
 
 notify pgrst, 'reload schema';
 
+-- Also run: supabase/migrations/018_complete_patient_signup.sql (signup + chronobiobank RPC)
+
 -- ─── Verify columns ────────────────────────────────────────────────────────────
 select table_name, column_name, data_type
 from information_schema.columns

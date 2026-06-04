@@ -16,7 +16,9 @@ import type {
   PatientSnapshot,
   TiptraqSummary,
 } from '@/lib/patient-dashboard/types'
-import { formatCompletenessValue, formatOpenGapsLabel } from '@/lib/patient-dashboard/tile-copy'
+import { buildSnapshotStatNotes } from '@/lib/patient-dashboard/snapshot-stat-copy'
+import { buildPatientNextStepsBlock } from '@/lib/patient-dashboard/build-patient-next-steps'
+import { formatCompletenessValue, formatOpenGapsLabel, tileSubhead } from '@/lib/patient-dashboard/tile-copy'
 
 /** Append when a metric cannot be grounded in five TipTraQ nights or report fields. */
 export const LOW_CONFIDENCE = '(low confidence)'
@@ -262,8 +264,10 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
     {
       id: 'sleep',
       value: withNightConfidence(`${metrics.clockDriftMinutes} min`, metrics.nightsLoaded),
-      label: 'Clock slipped last night',
-      subtitle: `You fell asleep ${metrics.meanSleepOnset} on average — ${metrics.clockDriftMinutes} minutes after your body-clock target (${metrics.targetSleepOnset}).`,
+      label: 'Clock drift (night average)',
+      subtitle: tileSubhead(
+        `Five nights averaged ${metrics.clockDriftMinutes} minutes late past your DLMO target.`
+      ),
       badge: 'Adding Dark Years',
       badgeTone: 'watch',
       source: 'TipTraQ',
@@ -294,7 +298,9 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
       id: 'vitd',
       value: bloodPanel.vitaminDLabel,
       label: 'Vitamin D not working',
-      subtitle: `No Layer 2 blood panel yet — vitamin D and VDR status are ${LOW_CONFIDENCE} until your GP bloods are linked.`,
+      subtitle: tileSubhead(
+        'No bloods yet; vitamin D and VDR unconfirmed for planning.'
+      ),
       badge: 'Act now',
       badgeTone: 'act',
       source: `Awaiting bloods ${LOW_CONFIDENCE}`,
@@ -318,13 +324,16 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
       id: 'tiptraq',
       value: tiptraqSummary.qualityLabel,
       label: 'Sleep quality',
-      subtitle: `TipTraQ recorded ${metrics.nightsLoaded} night${metrics.nightsLoaded === 1 ? '' : 's'} in DIOS — mean sleep ${metrics.meanTstLabel}, REM ${metrics.meanRemPct}%, AHI ${metrics.meanAhi}.`,
+      subtitle: tileSubhead(
+        'Five TipTraQ nights show mild OSA with sleep rhythm slip.'
+      ),
       badge: 'TipTraQ · 5/5 nights',
       badgeTone: 'study',
       source: 'TipTraQ',
       panelRows: [
         { key: 'Quality', value: tiptraqSummary.qualityLabel },
-        { key: 'Clock drift this week', value: `${metrics.darkYearsHours}h` },
+        { key: 'Clock drift (mean)', value: `${metrics.clockDriftMinutes} min` },
+        { key: 'Phase lag (midpoint)', value: `${metrics.darkYearsHours}h` },
         {
           key: 'Last study',
           value: `${metrics.nightsLoaded}/5 TipTraQ nights · SCt ${withNightConfidence(metrics.sleepTimingCentre, metrics.nightsLoaded)}`,
@@ -341,8 +350,9 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
       id: 'completeness',
       value: formatCompletenessValue(2),
       label: 'Data completeness',
-      subtitle:
-        'Two gaps are reducing the precision of your Dark Years calculation and your medication timing plan.',
+      subtitle: tileSubhead(
+        'Two data gaps reduce Dark Years and medication timing precision.'
+      ),
       badge: 'Action needed',
       badgeTone: 'action',
       source: 'DIOS layers',
@@ -412,6 +422,29 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
     chronotypeEvening: true,
   })
 
+  const statNotes = buildSnapshotStatNotes({
+    darkYearsHours: metrics.darkYearsHours,
+    lightAlignment: metrics.lightAlignment,
+    clockDrift: metrics.clockDriftMinutes,
+    dlmoEstimate: metrics.dlmoEstimate,
+    tipTraqNights: metrics.nightsLoaded,
+    meanSleepOnset: metrics.meanSleepOnset,
+    sleepTimingCentre: metrics.sleepTimingCentre,
+  })
+
+  const nextSteps = buildPatientNextStepsBlock({
+    medicationsDueTonight: 2,
+    medications: SEAN_MEDICATIONS,
+    clockDrift: metrics.clockDriftMinutes,
+    dlmoEstimate: metrics.dlmoEstimate,
+    bloodPanel,
+    completenessGaps: 2,
+    spectrumNodes,
+    tipTraqNightsCount: metrics.nightsLoaded,
+    hasTipTraq: true,
+    recoveryYears,
+  })
+
   return {
     chronologicalAge,
     chronosomaticAge,
@@ -421,6 +454,7 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
     lightAlignment: metrics.lightAlignment,
     clockDrift: metrics.clockDriftMinutes,
     dlmoEstimate: metrics.dlmoEstimate,
+    statNotes,
     medications: SEAN_MEDICATIONS,
     medicationsDueTonight: 2,
     bloodPanel,
@@ -429,6 +463,7 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
     completenessGaps: 2,
     coachOnline: true,
     spectrumNodes,
+    nextSteps,
     ...calibration,
   }
 }

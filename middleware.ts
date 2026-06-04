@@ -1,10 +1,14 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
 import {
+  getPatientOnboardingPath,
   getPostAuthPath,
   hasCompletedClinicianOnboarding,
+  hasPatientAccount,
   hasPatientProfile,
   isClinicianOnboardingPath,
+  isPatientAccountSignupPath,
+  isPatientChronoprofilePath,
   isPatientOnboardingPath,
   isProtectedPath,
   isPublicAuthPath,
@@ -40,10 +44,25 @@ export async function middleware(request: NextRequest) {
     if (isPatientOnboardingPath(pathname)) {
       const completed = await hasPatientProfile(supabase, user.id)
       if (completed) {
-        return (
-          redirectIfNeeded(request, PATIENT_ROUTES.coach) ?? supabaseResponse
-        )
+        return redirectIfNeeded(request, PATIENT_ROUTES.dashboard) ?? supabaseResponse
       }
+
+      if (isPatientAccountSignupPath(pathname)) {
+        const hasAccount = await hasPatientAccount(supabase, user.id)
+        if (hasAccount) {
+          return (
+            redirectIfNeeded(request, AUTH_ROUTES.patientChronoprofile) ?? supabaseResponse
+          )
+        }
+      }
+
+      if (isPatientChronoprofilePath(pathname)) {
+        const hasAccount = await hasPatientAccount(supabase, user.id)
+        if (!hasAccount) {
+          return redirectIfNeeded(request, AUTH_ROUTES.signUpPatient) ?? supabaseResponse
+        }
+      }
+
       return supabaseResponse
     }
 
@@ -84,10 +103,9 @@ export async function middleware(request: NextRequest) {
     }
 
     if (pathname.startsWith('/dashboard') && profile.role === 'patient') {
-      const completed = await hasPatientProfile(supabase, user.id)
-      if (!completed) {
-        return NextResponse.redirect(new URL(AUTH_ROUTES.signUpPatient, request.url))
-      }
+      const destination = await getPatientOnboardingPath(supabase, user.id)
+      const redirect = redirectIfNeeded(request, destination)
+      if (redirect) return redirect
     }
 
     if (pathname.startsWith('/clinic') && profile.role !== 'clinician') {

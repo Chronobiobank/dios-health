@@ -13,6 +13,19 @@ type ClinicianRow = {
 type PatientCompletionRow = {
   id: string
   onboarding_complete: boolean
+  fitzpatrick_type: number | null
+  chronotype_q1: string | null
+}
+
+export async function getPatientOnboardingPath(
+  supabase: SupabaseClient,
+  userId: string
+): Promise<string> {
+  const hasAccount = await hasPatientAccount(supabase, userId)
+  if (!hasAccount) return AUTH_ROUTES.signUpPatient
+
+  const completed = await hasPatientProfile(supabase, userId)
+  return completed ? PATIENT_ROUTES.dashboard : AUTH_ROUTES.patientChronoprofile
 }
 
 export async function getPostAuthPath(
@@ -25,11 +38,10 @@ export async function getPostAuthPath(
     .eq('id', userId)
     .maybeSingle<ProfileRow>()
 
-  if (!profile) return AUTH_ROUTES.signUp
+  if (!profile) return AUTH_ROUTES.signUpPatient
 
   if (profile.role === 'patient') {
-    const completed = await hasPatientProfile(supabase, userId)
-    return completed ? PATIENT_ROUTES.coach : AUTH_ROUTES.signUpPatient
+    return getPatientOnboardingPath(supabase, userId)
   }
 
   const onboardingComplete = await hasCompletedClinicianOnboarding(supabase, userId)
@@ -66,12 +78,36 @@ export function isSignupRoleChoicePath(pathname: string): boolean {
   return pathname === '/signup' || pathname === '/signup/'
 }
 
+export function isPatientAccountSignupPath(pathname: string): boolean {
+  return pathname === AUTH_ROUTES.signUpPatient || pathname === `${AUTH_ROUTES.signUpPatient}/`
+}
+
+export function isPatientChronoprofilePath(pathname: string): boolean {
+  return (
+    pathname === AUTH_ROUTES.patientChronoprofile ||
+    pathname === `${AUTH_ROUTES.patientChronoprofile}/`
+  )
+}
+
 export function isPatientOnboardingPath(pathname: string): boolean {
-  return pathname.startsWith('/signup/patient')
+  return isPatientAccountSignupPath(pathname) || isPatientChronoprofilePath(pathname)
 }
 
 export function isClinicianOnboardingPath(pathname: string): boolean {
   return pathname.startsWith('/signup/clinician')
+}
+
+export async function hasPatientAccount(
+  supabase: SupabaseClient,
+  userId: string
+): Promise<boolean> {
+  const { data } = await supabase
+    .from('patient_profiles')
+    .select('id')
+    .eq('id', userId)
+    .maybeSingle<{ id: string }>()
+
+  return Boolean(data?.id)
 }
 
 export async function hasPatientProfile(
@@ -80,11 +116,16 @@ export async function hasPatientProfile(
 ): Promise<boolean> {
   const { data } = await supabase
     .from('patient_profiles')
-    .select('id, onboarding_complete')
+    .select('id, onboarding_complete, fitzpatrick_type, chronotype_q1')
     .eq('id', userId)
     .maybeSingle<PatientCompletionRow>()
 
-  return Boolean(data?.id && data.onboarding_complete)
+  return Boolean(
+    data?.id &&
+      data.onboarding_complete &&
+      data.fitzpatrick_type != null &&
+      data.chronotype_q1
+  )
 }
 
 export async function hasCompletedClinicianOnboarding(

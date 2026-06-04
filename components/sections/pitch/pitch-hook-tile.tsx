@@ -54,7 +54,7 @@ export function PitchHookTile({
 export function PitchHookTileLinks() {
   return (
     <>
-      <Link href="/signup" className="pitch-btn-primary">
+      <Link href="/signup/patient" className="pitch-btn-primary">
         Patients — free
       </Link>
       <Link href="/signup/clinician" className="pitch-btn-secondary">

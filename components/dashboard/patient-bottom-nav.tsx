@@ -39,12 +39,12 @@ const TABS: NavTab[] = [
   },
   {
     label: 'Settings',
-    href: PATIENT_ROUTES.dataControls,
+    href: PATIENT_ROUTES.profile,
     icon: SlidersHorizontal,
     match: (path) =>
+      path === PATIENT_ROUTES.profile ||
       path === PATIENT_ROUTES.dataControls ||
-      path === PATIENT_ROUTES.streams ||
-      path === PATIENT_ROUTES.profile,
+      path === PATIENT_ROUTES.streams,
   },
 ]
 

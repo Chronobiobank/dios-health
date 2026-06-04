@@ -1,4 +1,5 @@
 import type { PatientProfileRow } from '@/lib/auth/require-patient'
+import { chronologicalAgeFromDateOfBirth } from '@/lib/patient-dashboard/date-of-birth'
 
 /** NZ format 17/07/1978 → ISO calendar date. */
 export const SEAN_JAMES_DATE_OF_BIRTH = '1978-07-17'
@@ -12,19 +13,7 @@ export function isSeanJamesPatient(
   )
 }
 
-/** Whole years lived — matches birth-certificate age (no decimals). */
-export function chronologicalAgeFromDateOfBirth(
-  dateOfBirthIso: string,
-  asOf: Date = new Date()
-): number {
-  const [y, m, d] = dateOfBirthIso.split('-').map(Number)
-  if (!y || !m || !d) return 0
-  let age = asOf.getFullYear() - y
-  const beforeBirthday =
-    asOf.getMonth() + 1 < m || (asOf.getMonth() + 1 === m && asOf.getDate() < d)
-  if (beforeBirthday) age -= 1
-  return Math.max(0, age)
-}
+export { chronologicalAgeFromDateOfBirth }
 
 export function seanJamesChronologicalAge(asOf?: Date): number {
   return chronologicalAgeFromDateOfBirth(SEAN_JAMES_DATE_OF_BIRTH, asOf)

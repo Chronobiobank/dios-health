@@ -19,30 +19,6 @@ export type CalibrationStripProps = {
   togglePanel: (id: DashboardPanelId) => void
 }
 
-const STRIP_STYLE = {
-  background: 'rgba(255,255,255,0.32)',
-  backdropFilter: 'blur(10px)',
-  WebkitBackdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255,255,255,0.55)',
-  borderRadius: 14,
-  padding: '10px 14px',
-} as const
-
-const PANEL_STYLE = {
-  padding: '1rem 1.25rem',
-  borderRadius: 18,
-} as const
-
-function ColumnDivider() {
-  return (
-    <div
-      className="mx-1 w-px shrink-0 self-stretch"
-      style={{ background: 'rgba(255,255,255,0.5)' }}
-      aria-hidden
-    />
-  )
-}
-
 function StripColumn({
   value,
   label,
@@ -113,15 +89,14 @@ export function CalibrationStrip({
   const latDisplay = `${Math.abs(latitude).toFixed(1)}°${hemisphere}`
 
   return (
-    <div className="space-y-3">
+    <div className="dash-tile-group">
       <button
         type="button"
         onClick={() => togglePanel('calibration')}
         className={cn(
-          'flex w-full min-w-0 items-center text-left transition-transform active:scale-[0.995]',
-          isOpen && 'ring-1 ring-white/60'
+          'calibration-strip__bar',
+          isOpen && 'calibration-strip__bar--open'
         )}
-        style={STRIP_STYLE}
         aria-expanded={isOpen}
       >
         <StripColumn
@@ -129,13 +104,11 @@ export function CalibrationStrip({
           label="Skin type"
           why="(Fitzpatrick · vitamin D calibration)"
         />
-        <ColumnDivider />
         <StripColumn
           value={`${latDisplay} · ${season}`}
           label="Solar position"
           why={`(${locationName} · light dose calibration)`}
         />
-        <ColumnDivider />
         <StripColumn
           value={chronotype}
           label="Chronotype"
@@ -152,7 +125,6 @@ export function CalibrationStrip({
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
             className="glass-panel"
-            style={PANEL_STYLE}
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex min-w-0 items-center gap-2">

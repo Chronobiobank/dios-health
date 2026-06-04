@@ -36,7 +36,7 @@ export function PatientTopBar({ fullName, avatarUrl, greeting, subtitle }: Patie
         >
           <Bell className="h-5 w-5" strokeWidth={1.75} />
         </button>
-        <Link href={PATIENT_ROUTES.dataControls} aria-label="Profile and settings">
+        <Link href={PATIENT_ROUTES.profile} aria-label="Profile and settings">
           <ProfileAvatar name={fullName} src={avatarUrl} size="sm" />
         </Link>
       </div>

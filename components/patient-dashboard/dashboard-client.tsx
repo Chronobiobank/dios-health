@@ -2,11 +2,11 @@
 
 import { useCallback, useState } from 'react'
 
-import { CalibrationStrip } from '@/components/dashboard/calibration-strip'
 import { DashboardNav } from '@/components/patient-dashboard/dashboard-nav'
 import { MeasureTile } from '@/components/patient-dashboard/measure-tile'
 import { MetabolicRiskTile } from '@/components/patient-dashboard/metabolic-risk-tile'
 import { Section, TileGrid } from '@/components/patient-dashboard/section'
+import { NextStepsTile } from '@/components/patient-dashboard/next-steps-tile'
 import { SnapshotTile } from '@/components/patient-dashboard/snapshot-tile'
 import { ToolTile } from '@/components/patient-dashboard/tool-tile'
 import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
@@ -17,9 +17,15 @@ type DashboardClientProps = PatientDashboardProps & {
   reserveBottomNav?: boolean
 }
 
+/**
+ * Single patient dashboard UI — used by /dashboard, /how-it-works, and /dev/dashboard.
+ * Change behaviour here (or in child components under components/patient-dashboard/), not in route pages.
+ */
 export function DashboardClient({
+  greeting,
   firstName,
   fullName,
+  avatarUrl,
   snapshot,
   reserveBottomNav = true,
 }: DashboardClientProps) {
@@ -43,29 +49,16 @@ export function DashboardClient({
     <div className="patient-dashboard-shell relative min-h-screen" data-dashboard="patient-v2">
       <div className={reserveBottomNav ? 'relative z-10 pb-[var(--patient-nav-offset)]' : 'relative z-10 pb-8'}>
         <div className="patient-dashboard-content">
-          <DashboardNav firstName={firstName} fullName={fullName} />
+          <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
 
-          <main className="space-y-7 py-5">
+          <main className="dash-dashboard-main">
           <Section label="Daily snapshot">
             <SnapshotTile
               snapshot={snapshot}
-              isOpen={openPanel === 'snapshot'}
-              onToggle={() => togglePanel('snapshot')}
+              openPanel={openPanel}
+              onTogglePanel={togglePanel}
             />
           </Section>
-
-          <CalibrationStrip
-            fitzpatrickType={snapshot.fitzpatrickType}
-            fitzpatrickLabel={snapshot.fitzpatrickLabel}
-            latitude={snapshot.latitude}
-            locationName={snapshot.locationName}
-            season={snapshot.season}
-            solarZenith={snapshot.solarZenith}
-            chronotype={snapshot.chronotype}
-            chronotypeSource={snapshot.chronotypeSource}
-            openPanel={openPanel}
-            togglePanel={togglePanel}
-          />
 
           <Section label="Metabolic Risk">
             <MetabolicRiskTile
@@ -76,6 +69,10 @@ export function DashboardClient({
                 sendPrompt('Explain my Metabolic Risk across the Chronosomatic Spectrum.')
               }
             />
+          </Section>
+
+          <Section label="Your next steps">
+            <NextStepsTile nextSteps={snapshot.nextSteps} onSendPrompt={sendPrompt} />
           </Section>
 
           <Section label="Your tools">

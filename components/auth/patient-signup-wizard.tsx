@@ -9,6 +9,7 @@ import { AuthShell } from '@/components/auth/auth-shell'
 import { BTN_PRIMARY } from '@/components/sections/layout'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
 import { AUTH_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
+import { mapSignUpError } from '@/lib/auth/sign-up-errors'
 import { createClient } from '@/lib/supabase/client'
 
 const TOTAL_STEPS = 2
@@ -42,22 +43,22 @@ export function PatientSignupWizard() {
 
     try {
       const supabase = createClient()
-
-      const full_name = `${firstName.trim()} ${familyName.trim()}`.trim()
+      const fullName = `${firstName.trim()} ${familyName.trim()}`.trim()
 
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
-            full_name,
+            full_name: fullName,
             first_name: firstName.trim(),
+            family_name: familyName.trim() || null,
           },
         },
       })
 
       if (authError) {
-        setError(authError.message)
+        setError(mapSignUpError(authError))
         setLoading(false)
         return
       }
@@ -72,7 +73,7 @@ export function PatientSignupWizard() {
           })
 
         if (signInError) {
-          setError(signInError.message)
+          setError(mapSignUpError(signInError))
           setLoading(false)
           return
         }
@@ -86,33 +87,26 @@ export function PatientSignupWizard() {
         return
       }
 
-      await supabase.from('profiles').upsert(
-        {
-          id: user.id,
-          role: 'patient',
-          full_name,
-        },
-        { onConflict: 'id' }
-      )
-
-      await supabase.from('patient_profiles').upsert(
-        {
-          id: user.id,
-          first_name: firstName.trim(),
-          family_name: familyName.trim() || null,
-          onboarding_complete: true,
-        },
-        { onConflict: 'id' }
-      )
-
-      await supabase.from('chronobiobank_consent').upsert({
-        patient_id: user.id,
-        clinical_consent: true,
-        research_consent: researchConsent,
-        consent_version: 'v1.0',
+      const completeRes = await fetch('/api/signup/patient/complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: firstName.trim(),
+          familyName: familyName.trim(),
+          researchConsent,
+        }),
       })
 
-      router.push(PATIENT_ROUTES.coach)
+      const completeJson = (await completeRes.json()) as { error?: string; next?: string }
+
+      if (!completeRes.ok) {
+        setError(completeJson.error ?? 'Could not save your profile. Please try again.')
+        setLoading(false)
+        return
+      }
+
+      router.push(completeJson.next ?? PATIENT_ROUTES.dashboard)
+      router.refresh()
     } catch {
       setError('Something went wrong. Please try again.')
     } finally {

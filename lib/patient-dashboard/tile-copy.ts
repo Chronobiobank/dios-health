@@ -21,3 +21,17 @@ export function formatBodyClockCta(recoveryYears: number): {
     after: ' in 90 days',
   }
 }
+
+const TILE_SUBHEAD_MIN_WORDS = 8
+const TILE_SUBHEAD_MAX_WORDS = 10
+
+/** Compact tile subheads — always 8–10 words for Tools and What we measured. */
+export function tileSubhead(
+  text: string,
+  minWords = TILE_SUBHEAD_MIN_WORDS,
+  maxWords = TILE_SUBHEAD_MAX_WORDS
+): string {
+  const words = text.trim().split(/\s+/).filter(Boolean)
+  const capped = words.length > maxWords ? words.slice(0, maxWords) : words
+  return capped.join(' ')
+}

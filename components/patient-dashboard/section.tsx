@@ -7,7 +7,7 @@ type SectionProps = {
 
 export function Section({ label, children }: SectionProps) {
   return (
-    <section className="space-y-3.5">
+    <section className="dash-dashboard-section">
       <h2 className="dashboard-section-label">{label}</h2>
       {children}
     </section>
@@ -15,5 +15,5 @@ export function Section({ label, children }: SectionProps) {
 }
 
 export function TileGrid({ children }: { children: ReactNode }) {
-  return <div className="grid grid-cols-2 gap-3.5">{children}</div>
+  return <div className="dash-tile-grid">{children}</div>
 }

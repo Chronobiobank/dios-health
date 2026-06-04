@@ -26,7 +26,7 @@ export function PitchChronobiobankTile() {
         ))}
       </ul>
       <PitchCtaRow compact>
-        <Link href="/signup" className="pitch-btn-primary">
+        <Link href="/signup/patient" className="pitch-btn-primary">
           Get started
         </Link>
         <Link href={PITCH_CONTACT_PAGE} className="pitch-btn-secondary">

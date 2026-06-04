@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { AuthToggle } from '@/components/auth/auth-toggle'
-import { CARD, LABEL } from '@/components/sections/layout'
+import { LABEL } from '@/components/sections/layout'
 import { COUNTRIES } from '@/lib/auth/countries'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
 import {
@@ -229,7 +229,7 @@ export function PatientProfilePanel({ patientId, initial }: PatientProfilePanelP
                 disabled={savingKey === 'fitzpatrickType'}
                 onClick={() => saveFitzpatrick(type.value)}
                 className={cn(
-                  `${CARD} rounded-xl p-3 text-left transition-colors disabled:opacity-60`,
+                  'dios-glass-inner rounded-xl p-3 text-left transition-colors disabled:opacity-60',
                   values.fitzpatrickType === type.value && 'border-black ring-1 ring-black'
                 )}
               >
@@ -352,7 +352,7 @@ export function PatientProfilePanel({ patientId, initial }: PatientProfilePanelP
                 disabled={savingKey === 'chronotypeQ2'}
                 onClick={() => saveChronotypeQ2(option.label)}
                 className={cn(
-                  `${CARD} w-full rounded-full px-4 py-3 text-left text-sm font-medium transition-colors disabled:opacity-60`,
+                  'dios-glass-inner w-full rounded-full px-4 py-3 text-left text-sm font-medium transition-colors disabled:opacity-60',
                   values.chronotypeQ2 === option.label && 'border-black bg-black text-white'
                 )}
               >

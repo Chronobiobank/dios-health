@@ -43,7 +43,7 @@ const SIGNALS = [
     detail: 'Time your metabolism spent running slower than it should.',
   },
   {
-    value: String(lightAlignment),
+    value: `${lightAlignment}/100`,
     label: 'Light alignment',
     detail: 'How closely your day matches what your body clock expects.',
   },
@@ -123,7 +123,7 @@ export function CircadianModelView() {
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {SIGNALS.map((signal) => (
               <div key={signal.label} className="glass-panel p-4 text-center">
-                <p className="text-xl font-medium text-[var(--dash-metric-brown)]">{signal.value}</p>
+                <p className="text-xl font-medium text-[var(--dash-age-text-strong)]">{signal.value}</p>
                 <p className="mt-1 font-mono text-xs uppercase tracking-wider text-black/45">
                   {signal.label}
                 </p>

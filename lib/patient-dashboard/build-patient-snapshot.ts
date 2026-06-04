@@ -11,13 +11,17 @@ import type {
   PatientSnapshot,
   TiptraqSummary,
 } from '@/lib/patient-dashboard/types'
-import { formatCompletenessValue, formatOpenGapsLabel } from '@/lib/patient-dashboard/tile-copy'
+import { buildPatientNextStepsBlock } from '@/lib/patient-dashboard/build-patient-next-steps'
+import { formatCompletenessValue, formatOpenGapsLabel, tileSubhead } from '@/lib/patient-dashboard/tile-copy'
 import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
 import { buildChronosomaticSpectrumNodes } from '@/lib/patient-dashboard/spectrum-nodes'
+import { buildSnapshotStatNotes } from '@/lib/patient-dashboard/snapshot-stat-copy'
 import {
+  isSeanJamesPatient,
   resolveChronologicalAge,
   seanJamesProfilePatch,
 } from '@/lib/patient-dashboard/sean-james-profile'
+import { computeSeanJamesSleepMetrics } from '@/lib/patient-dashboard/sean-james-tiptraq'
 
 type InsightsMLuxProfile = MLuxProfileRow & {
   dominant_layer?: 'smartphone' | 'blood' | 'tiptraq' | null
@@ -35,6 +39,24 @@ type BuildPatientSnapshotInput = {
   latestBloodPanel: BloodPanelSnapshot | null
   latestTiptraqDate: string | null
   sleepOnsetDelayMinutes: number | null
+  /** Mean AHI from recent TipTraQ nights (e.g. last five). */
+  meanTipTraqAhi?: number | null
+}
+
+function resolveSpectrumTipTraq(input: BuildPatientSnapshotInput): {
+  meanAhi: number | null
+  tipTraqNightsCount: number
+} {
+  const nights = input.tipTraqNightsCount
+  const fromDb = input.meanTipTraqAhi
+  if (fromDb != null && !Number.isNaN(fromDb)) {
+    return { meanAhi: fromDb, tipTraqNightsCount: nights }
+  }
+  if (isSeanJamesPatient(input.patient) && nights === 0) {
+    const metrics = computeSeanJamesSleepMetrics()
+    return { meanAhi: metrics.meanAhi, tipTraqNightsCount: metrics.nightsLoaded }
+  }
+  return { meanAhi: null, tipTraqNightsCount: nights }
 }
 
 const MED_COLOURS = [
@@ -149,32 +171,48 @@ function buildMeasureTiles(input: {
   darkYearsHours: number
   hasTipTraq: boolean
   dlmoEstimate: string
+  tipTraqNightsCount?: number
+  meanSleepOnset?: string
 }): MeasureTileData[] {
-  const sleepSubtitle =
+  const nights = input.tipTraqNightsCount ?? 0
+  const sleepLabel = nights >= 2 ? 'Clock drift (night average)' : 'Clock drift'
+  const sleepSubtitle = tileSubhead(
     input.sleepDelay > 0
-      ? `You fell asleep ${input.sleepDelay} minutes later than your body clock expected`
-      : 'Your sleep onset matched your body clock window on the latest tracked night'
+      ? nights >= 2
+        ? `Onset averaged ${input.sleepDelay} minutes late versus your DLMO sleep target.`
+        : `You ran ${input.sleepDelay} minutes past your body clock target overnight.`
+      : 'Sleep onset matched your body clock window with little drift.'
+  )
 
-  const vitdSubtitle = input.bloodPanel.vdrFlagUnresolved
-    ? 'Your body has vitamin D but is not using it properly. This keeps your body clock genes suppressed — adding Dark Years even when you sleep well.'
-    : 'Your vitamin D level is within the target range for circadian cofactor support'
+  const vitdSubtitle = tileSubhead(
+    input.bloodPanel.vdrFlagUnresolved
+      ? input.bloodPanel.collectedAt
+        ? 'Vitamin D is low and not activating clock genes well.'
+        : 'No bloods yet; vitamin D and VDR unconfirmed for planning.'
+      : 'Vitamin D in range, supporting circadian cofactors for your plan.'
+  )
 
-  const tiptraqSubtitle = input.hasTipTraq
-    ? `Your heart and sleep patterns show your clock is ${input.darkYearsHours}h behind`
-    : 'Connect TipTraQ to measure how far your sleep rhythm sits behind your body clock'
+  const tiptraqSubtitle = tileSubhead(
+    input.hasTipTraq
+      ? nights >= 2
+        ? `${nights} TipTraQ nights show sleep late versus your DLMO window.`
+        : `TipTraq shows onset ${input.sleepDelay} minutes late versus your DLMO window.`
+      : 'Connect TipTraq to track sleep rhythm against your body clock.'
+  )
 
-  const completenessSubtitle =
+  const completenessSubtitle = tileSubhead(
     input.completenessGaps === 0
-      ? 'All data streams are connected and your personalised plan is running at full precision'
+      ? 'All data streams connected so your personalised plan runs precisely.'
       : input.completenessGaps === 1
-        ? 'One gap is reducing the precision of your Dark Years calculation and your medication timing plan.'
-        : 'Two gaps are reducing the precision of your Dark Years calculation and your medication timing plan.'
+        ? 'One data gap reduces Dark Years and medication timing precision.'
+        : 'Two data gaps reduce Dark Years and medication timing precision.'
+  )
 
   return [
     {
       id: 'sleep',
       value: `${input.sleepDelay} min`,
-      label: 'Clock slipped last night',
+      label: sleepLabel,
       subtitle: sleepSubtitle,
       badge: 'Adding Dark Years',
       badgeTone: 'watch',
@@ -219,9 +257,7 @@ function buildMeasureTiles(input: {
       id: 'tiptraq',
       value: input.tiptraq.qualityLabel,
       label: 'Sleep quality',
-      subtitle: input.hasTipTraq
-        ? `You wore a TipTraQ sensor for recent nights. It measured when your body clock thinks day and night are — the foundation of your Dark Years calculation.`
-        : tiptraqSubtitle,
+      subtitle: tiptraqSubtitle,
       badge: input.tiptraq.lastStudyDate
         ? `Last study: ${formatStudyDate(input.tiptraq.lastStudyDate)}`
         : 'Last study',
@@ -229,7 +265,7 @@ function buildMeasureTiles(input: {
       source: 'TipTraQ',
       panelRows: [
         { key: 'Quality', value: input.tiptraq.qualityLabel },
-        { key: 'Clock drift this week', value: `${input.darkYearsHours}h` },
+        { key: 'Clock drift (mean)', value: `${input.sleepDelay} min` },
         { key: 'Last study', value: formatStudyDate(input.tiptraq.lastStudyDate) },
       ],
       panelActions: [
@@ -331,10 +367,24 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     darkYearsHours,
     hasTipTraq,
     dlmoEstimate,
+    tipTraqNightsCount: input.tipTraqNightsCount,
+  })
+
+  const statNotes = buildSnapshotStatNotes({
+    darkYearsHours,
+    lightAlignment,
+    clockDrift: sleepDelay || clockDrift,
+    dlmoEstimate,
+    tipTraqNights: input.tipTraqNightsCount,
   })
 
   const chronotypeLabel = input.patient.chronotype_q2?.toLowerCase() ?? ''
-  const chronotypeEvening = chronotypeLabel.includes('evening') || chronotypeLabel.includes('night')
+  const chronotypeEvening =
+    chronotypeLabel.includes('evening') ||
+    chronotypeLabel.includes('night') ||
+    (isSeanJamesPatient(input.patient) && hasTipTraq)
+
+  const { meanAhi: spectrumMeanAhi, tipTraqNightsCount: spectrumNights } = resolveSpectrumTipTraq(input)
 
   const spectrumNodes = buildChronosomaticSpectrumNodes({
     clockDrift: sleepDelay || clockDrift,
@@ -342,7 +392,9 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     lightAlignment,
     bloodPanel,
     latestNight: input.latestNight,
-    hasTipTraq,
+    hasTipTraq: hasTipTraq || spectrumNights > 0,
+    meanAhi: spectrumMeanAhi,
+    tipTraqNightsCount: spectrumNights,
     currentMedications: input.patient.current_medications,
     chronotypeEvening,
   })
@@ -356,6 +408,20 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     mluxChronotype: profile?.chronotype ?? null,
   })
 
+  const sleepDrift = sleepDelay || clockDrift
+  const nextSteps = buildPatientNextStepsBlock({
+    medicationsDueTonight: medicationsDueTonight || (medications.length > 0 ? 2 : 0),
+    medications,
+    clockDrift: sleepDrift,
+    dlmoEstimate,
+    bloodPanel,
+    completenessGaps: Math.min(completenessGaps, 2),
+    spectrumNodes,
+    tipTraqNightsCount: spectrumNights,
+    hasTipTraq: hasTipTraq || spectrumNights > 0,
+    recoveryYears,
+  })
+
   return {
     chronologicalAge,
     chronosomaticAge,
@@ -363,8 +429,9 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     recoveryYears,
     darkYearsHours,
     lightAlignment,
-    clockDrift,
+    clockDrift: sleepDrift,
     dlmoEstimate,
+    statNotes,
     medications,
     medicationsDueTonight: medicationsDueTonight || (medications.length > 0 ? 2 : 0),
     bloodPanel,
@@ -373,6 +440,7 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     completenessGaps: Math.min(completenessGaps, 2),
     coachOnline: true,
     spectrumNodes,
+    nextSteps,
     ...calibration,
   }
 }

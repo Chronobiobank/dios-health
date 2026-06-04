@@ -44,7 +44,6 @@ export type SpectrumNode = {
 }
 
 export type DashboardPanelId =
-  | 'snapshot'
   | 'calibration'
   | 'coach'
   | 'meds'
@@ -66,6 +65,28 @@ export type MeasureTileData = {
   panelActions: { label: string; prompt?: string; opensCoach?: boolean }[]
 }
 
+export type SnapshotStatNotes = {
+  darkYearsHours: string
+  lightAlignment: string
+  clockDrift: string
+}
+
+export type NextStepPriority = 'tonight' | 'this-week'
+
+export type PatientNextStep = {
+  id: string
+  priority: NextStepPriority
+  title: string
+  detail: string
+  href?: string
+  prompt?: string
+}
+
+export type PatientNextSteps = {
+  summary: string
+  steps: PatientNextStep[]
+}
+
 export type PatientSnapshot = {
   chronologicalAge: number
   chronosomaticAge: number
@@ -75,6 +96,8 @@ export type PatientSnapshot = {
   lightAlignment: number
   clockDrift: number
   dlmoEstimate: string
+  /** Explanations under Dark Years / Light alignment / Clock drift stat pills. */
+  statNotes: SnapshotStatNotes
   medications: Medication[]
   medicationsDueTonight: number
   bloodPanel: BloodPanel
@@ -83,6 +106,7 @@ export type PatientSnapshot = {
   completenessGaps: number
   coachOnline: boolean
   spectrumNodes: SpectrumNode[]
+  nextSteps: PatientNextSteps
   fitzpatrickType: string
   fitzpatrickLabel: string
   latitude: number
