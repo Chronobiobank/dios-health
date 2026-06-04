@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
+import { CircadianYearsIntro } from '@/components/evidence/circadian-years-intro'
+
 interface DemoData {
   patient: { name: string; gp: string; icb: string; date: string }
   scores: { alignment: number; recovery: number }
@@ -63,9 +65,9 @@ const DEMO_DATA: DemoData = {
 }
 
 export const metadata: Metadata = {
-  title: 'Circadian Digital Twin — DIOS NHS Demo',
+  title: 'Circadian model — Calendar vs circadian years | DIOS',
   description:
-    'Clinical decision support demo for NHS ICB audiences — body clock, sleep, and chronotherapy recommendations.',
+    'How DIOS compares calendar years and circadian years on your dashboard — and the clinical signals behind the digital twin.',
 }
 
 const TILE_CLASS = 'rounded-2xl border border-slate-100 bg-white p-4 shadow-sm'
@@ -519,6 +521,11 @@ export default function CircadianDigitalTwinPage() {
       className="mx-auto max-w-6xl px-6 pb-8 pt-20 sm:pt-24"
       style={{ backgroundColor: '#F7FAFC' }}
     >
+      <CircadianYearsIntro />
+
+      <p className="mb-4 font-mono text-[10px] uppercase tracking-wider text-slate-400">
+        Clinical digital twin · signal breakdown
+      </p>
       <DashboardHeader data={DEMO_DATA} />
       <DataLayerLegend />
 

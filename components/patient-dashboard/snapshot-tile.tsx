@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 
+import { SnapshotAgeRow } from '@/components/patient-dashboard/snapshot-age-row'
 import type { PatientSnapshot } from '@/lib/patient-dashboard/types'
 import { cn } from '@/lib/utils'
 
@@ -10,21 +11,6 @@ type SnapshotTileProps = {
   snapshot: PatientSnapshot
   isOpen: boolean
   onToggle: () => void
-}
-
-function ArrowGlyph() {
-  return (
-    <svg viewBox="0 0 24 16" className="h-3 w-5 text-[var(--dash-metric-loss)]" aria-hidden>
-      <path
-        d="M2 8h16M14 3l7 5-7 5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
 }
 
 export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) {
@@ -47,24 +33,11 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
         className={cn('glass-tile w-full p-5 text-left', isOpen && 'glass-tile--open')}
         aria-expanded={isOpen}
       >
-        <div className="snapshot-age-row">
-          <div className="snapshot-age-value-cell snapshot-age-value-cell--chrono">
-            <p className="snapshot-metric-value">{Math.round(chronologicalAge)}</p>
-          </div>
-          <div className="snapshot-age-value-cell snapshot-age-value-cell--center">
-            <div className="snapshot-center-arrow" aria-hidden>
-              <ArrowGlyph />
-            </div>
-            <p className="snapshot-loss-value">{yearsLost}</p>
-          </div>
-          <div className="snapshot-age-value-cell snapshot-age-value-cell--circadian">
-            <p className="snapshot-metric-value">{Math.round(circadianAge)}</p>
-          </div>
-
-          <p className="snapshot-metric-caption snapshot-metric-caption--years">Calendar years</p>
-          <p className="snapshot-metric-caption">years lost to jetlag</p>
-          <p className="snapshot-metric-caption snapshot-metric-caption--years">Circadian years</p>
-        </div>
+        <SnapshotAgeRow
+          chronologicalAge={chronologicalAge}
+          circadianAge={circadianAge}
+          yearsLost={yearsLost}
+        />
 
         <div className="snapshot-stat-row">
           <p className="snapshot-stat">
@@ -85,7 +58,7 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
           <span>
             Fix your body clock · recover <em>{recoveryYears} years</em> in 90 days
           </span>
-          <ArrowRight className="h-4 w-4 shrink-0 text-[var(--researcher-avatar-text)]" aria-hidden />
+          <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
         </div>
       </button>
 
