@@ -25,15 +25,21 @@ export default async function PitchDetailPage({ params }: PitchDetailPageProps) 
       <h1 className="type-section mt-4 max-w-4xl">{page.title}</h1>
       <p className="type-body mt-4 max-w-3xl text-black/70">{page.subtitle}</p>
 
-      <div
-        data-nav-surface="dark"
-        className="mt-8 h-[220px] w-full rounded-[var(--calm-radius-card,8px)] border border-black/10 bg-cover bg-center sm:h-[320px]"
-        style={{
-          backgroundImage: `linear-gradient(to bottom, rgb(247 250 252 / 0.1), rgb(13 13 13 / 0.35)), url(${page.image})`,
-        }}
-        aria-label={page.imageAlt}
-        role="img"
-      />
+      <div className="relative mt-8">
+        <div
+          data-nav-surface="dark"
+          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[var(--dios-site-nav-height)]"
+          aria-hidden
+        />
+        <div
+          className="h-[220px] w-full rounded-[var(--calm-radius-card,8px)] border border-black/10 bg-cover bg-center sm:h-[320px]"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, rgb(247 250 252 / 0.1), rgb(13 13 13 / 0.35)), url(${page.image})`,
+          }}
+          aria-label={page.imageAlt}
+          role="img"
+        />
+      </div>
 
       <section className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:gap-5">
         {page.sections.map((section) => (

@@ -584,6 +584,26 @@
       color 0.2s ease;
   }
 
+  /* Default — black logo and controls on light / pastel backgrounds */
+  .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__wordmark {
+    color: #0d0d0d;
+  }
+
+  .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__menu-trigger {
+    color: #0d0d0d;
+  }
+
+  .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__ask-dios {
+    color: var(--text-primary);
+    border-color: rgb(13 13 13 / 0.12);
+    background: rgb(255 255 255 / 0.45);
+  }
+
+  .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__cta {
+    background: #0d0d0d;
+    color: #fff;
+  }
+
   .dios-site-nav--on-dark {
     --dios-site-nav-bg: rgb(8 8 8 / 0.22);
     --dios-site-nav-border: rgb(255 255 255 / 0.1);

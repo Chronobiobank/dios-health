@@ -73,19 +73,10 @@
   color: #0d0d0d;
 }
 
-/* Snap deck — tiles scroll under the transparent nav */
-.calm-landing:has(.calm-landing__deck) {
-  margin-top: calc(-1 * var(--dios-site-nav-height));
-}
-
-.calm-landing:has(.calm-landing__deck) {
-  --pitch-screen-inset-top: calc(var(--pitch-screen-gap) + 0.25rem);
-}
-
 .calm-landing .pitch-deck {
-  /* Full viewport — dark hero tiles sit behind sticky nav */
-  height: 100svh;
-  max-height: 100svh;
+  /* Viewport below sticky nav — pastel backdrop shows through nav by default */
+  height: calc(100svh - var(--dios-site-nav-height));
+  max-height: calc(100svh - var(--dios-site-nav-height));
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
 }
