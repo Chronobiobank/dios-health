@@ -464,10 +464,11 @@ html:has(.patient-dashboard-route) {
 }
 
 .snapshot-stat .snapshot-age-label-title {
-  min-height: 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 1.25;
+  display: block;
 }
 
 .snapshot-center-arrow {
@@ -520,9 +521,9 @@ html:has(.patient-dashboard-route) {
 }
 
 .snapshot-stat-value {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.1875rem;
   width: 100%;
-  min-height: 1.35rem;
+  min-height: 0;
   flex: 0 0 auto;
   display: flex;
   align-items: center;
