@@ -61,8 +61,13 @@
   }
 }
 
+/* Landing only — nav logo and pitch tile share one horizontal gutter (set on body for nav sibling) */
+body:has(.calm-landing) {
+  --dios-landing-edge-gutter: clamp(1rem, 4vw, 1.5rem);
+}
+
 .calm-landing {
-  --pitch-screen-gap: clamp(1rem, 4vw, 1.5rem);
+  --pitch-screen-gap: var(--dios-landing-edge-gutter, clamp(1rem, 4vw, 1.5rem));
   /* Side + bottom gutter (top gutter lives below nav in the deck, not stacked on nav twice) */
   --pitch-screen-inset: var(--pitch-screen-gap);
   --pitch-screen-inset-top: calc(var(--pitch-screen-gap) + 0.75rem);
@@ -170,8 +175,11 @@ body:has(.calm-landing) .dios-site-nav__menu-panel {
 }
 
 @media (min-width: 768px) {
+  body:has(.calm-landing) {
+    --dios-landing-edge-gutter: clamp(1.25rem, 3vw, 2rem);
+  }
+
   .calm-landing {
-    --pitch-screen-gap: clamp(1.25rem, 3vw, 2rem);
     --pitch-screen-inset: var(--pitch-screen-gap);
   }
 

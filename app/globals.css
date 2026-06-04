@@ -681,6 +681,18 @@
     }
   }
 
+  /* Homepage — logo left edge matches pitch tile (see calm-ui --dios-landing-edge-gutter) */
+  body:has(.calm-landing) .dios-site-nav__inner {
+    padding-inline-start: max(
+      var(--dios-landing-edge-gutter, var(--dios-site-nav-padding-inline)),
+      env(safe-area-inset-left, 0px)
+    );
+    padding-inline-end: max(
+      var(--dios-landing-edge-gutter, var(--dios-site-nav-padding-inline)),
+      env(safe-area-inset-right, 0px)
+    );
+  }
+
   .dios-site-nav__brand {
     display: inline-flex;
     min-width: 0;
