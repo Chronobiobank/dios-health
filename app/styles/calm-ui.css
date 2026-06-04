@@ -73,10 +73,19 @@
   color: #0d0d0d;
 }
 
+/* Snap deck — tiles scroll under the transparent nav */
+.calm-landing:has(.calm-landing__deck) {
+  margin-top: calc(-1 * var(--dios-site-nav-height));
+}
+
+.calm-landing:has(.calm-landing__deck) {
+  --pitch-screen-inset-top: calc(var(--pitch-screen-gap) + 0.25rem);
+}
+
 .calm-landing .pitch-deck {
-  /* Fill viewport below sticky nav — stable height on iPhone (svh) */
-  height: calc(100svh - var(--dios-site-nav-height));
-  max-height: calc(100svh - var(--dios-site-nav-height));
+  /* Full viewport — dark hero tiles sit behind sticky nav */
+  height: 100svh;
+  max-height: 100svh;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
 }
@@ -123,6 +132,11 @@ body:has(.calm-landing) .dios-site-nav {
   border-bottom: none;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
+}
+
+body:has(.calm-landing) .dios-site-nav--on-dark {
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  backdrop-filter: blur(14px) saturate(1.15);
 }
 
 body:has(.calm-landing) .dios-site-nav__menu-panel {

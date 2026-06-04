@@ -578,6 +578,57 @@
     background-color: var(--dios-site-nav-bg);
     -webkit-backdrop-filter: blur(16px) saturate(1.1);
     backdrop-filter: blur(16px) saturate(1.1);
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .dios-site-nav--on-dark {
+    --dios-site-nav-bg: rgb(8 8 8 / 0.22);
+    --dios-site-nav-border: rgb(255 255 255 / 0.1);
+  }
+
+  .dios-site-nav--on-dark .dios-site-nav__wordmark {
+    color: #fff;
+  }
+
+  .dios-site-nav--on-dark .dios-site-nav__menu-trigger {
+    color: #fff;
+  }
+
+  .dios-site-nav--on-dark .dios-site-nav__menu-trigger:hover {
+    background: rgb(255 255 255 / 0.12);
+  }
+
+  .dios-site-nav--on-dark .dios-site-nav__ask-dios {
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.32);
+    background: rgb(255 255 255 / 0.1);
+  }
+
+  .dios-site-nav--on-dark .dios-site-nav__ask-dios:hover {
+    background: rgb(255 255 255 / 0.18);
+    border-color: rgb(255 255 255 / 0.45);
+  }
+
+  .dios-site-nav--on-dark .dios-site-nav__cta {
+    background: #fff;
+    color: #0d0d0d;
+  }
+
+  .dios-site-nav--on-dark .dios-site-nav__cta:hover {
+    background: rgb(255 255 255 / 0.92);
+  }
+
+  .dios-site-nav--on-dark .dios-site-nav__sign-out-btn {
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.32);
+  }
+
+  .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hover:not(:disabled) {
+    background: rgb(255 255 255 / 0.1);
+    border-color: rgb(255 255 255 / 0.45);
   }
 
   .dios-site-nav__inner {

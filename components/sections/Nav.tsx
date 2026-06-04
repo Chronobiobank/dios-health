@@ -3,10 +3,11 @@ import Link from 'next/link'
 import { DIOS_TAGLINE, DIOS_WORDMARK } from '@/components/DiosLogo'
 
 import { NavActions } from './NavActions'
+import { SiteNavHeader } from './SiteNavHeader'
 
 export function Nav() {
   return (
-    <header id="site-nav" className="dios-site-nav">
+    <SiteNavHeader>
       <div className="dios-site-nav__inner">
         <Link href="/" className="dios-site-nav__brand" aria-label={`DIOS — ${DIOS_TAGLINE}`}>
           <span className="dios-site-nav__wordmark dios-wordmark nav-brand-wordmark">{DIOS_WORDMARK}</span>
@@ -16,6 +17,6 @@ export function Nav() {
           <NavActions />
         </div>
       </div>
-    </header>
+    </SiteNavHeader>
   )
 }

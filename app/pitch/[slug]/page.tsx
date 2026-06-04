@@ -26,6 +26,7 @@ export default async function PitchDetailPage({ params }: PitchDetailPageProps) 
       <p className="type-body mt-4 max-w-3xl text-black/70">{page.subtitle}</p>
 
       <div
+        data-nav-surface="dark"
         className="mt-8 h-[220px] w-full rounded-[var(--calm-radius-card,8px)] border border-black/10 bg-cover bg-center sm:h-[320px]"
         style={{
           backgroundImage: `linear-gradient(to bottom, rgb(247 250 252 / 0.1), rgb(13 13 13 / 0.35)), url(${page.image})`,

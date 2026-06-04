@@ -1,8 +1,3 @@
-export const NAV_LINKS = [
-  { label: 'How it works', href: '/#pitch-how' },
-  { label: 'Technology', href: '/technology' },
-] as const
-
 /** Always visible in the marketing site header */
 export const NAV_DASHBOARD_LINK = {
   label: 'Go to dashboard',
@@ -20,16 +15,18 @@ export const AUTH_LINKS = [
   { label: 'Sign up', href: '/signup' },
 ] as const
 
+/** Off-canvas / hamburger menu — keep to primary routes only */
 export const NAV_MENU_LINKS = [
-  ...NAV_LINKS,
+  { label: 'How it works', href: '/how-it-works' },
+  { label: 'Clinical evidence', href: '/evidence' },
   { label: 'Contact DIOS', href: '/contact' },
 ] as const
 
 export const DIOS_MISSION_STATEMENT = 'Precision Chronotherapy'
 
 export const FOOTER_LINKS = [
-  { label: 'How it works', href: '/#pitch-how' },
-  { label: 'The science', href: '/evidence' },
+  { label: 'How it works', href: '/how-it-works' },
+  { label: 'Clinical evidence', href: '/evidence' },
   { label: 'For clinicians', href: '/signup/clinician' },
   { label: 'Privacy', href: '/privacy' },
   { label: 'Terms', href: '/terms' },
@@ -49,31 +46,27 @@ export type FooterNavSection = {
   links: readonly FooterNavLink[]
 }
 
-/** Landing page footer — 12 links, 3 columns × 4 */
+/** Landing page footer — primary routes only */
 export const LANDING_FOOTER_SECTIONS: readonly FooterNavSection[] = [
   {
     title: 'Product',
     links: [
-      { label: 'How it works', href: '/technology' },
+      { label: 'How it works', href: '/how-it-works' },
       { label: 'Clinician demo', href: '/signup/clinician' },
-      { label: 'Patient signup', href: '/signup' },
-      { label: 'Dashboard', href: '/dashboard' },
+      { label: 'Contact DIOS', href: '/contact' },
     ],
   },
   {
     title: 'Science',
     links: [
       { label: 'Clinical evidence', href: '/evidence' },
-      { label: 'Technology', href: '/technology' },
+      { label: 'Circadian model', href: '/circadian-digital-twin' },
       { label: 'TipTraQ', href: '/tiptraq' },
-      { label: 'Founder paper', href: '/pitch/problem' },
     ],
   },
   {
-    title: 'Company',
+    title: 'Legal',
     links: [
-      { label: 'Contact DIOS', href: '/contact' },
-      { label: 'Credibility', href: '/pitch/credibility' },
       { label: 'Privacy', href: '/privacy' },
       { label: 'Terms', href: '/terms' },
     ],

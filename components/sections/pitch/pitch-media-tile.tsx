@@ -65,6 +65,7 @@ export function PitchMediaTile({
 
   return (
     <article
+      data-nav-surface="dark"
       className={cn(
         'pitch-media-tile relative w-full overflow-hidden rounded-[var(--pitch-radius,var(--calm-radius-card,8px))]',
         'border border-white/[0.05] bg-[#0D0D0D] shadow-[0_8px_28px_rgb(0_0_0/0.14)]',
