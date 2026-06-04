@@ -12,26 +12,27 @@ const {
   recoveryYears,
   darkYearsHours,
   lightAlignment,
+  dlmoEstimate,
 } = MOCK_PATIENT_SNAPSHOT
 
 const bodyClockCta = formatBodyClockCta(recoveryYears)
 
 const EXPLAINERS = [
   {
-    label: 'Chronological age',
-    body: `How long you have lived — the number on your birth certificate. For most people this is ${Math.round(chronologicalAge)}.`,
+    label: 'Chronological Age',
+    body: 'How long you have lived. The number on your birth certificate. This does not change based on how you live — only time changes it.',
   },
   {
     label: 'Chronosomatic Age',
-    body: `How old your body is actually living. DIOS estimates this from sleep timing, light exposure, and Dark Years. When your clock runs late, Chronosomatic Age rises above chronological age.`,
+    body: 'How old your body is actually running. When your light-dark cycle is well aligned this can sit below your Chronological Age. When your body clock is disrupted it rises above it — sometimes by several years.',
   },
   {
     label: 'Dark Years',
-    body: `The gap between the two — ${darkYears} Dark Years in this example. That is time your biology spent in metabolic hibernation because sleep, light, and routine were out of sync with your internal clock.`,
+    body: 'The gap between the two numbers. Each Dark Year is time your metabolism spent suppressed — running at the biological equivalent of hibernation — because sleep timing, light exposure, and daily rhythm were out of sync with your internal clock. Dark Years are recoverable.',
   },
   {
     label: 'Recovery',
-    body: `With a re-entrainment plan, DIOS targets recovering ${recoveryYears} years within 90 days — by restoring your light-dark cycle and reducing Dark Years.`,
+    body: 'With a personalised plan, DIOS targets recovering your Dark Years within 90 days — by restoring your light-dark cycle, correcting nutritional deficiencies, and timing your medications to your body clock.',
   },
 ] as const
 
@@ -39,34 +40,33 @@ const SIGNALS = [
   {
     value: `${darkYearsHours}h`,
     label: 'Dark Years',
-    detail: 'Time in metabolic hibernation when your habits and biology diverge.',
+    detail: 'Time your metabolism spent running slower than it should.',
   },
   {
     value: String(lightAlignment),
     label: 'Light alignment',
-    detail: 'How closely your daily rhythm matches your estimated body-clock phase.',
+    detail: 'How closely your day matches what your body clock expects.',
   },
   {
-    value: 'DLMO',
-    label: 'Melatonin onset',
-    detail: 'When your internal night begins — the anchor for timing meds and sleep.',
+    value: dlmoEstimate,
+    label: 'DLMO',
+    detail:
+      "When your body's night begins — the clock signal we use to time your medications correctly.",
   },
 ] as const
 
 export function CircadianModelView() {
   return (
     <div className="min-h-screen pb-12">
-      <main className="mx-auto max-w-2xl px-5 pb-8 pt-20 sm:px-6 sm:pt-24">
-        <p className="font-mono text-sm uppercase tracking-widest text-black/50">Circadian model</p>
-        <h1 className="mt-2 text-[1.625rem] font-medium leading-tight tracking-tight text-[var(--text-primary)] sm:text-3xl">
-          Understanding Chronosomatic Age
+      <main className="patient-dashboard-content pb-8 pt-20 sm:pt-24">
+        <h1 className="dash-page-title">
+          Two ages. One gap. Everything you need to know.
         </h1>
         <p className="mt-3 dash-panel-body leading-relaxed text-[var(--text-muted)]">
-          Your DIOS dashboard compares two ages side by side.{' '}
-          <strong className="font-medium text-[var(--text-primary)]">Chronological age</strong> is how
-          long you have lived.{' '}
-          <strong className="font-medium text-[var(--text-primary)]">Chronosomatic Age</strong> is how
-          old your body is actually living — and Dark Years tell you how much you can recover.
+          Your body has two ages. The first is how long you have lived. The second is how old your
+          body is actually running right now. Most people assume they are the same. For most people
+          they are not. The gap between them — your Dark Years — is time your body spent ageing
+          faster than it needed to. DIOS measures that gap and shows you how to close it.
         </p>
 
         <div className="glass-tile mt-8 p-5">
@@ -84,9 +84,17 @@ export function CircadianModelView() {
           </div>
         </div>
 
-        <p className="mt-4 dash-panel-muted leading-relaxed">
-          The UK Biobank study of 80,000 people proved that your light-dark cycle determines how fast
-          you age metabolically. Dark Years measure time spent in that metabolic hibernation.
+        <p className="mt-8 font-mono text-xs uppercase tracking-wider text-black/45">
+          The largest study of light and health ever done
+        </p>
+        <p className="mt-2 dash-panel-muted leading-relaxed">
+          The UK Biobank study tracked 80,000 people using wrist-worn light sensors and found a
+          direct relationship between light-dark cycle disruption and metabolic ageing. People with
+          irregular light exposure and delayed sleep timing consistently showed worse metabolic
+          health, higher cardiovascular risk, and shorter healthy life expectancy — independent of
+          diet, exercise, and genetics. DIOS takes that population finding and applies it to you
+          personally. Your sleep timing, your light exposure, and your blood panel together show how
+          well your body clock is running — and how many Dark Years that is costing you.
         </p>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -102,11 +110,15 @@ export function CircadianModelView() {
 
         <section className="mt-8">
           <p className="font-mono text-xs uppercase tracking-wider text-black/45">
-            What drives Chronosomatic Age
+            How we work out your numbers
           </p>
           <p className="mt-2 dash-panel-muted leading-relaxed">
-            DIOS combines signals from your phone, wearables, and blood panels to estimate phase —
-            not a single test score, but a living measure that updates as your rhythm changes.
+            Three things tell us where your body clock is running. Your smartphone tracks your light
+            behaviour and sleep timing every day. A seven-night sleep study using TipTraQ tells us
+            your body clock type and whether your breathing is disrupting your sleep. A quarterly
+            blood test shows whether your body has the nutritional building blocks your clock needs
+            to run properly. Put those three together and we can tell you your Chronosomatic Age —
+            and exactly what is pushing it up.
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {SIGNALS.map((signal) => (
@@ -124,13 +136,10 @@ export function CircadianModelView() {
         </section>
 
         <div className="glass-tile mt-8 p-5">
-          <p className="dash-panel-heading">
-            See it on your dashboard
-          </p>
-          <p className="mt-2 dash-panel-muted leading-relaxed">
-            The snapshot tile is the starting point — chronological age on the left, Chronosomatic
-            Age on the right, and Dark Years in the middle. Everything else on the dashboard
-            explains what is adding Dark Years or pushing your Chronosomatic Age up.
+          <p className="dash-panel-muted leading-relaxed">
+            Two numbers. The gap between them. And a plan to close it. Your dashboard shows exactly
+            what is adding Dark Years to your life — and what you can do today to start getting them
+            back.
           </p>
           <div className="mt-4 flex flex-wrap gap-4">
             <Link

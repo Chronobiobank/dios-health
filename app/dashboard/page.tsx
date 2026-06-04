@@ -86,7 +86,7 @@ export default async function PatientDashboardPage() {
     latestNight: latestNight ?? null,
     latestBloodPanel: latestBloodPanel ?? null,
     latestTiptraqDate: latestTiptraqNight?.report_date ?? null,
-    sleepOnsetDelayMinutes: latestTiptraqNight?.rem_delay_flag ? 44 : null,
+    sleepOnsetDelayMinutes: latestTiptraqNight?.rem_delay_flag ? 38 : null,
   })
 
   return (

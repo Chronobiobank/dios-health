@@ -12,6 +12,8 @@ import type {
   TiptraqSummary,
 } from '@/lib/patient-dashboard/types'
 import { formatCompletenessValue, formatOpenGapsLabel } from '@/lib/patient-dashboard/tile-copy'
+import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
+import { buildChronosomaticSpectrumNodes } from '@/lib/patient-dashboard/spectrum-nodes'
 
 type InsightsMLuxProfile = MLuxProfileRow & {
   dominant_layer?: 'smartphone' | 'blood' | 'tiptraq' | null
@@ -142,6 +144,7 @@ function buildMeasureTiles(input: {
   completenessGaps: number
   darkYearsHours: number
   hasTipTraq: boolean
+  dlmoEstimate: string
 }): MeasureTileData[] {
   const sleepSubtitle =
     input.sleepDelay > 0
@@ -173,9 +176,12 @@ function buildMeasureTiles(input: {
       badgeTone: 'watch',
       source: 'Smartphone stream',
       panelRows: [
-        { key: 'Your body clock target', value: 'Based on DLMO estimate' },
+        { key: 'Your body clock target', value: input.dlmoEstimate },
         { key: 'How far your clock slipped', value: `${input.sleepDelay} min` },
-        { key: 'Dark Years added this week', value: `${input.darkYearsHours}h` },
+        {
+          key: 'Dark Years added this week',
+          value: `+${Math.round(input.darkYearsHours * 1.43 * 10) / 10} years`,
+        },
       ],
       panelActions: [
         {
@@ -277,7 +283,7 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     latestBloodPanel: input.latestBloodPanel,
   })
 
-  const chronologicalAge = input.patient.age ?? 61
+  const chronologicalAge = input.patient.age ?? 58
   const darkYearsHours = estimateDarkYearsHours(
     input.patient.chronotype_q1 ?? '',
     input.patient.chronotype_q3 ?? ''
@@ -286,19 +292,19 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
   const darkYears = Math.round(darkYearsHours * 2.3 * 10) / 10
   const chronosomaticAge = Math.round((chronologicalAge + darkYears) * 10) / 10
   const recoveryYears = Math.round(darkYears * 0.75 * 10) / 10
-  const lightAlignment = Math.round(profile?.confidence_score ?? insights.confidenceScore ?? 74)
+  const lightAlignment = Math.round(profile?.confidence_score ?? insights.confidenceScore ?? 71)
 
   const dlmoEstimate =
     profile?.mlux_phase_time?.slice(0, 5) ??
     insights.phaseTimeLabel ??
-    '21:20'
+    '22:30'
 
   const medications = buildMedications(input.patient.current_medications, insights)
   const medicationsDueTonight = medications.filter((m) => m.status === 'tonight').length
 
   const bloodPanel = buildBloodPanel(input.latestBloodPanel)
 
-  const sleepDelay = input.sleepOnsetDelayMinutes ?? (hasTipTraq ? 44 : 0)
+  const sleepDelay = input.sleepOnsetDelayMinutes ?? (hasTipTraq ? 38 : 0)
 
   const tiptraqSummary: TiptraqSummary = {
     sleepOnsetDelayMinutes: sleepDelay,
@@ -320,6 +326,28 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     completenessGaps: Math.min(completenessGaps, 2),
     darkYearsHours,
     hasTipTraq,
+    dlmoEstimate,
+  })
+
+  const chronotypeLabel = input.patient.chronotype_q2?.toLowerCase() ?? ''
+  const chronotypeEvening = chronotypeLabel.includes('evening') || chronotypeLabel.includes('night')
+
+  const spectrumNodes = buildChronosomaticSpectrumNodes({
+    clockDrift: sleepDelay || clockDrift,
+    darkYearsHours,
+    lightAlignment,
+    bloodPanel,
+    latestNight: input.latestNight,
+    hasTipTraq,
+    currentMedications: input.patient.current_medications,
+    chronotypeEvening,
+  })
+
+  const calibration = buildPatientCalibration({
+    patient: input.patient,
+    tipTraqNightsCount: input.tipTraqNightsCount,
+    latestTiptraqDate: input.latestTiptraqDate,
+    mluxChronotype: profile?.chronotype ?? null,
   })
 
   return {
@@ -338,5 +366,7 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     measureTiles,
     completenessGaps: Math.min(completenessGaps, 2),
     coachOnline: true,
+    spectrumNodes,
+    ...calibration,
   }
 }

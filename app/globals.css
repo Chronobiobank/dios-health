@@ -37,15 +37,15 @@
   --font-weight-bold: 700;
 
   /* OpenAI-style scale */
-  --text-body-size: 0.9375rem; /* 15px — primary UI copy */
+  --text-body-size: clamp(0.875rem, 0.35vw + 0.82rem, 1rem); /* fluid primary UI copy */
   --text-body-leading: 1.6;
-  --text-nav-size: 0.875rem; /* 14px — navigation */
+  --text-nav-size: clamp(0.8125rem, 0.25vw + 0.78rem, 0.9375rem); /* navigation */
   --text-nav-leading: 1.4;
-  --text-label-size: 0.875rem; /* 14px — tile labels, meta */
+  --text-label-size: clamp(0.8125rem, 0.2vw + 0.76rem, 0.9375rem); /* tile labels, meta */
   --text-label-leading: 1.4;
-  --text-caption-size: 0.8125rem; /* 13px — dates, footnotes */
+  --text-caption-size: clamp(0.75rem, 0.15vw + 0.72rem, 0.8125rem); /* dates, footnotes */
   --text-caption-leading: 1.45;
-  --text-heading-section: 1.75rem; /* ~28px — section titles */
+  --text-heading-section: clamp(1.5rem, 2vw + 1.2rem, 1.875rem); /* section titles */
   --text-heading-hero: clamp(2rem, 5vw, 3.25rem);
   --tracking-tight: -0.02em;
   --tracking-tighter: -0.03em;
@@ -296,12 +296,6 @@
     line-height: 1.15;
     letter-spacing: var(--tracking-tight);
     color: var(--text-primary);
-  }
-
-  @media (min-width: 768px) {
-    .type-section {
-      font-size: 1.875rem; /* 30px */
-    }
   }
 
   .type-body {

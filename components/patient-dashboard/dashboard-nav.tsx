@@ -1,45 +1,78 @@
 'use client'
 
-import { Bell } from 'lucide-react'
+import { Bell, Menu, Search } from 'lucide-react'
+import Image from 'next/image'
 
-import { resolveDashboardAvatar } from '@/components/patient-dashboard/constants'
-import { ProfileAvatar } from '@/components/profile/profile-avatar'
-import { cn } from '@/lib/utils'
+import { LOGO_PATH } from '@/components/patient-dashboard/constants'
+import { initialsFromName } from '@/lib/profile/avatar'
 
 type DashboardNavProps = {
-  greeting: string
+  firstName: string
   fullName: string
-  avatarUrl: string | null
+  onOpenCoach: () => void
 }
 
-export function DashboardNav({ greeting, fullName, avatarUrl }: DashboardNavProps) {
-  const avatarSrc = resolveDashboardAvatar(avatarUrl)
+export function DashboardNav({ firstName, fullName, onOpenCoach }: DashboardNavProps) {
+  const initials = initialsFromName(fullName)
 
   return (
-    <header
-      className={cn(
-        'relative z-20 border-b bg-transparent',
-        'border-[var(--color-border)]'
-      )}
-    >
-      <div className="mx-auto w-full max-w-[480px] px-4 py-4 sm:max-w-[640px]">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex min-w-0 items-center gap-3">
-            <ProfileAvatar
-              name={fullName}
-              src={avatarSrc}
-              size="sm"
-              className="h-11 w-11 ring-2 ring-white/55"
-            />
-            <h1 className="truncate text-2xl font-bold text-[var(--text-primary)]">{greeting}</h1>
+    <header className="patient-dashboard-nav relative z-10 bg-transparent">
+      <div className="space-y-3 py-4">
+        <div className="flex w-full min-w-0 items-center justify-between gap-3">
+          <Image
+            src={LOGO_PATH}
+            alt="DIOS"
+            width={80}
+            height={28}
+            priority
+            className="patient-dashboard-nav__logo shrink-0"
+          />
+          <div className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
+            <span className="patient-dashboard-nav__tagline hidden truncate sm:inline">
+              Quantify Your Meds
+            </span>
+            <button
+              type="button"
+              className="inline-flex shrink-0 items-center justify-center text-[var(--text-primary)]"
+              aria-label="Menu"
+            >
+              <Menu size={20} strokeWidth={1.75} />
+            </button>
           </div>
-          <button
-            type="button"
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[var(--text-primary)] hover:bg-white/30"
-            aria-label="Notifications"
-          >
-            <Bell className="h-[18px] w-[18px]" strokeWidth={1.75} />
-          </button>
+        </div>
+
+        <div className="flex w-full min-w-0 items-center justify-between gap-3">
+          <span className="patient-dashboard-nav__greeting min-w-0 truncate">
+            Kia ora, {firstName}.
+          </span>
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={onOpenCoach}
+              className="patient-dashboard-nav__coach flex items-center gap-2 rounded-full px-3 py-1.5"
+              style={{
+                background: 'rgba(255,255,255,0.5)',
+                border: '1px solid rgba(255,255,255,0.75)',
+              }}
+            >
+              <Search size={14} strokeWidth={1.75} aria-hidden />
+              Ask DIOS
+            </button>
+            <button
+              type="button"
+              className="inline-flex items-center justify-center text-[var(--text-primary)]"
+              aria-label="Notifications"
+            >
+              <Bell size={18} strokeWidth={1.75} />
+            </button>
+            <div
+              className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold text-white"
+              style={{ background: 'linear-gradient(135deg, #1D9E75, #0a6a52)' }}
+              aria-hidden
+            >
+              {initials}
+            </div>
+          </div>
         </div>
       </div>
     </header>

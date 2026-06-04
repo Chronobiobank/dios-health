@@ -1,7 +1,24 @@
+/* Shared column — nav logo left edge aligns with glass tile left edge */
+.patient-dashboard-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 30rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .patient-dashboard-content {
+    max-width: 40rem;
+  }
+}
+
 .patient-dashboard-shell {
   position: relative;
   min-height: 100vh;
   color: var(--text-primary);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
   --dash-tile-bg: rgba(255, 255, 255, 0.24);
   --dash-tile-bg-hover: rgba(255, 255, 255, 0.32);
   --dash-tile-border: rgba(255, 255, 255, 0.42);
@@ -13,8 +30,40 @@
   --dash-circadian-border: rgba(210, 190, 165, 0.55);
 }
 
+.patient-dashboard-nav {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.patient-dashboard-nav__logo {
+  display: block;
+  height: var(--nav-logo-mark-h, 28px);
+  width: auto;
+  max-width: 5.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.patient-dashboard-nav__greeting {
+  font-size: clamp(1.25rem, 3.5vw + 0.85rem, 1.5rem);
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.patient-dashboard-nav__tagline {
+  font-size: var(--text-label-size);
+  line-height: var(--text-label-leading);
+  color: var(--text-muted);
+}
+
+.patient-dashboard-nav__coach {
+  font-size: var(--text-caption-size);
+  line-height: var(--text-caption-leading);
+  color: var(--text-primary);
+}
+
 .dashboard-section-label {
-  font-size: 0.8125rem;
+  font-size: var(--text-caption-size);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -84,18 +133,12 @@
   text-align: center;
 }
 
-.snapshot-age-years-old-headline {
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  line-height: 1.3;
-  color: var(--dash-metric-brown);
-}
-
 .snapshot-age-years-old-number {
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   font-size: 1.625rem;
   font-weight: 600;
   line-height: 1;
+  color: var(--dash-metric-brown);
 }
 
 .snapshot-age-value-cell--chrono {
@@ -160,9 +203,32 @@
   width: 100%;
 }
 
+.snapshot-age-card-eyebrow {
+  margin-bottom: 0.25rem;
+  font-size: clamp(0.5625rem, 0.15vw + 0.52rem, 0.625rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+}
+
+.snapshot-age-card-value {
+  font-size: clamp(2rem, 9vw + 0.25rem, 2.75rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.snapshot-age-card-note {
+  margin-top: 0.25rem;
+  padding-inline: 0.25rem;
+  font-size: clamp(0.5625rem, 0.12vw + 0.5rem, 0.625rem);
+  font-style: italic;
+  line-height: 1.35;
+}
+
 .snapshot-age-label-title {
   display: block;
-  font-size: 0.8125rem;
+  font-size: var(--text-caption-size);
   font-weight: 500;
   letter-spacing: 0.01em;
   color: rgb(13 13 13 / 0.78);
@@ -171,7 +237,7 @@
 .snapshot-age-label-desc {
   display: block;
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.6875rem;
+  font-size: clamp(0.625rem, 0.15vw + 0.58rem, 0.6875rem);
   font-weight: 400;
   letter-spacing: 0;
   color: rgb(13 13 13 / 0.52);
@@ -221,7 +287,7 @@
 
 .snapshot-stat-value {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  font-size: 1.0625rem;
+  font-size: clamp(0.9375rem, 0.4vw + 0.85rem, 1.0625rem);
   font-weight: 600;
   line-height: 1.2;
   color: var(--dash-metric-brown);
@@ -244,7 +310,7 @@
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 2px 12px rgb(13 13 13 / 0.18);
   padding: 0.875rem 1rem;
-  font-size: 0.9375rem;
+  font-size: var(--text-body-size);
   line-height: 1.45;
   color: rgb(255 255 255 / 0.88);
   text-align: center;
@@ -322,7 +388,7 @@
 }
 
 .dash-tile-metric {
-  font-size: 1.1875rem;
+  font-size: clamp(1.0625rem, 0.5vw + 0.95rem, 1.1875rem);
   font-weight: 600;
   line-height: 1.3;
   color: var(--dash-metric-brown);
@@ -335,7 +401,7 @@
 }
 
 .dash-tile-title {
-  font-size: 1.0625rem;
+  font-size: clamp(1rem, 0.35vw + 0.92rem, 1.0625rem);
   font-weight: 600;
   line-height: 1.35;
   color: var(--dash-metric-brown);
@@ -349,7 +415,7 @@
 .dash-tile-subtitle {
   margin-top: 0.375rem;
   flex: 1;
-  font-size: 1rem;
+  font-size: var(--text-body-size);
   font-weight: 400;
   line-height: 1.5;
   color: var(--dash-section-label);
@@ -369,47 +435,93 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.875rem;
+  font-size: var(--text-label-size);
   font-weight: 500;
   line-height: 1.35;
   color: var(--dash-section-label);
 }
 
 .dash-tile-badge {
-  font-size: 0.8125rem;
+  font-size: var(--text-caption-size);
+}
+
+.dash-page-title {
+  font-size: clamp(1.375rem, 2vw + 1.1rem, 1.875rem);
+  font-weight: var(--font-weight-medium, 500);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-tight, -0.02em);
+  color: var(--text-primary);
 }
 
 .dash-panel-heading {
-  font-size: 1.0625rem;
+  font-size: clamp(1rem, 0.35vw + 0.92rem, 1.0625rem);
   font-weight: 500;
   line-height: 1.35;
   color: var(--text-primary);
 }
 
 .dash-panel-body {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
   color: var(--text-primary);
 }
 
 .dash-panel-muted {
-  font-size: 0.9375rem;
-  line-height: 1.5;
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
   color: var(--text-muted);
 }
 
 .dash-panel-row {
-  font-size: 0.9375rem;
+  font-size: var(--text-body-size);
   line-height: 1.45;
 }
 
 .dash-panel-action {
-  font-size: 0.9375rem;
+  font-size: var(--text-body-size);
 }
 
 .dash-panel-chip {
-  font-size: 0.875rem;
+  font-size: var(--text-label-size);
   line-height: 1.4;
+}
+
+.calibration-strip__value {
+  font-size: clamp(0.75rem, 0.25vw + 0.7rem, 0.8125rem);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.calibration-strip__label {
+  font-size: clamp(0.5625rem, 0.12vw + 0.52rem, 0.625rem);
+  color: var(--researcher-avatar-text);
+  text-align: center;
+}
+
+.calibration-strip__why {
+  font-size: clamp(0.5rem, 0.1vw + 0.48rem, 0.5625rem);
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--dash-section-label);
+  text-align: center;
+}
+
+.calibration-panel-note {
+  margin-top: 1rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  font-size: var(--text-caption-size);
+  line-height: 1.45;
+  color: var(--dash-section-label);
+}
+
+.calibration-panel-why {
+  max-width: 60%;
+  font-size: var(--text-caption-size);
+  line-height: 1.45;
+  text-align: right;
+  color: var(--text-muted);
 }
 
 .patient-dashboard-skeleton {
@@ -425,4 +537,124 @@
   50% {
     opacity: 0.85;
   }
+}
+
+.chronosomatic-spectrum {
+  position: relative;
+  padding: 0.75rem 0 0.25rem;
+}
+
+.chronosomatic-spectrum__track {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 1.375rem;
+  border-top: 2px dotted rgba(160, 160, 160, 0.3);
+  pointer-events: none;
+}
+
+.chronosomatic-spectrum__nodes {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.25rem;
+  align-items: start;
+}
+
+.chronosomatic-spectrum__node-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.chronosomatic-spectrum__dot-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+.chronosomatic-spectrum__dot {
+  position: relative;
+  z-index: 2;
+  display: block;
+  border-style: solid;
+  border-radius: 50%;
+  box-sizing: border-box;
+  transition: transform 0.15s ease;
+}
+
+.chronosomatic-spectrum__dot--open {
+  transform: scale(1.08);
+}
+
+.chronosomatic-spectrum__pulse-ring {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #791f1f;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.chronosomatic-spectrum__pulse-ring--legend {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.chronosomatic-spectrum__label {
+  font-size: 0.625rem;
+  line-height: 1.25;
+  color: var(--text-muted);
+  max-width: 3.25rem;
+  word-break: break-word;
+}
+
+.chronosomatic-spectrum__label--concern {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.chronosomatic-spectrum__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  justify-content: center;
+  font-size: 0.625rem;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+.chronosomatic-spectrum__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.chronosomatic-spectrum__legend-dot-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.chronosomatic-spectrum__legend-dot {
+  display: block;
+  border-style: solid;
+  border-radius: 50%;
+  box-sizing: border-box;
 }

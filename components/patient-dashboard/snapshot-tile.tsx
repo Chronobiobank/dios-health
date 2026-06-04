@@ -93,28 +93,28 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
             <div className="mt-3 space-y-2 dash-panel-row">
               <div className="flex items-center justify-between gap-3">
                 <span className="text-[var(--text-muted)]">Chronological age</span>
-                <span className="font-medium">{Math.round(chronologicalAge)}</span>
+                <span className="font-medium">{chronologicalAge} years</span>
               </div>
               <div className="flex items-center justify-between gap-3">
                 <span className="text-[var(--text-muted)]">Clock running late (body hibernating)</span>
-                <span className="font-medium text-[var(--dash-metric-loss)]">+2.1 Dark Years</span>
+                <span className="font-medium text-[var(--dash-metric-loss)]">+{darkYears.toFixed(1)} Dark Years</span>
               </div>
               <div className="flex items-center justify-between gap-3">
                 <span className="text-[var(--text-muted)]">Vitamin D not absorbing</span>
-                <span className="font-medium text-[var(--dash-metric-loss)]">+0.8 Dark Years</span>
+                <span className="font-medium text-[var(--dash-metric-loss)]">— (low confidence)</span>
               </div>
               <div className="flex items-center justify-between gap-3">
                 <span className="text-[var(--text-muted)]">Low iron stores</span>
-                <span className="font-medium text-[var(--dash-metric-loss)]">+0.3 Dark Years</span>
+                <span className="font-medium text-[var(--dash-metric-loss)]">— (low confidence)</span>
               </div>
               <div className="flex items-center justify-between gap-3">
                 <span className="text-[var(--text-muted)]">Chronosomatic age today</span>
-                <span className="font-medium">{chronosomaticAge}</span>
+                <span className="font-medium">{chronosomaticAge.toFixed(1)} years (est., low confidence)</span>
               </div>
             </div>
             <p className="mt-4 dash-panel-muted leading-relaxed">
-              Restore your light-dark cycle and fix your vitamin D. Your Chronosomatic Age could fall
-              to 61.8 — recovering {recoveryYears} years within 90 days.
+              Restore your light-dark cycle and link your blood panel. Your Chronosomatic Age could fall
+              to {(chronologicalAge + 0.5).toFixed(1)} — recovering {recoveryYears} years within 90 days.
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-3 dash-panel-action font-medium text-[var(--researcher-avatar-text)]">
               <span>The science ↗</span>

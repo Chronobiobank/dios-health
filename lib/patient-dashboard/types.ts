@@ -23,6 +23,37 @@ export type TiptraqSummary = {
   lastStudyDate: string | null
 }
 
+export type SpectrumSeverity = 'normal' | 'watch' | 'elevated' | 'high' | 'critical'
+
+export type SpectrumNodeId =
+  | 'sleep-rhythm'
+  | 'sleep-apnoea'
+  | 'blood-sugar'
+  | 'blood-pressure'
+  | 'immune-system'
+  | 'brain-health'
+  | 'cancer-risk'
+
+export type SpectrumNode = {
+  id: SpectrumNodeId
+  label: string
+  score: number
+  severity: SpectrumSeverity
+  reason: string
+  action: string
+}
+
+export type DashboardPanelId =
+  | 'snapshot'
+  | 'calibration'
+  | 'coach'
+  | 'meds'
+  | 'sleep'
+  | 'vitd'
+  | 'tiptraq'
+  | 'completeness'
+  | SpectrumNodeId
+
 export type MeasureTileData = {
   id: 'sleep' | 'vitd' | 'tiptraq' | 'completeness'
   value: string
@@ -51,6 +82,15 @@ export type PatientSnapshot = {
   measureTiles: MeasureTileData[]
   completenessGaps: number
   coachOnline: boolean
+  spectrumNodes: SpectrumNode[]
+  fitzpatrickType: string
+  fitzpatrickLabel: string
+  latitude: number
+  locationName: string
+  season: string
+  solarZenith: number
+  chronotype: string
+  chronotypeSource: string
 }
 
 export type PatientDashboardProps = {

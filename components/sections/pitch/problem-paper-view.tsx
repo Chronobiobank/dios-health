@@ -78,6 +78,37 @@ export function ProblemPaperView({ paper = GRANT_MUNRO_PROBLEM_PAPER }: { paper?
       </header>
 
       <section className="mt-10">
+        <h2 className="text-xl font-medium tracking-tight text-black sm:text-2xl">
+          Your medicine was designed without knowing what time your body thinks it is
+        </h2>
+        <div className="mt-4 space-y-4">
+          <p className="type-body text-base leading-relaxed text-black/75 sm:text-[17px]">
+            Your body runs on a 24-hour biological clock. Every organ, every hormone, every metabolic
+            process has a time of day when it works best — and a time when it is less active. This is
+            not a metaphor. It is measurable biology, governed by clock genes that have been running
+            in every living thing for 600 million years.
+          </p>
+          <p className="type-body text-base leading-relaxed text-black/75 sm:text-[17px]">
+            Medicine was developed assuming this clock either did not matter or was the same for
+            everyone. So we take statins in the morning because that is convenient. We take blood
+            pressure tablets at breakfast because the trial said once daily. We take metformin with
+            meals because food is the only timing cue the system captures. Nobody asks what time your
+            body clock thinks it is.
+          </p>
+          <p className="type-body text-base leading-relaxed text-black/75 sm:text-[17px]">
+            The UK Biobank study of 80,000 people showed that people whose light-dark cycle is
+            disrupted age metabolically faster, develop metabolic disease earlier, and die sooner.
+            This is not about sleep hygiene. It is about the fundamental mismatch between
+            standardised medicine and individual biology.
+          </p>
+          <p className="type-body text-base leading-relaxed text-black/75 sm:text-[17px]">
+            DIOS is built to close that gap. Not by changing what you take. By measuring when your
+            clock says to take it — and giving that information to your GP in a form they can act on.
+          </p>
+        </div>
+      </section>
+
+      <section className="mt-10">
         <h2 className="font-mono text-xs uppercase tracking-widest text-black/50">Abstract</h2>
         <p className="type-body mt-4 text-base leading-relaxed text-black/75 sm:text-[17px]">{paper.abstract}</p>
       </section>
