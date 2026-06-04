@@ -1,51 +1,70 @@
-import { DashboardPageTransition } from '@/components/dashboard/dashboard-page-transition'
-import { PatientCommandCentre } from '@/components/dashboard/patient-command-centre'
-import { buildSeededInsight } from '@/lib/auth/chronotype-insight'
+import { DashboardClient } from '@/components/patient-dashboard/dashboard-client'
 import { getLocalizedPatientGreeting, getPatientFirstName } from '@/lib/auth/greeting'
 import { requirePatientSession } from '@/lib/auth/require-patient'
-import { buildCommandCentreViewModel } from '@/lib/dashboard/command-centre'
-import type { MLuxProfileRow as PatientMluxProfileRow } from '@/lib/dashboard/mlux-profile'
+import type { BloodPanelSnapshot } from '@/lib/dashboard/insights-data'
+import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
+import { buildPatientSnapshot } from '@/lib/patient-dashboard/build-patient-snapshot'
 import { createClient } from '@/lib/supabase/server'
 
-type MluxProfileRow = PatientMluxProfileRow & {
+export const dynamic = 'force-dynamic'
+
+type MluxProfileRow = MLuxProfileRow & {
   mlux_score?: number | null
+  layers_active?: number | null
 }
 
-export default async function DashboardPage() {
+export default async function PatientDashboardPage() {
   const { user, profile, patient } = await requirePatientSession()
   const supabase = await createClient()
 
-  const [{ data: mluxProfile }, { count: tipTraqNightsCount }, { count: bloodPanelsCount }, { data: latestNight }, { data: latestSmartphone }] =
-    await Promise.all([
-      supabase.from('mlux_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
-      supabase
-        .from('tiptraq_nights')
-        .select('id', { count: 'exact', head: true })
-        .eq('patient_id', user.id),
-      supabase
-        .from('blood_circadian_panels')
-        .select('id', { count: 'exact', head: true })
-        .eq('patient_id', user.id),
-      supabase
-        .from('tiptraq_nights')
-        .select(
-          'non_dipper_flag, high_sympathetic_flag, rem_delay_flag, apnea_confound_flag'
-        )
-        .eq('patient_id', user.id)
-        .order('report_date', { ascending: false })
-        .limit(1)
-        .maybeSingle(),
-      supabase
-        .from('smartphone_circadian_observations')
-        .select('observed_at')
-        .eq('patient_id', user.id)
-        .order('observed_at', { ascending: false })
-        .limit(1)
-        .maybeSingle(),
-    ])
+  const [
+    { data: mluxProfile },
+    { count: tipTraqNightsCount },
+    { count: bloodPanelsCount },
+    { data: latestNight },
+    { data: latestSmartphone },
+    { data: latestBloodPanel },
+    { data: latestTiptraqNight },
+  ] = await Promise.all([
+    supabase.from('mlux_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
+    supabase
+      .from('tiptraq_nights')
+      .select('id', { count: 'exact', head: true })
+      .eq('patient_id', user.id),
+    supabase
+      .from('blood_circadian_panels')
+      .select('id', { count: 'exact', head: true })
+      .eq('patient_id', user.id),
+    supabase
+      .from('tiptraq_nights')
+      .select('non_dipper_flag, high_sympathetic_flag, rem_delay_flag, apnea_confound_flag')
+      .eq('patient_id', user.id)
+      .order('report_date', { ascending: false })
+      .limit(1)
+      .maybeSingle(),
+    supabase
+      .from('smartphone_circadian_observations')
+      .select('observed_at')
+      .eq('patient_id', user.id)
+      .order('observed_at', { ascending: false })
+      .limit(1)
+      .maybeSingle(),
+    supabase
+      .from('blood_circadian_panels')
+      .select('vitamin_d3_nmoll, vitamin_b12_pmoll, ferritin_ugl, vitamin_b5_umoll, collected_at')
+      .eq('patient_id', user.id)
+      .order('collected_at', { ascending: false })
+      .limit(1)
+      .maybeSingle<BloodPanelSnapshot>(),
+    supabase
+      .from('tiptraq_nights')
+      .select('report_date, rem_delay_flag')
+      .eq('patient_id', user.id)
+      .order('report_date', { ascending: false })
+      .limit(1)
+      .maybeSingle<{ report_date: string; rem_delay_flag: boolean | null }>(),
+  ])
 
-  const profileRow = mluxProfile as MluxProfileRow | null
-  const nightsUploaded = tipTraqNightsCount ?? 0
   const smartphoneActive =
     latestSmartphone?.observed_at != null &&
     Date.now() - new Date(latestSmartphone.observed_at).getTime() <= 7 * 24 * 60 * 60 * 1000
@@ -54,36 +73,32 @@ export default async function DashboardPage() {
     firstName: patient.first_name,
     fullName: profile.full_name,
   })
+
   const greeting = getLocalizedPatientGreeting(
     firstName,
     patient.location_city,
     patient.location_country
   )
-  const insight = buildSeededInsight(
-    patient.chronotype_q1 ?? '',
-    patient.chronotype_q2 ?? '',
-    patient.chronotype_q3 ?? ''
-  )
 
-  const model = buildCommandCentreViewModel({
-    greeting,
-    fullName: profile.full_name ?? firstName,
-    avatarUrl: profile.avatar_url,
-    firstName,
-    chronotypeQ1: patient.chronotype_q1 ?? '',
-    chronotypeQ3: patient.chronotype_q3 ?? '',
-    chronotypeLabel: insight.chronotypeLabel,
-    currentMedications: (patient.current_medications as string[] | null) ?? [],
-    mluxProfile: profileRow,
-    tipTraqNightsCount: nightsUploaded,
+  const snapshot = buildPatientSnapshot({
+    patient,
+    mluxProfile: (mluxProfile as MluxProfileRow | null) ?? null,
+    tipTraqNightsCount: tipTraqNightsCount ?? 0,
     bloodPanelsCount: bloodPanelsCount ?? 0,
     smartphoneActive,
     latestNight: latestNight ?? null,
+    latestBloodPanel: latestBloodPanel ?? null,
+    latestTiptraqDate: latestTiptraqNight?.report_date ?? null,
+    sleepOnsetDelayMinutes: latestTiptraqNight?.rem_delay_flag ? 44 : null,
   })
 
   return (
-    <DashboardPageTransition className="gap-0">
-      <PatientCommandCentre model={model} />
-    </DashboardPageTransition>
+    <DashboardClient
+      greeting={greeting}
+      firstName={firstName}
+      fullName={profile.full_name ?? firstName}
+      avatarUrl={profile.avatar_url}
+      snapshot={snapshot}
+    />
   )
 }

@@ -10,9 +10,11 @@ export const AUTH_ROUTES = {
 
 export const PATIENT_ROUTES = {
   dashboard: '/dashboard',
-  /** Legacy URL — redirects to {@link PATIENT_ROUTES.mel}. */
-  timebot: '/dashboard/timebot',
-  mel: '/dashboard/mel',
+  coach: '/dashboard/coach',
+  /** @deprecated Use {@link PATIENT_ROUTES.coach}. */
+  mel: '/dashboard/coach',
+  /** @deprecated Use {@link PATIENT_ROUTES.coach}. */
+  timebot: '/dashboard/coach',
   insights: '/dashboard/insights',
   streams: '/dashboard/streams',
   streamsBloods: '/dashboard/streams/bloods',

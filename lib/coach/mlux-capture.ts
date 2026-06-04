@@ -20,7 +20,7 @@ function formatLocalClock(date: Date): string {
 }
 
 /**
- * One-time silent front-camera MLux capture on Mel session open.
+ * One-time silent front-camera MLux capture on DIOS Coach session open.
  * Requests facingMode user, posts to smartphone observations, releases tracks.
  * Never throws — failures are swallowed so the session stays usable.
  */
@@ -67,9 +67,9 @@ export async function runSilentMluxCapture(
 }
 
 /** Log engagement — fire-and-forget. */
-export function startMelSession(): void {
-  void fetch('/api/mel/session', { method: 'POST' }).catch(() => {})
+export function startCoachSession(): void {
+  void fetch('/api/coach/session', { method: 'POST' }).catch(() => {})
 }
 
-/** @deprecated Use {@link startMelSession}. */
-export const startVayaSession = startMelSession
+/** @deprecated Use {@link startCoachSession}. */
+export const startVayaSession = startCoachSession

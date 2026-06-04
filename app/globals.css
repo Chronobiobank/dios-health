@@ -958,48 +958,48 @@
 }
 
   /* Vaya — voice-reactive melanopic orb */
-  .mel-orb {
+  .coach-orb {
     position: relative;
     width: 168px;
     height: 168px;
     flex-shrink: 0;
-    transform: scale(var(--mel-orb-scale, 1));
+    transform: scale(var(--coach-orb-scale, 1));
     transition: transform 160ms ease-out;
   }
 
-  .mel-orb__halo {
+  .coach-orb__halo {
     position: absolute;
     inset: 0;
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      rgb(45 212 191 / calc(var(--mel-orb-glow, 0.4) * 0.55)) 0%,
-      rgb(13 148 136 / calc(var(--mel-orb-glow, 0.4) * 0.2)) 45%,
+      rgb(45 212 191 / calc(var(--coach-orb-glow, 0.4) * 0.55)) 0%,
+      rgb(13 148 136 / calc(var(--coach-orb-glow, 0.4) * 0.2)) 45%,
       transparent 72%
     );
     filter: blur(10px);
     z-index: 0;
   }
 
-  .mel-orb__ring {
+  .coach-orb__ring {
     position: absolute;
     inset: 14%;
     border-radius: 50%;
     border: 1px solid rgb(13 148 136 / 0.22);
     opacity: 0;
-    animation: mel-orb-ripple-idle 3.2s ease-in-out infinite;
+    animation: coach-orb-ripple-idle 3.2s ease-in-out infinite;
     pointer-events: none;
   }
 
-  .mel-orb__ring:nth-of-type(2) {
+  .coach-orb__ring:nth-of-type(2) {
     animation-delay: 1.05s;
   }
 
-  .mel-orb__ring:nth-of-type(3) {
+  .coach-orb__ring:nth-of-type(3) {
     animation-delay: 2.1s;
   }
 
-  .mel-orb__core {
+  .coach-orb__core {
     position: absolute;
     inset: 20%;
     border-radius: 50%;
@@ -1012,14 +1012,14 @@
       rgb(15 118 110 / 1) 100%
     );
     box-shadow:
-      0 0 calc(28px * var(--mel-orb-glow, 0.45)) rgb(13 148 136 / 0.38),
+      0 0 calc(28px * var(--coach-orb-glow, 0.45)) rgb(13 148 136 / 0.38),
       inset 0 -10px 28px rgb(15 118 110 / 0.45),
       inset 0 6px 14px rgb(255 255 255 / 0.28);
     z-index: 2;
     overflow: hidden;
   }
 
-  .mel-orb__highlight {
+  .coach-orb__highlight {
     position: absolute;
     top: 14%;
     left: 22%;
@@ -1030,44 +1030,44 @@
     filter: blur(2px);
   }
 
-  .mel-orb--thinking .mel-orb__ring {
+  .coach-orb--thinking .coach-orb__ring {
     inset: 22%;
-    animation-name: mel-orb-ripple-thinking;
+    animation-name: coach-orb-ripple-thinking;
     animation-duration: 0.95s;
   }
 
-  .mel-orb--thinking .mel-orb__core {
-    animation: mel-orb-core-thinking 1.2s ease-in-out infinite;
+  .coach-orb--thinking .coach-orb__core {
+    animation: coach-orb-core-thinking 1.2s ease-in-out infinite;
   }
 
-  .mel-orb--responding .mel-orb__ring {
+  .coach-orb--responding .coach-orb__ring {
     inset: 18%;
-    animation-name: mel-orb-ripple-respond;
+    animation-name: coach-orb-ripple-respond;
     animation-duration: 2.8s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
   }
 
-  .mel-orb--responding .mel-orb__ring:nth-of-type(2),
-  .mel-orb--responding .mel-orb__ring:nth-of-type(3) {
+  .coach-orb--responding .coach-orb__ring:nth-of-type(2),
+  .coach-orb--responding .coach-orb__ring:nth-of-type(3) {
     animation: none;
     opacity: 0;
   }
 
-  .mel-orb--responding .mel-orb__core {
-    animation: mel-orb-core-respond 2.8s ease-out forwards;
+  .coach-orb--responding .coach-orb__core {
+    animation: coach-orb-core-respond 2.8s ease-out forwards;
   }
 
-  .mel-orb--reduced-motion .mel-orb__ring {
+  .coach-orb--reduced-motion .coach-orb__ring {
     animation: none;
     opacity: 0.12;
   }
 
-  .mel-orb--reduced-motion .mel-orb__core {
+  .coach-orb--reduced-motion .coach-orb__core {
     animation: none;
   }
 
-@keyframes mel-orb-ripple-idle {
+@keyframes coach-orb-ripple-idle {
   0% {
     transform: scale(0.5);
     opacity: 0.3;
@@ -1081,7 +1081,7 @@
   }
 }
 
-@keyframes mel-orb-ripple-thinking {
+@keyframes coach-orb-ripple-thinking {
   0% {
     transform: scale(0.62);
     opacity: 0.34;
@@ -1092,7 +1092,7 @@
   }
 }
 
-@keyframes mel-orb-ripple-respond {
+@keyframes coach-orb-ripple-respond {
   0% {
     transform: scale(0.58);
     opacity: 0.32;
@@ -1107,7 +1107,7 @@
   }
 }
 
-@keyframes mel-orb-core-thinking {
+@keyframes coach-orb-core-thinking {
   0%,
   100% {
     filter: brightness(1);
@@ -1117,7 +1117,7 @@
   }
 }
 
-@keyframes mel-orb-core-respond {
+@keyframes coach-orb-core-respond {
   0% {
     transform: scale(1);
   }

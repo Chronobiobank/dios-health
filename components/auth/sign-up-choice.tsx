@@ -8,7 +8,7 @@ import { AUTH_ROUTES } from '@/lib/auth/routes'
 const ROLES = [
   {
     href: AUTH_ROUTES.signUpPatient,
-    title: 'Start Mel.',
+    title: 'Start DIOS Coach.',
     body: 'Measure your Melanopic Lux score and get your personalised light and medication protocol.',
     cta: 'Begin your first session →',
   },

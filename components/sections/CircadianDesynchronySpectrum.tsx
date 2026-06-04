@@ -55,7 +55,7 @@ const LAYER_COLOURS: Record<
 }
 
 const LAYER_LABELS: Record<LayerKey, string> = {
-  L1: 'L1 · Mel',
+  L1: 'L1 · DIOS Coach',
   L2: 'L2 · Blood panel',
   L3: 'L3 · TipTraQ',
 }
@@ -111,7 +111,7 @@ function SpectrumTooltip({
       </p>
       <div className="mt-3 flex flex-col gap-1">
         {[
-          { label: 'L1 · Mel', value: node.layer1Signal },
+          { label: 'L1 · DIOS Coach', value: node.layer1Signal },
           { label: 'L2 · Blood', value: node.layer2Signal },
           { label: 'L3 · TipTraQ', value: node.layer3Signal },
         ].map(({ label, value }) => (
@@ -432,7 +432,7 @@ export function CircadianDesynchronySpectrum({
                   </p>
                   <div className="mt-3 flex flex-col gap-1.5">
                     {[
-                      { label: 'L1 Mel', value: node.layer1Signal },
+                      { label: 'L1 DIOS Coach', value: node.layer1Signal },
                       { label: 'L2 Blood', value: node.layer2Signal },
                       { label: 'L3 TipTraQ', value: node.layer3Signal },
                     ].map(({ label, value }) => (

@@ -1,0 +1,43 @@
+body:has(.patient-dashboard-shell) .dios-site-nav {
+  display: none;
+}
+
+.patient-dashboard-shell {
+  position: relative;
+  min-height: 100vh;
+  color: var(--text-primary);
+}
+
+.glass-tile {
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  transition: background 0.2s ease;
+}
+
+.glass-tile:hover {
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+}
+
+.patient-dashboard-skeleton {
+  background: rgba(255, 255, 255, 0.35);
+  animation: patient-dashboard-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes patient-dashboard-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}

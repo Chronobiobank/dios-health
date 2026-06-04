@@ -41,7 +41,7 @@ export async function middleware(request: NextRequest) {
       const completed = await hasPatientProfile(supabase, user.id)
       if (completed) {
         return (
-          redirectIfNeeded(request, PATIENT_ROUTES.mel) ?? supabaseResponse
+          redirectIfNeeded(request, PATIENT_ROUTES.coach) ?? supabaseResponse
         )
       }
       return supabaseResponse
@@ -126,6 +126,7 @@ export const config = {
     '/signup',
     '/signup/:path*',
     '/pending-verification',
+    '/dashboard',
     '/dashboard/:path*',
     '/clinic/:path*',
   ],

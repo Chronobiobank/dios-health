@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'Mel',
+    title: 'DIOS Coach',
   },
   other: {
     'mobile-web-app-capable': 'yes',

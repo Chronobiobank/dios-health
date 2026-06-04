@@ -91,7 +91,7 @@ export const PITCH_BIOMARKER_STATS = [
 export const PITCH_SPECTRUM_PAGE = '/evidence#spectrum' as const
 
 export const PITCH_CONFIDENCE_LAYERS = [
-  { key: 'ESTIMATED', title: 'L1 · Mel', body: 'Camera session' },
+  { key: 'ESTIMATED', title: 'L1 · DIOS Coach', body: 'Camera session' },
   { key: 'PRECISION', title: 'L2 · Bloods', body: 'Gominak panel' },
   { key: 'CONFIRMED', title: 'L3 · TipTraQ', body: 'Sleep + ANS' },
 ] as const
@@ -99,10 +99,10 @@ export const PITCH_CONFIDENCE_LAYERS = [
 export const PITCH_HOW_IT_WORKS = [
   {
     step: '01',
-    title: 'Mel',
+    title: 'DIOS Coach',
     body: 'Measures melanopic lux — your clock signal.',
     image: PITCH_IMAGES.steps.mel,
-    imageAlt: 'Glowing voice orb for Mel assistant',
+    imageAlt: 'Glowing voice orb for DIOS Coach',
   },
   {
     step: '02',
@@ -123,7 +123,7 @@ export const PITCH_HOW_IT_WORKS = [
 export const PITCH_FOUR_SIDES = [
   {
     audience: 'Patients',
-    line: 'Free Mel sessions and protocols.',
+    line: 'Free DIOS Coach sessions and protocols.',
     emphasis: 'Free',
     image: PITCH_IMAGES.sides.Patients,
     imageAlt: 'Patient using phone for health session',
@@ -152,7 +152,7 @@ export const PITCH_FOUR_SIDES = [
 ] as const
 
 export const PITCH_CHRONOBIOBANK_STEPS = [
-  'Clinical consent for Mel and DIOS.',
+  'Clinical consent for DIOS Coach and DIOS.',
   'Optional anonymised research — revocable.',
   'Confidence: ESTIMATED → PRECISION → CONFIRMED.',
 ] as const

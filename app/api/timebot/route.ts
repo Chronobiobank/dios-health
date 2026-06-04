@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            'Mel is not yet configured on this server. The ANTHROPIC_API_KEY environment variable is missing. Add it in Vercel → Settings → Environment Variables.',
+            'DIOS Coach is not yet configured on this server. The ANTHROPIC_API_KEY environment variable is missing. Add it in Vercel → Settings → Environment Variables.',
         },
         { status: 503 }
       )
@@ -141,7 +141,7 @@ export async function POST(request: Request) {
       .trim()
 
     if (!answer) {
-      return NextResponse.json({ error: 'Mel returned an empty response. Try again.' }, { status: 502 })
+      return NextResponse.json({ error: 'DIOS Coach returned an empty response. Try again.' }, { status: 502 })
     }
 
     return NextResponse.json({
@@ -151,8 +151,8 @@ export async function POST(request: Request) {
   } catch (error) {
     const mapped = mapAnthropicError(error)
     if (mapped) {
-      return NextResponse.json({ error: mapped.replace('Report extraction', 'Mel') }, { status: 502 })
+      return NextResponse.json({ error: mapped.replace('Report extraction', 'DIOS Coach') }, { status: 502 })
     }
-    return NextResponse.json({ error: 'Could not reach Mel. Please try again.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not reach DIOS Coach. Please try again.' }, { status: 500 })
   }
 }

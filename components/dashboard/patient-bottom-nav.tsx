@@ -23,11 +23,13 @@ const TABS: NavTab[] = [
     match: (path) => path === PATIENT_ROUTES.dashboard,
   },
   {
-    label: 'Mel',
-    href: PATIENT_ROUTES.mel,
+    label: 'Coach',
+    href: PATIENT_ROUTES.coach,
     icon: Bot,
     match: (path) =>
-      path === PATIENT_ROUTES.mel || path === PATIENT_ROUTES.timebot,
+      path === PATIENT_ROUTES.coach ||
+      path === PATIENT_ROUTES.mel ||
+      path === PATIENT_ROUTES.timebot,
   },
   {
     label: 'Insights',

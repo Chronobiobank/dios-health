@@ -13,7 +13,7 @@ export function isElevenLabsConfigured(): boolean {
   return Boolean(process.env.ELEVENLABS_API_KEY?.trim())
 }
 
-/** Server-side ElevenLabs TTS — used by /api/mel/speak and /api/mel/tts. */
+/** Server-side ElevenLabs TTS — used by /api/coach/speak and /api/coach/tts. */
 export async function synthesizeSpeech(text: string): Promise<ElevenLabsSynthesisResult> {
   const trimmed = text.trim()
   if (!trimmed) {

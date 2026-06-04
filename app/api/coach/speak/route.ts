@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server'
 
-import { synthesizeSpeech } from '@/lib/mel/elevenlabs'
+import { synthesizeSpeech } from '@/lib/coach/elevenlabs'
 import { createClient } from '@/lib/supabase/server'
 
-type TtsBody = {
+type SpeakBody = {
   text?: string
 }
 
-/** Legacy alias — prefer POST /api/mel/speak. */
 export async function POST(request: Request) {
   const supabase = await createClient()
   const {
@@ -16,7 +15,7 @@ export async function POST(request: Request) {
 
   if (!user) return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
 
-  const body = (await request.json()) as TtsBody
+  const body = (await request.json()) as SpeakBody
   const text = body.text?.trim()
   if (!text) return NextResponse.json({ error: 'Text is required.' }, { status: 400 })
 

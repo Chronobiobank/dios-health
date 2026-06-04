@@ -4,17 +4,17 @@ import { useEffect, useState, type CSSProperties } from 'react'
 
 import { cn } from '@/lib/utils'
 
-export type MelOrbState = 'idle' | 'thinking' | 'responding'
+export type CoachOrbState = 'idle' | 'thinking' | 'responding'
 
-type MelOrbProps = {
-  state: MelOrbState
+type CoachOrbProps = {
+  state: CoachOrbState
   volume?: number
   /** Pixel width/height of the orb (default 168). */
   size?: number
   className?: string
 }
 
-export function MelOrb({ state, volume = 0, size, className }: MelOrbProps) {
+export function CoachOrb({ state, volume = 0, size, className }: CoachOrbProps) {
   const [reducedMotion, setReducedMotion] = useState(false)
   const level = Math.max(0, Math.min(volume, 1))
   const scale = 1 + level * 0.14
@@ -29,36 +29,30 @@ export function MelOrb({ state, volume = 0, size, className }: MelOrbProps) {
   }, [])
 
   const style = {
-    '--mel-orb-scale': scale,
-    '--mel-orb-glow': glow,
+    '--coach-orb-scale': scale,
+    '--coach-orb-glow': glow,
     ...(size != null ? { width: size, height: size } : {}),
   } as CSSProperties
 
   return (
     <div
       className={cn(
-        'mel-orb',
-        `mel-orb--${state}`,
-        reducedMotion && 'mel-orb--reduced-motion',
+        'coach-orb',
+        `coach-orb--${state}`,
+        reducedMotion && 'coach-orb--reduced-motion',
         className
       )}
       data-state={state}
       style={style}
       aria-hidden
     >
-      <div className="mel-orb__halo" />
-      <span className="mel-orb__ring" />
-      <span className="mel-orb__ring" />
-      <span className="mel-orb__ring" />
-      <div className="mel-orb__core">
-        <span className="mel-orb__highlight" />
+      <div className="coach-orb__halo" />
+      <span className="coach-orb__ring" />
+      <span className="coach-orb__ring" />
+      <span className="coach-orb__ring" />
+      <div className="coach-orb__core">
+        <span className="coach-orb__highlight" />
       </div>
     </div>
   )
 }
-
-/** @deprecated Use {@link MelOrb}. */
-export const VayaOrb = MelOrb
-
-/** @deprecated Use {@link MelOrbState}. */
-export type VayaOrbState = MelOrbState
