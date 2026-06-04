@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 type ToolTileProps = {
   id: 'coach' | 'meds'
   snapshot: PatientSnapshot
+  firstName: string
   isOpen: boolean
   onToggle: () => void
   coachDraft: string
@@ -18,11 +19,13 @@ type ToolTileProps = {
   onSendPrompt: (prompt: string) => void
 }
 
-const QUICK_PROMPTS = [
-  'When should I take my meds tonight?',
-  'Why is my circadian age higher?',
-  'What shifts my body clock fastest?',
-] as const
+function coachQuickPrompts() {
+  return [
+    'Reduce my Dark Years ↗',
+    'Vitamin D issue ↗',
+    'Why my clock drifts ↗',
+  ] as const
+}
 
 function MedStatusBadge({ status }: { status: Medication['status'] }) {
   const label = status === 'taken' ? 'Taken' : status === 'tonight' ? 'Tonight' : 'Upcoming'
@@ -43,6 +46,7 @@ function MedStatusBadge({ status }: { status: Medication['status'] }) {
 export function ToolTile({
   id,
   snapshot,
+  firstName,
   isOpen,
   onToggle,
   coachDraft,
@@ -99,6 +103,8 @@ export function ToolTile({
           >
             {isCoach ? (
               <CoachPanel
+                firstName={firstName}
+                snapshot={snapshot}
                 draft={coachDraft}
                 onDraftChange={onCoachDraftChange}
                 onSendPrompt={onSendPrompt}
@@ -114,21 +120,29 @@ export function ToolTile({
 }
 
 function CoachPanel({
+  firstName,
+  snapshot,
   draft,
   onDraftChange,
   onSendPrompt,
 }: {
+  firstName: string
+  snapshot: PatientSnapshot
   draft: string
   onDraftChange: (value: string) => void
   onSendPrompt: (prompt: string) => void
 }) {
+  const prompts = coachQuickPrompts()
+
   return (
     <div className="space-y-3">
       <div className="rounded-2xl border border-white/70 bg-white/60 px-3 py-2.5 dash-panel-body">
-        Kia ora — I&apos;m here to help with your body clock, results, and plan.
+        Hi {firstName}. Your body clock is running {snapshot.darkYearsHours} hours late — you are
+        accumulating {snapshot.darkYears} Dark Years of metabolic hibernation. Want to know how to
+        turn that around?
       </div>
       <div className="flex flex-wrap gap-2">
-        {QUICK_PROMPTS.map((prompt) => (
+        {prompts.map((prompt) => (
           <button
             key={prompt}
             type="button"
@@ -149,7 +163,7 @@ function CoachPanel({
         <input
           value={draft}
           onChange={(event) => onDraftChange(event.target.value)}
-          placeholder="Ask DIOS anything…"
+          placeholder="Ask anything about your body clock…"
           className="min-w-0 flex-1 rounded-xl border border-white/75 bg-white/60 px-3 py-2.5 dash-panel-body outline-none"
         />
         <Button type="submit" size="sm" className="bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand)]/90">

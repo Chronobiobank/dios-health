@@ -6,12 +6,12 @@ import { getPatientDashboardGreeting } from '@/lib/auth/greeting'
 /** Static demo data for local design preview — matches reference dashboard numbers. */
 export const MOCK_PATIENT_SNAPSHOT: PatientSnapshot = {
   chronologicalAge: 61,
-  circadianAge: 64,
-  yearsLost: 3.2,
+  chronosomaticAge: 64,
+  darkYears: 3.2,
   recoveryYears: 2.4,
-  socialJetlag: 1.4,
-  syncScore: 74,
-  phaseDrift: 44,
+  darkYearsHours: 1.4,
+  lightAlignment: 74,
+  clockDrift: 44,
   dlmoEstimate: '21:20',
   medications: [
     {
@@ -41,78 +41,98 @@ export const MOCK_PATIENT_SNAPSHOT: PatientSnapshot = {
   tiptraqSummary: {
     sleepOnsetDelayMinutes: 44,
     qualityLabel: 'Moderate',
-    socialJetlagHours: 1.4,
+    darkYearsHours: 1.4,
     lastStudyDate: '2026-01-12',
   },
   measureTiles: [
     {
       id: 'sleep',
       value: '44 min',
-      label: 'Bedtime was late',
+      label: 'Clock slipped last night',
       subtitle: 'You fell asleep 44 minutes later than your body clock expected',
-      badge: 'Watch',
+      badge: 'Adding Dark Years',
       badgeTone: 'watch',
       source: 'Smartphone stream',
       panelRows: [
-        { key: 'Expected sleep onset', value: 'Based on DLMO estimate' },
-        { key: 'Observed delay', value: '44 min' },
-        { key: 'Social jetlag', value: '1.4h' },
+        { key: 'Your body clock target', value: 'Based on DLMO estimate' },
+        { key: 'How far your clock slipped', value: '44 min' },
+        { key: 'Dark Years added this week', value: '1.4h' },
       ],
       panelActions: [
-        { label: 'Ask DIOS about sleep timing', opensCoach: true },
-        { label: 'What shifts my clock?', prompt: 'What can I do tonight to shift my body clock earlier?' },
+        { label: 'How to recover ↗', prompt: 'How can I reduce my Dark Years and recover my clock tonight?' },
       ],
     },
     {
       id: 'vitd',
       value: 'Too low',
       label: 'Vitamin D not working',
-      subtitle: 'Your body has vitamin D but is not absorbing it properly right now',
+      subtitle:
+        'Your body has vitamin D but is not using it properly. This keeps your body clock genes suppressed — adding Dark Years even when you sleep well.',
       badge: 'Act now',
       badgeTone: 'act',
       source: 'Blood panel',
       panelRows: [
         { key: 'Vitamin D', value: '42 nmol/L' },
         { key: 'VDR flag', value: 'Unresolved' },
-        { key: 'Collected', value: 'Jan 2026' },
+        { key: 'Dark Years contribution', value: '+0.8 Dark Years' },
       ],
       panelActions: [
-        { label: 'Explain my vitamin D', prompt: 'Why is my vitamin D not working for my body clock?' },
-        { label: 'Open DIOS Coach', opensCoach: true },
+        {
+          label: 'Explain my vitamin D',
+          prompt: 'Why is my vitamin D adding Dark Years to my Chronosomatic Age?',
+        },
+        {
+          label: 'Show this to your GP — could recover 1.1 Dark Years in 90 days',
+          prompt: 'What should I ask my GP about vitamin D and iron to reduce my Dark Years?',
+        },
       ],
     },
     {
       id: 'tiptraq',
       value: 'Moderate',
       label: 'Sleep quality',
-      subtitle: 'Your heart and sleep patterns show your clock is 1.4h behind',
+      subtitle:
+        'You wore a TipTraQ sensor for 7 nights in May. It measured when your body clock thinks day and night are — the foundation of your Dark Years calculation.',
       badge: 'Last study: Jan 2026',
       badgeTone: 'study',
       source: 'TipTraQ',
       panelRows: [
         { key: 'Quality', value: 'Moderate' },
-        { key: 'Clock lag', value: '1.4h' },
+        { key: 'Clock drift this week', value: '1.4h' },
         { key: 'Last study', value: 'Jan 2026' },
       ],
-      panelActions: [{ label: 'Review sleep study', prompt: 'What did my latest TipTraQ night show?' }],
+      panelActions: [
+        {
+          label: 'Review sleep study',
+          prompt: 'What did my latest TipTraQ night show about my Dark Years?',
+        },
+      ],
     },
     {
       id: 'completeness',
-      value: formatCompletenessValue(1),
+      value: formatCompletenessValue(2),
       label: 'Data completeness',
-      subtitle: 'One unresolved issue is reducing how precise your personalised plan can be right now',
+      subtitle:
+        'Two gaps are reducing the precision of your Dark Years calculation and your medication timing plan.',
       badge: 'Action needed',
       badgeTone: 'action',
       source: 'DIOS layers',
       panelRows: [
-        { key: formatOpenGapsLabel(1), value: '1' },
-        { key: 'Sync score', value: '74' },
-        { key: 'Priority', value: 'Connect missing streams' },
+        { key: formatOpenGapsLabel(2), value: '2' },
+        { key: 'Light alignment', value: '74' },
+        {
+          key: 'Gap 1 — vitamin D',
+          value: 'Ask your GP about a higher vitamin D dose and retest in 90 days — could recover 0.8 Dark Years',
+        },
+        {
+          key: 'Gap 2 — iron',
+          value: 'Ask your GP about an iron supplement at your next blood test — could recover 0.3 Dark Years',
+        },
       ],
-      panelActions: [{ label: 'What should I connect?', prompt: 'Which data streams should I connect?' }],
+      panelActions: [{ label: 'Fix both gaps ↗', prompt: 'Which gaps should I fix first to reduce my Dark Years?' }],
     },
   ],
-  completenessGaps: 1,
+  completenessGaps: 2,
   coachOnline: true,
 }
 

@@ -26,6 +26,7 @@ type DashboardClientProps = PatientDashboardProps & {
 
 export function DashboardClient({
   greeting,
+  firstName,
   fullName,
   avatarUrl,
   snapshot,
@@ -66,6 +67,7 @@ export function DashboardClient({
               <ToolTile
                 id="coach"
                 snapshot={snapshot}
+                firstName={firstName}
                 isOpen={openPanel === 'coach'}
                 onToggle={() => togglePanel('coach')}
                 coachDraft={coachDraft}
@@ -75,6 +77,7 @@ export function DashboardClient({
               <ToolTile
                 id="meds"
                 snapshot={snapshot}
+                firstName={firstName}
                 isOpen={openPanel === 'meds'}
                 onToggle={() => togglePanel('meds')}
                 coachDraft={coachDraft}

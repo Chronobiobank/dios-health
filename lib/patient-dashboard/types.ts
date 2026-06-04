@@ -19,7 +19,7 @@ export type BloodPanel = {
 export type TiptraqSummary = {
   sleepOnsetDelayMinutes: number
   qualityLabel: string
-  socialJetlagHours: number
+  darkYearsHours: number
   lastStudyDate: string | null
 }
 
@@ -37,12 +37,12 @@ export type MeasureTileData = {
 
 export type PatientSnapshot = {
   chronologicalAge: number
-  circadianAge: number
-  yearsLost: number
+  chronosomaticAge: number
+  darkYears: number
   recoveryYears: number
-  socialJetlag: number
-  syncScore: number
-  phaseDrift: number
+  darkYearsHours: number
+  lightAlignment: number
+  clockDrift: number
   dlmoEstimate: string
   medications: Medication[]
   medicationsDueTonight: number

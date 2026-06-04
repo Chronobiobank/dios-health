@@ -13,39 +13,52 @@ function ArrowGlyph() {
   )
 }
 
-/** Two-line mono label — same structure on both sides so line counts always match. */
-function AgeYearsLabel({ line1, line2 }: { line1: string; line2: string }) {
+/** Title + descriptor — shared by age columns and stat pills. */
+export function SnapshotMetricLabel({ title, description }: { title: string; description: string }) {
   return (
     <p className="snapshot-age-label">
-      <span>{line1}</span>
-      <span>{line2}</span>
+      <span className="snapshot-age-label-title">{title}</span>
+      <span className="snapshot-age-label-desc">{description}</span>
     </p>
   )
 }
 
 type SnapshotAgeRowProps = {
   chronologicalAge: number
-  circadianAge: number
-  yearsLost: number
+  chronosomaticAge: number
+  darkYears: number
 }
 
-export function SnapshotAgeRow({ chronologicalAge, circadianAge, yearsLost }: SnapshotAgeRowProps) {
+export function SnapshotAgeRow({
+  chronologicalAge,
+  chronosomaticAge,
+  darkYears,
+}: SnapshotAgeRowProps) {
   return (
     <div className="snapshot-age-row">
       <div className="snapshot-age-value-cell snapshot-age-value-cell--chrono">
         <p className="snapshot-metric-value">{Math.round(chronologicalAge)}</p>
-        <AgeYearsLabel line1="Calendar" line2="years" />
+        <SnapshotMetricLabel
+          title="Chronological age"
+          description="(the age on your birth certificate)"
+        />
       </div>
       <div className="snapshot-age-value-cell snapshot-age-value-cell--center">
         <div className="snapshot-center-arrow" aria-hidden>
           <ArrowGlyph />
         </div>
-        <p className="snapshot-loss-value">{yearsLost}</p>
-        <AgeYearsLabel line1="years lost" line2="to jetlag" />
+        <p className="snapshot-loss-value">{darkYears}</p>
+        <SnapshotMetricLabel
+          title="Dark years"
+          description="(time living out of sync with your body clock)"
+        />
       </div>
       <div className="snapshot-age-value-cell snapshot-age-value-cell--circadian">
-        <p className="snapshot-metric-value">{Math.round(circadianAge)}</p>
-        <AgeYearsLabel line1="Circadian" line2="years" />
+        <p className="snapshot-metric-value">{Math.round(chronosomaticAge)}</p>
+        <SnapshotMetricLabel
+          title="Chronosomatic age"
+          description="(the age your body is actually living)"
+        />
       </div>
     </div>
   )

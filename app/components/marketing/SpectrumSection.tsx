@@ -5,7 +5,7 @@ const STAGES = [
     stage: 'Stage one is behavioural disruption before organ damage begins',
     bg: 'bg-dios-lilac-light',
     tag: 'Mild acute misalignment at population scale',
-    headline: 'Social jetlag and shift-work disorder are the earliest signals on the curve',
+    headline: 'Dark Years and shift-work disorder are the earliest signals on the curve',
     body: 'Daily habits fall out of sync with the internal clock long before metabolic or neurological disease appears',
     dark: false,
   },
@@ -36,7 +36,7 @@ const STAGES = [
 ] as const
 
 const SPECTRUM_MARKERS = [
-  'Social jetlag starts when habits and biology diverge',
+  'Dark Years start when habits and biology diverge',
   'Shift-work disorder forces sleep against the clock',
   'Metabolic disease follows sustained insulin drift',
   'Cancer and dementia sit at the chronic end',

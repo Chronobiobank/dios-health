@@ -16,8 +16,8 @@ export function formatBodyClockCta(recoveryYears: number): {
   after: string
 } {
   return {
-    before: 'Fix your body clock · recover ',
+    before: 'Reduce your Dark Years · recover ',
     highlight: `${recoveryYears} years`,
-    after: ' in 90 days with sleep and light timing',
+    after: ' in 90 days',
   }
 }

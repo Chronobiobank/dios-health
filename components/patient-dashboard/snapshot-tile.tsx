@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 
-import { SnapshotAgeRow } from '@/components/patient-dashboard/snapshot-age-row'
+import { SnapshotAgeRow, SnapshotMetricLabel } from '@/components/patient-dashboard/snapshot-age-row'
 import { formatBodyClockCta } from '@/lib/patient-dashboard/tile-copy'
 import type { PatientSnapshot } from '@/lib/patient-dashboard/types'
 import { cn } from '@/lib/utils'
@@ -17,13 +17,12 @@ type SnapshotTileProps = {
 export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) {
   const {
     chronologicalAge,
-    circadianAge,
-    yearsLost,
+    chronosomaticAge,
+    darkYears,
     recoveryYears,
-    socialJetlag,
-    syncScore,
-    phaseDrift,
-    dlmoEstimate,
+    darkYearsHours,
+    lightAlignment,
+    clockDrift,
   } = snapshot
 
   const bodyClockCta = formatBodyClockCta(recoveryYears)
@@ -38,23 +37,32 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
       >
         <SnapshotAgeRow
           chronologicalAge={chronologicalAge}
-          circadianAge={circadianAge}
-          yearsLost={yearsLost}
+          chronosomaticAge={chronosomaticAge}
+          darkYears={darkYears}
         />
 
         <div className="snapshot-stat-row">
-          <p className="snapshot-stat">
-            <strong>{socialJetlag}h</strong>
-            Social jetlag
-          </p>
-          <p className="snapshot-stat">
-            <strong>{syncScore}</strong>
-            Sync score
-          </p>
-          <p className="snapshot-stat">
-            <strong>+{phaseDrift}m</strong>
-            Phase drift
-          </p>
+          <div className="snapshot-stat">
+            <p className="snapshot-stat-value">{darkYearsHours}h</p>
+            <SnapshotMetricLabel
+              title="Dark years"
+              description="(time in metabolic hibernation)"
+            />
+          </div>
+          <div className="snapshot-stat">
+            <p className="snapshot-stat-value">{lightAlignment}</p>
+            <SnapshotMetricLabel
+              title="Light alignment"
+              description="(how closely your day matches your clock)"
+            />
+          </div>
+          <div className="snapshot-stat">
+            <p className="snapshot-stat-value">+{clockDrift}m</p>
+            <SnapshotMetricLabel
+              title="Clock drift"
+              description="(how far your sleep slipped last night)"
+            />
+          </div>
         </div>
 
         <div className="snapshot-cta-bar">
@@ -77,32 +85,40 @@ export function SnapshotTile({ snapshot, isOpen, onToggle }: SnapshotTileProps) 
             transition={{ duration: 0.2 }}
             className="glass-panel p-5"
           >
-            <p className="dash-panel-heading">Age breakdown</p>
+            <p className="dash-panel-muted leading-relaxed">
+              The UK Biobank study of 80,000 people proved that your light-dark cycle determines how
+              fast you age metabolically. Each factor below adds Dark Years — time spent in metabolic
+              hibernation.
+            </p>
             <div className="mt-3 space-y-2 dash-panel-row">
               <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--text-muted)]">Calendar years</span>
-                <span className="font-medium">{Math.round(chronologicalAge)} years</span>
+                <span className="text-[var(--text-muted)]">Chronological age</span>
+                <span className="font-medium">{Math.round(chronologicalAge)}</span>
               </div>
               <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--text-muted)]">Circadian years</span>
-                <span className="font-medium">{circadianAge} years</span>
+                <span className="text-[var(--text-muted)]">Clock running late (body hibernating)</span>
+                <span className="font-medium text-[var(--dash-metric-loss)]">+2.1 Dark Years</span>
               </div>
               <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--text-muted)]">Years lost</span>
-                <span className="font-medium text-[var(--dash-metric-loss)]">{yearsLost}</span>
+                <span className="text-[var(--text-muted)]">Vitamin D not absorbing</span>
+                <span className="font-medium text-[var(--dash-metric-loss)]">+0.8 Dark Years</span>
               </div>
               <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--text-muted)]">DLMO estimate</span>
-                <span className="font-medium">{dlmoEstimate}</span>
+                <span className="text-[var(--text-muted)]">Low iron stores</span>
+                <span className="font-medium text-[var(--dash-metric-loss)]">+0.3 Dark Years</span>
               </div>
               <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--text-muted)]">Social jetlag</span>
-                <span className="font-medium">{socialJetlag}h</span>
+                <span className="text-[var(--text-muted)]">Chronosomatic age today</span>
+                <span className="font-medium">{chronosomaticAge}</span>
               </div>
             </div>
-            <div className="mt-4 flex items-center gap-1 dash-panel-action font-medium text-[var(--researcher-avatar-text)]">
-              <span>See re-entrainment plan</span>
-              <ArrowRight className="h-4 w-4" aria-hidden />
+            <p className="mt-4 dash-panel-muted leading-relaxed">
+              Restore your light-dark cycle and fix your vitamin D. Your Chronosomatic Age could fall
+              to 61.8 — recovering {recoveryYears} years within 90 days.
+            </p>
+            <div className="mt-4 flex flex-wrap items-center gap-3 dash-panel-action font-medium text-[var(--researcher-avatar-text)]">
+              <span>The science ↗</span>
+              <span>Reduce dark years ↗</span>
             </div>
           </motion.div>
         ) : null}

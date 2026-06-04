@@ -63,7 +63,7 @@ function formatStudyDate(iso: string | null): string {
   return date.toLocaleDateString('en-NZ', { month: 'short', year: 'numeric' })
 }
 
-function estimateSocialJetlag(chronotypeQ1: string, chronotypeQ3: string): number {
+function estimateDarkYearsHours(chronotypeQ1: string, chronotypeQ3: string): number {
   const wakeMinutes = parseTimeToMinutes(chronotypeQ1)
   const sleepMinutes = parseTimeToMinutes(chronotypeQ3)
   if (wakeMinutes === null || sleepMinutes === null) return 1.4
@@ -140,7 +140,7 @@ function buildMeasureTiles(input: {
   bloodPanel: BloodPanel
   tiptraq: TiptraqSummary
   completenessGaps: number
-  socialJetlag: number
+  darkYearsHours: number
   hasTipTraq: boolean
 }): MeasureTileData[] {
   const sleepSubtitle =
@@ -148,39 +148,40 @@ function buildMeasureTiles(input: {
       ? `You fell asleep ${input.sleepDelay} minutes later than your body clock expected`
       : 'Your sleep onset matched your body clock window on the latest tracked night'
 
-  const vitdSubtitle =
-    input.bloodPanel.vdrFlagUnresolved
-      ? 'Your body has vitamin D but is not absorbing it properly right now'
-      : 'Your vitamin D level is within the target range for circadian cofactor support'
+  const vitdSubtitle = input.bloodPanel.vdrFlagUnresolved
+    ? 'Your body has vitamin D but is not using it properly. This keeps your body clock genes suppressed — adding Dark Years even when you sleep well.'
+    : 'Your vitamin D level is within the target range for circadian cofactor support'
 
   const tiptraqSubtitle = input.hasTipTraq
-    ? `Your heart and sleep patterns show your clock is ${input.socialJetlag}h behind`
+    ? `Your heart and sleep patterns show your clock is ${input.darkYearsHours}h behind`
     : 'Connect TipTraQ to measure how far your sleep rhythm sits behind your body clock'
 
   const completenessSubtitle =
     input.completenessGaps === 0
       ? 'All data streams are connected and your personalised plan is running at full precision'
       : input.completenessGaps === 1
-        ? 'One unresolved issue is reducing how precise your personalised plan can be right now'
-        : 'Two unresolved issues are reducing how precise your personalised plan can be'
+        ? 'One gap is reducing the precision of your Dark Years calculation and your medication timing plan.'
+        : 'Two gaps are reducing the precision of your Dark Years calculation and your medication timing plan.'
 
   return [
     {
       id: 'sleep',
       value: `${input.sleepDelay} min`,
-      label: 'Bedtime was late',
+      label: 'Clock slipped last night',
       subtitle: sleepSubtitle,
-      badge: 'Watch',
+      badge: 'Adding Dark Years',
       badgeTone: 'watch',
       source: 'Smartphone stream',
       panelRows: [
-        { key: 'Expected sleep onset', value: 'Based on DLMO estimate' },
-        { key: 'Observed delay', value: `${input.sleepDelay} min` },
-        { key: 'Social jetlag', value: `${input.socialJetlag}h` },
+        { key: 'Your body clock target', value: 'Based on DLMO estimate' },
+        { key: 'How far your clock slipped', value: `${input.sleepDelay} min` },
+        { key: 'Dark Years added this week', value: `${input.darkYearsHours}h` },
       ],
       panelActions: [
-        { label: 'Ask DIOS about sleep timing', opensCoach: true },
-        { label: 'What shifts my clock?', prompt: 'What can I do tonight to shift my body clock earlier?' },
+        {
+          label: 'How to recover ↗',
+          prompt: 'How can I reduce my Dark Years and recover my clock tonight?',
+        },
       ],
     },
     {
@@ -194,10 +195,13 @@ function buildMeasureTiles(input: {
       panelRows: [
         { key: 'Vitamin D', value: input.bloodPanel.vitaminDValue ?? 'Not measured' },
         { key: 'VDR flag', value: input.bloodPanel.vdrFlagUnresolved ? 'Unresolved' : 'Clear' },
-        { key: 'Collected', value: formatStudyDate(input.bloodPanel.collectedAt) },
+        { key: 'Dark Years contribution', value: '+0.8 Dark Years' },
       ],
       panelActions: [
-        { label: 'Explain my vitamin D', prompt: 'Why is my vitamin D not working for my body clock?' },
+        {
+          label: 'Explain my vitamin D',
+          prompt: 'Why is my vitamin D adding Dark Years to my Chronosomatic Age?',
+        },
         { label: 'Open DIOS Coach', opensCoach: true },
       ],
     },
@@ -205,17 +209,24 @@ function buildMeasureTiles(input: {
       id: 'tiptraq',
       value: input.tiptraq.qualityLabel,
       label: 'Sleep quality',
-      subtitle: tiptraqSubtitle,
-      badge: input.tiptraq.lastStudyDate ? `Last study: ${formatStudyDate(input.tiptraq.lastStudyDate)}` : 'Last study',
+      subtitle: input.hasTipTraq
+        ? `You wore a TipTraQ sensor for recent nights. It measured when your body clock thinks day and night are — the foundation of your Dark Years calculation.`
+        : tiptraqSubtitle,
+      badge: input.tiptraq.lastStudyDate
+        ? `Last study: ${formatStudyDate(input.tiptraq.lastStudyDate)}`
+        : 'Last study',
       badgeTone: 'study',
       source: 'TipTraQ',
       panelRows: [
         { key: 'Quality', value: input.tiptraq.qualityLabel },
-        { key: 'Clock lag', value: `${input.socialJetlag}h` },
+        { key: 'Clock drift this week', value: `${input.darkYearsHours}h` },
         { key: 'Last study', value: formatStudyDate(input.tiptraq.lastStudyDate) },
       ],
       panelActions: [
-        { label: 'Review sleep study', prompt: 'What did my latest TipTraQ night show about my body clock?' },
+        {
+          label: 'Review sleep study',
+          prompt: 'What did my latest TipTraQ night show about my Dark Years?',
+        },
       ],
     },
     {
@@ -228,11 +239,14 @@ function buildMeasureTiles(input: {
       source: 'DIOS layers',
       panelRows: [
         { key: formatOpenGapsLabel(input.completenessGaps), value: String(input.completenessGaps) },
-        { key: 'Sync score', value: 'See snapshot' },
+        { key: 'Light alignment', value: 'See snapshot' },
         { key: 'Priority', value: input.completenessGaps > 0 ? 'Connect missing streams' : 'Maintain streams' },
       ],
       panelActions: [
-        { label: 'What should I connect?', prompt: 'Which data streams should I connect to improve my plan?' },
+        {
+          label: input.completenessGaps > 1 ? 'Fix both gaps ↗' : 'What should I connect?',
+          prompt: 'Which gaps should I fix first to reduce my Dark Years?',
+        },
       ],
     },
   ]
@@ -264,15 +278,15 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
   })
 
   const chronologicalAge = input.patient.age ?? 61
-  const socialJetlag = estimateSocialJetlag(
+  const darkYearsHours = estimateDarkYearsHours(
     input.patient.chronotype_q1 ?? '',
     input.patient.chronotype_q3 ?? ''
   )
-  const phaseDrift = profile?.confidence_band_minutes ?? Math.round(socialJetlag * 60)
-  const yearsLost = Math.round(socialJetlag * 2.3 * 10) / 10
-  const circadianAge = Math.round((chronologicalAge + yearsLost) * 10) / 10
-  const recoveryYears = Math.round(yearsLost * 0.75 * 10) / 10
-  const syncScore = Math.round(profile?.confidence_score ?? insights.confidenceScore ?? 74)
+  const clockDrift = profile?.confidence_band_minutes ?? Math.round(darkYearsHours * 60)
+  const darkYears = Math.round(darkYearsHours * 2.3 * 10) / 10
+  const chronosomaticAge = Math.round((chronologicalAge + darkYears) * 10) / 10
+  const recoveryYears = Math.round(darkYears * 0.75 * 10) / 10
+  const lightAlignment = Math.round(profile?.confidence_score ?? insights.confidenceScore ?? 74)
 
   const dlmoEstimate =
     profile?.mlux_phase_time?.slice(0, 5) ??
@@ -289,7 +303,7 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
   const tiptraqSummary: TiptraqSummary = {
     sleepOnsetDelayMinutes: sleepDelay,
     qualityLabel: input.latestNight?.rem_delay_flag ? 'Moderate' : hasTipTraq ? 'Moderate' : 'Pending',
-    socialJetlagHours: socialJetlag,
+    darkYearsHours,
     lastStudyDate: input.latestTiptraqDate,
   }
 
@@ -304,18 +318,18 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     bloodPanel,
     tiptraq: tiptraqSummary,
     completenessGaps: Math.min(completenessGaps, 2),
-    socialJetlag,
+    darkYearsHours,
     hasTipTraq,
   })
 
   return {
     chronologicalAge,
-    circadianAge,
-    yearsLost,
+    chronosomaticAge,
+    darkYears,
     recoveryYears,
-    socialJetlag,
-    syncScore,
-    phaseDrift,
+    darkYearsHours,
+    lightAlignment,
+    clockDrift,
     dlmoEstimate,
     medications,
     medicationsDueTonight: medicationsDueTonight || (medications.length > 0 ? 2 : 0),

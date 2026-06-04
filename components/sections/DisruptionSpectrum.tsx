@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import { CONTAINER, SECTION } from './layout'
 
 const MARKERS = [
-  'Social jetlag from misaligned social and biological clocks',
+  'Dark Years from misaligned social and biological clocks',
   'Metabolic strain from sustained circadian drift',
   'Elevated cancer risk in long-term shift cohorts',
   'Neural decline linked to broken sleep architecture',
@@ -16,7 +16,7 @@ const MARKERS = [
 const STAGES = [
   {
     tag: 'Mild acute disruption detected at population scale',
-    title: 'Social jetlag and shift-work disorder sit at the earliest point on the curve',
+    title: 'Dark Years and shift-work disorder sit at the earliest point on the curve',
     body: 'Behavioural misalignment between social and biological clocks is the first signal DIOS can detect before pathology develops',
     bg: 'bg-[#EDE8F7]/50',
     dark: false,

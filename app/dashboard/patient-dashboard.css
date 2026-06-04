@@ -124,31 +124,41 @@
 }
 
 .snapshot-age-label {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.625rem;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   text-align: center;
-  line-height: 1.25;
-  color: rgb(13 13 13 / 0.52);
+  line-height: 1.35;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.0625rem;
-  min-height: 2.5em;
+  gap: 0.125rem;
+  min-height: 2.75em;
   width: 100%;
 }
 
-.snapshot-age-label span {
+.snapshot-age-label-title {
   display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgb(13 13 13 / 0.78);
 }
 
-.snapshot-age-value-cell--center .snapshot-age-label {
-  color: rgb(13 13 13 / 0.48);
+.snapshot-age-label-desc {
+  display: block;
+  font-size: 0.6875rem;
   font-weight: 400;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
+  color: rgb(13 13 13 / 0.52);
+  line-height: 1.35;
+}
+
+.snapshot-age-value-cell--center .snapshot-age-label-title {
+  color: rgb(13 13 13 / 0.72);
+}
+
+.snapshot-age-value-cell--center .snapshot-age-label-desc {
+  color: rgb(13 13 13 / 0.48);
 }
 
 .snapshot-center-arrow {
@@ -176,17 +186,23 @@
 }
 
 .snapshot-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: rgb(74 55 40 / 0.68);
+  gap: 0.25rem;
 }
 
-.snapshot-stat strong {
-  display: block;
+.snapshot-stat-value {
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   font-size: 1.0625rem;
   font-weight: 600;
+  line-height: 1.2;
   color: var(--dash-metric-brown);
+}
+
+.snapshot-stat .snapshot-age-label {
+  min-height: 2.75em;
 }
 
 .snapshot-cta-bar {
