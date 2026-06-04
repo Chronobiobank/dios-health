@@ -1,5 +1,14 @@
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
 import { isElevatedSeverity } from '@/lib/patient-dashboard/dashboard-indicators'
+import {
+  RIGHT_SLEEP_D3_TARGET,
+  RIGHT_SLEEP_PROTOCOL_LABEL,
+  rightSleepBaselineBloodsDetail,
+  rightSleepBVitaminsDetail,
+  rightSleepD3CorrectionDetail,
+  rightSleepLightCurfew,
+  rightSleepMorningLight,
+} from '@/lib/patient-dashboard/gominak-right-sleep'
 import type {
   BloodPanel,
   Medication,
@@ -26,7 +35,7 @@ const MAX_STEPS = 5
 function tonightMedDetail(medications: Medication[]): string {
   const tonight = medications.filter((m) => m.status === 'tonight')
   if (tonight.length === 0) {
-    return 'Take your evening doses in the Medication timing window below.'
+    return 'Take evening doses in the medication window below — timing still follows your DLMO anchor.'
   }
   const lines = tonight.map((m) => `${m.name} at ${m.time}`)
   return `Tonight: ${lines.join(' · ')}.`
@@ -39,29 +48,80 @@ function apnoeaNode(nodes: SpectrumNode[]): SpectrumNode | undefined {
 export function buildNextStepsSummary(input: BuildPatientNextStepsInput): string {
   const apnoea = apnoeaNode(input.spectrumNodes)
   const nights = input.tipTraqNightsCount
+  const curfew = rightSleepLightCurfew(input.dlmoEstimate)
 
   if (nights >= 5 && apnoea && isElevatedSeverity(apnoea.severity)) {
-    return `Your five TipTraQ nights show ${apnoea.severity === 'moderate' || apnoea.severity === 'severe' ? '' : 'mild '}sleep apnoea and clock slip — bloods and your GP are this week's priority.`
-  }
-
-  if (input.hasTipTraq && input.clockDrift >= 30) {
-    return `Sleep is running about ${input.clockDrift} minutes late versus your body-clock target — tighten evenings and close data gaps to sharpen your plan.`
+    return `${RIGHT_SLEEP_PROTOCOL_LABEL}: your TipTraQ block shows sleep apnoea and clock slip — keep tonight's curfew (${curfew}), add GP review, and finish the Gominak baseline panel.`
   }
 
   if (!input.bloodPanel.collectedAt) {
-    return 'TipTraQ is in — add your Gominak blood panel next so immune and age scores stop running on estimates.'
+    return `${RIGHT_SLEEP_PROTOCOL_LABEL} starts with baseline bloods (D3 target ${RIGHT_SLEEP_D3_TARGET}) — then titrate D and B vitamins while you hold evening light curfew and your DLMO sleep window.`
+  }
+
+  if (input.bloodPanel.vitaminDLabel === 'Too low' || input.bloodPanel.vdrFlagUnresolved) {
+    return `${RIGHT_SLEEP_PROTOCOL_LABEL}: bring vitamin D into ${RIGHT_SLEEP_D3_TARGET} with retested labs, then continue the B-vitamin phase while protecting sleep at ${input.dlmoEstimate}.`
+  }
+
+  if (input.hasTipTraq && input.clockDrift >= 30) {
+    return `${RIGHT_SLEEP_PROTOCOL_LABEL}: dim by ${curfew} and aim for sleep near ${input.dlmoEstimate} — you are averaging +${input.clockDrift}m late, which blocks D absorption and deep sleep.`
   }
 
   if (!input.hasTipTraq) {
-    return 'Connect TipTraQ and your phone stream first, then add bloods — each layer tightens medication timing.'
+    return `Connect TipTraQ and phone streams, then run ${RIGHT_SLEEP_PROTOCOL_LABEL} — sleep grading plus Gominak bloods unlock your dose and timing plan.`
   }
 
-  return `You could recover about ${input.recoveryYears} years in 90 days by holding rhythm, treating flagged risks, and keeping data complete.`
+  return `${RIGHT_SLEEP_PROTOCOL_LABEL} on track — hold ${RIGHT_SLEEP_D3_TARGET}, zeitgebers, and retest schedule; about ${input.recoveryYears} chronopathic years may recover in 90 days with consistent nights.`
 }
 
 export function buildPatientNextSteps(input: BuildPatientNextStepsInput): PatientNextStep[] {
   const steps: PatientNextStep[] = []
   const apnoea = apnoeaNode(input.spectrumNodes)
+  const curfew = rightSleepLightCurfew(input.dlmoEstimate)
+  const morningLight = rightSleepMorningLight(input.dlmoEstimate)
+
+  if (!input.bloodPanel.collectedAt) {
+    steps.push({
+      id: 'right-sleep-bloods',
+      priority: 'this-week',
+      title: 'RightSleep: Gominak baseline bloods',
+      detail: rightSleepBaselineBloodsDetail(),
+      href: PATIENT_ROUTES.streamsBloods,
+    })
+  } else if (input.bloodPanel.vitaminDLabel === 'Too low') {
+    steps.push({
+      id: 'right-sleep-d3',
+      priority: 'this-week',
+      title: 'RightSleep: titrate vitamin D to target',
+      detail: rightSleepD3CorrectionDetail(input.bloodPanel.vitaminDValue),
+      href: PATIENT_ROUTES.streamsBloods,
+      prompt: 'How do I titrate vitamin D safely on the Gominak RightSleep protocol?',
+    })
+  } else if (input.bloodPanel.vdrFlagUnresolved) {
+    steps.push({
+      id: 'right-sleep-b-vitamins',
+      priority: 'this-week',
+      title: 'RightSleep: B-vitamin phase',
+      detail: rightSleepBVitaminsDetail(),
+      prompt: 'What B-vitamin phase should I be on in RightSleep?',
+    })
+  }
+
+  if (input.clockDrift >= 30) {
+    steps.push({
+      id: 'right-sleep-curfew',
+      priority: 'tonight',
+      title: 'RightSleep: evening light curfew',
+      detail: `Dim screens and room lights by ${curfew} (about 90 minutes before your DLMO window at ${input.dlmoEstimate}). Late light keeps D and melatonin out of phase.`,
+      prompt: 'How does evening light affect my RightSleep vitamin D plan?',
+    })
+    steps.push({
+      id: 'right-sleep-sleep-window',
+      priority: 'tonight',
+      title: 'RightSleep: hit your sleep window',
+      detail: `Aim to be in bed near ${input.dlmoEstimate}. TipTraQ shows +${input.clockDrift}m average slip — grade tonight's sleep in your workbook.`,
+      prompt: 'How can I align sleep onset with my DLMO on RightSleep?',
+    })
+  }
 
   if (input.medicationsDueTonight > 0) {
     steps.push({
@@ -69,16 +129,6 @@ export function buildPatientNextSteps(input: BuildPatientNextStepsInput): Patien
       priority: 'tonight',
       title: 'Take tonight\'s meds on schedule',
       detail: tonightMedDetail(input.medications),
-    })
-  }
-
-  if (input.clockDrift >= 30) {
-    steps.push({
-      id: 'wind-down',
-      priority: 'tonight',
-      title: 'Protect your DLMO window',
-      detail: `Aim to wind down before ${input.dlmoEstimate}. You are averaging +${input.clockDrift}m past target — dim screens from ~22:00.`,
-      prompt: 'How can I reduce my Dark Years and recover my clock tonight?',
     })
   }
 
@@ -90,19 +140,9 @@ export function buildPatientNextSteps(input: BuildPatientNextStepsInput): Patien
     steps.push({
       id: 'gp-apnoea',
       priority: 'this-week',
-      title: 'Talk to your GP about sleep apnoea',
-      detail: `Bring your TipTraQ summary — ${band} overnight breathing is flagged on the spectrum.`,
-      prompt: 'What did my latest TipTraQ night show about my Dark Years?',
-    })
-  }
-
-  if (!input.bloodPanel.collectedAt) {
-    steps.push({
-      id: 'bloods',
-      priority: 'this-week',
-      title: 'Add your Gominak blood panel',
-      detail: 'Vitamin D, VDR, and iron unlock immune precision and sharpen Chronosomatic Age.',
-      href: PATIENT_ROUTES.streamsBloods,
+      title: 'Discuss sleep apnoea with your GP',
+      detail: `RightSleep improves sleep depth once breathing is addressed — bring TipTraQ (${band} OSA on your spectrum).`,
+      prompt: 'What did my latest TipTraQ night show about my breathing?',
     })
   }
 
@@ -110,53 +150,67 @@ export function buildPatientNextSteps(input: BuildPatientNextStepsInput): Patien
     steps.push({
       id: 'tiptraq-upload',
       priority: 'this-week',
-      title: 'Upload your TipTraQ nights',
-      detail: 'At least five nights let us score breathing, rhythm, and clock drift together.',
+      title: 'RightSleep: upload TipTraQ nights',
+      detail: 'At least five nights give sleep grading, breathing flags, and clock drift for your D dose and curfew timing.',
       href: PATIENT_ROUTES.streams,
-    })
-  } else if (input.completenessGaps >= 2 && input.bloodPanel.collectedAt) {
-    steps.push({
-      id: 'completeness',
-      priority: 'this-week',
-      title: 'Close remaining data gaps',
-      detail: 'Open Data completeness on your dashboard — connect anything still marked missing.',
-      prompt: 'Which gaps should I fix first to reduce my Dark Years?',
     })
   }
 
-  if (steps.length < MAX_STEPS) {
+  if (
+    steps.length < MAX_STEPS &&
+    (input.clockDrift >= 30 || input.bloodPanel.collectedAt) &&
+    !steps.some((s) => s.id === 'right-sleep-morning-light')
+  ) {
     const rhythm = input.spectrumNodes.find((n) => n.id === 'sleep-rhythm')
-    if (
-      rhythm &&
-      isElevatedSeverity(rhythm.severity) &&
-      input.clockDrift >= 30 &&
-      !steps.some((s) => s.id === 'morning-light')
-    ) {
+    if (!rhythm || isElevatedSeverity(rhythm.severity) || input.clockDrift >= 30) {
       steps.push({
-        id: 'morning-light',
+        id: 'right-sleep-morning-light',
         priority: 'this-week',
-        title: 'Hold morning light and wake time',
-        detail: rhythm.action,
-        prompt: 'Why my clock drifts ↗',
+        title: 'RightSleep: morning light anchor',
+        detail: `Get outdoor light before ${morningLight}. Morning zeitgeber sets melatonin timing for the next night.`,
+        prompt: 'Why is morning light part of Gominak RightSleep?',
       })
     }
   }
 
   if (
+    input.bloodPanel.collectedAt &&
+    input.bloodPanel.vitaminDLabel === 'In range' &&
+    !input.bloodPanel.vdrFlagUnresolved &&
+    steps.length < MAX_STEPS &&
+    !steps.some((s) => s.id === 'right-sleep-b-vitamins')
+  ) {
+    steps.push({
+      id: 'right-sleep-retest',
+      priority: 'this-week',
+      title: 'RightSleep: keep D in range',
+      detail: `Retest vitamin D on the workbook schedule (every 4–12 weeks) and stay within ${RIGHT_SLEEP_D3_TARGET} through winter and summer dosing changes.`,
+      href: PATIENT_ROUTES.streamsBloods,
+    })
+  }
+
+  if (
     steps.length < MAX_STEPS &&
     input.completenessGaps > 0 &&
-    !steps.some((s) => s.id === 'bloods' || s.id === 'tiptraq-upload' || s.id === 'completeness')
+    !steps.some((s) => s.id === 'right-sleep-bloods' || s.id === 'tiptraq-upload')
   ) {
     steps.push({
       id: 'streams',
       priority: 'this-week',
-      title: 'Review your data streams',
-      detail: `${input.completenessGaps} gap${input.completenessGaps === 1 ? '' : 's'} still reduce Dark Years and medication timing precision.`,
+      title: 'Complete RightSleep data streams',
+      detail: `${input.completenessGaps} gap${input.completenessGaps === 1 ? '' : 's'} still block calibrated D dosing and sleep grading.`,
       href: PATIENT_ROUTES.streams,
     })
   }
 
-  return steps.slice(0, MAX_STEPS)
+  const priorityOrder: Record<PatientNextStep['priority'], number> = {
+    tonight: 0,
+    'this-week': 1,
+  }
+
+  return steps
+    .sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority])
+    .slice(0, MAX_STEPS)
 }
 
 export function buildPatientNextStepsBlock(input: BuildPatientNextStepsInput): PatientNextSteps {

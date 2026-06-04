@@ -34,12 +34,20 @@ type BuildCalibrationInput = {
 export type PatientCalibrationFields = {
   fitzpatrickType: string
   fitzpatrickLabel: string
+  /** Iris tone proxy from Fitzpatrick until eye colour is captured in onboarding. */
+  eyeColorLabel: string
   latitude: number
   locationName: string
   season: string
   solarZenith: number
   chronotype: string
   chronotypeSource: string
+}
+
+function eyeColorFromFitzpatrick(type: number): string {
+  if (type <= 2) return 'Light'
+  if (type <= 4) return 'Mixed'
+  return 'Dark'
 }
 
 function fitzpatrickFields(type: number | null): { fitzpatrickType: string; fitzpatrickLabel: string } {
@@ -121,7 +129,13 @@ function formatTipTraqSource(dateIso: string | null): string {
 
 export function buildPatientCalibration(input: BuildCalibrationInput): PatientCalibrationFields {
   const now = input.now ?? new Date()
-  const { fitzpatrickType, fitzpatrickLabel } = fitzpatrickFields(input.patient.fitzpatrick_type)
+  const fitzpatrickValue = input.patient.fitzpatrick_type
+  const { fitzpatrickType, fitzpatrickLabel } = fitzpatrickFields(fitzpatrickValue)
+  const eyeColorLabel = eyeColorFromFitzpatrick(
+    fitzpatrickValue != null && fitzpatrickValue >= 1 && fitzpatrickValue <= 6
+      ? fitzpatrickValue
+      : 3
+  )
   const latitude = resolveLocationLatitude(
     input.patient.location_city,
     input.patient.location_country
@@ -144,6 +158,7 @@ export function buildPatientCalibration(input: BuildCalibrationInput): PatientCa
   return {
     fitzpatrickType,
     fitzpatrickLabel,
+    eyeColorLabel,
     latitude,
     locationName,
     season,

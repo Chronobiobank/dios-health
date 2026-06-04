@@ -4,7 +4,6 @@ import { useCallback, useState } from 'react'
 
 import { DashboardNav } from '@/components/patient-dashboard/dashboard-nav'
 import { MeasureTile } from '@/components/patient-dashboard/measure-tile'
-import { MetabolicRiskTile } from '@/components/patient-dashboard/metabolic-risk-tile'
 import { Section, TileGrid } from '@/components/patient-dashboard/section'
 import { NextStepsTile } from '@/components/patient-dashboard/next-steps-tile'
 import { SnapshotTile } from '@/components/patient-dashboard/snapshot-tile'
@@ -54,14 +53,6 @@ export function DashboardClient({
           <Section label="Daily snapshot">
             <SnapshotTile
               snapshot={snapshot}
-              openPanel={openPanel}
-              onTogglePanel={togglePanel}
-            />
-          </Section>
-
-          <Section label="Metabolic Risk">
-            <MetabolicRiskTile
-              nodes={snapshot.spectrumNodes}
               openPanel={openPanel}
               onTogglePanel={togglePanel}
               onExplainRisk={() =>

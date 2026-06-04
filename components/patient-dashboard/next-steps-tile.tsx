@@ -47,7 +47,10 @@ export function NextStepsTile({ nextSteps, onSendPrompt }: NextStepsTileProps) {
         <div className="next-steps-tile__icon" aria-hidden>
           <ListChecks strokeWidth={1.75} />
         </div>
-        <h3 className="next-steps-tile__title">Your next steps</h3>
+        <div className="next-steps-tile__heading">
+          <h3 className="next-steps-tile__title">Your next steps</h3>
+          <p className="next-steps-tile__protocol">Gominak RightSleep</p>
+        </div>
       </div>
 
       <p className="next-steps-tile__summary">{nextSteps.summary}</p>

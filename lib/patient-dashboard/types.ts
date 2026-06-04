@@ -109,6 +109,7 @@ export type PatientSnapshot = {
   nextSteps: PatientNextSteps
   fitzpatrickType: string
   fitzpatrickLabel: string
+  eyeColorLabel: string
   latitude: number
   locationName: string
   season: string

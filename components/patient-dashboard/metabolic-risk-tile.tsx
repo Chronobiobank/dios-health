@@ -19,6 +19,8 @@ type MetabolicRiskTileProps = {
   openPanel: DashboardPanelId | null
   onTogglePanel: (id: DashboardPanelId) => void
   onExplainRisk: () => void
+  /** Inside daily snapshot — no section-level grid span. */
+  embedded?: boolean
 }
 
 function severityBarFill(severity: SpectrumSeverity): string {
@@ -45,6 +47,7 @@ export function MetabolicRiskTile({
   openPanel,
   onTogglePanel,
   onExplainRisk,
+  embedded = false,
 }: MetabolicRiskTileProps) {
   const openNode = nodes.find((node) => node.id === openPanel) ?? null
 
@@ -53,7 +56,7 @@ export function MetabolicRiskTile({
   }
 
   return (
-    <div className="dash-tile-group col-span-2">
+    <div className={embedded ? 'dash-tile-group' : 'dash-tile-group col-span-2'}>
       <div className="glass-tile metabolic-risk-tile w-full">
         <p className="sr-only">Chronosomatic Spectrum</p>
 
@@ -94,7 +97,7 @@ export function MetabolicRiskTile({
             </div>
           }
         >
-          <DashTileExpandCue as="button" label="Discover more" onClick={onExplainRisk} />
+          <DashTileExpandCue as="button" label="Metabolic risk profile" onClick={onExplainRisk} />
         </DashTileExpandRow>
       </div>
 
