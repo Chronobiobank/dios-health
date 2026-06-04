@@ -171,7 +171,7 @@ export function PersonalisationPayoffSection() {
             href="/circadian-digital-twin"
             className="btn-primary type-button inline-flex items-center justify-center rounded-full bg-black py-3 text-white transition-colors hover:bg-black/80"
           >
-            Explore the circadian digital twin →
+            Explore circadian age →
           </Link>
         </p>
       </div>
