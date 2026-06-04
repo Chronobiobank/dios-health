@@ -1,4 +1,22 @@
-/* Shared column — nav logo left edge aligns with glass tile left edge */
+/* Patient dashboard + /how-it-works — no marketing header; site pastel backdrop */
+body:has([data-dashboard='patient-v2']) #site-nav,
+body:has(.patient-dashboard-route) #site-nav,
+body:has(.how-it-works-route) #site-nav,
+body:has(.dashboard-route-shell) #site-nav {
+  display: none;
+}
+
+body:has([data-dashboard='patient-v2']) .dios-app-shell,
+body:has(.patient-dashboard-route) .dios-app-shell,
+body:has(.how-it-works-route) .dios-app-shell {
+  min-height: 100svh;
+}
+
+html:has(.patient-dashboard-route),
+html:has(.how-it-works-route) {
+  scroll-padding-top: 1rem;
+}
+
 .patient-dashboard-content {
   box-sizing: border-box;
   width: 100%;
@@ -34,31 +52,10 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.35);
 }
 
-.patient-dashboard-nav__logo {
-  display: block;
-  height: var(--nav-logo-mark-h, 28px);
-  width: auto;
-  max-width: 5.5rem;
-  margin: 0;
-  padding: 0;
-}
-
 .patient-dashboard-nav__greeting {
   font-size: clamp(1.25rem, 3.5vw + 0.85rem, 1.5rem);
   font-weight: var(--font-weight-bold, 700);
   line-height: 1.2;
-  color: var(--text-primary);
-}
-
-.patient-dashboard-nav__tagline {
-  font-size: var(--text-label-size);
-  line-height: var(--text-label-leading);
-  color: var(--text-muted);
-}
-
-.patient-dashboard-nav__coach {
-  font-size: var(--text-caption-size);
-  line-height: var(--text-caption-leading);
   color: var(--text-primary);
 }
 

@@ -5,7 +5,10 @@ import './patient-dashboard.css'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen lg:pl-[var(--patient-sidebar-width)]">
+    <div
+      className="patient-dashboard-route min-h-screen lg:pl-[var(--patient-sidebar-width)]"
+      data-dashboard="patient-v2"
+    >
       <PatientBottomNav />
       <div
         className={cn(

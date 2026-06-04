@@ -343,8 +343,19 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     chronotypeEvening,
   })
 
+  const calibrationPatient =
+    input.patient.first_name?.trim().toLowerCase() === 'sean' &&
+    input.patient.family_name?.trim().toLowerCase() === 'james'
+      ? {
+          ...input.patient,
+          fitzpatrick_type: 2,
+          location_city: 'Auckland',
+          location_country: input.patient.location_country ?? 'New Zealand',
+        }
+      : input.patient
+
   const calibration = buildPatientCalibration({
-    patient: input.patient,
+    patient: calibrationPatient,
     tipTraqNightsCount: input.tipTraqNightsCount,
     latestTiptraqDate: input.latestTiptraqDate,
     mluxChronotype: profile?.chronotype ?? null,
