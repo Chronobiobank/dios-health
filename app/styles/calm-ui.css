@@ -165,6 +165,11 @@ body:has(.calm-landing) .dios-site-nav__menu-panel {
 }
 
 @media (min-width: 768px) {
+  .calm-landing {
+    --pitch-screen-gap: clamp(1.25rem, 3vw, 2rem);
+    --pitch-screen-inset: var(--pitch-screen-gap);
+  }
+
   .calm-landing .pitch-deck {
     height: auto;
     max-height: none;

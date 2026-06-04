@@ -22,7 +22,7 @@ export function PitchMinimalTileCard({ tile }: { tile: PitchMinimalTile }) {
         <PitchTileTitle
           as="h2"
           light
-          className={isPrimaryHero ? 'mt-2 text-4xl leading-tight sm:text-6xl' : 'mt-2'}
+          className={isPrimaryHero ? 'pitch-tile-title--hero mt-2' : 'mt-2'}
         >
           {tile.title}
         </PitchTileTitle>

@@ -87,7 +87,7 @@ export function PitchEvidenceCard({
 }) {
   return (
     <PitchMediaTile image={image} imageAlt={imageAlt} size="card">
-      <p className="text-[15px] font-medium leading-snug text-white sm:text-base">{finding}</p>
+      <p className="pitch-tile-finding">{finding}</p>
       <a href={href} target="_blank" rel="noopener noreferrer" className="pitch-glow-tile__link">
         {label} →
       </a>
@@ -141,8 +141,8 @@ export function PitchStepCard({
   return (
     <li>
       <PitchMediaTile image={image} imageAlt={imageAlt} size="card">
-        <span className="font-mono text-[11px] text-[var(--calm-brand)]/75">{step}</span>
-        <p className="mt-1 text-base font-medium text-white">{title}</p>
+        <span className="pitch-tile-card-eyebrow">{step}</span>
+        <p className="pitch-tile-card-title mt-1">{title}</p>
         <p className="pitch-glow-tile__label mt-1 max-sm:hidden">{body}</p>
         <Link href={detailsHref} className="pitch-glow-tile__link mt-1 inline-block">
           View details →
@@ -170,8 +170,8 @@ export function PitchAudienceCard({
 }) {
   return (
     <PitchMediaTile image={image} imageAlt={imageAlt} size="card">
-      <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--calm-brand)]/75">{emphasis}</p>
-      <p className="mt-1.5 text-base font-medium text-white">{audience}</p>
+      <p className="pitch-tile-card-eyebrow">{emphasis}</p>
+      <p className="pitch-tile-card-title mt-1.5">{audience}</p>
       <p className="pitch-glow-tile__label mt-1 max-sm:hidden">{line}</p>
       <Link href={detailsHref} className="pitch-glow-tile__link mt-1 inline-block">
         View details →
@@ -190,7 +190,7 @@ export function PitchInlineCitations({
   return (
     <p
       className={cn(
-        'mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:mt-5 sm:text-sm',
+        'pitch-tile-citations mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 sm:mt-5',
         light ? 'text-white/65' : 'text-white/50'
       )}
     >
