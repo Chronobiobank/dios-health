@@ -13,6 +13,7 @@ import {
 } from '@/lib/patient-dashboard/dashboard-indicators'
 import type { DashboardPanelId, SpectrumNode, SpectrumNodeId } from '@/lib/patient-dashboard/types'
 import type { SpectrumSeverity } from '@/lib/patient-dashboard/types'
+import { cn } from '@/lib/utils'
 
 type MetabolicRiskTileProps = {
   nodes: SpectrumNode[]
@@ -57,8 +58,13 @@ export function MetabolicRiskTile({
 
   return (
     <div className={embedded ? 'dash-tile-group' : 'dash-tile-group col-span-2'}>
-      <div className="glass-tile metabolic-risk-tile w-full">
-        <p className="sr-only">Chronosomatic Spectrum</p>
+      <div
+        className={cn(
+          'metabolic-risk-tile w-full',
+          embedded ? 'dios-glass-inner snapshot-metabolic-risk-tile' : 'glass-tile'
+        )}
+      >
+        <p className="sr-only">Metabolic risk profile — Chronosomatic Spectrum</p>
 
         <ChronosomaticSpectrum
           nodes={nodes}

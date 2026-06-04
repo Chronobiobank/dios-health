@@ -427,20 +427,9 @@ html:has(.patient-dashboard-route) {
   min-width: 0;
 }
 
-.snapshot-tile__risk-center .metabolic-risk-tile.glass-tile {
-  padding: 0;
-  border: none;
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  box-shadow: none;
-}
-
-.snapshot-tile__risk-center .metabolic-risk-tile.glass-tile:hover,
-.snapshot-tile__risk-center .metabolic-risk-tile.glass-tile:active {
-  transform: none;
-  background: transparent;
-  box-shadow: none;
+.snapshot-tile__risk-center .snapshot-metabolic-risk-tile {
+  padding: var(--dash-tile-gap);
+  box-sizing: border-box;
 }
 
 .snapshot-tile__risk-center .dash-tile-group {
@@ -964,22 +953,6 @@ html:has(.patient-dashboard-route) {
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
-}
-
-.next-steps-tile__heading {
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-  min-width: 0;
-}
-
-.next-steps-tile__protocol {
-  margin: 0;
-  font-family: var(--font-family-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--dash-text-sub);
 }
 
 .next-steps-tile__icon {
