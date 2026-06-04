@@ -1256,6 +1256,16 @@
   }
 }
 
+/* Scrollable marketing pages (contact, etc.) — dark copy on light cards; overrides
+   calmer base `p { color: var(--color-text-primary) }` in prefers-color-scheme: dark */
+.calm-landing .marketing-detail {
+  color: #0d0d0d;
+}
+
+.calm-landing .marketing-detail :where(p, li, span, h1, h2, h3, h4) {
+  color: inherit;
+}
+
 /* Marketing detail pages — pill CTAs without shared btn-* classes */
 .calm-landing .marketing-main :is(a, button).rounded-full {
   padding-inline: var(--dios-btn-padding-inline);

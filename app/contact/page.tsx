@@ -52,7 +52,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
       : 'DIOS%20enquiry'
 
   return (
-    <main className="mx-auto max-w-[76rem] px-5 pb-16 sm:px-6">
+    <main className="marketing-detail mx-auto max-w-[76rem] px-5 pb-16 sm:px-6">
         <p className="type-label">Contact</p>
         <h1 className="type-section mt-4 max-w-3xl">
           {intentBlock?.title ?? 'Get in touch'}
@@ -93,8 +93,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               <h2 className="text-xl font-medium tracking-tight text-black sm:text-2xl">
                 {GRANT_MUNRO_FOUNDER.name}
               </h2>
-              <p className="mt-1 text-sm">{GRANT_MUNRO_FOUNDER.role}</p>
-              <p className="mt-0.5 font-mono text-xs leading-relaxed">
+              <p className="mt-1 text-sm text-[#0D0D0D]/70">{GRANT_MUNRO_FOUNDER.role}</p>
+              <p className="mt-0.5 font-mono text-xs leading-relaxed text-[#0D0D0D]/55">
                 {GRANT_MUNRO_FOUNDER.affiliation}
               </p>
             </div>
