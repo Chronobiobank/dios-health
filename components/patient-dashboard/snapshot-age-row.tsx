@@ -23,6 +23,18 @@ export function SnapshotMetricLabel({ title, description }: { title: string; des
   )
 }
 
+/** Age column — e.g. "61 Years old" with a plain-language descriptor. */
+function AgeYearsOldTile({ age, description }: { age: number; description: string }) {
+  return (
+    <div className="snapshot-age-years-block">
+      <p className="snapshot-age-years-old-headline">
+        <span className="snapshot-age-years-old-number">{Math.round(age)}</span> Years old
+      </p>
+      <p className="snapshot-age-label-desc">{description}</p>
+    </div>
+  )
+}
+
 type SnapshotAgeRowProps = {
   chronologicalAge: number
   chronosomaticAge: number
@@ -37,10 +49,9 @@ export function SnapshotAgeRow({
   return (
     <div className="snapshot-age-row">
       <div className="snapshot-age-value-cell snapshot-age-value-cell--chrono">
-        <p className="snapshot-metric-value">{Math.round(chronologicalAge)}</p>
-        <SnapshotMetricLabel
-          title="Chronological age"
-          description="(the age on your birth certificate)"
+        <AgeYearsOldTile
+          age={chronologicalAge}
+          description="(chronological age on your birth certificate)"
         />
       </div>
       <div className="snapshot-age-value-cell snapshot-age-value-cell--center">
@@ -54,10 +65,9 @@ export function SnapshotAgeRow({
         />
       </div>
       <div className="snapshot-age-value-cell snapshot-age-value-cell--circadian">
-        <p className="snapshot-metric-value">{Math.round(chronosomaticAge)}</p>
-        <SnapshotMetricLabel
-          title="Chronosomatic age"
-          description="(the age your body is actually living)"
+        <AgeYearsOldTile
+          age={chronosomaticAge}
+          description="(chronosomatic age your body is actually living)"
         />
       </div>
     </div>
