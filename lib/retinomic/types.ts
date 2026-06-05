@@ -1,3 +1,6 @@
+import type { BaselineScanSummary } from '@/lib/retinomic/baseline-scan-summary'
+import type { RetinomicTier } from '@/src/types'
+
 export type {
   BiochemicalFuel,
   GclIplThicknessMicrons,
@@ -8,8 +11,6 @@ export type {
   TipTraqWebhookPayload,
   User,
 } from '@/src/types'
-
-import type { RetinomicTier } from '@/src/types'
 
 export type PhoticDayPhase = 'morning' | 'midday' | 'evening'
 
@@ -29,6 +30,7 @@ export type RetinomicDashboardProps = {
   greeting: string
   firstName: string
   tier: RetinomicTier
+  baselineScan: BaselineScanSummary | null
   melanopicLuxToday: number
   melanopicLuxCeiling: number
   photicPhase: PhoticDayPhase

@@ -47,10 +47,8 @@ export function SilotonNodeLocator({ className, onGeoResolved }: SilotonNodeLoca
     <div className={className}>
       <div className="mb-3 flex items-end justify-between gap-2">
         <div>
-          <p className="calm-auth-eyebrow">Find a scan node</p>
-          <p className="dash-sub mt-1 text-xs">
-            Siloton GiraffeOCT nodes · pharmacy & clinical hubs
-          </p>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-black/45">Nearby nodes</p>
+          <p className="dash-sub mt-1 text-xs">Siloton GiraffeOCT · pharmacy & clinical hubs</p>
         </div>
         {coords ? (
           <p className="dash-sub font-mono text-[10px]">

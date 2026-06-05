@@ -1,6 +1,7 @@
 'use client'
 
 import { DashboardNav } from '@/components/patient-dashboard/dashboard-nav'
+import { BaselineScanPanel } from '@/components/retinomic/panels/baseline-scan-panel'
 import { MetabolicDosePanel } from '@/components/retinomic/panels/metabolic-dose-panel'
 import { PhoticDosePanel } from '@/components/retinomic/panels/photic-dose-panel'
 import { InterventionGuide } from '@/components/dashboard/intervention-guide'
@@ -16,9 +17,11 @@ type RetinomicDashboardClientProps = RetinomicDashboardProps & {
 
 export function RetinomicDashboardClient({
   greeting,
+  firstName,
   fullName,
   avatarUrl,
   tier,
+  baselineScan,
   melanopicLuxToday,
   melanopicLuxCeiling,
   photicPhase,
@@ -34,6 +37,7 @@ export function RetinomicDashboardClient({
       <div className="relative z-10 pb-[var(--patient-nav-offset)] md:pb-0">
         <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
         <main className="dash-dashboard-main" aria-label="Retinomic protocol control panels">
+          {baselineScan ? <BaselineScanPanel baseline={baselineScan} firstName={firstName} /> : null}
           <InterventionGuide intervention={dailyIntervention} />
           <PhoticDosePanel
             melanopicLuxToday={melanopicLuxToday}

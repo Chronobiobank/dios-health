@@ -2,6 +2,8 @@ import type { HardwareBaseline, IrisPigment } from '@/src/types'
 import { computeSunZenithData } from '@/src/lib/engine/sun-zenith'
 
 export const ONBOARDING_BRIDGE_STORAGE_KEY = 'dios-retinomic-onboarding-bridge'
+/** Set after signup; dashboard reads once to show first-run welcome */
+export const DIOS_DASHBOARD_WELCOME_KEY = 'dios-dashboard-welcome-baseline'
 
 export type OnboardingGeo = {
   lat: number

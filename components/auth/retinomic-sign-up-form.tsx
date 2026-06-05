@@ -6,6 +6,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState, type FormEvent } from 'react'
 
 import {
+  clearOnboardingBridge,
+  DIOS_DASHBOARD_WELCOME_KEY,
   mergeOnboardingBridge,
   type OnboardingBridgePayload,
 } from '@/lib/auth/onboarding-bridge'
@@ -85,6 +87,11 @@ export function RetinomicSignUpForm({ initialBridge }: RetinomicSignUpFormProps)
         return
       }
 
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem(DIOS_DASHBOARD_WELCOME_KEY, '1')
+        clearOnboardingBridge()
+      }
+
       router.push(registerJson.next ?? PATIENT_ROUTES.dashboard)
       router.refresh()
     } catch {
@@ -99,10 +106,10 @@ export function RetinomicSignUpForm({ initialBridge }: RetinomicSignUpFormProps)
       {bridge ? (
         <div className="calm-auth-bridge">
           <p>
-            <strong>Bio-scan linked</strong>
+            <strong>Eye baseline linked</strong>
           </p>
           <p className="mt-1 type-medical-dense">
-            Iris {bridge.irisPigment} · Skin ITA {bridge.skinITA} · Zenith geo{' '}
+            {bridge.irisPigment} iris · ITA {bridge.skinITA} · light dose anchor ·{' '}
             {bridge.onboardingLatLong.lat.toFixed(2)}, {bridge.onboardingLatLong.lng.toFixed(2)}
           </p>
         </div>
@@ -110,7 +117,7 @@ export function RetinomicSignUpForm({ initialBridge }: RetinomicSignUpFormProps)
         <p className="calm-auth-muted">
           No scan on file.{' '}
           <Link href="/onboarding" className="calm-auth-link">
-            Run Retinomic baseline first
+            Start your free baseline scan
           </Link>
         </p>
       )}

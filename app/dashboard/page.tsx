@@ -6,6 +6,11 @@ import type { BloodPanelSnapshot } from '@/lib/dashboard/insights-data'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
 import {
+  buildBaselineScanSummary,
+  irisPigmentIsLight,
+  parseStoredHardwareBaseline,
+} from '@/lib/retinomic/baseline-scan-summary'
+import {
   detectLightIris,
   estimateMelanopicLuxCeiling,
   estimateMelanopicLuxToday,
@@ -107,6 +112,9 @@ export default async function PatientDashboardPage() {
     patient.location_country
   )
 
+  const hardwareBaseline = parseStoredHardwareBaseline(patient.hardware_baseline)
+  const baselineScan = buildBaselineScanSummary(patient, patient.hardware_baseline)
+
   const profileRow = mluxProfile as MluxProfileRow | null
   const calibration = buildPatientCalibration({
     patient,
@@ -135,7 +143,7 @@ export default async function PatientDashboardPage() {
   const photicPhase = resolvePhoticDayPhase()
   const melanopicLuxCeiling = estimateMelanopicLuxCeiling(
     patient.fitzpatrick_type,
-    calibration.latitude
+    hardwareBaseline?.onboardingGeo?.lat ?? calibration.latitude
   )
   const melanopicLuxToday = estimateMelanopicLuxToday(
     smartphoneActive,
@@ -168,10 +176,15 @@ export default async function PatientDashboardPage() {
       fullName={profile.full_name ?? firstName}
       avatarUrl={profile.avatar_url ?? resolveDashboardAvatar(null)}
       tier={effectiveTier}
+      baselineScan={baselineScan}
       melanopicLuxToday={melanopicLuxToday}
       melanopicLuxCeiling={melanopicLuxCeiling}
       photicPhase={photicPhase}
-      lightIrisDetected={detectLightIris(calibration.eyeColorLabel)}
+      lightIrisDetected={
+        hardwareBaseline?.irisPigment
+          ? irisPigmentIsLight(hardwareBaseline.irisPigment)
+          : detectLightIris(calibration.eyeColorLabel)
+      }
       vitaminD3NmolL={latestBloodPanel?.vitamin_d3_nmoll ?? null}
       vitaminB5UmolL={latestBloodPanel?.vitamin_b5_umoll ?? null}
       remCycleEfficiency={estimateRemCycleEfficiency(latestNight ?? null)}

@@ -19,6 +19,40 @@ export const RETINOMIC_LANDING_HERO = {
   secondaryCtaHref: '/onboarding',
 } as const
 
+/** Onboarding — continues tile 1 narrative into product */
+export const ONBOARDING_COPY = {
+  eyebrow: RETINOMIC_LANDING_HERO.eyebrow,
+  headline: 'Your free baseline scan',
+  subheadline: RETINOMIC_LANDING_HERO.subheadline,
+  image: PITCH_IMAGES.hook,
+  imageAlt: 'Retinomic eye scan — quantify your meds',
+  pillars: [
+    { id: 'light', label: 'Light dose', note: 'From scan', active: true },
+    { id: 'eye', label: 'Eye scan', note: 'Step 1', active: true },
+    { id: 'blood', label: 'Blood panel', note: 'If flagged', active: false },
+    { id: 'sleep', label: 'Sleep check', note: 'If flagged', active: false },
+  ],
+  step1: {
+    label: 'Step 1',
+    title: 'Retinomic eye scan',
+    body: 'Your phone reads iris pigment and skin tone — the first signals for your personal light dose and dose window.',
+    ctaIdle: 'Start eye scan',
+    ctaDone: 'Rescan eye baseline',
+    donePrefix: 'Dose window anchor captured',
+  },
+  step2: {
+    label: 'Step 2',
+    eyebrow: 'Optional · clinical depth',
+    title: 'In-person scan node',
+    body: 'Book a nearby Siloton GiraffeOCT node when you want retina verification beyond the phone baseline.',
+  },
+  continueCta: 'Save your baseline →',
+  signInHint: 'Already have an account?',
+  signUpHeadline: 'Save your dose baseline',
+  signUpSubtext:
+    'Your eye scan links to this account. Gominak blood and sleep panels unlock only if DIOS flags elevated risk.',
+} as const
+
 /** Tile 2 — problem (detail: /pitch/problem) */
 export const RETINOMIC_LANDING_PROBLEM = {
   eyebrow: 'The problem',
