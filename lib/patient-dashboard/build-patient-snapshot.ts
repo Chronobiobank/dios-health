@@ -9,6 +9,7 @@ import type {
   MeasureTileData,
   Medication,
   PatientSnapshot,
+  RetinomicBaselineSummary,
   TiptraqSummary,
 } from '@/lib/patient-dashboard/types'
 import { buildPatientNextStepsBlock } from '@/lib/patient-dashboard/build-patient-next-steps'
@@ -16,6 +17,15 @@ import { formatCompletenessValue, formatOpenGapsLabel, tileSubhead } from '@/lib
 import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
 import { buildChronosomaticSpectrumNodes } from '@/lib/patient-dashboard/spectrum-nodes'
 import { buildSnapshotStatNotes } from '@/lib/patient-dashboard/snapshot-stat-copy'
+import {
+  chronopenicBurdenScoreFromGapYears,
+  photonicAgeFromCalendarAndGap,
+} from '@/lib/product/chronopenic-burden'
+import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
+import {
+  parseStoredHardwareBaseline,
+  type StoredHardwareBaseline,
+} from '@/lib/retinomic/baseline-scan-summary'
 import {
   isSeanJamesPatient,
   resolveChronologicalAge,
@@ -41,6 +51,26 @@ type BuildPatientSnapshotInput = {
   sleepOnsetDelayMinutes: number | null
   /** Mean AHI from recent TipTraQ nights (e.g. last five). */
   meanTipTraqAhi?: number | null
+  hardwareBaseline?: StoredHardwareBaseline | null
+  feedFreshness?: FeedFreshness
+  /** Live melanopic alignment 0–100 when phone feed is fresh */
+  lightAlignmentOverride?: number | null
+}
+
+function buildRetinomicBaselineSummary(
+  hardware: StoredHardwareBaseline | null | undefined
+): RetinomicBaselineSummary | null {
+  if (!hardware) return null
+  const gclValues = [hardware.gclIplThicknessMicrons.leftEye, hardware.gclIplThicknessMicrons.rightEye].filter(
+    (v): v is number => v != null && Number.isFinite(v)
+  )
+  const gclIplMicrons = gclValues.length > 0 ? Math.min(...gclValues) : null
+  return {
+    irisLabel: hardware.irisPigment === 'LIGHT' ? 'Light' : 'Dark',
+    skinIta: hardware.skinITA,
+    gclIplMicrons,
+    hasOctThickness: gclIplMicrons != null,
+  }
 }
 
 function resolveSpectrumTipTraq(input: BuildPatientSnapshotInput): {
@@ -170,6 +200,7 @@ function buildMeasureTiles(input: {
   completenessGaps: number
   darkYearsHours: number
   hasTipTraq: boolean
+  hasRetinomicScan: boolean
   dlmoEstimate: string
   tipTraqNightsCount?: number
   meanSleepOnset?: string
@@ -202,9 +233,13 @@ function buildMeasureTiles(input: {
 
   const completenessSubtitle = tileSubhead(
     input.completenessGaps === 0
-      ? 'All data streams connected so your personalised plan runs precisely.'
+      ? input.hasRetinomicScan
+        ? 'Eye scan, phone stream, and layers connected — plan runs on your biology.'
+        : 'All data streams connected so your personalised plan runs precisely.'
       : input.completenessGaps === 1
-        ? 'One data gap reduces Dark Years and medication timing precision.'
+        ? input.hasRetinomicScan
+          ? 'Eye baseline on file — one stream gap still reduces timing precision.'
+          : 'One data gap reduces Dark Years and medication timing precision.'
         : 'Two data gaps reduce Dark Years and medication timing precision.'
   )
 
@@ -216,7 +251,7 @@ function buildMeasureTiles(input: {
       subtitle: sleepSubtitle,
       badge: 'Adding Dark Years',
       badgeTone: 'watch',
-      source: 'Smartphone stream',
+      source: input.hasRetinomicScan ? 'Retinomic scan + phone' : 'Smartphone stream',
       panelRows: [
         { key: 'Your body clock target', value: input.dlmoEstimate },
         { key: 'How far your clock slipped', value: `${input.sleepDelay} min` },
@@ -302,6 +337,9 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
   const hasTipTraq = input.tipTraqNightsCount > 0
   const bloodConnected = input.bloodPanelsCount > 0
   const profile = input.mluxProfile
+  const hardwareBaseline =
+    input.hardwareBaseline ?? parseStoredHardwareBaseline(input.patient.hardware_baseline)
+  const retinomicBaseline = buildRetinomicBaselineSummary(hardwareBaseline)
 
   const layersActive =
     (hasTipTraq ? LAYER_BIT_TIPTRAQ : 0) |
@@ -323,16 +361,22 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     latestBloodPanel: input.latestBloodPanel,
   })
 
-  const chronologicalAge = resolveChronologicalAge(input.patient)
+  const calendarAge = resolveChronologicalAge(input.patient)
   const darkYearsHours = estimateDarkYearsHours(
     input.patient.chronotype_q1 ?? '',
     input.patient.chronotype_q3 ?? ''
   )
   const clockDrift = profile?.confidence_band_minutes ?? Math.round(darkYearsHours * 60)
-  const darkYears = Math.round(darkYearsHours * 2.3 * 10) / 10
-  const chronosomaticAge = Math.round((chronologicalAge + darkYears) * 10) / 10
-  const recoveryYears = Math.round(darkYears * 0.75 * 10) / 10
-  const lightAlignment = Math.round(profile?.confidence_score ?? insights.confidenceScore ?? 71)
+  const chronopenicBurdenYears = Math.round(darkYearsHours * 2.3 * 10) / 10
+  const photonicAge = photonicAgeFromCalendarAndGap(calendarAge, chronopenicBurdenYears)
+  const chronopenicBurdenScore = chronopenicBurdenScoreFromGapYears(chronopenicBurdenYears)
+  const recoveryYears = Math.round(chronopenicBurdenYears * 0.75 * 10) / 10
+  const lightAlignment = Math.round(
+    input.lightAlignmentOverride ??
+      profile?.confidence_score ??
+      insights.confidenceScore ??
+      (retinomicBaseline ? 68 : 71)
+  )
 
   const dlmoEstimate =
     profile?.mlux_phase_time?.slice(0, 5) ??
@@ -366,6 +410,7 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     completenessGaps: Math.min(completenessGaps, 2),
     darkYearsHours,
     hasTipTraq,
+    hasRetinomicScan: retinomicBaseline != null,
     dlmoEstimate,
     tipTraqNightsCount: input.tipTraqNightsCount,
   })
@@ -401,12 +446,21 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
 
   const calibrationPatient = seanJamesProfilePatch(input.patient)
 
-  const calibration = buildPatientCalibration({
+  const baseCalibration = buildPatientCalibration({
     patient: calibrationPatient,
     tipTraqNightsCount: input.tipTraqNightsCount,
     latestTiptraqDate: input.latestTiptraqDate,
     mluxChronotype: profile?.chronotype ?? null,
   })
+
+  const calibration = {
+    ...baseCalibration,
+    eyeColorLabel: retinomicBaseline?.irisLabel ?? baseCalibration.eyeColorLabel,
+    latitude: hardwareBaseline?.onboardingGeo?.lat ?? baseCalibration.latitude,
+    solarZenith: Math.round(
+      hardwareBaseline?.onboardingGeo?.solarZenithDegrees ?? baseCalibration.solarZenith
+    ),
+  }
 
   const sleepDrift = sleepDelay || clockDrift
   const nextSteps = buildPatientNextStepsBlock({
@@ -420,17 +474,22 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     tipTraqNightsCount: spectrumNights,
     hasTipTraq: hasTipTraq || spectrumNights > 0,
     recoveryYears,
+    feedFreshness: input.feedFreshness,
+    hasRetinomicScan: retinomicBaseline != null,
   })
 
   return {
-    chronologicalAge,
-    chronosomaticAge,
-    darkYears,
+    calendarAge,
+    photonicAge,
+    chronopenicBurdenYears,
+    chronopenicBurdenScore,
+    burdenTrendDirection: null,
     recoveryYears,
     darkYearsHours,
     lightAlignment,
     clockDrift: sleepDrift,
     dlmoEstimate,
+    retinomicBaseline,
     statNotes,
     medications,
     medicationsDueTonight: medicationsDueTonight || (medications.length > 0 ? 2 : 0),

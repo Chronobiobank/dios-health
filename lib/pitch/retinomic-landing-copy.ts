@@ -5,25 +5,56 @@
 
 import { PITCH_IMAGES } from '@/lib/pitch/landing-images'
 
-/** Tile 1 — hero */
+/** Tile 1 — the problem (Holick opening) */
 export const RETINOMIC_LANDING_HERO = {
-  eyebrow: 'Quantify your meds',
-  headline: 'From standard dose to dose intelligence.',
+  eyebrow: 'The problem',
+  headline: 'Over one billion people are vitamin D deficient.',
   subheadline:
-    'We use your light, eye, blood, and sleep data to tailor med plans for better, brighter outcomes.',
-  detailHref: '/pitch/hook',
-  ctaLabel: 'Explore dose intelligence',
-  ctaHref: '/pitch/hook',
+    'Not because the sun changed. Because we stopped going outside. DIOS measures what modern life took from your biology and builds a protocol to restore it.',
+  detailHref: '/evidence',
+  ctaLabel: 'Clinical evidence',
+  ctaHref: '/evidence',
   signUpHref: '/auth/signup',
-  secondaryCtaLabel: 'Free baseline scan',
-  secondaryCtaHref: '/onboarding',
+  secondaryCtaLabel: 'How it works',
+  secondaryCtaHref: '/how-it-works',
 } as const
 
-/** Onboarding — continues tile 1 narrative into product */
+/** Tile 2 — the consequence */
+export const RETINOMIC_LANDING_CONSEQUENCE = {
+  eyebrow: 'The consequence',
+  headline:
+    'Your medications, your immune system, your sleep, and your brain all run on the same biological clock.',
+  subheadline: 'When light goes missing the clock loses time. That lost time is measurable.',
+  image: PITCH_IMAGES.spectrum,
+  imageAlt: 'Biological clock — medications, immune system, sleep, and brain',
+  detailHref: '/how-it-works',
+  ctaLabel: 'See the live demo',
+  ctaHref: '/how-it-works',
+  secondaryCtaLabel: 'Clinical evidence',
+  secondaryCtaHref: '/evidence',
+} as const
+
+/** Tile 3 — the number */
+export const RETINOMIC_LANDING_PHOTONIC_AGE = {
+  eyebrow: 'The number',
+  headline: 'Your Photonic Age.',
+  subheadline:
+    'The biological age your circadian system is actually operating at. Compared to your Calendar Age. The gap between them is what DIOS closes.',
+  image: PITCH_IMAGES.retinomic.howWeThink,
+  imageAlt: 'Photonic Age vs Calendar Age — chronopenic burden',
+  detailHref: '/how-it-works',
+  ctaLabel: 'Live demo',
+  ctaHref: '/how-it-works',
+  secondaryCtaLabel: 'Two ages explained',
+  secondaryCtaHref: '/circadian-digital-twin',
+} as const
+
+/** Onboarding — continues landing narrative into product */
 export const ONBOARDING_COPY = {
-  eyebrow: RETINOMIC_LANDING_HERO.eyebrow,
+  eyebrow: 'Free baseline scan',
   headline: 'Your free baseline scan',
-  subheadline: RETINOMIC_LANDING_HERO.subheadline,
+  subheadline:
+    'Your phone reads iris pigment and skin tone — the first signals for your personal light dose and dose window.',
   image: PITCH_IMAGES.hook,
   imageAlt: 'Retinomic eye scan — quantify your meds',
   pillars: [
@@ -75,9 +106,39 @@ export const HOW_IT_WORKS_DEMO_COPY = {
   secondaryHref: '/pitch/how-it-works',
 } as const
 
-/** Tile 2 — problem (detail: /pitch/problem) */
+/** Tile 4 — the protocol (detail: /pitch/how-it-works, /onboarding) */
+export const RETINOMIC_LANDING_PROTOCOL = {
+  eyebrow: 'The protocol',
+  headline: 'The First Light Protocol.',
+  subheadline:
+    'Ninety seconds every morning at civil twilight. Your phone measures what your biology is doing with the light it receives. The Dose Intelligence OS builds your protocol from that signal.',
+  image: PITCH_IMAGES.steps.camera,
+  imageAlt: 'First Light Protocol — morning scan at civil twilight',
+  detailHref: '/pitch/how-it-works',
+  ctaLabel: 'How it works',
+  ctaHref: '/pitch/how-it-works',
+  secondaryCtaLabel: 'Start free scan',
+  secondaryCtaHref: '/onboarding',
+} as const
+
+/** Tile 5 — the community (detail: /pitch/chronobiobank) */
+export const RETINOMIC_LANDING_VISION = {
+  eyebrow: 'The community',
+  headline: 'The Chronobiobank.',
+  subheadline:
+    'Every scan contributes to the Chronobiobank — the first global longitudinal dataset of circadian phenotypes. Your biology funds research. You co-own the returns.',
+  image: '/chronobiobank.png',
+  imageAlt: 'Chronobiobank — global longitudinal circadian phenotypes',
+  detailHref: '/pitch/chronobiobank',
+  ctaLabel: 'Our vision',
+  ctaHref: '/pitch/chronobiobank',
+  secondaryCtaLabel: 'Contact us',
+  secondaryCtaHref: '/contact',
+} as const
+
+/** Detail pages only — legacy problem narrative */
 export const RETINOMIC_LANDING_PROBLEM = {
-  eyebrow: 'The problem',
+  eyebrow: 'Standardised dosing',
   headline: 'Standardised dosing misses most patients.',
   subheadline: 'One time on every label. Most bodies need another window.',
   image: '/standardised.jpg',
@@ -87,34 +148,6 @@ export const RETINOMIC_LANDING_PROBLEM = {
   ctaHref: '/pitch/problem',
   secondaryCtaLabel: 'Clinical proof',
   secondaryCtaHref: '/pitch/clinical-proof',
-} as const
-
-/** Tile 3 — protocol (detail: /how-it-works, /evidence) */
-export const RETINOMIC_LANDING_PROTOCOL = {
-  eyebrow: 'Dose intelligence',
-  headline: 'No one size. All tailored to fit.',
-  subheadline: 'Gominak panel · Retinomic scan · Your dose window.',
-  image: PITCH_IMAGES.retinomic.howWeThink,
-  imageAlt: 'Dose Intelligence — personal dose timing',
-  detailHref: '/pitch/how-it-works',
-  ctaLabel: 'How it works',
-  ctaHref: '/pitch/how-it-works',
-  secondaryCtaLabel: 'Live demo',
-  secondaryCtaHref: '/how-it-works',
-} as const
-
-/** Tile 4 — vision (detail: /pitch/chronobiobank) */
-export const RETINOMIC_LANDING_VISION = {
-  eyebrow: 'Our vision',
-  headline: 'Your data helps everyone.',
-  subheadline: 'Co-own the Chronobiobank. Your biology funds research — you share returns.',
-  image: '/chronobiobank.png',
-  imageAlt: 'Chronobiobank research infrastructure',
-  detailHref: '/pitch/chronobiobank',
-  ctaLabel: 'Our vision',
-  ctaHref: '/pitch/chronobiobank',
-  secondaryCtaLabel: 'Contact us',
-  secondaryCtaHref: '/contact',
 } as const
 
 export type RetinomicFeatureCopy = {
@@ -240,8 +273,8 @@ export const RETINOMIC_LANDING_EVIDENCE: readonly RetinomicFeatureCopy[] = [
 export const RETINOMIC_LANDING_META = {
   title: 'Dose Intelligence · DIOS',
   description:
-    'From standard dose to dose intelligence. Light, eye, blood, and sleep tailored to your biology.',
+    'Over one billion people are vitamin D deficient. DIOS measures what modern life took from your biology and builds a protocol to restore it.',
   openGraphTitle: 'Dose Intelligence · dios.health',
   openGraphDescription:
-    'No one size. All tailored to fit. Free baseline scan — or explore the clinical evidence.',
+    'Not because the sun changed. Because we stopped going outside. Photonic Age, First Light Protocol, Chronobiobank.',
 } as const

@@ -1,41 +1,22 @@
-import { RetinomicDashboardClient } from '@/components/retinomic/retinomic-dashboard-client'
-import { getLocalizedPatientGreeting, getPatientFirstName } from '@/lib/auth/greeting'
+import { DashboardClient } from '@/components/patient-dashboard/dashboard-client'
 import { resolveDashboardAvatar } from '@/components/patient-dashboard/constants'
+import { getLocalizedPatientGreeting, getPatientFirstName } from '@/lib/auth/greeting'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import type { BloodPanelSnapshot } from '@/lib/dashboard/insights-data'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
-import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
+import { meanAhiFromValues } from '@/lib/patient-dashboard/dashboard-indicators'
+import { buildPatientSnapshot } from '@/lib/patient-dashboard/build-patient-snapshot'
+import { parseStoredHardwareBaseline } from '@/lib/retinomic/baseline-scan-summary'
 import {
-  buildBaselineScanSummary,
-  irisPigmentIsLight,
-  parseStoredHardwareBaseline,
-} from '@/lib/retinomic/baseline-scan-summary'
-import {
-  DAY_ONE_LOCKED_COPY,
-  dayOneInterventionIntro,
-  morningMluxMinutesFromBaseline,
-  tailorDailyInterventionForBaseline,
-} from '@/lib/retinomic/day-one-dashboard'
+  isSmartphoneFeedFresh,
+  resolveFeedFreshness,
+} from '@/lib/retinomic/feed-retention'
 import {
   parseSmartphoneSensorPayload,
   resolveLiveMluxFeed,
 } from '@/lib/retinomic/live-mlux-feed'
-import {
-  detectLightIris,
-  estimateMelanopicLuxCeiling,
-  resolvePhoticDayPhase,
-} from '@/lib/retinomic/photic-dose'
-import { getPatientRetinomicTier } from '@/lib/auth/retinomic-access'
-import { mapPatientRowToUser } from '@/lib/retinomic/patient-user-mapper'
-import { resolveRetinomicTierFromCounts } from '@/lib/retinomic/sync-tier'
-import type { BiochemicalFuel, HardwareBaseline } from '@/src/types'
-import {
-  estimateAutonomicStrain,
-  estimateRemCycleEfficiency,
-} from '@/lib/retinomic/sleep-metrics'
-import { buildDailyInterventionForPatient, resolveChronotypePhase } from '@/src/lib/engine/intervention'
-import { readPatientMedicationList } from '@/lib/medication/patient-medications'
-import { buildMedicationTimingFromIntervention } from '@/src/lib/engine/medication-timing'
+import { estimateMelanopicLuxCeiling, resolvePhoticDayPhase } from '@/lib/retinomic/photic-dose'
+import { resolveFirstLightWindow } from '@/lib/product/first-light-window'
 import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
@@ -57,7 +38,7 @@ export default async function PatientDashboardPage() {
     { data: latestSmartphone },
     { data: latestBloodPanel },
     { data: latestTiptraqNight },
-    { data: latestTiptraqTelemetry },
+    { data: recentAhiRows },
   ] = await Promise.all([
     supabase.from('mlux_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
     supabase
@@ -102,19 +83,19 @@ export default async function PatientDashboardPage() {
       .maybeSingle<{ report_date: string; rem_delay_flag: boolean | null }>(),
     supabase
       .from('tiptraq_nights')
-      .select('rem_sleep_efficiency_pct, micro_arousals_count')
+      .select('ahi')
       .eq('patient_id', user.id)
       .order('report_date', { ascending: false })
-      .limit(1)
-      .maybeSingle<{
-        rem_sleep_efficiency_pct: number | null
-        micro_arousals_count: number | null
-      }>(),
+      .limit(5),
   ])
 
+  const now = new Date()
+  const observedAt = latestSmartphone?.observed_at ?? null
+  const feedFreshness = resolveFeedFreshness(observedAt, now)
   const smartphoneActive =
-    latestSmartphone?.observed_at != null &&
-    Date.now() - new Date(latestSmartphone.observed_at).getTime() <= 7 * 24 * 60 * 60 * 1000
+    observedAt != null &&
+    now.getTime() - new Date(observedAt).getTime() <= 7 * 24 * 60 * 60 * 1000
+  const phoneFeedFresh = smartphoneActive && isSmartphoneFeedFresh(observedAt, now)
 
   const firstName = getPatientFirstName({
     firstName: patient.first_name,
@@ -128,143 +109,72 @@ export default async function PatientDashboardPage() {
   )
 
   const hardwareBaseline = parseStoredHardwareBaseline(patient.hardware_baseline)
-  const baselineScan = buildBaselineScanSummary(patient, patient.hardware_baseline)
-
   const profileRow = mluxProfile as MluxProfileRow | null
-  const calibration = buildPatientCalibration({
-    patient,
-    tipTraqNightsCount: tipTraqNightsCount ?? 0,
-    latestTiptraqDate: latestTiptraqNight?.report_date ?? null,
-    mluxChronotype: profileRow?.chronotype,
-  })
-
-  const fallbackTier = resolveRetinomicTierFromCounts(
-    bloodPanelsCount ?? 0,
-    tipTraqNightsCount ?? 0
-  )
-  const tier = await getPatientRetinomicTier(supabase, user.id)
-  const retinomicUser = mapPatientRowToUser(
-    {
-      id: patient.id,
-      retinomic_tier: tier,
-      hardware_baseline: (patient.hardware_baseline as HardwareBaseline | null) ?? null,
-      biochemical_fuel: (patient.biochemical_fuel as BiochemicalFuel | null) ?? null,
-      hardware_bandwidth_coefficient: patient.hardware_bandwidth_coefficient,
-      morning_mlux_target_duration_minutes: patient.morning_mlux_target_duration_minutes,
-    },
-    fallbackTier
-  )
-  const effectiveTier = retinomicUser.tier
   const photicPhase = resolvePhoticDayPhase()
   const melanopicLuxCeiling = estimateMelanopicLuxCeiling(
     patient.fitzpatrick_type,
-    hardwareBaseline?.onboardingGeo?.lat ?? calibration.latitude
+    hardwareBaseline?.onboardingGeo?.lat
   )
-  const morningMluxMinutes = hardwareBaseline
-    ? morningMluxMinutesFromBaseline(hardwareBaseline.irisPigment, hardwareBaseline.skinITA)
-    : (patient.morning_mlux_target_duration_minutes ?? 90)
 
   const sensorFields = parseSmartphoneSensorPayload(latestSmartphone?.sensor_payload)
-  const smartphoneFeed = latestSmartphone
-    ? {
-        observedAt: latestSmartphone.observed_at,
-        vdrDoseToday: sensorFields.vdrDoseToday,
-        outdoorLightBefore10am: sensorFields.outdoorLightBefore10am,
-        confidenceScore: latestSmartphone.confidence_score,
-      }
-    : null
-
-  const liveMluxFeedInput = {
+  const liveMluxFeed = resolveLiveMluxFeed({
     melanopicLuxCeiling,
     photicPhase,
     mluxScore: profileRow?.mlux_score ?? null,
-    smartphoneFeed,
+    smartphoneFeed: latestSmartphone
+      ? {
+          observedAt: latestSmartphone.observed_at,
+          vdrDoseToday: sensorFields.vdrDoseToday,
+          outdoorLightBefore10am: sensorFields.outdoorLightBefore10am,
+          confidenceScore: latestSmartphone.confidence_score,
+        }
+      : null,
     smartphoneActive,
     hardwareBaseline,
-  }
-
-  const liveMluxFeed = resolveLiveMluxFeed(liveMluxFeedInput)
-  const photicSource = liveMluxFeed.source
-
-  const isDayOneFree =
-    effectiveTier === 'FREE_SCREENING' && baselineScan != null && (bloodPanelsCount ?? 0) === 0
-
-  let dailyIntervention = buildDailyInterventionForPatient({
-    tier: effectiveTier,
-    chronotypeLabel: calibration.chronotype,
-    chronotypeWakeTime: patient.chronotype_q1,
-    vitaminD3NmolL: latestBloodPanel?.vitamin_d3_nmoll ?? null,
-    vitaminB5UmolL: latestBloodPanel?.vitamin_b5_umoll ?? null,
-    remSleepEfficiencyPercent:
-      latestTiptraqTelemetry?.rem_sleep_efficiency_pct != null
-        ? Number(latestTiptraqTelemetry.rem_sleep_efficiency_pct)
-        : estimateRemCycleEfficiency(latestNight ?? null),
-    microArousalsCount: latestTiptraqTelemetry?.micro_arousals_count ?? null,
-    eveningLightDisciplineOptimal: smartphoneActive,
-    morningMluxTargetDurationMinutes: morningMluxMinutes,
-    locationCity: patient.location_city,
-    locationCountry: patient.location_country,
   })
 
-  if (isDayOneFree && baselineScan) {
-    dailyIntervention = tailorDailyInterventionForBaseline(
-      dailyIntervention,
-      baselineScan,
-      effectiveTier,
-      morningMluxMinutes,
-      photicSource
-    )
-  }
-
-  const dayOneIntro =
-    isDayOneFree && baselineScan
-      ? dayOneInterventionIntro(baselineScan, photicSource)
+  const lightAlignmentOverride =
+    phoneFeedFresh && melanopicLuxCeiling > 0
+      ? Math.round((liveMluxFeed.melanopicLuxToday / melanopicLuxCeiling) * 100)
       : null
-  const bloodLockedCopy = isDayOneFree ? DAY_ONE_LOCKED_COPY.blood : null
-  const sleepLockedCopy = isDayOneFree ? DAY_ONE_LOCKED_COPY.sleep : null
 
-  const medicationTiming =
-    isDayOneFree && baselineScan
-      ? buildMedicationTimingFromIntervention({
-          intervention: dailyIntervention,
-          chronotype: resolveChronotypePhase(calibration.chronotype),
-          currentMedications: readPatientMedicationList(patient.current_medications),
-          fallbackSleepTime: patient.chronotype_q3,
-          mluxProfile: profileRow,
-        })
-      : null
+  const meanTipTraqAhi = meanAhiFromValues(
+    (recentAhiRows ?? [])
+      .map((row) => (row.ahi != null ? Number(row.ahi) : NaN))
+      .filter((v) => !Number.isNaN(v))
+  )
+
+  const snapshot = buildPatientSnapshot({
+    patient,
+    mluxProfile: profileRow,
+    tipTraqNightsCount: tipTraqNightsCount ?? 0,
+    bloodPanelsCount: bloodPanelsCount ?? 0,
+    smartphoneActive: phoneFeedFresh,
+    latestNight,
+    latestBloodPanel,
+    latestTiptraqDate: latestTiptraqNight?.report_date ?? null,
+    sleepOnsetDelayMinutes: null,
+    meanTipTraqAhi,
+    hardwareBaseline,
+    feedFreshness,
+    lightAlignmentOverride,
+  })
+
+  const firstLightWindow = resolveFirstLightWindow(now)
 
   return (
-    <RetinomicDashboardClient
+    <DashboardClient
       greeting={greeting}
       firstName={firstName}
       fullName={profile.full_name ?? firstName}
       avatarUrl={profile.avatar_url ?? resolveDashboardAvatar(null)}
-      tier={effectiveTier}
-      baselineScan={baselineScan}
-      dayOneIntro={dayOneIntro}
-      photicDoseSourceCaption={liveMluxFeed.caption}
-      liveMluxFeedInput={liveMluxFeedInput}
+      snapshot={snapshot}
+      feedFreshness={feedFreshness}
+      firstLightWindow={firstLightWindow}
       lightCheckIn={{
         fitzpatrickType: patient.fitzpatrick_type,
         defaultSleepOnset: patient.chronotype_q3 ?? '22:30',
       }}
-      bloodLockedCopy={bloodLockedCopy}
-      sleepLockedCopy={sleepLockedCopy}
-      melanopicLuxToday={liveMluxFeed.melanopicLuxToday}
-      melanopicLuxCeiling={melanopicLuxCeiling}
-      photicPhase={photicPhase}
-      lightIrisDetected={
-        hardwareBaseline?.irisPigment
-          ? irisPigmentIsLight(hardwareBaseline.irisPigment)
-          : detectLightIris(calibration.eyeColorLabel)
-      }
-      vitaminD3NmolL={latestBloodPanel?.vitamin_d3_nmoll ?? null}
-      vitaminB5UmolL={latestBloodPanel?.vitamin_b5_umoll ?? null}
-      remCycleEfficiency={estimateRemCycleEfficiency(latestNight ?? null)}
-      autonomicStrain={estimateAutonomicStrain(latestNight ?? null)}
-      dailyIntervention={dailyIntervention}
-      medicationTiming={medicationTiming}
     />
   )
 }

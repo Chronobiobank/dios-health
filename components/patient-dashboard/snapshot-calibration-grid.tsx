@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { SlidersHorizontal, X } from 'lucide-react'
 
-import type { DashboardPanelId } from '@/lib/patient-dashboard/types'
+import type { DashboardPanelId, RetinomicBaselineSummary } from '@/lib/patient-dashboard/types'
 import { cn } from '@/lib/utils'
 
 type SnapshotCalibrationGridProps = {
@@ -16,6 +16,7 @@ type SnapshotCalibrationGridProps = {
   solarZenith: number
   chronotype: string
   chronotypeSource: string
+  retinomicBaseline?: RetinomicBaselineSummary | null
   openPanel: DashboardPanelId | null
   onTogglePanel: (id: DashboardPanelId) => void
 }
@@ -54,6 +55,7 @@ export function SnapshotCalibrationGrid({
   solarZenith,
   chronotype,
   chronotypeSource,
+  retinomicBaseline = null,
   openPanel,
   onTogglePanel,
 }: SnapshotCalibrationGridProps) {
@@ -117,8 +119,22 @@ export function SnapshotCalibrationGrid({
               </p>
               <p>
                 <span className="text-[var(--text-muted)]">Eye · </span>
-                {eyeColorLabel} iris tone (proxy from skin type until you add a photo)
+                {retinomicBaseline
+                  ? `${eyeColorLabel} iris from retinomic scan · ITA ${retinomicBaseline.skinIta}°`
+                  : `${eyeColorLabel} iris tone (proxy from skin type until you add a photo)`}
               </p>
+              {retinomicBaseline?.hasOctThickness && retinomicBaseline.gclIplMicrons != null ? (
+                <p>
+                  <span className="text-[var(--text-muted)]">OCT · </span>
+                  GCL-IPL {retinomicBaseline.gclIplMicrons} µm — Siloton structural layer adjusts light
+                  bandwidth
+                </p>
+              ) : retinomicBaseline ? (
+                <p>
+                  <span className="text-[var(--text-muted)]">OCT · </span>
+                  Optional Siloton scan node — adds structural thickness when you book in person
+                </p>
+              ) : null}
               <p>
                 <span className="text-[var(--text-muted)]">GPS · </span>
                 {locationName} · {latDisplay} · {season} · zenith {solarZenith}°

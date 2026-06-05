@@ -1,23 +1,20 @@
 import type { Metadata } from 'next'
 
+import { DashboardClient } from '@/components/patient-dashboard/dashboard-client'
 import { HowItWorksDemoHero } from '@/components/retinomic/how-it-works-demo-hero'
-import { RetinomicDashboardClient } from '@/components/retinomic/retinomic-dashboard-client'
-import { MOCK_RETINOMIC_DASHBOARD } from '@/lib/retinomic/mock-dashboard-props'
-import { HOW_IT_WORKS_DEMO_COPY } from '@/lib/pitch/retinomic-landing-copy'
-
-export const dynamic = 'force-dynamic'
+import { MOCK_DASHBOARD_PROPS } from '@/lib/patient-dashboard/mock-snapshot'
 
 export const metadata: Metadata = {
-  title: `${HOW_IT_WORKS_DEMO_COPY.headline} · DIOS`,
-  description: HOW_IT_WORKS_DEMO_COPY.subheadline,
+  title: 'How it works — Dose Intelligence · DIOS',
+  description:
+    'See Sean James daily snapshot — Photonic Age vs Calendar Age, Chronoimmune indication spectrum, and personalised next steps.',
 }
 
-/** Public live demo — same day-one dashboard patients see after baseline scan */
 export default function HowItWorksPage() {
   return (
-    <>
+    <div className="calm-landing relative min-h-svh">
       <HowItWorksDemoHero />
-      <RetinomicDashboardClient {...MOCK_RETINOMIC_DASHBOARD} publicDemo />
-    </>
+      <DashboardClient {...MOCK_DASHBOARD_PROPS} reserveBottomNav={false} />
+    </div>
   )
 }

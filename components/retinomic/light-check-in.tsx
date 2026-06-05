@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
+import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
 import {
   lightCheckInPrompt,
   submitLightCheckIn,
@@ -14,11 +15,19 @@ import { cn } from '@/lib/utils'
 type LightCheckInProps = {
   phase: PhoticDayPhase
   config: LightCheckInConfig
+  feedFreshness?: FeedFreshness
+  emphasize?: boolean
   onLogged: (snapshot: SmartphoneFeedSnapshot) => void
 }
 
-export function LightCheckIn({ phase, config, onLogged }: LightCheckInProps) {
-  const prompt = lightCheckInPrompt(phase)
+export function LightCheckIn({
+  phase,
+  config,
+  feedFreshness = 'none',
+  emphasize = false,
+  onLogged,
+}: LightCheckInProps) {
+  const prompt = lightCheckInPrompt(phase, feedFreshness)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
@@ -49,7 +58,12 @@ export function LightCheckIn({ phase, config, onLogged }: LightCheckInProps) {
   )
 
   return (
-    <div className="retinomic-light-check-in mt-3">
+    <div
+      className={cn(
+        'retinomic-light-check-in mt-3',
+        emphasize && 'retinomic-light-check-in--emphasize'
+      )}
+    >
       <p className="type-body text-sm text-[var(--text-secondary)]">{prompt.question}</p>
       <div className="mt-2.5 flex flex-wrap gap-2">
         <button

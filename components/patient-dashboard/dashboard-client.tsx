@@ -8,8 +8,11 @@ import { Section, TileGrid } from '@/components/patient-dashboard/section'
 import { NextStepsTile } from '@/components/patient-dashboard/next-steps-tile'
 import { SnapshotTile } from '@/components/patient-dashboard/snapshot-tile'
 import { ToolTile } from '@/components/patient-dashboard/tool-tile'
+import { FirstLightScanBanner } from '@/components/patient-dashboard/first-light-scan-banner'
+import { LightCheckIn } from '@/components/retinomic/light-check-in'
 import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
 import type { DashboardPanelId, PatientDashboardProps } from '@/lib/patient-dashboard/types'
+import { resolvePhoticDayPhase } from '@/lib/retinomic/photic-dose'
 
 type DashboardClientProps = PatientDashboardProps & {
   /** Reserve space for mobile patient bottom nav (authenticated dashboard). */
@@ -26,6 +29,9 @@ export function DashboardClient({
   fullName,
   avatarUrl,
   snapshot,
+  feedFreshness = 'none',
+  lightCheckIn = null,
+  firstLightWindow = null,
   reserveBottomNav = true,
 }: DashboardClientProps) {
   const [openPanel, setOpenPanel] = useState<DashboardPanelId | null>(null)
@@ -51,14 +57,35 @@ export function DashboardClient({
 
           <main className="dash-dashboard-main">
           <Section label="Daily snapshot">
+            {firstLightWindow ? <FirstLightScanBanner window={firstLightWindow} /> : null}
             <SnapshotTile
               snapshot={snapshot}
               openPanel={openPanel}
               onTogglePanel={togglePanel}
               onExplainRisk={() =>
-                sendPrompt('Explain my Metabolic Risk across the Chronosomatic Spectrum.')
+                sendPrompt(
+                  snapshot.chronoimmuneProfile
+                    ? 'Explain my Chronoimmune indication zone and what PTH lower-third target means for my protocol.'
+                    : 'Explain my Metabolic Risk across the Chronosomatic Spectrum.'
+                )
               }
             />
+            {lightCheckIn &&
+            (feedFreshness === 'stale' ||
+              feedFreshness === 'none' ||
+              feedFreshness === 'aging') ? (
+              <div className="mt-3">
+                <LightCheckIn
+                  phase={resolvePhoticDayPhase()}
+                  config={lightCheckIn}
+                  feedFreshness={feedFreshness}
+                  emphasize
+                  onLogged={() => {
+                    window.location.reload()
+                  }}
+                />
+              </div>
+            ) : null}
           </Section>
 
           <Section label="Your next steps">

@@ -27,6 +27,9 @@ export function RetinomicDashboardClient({
   tier,
   baselineScan,
   dayOneIntro,
+  returnVisitIntro,
+  feedFreshness,
+  isReturnVisit,
   bloodLockedCopy,
   sleepLockedCopy,
   liveMluxFeedInput,
@@ -53,13 +56,25 @@ export function RetinomicDashboardClient({
           <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
         )}
         <main className="dash-dashboard-main" aria-label="Dose intelligence control panels">
-          {baselineScan ? <BaselineScanPanel baseline={baselineScan} firstName={firstName} /> : null}
-          <InterventionGuide intervention={dailyIntervention} dayOneIntro={dayOneIntro} />
+          {baselineScan ? (
+            <BaselineScanPanel
+              baseline={baselineScan}
+              firstName={firstName}
+              isReturnVisit={isReturnVisit}
+              feedFreshness={feedFreshness}
+            />
+          ) : null}
+          <InterventionGuide
+            intervention={dailyIntervention}
+            dayOneIntro={dayOneIntro}
+            returnVisitIntro={returnVisitIntro}
+          />
           {medicationTiming ? <MedicationTimingPanel plan={medicationTiming} publicDemo={publicDemo} /> : null}
           <PhoticDosePanel
             feedInput={liveMluxFeedInput}
             lightIrisDetected={lightIrisDetected}
             lightCheckIn={publicDemo ? null : lightCheckIn}
+            feedFreshness={feedFreshness}
           />
           <MetabolicDosePanel
             tier={tier}

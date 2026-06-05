@@ -5,6 +5,10 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { DIOS_DASHBOARD_WELCOME_KEY } from '@/lib/auth/onboarding-bridge'
+import {
+  returnVisitBaselineCopy,
+  type FeedFreshness,
+} from '@/lib/retinomic/feed-retention'
 import { PITCH_IMAGES } from '@/lib/pitch/landing-images'
 import type { BaselineScanSummary } from '@/lib/retinomic/baseline-scan-summary'
 import { cn } from '@/lib/utils'
@@ -12,9 +16,16 @@ import { cn } from '@/lib/utils'
 type BaselineScanPanelProps = {
   baseline: BaselineScanSummary
   firstName: string
+  isReturnVisit?: boolean
+  feedFreshness?: FeedFreshness
 }
 
-export function BaselineScanPanel({ baseline, firstName }: BaselineScanPanelProps) {
+export function BaselineScanPanel({
+  baseline,
+  firstName,
+  isReturnVisit = false,
+  feedFreshness = 'none',
+}: BaselineScanPanelProps) {
   const [isWelcome, setIsWelcome] = useState(false)
 
   useEffect(() => {
@@ -23,6 +34,11 @@ export function BaselineScanPanel({ baseline, firstName }: BaselineScanPanelProp
       sessionStorage.removeItem(DIOS_DASHBOARD_WELCOME_KEY)
     }
   }, [])
+
+  const returnCopy =
+    isReturnVisit && !isWelcome
+      ? returnVisitBaselineCopy(firstName, feedFreshness)
+      : null
 
   return (
     <section
@@ -46,17 +62,18 @@ export function BaselineScanPanel({ baseline, firstName }: BaselineScanPanelProp
 
         <div className="retinomic-baseline__copy min-w-0 flex-1">
           <p id="baseline-panel-title" className="type-pitch-eyebrow">
-            {isWelcome ? 'Baseline saved' : 'Your eye baseline'}
+            {isWelcome ? 'Baseline saved' : returnCopy?.eyebrow ?? 'Your eye baseline'}
           </p>
           <h2 className="type-pitch-title mt-2 text-[length:var(--text-heading-section)]">
             {isWelcome
               ? `${firstName}, your dose window is anchored.`
-              : 'Retinomic scan on file'}
+              : returnCopy?.title ?? 'Retinomic scan on file'}
           </h2>
           <p className="type-body mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
             {isWelcome
               ? 'Light and eye signals from onboarding are live below. Blood and sleep panels unlock if DIOS flags elevated risk.'
-              : 'Your phone eye scan sets the light dose ceiling and personal timing anchor for today’s panels.'}
+              : returnCopy?.body ??
+                'Your phone eye scan sets the light dose ceiling and personal timing anchor for today’s panels.'}
           </p>
 
           <dl className="retinomic-baseline__stats mt-4 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-3">

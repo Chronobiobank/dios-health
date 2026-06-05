@@ -6,6 +6,10 @@ import {
 import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
 import { buildChronosomaticSpectrumNodes } from '@/lib/patient-dashboard/spectrum-nodes'
 import {
+  chronopenicBurdenScoreFromGapYears,
+  photonicAgeFromCalendarAndGap,
+} from '@/lib/product/chronopenic-burden'
+import {
   SEAN_JAMES_DATE_OF_BIRTH,
   seanJamesChronologicalAge,
 } from '@/lib/patient-dashboard/sean-james-profile'
@@ -17,6 +21,7 @@ import type {
   TiptraqSummary,
 } from '@/lib/patient-dashboard/types'
 import { buildSnapshotStatNotes } from '@/lib/patient-dashboard/snapshot-stat-copy'
+import { buildSeanJamesChronoimmuneProfile } from '@/lib/chronoimmune/sean-james-demo'
 import { buildPatientNextStepsBlock } from '@/lib/patient-dashboard/build-patient-next-steps'
 import { formatCompletenessValue, formatOpenGapsLabel, tileSubhead } from '@/lib/patient-dashboard/tile-copy'
 
@@ -239,10 +244,11 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
   const latestNight = SEAN_JAMES_TIPTRAQ_NIGHTS[SEAN_JAMES_TIPTRAQ_NIGHTS.length - 1]
   const latestMlux = calculateNightMLux(latestNight)
 
-  const chronologicalAge = seanJamesChronologicalAge()
-  const darkYears = Math.round(metrics.darkYearsHours * 2.3 * 10) / 10
-  const chronosomaticAge = Math.round((chronologicalAge + darkYears) * 10) / 10
-  const recoveryYears = Math.round(darkYears * 0.75 * 10) / 10
+  const calendarAge = seanJamesChronologicalAge()
+  const chronopenicBurdenYears = Math.round(metrics.darkYearsHours * 2.3 * 10) / 10
+  const photonicAge = photonicAgeFromCalendarAndGap(calendarAge, chronopenicBurdenYears)
+  const chronopenicBurdenScore = chronopenicBurdenScoreFromGapYears(chronopenicBurdenYears)
+  const recoveryYears = Math.round(chronopenicBurdenYears * 0.75 * 10) / 10
 
   const bloodPanel: BloodPanel = {
     vitaminDLabel: `Not measured ${LOW_CONFIDENCE}`,
@@ -380,7 +386,7 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
       id: 'sean-james-demo',
       first_name: 'Sean',
       family_name: 'James',
-      age: chronologicalAge,
+      age: calendarAge,
       date_of_birth: SEAN_JAMES_DATE_OF_BIRTH,
       biological_sex: null,
       fitzpatrick_type: 2,
@@ -446,14 +452,22 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
   })
 
   return {
-    chronologicalAge,
-    chronosomaticAge,
-    darkYears,
+    calendarAge,
+    photonicAge,
+    chronopenicBurdenYears,
+    chronopenicBurdenScore,
+    burdenTrendDirection: 'stable' as const,
     recoveryYears,
     darkYearsHours: metrics.darkYearsHours,
     lightAlignment: metrics.lightAlignment,
     clockDrift: metrics.clockDriftMinutes,
     dlmoEstimate: metrics.dlmoEstimate,
+    retinomicBaseline: {
+      irisLabel: 'Light',
+      skinIta: 41.2,
+      gclIplMicrons: null,
+      hasOctThickness: false,
+    },
     statNotes,
     medications: SEAN_MEDICATIONS,
     medicationsDueTonight: 2,
@@ -464,6 +478,7 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
     coachOnline: true,
     spectrumNodes,
     nextSteps,
+    chronoimmuneProfile: buildSeanJamesChronoimmuneProfile(),
     ...calibration,
   }
 }

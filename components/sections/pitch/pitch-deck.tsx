@@ -26,7 +26,7 @@ function PitchScreen({ id, children }: { id: string; children: ReactNode }) {
   )
 }
 
-/** Medtech skim-and-dive: four full-bleed tiles, detail on /pitch/* and /how-it-works */
+/** Medtech skim-and-dive: five full-bleed tiles, detail on /pitch/* and /how-it-works */
 export function PitchDeck() {
   return (
     <div className="pitch-deck relative snap-y snap-mandatory overflow-y-auto scroll-smooth md:snap-none md:overflow-visible">

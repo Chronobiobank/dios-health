@@ -64,7 +64,7 @@ export function MetabolicRiskTile({
           embedded ? 'dios-glass-inner snapshot-metabolic-risk-tile' : 'glass-tile'
         )}
       >
-        <p className="sr-only">Metabolic risk profile — Chronosomatic Spectrum</p>
+        <p className="sr-only">Metabolic risk profile — chronopenic burden spectrum</p>
 
         <ChronosomaticSpectrum
           nodes={nodes}

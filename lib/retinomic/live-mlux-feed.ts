@@ -1,3 +1,10 @@
+import {
+  agingFeedHint,
+  isSmartphoneFeedFresh,
+  resolveFeedFreshness,
+  staleFeedNudge,
+  type FeedFreshness,
+} from '@/lib/retinomic/feed-retention'
 import type { PhoticDayPhase } from '@/lib/retinomic/types'
 import {
   estimateBaselineAnchoredMelanopicLux,
@@ -33,6 +40,9 @@ export type LiveMluxFeed = {
   lastUpdatedLabel: string | null
   vdrDoseToday: number | null
   isLive: boolean
+  freshness: FeedFreshness
+  staleNudge: string | null
+  agingHint: string | null
 }
 
 type SensorPayload = {
@@ -117,10 +127,15 @@ function formatLastUpdated(observedAt: string | null, now = new Date()): string 
 
 export function resolveLiveMluxFeed(input: LiveMluxFeedInput): LiveMluxFeed {
   const now = input.now ?? new Date()
+  const observedAt = input.smartphoneFeed?.observedAt ?? null
+  const freshness = resolveFeedFreshness(observedAt, now)
+  const phoneFeedFresh =
+    input.smartphoneActive &&
+    isSmartphoneFeedFresh(observedAt, now)
   const hasBaseline = input.hardwareBaseline != null
   const source = resolvePhoticDoseSource(
     input.mluxScore,
-    input.smartphoneActive,
+    phoneFeedFresh,
     hasBaseline
   )
 
@@ -137,7 +152,7 @@ export function resolveLiveMluxFeed(input: LiveMluxFeedInput): LiveMluxFeed {
     melanopicLuxToday = estimateMelanopicLuxToday(false, input.mluxScore, input.photicPhase)
     isLive = true
     confidenceLabel = 'mLux profile'
-  } else if (vdrFromFeed != null && input.smartphoneActive) {
+  } else if (vdrFromFeed != null && phoneFeedFresh) {
     melanopicLuxToday = vdrDoseToMelanopicLux(
       vdrFromFeed,
       input.melanopicLuxCeiling,
@@ -160,15 +175,29 @@ export function resolveLiveMluxFeed(input: LiveMluxFeedInput): LiveMluxFeed {
   let caption = photicDoseSourceCaption(source)
   if (isLive && source === 'phone') {
     caption = 'Live phone sensor feed'
+  } else if (freshness === 'stale' && hasBaseline) {
+    caption = 'Estimated from eye scan — check-in due'
+  } else if (freshness === 'aging' && hasBaseline) {
+    caption = 'Anchored from eye scan — check-in recommended'
   }
+
+  const staleNudge = staleFeedNudge(observedAt, now)
+  const agingHint = agingFeedHint(observedAt, now)
 
   return {
     melanopicLuxToday,
     source: isLive && source === 'baseline' ? 'phone' : source,
     caption,
     confidenceLabel,
-    lastUpdatedLabel: isLive ? formatLastUpdated(input.smartphoneFeed?.observedAt ?? null, now) : null,
+    lastUpdatedLabel: isLive
+      ? formatLastUpdated(observedAt, now)
+      : staleNudge
+        ? staleNudge
+        : agingHint,
     vdrDoseToday: vdrFromFeed,
     isLive,
+    freshness,
+    staleNudge,
+    agingHint,
   }
 }

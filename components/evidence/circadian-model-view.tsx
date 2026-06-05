@@ -6,9 +6,9 @@ import { MOCK_PATIENT_SNAPSHOT } from '@/lib/patient-dashboard/mock-snapshot'
 import { formatBodyClockCta } from '@/lib/patient-dashboard/tile-copy'
 
 const {
-  chronologicalAge,
-  chronosomaticAge,
-  darkYears,
+  calendarAge,
+  photonicAge,
+  chronopenicBurdenYears,
   recoveryYears,
   darkYearsHours,
   lightAlignment,
@@ -19,28 +19,28 @@ const bodyClockCta = formatBodyClockCta(recoveryYears)
 
 const EXPLAINERS = [
   {
-    label: 'Chronological Age',
+    label: 'Calendar Age',
     body: 'How long you have lived. The number on your birth certificate. This does not change based on how you live — only time changes it.',
   },
   {
-    label: 'Chronosomatic Age',
-    body: 'How old your body is actually running. When your light-dark cycle is well aligned this can sit below your Chronological Age. When your body clock is disrupted it rises above it — sometimes by several years.',
+    label: 'Photonic Age',
+    body: 'How old your circadian system, immune function, and neurological architecture are operating at — derived from light biology, biochemistry, and sleep. When aligned it can sit below Calendar Age; when disrupted it rises above it.',
   },
   {
-    label: 'Dark Years',
-    body: 'The gap between the two numbers. Each Dark Year is time your metabolism spent suppressed — running at the biological equivalent of hibernation — because sleep timing, light exposure, and daily rhythm were out of sync with your internal clock. Dark Years are recoverable.',
+    label: 'Chronopenic burden',
+    body: 'The gap between the two ages in years, and the Chronopenic Burden Score (0–100) that tracks whether protocols are closing it. Direction of travel matters more than the absolute number.',
   },
   {
     label: 'Recovery',
-    body: 'With a personalised plan, DIOS targets recovering your Dark Years within 90 days — by restoring your light-dark cycle, correcting nutritional deficiencies, and timing your medications to your body clock.',
+    body: 'With a personalised plan, DIOS targets closing your chronopenic burden within 90 days — First Light scan, biochemical panels when indicated, and medication timing anchored to your body clock.',
   },
 ] as const
 
 const SIGNALS = [
   {
     value: `${darkYearsHours}h`,
-    label: 'Dark Years',
-    detail: 'Time your metabolism spent running slower than it should.',
+    label: 'Phase lag',
+    detail: 'Hours your sleep rhythm sits off the population anchor.',
   },
   {
     value: `${lightAlignment}/100`,
@@ -65,15 +65,15 @@ export function CircadianModelView() {
         <p className="mt-3 dash-panel-body leading-relaxed text-[var(--text-muted)]">
           Your body has two ages. The first is how long you have lived. The second is how old your
           body is actually running right now. Most people assume they are the same. For most people
-          they are not. The gap between them — your Dark Years — is time your body spent ageing
-          faster than it needed to. DIOS measures that gap and shows you how to close it.
+          they are not. The gap — your chronopenic burden — is the diagnostic. DIOS measures
+          Photonic Age, tracks the burden score, and shows you how to close it.
         </p>
 
         <div className="glass-tile mt-8 p-5">
           <SnapshotAgeRow
-            chronologicalAge={chronologicalAge}
-            chronosomaticAge={chronosomaticAge}
-            darkYears={darkYears}
+            calendarAge={calendarAge}
+            photonicAge={photonicAge}
+            chronopenicBurdenYears={chronopenicBurdenYears}
           />
           <div className="snapshot-cta-bar mt-4">
             <span>
@@ -94,7 +94,7 @@ export function CircadianModelView() {
           health, higher cardiovascular risk, and shorter healthy life expectancy — independent of
           diet, exercise, and genetics. DIOS takes that population finding and applies it to you
           personally. Your sleep timing, your light exposure, and your blood panel together show how
-          well your body clock is running — and how many Dark Years that is costing you.
+          well your body clock is running — and your chronopenic burden score.
         </p>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -117,7 +117,7 @@ export function CircadianModelView() {
             behaviour and sleep timing every day. A seven-night sleep study using TipTraQ tells us
             your body clock type and whether your breathing is disrupting your sleep. A quarterly
             blood test shows whether your body has the nutritional building blocks your clock needs
-            to run properly. Put those three together and we can tell you your Chronosomatic Age —
+            to run properly. Put those three together and we can tell you your Photonic Age —
             and exactly what is pushing it up.
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
@@ -138,7 +138,7 @@ export function CircadianModelView() {
         <div className="glass-tile mt-8 p-5">
           <p className="dash-panel-muted leading-relaxed">
             Two numbers. The gap between them. And a plan to close it. Your dashboard shows exactly
-            what is adding Dark Years to your life — and what you can do today to start getting them
+            what is adding to your chronopenic burden — and what you can do today to start closing it
             back.
           </p>
           <div className="mt-4 flex flex-wrap gap-4">
@@ -152,7 +152,7 @@ export function CircadianModelView() {
               href="/signup/patient"
               className="dash-panel-action font-medium text-[var(--text-primary)] transition-opacity hover:opacity-70"
             >
-              Get your Chronosomatic Age →
+              Get your Photonic Age →
             </Link>
           </div>
         </div>

@@ -44,44 +44,49 @@ function AgeValueCell({ years, title, note, variant }: AgeValueCellProps) {
   )
 }
 
+import { AGE_LABELS } from '@/lib/product/dose-intelligence-model'
+
 type SnapshotAgeRowProps = {
-  chronologicalAge: number
-  chronosomaticAge: number
-  darkYears: number
+  calendarAge: number
+  photonicAge: number
+  chronopenicBurdenYears: number
 }
 
 export function SnapshotAgeRow({
-  chronologicalAge,
-  chronosomaticAge,
-  darkYears,
+  calendarAge,
+  photonicAge,
+  chronopenicBurdenYears,
 }: SnapshotAgeRowProps) {
-  const displayDarkYears = formatAgeYears(darkYears)
+  const displayBurden = formatAgeYears(chronopenicBurdenYears)
 
   return (
     <div className="snapshot-age-row">
       <AgeValueCell
-        years={chronologicalAge}
-        title="Chronological"
-        note="(Age on your birth certificate)"
+        years={calendarAge}
+        title={AGE_LABELS.calendar}
+        note="(years on your birth certificate)"
         variant="chrono"
       />
 
       <div className="snapshot-age-value-cell snapshot-age-value-cell--center">
         <div className="snapshot-age-years-block">
-          <p className="snapshot-dark-years-value" aria-label={`${displayDarkYears} dark years`}>
-            {displayDarkYears}
+          <p
+            className="snapshot-dark-years-value"
+            aria-label={`${displayBurden} years chronopenic burden`}
+          >
+            {displayBurden}
           </p>
-          <p className="snapshot-dark-years-label">Dark years</p>
+          <p className="snapshot-dark-years-label">Chronopenic burden</p>
           <p className="snapshot-age-card-note snapshot-age-card-note--center">
-            (time out of sync with your body clock)
+            (gap between Calendar and Photonic Age)
           </p>
         </div>
       </div>
 
       <AgeValueCell
-        years={chronosomaticAge}
-        title="Chronosomatic"
-        note="(Age on your cellular clocks)"
+        years={photonicAge}
+        title={AGE_LABELS.photonic}
+        note="(how old your body clock is running)"
         variant="circadian"
       />
     </div>

@@ -103,7 +103,7 @@ function CoachPanel({
       <div className="dash-panel-body rounded-2xl border border-white/70 bg-white/60 px-3 py-2.5">
         Hi {firstName}. Across your TipTraQ nights you fell asleep about {snapshot.clockDrift} minutes
         after your body-clock target ({snapshot.dlmoEstimate}) — that rhythm slip contributes{' '}
-        {snapshot.darkYears} Dark Years to your metabolic age. Want to know how to turn that around?
+        {snapshot.chronopenicBurdenYears} years of chronopenic burden on your Photonic Age. Want to know how to close that gap?
       </div>
       <div className="dash-panel-actions">
         {prompts.map((prompt) => (

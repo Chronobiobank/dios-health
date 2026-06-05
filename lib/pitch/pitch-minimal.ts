@@ -1,9 +1,11 @@
 import { PITCH_IMAGES } from '@/lib/pitch/landing-images'
 import { GRANT_MUNRO_PAPER_TITLE } from '@/lib/pitch/grant-munro-founder'
 import {
+  RETINOMIC_LANDING_CONSEQUENCE,
   RETINOMIC_LANDING_EVIDENCE,
   RETINOMIC_LANDING_FEATURES,
   RETINOMIC_LANDING_HERO,
+  RETINOMIC_LANDING_PHOTONIC_AGE,
   RETINOMIC_LANDING_PROBLEM,
   RETINOMIC_LANDING_PROBLEM_CARDS,
   RETINOMIC_LANDING_PROTOCOL,
@@ -42,7 +44,7 @@ export type PitchDetailPage = {
   sources?: readonly { label: string; href: string }[]
 }
 
-/** Four full-bleed narrative tiles — medtech skim-and-dive; no grids on landing */
+/** Five full-bleed narrative tiles — problem first, no jargon until tile 4 */
 export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
   {
     id: 'pitch-hook',
@@ -50,25 +52,38 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     eyebrow: RETINOMIC_LANDING_HERO.eyebrow,
     title: RETINOMIC_LANDING_HERO.headline,
     subtitle: RETINOMIC_LANDING_HERO.subheadline,
-    image: PITCH_IMAGES.hook,
-    imageAlt: 'Eye scan baseline — quantify your meds',
+    image: PITCH_IMAGES.retinomic.lightDose,
+    imageAlt: 'Outdoor light — primary source of vitamin D and circadian entrainment',
     href: RETINOMIC_LANDING_HERO.detailHref,
     ctaLabel: RETINOMIC_LANDING_HERO.ctaLabel,
     secondaryHref: RETINOMIC_LANDING_HERO.secondaryCtaHref,
     secondaryCtaLabel: RETINOMIC_LANDING_HERO.secondaryCtaLabel,
   },
   {
-    id: 'pitch-problem',
-    slug: 'problem',
-    eyebrow: RETINOMIC_LANDING_PROBLEM.eyebrow,
-    title: RETINOMIC_LANDING_PROBLEM.headline,
-    subtitle: RETINOMIC_LANDING_PROBLEM.subheadline,
-    image: RETINOMIC_LANDING_PROBLEM.image,
-    imageAlt: RETINOMIC_LANDING_PROBLEM.imageAlt,
-    href: RETINOMIC_LANDING_PROBLEM.detailHref,
-    ctaLabel: RETINOMIC_LANDING_PROBLEM.ctaLabel,
-    secondaryHref: RETINOMIC_LANDING_PROBLEM.secondaryCtaHref,
-    secondaryCtaLabel: RETINOMIC_LANDING_PROBLEM.secondaryCtaLabel,
+    id: 'pitch-consequence',
+    slug: 'consequence',
+    eyebrow: RETINOMIC_LANDING_CONSEQUENCE.eyebrow,
+    title: RETINOMIC_LANDING_CONSEQUENCE.headline,
+    subtitle: RETINOMIC_LANDING_CONSEQUENCE.subheadline,
+    image: RETINOMIC_LANDING_CONSEQUENCE.image,
+    imageAlt: RETINOMIC_LANDING_CONSEQUENCE.imageAlt,
+    href: RETINOMIC_LANDING_CONSEQUENCE.detailHref,
+    ctaLabel: RETINOMIC_LANDING_CONSEQUENCE.ctaLabel,
+    secondaryHref: RETINOMIC_LANDING_CONSEQUENCE.secondaryCtaHref,
+    secondaryCtaLabel: RETINOMIC_LANDING_CONSEQUENCE.secondaryCtaLabel,
+  },
+  {
+    id: 'pitch-photonic-age',
+    slug: 'photonic-age',
+    eyebrow: RETINOMIC_LANDING_PHOTONIC_AGE.eyebrow,
+    title: RETINOMIC_LANDING_PHOTONIC_AGE.headline,
+    subtitle: RETINOMIC_LANDING_PHOTONIC_AGE.subheadline,
+    image: RETINOMIC_LANDING_PHOTONIC_AGE.image,
+    imageAlt: RETINOMIC_LANDING_PHOTONIC_AGE.imageAlt,
+    href: RETINOMIC_LANDING_PHOTONIC_AGE.detailHref,
+    ctaLabel: RETINOMIC_LANDING_PHOTONIC_AGE.ctaLabel,
+    secondaryHref: RETINOMIC_LANDING_PHOTONIC_AGE.secondaryCtaHref,
+    secondaryCtaLabel: RETINOMIC_LANDING_PHOTONIC_AGE.secondaryCtaLabel,
   },
   {
     id: 'pitch-protocol',
@@ -110,29 +125,30 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     eyebrow: RETINOMIC_LANDING_HERO.eyebrow,
     title: RETINOMIC_LANDING_HERO.headline,
     subtitle: RETINOMIC_LANDING_HERO.subheadline,
-    image: PITCH_IMAGES.hook,
-    imageAlt: 'Eye scan baseline — quantify your meds',
+    image: PITCH_IMAGES.retinomic.lightDose,
+    imageAlt: 'Outdoor light — vitamin D deficiency and modern indoor life',
     sections: [
       {
-        title: 'Quantify your meds',
-        body: 'DIOS turns your light, eye, blood, and sleep signals into a personal dose window — when to take medicine, not just what the label says.',
+        title: 'Holick in three sentences',
+        body: 'Global vitamin D deficiency affects over one billion people — not because the sun changed but because modern indoor life eliminated the primary evolutionary source of D3 synthesis. Holick\'s 2007 NEJM paper established this as a pandemic. DIOS measures what modern life took from your biology and builds a protocol to restore it.',
       },
       {
-        title: 'Why the eye scan comes first',
-        body: 'Founder Grant Munro built the Retinomic baseline after several failed vitrectomy operations. He learned that measuring the retina clock early is prevention; waiting for surgical crisis is too late.',
+        title: 'From deficit to protocol',
+        body: 'The First Light Protocol addresses the deficit directly — morning outdoor exposure at civil twilight activates melanopsin-driven circadian entrainment and cutaneous UVB D3 precursor synthesis simultaneously. One ritual. Two biological mechanisms. Both measured.',
         bullets: [
-          'Free smartphone eye scan anchors your timing baseline',
-          'Light and sleep refine the window over days',
-          'Blood and overnight sleep escalate only when risk is flagged',
+          'D3 status via the Gominak blood panel when indicated',
+          'Circadian amplitude via the First Light MLux score',
+          'Sleep architecture as downstream outcome via TipTraQ',
         ],
       },
       {
         title: 'Built for shared decisions',
-        body: 'Output is clinician-ready: a practical schedule your GP can act on inside existing pathways — not another adherence pamphlet.',
+        body: 'Output is clinician-ready: Photonic Age, eating window, and protocol timing your GP or specialist can act on — not another adherence pamphlet.',
       },
     ],
     sources: [
-      { label: 'Start free baseline scan', href: '/onboarding' },
+      { label: 'Holick NEJM 2007', href: 'https://www.nejm.org/doi/full/10.1056/NEJMra070553' },
+      { label: 'Clinical evidence library', href: '/evidence' },
       { label: 'Live demo dashboard', href: '/how-it-works' },
     ],
   },

@@ -38,8 +38,15 @@ export const CLINIC_ROUTES = {
   settings: '/clinic/settings',
   patient: (id: string) => `/clinic/patients/${id}`,
   consult: (id: string) => `/clinic/patients/${id}/consult`,
+  order: (patientId: string) => `/clinic/order/${patientId}`,
 } as const
 
-export const PROTECTED_PREFIXES = ['/dashboard', '/clinic', '/pending-verification'] as const
+export const SHOP_ROUTES = {
+  catalog: '/shop',
+  product: (slug: string) => `/shop/${slug}`,
+  success: '/shop/success',
+} as const
+
+export const PROTECTED_PREFIXES = ['/dashboard', '/clinic', '/shop', '/pending-verification'] as const
 
 export const PUBLIC_AUTH_PREFIXES = ['/signin', '/signup', '/auth'] as const

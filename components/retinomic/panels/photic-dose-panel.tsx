@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { LightCheckIn } from '@/components/retinomic/light-check-in'
 import { PhoticProgressRing } from '@/components/retinomic/photic-progress-ring'
+import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
 import type { LightCheckInConfig } from '@/lib/retinomic/light-check-in'
 import {
   resolveLiveMluxFeed,
@@ -16,12 +17,14 @@ type PhoticDosePanelProps = {
   feedInput: LiveMluxFeedInput
   lightIrisDetected: boolean
   lightCheckIn?: LightCheckInConfig | null
+  feedFreshness?: FeedFreshness
 }
 
 export function PhoticDosePanel({
   feedInput,
   lightIrisDetected,
   lightCheckIn = null,
+  feedFreshness = 'none',
 }: PhoticDosePanelProps) {
   const [feedOverride, setFeedOverride] = useState<SmartphoneFeedSnapshot | null>(null)
 
@@ -65,7 +68,13 @@ export function PhoticDosePanel({
     }))
   }, [feedInput])
 
+  const effectiveFreshness: FeedFreshness = feedOverride ? 'fresh' : feedFreshness
   const banner = photicContextBanner(activeFeedInput.photicPhase, lightIrisDetected)
+  const showStaleNudge = feed.staleNudge != null && !feedOverride
+  const emphasizeCheckIn =
+    effectiveFreshness === 'stale' ||
+    effectiveFreshness === 'none' ||
+    effectiveFreshness === 'aging'
   const pct =
     activeFeedInput.melanopicLuxCeiling > 0
       ? Math.round((feed.melanopicLuxToday / activeFeedInput.melanopicLuxCeiling) * 100)
@@ -99,11 +108,22 @@ export function PhoticDosePanel({
           ) : null}
         </div>
       </div>
+      {showStaleNudge ? (
+        <p className="retinomic-photic-stale-nudge" role="status">
+          {feed.staleNudge}
+        </p>
+      ) : feed.agingHint ? (
+        <p className="retinomic-photic-aging-hint" role="status">
+          {feed.agingHint} — check in when you can
+        </p>
+      ) : null}
       <p className="retinomic-photic-banner">{banner}</p>
       {lightCheckIn ? (
         <LightCheckIn
           phase={activeFeedInput.photicPhase}
           config={lightCheckIn}
+          feedFreshness={effectiveFreshness}
+          emphasize={emphasizeCheckIn}
           onLogged={handleLogged}
         />
       ) : null}

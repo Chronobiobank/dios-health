@@ -1,3 +1,4 @@
+import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
 import type { BaselineScanSummary } from '@/lib/retinomic/baseline-scan-summary'
 import type { PhoticDayPhase, RetinomicTier } from '@/lib/retinomic/types'
 import type { IrisPigment } from '@/src/types'
@@ -77,11 +78,14 @@ export function tailorDailyInterventionForBaseline(
   baseline: BaselineScanSummary,
   tier: RetinomicTier,
   morningMluxMinutes: number,
-  photicSource: PhoticDoseSource = 'baseline'
+  photicSource: PhoticDoseSource = 'baseline',
+  options?: { returnVisit?: boolean; feedFreshness?: FeedFreshness }
 ): DailyIntervention {
   if (tier !== 'FREE_SCREENING') return intervention
 
   const irisLabel = baseline.irisPigment === 'LIGHT' ? 'light iris' : 'dark iris'
+  const returnVisit = options?.returnVisit ?? false
+  const feedFreshness = options?.feedFreshness ?? 'none'
   const flags = intervention.clinicalFlags.includes('Eye baseline live')
     ? intervention.clinicalFlags
     : ['Eye baseline live', ...intervention.clinicalFlags]
@@ -89,13 +93,23 @@ export function tailorDailyInterventionForBaseline(
   const tasks = intervention.tasks.map((task) => {
     if (task.id === 'photic-anchor') {
       const phoneLive = photicSource === 'phone' || photicSource === 'mlux'
+      let directive: string
+
+      if (returnVisit && (feedFreshness === 'stale' || feedFreshness === 'none')) {
+        directive = `Light check-in due — ${morningMluxMinutes} min melanopic anchor still applies. Run the quick check-in on your light panel to refresh today's ring; your scan (${irisLabel}) holds the ceiling until then.`
+      } else if (returnVisit && feedFreshness === 'aging') {
+        directive = `Phone feed aging — ${morningMluxMinutes} min morning anchor, then refresh your check-in on the light panel to keep dose current through the day.`
+      } else if (phoneLive) {
+        directive = `Phone feed live — ${morningMluxMinutes} min of 480nm melanopic light before first bite. Your scan (${irisLabel}, ITA ${baseline.skinITA}°) sets the ceiling; the sensor stream updates dose through the day.`
+      } else {
+        directive = `From your scan (${irisLabel}, ITA ${baseline.skinITA}°): ${morningMluxMinutes} min of 480nm melanopic light before first bite. This sets your dose window until your phone feed connects.`
+      }
+
       return {
         ...task,
-        title: 'Morning photic anchor',
-        directive: phoneLive
-          ? `Phone feed live — ${morningMluxMinutes} min of 480nm melanopic light before first bite. Your scan (${irisLabel}, ITA ${baseline.skinITA}°) sets the ceiling; the sensor stream updates dose through the day.`
-          : `From your scan (${irisLabel}, ITA ${baseline.skinITA}°): ${morningMluxMinutes} min of 480nm melanopic light before first bite. This sets your dose window until your phone feed connects.`,
-        priority: task.priority,
+        title: returnVisit ? 'Keep photic dose current' : 'Morning photic anchor',
+        directive,
+        priority: returnVisit && feedFreshness === 'stale' ? ('required' as const) : task.priority,
       }
     }
     if (task.pillar === 'fuel') {

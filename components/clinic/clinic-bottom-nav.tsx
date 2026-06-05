@@ -3,13 +3,18 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { CLINIC_ROUTES } from '@/lib/auth/routes'
+import { CLINIC_ROUTES, SHOP_ROUTES } from '@/lib/auth/routes'
 import { cn } from '@/lib/utils'
 
 const TABS = [
-  { label: 'Patients', href: CLINIC_ROUTES.panel, match: (path: string) => path === CLINIC_ROUTES.panel },
+  { label: 'Cohort', href: CLINIC_ROUTES.panel, match: (path: string) => path === CLINIC_ROUTES.panel },
   {
-    label: 'Insights',
+    label: 'Shop',
+    href: SHOP_ROUTES.catalog,
+    match: (path: string) => path.startsWith('/shop'),
+  },
+  {
+    label: 'List',
     href: CLINIC_ROUTES.patients,
     match: (path: string) => path === CLINIC_ROUTES.patients,
   },

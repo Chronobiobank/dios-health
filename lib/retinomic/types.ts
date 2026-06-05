@@ -1,6 +1,7 @@
 import type { BaselineScanSummary } from '@/lib/retinomic/baseline-scan-summary'
 import type { RetinomicTier } from '@/src/types'
 import type { MedicationTimingPlan } from '@/src/lib/engine/medication-timing'
+import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
 import type { LightCheckInConfig } from '@/lib/retinomic/light-check-in'
 import type { LiveMluxFeedInput } from '@/lib/retinomic/live-mlux-feed'
 
@@ -42,6 +43,10 @@ export type RetinomicDashboardProps = {
   tier: RetinomicTier
   baselineScan: BaselineScanSummary | null
   dayOneIntro: string | null
+  /** Day 2+ FREE tier — replaces dayOneIntro on return visits */
+  returnVisitIntro: string | null
+  feedFreshness: FeedFreshness
+  isReturnVisit: boolean
   photicDoseSourceCaption: string
   /** Serialized feed for client-side live lux updates */
   liveMluxFeedInput: LiveMluxFeedInput

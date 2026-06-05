@@ -1,23 +1,25 @@
 import { formatAgeYears } from '@/components/patient-dashboard/snapshot-age-row'
+import { AGE_LABELS } from '@/lib/product/dose-intelligence-model'
+import {
+  burdenTrendLabel,
+  chronopenicBurdenLabel,
+} from '@/lib/product/chronopenic-burden'
+import type { BurdenTrendDirection } from '@/lib/patient-dashboard/types'
 import { cn } from '@/lib/utils'
-
-function hibernationLossLabel(years: number): string {
-  const n = formatAgeYears(years)
-  const unit = n === 1 ? 'year' : 'years'
-  return `(${n} ${unit} lost to hibernation)`
-}
 
 type SnapshotHeroRowProps = {
   dlmoEstimate: string
   clockDrift: number
-  darkYears: number
-  chronosomaticAge: number
-  chronologicalAge: number
+  chronopenicBurdenYears: number
+  photonicAge: number
+  calendarAge: number
+  chronopenicBurdenScore: number
+  burdenTrendDirection: BurdenTrendDirection | null
   lightAlignment: number
   darkCycleNote: string
   lightCycleNote: string
-  chronopathicNote: string
-  chronologicalNote: string
+  photonicAgeNote: string
+  calendarAgeNote: string
 }
 
 function CycleCell({
@@ -80,18 +82,21 @@ function AgeStack({
 export function SnapshotHeroRow({
   dlmoEstimate,
   clockDrift,
-  darkYears,
-  chronosomaticAge,
-  chronologicalAge,
+  chronopenicBurdenYears,
+  photonicAge,
+  calendarAge,
+  chronopenicBurdenScore,
+  burdenTrendDirection,
   lightAlignment,
   darkCycleNote,
   lightCycleNote,
-  chronopathicNote,
-  chronologicalNote,
+  photonicAgeNote,
+  calendarAgeNote,
 }: SnapshotHeroRowProps) {
-  const chronopathicYears = formatAgeYears(chronosomaticAge)
-  const clockYears = formatAgeYears(chronologicalAge)
-  const hibernationLoss = hibernationLossLabel(darkYears)
+  const photonicYears = formatAgeYears(photonicAge)
+  const calendarYears = formatAgeYears(calendarAge)
+  const burdenSub = `(${chronopenicBurdenLabel(chronopenicBurdenYears)})`
+  const trendSub = burdenTrendLabel(burdenTrendDirection)
 
   return (
     <div className="snapshot-hero-row">
@@ -104,22 +109,25 @@ export function SnapshotHeroRow({
 
       <div className="snapshot-age-center">
         <AgeStack
-          value={chronopathicYears}
-          title="Chronopathic age"
-          sub={hibernationLoss}
+          value={photonicYears}
+          title={AGE_LABELS.photonic}
+          sub={burdenSub}
           size="primary"
-          ariaLabel={`Chronopathic age ${chronopathicYears}, ${hibernationLoss}`}
+          ariaLabel={`${AGE_LABELS.photonic} ${photonicYears}, ${burdenSub}`}
         />
+        <p className="snapshot-burden-score font-mono text-[10px] uppercase tracking-widest text-[var(--photic-muted)]">
+          Chronopenic Burden {chronopenicBurdenScore}/100 · {trendSub}
+        </p>
         <hr className="snapshot-age-center__rule" aria-hidden />
         <AgeStack
-          value={clockYears}
-          title="Chronological age"
-          sub="(clock years on your birth certificate)"
+          value={calendarYears}
+          title={AGE_LABELS.calendar}
+          sub="(years on your birth certificate)"
           size="secondary"
-          ariaLabel={`${clockYears} clock years`}
+          ariaLabel={`${AGE_LABELS.calendar} ${calendarYears}`}
         />
         <p className="sr-only">
-          {chronopathicNote} {chronologicalNote}
+          {photonicAgeNote} {calendarAgeNote}
         </p>
       </div>
 

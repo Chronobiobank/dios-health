@@ -45,7 +45,7 @@ export default function EvidencePage() {
         </p>
       </section>
 
-      <section className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 py-16 lg:grid-cols-3">
+      <section className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 py-16 md:grid-cols-2 lg:grid-cols-3">
         <article className="dios-glass-pillar evidence-retinomic-pillar--photic">
           <div>
             <div className="mb-4 text-2xl" aria-hidden>
@@ -159,6 +159,38 @@ export default function EvidencePage() {
           <p className="type-medical-caption dios-glass-pillar__divider mt-6 pt-4 text-[#0D0D0D]/50">
             Reference: FDA K243268 Clearance Data (2025). PranaQ Pte. Ltd. Home Sleep Apnea
             Evaluation Guidelines.
+          </p>
+        </article>
+
+        <article className="dios-glass-pillar evidence-retinomic-pillar--fuel">
+          <div>
+            <div className="mb-4 text-2xl" aria-hidden>
+              ☀️
+            </div>
+            <h2 className="mb-4 text-xl font-bold text-fuel-muted">
+              Pillar 4: Cutaneous D3 Synthesis
+            </h2>
+            <p className="type-medical-dense text-sm leading-relaxed text-[#0D0D0D]/65">
+              Global vitamin D deficiency affects over one billion people — not because the sun has
+              changed but because modern indoor life has eliminated the primary evolutionary source
+              of D3 synthesis.{' '}
+              <a
+                href="https://www.nejm.org/doi/full/10.1056/NEJMra070553"
+                className="text-fuel-muted underline hover:text-fuel-core"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Holick&apos;s landmark 2007 NEJM paper
+              </a>{' '}
+              established this deficit as a pandemic. The First Light Protocol addresses it directly
+              — morning outdoor exposure at civil twilight activates both melanopsin-driven
+              circadian entrainment and cutaneous UVB D3 precursor synthesis simultaneously. One
+              ritual. Two biological mechanisms. Both measured by DIOS.
+            </p>
+          </div>
+          <p className="type-medical-caption dios-glass-pillar__divider mt-6 pt-4 text-[#0D0D0D]/50">
+            Reference: Holick, M. F. (2007). &quot;Vitamin D Deficiency.&quot;{' '}
+            <em>New England Journal of Medicine</em>, 357(3), 266–281.
           </p>
         </article>
       </section>

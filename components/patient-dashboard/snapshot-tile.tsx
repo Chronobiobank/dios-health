@@ -1,5 +1,6 @@
 'use client'
 
+import { ChronoimmuneModuleTile } from '@/components/patient-dashboard/chronoimmune-module-tile'
 import { MetabolicRiskTile } from '@/components/patient-dashboard/metabolic-risk-tile'
 import { SnapshotCalibrationGrid } from '@/components/patient-dashboard/snapshot-calibration-grid'
 import { SnapshotHeroRow } from '@/components/patient-dashboard/snapshot-hero-row'
@@ -19,9 +20,11 @@ export function SnapshotTile({
   onExplainRisk,
 }: SnapshotTileProps) {
   const {
-    chronologicalAge,
-    chronosomaticAge,
-    darkYears,
+    calendarAge,
+    photonicAge,
+    chronopenicBurdenYears,
+    chronopenicBurdenScore,
+    burdenTrendDirection,
     lightAlignment,
     clockDrift,
     dlmoEstimate,
@@ -36,6 +39,8 @@ export function SnapshotTile({
     chronotypeSource,
     statNotes,
     spectrumNodes,
+    retinomicBaseline,
+    chronoimmuneProfile,
   } = snapshot
 
   return (
@@ -43,24 +48,38 @@ export function SnapshotTile({
       <SnapshotHeroRow
         dlmoEstimate={dlmoEstimate}
         clockDrift={clockDrift}
-        darkYears={darkYears}
-        chronosomaticAge={chronosomaticAge}
-        chronologicalAge={chronologicalAge}
+        chronopenicBurdenYears={chronopenicBurdenYears}
+        photonicAge={photonicAge}
+        calendarAge={calendarAge}
+        chronopenicBurdenScore={chronopenicBurdenScore}
+        burdenTrendDirection={burdenTrendDirection}
         lightAlignment={lightAlignment}
         darkCycleNote={statNotes.clockDrift}
         lightCycleNote={statNotes.lightAlignment}
-        chronopathicNote={`Chronopathic age is chronological age plus years lost to hibernation from your dark and light cycles. ${statNotes.darkYearsHours}`}
-        chronologicalNote="Years since birth — your clock age before circadian drift."
+        photonicAgeNote={`Photonic Age is how old your circadian system is running — Calendar Age plus chronopenic burden from light, sleep, and rhythm drift. ${statNotes.darkYearsHours}`}
+        calendarAgeNote="Calendar Age is years since birth — the baseline before photic drift."
       />
 
       <div className="snapshot-tile__risk-center">
-        <MetabolicRiskTile
-          embedded
-          nodes={spectrumNodes}
-          openPanel={openPanel}
-          onTogglePanel={onTogglePanel}
-          onExplainRisk={onExplainRisk ?? (() => {})}
-        />
+        {chronoimmuneProfile ? (
+          <ChronoimmuneModuleTile
+            embedded
+            profile={chronoimmuneProfile}
+            onExplain={
+              onExplainRisk
+                ? () => onExplainRisk()
+                : undefined
+            }
+          />
+        ) : (
+          <MetabolicRiskTile
+            embedded
+            nodes={spectrumNodes}
+            openPanel={openPanel}
+            onTogglePanel={onTogglePanel}
+            onExplainRisk={onExplainRisk ?? (() => {})}
+          />
+        )}
       </div>
 
       <SnapshotCalibrationGrid
@@ -73,6 +92,7 @@ export function SnapshotTile({
         solarZenith={solarZenith}
         chronotype={chronotype}
         chronotypeSource={chronotypeSource}
+        retinomicBaseline={retinomicBaseline}
         openPanel={openPanel}
         onTogglePanel={onTogglePanel}
       />

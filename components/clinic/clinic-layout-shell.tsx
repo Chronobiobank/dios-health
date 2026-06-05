@@ -23,7 +23,7 @@ export function ClinicLayoutShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-white text-[#0D0D0D]">
-      <div className="mx-auto flex min-h-screen max-w-4xl flex-col px-5 pb-24 sm:px-6 md:pb-8">
+      <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-5 pb-24 sm:px-6 md:pb-8">
         {children}
         <ClinicBottomNav />
       </div>

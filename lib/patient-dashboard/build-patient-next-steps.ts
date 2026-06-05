@@ -1,4 +1,5 @@
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
+import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
 import { isElevatedSeverity } from '@/lib/patient-dashboard/dashboard-indicators'
 import {
   RIGHT_SLEEP_D3_TARGET,
@@ -27,6 +28,8 @@ export type BuildPatientNextStepsInput = {
   tipTraqNightsCount: number
   hasTipTraq: boolean
   recoveryYears: number
+  feedFreshness?: FeedFreshness
+  hasRetinomicScan?: boolean
 }
 
 const MAX_STEPS = 5
@@ -77,6 +80,18 @@ export function buildPatientNextSteps(input: BuildPatientNextStepsInput): Patien
   const apnoea = apnoeaNode(input.spectrumNodes)
   const curfew = rightSleepLightCurfew(input.dlmoEstimate)
   const morningLight = rightSleepMorningLight(input.dlmoEstimate)
+
+  if (input.feedFreshness === 'stale' || input.feedFreshness === 'none' || input.feedFreshness === 'aging') {
+    steps.push({
+      id: 'light-check-in',
+      priority: 'tonight',
+      title: 'Refresh your light ring',
+      detail: input.hasRetinomicScan
+        ? 'Your eye scan anchors the ceiling — a quick outdoor-light check-in updates today\'s melanopic dose on your snapshot.'
+        : 'Run a quick outdoor-light check-in so today\'s light alignment stays honest on your snapshot.',
+      prompt: 'How do I refresh my light dose from a check-in?',
+    })
+  }
 
   if (!input.bloodPanel.collectedAt) {
     steps.push({

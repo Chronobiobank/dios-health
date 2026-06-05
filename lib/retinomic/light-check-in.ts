@@ -1,4 +1,5 @@
 import { parseDbTimeToMinutes, parseTimeToMinutes } from '@/lib/dashboard/time-utils'
+import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
 import type { PhoticDayPhase } from '@/lib/retinomic/types'
 import type { SmartphoneFeedSnapshot } from '@/lib/retinomic/live-mlux-feed'
 
@@ -39,7 +40,33 @@ export function normalizeSleepOnsetForApi(value: string | null | undefined): str
   return '22:30'
 }
 
-export function lightCheckInPrompt(phase: PhoticDayPhase): LightCheckInPrompt {
+export function lightCheckInPrompt(
+  phase: PhoticDayPhase,
+  feedFreshness: FeedFreshness = 'none'
+): LightCheckInPrompt {
+  if (feedFreshness === 'stale' || feedFreshness === 'none') {
+    switch (phase) {
+      case 'morning':
+        return {
+          question: 'Refresh your ring — outdoor melanopic light before 10am?',
+          yesLabel: 'Yes — got outside',
+          noLabel: 'Not yet today',
+        }
+      case 'midday':
+        return {
+          question: 'Refresh your ring — bright outdoor light so far today?',
+          yesLabel: 'Yes — good dose',
+          noLabel: 'Not much yet',
+        }
+      case 'evening':
+        return {
+          question: 'Refresh your ring — enough daylight exposure today?',
+          yesLabel: 'Yes — on track',
+          noLabel: 'Too little',
+        }
+    }
+  }
+
   switch (phase) {
     case 'morning':
       return {

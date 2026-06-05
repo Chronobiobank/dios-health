@@ -1,3 +1,7 @@
+import type { FirstLightWindowStatus } from '@/lib/product/first-light-window'
+import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
+import type { LightCheckInConfig } from '@/lib/retinomic/light-check-in'
+
 export type MedicationStatus = 'taken' | 'tonight' | 'upcoming'
 
 export type Medication = {
@@ -87,15 +91,82 @@ export type PatientNextSteps = {
   steps: PatientNextStep[]
 }
 
+/** Onboarding camera scan ± Siloton OCT — feeds calibration, not a separate dashboard. */
+export type RetinomicBaselineSummary = {
+  irisLabel: string
+  skinIta: number
+  gclIplMicrons: number | null
+  hasOctThickness: boolean
+}
+
+export type BurdenTrendDirection = 'improving' | 'stable' | 'worsening'
+
+export type CohortTriageStatus = 'red' | 'amber' | 'green'
+
+export type ChronoimmuneLabPoint = {
+  testDate: string
+  serum25ohdNgMl: number | null
+  pth: number
+  serumCalcium: number
+  urineCalcium24hrMg: number | null
+  egfr: number | null
+  doseIuAtTest: number
+}
+
+export type ChronoimmuneMicronutrientLog = {
+  id: import('@/lib/chronoimmune/indication-zones').MicronutrientItemId
+  logged: boolean
+}
+
+export type CalciumGateStatus = 'clear' | 'watch' | 'hold' | 'alert'
+
+export type ChronoimmuneProfile = {
+  recordId: string
+  zoneId: import('@/lib/chronoimmune/indication-zones').ChronoimmuneZoneId
+  indicationLabel: string
+  bodyWeightKg: number
+  currentDoseIu: number
+  doseRangeMinIu: number
+  doseRangeMaxIu: number
+  iuPerKg: number
+  pthReferenceLower: number
+  pthReferenceUpper: number
+  pthTargetCeiling: number
+  pthFloorThreshold: number
+  labHistory: ChronoimmuneLabPoint[]
+  micronutrientLog: ChronoimmuneMicronutrientLog[]
+  safetyGateLevel: 'passive' | 'active' | 'maximum'
+  labReviewFrequency: string
+  calciumCascade: {
+    serumCalcium: CalciumGateStatus
+    urineCalcium: CalciumGateStatus
+    egfr: CalciumGateStatus
+  }
+  consentOnFile: boolean
+  /** Separate from indication zone — triage is today's attention state. */
+  cohortTriageStatus: CohortTriageStatus
+  nextReviewDate: string
+  titrationLocked: boolean
+  lockReason: string | null
+}
+
 export type PatientSnapshot = {
-  chronologicalAge: number
-  chronosomaticAge: number
-  darkYears: number
+  /** Memo: Calendar Age — years since birth */
+  calendarAge: number
+  /** Memo: Photonic Age — biological age from light, biochemistry, sleep */
+  photonicAge: number
+  /** Years between Photonic and Calendar Age */
+  chronopenicBurdenYears: number
+  /** 0–100 composite; Layer 1 uses gap estimate until L2/L3 refine */
+  chronopenicBurdenScore: number
+  burdenTrendDirection: BurdenTrendDirection | null
   recoveryYears: number
   darkYearsHours: number
   lightAlignment: number
   clockDrift: number
   dlmoEstimate: string
+  /** Camera / OCT baseline when present */
+  retinomicBaseline: RetinomicBaselineSummary | null
   /** Explanations under Dark Years / Light alignment / Clock drift stat pills. */
   statNotes: SnapshotStatNotes
   medications: Medication[]
@@ -116,6 +187,8 @@ export type PatientSnapshot = {
   solarZenith: number
   chronotype: string
   chronotypeSource: string
+  /** Chronoimmune module — when present, indication spectrum replaces metabolic risk spectrum. */
+  chronoimmuneProfile?: ChronoimmuneProfile | null
 }
 
 export type PatientDashboardProps = {
@@ -124,4 +197,9 @@ export type PatientDashboardProps = {
   fullName: string
   avatarUrl: string | null
   snapshot: PatientSnapshot
+  /** Inline light check-in when phone feed is stale */
+  feedFreshness?: FeedFreshness
+  lightCheckIn?: LightCheckInConfig | null
+  /** Layer 1 First Light window status for morning scan CTA */
+  firstLightWindow?: FirstLightWindowStatus | null
 }
