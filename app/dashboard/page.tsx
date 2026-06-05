@@ -13,16 +13,16 @@ import {
 import {
   DAY_ONE_LOCKED_COPY,
   dayOneInterventionIntro,
-  estimateBaselineAnchoredMelanopicLux,
   morningMluxMinutesFromBaseline,
-  photicDoseSourceCaption,
-  resolvePhoticDoseSource,
   tailorDailyInterventionForBaseline,
 } from '@/lib/retinomic/day-one-dashboard'
 import {
+  parseSmartphoneSensorPayload,
+  resolveLiveMluxFeed,
+} from '@/lib/retinomic/live-mlux-feed'
+import {
   detectLightIris,
   estimateMelanopicLuxCeiling,
-  estimateMelanopicLuxToday,
   resolvePhoticDayPhase,
 } from '@/lib/retinomic/photic-dose'
 import { getPatientRetinomicTier } from '@/lib/auth/retinomic-access'
@@ -33,7 +33,9 @@ import {
   estimateAutonomicStrain,
   estimateRemCycleEfficiency,
 } from '@/lib/retinomic/sleep-metrics'
-import { buildDailyInterventionForPatient } from '@/src/lib/engine/intervention'
+import { buildDailyInterventionForPatient, resolveChronotypePhase } from '@/src/lib/engine/intervention'
+import { readPatientMedicationList } from '@/lib/medication/patient-medications'
+import { buildMedicationTimingFromIntervention } from '@/src/lib/engine/medication-timing'
 import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
@@ -75,11 +77,15 @@ export default async function PatientDashboardPage() {
       .maybeSingle(),
     supabase
       .from('smartphone_circadian_observations')
-      .select('observed_at')
+      .select('observed_at, confidence_score, sensor_payload')
       .eq('patient_id', user.id)
       .order('observed_at', { ascending: false })
       .limit(1)
-      .maybeSingle(),
+      .maybeSingle<{
+        observed_at: string
+        confidence_score: number | null
+        sensor_payload: Record<string, unknown> | null
+      }>(),
     supabase
       .from('blood_circadian_panels')
       .select('vitamin_d3_nmoll, vitamin_b12_pmoll, ferritin_ugl, vitamin_b5_umoll, collected_at')
@@ -154,28 +160,31 @@ export default async function PatientDashboardPage() {
     patient.fitzpatrick_type,
     hardwareBaseline?.onboardingGeo?.lat ?? calibration.latitude
   )
-  const photicSource = resolvePhoticDoseSource(
-    profileRow?.mlux_score ?? null,
-    smartphoneActive,
-    baselineScan != null
-  )
   const morningMluxMinutes = hardwareBaseline
     ? morningMluxMinutesFromBaseline(hardwareBaseline.irisPigment, hardwareBaseline.skinITA)
     : (patient.morning_mlux_target_duration_minutes ?? 90)
 
-  let melanopicLuxToday = estimateMelanopicLuxToday(
+  const sensorFields = parseSmartphoneSensorPayload(latestSmartphone?.sensor_payload)
+  const smartphoneFeed = latestSmartphone
+    ? {
+        observedAt: latestSmartphone.observed_at,
+        vdrDoseToday: sensorFields.vdrDoseToday,
+        outdoorLightBefore10am: sensorFields.outdoorLightBefore10am,
+        confidenceScore: latestSmartphone.confidence_score,
+      }
+    : null
+
+  const liveMluxFeedInput = {
+    melanopicLuxCeiling,
+    photicPhase,
+    mluxScore: profileRow?.mlux_score ?? null,
+    smartphoneFeed,
     smartphoneActive,
-    profileRow?.mlux_score ?? null,
-    photicPhase
-  )
-  if (photicSource === 'baseline' && hardwareBaseline) {
-    melanopicLuxToday = estimateBaselineAnchoredMelanopicLux(
-      melanopicLuxCeiling,
-      hardwareBaseline.irisPigment,
-      hardwareBaseline.skinITA,
-      photicPhase
-    )
+    hardwareBaseline,
   }
+
+  const liveMluxFeed = resolveLiveMluxFeed(liveMluxFeedInput)
+  const photicSource = liveMluxFeed.source
 
   const isDayOneFree =
     effectiveTier === 'FREE_SCREENING' && baselineScan != null && (bloodPanelsCount ?? 0) === 0
@@ -202,14 +211,28 @@ export default async function PatientDashboardPage() {
       dailyIntervention,
       baselineScan,
       effectiveTier,
-      morningMluxMinutes
+      morningMluxMinutes,
+      photicSource
     )
   }
 
   const dayOneIntro =
-    isDayOneFree && baselineScan ? dayOneInterventionIntro(baselineScan) : null
+    isDayOneFree && baselineScan
+      ? dayOneInterventionIntro(baselineScan, photicSource)
+      : null
   const bloodLockedCopy = isDayOneFree ? DAY_ONE_LOCKED_COPY.blood : null
   const sleepLockedCopy = isDayOneFree ? DAY_ONE_LOCKED_COPY.sleep : null
+
+  const medicationTiming =
+    isDayOneFree && baselineScan
+      ? buildMedicationTimingFromIntervention({
+          intervention: dailyIntervention,
+          chronotype: resolveChronotypePhase(calibration.chronotype),
+          currentMedications: readPatientMedicationList(patient.current_medications),
+          fallbackSleepTime: patient.chronotype_q3,
+          mluxProfile: profileRow,
+        })
+      : null
 
   return (
     <RetinomicDashboardClient
@@ -220,10 +243,11 @@ export default async function PatientDashboardPage() {
       tier={effectiveTier}
       baselineScan={baselineScan}
       dayOneIntro={dayOneIntro}
-      photicDoseSourceCaption={photicDoseSourceCaption(photicSource)}
+      photicDoseSourceCaption={liveMluxFeed.caption}
+      liveMluxFeedInput={liveMluxFeedInput}
       bloodLockedCopy={bloodLockedCopy}
       sleepLockedCopy={sleepLockedCopy}
-      melanopicLuxToday={melanopicLuxToday}
+      melanopicLuxToday={liveMluxFeed.melanopicLuxToday}
       melanopicLuxCeiling={melanopicLuxCeiling}
       photicPhase={photicPhase}
       lightIrisDetected={
@@ -236,6 +260,7 @@ export default async function PatientDashboardPage() {
       remCycleEfficiency={estimateRemCycleEfficiency(latestNight ?? null)}
       autonomicStrain={estimateAutonomicStrain(latestNight ?? null)}
       dailyIntervention={dailyIntervention}
+      medicationTiming={medicationTiming}
     />
   )
 }

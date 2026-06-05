@@ -182,7 +182,7 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
       },
       {
         title: 'Escalate on risk',
-        body: 'When DIOS flags elevated metabolic or circadian risk, care escalates to Gominak blood panels and FDA-cleared overnight sleep verification — still inside one protocol.',
+        body: 'When DIOS flags elevated metabolic or circadian risk, care escalates to Gominak blood panels and FDA-cleared overnight sleep verification — still inside one dose intelligence workflow.',
       },
     ],
     sources: [

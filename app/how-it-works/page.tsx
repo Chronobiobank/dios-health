@@ -1,23 +1,23 @@
+import type { Metadata } from 'next'
+
+import { HowItWorksDemoHero } from '@/components/retinomic/how-it-works-demo-hero'
 import { RetinomicDashboardClient } from '@/components/retinomic/retinomic-dashboard-client'
 import { MOCK_RETINOMIC_DASHBOARD } from '@/lib/retinomic/mock-dashboard-props'
+import { HOW_IT_WORKS_DEMO_COPY } from '@/lib/pitch/retinomic-landing-copy'
 
 export const dynamic = 'force-dynamic'
 
-/** Public demo of the Retinomic tiered dashboard — linked from landing Dose Intelligence tile. */
+export const metadata: Metadata = {
+  title: `${HOW_IT_WORKS_DEMO_COPY.headline} · DIOS`,
+  description: HOW_IT_WORKS_DEMO_COPY.subheadline,
+}
+
+/** Public live demo — same day-one dashboard patients see after baseline scan */
 export default function HowItWorksPage() {
   return (
     <>
-      <p
-        className="type-medical-dense calm-auth-muted mx-auto max-w-3xl px-4 pt-4 text-center text-xs"
-        role="status"
-      >
-        Public preview · sample Retinomic protocol data ·{' '}
-        <a href="/onboarding" className="calm-auth-link">
-          start your free baseline scan
-        </a>{' '}
-        to connect your devices
-      </p>
-      <RetinomicDashboardClient {...MOCK_RETINOMIC_DASHBOARD} />
+      <HowItWorksDemoHero />
+      <RetinomicDashboardClient {...MOCK_RETINOMIC_DASHBOARD} publicDemo />
     </>
   )
 }

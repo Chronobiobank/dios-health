@@ -18,7 +18,7 @@ export default async function PremiumDashboardPage() {
         {name}, quarterly labs and TipTraQ webhook streams are active on your profile.
       </p>
       <Link href={PATIENT_ROUTES.dashboard} className="calm-auth-link mt-6 inline-flex text-sm font-medium">
-        Back to protocol dashboard
+        Back to dose intelligence dashboard
       </Link>
     </div>
   )

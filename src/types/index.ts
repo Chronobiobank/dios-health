@@ -1,5 +1,5 @@
 /**
- * Retinomic Protocol — canonical user / patient state types.
+ * Dose Intelligence — canonical user / patient state types.
  */
 
 export type RetinomicTier = 'FREE_SCREENING' | 'PREMIUM_VERIFICATION'

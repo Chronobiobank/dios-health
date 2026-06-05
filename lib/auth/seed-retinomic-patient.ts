@@ -1,6 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 
 import { estimateFitzpatrickFromSkinIta } from '@/lib/auth/onboarding-bridge'
+import { seedSmartphoneBaselineFeed } from '@/lib/auth/seed-smartphone-baseline-feed'
 import { computeSunZenithData } from '@/src/lib/engine/sun-zenith'
 import type { HardwareBaseline, IrisPigment } from '@/src/types'
 
@@ -89,6 +90,19 @@ export async function seedRetinomicPatientRecord(
 
   if (consentError) {
     return { error: consentError.message }
+  }
+
+  const { error: feedError } = await seedSmartphoneBaselineFeed(supabase, {
+    userId: input.userId,
+    irisPigment: input.irisPigment,
+    skinITA: input.skinITA,
+    fitzpatrickType: fitzpatrick,
+    sleepOnsetLocal: '22:30',
+    solarZenithDeg: sun.solarZenithDegrees,
+  })
+
+  if (feedError) {
+    return { error: feedError }
   }
 
   return { error: null }

@@ -1,10 +1,12 @@
 'use client'
 
 import { DashboardNav } from '@/components/patient-dashboard/dashboard-nav'
+import { DemoDashboardNav } from '@/components/retinomic/demo-dashboard-nav'
 import { BaselineScanPanel } from '@/components/retinomic/panels/baseline-scan-panel'
 import { MetabolicDosePanel } from '@/components/retinomic/panels/metabolic-dose-panel'
 import { PhoticDosePanel } from '@/components/retinomic/panels/photic-dose-panel'
 import { InterventionGuide } from '@/components/dashboard/intervention-guide'
+import { MedicationTimingPanel } from '@/components/retinomic/panels/medication-timing-panel'
 import { TipTraqSleepPanel } from '@/components/retinomic/panels/tiptraq-sleep-panel'
 import type { RetinomicDashboardProps } from '@/lib/retinomic/types'
 import type { DailyIntervention } from '@/src/lib/engine/types'
@@ -13,6 +15,8 @@ type RetinomicDashboardClientProps = RetinomicDashboardProps & {
   fullName: string
   avatarUrl: string | null
   dailyIntervention: DailyIntervention
+  /** Public /how-it-works — sample nav, no profile links */
+  publicDemo?: boolean
 }
 
 export function RetinomicDashboardClient({
@@ -23,33 +27,35 @@ export function RetinomicDashboardClient({
   tier,
   baselineScan,
   dayOneIntro,
-  photicDoseSourceCaption,
   bloodLockedCopy,
   sleepLockedCopy,
-  melanopicLuxToday,
-  melanopicLuxCeiling,
-  photicPhase,
+  liveMluxFeedInput,
   lightIrisDetected,
   vitaminD3NmolL,
   vitaminB5UmolL,
   remCycleEfficiency,
   autonomicStrain,
   dailyIntervention,
+  medicationTiming,
+  publicDemo = false,
 }: RetinomicDashboardClientProps) {
   return (
-    <div className="patient-dashboard-shell relative min-h-screen" data-dashboard="retinomic">
+    <div
+      className="patient-dashboard-shell relative min-h-screen"
+      data-dashboard="retinomic"
+      data-public-demo={publicDemo ? 'true' : undefined}
+    >
       <div className="relative z-10 pb-[var(--patient-nav-offset)] md:pb-0">
-        <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
-        <main className="dash-dashboard-main" aria-label="Retinomic protocol control panels">
+        {publicDemo ? (
+          <DemoDashboardNav />
+        ) : (
+          <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
+        )}
+        <main className="dash-dashboard-main" aria-label="Dose intelligence control panels">
           {baselineScan ? <BaselineScanPanel baseline={baselineScan} firstName={firstName} /> : null}
           <InterventionGuide intervention={dailyIntervention} dayOneIntro={dayOneIntro} />
-          <PhoticDosePanel
-            melanopicLuxToday={melanopicLuxToday}
-            melanopicLuxCeiling={melanopicLuxCeiling}
-            phase={photicPhase}
-            lightIrisDetected={lightIrisDetected}
-            doseSourceCaption={photicDoseSourceCaption}
-          />
+          {medicationTiming ? <MedicationTimingPanel plan={medicationTiming} publicDemo={publicDemo} /> : null}
+          <PhoticDosePanel feedInput={liveMluxFeedInput} lightIrisDetected={lightIrisDetected} />
           <MetabolicDosePanel
             tier={tier}
             vitaminD3NmolL={vitaminD3NmolL}

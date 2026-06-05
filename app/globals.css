@@ -20,7 +20,7 @@
 /* Patient dashboard — tiles, rhythm, surface-aware CTAs */
 @import "./dashboard/patient-dashboard.css";
 
-/* Retinomic Protocol — pillar tokens, premium lock, medical typography */
+/* Dose Intelligence — pillar tokens, premium lock, medical typography */
 @import "./styles/retinomic-theme.css";
 
 @custom-variant dark (&:is(.dark *));

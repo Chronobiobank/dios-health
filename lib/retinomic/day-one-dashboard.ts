@@ -61,8 +61,14 @@ export function photicDoseSourceCaption(source: PhoticDoseSource): string {
   }
 }
 
-export function dayOneInterventionIntro(baseline: BaselineScanSummary): string {
+export function dayOneInterventionIntro(
+  baseline: BaselineScanSummary,
+  photicSource: PhoticDoseSource = 'baseline'
+): string {
   const iris = baseline.irisPigment === 'LIGHT' ? 'light iris' : 'dark iris'
+  if (photicSource === 'phone' || photicSource === 'mlux') {
+    return `Your ${iris} scan set the dose ceiling in ${baseline.locationLabel}. Your phone feed is updating today's light dose live. Blood and sleep panels stay closed unless DIOS flags risk.`
+  }
   return `Your ${iris} scan (ITA ${baseline.skinITA}°) anchors today's light dose in ${baseline.locationLabel}. Blood and sleep panels stay closed unless DIOS flags risk.`
 }
 
@@ -70,7 +76,8 @@ export function tailorDailyInterventionForBaseline(
   intervention: DailyIntervention,
   baseline: BaselineScanSummary,
   tier: RetinomicTier,
-  morningMluxMinutes: number
+  morningMluxMinutes: number,
+  photicSource: PhoticDoseSource = 'baseline'
 ): DailyIntervention {
   if (tier !== 'FREE_SCREENING') return intervention
 
@@ -81,10 +88,13 @@ export function tailorDailyInterventionForBaseline(
 
   const tasks = intervention.tasks.map((task) => {
     if (task.id === 'photic-anchor') {
+      const phoneLive = photicSource === 'phone' || photicSource === 'mlux'
       return {
         ...task,
         title: 'Morning photic anchor',
-        directive: `From your scan (${irisLabel}, ITA ${baseline.skinITA}°): ${morningMluxMinutes} min of 480nm melanopic light before first bite. This sets your dose window until your phone feed connects.`,
+        directive: phoneLive
+          ? `Phone feed live — ${morningMluxMinutes} min of 480nm melanopic light before first bite. Your scan (${irisLabel}, ITA ${baseline.skinITA}°) sets the ceiling; the sensor stream updates dose through the day.`
+          : `From your scan (${irisLabel}, ITA ${baseline.skinITA}°): ${morningMluxMinutes} min of 480nm melanopic light before first bite. This sets your dose window until your phone feed connects.`,
         priority: task.priority,
       }
     }

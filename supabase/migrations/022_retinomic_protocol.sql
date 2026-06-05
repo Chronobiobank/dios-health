@@ -1,4 +1,4 @@
--- Retinomic Protocol — tier state, hardware baseline, biochemical fuel, webhook telemetry
+-- Dose Intelligence (Retinomic) — tier state, hardware baseline, biochemical fuel, webhook telemetry
 
 alter table public.patient_profiles
   add column if not exists retinomic_tier text not null default 'FREE_SCREENING'

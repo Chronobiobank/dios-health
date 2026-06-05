@@ -1,4 +1,4 @@
--- Retinomic Protocol — run once in Supabase SQL Editor (same as migrations/022_retinomic_protocol.sql)
+-- Dose Intelligence (Retinomic) — run once in Supabase SQL Editor (same as migrations/022_retinomic_protocol.sql)
 
 alter table public.patient_profiles
   add column if not exists retinomic_tier text not null default 'FREE_SCREENING'

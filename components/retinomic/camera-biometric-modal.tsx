@@ -102,7 +102,7 @@ export function CameraBiometricModal({ open, onClose, onComplete }: CameraBiomet
           Biometric screening portal
         </p>
         <p className="dash-sub mt-2 text-sm">
-          Iris + cutaneous capture for Retinomic Protocol baseline.
+          Iris + cutaneous capture for your dose intelligence baseline.
         </p>
 
         <div className="retinomic-camera-viewport mt-4">

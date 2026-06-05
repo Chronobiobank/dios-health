@@ -7,6 +7,8 @@ import {
   parseDbTimeToMinutes,
   parseTimeToMinutes,
 } from '@/lib/dashboard/time-utils'
+import { resolveMedicationWindowTime } from '@/lib/medication/timing-catalog'
+import { matchPatientMedications } from '@/lib/medication/patient-medications'
 
 export type RiskSeverity = 'watch' | 'moderate' | 'act'
 
@@ -114,88 +116,6 @@ const DOMINANT_LAYER_LABEL: Record<Exclude<DominantLayer, null>, string> = {
   tiptraq: 'TipTraQ precision',
 }
 
-type MedicationDefinition = {
-  id: string
-  name: string
-  standardGuidance: string
-  explanation: string
-  profileTimeKey?: keyof Pick<
-    MLuxProfileRow,
-    'simvastatin_optimal_time' | 'ramipril_optimal_time' | 'prednisolone_optimal_time' | 'salmeterol_optimal_time'
-  >
-  estimatedOffsetMinutes?: number
-}
-
-const MEDICATION_DEFINITIONS: MedicationDefinition[] = [
-  {
-    id: 'atorvastatin',
-    name: 'Atorvastatin',
-    standardGuidance: 'Standard: take at night',
-    explanation: 'Cholesterol synthesis peaks overnight — timing to your body clock improves statin efficacy.',
-    profileTimeKey: 'simvastatin_optimal_time',
-  },
-  {
-    id: 'simvastatin',
-    name: 'Simvastatin',
-    standardGuidance: 'Standard: take at night',
-    explanation: 'Evening dosing aligns with your liver’s cholesterol production rhythm.',
-    profileTimeKey: 'simvastatin_optimal_time',
-  },
-  {
-    id: 'ramipril',
-    name: 'Ramipril',
-    standardGuidance: 'Standard: take in the morning',
-    explanation: 'Blood pressure dipping overnight matters — your window matches when your cardiovascular rhythm is ready.',
-    profileTimeKey: 'ramipril_optimal_time',
-  },
-  {
-    id: 'amlodipine',
-    name: 'Amlodipine',
-    standardGuidance: 'Standard: take in the morning',
-    explanation: 'Calcium channel blockers work best when aligned with your blood pressure body-clock dip.',
-    estimatedOffsetMinutes: 60,
-  },
-  {
-    id: 'sertraline',
-    name: 'Sertraline',
-    standardGuidance: 'Standard: take in the morning',
-    explanation: 'SSRI timing to your cortisol peak can reduce side effects and improve mood stability.',
-    estimatedOffsetMinutes: 660,
-  },
-  {
-    id: 'metformin',
-    name: 'Metformin',
-    standardGuidance: 'Standard: take with meals',
-    explanation: 'Meal-aligned dosing supports glucose control when your metabolic clock is primed.',
-    estimatedOffsetMinutes: 660,
-  },
-  {
-    id: 'prednisolone',
-    name: 'Prednisolone',
-    standardGuidance: 'Standard: take in the morning',
-    explanation: 'Cortisol peaks before waking — prednisolone lands best just ahead of your inflammatory surge.',
-    profileTimeKey: 'prednisolone_optimal_time',
-  },
-  {
-    id: 'salmeterol',
-    name: 'Salmeterol',
-    standardGuidance: 'Standard: take morning and evening',
-    explanation: 'Evening dosing can cover the pre-dawn bronchospasm window tied to your body clock.',
-    profileTimeKey: 'salmeterol_optimal_time',
-  },
-  {
-    id: 'levothyroxine',
-    name: 'Levothyroxine',
-    standardGuidance: 'Standard: take on waking, empty stomach',
-    explanation: 'Thyroid hormone absorbs best in your early waking window before food interferes.',
-    estimatedOffsetMinutes: 600,
-  },
-]
-
-function normalizeMedicationToken(value: string): string {
-  return value.trim().toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '')
-}
-
 function resolvePhaseMinutes(profile: InsightsMLuxProfile | null, fallbackSleepTime: string): number {
   const fromRolling = parseDbTimeToMinutes(profile?.mlux_phase_time ?? null)
   if (fromRolling !== null) return fromRolling
@@ -278,32 +198,6 @@ export function riskFlagsFromLatestNight(night: NightFlagsRow | null): Circadian
   return flags
 }
 
-function resolveMedicationTime(
-  definition: MedicationDefinition,
-  profile: InsightsMLuxProfile | null,
-  phaseMinutes: number,
-  estimated: boolean
-): { window: string; isEstimated: boolean } {
-  if (definition.profileTimeKey && profile) {
-    const fromProfile = profile[definition.profileTimeKey]
-    if (fromProfile) {
-      return { window: formatDbTimeLabel(fromProfile), isEstimated: estimated && !profile.mlux_phase_time }
-    }
-  }
-
-  const offset = definition.estimatedOffsetMinutes ?? 180
-  return {
-    window: formatClock(phaseMinutes + offset),
-    isEstimated: true,
-  }
-}
-
-function formatDbTimeLabel(time: string): string {
-  const minutes = parseDbTimeToMinutes(time)
-  if (minutes === null) return time.slice(0, 5)
-  return formatClock(minutes)
-}
-
 function buildMedicationWindows(
   currentMedications: string[] | null | undefined,
   profile: InsightsMLuxProfile | null,
@@ -311,34 +205,29 @@ function buildMedicationWindows(
   hasDlmoTiming: boolean,
   confidenceScore: number | null
 ): MedicationWindowCard[] {
-  const selected = (currentMedications ?? [])
-    .map(normalizeMedicationToken)
-    .filter(Boolean)
-
-  if (selected.length === 0) return []
+  const matched = matchPatientMedications(currentMedications)
+  if (matched.length === 0) return []
 
   const showCaveat = (confidenceScore ?? 0) < 60
 
-  return MEDICATION_DEFINITIONS.filter((definition) => selected.includes(definition.id)).map(
-    (definition) => {
-      const { window, isEstimated } = resolveMedicationTime(
-        definition,
-        profile,
-        phaseMinutes,
-        !hasDlmoTiming
-      )
+  return matched.map((definition) => {
+    const { timeLabel, estimated } = resolveMedicationWindowTime(
+      definition,
+      phaseMinutes,
+      profile,
+      hasDlmoTiming && profile?.mlux_phase_time != null
+    )
 
-      return {
-        id: definition.id,
-        name: definition.name,
-        standardGuidance: definition.standardGuidance,
-        diosWindow: `Your window: ${window}${isEstimated ? ' · ESTIMATED' : ''}`,
-        explanation: definition.explanation,
-        estimated: isEstimated,
-        showCaveat,
-      }
+    return {
+      id: definition.id,
+      name: definition.name,
+      standardGuidance: definition.standardGuidance,
+      diosWindow: `Your window: ${timeLabel}${estimated ? ' · ESTIMATED' : ''}`,
+      explanation: definition.explanation,
+      estimated,
+      showCaveat,
     }
-  )
+  })
 }
 
 function buildZeitgebers(phaseMinutes: number): ZeitgeberCard[] {

@@ -12,7 +12,7 @@ Copy these names when creating services. Use the same spelling everywhere.
 | What | Official name | Notes |
 |------|---------------|--------|
 | **Product** | DIOS Health | User-facing brand |
-| **Protocol feature** | Retinomic Protocol | Tiered dashboard (photic / metabolic / TipTraQ) |
+| **Product feature** | Dose Intelligence | Tiered dashboard (photic / metabolic / TipTraQ) |
 | **GitHub repository** | `dios-health` | Remote URL ends with `/dios-health` |
 | **Local folder** | `dios-health` | Where you run `npm run dev` |
 | **npm package** | `dios-health` | In `package.json` |

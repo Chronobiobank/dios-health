@@ -1,5 +1,7 @@
 import type { BaselineScanSummary } from '@/lib/retinomic/baseline-scan-summary'
 import type { RetinomicTier } from '@/src/types'
+import type { MedicationTimingPlan } from '@/src/lib/engine/medication-timing'
+import type { LiveMluxFeedInput } from '@/lib/retinomic/live-mlux-feed'
 
 export type {
   BiochemicalFuel,
@@ -40,6 +42,8 @@ export type RetinomicDashboardProps = {
   baselineScan: BaselineScanSummary | null
   dayOneIntro: string | null
   photicDoseSourceCaption: string
+  /** Serialized feed for client-side live lux updates */
+  liveMluxFeedInput: LiveMluxFeedInput
   bloodLockedCopy: DayOneLockedCopy | null
   sleepLockedCopy: DayOneLockedCopy | null
   melanopicLuxToday: number
@@ -50,4 +54,6 @@ export type RetinomicDashboardProps = {
   vitaminB5UmolL: number | null
   remCycleEfficiency: number | null
   autonomicStrain: number | null
+  /** Day-one med windows derived from intervention engine */
+  medicationTiming: MedicationTimingPlan | null
 }

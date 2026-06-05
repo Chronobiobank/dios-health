@@ -7,15 +7,10 @@ import {
   type InsightsMLuxProfile,
   type PatientProtocolRow,
 } from '@/lib/dashboard/insights-data'
+import { readPatientMedicationList } from '@/lib/medication/patient-medications'
 import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
-
-function readCurrentMedications(patient: Record<string, unknown>): string[] {
-  const value = patient.current_medications
-  if (!Array.isArray(value)) return []
-  return value.filter((item): item is string => typeof item === 'string')
-}
 
 export default async function DashboardInsightsPage() {
   const { user, profile, patient } = await requirePatientSession()
@@ -57,7 +52,7 @@ export default async function DashboardInsightsPage() {
     profile: (mluxProfile as InsightsMLuxProfile | null) ?? null,
     latestNight: latestNight?.[0] ?? null,
     nightsCount: nightsCount ?? 0,
-    currentMedications: readCurrentMedications(patient as unknown as Record<string, unknown>),
+    currentMedications: readPatientMedicationList(patient.current_medications),
     fallbackSleepTime: patient.chronotype_q3 ?? '11:00pm',
     activeProtocols: (protocols ?? []) as PatientProtocolRow[],
     latestBloodPanel: (bloodPanel as BloodPanelSnapshot | null) ?? null,

@@ -38,7 +38,7 @@ export const PITCH_IMAGES = {
     regulatory: '/governance-regulatory.jpeg',
     consentFirewall: '/consent-firewall.jpg',
   },
-  /** Retinomic Protocol deck — section tiles */
+  /** Dose Intelligence deck — section tiles */
   retinomic: {
     howWeThink: '/how-we-think.webp',
     lightDose: '/your-light-dose.jpg',

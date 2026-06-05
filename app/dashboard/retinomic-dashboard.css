@@ -1,4 +1,4 @@
-/* Retinomic Protocol — Calm UI light glass (matches patient-dashboard dios-glass tiles) */
+/* Dose Intelligence dashboard — Calm UI light glass (matches patient-dashboard dios-glass tiles) */
 
 .retinomic-protocol {
   color: var(--text-primary);
@@ -28,6 +28,51 @@
 
 .retinomic-panel--sleep .retinomic-panel__label {
   color: var(--telemetry-muted);
+}
+
+.retinomic-panel--medication .retinomic-panel__label {
+  color: var(--calm-brand);
+}
+
+.retinomic-med-window {
+  padding: 0.75rem 0.875rem;
+}
+
+.retinomic-med-window__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.retinomic-med-window__time {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.retinomic-med-window__name {
+  margin-top: 0.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.retinomic-med-window__badge {
+  font-family: var(--font-family-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.125rem 0.375rem;
+  border-radius: 999px;
+  border: 1px solid rgb(13 13 13 / 0.12);
+  color: var(--text-muted);
+}
+
+.retinomic-med-window__badge--example {
+  border-color: rgb(201 151 58 / 0.35);
+  color: var(--calm-brand);
 }
 
 .retinomic-panel--baseline .type-pitch-eyebrow {

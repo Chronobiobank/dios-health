@@ -38,7 +38,7 @@ export function Platform() {
       <div className={CONTAINER}>
         <SectionLabel title="How it works" />
         <h2 className={`${SECTION_TITLE} mt-4 max-w-xl`}>
-          Retinomic Protocol — four automated inputs, one dose engine
+          Dose Intelligence — four automated inputs, one dose engine
         </h2>
         <p className={`${BODY} mt-4 max-w-xl`}>
           Eye-clock structure, biochemical fuel, passive light sensing, and medical-grade sleep verification —

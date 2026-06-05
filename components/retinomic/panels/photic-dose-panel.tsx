@@ -1,26 +1,44 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+
 import { PhoticProgressRing } from '@/components/retinomic/photic-progress-ring'
-import type { PhoticDayPhase } from '@/lib/retinomic/types'
+import { resolveLiveMluxFeed, type LiveMluxFeedInput } from '@/lib/retinomic/live-mlux-feed'
 import { photicContextBanner } from '@/lib/retinomic/photic-dose'
 
 type PhoticDosePanelProps = {
-  melanopicLuxToday: number
-  melanopicLuxCeiling: number
-  phase: PhoticDayPhase
+  feedInput: LiveMluxFeedInput
   lightIrisDetected: boolean
-  doseSourceCaption?: string
 }
 
-export function PhoticDosePanel({
-  melanopicLuxToday,
-  melanopicLuxCeiling,
-  phase,
-  lightIrisDetected,
-  doseSourceCaption,
-}: PhoticDosePanelProps) {
-  const banner = photicContextBanner(phase, lightIrisDetected)
-  const pct = melanopicLuxCeiling > 0 ? Math.round((melanopicLuxToday / melanopicLuxCeiling) * 100) : 0
+export function PhoticDosePanel({ feedInput, lightIrisDetected }: PhoticDosePanelProps) {
+  const [feed, setFeed] = useState(() => resolveLiveMluxFeed(feedInput))
+
+  const vdrDose = feedInput.smartphoneFeed?.vdrDoseToday ?? null
+  const observedAt = feedInput.smartphoneFeed?.observedAt ?? null
+  const confidenceScore = feedInput.smartphoneFeed?.confidenceScore ?? null
+
+  useEffect(() => {
+    const tick = () => setFeed(resolveLiveMluxFeed(feedInput))
+    tick()
+    const interval = window.setInterval(tick, 60_000)
+    return () => window.clearInterval(interval)
+  }, [
+    feedInput.melanopicLuxCeiling,
+    feedInput.photicPhase,
+    feedInput.mluxScore,
+    feedInput.smartphoneActive,
+    feedInput.hardwareBaseline,
+    vdrDose,
+    observedAt,
+    confidenceScore,
+  ])
+
+  const banner = photicContextBanner(feedInput.photicPhase, lightIrisDetected)
+  const pct =
+    feedInput.melanopicLuxCeiling > 0
+      ? Math.round((feed.melanopicLuxToday / feedInput.melanopicLuxCeiling) * 100)
+      : 0
 
   return (
     <section
@@ -31,14 +49,23 @@ export function PhoticDosePanel({
         Light dose
       </p>
       <div className="retinomic-ring-wrap">
-        <PhoticProgressRing current={melanopicLuxToday} ceiling={melanopicLuxCeiling} />
+        <PhoticProgressRing
+          current={feed.melanopicLuxToday}
+          ceiling={feedInput.melanopicLuxCeiling}
+        />
         <div className="retinomic-ring-metrics">
           <p className="retinomic-ring-value">
             {pct}% <span className="dash-sub text-sm font-normal">of ceiling</span>
           </p>
           <p className="retinomic-ring-caption">
-            Target {melanopicLuxCeiling} mLux · {doseSourceCaption ?? 'phone sensor'}
+            Target {feedInput.melanopicLuxCeiling} mLux · {feed.caption}
           </p>
+          {feed.confidenceLabel ? (
+            <p className="calm-auth-muted mt-1 font-mono text-[10px] uppercase tracking-widest">
+              {feed.confidenceLabel}
+              {feed.lastUpdatedLabel ? ` · ${feed.lastUpdatedLabel}` : ''}
+            </p>
+          ) : null}
         </div>
       </div>
       <p className="retinomic-photic-banner">{banner}</p>

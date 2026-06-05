@@ -25,9 +25,9 @@ const siteUrl = process.env.VERCEL_URL
   : 'https://dios-health.vercel.app'
 
 export const metadata: Metadata = {
-  title: 'Retinomic Protocol · DIOS',
+  title: 'Dose Intelligence · DIOS',
   description:
-    'Retinomic Protocol — from standard dose to dose intelligence. Light, eye, blood, and sleep tailored to your biology.',
+    'From standard dose to dose intelligence. Light, eye, blood, and sleep tailored to your biology.',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
   },
   openGraph: {
-    title: 'Retinomic Protocol · dios.health',
+    title: 'Dose Intelligence · dios.health',
     description:
       'No one size. All tailored to fit. Free baseline scan — or explore the clinical evidence.',
     type: 'website',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Retinomic Protocol · dios.health',
+    title: 'Dose Intelligence · dios.health',
     description:
       'From standard dose to dose intelligence. Free baseline scan.',
   },

@@ -10,10 +10,12 @@ import {
   PatientIdentityPanel,
   type PatientIdentityValues,
 } from '@/components/dashboard/patient-identity-panel'
+import { PatientMedicationsPanel } from '@/components/dashboard/patient-medications-panel'
 import {
   PatientProfilePanel,
   type PatientProfileDemographics,
 } from '@/components/dashboard/patient-profile-panel'
+import { readPatientMedicationList } from '@/lib/medication/patient-medications'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { SignOutButton } from '@/components/auth/sign-out-button'
 import { ProfileAvatarUpload } from '@/components/profile/profile-avatar-upload'
@@ -75,6 +77,11 @@ export default async function DashboardProfilePage() {
 
         <PatientIdentityPanel patientId={user.id} initial={identity} />
       </div>
+
+      <PatientMedicationsPanel
+        patientId={user.id}
+        initialMedications={readPatientMedicationList(patient.current_medications)}
+      />
 
       <div className="dios-glass-outer rounded-2xl p-5 sm:p-6">
         <PatientProfilePanel patientId={user.id} initial={demographics} />

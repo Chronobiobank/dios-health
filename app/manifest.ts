@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'DIOS Coach',
     short_name: 'DIOS Coach',
     description:
-      'Measure your Melanopic Lux. Get your personalised light and medication protocol.',
+      'Measure your Melanopic Lux. Get your personalised dose intelligence — light, meds, and timing.',
     start_url: '/dashboard/coach',
     display: 'standalone',
     background_color: '#000000',

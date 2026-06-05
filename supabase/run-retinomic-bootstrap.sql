@@ -1,4 +1,4 @@
--- Retinomic Protocol bootstrap — run once in Supabase SQL Editor
+-- Dose Intelligence (Retinomic) bootstrap — run once in Supabase SQL Editor
 -- Supabase project: dios-health-dev (see supabase/GREENFIELD-SETUP.md)
 --
 -- Greenfield (new empty database): run migrations 001–019 first, then this file.

@@ -1,5 +1,5 @@
 /**
- * Retinomic Protocol — public landing copy.
+ * Dose Intelligence — public landing copy.
  * Medtech skim-and-dive: one idea per full-bleed tile; detail lives on /pitch/* and /how-it-works.
  */
 
@@ -12,7 +12,7 @@ export const RETINOMIC_LANDING_HERO = {
   subheadline:
     'We use your light, eye, blood, and sleep data to tailor med plans for better, brighter outcomes.',
   detailHref: '/pitch/hook',
-  ctaLabel: 'Explore the protocol',
+  ctaLabel: 'Explore dose intelligence',
   ctaHref: '/pitch/hook',
   signUpHref: '/auth/signup',
   secondaryCtaLabel: 'Free baseline scan',
@@ -53,6 +53,20 @@ export const ONBOARDING_COPY = {
     'Your eye scan links to this account. Gominak blood and sleep panels unlock only if DIOS flags elevated risk.',
 } as const
 
+/** Public live demo — /how-it-works */
+export const HOW_IT_WORKS_DEMO_COPY = {
+  eyebrow: 'Live demo',
+  headline: 'Your dashboard after the baseline scan',
+  subheadline:
+    'Sample day-one dose intelligence below. Start your free eye scan to replace this placeholder with your light, eye, blood, and sleep biology.',
+  sampleLabel: 'Sample patient · Sean · Auckland',
+  disclaimer: 'Illustrative data only · not medical advice',
+  primaryCta: 'Start free baseline scan',
+  primaryHref: '/onboarding',
+  secondaryCta: 'How dose intelligence works',
+  secondaryHref: '/pitch/how-it-works',
+} as const
+
 /** Tile 2 — problem (detail: /pitch/problem) */
 export const RETINOMIC_LANDING_PROBLEM = {
   eyebrow: 'The problem',
@@ -69,11 +83,11 @@ export const RETINOMIC_LANDING_PROBLEM = {
 
 /** Tile 3 — protocol (detail: /how-it-works, /evidence) */
 export const RETINOMIC_LANDING_PROTOCOL = {
-  eyebrow: 'The protocol',
+  eyebrow: 'Dose intelligence',
   headline: 'No one size. All tailored to fit.',
   subheadline: 'Gominak panel · Retinomic scan · Your dose window.',
   image: PITCH_IMAGES.retinomic.howWeThink,
-  imageAlt: 'Retinomic Protocol — personal dose timing',
+  imageAlt: 'Dose Intelligence — personal dose timing',
   detailHref: '/pitch/how-it-works',
   ctaLabel: 'How it works',
   ctaHref: '/pitch/how-it-works',
@@ -216,10 +230,10 @@ export const RETINOMIC_LANDING_EVIDENCE: readonly RetinomicFeatureCopy[] = [
 ] as const
 
 export const RETINOMIC_LANDING_META = {
-  title: 'Retinomic Protocol · DIOS',
+  title: 'Dose Intelligence · DIOS',
   description:
-    'From standard dose to dose intelligence. The Retinomic Protocol tailors light, eye, blood, and sleep to your biology.',
-  openGraphTitle: 'Retinomic Protocol · dios.health',
+    'From standard dose to dose intelligence. Light, eye, blood, and sleep tailored to your biology.',
+  openGraphTitle: 'Dose Intelligence · dios.health',
   openGraphDescription:
     'No one size. All tailored to fit. Free baseline scan — or explore the clinical evidence.',
 } as const

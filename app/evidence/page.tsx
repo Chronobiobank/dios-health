@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 export const metadata: Metadata = {
-  title: 'Clinical evidence — Retinomic Protocol · DIOS',
+  title: 'Clinical evidence — Dose Intelligence · DIOS',
   description:
     'Oculomics, neurochemistry, and FDA-cleared TipTraQ telemetry — the clinical validation framework behind dios.health Dose Intelligence OS.',
 }
@@ -34,7 +34,7 @@ export default function EvidencePage() {
           Clinical Validation Framework
         </div>
         <h1 className="mb-6 text-4xl font-semibold tracking-tight text-[#0D0D0D] md:text-5xl">
-          The Science Behind the Retinomic Protocol
+          The Science Behind Dose Intelligence
         </h1>
         <p className="type-medical-dense mx-auto max-w-2xl text-lg leading-relaxed text-[#0D0D0D]/65">
           We bridge{' '}
