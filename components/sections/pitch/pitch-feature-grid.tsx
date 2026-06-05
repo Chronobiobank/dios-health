@@ -18,7 +18,7 @@ export function PitchFeatureGrid() {
         <h2 className="pitch-feature-panel__title">{section.title}</h2>
       </header>
 
-      <ul className="pitch-feature-subgrid min-h-0 flex-1">
+      <ul className="pitch-feature-subgrid">
         {RETINOMIC_LANDING_FEATURES.map((feature) => (
           <li key={feature.id}>
             <PitchMediaTile image={feature.image} imageAlt={feature.imageAlt} size="subgrid">

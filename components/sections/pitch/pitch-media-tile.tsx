@@ -110,11 +110,11 @@ export function PitchMediaTile({
       className={cn(
         'pitch-media-tile relative w-full overflow-hidden rounded-[var(--pitch-radius,var(--calm-radius-card,8px))]',
         'border border-white/[0.05] bg-[#0D0D0D] shadow-[0_8px_28px_rgb(0_0_0/0.14)]',
-        size === 'hero' && 'h-full min-h-0',
+        (size === 'hero' || size === 'subgrid') && 'h-full min-h-0',
         className
       )}
     >
-      <div className={cn('relative w-full', FRAME_CLASS[size])}>
+      <div className={cn('relative h-full w-full', FRAME_CLASS[size])}>
         <div
           data-nav-surface="dark"
           className="pointer-events-none absolute inset-x-0 top-0 z-[6] h-[var(--dios-site-nav-height)]"

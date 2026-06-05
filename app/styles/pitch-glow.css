@@ -207,13 +207,14 @@
 
 /* Section 2 — dashboard-style frosted panel; pastel orbs show through */
 .calm-landing .pitch-feature-panel {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   height: 100%;
   min-height: 0;
   width: 100%;
-  justify-content: flex-end;
-  gap: 0.75rem;
+  gap: var(--dash-tile-gap, 0.5rem);
+  overflow: hidden;
   border-radius: var(--pitch-radius, var(--calm-radius-card, 12px));
   /* Matches dios-glass-outer — tuned slightly lighter so landing hues read through */
   background: linear-gradient(
@@ -274,31 +275,34 @@
   color: #fff;
 }
 
-/* Section 2 — four equal square sub-tiles with uniform gap */
+/* Section 2 — inner tiles fill the glass panel in four equal quarters (dashboard rhythm) */
 .calm-landing .pitch-feature-subgrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: var(--dash-tile-gap, 0.5rem);
   width: 100%;
-  padding: 0.125rem;
-}
-
-@media (min-width: 640px) {
-  .calm-landing .pitch-feature-subgrid {
-    gap: 0.875rem;
-    padding: 0.25rem;
-  }
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .calm-landing .pitch-feature-subgrid > li {
-  aspect-ratio: 1 / 1;
+  display: flex;
   min-height: 0;
   min-width: 0;
+  overflow: hidden;
 }
 
 .calm-landing .pitch-feature-subgrid .pitch-media-tile {
   display: flex;
+  flex: 1;
   flex-direction: column;
+  min-height: 0;
+  min-width: 0;
   height: 100%;
   width: 100%;
 }
@@ -307,7 +311,7 @@
   flex: 1;
   min-height: 0;
   width: 100%;
-  aspect-ratio: auto;
+  height: 100%;
 }
 
 /* One copy column per tile — same left edge and rag-right measure on every screen */
