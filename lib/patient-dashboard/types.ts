@@ -128,6 +128,10 @@ export type ChronoimmuneProfile = {
   secondaryIndicationLabels?: string[]
   /** Active nodes on the Circadian Desynchrony tree (diagnostic model). */
   activeDesynchronyNodeIds?: string[]
+  /** Chronobiobank granular consent — visible to practitioner on patient record. */
+  chronobiobankConsent?: import('@/lib/chronobiobank/types').ChronobiobankConsentState
+  /** Governance voting weight from data fidelity contributions. */
+  governanceWeight?: number
   bodyWeightKg: number
   currentDoseIu: number
   doseRangeMinIu: number

@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { ChronobiobankConsentPanel } from '@/components/chronobiobank/chronobiobank-consent-panel'
+import { CoimbraParadoxStatement } from '@/components/chronobiobank/coimbra-paradox-statement'
 import { DataControlsPanel } from '@/components/dashboard/data-controls-panel'
 import { DashboardSettingsPage } from '@/components/dashboard/dashboard-settings-page'
 import {
@@ -15,6 +17,7 @@ import { buildPatientDashboardHeader } from '@/lib/auth/patient-dashboard-header
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
 import { type TipTraqNightRow } from '@/lib/dashboard/mlux-profile'
+import { consentStateFromRow } from '@/lib/chronobiobank/consent-toggles'
 import { createClient } from '@/lib/supabase/server'
 import { cn } from '@/lib/utils'
 
@@ -29,6 +32,16 @@ export default async function DashboardDataControlsPage() {
     .order('report_date', { ascending: false })
 
   const nightHistory = (nights ?? []) as TipTraqNightRow[]
+
+  const { data: chronobiobankConsentRow } = await supabase
+    .from('chronobiobank_consent')
+    .select(
+      'consent_academic_research, consent_pharma_discovery, consent_ai_training, consent_open_source_challenges, consent_version, updated_at'
+    )
+    .eq('patient_id', user.id)
+    .maybeSingle()
+
+  const chronobiobankConsent = consentStateFromRow(chronobiobankConsentRow)
 
   const header = buildPatientDashboardHeader({
     profile,
@@ -73,6 +86,25 @@ export default async function DashboardDataControlsPage() {
                 dataShareResearch={patient.data_share_research}
                 dataSharePolicy={patient.data_share_policy}
               />
+            </div>
+          </section>
+
+          <section className={cn(SETTINGS_SECTION, 'border-t border-black/10 pt-8')}>
+            <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">
+              Chronobiobank
+            </h2>
+            <div className="mt-4">
+              <CoimbraParadoxStatement />
+            </div>
+            <div className="mt-6">
+              <h3 className="text-sm font-medium text-black">Research consent dimensions</h3>
+              <p className="mt-1 text-sm text-black/55">
+                Control how your anonymised data may be used. Each toggle is independent and
+                logged.
+              </p>
+              <div className="mt-4">
+                <ChronobiobankConsentPanel initial={chronobiobankConsent} />
+              </div>
             </div>
           </section>
 

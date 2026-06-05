@@ -6,6 +6,11 @@ import type {
 } from '@/lib/patient-dashboard/types'
 import { getChronoimmuneZone } from '@/lib/chronoimmune/indication-zones'
 import { calculatePthTarget } from '@/lib/chronoimmune/pth-target'
+import {
+  SEAN_JAMES_GOVERNANCE_CONTRIBUTIONS,
+} from '@/lib/chronobiobank/build-governance-input'
+import { SEAN_JAMES_CHRONOBIOBANK_CONSENT } from '@/lib/chronobiobank/consent-toggles'
+import { calculateGovernanceWeight } from '@/lib/chronobiobank/governance-weight'
 import { SEAN_JAMES_ACTIVE_DESYNCHRONY_NODES } from '@/lib/spectrum/desynchrony-tree'
 
 export const SEAN_JAMES_RECORD_ID = 'SEAN-001'
@@ -72,6 +77,8 @@ export function buildSeanJamesChronoimmuneProfile(): ChronoimmuneProfile {
       'Early insulin resistance — metabolic immune reclassification (Zone 2)',
     ],
     activeDesynchronyNodeIds: [...SEAN_JAMES_ACTIVE_DESYNCHRONY_NODES],
+    chronobiobankConsent: SEAN_JAMES_CHRONOBIOBANK_CONSENT,
+    governanceWeight: calculateGovernanceWeight(SEAN_JAMES_GOVERNANCE_CONTRIBUTIONS).totalWeight,
     bodyWeightKg,
     currentDoseIu,
     doseRangeMinIu: 10_000,

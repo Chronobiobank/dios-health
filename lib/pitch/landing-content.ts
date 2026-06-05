@@ -152,9 +152,9 @@ export const PITCH_FOUR_SIDES = [
 ] as const
 
 export const PITCH_CHRONOBIOBANK_STEPS = [
-  'Clinical consent for DIOS Coach and DIOS.',
-  'Optional anonymised research — revocable.',
-  'Confidence: ESTIMATED → PRECISION → CONFIRMED.',
+  'The Coimbra Paradox — patients fund the evidence pharmaceutical companies will not.',
+  'Four independent consent dimensions — academic, pharma, AI, open science.',
+  'Governance weight proportional to scan days, City Labs panels, and TipTraQ contribution.',
 ] as const
 
 export const RESEARCH_ENQUIRIES_EMAIL = 'research@dios.health'

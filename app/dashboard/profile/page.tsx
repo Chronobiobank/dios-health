@@ -18,7 +18,9 @@ import {
 import { readPatientMedicationList } from '@/lib/medication/patient-medications'
 import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { SignOutButton } from '@/components/auth/sign-out-button'
+import { GovernanceWeightCard } from '@/components/chronobiobank/governance-weight-card'
 import { ProfileAvatarUpload } from '@/components/profile/profile-avatar-upload'
+import { fetchPatientChronobiobankContext } from '@/lib/chronobiobank/fetch-patient-governance'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
 import { cn } from '@/lib/utils'
@@ -27,6 +29,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function DashboardProfilePage() {
   const { user, profile, patient } = await requirePatientSession()
+  const chronobiobank = await fetchPatientChronobiobankContext(user.id)
 
   const identity: PatientIdentityValues = {
     firstName: patient.first_name ?? '',
@@ -86,6 +89,18 @@ export default async function DashboardProfilePage() {
       <div className="dios-glass-outer rounded-2xl p-5 sm:p-6">
         <PatientProfilePanel patientId={user.id} initial={demographics} />
       </div>
+
+      <section className={cn(SETTINGS_SECTION, 'border-t border-black/10 pt-8')}>
+        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">
+          Chronobiobank
+        </h2>
+        <p className="mt-2 text-sm text-black/55">
+          Your governance weight reflects how much high-fidelity data you have contributed.
+        </p>
+        <div className="mt-4 md:max-w-xl">
+          <GovernanceWeightCard contributions={chronobiobank.contributions} />
+        </div>
+      </section>
 
       <section className={cn(SETTINGS_SECTION, 'border-t border-black/10 pt-8')}>
         <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">

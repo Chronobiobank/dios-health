@@ -13,6 +13,8 @@ import {
   YAxis,
 } from 'recharts'
 
+import { ChronobiobankConsentSummary } from '@/components/chronobiobank/chronobiobank-consent-summary'
+import { CoimbraParadoxStatement } from '@/components/chronobiobank/coimbra-paradox-statement'
 import { MicronutrientChecklist } from '@/components/patient-dashboard/micronutrient-checklist'
 import { SupplementEventsList } from '@/components/patient-dashboard/supplement-events-list'
 import { getChronoimmuneZone } from '@/lib/chronoimmune/indication-zones'
@@ -89,6 +91,11 @@ export function ChronoimmunePatientCard({
           <span className={cn('chronoimmune-triage', TRIAGE_STYLES[profile.cohortTriageStatus])}>
             {TRIAGE_LABELS[profile.cohortTriageStatus]}
           </span>
+          {profile.governanceWeight != null ? (
+            <span className="chronoimmune-governance-weight font-mono text-[10px] text-[var(--text-muted)]">
+              Governance {profile.governanceWeight}
+            </span>
+          ) : null}
           <span className="chronoimmune-record-id font-mono text-[10px] text-[var(--text-muted)]">
             {profile.recordId}
           </span>
@@ -104,6 +111,12 @@ export function ChronoimmunePatientCard({
           </p>
         </div>
       ) : null}
+
+      {profile.chronobiobankConsent ? (
+        <ChronobiobankConsentSummary consent={profile.chronobiobankConsent} />
+      ) : null}
+
+      <CoimbraParadoxStatement compact showPhaseNote={false} />
 
       <div className="chronoimmune-patient-card__grid">
         <section className="chronoimmune-panel">

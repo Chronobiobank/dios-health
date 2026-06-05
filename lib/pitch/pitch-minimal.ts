@@ -240,16 +240,22 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     imageAlt: RETINOMIC_LANDING_VISION.imageAlt,
     sections: [
       {
-        title: 'Your data helps everyone',
-        body: 'Co-own the Chronobiobank: longitudinal circadian evidence you control, linked to care pathways and governed research.',
+        title: 'The Coimbra Paradox — solved',
+        body: 'Mainstream medicine requires clinical trial evidence for treatments it will endorse. Clinical trials for vitamin D are not funded because vitamin D cannot be patented. When enough participants contribute enough longitudinal data, the community itself generates the evidence that no pharmaceutical company will fund. The patients create the proof. The patients own the proof. The patients decide who uses it and on what terms.',
       },
       {
-        title: 'Infrastructure for prevention',
-        body: 'The same signals that personalise your dose window — light, eye, blood, sleep — become population evidence when you opt in. Returns flow back to participants as validation compounds.',
+        title: 'Governance proportional to data fidelity',
+        body: 'Daily First Light scans establish base contribution. Verified City Labs panels and 90-day TipTraQ sleep files increase your voting weight on data access proposals. Phase 2 adds zero-knowledge proofs so institutions can verify cohort facts without seeing identity. Phase 3 activates the collective veto — participants vote on pharmaceutical and research access terms.',
+        bullets: [
+          'Academic non-profit research — allow or deny',
+          'Pharmaceutical discovery — allow or deny',
+          'Independent AI model training — allow or deny',
+          'Open source data challenges — allow or deny',
+        ],
       },
       {
-        title: 'Research by design',
-        body: 'Governed data flows support translational protocols, NHS medicines optimisation, and the preventive monitoring stack DIOS was founded to deploy.',
+        title: 'Phase 1 — launch now',
+        body: 'Supabase custodian, GDPR-compliant, honest centralised architecture. Your consent toggles are logged immutably. Decentralised storage and ZKP verification follow when the dataset is valuable enough to protect at that level.',
       },
     ],
     sources: [
