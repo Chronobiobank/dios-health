@@ -27,7 +27,7 @@ const siteUrl = process.env.VERCEL_URL
 export const metadata: Metadata = {
   title: 'DIOS — Dose Intelligence OS',
   description:
-    'dios.health is a translational medicine engine bridging eye-clock structure, biochemistry, and environment. Retinomic Protocol — end guesswork wearables.',
+    'Pharma and nutrition science assume identical micronutrient response. DIOS dose intelligence and the Gominak protocol tailor every target to your biology.',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
@@ -40,17 +40,17 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
   },
   openGraph: {
-    title: 'The End of Guesswork Wearables · dios.health',
+    title: 'From standard dose to dose intelligence · dios.health',
     description:
-      'DIOS computes your master-clock light dose, maps retinal structure via Siloton GiraffeOCT, titrates biochemical fuel, and verifies sleep with PranaQ TipTraQ.',
+      'We don't all respond to micronutrients the same. Gominak titrates light, blood, and pill time to your biology.',
     type: 'website',
     url: siteUrl,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The End of Guesswork Wearables · dios.health',
+    title: 'From standard dose to dose intelligence · dios.health',
     description:
-      'Translational medicine engine — eye-clock, biochemistry, environment. Scan your Retinomic baseline free.',
+      'Standard dose assumes identical micronutrient response. DIOS tailors every target to you. Free baseline scan.',
   },
 }
 

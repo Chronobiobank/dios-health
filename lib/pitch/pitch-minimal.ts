@@ -1,8 +1,12 @@
-import { PITCH_HERO, PITCH_IMAGES } from '@/lib/pitch/landing-images'
+import { PITCH_IMAGES } from '@/lib/pitch/landing-images'
 import { GRANT_MUNRO_PAPER_TITLE } from '@/lib/pitch/grant-munro-founder'
 import {
+  RETINOMIC_EVIDENCE_SECTION,
+  RETINOMIC_FEATURES_SECTION,
   RETINOMIC_LANDING_HERO,
   RETINOMIC_LANDING_PHILOSOPHY,
+  RETINOMIC_LANDING_PROBLEM,
+  RETINOMIC_PROBLEM_SECTION,
 } from '@/lib/pitch/retinomic-landing-copy'
 
 export type PitchMinimalTile = {
@@ -39,31 +43,6 @@ export type PitchDetailPage = {
 
 export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
   {
-    id: 'pitch-hook',
-    slug: 'hook',
-    eyebrow: RETINOMIC_LANDING_HERO.eyebrow,
-    title: RETINOMIC_LANDING_HERO.headline,
-    subtitle: RETINOMIC_LANDING_HERO.subheadline,
-    image: PITCH_HERO.poster,
-    imageAlt: 'Retinomic baseline screening — eye-clock and light dose',
-    videoSrc: '/first-light.mp4',
-    href: RETINOMIC_LANDING_HERO.ctaHref,
-    ctaLabel: RETINOMIC_LANDING_HERO.ctaLabel,
-    secondaryHref: RETINOMIC_LANDING_HERO.secondaryCtaHref,
-    secondaryCtaLabel: RETINOMIC_LANDING_HERO.secondaryCtaLabel,
-  },
-  {
-    id: 'pitch-clinical-proof',
-    slug: 'clinical-proof',
-    eyebrow: 'The evidence',
-    title: 'Big studies. Your dose.',
-    subtitle: 'Population research plus your scan, bloods, and sleep.',
-    image: PITCH_IMAGES.evidence,
-    imageAlt: 'Clinical evidence overview',
-    href: '/pitch/clinical-proof',
-    ctaLabel: 'Clinical proof',
-  },
-  {
     id: 'pitch-pilot-structure',
     slug: 'chronobiobank',
     eyebrow: 'Our vision',
@@ -71,28 +50,20 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     subtitle: 'Co-own the Chronobiobank. Your data funds research — you share returns.',
     image: '/chronobiobank.png',
     imageAlt: 'Chronobiobank research infrastructure',
-    href: '/contact',
-    ctaLabel: 'Contact us',
-  },
-  {
-    id: 'pitch-credibility',
-    slug: 'credibility',
-    eyebrow: 'Trust by design',
-    title: 'Built for the NHS.',
-    subtitle: 'Every skin tone. Clear consent. Your data stays yours.',
-    image: '/consent-firewall.jpg',
-    imageAlt: 'Governance and compliance',
-    href: '/pitch/credibility',
-    ctaLabel: 'How we keep trust',
+    href: '/pitch/chronobiobank',
+    ctaLabel: 'Learn more',
+    secondaryHref: '/contact',
+    secondaryCtaLabel: 'Contact us',
   },
 ] as const
 
 /** Footer / in-page nav — kept in sync with snap-deck section ids */
 export const PITCH_LANDING_HASH_LINKS = [
-  { label: RETINOMIC_LANDING_HERO.eyebrow, href: '/#pitch-hook' },
-  { label: 'Retinomic Protocol', href: '/#pitch-features' },
+  { label: RETINOMIC_PROBLEM_SECTION.eyebrow, href: '/#pitch-problem' },
+  { label: RETINOMIC_FEATURES_SECTION.eyebrow, href: '/#pitch-features' },
   { label: RETINOMIC_LANDING_PHILOSOPHY.eyebrow, href: '/#pitch-philosophy' },
-  ...PITCH_MINIMAL_TILES.filter((t) => t.id !== 'pitch-hook').map((tile) => ({
+  { label: RETINOMIC_EVIDENCE_SECTION.eyebrow, href: '/#pitch-clinical-proof' },
+  ...PITCH_MINIMAL_TILES.map((tile) => ({
     label: tile.eyebrow,
     href: `/#${tile.id}`,
   })),
@@ -101,20 +72,20 @@ export const PITCH_LANDING_HASH_LINKS = [
 export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
   {
     slug: 'hook',
-    eyebrow: 'What we know',
-    title: 'DIOS tells patients the best time to take medication.',
-    subtitle: 'It turns circadian signal into practical medication timing recommendations.',
-    image: PITCH_HERO.poster,
-    imageAlt: 'Medicines and tablets',
+    eyebrow: 'Dose Intelligence OS',
+    title: 'Quantify your meds.',
+    subtitle: 'From standard dose to dose intelligence — timing built on your biology.',
+    image: PITCH_IMAGES.hook,
+    imageAlt: 'Dose Intelligence OS — personal medication timing',
     sections: [
       {
-        title: 'Before',
-        body: 'Patients are told what to take, but timing is usually generic and not personalised to physiology.',
+        title: 'The blind spot',
+        body: 'Most pharmaceutical and nutritional science assumes we all respond to micronutrients the same. We don't. Standard dose times and population blood targets follow — and most patients miss.',
       },
       {
-        title: 'After',
-        body: 'DIOS adds patient-specific timing guidance and documentation-ready output within routine clinical workflows.',
-        bullets: ['Personalised timing window', 'Patient-friendly guidance', 'Clinician summary for review'],
+        title: 'Dose intelligence',
+        body: 'The Gominak protocol at the heart of DIOS: no one size. Light, Gominak blood targets, and pill time — all tailored to fit you, with clinician-ready output in routine workflows.',
+        bullets: ['Tailored dose window', 'Gominak panel titration', 'Clinician summary for review'],
       },
     ],
     sources: [
@@ -126,15 +97,19 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
   },
   {
     slug: 'problem',
-    eyebrow: 'The problem',
-    title: 'Why outcomes are left on the table.',
-    subtitle: 'Population-average dose timing leads to avoidable variability.',
-    image: PITCH_IMAGES.evidence,
-    imageAlt: 'Clinical burden',
+    eyebrow: RETINOMIC_LANDING_PROBLEM.eyebrow,
+    title: RETINOMIC_LANDING_PROBLEM.headline,
+    subtitle: RETINOMIC_LANDING_PROBLEM.subheadline,
+    image: RETINOMIC_LANDING_PROBLEM.image,
+    imageAlt: RETINOMIC_LANDING_PROBLEM.imageAlt,
     sections: [
       {
+        title: 'Standardised dosing',
+        body: 'Medicine picks one dose time and one set of micronutrient targets for every patient. Pharma and nutrition science assume identical response — most bodies need a different window.',
+      },
+      {
         title: 'Founder paper',
-        body: `Grant Munro’s founder position paper, ${GRANT_MUNRO_PAPER_TITLE}, is published on this page with a downloadable PDF.`,
+        body: `Grant Munro’s founder position paper, ${GRANT_MUNRO_PAPER_TITLE}, sets out the clinical and system case for dose intelligence. Full text on this page, with a downloadable PDF.`,
         bullets: ['Full text on web', 'PDF for sharing with clinical and system leaders'],
       },
     ],

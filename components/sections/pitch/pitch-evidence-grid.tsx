@@ -1,15 +1,16 @@
 'use client'
 
 import {
-  RETINOMIC_FEATURES_SECTION,
-  RETINOMIC_LANDING_FEATURES,
+  RETINOMIC_EVIDENCE_SECTION,
+  RETINOMIC_LANDING_EVIDENCE,
 } from '@/lib/pitch/retinomic-landing-copy'
 
 import { PitchCtaLink } from './pitch-cta-link'
 import { PitchSubgridTile } from './pitch-subgrid-tile'
 
-export function PitchFeatureGrid() {
-  const section = RETINOMIC_FEATURES_SECTION
+/** Landing evidence screen — same light 2×2 glass panel as Retinomic Protocol */
+export function PitchEvidenceGrid() {
+  const section = RETINOMIC_EVIDENCE_SECTION
 
   return (
     <div className="pitch-feature-panel dios-glass-outer">
@@ -19,9 +20,9 @@ export function PitchFeatureGrid() {
       </header>
 
       <ul className="pitch-feature-subgrid">
-        {RETINOMIC_LANDING_FEATURES.map((feature) => (
-          <li key={feature.id}>
-            <PitchSubgridTile card={feature} />
+        {RETINOMIC_LANDING_EVIDENCE.map((study) => (
+          <li key={study.id}>
+            <PitchSubgridTile card={study} />
           </li>
         ))}
       </ul>

@@ -259,6 +259,14 @@
   color: #0d0d0d;
 }
 
+.calm-landing .pitch-feature-panel__subtitle {
+  margin-top: 0.5rem;
+  max-width: 36rem;
+  font-size: clamp(0.875rem, 2.4vw, 1.0625rem);
+  line-height: 1.45;
+  color: rgb(13 13 13 / 0.62);
+}
+
 /* Light glass panel — taller tap targets on landing section 2 */
 .calm-landing .pitch-feature-panel__ctas .pitch-feature-panel__cta {
   min-height: 3rem;

@@ -1,11 +1,5 @@
 /** Calm UI landing visuals — assets under /public/pitch and /public video */
 
-export const PITCH_HERO = {
-  /** NHS medicines waste — matches hook copy */
-  video: '/pills.mp4',
-  poster: '/pitch/hook.jpg',
-} as const
-
 export const PITCH_IMAGES = {
   hook: '/pitch/hook.jpg',
   evidence: '/evidence.jpg',
@@ -52,4 +46,10 @@ export const PITCH_IMAGES = {
     bloodFuel: '/city-labs-panel.jpg',
     sleepCheck: '/your-sleep-check.jpg',
   },
+} as const
+
+export const PITCH_HERO = {
+  poster: '/standardised.jpg',
+  /** @deprecated Hero uses still image only — was first-light.mp4 */
+  video: '/first-light.mp4',
 } as const

@@ -1,27 +1,29 @@
 'use client'
 
 import {
-  RETINOMIC_FEATURES_SECTION,
-  RETINOMIC_LANDING_FEATURES,
+  RETINOMIC_LANDING_PROBLEM_CARDS,
+  RETINOMIC_PROBLEM_SECTION,
 } from '@/lib/pitch/retinomic-landing-copy'
 
 import { PitchCtaLink } from './pitch-cta-link'
 import { PitchSubgridTile } from './pitch-subgrid-tile'
 
-export function PitchFeatureGrid() {
-  const section = RETINOMIC_FEATURES_SECTION
+/** Landing screen 1 — light glass panel on standardised dosing in medicine */
+export function PitchProblemGrid() {
+  const section = RETINOMIC_PROBLEM_SECTION
 
   return (
     <div className="pitch-feature-panel dios-glass-outer">
       <header className="pitch-feature-panel__head">
         <p className="pitch-feature-panel__eyebrow">{section.eyebrow}</p>
-        <h2 className="pitch-feature-panel__title">{section.title}</h2>
+        <h1 className="pitch-feature-panel__title">{section.title}</h1>
+        <p className="pitch-feature-panel__subtitle">{section.subtitle}</p>
       </header>
 
       <ul className="pitch-feature-subgrid">
-        {RETINOMIC_LANDING_FEATURES.map((feature) => (
-          <li key={feature.id}>
-            <PitchSubgridTile card={feature} />
+        {RETINOMIC_LANDING_PROBLEM_CARDS.map((card) => (
+          <li key={card.id}>
+            <PitchSubgridTile card={card} />
           </li>
         ))}
       </ul>
