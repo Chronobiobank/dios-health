@@ -13,6 +13,8 @@ export type MicronutrientItemId =
   | 'magnesium-citrate'
   | 'zinc'
   | 'selenium'
+  | 'chromium'
+  | 'alpha-lipoic-acid'
   | 'supervised-cofactors'
 
 export type ChronoimmuneZoneSpec = {
@@ -35,7 +37,7 @@ export const CHRONOIMMUNE_ZONES: ChronoimmuneZoneSpec[] = [
     shortLabel: 'Optimise',
     title: 'Metabolic and Circadian Optimisation',
     indication:
-      'General chronopenic burden, social jet lag, metabolic clock misalignment, preventive optimisation.',
+      'General chronopenic burden, social jet lag, metabolic clock misalignment, preventive optimisation. Early insulin resistance, pre-diabetes, mild NAFLD, subclinical hypothyroidism, mild PCOS, elevated hsCRP without diagnosis.',
     d3Guidance: 'Gominak range 60 to 80 ng/mL serum 25(OH)D.',
     pthExpectation: 'Mid-range — lower third not yet targeted.',
     micronutrients: ['d3-k2', 'b5', 'b12', 'magnesium-glycinate', 'ferritin-support'],
@@ -47,7 +49,8 @@ export const CHRONOIMMUNE_ZONES: ChronoimmuneZoneSpec[] = [
     id: 2,
     shortLabel: 'Derm / mild',
     title: 'Dermatological and Mild Autoimmune',
-    indication: 'Psoriasis, eczema, mild inflammatory autoimmune, early metabolic syndrome.',
+    indication:
+      'Psoriasis, eczema, mild inflammatory autoimmune, early metabolic syndrome. Type 2 diabetes — immune reclassification, mild PCOS with inflammatory markers, early atherosclerosis elevated hsCRP, Hashimoto euthyroid, atopic eczema, mild asthma.',
     d3Guidance: 'Approximately 10,000 to 30,000 IU daily, weight-adjusted.',
     pthExpectation: 'Lower third of reference range.',
     micronutrients: [
@@ -58,6 +61,8 @@ export const CHRONOIMMUNE_ZONES: ChronoimmuneZoneSpec[] = [
       'ferritin-support',
       'omega-3',
       'riboflavin-b2',
+      'chromium',
+      'alpha-lipoic-acid',
     ],
     labReviewFrequency: 'Every three to six months',
     safetyGateLevel: 'passive',
@@ -67,7 +72,8 @@ export const CHRONOIMMUNE_ZONES: ChronoimmuneZoneSpec[] = [
     id: 3,
     shortLabel: 'Moderate',
     title: 'Moderate Autoimmune',
-    indication: 'Rheumatoid arthritis, lupus, Hashimoto, Crohn, moderate inflammatory burden.',
+    indication:
+      'Rheumatoid arthritis, lupus, Hashimoto, Crohn, moderate inflammatory burden. Established type 2 diabetes with complications, NASH, moderate PCOS, rheumatoid arthritis, lupus mild to moderate, Crohn in remission, Graves disease.',
     d3Guidance: 'Approximately 30,000 to 60,000 IU daily, weight-adjusted.',
     pthExpectation: 'Lower third — monitored monthly initially.',
     micronutrients: [
@@ -90,7 +96,8 @@ export const CHRONOIMMUNE_ZONES: ChronoimmuneZoneSpec[] = [
     id: 4,
     shortLabel: 'Severe',
     title: 'Severe Neurological and Autoimmune',
-    indication: 'MS, ALS, Parkinson, severe lupus, treatment-resistant autoimmune.',
+    indication:
+      'MS, ALS, Parkinson, severe lupus, treatment-resistant autoimmune. Severe NASH with fibrosis, morbid obesity with metabolic syndrome, treatment resistant type 2 diabetes.',
     d3Guidance: 'Approximately 60,000 to 100,000 IU daily — 1,000 IU per kg body weight starting calculation.',
     pthExpectation: 'Lower third mandatory — dual boundary alerts active.',
     micronutrients: [
@@ -149,6 +156,8 @@ export const MICRONUTRIENT_LABELS: Record<MicronutrientItemId, string> = {
   'magnesium-citrate': 'Magnesium citrate',
   zinc: 'Zinc',
   selenium: 'Selenium',
+  chromium: 'Chromium',
+  'alpha-lipoic-acid': 'Alpha-lipoic acid',
   'supervised-cofactors': 'Supervised cofactor titration',
 }
 

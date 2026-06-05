@@ -2,8 +2,6 @@
 
 import dynamic from 'next/dynamic'
 
-import { DEMO_SPECTRUM_SCORES } from '@/lib/spectrum/spectrum-builder'
-
 const CircadianDesynchronySpectrum = dynamic(
   () =>
     import('@/components/sections/CircadianDesynchronySpectrum').then((mod) => ({
@@ -22,6 +20,6 @@ const CircadianDesynchronySpectrum = dynamic(
 
 export function EvidenceSpectrumSection() {
   return (
-    <CircadianDesynchronySpectrum scores={DEMO_SPECTRUM_SCORES} mluxScore={87} isDemo />
+    <CircadianDesynchronySpectrum mluxScore={87} isDemo />
   )
 }

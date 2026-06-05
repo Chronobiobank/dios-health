@@ -77,6 +77,13 @@ export function ChronoimmunePatientCard({
             Zone {profile.zoneId} — {zone.title}
           </h3>
           <p className="dash-panel-muted mt-1 text-sm">{profile.indicationLabel}</p>
+          {profile.secondaryIndicationLabels && profile.secondaryIndicationLabels.length > 0 ? (
+            <ul className="mt-2 space-y-1 text-xs text-[var(--text-muted)]">
+              {profile.secondaryIndicationLabels.map((label) => (
+                <li key={label}>· {label}</li>
+              ))}
+            </ul>
+          ) : null}
         </div>
         <div className="chronoimmune-patient-card__badges">
           <span className={cn('chronoimmune-triage', TRIAGE_STYLES[profile.cohortTriageStatus])}>

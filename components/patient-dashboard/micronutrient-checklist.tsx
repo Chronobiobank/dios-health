@@ -35,15 +35,15 @@ export function MicronutrientChecklist({
         {profile.micronutrientLog.map((item) => {
           const product = productForMicronutrient(item.id)
           const showOrder = !item.logged && product != null
-
-          const orderHref =
-            orderContext === 'clinician' && patientId
-              ? `${CLINIC_ROUTES.order(patientId)}?product=${product!.slug}&micronutrient=${item.id}`
-              : shopProductUrl(product!.slug, {
-                  qty: product!.quantityOptions[0]?.id,
+          const orderHref = showOrder
+            ? orderContext === 'clinician' && patientId
+              ? `${CLINIC_ROUTES.order(patientId)}?product=${product.slug}&micronutrient=${item.id}`
+              : shopProductUrl(product.slug, {
+                  qty: product.quantityOptions[0]?.id,
                   source: 'checklist',
                   micronutrient: item.id,
                 })
+            : null
 
           return (
             <li
@@ -59,7 +59,7 @@ export function MicronutrientChecklist({
                 </span>
                 {MICRONUTRIENT_LABELS[item.id]}
               </span>
-              {showOrder ? (
+              {showOrder && orderHref ? (
                 <Link
                   href={orderHref}
                   className="chronoimmune-order-btn"

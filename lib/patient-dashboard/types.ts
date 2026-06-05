@@ -124,6 +124,10 @@ export type ChronoimmuneProfile = {
   recordId: string
   zoneId: import('@/lib/chronoimmune/indication-zones').ChronoimmuneZoneId
   indicationLabel: string
+  /** Additional branch indications — same patient, multiple branches. */
+  secondaryIndicationLabels?: string[]
+  /** Active nodes on the Circadian Desynchrony tree (diagnostic model). */
+  activeDesynchronyNodeIds?: string[]
   bodyWeightKg: number
   currentDoseIu: number
   doseRangeMinIu: number

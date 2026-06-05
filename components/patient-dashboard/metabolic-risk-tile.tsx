@@ -1,18 +1,13 @@
 ﻿'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
-import type { ReactNode } from 'react'
-
 import { DashTileExpandCue, DashTileExpandRow } from '@/components/patient-dashboard/dash-tile-expand-row'
-import { ChronosomaticSpectrum } from '@/components/patient-dashboard/chronosomatic-spectrum'
+import { CircadianDesynchronyTree } from '@/components/patient-dashboard/circadian-desynchrony-tree'
 import {
-  dotStyleForSeverity,
-  spectrumDotWrapStyle,
-  SPECTRUM_SEVERITY_LABELS,
-  SPECTRUM_SEVERITY_STYLES,
-} from '@/lib/patient-dashboard/dashboard-indicators'
-import type { DashboardPanelId, SpectrumNode, SpectrumNodeId } from '@/lib/patient-dashboard/types'
-import type { SpectrumSeverity } from '@/lib/patient-dashboard/types'
+  CHRONOIMMUNE_ZONES,
+  ZONE_COLOUR_STYLES,
+} from '@/lib/chronoimmune/indication-zones'
+import type { DashboardPanelId, SpectrumNode } from '@/lib/patient-dashboard/types'
+import { desynchronyNodesFromSpectrumSeverity } from '@/lib/spectrum/desynchrony-tree'
 import { cn } from '@/lib/utils'
 
 type MetabolicRiskTileProps = {
@@ -20,41 +15,15 @@ type MetabolicRiskTileProps = {
   openPanel: DashboardPanelId | null
   onTogglePanel: (id: DashboardPanelId) => void
   onExplainRisk: () => void
-  /** Inside daily snapshot — no section-level grid span. */
   embedded?: boolean
-}
-
-function severityBarFill(severity: SpectrumSeverity): string {
-  return SPECTRUM_SEVERITY_STYLES[severity].border
-}
-
-function LegendItem({
-  children,
-  dot,
-}: {
-  children: ReactNode
-  dot: ReactNode
-}) {
-  return (
-    <span className="chronosomatic-spectrum__legend-item">
-      {dot}
-      <span>{children}</span>
-    </span>
-  )
 }
 
 export function MetabolicRiskTile({
   nodes,
-  openPanel,
-  onTogglePanel,
   onExplainRisk,
   embedded = false,
 }: MetabolicRiskTileProps) {
-  const openNode = nodes.find((node) => node.id === openPanel) ?? null
-
-  const handleSelectNode = (id: SpectrumNodeId) => {
-    onTogglePanel(id)
-  }
+  const activeNodeIds = desynchronyNodesFromSpectrumSeverity(nodes)
 
   return (
     <div className={embedded ? 'dash-tile-group' : 'dash-tile-group col-span-2'}>
@@ -64,83 +33,46 @@ export function MetabolicRiskTile({
           embedded ? 'dios-glass-inner snapshot-metabolic-risk-tile' : 'glass-tile'
         )}
       >
-        <p className="sr-only">Metabolic risk profile — chronopenic burden spectrum</p>
+        <p className="sr-only">Circadian Desynchrony Spectrum — branching diagnostic model</p>
 
-        <ChronosomaticSpectrum
-          nodes={nodes}
-          openNodeId={
-            openPanel && nodes.some((n) => n.id === openPanel) ? (openPanel as SpectrumNodeId) : null
-          }
-          onSelectNode={handleSelectNode}
-        />
+        <p className="desynchrony-tree__section-label font-mono text-[10px] uppercase tracking-widest text-black/45">
+          Circadian Desynchrony Spectrum
+        </p>
+
+        <CircadianDesynchronyTree activeNodeIds={activeNodeIds} compact showAxisNote={false} />
 
         <DashTileExpandRow
           leading={
             <div
               className="chronosomatic-spectrum__legend metabolic-risk-tile__legend"
               role="list"
-              aria-label="Risk severity key"
+              aria-label="Indication zone colour key"
             >
-              {SPECTRUM_SEVERITY_LABELS.map(({ severity, label }) => {
-                const style = dotStyleForSeverity(severity)
-                const dot = (
-                  <span
-                    className="chronosomatic-spectrum__legend-dot"
-                    style={{
-                      ...spectrumDotWrapStyle(style.size),
-                      backgroundColor: style.fill,
-                      borderColor: style.border,
-                      borderWidth: style.borderWidth,
-                    }}
-                  />
-                )
+              {CHRONOIMMUNE_ZONES.map((zone) => {
+                const style = ZONE_COLOUR_STYLES[zone.colour]
                 return (
-                  <LegendItem key={severity} dot={dot}>
-                    {label}
-                  </LegendItem>
+                  <span key={zone.id} className="chronosomatic-spectrum__legend-item">
+                    <span
+                      className="chronosomatic-spectrum__legend-dot"
+                      style={{
+                        width: style.size,
+                        height: style.size,
+                        minWidth: style.size,
+                        backgroundColor: style.fill,
+                        borderColor: style.border,
+                        borderWidth: style.borderWidth,
+                      }}
+                    />
+                    <span>Z{zone.id}</span>
+                  </span>
                 )
               })}
             </div>
           }
         >
-          <DashTileExpandCue as="button" label="Metabolic risk profile" onClick={onExplainRisk} />
+          <DashTileExpandCue as="button" label="Explain desynchrony tree" onClick={onExplainRisk} />
         </DashTileExpandRow>
       </div>
-
-      <AnimatePresence initial={false}>
-        {openNode ? (
-          <motion.div
-            key={`spectrum-${openNode.id}`}
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="glass-panel"
-          >
-            <p className="dash-panel-heading">{openNode.label}</p>
-            <div className="h-2 overflow-hidden rounded-full bg-white/50">
-              <div
-                className="h-full rounded-full transition-all"
-                style={{
-                  width: `${openNode.score}%`,
-                  backgroundColor: severityBarFill(openNode.severity),
-                }}
-              />
-            </div>
-            <p className="dash-panel-muted leading-relaxed">
-              <span className="dash-head font-medium">Reason: </span>
-              {openNode.reason}
-            </p>
-            <p className="dash-panel-muted leading-relaxed">
-              <span className="dash-head font-medium">Action: </span>
-              {openNode.action}
-            </p>
-            <p className="dash-sub text-[0.6875rem] capitalize">
-              Chronosomatic Spectrum · {openNode.severity}
-            </p>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
     </div>
   )
 }

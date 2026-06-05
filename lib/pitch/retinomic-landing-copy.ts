@@ -19,12 +19,13 @@ export const RETINOMIC_LANDING_HERO = {
   secondaryCtaHref: '/how-it-works',
 } as const
 
-/** Tile 2 — the consequence */
+/** Tile 2 — the consequence (autoimmune reclassification framing) */
 export const RETINOMIC_LANDING_CONSEQUENCE = {
   eyebrow: 'The consequence',
   headline:
-    'Your medications, your immune system, your sleep, and your brain all run on the same biological clock.',
-  subheadline: 'When light goes missing the clock loses time. That lost time is measurable.',
+    'Type 2 diabetes, psoriasis, and depression are being reclassified — as circadian immune conditions.',
+  subheadline:
+    'Your medications, immune system, sleep, and brain run on one biological clock. When light goes missing, NLRP3 inflammation amplifies on every branch. That lost time is measurable.',
   image: PITCH_IMAGES.spectrum,
   imageAlt: 'Biological clock — medications, immune system, sleep, and brain',
   detailHref: '/how-it-works',

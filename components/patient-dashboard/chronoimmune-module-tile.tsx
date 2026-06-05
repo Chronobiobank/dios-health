@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 import { ChronoimmuneIndicationSpectrum } from '@/components/patient-dashboard/chronoimmune-indication-spectrum'
 import { ChronoimmunePatientCard } from '@/components/patient-dashboard/chronoimmune-patient-card'
+import { CircadianDesynchronyTree } from '@/components/patient-dashboard/circadian-desynchrony-tree'
 import { DashTileExpandCue, DashTileExpandRow } from '@/components/patient-dashboard/dash-tile-expand-row'
 import {
   CHRONOIMMUNE_ZONES,
@@ -44,8 +45,23 @@ export function ChronoimmuneModuleTile({
           embedded ? 'dios-glass-inner snapshot-metabolic-risk-tile' : 'glass-tile'
         )}
       >
-        <p className="sr-only">Chronoimmune Indication Spectrum — Dose Intelligence OS</p>
+        <p className="sr-only">
+          Circadian Desynchrony Spectrum tree and Chronoimmune Indication Spectrum — separate clinical
+          axes
+        </p>
 
+        <p className="desynchrony-tree__section-label font-mono text-[10px] uppercase tracking-widest text-black/45">
+          Circadian Desynchrony Spectrum — diagnostic tree
+        </p>
+        <CircadianDesynchronyTree
+          activeNodeIds={profile.activeDesynchronyNodeIds ?? []}
+          compact
+          showAxisNote={false}
+        />
+
+        <p className="desynchrony-tree__section-label mt-4 font-mono text-[10px] uppercase tracking-widest text-black/45">
+          Chronoimmune Indication Spectrum — protocol assignment
+        </p>
         <ChronoimmuneIndicationSpectrum
           activeZoneId={profile.zoneId}
           openZoneId={openZoneId}

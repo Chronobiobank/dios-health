@@ -6,6 +6,7 @@ import type {
 } from '@/lib/patient-dashboard/types'
 import { getChronoimmuneZone } from '@/lib/chronoimmune/indication-zones'
 import { calculatePthTarget } from '@/lib/chronoimmune/pth-target'
+import { SEAN_JAMES_ACTIVE_DESYNCHRONY_NODES } from '@/lib/spectrum/desynchrony-tree'
 
 export const SEAN_JAMES_RECORD_ID = 'SEAN-001'
 
@@ -49,7 +50,11 @@ const zone = getChronoimmuneZone(2)
 
 const micronutrientLog: ChronoimmuneMicronutrientLog[] = zone.micronutrients.map((id) => ({
   id,
-  logged: id === 'd3-k2' || id === 'b5' || id === 'magnesium-glycinate',
+  logged:
+    id === 'd3-k2' ||
+    id === 'b5' ||
+    id === 'magnesium-glycinate' ||
+    id === 'omega-3',
 }))
 
 /** Sean James — Zone 2 Chronoimmune demo (SEAN-001). */
@@ -61,7 +66,12 @@ export function buildSeanJamesChronoimmuneProfile(): ChronoimmuneProfile {
   return {
     recordId: SEAN_JAMES_RECORD_ID,
     zoneId: 2,
-    indicationLabel: 'Psoriasis — mild autoimmune',
+    indicationLabel: 'Psoriasis — mild autoimmune · early insulin resistance',
+    secondaryIndicationLabels: [
+      'Psoriasis — classical immune branch (Zone 2)',
+      'Early insulin resistance — metabolic immune reclassification (Zone 2)',
+    ],
+    activeDesynchronyNodeIds: [...SEAN_JAMES_ACTIVE_DESYNCHRONY_NODES],
     bodyWeightKg,
     currentDoseIu,
     doseRangeMinIu: 10_000,

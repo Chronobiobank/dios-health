@@ -2003,3 +2003,193 @@ button.dios-btn-on-dark--secondary {
 .chronoimmune-zone-active-note {
   text-align: center;
 }
+
+/* Circadian Desynchrony branching tree */
+.desynchrony-tree {
+  width: 100%;
+  min-width: 0;
+}
+
+.desynchrony-tree__section-label {
+  margin-bottom: 0.5rem;
+}
+
+.desynchrony-tree__spine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0 0.75rem;
+}
+
+.desynchrony-tree__spine-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 16rem;
+  text-align: center;
+}
+
+.desynchrony-tree__spine-line {
+  width: 2px;
+  height: 1.25rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(160, 160, 160, 0.45),
+    rgba(160, 160, 160, 0.2)
+  );
+}
+
+.desynchrony-tree__spine-label {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.625rem;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.desynchrony-tree__branches {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 40rem) {
+  .desynchrony-tree__branches {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+}
+
+.desynchrony-tree__branch {
+  min-width: 0;
+  padding: 0.5rem 0.35rem 0;
+  border-top: 2px dotted rgba(160, 160, 160, 0.35);
+}
+
+.desynchrony-tree__branch-title {
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.desynchrony-tree__branch-sub {
+  margin-top: 0.15rem;
+  font-size: 0.5625rem;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+.desynchrony-tree__branch-rail {
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.desynchrony-tree__branch-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  justify-content: flex-start;
+}
+
+.desynchrony-tree__branch-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 2.5rem;
+}
+
+.desynchrony-tree__branch-label {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.5625rem;
+  line-height: 1.2;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 3.5rem;
+}
+
+.desynchrony-tree__branch-label--active {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.desynchrony-tree__dot--active {
+  transform: scale(1.05);
+}
+
+.desynchrony-tree__detail {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--dios-glass-inner-border);
+  background: rgb(255 255 255 / 0.55);
+}
+
+.desynchrony-tree__detail-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.desynchrony-tree__detail-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.desynchrony-tree__detail-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.desynchrony-tree__detail-meta {
+  font-size: 0.625rem;
+  color: var(--text-muted);
+}
+
+.desynchrony-tree__detail-grid {
+  margin-top: 0.65rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.desynchrony-tree__detail-grid dt {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.desynchrony-tree__detail-grid dd {
+  margin: 0.1rem 0 0;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--dash-text-sub);
+}
+
+.desynchrony-tree__axis-note {
+  margin-top: 0.65rem;
+  font-size: 0.625rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.desynchrony-tree--compact .desynchrony-tree__branch-sub,
+.desynchrony-tree--compact .desynchrony-tree__hint {
+  display: none;
+}
