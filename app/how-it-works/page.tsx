@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 
 import { DashboardClient } from '@/components/patient-dashboard/dashboard-client'
-import { HowItWorksDemoHero } from '@/components/retinomic/how-it-works-demo-hero'
 import { MOCK_DASHBOARD_PROPS } from '@/lib/patient-dashboard/mock-snapshot'
 
 export const metadata: Metadata = {
@@ -13,7 +12,6 @@ export const metadata: Metadata = {
 export default function HowItWorksPage() {
   return (
     <div className="calm-landing relative min-h-svh">
-      <HowItWorksDemoHero />
       <DashboardClient {...MOCK_DASHBOARD_PROPS} reserveBottomNav={false} />
     </div>
   )
