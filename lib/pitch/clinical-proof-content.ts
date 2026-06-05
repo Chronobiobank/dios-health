@@ -1,4 +1,6 @@
-/** Clinical proof landing detail — three evidence tiles with inline sources */
+/** Clinical proof landing detail — evidence tiles with inline sources */
+
+import { GRANT_MUNRO_FOUNDER_ORIGIN } from '@/lib/pitch/grant-munro-founder'
 
 export type ClinicalProofTile = {
   id: string
@@ -8,15 +10,16 @@ export type ClinicalProofTile = {
 }
 
 export const CLINICAL_PROOF_PAGE = {
-  eyebrow: 'Strong clinical proof',
-  title: 'Evidence converges.',
+  eyebrow: 'Clinical proof',
+  title: 'Personal timing beats standard dose.',
   subtitle:
-    'Dose timing shapes cardiovascular, metabolic, and safety outcomes; evidence now supports clinical deployment.',
+    'Landmark cardiovascular, metabolic, and safety studies support dose intelligence — the preventive monitoring Grant Munro wished had existed before his vitrectomies.',
+  founderBridge: GRANT_MUNRO_FOUNDER_ORIGIN.paragraphs[2],
   tiles: [
     {
       id: 'cardiovascular',
       title: 'Cardiovascular',
-      body: 'Bedtime versus morning antihypertensive dosing can change event rates — timing is a modifiable lever in BP pathways.',
+      body: 'Bedtime versus morning antihypertensive dosing changes event rates in the Hygia trial — timing is a modifiable lever in blood-pressure pathways, not a convenience choice.',
       sources: [
         {
           label: 'Hermida et al. — EHJ Hygia chronotherapy trial',
@@ -27,7 +30,7 @@ export const CLINICAL_PROOF_PAGE = {
     {
       id: 'metabolic',
       title: 'Metabolic',
-      body: 'Circadian disruption from light–dark misalignment links to insulin resistance and type 2 diabetes risk.',
+      body: 'Circadian disruption from light–dark misalignment links to insulin resistance and type 2 diabetes risk — the same clock biology DIOS reads from light and sleep baselines.',
       sources: [
         {
           label: 'Lancet Regional Health — Europe 2024 metabolic risk',
@@ -36,9 +39,20 @@ export const CLINICAL_PROOF_PAGE = {
       ],
     },
     {
+      id: 'photic',
+      title: 'Photic dose',
+      body: 'Melanopic lux from everyday light anchors personal timing — measurable from a phone, without assuming everyone shares the same chronotype.',
+      sources: [
+        {
+          label: 'PNAS — melanopic lux and circadian dose',
+          href: 'https://www.pnas.org/doi/10.1073/pnas.2301608120',
+        },
+      ],
+    },
+    {
       id: 'safety',
       title: 'Safety',
-      body: 'Clearer timing guidance supports medication safety, adherence, and fewer avoidable treatment escalations.',
+      body: 'Clearer timing guidance supports medication safety, adherence, and fewer avoidable treatment escalations — cutting the harm from population-default schedules.',
       sources: [
         {
           label: 'BMJ Quality & Safety — medicines safety and timing',

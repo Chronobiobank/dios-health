@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Download } from 'lucide-react'
 
 import { CARD } from '@/components/sections/layout'
+import { PitchFounderOrigin } from '@/components/sections/pitch/pitch-founder-origin'
 import {
   GRANT_MUNRO_PROBLEM_PAPER,
   type GrantMunroProblemPaper,
@@ -77,8 +78,10 @@ export function ProblemPaperView({ paper = GRANT_MUNRO_PROBLEM_PAPER }: { paper?
         </div>
       </header>
 
+      <PitchFounderOrigin className="mt-10" />
+
       <section className="mt-10">
-        <h2 className="text-xl font-medium tracking-tight text-black sm:text-2xl">
+        <h2 className="text-xl font-semibold tracking-tight text-black sm:text-2xl">
           Your medicine was designed without knowing what time your body thinks it is
         </h2>
         <div className="mt-4 space-y-4">
@@ -144,16 +147,13 @@ export function ProblemPaperView({ paper = GRANT_MUNRO_PROBLEM_PAPER }: { paper?
         >
           Back to landing
         </Link>
-        <Link
-          href="/evidence"
-          className="inline-flex items-center rounded-full border border-black/15 bg-white/80 px-5 py-2 text-sm font-medium text-black hover:bg-white"
-        >
+        <Link href="/evidence" className="dios-btn-on-light--secondary">
           Our circadian model
         </Link>
         <a
           href={paper.pdfPath}
           download={paper.pdfFilename}
-          className="inline-flex items-center gap-2 rounded-full border border-black/15 bg-white/80 px-5 py-2 text-sm font-medium text-black hover:bg-white"
+          className="dios-btn-on-light--secondary gap-2"
         >
           <Download className="h-4 w-4" aria-hidden />
           Download PDF

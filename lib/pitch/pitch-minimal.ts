@@ -114,16 +114,27 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     imageAlt: 'Eye scan baseline — quantify your meds',
     sections: [
       {
-        title: 'Dose Intelligence OS',
-        body: 'DIOS reads your biology and returns a personal dose window — when to take medicine, not just what the label says.',
+        title: 'Quantify your meds',
+        body: 'DIOS turns your light, eye, blood, and sleep signals into a personal dose window — when to take medicine, not just what the label says.',
       },
       {
-        title: 'Retinomic Protocol',
-        body: 'Four signals — light, eye, blood, and sleep — titrated to you through the Gominak protocol. No population averages.',
-        bullets: ['Free baseline scan', 'Clinician-ready output', 'Escalates when risk is flagged'],
+        title: 'Why the eye scan comes first',
+        body: 'Founder Grant Munro built the Retinomic baseline after several failed vitrectomy operations. He learned that measuring the retina clock early is prevention; waiting for surgical crisis is too late.',
+        bullets: [
+          'Free smartphone eye scan anchors your timing baseline',
+          'Light and sleep refine the window over days',
+          'Blood and overnight sleep escalate only when risk is flagged',
+        ],
+      },
+      {
+        title: 'Built for shared decisions',
+        body: 'Output is clinician-ready: a practical schedule your GP can act on inside existing pathways — not another adherence pamphlet.',
       },
     ],
-    sources: [{ label: 'See the demo', href: '/how-it-works' }],
+    sources: [
+      { label: 'Start free baseline scan', href: '/onboarding' },
+      { label: 'Live demo dashboard', href: '/how-it-works' },
+    ],
   },
   {
     slug: 'problem',
@@ -134,20 +145,21 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     imageAlt: RETINOMIC_LANDING_PROBLEM.imageAlt,
     sections: [
       {
-        title: 'Standardised dosing',
-        body: 'Medicine picks one dose time and one set of micronutrient targets for every patient. Most bodies need a different window.',
+        title: 'One schedule on every label',
+        body: 'Medicine optimises what to take and how much — but rarely when. Morning statins, meal-linked metformin, and bedtime rules only where a trial forced the question. Most bodies need another window.',
+      },
+      {
+        title: 'Population averages miss biology',
+        body: 'Delayed sleep phase, shift work, and seasonal light change how drugs are absorbed and tolerated. Handing the same clock instruction to every patient drives non-adherence, switches, and avoidable harm.',
+        bullets: RETINOMIC_LANDING_PROBLEM_CARDS.map((c) => `${c.lead}: ${c.body}`),
       },
       {
         title: 'Founder paper',
-        body: `Grant Munro’s position paper, ${GRANT_MUNRO_PAPER_TITLE}, sets out the clinical and system case. Full text and PDF on the problem page.`,
-        bullets: RETINOMIC_LANDING_PROBLEM_CARDS.map((c) => `${c.lead}: ${c.body}`),
+        body: `Grant Munro’s ${GRANT_MUNRO_PAPER_TITLE} connects chronotherapy evidence to NHS medicines optimisation — and to his own fight to preserve vision after failed surgery. Read the full paper below.`,
       },
     ],
     sources: [
-      {
-        label: `Grant Munro — ${GRANT_MUNRO_PAPER_TITLE} (PDF)`,
-        href: '/papers/grant-munro-population-dosing-misses-biology.pdf',
-      },
+      { label: 'Read the full founder paper', href: '/pitch/problem' },
       { label: 'Clinical proof', href: '/pitch/clinical-proof' },
     ],
   },
@@ -161,57 +173,67 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     sections: [
       {
         title: 'Scan · Score · Schedule',
-        body: 'Start with a free smartphone baseline. DIOS scores your timing state and returns a practical dose window for shared decisions.',
+        body: 'Start with a free Retinomic eye scan and photic baseline on your phone. DIOS scores your timing state and returns a dose window you and your clinician can use this week.',
       },
       {
-        title: 'Four pillars',
-        body: 'Each signal is read and tuned to you — not a textbook schedule.',
+        title: 'Four pillars — all tailored',
+        body: 'No textbook schedule. Each signal is read and tuned to you through the Gominak protocol.',
         bullets: RETINOMIC_LANDING_FEATURES.map((f) => `${f.lead}: ${f.body}`),
       },
       {
         title: 'Escalate on risk',
-        body: 'When DIOS flags elevated risk, care escalates to Gominak bloods and overnight sleep verification.',
+        body: 'When DIOS flags elevated metabolic or circadian risk, care escalates to Gominak blood panels and FDA-cleared overnight sleep verification — still inside one protocol.',
       },
     ],
     sources: [
       { label: 'Live demo dashboard', href: '/how-it-works' },
-      { label: 'Clinical evidence', href: '/evidence' },
+      { label: 'Clinical evidence library', href: '/evidence' },
     ],
   },
   {
     slug: 'clinical-proof',
     eyebrow: 'Clinical proof',
     title: 'Personal timing beats standard dose.',
-    subtitle: 'Landmark studies behind the Retinomic Protocol.',
+    subtitle:
+      'Cardiovascular, metabolic, photic, and safety evidence converges — the same biology DIOS measures before decline becomes irreversible.',
     image: PITCH_IMAGES.evidence,
     imageAlt: 'Clinical evidence for chronotherapy',
     sections: [
       {
-        title: 'The evidence base',
-        body: 'Cardiovascular, metabolic, photic, and safety signals converge on one idea: timing changes outcomes.',
+        title: 'Landmark trials',
+        body: 'Bedtime antihypertensives, circadian metabolic risk, melanopic light dose, and medicines safety all point one way: timing is a modifiable clinical lever.',
         bullets: RETINOMIC_LANDING_EVIDENCE.map((s) => `${s.lead}: ${s.body}`),
+      },
+      {
+        title: 'From evidence to deployment',
+        body: 'Chronotherapy stalled because measurement and workflow were missing. DIOS supplies patient-specific timing evidence — starting with the retinomic eye scan Grant Munro wished had existed before his vitrectomies.',
       },
     ],
     sources: [
       { label: 'Full evidence library', href: '/evidence' },
+      { label: 'Dedicated clinical proof page', href: '/pitch/clinical-proof' },
       { label: 'EHJ Hygia trial', href: 'https://doi.org/10.1093/eurheartj/ehz754' },
     ],
   },
   {
     slug: 'chronobiobank',
     eyebrow: RETINOMIC_LANDING_VISION.eyebrow,
-    title: "The world's first Chronobiobank.",
+    title: RETINOMIC_LANDING_VISION.headline,
     subtitle: RETINOMIC_LANDING_VISION.subheadline,
     image: RETINOMIC_LANDING_VISION.image,
     imageAlt: RETINOMIC_LANDING_VISION.imageAlt,
     sections: [
       {
-        title: 'Infrastructure first',
-        body: 'User-owned longitudinal circadian evidence across care pathways.',
+        title: 'Your data helps everyone',
+        body: 'Co-own the Chronobiobank: longitudinal circadian evidence you control, linked to care pathways and governed research.',
+      },
+      {
+        title: 'Infrastructure for prevention',
+        body: 'The same signals that personalise your dose window — light, eye, blood, sleep — become population evidence when you opt in. Returns flow back to participants as validation compounds.',
       },
       {
         title: 'Research by design',
-        body: 'Governed data flows support validation and translational protocols.',
+        body: 'Governed data flows support translational protocols, NHS medicines optimisation, and the preventive monitoring stack DIOS was founded to deploy.',
       },
     ],
     sources: [

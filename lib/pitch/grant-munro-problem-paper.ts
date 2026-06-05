@@ -1,6 +1,10 @@
 /** Founder position paper — displayed in full on /pitch/problem */
 
-import { GRANT_MUNRO_FOUNDER, GRANT_MUNRO_PAPER_TITLE } from '@/lib/pitch/grant-munro-founder'
+import {
+  GRANT_MUNRO_FOUNDER,
+  GRANT_MUNRO_FOUNDER_ORIGIN,
+  GRANT_MUNRO_PAPER_TITLE,
+} from '@/lib/pitch/grant-munro-founder'
 
 export type ProblemPaperSection = {
   id: string
@@ -32,6 +36,7 @@ export const GRANT_MUNRO_PROBLEM_PAPER = {
   abstract: `Modern prescribing optimises what to take and how much — but rarely when. Dose timing is still governed by population convenience: morning statins, bedtime antihypertensives only where a trial happened to prove it, meal-linked metformin regardless of personal phase. Circadian pharmacology shows that the same molecule can differ materially in efficacy, tolerability, and safety depending on clock phase. Yet clinical pathways, formularies, and patient instructions remain generic.
 
 This paper frames the problem DIOS was built to solve: the gap between chronotherapy evidence and routinised care. It connects patient-level biology to system-level waste — including NHS medicines optimisation and avoidable hospital load — and argues that precision timing requires infrastructure, not another adherence pamphlet.`,
+  founderOrigin: GRANT_MUNRO_FOUNDER_ORIGIN,
   sections: [
     {
       id: 'introduction',
