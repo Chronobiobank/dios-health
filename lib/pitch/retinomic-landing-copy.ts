@@ -1,60 +1,77 @@
 /**
- * Retinomic Protocol — public landing copy (Dose Intelligence OS).
- * Mobile-first: short lines, plain English. Single source for hero + deck tiles.
- * Narrative arc: uniform-response fallacy (problem) → dose intelligence → Gominak protocol (tailored fit).
+ * Retinomic Protocol — public landing copy.
+ * Medtech skim-and-dive: one idea per full-bleed tile; detail lives on /pitch/* and /how-it-works.
  */
 
 import { PITCH_IMAGES } from '@/lib/pitch/landing-images'
 
+/** Tile 1 — hero */
 export const RETINOMIC_LANDING_HERO = {
-  eyebrow: 'Dose Intelligence OS',
-  headline: 'Quantify your meds.',
+  eyebrow: 'Quantify your meds',
+  headline: 'From standard dose to dose intelligence.',
   subheadline:
-    'From standard dose to dose intelligence — timing built on your biology.',
-  ctaLabel: 'Free baseline scan',
-  ctaHref: '/onboarding',
+    'We use your light, eye, blood, and sleep data to tailor med plans for better, brighter outcomes.',
+  detailHref: '/pitch/hook',
+  ctaLabel: 'Explore the protocol',
+  ctaHref: '/pitch/hook',
   signUpHref: '/auth/signup',
-  secondaryCtaLabel: 'Clinician demo',
-  secondaryCtaHref: '/signup/clinician',
+  secondaryCtaLabel: 'Free baseline scan',
+  secondaryCtaHref: '/onboarding',
+} as const
+
+/** Tile 2 — problem (detail: /pitch/problem) */
+export const RETINOMIC_LANDING_PROBLEM = {
+  eyebrow: 'The problem',
+  headline: 'Standardised dosing misses most patients.',
+  subheadline: 'One time on every label. Most bodies need another window.',
+  image: '/standardised.jpg',
+  imageAlt: 'Standardised medicine dosing — one schedule for every patient',
+  detailHref: '/pitch/problem',
+  ctaLabel: 'Why this matters',
+  ctaHref: '/pitch/problem',
+  secondaryCtaLabel: 'Clinical proof',
+  secondaryCtaHref: '/pitch/clinical-proof',
+} as const
+
+/** Tile 3 — protocol (detail: /how-it-works, /evidence) */
+export const RETINOMIC_LANDING_PROTOCOL = {
+  eyebrow: 'The protocol',
+  headline: 'No one size. All tailored to fit.',
+  subheadline: 'Gominak panel · Retinomic scan · Your dose window.',
+  image: PITCH_IMAGES.retinomic.howWeThink,
+  imageAlt: 'Retinomic Protocol — personal dose timing',
+  detailHref: '/pitch/how-it-works',
+  ctaLabel: 'How it works',
+  ctaHref: '/pitch/how-it-works',
+  secondaryCtaLabel: 'Live demo',
+  secondaryCtaHref: '/how-it-works',
+} as const
+
+/** Tile 4 — vision (detail: /pitch/chronobiobank) */
+export const RETINOMIC_LANDING_VISION = {
+  eyebrow: 'Our vision',
+  headline: 'Your data helps everyone.',
+  subheadline: 'Co-own the Chronobiobank. Your biology funds research — you share returns.',
+  image: '/chronobiobank.png',
+  imageAlt: 'Chronobiobank research infrastructure',
+  detailHref: '/pitch/chronobiobank',
+  ctaLabel: 'Our vision',
+  ctaHref: '/pitch/chronobiobank',
+  secondaryCtaLabel: 'Contact us',
+  secondaryCtaHref: '/contact',
 } as const
 
 export type RetinomicFeatureCopy = {
   id: string
   lead: string
-  /** Shown from sm breakpoint up; keep lead alone on small phones */
   body: string
   image: string
   imageAlt: string
-  /** Internal route or external study URL */
   href?: string
   external?: boolean
 }
 
-/** Landing screen 1 — light glass panel, standardised dosing in medicine */
-export const RETINOMIC_PROBLEM_SECTION = {
-  eyebrow: 'The problem',
-  title: 'Standardised dosing misses most patients.',
-  subtitle:
-    'One time on every label. The same micronutrient targets for every body — and most never get the window they need.',
-  primaryCtaLabel: 'Read the founder paper',
-  primaryCtaHref: '/pitch/problem',
-  secondaryCtaLabel: 'Free baseline scan',
-  secondaryCtaHref: '/onboarding',
-} as const
-
-/** Detail page + OG — mirrors problem section */
-export const RETINOMIC_LANDING_PROBLEM = {
-  eyebrow: RETINOMIC_PROBLEM_SECTION.eyebrow,
-  headline: RETINOMIC_PROBLEM_SECTION.title,
-  subheadline: RETINOMIC_PROBLEM_SECTION.subtitle,
-  image: '/standardised.jpg',
-  imageAlt: 'Standardised medicine dosing — one schedule for every patient',
-  ctaLabel: RETINOMIC_PROBLEM_SECTION.primaryCtaLabel,
-  ctaHref: RETINOMIC_PROBLEM_SECTION.primaryCtaHref,
-  secondaryCtaLabel: 'Clinical proof',
-  secondaryCtaHref: '/pitch/clinical-proof',
-} as const
-
+/** Detail pages only — not shown on landing deck */
 export const RETINOMIC_LANDING_PROBLEM_CARDS: readonly RetinomicFeatureCopy[] = [
   {
     id: 'dose-time',
@@ -91,15 +108,6 @@ export const RETINOMIC_LANDING_PROBLEM_CARDS: readonly RetinomicFeatureCopy[] = 
   },
 ] as const
 
-export const RETINOMIC_FEATURES_SECTION = {
-  eyebrow: 'Gominak protocol',
-  title: 'No one size. All tailored to fit.',
-  primaryCtaLabel: 'Free baseline scan',
-  primaryCtaHref: '/onboarding',
-  secondaryCtaLabel: 'See demo',
-  secondaryCtaHref: '/how-it-works',
-} as const
-
 export const RETINOMIC_LANDING_FEATURES: readonly RetinomicFeatureCopy[] = [
   {
     id: 'dios-engine',
@@ -135,16 +143,6 @@ export const RETINOMIC_LANDING_FEATURES: readonly RetinomicFeatureCopy[] = [
   },
 ] as const
 
-export const RETINOMIC_EVIDENCE_SECTION = {
-  eyebrow: 'The evidence',
-  title: 'Personal timing beats standard dose.',
-  primaryCtaLabel: 'Clinical proof',
-  primaryCtaHref: '/pitch/clinical-proof',
-  secondaryCtaLabel: 'All evidence',
-  secondaryCtaHref: '/evidence',
-} as const
-
-/** Four landmark studies — mirrors protocol 2×2 glass tile layout */
 export const RETINOMIC_LANDING_EVIDENCE: readonly RetinomicFeatureCopy[] = [
   {
     id: 'hygia',
@@ -183,22 +181,11 @@ export const RETINOMIC_LANDING_EVIDENCE: readonly RetinomicFeatureCopy[] = [
   },
 ] as const
 
-export const RETINOMIC_LANDING_PHILOSOPHY = {
-  eyebrow: 'The shift',
-  headline: 'From standard dose to dose intelligence.',
-  subheadline:
-    'Your D3, your B12, your pill time — none of them match a population average. Gominak titrates all three to you.',
-  image: PITCH_IMAGES.retinomic.howWeThink,
-  imageAlt: 'Gominak protocol — personalised dose timing, not population norms',
-  ctaLabel: 'See the evidence',
-  ctaHref: '/evidence',
-} as const
-
 export const RETINOMIC_LANDING_META = {
-  title: 'DIOS — Dose Intelligence OS',
+  title: 'Retinomic Protocol · DIOS',
   description:
-    'Pharma and nutrition science assume we all respond to micronutrients the same. DIOS dose intelligence and the Gominak protocol tailor every target to your biology.',
-  openGraphTitle: 'Standardised dosing misses most patients · dios.health',
+    'From standard dose to dose intelligence. The Retinomic Protocol tailors light, eye, blood, and sleep to your biology.',
+  openGraphTitle: 'Retinomic Protocol · dios.health',
   openGraphDescription:
-    'One time on every label. The same micronutrient targets for every body. DIOS moves medicine to dose intelligence. Free baseline scan.',
+    'No one size. All tailored to fit. Free baseline scan — or explore the clinical evidence.',
 } as const

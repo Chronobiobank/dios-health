@@ -1,12 +1,13 @@
 import { PITCH_IMAGES } from '@/lib/pitch/landing-images'
 import { GRANT_MUNRO_PAPER_TITLE } from '@/lib/pitch/grant-munro-founder'
 import {
-  RETINOMIC_EVIDENCE_SECTION,
-  RETINOMIC_FEATURES_SECTION,
+  RETINOMIC_LANDING_EVIDENCE,
+  RETINOMIC_LANDING_FEATURES,
   RETINOMIC_LANDING_HERO,
-  RETINOMIC_LANDING_PHILOSOPHY,
   RETINOMIC_LANDING_PROBLEM,
-  RETINOMIC_PROBLEM_SECTION,
+  RETINOMIC_LANDING_PROBLEM_CARDS,
+  RETINOMIC_LANDING_PROTOCOL,
+  RETINOMIC_LANDING_VISION,
 } from '@/lib/pitch/retinomic-landing-copy'
 
 export type PitchMinimalTile = {
@@ -41,59 +42,88 @@ export type PitchDetailPage = {
   sources?: readonly { label: string; href: string }[]
 }
 
+/** Four full-bleed narrative tiles — medtech skim-and-dive; no grids on landing */
 export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
+  {
+    id: 'pitch-hook',
+    slug: 'hook',
+    eyebrow: RETINOMIC_LANDING_HERO.eyebrow,
+    title: RETINOMIC_LANDING_HERO.headline,
+    subtitle: RETINOMIC_LANDING_HERO.subheadline,
+    image: PITCH_IMAGES.hook,
+    imageAlt: 'Eye scan baseline — quantify your meds',
+    href: RETINOMIC_LANDING_HERO.detailHref,
+    ctaLabel: RETINOMIC_LANDING_HERO.ctaLabel,
+    secondaryHref: RETINOMIC_LANDING_HERO.secondaryCtaHref,
+    secondaryCtaLabel: RETINOMIC_LANDING_HERO.secondaryCtaLabel,
+  },
+  {
+    id: 'pitch-problem',
+    slug: 'problem',
+    eyebrow: RETINOMIC_LANDING_PROBLEM.eyebrow,
+    title: RETINOMIC_LANDING_PROBLEM.headline,
+    subtitle: RETINOMIC_LANDING_PROBLEM.subheadline,
+    image: RETINOMIC_LANDING_PROBLEM.image,
+    imageAlt: RETINOMIC_LANDING_PROBLEM.imageAlt,
+    href: RETINOMIC_LANDING_PROBLEM.detailHref,
+    ctaLabel: RETINOMIC_LANDING_PROBLEM.ctaLabel,
+    secondaryHref: RETINOMIC_LANDING_PROBLEM.secondaryCtaHref,
+    secondaryCtaLabel: RETINOMIC_LANDING_PROBLEM.secondaryCtaLabel,
+  },
+  {
+    id: 'pitch-protocol',
+    slug: 'how-it-works',
+    eyebrow: RETINOMIC_LANDING_PROTOCOL.eyebrow,
+    title: RETINOMIC_LANDING_PROTOCOL.headline,
+    subtitle: RETINOMIC_LANDING_PROTOCOL.subheadline,
+    image: RETINOMIC_LANDING_PROTOCOL.image,
+    imageAlt: RETINOMIC_LANDING_PROTOCOL.imageAlt,
+    href: RETINOMIC_LANDING_PROTOCOL.detailHref,
+    ctaLabel: RETINOMIC_LANDING_PROTOCOL.ctaLabel,
+    secondaryHref: RETINOMIC_LANDING_PROTOCOL.secondaryCtaHref,
+    secondaryCtaLabel: RETINOMIC_LANDING_PROTOCOL.secondaryCtaLabel,
+  },
   {
     id: 'pitch-pilot-structure',
     slug: 'chronobiobank',
-    eyebrow: 'Our vision',
-    title: 'Your data helps everyone.',
-    subtitle: 'Co-own the Chronobiobank. Your data funds research — you share returns.',
-    image: '/chronobiobank.png',
-    imageAlt: 'Chronobiobank research infrastructure',
-    href: '/pitch/chronobiobank',
-    ctaLabel: 'Learn more',
-    secondaryHref: '/contact',
-    secondaryCtaLabel: 'Contact us',
+    eyebrow: RETINOMIC_LANDING_VISION.eyebrow,
+    title: RETINOMIC_LANDING_VISION.headline,
+    subtitle: RETINOMIC_LANDING_VISION.subheadline,
+    image: RETINOMIC_LANDING_VISION.image,
+    imageAlt: RETINOMIC_LANDING_VISION.imageAlt,
+    href: RETINOMIC_LANDING_VISION.detailHref,
+    ctaLabel: RETINOMIC_LANDING_VISION.ctaLabel,
+    secondaryHref: RETINOMIC_LANDING_VISION.secondaryCtaHref,
+    secondaryCtaLabel: RETINOMIC_LANDING_VISION.secondaryCtaLabel,
   },
 ] as const
 
-/** Footer / in-page nav — kept in sync with snap-deck section ids */
-export const PITCH_LANDING_HASH_LINKS = [
-  { label: RETINOMIC_PROBLEM_SECTION.eyebrow, href: '/#pitch-problem' },
-  { label: RETINOMIC_FEATURES_SECTION.eyebrow, href: '/#pitch-features' },
-  { label: RETINOMIC_LANDING_PHILOSOPHY.eyebrow, href: '/#pitch-philosophy' },
-  { label: RETINOMIC_EVIDENCE_SECTION.eyebrow, href: '/#pitch-clinical-proof' },
-  ...PITCH_MINIMAL_TILES.map((tile) => ({
-    label: tile.eyebrow,
-    href: `/#${tile.id}`,
-  })),
-] as readonly { label: string; href: string }[]
+/** Footer / in-page nav — one link per deck screen */
+export const PITCH_LANDING_HASH_LINKS = PITCH_MINIMAL_TILES.map((tile) => ({
+  label: tile.eyebrow,
+  href: `/#${tile.id}`,
+})) as readonly { label: string; href: string }[]
 
 export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
   {
     slug: 'hook',
-    eyebrow: 'Dose Intelligence OS',
-    title: 'Quantify your meds.',
-    subtitle: 'From standard dose to dose intelligence — timing built on your biology.',
+    eyebrow: RETINOMIC_LANDING_HERO.eyebrow,
+    title: RETINOMIC_LANDING_HERO.headline,
+    subtitle: RETINOMIC_LANDING_HERO.subheadline,
     image: PITCH_IMAGES.hook,
-    imageAlt: 'Dose Intelligence OS — personal medication timing',
+    imageAlt: 'Eye scan baseline — quantify your meds',
     sections: [
       {
-        title: 'The blind spot',
-        body: "Most pharmaceutical and nutritional science assumes we all respond to micronutrients the same. We don't. Standard dose times and population blood targets follow — and most patients miss.",
+        title: 'Dose Intelligence OS',
+        body: 'DIOS reads your biology and returns a personal dose window — when to take medicine, not just what the label says.',
       },
       {
-        title: 'Dose intelligence',
-        body: 'The Gominak protocol at the heart of DIOS: no one size. Light, Gominak blood targets, and pill time — all tailored to fit you, with clinician-ready output in routine workflows.',
-        bullets: ['Tailored dose window', 'Gominak panel titration', 'Clinician summary for review'],
+        title: 'Retinomic Protocol',
+        body: 'Four signals — light, eye, blood, and sleep — titrated to you through the Gominak protocol. No population averages.',
+        bullets: ['Free baseline scan', 'Clinician-ready output', 'Escalates when risk is flagged'],
       },
     ],
-    sources: [
-      {
-        label: 'NHS waste reduction report',
-        href: 'https://www.england.nhs.uk/wp-content/uploads/2015/06/pharmaceutical-waste-reduction.pdf',
-      },
-    ],
+    sources: [{ label: 'See the demo', href: '/how-it-works' }],
   },
   {
     slug: 'problem',
@@ -105,12 +135,12 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     sections: [
       {
         title: 'Standardised dosing',
-        body: 'Medicine picks one dose time and one set of micronutrient targets for every patient. Pharma and nutrition science assume identical response — most bodies need a different window.',
+        body: 'Medicine picks one dose time and one set of micronutrient targets for every patient. Most bodies need a different window.',
       },
       {
         title: 'Founder paper',
-        body: `Grant Munro’s founder position paper, ${GRANT_MUNRO_PAPER_TITLE}, sets out the clinical and system case for dose intelligence. Full text on this page, with a downloadable PDF.`,
-        bullets: ['Full text on web', 'PDF for sharing with clinical and system leaders'],
+        body: `Grant Munro’s position paper, ${GRANT_MUNRO_PAPER_TITLE}, sets out the clinical and system case. Full text and PDF on the problem page.`,
+        bullets: RETINOMIC_LANDING_PROBLEM_CARDS.map((c) => `${c.lead}: ${c.body}`),
       },
     ],
     sources: [
@@ -118,117 +148,76 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
         label: `Grant Munro — ${GRANT_MUNRO_PAPER_TITLE} (PDF)`,
         href: '/papers/grant-munro-population-dosing-misses-biology.pdf',
       },
-      {
-        label: 'NHS medicines optimisation',
-        href: 'https://www.england.nhs.uk/medicines-2/medicines-optimisation/',
-      },
-      {
-        label: 'NHS waste reduction report',
-        href: 'https://www.england.nhs.uk/wp-content/uploads/2015/06/pharmaceutical-waste-reduction.pdf',
-      },
+      { label: 'Clinical proof', href: '/pitch/clinical-proof' },
     ],
   },
   {
     slug: 'how-it-works',
-    eyebrow: 'How it works',
-    title: 'Dose Intelligence OS workflow.',
-    subtitle: 'DIOS starts with free scan, score, and schedule, then escalates to deeper diagnostics when risk is flagged.',
-    image: PITCH_IMAGES.steps.camera,
-    imageAlt: 'Workflow',
+    eyebrow: RETINOMIC_LANDING_PROTOCOL.eyebrow,
+    title: RETINOMIC_LANDING_PROTOCOL.headline,
+    subtitle: RETINOMIC_LANDING_PROTOCOL.subheadline,
+    image: RETINOMIC_LANDING_PROTOCOL.image,
+    imageAlt: RETINOMIC_LANDING_PROTOCOL.imageAlt,
     sections: [
       {
-        title: 'Step 1: Scan (free)',
-        body: 'Patient completes a short smartphone assessment to capture timing-relevant signal.',
+        title: 'Scan · Score · Schedule',
+        body: 'Start with a free smartphone baseline. DIOS scores your timing state and returns a practical dose window for shared decisions.',
       },
       {
-        title: 'Step 2: Score (free)',
-        body: 'DIOS scores circadian timing state and confidence for rapid triage.',
+        title: 'Four pillars',
+        body: 'Each signal is read and tuned to you — not a textbook schedule.',
+        bullets: RETINOMIC_LANDING_FEATURES.map((f) => `${f.lead}: ${f.body}`),
       },
       {
-        title: 'Step 3: Schedule (free)',
-        body: 'Clinician receives practical dose-timing guidance for shared decisions.',
+        title: 'Escalate on risk',
+        body: 'When DIOS flags elevated risk, care escalates to Gominak bloods and overnight sleep verification.',
       },
-      {
-        title: 'Step 4: Escalate on risk flag',
-        body: 'If DIOS identifies elevated risk, care can escalate to deeper analysis using TipTraQ and bloods.',
-      },
-    ],
-    sources: [{ label: 'Clinical workflow context', href: '/clinic' }],
-  },
-  {
-    slug: 'why-now',
-    eyebrow: 'Why now',
-    title: 'The technology finally supports scale.',
-    subtitle: 'Smartphone biomarker capture makes precision timing accessible without hardware rollouts.',
-    image: PITCH_IMAGES.biomarker.mlux,
-    imageAlt: 'Smartphone biomarker',
-    sections: [
-      { title: 'Technology shift', body: 'Consumer devices can now capture useful circadian proxies.' },
-      { title: 'Delivery shift', body: 'Care systems can deploy through existing pathways instead of new infrastructure.' },
     ],
     sources: [
-      { label: 'PNAS biomarker study', href: 'https://www.pnas.org/doi/10.1073/pnas.2301608120' },
-      { label: 'CIE S026 standard', href: 'https://cie.co.at/publications/cie-systems/cie-s026-e2018-melanopic-action-spectrum' },
+      { label: 'Live demo dashboard', href: '/how-it-works' },
+      { label: 'Clinical evidence', href: '/evidence' },
     ],
   },
   {
     slug: 'clinical-proof',
     eyebrow: 'Clinical proof',
-    title: 'The evidence base is converging.',
-    subtitle: 'Cardiovascular, metabolic, and medication-safety signals support deployment.',
+    title: 'Personal timing beats standard dose.',
+    subtitle: 'Landmark studies behind the Retinomic Protocol.',
     image: PITCH_IMAGES.evidence,
-    imageAlt: 'Clinical evidence',
+    imageAlt: 'Clinical evidence for chronotherapy',
     sections: [
-      { title: 'Cardiovascular', body: 'Timing can influence outcomes in antihypertensive pathways.' },
-      { title: 'Metabolic', body: 'Light-rhythm disruption links to diabetes and metabolic risk.' },
-      { title: 'Safety', body: 'Clearer timing guidance supports medication safety and adherence.' },
+      {
+        title: 'The evidence base',
+        body: 'Cardiovascular, metabolic, photic, and safety signals converge on one idea: timing changes outcomes.',
+        bullets: RETINOMIC_LANDING_EVIDENCE.map((s) => `${s.lead}: ${s.body}`),
+      },
     ],
     sources: [
+      { label: 'Full evidence library', href: '/evidence' },
       { label: 'EHJ Hygia trial', href: 'https://doi.org/10.1093/eurheartj/ehz754' },
-      { label: 'Lancet 2024 metabolic risk', href: 'https://www.thelancet.com/journals/lanepe/article/PIIS2666-7762(24)00110-8/fulltext' },
-      { label: 'BMJ QS medicines safety', href: 'https://doi.org/10.1136/bmjqs-2019-010206' },
     ],
   },
   {
     slug: 'chronobiobank',
-    eyebrow: 'Our vision',
+    eyebrow: RETINOMIC_LANDING_VISION.eyebrow,
     title: "The world's first Chronobiobank.",
-    subtitle:
-      'DIOS builds user-owned infrastructure for continuous clinical learning, equitable precision care, and next-generation drug design and innovation.',
-    image: '/chronobiobank.png',
-    imageAlt: 'Chronobiobank model',
+    subtitle: RETINOMIC_LANDING_VISION.subheadline,
+    image: RETINOMIC_LANDING_VISION.image,
+    imageAlt: RETINOMIC_LANDING_VISION.imageAlt,
     sections: [
       {
         title: 'Infrastructure first',
-        body: 'The platform is built to generate high-quality longitudinal circadian evidence across care pathways.',
+        body: 'User-owned longitudinal circadian evidence across care pathways.',
       },
       {
         title: 'Research by design',
-        body: 'Governed data flows support hypothesis generation, validation, and translational clinical protocols.',
-      },
-      {
-        title: 'Innovation engine',
-        body: 'Each deployment contributes to a larger chronomedicine evidence graph that improves future interventions.',
+        body: 'Governed data flows support validation and translational protocols.',
       },
     ],
     sources: [
-      { label: 'Privacy policy', href: '/privacy' },
-      { label: 'Clinical evidence page', href: '/evidence' },
       { label: 'Contact DIOS', href: '/contact' },
+      { label: 'Privacy policy', href: '/privacy' },
     ],
-  },
-  {
-    slug: 'credibility',
-    eyebrow: 'Credibility',
-    title: 'Governance and safety are part of the product.',
-    subtitle: 'Clinical risk, IG, and regulatory framing are built into rollout.',
-    image: '/consent-firewall.jpg',
-    imageAlt: 'Governance',
-    sections: [
-      { title: 'Governance', body: 'DPIA starter, subprocessor transparency, and rollout controls.' },
-      { title: 'Regulatory framing', body: 'Intended use scoped against SaMD / CDS pathways before scaling.' },
-    ],
-    sources: [{ label: 'MHRA SaMD guidance', href: 'https://www.gov.uk/government/collections/software-and-ai-as-a-medical-device' }],
   },
 ] as const
 

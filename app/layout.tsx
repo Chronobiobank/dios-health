@@ -25,9 +25,9 @@ const siteUrl = process.env.VERCEL_URL
   : 'https://dios-health.vercel.app'
 
 export const metadata: Metadata = {
-  title: 'DIOS — Dose Intelligence OS',
+  title: 'Retinomic Protocol · DIOS',
   description:
-    'Pharma and nutrition science assume identical micronutrient response. DIOS dose intelligence and the Gominak protocol tailor every target to your biology.',
+    'Retinomic Protocol — from standard dose to dose intelligence. Light, eye, blood, and sleep tailored to your biology.',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
@@ -40,17 +40,17 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
   },
   openGraph: {
-    title: 'From standard dose to dose intelligence · dios.health',
+    title: 'Retinomic Protocol · dios.health',
     description:
-      "We don't all respond to micronutrients the same. Gominak titrates light, blood, and pill time to your biology.",
+      'No one size. All tailored to fit. Free baseline scan — or explore the clinical evidence.',
     type: 'website',
     url: siteUrl,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'From standard dose to dose intelligence · dios.health',
+    title: 'Retinomic Protocol · dios.health',
     description:
-      'Standard dose assumes identical micronutrient response. DIOS tailors every target to you. Free baseline scan.',
+      'From standard dose to dose intelligence. Free baseline scan.',
   },
 }
 

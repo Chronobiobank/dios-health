@@ -16,7 +16,7 @@ export function PitchTileEyebrow({
   light?: boolean
 }) {
   return (
-    <p className={cn('pitch-tile-eyebrow', light && 'pitch-tile-eyebrow--light')}>{children}</p>
+    <p className={cn('type-pitch-eyebrow', light && 'pitch-tile-eyebrow--light')}>{children}</p>
   )
 }
 
@@ -32,7 +32,7 @@ export function PitchTileTitle({
   className?: string
 }) {
   return (
-    <Tag className={cn('pitch-tile-title', light && 'pitch-tile-title--light', className)}>
+    <Tag className={cn('type-pitch-title', light && 'pitch-tile-title--light', className)}>
       {children}
     </Tag>
   )
@@ -48,7 +48,7 @@ export function PitchTileSub({
   className?: string
 }) {
   return (
-    <p className={cn('pitch-tile-sub', light && 'pitch-tile-sub--light', className)}>{children}</p>
+    <p className={cn('type-pitch-sub', light && 'pitch-tile-sub--light', className)}>{children}</p>
   )
 }
 

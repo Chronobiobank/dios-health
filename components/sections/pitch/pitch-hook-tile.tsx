@@ -40,7 +40,7 @@ export function PitchHookTile({
     >
       <div className="pitch-tile-copy">
         <PitchTileEyebrow light>{eyebrow}</PitchTileEyebrow>
-        <PitchTileTitle as="h1" light className="mt-2 pitch-tile-title--hero">
+        <PitchTileTitle as="h1" light className="mt-2">
           {title}
         </PitchTileTitle>
         <PitchTileSub light className="mt-2">

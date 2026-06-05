@@ -1,7 +1,7 @@
 /** Calm UI landing visuals — assets under /public/pitch and /public video */
 
 export const PITCH_IMAGES = {
-  hook: '/pitch/hook.jpg',
+  hook: '/your-eye-scan.avif',
   evidence: '/evidence.jpg',
   outcomes: {
     waste: '/Medicines-waste.jpeg',

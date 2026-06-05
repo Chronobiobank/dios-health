@@ -56,12 +56,8 @@
 
 /* Media tiles — tint/scrim applied in PitchMediaTile (Tailwind); typography below */
 
-/* In-tile typography — mobile-first; scales up at tablet/desktop */
-.calm-landing .pitch-tile-eyebrow {
-  font-family: var(--font-family-mono);
-  font-size: clamp(0.625rem, 1.6vw, 0.75rem);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+/* In-tile typography — sizes from globals (.type-pitch-*); color only here */
+.calm-landing .type-pitch-eyebrow {
   color: rgb(255 255 255 / 0.4);
 }
 
@@ -69,36 +65,85 @@
   color: rgb(255 255 255 / 0.65);
 }
 
-.calm-landing .pitch-tile-title {
-  font-size: clamp(1.5rem, 5.5vw, 2rem);
-  font-weight: 600;
-  line-height: 1.12;
-  letter-spacing: -0.02em;
+.calm-landing .type-pitch-title {
   color: rgb(255 255 255 / 0.95);
 }
 
 .calm-landing .pitch-tile-title--light {
-  font-size: clamp(1.75rem, 6.5vw, 2.5rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
   color: #fff;
 }
 
-/* Hook / primary hero tile */
-.calm-landing .pitch-tile-title--hero {
-  font-size: clamp(2rem, 7.5vw, 2.75rem);
-  line-height: 1.06;
-}
-
-.calm-landing .pitch-tile-sub {
-  font-size: clamp(0.9375rem, 2.8vw, 1.0625rem);
-  line-height: 1.5;
+.calm-landing .type-pitch-sub {
   color: rgb(255 255 255 / 0.55);
 }
 
 .calm-landing .pitch-tile-sub--light {
-  font-size: clamp(1rem, 3vw, 1.125rem);
   color: rgb(255 255 255 / 0.78);
+}
+
+/* Landing glass tiles — frosted panel, image in inner glass, dark copy on light glass */
+.calm-landing .pitch-glass-tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  gap: clamp(0.875rem, 2.5vw, 1.25rem);
+}
+
+.calm-landing .pitch-glass-tile__media {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: min(32vh, 11rem);
+  overflow: hidden;
+  padding: 0;
+  gap: 0;
+}
+
+.calm-landing .pitch-glass-tile__image {
+  transition: transform 0.45s ease;
+}
+
+.calm-landing .pitch-glass-tile:hover .pitch-glass-tile__image {
+  transform: scale(1.02);
+}
+
+.calm-landing .pitch-glass-tile__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    165deg,
+    rgb(255 255 255 / 0.22) 0%,
+    rgb(255 255 255 / 0.04) 38%,
+    rgb(13 13 13 / 0.08) 100%
+  );
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55);
+}
+
+.calm-landing .pitch-glass-tile__copy {
+  flex-shrink: 0;
+  width: min(100%, var(--pitch-tile-copy-max));
+  max-width: var(--pitch-tile-copy-max);
+}
+
+.calm-landing .pitch-glass-tile .type-pitch-eyebrow {
+  color: var(--calm-brand);
+}
+
+.calm-landing .pitch-glass-tile .type-pitch-title {
+  color: var(--text-primary);
+}
+
+.calm-landing .pitch-glass-tile .type-pitch-sub {
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+@media (min-width: 768px) {
+  .calm-landing .pitch-glass-tile__media {
+    min-height: min(38vh, 16rem);
+  }
 }
 
 .calm-landing .pitch-tile-finding {
@@ -131,29 +176,6 @@
 @media (min-width: 768px) {
   .calm-landing .pitch-section-head__subtitle {
     font-size: clamp(1rem, 1.8vw, 1.1875rem);
-  }
-
-  .calm-landing .pitch-tile-eyebrow,
-  .calm-landing .pitch-tile-eyebrow--light {
-    font-size: 0.8125rem;
-  }
-
-  .calm-landing .pitch-tile-title {
-    font-size: clamp(2rem, 4.5vw, 2.75rem);
-  }
-
-  .calm-landing .pitch-tile-title--light {
-    font-size: clamp(2.25rem, 5vw, 3.5rem);
-  }
-
-  .calm-landing .pitch-tile-title--hero {
-    font-size: clamp(2.75rem, 5.5vw, 4.5rem);
-  }
-
-  .calm-landing .pitch-tile-sub,
-  .calm-landing .pitch-tile-sub--light {
-    font-size: clamp(1.125rem, 2.2vw, 1.375rem);
-    line-height: 1.55;
   }
 
   .calm-landing .pitch-tile-finding {
@@ -191,21 +213,7 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .calm-landing .pitch-tile-title--light {
-    font-size: clamp(2.5rem, 4vw, 3.75rem);
-  }
-
-  .calm-landing .pitch-tile-title--hero {
-    font-size: clamp(3.25rem, 4.5vw, 5rem);
-  }
-
-  .calm-landing .pitch-tile-sub--light {
-    font-size: 1.4375rem;
-  }
-}
-
-/* Section 2 — dashboard-style frosted panel; pastel orbs show through */
+/* Glass grid panels — pair with .dios-glass-outer (tokens in dios-glass.css) */
 .calm-landing .pitch-feature-panel {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
@@ -215,31 +223,10 @@
   width: 100%;
   gap: var(--dash-tile-gap, 0.5rem);
   overflow: hidden;
-  border-radius: var(--pitch-radius, var(--calm-radius-card, 12px));
-  /* Matches dios-glass-outer — tuned slightly lighter so landing hues read through */
-  background: linear-gradient(
-    152deg,
-    rgb(255 255 255 / 0.58) 0%,
-    rgb(248 250 252 / 0.42) 42%,
-    rgb(255 255 255 / 0.5) 100%
-  );
-  -webkit-backdrop-filter: var(--dios-glass-outer-blur, blur(44px) saturate(1.8));
-  backdrop-filter: var(--dios-glass-outer-blur, blur(44px) saturate(1.8));
-  border: 1px solid var(--dios-glass-outer-border, rgb(255 255 255 / 0.68));
-  box-shadow: var(--dios-glass-outer-highlight, inset 0 1px 0 rgb(255 255 255 / 0.92)),
-    var(--dios-glass-outer-shadow, 0 8px 32px rgb(13 13 13 / 0.06));
 }
 
 .calm-landing .pitch-feature-panel.dios-glass-outer:hover {
   transform: none;
-  background: linear-gradient(
-    152deg,
-    rgb(255 255 255 / 0.58) 0%,
-    rgb(248 250 252 / 0.42) 42%,
-    rgb(255 255 255 / 0.5) 100%
-  );
-  box-shadow: var(--dios-glass-outer-highlight, inset 0 1px 0 rgb(255 255 255 / 0.92)),
-    var(--dios-glass-outer-shadow, 0 8px 32px rgb(13 13 13 / 0.06));
 }
 
 .calm-landing .pitch-feature-panel__eyebrow {
@@ -319,9 +306,9 @@
   text-align: left;
 }
 
-.calm-landing .pitch-tile-copy .pitch-tile-eyebrow,
-.calm-landing .pitch-tile-copy .pitch-tile-title,
-.calm-landing .pitch-tile-copy .pitch-tile-sub {
+.calm-landing .pitch-tile-copy .type-pitch-eyebrow,
+.calm-landing .pitch-tile-copy .type-pitch-title,
+.calm-landing .pitch-tile-copy .type-pitch-sub {
   max-width: none;
   text-wrap: pretty;
 }

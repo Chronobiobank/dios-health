@@ -22,7 +22,7 @@ export const NAV_MENU_LINKS = [
   { label: 'Contact DIOS', href: '/contact' },
 ] as const
 
-export const DIOS_MISSION_STATEMENT = 'From standard dose to dose intelligence'
+export const DIOS_MISSION_STATEMENT = 'Dose Intelligence'
 
 export const FOOTER_LINKS = [
   { label: 'How it works', href: '/how-it-works' },

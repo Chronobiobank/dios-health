@@ -17,9 +17,12 @@
 }
 
 .calm-landing .calm-card {
-  border-radius: var(--calm-radius-card);
-  background-color: rgb(15 15 15 / 0.72);
-  border: 0.5px solid rgb(255 255 255 / 0.12);
+  border-radius: var(--dios-glass-radius-outer, var(--calm-radius-card));
+  background: var(--dios-glass-outer-bg);
+  backdrop-filter: var(--dios-glass-outer-blur);
+  -webkit-backdrop-filter: var(--dios-glass-outer-blur);
+  border: 1px solid var(--dios-glass-outer-border);
+  box-shadow: var(--dios-glass-outer-highlight), var(--dios-glass-outer-shadow);
 }
 
 .calm-landing .calm-eyebrow {
@@ -104,6 +107,7 @@ body:has(.calm-landing) {
 }
 
 /* Full-height only for the screen-level tile — not nested sub-tiles in a grid */
+.calm-landing .pitch-screen > .pitch-screen__tile > .pitch-glass-tile,
 .calm-landing .pitch-screen > .pitch-screen__tile > .pitch-media-tile {
   display: flex;
   flex-direction: column;
@@ -111,6 +115,7 @@ body:has(.calm-landing) {
   min-height: 0;
 }
 
+.calm-landing .pitch-screen > .pitch-screen__tile > .pitch-glass-tile > .pitch-glass-tile__media,
 .calm-landing .pitch-screen > .pitch-screen__tile > .pitch-media-tile > .pitch-media-tile__frame {
   flex: 1;
   min-height: 0;
