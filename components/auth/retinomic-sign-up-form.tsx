@@ -11,6 +11,7 @@ import {
   mergeOnboardingBridge,
   type OnboardingBridgePayload,
 } from '@/lib/auth/onboarding-bridge'
+import { medicationLabelsFromIds } from '@/lib/medication/patient-medications'
 import { AUTH_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
@@ -44,6 +45,10 @@ export function RetinomicSignUpForm({ initialBridge }: RetinomicSignUpFormProps)
     const lng = bridge?.onboardingLatLong.lng ?? 174.76
     const irisPigment = bridge?.irisPigment ?? 'DARK'
     const skinITA = bridge?.skinITA ?? 38
+    const currentMedications =
+      bridge?.medicationIds && bridge.medicationIds.length > 0
+        ? medicationLabelsFromIds(bridge.medicationIds)
+        : undefined
 
     try {
       const registerRes = await fetch('/api/auth/register', {
@@ -57,6 +62,7 @@ export function RetinomicSignUpForm({ initialBridge }: RetinomicSignUpFormProps)
           skinITA,
           onboardingLat: lat,
           onboardingLng: lng,
+          currentMedications,
         }),
       })
 
@@ -111,6 +117,9 @@ export function RetinomicSignUpForm({ initialBridge }: RetinomicSignUpFormProps)
           <p className="mt-1 type-medical-dense">
             {bridge.irisPigment} iris · ITA {bridge.skinITA} · light dose anchor ·{' '}
             {bridge.onboardingLatLong.lat.toFixed(2)}, {bridge.onboardingLatLong.lng.toFixed(2)}
+            {bridge.medicationIds && bridge.medicationIds.length > 0
+              ? ` · ${bridge.medicationIds.length} med${bridge.medicationIds.length === 1 ? '' : 's'} for timing`
+              : ''}
           </p>
         </div>
       ) : (

@@ -1,3 +1,4 @@
+import { normalizeMedicationIds } from '@/lib/medication/patient-medications'
 import type { HardwareBaseline, IrisPigment } from '@/src/types'
 import { computeSunZenithData } from '@/src/lib/engine/sun-zenith'
 
@@ -15,6 +16,8 @@ export type OnboardingBridgePayload = {
   skinITA: number
   onboardingLatLong: OnboardingGeo
   capturedAt: string
+  /** Catalog ids selected during onboarding — persisted to profile at signup */
+  medicationIds?: string[]
 }
 
 export type OnboardingBridgeParseResult = {
@@ -104,7 +107,11 @@ export function readOnboardingBridgeFromSession(): OnboardingBridgePayload | nul
       parsed.onboardingLatLong?.lat != null &&
       parsed.onboardingLatLong?.lng != null
     ) {
-      return parsed
+      const medicationIds = normalizeMedicationIds(parsed.medicationIds)
+      return {
+        ...parsed,
+        medicationIds: medicationIds.length > 0 ? medicationIds : undefined,
+      }
     }
   } catch {
     return null
@@ -121,12 +128,18 @@ export function mergeOnboardingBridge(
   searchParams: URLSearchParams
 ): OnboardingBridgeParseResult {
   const fromUrl = parseOnboardingBridgeFromSearchParams(searchParams)
+  const fromSession = readOnboardingBridgeFromSession()
+
   if (fromUrl) {
-    persistOnboardingBridge(fromUrl)
-    return { payload: fromUrl, source: 'url' }
+    const merged: OnboardingBridgePayload = {
+      ...fromUrl,
+      capturedAt: fromSession?.capturedAt ?? fromUrl.capturedAt,
+      medicationIds: fromSession?.medicationIds ?? fromUrl.medicationIds,
+    }
+    persistOnboardingBridge(merged)
+    return { payload: merged, source: 'url' }
   }
 
-  const fromSession = readOnboardingBridgeFromSession()
   if (fromSession) {
     return { payload: fromSession, source: 'session' }
   }

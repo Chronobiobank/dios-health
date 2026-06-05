@@ -3,13 +3,12 @@
 import { useCallback, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { MEDICATION_TIMING_CATALOG } from '@/lib/medication/timing-catalog'
+import { MedicationChipPicker } from '@/components/retinomic/medication-chip-picker'
 import {
   medicationLabelsFromIds,
   selectedMedicationIdsFromProfile,
 } from '@/lib/medication/patient-medications'
 import { createClient } from '@/lib/supabase/client'
-import { cn } from '@/lib/utils'
 
 type PatientMedicationsPanelProps = {
   patientId: string
@@ -87,32 +86,12 @@ export function PatientMedicationsPanel({
         personal timing anchored to your body clock.
       </p>
 
-      <ul className="mt-4 flex flex-wrap gap-2">
-        {MEDICATION_TIMING_CATALOG.map((medication) => {
-          const active = selectedIds.has(medication.id)
-          return (
-            <li key={medication.id}>
-              <button
-                type="button"
-                disabled={saving}
-                onClick={() => toggleMedication(medication.id)}
-                className={cn(
-                  'rounded-full border px-3 py-1.5 text-left text-sm transition-colors',
-                  active
-                    ? 'border-[rgb(201,151,58)]/45 bg-[rgb(201,151,58)]/12 text-black'
-                    : 'border-black/12 bg-white/50 text-black/70 hover:border-black/25 hover:text-black'
-                )}
-                aria-pressed={active}
-              >
-                <span className="font-medium">{medication.name}</span>
-                <span className="mt-0.5 block font-mono text-[10px] uppercase tracking-wide text-black/45">
-                  {medication.standardGuidance.replace('Standard: ', '')}
-                </span>
-              </button>
-            </li>
-          )
-        })}
-      </ul>
+      <MedicationChipPicker
+        selectedIds={selectedIds}
+        onToggle={toggleMedication}
+        disabled={saving}
+        className="mt-4"
+      />
 
       {saving ? (
         <p className="calm-auth-muted mt-3 font-mono text-[10px] uppercase tracking-widest">Saving…</p>

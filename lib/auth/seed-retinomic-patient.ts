@@ -14,6 +14,7 @@ export type SeedRetinomicPatientInput = {
   skinITA: number
   lat: number
   lng: number
+  currentMedications?: string[]
 }
 
 function cityFromCoordinates(lat: number, lng: number): { city: string; country: string } {
@@ -76,6 +77,10 @@ export async function seedRetinomicPatientRecord(
     siloton_integration: { linked: false, accessToken: null },
     onboarding_complete: true,
     data_share_policy: true,
+    current_medications:
+      input.currentMedications && input.currentMedications.length > 0
+        ? input.currentMedications
+        : null,
   })
 
   if (patientError) {

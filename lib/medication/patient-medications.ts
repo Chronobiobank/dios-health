@@ -4,6 +4,20 @@ import {
   normalizeMedicationToken,
 } from '@/lib/medication/timing-catalog'
 
+const VALID_MEDICATION_IDS = new Set(MEDICATION_TIMING_CATALOG.map((row) => row.id))
+
+export function normalizeMedicationIds(ids: unknown): string[] {
+  if (!Array.isArray(ids)) return []
+  const seen = new Set<string>()
+  const normalized: string[] = []
+  for (const id of ids) {
+    if (typeof id !== 'string' || !VALID_MEDICATION_IDS.has(id) || seen.has(id)) continue
+    seen.add(id)
+    normalized.push(id)
+  }
+  return normalized
+}
+
 export function readPatientMedicationList(value: unknown): string[] {
   if (!Array.isArray(value)) return []
   return value.filter((item): item is string => typeof item === 'string' && item.trim().length > 0)

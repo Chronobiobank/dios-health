@@ -29,6 +29,7 @@ export const ONBOARDING_COPY = {
   pillars: [
     { id: 'light', label: 'Light dose', note: 'From scan', active: true },
     { id: 'eye', label: 'Eye scan', note: 'Step 1', active: true },
+    { id: 'meds', label: 'Med timing', note: 'Step 3', active: false },
     { id: 'blood', label: 'Blood panel', note: 'If flagged', active: false },
     { id: 'sleep', label: 'Sleep check', note: 'If flagged', active: false },
   ],
@@ -46,11 +47,18 @@ export const ONBOARDING_COPY = {
     title: 'In-person scan node',
     body: 'Book a nearby Siloton GiraffeOCT node when you want retina verification beyond the phone baseline.',
   },
+  step3: {
+    label: 'Step 3',
+    eyebrow: 'Quantify your meds',
+    title: 'What do you take?',
+    body: 'Select your medications now — your first dashboard shows personal dose windows instead of examples. Skip if you prefer to add these later in Settings.',
+    skipNote: 'Optional — you can add or edit medications anytime in Settings.',
+  },
   continueCta: 'Save your baseline →',
   signInHint: 'Already have an account?',
   signUpHeadline: 'Save your dose baseline',
   signUpSubtext:
-    'Your eye scan links to this account. Gominak blood and sleep panels unlock only if DIOS flags elevated risk.',
+    'Your eye scan and medication timing link to this account. Gominak blood and sleep panels unlock only if DIOS flags elevated risk.',
 } as const
 
 /** Public live demo — /how-it-works */

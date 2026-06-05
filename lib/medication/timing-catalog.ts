@@ -130,5 +130,3 @@ export function resolveMedicationWindowTime(
     estimated: true,
   }
 }
-
-export { matchPatientMedications } from '@/lib/medication/patient-medications'

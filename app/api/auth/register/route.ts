@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import { mapSignupDbError } from '@/lib/auth/map-signup-db-error'
+import { readPatientMedicationList } from '@/lib/medication/patient-medications'
 import { seedRetinomicPatientRecord } from '@/lib/auth/seed-retinomic-patient'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
 import { createAdminClient } from '@/lib/supabase/admin'
@@ -21,6 +22,7 @@ type RegisterBody = {
   skinITA?: number
   onboardingLat?: number
   onboardingLng?: number
+  currentMedications?: unknown
 }
 
 export async function POST(request: Request) {
@@ -56,6 +58,7 @@ export async function POST(request: Request) {
     typeof body.onboardingLng === 'number' && Number.isFinite(body.onboardingLng)
       ? body.onboardingLng
       : 174.76
+  const currentMedications = readPatientMedicationList(body.currentMedications)
 
   try {
     const admin = createAdminClient()
@@ -89,6 +92,7 @@ export async function POST(request: Request) {
       skinITA,
       lat,
       lng,
+      currentMedications,
     })
 
     if (seedError) {
