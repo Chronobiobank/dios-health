@@ -1,43 +1,74 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { LightCheckIn } from '@/components/retinomic/light-check-in'
 import { PhoticProgressRing } from '@/components/retinomic/photic-progress-ring'
-import { resolveLiveMluxFeed, type LiveMluxFeedInput } from '@/lib/retinomic/live-mlux-feed'
+import type { LightCheckInConfig } from '@/lib/retinomic/light-check-in'
+import {
+  resolveLiveMluxFeed,
+  type LiveMluxFeedInput,
+  type SmartphoneFeedSnapshot,
+} from '@/lib/retinomic/live-mlux-feed'
 import { photicContextBanner } from '@/lib/retinomic/photic-dose'
 
 type PhoticDosePanelProps = {
   feedInput: LiveMluxFeedInput
   lightIrisDetected: boolean
+  lightCheckIn?: LightCheckInConfig | null
 }
 
-export function PhoticDosePanel({ feedInput, lightIrisDetected }: PhoticDosePanelProps) {
-  const [feed, setFeed] = useState(() => resolveLiveMluxFeed(feedInput))
+export function PhoticDosePanel({
+  feedInput,
+  lightIrisDetected,
+  lightCheckIn = null,
+}: PhoticDosePanelProps) {
+  const [feedOverride, setFeedOverride] = useState<SmartphoneFeedSnapshot | null>(null)
 
-  const vdrDose = feedInput.smartphoneFeed?.vdrDoseToday ?? null
-  const observedAt = feedInput.smartphoneFeed?.observedAt ?? null
-  const confidenceScore = feedInput.smartphoneFeed?.confidenceScore ?? null
+  const activeFeedInput = useMemo<LiveMluxFeedInput>(
+    () => ({
+      ...feedInput,
+      smartphoneFeed: feedOverride ?? feedInput.smartphoneFeed,
+      smartphoneActive: feedOverride != null ? true : feedInput.smartphoneActive,
+    }),
+    [feedInput, feedOverride]
+  )
+
+  const [feed, setFeed] = useState(() => resolveLiveMluxFeed(activeFeedInput))
+
+  const vdrDose = activeFeedInput.smartphoneFeed?.vdrDoseToday ?? null
+  const observedAt = activeFeedInput.smartphoneFeed?.observedAt ?? null
+  const confidenceScore = activeFeedInput.smartphoneFeed?.confidenceScore ?? null
 
   useEffect(() => {
-    const tick = () => setFeed(resolveLiveMluxFeed(feedInput))
+    const tick = () => setFeed(resolveLiveMluxFeed(activeFeedInput))
     tick()
     const interval = window.setInterval(tick, 60_000)
     return () => window.clearInterval(interval)
   }, [
-    feedInput.melanopicLuxCeiling,
-    feedInput.photicPhase,
-    feedInput.mluxScore,
-    feedInput.smartphoneActive,
-    feedInput.hardwareBaseline,
+    activeFeedInput.melanopicLuxCeiling,
+    activeFeedInput.photicPhase,
+    activeFeedInput.mluxScore,
+    activeFeedInput.smartphoneActive,
+    activeFeedInput.hardwareBaseline,
     vdrDose,
     observedAt,
     confidenceScore,
   ])
 
-  const banner = photicContextBanner(feedInput.photicPhase, lightIrisDetected)
+  const handleLogged = useCallback((snapshot: SmartphoneFeedSnapshot) => {
+    setFeedOverride(snapshot)
+    setFeed(resolveLiveMluxFeed({
+      ...feedInput,
+      smartphoneFeed: snapshot,
+      smartphoneActive: true,
+    }))
+  }, [feedInput])
+
+  const banner = photicContextBanner(activeFeedInput.photicPhase, lightIrisDetected)
   const pct =
-    feedInput.melanopicLuxCeiling > 0
-      ? Math.round((feed.melanopicLuxToday / feedInput.melanopicLuxCeiling) * 100)
+    activeFeedInput.melanopicLuxCeiling > 0
+      ? Math.round((feed.melanopicLuxToday / activeFeedInput.melanopicLuxCeiling) * 100)
       : 0
 
   return (
@@ -51,14 +82,14 @@ export function PhoticDosePanel({ feedInput, lightIrisDetected }: PhoticDosePane
       <div className="retinomic-ring-wrap">
         <PhoticProgressRing
           current={feed.melanopicLuxToday}
-          ceiling={feedInput.melanopicLuxCeiling}
+          ceiling={activeFeedInput.melanopicLuxCeiling}
         />
         <div className="retinomic-ring-metrics">
           <p className="retinomic-ring-value">
             {pct}% <span className="dash-sub text-sm font-normal">of ceiling</span>
           </p>
           <p className="retinomic-ring-caption">
-            Target {feedInput.melanopicLuxCeiling} mLux · {feed.caption}
+            Target {activeFeedInput.melanopicLuxCeiling} mLux · {feed.caption}
           </p>
           {feed.confidenceLabel ? (
             <p className="calm-auth-muted mt-1 font-mono text-[10px] uppercase tracking-widest">
@@ -69,6 +100,13 @@ export function PhoticDosePanel({ feedInput, lightIrisDetected }: PhoticDosePane
         </div>
       </div>
       <p className="retinomic-photic-banner">{banner}</p>
+      {lightCheckIn ? (
+        <LightCheckIn
+          phase={activeFeedInput.photicPhase}
+          config={lightCheckIn}
+          onLogged={handleLogged}
+        />
+      ) : null}
     </section>
   )
 }

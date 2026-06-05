@@ -30,6 +30,7 @@ export function RetinomicDashboardClient({
   bloodLockedCopy,
   sleepLockedCopy,
   liveMluxFeedInput,
+  lightCheckIn,
   lightIrisDetected,
   vitaminD3NmolL,
   vitaminB5UmolL,
@@ -55,7 +56,11 @@ export function RetinomicDashboardClient({
           {baselineScan ? <BaselineScanPanel baseline={baselineScan} firstName={firstName} /> : null}
           <InterventionGuide intervention={dailyIntervention} dayOneIntro={dayOneIntro} />
           {medicationTiming ? <MedicationTimingPanel plan={medicationTiming} publicDemo={publicDemo} /> : null}
-          <PhoticDosePanel feedInput={liveMluxFeedInput} lightIrisDetected={lightIrisDetected} />
+          <PhoticDosePanel
+            feedInput={liveMluxFeedInput}
+            lightIrisDetected={lightIrisDetected}
+            lightCheckIn={publicDemo ? null : lightCheckIn}
+          />
           <MetabolicDosePanel
             tier={tier}
             vitaminD3NmolL={vitaminD3NmolL}

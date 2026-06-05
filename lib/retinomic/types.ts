@@ -1,6 +1,7 @@
 import type { BaselineScanSummary } from '@/lib/retinomic/baseline-scan-summary'
 import type { RetinomicTier } from '@/src/types'
 import type { MedicationTimingPlan } from '@/src/lib/engine/medication-timing'
+import type { LightCheckInConfig } from '@/lib/retinomic/light-check-in'
 import type { LiveMluxFeedInput } from '@/lib/retinomic/live-mlux-feed'
 
 export type {
@@ -44,6 +45,8 @@ export type RetinomicDashboardProps = {
   photicDoseSourceCaption: string
   /** Serialized feed for client-side live lux updates */
   liveMluxFeedInput: LiveMluxFeedInput
+  /** Authenticated dashboard — inline light check-in */
+  lightCheckIn: LightCheckInConfig | null
   bloodLockedCopy: DayOneLockedCopy | null
   sleepLockedCopy: DayOneLockedCopy | null
   melanopicLuxToday: number

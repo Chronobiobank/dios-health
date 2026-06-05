@@ -99,6 +99,7 @@ export const MOCK_RETINOMIC_DASHBOARD: RetinomicDashboardProps & {
   dayOneIntro: dayOneInterventionIntro(MOCK_BASELINE_SCAN, mockLiveMluxFeed.source),
   photicDoseSourceCaption: mockLiveMluxFeed.caption,
   liveMluxFeedInput: mockLiveMluxFeedInput,
+  lightCheckIn: null,
   bloodLockedCopy: DAY_ONE_LOCKED_COPY.blood,
   sleepLockedCopy: DAY_ONE_LOCKED_COPY.sleep,
   melanopicLuxToday: mockLiveMluxFeed.melanopicLuxToday,

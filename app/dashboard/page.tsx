@@ -245,6 +245,10 @@ export default async function PatientDashboardPage() {
       dayOneIntro={dayOneIntro}
       photicDoseSourceCaption={liveMluxFeed.caption}
       liveMluxFeedInput={liveMluxFeedInput}
+      lightCheckIn={{
+        fitzpatrickType: patient.fitzpatrick_type,
+        defaultSleepOnset: patient.chronotype_q3 ?? '22:30',
+      }}
       bloodLockedCopy={bloodLockedCopy}
       sleepLockedCopy={sleepLockedCopy}
       melanopicLuxToday={liveMluxFeed.melanopicLuxToday}

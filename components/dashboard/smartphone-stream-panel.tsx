@@ -6,6 +6,7 @@ import { useState, type FormEvent } from 'react'
 import { DASHBOARD_BODY, DASHBOARD_CARD, MONO_DATA, SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
 import { BTN_PRIMARY, CARD, LABEL } from '@/components/sections/layout'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
+import { submitLightCheckIn } from '@/lib/retinomic/light-check-in'
 
 type SmartphoneStreamPanelProps = {
   fitzpatrickType: number | null
@@ -50,21 +51,14 @@ export function SmartphoneStreamPanel({
     }
 
     try {
-      const response = await fetch('/api/smartphone/observations', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sleep_onset_local: sleepOnset,
-          outdoor_light_before_10am: outdoorLight === 'yes',
-          sleep_onset_estimated: true,
-          fitzpatrick_type: fitzpatrickType,
-        }),
+      const result = await submitLightCheckIn({
+        outdoorLight: outdoorLight === 'yes',
+        sleepOnsetLocal: sleepOnset,
+        fitzpatrickType,
       })
 
-      const result = (await response.json()) as { error?: string }
-
-      if (!response.ok) {
-        setError(result.error ?? 'Could not save your reading. Please try again.')
+      if (!result.ok) {
+        setError(result.error)
         return
       }
 
