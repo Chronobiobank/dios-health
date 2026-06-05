@@ -80,7 +80,7 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     sections: [
       {
         title: 'The blind spot',
-        body: 'Most pharmaceutical and nutritional science assumes we all respond to micronutrients the same. We don't. Standard dose times and population blood targets follow — and most patients miss.',
+        body: "Most pharmaceutical and nutritional science assumes we all respond to micronutrients the same. We don't. Standard dose times and population blood targets follow — and most patients miss.",
       },
       {
         title: 'Dose intelligence',

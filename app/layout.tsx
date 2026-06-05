@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'From standard dose to dose intelligence · dios.health',
     description:
-      'We don't all respond to micronutrients the same. Gominak titrates light, blood, and pill time to your biology.',
+      "We don't all respond to micronutrients the same. Gominak titrates light, blood, and pill time to your biology.",
     type: 'website',
     url: siteUrl,
   },
