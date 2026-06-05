@@ -10,6 +10,8 @@ type MetabolicDosePanelProps = {
   tier: RetinomicTier
   vitaminD3NmolL: number | null
   vitaminB5UmolL: number | null
+  lockedTitle?: string
+  lockedBody?: string
 }
 
 function LockIcon() {
@@ -26,7 +28,13 @@ function LockIcon() {
   )
 }
 
-export function MetabolicDosePanel({ tier, vitaminD3NmolL, vitaminB5UmolL }: MetabolicDosePanelProps) {
+export function MetabolicDosePanel({
+  tier,
+  vitaminD3NmolL,
+  vitaminB5UmolL,
+  lockedTitle,
+  lockedBody,
+}: MetabolicDosePanelProps) {
   const isLocked = tier === 'FREE_SCREENING'
   const d3Ng = vitaminD3NmolL != null ? vitaminD3NmolToNgMl(vitaminD3NmolL) : null
   const d3Display = d3Ng != null ? `${d3Ng}` : '—'
@@ -64,8 +72,10 @@ export function MetabolicDosePanel({ tier, vitaminD3NmolL, vitaminB5UmolL }: Met
         {isLocked ? (
           <div className="premium-locked__overlay premium-locked__glass retinomic-locked-overlay">
             <LockIcon />
-            <Link href={PATIENT_ROUTES.streamsBloods} className="dios-btn-on-light">
-              Unlock quarterly labs
+            <p className="retinomic-locked-overlay__title">{lockedTitle ?? 'Gominak blood panel'}</p>
+            <p className="retinomic-locked-overlay__body">{lockedBody ?? 'Unlocks when DIOS flags metabolic risk.'}</p>
+            <Link href={PATIENT_ROUTES.streamsBloods} className="dios-btn-on-light--secondary">
+              Learn about labs
             </Link>
           </div>
         ) : null}

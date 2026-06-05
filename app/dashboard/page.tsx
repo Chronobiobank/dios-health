@@ -11,6 +11,15 @@ import {
   parseStoredHardwareBaseline,
 } from '@/lib/retinomic/baseline-scan-summary'
 import {
+  DAY_ONE_LOCKED_COPY,
+  dayOneInterventionIntro,
+  estimateBaselineAnchoredMelanopicLux,
+  morningMluxMinutesFromBaseline,
+  photicDoseSourceCaption,
+  resolvePhoticDoseSource,
+  tailorDailyInterventionForBaseline,
+} from '@/lib/retinomic/day-one-dashboard'
+import {
   detectLightIris,
   estimateMelanopicLuxCeiling,
   estimateMelanopicLuxToday,
@@ -145,13 +154,33 @@ export default async function PatientDashboardPage() {
     patient.fitzpatrick_type,
     hardwareBaseline?.onboardingGeo?.lat ?? calibration.latitude
   )
-  const melanopicLuxToday = estimateMelanopicLuxToday(
+  const photicSource = resolvePhoticDoseSource(
+    profileRow?.mlux_score ?? null,
+    smartphoneActive,
+    baselineScan != null
+  )
+  const morningMluxMinutes = hardwareBaseline
+    ? morningMluxMinutesFromBaseline(hardwareBaseline.irisPigment, hardwareBaseline.skinITA)
+    : (patient.morning_mlux_target_duration_minutes ?? 90)
+
+  let melanopicLuxToday = estimateMelanopicLuxToday(
     smartphoneActive,
     profileRow?.mlux_score ?? null,
     photicPhase
   )
+  if (photicSource === 'baseline' && hardwareBaseline) {
+    melanopicLuxToday = estimateBaselineAnchoredMelanopicLux(
+      melanopicLuxCeiling,
+      hardwareBaseline.irisPigment,
+      hardwareBaseline.skinITA,
+      photicPhase
+    )
+  }
 
-  const dailyIntervention = buildDailyInterventionForPatient({
+  const isDayOneFree =
+    effectiveTier === 'FREE_SCREENING' && baselineScan != null && (bloodPanelsCount ?? 0) === 0
+
+  let dailyIntervention = buildDailyInterventionForPatient({
     tier: effectiveTier,
     chronotypeLabel: calibration.chronotype,
     chronotypeWakeTime: patient.chronotype_q1,
@@ -163,11 +192,24 @@ export default async function PatientDashboardPage() {
         : estimateRemCycleEfficiency(latestNight ?? null),
     microArousalsCount: latestTiptraqTelemetry?.micro_arousals_count ?? null,
     eveningLightDisciplineOptimal: smartphoneActive,
-    morningMluxTargetDurationMinutes:
-      patient.morning_mlux_target_duration_minutes ?? 90,
+    morningMluxTargetDurationMinutes: morningMluxMinutes,
     locationCity: patient.location_city,
     locationCountry: patient.location_country,
   })
+
+  if (isDayOneFree && baselineScan) {
+    dailyIntervention = tailorDailyInterventionForBaseline(
+      dailyIntervention,
+      baselineScan,
+      effectiveTier,
+      morningMluxMinutes
+    )
+  }
+
+  const dayOneIntro =
+    isDayOneFree && baselineScan ? dayOneInterventionIntro(baselineScan) : null
+  const bloodLockedCopy = isDayOneFree ? DAY_ONE_LOCKED_COPY.blood : null
+  const sleepLockedCopy = isDayOneFree ? DAY_ONE_LOCKED_COPY.sleep : null
 
   return (
     <RetinomicDashboardClient
@@ -177,6 +219,10 @@ export default async function PatientDashboardPage() {
       avatarUrl={profile.avatar_url ?? resolveDashboardAvatar(null)}
       tier={effectiveTier}
       baselineScan={baselineScan}
+      dayOneIntro={dayOneIntro}
+      photicDoseSourceCaption={photicDoseSourceCaption(photicSource)}
+      bloodLockedCopy={bloodLockedCopy}
+      sleepLockedCopy={sleepLockedCopy}
       melanopicLuxToday={melanopicLuxToday}
       melanopicLuxCeiling={melanopicLuxCeiling}
       photicPhase={photicPhase}

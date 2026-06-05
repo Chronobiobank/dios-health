@@ -22,6 +22,10 @@ export function RetinomicDashboardClient({
   avatarUrl,
   tier,
   baselineScan,
+  dayOneIntro,
+  photicDoseSourceCaption,
+  bloodLockedCopy,
+  sleepLockedCopy,
   melanopicLuxToday,
   melanopicLuxCeiling,
   photicPhase,
@@ -38,22 +42,29 @@ export function RetinomicDashboardClient({
         <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
         <main className="dash-dashboard-main" aria-label="Retinomic protocol control panels">
           {baselineScan ? <BaselineScanPanel baseline={baselineScan} firstName={firstName} /> : null}
-          <InterventionGuide intervention={dailyIntervention} />
+          <InterventionGuide intervention={dailyIntervention} dayOneIntro={dayOneIntro} />
           <PhoticDosePanel
             melanopicLuxToday={melanopicLuxToday}
             melanopicLuxCeiling={melanopicLuxCeiling}
             phase={photicPhase}
             lightIrisDetected={lightIrisDetected}
+            doseSourceCaption={photicDoseSourceCaption}
           />
           <MetabolicDosePanel
             tier={tier}
             vitaminD3NmolL={vitaminD3NmolL}
             vitaminB5UmolL={vitaminB5UmolL}
+            lockedTitle={bloodLockedCopy?.title}
+            lockedBody={bloodLockedCopy?.body}
           />
           <TipTraqSleepPanel
             tier={tier}
             remCycleEfficiency={remCycleEfficiency}
             autonomicStrain={autonomicStrain}
+            lockedTitle={sleepLockedCopy?.title}
+            lockedBody={sleepLockedCopy?.body}
+            lockedHref={sleepLockedCopy?.href}
+            lockedCta={sleepLockedCopy?.cta}
           />
         </main>
       </div>

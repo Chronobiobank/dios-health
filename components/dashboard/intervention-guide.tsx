@@ -36,9 +36,10 @@ function PriorityBadge({ priority }: { priority: InterventionTask['priority'] })
 
 type InterventionGuideProps = {
   intervention: DailyIntervention
+  dayOneIntro?: string | null
 }
 
-export function InterventionGuide({ intervention }: InterventionGuideProps) {
+export function InterventionGuide({ intervention, dayOneIntro }: InterventionGuideProps) {
   return (
     <section
       className="dios-glass-outer retinomic-panel"
@@ -49,7 +50,12 @@ export function InterventionGuide({ intervention }: InterventionGuideProps) {
           <p id="intervention-guide-title" className="dashboard-section-label">
             Today&apos;s plan
           </p>
-          <p className="dash-sub mt-1 text-sm">
+          {dayOneIntro ? (
+            <p className="type-body mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+              {dayOneIntro}
+            </p>
+          ) : null}
+          <p className={cn('dash-sub text-sm', dayOneIntro ? 'mt-2' : 'mt-1')}>
             Eat within {intervention.treWindowHours}h · first meal {intervention.firstMealTime}
             {intervention.firstBiteBComplexSync ? ' · B-vitamins with food' : ''}
           </p>

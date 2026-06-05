@@ -26,11 +26,22 @@ export type SilotonScanNode = {
   slotsAvailable: number
 }
 
+export type DayOneLockedCopy = {
+  title: string
+  body: string
+  cta?: string
+  href?: string
+}
+
 export type RetinomicDashboardProps = {
   greeting: string
   firstName: string
   tier: RetinomicTier
   baselineScan: BaselineScanSummary | null
+  dayOneIntro: string | null
+  photicDoseSourceCaption: string
+  bloodLockedCopy: DayOneLockedCopy | null
+  sleepLockedCopy: DayOneLockedCopy | null
   melanopicLuxToday: number
   melanopicLuxCeiling: number
   photicPhase: PhoticDayPhase

@@ -1,3 +1,4 @@
+import { DAY_ONE_LOCKED_COPY } from '@/lib/retinomic/day-one-dashboard'
 import type { RetinomicDashboardProps } from '@/lib/retinomic/types'
 import { DEFAULT_DASHBOARD_AVATAR } from '@/components/patient-dashboard/constants'
 import { buildDailyInterventionForPatient } from '@/src/lib/engine/intervention'
@@ -22,6 +23,11 @@ export const MOCK_RETINOMIC_DASHBOARD: RetinomicDashboardProps & {
     lng: 174.7633,
     solarZenithDegrees: 58,
   },
+  dayOneIntro:
+    'Your light iris scan (ITA 41.2°) anchors today\'s light dose in Auckland, New Zealand. Blood and sleep panels stay closed unless DIOS flags risk.',
+  photicDoseSourceCaption: 'Anchored from your eye scan',
+  bloodLockedCopy: DAY_ONE_LOCKED_COPY.blood,
+  sleepLockedCopy: DAY_ONE_LOCKED_COPY.sleep,
   melanopicLuxToday: 248,
   melanopicLuxCeiling: 420,
   photicPhase: 'morning',

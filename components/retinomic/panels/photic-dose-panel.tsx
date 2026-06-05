@@ -9,6 +9,7 @@ type PhoticDosePanelProps = {
   melanopicLuxCeiling: number
   phase: PhoticDayPhase
   lightIrisDetected: boolean
+  doseSourceCaption?: string
 }
 
 export function PhoticDosePanel({
@@ -16,6 +17,7 @@ export function PhoticDosePanel({
   melanopicLuxCeiling,
   phase,
   lightIrisDetected,
+  doseSourceCaption,
 }: PhoticDosePanelProps) {
   const banner = photicContextBanner(phase, lightIrisDetected)
   const pct = melanopicLuxCeiling > 0 ? Math.round((melanopicLuxToday / melanopicLuxCeiling) * 100) : 0
@@ -35,7 +37,7 @@ export function PhoticDosePanel({
             {pct}% <span className="dash-sub text-sm font-normal">of ceiling</span>
           </p>
           <p className="retinomic-ring-caption">
-            Target {melanopicLuxCeiling} mLux · phone sensor
+            Target {melanopicLuxCeiling} mLux · {doseSourceCaption ?? 'phone sensor'}
           </p>
         </div>
       </div>
