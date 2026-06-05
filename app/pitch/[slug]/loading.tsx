@@ -2,7 +2,7 @@ import { PitchRouteLoading } from '@/components/sections/pitch/pitch-route-loadi
 
 export default function PitchDetailLoading() {
   return (
-    <div className="min-h-screen bg-[#080808]">
+    <div className="marketing-detail min-h-screen">
       <PitchRouteLoading />
     </div>
   )

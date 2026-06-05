@@ -5,14 +5,9 @@ import { RetinomicSignInForm } from '@/components/auth/retinomic-sign-in-form'
 
 export default function RetinomicSignInPage() {
   return (
-    <RetinomicAuthShell
-      headline="Protocol access"
-      subtext="Sign in to your Retinomic dashboard. Premium verification unlocks full metabolic and TipTraQ streams."
-    >
+    <RetinomicAuthShell headline="Sign in" subtext="Open your Retinomic dashboard and daily plan.">
       <Suspense
-        fallback={
-          <p className="text-center text-sm text-[rgb(250_250_247/0.5)]">Loading sign-in…</p>
-        }
+        fallback={<p className="calm-auth-muted text-center text-sm">Loading sign-in…</p>}
       >
         <RetinomicSignInForm />
       </Suspense>

@@ -64,17 +64,11 @@ export default function TipTraqProductPage() {
       </ul>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link
-          href="/"
-          className="inline-flex items-center rounded-full bg-black px-5 py-2 text-sm font-medium text-white hover:bg-black/90"
-        >
+        <Link href="/" className="dios-btn-on-light">
           Back to landing
         </Link>
-        <Link
-          href="/signup/clinician"
-          className="inline-flex items-center rounded-full border border-black/15 bg-white/80 px-5 py-2 text-sm font-medium text-black hover:bg-white"
-        >
-          Request clinician demo
+        <Link href="/signup/clinician" className="dios-btn-on-light--secondary">
+          Clinician demo
         </Link>
       </div>
     </main>

@@ -280,7 +280,7 @@ export function WorkforceModel() {
         <div className="mt-8 text-center">
           <Link
             href="#demo"
-            className="btn-primary type-button inline-flex items-center justify-center rounded-full bg-black py-3 text-white transition-colors hover:bg-black/80"
+            className="dios-btn-on-light type-button w-full py-3"
           >
             Talk to us about your institution →
           </Link>

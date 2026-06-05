@@ -130,7 +130,7 @@ function CoachPanel({
           placeholder="Ask anything about your body clock…"
           className="dash-head min-w-0 flex-1 rounded-xl border border-white/75 bg-white/60 px-3 py-2.5 dash-panel-body outline-none"
         />
-        <Button type="submit" size="sm" className="bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand)]/90">
+        <Button type="submit" size="sm" className="dios-btn-on-light h-10 min-h-0 px-4 hover:opacity-90">
           Send
         </Button>
       </form>

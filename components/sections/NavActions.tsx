@@ -13,7 +13,7 @@ export async function NavActions() {
   const isAuthenticated = Boolean(user)
   const coachHref = isAuthenticated
     ? PATIENT_ROUTES.coach
-    : `${AUTH_ROUTES.signIn}?next=${encodeURIComponent(PATIENT_ROUTES.coach)}`
+    : `${AUTH_ROUTES.authSignIn}?next=${encodeURIComponent(PATIENT_ROUTES.coach)}`
 
   return (
     <>

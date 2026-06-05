@@ -58,8 +58,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           {intentBlock?.title ?? 'Get in touch'}
         </h1>
         <p className="type-body mt-4 max-w-3xl text-[#0D0D0D]">
-          {intentBlock?.lead ??
-            'For Chronobiobank research, clinical partnerships, or product questions, reach the DIOS team by email or book a demo.'}
+          {intentBlock?.lead ?? 'Email the DIOS team for research, clinical pilots, or product questions.'}
         </p>
         {intentBlock?.bullets ? (
           <ul className="type-body mt-6 max-w-3xl list-none space-y-2 pl-0 text-[#0D0D0D]">

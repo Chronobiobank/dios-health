@@ -22,10 +22,10 @@ export function PitchPhilosophySection() {
         </PitchTileSub>
 
         <div className="mt-4 flex flex-wrap gap-2.5 sm:mt-5 sm:gap-3">
-          <PitchCtaLink href={ctaHref} className="pitch-btn-primary">
+          <PitchCtaLink href={ctaHref} className="dios-btn-on-dark">
             {ctaLabel}
           </PitchCtaLink>
-          <PitchCtaLink href="/onboarding" className="pitch-btn-secondary">
+          <PitchCtaLink href="/onboarding" className="dios-btn-on-dark--secondary">
             Free scan
           </PitchCtaLink>
         </div>

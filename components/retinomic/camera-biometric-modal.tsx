@@ -97,27 +97,24 @@ export function CameraBiometricModal({ open, onClose, onComplete }: CameraBiomet
       aria-modal="true"
       aria-labelledby="biometric-portal-title"
     >
-      <div className="retinomic-camera-modal__card">
-        <p id="biometric-portal-title" className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#7eb8ff]">
+      <div className="dios-glass-outer retinomic-camera-modal__card">
+        <p id="biometric-portal-title" className="calm-auth-eyebrow">
           Biometric screening portal
         </p>
-        <p className="mt-2 text-sm text-[rgb(250_250_247/0.72)]">
+        <p className="dash-sub mt-2 text-sm">
           Iris + cutaneous capture for Retinomic Protocol baseline.
         </p>
 
         <div className="retinomic-camera-viewport mt-4">
           {cameraError ? (
-            <div className="flex h-full items-center justify-center bg-[#111] px-4 text-center text-xs text-[rgb(250_250_247/0.45)]">
+            <div className="flex h-full items-center justify-center bg-white/60 px-4 text-center text-xs text-[var(--text-muted)]">
               {cameraError}
             </div>
           ) : (
             <video ref={videoRef} className="retinomic-camera-viewport__feed" muted playsInline />
           )}
           {scanning ? (
-            <div
-              className="retinomic-camera-scan-line animate-pulse-slow"
-              aria-hidden
-            />
+            <div className="retinomic-camera-scan-line animate-pulse-slow" aria-hidden />
           ) : null}
         </div>
 
@@ -126,18 +123,14 @@ export function CameraBiometricModal({ open, onClose, onComplete }: CameraBiomet
         </div>
 
         <div className="mt-4 flex gap-2">
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex-1 rounded-full border border-[rgb(255_255_255/0.15)] py-2.5 text-sm text-[rgb(250_250_247/0.7)]"
-          >
+          <button type="button" onClick={onClose} className="dios-btn-on-light--secondary flex-1 py-2.5">
             Cancel
           </button>
           <button
             type="button"
             onClick={handleActivate}
             disabled={scanning}
-            className="flex-1 rounded-full bg-[#7eb8ff] py-2.5 text-sm font-medium text-[#0a0a0a] disabled:opacity-50"
+            className="dios-btn-on-light flex-1 py-2.5 disabled:opacity-50"
           >
             {scanning ? 'Scanning…' : 'Activate scan'}
           </button>

@@ -602,9 +602,9 @@
   }
 
   .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__ask-dios {
-    color: var(--text-primary);
-    border-color: rgb(13 13 13 / 0.12);
-    background: rgb(255 255 255 / 0.45);
+    color: #fafaf7;
+    border-color: var(--text-primary);
+    background: var(--text-primary);
   }
 
   .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__cta {
@@ -794,9 +794,9 @@
       border-color 0.15s ease;
   }
 
-  .dios-site-nav__ask-dios:hover {
-    background: rgb(255 255 255 / 0.62);
-    border-color: rgb(13 13 13 / 0.18);
+  .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__ask-dios:hover {
+    background: rgb(13 13 13 / 0.85);
+    border-color: var(--text-primary);
   }
 
   @media (min-width: 640px) {
@@ -1290,6 +1290,17 @@
 
 .calm-landing .marketing-detail :where(p, li, span, h1, h2, h3, h4) {
   color: inherit;
+}
+
+/* Kawasaki scan — one idea per head; subs stay short and narrow */
+.calm-landing .marketing-detail .type-section {
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.calm-landing .marketing-detail .type-body,
+.calm-landing .marketing-detail .type-label + .type-section + .type-body {
+  max-width: 42ch;
 }
 
 /* Marketing detail pages — pill CTAs without shared btn-* classes */

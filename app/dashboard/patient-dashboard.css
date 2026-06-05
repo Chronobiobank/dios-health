@@ -411,6 +411,100 @@ html:has(.patient-dashboard-route) {
   gap: var(--dash-tile-gap);
 }
 
+/* Surface-aware CTAs — Kawasaki rule: black on light, white on dark tiles */
+.dios-btn-on-light,
+a.dios-btn-on-light,
+button.dios-btn-on-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-height: 2.5rem;
+  padding-inline: 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid var(--text-primary);
+  background: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #fafaf7;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.dios-btn-on-light:hover {
+  opacity: 0.9;
+}
+
+.dios-btn-on-light:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dios-btn-on-light--secondary,
+a.dios-btn-on-light--secondary,
+button.dios-btn-on-light--secondary {
+  background: rgb(255 255 255 / 0.58);
+  color: var(--text-primary);
+  border: 1px solid rgb(13 13 13 / 0.14);
+  backdrop-filter: var(--dios-glass-inner-blur);
+  -webkit-backdrop-filter: var(--dios-glass-inner-blur);
+}
+
+.dios-btn-on-light--secondary:hover {
+  background: rgb(255 255 255 / 0.72);
+}
+
+.dios-btn-on-dark,
+a.dios-btn-on-dark,
+button.dios-btn-on-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-height: 3rem;
+  min-width: 9rem;
+  padding-inline: var(--dios-btn-padding-inline);
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  background: #fff;
+  font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+  font-weight: 500;
+  line-height: 1;
+  color: #080808;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.dios-btn-on-dark:hover {
+  opacity: 0.92;
+}
+
+.dios-btn-on-dark--secondary,
+a.dios-btn-on-dark--secondary,
+button.dios-btn-on-dark--secondary {
+  min-height: 3rem;
+  min-width: 9rem;
+  padding-inline: var(--dios-btn-padding-inline);
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  background: rgb(255 255 255 / 0.08);
+  font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+  font-weight: 500;
+  color: #fff;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media (min-width: 640px) {
+  .dios-btn-on-dark,
+  .dios-btn-on-dark--secondary {
+    min-width: 11rem;
+    padding-inline: var(--dios-btn-padding-inline-sm);
+  }
+}
+
 /* Largest tiles — light grey pearlescent translucency */
 .dios-glass-outer,
 .glass-tile {

@@ -26,7 +26,7 @@ function PaperDownloadBar({ paper }: { paper: GrantMunroProblemPaper }) {
       <a
         href={paper.pdfPath}
         download={paper.pdfFilename}
-        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-black/90"
+        className="dios-btn-on-light shrink-0 gap-2"
       >
         <Download className="h-4 w-4" aria-hidden />
         Download PDF
@@ -140,7 +140,7 @@ export function ProblemPaperView({ paper = GRANT_MUNRO_PROBLEM_PAPER }: { paper?
       <div className="mt-10 flex flex-wrap gap-3">
         <Link
           href="/"
-          className="inline-flex items-center rounded-full bg-black px-5 py-2 text-sm font-medium text-white hover:bg-black/90"
+          className="dios-btn-on-light"
         >
           Back to landing
         </Link>

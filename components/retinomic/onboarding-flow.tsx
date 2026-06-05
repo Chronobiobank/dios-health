@@ -40,32 +40,23 @@ export function OnboardingFlow() {
 
   return (
     <div className="retinomic-onboarding">
-      <div className="mx-auto max-w-md px-4 py-10">
-        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#7eb8ff]">
-          Retinomic Protocol · onboarding
-        </p>
-        <h1 className="mt-3 text-2xl font-medium tracking-tight text-[#fafaf7]">
-          Passive sensing + node screening
+      <div className="mx-auto max-w-md px-4">
+        <p className="calm-auth-eyebrow">Free baseline scan</p>
+        <h1 className="mt-3 text-2xl font-medium tracking-tight text-[var(--text-primary)]">
+          Camera check + scan node
         </h1>
-        <p className="mt-2 text-sm text-[rgb(250_250_247/0.6)]">
-          Free tier: smartphone photometry and Siloton OCT baseline. Premium unlocks quarterly
-          labs and TipTraQ verification.
+        <p className="dash-sub mt-2 text-sm">
+          Face scan first. Then pick your nearest Siloton node.
         </p>
 
-        <section className="mt-8 rounded-xl border border-[rgb(255_255_255/0.1)] bg-[#0f0f0f] p-4">
-          <p className="text-sm font-medium text-[#fafaf7]">Step 1 · Biometric portal</p>
-          <p className="mt-1 text-xs text-[rgb(250_250_247/0.55)]">
-            Iris hue + skin ITA capture for chronotype anchoring.
-          </p>
-          <button
-            type="button"
-            onClick={() => setCameraOpen(true)}
-            className="mt-4 w-full rounded-full bg-[#7eb8ff] py-3 text-sm font-medium text-[#0a0a0a]"
-          >
+        <section className="dios-glass-outer mt-8 p-4">
+          <p className="text-sm font-medium text-[var(--text-primary)]">Step 1 · Face scan</p>
+          <p className="dash-sub mt-1 text-xs">Iris and skin tone for your light dose.</p>
+          <button type="button" onClick={() => setCameraOpen(true)} className="dios-btn-on-light calm-auth-btn-primary mt-4">
             {scanResult ? 'Rescan biometrics' : 'Open camera screening'}
           </button>
           {scanResult ? (
-            <p className="mt-2 text-center font-mono text-[10px] text-[#7eb8ff]">
+            <p className="mt-2 text-center font-mono text-[10px] text-[var(--photic-muted)]">
               {scanResult.irisPigment} iris · ITA {scanResult.skinITA} — ready to secure identity
             </p>
           ) : null}
@@ -75,20 +66,16 @@ export function OnboardingFlow() {
           <SilotonNodeLocator onGeoResolved={setGeo} />
         </section>
 
-        <button
-          type="button"
-          onClick={handleContinueToSignup}
-          className="mt-8 w-full rounded-full border border-[rgb(255_255_255/0.2)] py-3 text-sm font-medium text-[#fafaf7]"
-        >
-          Secure baseline identity →
+        <button type="button" onClick={handleContinueToSignup} className="dios-btn-on-light--secondary calm-auth-btn-secondary mt-8">
+          Continue to account →
         </button>
 
-        <p className="mt-3 text-center text-xs text-[rgb(250_250_247/0.45)]">
+        <p className="calm-auth-muted mt-3 text-center">
           Already have an account?{' '}
           <button
             type="button"
             onClick={() => router.push(AUTH_ROUTES.authSignIn)}
-            className="text-[#7eb8ff] underline-offset-2 hover:underline"
+            className="calm-auth-link"
           >
             Sign in
           </button>

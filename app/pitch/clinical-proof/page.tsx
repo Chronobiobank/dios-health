@@ -51,17 +51,11 @@ export default function ClinicalProofPage() {
       </div>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link
-          href="/"
-          className="inline-flex items-center rounded-full bg-black px-5 py-2 text-sm font-medium text-white hover:bg-black/90"
-        >
+        <Link href="/" className="dios-btn-on-light">
           Back to landing
         </Link>
-        <Link
-          href="/evidence"
-          className="inline-flex items-center rounded-full border border-black/15 bg-white/80 px-5 py-2 text-sm font-medium text-black hover:bg-white"
-        >
-          Full evidence overview
+        <Link href="/evidence" className="dios-btn-on-light--secondary">
+          All evidence
         </Link>
       </div>
     </main>

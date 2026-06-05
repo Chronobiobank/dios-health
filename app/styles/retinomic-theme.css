@@ -55,20 +55,8 @@
 .premium-locked__glass {
   backdrop-filter: blur(var(--retinomic-glass-blur));
   -webkit-backdrop-filter: blur(var(--retinomic-glass-blur));
-  background: rgb(8 8 8 / 0.35);
-}
-
-/* Evidence route — dark clinical grid on Calm grounding */
-.evidence-retinomic-route {
-  --text-primary: #f1f5f9;
-  --text-secondary: rgb(241 245 249 / 0.72);
-  --text-muted: rgb(148 163 184 / 0.9);
-  color: var(--text-primary);
-  background-color: var(--calm-bg, #080808);
-}
-
-.evidence-retinomic-route .marketing-main {
-  color: inherit;
+  background: rgb(255 255 255 / 0.42);
+  border-radius: var(--calm-radius-card, 8px);
 }
 
 .evidence-retinomic-pillar--photic {

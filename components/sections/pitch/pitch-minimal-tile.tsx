@@ -24,12 +24,12 @@ export function PitchMinimalTileCard({ tile }: { tile: PitchMinimalTile }) {
           {tile.subtitle}
         </PitchTileSub>
         <div className="mt-5 flex flex-wrap gap-2.5 sm:gap-3">
-          <PitchCtaLink href={tile.href} className="pitch-btn-primary">
+          <PitchCtaLink href={tile.href} className="dios-btn-on-dark">
             {tile.ctaLabel}
             {!isPrimaryHero ? ' →' : null}
           </PitchCtaLink>
           {tile.secondaryHref && tile.secondaryCtaLabel ? (
-            <PitchCtaLink href={tile.secondaryHref} className="pitch-btn-secondary">
+            <PitchCtaLink href={tile.secondaryHref} className="dios-btn-on-dark--secondary">
               {tile.secondaryCtaLabel} →
             </PitchCtaLink>
           ) : null}

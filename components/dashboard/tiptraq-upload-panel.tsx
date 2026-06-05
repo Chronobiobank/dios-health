@@ -81,10 +81,8 @@ export function TipTraQUploadPanel() {
     <div className="w-full" data-tiptraq-upload="signed-flow-v3">
       {state.status === 'idle' && (
         <div
-          className={`rounded-2xl border border-dashed px-6 py-10 text-center transition-colors ${
-            isDragging
-              ? 'border-teal-600 bg-teal-50/50'
-              : 'border-black/15 bg-neutral-950 text-white'
+          className={`dios-glass-outer border-dashed px-6 py-10 text-center transition-colors ${
+            isDragging ? 'border-teal-600/50 bg-teal-50/40' : 'border-black/15'
           }`}
           onDragOver={(e) => {
             e.preventDefault()
@@ -93,15 +91,13 @@ export function TipTraQUploadPanel() {
           onDragLeave={() => setIsDragging(false)}
           onDrop={handleDrop}
         >
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-xl">
+          <div className="dash-sub mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-black/10 bg-white/60 text-xl">
             ↑
           </div>
-          <div className="mt-4 text-lg font-medium">Upload TipTraQ channel data</div>
-          <div className="mt-2 text-sm text-white/60">
-            Drag and drop your EDF nightly recording, or tap to choose
-          </div>
-          <label className="mt-6 inline-flex cursor-pointer items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition-transform duration-100 active:scale-[0.97] hover:bg-white/90">
-            Choose EDF file
+          <div className="dash-head mt-4 text-lg font-medium">Upload a night</div>
+          <div className="dash-sub mt-2 text-sm">Drop your EDF file or choose one.</div>
+          <label className="dios-btn-on-light mt-6 cursor-pointer transition-transform duration-100 active:scale-[0.97]">
+            Choose file
             <input
               type="file"
               accept=".edf,application/edf,application/octet-stream"
@@ -109,9 +105,7 @@ export function TipTraQUploadPanel() {
               className="hidden"
             />
           </label>
-          <div className="mt-4 font-mono text-[11px] text-white/40">
-            European Data Format (.edf) · One night at a time · Max 50MB
-          </div>
+          <div className="dash-sub mt-4 font-mono text-[11px]">.edf · one night · max 50MB</div>
         </div>
       )}
 
@@ -166,7 +160,7 @@ export function TipTraQUploadPanel() {
 
           <button
             type="button"
-            className="mt-6 w-full rounded-full border border-black/10 py-3 text-sm font-medium text-black transition-transform duration-100 active:scale-[0.97] hover:bg-black/5"
+            className="dios-btn-on-light--secondary mt-6 w-full transition-transform duration-100 active:scale-[0.97]"
             onClick={reset}
           >
             Upload another night →
@@ -179,7 +173,7 @@ export function TipTraQUploadPanel() {
           <div className="text-sm text-red-800">{state.error}</div>
           <button
             type="button"
-            className="mt-4 rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition-transform duration-100 active:scale-[0.97]"
+            className="dios-btn-on-light mt-4 transition-transform duration-100 active:scale-[0.97]"
             onClick={reset}
           >
             Try again

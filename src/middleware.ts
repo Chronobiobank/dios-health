@@ -99,7 +99,7 @@ export async function middleware(request: NextRequest) {
   if (isPremiumDashboardPath(pathname)) {
     if (!user) {
       const signInUrl = request.nextUrl.clone()
-      signInUrl.pathname = AUTH_ROUTES.signIn
+      signInUrl.pathname = AUTH_ROUTES.authSignIn
       signInUrl.searchParams.set('next', pathname)
       return NextResponse.redirect(signInUrl)
     }

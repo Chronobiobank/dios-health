@@ -28,7 +28,7 @@ export function SilotonNodeLocator({ className, onGeoResolved }: SilotonNodeLoca
       setStatus('error')
       setNodes([])
     }
-  }, [])
+  }, [onGeoResolved])
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -47,26 +47,24 @@ export function SilotonNodeLocator({ className, onGeoResolved }: SilotonNodeLoca
     <div className={className}>
       <div className="mb-3 flex items-end justify-between gap-2">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#7eb8ff]">
-            Find a scan node
-          </p>
-          <p className="mt-1 text-xs text-[rgb(250_250_247/0.55)]">
+          <p className="calm-auth-eyebrow">Find a scan node</p>
+          <p className="dash-sub mt-1 text-xs">
             Siloton GiraffeOCT nodes · pharmacy & clinical hubs
           </p>
         </div>
         {coords ? (
-          <p className="font-mono text-[10px] text-[rgb(250_250_247/0.4)]">
+          <p className="dash-sub font-mono text-[10px]">
             {coords.lat.toFixed(2)}, {coords.lng.toFixed(2)}
           </p>
         ) : null}
       </div>
 
-      <div className="retinomic-siloton-map">
+      <div className="dios-glass-outer retinomic-siloton-map p-0">
         <div className="retinomic-siloton-map__canvas" aria-hidden>
           {nodes.slice(0, 4).map((node, i) => (
             <span
               key={node.id}
-              className="absolute h-2 w-2 rounded-full bg-[#7eb8ff] shadow-[0_0_12px_#7eb8ff]"
+              className="absolute h-2 w-2 rounded-full bg-[var(--photic-core)] shadow-[0_0_12px_var(--photic-core)]"
               style={{
                 left: `${18 + i * 18}%`,
                 top: `${30 + (i % 2) * 22}%`,
@@ -76,17 +74,17 @@ export function SilotonNodeLocator({ className, onGeoResolved }: SilotonNodeLoca
         </div>
         <div className="retinomic-siloton-node-list">
           {status === 'loading' ? (
-            <p className="text-center text-xs text-[rgb(250_250_247/0.5)]">Resolving nearby nodes…</p>
+            <p className="calm-auth-muted text-center text-xs">Resolving nearby nodes…</p>
           ) : null}
           {status === 'error' ? (
-            <p className="text-center text-xs text-[#f87171]">Could not load nodes. Retry shortly.</p>
+            <p className="text-center text-xs text-red-600/90">Could not load nodes. Retry shortly.</p>
           ) : null}
           {nodes.map((node) => (
-            <button key={node.id} type="button" className="retinomic-siloton-node">
+            <button key={node.id} type="button" className="dios-glass-inner retinomic-siloton-node">
               <span className="min-w-0">
-                <span className="block text-sm font-medium text-[#fafaf7]">{node.name}</span>
-                <span className="mt-0.5 block text-xs text-[rgb(250_250_247/0.5)]">{node.address}</span>
-                <span className="mt-1 block font-mono text-[10px] text-[rgb(250_250_247/0.4)]">
+                <span className="block text-sm font-medium text-[var(--text-primary)]">{node.name}</span>
+                <span className="dash-sub mt-0.5 block text-xs">{node.address}</span>
+                <span className="dash-sub mt-1 block font-mono text-[10px]">
                   Open until {node.openUntil} · {node.slotsAvailable} slot
                   {node.slotsAvailable === 1 ? '' : 's'}
                 </span>

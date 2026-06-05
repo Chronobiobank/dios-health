@@ -34,28 +34,28 @@ export function MetabolicDosePanel({ tier, vitaminD3NmolL, vitaminB5UmolL }: Met
 
   return (
     <section
-      className="retinomic-panel retinomic-panel--metabolic"
+      className="dios-glass-outer retinomic-panel retinomic-panel--metabolic"
       aria-labelledby="metabolic-panel-title"
     >
       <p id="metabolic-panel-title" className="retinomic-panel__label">
-        Biochemical fuel · metabolic dose
+        Blood fuel
       </p>
       <div className={isLocked ? 'premium-locked' : 'relative'}>
         <div className="premium-locked__content">
           <div className="retinomic-metric-row">
-            <div className="retinomic-metric">
+            <div className="dios-glass-inner retinomic-metric">
               <p className="retinomic-metric__name">Vitamin D3</p>
               <p className="retinomic-metric__value">
                 {d3Display}
-                <span className="text-sm font-normal text-[rgb(250_250_247/0.5)]"> ng/mL</span>
+                <span className="dash-sub text-sm font-normal"> ng/mL</span>
               </p>
               <p className="retinomic-metric__target">Target 60–80 ng/mL</p>
             </div>
-            <div className="retinomic-metric">
+            <div className="dios-glass-inner retinomic-metric">
               <p className="retinomic-metric__name">Vitamin B5</p>
               <p className="retinomic-metric__value">
                 {b5Display}
-                <span className="text-sm font-normal text-[rgb(250_250_247/0.5)]"> μmol/L</span>
+                <span className="dash-sub text-sm font-normal"> μmol/L</span>
               </p>
               <p className="retinomic-metric__target">Pantothenate coenzyme pool</p>
             </div>
@@ -64,8 +64,8 @@ export function MetabolicDosePanel({ tier, vitaminD3NmolL, vitaminB5UmolL }: Met
         {isLocked ? (
           <div className="premium-locked__overlay premium-locked__glass retinomic-locked-overlay">
             <LockIcon />
-            <Link href={PATIENT_ROUTES.streamsBloods} className="retinomic-upgrade-cta">
-              Unlock Metabolic Tracking via Quarterly Labs
+            <Link href={PATIENT_ROUTES.streamsBloods} className="dios-btn-on-light">
+              Unlock quarterly labs
             </Link>
           </div>
         ) : null}

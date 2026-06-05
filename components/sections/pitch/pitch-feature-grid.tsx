@@ -34,10 +34,10 @@ export function PitchFeatureGrid() {
       </ul>
 
       <div className="pitch-feature-panel__ctas flex flex-wrap gap-2.5 sm:gap-3">
-        <PitchCtaLink href={section.primaryCtaHref} className="pitch-btn-primary">
+        <PitchCtaLink href={section.primaryCtaHref} className="dios-btn-on-light pitch-feature-panel__cta">
           {section.primaryCtaLabel}
         </PitchCtaLink>
-        <PitchCtaLink href={section.secondaryCtaHref} className="pitch-btn-secondary">
+        <PitchCtaLink href={section.secondaryCtaHref} className="dios-btn-on-light--secondary pitch-feature-panel__cta">
           {section.secondaryCtaLabel} →
         </PitchCtaLink>
       </div>

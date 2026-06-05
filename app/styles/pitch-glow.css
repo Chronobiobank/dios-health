@@ -180,10 +180,10 @@
     font-size: 0.75rem;
   }
 
-  .calm-landing .pitch-btn-primary,
-  .calm-landing .pitch-btn-secondary {
+  .calm-landing .dios-btn-on-dark,
+  .calm-landing .dios-btn-on-dark--secondary {
     font-size: 1.0625rem;
-    height: 3.25rem;
+    min-height: 3.25rem;
   }
 
   .calm-landing .pitch-glass-note {
@@ -259,20 +259,10 @@
   color: #0d0d0d;
 }
 
-/* Light glass panel — same rule as site nav CTAs on pastel: black fill, white label */
-.calm-landing .pitch-feature-panel__ctas .pitch-btn-primary,
-.calm-landing .pitch-feature-panel__ctas .pitch-btn-secondary {
-  background: #0d0d0d;
-  color: #fff;
-  border: 1px solid #0d0d0d;
-  backdrop-filter: none;
-}
-
-.calm-landing .pitch-feature-panel__ctas .pitch-btn-primary:hover,
-.calm-landing .pitch-feature-panel__ctas .pitch-btn-secondary:hover {
-  opacity: 0.9;
-  background: #0d0d0d;
-  color: #fff;
+/* Light glass panel — taller tap targets on landing section 2 */
+.calm-landing .pitch-feature-panel__ctas .pitch-feature-panel__cta {
+  min-height: 3rem;
+  min-width: 9rem;
 }
 
 /* Section 2 — inner tiles fill the glass panel in four equal quarters (dashboard rhythm) */
@@ -361,44 +351,6 @@
   color: var(--calm-optimal);
 }
 
-/* CTAs inside tiles */
-.calm-landing .pitch-btn-primary {
-  display: inline-flex;
-  height: 3rem;
-  width: auto;
-  min-width: 9rem;
-  padding-inline: var(--dios-btn-padding-inline);
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  background: #fff;
-  font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
-  font-weight: 500;
-  color: #080808;
-  transition: opacity 0.2s;
-}
-
-.calm-landing .pitch-btn-primary:hover {
-  opacity: 0.92;
-}
-
-.calm-landing .pitch-btn-secondary {
-  display: inline-flex;
-  height: 3rem;
-  width: auto;
-  min-width: 9rem;
-  padding-inline: var(--dios-btn-padding-inline);
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  border: 1px solid rgb(255 255 255 / 0.25);
-  background: rgb(255 255 255 / 0.08);
-  font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
-  font-weight: 500;
-  color: #fff;
-  backdrop-filter: blur(12px);
-}
-
 .calm-landing .pitch-btn-ghost {
   display: inline-flex;
   height: 2.75rem;
@@ -433,11 +385,8 @@
 }
 
 @media (min-width: 640px) {
-  .calm-landing .pitch-btn-primary,
-  .calm-landing .pitch-btn-secondary {
-    width: auto;
+  .calm-landing .pitch-feature-panel__ctas .pitch-feature-panel__cta {
     min-width: 11rem;
-    padding-inline: var(--dios-btn-padding-inline-sm);
   }
 }
 

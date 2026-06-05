@@ -83,16 +83,10 @@ export default async function PitchDetailPage({ params }: PitchDetailPageProps) 
       ) : null}
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link
-          href="/"
-          className="inline-flex items-center rounded-full bg-black px-5 py-2 text-sm font-medium text-white hover:bg-black/90"
-        >
+        <Link href="/" className="dios-btn-on-light">
           Back to landing
         </Link>
-        <Link
-          href="/contact?intent=clinical-briefing"
-          className="inline-flex items-center rounded-full border border-black/15 bg-white/80 px-5 py-2 text-sm font-medium text-black hover:bg-white"
-        >
+        <Link href="/contact?intent=clinical-briefing" className="dios-btn-on-light--secondary">
           Request briefing
         </Link>
       </div>

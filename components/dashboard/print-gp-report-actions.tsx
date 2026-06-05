@@ -33,7 +33,7 @@ export function PrintGpReportActions({ canPrint }: PrintGpReportActionsProps) {
         <button
           type="button"
           onClick={() => window.print()}
-          className="rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition-transform duration-100 active:scale-[0.97]"
+          className="dios-btn-on-light transition-transform duration-100 active:scale-[0.97]"
         >
           Print report
         </button>

@@ -30,10 +30,10 @@ export function RetinomicDashboardClient({
   dailyIntervention,
 }: RetinomicDashboardClientProps) {
   return (
-    <div className="retinomic-protocol patient-dashboard-shell relative min-h-screen" data-dashboard="retinomic">
+    <div className="patient-dashboard-shell relative min-h-screen" data-dashboard="retinomic">
       <div className="relative z-10 pb-[var(--patient-nav-offset)] md:pb-0">
         <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
-        <main className="retinomic-protocol__stack" aria-label="Retinomic protocol control panels">
+        <main className="dash-dashboard-main" aria-label="Retinomic protocol control panels">
           <InterventionGuide intervention={dailyIntervention} />
           <PhoticDosePanel
             melanopicLuxToday={melanopicLuxToday}

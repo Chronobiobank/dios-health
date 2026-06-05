@@ -8,12 +8,12 @@ export default function HowItWorksPage() {
   return (
     <>
       <p
-        className="type-medical-dense mx-auto max-w-3xl px-4 pt-4 text-center text-xs text-white/50"
+        className="type-medical-dense calm-auth-muted mx-auto max-w-3xl px-4 pt-4 text-center text-xs"
         role="status"
       >
         Public preview · sample Retinomic protocol data ·{' '}
-        <a href="/auth/signup" className="text-photic-300 underline-offset-2 hover:underline">
-          sign up
+        <a href="/onboarding" className="calm-auth-link">
+          start your free baseline scan
         </a>{' '}
         to connect your devices
       </p>

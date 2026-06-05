@@ -28,7 +28,7 @@ export function PhoticProgressRing({ current, ceiling, size = 112 }: PhoticProgr
         cy={center}
         r={radius}
         fill="none"
-        stroke="rgb(255 255 255 / 0.08)"
+        stroke="rgb(13 13 13 / 0.08)"
         strokeWidth={stroke}
       />
       <circle
@@ -36,7 +36,7 @@ export function PhoticProgressRing({ current, ceiling, size = 112 }: PhoticProgr
         cy={center}
         r={radius}
         fill="none"
-        stroke="#7eb8ff"
+        stroke="var(--photic-core)"
         strokeWidth={stroke}
         strokeLinecap="round"
         strokeDasharray={circumference}
@@ -47,7 +47,7 @@ export function PhoticProgressRing({ current, ceiling, size = 112 }: PhoticProgr
         x={center}
         y={center - 4}
         textAnchor="middle"
-        className="fill-[#fafaf7] text-[15px] font-medium"
+        className="fill-[var(--text-primary)] text-[15px] font-medium"
         style={{ fontFamily: 'var(--font-family-sans)' }}
       >
         {current}
@@ -56,7 +56,7 @@ export function PhoticProgressRing({ current, ceiling, size = 112 }: PhoticProgr
         x={center}
         y={center + 14}
         textAnchor="middle"
-        className="fill-[rgb(250_250_247/0.5)] text-[9px] uppercase"
+        className="fill-[var(--text-muted)] text-[9px] uppercase"
         style={{ fontFamily: 'var(--font-family-mono)', letterSpacing: '0.08em' }}
       >
         mLux

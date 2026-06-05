@@ -11,18 +11,13 @@ export default async function PremiumDashboardPage() {
   const name = profile.full_name ?? 'Patient'
 
   return (
-    <div className="retinomic-protocol py-8">
-      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6366f1]">
-        Premium verification
-      </p>
-      <h1 className="mt-2 text-xl font-medium text-[#fafaf7]">Clinical output unlocked</h1>
-      <p className="mt-2 text-sm text-[rgb(250_250_247/0.6)]">
+    <div className="dios-glass-outer py-8">
+      <p className="dashboard-section-label text-[var(--telemetry-muted)]">Premium verification</p>
+      <h1 className="mt-2 text-xl font-medium text-[var(--text-primary)]">Clinical output unlocked</h1>
+      <p className="dash-sub mt-2 text-sm">
         {name}, quarterly labs and TipTraQ webhook streams are active on your profile.
       </p>
-      <Link
-        href={PATIENT_ROUTES.dashboard}
-        className="mt-6 inline-flex text-sm font-medium text-[#a5b4fc] underline-offset-2 hover:underline"
-      >
+      <Link href={PATIENT_ROUTES.dashboard} className="calm-auth-link mt-6 inline-flex text-sm font-medium">
         Back to protocol dashboard
       </Link>
     </div>

@@ -71,7 +71,7 @@ function BodyClockHeader({ data }: { data: InsightsData }) {
         <div className="mt-4 flex flex-wrap gap-3">
           <Link
             href={PATIENT_ROUTES.streams}
-            className="inline-flex h-11 items-center rounded-full bg-black px-5 text-sm font-medium text-white transition-transform active:scale-[0.98]"
+            className="dios-btn-on-light h-11 transition-transform active:scale-[0.98]"
           >
             Go to Streams →
           </Link>

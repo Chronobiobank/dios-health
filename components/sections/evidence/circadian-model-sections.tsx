@@ -87,7 +87,7 @@ export function EvidenceDiosBridgeSection() {
             <Link
               key={link.href}
               href={link.href}
-              className="btn-primary type-button inline-flex items-center justify-center rounded-full bg-black px-5 py-2.5 text-white transition-colors hover:bg-black/80"
+              className="dios-btn-on-light type-button"
             >
               {link.label} →
             </Link>

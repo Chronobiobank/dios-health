@@ -21,18 +21,21 @@ export function PhoticDosePanel({
   const pct = melanopicLuxCeiling > 0 ? Math.round((melanopicLuxToday / melanopicLuxCeiling) * 100) : 0
 
   return (
-    <section className="retinomic-panel retinomic-panel--photic" aria-labelledby="photic-panel-title">
+    <section
+      className="dios-glass-outer retinomic-panel retinomic-panel--photic"
+      aria-labelledby="photic-panel-title"
+    >
       <p id="photic-panel-title" className="retinomic-panel__label">
-        Physical input · photic dose
+        Light dose
       </p>
       <div className="retinomic-ring-wrap">
         <PhoticProgressRing current={melanopicLuxToday} ceiling={melanopicLuxCeiling} />
         <div className="retinomic-ring-metrics">
           <p className="retinomic-ring-value">
-            {pct}% <span className="text-sm font-normal text-[rgb(250_250_247/0.55)]">of ceiling</span>
+            {pct}% <span className="dash-sub text-sm font-normal">of ceiling</span>
           </p>
           <p className="retinomic-ring-caption">
-            Target {melanopicLuxCeiling} mLux · passive smartphone photometry
+            Target {melanopicLuxCeiling} mLux · phone sensor
           </p>
         </div>
       </div>

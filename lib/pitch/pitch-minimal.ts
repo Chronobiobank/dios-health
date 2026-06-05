@@ -1,6 +1,9 @@
 import { PITCH_HERO, PITCH_IMAGES } from '@/lib/pitch/landing-images'
 import { GRANT_MUNRO_PAPER_TITLE } from '@/lib/pitch/grant-munro-founder'
-import { RETINOMIC_LANDING_HERO } from '@/lib/pitch/retinomic-landing-copy'
+import {
+  RETINOMIC_LANDING_HERO,
+  RETINOMIC_LANDING_PHILOSOPHY,
+} from '@/lib/pitch/retinomic-landing-copy'
 
 export type PitchMinimalTile = {
   id: string
@@ -54,20 +57,18 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     slug: 'clinical-proof',
     eyebrow: 'The evidence',
     title: 'Big studies. Your dose.',
-    subtitle:
-      'Large population research plus your own eye scan, bloods, and sleep data — in one place.',
+    subtitle: 'Population research plus your scan, bloods, and sleep.',
     image: PITCH_IMAGES.evidence,
     imageAlt: 'Clinical evidence overview',
     href: '/pitch/clinical-proof',
-    ctaLabel: 'View evidence',
+    ctaLabel: 'Clinical proof',
   },
   {
     id: 'pitch-pilot-structure',
     slug: 'chronobiobank',
     eyebrow: 'Our vision',
     title: 'Your data helps everyone.',
-    subtitle:
-      'Patients co-own the Chronobiobank. Your records can fund research — and you share the returns.',
+    subtitle: 'Co-own the Chronobiobank. Your data funds research — you share returns.',
     image: '/chronobiobank.png',
     imageAlt: 'Chronobiobank research infrastructure',
     href: '/contact',
@@ -78,8 +79,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
     slug: 'credibility',
     eyebrow: 'Trust by design',
     title: 'Built for the NHS.',
-    subtitle:
-      'Works for every skin tone. Clear consent. Your data stays yours.',
+    subtitle: 'Every skin tone. Clear consent. Your data stays yours.',
     image: '/consent-firewall.jpg',
     imageAlt: 'Governance and compliance',
     href: '/pitch/credibility',
@@ -91,7 +91,7 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
 export const PITCH_LANDING_HASH_LINKS = [
   { label: RETINOMIC_LANDING_HERO.eyebrow, href: '/#pitch-hook' },
   { label: 'Retinomic Protocol', href: '/#pitch-features' },
-  { label: 'Core philosophy', href: '/#pitch-philosophy' },
+  { label: RETINOMIC_LANDING_PHILOSOPHY.eyebrow, href: '/#pitch-philosophy' },
   ...PITCH_MINIMAL_TILES.filter((t) => t.id !== 'pitch-hook').map((tile) => ({
     label: tile.eyebrow,
     href: `/#${tile.id}`,
