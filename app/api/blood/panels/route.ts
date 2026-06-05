@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 
 import { calculateBloodPanelDlmo } from '@/lib/dashboard/blood-panel-gominak'
 import { mergeDlmoLayers } from '@/lib/dashboard/dlmo-merge'
+import { syncRetinomicPatientState } from '@/lib/retinomic/sync-tier'
 import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
@@ -111,7 +112,17 @@ export async function POST(request: Request) {
       return errorResponse(mergeError, 500)
     }
 
-    return NextResponse.json({ success: true, id: panel.id, dominant_layer: dominantLayer })
+    const { tier, error: tierSyncError } = await syncRetinomicPatientState(supabase, user.id)
+    if (tierSyncError) {
+      console.error('[Blood panel] retinomic tier sync failed', tierSyncError)
+    }
+
+    return NextResponse.json({
+      success: true,
+      id: panel.id,
+      dominant_layer: dominantLayer,
+      retinomic_tier: tier,
+    })
   } catch (error) {
     console.error('[Blood panel] error', error)
     return errorResponse('Internal server error', 500)

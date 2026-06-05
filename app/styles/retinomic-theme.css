@@ -1,0 +1,96 @@
+/* Retinomic Protocol — semantic pillar tokens & premium glass utilities */
+
+:root {
+  --photic-core: #38bdf8;
+  --photic-muted: #0369a1;
+  --photic-deep: #0c4a6e;
+  --fuel-core: #f59e0b;
+  --fuel-muted: #b45309;
+  --fuel-deep: #451a03;
+  --telemetry-core: #818cf8;
+  --telemetry-muted: #4338ca;
+  --telemetry-deep: #312e81;
+  --retinomic-glass-blur: 20px;
+}
+
+/* Dense medical copy — fits Calm UI grids without margin collapse */
+.type-medical-dense {
+  letter-spacing: var(--tracking-tight, -0.02em);
+  line-height: 1.625;
+}
+
+.type-medical-caption {
+  font-size: var(--text-caption-size, 0.75rem);
+  line-height: var(--text-caption-leading, 1.45);
+  letter-spacing: 0.02em;
+}
+
+/* FREE_SCREENING — frosted lock over blurred lab / sleep panels */
+.premium-locked {
+  position: relative;
+}
+
+.premium-locked > .premium-locked__content,
+.premium-locked > .retinomic-locked-content {
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.premium-locked__overlay,
+.premium-locked > .retinomic-locked-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+  pointer-events: auto;
+  user-select: auto;
+}
+
+.premium-locked__glass {
+  backdrop-filter: blur(var(--retinomic-glass-blur));
+  -webkit-backdrop-filter: blur(var(--retinomic-glass-blur));
+  background: rgb(8 8 8 / 0.35);
+}
+
+/* Evidence route — dark clinical grid on Calm grounding */
+.evidence-retinomic-route {
+  --text-primary: #f1f5f9;
+  --text-secondary: rgb(241 245 249 / 0.72);
+  --text-muted: rgb(148 163 184 / 0.9);
+  color: var(--text-primary);
+  background-color: var(--calm-bg, #080808);
+}
+
+.evidence-retinomic-route .marketing-main {
+  color: inherit;
+}
+
+.evidence-retinomic-pillar--photic {
+  border-color: rgb(3 105 161 / 0.35);
+}
+
+.evidence-retinomic-pillar--photic:hover {
+  border-color: rgb(56 189 248 / 0.4);
+}
+
+.evidence-retinomic-pillar--fuel {
+  border-color: rgb(69 26 3 / 0.5);
+}
+
+.evidence-retinomic-pillar--fuel:hover {
+  border-color: rgb(245 158 11 / 0.35);
+}
+
+.evidence-retinomic-pillar--telemetry {
+  border-color: rgb(49 46 129 / 0.45);
+}
+
+.evidence-retinomic-pillar--telemetry:hover {
+  border-color: rgb(129 140 248 / 0.4);
+}

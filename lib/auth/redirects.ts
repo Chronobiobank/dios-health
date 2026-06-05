@@ -71,7 +71,15 @@ export function isProtectedPath(pathname: string): boolean {
 }
 
 export function isPublicAuthPath(pathname: string): boolean {
-  return pathname === '/signin' || pathname.startsWith('/signup')
+  return (
+    pathname === '/signin' ||
+    pathname.startsWith('/signup') ||
+    pathname.startsWith('/auth/')
+  )
+}
+
+export function isRetinomicAuthPath(pathname: string): boolean {
+  return pathname === '/auth/signin' || pathname === '/auth/signup'
 }
 
 export function isSignupRoleChoicePath(pathname: string): boolean {
@@ -79,7 +87,12 @@ export function isSignupRoleChoicePath(pathname: string): boolean {
 }
 
 export function isPatientAccountSignupPath(pathname: string): boolean {
-  return pathname === AUTH_ROUTES.signUpPatient || pathname === `${AUTH_ROUTES.signUpPatient}/`
+  return (
+    pathname === AUTH_ROUTES.authSignUp ||
+    pathname === `${AUTH_ROUTES.authSignUp}/` ||
+    pathname === AUTH_ROUTES.legacySignUpPatient ||
+    pathname === `${AUTH_ROUTES.legacySignUpPatient}/`
+  )
 }
 
 export function isPatientChronoprofilePath(pathname: string): boolean {

@@ -1,11 +1,25 @@
-import { DashboardClient } from '@/components/patient-dashboard/dashboard-client'
+import { RetinomicDashboardClient } from '@/components/retinomic/retinomic-dashboard-client'
 import { getLocalizedPatientGreeting, getPatientFirstName } from '@/lib/auth/greeting'
 import { resolveDashboardAvatar } from '@/components/patient-dashboard/constants'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import type { BloodPanelSnapshot } from '@/lib/dashboard/insights-data'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
-import { meanAhiFromValues } from '@/lib/patient-dashboard/dashboard-indicators'
-import { buildPatientSnapshot } from '@/lib/patient-dashboard/build-patient-snapshot'
+import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
+import {
+  detectLightIris,
+  estimateMelanopicLuxCeiling,
+  estimateMelanopicLuxToday,
+  resolvePhoticDayPhase,
+} from '@/lib/retinomic/photic-dose'
+import { getPatientRetinomicTier } from '@/lib/auth/retinomic-access'
+import { mapPatientRowToUser } from '@/lib/retinomic/patient-user-mapper'
+import { resolveRetinomicTierFromCounts } from '@/lib/retinomic/sync-tier'
+import type { BiochemicalFuel, HardwareBaseline } from '@/src/types'
+import {
+  estimateAutonomicStrain,
+  estimateRemCycleEfficiency,
+} from '@/lib/retinomic/sleep-metrics'
+import { buildDailyInterventionForPatient } from '@/src/lib/engine/intervention'
 import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
@@ -27,7 +41,7 @@ export default async function PatientDashboardPage() {
     { data: latestSmartphone },
     { data: latestBloodPanel },
     { data: latestTiptraqNight },
-    { data: recentTiptraqAhi },
+    { data: latestTiptraqTelemetry },
   ] = await Promise.all([
     supabase.from('mlux_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
     supabase
@@ -68,16 +82,15 @@ export default async function PatientDashboardPage() {
       .maybeSingle<{ report_date: string; rem_delay_flag: boolean | null }>(),
     supabase
       .from('tiptraq_nights')
-      .select('ahi')
+      .select('rem_sleep_efficiency_pct, micro_arousals_count')
       .eq('patient_id', user.id)
-      .not('ahi', 'is', null)
       .order('report_date', { ascending: false })
-      .limit(5),
+      .limit(1)
+      .maybeSingle<{
+        rem_sleep_efficiency_pct: number | null
+        micro_arousals_count: number | null
+      }>(),
   ])
-
-  const meanTipTraqAhi = meanAhiFromValues(
-    (recentTiptraqAhi ?? []).map((row) => Number(row.ahi))
-  )
 
   const smartphoneActive =
     latestSmartphone?.observed_at != null &&
@@ -94,26 +107,76 @@ export default async function PatientDashboardPage() {
     patient.location_country
   )
 
-  const snapshot = buildPatientSnapshot({
+  const profileRow = mluxProfile as MluxProfileRow | null
+  const calibration = buildPatientCalibration({
     patient,
-    mluxProfile: (mluxProfile as MluxProfileRow | null) ?? null,
     tipTraqNightsCount: tipTraqNightsCount ?? 0,
-    bloodPanelsCount: bloodPanelsCount ?? 0,
-    smartphoneActive,
-    latestNight: latestNight ?? null,
-    latestBloodPanel: latestBloodPanel ?? null,
     latestTiptraqDate: latestTiptraqNight?.report_date ?? null,
-    sleepOnsetDelayMinutes: latestTiptraqNight?.rem_delay_flag ? 38 : null,
-    meanTipTraqAhi,
+    mluxChronotype: profileRow?.chronotype,
+  })
+
+  const fallbackTier = resolveRetinomicTierFromCounts(
+    bloodPanelsCount ?? 0,
+    tipTraqNightsCount ?? 0
+  )
+  const tier = await getPatientRetinomicTier(supabase, user.id)
+  const retinomicUser = mapPatientRowToUser(
+    {
+      id: patient.id,
+      retinomic_tier: tier,
+      hardware_baseline: (patient.hardware_baseline as HardwareBaseline | null) ?? null,
+      biochemical_fuel: (patient.biochemical_fuel as BiochemicalFuel | null) ?? null,
+      hardware_bandwidth_coefficient: patient.hardware_bandwidth_coefficient,
+      morning_mlux_target_duration_minutes: patient.morning_mlux_target_duration_minutes,
+    },
+    fallbackTier
+  )
+  const effectiveTier = retinomicUser.tier
+  const photicPhase = resolvePhoticDayPhase()
+  const melanopicLuxCeiling = estimateMelanopicLuxCeiling(
+    patient.fitzpatrick_type,
+    calibration.latitude
+  )
+  const melanopicLuxToday = estimateMelanopicLuxToday(
+    smartphoneActive,
+    profileRow?.mlux_score ?? null,
+    photicPhase
+  )
+
+  const dailyIntervention = buildDailyInterventionForPatient({
+    tier: effectiveTier,
+    chronotypeLabel: calibration.chronotype,
+    chronotypeWakeTime: patient.chronotype_q1,
+    vitaminD3NmolL: latestBloodPanel?.vitamin_d3_nmoll ?? null,
+    vitaminB5UmolL: latestBloodPanel?.vitamin_b5_umoll ?? null,
+    remSleepEfficiencyPercent:
+      latestTiptraqTelemetry?.rem_sleep_efficiency_pct != null
+        ? Number(latestTiptraqTelemetry.rem_sleep_efficiency_pct)
+        : estimateRemCycleEfficiency(latestNight ?? null),
+    microArousalsCount: latestTiptraqTelemetry?.micro_arousals_count ?? null,
+    eveningLightDisciplineOptimal: smartphoneActive,
+    morningMluxTargetDurationMinutes:
+      patient.morning_mlux_target_duration_minutes ?? 90,
+    locationCity: patient.location_city,
+    locationCountry: patient.location_country,
   })
 
   return (
-    <DashboardClient
+    <RetinomicDashboardClient
       greeting={greeting}
       firstName={firstName}
       fullName={profile.full_name ?? firstName}
       avatarUrl={profile.avatar_url ?? resolveDashboardAvatar(null)}
-      snapshot={snapshot}
+      tier={effectiveTier}
+      melanopicLuxToday={melanopicLuxToday}
+      melanopicLuxCeiling={melanopicLuxCeiling}
+      photicPhase={photicPhase}
+      lightIrisDetected={detectLightIris(calibration.eyeColorLabel)}
+      vitaminD3NmolL={latestBloodPanel?.vitamin_d3_nmoll ?? null}
+      vitaminB5UmolL={latestBloodPanel?.vitamin_b5_umoll ?? null}
+      remCycleEfficiency={estimateRemCycleEfficiency(latestNight ?? null)}
+      autonomicStrain={estimateAutonomicStrain(latestNight ?? null)}
+      dailyIntervention={dailyIntervention}
     />
   )
 }

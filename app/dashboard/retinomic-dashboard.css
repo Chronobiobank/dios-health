@@ -1,0 +1,343 @@
+/* Retinomic Protocol — dark stacked control panels */
+.retinomic-protocol {
+  --retinomic-bg: var(--calm-bg, #080808);
+  --retinomic-surface: var(--calm-surface, #0f0f0f);
+  --retinomic-border: rgb(255 255 255 / 0.1);
+  --retinomic-text: #fafaf7;
+  --retinomic-muted: rgb(250 250 247 / 0.55);
+  --retinomic-photic: #7eb8ff;
+  --retinomic-metabolic: #e8a54b;
+  --retinomic-sleep: #6366f1;
+  color: var(--retinomic-text);
+}
+
+.retinomic-protocol__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-block: 1rem 2rem;
+}
+
+.retinomic-panel {
+  border-radius: 12px;
+  border: 0.5px solid var(--retinomic-border);
+  background: linear-gradient(165deg, rgb(18 18 20 / 0.95), rgb(10 10 12 / 0.98));
+  padding: 1rem 1.125rem 1.125rem;
+  box-shadow: 0 12px 40px rgb(0 0 0 / 0.35);
+}
+
+.retinomic-panel__label {
+  font-family: var(--font-family-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.retinomic-panel--photic .retinomic-panel__label {
+  color: var(--retinomic-photic);
+}
+
+.retinomic-panel--metabolic .retinomic-panel__label {
+  color: var(--retinomic-metabolic);
+}
+
+.retinomic-panel--sleep .retinomic-panel__label {
+  color: var(--retinomic-sleep);
+}
+
+.retinomic-photic-banner {
+  margin-top: 0.875rem;
+  padding: 0.75rem 0.875rem;
+  border-radius: 8px;
+  border: 0.5px solid rgb(126 184 255 / 0.25);
+  background: rgb(126 184 255 / 0.08);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: rgb(214 230 255 / 0.92);
+}
+
+.retinomic-ring-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.retinomic-ring-metrics {
+  flex: 1;
+  min-width: 0;
+}
+
+.retinomic-ring-value {
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.retinomic-ring-caption {
+  font-size: 0.75rem;
+  color: var(--retinomic-muted);
+  margin-top: 0.25rem;
+}
+
+.retinomic-metric-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.retinomic-metric {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 0.5px solid var(--retinomic-border);
+  background: rgb(255 255 255 / 0.03);
+}
+
+.retinomic-metric__name {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--retinomic-metabolic);
+  margin-bottom: 0.375rem;
+}
+
+.retinomic-metric__value {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.retinomic-metric__target {
+  font-size: 0.6875rem;
+  color: var(--retinomic-muted);
+  margin-top: 0.25rem;
+}
+
+.retinomic-locked-wrap {
+  position: relative;
+}
+
+.retinomic-locked-wrap--blur > .retinomic-locked-content {
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.retinomic-locked-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.retinomic-upgrade-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding-inline: 1.25rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background: var(--retinomic-metabolic);
+  color: #0a0a0a;
+  transition: opacity 0.15s;
+}
+
+.retinomic-upgrade-cta:hover {
+  opacity: 0.9;
+}
+
+.retinomic-upgrade-cta--sleep {
+  background: var(--retinomic-sleep);
+  color: #f5f5ff;
+}
+
+.retinomic-hypnogram {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.retinomic-stat-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  margin-top: 0.75rem;
+}
+
+.retinomic-stat-chip {
+  padding: 0.625rem 0.75rem;
+  border-radius: 8px;
+  background: rgb(99 102 241 / 0.12);
+  border: 0.5px solid rgb(99 102 241 / 0.28);
+}
+
+.retinomic-stat-chip__label {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgb(165 180 252 / 0.9);
+}
+
+.retinomic-stat-chip__value {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.retinomic-teaser-device {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem;
+  border-radius: 10px;
+  border: 0.5px solid rgb(99 102 241 / 0.35);
+  background: linear-gradient(135deg, rgb(30 27 75 / 0.6), rgb(15 15 20 / 0.9));
+  margin-bottom: 0.75rem;
+}
+
+.retinomic-teaser-device__visual {
+  width: 4.5rem;
+  height: 3rem;
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgb(79 70 229), rgb(30 27 75));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.15);
+}
+
+.retinomic-onboarding {
+  min-height: 100svh;
+  background: var(--calm-bg, #080808);
+  color: #fafaf7;
+}
+
+.retinomic-camera-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgb(0 0 0 / 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.retinomic-camera-modal__card {
+  width: min(100%, 22rem);
+  border-radius: 16px;
+  border: 0.5px solid rgb(255 255 255 / 0.12);
+  background: var(--calm-surface, #0f0f0f);
+  padding: 1.25rem;
+}
+
+.retinomic-camera-viewport {
+  position: relative;
+  aspect-ratio: 1;
+  margin: 0 auto 1rem;
+  max-width: 14rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #050505;
+  border: 2px solid rgb(126 184 255 / 0.45);
+  box-shadow: 0 0 0 4px rgb(126 184 255 / 0.12), 0 0 32px rgb(126 184 255 / 0.2);
+}
+
+.retinomic-camera-viewport::before,
+.retinomic-camera-viewport::after {
+  content: '';
+  position: absolute;
+  inset: 18%;
+  border: 1px solid rgb(126 184 255 / 0.35);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.retinomic-camera-viewport__feed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.retinomic-camera-scan-line {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--retinomic-photic), transparent);
+  animation: retinomic-scan-sweep 2.2s ease-in-out infinite;
+}
+
+@keyframes retinomic-scan-sweep {
+  0%,
+  100% {
+    top: 22%;
+    opacity: 0.4;
+  }
+  50% {
+    top: 72%;
+    opacity: 1;
+  }
+}
+
+.retinomic-scan-labels {
+  min-height: 3.5rem;
+  font-family: var(--font-family-mono);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  color: rgb(126 184 255 / 0.9);
+  text-align: center;
+}
+
+.retinomic-siloton-map {
+  border-radius: 12px;
+  border: 0.5px solid var(--retinomic-border);
+  background: rgb(15 15 15 / 0.9);
+  overflow: hidden;
+}
+
+.retinomic-siloton-map__canvas {
+  position: relative;
+  height: 10rem;
+  background:
+    radial-gradient(circle at 30% 40%, rgb(126 184 255 / 0.15), transparent 55%),
+    linear-gradient(180deg, rgb(20 20 24), rgb(8 8 10));
+}
+
+.retinomic-siloton-node-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  max-height: 14rem;
+  overflow-y: auto;
+}
+
+.retinomic-siloton-node {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 8px;
+  border: 0.5px solid rgb(255 255 255 / 0.08);
+  background: rgb(255 255 255 / 0.03);
+  text-align: left;
+  width: 100%;
+  transition: border-color 0.15s;
+}
+
+.retinomic-siloton-node:hover {
+  border-color: rgb(126 184 255 / 0.35);
+}
+
+.retinomic-siloton-node__distance {
+  font-family: var(--font-family-mono);
+  font-size: 0.6875rem;
+  color: var(--retinomic-photic);
+  white-space: nowrap;
+}

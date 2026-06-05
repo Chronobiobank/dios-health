@@ -25,14 +25,14 @@ const siteUrl = process.env.VERCEL_URL
   : 'https://dios-health.vercel.app'
 
 export const metadata: Metadata = {
-  title: 'DIOS – Quantify Your Meds',
+  title: 'DIOS — Dose Intelligence OS',
   description:
-    "The world's first clinical decision support platform personalising medicine timing to individual body clock variation, not European population norms. Free for every patient. Free for every GP.",
+    'dios.health is a translational medicine engine bridging eye-clock structure, biochemistry, and environment. Retinomic Protocol — end guesswork wearables.',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'DIOS Coach',
+    title: 'DIOS',
   },
   other: {
     'mobile-web-app-capable': 'yes',
@@ -40,17 +40,17 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
   },
   openGraph: {
-    title: 'DIOS – Quantify Your Meds',
+    title: 'The End of Guesswork Wearables · dios.health',
     description:
-      'Medicine timing personalised to your body clock, not European norms. Free for every patient and GP. Built on Oxford-validated chronodosing science.',
+      'DIOS computes your master-clock light dose, maps retinal structure via Siloton GiraffeOCT, titrates biochemical fuel, and verifies sleep with PranaQ TipTraQ.',
     type: 'website',
     url: siteUrl,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DIOS – Quantify Your Meds',
+    title: 'The End of Guesswork Wearables · dios.health',
     description:
-      "The world's first platform personalising medicine timing to individual body clock variation. Not European population averages.",
+      'Translational medicine engine — eye-clock, biochemistry, environment. Scan your Retinomic baseline free.',
   },
 }
 

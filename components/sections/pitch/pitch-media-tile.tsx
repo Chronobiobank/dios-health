@@ -6,13 +6,52 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { PITCH_TILE_TINT_GRADIENT } from '@/lib/pitch/pitch-palette'
 import { cn } from '@/lib/utils'
 
-export type PitchMediaTileSize = 'hero' | 'card' | 'metric' | 'feature'
+export type PitchMediaTileSize = 'hero' | 'card' | 'metric' | 'subgrid' | 'feature'
 
 const FRAME_CLASS: Record<PitchMediaTileSize, string> = {
   hero: 'pitch-media-tile__frame h-full min-h-0 w-full',
   card: 'min-h-[200px] aspect-[4/3] sm:min-h-[220px]',
   metric: 'min-h-[140px] aspect-square sm:min-h-[168px]',
+  /** Equal cells inside pitch-feature-subgrid — height comes from the grid */
+  subgrid: 'pitch-media-tile__frame h-full min-h-0 w-full',
   feature: 'min-h-[min(52dvh,420px)] aspect-[16/10] sm:min-h-[380px]',
+}
+
+/** Lighter scrims on small tiles so photography reads; hero keeps a bottom read for copy */
+const TILE_SCRIM: Record<
+  PitchMediaTileSize,
+  { image: string; tintOpacity: string; wash: string; gradient: string }
+> = {
+  hero: {
+    image: 'brightness-[0.78] saturate-[0.94]',
+    tintOpacity: 'opacity-[0.14]',
+    wash: 'bg-[#0D0D0D]/15',
+    gradient: 'bg-gradient-to-b from-[#0D0D0D]/5 via-[#080808]/20 to-[#080808]/58',
+  },
+  feature: {
+    image: 'brightness-[0.82] saturate-[0.95]',
+    tintOpacity: 'opacity-[0.12]',
+    wash: 'bg-[#0D0D0D]/12',
+    gradient: 'bg-gradient-to-b from-transparent via-[#080808]/18 to-[#080808]/52',
+  },
+  card: {
+    image: 'brightness-[0.85] saturate-[0.96]',
+    tintOpacity: 'opacity-[0.1]',
+    wash: 'bg-[#0D0D0D]/10',
+    gradient: 'bg-gradient-to-b from-transparent via-[#080808]/12 to-[#080808]/48',
+  },
+  metric: {
+    image: 'brightness-[0.88] saturate-[0.97]',
+    tintOpacity: 'opacity-[0.08]',
+    wash: 'bg-[#0D0D0D]/8',
+    gradient: 'bg-gradient-to-b from-transparent via-[#080808]/10 to-[#080808]/45',
+  },
+  subgrid: {
+    image: 'brightness-[0.9] saturate-[0.98]',
+    tintOpacity: 'opacity-[0.06]',
+    wash: 'bg-[#0D0D0D]/6',
+    gradient: 'bg-gradient-to-b from-transparent via-[#080808]/8 to-[#080808]/42',
+  },
 }
 
 type PitchMediaTileProps = {
@@ -22,13 +61,14 @@ type PitchMediaTileProps = {
   videoSrc?: string
   size?: PitchMediaTileSize
   priority?: boolean
+  /** Bypass Next optimizer — use for pre-sized local hero assets */
+  unoptimized?: boolean
   className?: string
   children?: ReactNode
 }
 
 /**
- * OpenAI calm hero tile (see HeroFeatureTile / PitchHookTile): image or video fill,
- * 35% brand tint, calm scrim, copy overlaid at the bottom of the card.
+ * OpenAI calm hero tile: image or video fill, light brand tint, bottom scrim for copy.
  */
 export function PitchMediaTile({
   image,
@@ -36,9 +76,11 @@ export function PitchMediaTile({
   videoSrc,
   size = 'card',
   priority = false,
+  unoptimized = false,
   className,
   children,
 }: PitchMediaTileProps) {
+  const scrim = TILE_SCRIM[size]
   const videoRef = useRef<HTMLVideoElement>(null)
   const [videoActive, setVideoActive] = useState(false)
   const [usePosterOnly, setUsePosterOnly] = useState(!videoSrc)
@@ -85,8 +127,10 @@ export function PitchMediaTile({
               alt={imageAlt}
               fill
               priority={priority}
+              unoptimized={unoptimized}
+              quality={unoptimized ? undefined : 90}
               sizes={sizes}
-              className="object-cover object-center brightness-[0.55] saturate-[0.9]"
+              className={cn('object-cover object-center', scrim.image)}
             />
           ) : null}
 
@@ -115,23 +159,23 @@ export function PitchMediaTile({
         </div>
 
         <div
-          className="pointer-events-none absolute inset-0 z-[2] opacity-[0.35]"
+          className={cn('pointer-events-none absolute inset-0 z-[2]', scrim.tintOpacity)}
           style={{ background: PITCH_TILE_TINT_GRADIENT }}
           aria-hidden
         />
-        <div className="pointer-events-none absolute inset-0 z-[2] bg-[#0D0D0D]/30" aria-hidden />
         <div
-          className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-[#0D0D0D]/10 via-[#080808]/35 to-[#080808]/70"
+          className={cn('pointer-events-none absolute inset-0 z-[2]', scrim.wash)}
           aria-hidden
         />
+        <div className={cn('pointer-events-none absolute inset-0 z-[2]', scrim.gradient)} aria-hidden />
 
         {children ? (
           <div
             className={cn(
               'absolute inset-0 z-[3] flex flex-col justify-end',
               size !== 'metric' && 'items-start',
-              size === 'metric'
-                ? 'px-3.5 pb-3.5 pt-10 sm:px-4 sm:pb-4 md:px-5 md:pb-5'
+              size === 'metric' || size === 'subgrid'
+                ? 'p-3 sm:p-3.5'
                 : 'px-4 pb-4 pt-12 sm:px-5 sm:pb-5 sm:pt-14 md:px-7 md:pb-7 md:pt-16'
             )}
           >

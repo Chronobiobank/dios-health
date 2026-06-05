@@ -7,28 +7,28 @@ import { SectionLabel } from './SectionLabel'
 
 const STREAMS = [
   {
-    image: SITE_IMAGES.streams.wearable,
-    alt: 'Sleep tracker on a bedside table',
-    headline: 'The sleep tracker reads when your patient actually sleeps',
-    caption: 'TipTraQ wearable stream',
-  },
-  {
-    image: SITE_IMAGES.streams.lab,
-    alt: 'Blood test vials in a lab tray',
-    headline: 'The blood panel checks whether their body can use the medicine properly',
-    caption: 'Vitamin D, B12, ferritin, and cortisol',
+    image: SITE_IMAGES.streams.mobile,
+    alt: 'Smartphone on a desk',
+    headline: 'DIOS computes melanopic dose — intensity, wavelength, timing',
+    caption: 'Dose Intelligence OS · passive phone stream',
   },
   {
     image: SITE_IMAGES.streams.retina,
     alt: 'Handheld eye scan device',
-    headline: 'The eye scan reads the retinal nerve that drives their body clock',
-    caption: 'Siloton Giraffe OCT on the specialist tier',
+    headline: 'Siloton GiraffeOCT maps retinal light-receptor density',
+    caption: 'Quantum photonic-chip eye-clock scan',
   },
   {
-    image: SITE_IMAGES.streams.mobile,
-    alt: 'Smartphone on a desk',
-    headline: 'Their phone passively tracks light exposure and daily rhythm',
-    caption: 'Smartphone passive stream',
+    image: SITE_IMAGES.streams.lab,
+    alt: 'Blood test vials in a lab tray',
+    headline: 'Biochemical fuel titration — D3, B5, B12 for deep sleep chemistry',
+    caption: 'Quarterly metabolic panel',
+  },
+  {
+    image: SITE_IMAGES.streams.wearable,
+    alt: 'TipTraQ fingertip sleep sensor',
+    headline: 'PranaQ TipTraQ verifies neural sleep recovery',
+    caption: 'FDA-cleared fingertip telemetry',
   },
 ] as const
 
@@ -38,10 +38,11 @@ export function Platform() {
       <div className={CONTAINER}>
         <SectionLabel title="How it works" />
         <h2 className={`${SECTION_TITLE} mt-4 max-w-xl`}>
-          Your patient generates the data and you act on the timing call
+          Retinomic Protocol — four automated inputs, one dose engine
         </h2>
         <p className={`${BODY} mt-4 max-w-xl`}>
-          DIOS reads four data streams your patient already generates without extra clinic visits or tests
+          Eye-clock structure, biochemical fuel, passive light sensing, and medical-grade sleep verification —
+          no guesswork wearables
         </p>
 
         <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">

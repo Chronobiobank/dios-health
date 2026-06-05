@@ -99,24 +99,24 @@ export const PITCH_CONFIDENCE_LAYERS = [
 export const PITCH_HOW_IT_WORKS = [
   {
     step: '01',
-    title: 'DIOS Coach',
-    body: 'Measures melanopic lux — your clock signal.',
+    title: 'DIOS engine',
+    body: 'Daily intensity, wavelength, and timing for your master clock.',
     image: PITCH_IMAGES.steps.mel,
-    imageAlt: 'Glowing voice orb for DIOS Coach',
+    imageAlt: 'Dose Intelligence OS processing',
   },
   {
     step: '02',
-    title: 'Camera',
-    body: '60 seconds. No wearable.',
+    title: 'Siloton OCT',
+    body: 'Retinal light-receptor density — no manual uploads.',
     image: PITCH_IMAGES.steps.camera,
-    imageAlt: 'Smartphone front camera light session',
+    imageAlt: 'GiraffeOCT eye-clock scan',
   },
   {
     step: '03',
-    title: 'Protocol',
-    body: 'Timed doses and zeitgebers.',
+    title: 'TipTraQ verify',
+    body: 'FDA-cleared sleep telemetry validates neural recovery.',
     image: PITCH_IMAGES.steps.protocol,
-    imageAlt: 'Personalised chronotherapy protocol',
+    imageAlt: 'Medical-grade sleep verification',
   },
 ] as const
 

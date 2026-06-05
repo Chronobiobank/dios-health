@@ -10,12 +10,12 @@ export const PITCH_SPOT = {
   optimalRgb: '237 137 54',
 } as const
 
-/** Media tile tint at 35% layer opacity — warm gold wash over photography */
+/** Media tile tint — light gold wash; layer opacity set in PitchMediaTile */
 export const PITCH_TILE_TINT_GRADIENT = `linear-gradient(
   145deg,
-  rgb(${PITCH_SPOT.optimalRgb} / 0.45) 0%,
-  rgb(${PITCH_SPOT.brandRgb} / 0.5) 42%,
-  rgb(8 8 8 / 0.92) 100%
+  rgb(${PITCH_SPOT.optimalRgb} / 0.2) 0%,
+  rgb(${PITCH_SPOT.brandRgb} / 0.22) 42%,
+  rgb(8 8 8 / 0.5) 100%
 )`
 
 /** Spectrum bar fill — same hue, opacity encodes score (no magenta/navy mix). */

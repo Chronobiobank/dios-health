@@ -18,6 +18,9 @@
 /* Patient dashboard — dios-glass-outer / dios-glass-inner tiles (site-wide via globals) */
 @import "./dashboard/patient-dashboard.css";
 
+/* Retinomic Protocol — pillar tokens, premium lock, medical typography */
+@import "./styles/retinomic-theme.css";
+
 @custom-variant dark (&:is(.dark *));
 
 .dios-wordmark {

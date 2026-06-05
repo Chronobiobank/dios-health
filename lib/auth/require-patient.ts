@@ -33,6 +33,11 @@ export type PatientProfileRow = {
   data_share_research: boolean
   data_share_policy: boolean
   onboarding_complete: boolean
+  retinomic_tier?: 'FREE_SCREENING' | 'PREMIUM_VERIFICATION' | null
+  hardware_baseline?: Record<string, unknown> | null
+  biochemical_fuel?: Record<string, unknown> | null
+  hardware_bandwidth_coefficient?: number | null
+  morning_mlux_target_duration_minutes?: number | null
 }
 
 export async function requirePatientSession() {
@@ -70,7 +75,7 @@ export async function requirePatientSession() {
     .maybeSingle<PatientProfileRow>()
 
   if (!patient) {
-    redirect(AUTH_ROUTES.signUpPatient)
+    redirect(AUTH_ROUTES.authSignUp)
   }
 
   if (!patient.onboarding_complete || !patient.fitzpatrick_type || !patient.chronotype_q1) {

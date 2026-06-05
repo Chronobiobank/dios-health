@@ -44,4 +44,12 @@ export const PITCH_IMAGES = {
     regulatory: '/governance-regulatory.jpeg',
     consentFirewall: '/consent-firewall.jpg',
   },
+  /** Retinomic Protocol deck — section tiles */
+  retinomic: {
+    howWeThink: '/how-we-think.webp',
+    lightDose: '/your-light-dose.jpg',
+    eyeScan: '/your-eye-scan.avif',
+    bloodFuel: '/city-labs-panel.jpg',
+    sleepCheck: '/your-sleep-check.jpg',
+  },
 } as const

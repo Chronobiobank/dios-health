@@ -103,15 +103,22 @@ body:has(.calm-landing) {
   width: 100%;
 }
 
-.calm-landing .pitch-screen .pitch-media-tile {
+/* Full-height only for the screen-level tile — not nested sub-tiles in a grid */
+.calm-landing .pitch-screen > .pitch-screen__tile > .pitch-media-tile {
   display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 0;
 }
 
-.calm-landing .pitch-screen .pitch-media-tile__frame {
+.calm-landing .pitch-screen > .pitch-screen__tile > .pitch-media-tile > .pitch-media-tile__frame {
   flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+.calm-landing .pitch-screen > .pitch-screen__tile > .pitch-feature-panel {
+  height: 100%;
   min-height: 0;
   width: 100%;
 }

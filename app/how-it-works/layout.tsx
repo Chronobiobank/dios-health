@@ -1,4 +1,6 @@
-/** Demo dashboard — keeps global site nav; dash styles loaded globally via globals.css */
+import '@/app/dashboard/retinomic-dashboard.css'
+
+/** Demo dashboard — keeps global site nav; Retinomic panel styles + globals theme tokens. */
 export default function HowItWorksLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="how-it-works-route min-h-screen">

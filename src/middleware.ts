@@ -15,6 +15,11 @@ import {
   isSignupRoleChoicePath,
   shouldRedirectTo,
 } from '@/lib/auth/redirects'
+import {
+  getPatientRetinomicTier,
+  isPremiumDashboardPath,
+  wantsJsonResponse,
+} from '@/lib/auth/retinomic-access'
 import { AUTH_ROUTES, CLINIC_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
 import { updateSession } from '@/lib/supabase/middleware'
 
@@ -35,7 +40,7 @@ export async function middleware(request: NextRequest) {
 
   if (!user && isProtectedPath(pathname)) {
     const signInUrl = request.nextUrl.clone()
-    signInUrl.pathname = AUTH_ROUTES.signIn
+    signInUrl.pathname = AUTH_ROUTES.authSignIn
     signInUrl.searchParams.set('next', pathname)
     return NextResponse.redirect(signInUrl)
   }
@@ -77,13 +82,41 @@ export async function middleware(request: NextRequest) {
 
     if (isSignupRoleChoicePath(pathname)) {
       const destination = await getPostAuthPath(supabase, user.id)
-      // New OAuth users: destination is /signup — must not redirect to the same URL.
       return redirectIfNeeded(request, destination) ?? supabaseResponse
     }
 
-    if (pathname === AUTH_ROUTES.signIn) {
+    if (pathname === AUTH_ROUTES.signIn || pathname === AUTH_ROUTES.authSignIn) {
       const destination = await getPostAuthPath(supabase, user.id)
       return redirectIfNeeded(request, destination) ?? supabaseResponse
+    }
+
+    if (pathname === AUTH_ROUTES.authSignUp && user) {
+      const destination = await getPostAuthPath(supabase, user.id)
+      return redirectIfNeeded(request, destination) ?? supabaseResponse
+    }
+  }
+
+  if (isPremiumDashboardPath(pathname)) {
+    if (!user) {
+      const signInUrl = request.nextUrl.clone()
+      signInUrl.pathname = AUTH_ROUTES.signIn
+      signInUrl.searchParams.set('next', pathname)
+      return NextResponse.redirect(signInUrl)
+    }
+
+    const tier = await getPatientRetinomicTier(supabase, user.id)
+    if (tier === 'FREE_SCREENING') {
+      if (wantsJsonResponse(request)) {
+        return NextResponse.json(
+          {
+            error: 'Premium verification required',
+            code: 'RETINOMIC_TIER_FORBIDDEN',
+            tier,
+          },
+          { status: 403 }
+        )
+      }
+      return NextResponse.redirect(new URL(PATIENT_ROUTES.dashboard, request.url))
     }
   }
 
@@ -141,6 +174,8 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/signin',
+    '/auth/signin',
+    '/auth/signup',
     '/signup',
     '/signup/:path*',
     '/pending-verification',

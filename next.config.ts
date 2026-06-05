@@ -1,6 +1,14 @@
 import type { NextConfig } from 'next'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const projectRoot = path.dirname(fileURLToPath(import.meta.url))
 
 const nextConfig: NextConfig = {
+  // Home folder has a stray package-lock.json; pin Turbopack to this repo.
+  turbopack: {
+    root: projectRoot,
+  },
   async redirects() {
     return [
       { source: '/vaya', destination: '/dashboard/coach', permanent: true },

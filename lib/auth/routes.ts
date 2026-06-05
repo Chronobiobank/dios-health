@@ -1,10 +1,15 @@
 export const AUTH_ROUTES = {
   signIn: '/signin',
+  /** Retinomic sign-in (preferred). */
+  authSignIn: '/auth/signin',
   forgotPassword: '/signin/forgot-password',
   resetPassword: '/signin/reset-password',
   /** Patient account creation (email + password). */
-  signUp: '/signup/patient',
-  signUpPatient: '/signup/patient',
+  signUp: '/auth/signup',
+  signUpPatient: '/auth/signup',
+  authSignUp: '/auth/signup',
+  /** Legacy path — redirects to authSignUp */
+  legacySignUpPatient: '/signup/patient',
   /** Demographics wizard — builds chronoprofile before dashboard. */
   patientChronoprofile: '/signup/patient/chronoprofile',
   signUpClinician: '/signup/clinician',
@@ -13,6 +18,7 @@ export const AUTH_ROUTES = {
 
 export const PATIENT_ROUTES = {
   dashboard: '/dashboard',
+  premium: '/dashboard/premium',
   coach: '/dashboard/coach',
   /** @deprecated Use {@link PATIENT_ROUTES.coach}. */
   mel: '/dashboard/coach',
@@ -36,4 +42,4 @@ export const CLINIC_ROUTES = {
 
 export const PROTECTED_PREFIXES = ['/dashboard', '/clinic', '/pending-verification'] as const
 
-export const PUBLIC_AUTH_PREFIXES = ['/signin', '/signup'] as const
+export const PUBLIC_AUTH_PREFIXES = ['/signin', '/signup', '/auth'] as const

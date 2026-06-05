@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 
-import { DashboardClient } from '@/components/patient-dashboard/dashboard-client'
-import { MOCK_DASHBOARD_PROPS } from '@/lib/patient-dashboard/mock-snapshot'
+import { RetinomicDashboardClient } from '@/components/retinomic/retinomic-dashboard-client'
+import { MOCK_RETINOMIC_DASHBOARD } from '@/lib/retinomic/mock-dashboard-props'
 
 export const dynamic = 'force-dynamic'
 
@@ -11,5 +11,5 @@ export default function DevDashboardPreviewPage() {
     notFound()
   }
 
-  return <DashboardClient {...MOCK_DASHBOARD_PROPS} />
+  return <RetinomicDashboardClient {...MOCK_RETINOMIC_DASHBOARD} />
 }

@@ -2,20 +2,18 @@ import type { Metadata } from 'next'
 
 import { PitchDeck } from '@/components/sections/pitch/pitch-deck'
 import { PitchLandingPrefetch } from '@/components/sections/pitch/pitch-landing-prefetch'
+import { RETINOMIC_LANDING_META } from '@/lib/pitch/retinomic-landing-copy'
 
 export const metadata: Metadata = {
-  title: 'DIOS – What is your Chronosomatic Age?',
-  description:
-    'The UK Biobank study of 80,000 people proved that your light-dark cycle determines how fast you age. DIOS measures your Chronosomatic Age — and shows you how to recover your Dark Years.',
+  title: RETINOMIC_LANDING_META.title,
+  description: RETINOMIC_LANDING_META.description,
   openGraph: {
-    title: 'DIOS – What is your Chronosomatic Age?',
-    description:
-      '80,000 people. One finding. Your light-dark cycle determines how fast you age metabolically. DIOS is the first clinical tool built to measure and fix it.',
+    title: RETINOMIC_LANDING_META.openGraphTitle,
+    description: RETINOMIC_LANDING_META.openGraphDescription,
   },
   twitter: {
-    title: 'DIOS – What is your Chronosomatic Age?',
-    description:
-      '80,000 people. One finding. Your light-dark cycle determines how fast you age. DIOS measures your Chronosomatic Age and shows you how to recover your Dark Years.',
+    title: RETINOMIC_LANDING_META.openGraphTitle,
+    description: RETINOMIC_LANDING_META.openGraphDescription,
   },
 }
 

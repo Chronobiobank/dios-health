@@ -11,7 +11,7 @@ export const NAV_COACH_LINK = {
 } as const
 
 export const AUTH_LINKS = [
-  { label: 'Sign in', href: '/signin' },
+  { label: 'Sign in', href: '/auth/signin' },
   { label: 'Sign up', href: '/signup/patient' },
 ] as const
 

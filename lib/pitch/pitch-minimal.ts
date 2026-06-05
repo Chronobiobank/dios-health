@@ -1,5 +1,6 @@
 import { PITCH_HERO, PITCH_IMAGES } from '@/lib/pitch/landing-images'
 import { GRANT_MUNRO_PAPER_TITLE } from '@/lib/pitch/grant-munro-founder'
+import { RETINOMIC_LANDING_HERO } from '@/lib/pitch/retinomic-landing-copy'
 
 export type PitchMinimalTile = {
   id: string
@@ -37,95 +38,65 @@ export const PITCH_MINIMAL_TILES: readonly PitchMinimalTile[] = [
   {
     id: 'pitch-hook',
     slug: 'hook',
-    eyebrow: 'What we know',
-    title: 'Light determines how fast you age.',
-    subtitle:
-      'The UK Biobank study of 80,000 people found that the rhythm of your light and dark cycle — not diet or exercise alone — determines health and how long you live.',
+    eyebrow: RETINOMIC_LANDING_HERO.eyebrow,
+    title: RETINOMIC_LANDING_HERO.headline,
+    subtitle: RETINOMIC_LANDING_HERO.subheadline,
     image: PITCH_HERO.poster,
-    imageAlt: 'Medicines and tablets',
+    imageAlt: 'Retinomic baseline screening — eye-clock and light dose',
     videoSrc: '/first-light.mp4',
-    href: '/circadian-digital-twin',
-    ctaLabel: 'View the science',
-  },
-  {
-    id: 'pitch-problem',
-    slug: 'problem',
-    eyebrow: 'The core problem',
-    title: 'Most people are living in the dark.',
-    subtitle:
-      'Circadian dyssynchrony — the gap between your body clock and your actual life — silently accelerates metabolic disease. Until now medicine had no way to measure it.',
-    image: '/standardised.jpg',
-    imageAlt: 'Standardised medication packaging',
-    href: '/pitch/problem',
-    ctaLabel: 'See the problem',
-  },
-  {
-    id: 'pitch-how',
-    slug: 'how-it-works',
-    eyebrow: 'The DIOS solution',
-    title: 'Your Dark Years. Recovered.',
-    subtitle:
-      'DIOS measures the gap between your Chronological Age and your Chronosomatic Age — the Dark Years lost to metabolic hibernation — and gives you a precise plan to close it.',
-    image: '/dose-intelligence.jpg',
-    imageAlt: 'Phone camera session',
-    href: '/how-it-works',
-    ctaLabel: 'How it works',
-  },
-  {
-    id: 'pitch-why-now',
-    slug: 'why-now',
-    eyebrow: 'Why this matters',
-    title: 'Three layers. One number.',
-    subtitle:
-      'Daily smartphone sensors, a seven-night TipTraQ sleep study, and a quarterly blood panel converge into a single score — your Chronosomatic Age — and a Metabolic Risk profile across seven body systems.',
-    image: '/tiptraq-wearable.jpg',
-    imageAlt: 'TipTraQ wearable home sleep monitor',
-    href: '/tiptraq',
-    ctaLabel: 'Explore the diagnostic stack',
+    href: RETINOMIC_LANDING_HERO.ctaHref,
+    ctaLabel: RETINOMIC_LANDING_HERO.ctaLabel,
+    secondaryHref: RETINOMIC_LANDING_HERO.secondaryCtaHref,
+    secondaryCtaLabel: RETINOMIC_LANDING_HERO.secondaryCtaLabel,
   },
   {
     id: 'pitch-clinical-proof',
     slug: 'clinical-proof',
-    eyebrow: 'Strong clinical proof',
-    title: 'The evidence is unambiguous.',
+    eyebrow: 'The evidence',
+    title: 'Big studies. Your dose.',
     subtitle:
-      '80,000 participants. Accelerometer-measured light cycles. Hard metabolic and mortality outcomes. The UK Biobank proved that circadian alignment extends healthy life. DIOS is the first clinical tool built directly on that finding.',
+      'Large population research plus your own eye scan, bloods, and sleep data — in one place.',
     image: PITCH_IMAGES.evidence,
     imageAlt: 'Clinical evidence overview',
     href: '/pitch/clinical-proof',
-    ctaLabel: 'View the evidence',
+    ctaLabel: 'View evidence',
   },
   {
     id: 'pitch-pilot-structure',
     slug: 'chronobiobank',
-    eyebrow: 'Our bold vision',
-    title: 'Community-owned. Patient-powered.',
+    eyebrow: 'Our vision',
+    title: 'Your data helps everyone.',
     subtitle:
-      "Every DIOS patient contributes to the Chronobiobank — the world's first community-owned circadian dataset. Your data funds the research. You own the returns.",
+      'Patients co-own the Chronobiobank. Your records can fund research — and you share the returns.',
     image: '/chronobiobank.png',
     imageAlt: 'Chronobiobank research infrastructure',
     href: '/contact',
-    ctaLabel: 'Contact the DIOS team',
+    ctaLabel: 'Contact us',
   },
   {
     id: 'pitch-credibility',
     slug: 'credibility',
-    eyebrow: 'Built for credibility',
-    title: 'Built for the NHS. Designed for everyone.',
+    eyebrow: 'Trust by design',
+    title: 'Built for the NHS.',
     subtitle:
-      'Fitzpatrick skin-type correction, data sovereignty frameworks, and clinical decision support standards built in from day one — because circadian medicine should work for every patient, not just white European populations.',
+      'Works for every skin tone. Clear consent. Your data stays yours.',
     image: '/consent-firewall.jpg',
     imageAlt: 'Governance and compliance',
     href: '/pitch/credibility',
-    ctaLabel: 'Explore our credibility',
+    ctaLabel: 'How we keep trust',
   },
 ] as const
 
 /** Footer / in-page nav — kept in sync with snap-deck section ids */
-export const PITCH_LANDING_HASH_LINKS = PITCH_MINIMAL_TILES.map((tile) => ({
-  label: tile.eyebrow,
-  href: `/#${tile.id}`,
-})) as readonly { label: string; href: string }[]
+export const PITCH_LANDING_HASH_LINKS = [
+  { label: RETINOMIC_LANDING_HERO.eyebrow, href: '/#pitch-hook' },
+  { label: 'Retinomic Protocol', href: '/#pitch-features' },
+  { label: 'Core philosophy', href: '/#pitch-philosophy' },
+  ...PITCH_MINIMAL_TILES.filter((t) => t.id !== 'pitch-hook').map((tile) => ({
+    label: tile.eyebrow,
+    href: `/#${tile.id}`,
+  })),
+] as readonly { label: string; href: string }[]
 
 export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
   {

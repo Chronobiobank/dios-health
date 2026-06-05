@@ -7,7 +7,8 @@
     "dev:fresh": "powershell -ExecutionPolicy Bypass -File ./scripts/dev-fresh.ps1",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:retinomic-demo": "npx tsx --env-file=.env.local scripts/seed-retinomic-demo.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",

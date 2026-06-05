@@ -107,14 +107,75 @@ html:has(.patient-dashboard-route) {
     font-size: 0.6875rem;
     line-height: 1.3;
     max-width: none;
+    padding-inline: 0.125rem;
+  }
+
+  .chronosomatic-spectrum__labels {
+    gap: 0.375rem;
   }
 
   .chronosomatic-spectrum__legend {
     font-size: 0.6875rem;
   }
+
+  .snapshot-tile__risk-center .dash-tile-group {
+    max-width: 100%;
+  }
+
+  .metabolic-risk-tile {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .metabolic-risk-tile .chronosomatic-spectrum {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .metabolic-risk-tile .dash-tile-expand-row {
+    flex-wrap: wrap;
+    align-items: flex-end;
+    row-gap: 0.5rem;
+  }
+
+  .metabolic-risk-tile .dash-tile-expand-row__leading {
+    flex: 1 1 12rem;
+  }
+
+  .metabolic-risk-tile .dash-tile-expand-row__cue {
+    flex: 0 1 auto;
+    margin-left: auto;
+  }
+
+  .metabolic-risk-tile .metabolic-risk-tile__legend.chronosomatic-spectrum__legend {
+    flex-wrap: wrap;
+    row-gap: 0.375rem;
+    column-gap: 0.75rem;
+  }
 }
 
 @media (min-width: 1024px) {
+  .chronosomatic-spectrum__rail,
+  .chronosomatic-spectrum__dots {
+    min-height: 2.75rem;
+  }
+
+  .chronosomatic-spectrum__label-btn {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    padding-inline: 0.25rem;
+  }
+
+  .chronosomatic-spectrum__labels {
+    gap: 0.5rem;
+    margin-top: calc(var(--dash-tile-gap) * 1.25);
+  }
+
+  .metabolic-risk-tile .metabolic-risk-tile__legend.chronosomatic-spectrum__legend {
+    column-gap: 1rem;
+    font-size: 0.6875rem;
+  }
+
   .patient-dashboard-content,
   .how-it-works-route__inner {
     padding-inline: 1.5rem;
@@ -1374,11 +1435,17 @@ html:has(.patient-dashboard-route) {
   display: flex;
   flex-direction: column;
   gap: var(--dash-tile-gap);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .metabolic-risk-tile .chronosomatic-spectrum {
   flex: none;
+  width: 100%;
+  min-width: 0;
   padding: 0;
+  overflow: visible;
 }
 
 .metabolic-risk-tile .chronosomatic-spectrum__labels {
@@ -1477,19 +1544,27 @@ html:has(.patient-dashboard-route) {
 }
 
 .chronosomatic-spectrum {
+  --spectrum-max-dot: 16px;
+  --spectrum-dot-inset: calc(var(--spectrum-max-dot) / 2);
+  width: 100%;
+  min-width: 0;
   padding: 0.25rem 0 0;
+  box-sizing: border-box;
 }
 
-/* Dot row only — dashed line through circle centres (first ↔ last column). */
+/* Dot row — dashed line from first to last dot centre (flex, gap-aware). */
 .chronosomatic-spectrum__rail {
   position: relative;
   min-height: 2.25rem;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
 }
 
 .chronosomatic-spectrum__track {
   position: absolute;
-  left: calc(100% / 14);
-  right: calc(100% / 14);
+  left: var(--spectrum-dot-inset);
+  right: var(--spectrum-dot-inset);
   top: 50%;
   transform: translateY(-50%);
   border-top: 2px dotted rgba(160, 160, 160, 0.35);
@@ -1500,33 +1575,42 @@ html:has(.patient-dashboard-route) {
 .chronosomatic-spectrum__dots {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: var(--dash-tile-gap);
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  gap: 0;
+  width: 100%;
+  min-width: 0;
   min-height: 2.25rem;
+  box-sizing: border-box;
 }
 
 .chronosomatic-spectrum__dot-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  align-self: center;
+  flex: 0 0 auto;
   min-width: 0;
   padding: 0;
   background: transparent;
   border: none;
   cursor: pointer;
+  overflow: visible;
 }
 
 .chronosomatic-spectrum__labels {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: var(--dash-tile-gap);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.125rem;
+  width: 100%;
+  min-width: 0;
   margin-top: var(--dash-tile-gap);
+  box-sizing: border-box;
 }
 
 .chronosomatic-spectrum__label-btn {
+  flex: 1 1 0;
   min-width: 0;
   padding: 0;
   background: transparent;
@@ -1536,9 +1620,9 @@ html:has(.patient-dashboard-route) {
   font-size: 0.625rem;
   line-height: 1.25;
   color: var(--text-muted);
-  max-width: 3.25rem;
-  margin-inline: auto;
-  word-break: break-word;
+  max-width: none;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .chronosomatic-spectrum__dot-wrap {

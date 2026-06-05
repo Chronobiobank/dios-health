@@ -1,5 +1,8 @@
-import { PatientSignupWizard } from '@/components/auth/patient-signup-wizard'
+import { redirect } from 'next/navigation'
 
-export default function PatientSignUpPage() {
-  return <PatientSignupWizard />
+import { AUTH_ROUTES } from '@/lib/auth/routes'
+
+/** Legacy route — Retinomic sign-up lives at /auth/signup */
+export default function PatientSignUpRedirectPage() {
+  redirect(AUTH_ROUTES.authSignUp)
 }

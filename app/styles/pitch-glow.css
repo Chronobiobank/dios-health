@@ -205,6 +205,111 @@
   }
 }
 
+/* Section 2 — dashboard-style frosted panel; pastel orbs show through */
+.calm-landing .pitch-feature-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  border-radius: var(--pitch-radius, var(--calm-radius-card, 12px));
+  /* Matches dios-glass-outer — tuned slightly lighter so landing hues read through */
+  background: linear-gradient(
+    152deg,
+    rgb(255 255 255 / 0.58) 0%,
+    rgb(248 250 252 / 0.42) 42%,
+    rgb(255 255 255 / 0.5) 100%
+  );
+  -webkit-backdrop-filter: var(--dios-glass-outer-blur, blur(44px) saturate(1.8));
+  backdrop-filter: var(--dios-glass-outer-blur, blur(44px) saturate(1.8));
+  border: 1px solid var(--dios-glass-outer-border, rgb(255 255 255 / 0.68));
+  box-shadow: var(--dios-glass-outer-highlight, inset 0 1px 0 rgb(255 255 255 / 0.92)),
+    var(--dios-glass-outer-shadow, 0 8px 32px rgb(13 13 13 / 0.06));
+}
+
+.calm-landing .pitch-feature-panel.dios-glass-outer:hover {
+  transform: none;
+  background: linear-gradient(
+    152deg,
+    rgb(255 255 255 / 0.58) 0%,
+    rgb(248 250 252 / 0.42) 42%,
+    rgb(255 255 255 / 0.5) 100%
+  );
+  box-shadow: var(--dios-glass-outer-highlight, inset 0 1px 0 rgb(255 255 255 / 0.92)),
+    var(--dios-glass-outer-shadow, 0 8px 32px rgb(13 13 13 / 0.06));
+}
+
+.calm-landing .pitch-feature-panel__eyebrow {
+  font-family: var(--font-family-mono);
+  font-size: clamp(0.625rem, 1.6vw, 0.75rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--calm-brand);
+}
+
+.calm-landing .pitch-feature-panel__title {
+  margin-top: 0.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #0d0d0d;
+}
+
+/* Light glass panel — same rule as site nav CTAs on pastel: black fill, white label */
+.calm-landing .pitch-feature-panel__ctas .pitch-btn-primary,
+.calm-landing .pitch-feature-panel__ctas .pitch-btn-secondary {
+  background: #0d0d0d;
+  color: #fff;
+  border: 1px solid #0d0d0d;
+  backdrop-filter: none;
+}
+
+.calm-landing .pitch-feature-panel__ctas .pitch-btn-primary:hover,
+.calm-landing .pitch-feature-panel__ctas .pitch-btn-secondary:hover {
+  opacity: 0.9;
+  background: #0d0d0d;
+  color: #fff;
+}
+
+/* Section 2 — four equal square sub-tiles with uniform gap */
+.calm-landing .pitch-feature-subgrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.125rem;
+}
+
+@media (min-width: 640px) {
+  .calm-landing .pitch-feature-subgrid {
+    gap: 0.875rem;
+    padding: 0.25rem;
+  }
+}
+
+.calm-landing .pitch-feature-subgrid > li {
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+.calm-landing .pitch-feature-subgrid .pitch-media-tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.calm-landing .pitch-feature-subgrid .pitch-media-tile__frame {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  aspect-ratio: auto;
+}
+
 /* One copy column per tile — same left edge and rag-right measure on every screen */
 .calm-landing .pitch-tile-copy {
   width: min(100%, var(--pitch-tile-copy-max));

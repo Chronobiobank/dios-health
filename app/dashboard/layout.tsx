@@ -1,3 +1,5 @@
+import '@/app/dashboard/retinomic-dashboard.css'
+
 import { PatientBottomNav } from '@/components/dashboard/patient-bottom-nav'
 import { cn } from '@/lib/utils'
 
