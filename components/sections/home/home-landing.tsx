@@ -98,9 +98,9 @@ export function HomeLanding() {
         </div>
       </section>
 
-      <section className="home-landing__idea home-landing__idea--paper" id="how">
+      <section className="home-landing__idea home-landing__idea--bronze" id="how">
         <div className="home-landing__inner">
-          <h2 className="home-landing__title home-landing__reveal">
+          <h2 className="home-landing__title home-landing__title--on-bronze">
             {HOME_STEPS.headline[0]}
             <br />
             {HOME_STEPS.headline[1]}

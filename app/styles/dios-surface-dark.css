@@ -13,6 +13,7 @@
 :root {
   --dios-surface-ink: #0f1012;
   --dios-surface-accent: #1b3d5f;
+  --dios-surface-green: #1d9e75;
   --dios-surface-gold: #c8963e;
 
   /* Default block tokens (light page sections + black surfaces) */
@@ -29,13 +30,18 @@
 }
 
 .dios-surface-dark,
-.dios-surface-accent {
+.dios-surface-accent,
+.dios-surface-green {
   --dios-surface-fg: rgb(255 255 255 / 0.92);
   --dios-surface-fg-muted: rgb(255 255 255 / 0.65);
   --dios-surface-fg-faint: rgb(255 255 255 / 0.48);
   --dios-surface-eyebrow: rgb(255 255 255 / 0.72);
   --dios-surface-eyebrow-accent: var(--dios-surface-gold);
   color: var(--dios-surface-fg);
+}
+
+.dios-surface-green {
+  background-color: var(--dios-surface-green);
 }
 
 .dios-surface-dark {
@@ -66,7 +72,8 @@
 
 /* Override globals/calmer base `p, h1–h4 { color: --text-primary }` */
 .dios-surface-dark :is(h1, h2, h3, h4, p, li, span, a),
-.dios-surface-accent :is(h1, h2, h3, h4, p, li, span, a) {
+.dios-surface-accent :is(h1, h2, h3, h4, p, li, span, a),
+.dios-surface-green :is(h1, h2, h3, h4, p, li, span, a) {
   color: inherit;
 }
 
@@ -78,7 +85,8 @@
 }
 
 .dios-surface-dark .dios-on-dark-title em,
-.dios-surface-accent .dios-on-dark-title em {
+.dios-surface-accent .dios-on-dark-title em,
+.dios-surface-green .dios-on-dark-title em {
   color: var(--dios-surface-gold);
   font-style: italic;
 }
