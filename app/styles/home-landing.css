@@ -98,7 +98,7 @@
 
 .home-landing__btn-ghost {
   background: transparent;
-  border: 0.5px solid rgb(0 0 0 / 0.15);
+  border: 1px solid var(--dios-outline-btn-border, #0d0d0d);
   color: var(--hl-ink-3);
 }
 

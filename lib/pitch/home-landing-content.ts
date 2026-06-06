@@ -9,8 +9,8 @@ export const HOME_LANDING_META = {
 
 export const HOME_PROBLEM = {
   kicker: 'Dose Intelligence OS',
-  lines: ['Most are', 'taking their', 'meds at the', 'wrong time.'] as const,
-  emphasisLine: 3,
+  lines: ['Most folk take their meds at the', 'wrong time.'] as const,
+  emphasisLine: 1,
   primaryCta: { label: 'Fix it', href: '#cta' },
   secondaryCta: { label: 'How', href: '#insight' },
 } as const

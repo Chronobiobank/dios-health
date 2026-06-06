@@ -65,6 +65,7 @@
   --tracking-tighter: -0.03em;
 
   --text-primary: #0d0d0d;
+  --dios-outline-btn-border: var(--text-primary);
   --text-secondary: rgb(13 13 13 / 0.7);
   --text-muted: rgb(13 13 13 / 0.5);
   --text-faint: rgb(13 13 13 / 0.4);
@@ -822,7 +823,7 @@
     justify-content: center;
     white-space: nowrap;
     border-radius: 9999px;
-    border: 1px solid rgb(13 13 13 / 0.12);
+    border: 1px solid var(--dios-outline-btn-border);
     background: rgb(255 255 255 / 0.45);
     padding-inline: 0.875rem;
     font-size: 0.8125rem;
@@ -893,7 +894,7 @@
     justify-content: center;
     white-space: nowrap;
     border-radius: 9999px;
-    border: 1px solid rgb(13 13 13 / 0.15);
+    border: 1px solid var(--dios-outline-btn-border);
     background: transparent;
     padding-inline: var(--dios-btn-padding-inline-compact);
     font-size: 0.8125rem;
@@ -1322,6 +1323,42 @@
 @keyframes dios-marquee {
   to {
     transform: translateX(-50%);
+  }
+}
+
+/* Light surfaces — outline / ghost buttons use solid black borders for legibility */
+@layer components {
+  :where(
+    .dios-btn-on-light--secondary,
+    a.dios-btn-on-light--secondary,
+    button.dios-btn-on-light--secondary,
+    .home-landing__btn-ghost,
+    .clinicians-landing__btn--line
+  ) {
+    border-color: var(--dios-outline-btn-border);
+  }
+
+  :where(
+    .dios-btn-on-light--secondary,
+    a.dios-btn-on-light--secondary,
+    button.dios-btn-on-light--secondary
+  ):hover {
+    border-color: var(--dios-outline-btn-border);
+  }
+
+  .dios-site-nav:not(.dios-site-nav--on-dark) :where(.dios-site-nav__ask-dios, .dios-site-nav__sign-out-btn) {
+    border-color: var(--dios-outline-btn-border);
+  }
+
+  /* Tailwind bordered pills on light pages */
+  :is(a, button)[class*='border-black'] {
+    border-color: var(--dios-outline-btn-border);
+  }
+
+  .dios-surface-dark :is(a, button)[class*='border-black'],
+  .dios-surface-accent :is(a, button)[class*='border-black'],
+  .clinicians-landing__btn--ghost {
+    border-color: rgb(255 255 255 / 0.28);
   }
 }
 

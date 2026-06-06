@@ -446,7 +446,7 @@
 
 .clinicians-landing__btn--line {
   background: transparent;
-  border: 1px solid rgb(0 0 0 / 0.18);
+  border: 1px solid var(--dios-outline-btn-border, #0d0d0d);
   color: var(--cl-ink-2);
 }
 

@@ -5,6 +5,13 @@
     text-size-adjust: 100%;
   }
 
+  /* Mobile — proportional bump for senior legibility (rem-based copy + controls) */
+  @media (max-width: 639px) {
+    html {
+      font-size: 118.75%;
+    }
+  }
+
   body {
     background-color: transparent;
     color: var(--color-text-primary);
