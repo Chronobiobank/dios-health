@@ -30,7 +30,7 @@ export const HOME_PROBLEM = {
 export const HOME_INSIGHT = {
   headline: 'Optimised dosing is synced to the',
   headlineEmphasis: 'body clock.',
-  statement: 'Med labels are the same for everyone. We match the dose to suit your body.',
+  statement: 'Prescription labels are the same for everyone. We match the dose to suit.',
   ctaLabel: 'Why body clocks matter',
   ctaHref: MARKETING_ROUTES.howItWorks,
 } as const
