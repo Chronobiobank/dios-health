@@ -1,3 +1,5 @@
+import { COACH_ASK_LABEL } from '@/lib/coach/brand'
+
 /** Always visible in the marketing site header */
 export const NAV_DASHBOARD_LINK = {
   label: 'Go to dashboard',
@@ -6,7 +8,7 @@ export const NAV_DASHBOARD_LINK = {
 } as const
 
 export const NAV_COACH_LINK = {
-  label: 'Ask DIOS',
+  label: COACH_ASK_LABEL,
   href: '/dashboard/coach',
 } as const
 

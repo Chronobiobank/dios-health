@@ -28,14 +28,16 @@ export const HOME_PROBLEM = {
 } as const
 
 export const HOME_INSIGHT = {
-  headline: 'Optimised dosing is synced to the',
-  headlineEmphasis: 'body clock.',
+  eyebrow: 'Technology',
+  headline: 'Dose intelligence',
+  headlineEmphasis: 'syncronised to body clocks.',
   statement: 'Most scripts are standarised. We match the dose to suit.',
   ctaLabel: 'Why body clocks matter',
   ctaHref: MARKETING_ROUTES.howItWorks,
 } as const
 
 export const HOME_AUDIENCE = {
+  eyebrow: 'Solution',
   headline: ['One App.', 'Two Views.'] as const,
   patient: {
     who: 'For Patients',

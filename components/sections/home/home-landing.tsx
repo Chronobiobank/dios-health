@@ -58,16 +58,21 @@ export function HomeLanding() {
         </div>
       </section>
 
-      <section className="home-landing__idea dios-surface-dark" data-nav-surface="dark" id="insight">
+      <section
+        className="home-landing__idea home-landing__idea--from-top dios-surface-dark"
+        data-nav-surface="dark"
+        id="insight"
+      >
         <div className="home-landing__inner">
-          <h2 className="home-landing__title home-landing__reveal dios-on-dark-title">
+          <p className="dios-on-dark-eyebrow">{HOME_INSIGHT.eyebrow}</p>
+          <h2 className="home-landing__title dios-on-dark-title">
             {HOME_INSIGHT.headline}{' '}
             <em>{HOME_INSIGHT.headlineEmphasis}</em>
           </h2>
-          <p className="home-landing__insight-statement home-landing__reveal dios-on-dark-copy dios-on-dark-copy--strong">
+          <p className="home-landing__insight-statement dios-on-dark-copy dios-on-dark-copy--strong">
             {HOME_INSIGHT.statement}
           </p>
-          <div className="home-landing__insight-actions home-landing__reveal">
+          <div className="home-landing__insight-actions">
             <Link className="home-landing__btn-on-dark" href={HOME_INSIGHT.ctaHref}>
               {HOME_INSIGHT.ctaLabel}
             </Link>
@@ -75,14 +80,15 @@ export function HomeLanding() {
         </div>
       </section>
 
-      <section className="home-landing__idea home-landing__idea--muted" id="who">
+      <section className="home-landing__idea home-landing__idea--muted home-landing__idea--from-top" id="who">
         <div className="home-landing__inner">
-          <h2 className="home-landing__title home-landing__reveal">
+          <p className="home-landing__kicker">{HOME_AUDIENCE.eyebrow}</p>
+          <h2 className="home-landing__title">
             {HOME_AUDIENCE.headline[0]}
             <br />
             {HOME_AUDIENCE.headline[1]}
           </h2>
-          <div className="home-landing__cards home-landing__reveal">
+          <div className="home-landing__cards">
             <Link className="home-landing__card" href={HOME_AUDIENCE.patient.href}>
               <div className="home-landing__card-top dios-dark-block dios-dark-block--solution">
                 <p className="dios-on-dark-eyebrow dios-on-dark-eyebrow--accent">{HOME_AUDIENCE.patient.who}</p>

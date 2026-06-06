@@ -50,5 +50,6 @@
 .calm-landing .type-pitch-title em,
 .calm-landing .type-section em,
 .calm-landing .type-hero em {
+  color: var(--gold);
   font-style: italic;
 }

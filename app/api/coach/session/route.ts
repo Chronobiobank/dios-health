@@ -23,7 +23,7 @@ export async function POST() {
     .single()
 
   if (error || !data) {
-    return NextResponse.json({ error: 'Could not start DIOS Coach session.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not start DiDi session.' }, { status: 500 })
   }
 
   return NextResponse.json({

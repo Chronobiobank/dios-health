@@ -1,3 +1,4 @@
+import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
 import { normalizeMinutesFromMidnight } from '@/lib/mlux'
 import { formatMinutesLabel, parseDbTimeToMinutes, parseTimeToMinutes } from '@/lib/dashboard/time-utils'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
@@ -260,7 +261,7 @@ export function buildTimebotSystemPrompt(isFirstTimeUser: boolean): string {
   const supplementList = CANONICAL_SUPPLEMENTS.join(', ')
 
   if (isFirstTimeUser) {
-    return `You are DIOS Coach — the DIOS timing guide for chronotherapy and supplement timing.
+    return `You are ${COACH_DISPLAY_NAME} — the DIOS timing guide for chronotherapy and supplement timing.
 
 ${TIMEBOT_VOICE}
 
@@ -275,7 +276,7 @@ MEDICATION EXTRACTION:
 Also note medications mentioned (atorvastatin, ramipril, sertraline, metformin, etc.). Explain medication windows will personalise after TipTraQ or more data layers.`
   }
 
-  return `You are DIOS Coach — the DIOS timing guide for patients on chronotherapy.
+  return `You are ${COACH_DISPLAY_NAME} — the DIOS timing guide for patients on chronotherapy.
 
 ${TIMEBOT_VOICE}
 

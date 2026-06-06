@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { TimebotView } from '@/components/dashboard/timebot-view'
 import { getCoachIntroMessage, getPatientFirstName } from '@/lib/auth/greeting'
+import { COACH_ASK_LABEL, COACH_DISPLAY_NAME } from '@/lib/coach/brand'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import { buildTimebotData } from '@/lib/dashboard/timebot-data'
@@ -10,8 +11,8 @@ import { createClient } from '@/lib/supabase/server'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'DIOS Coach — DIOS',
-  description: 'Ask DIOS Coach about your body clock, results, and medication timing.',
+  title: `${COACH_DISPLAY_NAME} — DIOS`,
+  description: `${COACH_ASK_LABEL} about your body clock, results, and medication timing.`,
 }
 
 export default async function DashboardCoachPage() {

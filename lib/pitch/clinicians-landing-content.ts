@@ -75,7 +75,7 @@ export const CLINICIANS_USERS = {
     cvp: 'Take it now. Your window is open.',
     points: [
       'One notification at the right biological moment',
-      'Voice coach — plain English, three sentences',
+      'DiDi voice coach — plain English, three sentences',
       'Lab reminder when the panel is due',
       'Chronopathic Age — one progress number',
       'No jargon required',

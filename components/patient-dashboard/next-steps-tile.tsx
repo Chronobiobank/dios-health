@@ -29,7 +29,7 @@ function NextStepAction({
   if (step.prompt) {
     return (
       <button type="button" className="next-steps-tile__action" onClick={() => onSendPrompt(step.prompt!)}>
-        Ask coach
+        Ask DiDi
         <span aria-hidden> ↗</span>
       </button>
     )

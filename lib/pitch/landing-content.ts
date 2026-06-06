@@ -91,7 +91,7 @@ export const PITCH_BIOMARKER_STATS = [
 export const PITCH_SPECTRUM_PAGE = '/evidence#spectrum' as const
 
 export const PITCH_CONFIDENCE_LAYERS = [
-  { key: 'ESTIMATED', title: 'L1 · DIOS Coach', body: 'Camera session' },
+  { key: 'ESTIMATED', title: 'L1 · DiDi', body: 'Camera session' },
   { key: 'PRECISION', title: 'L2 · Bloods', body: 'Gominak panel' },
   { key: 'CONFIRMED', title: 'L3 · TipTraQ', body: 'Sleep + ANS' },
 ] as const
@@ -123,7 +123,7 @@ export const PITCH_HOW_IT_WORKS = [
 export const PITCH_FOUR_SIDES = [
   {
     audience: 'Patients',
-    line: 'Free DIOS Coach sessions and protocols.',
+    line: 'Free DiDi sessions and protocols.',
     emphasis: 'Free',
     image: PITCH_IMAGES.sides.Patients,
     imageAlt: 'Patient using phone for health session',

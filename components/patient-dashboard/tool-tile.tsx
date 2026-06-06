@@ -58,7 +58,7 @@ export function ToolTile({
         )
       }
       iconClassName={isCoach ? 'dash-tile-icon--coach' : 'dash-tile-icon--meds'}
-      title={isCoach ? 'DIOS Coach' : 'Medication timing'}
+      title={isCoach ? 'DiDi' : 'Medication timing'}
       subtitle={tileSubhead(
         isCoach
           ? 'Ask about your body clock, results, and your care plan.'

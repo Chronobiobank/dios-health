@@ -179,7 +179,7 @@ export function PatientDetailCard({ patient }: PatientDetailCardProps) {
       </section>
 
       <section>
-        <h3 className="clinicians-triage__section-title">Mel session log</h3>
+        <h3 className="clinicians-triage__section-title">DiDi session log</h3>
         <ul className="clinicians-triage__mel-list">
           {patient.melSessions.map((session) => (
             <li key={`${session.type}-${session.at}`} className="clinicians-triage__mel-item">

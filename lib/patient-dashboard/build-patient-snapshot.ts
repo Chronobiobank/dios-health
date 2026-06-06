@@ -285,7 +285,7 @@ function buildMeasureTiles(input: {
           label: 'Explain my vitamin D',
           prompt: 'Why is my vitamin D adding Dark Years to my Chronosomatic Age?',
         },
-        { label: 'Open DIOS Coach', opensCoach: true },
+        { label: 'Open DiDi', opensCoach: true },
       ],
     },
     {

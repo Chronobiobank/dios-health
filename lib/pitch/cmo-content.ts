@@ -78,7 +78,7 @@ export const PITCH_NHS_LEADERS = {
       title: 'Patient initiates (async)',
       body: '60-second session on phone to estimate a timing signal (melanopic lux / rhythm). No wearable required.',
       image: PITCH_IMAGES.steps.mel,
-      imageAlt: 'DIOS Coach session',
+      imageAlt: 'DiDi session',
     },
     {
       step: '02',
@@ -199,7 +199,7 @@ export const PITCH_GOVERNANCE = {
     {
       id: 'research',
       title: 'Research vs care firewall',
-      body: 'Consent for DIOS Coach and clinical DIOS is separate from optional, revocable anonymised Chronobiobank research.',
+      body: 'Consent for DiDi and clinical DIOS is separate from optional, revocable anonymised Chronobiobank research.',
       href: '/#pitch-model',
       label: 'Chronobiobank model →',
       image: PITCH_IMAGES.governance.consentFirewall,

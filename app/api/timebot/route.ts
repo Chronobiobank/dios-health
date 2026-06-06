@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            'DIOS Coach is not yet configured on this server. The ANTHROPIC_API_KEY environment variable is missing. Add it in Vercel → Settings → Environment Variables.',
+            'DiDi is not yet configured on this server. The ANTHROPIC_API_KEY environment variable is missing. Add it in Vercel → Settings → Environment Variables.',
         },
         { status: 503 }
       )
@@ -141,7 +141,7 @@ export async function POST(request: Request) {
       .trim()
 
     if (!answer) {
-      return NextResponse.json({ error: 'DIOS Coach returned an empty response. Try again.' }, { status: 502 })
+      return NextResponse.json({ error: 'DiDi returned an empty response. Try again.' }, { status: 502 })
     }
 
     return NextResponse.json({
@@ -151,8 +151,8 @@ export async function POST(request: Request) {
   } catch (error) {
     const mapped = mapAnthropicError(error)
     if (mapped) {
-      return NextResponse.json({ error: mapped.replace('Report extraction', 'DIOS Coach') }, { status: 502 })
+      return NextResponse.json({ error: mapped.replace('Report extraction', 'DiDi') }, { status: 502 })
     }
-    return NextResponse.json({ error: 'Could not reach DIOS Coach. Please try again.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not reach DiDi. Please try again.' }, { status: 500 })
   }
 }

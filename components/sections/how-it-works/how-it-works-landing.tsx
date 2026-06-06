@@ -27,13 +27,18 @@ export function HowItWorksLanding() {
         </div>
       </section>
 
-      <section className="home-landing__idea dios-surface-dark" data-nav-surface="dark" id="insight">
+      <section
+        className="home-landing__idea home-landing__idea--from-top dios-surface-dark"
+        data-nav-surface="dark"
+        id="insight"
+      >
         <div className="home-landing__inner">
-          <h2 className="home-landing__title home-landing__reveal dios-on-dark-title">
+          <p className="dios-on-dark-eyebrow">{HOW_IT_WORKS_INSIGHT.eyebrow}</p>
+          <h2 className="home-landing__title dios-on-dark-title">
             {HOW_IT_WORKS_INSIGHT.headline}{' '}
             <em>{HOW_IT_WORKS_INSIGHT.headlineEmphasis}</em>
           </h2>
-          <p className="home-landing__insight-statement home-landing__reveal dios-on-dark-copy dios-on-dark-copy--strong">
+          <p className="home-landing__insight-statement dios-on-dark-copy dios-on-dark-copy--strong">
             {HOW_IT_WORKS_INSIGHT.statement}
           </p>
         </div>

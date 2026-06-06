@@ -55,7 +55,7 @@ export function MelOnboardingFlow() {
           <p className="mel-onboarding__step-label">Step 1 of 4</p>
           <h1 className="mel-onboarding__title">Camera access</h1>
           <p className="mel-onboarding__body">
-            Mel needs your camera to measure your light exposure.
+            DiDi needs your camera to measure your light exposure.
           </p>
           <div className="mel-onboarding__camera-icon" aria-hidden>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -124,7 +124,7 @@ export function MelOnboardingFlow() {
           <p className="mel-onboarding__step-label">Step 4 of 4</p>
           <h1 className="mel-onboarding__title">Your first window</h1>
           <div className="mel-onboarding__push-card" role="status">
-            <p className="mel-onboarding__push-app">DIOS · Mel</p>
+            <p className="mel-onboarding__push-app">DIOS · DiDi</p>
             <p className="mel-onboarding__push-text">
               Simvastatin 20mg — your window opens in 40 minutes. I will remind you then.
             </p>

@@ -249,7 +249,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
       }
 
       if (!response.ok) {
-        setError(result.error ?? 'DIOS Coach could not answer right now.')
+        setError(result.error ?? 'DiDi could not answer right now.')
         setPulseState('idle')
         return
       }
@@ -271,7 +271,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
       if (respondTimer.current) window.clearTimeout(respondTimer.current)
       respondTimer.current = window.setTimeout(() => setPulseState('idle'), 3000)
     } catch {
-      setError('DIOS Coach could not answer right now.')
+      setError('DiDi could not answer right now.')
       setPulseState('idle')
     } finally {
       setLoading(false)
@@ -391,7 +391,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
         ) : null}
 
         {loading ? (
-          <p className="mt-3 animate-pulse font-mono text-[12px] text-black/35">DIOS Coach is thinking…</p>
+          <p className="mt-3 animate-pulse font-mono text-[12px] text-black/35">DiDi is thinking…</p>
         ) : null}
 
         {error ? (
@@ -426,7 +426,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
           </div>
           {!hasMedicationOnProtocol ? (
             <p className="mt-3 text-center text-[12px] leading-relaxed text-black/45">
-              Example timing — tell DIOS Coach what you take to personalise your protocol.
+              Example timing — tell DiDi what you take to personalise your protocol.
             </p>
           ) : null}
         </div>
@@ -463,7 +463,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
                   ? 'scale-110 bg-red-500 text-white shadow-[0_0_0_8px_rgba(239,68,68,0.15)]'
                   : 'bg-black text-white shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:scale-105'
               )}
-              aria-label={isListening ? 'Stop — send to DIOS Coach' : 'Speak to DIOS Coach'}
+              aria-label={isListening ? 'Stop — send to DiDi' : 'Speak to DiDi'}
             >
               {isListening ? <MicOff className="h-7 w-7" /> : <Mic className="h-7 w-7" />}
             </button>
@@ -486,7 +486,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask DIOS Coach"
+                placeholder="Ask DiDi"
                 disabled={loading}
                 className="calmer-input"
                 autoFocus

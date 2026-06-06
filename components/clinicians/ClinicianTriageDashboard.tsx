@@ -154,7 +154,7 @@ function DetailShell({ patient }: { patient: TriageMockPatient }) {
           <p className="ct-detail__section-copy">Calcium cascade · eGFR · hydration.</p>
         </div>
         <div className="ct-detail__section">
-          <p className="ct-detail__section-label">Mel log</p>
+          <p className="ct-detail__section-label">DiDi log</p>
           <p className="ct-detail__section-copy">Last three voice sessions.</p>
         </div>
       </div>

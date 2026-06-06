@@ -111,7 +111,7 @@ export function buildMedicationTimingFromIntervention(input: {
 
   if (hasPatientMeds && windows.length === 0) {
     intro =
-      'Your medications are saved, but DIOS could not match them to a timing module yet. Pick supported meds in Settings or ask DIOS Coach.'
+      'Your medications are saved, but DIOS could not match them to a timing module yet. Pick supported meds in Settings or ask DiDi.'
   } else if (hasPatientMeds && unmatchedMedications.length > 0) {
     intro = `Personal windows for ${windows.length} medication${windows.length === 1 ? '' : 's'} on your profile. ${unmatchedMedications.length} entr${unmatchedMedications.length === 1 ? 'y' : 'ies'} still need a supported module.`
   }

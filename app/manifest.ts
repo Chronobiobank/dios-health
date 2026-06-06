@@ -1,9 +1,11 @@
 import type { MetadataRoute } from 'next'
 
+import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'DIOS Coach',
-    short_name: 'DIOS Coach',
+    name: COACH_DISPLAY_NAME,
+    short_name: COACH_DISPLAY_NAME,
     description:
       'Measure your Melanopic Lux. Get your personalised dose intelligence — light, meds, and timing.',
     start_url: '/dashboard/coach',

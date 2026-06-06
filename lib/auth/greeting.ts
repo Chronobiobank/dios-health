@@ -1,3 +1,5 @@
+import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
+
 export function getTimeGreeting(date = new Date()): 'morning' | 'afternoon' | 'evening' {
   const hour = date.getHours()
   if (hour < 12) return 'morning'
@@ -48,7 +50,7 @@ function getLocalizedSalutation(
   return isNewZealand(locationCity, locationCountry) ? 'Kia ora' : 'Hello'
 }
 
-/** Salutation for DIOS Coach speech bubble — same locale rules, exclamation for warmth. */
+/** Salutation for DiDi speech bubble — same locale rules, exclamation for warmth. */
 export function getLocalizedPatientGreetingBubble(
   firstName: string,
   locationCity?: string | null,
@@ -57,19 +59,19 @@ export function getLocalizedPatientGreetingBubble(
   return getLocalizedPatientGreeting(firstName, locationCity, locationCountry).replace(/\.$/, '!')
 }
 
-/** Full DIOS Coach intro — shown in the chatbot speech bubble on first load. */
+/** Full DiDi intro — shown in the chatbot speech bubble on first load. */
 export function getCoachIntroMessage(
   firstName: string,
   locationCity?: string | null,
   locationCountry?: string | null
 ): string {
   const salutation = getLocalizedSalutation(locationCity, locationCountry)
-  return `${salutation} ${firstName}, I'm DIOS Coach — tell me what pills you take and I'll tailor a plan that suits your body clock.`
+  return `${salutation} ${firstName}, I'm ${COACH_DISPLAY_NAME} — tell me what pills you take and I'll tailor a plan that suits your body clock.`
 }
 
-/** Generic DIOS Coach intro for unauthenticated / marketing surfaces. */
+/** Generic DiDi intro for unauthenticated / marketing surfaces. */
 export function getCoachIntroMessageGeneric(): string {
-  return "Hello, I'm DIOS Coach — tell me what pills you take and I'll tailor a plan that suits your body clock."
+  return `Hello, I'm ${COACH_DISPLAY_NAME} — tell me what pills you take and I'll tailor a plan that suits your body clock.`
 }
 
 export function getFirstName(fullName: string): string {
