@@ -78,27 +78,15 @@ export function HomeLanding() {
           <div className="home-landing__cards home-landing__reveal">
             <Link className="home-landing__card" href={HOME_AUDIENCE.patient.href}>
               <div className="home-landing__card-top dios-dark-block dios-dark-block--solution">
-                <p className="home-landing__card-line dios-on-dark-headline">{HOME_AUDIENCE.patient.who}</p>
+                <p className="dios-on-dark-eyebrow dios-on-dark-eyebrow--accent">{HOME_AUDIENCE.patient.who}</p>
+                <p className="home-landing__card-line dios-on-dark-headline">{HOME_AUDIENCE.patient.line}</p>
               </div>
-              <ul className="home-landing__card-points">
-                {HOME_AUDIENCE.patient.points.map((point) => (
-                  <li key={point.label}>
-                    <strong>{point.label}</strong> — {point.text}
-                  </li>
-                ))}
-              </ul>
             </Link>
             <Link className="home-landing__card" href={HOME_AUDIENCE.clinician.href}>
               <div className="home-landing__card-top dios-dark-block dios-dark-block--ink">
-                <p className="home-landing__card-line dios-on-dark-headline">{HOME_AUDIENCE.clinician.who}</p>
+                <p className="dios-on-dark-eyebrow">{HOME_AUDIENCE.clinician.who}</p>
+                <p className="home-landing__card-line dios-on-dark-headline">{HOME_AUDIENCE.clinician.line}</p>
               </div>
-              <ul className="home-landing__card-points">
-                {HOME_AUDIENCE.clinician.points.map((point) => (
-                  <li key={point.label}>
-                    <strong>{point.label}</strong> — {point.text}
-                  </li>
-                ))}
-              </ul>
             </Link>
           </div>
         </div>
