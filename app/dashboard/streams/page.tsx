@@ -2,9 +2,9 @@ import { DashboardSettingsPage } from '@/components/dashboard/dashboard-settings
 import {
   SECTION_LABEL,
   SETTINGS_HEADER,
+  SETTINGS_LEDE,
   SETTINGS_SECTION,
 } from '@/components/dashboard/dashboard-styles'
-import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { SmartphoneStreamPanel } from '@/components/dashboard/smartphone-stream-panel'
 import { StreamsStatus } from '@/components/dashboard/streams-status'
 import { TipTraqNightList } from '@/components/dashboard/tiptraq-night-list'
@@ -18,7 +18,7 @@ export const dynamic = 'force-dynamic'
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000
 
 export default async function DashboardStreamsPage() {
-  const { user, profile, patient } = await requirePatientSession()
+  const { user, patient } = await requirePatientSession()
   const supabase = await createClient()
 
   const { data: nights } = await supabase
@@ -57,11 +57,9 @@ export default async function DashboardStreamsPage() {
 
   return (
     <DashboardSettingsPage>
-      <PatientTopBar fullName={profile.full_name ?? 'Patient'} avatarUrl={profile.avatar_url} />
-
       <header className={SETTINGS_HEADER}>
         <h1>Data streams</h1>
-        <p className="mt-2 text-sm text-black/55">
+        <p className={SETTINGS_LEDE}>
           Start free with your phone, add bloods, then TipTraQ — each layer refines your body clock.
         </p>
       </header>

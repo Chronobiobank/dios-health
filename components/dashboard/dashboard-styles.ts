@@ -27,7 +27,13 @@ export const CONSULT_CTA =
 /** Settings / profile routes — pair with dashboard-settings-page in patient-dashboard.css */
 export const SETTINGS_PAGE = 'dashboard-settings-page'
 export const SETTINGS_HEADER = 'dashboard-settings-header'
+export const SETTINGS_BACK_LINK = 'dashboard-settings-back type-caption'
+export const SETTINGS_LEDE = 'type-body'
 export const SETTINGS_PROFILE_HERO = 'dashboard-settings-profile-hero'
 export const SETTINGS_DATA_LAYOUT = 'dashboard-settings-data-layout'
 export const SETTINGS_TOGGLES = 'dashboard-settings-toggles'
 export const SETTINGS_SECTION = 'dashboard-settings-section'
+export const SETTINGS_SECTION_DIVIDED = `${SETTINGS_SECTION} dashboard-settings-section--divided`
+export const SETTINGS_PANEL = 'dashboard-settings-panel'
+export const SETTINGS_STACK = 'dashboard-settings-stack'
+export const SETTINGS_LINK_CARD = 'dashboard-settings-link-card dios-glass-inner'

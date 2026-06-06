@@ -16,7 +16,7 @@ export function DashboardPageTransition({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.15 }}
-      className={cn('flex flex-col gap-8', className)}
+      className={cn('flex flex-col', className)}
     >
       {children}
     </motion.div>

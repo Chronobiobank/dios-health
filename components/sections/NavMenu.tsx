@@ -2,6 +2,7 @@
 
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useId, useRef, useState } from 'react'
 
 import { SignOutButton } from '@/components/auth/sign-out-button'
@@ -10,7 +11,13 @@ import { cn } from '@/lib/utils'
 
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
 
-import { AUTH_LINKS, NAV_COACH_LINK, NAV_DASHBOARD_LINK, NAV_MENU_LINKS } from './navigation'
+import {
+  AUTH_LINKS,
+  isPatientDashboardPath,
+  NAV_COACH_LINK,
+  NAV_DASHBOARD_LINK,
+  NAV_MENU_LINKS,
+} from './navigation'
 
 type NavMenuProps = {
   isAuthenticated?: boolean
@@ -18,6 +25,8 @@ type NavMenuProps = {
 }
 
 export function NavMenu({ isAuthenticated = false, coachHref }: NavMenuProps) {
+  const pathname = usePathname()
+  const onDashboard = isPatientDashboardPath(pathname)
   const [open, setOpen] = useState(false)
   const menuId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
@@ -96,15 +105,17 @@ export function NavMenu({ isAuthenticated = false, coachHref }: NavMenuProps) {
             <ul className="flex flex-col gap-1">
               {isAuthenticated ? (
                 <>
-                  <li>
-                    <HashLink
-                      href={NAV_DASHBOARD_LINK.href}
-                      className="type-nav block rounded-lg px-3 py-2.5 transition-colors hover:bg-black/[0.03] hover:text-black md:hidden"
-                      onClick={() => setOpen(false)}
-                    >
-                      {NAV_DASHBOARD_LINK.label}
-                    </HashLink>
-                  </li>
+                  {!onDashboard ? (
+                    <li>
+                      <HashLink
+                        href={NAV_DASHBOARD_LINK.href}
+                        className="type-nav block rounded-lg px-3 py-2.5 transition-colors hover:bg-black/[0.03] hover:text-black md:hidden"
+                        onClick={() => setOpen(false)}
+                      >
+                        {NAV_DASHBOARD_LINK.label}
+                      </HashLink>
+                    </li>
+                  ) : null}
                   <li>
                     <HashLink
                       href={PATIENT_ROUTES.profile}

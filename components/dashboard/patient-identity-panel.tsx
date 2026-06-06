@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { SECTION_LABEL, SETTINGS_LEDE, SETTINGS_SECTION } from '@/components/dashboard/dashboard-styles'
 import { LABEL } from '@/components/sections/layout'
 import { BIOLOGICAL_SEX_OPTIONS } from '@/lib/auth/patient-signup-data'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
@@ -147,11 +148,11 @@ export function PatientIdentityPanel({ patientId, initial }: PatientIdentityPane
   )
 
   return (
-    <section>
-      <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">About you</h2>
-      <p className="mt-2 text-sm text-black/55">Your name and date of birth used across your dashboard.</p>
+    <section className={SETTINGS_SECTION}>
+      <h2 className={SECTION_LABEL}>About you</h2>
+      <p className={SETTINGS_LEDE}>Your name and date of birth used across your dashboard.</p>
 
-      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="profile_first_name" className={`${LABEL} mb-2 block`}>
             First name

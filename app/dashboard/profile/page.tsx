@@ -2,9 +2,15 @@ import Link from 'next/link'
 
 import { DashboardSettingsPage } from '@/components/dashboard/dashboard-settings-page'
 import {
+  DASHBOARD_CARD,
+  SECTION_LABEL,
+  SETTINGS_BACK_LINK,
   SETTINGS_HEADER,
+  SETTINGS_LEDE,
+  SETTINGS_LINK_CARD,
   SETTINGS_PROFILE_HERO,
   SETTINGS_SECTION,
+  SETTINGS_SECTION_DIVIDED,
 } from '@/components/dashboard/dashboard-styles'
 import {
   PatientIdentityPanel,
@@ -16,14 +22,12 @@ import {
   type PatientProfileDemographics,
 } from '@/components/dashboard/patient-profile-panel'
 import { readPatientMedicationList } from '@/lib/medication/patient-medications'
-import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { SignOutButton } from '@/components/auth/sign-out-button'
 import { GovernanceWeightCard } from '@/components/chronobiobank/governance-weight-card'
 import { ProfileAvatarUpload } from '@/components/profile/profile-avatar-upload'
 import { fetchPatientChronobiobankContext } from '@/lib/chronobiobank/fetch-patient-governance'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
-import { cn } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -51,17 +55,12 @@ export default async function DashboardProfilePage() {
 
   return (
     <DashboardSettingsPage>
-      <PatientTopBar fullName={profile.full_name ?? 'Patient'} avatarUrl={profile.avatar_url} />
-
       <header className={SETTINGS_HEADER}>
-        <Link
-          href={PATIENT_ROUTES.dashboard}
-          className="font-mono text-[11px] text-black/45 transition-colors hover:text-black"
-        >
+        <Link href={PATIENT_ROUTES.dashboard} className={SETTINGS_BACK_LINK}>
           ← Dashboard
         </Link>
-        <h1 className="mt-3">Profile & settings</h1>
-        <p className="mt-2 text-sm text-black/55">
+        <h1>Profile &amp; settings</h1>
+        <p className={SETTINGS_LEDE}>
           Update your photo, personal details, and chronoprofile. Each change saves when you edit a
           field.
         </p>
@@ -69,13 +68,11 @@ export default async function DashboardProfilePage() {
 
       <div className={SETTINGS_PROFILE_HERO}>
         <section className={SETTINGS_SECTION}>
-          <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">Photo</h2>
-          <div className="mt-4">
-            <ProfileAvatarUpload
-              fullName={profile.full_name ?? 'Patient'}
-              initialAvatarUrl={profile.avatar_url}
-            />
-          </div>
+          <h2 className={SECTION_LABEL}>Photo</h2>
+          <ProfileAvatarUpload
+            fullName={profile.full_name ?? 'Patient'}
+            initialAvatarUrl={profile.avatar_url}
+          />
         </section>
 
         <PatientIdentityPanel patientId={user.id} initial={identity} />
@@ -86,44 +83,35 @@ export default async function DashboardProfilePage() {
         initialMedications={readPatientMedicationList(patient.current_medications)}
       />
 
-      <div className="dios-glass-outer rounded-2xl p-5 sm:p-6">
+      <div className={DASHBOARD_CARD}>
         <PatientProfilePanel patientId={user.id} initial={demographics} />
       </div>
 
-      <section className={cn(SETTINGS_SECTION, 'border-t border-black/10 pt-8')}>
-        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">
-          Chronobiobank
-        </h2>
-        <p className="mt-2 text-sm text-black/55">
+      <section className={SETTINGS_SECTION_DIVIDED}>
+        <h2 className={SECTION_LABEL}>Chronobiobank</h2>
+        <p className={SETTINGS_LEDE}>
           Your governance weight reflects how much high-fidelity data you have contributed.
         </p>
-        <div className="mt-4 md:max-w-xl">
-          <GovernanceWeightCard contributions={chronobiobank.contributions} />
-        </div>
+        <GovernanceWeightCard contributions={chronobiobank.contributions} />
       </section>
 
-      <section className={cn(SETTINGS_SECTION, 'border-t border-black/10 pt-8')}>
-        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">
-          Data & privacy
-        </h2>
-        <p className="mt-2 text-sm text-black/55">
+      <section className={SETTINGS_SECTION_DIVIDED}>
+        <h2 className={SECTION_LABEL}>Data & privacy</h2>
+        <p className={SETTINGS_LEDE}>
           Control who can see your health data and manage TipTraQ sharing.
         </p>
-        <Link
-          href={PATIENT_ROUTES.dataControls}
-          className="dios-glass-inner mt-4 flex items-center justify-between rounded-2xl px-5 py-4 transition-[box-shadow,background] duration-200 hover:brightness-[1.02] md:max-w-xl"
-        >
+        <Link href={PATIENT_ROUTES.dataControls} className={SETTINGS_LINK_CARD}>
           <div>
             <p className="text-sm font-medium text-black">Data controls</p>
-            <p className="mt-1 text-sm text-black/55">Sharing preferences and recordings</p>
+            <p className="type-body">Sharing preferences and recordings</p>
           </div>
-          <span className="font-mono text-[11px] text-black/45">Open →</span>
+          <span className="type-caption">Open →</span>
         </Link>
       </section>
 
-      <section className={cn(SETTINGS_SECTION, 'border-t border-black/10 pt-8')}>
-        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">Account</h2>
-        <SignOutButton className="mt-4 md:max-w-xs" />
+      <section className={SETTINGS_SECTION_DIVIDED}>
+        <h2 className={SECTION_LABEL}>Account</h2>
+        <SignOutButton className="md:max-w-xs" />
       </section>
     </DashboardSettingsPage>
   )

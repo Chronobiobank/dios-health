@@ -2,7 +2,6 @@ import { Suspense } from 'react'
 
 import { GpReportView } from '@/components/dashboard/gp-report-view'
 import { PrintGpReportActions } from '@/components/dashboard/print-gp-report-actions'
-import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
 import { buildGpReportData } from '@/lib/dashboard/gp-report-data'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import { requirePatientSession } from '@/lib/auth/require-patient'
@@ -33,10 +32,6 @@ export default async function DashboardGpReportPage() {
 
   return (
     <>
-      <div className="print:hidden">
-        <PatientTopBar fullName={profile.full_name ?? 'Patient'} avatarUrl={profile.avatar_url} />
-      </div>
-
       <GpReportView report={report} />
 
       <Suspense fallback={null}>

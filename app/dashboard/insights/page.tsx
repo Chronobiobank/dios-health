@@ -1,5 +1,5 @@
 import { InsightsView } from '@/components/dashboard/insights-view'
-import { PatientTopBar } from '@/components/dashboard/patient-top-bar'
+import { SETTINGS_HEADER, SETTINGS_LEDE } from '@/components/dashboard/dashboard-styles'
 import { requirePatientSession } from '@/lib/auth/require-patient'
 import {
   buildInsightsData,
@@ -13,7 +13,7 @@ import { createClient } from '@/lib/supabase/server'
 export const dynamic = 'force-dynamic'
 
 export default async function DashboardInsightsPage() {
-  const { user, profile, patient } = await requirePatientSession()
+  const { user, patient } = await requirePatientSession()
   const supabase = await createClient()
 
   const [
@@ -65,13 +65,12 @@ export default async function DashboardInsightsPage() {
     : 'Log sleep on Streams or upload TipTraQ to build your body clock reading.'
 
   return (
-    <>
-      <PatientTopBar
-        fullName={profile.full_name ?? 'Patient'}
-        avatarUrl={profile.avatar_url}
-        subtitle={subtitle}
-      />
+    <div className="space-y-8">
+      <header className={SETTINGS_HEADER}>
+        <h1>Insights</h1>
+        <p className={SETTINGS_LEDE}>{subtitle}</p>
+      </header>
       <InsightsView data={insights} />
-    </>
+    </div>
   )
 }

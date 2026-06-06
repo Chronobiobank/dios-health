@@ -4,6 +4,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { AuthToggle } from '@/components/auth/auth-toggle'
+import {
+  SECTION_LABEL,
+  SETTINGS_LEDE,
+  SETTINGS_SECTION,
+  SETTINGS_STACK,
+} from '@/components/dashboard/dashboard-styles'
 import { LABEL } from '@/components/sections/layout'
 import { COUNTRIES } from '@/lib/auth/countries'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
@@ -210,14 +216,14 @@ export function PatientProfilePanel({ patientId, initial }: PatientProfilePanelP
   )
 
   return (
-    <div className="space-y-10">
-      <section>
-        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">Skin & location</h2>
-        <p className="mt-2 text-sm text-black/55">
+    <div className={SETTINGS_STACK}>
+      <section className={SETTINGS_SECTION}>
+        <h2 className={SECTION_LABEL}>Skin & location</h2>
+        <p className={SETTINGS_LEDE}>
           Used to personalise light and timing recommendations for your skin type and latitude.
         </p>
 
-        <div className="mt-4">
+        <div>
           <p className={`${LABEL} mb-3`}>
             What best describes your skin tone in winter, away from sun exposure?
           </p>
@@ -244,7 +250,7 @@ export function PatientProfilePanel({ patientId, initial }: PatientProfilePanelP
           </div>
         </div>
 
-        <div className="mt-6">
+        <div>
           <label htmlFor="profile_location_city" className={`${LABEL} mb-2 block`}>
             City
           </label>
@@ -259,7 +265,7 @@ export function PatientProfilePanel({ patientId, initial }: PatientProfilePanelP
           />
         </div>
 
-        <div className="mt-4">
+        <div>
           <label htmlFor="profile_location_country" className={`${LABEL} mb-2 block`}>
             Country
           </label>
@@ -279,11 +285,11 @@ export function PatientProfilePanel({ patientId, initial }: PatientProfilePanelP
         </div>
       </section>
 
-      <section>
-        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">Shift work</h2>
-        <p className="mt-2 text-sm text-black/55">Helps DIOS adjust timing when your schedule is irregular.</p>
+      <section className={SETTINGS_SECTION}>
+        <h2 className={SECTION_LABEL}>Shift work</h2>
+        <p className={SETTINGS_LEDE}>Helps DIOS adjust timing when your schedule is irregular.</p>
 
-        <div className="mt-4">
+        <div>
           <AuthToggle
             label="I work shifts"
             description="Night, rotating, or early-morning patterns"
@@ -294,7 +300,7 @@ export function PatientProfilePanel({ patientId, initial }: PatientProfilePanelP
         </div>
 
         {values.shiftWorker ? (
-          <div className="mt-4">
+          <div>
             <p className={`${LABEL} mb-3`}>Shift pattern</p>
             <div className="flex flex-wrap gap-2">
               {SHIFT_PATTERNS.map((pattern) => (
@@ -316,13 +322,13 @@ export function PatientProfilePanel({ patientId, initial }: PatientProfilePanelP
         ) : null}
       </section>
 
-      <section>
-        <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">Body clock</h2>
-        <p className="mt-2 text-sm text-black/55">
+      <section className={SETTINGS_SECTION}>
+        <h2 className={SECTION_LABEL}>Body clock</h2>
+        <p className={SETTINGS_LEDE}>
           Your answers shape the body clock estimate on your dashboard until TipTraQ data is available.
         </p>
 
-        <div className="mt-4">
+        <div>
           <label htmlFor="profile_chronotype_q1" className={`${LABEL} mb-2 block`}>
             Without an alarm, what time would you naturally wake up?
           </label>

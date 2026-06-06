@@ -1,5 +1,11 @@
 import { COACH_ASK_LABEL } from '@/lib/coach/brand'
 
+export function isPatientDashboardPath(pathname: string): boolean {
+  const normalized =
+    pathname.endsWith('/') && pathname.length > 1 ? pathname.slice(0, -1) : pathname
+  return normalized === '/dashboard' || normalized.startsWith('/dashboard/')
+}
+
 /** Always visible in the marketing site header */
 export const NAV_DASHBOARD_LINK = {
   label: 'Go to dashboard',

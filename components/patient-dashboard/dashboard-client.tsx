@@ -2,8 +2,8 @@
 
 import { useCallback, useMemo, useState } from 'react'
 
-import { BodyClockDetailTile } from '@/components/patient-dashboard/body-clock-detail-tile'
 import { DashboardNav } from '@/components/patient-dashboard/dashboard-nav'
+import { BodyClockDetailTile } from '@/components/patient-dashboard/body-clock-detail-tile'
 import { DoseWindowsTile } from '@/components/patient-dashboard/dose-windows-tile'
 import { MeasureTile } from '@/components/patient-dashboard/measure-tile'
 import { Section, TileGrid } from '@/components/patient-dashboard/section'
@@ -27,16 +27,16 @@ type DashboardClientProps = PatientDashboardProps & {
  */
 export function DashboardClient({
   greeting,
-  firstName,
   fullName,
   avatarUrl,
+  firstName,
   snapshot,
   feedFreshness = 'none',
   lightCheckIn = null,
   firstLightWindow = null,
   firstLightDailyStatus: serverFirstLightDailyStatus = null,
   confirmedDosesToday = [],
-  reserveBottomNav = true,
+  reserveBottomNav = false,
 }: DashboardClientProps) {
   const [openPanel, setOpenPanel] = useState<DashboardPanelId | null>(null)
   const [coachDraft, setCoachDraft] = useState('')
@@ -87,10 +87,10 @@ export function DashboardClient({
 
   return (
     <div className="patient-dashboard-shell relative min-h-screen" data-dashboard="patient-v2">
-      <div className={reserveBottomNav ? 'relative z-10 pb-[var(--patient-nav-offset)] md:pb-0' : 'relative z-10 pb-8 md:pb-0'}>
-        <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
-
+      <div className={reserveBottomNav ? 'relative z-10 pb-[var(--patient-nav-offset)] md:pb-0' : 'relative z-10'}>
         <main className="dash-dashboard-main">
+          <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
+
           <Section label="Today's script">
             {firstLightWindow ? (
               <FirstLightScanBanner

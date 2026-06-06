@@ -132,7 +132,13 @@
   --color-accent: var(--gold);
   --dios-surface-btn: var(--aubergine-dark);
 
-  /* Layout */
+  /* Layout — stack rhythm shared by landing, marketing, and dashboard settings */
+  --dios-stack-gap-tight: 0.625rem;
+  --dios-stack-gap: 1rem;
+  --dios-stack-gap-relaxed: 1.25rem;
+  --dios-page-section-gap: 1.5rem;
+  --dios-settings-divider-gap: 1.5rem;
+
   --nav-logo-mark-h: 24px;
   --dios-nav-offset: calc(3 * var(--nav-logo-mark-h));
   --dios-site-nav-inset-top: 0.5rem;
@@ -462,12 +468,12 @@
 
   .type-dashboard-label {
     font-family: var(--font-family-mono);
-    font-size: 10px;
-    font-weight: 400;
+    font-size: var(--text-eyebrow-size);
+    font-weight: var(--font-weight-medium);
     line-height: 1.4;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgb(0 0 0 / 0.4);
+    color: var(--text-muted);
   }
 
   .type-logo {

@@ -1,6 +1,7 @@
 import '@/app/dashboard/retinomic-dashboard.css'
 
 import { PatientBottomNav } from '@/components/dashboard/patient-bottom-nav'
+import { PatientDashboardLayoutShell } from '@/components/dashboard/patient-dashboard-layout-shell'
 import { cn } from '@/lib/utils'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -16,7 +17,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           'pb-[var(--patient-nav-offset)] md:pb-8'
         )}
       >
-        <div className="patient-dashboard-content w-full">{children}</div>
+        <div className="patient-dashboard-content w-full">
+          <PatientDashboardLayoutShell>{children}</PatientDashboardLayoutShell>
+        </div>
       </div>
     </div>
   )

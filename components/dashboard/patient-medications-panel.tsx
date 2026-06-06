@@ -3,6 +3,11 @@
 import { useCallback, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+import {
+  SECTION_LABEL,
+  SETTINGS_LEDE,
+  SETTINGS_PANEL,
+} from '@/components/dashboard/dashboard-styles'
 import { MedicationChipPicker } from '@/components/retinomic/medication-chip-picker'
 import {
   medicationLabelsFromIds,
@@ -77,27 +82,20 @@ export function PatientMedicationsPanel({
   )
 
   return (
-    <section className="dios-glass-outer rounded-2xl p-5 sm:p-6">
-      <h2 className="text-xs font-medium uppercase tracking-[0.08em] text-black/45">
-        Your medications
-      </h2>
-      <p className="mt-2 text-sm text-black/55">
+    <section className={`${SETTINGS_PANEL} dios-glass-outer rounded-2xl p-5 sm:p-6`}>
+      <h2 className={SECTION_LABEL}>Your medications</h2>
+      <p className={SETTINGS_LEDE}>
         Select what you take today. DIOS replaces example dose windows on your dashboard with
         personal timing anchored to your body clock.
       </p>
 
-      <MedicationChipPicker
-        selectedIds={selectedIds}
-        onToggle={toggleMedication}
-        disabled={saving}
-        className="mt-4"
-      />
+      <MedicationChipPicker selectedIds={selectedIds} onToggle={toggleMedication} disabled={saving} />
 
       {saving ? (
-        <p className="calm-auth-muted mt-3 font-mono text-[10px] uppercase tracking-widest">Saving…</p>
+        <p className="calm-auth-muted font-mono text-[10px] uppercase tracking-widest">Saving…</p>
       ) : null}
-      {savedMessage ? <p className="mt-3 text-sm text-teal-800">{savedMessage}</p> : null}
-      {error ? <p className="mt-3 text-sm text-red-700">{error}</p> : null}
+      {savedMessage ? <p className="text-sm text-teal-800">{savedMessage}</p> : null}
+      {error ? <p className="text-sm text-red-700">{error}</p> : null}
     </section>
   )
 }

@@ -1,9 +1,4 @@
-/* Authenticated dashboard — no duplicate marketing header; site pastel backdrop */
-body:has(.patient-dashboard-route) #site-nav,
-body:has(.dashboard-route-shell) #site-nav {
-  display: none;
-}
-
+/* Authenticated dashboard — keep global site nav; app chrome is bottom/side tabs only */
 body:has(.patient-dashboard-route) .dios-app-shell {
   min-height: 100svh;
 }
@@ -103,27 +98,28 @@ html:has(.patient-dashboard-route) {
     padding-inline: 1.25rem;
   }
 
-  .dashboard-settings-page {
-    gap: 1.75rem;
+  :root {
+    --dios-page-section-gap: 1.75rem;
+    --dios-settings-divider-gap: 1.75rem;
   }
 
   .dashboard-settings-profile-hero {
     display: grid;
     grid-template-columns: minmax(0, 11.5rem) minmax(0, 1fr);
-    gap: 1.75rem 2rem;
+    gap: var(--dios-page-section-gap) 2rem;
     align-items: start;
   }
 
   .dashboard-settings-data-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
+    gap: var(--dios-page-section-gap);
   }
 
   .dashboard-settings-toggles {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
+    gap: var(--dios-stack-gap);
   }
 
   .patient-dashboard-nav > div {
@@ -244,13 +240,14 @@ html:has(.patient-dashboard-route) {
     padding-inline: 1.5rem;
   }
 
-  .dashboard-settings-page {
-    gap: 2rem;
+  :root {
+    --dios-page-section-gap: 2rem;
+    --dios-settings-divider-gap: 2rem;
   }
 
   .dashboard-settings-profile-hero {
     grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
-    gap: 2rem 2.5rem;
+    gap: var(--dios-page-section-gap) 2.5rem;
   }
 
   .dashboard-settings-data-layout {
@@ -260,12 +257,18 @@ html:has(.patient-dashboard-route) {
   }
 }
 
-/* Settings routes — section rhythm and page header */
+/* Settings routes — section rhythm and page header (uses global --dios-* stack tokens) */
 .dashboard-settings-page {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--dios-page-section-gap);
   width: 100%;
+}
+
+.dashboard-settings-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dios-stack-gap);
 }
 
 .dashboard-settings-header h1 {
@@ -276,13 +279,58 @@ html:has(.patient-dashboard-route) {
   color: var(--text-primary);
 }
 
-.dashboard-settings-section {
-  padding-top: 0.25rem;
+.dashboard-settings-back {
+  align-self: flex-start;
+  color: var(--text-faint);
+  text-decoration: none;
+  transition: color 0.15s ease;
 }
 
-.dashboard-settings-section + .dashboard-settings-section,
-.dashboard-settings-page > .border-t {
-  margin-top: 0.25rem;
+.dashboard-settings-back:hover {
+  color: var(--text-primary);
+}
+
+.dashboard-settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dios-stack-gap);
+}
+
+.dashboard-settings-section--divided {
+  border-top: 1px solid rgb(13 13 13 / 0.1);
+  padding-top: var(--dios-settings-divider-gap);
+}
+
+.dashboard-settings-panel,
+.dashboard-settings-stack > section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dios-stack-gap);
+}
+
+.dashboard-settings-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dios-page-section-gap);
+}
+
+.dashboard-settings-link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  transition: filter 0.2s ease;
+}
+
+.dashboard-settings-link-card:hover {
+  filter: brightness(1.02);
+}
+
+@media (min-width: 768px) {
+  .dashboard-settings-link-card {
+    max-width: 36rem;
+  }
 }
 
 .dashboard-settings-profile-hero > section {
@@ -415,6 +463,11 @@ html:has(.patient-dashboard-route) {
   font-weight: var(--font-weight-medium, 500);
   line-height: 1.2;
   color: var(--text-primary);
+}
+
+.patient-dashboard-layout__content {
+  width: 100%;
+  min-width: 0;
 }
 
 .dashboard-section-label {

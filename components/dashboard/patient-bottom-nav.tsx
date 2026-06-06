@@ -128,7 +128,7 @@ export function PatientBottomNav() {
       </nav>
 
       <nav
-        className="patient-side-nav fixed inset-y-0 left-0 z-40 hidden w-[var(--patient-sidebar-width)] flex-col border-r border-black/10 bg-white md:flex"
+        className="patient-side-nav fixed left-0 top-[var(--dios-site-nav-height)] z-40 hidden h-[calc(100svh-var(--dios-site-nav-height))] w-[var(--patient-sidebar-width)] flex-col border-r border-black/10 bg-white md:flex"
         aria-label="Patient dashboard"
       >
         <ul className="flex flex-col gap-1 px-3 py-6">
