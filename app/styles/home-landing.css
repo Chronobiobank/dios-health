@@ -209,6 +209,32 @@
   padding: 0.875rem 1.5rem;
 }
 
+.home-landing__card-points {
+  background: var(--hl-paper);
+  border: 0.5px solid rgb(0 0 0 / 0.07);
+  border-radius: 0 0 5px 5px;
+  border-top: none;
+  color: var(--hl-ink-2);
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  font-weight: 400;
+  gap: 0.625rem;
+  line-height: 1.5;
+  list-style: none;
+  margin: 0;
+  padding: 1rem 1.5rem 1.125rem;
+}
+
+.home-landing__card-points strong {
+  color: var(--hl-ink);
+  font-weight: 600;
+}
+
+.home-landing__card-top + .home-landing__card-points {
+  padding-top: 0.875rem;
+}
+
 /* Steps */
 .home-landing__steps {
   display: flex;

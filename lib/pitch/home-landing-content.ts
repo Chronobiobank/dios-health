@@ -28,17 +28,22 @@ export const HOME_INSIGHT = {
 } as const
 
 export const HOME_AUDIENCE = {
-  headline: ['For patients.', 'For clinicians.'] as const,
+  headline: ['One App.', 'Two Views.'] as const,
   patient: {
-    who: 'Patient',
-    line: 'Take it now. Your window is open.',
-    detail: 'One notification. The right moment. Plain English.',
+    who: 'For Patients',
+    points: [
+      { label: 'Take it now', text: 'Your optimal window is open.' },
+      { label: 'One notification', text: 'The right moment, every day.' },
+    ] as const,
     href: MARKETING_ROUTES.howItWorks,
   },
   clinician: {
-    who: 'Clinician',
-    line: 'Who needs attention this week?',
-    detail: 'Triage board. PTH trajectory. Safety alerts.',
+    who: 'For Clinicians',
+    points: [
+      { label: 'Triage Board', text: 'See who needs attention this week.' },
+      { label: 'PTH Trajectory', text: 'Track hormone trends instantly.' },
+      { label: 'Safety Alerts', text: 'Real-time patient risk flags.' },
+    ] as const,
     href: MARKETING_ROUTES.clinicians,
   },
 } as const
