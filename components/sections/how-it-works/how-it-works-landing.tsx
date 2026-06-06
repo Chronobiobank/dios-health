@@ -30,8 +30,7 @@ export function HowItWorksLanding() {
       <section className="home-landing__idea dios-surface-dark" data-nav-surface="dark" id="insight">
         <div className="home-landing__inner">
           <h2 className="home-landing__title home-landing__reveal dios-on-dark-title">
-            {HOW_IT_WORKS_INSIGHT.headline}
-            <br />
+            {HOW_IT_WORKS_INSIGHT.headline}{' '}
             <em>{HOW_IT_WORKS_INSIGHT.headlineEmphasis}</em>
           </h2>
           <p className="home-landing__insight-statement home-landing__reveal dios-on-dark-copy dios-on-dark-copy--strong">

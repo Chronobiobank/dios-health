@@ -20,10 +20,10 @@ export const HOME_PROBLEM = {
 } as const
 
 export const HOME_INSIGHT = {
-  headline: 'A synced dose is the',
-  headlineEmphasis: 'optimal dose.',
+  headline: 'Optimal dosing syncs with your',
+  headlineEmphasis: 'body clock.',
   statement: 'Med labels are the same for everyone. We match the dose to suit your body.',
-  ctaLabel: 'Why Circadian Medicine?',
+  ctaLabel: 'Why body clocks matter',
   ctaHref: MARKETING_ROUTES.howItWorks,
 } as const
 

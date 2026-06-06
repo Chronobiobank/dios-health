@@ -54,8 +54,7 @@ export function HomeLanding() {
       <section className="home-landing__idea dios-surface-dark" data-nav-surface="dark" id="insight">
         <div className="home-landing__inner">
           <h2 className="home-landing__title home-landing__reveal dios-on-dark-title">
-            {HOME_INSIGHT.headline}
-            <br />
+            {HOME_INSIGHT.headline}{' '}
             <em>{HOME_INSIGHT.headlineEmphasis}</em>
           </h2>
           <p className="home-landing__insight-statement home-landing__reveal dios-on-dark-copy dios-on-dark-copy--strong">

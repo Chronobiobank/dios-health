@@ -6,7 +6,7 @@ export { MARKETING_ROUTES }
 export const HOW_IT_WORKS_META = {
   title: 'How it works — DIOS Dose Intelligence',
   description:
-    'A synced dose is the optimal dose. Three steps to scan your clock, map your protocol, and track progress.',
+    'Optimal dosing syncs with your body clock. Three steps to scan your clock, map your protocol, and track progress.',
 } as const
 
 export const HOW_IT_WORKS_HERO = {
