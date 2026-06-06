@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 const NAV_ID = 'site-nav'
 const ON_DARK_CLASS = 'dios-site-nav--on-dark'
-const SURFACE_SELECTOR = '[data-nav-surface="dark"]'
+const SURFACE_SELECTOR = '[data-nav-surface="dark"], .dios-surface-dark, .dios-surface-accent'
 const MIN_INTERSECTION = 0.12
 
 function navBandRootMargin(navHeight: number): string {

@@ -1,5 +1,5 @@
-import '@/app/dashboard/retinomic-dashboard.css'
+import '@/app/styles/mel-onboarding.css'
 
 export default function OnboardingLayout({ children }: { children: React.ReactNode }) {
-  return <div className="min-h-svh">{children}</div>
+  return children
 }

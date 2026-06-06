@@ -11,7 +11,7 @@ import {
 
 function FooterNavItem({ link }: { link: FooterNavLink }) {
   const className =
-    'text-[13px] leading-snug text-[#0D0D0D]/60 transition-colors hover:text-[#0D0D0D]/90'
+    'text-[13px] leading-snug text-[#0D0D0D]/72 transition-colors hover:text-[#0D0D0D]'
 
   if (link.href.includes('#')) {
     return (
@@ -55,7 +55,7 @@ export function PitchFooter() {
           >
             {LANDING_FOOTER_SECTIONS.map((section) => (
               <div key={section.title}>
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#0D0D0D]/40">
+                <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#0D0D0D]/55">
                   {section.title}
                 </p>
                 <ul className="mt-3 flex flex-col gap-2.5">
@@ -71,8 +71,8 @@ export function PitchFooter() {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 border-t border-black/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[12px] text-[#0D0D0D]/45">© {new Date().getFullYear()} DIOS</p>
-          <p className="text-[12px] text-[#0D0D0D]/45">{DIOS_TAGLINE}</p>
+          <p className="text-[12px] text-[#0D0D0D]/58">© {new Date().getFullYear()} DIOS</p>
+          <p className="text-[12px] text-[#0D0D0D]/58">{DIOS_TAGLINE}</p>
         </div>
       </div>
     </footer>

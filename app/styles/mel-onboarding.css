@@ -1,0 +1,210 @@
+/* Mel onboarding — /onboarding */
+
+.mel-onboarding {
+  --mo-ink: #0f1012;
+  --mo-muted: #6b7280;
+  --mo-paper: #f8f6f1;
+  --mo-accent: #1b3d5f;
+  --mo-green: #1d9e75;
+  --mo-mono: var(--font-geist-mono, ui-monospace, monospace);
+  --mo-sans: var(--font-geist-sans, system-ui, sans-serif);
+  background: var(--mo-paper);
+  color: var(--mo-ink);
+  font-family: var(--mo-sans);
+  min-height: 100svh;
+  padding: calc(var(--dios-site-nav-height, 48px) + 2rem) 1.5rem 2rem;
+}
+
+.mel-onboarding__inner {
+  margin-inline: auto;
+  max-width: 24rem;
+  width: 100%;
+}
+
+.mel-onboarding__step-label {
+  color: var(--mo-muted);
+  font-family: var(--mo-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mel-onboarding__title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.25;
+  margin-top: 0.75rem;
+}
+
+.mel-onboarding__body {
+  color: var(--mo-muted);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-top: 0.75rem;
+}
+
+.mel-onboarding__camera-icon {
+  align-items: center;
+  background: rgb(27 61 95 / 0.08);
+  border-radius: 50%;
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+  margin: 2rem auto;
+  width: 4rem;
+}
+
+.mel-onboarding__camera-icon svg {
+  height: 1.75rem;
+  width: 1.75rem;
+}
+
+.mel-onboarding__btn {
+  background: var(--mo-ink);
+  border: none;
+  border-radius: 3px;
+  color: var(--mo-paper);
+  cursor: pointer;
+  display: block;
+  font-family: var(--mo-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  margin-top: 2rem;
+  padding: 0.875rem 1.25rem;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+}
+
+.mel-onboarding__btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.mel-onboarding__scan-stage {
+  margin-top: 2rem;
+  position: relative;
+}
+
+.mel-onboarding__scan-ring {
+  aspect-ratio: 1;
+  background: rgb(0 0 0 / 0.04);
+  border-radius: 50%;
+  margin-inline: auto;
+  max-width: 14rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.mel-onboarding__scan-ring::before {
+  background: conic-gradient(var(--mo-accent) var(--mo-progress, 0%), transparent 0);
+  content: '';
+  inset: 0;
+  mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px));
+  position: absolute;
+}
+
+.mel-onboarding__scan-feed {
+  align-items: center;
+  background: linear-gradient(145deg, #1a1a1f, #2a2a32);
+  border-radius: 50%;
+  display: flex;
+  height: calc(100% - 1.5rem);
+  inset: 0.75rem;
+  justify-content: center;
+  position: absolute;
+}
+
+.mel-onboarding__scan-feed span {
+  color: rgb(255 255 255 / 0.35);
+  font-family: var(--mo-mono);
+  font-size: 0.75rem;
+}
+
+.mel-onboarding__countdown {
+  font-family: var(--mo-mono);
+  font-size: 2rem;
+  font-weight: 500;
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.mel-onboarding__bti-card {
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / 0.08);
+  border-radius: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+}
+
+.mel-onboarding__bti-value {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.mel-onboarding__bti-confidence {
+  color: rgb(0 0 0 / 0.3);
+  font-family: var(--mo-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+}
+
+.mel-onboarding__mel-quote {
+  border-left: 3px solid var(--mo-accent);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-top: 1.25rem;
+  padding-left: 1rem;
+}
+
+.mel-onboarding__push-card {
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / 0.1);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.08);
+  margin-top: 1.5rem;
+  padding: 1rem 1.125rem;
+}
+
+.mel-onboarding__push-app {
+  color: var(--mo-muted);
+  font-family: var(--mo-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mel-onboarding__push-text {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  margin-top: 0.35rem;
+}
+
+.mel-onboarding__protocol-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.mel-onboarding__input {
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / 0.12);
+  border-radius: 0.25rem;
+  font-family: var(--mo-sans);
+  font-size: 0.875rem;
+  padding: 0.625rem 0.75rem;
+  width: 100%;
+}
+
+.mel-onboarding__success {
+  color: var(--mo-green);
+  font-size: 0.8125rem;
+  margin-top: 0.75rem;
+}

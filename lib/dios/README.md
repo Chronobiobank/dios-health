@@ -8,6 +8,9 @@ Foundational **Operating System for Dose Intelligence** logic — separate from 
 |------|----------------|
 | `constants/` | Canonical table names and platform identifiers |
 | `core/` | Session logging, shared types for ingestion boundaries |
+| `ingestion/` | Ingestion Layer schema types + mock pull-sync generator (UI/BTI dev) |
+| `bti/` | Client BTI engine service — `calculateBiologicalWindow` + payload types |
+| `premium/` | Premium tier verification + `MockTipTraQAdapter` clinical ingestion |
 
 ## Product modules (outside this folder)
 

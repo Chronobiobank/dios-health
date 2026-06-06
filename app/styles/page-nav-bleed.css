@@ -1,0 +1,79 @@
+/* Page top bleed — first-section background extends seamlessly under sticky nav */
+
+.dios-nav-tone-paper {
+  --dios-nav-tone-bg: #f8f6f1;
+  background-color: var(--dios-nav-tone-bg);
+}
+
+.dios-nav-tone-muted {
+  --dios-nav-tone-bg: #edeae3;
+  background-color: var(--dios-nav-tone-bg);
+}
+
+.dios-nav-tone-surface {
+  --dios-nav-tone-bg: #faf9f7;
+  background-color: var(--dios-nav-tone-bg);
+}
+
+.dios-nav-tone-canvas {
+  --dios-nav-tone-bg: #f7fafc;
+  background-color: var(--dios-nav-tone-bg);
+}
+
+.dios-nav-tone-accent {
+  --dios-nav-tone-bg: #1b3d5f;
+  background-color: var(--dios-nav-tone-bg);
+}
+
+.dios-nav-tone-ink {
+  --dios-nav-tone-bg: #0f1012;
+  background-color: var(--dios-nav-tone-bg);
+}
+
+/* Pull first block under nav; keep content offset via existing section padding */
+.dios-page-top-bleed {
+  margin-top: calc(-1 * var(--dios-site-nav-height));
+}
+
+/* Match body + solid nav to page top tone (when not on a dark scroll probe) */
+body:has(.dios-nav-tone-paper) {
+  background-color: #f8f6f1;
+}
+
+body:has(.dios-nav-tone-muted) {
+  background-color: #edeae3;
+}
+
+body:has(.dios-nav-tone-surface) {
+  background-color: #faf9f7;
+}
+
+body:has(.dios-nav-tone-canvas) {
+  background-color: #f7fafc;
+}
+
+body:has(.dios-nav-tone-accent) {
+  background-color: #1b3d5f;
+}
+
+body:has(.dios-nav-tone-ink) {
+  background-color: #0f1012;
+}
+
+body:has(.dios-nav-tone-paper) .dios-site-nav:not(.dios-site-nav--on-dark),
+body:has(.dios-nav-tone-muted) .dios-site-nav:not(.dios-site-nav--on-dark),
+body:has(.dios-nav-tone-surface) .dios-site-nav:not(.dios-site-nav--on-dark),
+body:has(.dios-nav-tone-canvas) .dios-site-nav:not(.dios-site-nav--on-dark),
+body:has(.dios-nav-tone-accent) .dios-site-nav:not(.dios-site-nav--on-dark),
+body:has(.dios-nav-tone-ink) .dios-site-nav:not(.dios-site-nav--on-dark) {
+  --dios-site-nav-bg: var(--dios-nav-tone-bg);
+  --dios-site-nav-border: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Marketing shell — child pages handle their own top inset */
+.calm-landing .marketing-main:has(> .home-landing),
+.calm-landing .marketing-main:has(> .dios-page-top-bleed) {
+  padding-top: 0;
+}

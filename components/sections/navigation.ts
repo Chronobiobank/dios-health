@@ -27,7 +27,7 @@ export const DIOS_MISSION_STATEMENT = 'Dose Intelligence'
 export const FOOTER_LINKS = [
   { label: 'How it works', href: '/how-it-works' },
   { label: 'Clinical evidence', href: '/evidence' },
-  { label: 'For clinicians', href: '/signup/clinician' },
+  { label: 'For clinicians', href: '/clinicians' },
   { label: 'Privacy', href: '/privacy' },
   { label: 'Terms', href: '/terms' },
 ] as const
@@ -46,20 +46,24 @@ export type FooterNavSection = {
   links: readonly FooterNavLink[]
 }
 
-/** Landing page footer — primary routes only */
+/** Site footer — product, science, and legal routes for marketing pages */
 export const LANDING_FOOTER_SECTIONS: readonly FooterNavSection[] = [
   {
     title: 'Product',
     links: [
       { label: 'How it works', href: '/how-it-works' },
-      { label: 'Clinician demo', href: '/signup/clinician' },
-      { label: 'Contact DIOS', href: '/contact' },
+      { label: 'Get started', href: '/onboarding' },
+      { label: 'For clinicians', href: '/clinicians' },
+      { label: 'Sign in', href: '/auth/signin' },
+      { label: 'Contact', href: '/contact' },
     ],
   },
   {
     title: 'Science',
     links: [
       { label: 'Clinical evidence', href: '/evidence' },
+      { label: 'Science', href: '/science' },
+      { label: 'Chronobiobank', href: '/chronobiobank' },
       { label: 'Circadian model', href: '/circadian-digital-twin' },
       { label: 'TipTraQ', href: '/tiptraq' },
     ],

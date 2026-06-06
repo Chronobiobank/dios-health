@@ -7,6 +7,8 @@
 /* Calm UI — landing & clinical spectrum */
 @import "./styles/calm-ui.css";
 @import "./styles/dios-glass.css";
+@import "./styles/dios-surface-dark.css";
+@import "./styles/page-nav-bleed.css";
 @import "./styles/pitch-glow.css";
 
 /* Calmer UX — legibility, responsive rhythm, chat layout */
@@ -105,9 +107,14 @@
   --color-accent: #C9973A;
 
   /* Layout */
-  --nav-logo-mark-h: 28px;
+  --nav-logo-mark-h: 24px;
   --dios-nav-offset: calc(3 * var(--nav-logo-mark-h));
-  --dios-site-nav-height: 4rem;
+  --dios-site-nav-inset-top: 0.5rem;
+  --dios-site-nav-content-height: 3rem;
+  --dios-site-nav-safe-top: env(safe-area-inset-top, 0px);
+  --dios-site-nav-height: calc(
+    var(--dios-site-nav-safe-top) + var(--dios-site-nav-inset-top) + var(--dios-site-nav-content-height)
+  );
   --dios-site-nav-max-width: 76rem;
   /* Minimal edge gutter — nav is full-bleed; do not centre a max-width bar */
   --dios-site-nav-padding-inline: 1rem;
@@ -608,7 +615,8 @@
 @layer components {
   @media (min-width: 640px) {
     :root {
-      --dios-site-nav-height: 4.5rem;
+      --dios-site-nav-inset-top: 0.625rem;
+      --dios-site-nav-content-height: 3.5rem;
     }
   }
 
@@ -616,6 +624,7 @@
     position: sticky;
     top: 0;
     z-index: 50;
+    padding-top: calc(var(--dios-site-nav-safe-top) + var(--dios-site-nav-inset-top));
     border-bottom: 1px solid var(--dios-site-nav-border);
     background-color: var(--dios-site-nav-bg);
     -webkit-backdrop-filter: blur(16px) saturate(1.1);
@@ -700,7 +709,7 @@
     box-sizing: border-box;
     width: 100%;
     max-width: none;
-    height: var(--dios-site-nav-height);
+    height: var(--dios-site-nav-content-height);
     margin-inline: 0;
     padding-inline-start: max(
       var(--dios-site-nav-padding-inline),
@@ -740,7 +749,7 @@
 
   .dios-site-nav__wordmark {
     flex-shrink: 0;
-    font-size: 1.75rem;
+    font-size: 1.375rem;
     line-height: 1;
     color: #0d0d0d;
     display: inline-flex;
@@ -749,7 +758,7 @@
 
   @media (min-width: 640px) {
     .dios-site-nav__wordmark {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
 
@@ -835,9 +844,9 @@
 
   @media (min-width: 640px) {
     .dios-site-nav__ask-dios {
-      height: 2.25rem;
-      padding-inline: 1rem;
-      font-size: 0.875rem;
+      height: 2rem;
+      padding-inline: 0.9375rem;
+      font-size: 0.8125rem;
     }
   }
 
@@ -849,9 +858,9 @@
 
   @media (min-width: 640px) {
     .dios-site-nav__cta {
-      height: 2.25rem;
-      padding-inline: var(--dios-btn-padding-inline-compact-sm);
-      font-size: 0.875rem;
+      height: 2rem;
+      padding-inline: var(--dios-btn-padding-inline-compact);
+      font-size: 0.8125rem;
     }
   }
 
@@ -911,16 +920,16 @@
     }
 
     .dios-site-nav__sign-out-btn {
-      height: 2.25rem;
-      padding-inline: var(--dios-btn-padding-inline-compact-sm);
-      font-size: 0.875rem;
+      height: 2rem;
+      padding-inline: var(--dios-btn-padding-inline-compact);
+      font-size: 0.8125rem;
     }
   }
 
   .dios-site-nav__menu-trigger {
     display: inline-flex;
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2rem;
+    width: 2rem;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;

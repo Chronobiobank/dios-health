@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 
-import { OnboardingFlow } from '@/components/retinomic/onboarding-flow'
-import { ONBOARDING_COPY, RETINOMIC_LANDING_HERO } from '@/lib/pitch/retinomic-landing-copy'
+import { MelOnboardingFlow } from '@/components/mel/mel-onboarding-flow'
 
 export const metadata: Metadata = {
-  title: `${ONBOARDING_COPY.headline} · DIOS`,
-  description: RETINOMIC_LANDING_HERO.subheadline,
+  title: 'Mel onboarding — DIOS',
+  description: '60-second clock scan. BTI estimate. Your first medication window.',
+  robots: { index: false, follow: false },
 }
 
-export default function RetinomicOnboardingPage() {
-  return <OnboardingFlow />
+export default function MelOnboardingPage() {
+  return <MelOnboardingFlow />
 }

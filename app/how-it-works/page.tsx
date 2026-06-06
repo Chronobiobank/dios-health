@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function HowItWorksPage() {
   return (
-    <div className="calm-landing relative min-h-svh">
+    <div className="calm-landing dios-nav-tone-canvas dios-page-top-bleed relative min-h-svh">
       <DashboardClient {...MOCK_DASHBOARD_PROPS} reserveBottomNav={false} />
     </div>
   )
