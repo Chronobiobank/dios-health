@@ -13,7 +13,7 @@ export const HOME_LANDING_META = {
 
 export const HOME_PROBLEM = {
   kicker: 'Dose Intelligence OS',
-  lines: ['Most folk take their meds at the', 'wrong time.'] as const,
+  lines: ['Most people take their meds at the', 'wrong time.'] as const,
   emphasisLine: 1,
   primaryCta: { label: 'Fix it', href: MARKETING_ROUTES.onboarding },
   secondaryCta: { label: 'How', href: MARKETING_ROUTES.howItWorks },
