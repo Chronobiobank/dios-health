@@ -110,13 +110,13 @@ export const HOME_CTA = {
   headline: ['Optimise', 'your script.'] as const,
   patient: {
     who: 'Patient',
-    line: 'Start measuring your clock',
+    line: 'Track your clock',
     detail: 'Free — phone camera',
     href: MARKETING_ROUTES.onboarding,
   },
   clinician: {
     who: 'Clinician',
-    line: 'Enrol your first cohort',
+    line: 'Enrol your cohort',
     detail: 'Primary care · specialists',
     href: `${MARKETING_ROUTES.clinicians}#cta`,
   },

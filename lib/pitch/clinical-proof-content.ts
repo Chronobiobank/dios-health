@@ -13,7 +13,7 @@ export const CLINICAL_PROOF_PAGE = {
   eyebrow: 'Clinical proof',
   title: 'Personal timing beats standard dose.',
   subtitle:
-    'Landmark cardiovascular, metabolic, and safety studies support dose intelligence — the preventive monitoring Grant Munro wished had existed before his vitrectomies.',
+    'Landmark cardiovascular, metabolic, and safety studies support dose intelligence — the same biology DIOS measures through City Labs, PranaQ TipTraQ, and everyday smartphone capture.',
   founderBridge: GRANT_MUNRO_FOUNDER_ORIGIN.paragraphs[2],
   tiles: [
     {

@@ -171,7 +171,7 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
       },
       {
         title: 'Founder paper',
-        body: `Grant Munro’s ${GRANT_MUNRO_PAPER_TITLE} connects chronotherapy evidence to NHS medicines optimisation — and to his own fight to preserve vision after failed surgery. Read the full paper below.`,
+        body: `Grant Munro’s ${GRANT_MUNRO_PAPER_TITLE} connects chronotherapy evidence to NHS medicines optimisation — and to the layered measurement stack DIOS deploys with City Labs and PranaQ TipTraQ. Read the full paper below.`,
       },
     ],
     sources: [
@@ -222,7 +222,7 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
       },
       {
         title: 'From evidence to deployment',
-        body: 'Chronotherapy stalled because measurement and workflow were missing. DIOS supplies patient-specific timing evidence — starting with the retinomic eye scan Grant Munro wished had existed before his vitrectomies.',
+        body: 'Chronotherapy stalled because measurement and workflow were missing. DIOS supplies patient-specific timing evidence — smartphone retinomic screening, City Labs panels, and PranaQ TipTraQ verification in one workflow.',
       },
     ],
     sources: [

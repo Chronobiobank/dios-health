@@ -4,7 +4,7 @@ import { CARD } from '@/components/sections/layout'
 import { GRANT_MUNRO_FOUNDER, GRANT_MUNRO_FOUNDER_ORIGIN } from '@/lib/pitch/grant-munro-founder'
 import { cn } from '@/lib/utils'
 
-/** Founder personal origin — preventive vision care after failed vitrectomies */
+/** Founder background — NIHI prevention research and partner measurement stack */
 export function PitchFounderOrigin({ className }: { className?: string }) {
   const origin = GRANT_MUNRO_FOUNDER_ORIGIN
 

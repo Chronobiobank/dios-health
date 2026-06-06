@@ -2,14 +2,13 @@
 
 export const GRANT_MUNRO_PAPER_TITLE = 'Precision Chronotherapy (2026)' as const
 
-/** Personal origin — why preventive dose intelligence, not reactive surgery alone */
 export const GRANT_MUNRO_FOUNDER_ORIGIN = {
-  eyebrow: 'Founder story',
-  headline: 'Vision loss taught him prevention comes first.',
+  eyebrow: 'Founder',
+  headline: 'Prevention research, built for prescribing.',
   paragraphs: [
-    'Grant Munro founded DIOS after years of personal struggle with vision following several failed vitrectomy operations. Each procedure aimed to save sight; each recovery left more uncertainty about what came next.',
-    'That experience exposed a hard truth: reactive surgery after the retina is already in crisis is not the same as measuring biology early and acting before decline becomes irreversible.',
-    'Preventive monitoring — light, eye, blood, and sleep read as one clock — could have changed his trajectory. DIOS is built so the next patient does not have to learn that lesson through failed operations alone.',
+    'Grant Munro is the founder of DIOS Health and an Honorary Fellow at the National Institute for Health Innovation (NIHI), University of Auckland — working where prevention, chronic disease management, and health technology translation meet.',
+    'DIOS layers passive smartphone capture with partner-verified streams: City Labs blood panels for metabolic and circadian cofactors, and PranaQ TipTraQ for FDA-cleared home sleep verification when timing evidence must be clinical-grade.',
+    `His position paper, ${GRANT_MUNRO_PAPER_TITLE}, sets out the medicines optimisation case for personalised dose timing — the system argument behind the platform.`,
   ],
 } as const
 
@@ -25,9 +24,9 @@ export const GRANT_MUNRO_FOUNDER = {
   nihiUrl: 'https://www.nihi.org.nz/',
   origin: GRANT_MUNRO_FOUNDER_ORIGIN,
   overview: [
-    'Grant Munro is the founder of DIOS Health, building dose intelligence infrastructure that connects circadian biology to everyday prescribing and medicines optimisation.',
-    'After several failed vitrectomy operations and a long fight to preserve his vision, he concluded that preventive, biology-led monitoring must come before reactive crisis care — a conviction that shaped the Retinomic eye scan and the wider dose intelligence stack.',
-    'He is an Honorary Fellow at the National Institute for Health Innovation (NIHI), University of Auckland — a research institute focused on prevention, chronic disease management, and health technology translation.',
+    'Grant Munro founded DIOS Health to build dose intelligence infrastructure — connecting circadian biology to everyday prescribing and medicines optimisation.',
+    'He is an Honorary Fellow at the National Institute for Health Innovation (NIHI), University of Auckland, with a background in prevention-led health technology and chronic disease management.',
+    'The platform integrates partner data streams including City Labs panels and PranaQ TipTraQ alongside the Retinomic eye scan and First Light photic baseline.',
     `His founder position paper, ${GRANT_MUNRO_PAPER_TITLE}, sets out the clinical and system case for personalised medicine timing. The full text is on the problem page, with a downloadable PDF.`,
   ],
   links: [
