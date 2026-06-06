@@ -78,6 +78,12 @@
   opacity: 0;
 }
 
+.home-landing__hero-actions--wide {
+  animation: none;
+  max-width: none;
+  opacity: 1;
+}
+
 .home-landing__btn-solid,
 .home-landing__btn-ghost {
   border-radius: 3px;
@@ -103,6 +109,15 @@
 }
 
 /* Section 2 — insight */
+.home-landing__insight-statement {
+  font-family: var(--hl-sans);
+  font-size: clamp(1.0625rem, 3.5vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.45;
+  margin-top: 1.25rem;
+  max-width: 28ch;
+}
+
 .home-landing__title {
   font-family: var(--hl-serif);
   font-size: clamp(2.2rem, 9vw, 4.5rem);

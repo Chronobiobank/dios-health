@@ -1,5 +1,9 @@
 /** Stripped mobile-first home landing — one idea per screen. */
 
+import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
+
+export { MARKETING_ROUTES }
+
 export const HOME_LANDING_META = {
   title: 'DIOS — Quantify Your Meds',
   description: 'Your medication has a biological window. DIOS finds it.',
@@ -11,21 +15,14 @@ export const HOME_PROBLEM = {
   kicker: 'Dose Intelligence OS',
   lines: ['Most folk take their meds at the', 'wrong time.'] as const,
   emphasisLine: 1,
-  primaryCta: { label: 'Fix it', href: '#cta' },
-  secondaryCta: { label: 'How', href: '#insight' },
+  primaryCta: { label: 'Fix it', href: MARKETING_ROUTES.onboarding },
+  secondaryCta: { label: 'How', href: MARKETING_ROUTES.howItWorks },
 } as const
 
 export const HOME_INSIGHT = {
   headline: 'Every drug has a',
   headlineEmphasis: 'biological window.',
-  before: {
-    label: 'Today',
-    text: 'Same schedule for everyone. Clock time. Population average.',
-  },
-  after: {
-    label: 'With DIOS',
-    text: 'Your window. Your biology. Your clock — mapped precisely.',
-  },
+  statement: 'The label uses clock time. DIOS maps yours.',
 } as const
 
 export const HOME_AUDIENCE = {
@@ -34,13 +31,13 @@ export const HOME_AUDIENCE = {
     who: 'Patient',
     line: 'Take it now. Your window is open.',
     detail: 'One notification. The right moment. Plain English.',
-    href: '#cta',
+    href: MARKETING_ROUTES.howItWorks,
   },
   clinician: {
     who: 'Clinician',
     line: 'Who needs attention this week?',
     detail: 'Triage board. PTH trajectory. Safety alerts.',
-    href: '#cta',
+    href: MARKETING_ROUTES.clinicians,
   },
 } as const
 
@@ -68,7 +65,7 @@ export const HOME_STEPS = {
 export const HOME_PROOF = {
   headline: ['The science', 'is published.'] as const,
   moreLabel: 'Full evidence library',
-  moreHref: '/science',
+  moreHref: MARKETING_ROUTES.science,
   cards: [
     {
       ref: 'Hermida et al. — n=19,084',
@@ -103,13 +100,13 @@ export const HOME_CTA = {
     who: 'Patient',
     line: 'Start measuring your clock',
     detail: 'Free — phone camera',
-    href: '/onboarding',
+    href: MARKETING_ROUTES.onboarding,
   },
   clinician: {
     who: 'Clinician',
     line: 'Enrol your first cohort',
     detail: 'Coimbra · Gominak · circadian',
-    href: 'mailto:grant@dios.health?subject=Clinician%20cohort%20enquiry',
+    href: `${MARKETING_ROUTES.clinicians}#cta`,
   },
 } as const
 

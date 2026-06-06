@@ -9,6 +9,7 @@ import {
   HOME_PROBLEM,
   HOME_PROOF,
   HOME_STEPS,
+  MARKETING_ROUTES,
 } from '@/lib/pitch/home-landing-content'
 
 function ProofFinding({ text, emphasis }: { text: string; emphasis: string }) {
@@ -57,18 +58,12 @@ export function HomeLanding() {
             <br />
             <em>{HOME_INSIGHT.headlineEmphasis}</em>
           </h2>
-          <div className="dios-on-dark-stack home-landing__reveal">
-            <div className="dios-on-dark-panel">
-              <p className="dios-on-dark-eyebrow">{HOME_INSIGHT.before.label}</p>
-              <p className="dios-on-dark-copy dios-on-dark-copy--struck">{HOME_INSIGHT.before.text}</p>
-            </div>
-            <div className="dios-on-dark-panel dios-on-dark-panel--solution">
-              <p className="dios-on-dark-eyebrow dios-on-dark-eyebrow--accent">
-                {HOME_INSIGHT.after.label}
-              </p>
-              <p className="dios-on-dark-copy dios-on-dark-copy--strong">{HOME_INSIGHT.after.text}</p>
-            </div>
-          </div>
+          <p className="home-landing__insight-statement home-landing__reveal dios-on-dark-copy dios-on-dark-copy--strong">
+            {HOME_INSIGHT.statement}
+          </p>
+          <p className="home-landing__proof-more home-landing__reveal">
+            <Link href={MARKETING_ROUTES.howItWorks}>How biological windows work ↗</Link>
+          </p>
         </div>
       </section>
 
@@ -118,6 +113,9 @@ export function HomeLanding() {
               </div>
             ))}
           </div>
+          <p className="home-landing__proof-more home-landing__reveal">
+            <Link href={MARKETING_ROUTES.howItWorks}>Full walkthrough ↗</Link>
+          </p>
         </div>
       </section>
 
