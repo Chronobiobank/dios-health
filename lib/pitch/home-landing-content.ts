@@ -20,9 +20,9 @@ export const HOME_PROBLEM = {
 } as const
 
 export const HOME_INSIGHT = {
-  headline: 'A timed dose is the',
+  headline: 'A synced dose is the',
   headlineEmphasis: 'optimal dose.',
-  statement: 'The time on the label is the same for everyone. DIOS finds the time that suits your body.',
+  statement: 'Med labels are the same for everyone. We match the dose to suit your body.',
   ctaLabel: 'Why Circadian Medicine?',
   ctaHref: MARKETING_ROUTES.howItWorks,
 } as const
