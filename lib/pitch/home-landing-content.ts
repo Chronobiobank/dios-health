@@ -13,7 +13,8 @@ export const HOME_LANDING_META = {
 
 export const HOME_HERO = {
   tagline: ['Optimise', 'Your Script.'] as const,
-  subline: 'Built for shift workers, carers, and anyone maximising their meds.',
+  subline:
+    'Chronotherapy made simple for shift workers, carers, and anyone maximising their meds.',
   video: '/optimise-your-script.mp4',
   poster: '/your-light-dose.jpg',
 } as const
