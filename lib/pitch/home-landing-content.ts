@@ -50,22 +50,11 @@ export const HOME_AUDIENCE = {
 export const HOME_STEPS = {
   headline: ['Three steps.', 'No jargon.'] as const,
   steps: [
-    {
-      n: '01',
-      title: 'Scan your clock',
-      detail: '60 seconds. Phone camera. Sleep data. Blood panel if available.',
-    },
-    {
-      n: '02',
-      title: 'Map every drug to your window',
-      detail: 'Your protocol aligned to your biology. Not a generic schedule.',
-    },
-    {
-      n: '03',
-      title: 'Track whether it is working',
-      detail: 'One number. Biological progress. Clinician sees it too.',
-    },
+    { n: '01', line: 'Scan your clock in 60 seconds.' },
+    { n: '02', line: 'Every drug timed to your biology.' },
+    { n: '03', line: 'Track progress in one number.' },
   ],
+  walkthroughCta: { label: 'Full walkthrough', href: MARKETING_ROUTES.howItWorks },
 } as const
 
 export const HOME_PROOF = {

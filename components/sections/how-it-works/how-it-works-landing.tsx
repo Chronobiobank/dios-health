@@ -50,10 +50,7 @@ export function HowItWorksLanding() {
             {HOW_IT_WORKS_STEPS.steps.map((step) => (
               <div key={step.n} className="home-landing__step">
                 <span className="home-landing__step-n">{step.n}</span>
-                <div>
-                  <p className="home-landing__step-title">{step.title}</p>
-                  <p className="home-landing__step-detail">{step.detail}</p>
-                </div>
+                <p className="home-landing__step-line">{step.line}</p>
               </div>
             ))}
           </div>

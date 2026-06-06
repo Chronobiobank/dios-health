@@ -483,14 +483,14 @@
 .clinicians-landing__step-num {
   color: rgb(0 0 0 / 0.1);
   font-family: var(--cl-mono);
-  font-size: 1.5rem;
+  font-size: var(--text-step-num-size);
   font-weight: 300;
   line-height: 1;
   margin-bottom: 0.75rem;
 }
 
 .clinicians-landing__step-name {
-  font-size: 0.9375rem;
+  font-size: var(--text-step-title-size);
   font-weight: 500;
   line-height: 1.35;
   margin-bottom: 0.375rem;
@@ -498,7 +498,7 @@
 
 .clinicians-landing__step-desc {
   color: var(--cl-ink-3);
-  font-size: 0.8125rem;
+  font-size: var(--text-step-detail-size);
   font-weight: 300;
   line-height: 1.65;
 }

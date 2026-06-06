@@ -109,16 +109,18 @@ export function HomeLanding() {
             {HOME_STEPS.steps.map((step) => (
               <div key={step.n} className="home-landing__step">
                 <span className="home-landing__step-n">{step.n}</span>
-                <div>
-                  <p className="home-landing__step-title">{step.title}</p>
-                  <p className="home-landing__step-detail">{step.detail}</p>
-                </div>
+                <p className="home-landing__step-line">{step.line}</p>
               </div>
             ))}
           </div>
-          <p className="home-landing__proof-more home-landing__reveal">
-            <Link href={MARKETING_ROUTES.howItWorks}>Full walkthrough ↗</Link>
-          </p>
+          <div className="home-landing__proof-actions home-landing__reveal">
+            <Link
+              className="home-landing__btn-solid home-landing__btn-solid--block"
+              href={HOME_STEPS.walkthroughCta.href}
+            >
+              {HOME_STEPS.walkthroughCta.label}
+            </Link>
+          </div>
         </div>
       </section>
 

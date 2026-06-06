@@ -9,6 +9,7 @@
 @import "./styles/dios-glass.css";
 @import "./styles/dios-surface-dark.css";
 @import "./styles/page-nav-bleed.css";
+@import "./styles/marketing-typography.css";
 @import "./styles/pitch-glow.css";
 
 /* Calmer UX — legibility, responsive rhythm, chat layout */
@@ -39,6 +40,7 @@
    * Weight roles mirror openai.com: regular body, medium headlines & UI, semibold emphasis
    */
   --font-family-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-family-serif: var(--font-instrument-serif, Georgia, serif);
   --font-family-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --font-weight-regular: 400;
@@ -46,19 +48,24 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* OpenAI-style scale */
-  --text-body-size: clamp(0.875rem, 0.35vw + 0.82rem, 1rem); /* fluid primary UI copy */
+  /* Senior-first legibility — 125% root rem scale (see calmer/base.css) + bumped type tokens */
+  --legibility-root-size: 125%;
+  --text-body-size: clamp(1rem, 0.35vw + 0.95rem, 1.125rem);
   --text-body-leading: 1.6;
-  --text-nav-size: clamp(0.8125rem, 0.25vw + 0.78rem, 0.9375rem); /* navigation */
+  --text-nav-size: clamp(0.9375rem, 0.25vw + 0.9rem, 1.0625rem);
   --text-nav-leading: 1.4;
-  --text-label-size: clamp(0.8125rem, 0.2vw + 0.76rem, 0.9375rem); /* tile labels, meta */
+  --text-label-size: clamp(0.9375rem, 0.2vw + 0.88rem, 1.0625rem);
   --text-label-leading: 1.4;
-  --text-caption-size: clamp(0.75rem, 0.15vw + 0.72rem, 0.8125rem); /* dates, footnotes */
+  --text-caption-size: clamp(0.875rem, 0.15vw + 0.84rem, 1rem);
   --text-caption-leading: 1.45;
-  --text-heading-section: clamp(1.5rem, 2vw + 1.2rem, 1.875rem); /* section titles */
-  --text-heading-hero: clamp(2rem, 5vw, 3.25rem);
-  /* Landing pitch tiles — one scale per role on every full-bleed screen */
-  --pitch-tile-eyebrow-size: 0.6875rem;
+  --text-eyebrow-size: clamp(0.75rem, 0.2vw + 0.72rem, 0.875rem);
+  --text-button-size: clamp(0.875rem, 0.2vw + 0.84rem, 1rem);
+  --text-heading-section: clamp(2.5rem, 8vw, 4.5rem);
+  --text-heading-hero: clamp(3.25rem, 12vw, 6.75rem);
+  --text-step-num-size: clamp(1.75rem, 5vw, 2.5rem);
+  --text-step-title-size: clamp(1.0625rem, 2.5vw, 1.3125rem);
+  --text-step-detail-size: clamp(1rem, 2vw, 1.125rem);
+  --pitch-tile-eyebrow-size: var(--text-eyebrow-size);
   --pitch-tile-title-size: var(--text-heading-section);
   --pitch-tile-sub-size: var(--text-body-size);
   --tracking-tight: -0.02em;
@@ -303,20 +310,10 @@
 /* OpenAI-style typography utilities — use across pages & components */
 @layer utilities {
   .type-hero {
-    font-family: var(--font-family-sans);
-    font-size: var(--text-heading-hero);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.08;
-    letter-spacing: var(--tracking-tight);
     color: var(--text-primary);
   }
 
   .type-section {
-    font-family: var(--font-family-sans);
-    font-size: var(--text-heading-section);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.15;
-    letter-spacing: var(--tracking-tight);
     color: var(--text-primary);
   }
 
@@ -332,11 +329,6 @@
   }
 
   .type-pitch-title {
-    font-family: var(--font-family-sans);
-    font-size: var(--pitch-tile-title-size);
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.15;
-    letter-spacing: var(--tracking-tight);
     color: var(--text-primary);
   }
 
@@ -803,7 +795,7 @@
     border-radius: 9999px;
     background: #0d0d0d;
     padding-inline: var(--dios-btn-padding-inline-compact);
-    font-size: 0.8125rem;
+    font-size: var(--text-nav-size);
     font-weight: 500;
     line-height: 1;
     color: #fff;
@@ -826,7 +818,7 @@
     border: 1px solid var(--dios-outline-btn-border);
     background: rgb(255 255 255 / 0.45);
     padding-inline: 0.875rem;
-    font-size: 0.8125rem;
+    font-size: var(--text-nav-size);
     font-weight: 500;
     line-height: 1;
     color: var(--text-primary);
@@ -847,7 +839,7 @@
     .dios-site-nav__ask-dios {
       height: 2rem;
       padding-inline: 0.9375rem;
-      font-size: 0.8125rem;
+      font-size: var(--text-nav-size);
     }
   }
 
@@ -861,7 +853,7 @@
     .dios-site-nav__cta {
       height: 2rem;
       padding-inline: var(--dios-btn-padding-inline-compact);
-      font-size: 0.8125rem;
+      font-size: var(--text-nav-size);
     }
   }
 
@@ -897,7 +889,7 @@
     border: 1px solid var(--dios-outline-btn-border);
     background: transparent;
     padding-inline: var(--dios-btn-padding-inline-compact);
-    font-size: 0.8125rem;
+    font-size: var(--text-nav-size);
     font-weight: 500;
     line-height: 1;
     color: #0d0d0d;
@@ -923,7 +915,7 @@
     .dios-site-nav__sign-out-btn {
       height: 2rem;
       padding-inline: var(--dios-btn-padding-inline-compact);
-      font-size: 0.8125rem;
+      font-size: var(--text-nav-size);
     }
   }
 

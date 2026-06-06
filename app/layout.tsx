@@ -1,23 +1,10 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+
 import { Nav } from '@/components/sections/Nav'
 import { ScrollToHash } from '@/components/sections/ScrollToHash'
+import { geistSans, siteFontVariableClasses } from '@/lib/fonts/site-fonts'
+
 import './globals.css'
-
-/** Geist — https://fonts.google.com/specimen/Geist */
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  display: 'swap',
-})
 
 const siteUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -65,7 +52,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-pt-[calc(var(--dios-site-nav-height)+1rem)]`}
+      className={`${siteFontVariableClasses} h-full scroll-pt-[calc(var(--dios-site-nav-height)+1rem)]`}
     >
       <body className={`${geistSans.className} flex min-h-full flex-col bg-[#f7fafc]`}>
         <ScrollToHash />

@@ -2,14 +2,8 @@
 
 @layer base {
   html {
+    font-size: var(--legibility-root-size, 125%);
     text-size-adjust: 100%;
-  }
-
-  /* Mobile — proportional bump for senior legibility (rem-based copy + controls) */
-  @media (max-width: 639px) {
-    html {
-      font-size: 118.75%;
-    }
   }
 
   body {
@@ -52,7 +46,7 @@
 
 @layer utilities {
   .calmer-prose {
-    font-size: clamp(0.9375rem, 0.2vw + 0.9rem, 1rem);
+    font-size: var(--text-body-size);
     line-height: 1.6;
     color: var(--color-text-secondary);
   }

@@ -1,0 +1,54 @@
+/* Marketing typography — Instrument Serif headlines aligned with home landing */
+
+:root {
+  --font-family-serif: var(--font-instrument-serif, Georgia, serif);
+  --marketing-headline-size: var(--text-heading-hero);
+  --marketing-section-size: var(--text-heading-section);
+  --marketing-card-headline-size: clamp(2rem, 6.5vw, 3.375rem);
+}
+
+/* Global marketing type utilities */
+.type-hero {
+  font-family: var(--font-family-serif);
+  font-size: var(--marketing-headline-size);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.type-section,
+.type-pitch-title {
+  font-family: var(--font-family-serif);
+  font-size: var(--marketing-section-size);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+/* Calm landing shell — serif headlines on all marketing routes */
+.calm-landing .calm-headline,
+.calm-landing .dios-on-dark-title,
+.calm-landing .marketing-detail :is(h1, h2) {
+  font-family: var(--font-family-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.calm-landing .dios-on-dark-title {
+  font-size: var(--marketing-headline-size);
+  line-height: 1;
+}
+
+.calm-landing .dios-on-dark-headline {
+  font-family: var(--font-family-serif);
+  font-size: var(--marketing-card-headline-size);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.calm-landing .dios-on-dark-title em,
+.calm-landing .type-pitch-title em,
+.calm-landing .type-section em,
+.calm-landing .type-hero em {
+  font-style: italic;
+}

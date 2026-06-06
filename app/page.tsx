@@ -1,19 +1,10 @@
 import type { Metadata } from 'next'
-import { Instrument_Serif } from 'next/font/google'
 
 import { HomeLanding } from '@/components/sections/home/home-landing'
 import { MarketingShell } from '@/components/sections/marketing-shell'
 import { HOME_LANDING_META } from '@/lib/pitch/home-landing-content'
 
 import '@/app/styles/home-landing.css'
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-serif',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: HOME_LANDING_META.title,
@@ -30,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <MarketingShell prefetchRoutes showFooter={false} className={instrumentSerif.variable}>
+    <MarketingShell prefetchRoutes showFooter={false}>
       <HomeLanding />
     </MarketingShell>
   )
