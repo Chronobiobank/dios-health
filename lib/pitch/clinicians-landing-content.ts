@@ -1,19 +1,19 @@
-/** Clinician acquisition landing — mobile-first narrative (BTI / spectrum / moat). */
+/** Clinician acquisition — med timing lead (Option 1: Optimise Your Script). */
 
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 
 export const CLINICIANS_LANDING_META = {
-  title: 'For clinicians — DIOS Dose Intelligence OS',
+  title: 'For clinicians — DIOS',
   description:
-    'Biological time, not clock time. Cohort triage, Chronomedicine Spectrum sequencing, and Chronobiobank outcomes indexed by BTI.',
+    'Your patients have a biological dose window. DIOS maps meds to body clocks and triages who needs attention this week.',
 } as const
 
 export const CLINICIANS_HERO = {
-  eyebrow: 'Dose Intelligence OS',
-  headline: 'Every drug was developed for clock time.',
-  headlineEmphasis: 'Your patients run on biological time.',
+  eyebrow: 'For clinicians',
+  headline: 'Same script.',
+  headlineEmphasis: 'Wrong time for most patients.',
   subheadline:
-    'DIOS measures each patient’s Biological Time Index, maps every drug and micronutrient on the Chronomedicine Spectrum, and tells you who needs attention this week.',
+    'DIOS scans each patient’s body clock, times every med and supplement to their biological window, and surfaces a red–amber–green cohort view — before outcomes slip.',
   primaryCta: { label: 'Enrol your cohort', href: 'mailto:grant@dios.health' },
   secondaryCta: { label: 'See triage demo', href: MARKETING_ROUTES.cliniciansTriage },
 } as const
@@ -23,35 +23,35 @@ export const CLINICIANS_GAP = {
   headline: 'Clock time on the label. Biology on another clock entirely.',
   before: {
     label: 'What medicine does today',
-    body: 'Take your statin at 8pm. Take D3 in the morning. Take your antidepressant with breakfast.',
+    body: 'Take your statin at 8pm. Take metformin with breakfast. One schedule on every label — built for population averages, not your patient’s phase.',
   },
   after: {
     label: 'What DIOS does',
-    body: 'BTI estimates your patient’s phase. Each drug gets a biological-time window — updated when sleep, light, or labs shift the clock.',
+    body: 'A 60-second body-clock scan estimates circadian phase. Each drug gets a personal timing window — updated when sleep, light, or labs shift the clock.',
   },
 } as const
 
 export const CLINICIANS_STEPS = {
   eyebrow: 'How it works',
-  headline: 'Measure. Align. Track.',
+  headline: 'Scan. Time. Triage.',
   steps: [
     {
       num: '01',
-      name: 'Measure biological time',
-      desc: '60-second First Light scan. TipTraQ when linked. Labs when due. Three layers triangulate the Biological Time Index.',
-      mono: 'BTI — clock position + confidence tier',
+      name: 'Scan the body clock',
+      desc: '60-second phone scan at first light. Optional TipTraQ nights and lab panels when risk is flagged.',
+      mono: 'Circadian phase + confidence tier',
     },
     {
       num: '02',
-      name: 'Align the Chronomedicine Spectrum',
-      desc: 'Architects, sensitisers, modulators, opportunists, restorers — every substance in the protocol plotted on BTI with conflict detection.',
-      mono: 'Window open — sequence surfaced',
+      name: 'Time the protocol',
+      desc: 'Every med and supplement mapped to today’s biological window — not wall-clock defaults.',
+      mono: 'Window open — take it now',
     },
     {
       num: '03',
-      name: 'Track Chronopathic Age',
-      desc: 'PTH trajectory for supervised protocols. Sleep and inflammatory markers for all patients. One outcome line — is biological time moving the right way?',
-      mono: 'Clinician and patient see the same signal',
+      name: 'Triage the cohort',
+      desc: 'Red, amber, green by adherence, safety gates, and trajectory. You review flagged patients first.',
+      mono: 'Who needs attention this week',
     },
   ],
 } as const
@@ -63,11 +63,11 @@ export const CLINICIANS_USERS = {
     who: 'Clinician',
     cvp: 'Who needs attention this week?',
     points: [
-      'Cohort triage — red, amber, green by protocol risk',
-      'PTH trajectory and calcium cascade gates',
-      'Titration lock until you review',
-      'Next lab due — automated',
-      'Chronobiobank depth per patient',
+      'Cohort triage — red, amber, green',
+      'Personal dose windows per patient',
+      'Safety gates lock titration until you review',
+      'Exportable clinical summary for the EHR',
+      'Peer-reviewed timing evidence on tap',
     ],
   },
   patient: {
@@ -75,18 +75,18 @@ export const CLINICIANS_USERS = {
     cvp: 'Take it now. Your window is open.',
     points: [
       'One notification at the right biological moment',
-      'DiDi voice coach — plain English, three sentences',
-      'Lab reminder when the panel is due',
-      'Chronopathic Age — one progress number',
-      'No jargon required',
+      'DiDi coach — plain English, three sentences',
+      'Today’s med and supplement timing guidance',
+      'Progress tracked with exploratory metrics',
+      'Share profile with GP or pharmacist',
     ],
   },
 } as const
 
 export const CLINICIANS_MOAT = {
   eyebrow: 'Why no one else can do this',
-  headline: 'The Chronobiobank — indexed by biological time from day one.',
-  sub: 'Every competitor has members. None has circadian-indexed, protocol-specific outcomes.',
+  headline: 'Timing outcomes indexed by biology — from day one.',
+  sub: 'Adherence apps log clock time. DIOS logs biological time at dose — and that dual index cannot be retrofitted.',
   competitors: [
     {
       name: 'Medisafe',
@@ -104,47 +104,50 @@ export const CLINICIANS_MOAT = {
       name: 'TimeTeller',
       stat: 'Saliva phenotyping',
       what: 'Strong circadian profiling — report in hand, then nothing.',
-      gap: 'No protocol OS, no longitudinal bank, no practitioner triage.',
+      gap: 'No dose-timing OS, no longitudinal bank, no practitioner triage.',
     },
   ],
   verdict:
-    'Retrofitting biological time onto clock-time records is architecturally non-viable. DIOS indexes every outcome by BTI and wall-clock together — and that dual index compounds with every patient-month.',
+    'Retrofitting biological time onto clock-time records is architecturally non-viable. DIOS indexes every dose event by body clock and wall clock together — and that compounds with every patient-month in the Chronobiobank.',
 } as const
 
 export const CLINICIANS_EVIDENCE = {
-  eyebrow: 'The science is settled',
-  headline: 'Thirty years of evidence. No clinical OS — until now.',
+  eyebrow: 'The science is published',
+  headline: 'Same drug. Different moment. Outcomes change.',
   cards: [
     {
       source: 'Hermida · Hygia Trial · n=19,084',
-      finding: 'Bedtime antihypertensive dosing reduced cardiovascular events versus morning dosing — same drug, different biological window.',
+      finding:
+        'Bedtime antihypertensive dosing reduced cardiovascular events versus morning dosing — same drug, different biological window.',
     },
     {
-      source: 'UK Biobank · melanopic light cohorts',
-      finding: 'Light patterns independently predict metabolic, cardiovascular, and psychiatric risk — the input DIOS measures daily.',
+      source: 'Levi · The Lancet · n=186',
+      finding: 'Timed chemotherapy cut toxicity fivefold. Response nearly doubled.',
     },
     {
       source: 'Pigazzani · TIME chronotype sub-study',
       finding: 'Individual chronotype modulates drug response — population-average timing is insufficient.',
     },
     {
-      source: 'Coimbra supervised cohort · n=319',
-      finding: 'High-dose D3 protocols with monitoring — evidence that toxicity narratives ignore supervised longitudinal data.',
+      source: 'UK Biobank · melanopic light cohorts',
+      finding:
+        'Light–dark patterns predict cardiovascular and metabolic risk — the daily signal DIOS measures before timing guidance.',
     },
   ],
 } as const
 
 export const CLINICIANS_CTA = {
-  headline: 'Close the loop your protocol leaves open.',
-  sub: 'Coimbra, Gominak, and chronotherapy practitioners — enrol your first cohort. Free for patients at entry.',
+  headline: 'Optimise scripts across your cohort.',
+  sub: 'Primary care, pharmacy, and specialist practices — free patient entry, clinician triage from day one.',
   primary: { label: 'Enrol your cohort', href: 'mailto:grant@dios.health' },
   secondary: { label: 'See triage demo', href: MARKETING_ROUTES.cliniciansTriage },
 } as const
 
+/** How common drug classes relate to biological time — clinician skim only */
 export const CHRONOMEDICINE_CLUSTERS = [
-  { id: 'architect', label: 'Architects', examples: 'D3, melatonin, B5 — they set the clock' },
-  { id: 'sensitiser', label: 'Sensitisers', examples: 'Statins, BP meds, metformin — efficacy gated by BTI' },
-  { id: 'modulator', label: 'Modulators', examples: 'SSRIs, steroids — bidirectional clock effect' },
-  { id: 'opportunist', label: 'Opportunists', examples: 'Chemotherapy — narrow window opens and closes' },
-  { id: 'restorer', label: 'Restorers', examples: 'First Light, chronobiotics — repair the clock' },
+  { id: 'architect', label: 'Clock setters', examples: 'Melatonin, light exposure — anchor phase first' },
+  { id: 'sensitiser', label: 'Window-sensitive', examples: 'Statins, BP meds, metformin — efficacy gated by phase' },
+  { id: 'modulator', label: 'Bidirectional', examples: 'SSRIs, steroids — drug and clock affect each other' },
+  { id: 'opportunist', label: 'Narrow window', examples: 'Chemotherapy — window opens and closes fast' },
+  { id: 'restorer', label: 'Rhythm repair', examples: 'Morning scan, chronobiotics — restore amplitude' },
 ] as const

@@ -32,6 +32,14 @@ function redirectIfNeeded(request: NextRequest, destination: string) {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+
+  // Supabase may return OAuth codes to Site URL (/) when redirect URL is misconfigured
+  if (request.nextUrl.searchParams.has('code') && pathname !== '/auth/callback') {
+    const callbackUrl = request.nextUrl.clone()
+    callbackUrl.pathname = '/auth/callback'
+    return NextResponse.redirect(callbackUrl)
+  }
+
   const { supabaseResponse, user, supabase } = await updateSession(request)
 
   if (!supabase) {
@@ -137,8 +145,11 @@ export async function middleware(request: NextRequest) {
 
     if (pathname.startsWith('/dashboard') && profile.role === 'patient') {
       const destination = await getPatientOnboardingPath(supabase, user.id)
-      const redirect = redirectIfNeeded(request, destination)
-      if (redirect) return redirect
+      // Only gate incomplete onboarding — do not bounce /dashboard/profile (etc.) to home.
+      if (destination !== PATIENT_ROUTES.dashboard) {
+        const redirect = redirectIfNeeded(request, destination)
+        if (redirect) return redirect
+      }
     }
 
     if (pathname.startsWith('/clinic') && profile.role !== 'clinician') {
@@ -173,6 +184,8 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    '/',
+    '/auth/callback',
     '/signin',
     '/auth/signin',
     '/auth/signup',

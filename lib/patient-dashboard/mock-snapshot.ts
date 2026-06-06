@@ -1,14 +1,7 @@
-import type { PatientDashboardProps } from '@/lib/patient-dashboard/types'
-import { buildSeanJamesSnapshot } from '@/lib/patient-dashboard/sean-james-tiptraq'
-import { DEFAULT_DASHBOARD_AVATAR } from '@/components/patient-dashboard/constants'
+import type { PatientDashboardProps, PatientSnapshot } from '@/lib/patient-dashboard/types'
+import { buildHowItWorksDemoProps, buildHowItWorksDemoSnapshot } from '@/lib/patient-dashboard/how-it-works-demo-snapshot'
 
-/** Static demo data — Sean James TipTraQ (see sean-james-tiptraq.ts). */
-export const MOCK_PATIENT_SNAPSHOT = buildSeanJamesSnapshot()
+/** Static demo — med-timing lead, First Light complete (see how-it-works-demo-snapshot.ts). */
+export const MOCK_PATIENT_SNAPSHOT: PatientSnapshot = buildHowItWorksDemoSnapshot()
 
-export const MOCK_DASHBOARD_PROPS: PatientDashboardProps = {
-  greeting: 'Kia ora, Sean.',
-  firstName: 'Sean',
-  fullName: 'Sean James',
-  avatarUrl: DEFAULT_DASHBOARD_AVATAR,
-  snapshot: MOCK_PATIENT_SNAPSHOT,
-}
+export const MOCK_DASHBOARD_PROPS: PatientDashboardProps = buildHowItWorksDemoProps()

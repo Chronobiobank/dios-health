@@ -103,8 +103,11 @@
   --dios-accent-bg: var(--aubergine-mid);
   --dios-surface-ink: var(--aubergine-dark);
   --dios-surface-accent: var(--aubergine-mid);
-  --lilac: #C9B8E8;
-  --lilac-light: #EDE8F7;
+  --lilac: #c9b8e8;
+  --lilac-light: #ede8f7;
+  --lilac-bright: #d891ef;
+  --dios-spot: var(--lilac-bright);
+  --dios-focus-ring: var(--lilac-bright);
   --gold: #C9973A;
   --gold-light: #F0D9A8;
 
@@ -236,6 +239,7 @@
   --color-dios-gold: var(--gold);
   --color-dios-lilac: var(--lilac);
   --color-dios-lilac-light: var(--lilac-light);
+  --color-dios-lilac-bright: var(--lilac-bright);
   --color-dios-cream: var(--cream);
   --color-dios-border: var(--color-border);
   --color-dios-muted: var(--text-muted);
@@ -698,8 +702,9 @@
   }
 
   .dios-site-nav--on-dark .dios-site-nav__ask-dios:hover {
-    background: rgb(255 255 255 / 0.18);
-    border-color: rgb(255 255 255 / 0.45);
+    background: var(--lilac-bright);
+    border-color: var(--lilac-bright);
+    color: var(--text-on-dark);
   }
 
   .dios-site-nav--on-dark .dios-site-nav__cta {
@@ -853,12 +858,14 @@
     backdrop-filter: blur(8px);
     transition:
       background-color 0.15s ease,
-      border-color 0.15s ease;
+      border-color 0.15s ease,
+      color 0.15s ease;
   }
 
   .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__ask-dios:hover {
-    background: rgb(13 13 13 / 0.85);
-    border-color: var(--text-primary);
+    background: var(--lilac-bright);
+    border-color: var(--lilac-bright);
+    color: var(--text-on-dark);
   }
 
   @media (min-width: 640px) {
@@ -1361,7 +1368,13 @@
     a.dios-btn-on-light--secondary,
     button.dios-btn-on-light--secondary
   ):hover {
-    border-color: var(--dios-outline-btn-border);
+    border-color: var(--lilac-bright);
+  }
+
+  .home-landing :is(a, button):focus-visible,
+  .calm-landing :is(a, button):focus-visible {
+    outline: 2px solid var(--dios-focus-ring);
+    outline-offset: 2px;
   }
 
   .dios-site-nav:not(.dios-site-nav--on-dark) :where(.dios-site-nav__ask-dios, .dios-site-nav__sign-out-btn) {

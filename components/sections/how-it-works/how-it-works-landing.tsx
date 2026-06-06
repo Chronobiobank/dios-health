@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-import { DiosSiteFooter } from '@/components/sections/dios-site-footer'
 import { HomeLandingReveal } from '@/components/sections/home/home-landing-reveal'
 import {
   HOW_IT_WORKS_CTA,
@@ -78,7 +77,6 @@ export function HowItWorksLanding() {
         </div>
       </section>
 
-      <DiosSiteFooter />
     </div>
   )
 }

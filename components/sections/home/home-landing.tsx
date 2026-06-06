@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { DiosSiteFooter } from '@/components/sections/dios-site-footer'
+import { HomeCtaVideo } from '@/components/sections/home/home-cta-video'
 import { HomeHeroVideo } from '@/components/sections/home/home-hero-video'
 import { HomeLandingReveal } from '@/components/sections/home/home-landing-reveal'
 import {
@@ -130,7 +130,13 @@ export function HomeLanding() {
         </div>
       </section>
 
-      <section className="home-landing__idea home-landing__idea--paper home-landing__idea--cta" id="cta">
+      <section
+        className="home-landing__idea home-landing__idea--cta home-landing__idea--cta-photo"
+        data-nav-surface="dark"
+        id="cta"
+      >
+        <HomeCtaVideo />
+        <div className="home-landing__cta-scrim" aria-hidden />
         <div className="home-landing__inner">
           <h2 className="type-hero home-landing__title home-landing__title--one-line">{HOME_CTA.headline}</h2>
           <div className="home-landing__cta-cards">
@@ -157,8 +163,6 @@ export function HomeLanding() {
           </div>
         </div>
       </section>
-
-      <DiosSiteFooter />
     </div>
   )
 }

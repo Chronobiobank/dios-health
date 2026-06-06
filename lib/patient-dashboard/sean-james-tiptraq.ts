@@ -22,6 +22,7 @@ import type {
 } from '@/lib/patient-dashboard/types'
 import { buildSnapshotStatNotes } from '@/lib/patient-dashboard/snapshot-stat-copy'
 import { buildSeanJamesChronoimmuneProfile } from '@/lib/chronoimmune/sean-james-demo'
+import { buildEatingWindowSummary } from '@/lib/patient-dashboard/build-eating-window'
 import { buildPatientNextStepsBlock } from '@/lib/patient-dashboard/build-patient-next-steps'
 import { formatCompletenessValue, formatOpenGapsLabel, tileSubhead } from '@/lib/patient-dashboard/tile-copy'
 
@@ -471,6 +472,7 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
     statNotes,
     medications: SEAN_MEDICATIONS,
     medicationsDueTonight: 2,
+    eatingWindow: buildEatingWindowSummary(),
     bloodPanel,
     tiptraqSummary,
     measureTiles,

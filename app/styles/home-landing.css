@@ -56,9 +56,14 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn {
 }
 
 body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__menu-trigger:hover,
-body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__ask-dios:hover,
 body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hover:not(:disabled) {
   border-color: #fff;
+}
+
+body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__ask-dios:hover {
+  background: var(--lilac-bright);
+  border-color: var(--lilac-bright);
+  color: #fff;
 }
 
 /* Section 1 — full-height video hero under nav */
@@ -243,12 +248,25 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
   background: var(--hl-btn-bg);
   color: #fff;
   font-weight: 500;
+  transition: background-color 0.15s ease;
+}
+
+.home-landing__btn-solid:hover {
+  background: var(--lilac-bright, #d891ef);
 }
 
 .home-landing__btn-ghost {
   background: transparent;
   border: 1px solid var(--dios-outline-btn-border, #0d0d0d);
   color: var(--hl-ink-3);
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.home-landing__btn-ghost:hover {
+  border-color: var(--lilac-bright, #d891ef);
+  color: var(--hl-ink);
 }
 
 /* Section 2 — insight */
@@ -288,7 +306,7 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 
 .home-landing__btn-on-dark:hover {
   background: rgb(255 255 255 / 0.2);
-  border-color: #fff;
+  border-color: var(--lilac-bright, #d891ef);
 }
 
 .home-landing__btn-on-dark--solid {
@@ -301,6 +319,18 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
   background: rgb(255 255 255 / 0.92);
   border-color: #fff;
   color: var(--hl-ink);
+}
+
+.home-landing__btn-ghost--on-dark {
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 0.45);
+  color: rgb(255 255 255 / 0.82);
+}
+
+.home-landing__btn-ghost--on-dark:hover {
+  background: rgb(255 255 255 / 0.08);
+  border-color: var(--lilac-bright, #d891ef);
+  color: #fff;
 }
 
 /* Mirrors global .type-hero — senior legibility token (--text-heading-hero) */
@@ -338,8 +368,89 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
   padding-block: calc(2rem + var(--dios-site-nav-height, 48px)) 2rem;
 }
 
+/* Content-heavy marketing pages — evidence, science, chronobiobank */
+.home-landing__idea--stack {
+  justify-content: flex-start;
+  min-height: auto;
+  padding-block: calc(2rem + var(--dios-site-nav-height, 48px)) 2.5rem;
+}
+
+.home-landing__inner--wide {
+  max-width: 48rem;
+}
+
+.home-landing__card-detail.home-landing__lede,
+.home-landing__lede {
+  border: none;
+  border-radius: 0;
+  color: var(--hl-ink-2);
+  font-size: var(--text-body-size);
+  font-weight: 400;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 42ch;
+  padding: 0;
+}
+
+.home-landing__lede--block {
+  max-width: none;
+  white-space: pre-line;
+}
+
+.home-landing__idea--paper .home-landing__hero-title + .home-landing__lede,
+.home-landing__title + .home-landing__lede {
+  margin-top: -1.25rem;
+}
+
+.home-landing__idea--cta-photo {
+  color: #fff;
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+
+.home-landing__cta-media {
+  inset: 0;
+  position: absolute;
+  z-index: 0;
+}
+
+.home-landing__cta-video {
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  width: 100%;
+}
+
+.home-landing__cta-video.is-ready {
+  opacity: 1;
+}
+
+.home-landing__cta-scrim {
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0.42) 0%,
+    rgb(0 0 0 / 0.5) 50%,
+    rgb(0 0 0 / 0.58) 100%
+  );
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.home-landing__idea--cta-photo .home-landing__inner {
+  position: relative;
+  z-index: 2;
+}
+
 .home-landing__idea--cta .home-landing__title {
   color: var(--hl-ink);
+}
+
+.home-landing__idea--cta-photo .home-landing__title {
+  color: #fff;
+  text-shadow: 0 2px 24px rgb(0 0 0 / 0.4);
 }
 
 .home-landing__title--one-line {
@@ -361,10 +472,24 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 
 .home-landing__card {
   border-radius: 5px;
+  box-shadow: 0 0 0 0.5px transparent;
   color: inherit;
   display: block;
   overflow: hidden;
   text-decoration: none;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.home-landing__card:hover {
+  box-shadow:
+    0 0 0 1px var(--lilac-bright, #d891ef),
+    0 10px 28px rgb(216 145 239 / 0.28);
+}
+
+.home-landing__card:hover .dios-dark-block--solution {
+  border-color: color-mix(in srgb, var(--lilac-bright, #d891ef) 65%, rgb(255 255 255 / 0.16));
 }
 
 .home-landing__card-top {
@@ -473,8 +598,12 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
   flex-direction: column;
   gap: 0.875rem;
   list-style: none;
-  margin: 1.75rem 0 0;
+  margin: 1.25rem 0 0;
   padding: 0;
+}
+
+.home-landing__lede + .home-landing__proof-bites {
+  margin-top: 1rem;
 }
 
 .home-landing__proof-bites li {
@@ -517,6 +646,177 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
   color: var(--hl-ink);
 }
 
+.home-landing__proof-more--on-dark a {
+  color: rgb(255 255 255 / 0.65);
+}
+
+.home-landing__proof-more--on-dark a:hover {
+  color: #fff;
+}
+
+/* Proof study cards — science landing */
+.home-landing__proof-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-top: 1.25rem;
+}
+
+.home-landing__proof-card {
+  background: var(--hl-paper-2);
+  border: 0.5px solid rgb(0 0 0 / 0.07);
+  border-left: 3px solid var(--lilac-bright, #d891ef);
+  border-radius: 4px;
+  padding: 1rem 0.875rem;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.home-landing__proof-card:hover {
+  border-color: color-mix(in srgb, var(--lilac-bright, #d891ef) 35%, rgb(0 0 0 / 0.07));
+  box-shadow: 0 8px 24px rgb(216 145 239 / 0.12);
+}
+
+.home-landing__proof-card-ref {
+  color: var(--hl-ink-3);
+  font-family: var(--hl-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.375rem;
+}
+
+.home-landing__proof-card-finding {
+  color: var(--hl-ink-2);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.home-landing__proof-card-finding strong {
+  color: var(--hl-ink);
+  font-weight: 600;
+}
+
+.home-landing__proof-card-doi {
+  color: var(--hl-ink-3);
+  display: inline-block;
+  font-family: var(--hl-mono);
+  font-size: 0.625rem;
+  margin-top: 0.5rem;
+  text-decoration: none;
+}
+
+.home-landing__proof-card-doi:hover {
+  color: var(--hl-ink);
+}
+
+/* Evidence pillars */
+.home-landing__pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.home-landing__pillar {
+  background: var(--hl-paper);
+  border: 0.5px solid rgb(0 0 0 / 0.07);
+  border-radius: 5px;
+  padding: 1.25rem 1.125rem;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.home-landing__pillar:hover {
+  border-color: color-mix(in srgb, var(--lilac-bright, #d891ef) 45%, rgb(0 0 0 / 0.07));
+  box-shadow: 0 8px 24px rgb(216 145 239 / 0.14);
+}
+
+.home-landing__pillar-label {
+  color: var(--hl-ink-3);
+  font-family: var(--hl-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+}
+
+.home-landing__pillar-title {
+  font-family: var(--hl-serif);
+  font-size: 1.375rem;
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+
+.home-landing__pillar-summary {
+  color: var(--hl-ink-2);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0 0 0.875rem;
+}
+
+.home-landing__pillar-bullets {
+  border-top: 0.5px solid rgb(0 0 0 / 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.875rem 0 0;
+}
+
+.home-landing__pillar-bullet {
+  color: var(--hl-ink-2);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.55;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.home-landing__pillar-bullet-mark {
+  color: var(--lilac-bright, #d891ef);
+  font-family: var(--hl-mono);
+  font-size: 0.75rem;
+  left: 0;
+  position: absolute;
+  top: 0.15em;
+}
+
+.home-landing__pillar-bullet strong {
+  color: var(--hl-ink);
+  font-weight: 600;
+}
+
+.home-landing__pillar-link {
+  color: var(--hl-aubergine);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.home-landing__pillar-link:hover {
+  color: var(--lilac-bright, #d891ef);
+}
+
+.home-landing__pillar-ref {
+  border-top: 0.5px solid rgb(0 0 0 / 0.06);
+  color: var(--hl-ink-3);
+  font-family: var(--hl-mono);
+  font-size: 0.625rem;
+  line-height: 1.5;
+  margin: 0.875rem 0 0;
+  padding-top: 0.75rem;
+}
+
+.home-landing :is(a, button):focus-visible {
+  outline: 2px solid var(--dios-focus-ring, var(--lilac-bright, #d891ef));
+  outline-offset: 3px;
+}
+
 .home-landing__btn-solid--block {
   display: block;
   width: 100%;
@@ -531,10 +831,29 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 
 .home-landing__cta-card {
   border-radius: 5px;
+  box-shadow: 0 0 0 0.5px transparent;
   color: inherit;
   display: block;
   overflow: hidden;
   text-decoration: none;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.home-landing__cta-card:hover {
+  box-shadow:
+    0 0 0 1px var(--lilac-bright, #d891ef),
+    0 10px 28px rgb(216 145 239 / 0.28);
+}
+
+.home-landing__cta-card:hover .dios-dark-block--solution {
+  border-color: color-mix(in srgb, var(--lilac-bright, #d891ef) 65%, rgb(255 255 255 / 0.16));
+}
+
+.home-landing__cta-card:hover .home-landing__cta-foot {
+  border-top-color: var(--lilac-bright, #d891ef);
+  background: color-mix(in srgb, var(--lilac-bright, #d891ef) 14%, var(--aubergine-light, #e8d5e2));
 }
 
 .home-landing__cta-top {
@@ -607,4 +926,13 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
     grid-template-columns: 1fr 1fr;
   }
 
+  .home-landing__pillars {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .home-landing__pillar:nth-child(4) {
+    grid-column: 1 / -1;
+  }
 }

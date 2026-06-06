@@ -12,7 +12,9 @@ import type {
   RetinomicBaselineSummary,
   TiptraqSummary,
 } from '@/lib/patient-dashboard/types'
+import { buildEatingWindowSummary } from '@/lib/patient-dashboard/build-eating-window'
 import { buildPatientNextStepsBlock } from '@/lib/patient-dashboard/build-patient-next-steps'
+import { applyScriptFirstSnapshot } from '@/lib/patient-dashboard/script-first-narrative'
 import { formatCompletenessValue, formatOpenGapsLabel, tileSubhead } from '@/lib/patient-dashboard/tile-copy'
 import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
 import { buildChronosomaticSpectrumNodes } from '@/lib/patient-dashboard/spectrum-nodes'
@@ -21,6 +23,7 @@ import {
   chronopenicBurdenScoreFromGapYears,
   photonicAgeFromCalendarAndGap,
 } from '@/lib/product/chronopenic-burden'
+import type { FirstLightDailyStatus } from '@/lib/product/first-light-daily-status'
 import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
 import {
   parseStoredHardwareBaseline,
@@ -55,6 +58,9 @@ type BuildPatientSnapshotInput = {
   feedFreshness?: FeedFreshness
   /** Live melanopic alignment 0–100 when phone feed is fresh */
   lightAlignmentOverride?: number | null
+  /** Today's completed First Light session — anchors eating window and next steps */
+  firstLightDailyStatus?: FirstLightDailyStatus | null
+  firstLightScanActionable?: boolean
 }
 
 function buildRetinomicBaselineSummary(
@@ -476,9 +482,11 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     recoveryYears,
     feedFreshness: input.feedFreshness,
     hasRetinomicScan: retinomicBaseline != null,
+    firstLightDailyStatus: input.firstLightDailyStatus,
+    firstLightScanActionable: input.firstLightScanActionable,
   })
 
-  return {
+  const baseSnapshot: PatientSnapshot = {
     calendarAge,
     photonicAge,
     chronopenicBurdenYears,
@@ -493,6 +501,8 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     statNotes,
     medications,
     medicationsDueTonight: medicationsDueTonight || (medications.length > 0 ? 2 : 0),
+    eatingWindow:
+      input.firstLightDailyStatus?.eatingWindow ?? buildEatingWindowSummary(),
     bloodPanel,
     tiptraqSummary,
     measureTiles,
@@ -502,4 +512,14 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     nextSteps,
     ...calibration,
   }
+
+  return applyScriptFirstSnapshot(baseSnapshot, {
+    sleepDelay: sleepDrift,
+    hasTipTraq: hasTipTraq || spectrumNights > 0,
+    tipTraqNightsCount: spectrumNights,
+    bloodPanel,
+    completenessGaps: Math.min(completenessGaps, 2),
+    hasRetinomicScan: retinomicBaseline != null,
+    firstLightDailyStatus: input.firstLightDailyStatus,
+  })
 }

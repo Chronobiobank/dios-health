@@ -1,16 +1,18 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
+import { BodyClockDetailTile } from '@/components/patient-dashboard/body-clock-detail-tile'
 import { DashboardNav } from '@/components/patient-dashboard/dashboard-nav'
+import { DoseWindowsTile } from '@/components/patient-dashboard/dose-windows-tile'
 import { MeasureTile } from '@/components/patient-dashboard/measure-tile'
 import { Section, TileGrid } from '@/components/patient-dashboard/section'
 import { NextStepsTile } from '@/components/patient-dashboard/next-steps-tile'
-import { SnapshotTile } from '@/components/patient-dashboard/snapshot-tile'
 import { ToolTile } from '@/components/patient-dashboard/tool-tile'
 import { FirstLightScanBanner } from '@/components/patient-dashboard/first-light-scan-banner'
+import { useFirstLightDailyStatus } from '@/components/patient-dashboard/use-first-light-daily-status'
 import { LightCheckIn } from '@/components/retinomic/light-check-in'
-import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
+import { nextStepsFromSnapshotContext } from '@/lib/patient-dashboard/build-patient-next-steps'
 import type { DashboardPanelId, PatientDashboardProps } from '@/lib/patient-dashboard/types'
 import { resolvePhoticDayPhase } from '@/lib/retinomic/photic-dose'
 
@@ -21,7 +23,7 @@ type DashboardClientProps = PatientDashboardProps & {
 
 /**
  * Single patient dashboard UI — used by /dashboard, /how-it-works, and /dev/dashboard.
- * Change behaviour here (or in child components under components/patient-dashboard/), not in route pages.
+ * Lead: dose windows + First Light. Drill-down: body clock detail (Photonic Age, spectrum).
  */
 export function DashboardClient({
   greeting,
@@ -32,10 +34,35 @@ export function DashboardClient({
   feedFreshness = 'none',
   lightCheckIn = null,
   firstLightWindow = null,
+  firstLightDailyStatus: serverFirstLightDailyStatus = null,
+  confirmedDosesToday = [],
   reserveBottomNav = true,
 }: DashboardClientProps) {
   const [openPanel, setOpenPanel] = useState<DashboardPanelId | null>(null)
   const [coachDraft, setCoachDraft] = useState('')
+
+  const mergedFirstLightDaily = useFirstLightDailyStatus(serverFirstLightDailyStatus)
+  const scanActionable =
+    firstLightWindow?.scanDue === true || firstLightWindow?.outsideEntrainment === true
+
+  const displayNextSteps = useMemo(() => {
+    const serverAt = serverFirstLightDailyStatus?.completedAt ?? null
+    const mergedAt = mergedFirstLightDaily?.completedAt ?? null
+    if (!mergedFirstLightDaily || serverAt === mergedAt) {
+      return snapshot.nextSteps
+    }
+    return nextStepsFromSnapshotContext(snapshot, {
+      feedFreshness,
+      firstLightDailyStatus: mergedFirstLightDaily,
+      firstLightScanActionable: scanActionable,
+    })
+  }, [
+    feedFreshness,
+    mergedFirstLightDaily,
+    scanActionable,
+    serverFirstLightDailyStatus?.completedAt,
+    snapshot,
+  ])
 
   const togglePanel = useCallback((id: DashboardPanelId) => {
     setOpenPanel((prev) => (prev === id ? null : id))
@@ -50,30 +77,34 @@ export function DashboardClient({
     setOpenPanel('coach')
   }, [])
 
+  const explainRisk = useCallback(() => {
+    sendPrompt(
+      snapshot.chronoimmuneProfile
+        ? 'Explain my Chronoimmune indication zone and what PTH lower-third target means for my protocol.'
+        : 'Explain my metabolic risk across the body clock spectrum.'
+    )
+  }, [sendPrompt, snapshot.chronoimmuneProfile])
+
   return (
     <div className="patient-dashboard-shell relative min-h-screen" data-dashboard="patient-v2">
       <div className={reserveBottomNav ? 'relative z-10 pb-[var(--patient-nav-offset)] md:pb-0' : 'relative z-10 pb-8 md:pb-0'}>
-          <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
+        <DashboardNav greeting={greeting} fullName={fullName} avatarUrl={avatarUrl} />
 
-          <main className="dash-dashboard-main">
-          <Section label="Daily snapshot">
-            {firstLightWindow ? <FirstLightScanBanner window={firstLightWindow} /> : null}
-            <SnapshotTile
+        <main className="dash-dashboard-main">
+          <Section label="Today's script">
+            {firstLightWindow ? (
+              <FirstLightScanBanner
+                window={firstLightWindow}
+                dailyStatus={mergedFirstLightDaily}
+              />
+            ) : null}
+            <DoseWindowsTile
               snapshot={snapshot}
-              openPanel={openPanel}
-              onTogglePanel={togglePanel}
-              onExplainRisk={() =>
-                sendPrompt(
-                  snapshot.chronoimmuneProfile
-                    ? 'Explain my Chronoimmune indication zone and what PTH lower-third target means for my protocol.'
-                    : 'Explain my Metabolic Risk across the Chronosomatic Spectrum.'
-                )
-              }
+              dailyStatus={mergedFirstLightDaily}
+              confirmedDosesToday={confirmedDosesToday}
             />
             {lightCheckIn &&
-            (feedFreshness === 'stale' ||
-              feedFreshness === 'none' ||
-              feedFreshness === 'aging') ? (
+            (feedFreshness === 'stale' || feedFreshness === 'none' || feedFreshness === 'aging') ? (
               <div className="mt-3">
                 <LightCheckIn
                   phase={resolvePhoticDayPhase()}
@@ -89,10 +120,10 @@ export function DashboardClient({
           </Section>
 
           <Section label="Your next steps">
-            <NextStepsTile nextSteps={snapshot.nextSteps} onSendPrompt={sendPrompt} />
+            <NextStepsTile nextSteps={displayNextSteps} onSendPrompt={sendPrompt} />
           </Section>
 
-          <Section label="Your tools">
+          <Section label="Ask DiDi">
             <TileGrid>
               <ToolTile
                 id="coach"
@@ -117,6 +148,17 @@ export function DashboardClient({
             </TileGrid>
           </Section>
 
+          <Section label="Body clock detail">
+            <BodyClockDetailTile
+              snapshot={snapshot}
+              isOpen={openPanel === 'body-clock'}
+              onToggle={() => togglePanel('body-clock')}
+              openPanel={openPanel}
+              onTogglePanel={togglePanel}
+              onExplainRisk={explainRisk}
+            />
+          </Section>
+
           <Section label="What we measured">
             <TileGrid>
               {snapshot.measureTiles.map((tile) => (
@@ -131,9 +173,7 @@ export function DashboardClient({
               ))}
             </TileGrid>
           </Section>
-          </main>
-
-        <PitchFooter />
+        </main>
       </div>
     </div>
   )

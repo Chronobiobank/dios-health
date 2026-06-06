@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
 import { SnapshotAgeRow } from '@/components/patient-dashboard/snapshot-age-row'
-import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
 import { MOCK_PATIENT_SNAPSHOT } from '@/lib/patient-dashboard/mock-snapshot'
 import { formatBodyClockCta } from '@/lib/patient-dashboard/tile-copy'
 
@@ -157,8 +156,6 @@ export function CircadianModelView() {
           </div>
         </div>
       </main>
-
-      <PitchFooter />
     </div>
   )
 }

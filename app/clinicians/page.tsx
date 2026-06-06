@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function CliniciansPage() {
   return (
-    <MarketingShell showFooter={false}>
+    <MarketingShell>
       <CliniciansLanding />
     </MarketingShell>
   )

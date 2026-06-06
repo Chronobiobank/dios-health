@@ -3,7 +3,6 @@ import type { ReactNode } from 'react'
 
 import { PITCH_MINIMAL_TILES } from '@/lib/pitch/pitch-minimal'
 
-import { PitchFooter } from './pitch-footer'
 import { PitchMinimalTileCard } from './pitch-minimal-tile'
 
 function ScrollIndicator() {
@@ -35,10 +34,6 @@ export function PitchDeck() {
           <PitchMinimalTileCard tile={tile} />
         </PitchScreen>
       ))}
-
-      <div className="snap-start">
-        <PitchFooter />
-      </div>
     </div>
   )
 }

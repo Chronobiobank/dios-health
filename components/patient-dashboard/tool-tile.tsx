@@ -21,9 +21,9 @@ type ToolTileProps = {
 
 function coachQuickPrompts() {
   return [
-    'Reduce my Dark Years ↗',
-    'Vitamin D issue ↗',
-    'Why my clock drifts ↗',
+    'Why is my statin timed tonight? ↗',
+    'When should I take my next dose? ↗',
+    'Explain my body clock drift ↗',
   ] as const
 }
 
@@ -61,8 +61,8 @@ export function ToolTile({
       title={isCoach ? 'DiDi' : 'Medication timing'}
       subtitle={tileSubhead(
         isCoach
-          ? 'Ask about your body clock, results, and your care plan.'
-          : `${snapshot.medicationsDueTonight} meds due tonight aligned to your body clock schedule.`
+          ? 'Plain English — three sentences max. Ask about today’s dose windows.'
+          : 'Full schedule with timing rationale for each script.'
       )}
       isOpen={isOpen}
       onToggle={onToggle}
@@ -101,9 +101,12 @@ function CoachPanel({
   return (
     <div className="dash-panel-stack">
       <div className="dash-panel-body rounded-2xl border border-white/70 bg-white/60 px-3 py-2.5">
-        Hi {firstName}. Across your TipTraQ nights you fell asleep about {snapshot.clockDrift} minutes
-        after your body-clock target ({snapshot.dlmoEstimate}) — that rhythm slip contributes{' '}
-        {snapshot.chronopenicBurdenYears} years of chronopenic burden on your Photonic Age. Want to know how to close that gap?
+        Hi {firstName}. Your body clock phase is {snapshot.dlmoEstimate}
+        {snapshot.clockDrift > 0 ? ` — about ${snapshot.clockDrift} minutes drift from target` : ''}.{' '}
+        {snapshot.medicationsDueTonight > 0
+          ? `${snapshot.medicationsDueTonight} dose ${snapshot.medicationsDueTonight === 1 ? 'window is' : 'windows are'} open tonight.`
+          : 'Your dose windows are on schedule today.'}{' '}
+        Ask me to explain any timing change.
       </div>
       <div className="dash-panel-actions">
         {prompts.map((prompt) => (
@@ -127,7 +130,7 @@ function CoachPanel({
         <input
           value={draft}
           onChange={(event) => onDraftChange(event.target.value)}
-          placeholder="Ask anything about your body clock…"
+          placeholder="Ask about your dose windows…"
           className="dash-head min-w-0 flex-1 rounded-xl border border-white/75 bg-white/60 px-3 py-2.5 dash-panel-body outline-none"
         />
         <Button type="submit" size="sm" className="dios-btn-on-light h-10 min-h-0 px-4 hover:opacity-90">

@@ -18,6 +18,8 @@ export const AUTH_ROUTES = {
 
 export const PATIENT_ROUTES = {
   dashboard: '/dashboard',
+  firstLight: '/dashboard/first-light',
+  firstLightComplete: '/dashboard/first-light/complete',
   premium: '/dashboard/premium',
   coach: '/dashboard/coach',
   /** @deprecated Use {@link PATIENT_ROUTES.coach}. */

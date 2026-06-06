@@ -39,7 +39,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-brand);
+    outline: 2px solid var(--dios-focus-ring, var(--lilac-bright, #d891ef));
     outline-offset: 2px;
   }
 }

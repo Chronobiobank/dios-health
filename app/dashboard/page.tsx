@@ -16,6 +16,7 @@ import {
   resolveLiveMluxFeed,
 } from '@/lib/retinomic/live-mlux-feed'
 import { estimateMelanopicLuxCeiling, resolvePhoticDayPhase } from '@/lib/retinomic/photic-dose'
+import { resolveFirstLightDailyStatus } from '@/lib/product/first-light-daily-status'
 import { resolveFirstLightWindow } from '@/lib/product/first-light-window'
 import { createClient } from '@/lib/supabase/server'
 
@@ -39,6 +40,7 @@ export default async function PatientDashboardPage() {
     { data: latestBloodPanel },
     { data: latestTiptraqNight },
     { data: recentAhiRows },
+    { data: doseEventsToday },
   ] = await Promise.all([
     supabase.from('mlux_profiles').select('*').eq('patient_id', user.id).maybeSingle(),
     supabase
@@ -87,6 +89,12 @@ export default async function PatientDashboardPage() {
       .eq('patient_id', user.id)
       .order('report_date', { ascending: false })
       .limit(5),
+    supabase
+      .from('dose_events')
+      .select('medication_name')
+      .eq('patient_id', user.id)
+      .eq('recommended_date', new Date().toISOString().slice(0, 10))
+      .eq('confirmed', true),
   ])
 
   const now = new Date()
@@ -144,6 +152,11 @@ export default async function PatientDashboardPage() {
       .filter((v) => !Number.isNaN(v))
   )
 
+  const firstLightDailyStatus = resolveFirstLightDailyStatus(latestSmartphone ?? null, now)
+  const firstLightWindow = resolveFirstLightWindow(now)
+  const firstLightScanActionable =
+    firstLightWindow.scanDue || firstLightWindow.outsideEntrainment
+
   const snapshot = buildPatientSnapshot({
     patient,
     mluxProfile: profileRow,
@@ -158,9 +171,9 @@ export default async function PatientDashboardPage() {
     hardwareBaseline,
     feedFreshness,
     lightAlignmentOverride,
+    firstLightDailyStatus,
+    firstLightScanActionable,
   })
-
-  const firstLightWindow = resolveFirstLightWindow(now)
 
   return (
     <DashboardClient
@@ -171,6 +184,8 @@ export default async function PatientDashboardPage() {
       snapshot={snapshot}
       feedFreshness={feedFreshness}
       firstLightWindow={firstLightWindow}
+      firstLightDailyStatus={firstLightDailyStatus}
+      confirmedDosesToday={(doseEventsToday ?? []).map((row) => row.medication_name)}
       lightCheckIn={{
         fitzpatrickType: patient.fitzpatrick_type,
         defaultSleepOnset: patient.chronotype_q3 ?? '22:30',

@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, type FormEvent } from 'react'
 
+import { AuthDivider } from '@/components/auth/auth-divider'
+import { GoogleSignInButton } from '@/components/auth/google-sign-in-button'
 import { mapSignInError } from '@/lib/auth/errors'
 import { isSafeRelativePath } from '@/lib/auth/post-sign-in-redirect'
 import { resolvePatientAuthDestination } from '@/lib/auth/resolve-patient-destination'
@@ -16,8 +18,11 @@ import { cn } from '@/lib/utils'
 export function RetinomicSignInForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const authError = searchParams.get('error') === 'auth'
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(
+    authError ? 'Google sign-in could not be completed. Try again or use email.' : null
+  )
   const [showPassword, setShowPassword] = useState(false)
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -67,7 +72,12 @@ export function RetinomicSignInForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="dios-glass-outer calm-auth-form p-8">
+    <div className="dios-glass-outer calm-auth-form p-8">
+      <GoogleSignInButton />
+
+      <AuthDivider label="or sign in with email" />
+
+      <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
         <label htmlFor="email" className="calm-auth-label">
           Email
@@ -131,6 +141,7 @@ export function RetinomicSignInForm() {
           Create account
         </Link>
       </p>
-    </form>
+      </form>
+    </div>
   )
 }

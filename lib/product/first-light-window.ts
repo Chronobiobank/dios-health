@@ -17,9 +17,9 @@ export function resolveFirstLightWindow(now = new Date()): FirstLightWindowStatu
 
   let message: string
   if (isOpen) {
-    message = 'First Light window open — run your morning scan outside.'
+    message = 'First Light window open — run your 60s morning scan outside.'
   } else if (outsideEntrainment) {
-    message = `Outside today's entrainment window (before ${end}:00). Tomorrow's scan anchors your Photonic Age.`
+    message = `Outside today's entrainment window (before ${end}:00). You can still scan — timing precision is reduced.`
   } else {
     message = 'First Light window opens at civil dawn — DIOS will prompt you at sunrise.'
   }

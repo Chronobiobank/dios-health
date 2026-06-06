@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
 import { CliniciansRevealInit } from '@/components/sections/clinicians/clinicians-reveal'
-import { DiosSiteFooter } from '@/components/sections/dios-site-footer'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 import {
   CHRONOMEDICINE_CLUSTERS,
@@ -77,7 +76,7 @@ export function CliniciansLanding() {
               </article>
             ))}
           </div>
-          <div className="clinicians-landing__clusters clinicians-landing__reveal" aria-label="Chronomedicine Spectrum clusters">
+          <div className="clinicians-landing__clusters clinicians-landing__reveal" aria-label="Dose timing categories">
             {CHRONOMEDICINE_CLUSTERS.map((cluster) => (
               <div key={cluster.id} className="clinicians-landing__cluster">
                 <p className="clinicians-landing__cluster-label">{cluster.label}</p>
@@ -192,7 +191,6 @@ export function CliniciansLanding() {
         </div>
       </section>
 
-      <DiosSiteFooter />
     </div>
   )
 }

@@ -23,7 +23,7 @@ export const HOW_IT_WORKS_STEPS = HOME_STEPS
 export const HOW_IT_WORKS_DEMO = {
   label: 'See the live patient demo',
   href: MARKETING_ROUTES.howItWorksDemo,
-  detail: 'Sean James daily snapshot — Photonic Age, Chronoimmune spectrum, and next steps.',
+  detail: 'Sean James daily snapshot — body-clock timing guidance, protocol modules, and next steps.',
 } as const
 
 export const HOW_IT_WORKS_CTA = {

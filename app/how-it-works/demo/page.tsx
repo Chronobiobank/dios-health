@@ -6,7 +6,7 @@ import { MOCK_DASHBOARD_PROPS } from '@/lib/patient-dashboard/mock-snapshot'
 export const metadata: Metadata = {
   title: 'Live demo — How it works · DIOS',
   description:
-    'Sean James daily snapshot — Photonic Age vs Calendar Age, Chronoimmune indication spectrum, and personalised next steps.',
+    'Sean James daily snapshot — body-clock timing guidance, protocol modules, and personalised next steps.',
 }
 
 export default function HowItWorksDemoPage() {

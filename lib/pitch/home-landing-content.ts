@@ -30,8 +30,8 @@ export const HOME_PROBLEM = {
 export const HOME_INSIGHT = {
   eyebrow: 'Technology',
   headline: 'Dose intelligence',
-  headlineEmphasis: 'syncronised to body clocks.',
-  statement: 'Most scripts are standarised. We match the dose to suit.',
+  headlineEmphasis: 'synchronised to body clocks.',
+  statement: 'Most scripts are standardised. We match the dose to suit.',
   ctaLabel: 'Why body clocks matter',
   ctaHref: MARKETING_ROUTES.howItWorks,
 } as const
@@ -103,6 +103,11 @@ export const HOME_PROOF = {
       doi: 'https://doi.org/10.3389/fpsyt.2025.1697900',
     },
   ],
+} as const
+
+export const HOME_CTA_MEDIA = {
+  video: '/first-light.mp4',
+  poster: '/your-light-dose.jpg',
 } as const
 
 export const HOME_CTA = {

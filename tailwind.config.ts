@@ -20,6 +20,8 @@ const config: Config = {
           gold: '#C9973A',
           lilac: '#C9B8E8',
           'lilac-light': '#EDE8F7',
+          'lilac-bright': '#D891EF',
+          spot: '#D891EF',
           cream: '#FAFAF7',
           border: '#E8D5E2',
           muted: 'rgb(26 13 23 / 0.52)',

@@ -5,49 +5,48 @@
 
 import { PITCH_IMAGES } from '@/lib/pitch/landing-images'
 
-/** Tile 1 — the problem (Holick opening) */
+/** Tile 1 — the problem (med timing lead — matches home) */
 export const RETINOMIC_LANDING_HERO = {
   eyebrow: 'The problem',
-  headline: 'Over one billion people are vitamin D deficient.',
+  headline: 'Taking meds is standardised guesswork.',
   subheadline:
-    'Not because the sun changed. Because we stopped going outside. DIOS measures what modern life took from your biology and builds a protocol to restore it.',
-  detailHref: '/evidence',
-  ctaLabel: 'Clinical evidence',
-  ctaHref: '/evidence',
+    'One schedule on every label. Most bodies need another window. DIOS scans your body clock and times your protocol to suit.',
+  detailHref: '/science',
+  ctaLabel: 'Read the evidence',
+  ctaHref: '/science',
   signUpHref: '/auth/signup',
-  secondaryCtaLabel: 'How it works',
-  secondaryCtaHref: '/how-it-works',
+  secondaryCtaLabel: 'Build your profile',
+  secondaryCtaHref: '/onboarding',
 } as const
 
-/** Tile 2 — the consequence (autoimmune reclassification framing) */
+/** Tile 2 — dose intelligence (matches home insight) */
 export const RETINOMIC_LANDING_CONSEQUENCE = {
-  eyebrow: 'The consequence',
-  headline:
-    'Type 2 diabetes, psoriasis, and depression are being reclassified — as circadian immune conditions.',
+  eyebrow: 'Technology',
+  headline: 'Dose intelligence synchronised to body clocks.',
   subheadline:
-    'Your medications, immune system, sleep, and brain run on one biological clock. When light goes missing, NLRP3 inflammation amplifies on every branch. That lost time is measurable.',
+    'Most scripts are standardised. We match the dose to suit — measured from light, sleep, and labs when you need clinical depth.',
   image: PITCH_IMAGES.spectrum,
-  imageAlt: 'Biological clock — medications, immune system, sleep, and brain',
+  imageAlt: 'Dose intelligence mapped to circadian phase',
   detailHref: '/how-it-works',
-  ctaLabel: 'See the live demo',
+  ctaLabel: 'Why body clocks matter',
   ctaHref: '/how-it-works',
   secondaryCtaLabel: 'Clinical evidence',
   secondaryCtaHref: '/evidence',
 } as const
 
-/** Tile 3 — the number */
+/** Tile 3 — one app, two views (matches home audience) */
 export const RETINOMIC_LANDING_PHOTONIC_AGE = {
-  eyebrow: 'The number',
-  headline: 'Your Photonic Age.',
+  eyebrow: 'Solution',
+  headline: 'One App. Two Views.',
   subheadline:
-    'The biological age your circadian system is actually operating at. Compared to your Calendar Age. The gap between them is what DIOS closes.',
+    'Patients see today’s timing guidance. Clinicians see who needs attention this week — same data, different jobs.',
   image: PITCH_IMAGES.retinomic.howWeThink,
-  imageAlt: 'Photonic Age vs Calendar Age — chronopenic burden',
-  detailHref: '/how-it-works',
-  ctaLabel: 'Live demo',
-  ctaHref: '/how-it-works',
-  secondaryCtaLabel: 'Two ages explained',
-  secondaryCtaHref: '/circadian-digital-twin',
+  imageAlt: 'Patient timing guidance and clinician cohort triage',
+  detailHref: '/clinicians',
+  ctaLabel: 'For clinicians',
+  ctaHref: '/clinicians',
+  secondaryCtaLabel: 'Live patient demo',
+  secondaryCtaHref: '/how-it-works/demo',
 } as const
 
 /** Onboarding — continues landing narrative into product */
@@ -107,34 +106,34 @@ export const HOW_IT_WORKS_DEMO_COPY = {
   secondaryHref: '/how-it-works',
 } as const
 
-/** Tile 4 — the protocol (detail: /pitch/how-it-works, /onboarding) */
+/** Tile 4 — three steps (matches home how) */
 export const RETINOMIC_LANDING_PROTOCOL = {
-  eyebrow: 'The protocol',
-  headline: 'The First Light Protocol.',
+  eyebrow: 'How it works',
+  headline: '3 simple steps.',
   subheadline:
-    'Ninety seconds every morning at civil twilight. Your phone measures what your biology is doing with the light it receives. The Dose Intelligence OS builds your protocol from that signal.',
+    'Scan your body clock in 60 seconds. Time all meds and supplements to your clock. Track progress with exploratory metrics.',
   image: PITCH_IMAGES.steps.camera,
-  imageAlt: 'First Light Protocol — morning scan at civil twilight',
-  detailHref: '/pitch/how-it-works',
-  ctaLabel: 'How it works',
-  ctaHref: '/pitch/how-it-works',
+  imageAlt: 'Scan, time, and track — dose intelligence workflow',
+  detailHref: '/how-it-works',
+  ctaLabel: 'Full walkthrough',
+  ctaHref: '/how-it-works',
   secondaryCtaLabel: 'Start free scan',
   secondaryCtaHref: '/onboarding',
 } as const
 
-/** Tile 5 — the community (detail: /pitch/chronobiobank) */
+/** Tile 5 — get in sync (matches home CTA) */
 export const RETINOMIC_LANDING_VISION = {
-  eyebrow: 'The community',
-  headline: 'The Chronobiobank.',
+  eyebrow: 'Get started',
+  headline: 'Get in sync.',
   subheadline:
-    'Every scan contributes to the Chronobiobank — the first global longitudinal dataset of circadian phenotypes. Your biology funds research. You co-own the returns.',
+    'Patients track their clock. Clinicians enrol their cohort. Both feed the same dose intelligence OS.',
   image: '/chronobiobank.png',
-  imageAlt: 'Chronobiobank — global longitudinal circadian phenotypes',
-  detailHref: '/pitch/chronobiobank',
-  ctaLabel: 'Our vision',
-  ctaHref: '/pitch/chronobiobank',
-  secondaryCtaLabel: 'Contact us',
-  secondaryCtaHref: '/contact',
+  imageAlt: 'Patient and clinician entry to DIOS',
+  detailHref: '/onboarding',
+  ctaLabel: 'Build your profile',
+  ctaHref: '/onboarding',
+  secondaryCtaLabel: 'For clinicians',
+  secondaryCtaHref: '/clinicians',
 } as const
 
 /** Detail pages only — legacy problem narrative */
@@ -272,10 +271,8 @@ export const RETINOMIC_LANDING_EVIDENCE: readonly RetinomicFeatureCopy[] = [
 ] as const
 
 export const RETINOMIC_LANDING_META = {
-  title: 'Dose Intelligence · DIOS',
-  description:
-    'Over one billion people are vitamin D deficient. DIOS measures what modern life took from your biology and builds a protocol to restore it.',
-  openGraphTitle: 'Dose Intelligence · dios.health',
-  openGraphDescription:
-    'Not because the sun changed. Because we stopped going outside. Photonic Age, First Light Protocol, Chronobiobank.',
+  title: 'DIOS — Optimise Your Script',
+  description: 'Your medication has a biological window. DIOS finds it.',
+  openGraphTitle: 'DIOS — Optimise Your Script',
+  openGraphDescription: 'Chronotherapy made simple — scan your clock, time your meds, track progress.',
 } as const

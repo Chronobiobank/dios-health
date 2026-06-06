@@ -1,3 +1,4 @@
+import type { FirstLightDailyStatus } from '@/lib/product/first-light-daily-status'
 import type { FirstLightWindowStatus } from '@/lib/product/first-light-window'
 import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
 import type { LightCheckInConfig } from '@/lib/retinomic/light-check-in'
@@ -47,7 +48,13 @@ export type SpectrumNode = {
   action: string
 }
 
+export type EatingWindowSummary = {
+  opens: string
+  closes: string
+}
+
 export type DashboardPanelId =
+  | 'body-clock'
   | 'calibration'
   | 'coach'
   | 'meds'
@@ -179,6 +186,8 @@ export type PatientSnapshot = {
   statNotes: SnapshotStatNotes
   medications: Medication[]
   medicationsDueTonight: number
+  /** Anchored to first light / morning scan */
+  eatingWindow?: EatingWindowSummary | null
   bloodPanel: BloodPanel
   tiptraqSummary: TiptraqSummary
   measureTiles: MeasureTileData[]
@@ -197,6 +206,8 @@ export type PatientSnapshot = {
   chronotypeSource: string
   /** Chronoimmune module — when present, indication spectrum replaces metabolic risk spectrum. */
   chronoimmuneProfile?: ChronoimmuneProfile | null
+  /** Today's cohort triage — mirrors clinician view on the script hero. */
+  patientTriageStatus?: CohortTriageStatus
 }
 
 export type PatientDashboardProps = {
@@ -210,4 +221,8 @@ export type PatientDashboardProps = {
   lightCheckIn?: LightCheckInConfig | null
   /** Layer 1 First Light window status for morning scan CTA */
   firstLightWindow?: FirstLightWindowStatus | null
+  /** Today's First Light session — hides CTA when complete */
+  firstLightDailyStatus?: FirstLightDailyStatus | null
+  /** Medication names confirmed via dose_events today */
+  confirmedDosesToday?: string[]
 }

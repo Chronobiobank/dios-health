@@ -1,4 +1,6 @@
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
+import type { FirstLightDailyStatus } from '@/lib/product/first-light-daily-status'
+import { FIRST_LIGHT_PROTOCOL } from '@/lib/product/dose-intelligence-model'
 import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
 import { isElevatedSeverity } from '@/lib/patient-dashboard/dashboard-indicators'
 import {
@@ -14,6 +16,7 @@ import type {
   Medication,
   PatientNextStep,
   PatientNextSteps,
+  PatientSnapshot,
   SpectrumNode,
 } from '@/lib/patient-dashboard/types'
 
@@ -30,6 +33,9 @@ export type BuildPatientNextStepsInput = {
   recoveryYears: number
   feedFreshness?: FeedFreshness
   hasRetinomicScan?: boolean
+  firstLightDailyStatus?: FirstLightDailyStatus | null
+  /** True when entrainment window is open or past — skip before civil dawn */
+  firstLightScanActionable?: boolean
 }
 
 const MAX_STEPS = 5
@@ -48,9 +54,31 @@ function apnoeaNode(nodes: SpectrumNode[]): SpectrumNode | undefined {
 }
 
 export function buildNextStepsSummary(input: BuildPatientNextStepsInput): string {
+  const daily = input.firstLightDailyStatus
   const apnoea = apnoeaNode(input.spectrumNodes)
   const nights = input.tipTraqNightsCount
   const curfew = rightSleepLightCurfew(input.dlmoEstimate)
+
+  if (daily?.completeToday && daily.riskStatus === 'amber') {
+    const missed =
+      daily.missedCheckpoints.length > 0
+        ? daily.missedCheckpoints.join(', ')
+        : 'one or more safety checkpoints'
+    return `Morning scan recorded — finish ${missed} before tonight's dose windows. Your clinician sees amber triage until checkpoints clear.`
+  }
+
+  if (daily?.completeToday && input.medicationsDueTonight > 0) {
+    const tonight = input.medications.filter((m) => m.status === 'tonight')
+    const medLine =
+      tonight.length > 0
+        ? tonight.map((m) => `${m.name} at ${m.time}`).join(' · ')
+        : 'evening doses in your script below'
+    return `First Light anchored today — hold tonight's windows (${medLine}) and keep your eating window through close.`
+  }
+
+  if (daily?.completeToday) {
+    return `Morning scan complete — dose windows updated from today's first-light anchor. Hold evening curfew (${curfew}) for tomorrow's scan.`
+  }
 
   if (nights >= 5 && apnoea && isElevatedSeverity(apnoea.severity)) {
     return `Your TipTraQ block shows sleep apnoea and clock slip — keep tonight's curfew (${curfew}), add GP review, and finish your baseline blood panel.`
@@ -77,9 +105,32 @@ export function buildNextStepsSummary(input: BuildPatientNextStepsInput): string
 
 export function buildPatientNextSteps(input: BuildPatientNextStepsInput): PatientNextStep[] {
   const steps: PatientNextStep[] = []
+  const daily = input.firstLightDailyStatus
   const apnoea = apnoeaNode(input.spectrumNodes)
   const curfew = rightSleepLightCurfew(input.dlmoEstimate)
   const morningLight = rightSleepMorningLight(input.dlmoEstimate)
+
+  if (!daily?.completeToday && input.firstLightScanActionable !== false) {
+    steps.push({
+      id: 'first-light-scan',
+      priority: 'tonight',
+      title: `Run ${FIRST_LIGHT_PROTOCOL.name} scan`,
+      detail:
+        'Your dose windows anchor at first light — complete the 60s morning scan before 9am for tonight\'s script timing.',
+      href: PATIENT_ROUTES.firstLight,
+    })
+  } else if (daily?.completeToday && daily.riskStatus === 'amber') {
+    steps.push({
+      id: 'first-light-safety',
+      priority: 'tonight',
+      title: 'Complete safety checkpoints',
+      detail:
+        daily.missedCheckpoints.length > 0
+          ? `Still open: ${daily.missedCheckpoints.join(' · ')}. Cohort stays amber until all three are confirmed.`
+          : 'Confirm fluid intake, low-calcium diet, and activity before tonight\'s dose windows.',
+      href: PATIENT_ROUTES.firstLight,
+    })
+  }
 
   if (input.feedFreshness === 'stale' || input.feedFreshness === 'none' || input.feedFreshness === 'aging') {
     steps.push({
@@ -172,6 +223,7 @@ export function buildPatientNextSteps(input: BuildPatientNextStepsInput): Patien
 
   if (
     steps.length < MAX_STEPS &&
+    !daily?.completeToday &&
     (input.clockDrift >= 30 || input.bloodPanel.collectedAt) &&
     !steps.some((s) => s.id === 'right-sleep-morning-light')
   ) {
@@ -232,4 +284,27 @@ export function buildPatientNextStepsBlock(input: BuildPatientNextStepsInput): P
     summary: buildNextStepsSummary(input),
     steps: buildPatientNextSteps(input),
   }
+}
+
+/** Rebuild next steps when client-side First Light status differs from the server snapshot. */
+export function nextStepsFromSnapshotContext(
+  snapshot: PatientSnapshot,
+  overrides: Partial<BuildPatientNextStepsInput> = {}
+): PatientNextSteps {
+  const tiptraq = snapshot.measureTiles.find((t) => t.id === 'tiptraq')
+  const hasTipTraq = Boolean(tiptraq && tiptraq.badge !== 'Pending' && tiptraq.value !== '—')
+  return buildPatientNextStepsBlock({
+    medicationsDueTonight: snapshot.medicationsDueTonight,
+    medications: snapshot.medications,
+    clockDrift: snapshot.clockDrift,
+    dlmoEstimate: snapshot.dlmoEstimate,
+    bloodPanel: snapshot.bloodPanel,
+    completenessGaps: snapshot.completenessGaps,
+    spectrumNodes: snapshot.spectrumNodes,
+    tipTraqNightsCount: hasTipTraq ? 5 : 0,
+    hasTipTraq,
+    recoveryYears: snapshot.recoveryYears,
+    hasRetinomicScan: snapshot.retinomicBaseline != null,
+    ...overrides,
+  })
 }

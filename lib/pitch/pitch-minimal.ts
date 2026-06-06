@@ -129,26 +129,26 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     imageAlt: 'Outdoor light — vitamin D deficiency and modern indoor life',
     sections: [
       {
-        title: 'Holick in three sentences',
-        body: 'Global vitamin D deficiency affects over one billion people — not because the sun changed but because modern indoor life eliminated the primary evolutionary source of D3 synthesis. Holick\'s 2007 NEJM paper established this as a pandemic. DIOS measures what modern life took from your biology and builds a protocol to restore it.',
+        title: 'Standardised guesswork',
+        body: 'Medicine optimises what to take and how much — but rarely when. Morning statins, meal-linked metformin, and bedtime rules only where a trial forced the question. Most bodies need another window.',
       },
       {
-        title: 'From deficit to protocol',
-        body: 'The First Light Protocol addresses the deficit directly — morning outdoor exposure at civil twilight activates melanopsin-driven circadian entrainment and cutaneous UVB D3 precursor synthesis simultaneously. One ritual. Two biological mechanisms. Both measured.',
+        title: 'Biology beats the label',
+        body: 'Delayed sleep phase, shift work, and seasonal light change how drugs are absorbed and tolerated. The same script at the wrong biological moment drives non-adherence, switches, and avoidable harm.',
         bullets: [
-          'D3 status via the Gominak blood panel when indicated',
-          'Circadian amplitude via the First Light MLux score',
-          'Sleep architecture as downstream outcome via TipTraQ',
+          'Hermida — 45% fewer cardiovascular events when timing matched biology',
+          'Pigazzani — chronotype modulates antihypertensive response',
+          'UK Biobank — light–dark rhythm predicts metabolic and cardiovascular risk',
         ],
       },
       {
         title: 'Built for shared decisions',
-        body: 'Output is clinician-ready: Photonic Age, eating window, and protocol timing your GP or specialist can act on — not another adherence pamphlet.',
+        body: 'Output is clinician-ready: personal dose windows, adherence context, and timing evidence your GP or specialist can act on — not another pamphlet.',
       },
     ],
     sources: [
-      { label: 'Holick NEJM 2007', href: 'https://www.nejm.org/doi/full/10.1056/NEJMra070553' },
-      { label: 'Clinical evidence library', href: '/evidence' },
+      { label: 'Peer-reviewed library', href: '/science' },
+      { label: 'Clinical validation framework', href: '/evidence' },
       { label: 'Live demo dashboard', href: '/how-it-works/demo' },
     ],
   },

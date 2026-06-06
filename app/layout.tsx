@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 
 import { Nav } from '@/components/sections/Nav'
+import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
 import { ScrollToHash } from '@/components/sections/ScrollToHash'
 import { geistSans, siteFontVariableClasses } from '@/lib/fonts/site-fonts'
 
@@ -13,7 +14,7 @@ const siteUrl = process.env.VERCEL_URL
 export const metadata: Metadata = {
   title: 'Dose Intelligence · DIOS',
   description:
-    'From standard dose to dose intelligence. Light, eye, blood, and sleep tailored to your biology.',
+    'Your medication has a biological window. DIOS finds it — chronotherapy made simple for patients and clinicians.',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Dose Intelligence · dios.health',
     description:
-      'No one size. All tailored to fit. Free baseline scan — or explore the clinical evidence.',
+      'Optimise your script. Scan your body clock, time your meds, and track progress with dose intelligence.',
     type: 'website',
     url: siteUrl,
   },
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Dose Intelligence · dios.health',
     description:
-      'From standard dose to dose intelligence. Free baseline scan.',
+      'Your medication has a biological window. DIOS finds it.',
   },
 }
 
@@ -57,7 +58,10 @@ export default function RootLayout({
       <body className={`${geistSans.className} flex min-h-full flex-col bg-[#f7fafc]`}>
         <ScrollToHash />
         <Nav />
-        <div className="dios-app-shell relative z-10 flex min-h-full flex-1 flex-col">{children}</div>
+        <div className="dios-app-shell relative z-10 flex min-h-full flex-1 flex-col">
+          <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+          <PitchFooter />
+        </div>
       </body>
     </html>
   )

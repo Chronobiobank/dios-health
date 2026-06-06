@@ -1,8 +1,10 @@
 'use client'
 
+import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
-import { OAUTH_CALLBACK_URL } from '@/lib/auth/oauth'
+import { isSafeRelativePath } from '@/lib/auth/post-sign-in-redirect'
+import { resolveOAuthCallbackUrl } from '@/lib/auth/oauth'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 
@@ -34,6 +36,7 @@ function GoogleIcon() {
 }
 
 export function GoogleSignInButton({ className }: GoogleSignInButtonProps) {
+  const searchParams = useSearchParams()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -42,10 +45,16 @@ export function GoogleSignInButton({ className }: GoogleSignInButtonProps) {
     setError(null)
 
     const supabase = createClient()
+    const next = searchParams.get('next')
+    const callbackBase = resolveOAuthCallbackUrl(window.location.origin)
+    const redirectTo =
+      next && isSafeRelativePath(next)
+        ? `${callbackBase}?next=${encodeURIComponent(next)}`
+        : callbackBase
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: OAUTH_CALLBACK_URL,
+        redirectTo,
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',
