@@ -47,8 +47,7 @@ export const HOME_AUDIENCE = {
     line: 'Who needs attention this week?',
     href: MARKETING_ROUTES.clinicians,
   },
-  equity:
-    'Built for shift workers, carers managing meds, and anyone without a fixed routine — large type, simple steps, and no assumption that one schedule fits all.',
+  equity: 'Built for shift workers, carers managing meds, and anyone without a fixed routine.',
 } as const
 
 export const HOME_STEPS = {
