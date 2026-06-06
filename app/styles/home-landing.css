@@ -154,6 +154,13 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 .home-landing__idea--bronze {
   background: var(--hl-bronze);
   color: var(--hl-ink);
+  justify-content: flex-start;
+  padding-block: calc(2rem + var(--dios-site-nav-height, 48px)) 2rem;
+}
+
+.home-landing__idea--bronze .home-landing__title {
+  font-size: var(--text-heading-section);
+  margin-bottom: 1.25rem;
 }
 
 .home-landing__inner {
@@ -383,6 +390,8 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 
 .home-landing__idea--bronze .home-landing__step {
   border-bottom-color: rgb(0 0 0 / 0.12);
+  gap: 1rem;
+  padding: 0.5rem 0;
 }
 
 .home-landing__idea--bronze .home-landing__step-n {
@@ -393,12 +402,16 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
   color: var(--hl-ink);
 }
 
+.home-landing__idea--bronze .home-landing__proof-actions {
+  margin-top: 1rem;
+}
+
 .home-landing__steps-disclaimer {
   color: var(--hl-ink-2);
   font-size: var(--text-caption-size);
   font-weight: 400;
   line-height: 1.55;
-  margin: 1.25rem 0 0;
+  margin: 0.75rem 0 0;
   max-width: 36ch;
 }
 

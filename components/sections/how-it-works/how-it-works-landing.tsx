@@ -42,9 +42,7 @@ export function HowItWorksLanding() {
       <section className="home-landing__idea home-landing__idea--muted" id="how">
         <div className="home-landing__inner">
           <h2 className="home-landing__title home-landing__reveal">
-            {HOW_IT_WORKS_STEPS.headline[0]}
-            <br />
-            {HOW_IT_WORKS_STEPS.headline[1]}
+            {HOW_IT_WORKS_STEPS.headline}
           </h2>
           <div className="home-landing__steps home-landing__reveal">
             {HOW_IT_WORKS_STEPS.steps.map((step) => (

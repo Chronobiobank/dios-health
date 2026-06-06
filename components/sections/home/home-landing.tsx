@@ -102,11 +102,9 @@ export function HomeLanding() {
       <section className="home-landing__idea home-landing__idea--bronze" id="how">
         <div className="home-landing__inner">
           <h2 className="home-landing__title home-landing__title--on-bronze">
-            {HOME_STEPS.headline[0]}
-            <br />
-            {HOME_STEPS.headline[1]}
+            {HOME_STEPS.headline}
           </h2>
-          <div className="home-landing__steps home-landing__reveal">
+          <div className="home-landing__steps">
             {HOME_STEPS.steps.map((step) => (
               <div key={step.n} className="home-landing__step">
                 <span className="home-landing__step-n">{step.n}</span>
@@ -114,7 +112,7 @@ export function HomeLanding() {
               </div>
             ))}
           </div>
-          <div className="home-landing__proof-actions home-landing__reveal">
+          <div className="home-landing__proof-actions">
             <Link
               className="home-landing__btn-solid home-landing__btn-solid--block"
               href={HOME_STEPS.walkthroughCta.href}
