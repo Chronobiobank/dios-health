@@ -38,14 +38,14 @@ export default function SciencePage() {
           {HOME_PROOF.cards.map((card) => (
             <article
               key={card.ref}
-              className="rounded border border-black/10 border-l-[3px] border-l-[#1b3d5f] bg-[#f8f6f1] p-4"
+              className="rounded border border-black/10 border-l-[3px] border-l-dios-aubergine-mid bg-[#f8f6f1] p-4"
             >
               <p className="font-mono text-[10px] tracking-wide text-black/30">{card.ref}</p>
               <p className="mt-1 text-sm font-light leading-relaxed text-[#383b40]">
                 <ProofFinding text={card.finding} emphasis={card.emphasis} />
               </p>
               <a
-                className="mt-2 inline-block font-mono text-[10px] text-[#1b3d5f] opacity-70"
+                className="mt-2 inline-block font-mono text-[10px] text-dios-ink opacity-70"
                 href={card.doi}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -56,7 +56,7 @@ export default function SciencePage() {
           ))}
         </div>
         <p className="mt-8 font-mono text-xs">
-          <Link href="/evidence" className="text-[#1b3d5f]">
+          <Link href="/evidence" className="text-dios-ink">
             Extended clinical validation framework ↗
           </Link>
         </p>

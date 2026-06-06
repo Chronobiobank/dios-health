@@ -124,16 +124,10 @@ export function HomeLanding() {
         </div>
       </section>
 
-      <section className="home-landing__idea dios-surface-accent" data-nav-surface="dark" id="cta">
+      <section className="home-landing__idea home-landing__idea--paper home-landing__idea--cta" id="cta">
         <div className="home-landing__inner">
-          <h2 className="home-landing__title home-landing__reveal dios-on-dark-title">
-            <em>
-              {HOME_CTA.headline[0]}
-              <br />
-              {HOME_CTA.headline[1]}
-            </em>
-          </h2>
-          <div className="home-landing__cta-cards home-landing__reveal">
+          <h2 className="type-hero home-landing__title home-landing__title--one-line">{HOME_CTA.headline}</h2>
+          <div className="home-landing__cta-cards">
             <Link className="home-landing__cta-card" href={HOME_CTA.patient.href}>
               <div className="home-landing__cta-top dios-dark-block dios-dark-block--solution">
                 <p className="dios-on-dark-eyebrow dios-on-dark-eyebrow--accent">{HOME_CTA.patient.who}</p>

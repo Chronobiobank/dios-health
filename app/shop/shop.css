@@ -52,7 +52,7 @@
 
 .shop-checkout-btn {
   border-radius: 999px;
-  background: #0d0d0d;
+  background: var(--dios-surface-btn, var(--aubergine-dark));
   color: white;
   padding: 0.75rem 1.25rem;
   font-size: 0.875rem;
@@ -88,7 +88,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #0d0d0d;
+  color: var(--text-primary);
   background: white;
   transition: background 0.15s ease;
 }

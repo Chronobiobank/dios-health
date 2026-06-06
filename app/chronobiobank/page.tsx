@@ -60,7 +60,7 @@ export default function ChronobiobankPage() {
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/onboarding"
-            className="rounded bg-[#0f1012] px-5 py-3 text-center font-mono text-xs tracking-wide text-[#f8f6f1]"
+            className="rounded bg-dios-aubergine px-5 py-3 text-center font-mono text-xs tracking-wide text-white"
           >
             Start as patient
           </Link>

@@ -1,7 +1,7 @@
 /* Clinician triage shell — ultra-clean minimalist SPA layout */
 
 .ct-shell {
-  --ct-ink: #0f1012;
+  --ct-ink: var(--aubergine-dark, #3b1f35);
   --ct-muted: #6b7280;
   --ct-faint: #9ca3af;
   --ct-paper: #faf9f7;
@@ -10,7 +10,7 @@
   --ct-green: #1d9e75;
   --ct-amber: #ba7517;
   --ct-red: #a32d2d;
-  --ct-accent: #1b3d5f;
+  --ct-accent: var(--aubergine-mid, #5c3050);
   --ct-mono: var(--font-geist-mono, ui-monospace, monospace);
   --ct-sans: var(--font-geist-sans, system-ui, sans-serif);
   background: var(--ct-paper);

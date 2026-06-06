@@ -547,7 +547,7 @@ button.dios-btn-on-dark {
   font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
   font-weight: 500;
   line-height: 1;
-  color: #080808;
+  color: var(--text-primary);
   text-decoration: none;
   transition: opacity 0.2s ease;
 }

@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       'Measure your Melanopic Lux. Get your personalised dose intelligence — light, meds, and timing.',
     start_url: '/dashboard/coach',
     display: 'standalone',
-    background_color: '#000000',
-    theme_color: '#000000',
+    background_color: '#1A0D17',
+    theme_color: '#1A0D17',
     orientation: 'portrait',
     icons: [
       {

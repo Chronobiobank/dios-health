@@ -71,12 +71,15 @@
   --tracking-tight: -0.02em;
   --tracking-tighter: -0.03em;
 
-  --text-primary: #0d0d0d;
+  /* Ink — rich near-black (legible on light surfaces; not coloured type) */
+  --text-primary: var(--aubergine-very-dark, #1a0d17);
   --dios-outline-btn-border: var(--text-primary);
-  --text-secondary: rgb(13 13 13 / 0.7);
-  --text-muted: rgb(13 13 13 / 0.5);
-  --text-faint: rgb(13 13 13 / 0.4);
-  --text-hint: rgb(13 13 13 / 0.45);
+  --text-secondary: rgb(26 13 23 / 0.72);
+  --text-muted: rgb(26 13 23 / 0.52);
+  --text-faint: rgb(26 13 23 / 0.4);
+  --text-hint: rgb(26 13 23 / 0.45);
+  --text-on-dark: #fff;
+  --text-on-dark-muted: rgb(255 255 255 / 0.72);
 
   /* Researcher profile cards */
   --researcher-card-bg: #ffffff;
@@ -85,20 +88,31 @@
   --researcher-avatar-text: #115e59;
   --researcher-relevance: #115e59;
 
-  /* DIOS palette */
-  --aubergine: #3B1F35;
-  --aubergine-mid: #5C3050;
-  --aubergine-light: #E8D5E2;
+  /* Aubergine palette — light · medium · dark · very dark (replaces navy/black surfaces) */
+  --aubergine-very-dark: #1a0d17;
+  --aubergine-dark: #3b1f35;
+  --aubergine-mid: #5c3050;
+  --aubergine-light: #e8d5e2;
+  --aubergine: var(--aubergine-dark);
+  --dios-aubergine-very-dark: var(--aubergine-very-dark);
+  --dios-aubergine: var(--aubergine-dark);
+  --dios-aubergine-mid: var(--aubergine-mid);
+  --dios-aubergine-light: var(--aubergine-light);
+  --dios-dark-bg: var(--aubergine-very-dark);
+  --dios-ink-bg: var(--aubergine-dark);
+  --dios-accent-bg: var(--aubergine-mid);
+  --dios-surface-ink: var(--aubergine-dark);
+  --dios-surface-accent: var(--aubergine-mid);
   --lilac: #C9B8E8;
   --lilac-light: #EDE8F7;
   --gold: #C9973A;
   --gold-light: #F0D9A8;
 
   /* Calm UI (see app/styles/calm-ui.css) */
-  --calm-bg: #080808;
-  --calm-surface: #0f0f0f;
+  --calm-bg: var(--aubergine-very-dark);
+  --calm-surface: var(--aubergine-dark);
   --calm-brand: #c9973a;
-  --calm-risk: #1a365d;
+  --calm-risk: var(--aubergine-mid);
   --calm-optimal: #ed8936;
   --calm-critical: #d53f8c;
   --calm-radius-card: 1.25rem;
@@ -106,13 +120,14 @@
   --cream: #FAFAF7;
   --cream-100: #F3F3EE;
 
-  /* Semantic */
-  --color-bg: #FAFAF7;
-  --color-surface: #F5EFF3;
-  --color-border: #E8D5E2;
-  --color-text: #1A0D17;
-  --color-text-muted: #5C3050;
-  --color-accent: #C9973A;
+  /* Semantic — surfaces & borders use aubergine; copy uses ink/grey/white only */
+  --color-bg: var(--cream, #fafaf7);
+  --color-surface: #f5eff3;
+  --color-border: var(--aubergine-light);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--gold);
+  --dios-surface-btn: var(--aubergine-dark);
 
   /* Layout */
   --nav-logo-mark-h: 24px;
@@ -214,6 +229,17 @@
   --radius-3xl: 0.625rem;
   --radius-4xl: 0.75rem;
   --animate-dios-marquee: dios-marquee 35s linear infinite;
+  --color-dios-aubergine-very-dark: var(--aubergine-very-dark);
+  --color-dios-aubergine: var(--aubergine-dark);
+  --color-dios-aubergine-mid: var(--aubergine-mid);
+  --color-dios-aubergine-light: var(--aubergine-light);
+  --color-dios-gold: var(--gold);
+  --color-dios-lilac: var(--lilac);
+  --color-dios-lilac-light: var(--lilac-light);
+  --color-dios-cream: var(--cream);
+  --color-dios-border: var(--color-border);
+  --color-dios-muted: var(--text-muted);
+  --color-dios-ink: var(--text-primary);
 }
 
 .dark {
@@ -628,28 +654,28 @@
       color 0.2s ease;
   }
 
-  /* Default — black logo and controls on light / pastel backgrounds */
+  /* Default — ink logo and controls on light / pastel backgrounds */
   .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__wordmark {
-    color: #0d0d0d;
+    color: var(--text-primary);
   }
 
   .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__menu-trigger {
-    color: #0d0d0d;
+    color: var(--text-primary);
   }
 
   .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__ask-dios {
-    color: #fafaf7;
-    border-color: var(--text-primary);
-    background: var(--text-primary);
+    color: var(--text-on-dark);
+    border-color: var(--dios-surface-btn);
+    background: var(--dios-surface-btn);
   }
 
   .dios-site-nav:not(.dios-site-nav--on-dark) .dios-site-nav__cta {
-    background: #0d0d0d;
-    color: #fff;
+    background: var(--dios-surface-btn);
+    color: var(--text-on-dark);
   }
 
   .dios-site-nav--on-dark {
-    --dios-site-nav-bg: rgb(8 8 8 / 0.22);
+    --dios-site-nav-bg: rgb(26 13 23 / 0.22);
     --dios-site-nav-border: rgb(255 255 255 / 0.1);
   }
 
@@ -678,7 +704,7 @@
 
   .dios-site-nav--on-dark .dios-site-nav__cta {
     background: #fff;
-    color: #0d0d0d;
+    color: var(--text-primary);
   }
 
   .dios-site-nav--on-dark .dios-site-nav__cta:hover {
@@ -744,7 +770,7 @@
     flex-shrink: 0;
     font-size: 1.375rem;
     line-height: 1;
-    color: #0d0d0d;
+    color: var(--text-primary);
     display: inline-flex;
     align-items: center;
   }
@@ -793,18 +819,18 @@
     justify-content: center;
     white-space: nowrap;
     border-radius: 9999px;
-    background: #0d0d0d;
+    background: var(--dios-surface-btn);
     padding-inline: var(--dios-btn-padding-inline-compact);
     font-size: var(--text-nav-size);
     font-weight: 500;
     line-height: 1;
-    color: #fff;
+    color: var(--text-on-dark);
     text-decoration: none;
     transition: background-color 0.15s ease;
   }
 
   .dios-site-nav__cta:hover {
-    background: rgb(13 13 13 / 0.85);
+    background: color-mix(in srgb, var(--dios-surface-btn) 88%, #000);
   }
 
   .dios-site-nav__ask-dios {
@@ -892,14 +918,14 @@
     font-size: var(--text-nav-size);
     font-weight: 500;
     line-height: 1;
-    color: #0d0d0d;
+    color: var(--text-primary);
     cursor: pointer;
     transition: background-color 0.15s ease, border-color 0.15s ease;
   }
 
   .dios-site-nav__sign-out-btn:hover:not(:disabled) {
-    background: rgb(13 13 13 / 0.05);
-    border-color: rgb(13 13 13 / 0.25);
+    background: rgb(26 13 23 / 0.05);
+    border-color: rgb(26 13 23 / 0.25);
   }
 
   .dios-site-nav__sign-out-btn:disabled {
@@ -929,13 +955,13 @@
     border-radius: 9999px;
     border: none;
     background: transparent;
-    color: #0d0d0d;
+    color: var(--text-primary);
     cursor: pointer;
     transition: background-color 0.15s ease;
   }
 
   .dios-site-nav__menu-trigger:hover {
-    background: rgb(13 13 13 / 0.05);
+    background: rgb(26 13 23 / 0.05);
   }
 
   @media (min-width: 640px) {
@@ -1033,8 +1059,8 @@
   }
 
   .dios-page-actions__icon-btn:hover {
-    background: rgb(13 13 13 / 0.05);
-    color: #0d0d0d;
+    background: rgb(26 13 23 / 0.05);
+    color: var(--text-primary);
   }
 
   /* DIʘS Timebot — clinical sonar pulse */
@@ -1357,7 +1383,16 @@
 /* Scrollable marketing pages (contact, etc.) — dark copy on light cards; overrides
    calmer base `p { color: var(--color-text-primary) }` in prefers-color-scheme: dark */
 .calm-landing .marketing-detail {
-  color: #0d0d0d;
+  color: var(--text-primary);
+}
+
+/* Marketing — ink-only type on light surfaces (no coloured text utilities) */
+.calm-landing :is(.text-dios-aubergine, .text-dios-aubergine-mid) {
+  color: var(--text-primary);
+}
+
+.calm-landing .text-dios-muted {
+  color: var(--text-muted);
 }
 
 .calm-landing .marketing-detail :where(p, li, span, h1, h2, h3, h4) {

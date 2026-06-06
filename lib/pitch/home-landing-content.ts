@@ -104,11 +104,11 @@ export const HOME_PROOF = {
 } as const
 
 export const HOME_CTA = {
-  headline: ['Optimise', 'your script.'] as const,
+  headline: 'Get in sync.',
   patient: {
     who: 'Patient',
     line: 'Track your clock',
-    detail: 'Evaluation cohort — no patient charge',
+    detail: 'Free evaluation cohort',
     href: MARKETING_ROUTES.onboarding,
   },
   clinician: {

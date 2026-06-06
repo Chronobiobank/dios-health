@@ -1,10 +1,10 @@
 /* Calm UI — DIOS dark landing & clinical spectrum tokens */
 
 :root {
-  --calm-bg: #080808;
-  --calm-surface: #0f0f0f;
+  --calm-bg: var(--aubergine-very-dark, #1a0d17);
+  --calm-surface: var(--aubergine-dark, #3b1f35);
   --calm-brand: #c9973a;
-  --calm-risk: #1a365d;
+  --calm-risk: var(--aubergine-mid, #5c3050);
   --calm-optimal: #ed8936;
   --calm-critical: #d53f8c;
   /* Pitch landing — single spot family (clinical views may still use risk/critical) */
@@ -78,7 +78,7 @@ body:has(.calm-landing) {
     var(--pitch-screen-gap) + var(--dios-site-nav-height) + env(safe-area-inset-bottom, 0px)
   );
   background-color: transparent;
-  color: #0d0d0d;
+  color: var(--text-primary);
 }
 
 .calm-landing .pitch-deck {

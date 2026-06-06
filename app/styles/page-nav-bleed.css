@@ -21,12 +21,12 @@
 }
 
 .dios-nav-tone-accent {
-  --dios-nav-tone-bg: #1b3d5f;
+  --dios-nav-tone-bg: var(--aubergine-mid, #5c3050);
   background-color: var(--dios-nav-tone-bg);
 }
 
 .dios-nav-tone-ink {
-  --dios-nav-tone-bg: #0f1012;
+  --dios-nav-tone-bg: var(--aubergine-dark, #3b1f35);
   background-color: var(--dios-nav-tone-bg);
 }
 
@@ -53,11 +53,11 @@ body:has(.dios-nav-tone-canvas) {
 }
 
 body:has(.dios-nav-tone-accent) {
-  background-color: #1b3d5f;
+  background-color: var(--aubergine-mid, #5c3050);
 }
 
 body:has(.dios-nav-tone-ink) {
-  background-color: #0f1012;
+  background-color: var(--aubergine-dark, #3b1f35);
 }
 
 body:has(.dios-nav-tone-paper) .dios-site-nav:not(.dios-site-nav--on-dark),

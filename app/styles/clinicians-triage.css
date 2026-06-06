@@ -9,7 +9,7 @@
   --ct-modulator: #ba7517;
   --ct-opportunist: #d85a30;
   --ct-restorer: #a32d2d;
-  --ct-ink: #0f1012;
+  --ct-ink: var(--aubergine-dark, #3b1f35);
   --ct-muted: #6b7280;
   --ct-paper: #f8f6f1;
   --ct-border: rgb(0 0 0 / 0.08);
@@ -99,7 +99,7 @@
 }
 
 .clinicians-triage__badge-premium {
-  color: #1b3d5f;
+  color: var(--text-muted);
   font-family: var(--ct-mono);
   font-size: 0.5625rem;
   letter-spacing: 0.03em;

@@ -7,12 +7,12 @@
  * Card feet:    .dios-on-dark-foot
  * Contrast:     .dios-on-dark-stack → .dios-on-dark-panel + .dios-on-dark-panel--solution
  *
- * Block/solution tokens auto-shift on blue (.dios-surface-accent) so boxes stay visible.
+ * Block/solution tokens auto-shift on accent (.dios-surface-accent) so boxes stay visible.
  */
 
 :root {
-  --dios-surface-ink: #0f1012;
-  --dios-surface-accent: #1b3d5f;
+  --dios-surface-ink: var(--aubergine-dark, #3b1f35);
+  --dios-surface-accent: var(--aubergine-mid, #5c3050);
   --dios-surface-green: #1d9e75;
   --dios-surface-gold: #c8963e;
 
@@ -57,7 +57,7 @@
 
 .dios-surface-accent {
   background-color: var(--dios-surface-accent);
-  /* On blue: solution = gold, problem = frost, ink = black */
+  /* On accent: solution = gold, problem = frost, ink = very dark */
   --dios-block-problem-bg: rgb(255 255 255 / 0.12);
   --dios-block-problem-border: rgb(255 255 255 / 0.18);
   --dios-block-solution-bg: rgb(200 150 62 / 0.44);
@@ -318,6 +318,7 @@
   display: grid;
   gap: 1.5rem 1.25rem;
   grid-template-columns: 1fr;
+  width: 100%;
 }
 
 .dios-site-footer__col .dios-on-dark-eyebrow {
@@ -353,9 +354,9 @@
   letter-spacing: 0.04em;
 }
 
-@media (min-width: 42.5rem) {
+@media (min-width: 40rem) {
   .dios-site-footer {
-    padding-inline: 3.5rem;
+    padding-inline: 2rem;
   }
 
   .dios-site-footer__inner {
@@ -363,6 +364,42 @@
   }
 
   .dios-site-footer__nav {
+    gap: 1.5rem 2rem;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 48rem) {
+  .dios-site-footer {
+    padding-inline: 3.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .dios-site-footer__inner {
+    align-items: start;
+    display: grid;
+    gap: 2rem 3rem;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.95fr);
+    grid-template-rows: auto auto;
+  }
+
+  .dios-site-footer__brand-block {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .dios-site-footer__nav {
+    align-self: start;
+    gap: 1.25rem 2.5rem;
+    grid-column: 2;
+    grid-row: 1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: start;
+  }
+
+  .dios-site-footer__bottom {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 }

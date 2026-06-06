@@ -1,16 +1,19 @@
 /* Home landing — stripped mobile-first, one idea per screen */
 
 .home-landing {
-  --hl-ink: #0f1012;
-  --hl-ink-2: #383b40;
-  --hl-ink-3: #6b7280;
+  /* Light-section copy — black & grey only (aubergine reserved for surfaces) */
+  --hl-ink: var(--text-primary, #0d0d0d);
+  --hl-ink-2: var(--text-secondary, rgb(13 13 13 / 0.7));
+  --hl-ink-3: var(--text-muted, rgb(13 13 13 / 0.5));
+  --hl-btn-bg: var(--aubergine-dark, #3b1f35);
   --hl-paper: #f8f6f1;
   --hl-paper-2: #edeae3;
-  /* Brand trio — bronze · dark blue · dark green */
+  /* Brand trio — bronze · aubergine mid · green */
   --hl-bronze: #b8872e;
-  --hl-blue: #1b3d5f;
+  --hl-aubergine: var(--aubergine-mid, #5c3050);
+  --hl-blue: var(--hl-aubergine);
   --hl-green: #1d9e75;
-  --hl-accent: var(--hl-blue);
+  --hl-accent: var(--aubergine-mid, #5c3050);
   --hl-gold: var(--hl-bronze);
   --hl-serif: var(--font-instrument-serif, Georgia, serif);
   --hl-sans: var(--font-geist-sans, system-ui, sans-serif);
@@ -91,8 +94,8 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 
 .home-landing__hero-video--static {
   background:
-    linear-gradient(145deg, rgb(15 16 18 / 0.92), rgb(27 61 95 / 0.88)),
-    var(--hl-accent);
+    linear-gradient(145deg, rgb(26 13 23 / 0.88), rgb(59 31 53 / 0.92)),
+    var(--aubergine-mid, #5c3050);
 }
 
 .home-landing__hero-scrim {
@@ -130,7 +133,6 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 }
 
 .home-landing__hero-tagline em {
-  color: var(--hl-gold);
   font-style: italic;
 }
 
@@ -172,7 +174,7 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 /* Section 1 — problem */
 .home-landing__kicker {
   animation: home-landing-up 0.5s 0.1s forwards;
-  color: var(--hl-gold);
+  color: var(--hl-ink-3);
   font-family: var(--hl-mono);
   font-size: var(--text-eyebrow-size);
   letter-spacing: 0.22em;
@@ -192,7 +194,7 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 }
 
 .home-landing__hero-title em {
-  color: var(--hl-gold);
+  color: var(--hl-ink);
   font-style: italic;
 }
 
@@ -224,8 +226,8 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 }
 
 .home-landing__btn-solid {
-  background: var(--hl-ink);
-  color: var(--hl-paper);
+  background: var(--hl-btn-bg);
+  color: #fff;
   font-weight: 500;
 }
 
@@ -287,16 +289,50 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
   color: var(--hl-ink);
 }
 
+/* Mirrors global .type-hero — senior legibility token (--text-heading-hero) */
 .home-landing__title {
-  font-family: var(--hl-serif);
-  font-size: var(--hl-headline-size);
+  font-family: var(--font-family-serif, var(--hl-serif));
+  font-size: var(--text-heading-hero);
   font-weight: 400;
+  letter-spacing: -0.01em;
   line-height: 1;
   margin-bottom: 2rem;
 }
 
 .home-landing__idea--paper .home-landing__title,
 .home-landing__idea--muted .home-landing__title {
+  color: var(--hl-ink);
+}
+
+.home-landing__idea--paper .home-landing__title em,
+.home-landing__idea--muted .home-landing__title em {
+  color: var(--hl-ink);
+}
+
+/* Card feet on muted audience section */
+.home-landing__idea--muted .dios-on-dark-foot {
+  background: var(--hl-paper-2);
+  border-top: 0.5px solid rgb(0 0 0 / 0.08);
+  color: var(--hl-ink-2);
+}
+
+/* CTA — headline visible from top; feet use light aubergine on paper */
+.home-landing__idea--cta {
+  justify-content: flex-start;
+  padding-block: calc(2rem + var(--dios-site-nav-height, 48px)) 2rem;
+}
+
+.home-landing__idea--cta .home-landing__title {
+  color: var(--hl-ink);
+}
+
+.home-landing__title--one-line {
+  white-space: nowrap;
+}
+
+.home-landing__idea--cta .home-landing__cta-foot {
+  background: var(--aubergine-light, #e8d5e2);
+  border-top: 0.5px solid rgb(26 13 23 / 0.1);
   color: var(--hl-ink);
 }
 
@@ -435,7 +471,7 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 }
 
 .home-landing__proof-bites li::before {
-  color: var(--hl-accent);
+  color: var(--hl-ink-3);
   content: '→';
   font-family: var(--hl-mono);
   font-size: 0.875rem;
@@ -457,7 +493,7 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
 }
 
 .home-landing__proof-more a {
-  color: var(--hl-accent);
+  color: var(--hl-ink-2);
   text-decoration: none;
 }
 

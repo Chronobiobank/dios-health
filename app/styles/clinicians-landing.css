@@ -6,7 +6,7 @@
   --cl-ink-3: #6b7280;
   --cl-paper: #f8f6f1;
   --cl-paper-2: #edeae3;
-  --cl-accent: #1b3d5f;
+  --cl-accent: var(--aubergine-mid, #5c3050);
   --cl-gold: #b8872e;
   --cl-pad-x: clamp(1rem, 4vw, 2.5rem);
   --cl-pad-y: clamp(2.5rem, 8vw, 5rem);
@@ -174,7 +174,7 @@
 }
 
 .clinicians-landing__how-lane-head--doc {
-  background: #1e2328;
+  background: var(--aubergine-dark, #3b1f35);
 }
 
 .clinicians-landing__how-lane-label {
