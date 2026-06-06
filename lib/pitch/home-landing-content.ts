@@ -19,7 +19,7 @@ export const HOME_HERO = {
 
 export const HOME_PROBLEM = {
   eyebrow: 'The problem',
-  headline: ['Med routines are', 'standardised guesswork.'] as const,
+  headline: ['Taking meds is', 'standardised guesswork.'] as const,
   emphasisLine: 1,
   primaryCta: { label: 'Fix it', href: MARKETING_ROUTES.onboarding },
   secondaryCta: { label: 'How', href: MARKETING_ROUTES.howItWorks },
