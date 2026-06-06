@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { DIOS_TAGLINE } from '@/components/DiosLogo'
@@ -10,9 +11,19 @@ export function DiosSiteFooter() {
   return (
     <footer className="dios-site-footer dios-surface-dark" data-nav-surface="dark">
       <div className="dios-site-footer__inner">
-        <p className="dios-site-footer__brand">
-          <span>DIOS</span> — Dose Intelligence OS
-        </p>
+        <div className="dios-site-footer__brand-block">
+          <Link href="/" className="dios-site-footer__brand" aria-label={`DIOS — ${DIOS_TAGLINE}`}>
+            <Image
+              src="/DIOS icon white.png"
+              alt=""
+              width={96}
+              height={96}
+              className="dios-site-footer__logo"
+              priority
+            />
+          </Link>
+          <p className="dios-site-footer__tagline">{DIOS_TAGLINE}</p>
+        </div>
 
         <nav className="dios-site-footer__nav" aria-label="Site">
           {LANDING_FOOTER_SECTIONS.map((section) => (
@@ -34,7 +45,6 @@ export function DiosSiteFooter() {
         <div className="dios-site-footer__bottom">
           <p className="dios-site-footer__governance">{HOME_GOVERNANCE_LINE}</p>
           <p className="dios-site-footer__copy">© {year} DIOS</p>
-          <p className="dios-site-footer__tagline">{DIOS_TAGLINE}</p>
         </div>
       </div>
     </footer>
