@@ -244,23 +244,26 @@
 }
 
 .dios-site-footer__brand-block {
+  --footer-brand-scale: clamp(3.25rem, 11vw, 5rem);
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  gap: 0.875rem 1rem;
+  font-size: var(--footer-brand-scale);
+  gap: 0.02em;
   max-width: 100%;
   width: 100%;
 }
 
 .dios-site-footer__brand {
-  display: block;
+  align-items: center;
+  display: flex;
   flex-shrink: 0;
   line-height: 0;
 }
 
 .dios-site-footer__logo {
   display: block;
-  height: clamp(3.25rem, 11vw, 5rem);
+  height: 1em;
   object-fit: contain;
   object-position: left center;
   width: auto;
@@ -298,14 +301,15 @@
 }
 
 .dios-site-footer__tagline {
+  align-self: center;
   color: rgb(255 255 255 / 0.92);
   flex-shrink: 0;
   font-family: var(--font-instrument-serif, Georgia, serif);
-  font-size: clamp(1.25rem, 4.25vw, 2rem);
+  font-size: 0.46em;
   font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1;
-  margin: 0;
+  margin: 0 0 0 -0.06em;
   text-align: left;
   white-space: nowrap;
 }
