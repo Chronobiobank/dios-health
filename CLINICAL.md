@@ -32,4 +32,4 @@ DIOS is **clinical decision support**, not a diagnostic device in isolation. It 
 
 This document is the primary reference for NHS, research, and pharma partners evaluating DIOS as **infrastructure** — not a single-feature app. Technical module boundaries are described in `lib/dios/README.md`.
 
-**Quantify Your Meds.**
+**Optimise Your Script.**

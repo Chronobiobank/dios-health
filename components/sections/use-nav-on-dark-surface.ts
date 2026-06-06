@@ -4,93 +4,51 @@ import { useEffect } from 'react'
 
 const NAV_ID = 'site-nav'
 const ON_DARK_CLASS = 'dios-site-nav--on-dark'
-const SURFACE_SELECTOR = '[data-nav-surface="dark"], .dios-surface-dark, .dios-surface-accent'
-const MIN_INTERSECTION = 0.12
+const SURFACE_SELECTOR =
+  '[data-nav-surface="dark"], .dios-surface-dark, .dios-surface-accent, .home-landing__hero'
 
-function navBandRootMargin(navHeight: number): string {
-  const viewportH = window.innerHeight
-  const bottomShrink = Math.max(0, viewportH - navHeight)
-  return `${-navHeight}px 0px -${bottomShrink}px 0px`
+function surfaceUnderNav(el: Element, navHeight: number): boolean {
+  const rect = el.getBoundingClientRect()
+  return rect.top < navHeight && rect.bottom > 0
 }
 
-/** Toggle light nav chrome only while a dark probe strip overlaps the top nav band. */
+/** Toggle light nav chrome while a dark surface underlies the sticky nav band. */
 export function useNavOnDarkSurface() {
   useEffect(() => {
     const nav = document.getElementById(NAV_ID)
     if (!nav) return
 
-    nav.classList.remove(ON_DARK_CLASS)
-
-    const visibleDark = new Set<Element>()
-    let observer: IntersectionObserver | null = null
-    let observed = new WeakSet<Element>()
-
-    const apply = () => {
-      nav.classList.toggle(ON_DARK_CLASS, visibleDark.size > 0)
-    }
-
-    const observeSurfaces = () => {
-      if (!observer) return
-      document.querySelectorAll(SURFACE_SELECTOR).forEach((el) => {
-        if (observed.has(el)) return
-        observed.add(el)
-        observer!.observe(el)
-      })
-    }
-
-    const mountObserver = () => {
+    const sync = () => {
       const navH = Math.round(nav.getBoundingClientRect().height) || 64
-      observer?.disconnect()
-      observer = null
-      visibleDark.clear()
-      observed = new WeakSet()
-      nav.classList.remove(ON_DARK_CLASS)
-
-      observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting && entry.intersectionRatio >= MIN_INTERSECTION) {
-              visibleDark.add(entry.target)
-            } else {
-              visibleDark.delete(entry.target)
-            }
-          }
-          apply()
-        },
-        {
-          root: null,
-          threshold: [0, MIN_INTERSECTION, 0.35, 0.6],
-          rootMargin: navBandRootMargin(navH),
-        }
-      )
-
-      observeSurfaces()
-      apply()
+      let onDark = false
+      document.querySelectorAll(SURFACE_SELECTOR).forEach((el) => {
+        if (surfaceUnderNav(el, navH)) onDark = true
+      })
+      nav.classList.toggle(ON_DARK_CLASS, onDark)
     }
 
-    mountObserver()
+    sync()
+    requestAnimationFrame(sync)
 
     let mutationTimer: ReturnType<typeof setTimeout> | undefined
     const mutation = new MutationObserver(() => {
       clearTimeout(mutationTimer)
-      mutationTimer = setTimeout(observeSurfaces, 80)
+      mutationTimer = setTimeout(sync, 80)
     })
     mutation.observe(document.body, { childList: true, subtree: true })
 
-    const onScroll = () => apply()
-    window.addEventListener('scroll', onScroll, { passive: true, capture: true })
-    window.addEventListener('resize', mountObserver)
+    window.addEventListener('scroll', sync, { passive: true, capture: true })
+    window.addEventListener('resize', sync)
 
     const deck = document.querySelector('.pitch-deck')
-    deck?.addEventListener('scroll', onScroll, { passive: true })
+    deck?.addEventListener('scroll', sync, { passive: true })
 
     return () => {
       clearTimeout(mutationTimer)
-      observer?.disconnect()
       mutation.disconnect()
-      window.removeEventListener('scroll', onScroll, { capture: true })
-      window.removeEventListener('resize', mountObserver)
-      deck?.removeEventListener('scroll', onScroll)
+      window.removeEventListener('scroll', sync, { capture: true })
+      window.removeEventListener('resize', sync)
+      deck?.removeEventListener('scroll', sync)
       nav.classList.remove(ON_DARK_CLASS)
     }
   }, [])

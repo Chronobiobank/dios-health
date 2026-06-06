@@ -1,10 +1,12 @@
 import Link from 'next/link'
 
 import { DiosSiteFooter } from '@/components/sections/dios-site-footer'
+import { HomeHeroVideo } from '@/components/sections/home/home-hero-video'
 import { HomeLandingReveal } from '@/components/sections/home/home-landing-reveal'
 import {
   HOME_AUDIENCE,
   HOME_CTA,
+  HOME_HERO,
   HOME_INSIGHT,
   HOME_PROBLEM,
   HOME_PROOF,
@@ -12,31 +14,35 @@ import {
   MARKETING_ROUTES,
 } from '@/lib/pitch/home-landing-content'
 
-function ProofFinding({ text, emphasis }: { text: string; emphasis: string }) {
-  const parts = text.split(emphasis)
-  if (parts.length < 2) return <>{text}</>
-  return (
-    <>
-      {parts[0]}
-      <strong>{emphasis}</strong>
-      {parts.slice(1).join(emphasis)}
-    </>
-  )
-}
-
 export function HomeLanding() {
   return (
     <div className="home-landing dios-nav-tone-paper">
       <HomeLandingReveal />
 
-      <section className="home-landing__idea home-landing__idea--paper dios-page-top-bleed">
+      <section
+        className="home-landing__hero dios-page-top-bleed dios-surface-dark"
+        data-nav-surface="dark"
+        id="hero"
+      >
+        <HomeHeroVideo />
+        <div className="home-landing__hero-scrim" aria-hidden />
+        <div className="home-landing__inner home-landing__hero-content">
+          <p className="home-landing__hero-tagline">
+            {HOME_HERO.tagline[0]}
+            <br />
+            <em>{HOME_HERO.tagline[1]}</em>
+          </p>
+        </div>
+      </section>
+
+      <section className="home-landing__idea home-landing__idea--paper" id="problem">
         <div className="home-landing__inner">
-          <p className="home-landing__kicker">{HOME_PROBLEM.kicker}</p>
+          <p className="home-landing__kicker">{HOME_PROBLEM.eyebrow}</p>
           <h1 className="home-landing__hero-title">
-            {HOME_PROBLEM.lines.map((line, i) => (
+            {HOME_PROBLEM.headline.map((line, i) => (
               <span key={line}>
                 {i === HOME_PROBLEM.emphasisLine ? <em>{line}</em> : line}
-                {i < HOME_PROBLEM.lines.length - 1 ? <br /> : null}
+                {i < HOME_PROBLEM.headline.length - 1 ? <br /> : null}
               </span>
             ))}
           </h1>
@@ -123,27 +129,16 @@ export function HomeLanding() {
             <br />
             {HOME_PROOF.headline[1]}
           </h2>
-          <div className="home-landing__proof-cards home-landing__reveal">
-            {HOME_PROOF.cards.map((card) => (
-              <article key={card.ref} className="home-landing__proof-card">
-                <p className="home-landing__proof-ref">{card.ref}</p>
-                <p className="home-landing__proof-finding">
-                  <ProofFinding text={card.finding} emphasis={card.emphasis} />
-                </p>
-                <a
-                  className="home-landing__proof-doi"
-                  href={card.doi}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  DOI ↗
-                </a>
-              </article>
+          <ul className="home-landing__proof-bites">
+            {HOME_PROOF.soundbites.map((bite) => (
+              <li key={bite}>{bite}</li>
             ))}
+          </ul>
+          <div className="home-landing__proof-actions">
+            <Link className="home-landing__btn-solid home-landing__btn-solid--block" href={HOME_PROOF.ctaHref}>
+              {HOME_PROOF.ctaLabel}
+            </Link>
           </div>
-          <p className="home-landing__proof-more home-landing__reveal">
-            <Link href={HOME_PROOF.moreHref}>{HOME_PROOF.moreLabel} ↗</Link>
-          </p>
         </div>
       </section>
 

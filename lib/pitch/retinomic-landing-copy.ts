@@ -57,7 +57,7 @@ export const ONBOARDING_COPY = {
   subheadline:
     'Your phone reads iris pigment and skin tone — the first signals for your personal light dose and dose window.',
   image: PITCH_IMAGES.hook,
-  imageAlt: 'Retinomic eye scan — quantify your meds',
+  imageAlt: 'Retinomic eye scan — optimise your script',
   pillars: [
     { id: 'light', label: 'Light dose', note: 'From scan', active: true },
     { id: 'eye', label: 'Eye scan', note: 'Step 1', active: true },
@@ -81,7 +81,7 @@ export const ONBOARDING_COPY = {
   },
   step3: {
     label: 'Step 3',
-    eyebrow: 'Quantify your meds',
+    eyebrow: 'Optimise your script',
     title: 'What do you take?',
     body: 'Select your medications now — your first dashboard shows personal dose windows instead of examples. Skip if you prefer to add these later in Settings.',
     skipNote: 'Optional — you can add or edit medications anytime in Settings.',

@@ -72,6 +72,12 @@ body:has(.dios-nav-tone-ink) .dios-site-nav:not(.dios-site-nav--on-dark) {
   backdrop-filter: none;
 }
 
+/* Home video hero — keep nav transparent with light chrome, not paper fill */
+body:has(.home-landing) .dios-site-nav--on-dark {
+  --dios-site-nav-bg: transparent;
+  --dios-site-nav-border: transparent;
+}
+
 /* Marketing shell — child pages handle their own top inset */
 .calm-landing .marketing-main:has(> .home-landing),
 .calm-landing .marketing-main:has(> .dios-page-top-bleed) {

@@ -5,15 +5,21 @@ import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 export { MARKETING_ROUTES }
 
 export const HOME_LANDING_META = {
-  title: 'DIOS — Quantify Your Meds',
+  title: 'DIOS — Optimise Your Script',
   description: 'Your medication has a biological window. DIOS finds it.',
-  openGraphTitle: 'DIOS — Quantify Your Meds',
+  openGraphTitle: 'DIOS — Optimise Your Script',
   openGraphDescription: 'Your medication has a biological window. DIOS finds it.',
 } as const
 
+export const HOME_HERO = {
+  tagline: ['Optimise', 'Your Script.'] as const,
+  video: '/optimise-your-script.mp4',
+  poster: '/your-light-dose.jpg',
+} as const
+
 export const HOME_PROBLEM = {
-  kicker: 'Dose Intelligence OS',
-  lines: ['Most people take their meds at the', 'wrong time.'] as const,
+  eyebrow: 'The problem',
+  headline: ['Most people take their meds at the', 'wrong time.'] as const,
   emphasisLine: 1,
   primaryCta: { label: 'Fix it', href: MARKETING_ROUTES.onboarding },
   secondaryCta: { label: 'How', href: MARKETING_ROUTES.howItWorks },
@@ -64,8 +70,14 @@ export const HOME_STEPS = {
 
 export const HOME_PROOF = {
   headline: ['The science', 'is published.'] as const,
-  moreLabel: 'Full evidence library',
-  moreHref: MARKETING_ROUTES.science,
+  ctaLabel: 'Read the evidence',
+  ctaHref: MARKETING_ROUTES.science,
+  soundbites: [
+    'Same drug at bedtime — 45% fewer cardiovascular events.',
+    'Timed chemotherapy — toxicity cut fivefold.',
+    'Light patterns predict heart disease and mortality.',
+    'Stimulant timing matters — body clock delayed 45–90 minutes.',
+  ] as const,
   cards: [
     {
       ref: 'Hermida et al. — n=19,084',
@@ -95,7 +107,7 @@ export const HOME_PROOF = {
 } as const
 
 export const HOME_CTA = {
-  headline: ['Quantify', 'your meds.'] as const,
+  headline: ['Optimise', 'your script.'] as const,
   patient: {
     who: 'Patient',
     line: 'Start measuring your clock',
@@ -105,7 +117,7 @@ export const HOME_CTA = {
   clinician: {
     who: 'Clinician',
     line: 'Enrol your first cohort',
-    detail: 'Coimbra · Gominak · circadian',
+    detail: 'Primary care · specialists',
     href: `${MARKETING_ROUTES.clinicians}#cta`,
   },
 } as const

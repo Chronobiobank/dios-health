@@ -12,6 +12,14 @@ export function HomeLandingReveal() {
       return
     }
 
+    const markVisible = (el: Element) => {
+      const rect = el.getBoundingClientRect()
+      const viewport = window.innerHeight || document.documentElement.clientHeight
+      if (rect.top < viewport * 0.92 && rect.bottom > 0) {
+        el.classList.add('is-visible')
+      }
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -24,8 +32,20 @@ export function HomeLandingReveal() {
       { threshold: 0.08, rootMargin: '0px 0px -24px 0px' }
     )
 
-    nodes.forEach((el) => io.observe(el))
-    return () => io.disconnect()
+    const observeAll = () => {
+      nodes.forEach((el) => {
+        markVisible(el)
+        io.observe(el)
+      })
+    }
+
+    observeAll()
+    requestAnimationFrame(observeAll)
+    window.addEventListener('hashchange', observeAll)
+    return () => {
+      io.disconnect()
+      window.removeEventListener('hashchange', observeAll)
+    }
   }, [])
 
   return null

@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 /** Official wordmark — ʘ is U+0298 LATIN LETTER BILABIAL CLICK */
 export const DIOS_WORDMARK = 'DI\u0298S'
 
-export const DIOS_TAGLINE = 'Quantify Your Meds'
+export const DIOS_TAGLINE = 'Optimise Your Script'
 
 const SIZE_CLASSES = {
   sm: 'text-[18px] leading-none',

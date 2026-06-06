@@ -5,8 +5,8 @@
  */
 export const SITE_IMAGES = {
   hero: {
-    poster: '/hero.jpg',
-    video: '/dosing.mp4',
+    poster: '/your-light-dose.jpg',
+    video: '/optimise-your-script.mp4',
   },
   featured: {
     platform: '/featured-platform.jpg',
