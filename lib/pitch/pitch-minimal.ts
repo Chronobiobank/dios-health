@@ -149,7 +149,7 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
     sources: [
       { label: 'Holick NEJM 2007', href: 'https://www.nejm.org/doi/full/10.1056/NEJMra070553' },
       { label: 'Clinical evidence library', href: '/evidence' },
-      { label: 'Live demo dashboard', href: '/how-it-works' },
+      { label: 'Live demo dashboard', href: '/how-it-works/demo' },
     ],
   },
   {
@@ -202,7 +202,7 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
       },
     ],
     sources: [
-      { label: 'Live demo dashboard', href: '/how-it-works' },
+      { label: 'Live demo dashboard', href: '/how-it-works/demo' },
       { label: 'Clinical evidence library', href: '/evidence' },
     ],
   },

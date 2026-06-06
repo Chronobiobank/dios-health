@@ -11,6 +11,8 @@
   --hl-serif: var(--font-instrument-serif, Georgia, serif);
   --hl-sans: var(--font-geist-sans, system-ui, sans-serif);
   --hl-mono: var(--font-geist-mono, ui-monospace, monospace);
+  --hl-headline-size: clamp(3rem, 12vw, 6rem);
+  --hl-card-headline-size: clamp(1.875rem, 6.5vw, 3rem);
   color: var(--hl-ink);
   font-family: var(--hl-sans);
 }
@@ -57,7 +59,7 @@
 .home-landing__hero-title {
   animation: home-landing-up 0.6s 0.2s forwards;
   font-family: var(--hl-serif);
-  font-size: clamp(3rem, 12vw, 6rem);
+  font-size: var(--hl-headline-size);
   font-weight: 400;
   line-height: 1;
   margin-bottom: 2.5rem;
@@ -118,11 +120,41 @@
   max-width: 28ch;
 }
 
+.home-landing__insight-actions {
+  margin-top: 2rem;
+}
+
+.home-landing__btn-on-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border: 1px solid rgb(255 255 255 / 0.5);
+  background: rgb(255 255 255 / 0.12);
+  color: #fff;
+  font-family: var(--hl-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  min-height: 2.75rem;
+  padding: 0.875rem 1.25rem;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.home-landing__btn-on-dark:hover {
+  background: rgb(255 255 255 / 0.2);
+  border-color: #fff;
+}
+
 .home-landing__title {
   font-family: var(--hl-serif);
-  font-size: clamp(2.2rem, 9vw, 4.5rem);
+  font-size: var(--hl-headline-size);
   font-weight: 400;
-  line-height: 1.05;
+  line-height: 1;
   margin-bottom: 2rem;
 }
 
@@ -147,13 +179,22 @@
 }
 
 .home-landing__card-top {
-  padding: 1.25rem 1.5rem;
+  padding: 1.5rem 1.5rem;
+}
+
+.home-landing__card-top .dios-on-dark-headline,
+.home-landing__cta-top .dios-on-dark-headline {
+  font-family: var(--hl-serif);
+  font-size: var(--hl-card-headline-size);
+  font-weight: 400;
+  line-height: 1.1;
 }
 
 .home-landing__card-line {
   font-family: var(--hl-serif);
-  font-size: 1.3rem;
-  line-height: 1.2;
+  font-size: var(--hl-card-headline-size);
+  font-weight: 400;
+  line-height: 1.1;
 }
 
 .home-landing__card-detail {
@@ -280,12 +321,14 @@
 }
 
 .home-landing__cta-top {
-  padding: 1.1rem 1.5rem;
+  padding: 1.5rem 1.5rem;
 }
 
 .home-landing__cta-line {
-  font-size: 1rem;
+  font-family: var(--hl-serif);
+  font-size: var(--hl-card-headline-size);
   font-weight: 400;
+  line-height: 1.1;
 }
 
 /* Reveal */

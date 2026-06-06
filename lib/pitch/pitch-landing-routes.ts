@@ -3,6 +3,11 @@ import { PITCH_MINIMAL_TILES } from '@/lib/pitch/pitch-minimal'
 /** Keep in sync with {@link LANDING_FOOTER_SECTIONS} in components/sections/navigation.ts */
 const LANDING_FOOTER_ROUTES = [
   '/how-it-works',
+  '/how-it-works/demo',
+  '/clinicians',
+  '/clinicians/triage',
+  '/science',
+  '/chronobiobank',
   '/signup/clinician',
   '/contact',
   '/evidence',

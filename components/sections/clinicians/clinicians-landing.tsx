@@ -1,6 +1,8 @@
 import Link from 'next/link'
 
 import { CliniciansRevealInit } from '@/components/sections/clinicians/clinicians-reveal'
+import { DiosSiteFooter } from '@/components/sections/dios-site-footer'
+import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 import {
   CHRONOMEDICINE_CLUSTERS,
   CLINICIANS_CTA,
@@ -161,6 +163,9 @@ export function CliniciansLanding() {
               </article>
             ))}
           </div>
+          <p className="clinicians-landing__more-link clinicians-landing__reveal">
+            <Link href={MARKETING_ROUTES.science}>Peer-reviewed library ↗</Link>
+          </p>
         </div>
       </section>
 
@@ -178,6 +183,16 @@ export function CliniciansLanding() {
           </div>
         </div>
       </section>
+
+      <section className="clinicians-landing__section clinicians-landing__section--muted">
+        <div className="clinicians-landing__inner">
+          <p className="clinicians-landing__more-link">
+            <Link href={MARKETING_ROUTES.science}>Full evidence library ↗</Link>
+          </p>
+        </div>
+      </section>
+
+      <DiosSiteFooter />
     </div>
   )
 }

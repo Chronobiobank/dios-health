@@ -61,9 +61,11 @@ export function HomeLanding() {
           <p className="home-landing__insight-statement home-landing__reveal dios-on-dark-copy dios-on-dark-copy--strong">
             {HOME_INSIGHT.statement}
           </p>
-          <p className="home-landing__proof-more home-landing__reveal">
-            <Link href={MARKETING_ROUTES.howItWorks}>How biological windows work ↗</Link>
-          </p>
+          <div className="home-landing__insight-actions home-landing__reveal">
+            <Link className="home-landing__btn-on-dark" href={MARKETING_ROUTES.howItWorks}>
+              How biological windows work
+            </Link>
+          </div>
         </div>
       </section>
 

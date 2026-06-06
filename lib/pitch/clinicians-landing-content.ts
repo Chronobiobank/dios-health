@@ -1,5 +1,7 @@
 /** Clinician acquisition landing — mobile-first narrative (BTI / spectrum / moat). */
 
+import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
+
 export const CLINICIANS_LANDING_META = {
   title: 'For clinicians — DIOS Dose Intelligence OS',
   description:
@@ -13,7 +15,7 @@ export const CLINICIANS_HERO = {
   subheadline:
     'DIOS measures each patient’s Biological Time Index, maps every drug and micronutrient on the Chronomedicine Spectrum, and tells you who needs attention this week.',
   primaryCta: { label: 'Enrol your cohort', href: 'mailto:grant@dios.health' },
-  secondaryCta: { label: 'See triage demo', href: '/clinic' },
+  secondaryCta: { label: 'See triage demo', href: MARKETING_ROUTES.cliniciansTriage },
 } as const
 
 export const CLINICIANS_GAP = {
@@ -136,7 +138,7 @@ export const CLINICIANS_CTA = {
   headline: 'Close the loop your protocol leaves open.',
   sub: 'Coimbra, Gominak, and chronotherapy practitioners — enrol your first cohort. Free for patients at entry.',
   primary: { label: 'Enrol your cohort', href: 'mailto:grant@dios.health' },
-  secondary: { label: 'Clinician dashboard', href: '/clinic' },
+  secondary: { label: 'See triage demo', href: MARKETING_ROUTES.cliniciansTriage },
 } as const
 
 export const CHRONOMEDICINE_CLUSTERS = [

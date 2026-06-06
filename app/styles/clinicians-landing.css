@@ -682,6 +682,17 @@
   line-height: 1.65;
 }
 
+.clinicians-landing__more-link {
+  font-family: var(--cl-mono);
+  font-size: 0.6875rem;
+  margin-top: 1.5rem;
+}
+
+.clinicians-landing__more-link a {
+  color: var(--cl-accent);
+  text-decoration: none;
+}
+
 /* CTA */
 .clinicians-landing__cta {
   background: var(--cl-accent);

@@ -1,15 +1,29 @@
 import type { Metadata } from 'next'
+import { Instrument_Serif } from 'next/font/google'
 
-import { ClinicianTriageDashboard } from '@/components/clinicians/ClinicianTriageDashboard'
+import { CliniciansLanding } from '@/components/sections/clinicians/clinicians-landing'
+import { MarketingShell } from '@/components/sections/marketing-shell'
+import { CLINICIANS_LANDING_META } from '@/lib/pitch/clinicians-landing-content'
 
-import '@/app/styles/clinician-triage-shell.css'
+import '@/app/styles/clinicians-landing.css'
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'Clinician triage — DIOS',
-  description: 'Who needs attention this week. Red, amber, green by PTH trajectory and safety gates.',
-  robots: { index: false, follow: false },
+  title: CLINICIANS_LANDING_META.title,
+  description: CLINICIANS_LANDING_META.description,
 }
 
-export default function CliniciansTriagePage() {
-  return <ClinicianTriageDashboard />
+export default function CliniciansPage() {
+  return (
+    <MarketingShell showFooter={false} className={instrumentSerif.variable}>
+      <CliniciansLanding />
+    </MarketingShell>
+  )
 }

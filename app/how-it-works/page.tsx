@@ -1,18 +1,15 @@
 import type { Metadata } from 'next'
 
-import { DashboardClient } from '@/components/patient-dashboard/dashboard-client'
-import { MOCK_DASHBOARD_PROPS } from '@/lib/patient-dashboard/mock-snapshot'
+import { HowItWorksLanding } from '@/components/sections/how-it-works/how-it-works-landing'
+import { HOW_IT_WORKS_META } from '@/lib/pitch/how-it-works-content'
+
+import '@/app/styles/home-landing.css'
 
 export const metadata: Metadata = {
-  title: 'How it works — Dose Intelligence · DIOS',
-  description:
-    'See Sean James daily snapshot — Photonic Age vs Calendar Age, Chronoimmune indication spectrum, and personalised next steps.',
+  title: HOW_IT_WORKS_META.title,
+  description: HOW_IT_WORKS_META.description,
 }
 
 export default function HowItWorksPage() {
-  return (
-    <div className="calm-landing dios-nav-tone-canvas dios-page-top-bleed relative min-h-svh">
-      <DashboardClient {...MOCK_DASHBOARD_PROPS} reserveBottomNav={false} />
-    </div>
-  )
+  return <HowItWorksLanding />
 }

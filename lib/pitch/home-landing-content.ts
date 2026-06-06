@@ -22,7 +22,7 @@ export const HOME_PROBLEM = {
 export const HOME_INSIGHT = {
   headline: 'Every drug has a',
   headlineEmphasis: 'biological window.',
-  statement: 'The label uses clock time. DIOS maps yours.',
+  statement: 'The time on the label is the same for everyone. DIOS finds the time that suits your body.',
 } as const
 
 export const HOME_AUDIENCE = {

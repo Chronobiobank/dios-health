@@ -104,7 +104,7 @@ export const HOW_IT_WORKS_DEMO_COPY = {
   primaryCta: 'Start free baseline scan',
   primaryHref: '/onboarding',
   secondaryCta: 'How dose intelligence works',
-  secondaryHref: '/pitch/how-it-works',
+  secondaryHref: '/how-it-works',
 } as const
 
 /** Tile 4 — the protocol (detail: /pitch/how-it-works, /onboarding) */
