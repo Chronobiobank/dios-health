@@ -5,11 +5,11 @@ import { HomeHeroVideo } from '@/components/sections/home/home-hero-video'
 import { HomeLandingReveal } from '@/components/sections/home/home-landing-reveal'
 import {
   HOME_AUDIENCE,
+  HOME_CLINICAL_DISCLAIMER,
   HOME_CTA,
   HOME_HERO,
   HOME_INSIGHT,
   HOME_PROBLEM,
-  HOME_PROOF,
   HOME_STEPS,
   MARKETING_ROUTES,
 } from '@/lib/pitch/home-landing-content'
@@ -32,6 +32,7 @@ export function HomeLanding() {
             <br />
             <em>{HOME_HERO.tagline[1]}</em>
           </p>
+          <p className="home-landing__hero-subline">{HOME_HERO.subline}</p>
         </div>
       </section>
 
@@ -50,8 +51,8 @@ export function HomeLanding() {
             <Link className="home-landing__btn-solid" href={HOME_PROBLEM.primaryCta.href}>
               {HOME_PROBLEM.primaryCta.label}
             </Link>
-            <Link className="home-landing__btn-ghost" href={HOME_PROBLEM.secondaryCta.href}>
-              {HOME_PROBLEM.secondaryCta.label}
+            <Link className="home-landing__btn-ghost" href={HOME_PROBLEM.evidenceCta.href}>
+              {HOME_PROBLEM.evidenceCta.label}
             </Link>
           </div>
         </div>
@@ -95,6 +96,7 @@ export function HomeLanding() {
               </div>
             </Link>
           </div>
+          <p className="home-landing__equity-note home-landing__reveal">{HOME_AUDIENCE.equity}</p>
         </div>
       </section>
 
@@ -121,26 +123,7 @@ export function HomeLanding() {
               {HOME_STEPS.walkthroughCta.label}
             </Link>
           </div>
-        </div>
-      </section>
-
-      <section className="home-landing__idea home-landing__idea--muted" id="science">
-        <div className="home-landing__inner">
-          <h2 className="home-landing__title home-landing__reveal">
-            {HOME_PROOF.headline[0]}
-            <br />
-            {HOME_PROOF.headline[1]}
-          </h2>
-          <ul className="home-landing__proof-bites">
-            {HOME_PROOF.soundbites.map((bite) => (
-              <li key={bite}>{bite}</li>
-            ))}
-          </ul>
-          <div className="home-landing__proof-actions">
-            <Link className="home-landing__btn-solid home-landing__btn-solid--block" href={HOME_PROOF.ctaHref}>
-              {HOME_PROOF.ctaLabel}
-            </Link>
-          </div>
+          <p className="home-landing__steps-disclaimer">{HOME_CLINICAL_DISCLAIMER}</p>
         </div>
       </section>
 

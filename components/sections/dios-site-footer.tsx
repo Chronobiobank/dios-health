@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { DIOS_TAGLINE } from '@/components/DiosLogo'
 import { LANDING_FOOTER_SECTIONS } from '@/components/sections/navigation'
+import { HOME_GOVERNANCE_LINE } from '@/lib/pitch/home-landing-content'
 
 export function DiosSiteFooter() {
   const year = new Date().getFullYear()
@@ -31,6 +32,7 @@ export function DiosSiteFooter() {
         </nav>
 
         <div className="dios-site-footer__bottom">
+          <p className="dios-site-footer__governance">{HOME_GOVERNANCE_LINE}</p>
           <p className="dios-site-footer__copy">© {year} DIOS</p>
           <p className="dios-site-footer__tagline">{DIOS_TAGLINE}</p>
         </div>

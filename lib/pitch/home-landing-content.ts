@@ -13,6 +13,8 @@ export const HOME_LANDING_META = {
 
 export const HOME_HERO = {
   tagline: ['Optimise', 'Your Script.'] as const,
+  subline:
+    'Chronotherapy decision support for patients and NHS clinicians — scan, score, schedule.',
   video: '/optimise-your-script.mp4',
   poster: '/your-light-dose.jpg',
 } as const
@@ -21,12 +23,12 @@ export const HOME_PROBLEM = {
   eyebrow: 'The problem',
   headline: ['Taking meds is', 'standardised guesswork.'] as const,
   emphasisLine: 1,
-  primaryCta: { label: 'Fix it', href: MARKETING_ROUTES.onboarding },
-  secondaryCta: { label: 'How', href: MARKETING_ROUTES.howItWorks },
+  primaryCta: { label: 'Build your profile', href: MARKETING_ROUTES.onboarding },
+  evidenceCta: { label: 'Read the evidence', href: MARKETING_ROUTES.science },
 } as const
 
 export const HOME_INSIGHT = {
-  headline: 'Optimal dosing syncs with your',
+  headline: 'Optimised dosing is synced to the',
   headlineEmphasis: 'body clock.',
   statement: 'Med labels are the same for everyone. We match the dose to suit your body.',
   ctaLabel: 'Why body clocks matter',
@@ -37,7 +39,7 @@ export const HOME_AUDIENCE = {
   headline: ['One App.', 'Two Views.'] as const,
   patient: {
     who: 'For Patients',
-    line: 'Take it now. Your window is open.',
+    line: "See today's timing guidance",
     href: MARKETING_ROUTES.howItWorks,
   },
   clinician: {
@@ -45,17 +47,25 @@ export const HOME_AUDIENCE = {
     line: 'Who needs attention this week?',
     href: MARKETING_ROUTES.clinicians,
   },
+  equity:
+    'Built for shift workers, carers managing meds, and anyone without a fixed routine — large type, simple steps, and no assumption that one schedule fits all.',
 } as const
 
 export const HOME_STEPS = {
   headline: ['Three steps.', 'No jargon.'] as const,
   steps: [
-    { n: '01', line: 'Scan your clock in 60 seconds.' },
-    { n: '02', line: 'Every drug timed to your biology.' },
-    { n: '03', line: 'Track progress in one number.' },
+    { n: '01', line: 'Scan your body clock in 60 seconds.' },
+    { n: '02', line: 'All meds and supps timed to your clock.' },
+    { n: '03', line: 'Track progress with exploratory metrics.' },
   ],
   walkthroughCta: { label: 'Full walkthrough', href: MARKETING_ROUTES.howItWorks },
 } as const
+
+export const HOME_GOVERNANCE_LINE =
+  'NHS & clinical governance · UK GDPR · Clinician review before dose changes · Partner devices FDA-cleared where stated · Evaluation cohort open to PCNs' as const
+
+export const HOME_CLINICAL_DISCLAIMER =
+  'Does not replace your prescriber. Share your profile with your GP or pharmacist.' as const
 
 export const HOME_PROOF = {
   headline: ['The science', 'is published.'] as const,
@@ -100,7 +110,7 @@ export const HOME_CTA = {
   patient: {
     who: 'Patient',
     line: 'Track your clock',
-    detail: 'Free — phone camera',
+    detail: 'Evaluation cohort — no patient charge',
     href: MARKETING_ROUTES.onboarding,
   },
   clinician: {
