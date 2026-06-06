@@ -402,15 +402,6 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__sign-out-btn:hov
   max-width: 36ch;
 }
 
-.home-landing__equity-note {
-  color: var(--hl-ink-3);
-  font-size: var(--text-label-size);
-  font-weight: 400;
-  line-height: 1.55;
-  margin: 1.75rem 0 0;
-  max-width: 42ch;
-}
-
 /* Proof — arrow-bulleted soundbites + single CTA */
 .home-landing__proof-bites {
   display: flex;

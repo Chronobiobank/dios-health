@@ -13,8 +13,7 @@ export const HOME_LANDING_META = {
 
 export const HOME_HERO = {
   tagline: ['Optimise', 'Your Script.'] as const,
-  subline:
-    'Chronotherapy decision support for patients and NHS clinicians — scan, score, schedule.',
+  subline: 'Built for shift workers, carers, and anyone maximising their meds.',
   video: '/optimise-your-script.mp4',
   poster: '/your-light-dose.jpg',
 } as const
@@ -47,7 +46,6 @@ export const HOME_AUDIENCE = {
     line: 'Who needs attention this week?',
     href: MARKETING_ROUTES.clinicians,
   },
-  equity: 'Built for shift workers, carers managing meds, and anyone without a fixed routine.',
 } as const
 
 export const HOME_STEPS = {

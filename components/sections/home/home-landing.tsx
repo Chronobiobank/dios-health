@@ -96,7 +96,6 @@ export function HomeLanding() {
               </div>
             </Link>
           </div>
-          <p className="home-landing__equity-note home-landing__reveal">{HOME_AUDIENCE.equity}</p>
         </div>
       </section>
 
