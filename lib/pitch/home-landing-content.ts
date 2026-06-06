@@ -20,8 +20,8 @@ export const HOME_PROBLEM = {
 } as const
 
 export const HOME_INSIGHT = {
-  headline: 'Every drug has a',
-  headlineEmphasis: 'biological window.',
+  headline: 'A timed dose is the',
+  headlineEmphasis: 'optimal dose.',
   statement: 'The time on the label is the same for everyone. DIOS finds the time that suits your body.',
 } as const
 
