@@ -23,6 +23,8 @@ export const HOME_INSIGHT = {
   headline: 'A timed dose is the',
   headlineEmphasis: 'optimal dose.',
   statement: 'The time on the label is the same for everyone. DIOS finds the time that suits your body.',
+  ctaLabel: 'Why Circadian Medicine?',
+  ctaHref: MARKETING_ROUTES.howItWorks,
 } as const
 
 export const HOME_AUDIENCE = {

@@ -62,8 +62,8 @@ export function HomeLanding() {
             {HOME_INSIGHT.statement}
           </p>
           <div className="home-landing__insight-actions home-landing__reveal">
-            <Link className="home-landing__btn-on-dark" href={MARKETING_ROUTES.howItWorks}>
-              How biological windows work
+            <Link className="home-landing__btn-on-dark" href={HOME_INSIGHT.ctaHref}>
+              {HOME_INSIGHT.ctaLabel}
             </Link>
           </div>
         </div>
