@@ -21,7 +21,7 @@ export const KAWASAKI_NAV = {
 } as const
 
 export const KAWASAKI_FOOTER = {
-  descriptor: 'Precision Chronoimmunology',
+  descriptor: 'Dose intelligence for high-dose protocols',
   tagline: 'Make Time Count',
   copyrightYear: 2026,
   links: [
@@ -99,7 +99,7 @@ export const KAWASAKI_STORY_SLIDES: readonly KawasakiStorySlide[] = [
     eyebrow: 'Solution',
     headlineHtml: 'We close the <em>90-day gap</em>',
     support: 'Four cadences show what quarterly bloods cannot.',
-    link: { label: 'See the model →', href: MARKETING_ROUTES.howItWorks },
+    link: { label: 'See the model →', href: MARKETING_ROUTES.scienceFourCadences },
     variant: 'teal',
     media: {
       image: '/the-solution.webp',
@@ -135,7 +135,8 @@ export const KAWASAKI_STORY_SLIDES: readonly KawasakiStorySlide[] = [
     slideNum: '06',
     eyebrow: 'Patients',
     headlineHtml: '<em>DINA</em> for patients',
-    support: 'A free agent that tells them when to take every dose.',
+    support:
+      'Confirms each dose window daily and flags safety issues your triage dashboard sees.',
     media: {
       image: '/for%20patients.jpg',
       scrim: 'light',

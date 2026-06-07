@@ -6,6 +6,7 @@ export const MARKETING_ROUTES = {
   howItWorksDemo: '/how-it-works/demo',
   technology: '/technology',
   science: '/science',
+  scienceFourCadences: '/science#four-cadences',
   /** HTML prototype `/learn` — maps to science curriculum */
   learn: '/science',
   evidence: '/evidence',

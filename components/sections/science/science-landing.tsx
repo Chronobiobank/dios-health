@@ -3,6 +3,12 @@ import Link from 'next/link'
 import { HomeLandingReveal } from '@/components/sections/home/home-landing-reveal'
 import { HOME_PROOF } from '@/lib/pitch/home-landing-content'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
+import {
+  CADENCE_TAGLINE,
+  INTELLIGENCE_CADENCES,
+  INTELLIGENCE_LAYER_ORDER,
+  INTELLIGENCE_LAYER_SUMMARY,
+} from '@/lib/product/intelligence-cadence'
 
 function ProofFinding({ text, emphasis }: { text: string; emphasis: string }) {
   const parts = text.split(emphasis)
@@ -40,6 +46,35 @@ export function ScienceLanding() {
               <li key={bite}>{bite}</li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section
+        className="home-landing__idea home-landing__idea--paper home-landing__idea--stack"
+        id="four-cadences"
+      >
+        <div className="home-landing__inner home-landing__inner--wide">
+          <p className="home-landing__kicker">Intelligence model</p>
+          <h2 className="home-landing__title">{CADENCE_TAGLINE}</h2>
+          <p className="home-landing__card-detail home-landing__lede home-landing__lede--block">
+            {INTELLIGENCE_LAYER_SUMMARY}
+          </p>
+          <div className="home-landing__pillars">
+            {INTELLIGENCE_LAYER_ORDER.map((cadenceId) => {
+              const cadence = INTELLIGENCE_CADENCES[cadenceId]
+              return (
+                <article key={cadenceId} className="home-landing__pillar">
+                  <p className="home-landing__pillar-label">{cadence.interval}</p>
+                  <h3 className="home-landing__pillar-title">{cadence.label}</h3>
+                  <p className="home-landing__pillar-summary">{cadence.description}</p>
+                  <p className="home-landing__pillar-ref">{cadence.roleLabel}</p>
+                </article>
+              )
+            })}
+          </div>
+          <p className="home-landing__proof-more">
+            <Link href={MARKETING_ROUTES.technology}>Technology deep dive ↗</Link>
+          </p>
         </div>
       </section>
 
