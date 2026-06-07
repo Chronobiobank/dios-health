@@ -909,7 +909,218 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__ask-dios:hover {
   }
 }
 
+/* Markets — US + Commonwealth lanes */
+.home-landing__market-lanes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.home-landing__market-lane {
+  background: var(--hl-paper);
+  border: 0.5px solid rgb(0 0 0 / 0.07);
+  border-radius: 5px;
+  padding: 1.125rem 1rem;
+}
+
+.home-landing__market-label {
+  color: var(--hl-ink-3);
+  font-family: var(--hl-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.375rem;
+  text-transform: uppercase;
+}
+
+.home-landing__market-line {
+  color: var(--hl-ink);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.45;
+  margin: 0 0 0.625rem;
+}
+
+.home-landing__market-bullets {
+  color: var(--hl-ink-2);
+  display: flex;
+  flex-direction: column;
+  font-size: 0.875rem;
+  gap: 0.375rem;
+  line-height: 1.5;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home-landing__market-bullets li {
+  padding-left: 1.125rem;
+  position: relative;
+}
+
+.home-landing__market-bullets li::before {
+  color: var(--hl-ink-3);
+  content: '·';
+  left: 0;
+  position: absolute;
+}
+
+/* Case study — mock practice cohort */
+.home-landing__case-subhead {
+  color: var(--hl-ink-2);
+  font-family: var(--hl-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  margin: 0.375rem 0 0;
+}
+
+.home-landing__case-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 1.25rem;
+}
+
+.home-landing__case-metric {
+  background: var(--hl-paper-2);
+  border: 0.5px solid rgb(0 0 0 / 0.07);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.75rem 0.625rem;
+  text-align: center;
+}
+
+.home-landing__case-metric--red {
+  border-top: 3px solid #c44;
+}
+
+.home-landing__case-metric--amber {
+  border-top: 3px solid #c90;
+}
+
+.home-landing__case-metric--green {
+  border-top: 3px solid #2a8;
+}
+
+.home-landing__case-metric-value {
+  color: var(--hl-ink);
+  font-family: var(--hl-serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.home-landing__case-metric-label {
+  color: var(--hl-ink-3);
+  font-family: var(--hl-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.home-landing__case-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-top: 1rem;
+}
+
+.home-landing__case-card {
+  background: var(--hl-paper-2);
+  border: 0.5px solid rgb(0 0 0 / 0.07);
+  border-radius: 4px;
+  padding: 1rem 0.875rem;
+}
+
+.home-landing__case-card--alert {
+  border-left: 3px solid #c44;
+}
+
+.home-landing__case-card--ok {
+  border-left: 3px solid #2a8;
+}
+
+.home-landing__case-card-label {
+  color: var(--hl-ink-3);
+  font-family: var(--hl-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.375rem;
+  text-transform: uppercase;
+}
+
+.home-landing__case-card-title {
+  color: var(--hl-ink);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.home-landing__case-card-issue {
+  color: #a33;
+  font-family: var(--hl-mono);
+  font-size: 0.6875rem;
+  margin: 0 0 0.625rem;
+}
+
+.home-landing__case-card-copy {
+  color: var(--hl-ink-2);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  margin: 0 0 0.5rem;
+}
+
+.home-landing__case-card-copy strong {
+  color: var(--hl-ink);
+  font-weight: 600;
+}
+
+.home-landing__case-card-outcome {
+  color: var(--hl-ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  margin: 0.625rem 0 0;
+}
+
+.home-landing__case-quote {
+  border-left: 2px solid rgb(0 0 0 / 0.12);
+  margin: 1.25rem 0 0;
+  padding: 0 0 0 1rem;
+}
+
+.home-landing__case-quote p {
+  color: var(--hl-ink-2);
+  font-family: var(--hl-serif);
+  font-size: 1.125rem;
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.home-landing__case-quote footer {
+  color: var(--hl-ink-3);
+  font-family: var(--hl-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  margin-top: 0.5rem;
+}
+
 @media (min-width: 42.5rem) {
+  .home-landing__market-lanes {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .home-landing__case-grid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: 1.4fr 1fr;
+  }
+
   .home-landing__idea {
     padding-inline: 3.5rem;
   }
