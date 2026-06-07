@@ -1,6 +1,6 @@
 'use client'
 
-import { DIOS_WORDMARK } from '@/components/DiosLogo'
+import { DIOS_BRAND_NAME, DIOS_LOGO_MARK } from '@/components/DiosLogo'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -20,8 +20,8 @@ export function SiteNav() {
       <div className="dios-nav-bar">
         <div className="dios-nav-inner">
           <div className="dios-nav-row">
-          <Link href="/" className="shrink-0" onClick={() => setOpen(false)} aria-label="DIOS — home">
-            <span className="dios-wordmark text-[28px] leading-none text-black">{DIOS_WORDMARK}</span>
+          <Link href="/" className="shrink-0" onClick={() => setOpen(false)} aria-label={`${DIOS_BRAND_NAME} — home`}>
+            <span className="dios-wordmark text-[28px] leading-none text-black">{DIOS_LOGO_MARK}</span>
           </Link>
 
           <nav className="ml-auto hidden items-center gap-10 md:flex">

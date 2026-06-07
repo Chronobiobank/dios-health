@@ -1,145 +1,145 @@
 import Link from 'next/link'
 
+import { DIOS_BRAND_NAME, DIOS_LOGO_GLYPH, DIOS_LOGO_MARK } from '@/components/DiosLogo'
 import { MarketingFontScope } from '@/components/sections/marketing/marketing-font-scope'
+import { MarketingKawasakiProgress } from '@/components/sections/marketing/marketing-kawasaki-progress'
+import { MarketingSlideBackground } from '@/components/sections/marketing/marketing-slide-background'
 import {
-  MARKETING_BEATS,
-  MARKETING_CTA_BAND,
-  MARKETING_FOR_SECTION,
-  MARKETING_HERO,
-  MARKETING_MODEL,
-  MARKETING_PULL_QUOTE,
-  MARKETING_THREE_QUESTIONS,
+  KAWASAKI_CTA_SECTION,
+  KAWASAKI_FOOTER,
+  KAWASAKI_NAV,
+  KAWASAKI_STORY_SLIDES,
 } from '@/lib/pitch/marketing-landing-content'
 
 function HtmlText({ html }: { html: string }) {
   return <span dangerouslySetInnerHTML={{ __html: html }} />
 }
 
+const KAWASAKI_SECTION_IDS = [
+  ...KAWASAKI_STORY_SLIDES.map((s) => s.id),
+  KAWASAKI_CTA_SECTION.id,
+] as const
+
+function slideVariantClass(variant?: string) {
+  if (variant === 'dark') return 'kz-s--dark'
+  if (variant === 'teal') return 'kz-s--teal'
+  return ''
+}
+
+function slideMediaClass(media?: (typeof KAWASAKI_STORY_SLIDES)[number]['media']) {
+  if (!media) return ''
+  const classes = ['kz-s--has-media']
+  if (media.scrim === 'cta' || media.scrim === 'dark') {
+    classes.push('kz-s--on-video')
+  }
+  if (media.extendsUnderNav) classes.push('kz-s--under-nav')
+  return ` ${classes.join(' ')}`
+}
+
 export function MarketingLanding() {
   return (
     <MarketingFontScope>
-      <div className="mkt-page">
-        <section className="mkt-hero" aria-labelledby="marketing-hero-heading">
-          <p className="mkt-hero-eyebrow">{MARKETING_HERO.eyebrow}</p>
-          <h1 id="marketing-hero-heading">
-            {MARKETING_HERO.titleLine1}
-            <br />
-            <em>{MARKETING_HERO.titleEmphasis}</em>
-          </h1>
-          <p className="mkt-hero-sub">{MARKETING_HERO.sub}</p>
-          <div className="mkt-hero-ctas">
-            <Link href={MARKETING_HERO.ctas.primary.href} className="mkt-btn-primary">
-              {MARKETING_HERO.ctas.primary.label}
-            </Link>
-            <Link href={MARKETING_HERO.ctas.secondary.href} className="mkt-btn-secondary">
-              {MARKETING_HERO.ctas.secondary.label}
-            </Link>
-            <Link href={MARKETING_HERO.ctas.tertiary.href} className="mkt-btn-tertiary">
-              {MARKETING_HERO.ctas.tertiary.label}
-            </Link>
-          </div>
-          <div className="mkt-hero-statement">
-            {MARKETING_HERO.statements.map((item) => (
-              <div key={item.num} className="mkt-hs-item">
-                <div className="mkt-hs-num">{item.num}</div>
-                <div className="mkt-hs-text">
-                  <HtmlText html={item.html} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mkt-pull-quote" aria-label="Pull quote">
-          <p className="mkt-pq-text">
-            <HtmlText html={MARKETING_PULL_QUOTE.textHtml} />
-          </p>
-          <p className="mkt-pq-attr">{MARKETING_PULL_QUOTE.attr}</p>
-        </section>
-
-        <section className="mkt-beats" aria-label="Platform beats">
-          {MARKETING_BEATS.map((beat) => (
-            <article key={beat.num} className="mkt-beat">
-              <div className="mkt-beat-num">{beat.num}</div>
-              <div>
-                <h2 className="mkt-beat-head">
-                  <HtmlText html={beat.headHtml} />
-                </h2>
-                <p className="mkt-beat-text">
-                  <HtmlText html={beat.textHtml} />
-                </p>
-              </div>
-            </article>
+      <nav className="kz-nav" aria-label="Site">
+        <Link
+          href="/"
+          className="kz-nav-logo dios-wordmark"
+          aria-label={`${DIOS_BRAND_NAME} — home`}
+        >
+          {DIOS_LOGO_MARK}
+        </Link>
+        <ul className="kz-nav-links">
+          {KAWASAKI_NAV.links.map((link) => (
+            <li key={link.label}>
+              <Link href={link.href}>{link.label}</Link>
+            </li>
           ))}
-        </section>
+        </ul>
+        <Link href={KAWASAKI_NAV.cta.href} className="kz-nav-cta">
+          {KAWASAKI_NAV.cta.label}
+        </Link>
+      </nav>
 
-        <section className="mkt-three-q" aria-labelledby="marketing-three-q-heading">
-          <p id="marketing-three-q-heading" className="mkt-tq-eyebrow">
-            {MARKETING_THREE_QUESTIONS.eyebrow}
+      <MarketingKawasakiProgress sectionIds={KAWASAKI_SECTION_IDS} />
+
+      {KAWASAKI_STORY_SLIDES.map((slide) => (
+        <section
+          key={slide.id}
+          id={slide.id}
+          className={`kz-s ${slideVariantClass(slide.variant)}${slideMediaClass(slide.media)}`}
+          aria-labelledby={`${slide.id}-heading`}
+        >
+          {slide.media ? (
+            <MarketingSlideBackground media={slide.media} />
+          ) : null}
+          <div className="kz-s__content">
+            <p className="kz-ey">{slide.eyebrow}</p>
+            <h1 id={`${slide.id}-heading`} className="kz-h1">
+              <HtmlText html={slide.headlineHtml} />
+            </h1>
+            <p className="kz-sup">{slide.support}</p>
+            {slide.link ? (
+              <Link href={slide.link.href} className="kz-btn-t kz-slide-link">
+                {slide.link.label}
+              </Link>
+            ) : null}
+          </div>
+          <div className="kz-num">{slide.slideNum}</div>
+        </section>
+      ))}
+
+      <section
+        id={KAWASAKI_CTA_SECTION.id}
+        className="kz-s kz-s--dark kz-s--has-media kz-s--on-video"
+        aria-labelledby={`${KAWASAKI_CTA_SECTION.id}-heading`}
+      >
+        {KAWASAKI_CTA_SECTION.media ? (
+          <MarketingSlideBackground media={KAWASAKI_CTA_SECTION.media} />
+        ) : null}
+        <div className="kz-s__content">
+          <p className="kz-ey">{KAWASAKI_CTA_SECTION.eyebrow}</p>
+          <h1 id={`${KAWASAKI_CTA_SECTION.id}-heading`} className="kz-h1">
+            <HtmlText html={KAWASAKI_CTA_SECTION.headlineHtml} />
+          </h1>
+          <div className="kz-cta-stack">
+          <Link href={KAWASAKI_CTA_SECTION.ctas.primary.href} className="kz-btn-p">
+            {KAWASAKI_CTA_SECTION.ctas.primary.label}
+          </Link>
+          <Link href={KAWASAKI_CTA_SECTION.ctas.secondary.href} className="kz-btn-s">
+            {KAWASAKI_CTA_SECTION.ctas.secondary.label}
+          </Link>
+          <Link href={KAWASAKI_CTA_SECTION.ctas.tertiary.href} className="kz-btn-t">
+            {KAWASAKI_CTA_SECTION.ctas.tertiary.label}
+          </Link>
+          </div>
+        </div>
+        <div className="kz-num">{KAWASAKI_CTA_SECTION.slideNum}</div>
+      </section>
+
+      <footer className="kz-footer">
+        <div className="kz-footer__main">
+          <div className="kz-footer__brand">
+            <span className="kz-f-glyph dios-wordmark" aria-hidden>
+              {DIOS_LOGO_GLYPH}
+            </span>
+            <p className="kz-f-descriptor">{KAWASAKI_FOOTER.descriptor}</p>
+          </div>
+          <nav className="kz-footer__nav" aria-label="Site">
+            <ul className="kz-f-links">
+              {KAWASAKI_FOOTER.links.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+        <div className="kz-footer__bar">
+          <p className="kz-footer__copy">
+            © {KAWASAKI_FOOTER.copyrightYear} {DIOS_BRAND_NAME}
           </p>
-          <div className="mkt-tq-grid">
-            {MARKETING_THREE_QUESTIONS.items.map((item) => (
-              <div key={item.num} className="mkt-tq-item">
-                <div className="mkt-tq-num">{item.num}</div>
-                <p className="mkt-tq-q">
-                  <HtmlText html={item.html} />
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mkt-for-section" aria-labelledby="marketing-for-heading">
-          <h2 id="marketing-for-heading" className="mkt-for-head">
-            {MARKETING_FOR_SECTION.head}
-          </h2>
-          <div className="mkt-for-grid">
-            {MARKETING_FOR_SECTION.cards.map((card) => (
-              <article key={card.type} className="mkt-for-card">
-                <p className="mkt-for-type">{card.type}</p>
-                <h3 className="mkt-for-title">{card.title}</h3>
-                <p className="mkt-for-text">{card.text}</p>
-                <Link href={card.link.href} className="mkt-for-link">
-                  {card.link.label}
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mkt-model" aria-labelledby="marketing-model-heading">
-          <h2 id="marketing-model-heading" className="mkt-model-head">
-            <HtmlText html={MARKETING_MODEL.headHtml} />
-          </h2>
-          <p className="mkt-model-sub">{MARKETING_MODEL.sub}</p>
-          <div className="mkt-model-tiers">
-            {MARKETING_MODEL.tiers.map((tier) => (
-              <article key={tier.level} className={`mkt-tier mkt-tier--${tier.level}`}>
-                <p className="mkt-tier-label">{tier.label}</p>
-                <h3 className="mkt-tier-name">{tier.name}</h3>
-                <p className="mkt-tier-desc">{tier.desc}</p>
-                <p className="mkt-tier-conf">{tier.conf}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mkt-cta-band" aria-labelledby="marketing-cta-heading">
-          <h2 id="marketing-cta-heading" className="mkt-cta-head">
-            <HtmlText html={MARKETING_CTA_BAND.headHtml} />
-          </h2>
-          <p className="mkt-cta-sub">{MARKETING_CTA_BAND.sub}</p>
-          <div className="mkt-cta-buttons">
-            <Link href={MARKETING_CTA_BAND.ctas.primary.href} className="mkt-btn-primary">
-              {MARKETING_CTA_BAND.ctas.primary.label}
-            </Link>
-            <Link href={MARKETING_CTA_BAND.ctas.secondary.href} className="mkt-btn-secondary">
-              {MARKETING_CTA_BAND.ctas.secondary.label}
-            </Link>
-          </div>
-          <p className="mkt-cta-divider">{MARKETING_CTA_BAND.divider}</p>
-        </section>
-      </div>
+          <p className="kz-footer__tagline">{KAWASAKI_FOOTER.tagline}</p>
+        </div>
+      </footer>
     </MarketingFontScope>
   )
 }

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { DIOS_WORDMARK } from '@/components/DiosLogo'
+import { DIOS_BRAND_NAME, DIOS_LOGO_MARK } from '@/components/DiosLogo'
 import { AUTH_ROUTES } from '@/lib/auth/routes'
 
 type RoutePlaceholderProps = {
@@ -14,8 +14,8 @@ export function RoutePlaceholder({ title, path, note, steps }: RoutePlaceholderP
   return (
     <main className="min-h-screen bg-white text-[#0D0D0D]">
       <div className="mx-auto max-w-lg px-5 py-16 sm:px-6">
-        <Link href="/" className="dios-wordmark text-xl text-black" aria-label="DIOS — home">
-          {DIOS_WORDMARK}
+        <Link href="/" className="dios-wordmark text-xl text-black" aria-label={`${DIOS_BRAND_NAME} — home`}>
+          {DIOS_LOGO_MARK}
         </Link>
 
         <p className="type-caption mt-12 font-mono uppercase tracking-widest text-black/40">

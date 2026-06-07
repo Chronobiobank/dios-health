@@ -1,7 +1,19 @@
 import { cn } from '@/lib/utils'
 
-/** Official wordmark — plain ASCII DIOS only */
-export const DIOS_WORDMARK = 'DIOS'
+/** Plain brand name — copy, titles, aria-labels. Never use the dotted O outside the logo. */
+export const DIOS_BRAND_NAME = 'DIOS'
+
+/**
+ * Visual wordmark only — O replaced with ʘ (U+0298 latin letter bilabial click).
+ * Always pair with `.dios-wordmark` (Montserrat Medium).
+ */
+export const DIOS_LOGO_MARK = `DI${String.fromCodePoint(0x0298)}S`
+
+/** Single ʘ glyph (U+0298) — footer and compact brand moments only */
+export const DIOS_LOGO_GLYPH = String.fromCodePoint(0x0298)
+
+/** Logo mark alias for existing nav imports */
+export const DIOS_WORDMARK = DIOS_LOGO_MARK
 
 export const DIOS_TAGLINE = 'Make Time Count'
 
@@ -36,9 +48,9 @@ export function DiosLogo({
         SIZE_CLASSES[size],
         className
       )}
-      aria-hidden
+      aria-label={DIOS_BRAND_NAME}
     >
-      {DIOS_WORDMARK}
+      {DIOS_LOGO_MARK}
     </span>
   )
 }
@@ -78,8 +90,9 @@ export function DiosLogoGallery() {
           Official wordmark — scale gallery
         </h1>
         <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-black/60">
-          Rendered with <code className="font-mono text-xs">.dios-wordmark</code> (Montserrat, 500).
-          Plain ASCII wordmark — no unicode variants.
+          Rendered with <code className="font-mono text-xs">.dios-wordmark</code> (Montserrat Medium,
+          500). Logo mark uses ʘ (U+0298) in place of O — plain{' '}
+          <code className="font-mono text-xs">{DIOS_BRAND_NAME}</code> in body copy only.
         </p>
 
         <ul className="mt-16 divide-y divide-black/10 border-t border-black/10">

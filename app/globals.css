@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 @import "tailwindcss";
 @config "../tailwind.config.ts";
 @import "tw-animate-css";
@@ -30,6 +30,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* DIOS logo mark only — pair with DIOS_LOGO_MARK (DIʘS), never body copy */
 .dios-wordmark {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
@@ -642,9 +643,9 @@
     color: var(--text-muted);
   }
 
-  /* Top nav: DIOS wordmark left; tagline sits beside the menu trigger */
+  /* Top nav: DIOS logo mark — weight set by .dios-wordmark (Montserrat Medium) */
   .nav-brand-wordmark {
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .nav-brand-tagline {

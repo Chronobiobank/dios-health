@@ -104,7 +104,11 @@
     .home-landing__btn-on-dark--solid,
     .clinicians-landing__btn,
     .dina-page__btn-solid,
-    .dina-page__btn-ghost
+    .dina-page__btn-ghost,
+    .kz-btn-p,
+    .kz-btn-s,
+    .kz-btn-t,
+    .kz-nav-cta
   ) {
     min-height: var(--legibility-touch-min, 3rem);
     font-size: var(--text-button-size);

@@ -1,18 +1,27 @@
 /**
- * Marketing landing design tokens — scoped to .marketing-v2-root only.
+ * Kawasaki marketing tokens — scoped to .marketing-v2-root only.
  * Do not import in dashboard or clinical layouts.
  */
 .marketing-v2-root {
   --mkt-bg: #f7fafc;
-  --mkt-bg2: #edf2f7;
   --mkt-text: #1a202c;
-  --mkt-muted: #718096;
-  --mkt-faint: #a0aec0;
+  /* Darker muted ink — senior-readable contrast on light bg */
+  --mkt-muted: #4a5568;
+  --mkt-faint: #718096;
   --mkt-border: #e2e8f0;
-  --mkt-border2: #cbd5e0;
   --mkt-teal: #1d9e75;
-  --mkt-teal-lt: #e6faf5;
   --mkt-serif: var(--font-lora), Georgia, serif;
   --mkt-sans: var(--font-dm-sans), system-ui, sans-serif;
   --mkt-mono: var(--font-mkt-mono), monospace;
+  /* Senior-first type — inherits html.dios-legible root scale */
+  --mkt-type-hero: var(--text-heading-hero, clamp(3.5rem, 11vw, 7rem));
+  --mkt-type-body: var(--text-body-size, clamp(1.0625rem, 0.35vw + 1rem, 1.25rem));
+  --mkt-type-nav: var(--text-nav-size, clamp(1rem, 0.25vw + 0.94rem, 1.125rem));
+  --mkt-type-label: var(--text-label-size, clamp(1rem, 0.2vw + 0.92rem, 1.0625rem));
+  --mkt-type-caption: var(--text-caption-size, clamp(0.9375rem, 0.15vw + 0.88rem, 1.0625rem));
+  --mkt-type-button: var(--text-button-size, clamp(1rem, 0.2vw + 0.94rem, 1.125rem));
+  --mkt-type-card-head: var(--text-step-title-size, clamp(1.125rem, 2.5vw, 1.375rem));
+  --mkt-type-card-body: var(--text-step-detail-size, clamp(1.0625rem, 2vw, 1.1875rem));
+  --mkt-touch-min: var(--legibility-touch-min, 3rem);
+  --mkt-body-leading: var(--text-body-leading, 1.65);
 }

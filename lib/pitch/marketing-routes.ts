@@ -4,6 +4,7 @@ export const MARKETING_ROUTES = {
   dina: '/dina',
   howItWorks: '/how-it-works',
   howItWorksDemo: '/how-it-works/demo',
+  technology: '/technology',
   science: '/science',
   /** HTML prototype `/learn` — maps to science curriculum */
   learn: '/science',
