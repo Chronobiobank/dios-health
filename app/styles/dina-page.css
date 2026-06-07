@@ -1,0 +1,261 @@
+/* DINA scenarios — /dina + coach gallery */
+
+.dina-page {
+  padding-bottom: 4rem;
+}
+
+.dina-page__inner {
+  margin-inline: auto;
+  max-width: 40rem;
+  padding-inline: 1.25rem;
+}
+
+.dina-page__hero {
+  padding-block: 2.5rem 1.5rem;
+}
+
+.dina-page__eyebrow {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+.dina-page__title {
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-top: 0.75rem;
+}
+
+.dina-page__lead {
+  color: rgb(0 0 0 / 0.62);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 1rem;
+  max-width: 36rem;
+}
+
+.dina-page__scenarios {
+  padding-block: 1rem 2rem;
+}
+
+.dina-page__cta {
+  border-top: 1px solid rgb(0 0 0 / 0.08);
+  padding-block: 2rem;
+}
+
+.dina-page__cta-copy {
+  color: rgb(0 0 0 / 0.6);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.dina-page__cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.dina-page__btn-solid,
+.dina-page__btn-ghost {
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.65rem 1.25rem;
+  text-decoration: none;
+}
+
+.dina-page__btn-solid {
+  background: #111213;
+  color: #fff;
+}
+
+.dina-page__btn-ghost {
+  border: 1px solid rgb(0 0 0 / 0.14);
+  color: rgb(0 0 0 / 0.75);
+}
+
+/* Gallery */
+
+.dina-scenarios {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dina-scenarios__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.dina-scenarios__tab {
+  background: rgb(255 255 255 / 0.7);
+  border: 1px solid rgb(0 0 0 / 0.1);
+  border-radius: 999px;
+  color: rgb(0 0 0 / 0.62);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  padding: 0.45rem 0.85rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.dina-scenarios__tab--active {
+  background: rgb(17 18 19 / 0.06);
+  border-color: rgb(17 18 19 / 0.22);
+  color: #111213;
+  font-weight: 500;
+}
+
+.dina-scenarios__panel {
+  background: rgb(255 255 255 / 0.72);
+  border: 1px solid rgb(0 0 0 / 0.08);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.25rem;
+}
+
+.dina-scenarios__job {
+  color: rgb(0 0 0 / 0.5);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.dina-scenarios__context {
+  color: rgb(0 0 0 / 0.58);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.dina-scenarios__patient {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.dina-scenarios__showcase {
+  background: rgb(17 18 19 / 0.03);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+}
+
+.dina-scenarios__speaker {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.45rem;
+  opacity: 0.45;
+  text-transform: uppercase;
+}
+
+.dina-scenarios__bubble {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.dina-scenarios__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.dina-scenarios__action {
+  background: #111213;
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.55rem 1rem;
+  transition: opacity 0.15s ease;
+}
+
+.dina-scenarios__action:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.dina-scenarios__action:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.dina-scenarios__live {
+  border-top: 1px solid rgb(0 0 0 / 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+}
+
+.dina-scenarios__orb-wrap {
+  display: flex;
+  justify-content: center;
+  transform: scale(0.55);
+  transform-origin: top center;
+  margin-bottom: -2.5rem;
+}
+
+.dina-scenarios__thread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.dina-scenarios__line {
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+}
+
+.dina-scenarios__line--user {
+  background: rgb(17 18 19 / 0.04);
+  margin-left: 1.5rem;
+}
+
+.dina-scenarios__line--dina {
+  background: rgb(255 255 255 / 0.85);
+  border: 1px solid rgb(0 0 0 / 0.07);
+  margin-right: 1.5rem;
+}
+
+.dina-scenarios__line-label {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35rem;
+  opacity: 0.45;
+  text-transform: uppercase;
+}
+
+.dina-scenarios__line-text {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.dina-scenarios__status {
+  color: rgb(0 0 0 / 0.4);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.dina-scenarios__error {
+  color: #b91c1c;
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+.dina-scenarios--compact .dina-scenarios__panel {
+  padding: 1rem;
+}
+
+.dina-scenarios--compact .dina-scenarios__bubble {
+  font-size: 1rem;
+}

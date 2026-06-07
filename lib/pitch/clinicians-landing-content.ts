@@ -75,7 +75,7 @@ export const CLINICIANS_USERS = {
     cvp: 'Take it now. Your window is open.',
     points: [
       'One notification at the right biological moment',
-      'DiDi coach — plain English, three sentences',
+      'DINA — plain English, three sentences',
       'Today’s med and supplement timing guidance',
       'Progress tracked with exploratory metrics',
       'Share profile with GP or pharmacist',
@@ -141,6 +141,29 @@ export const CLINICIANS_CTA = {
   sub: 'Primary care, pharmacy, and specialist practices — free patient entry, clinician triage from day one.',
   primary: { label: 'Enrol your cohort', href: 'mailto:grant@dios.health' },
   secondary: { label: 'See triage demo', href: MARKETING_ROUTES.cliniciansTriage },
+} as const
+
+/** Live product mockups — clinician, patient, and evidence surfaces */
+export const CLINICIANS_PRODUCT_DEMOS = {
+  eyebrow: 'See it working',
+  headline: 'Three surfaces. One platform.',
+  items: [
+    {
+      label: 'Cohort triage',
+      detail: 'Twelve patients, red → amber → green. Monday morning workload at a glance.',
+      href: MARKETING_ROUTES.cliniciansTriage,
+    },
+    {
+      label: 'DINA companion',
+      detail: 'Morning sequencing, caught conflicts, missed-dose nuance — ask DINA yourself.',
+      href: MARKETING_ROUTES.dina,
+    },
+    {
+      label: 'Circadian model',
+      detail: 'Timing matrix plus published trial evidence — Hygia, Lévi, Biobank, TIME.',
+      href: '/circadian-digital-twin',
+    },
+  ],
 } as const
 
 /** How common drug classes relate to biological time — clinician skim only */

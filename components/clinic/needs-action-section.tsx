@@ -104,7 +104,7 @@ export function NeedsActionSection({ patients }: NeedsActionSectionProps) {
                     </div>
                     <div>
                       <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-black/45">
-                        DiDi
+                        DINA
                       </dt>
                       <dd className="mt-1 font-mono text-[14px] font-semibold text-black">
                         {patient.vayaSessionsLast30}

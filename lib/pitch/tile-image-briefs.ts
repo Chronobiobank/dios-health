@@ -64,9 +64,9 @@ export const PITCH_TILE_BRIEFS = {
     prompt:
       'Infographic abstract: seven connected nodes in a horizontal cascade from sleep to cancer risk, circadian desynchrony spectrum, gradient bars purple amber blue on black, medical data viz aesthetic, no text no labels',
   },
-  'step-mel': {
+  'step-dina': {
     file: 'step-mel.jpg',
-    tileText: 'DiDi — Measures melanopic lux, your clock signal.',
+    tileText: 'DINA — Measures melanopic lux, your clock signal.',
     prompt:
       'Glowing soft teal and gold spherical AI voice assistant orb floating on pure black, melanopic clock signal metaphor, premium health tech, minimal, no face no text',
   },
@@ -84,7 +84,7 @@ export const PITCH_TILE_BRIEFS = {
   },
   'side-patients': {
     file: 'side-patients.jpg',
-    tileText: 'Patients — Free DiDi sessions and protocols.',
+    tileText: 'Patients — Free DINA sessions and protocols.',
     prompt:
       'Patient at home using smartphone health app comfortably on sofa, free accessible healthcare mood, warm natural light, hopeful calm, diverse UK adult, no logos no text on screen',
   },

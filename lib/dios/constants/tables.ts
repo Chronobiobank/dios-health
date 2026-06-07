@@ -1,12 +1,15 @@
 /**
  * DIOS core table identifiers.
  *
- * Domain term: mel_sessions (melanopic engagement layer — DIOS Coach camera sessions).
- * Physical Postgres table: vaya_sessions (product-facing name retained for migration stability).
+ * Domain term: coach_sessions (DINA camera / voice engagement logs).
+ * Physical Postgres table: vaya_sessions (retained for migration stability).
  */
-export const MEL_SESSIONS_TABLE = 'vaya_sessions' as const
+export const COACH_SESSIONS_TABLE = 'vaya_sessions' as const
 
-export type MelSessionsTableName = typeof MEL_SESSIONS_TABLE
+/** @deprecated Use {@link COACH_SESSIONS_TABLE}. */
+export const MEL_SESSIONS_TABLE = COACH_SESSIONS_TABLE
+
+export type CoachSessionsTableName = typeof COACH_SESSIONS_TABLE
 
 /** Pull-based wearable ingestion logs — CLAUDE.md §1 */
 export const WEARABLE_TELEMETRY_LOGS_TABLE = 'wearable_telemetry_logs' as const

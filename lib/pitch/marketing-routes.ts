@@ -1,6 +1,7 @@
 /** Marketing routes — landing section CTAs map to these full pages */
 export const MARKETING_ROUTES = {
   home: '/',
+  dina: '/dina',
   howItWorks: '/how-it-works',
   howItWorksDemo: '/how-it-works/demo',
   science: '/science',

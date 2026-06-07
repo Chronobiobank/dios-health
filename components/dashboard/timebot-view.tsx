@@ -4,6 +4,8 @@ import { Check, Mic, MicOff, Type } from 'lucide-react'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 
 import { DIOS_TAGLINE } from '@/components/DiosLogo'
+import { COACH_ASK_LABEL, COACH_DISPLAY_NAME } from '@/lib/coach/brand'
+import { DinaScenariosGallery } from '@/components/coach/dina-scenarios-gallery'
 import { CoachOrb, type CoachOrbState } from '@/components/dashboard/coach-orb'
 import type {
   TimebotData,
@@ -249,7 +251,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
       }
 
       if (!response.ok) {
-        setError(result.error ?? 'DiDi could not answer right now.')
+        setError(result.error ?? `${COACH_DISPLAY_NAME} could not answer right now.`)
         setPulseState('idle')
         return
       }
@@ -271,7 +273,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
       if (respondTimer.current) window.clearTimeout(respondTimer.current)
       respondTimer.current = window.setTimeout(() => setPulseState('idle'), 3000)
     } catch {
-      setError('DiDi could not answer right now.')
+      setError(`${COACH_DISPLAY_NAME} could not answer right now.`)
       setPulseState('idle')
     } finally {
       setLoading(false)
@@ -391,7 +393,9 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
         ) : null}
 
         {loading ? (
-          <p className="mt-3 animate-pulse font-mono text-[12px] text-black/35">DiDi is thinking…</p>
+          <p className="mt-3 animate-pulse font-mono text-[12px] text-black/35">
+            {COACH_DISPLAY_NAME} is thinking…
+          </p>
         ) : null}
 
         {error ? (
@@ -402,7 +406,14 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 pb-4 pt-2">
-        <div className="mt-4">
+        <div className="mt-2">
+          <p className="mb-2 font-mono text-[11px] uppercase tracking-widest text-black/35">
+            Example conversations
+          </p>
+          <DinaScenariosGallery apiEndpoint="/api/timebot" compact />
+        </div>
+
+        <div className="mt-6">
           <p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-black/35">
             Today&apos;s protocol
           </p>
@@ -426,7 +437,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
           </div>
           {!hasMedicationOnProtocol ? (
             <p className="mt-3 text-center text-[12px] leading-relaxed text-black/45">
-              Example timing — tell DiDi what you take to personalise your protocol.
+              Example timing — tell {COACH_DISPLAY_NAME} what you take to personalise your protocol.
             </p>
           ) : null}
         </div>
@@ -463,7 +474,9 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
                   ? 'scale-110 bg-red-500 text-white shadow-[0_0_0_8px_rgba(239,68,68,0.15)]'
                   : 'bg-black text-white shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:scale-105'
               )}
-              aria-label={isListening ? 'Stop — send to DiDi' : 'Speak to DiDi'}
+              aria-label={
+                isListening ? `Stop — send to ${COACH_DISPLAY_NAME}` : `Speak to ${COACH_DISPLAY_NAME}`
+              }
             >
               {isListening ? <MicOff className="h-7 w-7" /> : <Mic className="h-7 w-7" />}
             </button>
@@ -486,7 +499,7 @@ export function TimebotView({ data, mluxScore, introMessage }: TimebotViewProps)
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask DiDi"
+                placeholder={COACH_ASK_LABEL}
                 disabled={loading}
                 className="calmer-input"
                 autoFocus

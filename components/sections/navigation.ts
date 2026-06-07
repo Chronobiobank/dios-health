@@ -26,6 +26,7 @@ export const AUTH_LINKS = [
 /** Off-canvas / hamburger menu — keep to primary routes only */
 export const NAV_MENU_LINKS = [
   { label: 'How it works', href: '/how-it-works' },
+  { label: 'DINA', href: '/dina' },
   { label: 'Clinical evidence', href: '/evidence' },
   { label: 'Contact DIOS', href: '/contact' },
 ] as const
@@ -60,6 +61,7 @@ export const LANDING_FOOTER_SECTIONS: readonly FooterNavSection[] = [
     title: 'Product',
     links: [
       { label: 'How it works', href: '/how-it-works' },
+      { label: 'DINA', href: '/dina' },
       { label: 'Get started', href: '/onboarding' },
       { label: 'For clinicians', href: '/clinicians' },
       { label: 'Sign in', href: '/auth/signin' },

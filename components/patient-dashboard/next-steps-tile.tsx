@@ -3,6 +3,7 @@
 import { ListChecks } from 'lucide-react'
 import Link from 'next/link'
 
+import { COACH_ASK_LABEL } from '@/lib/coach/brand'
 import type { PatientNextStep, PatientNextSteps } from '@/lib/patient-dashboard/types'
 
 type NextStepsTileProps = {
@@ -29,7 +30,7 @@ function NextStepAction({
   if (step.prompt) {
     return (
       <button type="button" className="next-steps-tile__action" onClick={() => onSendPrompt(step.prompt!)}>
-        Ask DiDi
+        {COACH_ASK_LABEL}
         <span aria-hidden> ↗</span>
       </button>
     )

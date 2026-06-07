@@ -48,7 +48,7 @@ export const SPECTRUM_NODES: SpectrumNodeSpec[] = [
     differentials: ['DSPD', 'ASPD', 'Shift work disorder', 'Jet lag'],
     clinicalScript:
       'Evening chronotype with delayed MLux phase — consider morning bright light protocol and melatonin 0.5mg at target bedtime minus 5h',
-    layer1Signal: 'MLux phase time from DiDi camera session',
+    layer1Signal: 'MLux phase time from DINA camera session',
     layer2Signal: 'Melatonin metabolites (6-sulphatoxymelatonin) in Gominak panel',
     layer3Signal: 'TipTraQ sleep onset / MSFsc chronotype confirmation',
   },
@@ -64,7 +64,7 @@ export const SPECTRUM_NODES: SpectrumNodeSpec[] = [
     differentials: ['OSA', 'Insomnia disorder', 'REM behaviour disorder', 'PLMD'],
     clinicalScript:
       'Low nocturnal dark exposure reducing sleep pressure — evening light curfew 21:15, blackout protocol, review OSA risk',
-    layer1Signal: 'Nocturnal MLux adequacy from DiDi session',
+    layer1Signal: 'Nocturnal MLux adequacy from DINA session',
     layer2Signal:
       'Vitamin D status — Gominak 60-80ng/ml optimal for sleep architecture',
     layer3Signal: 'TipTraQ REM latency, sleep efficiency, AHI proxy',
@@ -81,7 +81,7 @@ export const SPECTRUM_NODES: SpectrumNodeSpec[] = [
     differentials: ['T2DM', 'Metabolic syndrome', 'Insulin resistance', 'NAFLD'],
     clinicalScript:
       'Evening chronotype doubles T2DM risk independently (UK Biobank, 84,790 participants, Lancet). Metformin optimal at breakfast — align with peripheral clock phase',
-    layer1Signal: 'Chronotype + morning MLux adequacy from DiDi',
+    layer1Signal: 'Chronotype + morning MLux adequacy from DINA',
     layer2Signal: 'HbA1c, fasting insulin, Gominak panel metabolic markers',
     layer3Signal:
       'TipTraQ sleep duration — <6h doubles insulin resistance independently',
@@ -98,7 +98,7 @@ export const SPECTRUM_NODES: SpectrumNodeSpec[] = [
     differentials: ['Non-dipping HTN', 'AF', 'Morning MACE risk', 'White coat HTN'],
     clinicalScript:
       'Hygia trial: bedtime antihypertensives reduce MACE 45% vs morning dosing (n=19,084). Move ramipril to DLMO+1h — typically 22:00-24:00 for evening types',
-    layer1Signal: 'Evening chronotype flag from DiDi + MLux phase time',
+    layer1Signal: 'Evening chronotype flag from DINA + MLux phase time',
     layer2Signal: 'Renin-aldosterone ratio, potassium, magnesium in blood panel',
     layer3Signal: 'TipTraQ non-dipping confirmation — autonomic overnight pattern',
   },
@@ -115,7 +115,7 @@ export const SPECTRUM_NODES: SpectrumNodeSpec[] = [
     clinicalScript:
       'Coimbra protocol: VDR resistance corrected by high-dose D3 + low-protein diet + hydration. Morning UVB exposure critical for endogenous D3 synthesis — MLux morning score is the proxy',
     layer1Signal:
-      'Morning MLux adequacy (UVB proxy) + melanin calibration from DiDi',
+      'Morning MLux adequacy (UVB proxy) + melanin calibration from DINA',
     layer2Signal: 'Vitamin D 25-OH, PTH, calcium, magnesium — full Gominak/Coimbra panel',
     layer3Signal: 'TipTraQ HRV — autonomic suppression precedes flare by 48-72h',
   },
@@ -131,7 +131,7 @@ export const SPECTRUM_NODES: SpectrumNodeSpec[] = [
     differentials: ['MCI', "Alzheimer's", 'MDD', 'Generalised anxiety', 'ADHD'],
     clinicalScript:
       "SSRI optimal timing at DLMO+2h for evening types — aligns with peak serotonin reuptake inhibition during circadian nadir. Donepezil at bedtime — Alzheimer's trials confirm nocturnal cholinergic advantage",
-    layer1Signal: 'Phase delay + evening light exposure from DiDi session',
+    layer1Signal: 'Phase delay + evening light exposure from DINA session',
     layer2Signal: 'Vitamin D, omega-3 index, B12, folate in Gominak panel',
     layer3Signal: 'TipTraQ REM duration — REM is the primary amyloid clearance window',
   },
@@ -152,7 +152,7 @@ export const SPECTRUM_NODES: SpectrumNodeSpec[] = [
     differentials: ['Breast', 'Colorectal', 'Prostate', 'NHL', 'Melanoma'],
     clinicalScript:
       'Night shift work classified IARC Group 2A carcinogen. Chrono-oncology trials show 50% reduction in chemotherapy toxicity with circadian-timed dosing (Lévi et al). MLux night score is the sentinel biomarker',
-    layer1Signal: 'Nocturnal light exposure score from DiDi — night-shift flag',
+    layer1Signal: 'Nocturnal light exposure score from DINA — night-shift flag',
     layer2Signal: 'Vitamin D, melatonin metabolites, inflammatory markers',
     layer3Signal: 'TipTraQ shift pattern confirmation + sleep fragmentation',
   },

@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useState } from 'react'
 
 import { DashboardNav } from '@/components/patient-dashboard/dashboard-nav'
+import { COACH_ASK_LABEL } from '@/lib/coach/brand'
 import { BodyClockDetailTile } from '@/components/patient-dashboard/body-clock-detail-tile'
 import { DoseWindowsTile } from '@/components/patient-dashboard/dose-windows-tile'
 import { MeasureTile } from '@/components/patient-dashboard/measure-tile'
@@ -123,7 +124,7 @@ export function DashboardClient({
             <NextStepsTile nextSteps={displayNextSteps} onSendPrompt={sendPrompt} />
           </Section>
 
-          <Section label="Ask DiDi">
+          <Section label={COACH_ASK_LABEL}>
             <TileGrid>
               <ToolTile
                 id="coach"

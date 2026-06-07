@@ -1,0 +1,291 @@
+/* Chronomedicine model — timing matrix + evidence panel */
+
+.chronotherapy-model-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+/* —— Matrix —— */
+
+.chronotherapy-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chronotherapy-matrix__axis {
+  display: flex;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.625rem;
+  justify-content: space-between;
+  letter-spacing: 0.08em;
+  margin-left: 8.5rem;
+  opacity: 0.45;
+  text-transform: uppercase;
+}
+
+.chronotherapy-matrix__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chronotherapy-matrix__row {
+  align-items: stretch;
+  background: rgb(255 255 255 / 0.55);
+  border: 1px solid rgb(0 0 0 / 0.08);
+  border-radius: 10px;
+  cursor: pointer;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 8.5rem 1fr;
+  padding: 0.75rem 0.875rem;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  width: 100%;
+}
+
+.chronotherapy-matrix__row:hover {
+  border-color: rgb(0 0 0 / 0.14);
+}
+
+.chronotherapy-matrix__row--active {
+  border-color: rgb(26 92 66 / 0.45);
+  box-shadow: 0 0 0 1px rgb(26 92 66 / 0.2);
+}
+
+.chronotherapy-matrix__row-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.chronotherapy-matrix__row-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.chronotherapy-matrix__row-substances {
+  color: rgb(0 0 0 / 0.5);
+  font-size: 0.6875rem;
+  line-height: 1.35;
+}
+
+.chronotherapy-matrix__row-window {
+  color: rgb(0 0 0 / 0.55);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  margin-top: 0.15rem;
+}
+
+.chronotherapy-matrix__row-cluster {
+  color: rgb(0 0 0 / 0.38);
+  display: block;
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+}
+
+.chronotherapy-matrix__track {
+  align-self: center;
+  background: rgb(0 0 0 / 0.06);
+  border-radius: 4px;
+  height: 1.125rem;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.chronotherapy-matrix__band {
+  border-radius: 3px;
+  bottom: 2px;
+  position: absolute;
+  top: 2px;
+}
+
+.chronotherapy-matrix__hint {
+  color: rgb(0 0 0 / 0.45);
+  margin-top: 0.25rem;
+}
+
+/* —— Evidence panel —— */
+
+.chronotherapy-evidence {
+  border-top: 1px solid rgb(0 0 0 / 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-top: 2rem;
+}
+
+.chronotherapy-evidence__eyebrow {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+.chronotherapy-evidence__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-top: 0.5rem;
+}
+
+.chronotherapy-evidence__lede {
+  color: rgb(0 0 0 / 0.6);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  margin-top: 0.5rem;
+  max-width: 42rem;
+}
+
+.chronotherapy-evidence__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chronotherapy-evidence__tab {
+  background: rgb(255 255 255 / 0.6);
+  border: 1px solid rgb(0 0 0 / 0.1);
+  border-radius: 999px;
+  color: rgb(0 0 0 / 0.65);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.chronotherapy-evidence__tab:hover {
+  border-color: rgb(0 0 0 / 0.18);
+}
+
+.chronotherapy-evidence__tab--active {
+  background: rgb(26 92 66 / 0.1);
+  border-color: rgb(26 92 66 / 0.35);
+  color: rgb(15 50 36);
+  font-weight: 500;
+}
+
+.chronotherapy-evidence__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chronotherapy-evidence__card {
+  background: rgb(255 255 255 / 0.72);
+  border: 1px solid rgb(0 0 0 / 0.08);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.125rem 1.25rem;
+}
+
+.chronotherapy-evidence__card-head {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.chronotherapy-evidence__study {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  max-width: 28rem;
+}
+
+.chronotherapy-evidence__badge {
+  background: rgb(0 0 0 / 0.05);
+  border-radius: 999px;
+  flex-shrink: 0;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.55rem;
+  white-space: nowrap;
+}
+
+.chronotherapy-evidence__finding {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.45;
+  max-width: 40rem;
+}
+
+.chronotherapy-evidence__emphasis {
+  color: #1a5c42;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.chronotherapy-evidence__detail {
+  color: rgb(0 0 0 / 0.62);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  max-width: 40rem;
+}
+
+.chronotherapy-evidence__doi {
+  color: rgb(0 0 0 / 0.75);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  width: fit-content;
+}
+
+.chronotherapy-evidence__doi:hover {
+  opacity: 0.75;
+}
+
+.chronotherapy-evidence__cluster-insight {
+  background: rgb(26 92 66 / 0.06);
+  border: 1px solid rgb(26 92 66 / 0.18);
+  border-radius: 10px;
+  color: rgb(15 50 36);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  padding: 1rem 1.125rem;
+}
+
+.chronotherapy-evidence__insight-label {
+  display: block;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .chronotherapy-matrix__axis {
+    margin-left: 0;
+  }
+
+  .chronotherapy-matrix__row {
+    grid-template-columns: 1fr;
+  }
+
+  .chronotherapy-matrix__track {
+    height: 0.875rem;
+  }
+}

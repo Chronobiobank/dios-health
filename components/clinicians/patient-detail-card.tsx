@@ -179,11 +179,11 @@ export function PatientDetailCard({ patient }: PatientDetailCardProps) {
       </section>
 
       <section>
-        <h3 className="clinicians-triage__section-title">DiDi session log</h3>
-        <ul className="clinicians-triage__mel-list">
-          {patient.melSessions.map((session) => (
-            <li key={`${session.type}-${session.at}`} className="clinicians-triage__mel-item">
-              <p className="clinicians-triage__mel-type">
+        <h3 className="clinicians-triage__section-title">DINA session log</h3>
+        <ul className="clinicians-triage__coach-list">
+          {patient.coachSessions.map((session) => (
+            <li key={`${session.type}-${session.at}`} className="clinicians-triage__coach-item">
+              <p className="clinicians-triage__coach-type">
                 {session.type.replace('_', ' ')} · {formatSessionDate(session.at)} ·{' '}
                 {session.durationSec}s
               </p>

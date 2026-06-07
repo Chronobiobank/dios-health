@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 
 import { TimebotView } from '@/components/dashboard/timebot-view'
+
+import '@/app/styles/dina-page.css'
 import { getCoachIntroMessage, getPatientFirstName } from '@/lib/auth/greeting'
 import { COACH_ASK_LABEL, COACH_DISPLAY_NAME } from '@/lib/coach/brand'
 import { requirePatientSession } from '@/lib/auth/require-patient'

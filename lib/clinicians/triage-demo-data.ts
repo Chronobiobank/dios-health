@@ -61,7 +61,7 @@ const SEAN_JAMES: TriagePatient = {
     { name: 'B50 complex', dose: 'phase 2', cluster: 'architect' },
   ],
   nextAction: 'Lab due 15 Jul. All gates clear. No action required.',
-  melSessions: [
+  coachSessions: [
     {
       type: 'LAB_REVIEW',
       summary: 'PTH 38 pg/mL — lower third. All safety gates clear. Next lab 15 July.',
@@ -139,7 +139,7 @@ const ELENA_R: TriagePatient = {
     { name: 'Magnesium citrate', dose: '600mg', cluster: null, note: 'cofactor' },
   ],
   nextAction: 'Calcium cascade WARNING — hold D3 notifications. Clinician review required.',
-  melSessions: [
+  coachSessions: [
     {
       type: 'LAB_REVIEW',
       summary: 'PTH floor alert. Calcium cascade flagged. Contact clinician before next dose.',
@@ -216,7 +216,7 @@ const MARCUS_H: TriagePatient = {
     { name: 'B12 methylcobalamin', dose: '5,000mcg', cluster: 'restorer' },
   ],
   nextAction: 'Lab due 8 Jun. PTH still in middle third — review titration at next draw.',
-  melSessions: [
+  coachSessions: [
     {
       type: 'LAB_REVIEW',
       summary: 'PTH 46 pg/mL — middle third. Dose held pending lab review.',

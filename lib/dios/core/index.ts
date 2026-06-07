@@ -1,5 +1,5 @@
 export {
-  melSessionsTable,
-  type MelSessionInsert,
-  type MelSessionRow,
-} from '@/lib/dios/core/mel-sessions'
+  coachSessionsTable,
+  type CoachSessionInsert,
+  type CoachSessionRow,
+} from '@/lib/dios/core/coach-sessions'

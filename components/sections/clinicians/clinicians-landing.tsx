@@ -6,6 +6,7 @@ import {
   CHRONOMEDICINE_CLUSTERS,
   CLINICIANS_CTA,
   CLINICIANS_EVIDENCE,
+  CLINICIANS_PRODUCT_DEMOS,
   CLINICIANS_GAP,
   CLINICIANS_HERO,
   CLINICIANS_MOAT,
@@ -150,6 +151,21 @@ export function CliniciansLanding() {
         </div>
       </section>
 
+      <section className="clinicians-landing__section clinicians-landing__section--muted" id="demos">
+        <div className="clinicians-landing__inner">
+          <p className="clinicians-landing__eyebrow clinicians-landing__reveal">{CLINICIANS_PRODUCT_DEMOS.eyebrow}</p>
+          <h2 className="clinicians-landing__title clinicians-landing__reveal">{CLINICIANS_PRODUCT_DEMOS.headline}</h2>
+          <div className="clinicians-landing__demos clinicians-landing__reveal">
+            {CLINICIANS_PRODUCT_DEMOS.items.map((item) => (
+              <Link key={item.href} href={item.href} className="clinicians-landing__demo-card">
+                <p className="clinicians-landing__demo-label">{item.label} ↗</p>
+                <p className="clinicians-landing__demo-detail">{item.detail}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="clinicians-landing__section" id="science">
         <div className="clinicians-landing__inner">
           <p className="clinicians-landing__eyebrow clinicians-landing__reveal">{CLINICIANS_EVIDENCE.eyebrow}</p>
@@ -163,7 +179,7 @@ export function CliniciansLanding() {
             ))}
           </div>
           <p className="clinicians-landing__more-link clinicians-landing__reveal">
-            <Link href={MARKETING_ROUTES.science}>Peer-reviewed library ↗</Link>
+            <Link href="/circadian-digital-twin">Circadian model & trial evidence ↗</Link>
           </p>
         </div>
       </section>

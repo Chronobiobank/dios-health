@@ -652,6 +652,40 @@
 }
 
 /* Evidence */
+.clinicians-landing__demos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-top: 1.25rem;
+}
+
+.clinicians-landing__demo-card {
+  background: var(--cl-paper);
+  border: 1px solid rgb(0 0 0 / 0.08);
+  border-radius: 4px;
+  display: block;
+  padding: 1rem 0.875rem;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.clinicians-landing__demo-card:hover {
+  border-color: rgb(0 0 0 / 0.18);
+}
+
+.clinicians-landing__demo-label {
+  color: var(--cl-ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.clinicians-landing__demo-detail {
+  color: var(--cl-ink-3);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin-top: 0.35rem;
+}
+
 .clinicians-landing__evidence {
   display: flex;
   flex-direction: column;
@@ -817,6 +851,12 @@
   .clinicians-landing__moat-cell {
     border: none;
     border-radius: 0;
+  }
+
+  .clinicians-landing__demos {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .clinicians-landing__evidence {

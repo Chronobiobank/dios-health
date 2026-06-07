@@ -5,6 +5,7 @@ import { MessageCircle, Pill } from 'lucide-react'
 import { DashCompactTile } from '@/components/patient-dashboard/dash-compact-tile'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
 import { tileSubhead } from '@/lib/patient-dashboard/tile-copy'
 import type { Medication, PatientSnapshot } from '@/lib/patient-dashboard/types'
 
@@ -58,7 +59,7 @@ export function ToolTile({
         )
       }
       iconClassName={isCoach ? 'dash-tile-icon--coach' : 'dash-tile-icon--meds'}
-      title={isCoach ? 'DiDi' : 'Medication timing'}
+      title={isCoach ? COACH_DISPLAY_NAME : 'Medication timing'}
       subtitle={tileSubhead(
         isCoach
           ? 'Plain English — three sentences max. Ask about today’s dose windows.'

@@ -408,26 +408,26 @@
   padding: 0.75rem 1rem;
 }
 
-.clinicians-triage__mel-list {
+.clinicians-triage__coach-list {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
   list-style: none;
 }
 
-.clinicians-triage__mel-item {
+.clinicians-triage__coach-item {
   border-bottom: 1px solid var(--ct-border);
   font-size: 0.8125rem;
   line-height: 1.5;
   padding-bottom: 0.625rem;
 }
 
-.clinicians-triage__mel-item:last-child {
+.clinicians-triage__coach-item:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
 
-.clinicians-triage__mel-type {
+.clinicians-triage__coach-type {
   color: var(--ct-muted);
   font-family: var(--ct-mono);
   font-size: 0.5625rem;

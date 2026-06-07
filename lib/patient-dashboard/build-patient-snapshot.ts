@@ -1,3 +1,4 @@
+import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
 import { buildInsightsData, type BloodPanelSnapshot, type NightFlagsRow } from '@/lib/dashboard/insights-data'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
 import { parseTimeToMinutes } from '@/lib/dashboard/time-utils'
@@ -291,7 +292,7 @@ function buildMeasureTiles(input: {
           label: 'Explain my vitamin D',
           prompt: 'Why is my vitamin D adding Dark Years to my Chronosomatic Age?',
         },
-        { label: 'Open DiDi', opensCoach: true },
+        { label: `Open ${COACH_DISPLAY_NAME}`, opensCoach: true },
       ],
     },
     {

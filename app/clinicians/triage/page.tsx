@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
 
-import { ClinicianTriageDashboard } from '@/components/clinicians/ClinicianTriageDashboard'
+import { GpCohortTriageDashboard } from '@/components/clinicians/gp-cohort-triage-dashboard'
 
 import '@/app/styles/clinician-triage-shell.css'
 
 export const metadata: Metadata = {
-  title: 'Clinician triage demo — DIOS',
-  description: 'Who needs attention this week. Red, amber, green by PTH trajectory and safety gates.',
+  title: 'Cohort triage — Monday morning review — DIOS',
+  description:
+    'Twelve patients sorted red, amber, green. GP workload at a glance — timing conflicts, DINA handoff, export and lab orders from one screen.',
   robots: { index: false, follow: false },
 }
 
 export default function CliniciansTriagePage() {
-  return <ClinicianTriageDashboard />
+  return <GpCohortTriageDashboard />
 }

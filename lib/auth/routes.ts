@@ -22,9 +22,9 @@ export const PATIENT_ROUTES = {
   firstLightComplete: '/dashboard/first-light/complete',
   premium: '/dashboard/premium',
   coach: '/dashboard/coach',
-  /** @deprecated Use {@link PATIENT_ROUTES.coach}. */
+  /** @deprecated Legacy alias — same as {@link PATIENT_ROUTES.coach}. Kept for old URLs only. */
   mel: '/dashboard/coach',
-  /** @deprecated Use {@link PATIENT_ROUTES.coach}. */
+  /** @deprecated Legacy alias — same as {@link PATIENT_ROUTES.coach}. Kept for old URLs only. */
   timebot: '/dashboard/coach',
   insights: '/dashboard/insights',
   streams: '/dashboard/streams',

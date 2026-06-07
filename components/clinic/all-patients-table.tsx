@@ -22,7 +22,7 @@ export function AllPatientsTable({ patients }: AllPatientsTableProps) {
               <th className="px-4 py-3 font-medium sm:px-5">MLux</th>
               <th className="px-4 py-3 font-medium sm:px-5">Finding</th>
               <th className="px-4 py-3 font-medium sm:px-5">Adherence</th>
-              <th className="px-4 py-3 font-medium sm:px-5">DiDi</th>
+              <th className="px-4 py-3 font-medium sm:px-5">DINA</th>
               <th className="px-4 py-3 font-medium sm:px-5">Action</th>
             </tr>
           </thead>

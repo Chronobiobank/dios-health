@@ -72,7 +72,7 @@ export function buildSpectrumNodes(input: SpectrumInput): SpectrumNode[] {
         ? 'Evening chronotype detected — body clock running delayed'
         : isMorning
           ? 'Morning chronotype — body clock running advanced'
-          : 'Intermediate chronotype — estimated from DiDi session',
+          : 'Intermediate chronotype — estimated from DINA session',
     },
     {
       id: 'sleep-quality',

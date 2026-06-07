@@ -12,6 +12,7 @@ import {
 } from '@/lib/dashboard/timebot-supplements'
 import { formatMinutesLabel } from '@/lib/dashboard/time-utils'
 import { getPatientFirstName } from '@/lib/auth/greeting'
+import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
 import { createAnthropicClient, mapAnthropicError } from '@/lib/tiptraq/anthropic-client'
 import { createClient } from '@/lib/supabase/server'
 
@@ -33,7 +34,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            'DiDi is not yet configured on this server. The ANTHROPIC_API_KEY environment variable is missing. Add it in Vercel → Settings → Environment Variables.',
+            `${COACH_DISPLAY_NAME} is not yet configured on this server. The ANTHROPIC_API_KEY environment variable is missing. Add it in Vercel → Settings → Environment Variables.`,
         },
         { status: 503 }
       )
@@ -141,7 +142,10 @@ export async function POST(request: Request) {
       .trim()
 
     if (!answer) {
-      return NextResponse.json({ error: 'DiDi returned an empty response. Try again.' }, { status: 502 })
+      return NextResponse.json(
+        { error: `${COACH_DISPLAY_NAME} returned an empty response. Try again.` },
+        { status: 502 }
+      )
     }
 
     return NextResponse.json({
@@ -151,8 +155,14 @@ export async function POST(request: Request) {
   } catch (error) {
     const mapped = mapAnthropicError(error)
     if (mapped) {
-      return NextResponse.json({ error: mapped.replace('Report extraction', 'DiDi') }, { status: 502 })
+      return NextResponse.json(
+        { error: mapped.replace('Report extraction', COACH_DISPLAY_NAME) },
+        { status: 502 }
+      )
     }
-    return NextResponse.json({ error: 'Could not reach DiDi. Please try again.' }, { status: 500 })
+    return NextResponse.json(
+      { error: `Could not reach ${COACH_DISPLAY_NAME}. Please try again.` },
+      { status: 500 }
+    )
   }
 }

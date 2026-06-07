@@ -23,7 +23,7 @@ export const PITCH_IMAGES = {
   },
   spectrum: '/pitch/spectrum.jpg',
   steps: {
-    mel: '/pitch/step-mel.jpg',
+    dina: '/pitch/step-mel.jpg',
     camera: '/pitch/step-camera.jpg',
     protocol: '/pitch/step-protocol.jpg',
   },

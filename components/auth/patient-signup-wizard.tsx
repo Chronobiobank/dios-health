@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { AuthShell } from '@/components/auth/auth-shell'
 import { BTN_PRIMARY } from '@/components/sections/layout'
 import { AUTH_INPUT_CLASS } from '@/lib/auth/form-styles'
+import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
 import { AUTH_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
 import { mapSignUpError } from '@/lib/auth/sign-up-errors'
 import { createClient } from '@/lib/supabase/client'
@@ -232,7 +233,8 @@ export function PatientSignupWizard() {
               <div>
                 <p className="text-[15px] font-medium text-black">Clinical use</p>
                 <p className="mt-1 text-sm leading-relaxed text-black/60">
-                  Your session data personalises your dose timing and light protocol. Required to use DiDi.
+                  Your session data personalises your dose timing and light protocol. Required to use{' '}
+                  {COACH_DISPLAY_NAME}.
                 </p>
               </div>
             </div>
@@ -299,7 +301,7 @@ export function PatientSignupWizard() {
           ) : null}
 
           <button type="submit" className={BTN_PRIMARY} disabled={loading}>
-            {loading ? 'Creating account…' : 'Open DiDi →'}
+            {loading ? 'Creating account…' : `Open ${COACH_DISPLAY_NAME} →`}
           </button>
 
           <button

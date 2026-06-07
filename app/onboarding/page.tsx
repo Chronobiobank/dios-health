@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 
-import { MelOnboardingFlow } from '@/components/mel/mel-onboarding-flow'
+import { DinaOnboardingFlow } from '@/components/onboarding/dina-onboarding-flow'
+import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
 
 export const metadata: Metadata = {
-  title: 'DiDi onboarding — DIOS',
-  description: '60-second clock scan. BTI estimate. Your first medication window.',
-  robots: { index: false, follow: false },
+  title: `${COACH_DISPLAY_NAME} onboarding — DIOS`,
+  description: `Meet ${COACH_DISPLAY_NAME}, your Dose Intelligence Agent — scan your clock and map your first medication window.`,
 }
 
-export default function MelOnboardingPage() {
-  return <MelOnboardingFlow />
+export default function DinaOnboardingPage() {
+  return <DinaOnboardingFlow />
 }

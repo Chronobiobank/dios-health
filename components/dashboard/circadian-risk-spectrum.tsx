@@ -182,7 +182,7 @@ export function CircadianRiskSpectrum({
           <h2 className="text-[15px] font-semibold text-black">Circadian Risk Profile</h2>
           <p className="mt-0.5 text-[12px] text-black/50">
             {overallConfidence === 'ESTIMATED'
-              ? 'Based on DiDi session · Add data layers to sharpen'
+              ? 'Based on DINA session · Add data layers to sharpen'
               : overallConfidence === 'PRECISION'
                 ? 'Blood panel data included'
                 : 'All data layers confirmed'}
@@ -226,7 +226,7 @@ export function CircadianRiskSpectrum({
 
       {isFirstOpen ? (
         <p className="mt-4 text-center font-mono text-[11px] text-black/30">
-          Confidence grows with each DiDi session and data layer
+          Confidence grows with each DINA session and data layer
         </p>
       ) : null}
     </section>

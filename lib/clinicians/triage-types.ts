@@ -15,7 +15,7 @@ export type SafetyGateStatus = 'CLEAR' | 'WARNING' | 'HOLD'
 
 export type SafetyGateType = 'CALCIUM_CASCADE' | 'EGFR' | 'URINARY_CA' | 'HYDRATION'
 
-export type MelSessionType = 'ONBOARDING' | 'DAILY_CHECK' | 'LAB_REVIEW'
+export type CoachSessionType = 'ONBOARDING' | 'DAILY_CHECK' | 'LAB_REVIEW'
 
 export type PthTrend = 'down' | 'up' | 'flat'
 
@@ -55,8 +55,8 @@ export type TriageProtocolDrug = {
   note?: string
 }
 
-export type TriageMelSession = {
-  type: MelSessionType
+export type TriageCoachSession = {
+  type: CoachSessionType
   summary: string
   at: string
   durationSec: number
@@ -80,5 +80,5 @@ export type TriagePatient = {
   nextLabDue: string
   protocolDrugs: TriageProtocolDrug[]
   nextAction: string
-  melSessions: TriageMelSession[]
+  coachSessions: TriageCoachSession[]
 }
