@@ -121,17 +121,18 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-nav-cta {
-  font-size: var(--mkt-type-button);
-  line-height: 1.2;
-  min-height: var(--mkt-touch-min);
-  padding: 0.625rem 1.25rem;
+  font-size: clamp(0.8125rem, 0.15vw + 0.76rem, 0.9375rem);
+  line-height: 1.25;
+  min-height: 0;
+  padding: 0.3125rem 0.75rem;
   display: inline-flex;
   align-items: center;
   background: var(--mkt-text);
   color: var(--mkt-bg);
-  border-radius: 4px;
+  border-radius: 3px;
   text-decoration: none;
   font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 /* ── SECTION — full viewport, snap ── */
@@ -596,7 +597,9 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-f-glyph {
-  font-size: clamp(2.25rem, 5vw + 1rem, 3.25rem);
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(4.5rem, 10vw + 2rem, 6.5rem);
+  font-weight: 400;
   line-height: 1;
   color: var(--mkt-text);
   letter-spacing: 0;
@@ -657,10 +660,8 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-footer__tagline {
-  font-family: var(--mkt-mono);
   font-size: var(--mkt-type-caption);
   line-height: var(--text-caption-leading, 1.5);
-  letter-spacing: 0.06em;
   color: var(--mkt-faint);
   margin: 0;
   text-align: right;
@@ -693,8 +694,8 @@ html.marketing-v2-active .dios-app-shell {
   }
 
   .marketing-v2-root .kz-nav-cta {
-    font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
-    padding: 0.625rem 1rem;
+    font-size: clamp(0.8125rem, 2vw, 0.875rem);
+    padding: 0.375rem 0.6875rem;
   }
 
   .marketing-v2-root .kz-s {

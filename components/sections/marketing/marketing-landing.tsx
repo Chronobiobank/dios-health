@@ -118,7 +118,7 @@ export function MarketingLanding() {
       <footer className="kz-footer">
         <div className="kz-footer__main">
           <div className="kz-footer__brand">
-            <span className="kz-f-glyph dios-wordmark" aria-hidden>
+            <span className="kz-f-glyph" aria-hidden>
               {DIOS_LOGO_GLYPH}
             </span>
             <p className="kz-f-descriptor">{KAWASAKI_FOOTER.descriptor}</p>
