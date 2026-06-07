@@ -7,6 +7,7 @@ import { useEffect, useId, useRef, useState } from 'react'
 
 import { SignOutButton } from '@/components/auth/sign-out-button'
 import { HashLink } from '@/components/sections/HashLink'
+import { COACH_ASK_LABEL } from '@/lib/coach/brand'
 import { cn } from '@/lib/utils'
 
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
@@ -14,7 +15,6 @@ import { PATIENT_ROUTES } from '@/lib/auth/routes'
 import {
   AUTH_LINKS,
   isPatientDashboardPath,
-  NAV_COACH_LINK,
   NAV_DASHBOARD_LINK,
   NAV_MENU_LINKS,
 } from './navigation'
@@ -62,8 +62,8 @@ export function NavMenu({ isAuthenticated = false, coachHref }: NavMenuProps) {
 
   return (
     <div ref={rootRef} className="dios-site-nav__coach-menu">
-      <Link href={coachHref} className="dios-site-nav__ask-dios type-button">
-        {NAV_COACH_LINK.label}
+      <Link href={coachHref} className="dios-site-nav__ask-dios type-button" aria-label={COACH_ASK_LABEL}>
+        {COACH_ASK_LABEL}
       </Link>
       <button
         type="button"

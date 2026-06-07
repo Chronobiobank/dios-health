@@ -3,14 +3,14 @@ import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 export const EVIDENCE_LANDING_META = {
   title: 'Clinical evidence — Dose Intelligence · DIOS',
   description:
-    'Oculomics, neurochemistry, and FDA-cleared TipTraQ telemetry — the clinical validation framework behind dios.health Dose Intelligence OS.',
+    'Melanopsin phototransduction, neurochemistry, and FDA-cleared TipTraQ telemetry — the clinical validation framework behind DIOS Dose Intelligence.',
 } as const
 
 export const EVIDENCE_HERO = {
   eyebrow: 'Clinical validation',
   headline: 'The science behind',
   headlineEmphasis: 'dose intelligence.',
-  lede: 'We bridge ocular architecture, neurochemistry, and medical-grade telemetry to personalise dose timing — not population schedules.',
+  lede: 'We bridge photic signalling, neurochemistry, and medical-grade telemetry to personalise dose timing — not population schedules.',
 } as const
 
 export type EvidencePillar = {
@@ -26,23 +26,21 @@ export const EVIDENCE_PILLARS: readonly EvidencePillar[] = [
   {
     id: 'photic',
     label: 'Pillar 1',
-    title: 'Oculomics & light',
+    title: 'Photic signalling & light',
     summary:
       'Human circadian rhythms are anchored by intrinsically photosensitive retinal ganglion cells (ipRGCs). Melanopsin peaks between 480–490 nm (blue-cyan spectrum).',
     bullets: [
       {
-        label: 'Hardware limits',
-        body: 'Retinal structural thickness dictates light absorption bandwidth. Thinning of the GCL-IPL raises the melanopic lux threshold required to sync the master clock.',
+        label: 'ipRGC transduction',
+        body: 'Foster and colleagues established melanopsin-expressing ipRGCs as the primary photic input to the suprachiasmatic nucleus — the master clock that sets dose timing windows.',
       },
       {
-        label: 'Siloton GiraffeOCT',
-        body: 'DIOS ingests native data from Siloton quantum photonic integrated circuit eye scanners to measure structural µm thickness and calculate your biological light dose.',
-        href: 'https://siloton.com/',
-        linkLabel: "Siloton's PIC OCT scanners",
+        label: 'DIOS measurement path',
+        body: 'DIOS derives provisional melanopic lux and DLMO from monthly smartphone camera sessions and TipTraQ sleep architecture — no ophthalmic imaging required.',
       },
     ],
     reference:
-      'Foster, R. G., et al. (2002). Melanopsin and circadian phototransduction. / Siloton Ltd. (2025). Ophthalmic PIC OCT.',
+      'Foster, R. G., et al. (2002). Melanopsin and circadian phototransduction.',
   },
   {
     id: 'fuel',
@@ -104,7 +102,7 @@ export const EVIDENCE_PILLARS: readonly EvidencePillar[] = [
 
 export const EVIDENCE_LOOP = {
   headline: 'Operationalising the loop',
-  body: 'By feeding non-invasive baselines — iris, skin melanin, and geolocation zenith — into the platform, DIOS flags circadian phase displacement and recommends biochemical intervention only when a broken loop is detected.',
+  body: 'By feeding non-invasive baselines — skin melanin, monthly light capture, and geolocation zenith — into the platform, DIOS flags circadian phase displacement and recommends biochemical intervention only when a broken loop is detected.',
 } as const
 
 export const EVIDENCE_CTA = {
