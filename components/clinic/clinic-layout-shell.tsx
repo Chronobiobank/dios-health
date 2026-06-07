@@ -11,7 +11,7 @@ export function ClinicLayoutShell({ children }: { children: React.ReactNode }) {
   if (isConsult) {
     return (
       <div
-        className="fixed inset-x-0 bottom-0 z-40 flex flex-col overflow-y-auto bg-white text-[#0D0D0D]"
+        className="clinical-layout fixed inset-x-0 bottom-0 z-40 flex flex-col overflow-y-auto bg-white text-[#0D0D0D]"
         style={{ top: 'var(--dios-site-nav-height)' }}
       >
         <div className="mx-auto flex min-h-full w-full max-w-2xl flex-col px-5 py-4 sm:px-6 sm:py-6">
@@ -22,7 +22,7 @@ export function ClinicLayoutShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-white text-[#0D0D0D]">
+    <div className="clinical-layout min-h-screen bg-white text-[#0D0D0D]">
       <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-5 pb-24 sm:px-6 md:pb-8">
         {children}
         <ClinicBottomNav />

@@ -13,8 +13,8 @@
   --ct-muted: #6b7280;
   --ct-paper: #f8f6f1;
   --ct-border: rgb(0 0 0 / 0.08);
-  --ct-mono: var(--font-geist-mono, ui-monospace, monospace);
-  --ct-sans: var(--font-geist-sans, system-ui, sans-serif);
+  --ct-mono: var(--font-data);
+  --ct-sans: var(--font-ui);
   background: var(--ct-paper);
   color: var(--ct-ink);
   font-family: var(--ct-sans);

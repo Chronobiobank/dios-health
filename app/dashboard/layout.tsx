@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="patient-dashboard-route min-h-screen md:pl-[var(--patient-sidebar-width)]"
+      className="clinical-layout patient-dashboard-route min-h-screen bg-background md:pl-[var(--patient-sidebar-width)]"
       data-dashboard="patient-v2"
     >
       <PatientBottomNav />

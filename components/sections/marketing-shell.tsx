@@ -19,7 +19,7 @@ export function MarketingShell({
   prefetchRoutes = true,
 }: MarketingShellProps) {
   return (
-    <div className={cn('calm-landing relative min-h-svh text-dios-ink', className)}>
+    <div className={cn('marketing-layout calm-landing relative min-h-svh text-dios-ink', className)}>
       {prefetchRoutes ? <PitchLandingPrefetch /> : null}
       <div className="relative z-10 flex min-h-svh flex-col">
         <div className="marketing-main flex-1">{children}</div>

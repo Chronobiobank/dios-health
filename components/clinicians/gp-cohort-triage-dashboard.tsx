@@ -11,12 +11,15 @@ import {
   type GpCohortPatient,
   type GpTriageBand,
 } from '@/lib/clinicians/gp-cohort-mock'
+import { DataValue } from '@/components/ui/data-value'
+import { FlagBadge } from '@/components/ui/flag-badge'
+import { StatusDot } from '@/components/ui/status-dot'
 import { cn } from '@/lib/utils'
 
-const BAND_DOT: Record<GpTriageBand, string> = {
-  needs_review: 'ct-card__dot--urgent',
-  watch: 'ct-card__dot--review',
-  on_track: 'ct-card__dot--on-track',
+const BAND_STATUS: Record<GpTriageBand, 'red' | 'amber' | 'green'> = {
+  needs_review: 'red',
+  watch: 'amber',
+  on_track: 'green',
 }
 
 function downloadTextFile(filename: string, content: string) {
@@ -40,7 +43,7 @@ function QueueRow({ patient, active, onSelect }: QueueRowProps) {
     <article className={cn('ct-card', active && 'is-active', patient.band === 'needs_review' && 'ct-card--alert')}>
       <button type="button" className="ct-card__main" onClick={onSelect}>
         <div className="ct-card__row">
-          <span className={cn('ct-card__dot', BAND_DOT[patient.band])} aria-hidden />
+          <StatusDot status={BAND_STATUS[patient.band]} showLabel />
           <div>
             <p className="ct-card__name">{patient.name}</p>
             <p className="ct-card__ref">
@@ -72,22 +75,10 @@ function DetailPanel({ patient, onMessageDina, onExport, onOrderLabs }: DetailPa
       </header>
 
       <div className="ct-detail__grid">
-        <div className="ct-detail__metric">
-          <p className="ct-detail__metric-label">DLMO</p>
-          <p className="ct-detail__metric-value">{patient.dlmo ?? '—'}</p>
-        </div>
-        <div className="ct-detail__metric">
-          <p className="ct-detail__metric-label">Chronopenic burden</p>
-          <p className="ct-detail__metric-value">{patient.chronopenicBurden ?? '—'}</p>
-        </div>
-        <div className="ct-detail__metric">
-          <p className="ct-detail__metric-label">Medications</p>
-          <p className="ct-detail__metric-value">{patient.medications.length}</p>
-        </div>
-        <div className="ct-detail__metric">
-          <p className="ct-detail__metric-label">Recommended</p>
-          <p className="ct-detail__metric-value ct-detail__metric-value--wrap">{patient.recommendedAction}</p>
-        </div>
+        <DataValue label="DLMO" value={patient.dlmo ?? '—'} size="md" />
+        <DataValue label="Chronopenic burden" value={patient.chronopenicBurden ?? '—'} size="md" />
+        <DataValue label="Medications" value={patient.medications.length} size="md" />
+        <DataValue label="Recommended" value={patient.recommendedAction} size="sm" />
       </div>
 
       {patient.labs.length > 0 ? (
@@ -96,8 +87,11 @@ function DetailPanel({ patient, onMessageDina, onExport, onOrderLabs }: DetailPa
           <ul className="ct-detail__lab-list">
             {patient.labs.map((lab) => (
               <li key={lab.label} className="ct-detail__lab-item">
-                <strong>{lab.label}</strong> {lab.value}
-                {lab.trend ? <span className="ct-detail__lab-trend"> · {lab.trend}</span> : null}
+                <strong>{lab.label}</strong>{' '}
+                <span className="font-mono tabular-nums text-data-sm">{lab.value}</span>
+                {lab.trend ? (
+                  <span className="ct-detail__lab-trend font-mono tabular-nums"> · {lab.trend}</span>
+                ) : null}
               </li>
             ))}
           </ul>
@@ -106,9 +100,9 @@ function DetailPanel({ patient, onMessageDina, onExport, onOrderLabs }: DetailPa
 
       {patient.timingConflict ? (
         <div className="ct-detail__flag ct-detail__flag--red">
-          <p className="ct-detail__flag-label">Timing conflict</p>
+          <FlagBadge label="Timing conflict" severity="red" />
           <p className="ct-detail__flag-title">{patient.timingConflict.drugs}</p>
-          <p className="ct-detail__flag-stat">
+          <p className="ct-detail__flag-stat font-mono tabular-nums">
             {patient.timingConflict.averageSeparationMinutes} min average separation ·{' '}
             {patient.timingConflict.requiredSeparationMinutes} min required
           </p>
@@ -245,7 +239,7 @@ export function GpCohortTriageDashboard() {
   }
 
   return (
-    <div className="ct-shell dios-nav-tone-surface dios-page-top-bleed">
+    <div className="clinical-layout ct-shell dios-nav-tone-surface dios-page-top-bleed">
       <div className="ct-shell__frame">
         <header className="ct-shell__top">
           <p className="ct-shell__eyebrow">Monday morning review</p>
@@ -253,16 +247,16 @@ export function GpCohortTriageDashboard() {
 
           <div className="ct-summary-bar" aria-label="Cohort summary">
             <div className="ct-summary-bar__item ct-summary-bar__item--red">
-              <span className="ct-summary-bar__count">{summary.needsReview}</span>
-              <span className="ct-summary-bar__label">needs review</span>
+              <span className="ct-summary-bar__count font-mono tabular-nums">{summary.needsReview}</span>
+              <StatusDot status="red" showLabel />
             </div>
             <div className="ct-summary-bar__item ct-summary-bar__item--amber">
-              <span className="ct-summary-bar__count">{summary.watch}</span>
-              <span className="ct-summary-bar__label">watch</span>
+              <span className="ct-summary-bar__count font-mono tabular-nums">{summary.watch}</span>
+              <StatusDot status="amber" showLabel />
             </div>
             <div className="ct-summary-bar__item ct-summary-bar__item--green">
-              <span className="ct-summary-bar__count">{summary.onTrack}</span>
-              <span className="ct-summary-bar__label">on track</span>
+              <span className="ct-summary-bar__count font-mono tabular-nums">{summary.onTrack}</span>
+              <StatusDot status="green" showLabel />
             </div>
             <p className="ct-summary-bar__meta">
               {summary.total} patients enrolled · sorted red → amber → green

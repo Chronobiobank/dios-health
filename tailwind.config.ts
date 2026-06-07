@@ -5,6 +5,7 @@ import type { Config } from 'tailwindcss'
  * Referenced from app/globals.css via @config.
  */
 const config: Config = {
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     extend: {
       screens: {
@@ -34,7 +35,6 @@ const config: Config = {
           optimal: '#ED8936',
           critical: '#D53F8C',
         },
-        /** Retinomic pillars — muted clinical accents (Calm UI anchors) */
         photic: {
           core: '#38bdf8',
           muted: '#0369a1',
@@ -50,6 +50,25 @@ const config: Config = {
           muted: '#4338ca',
           deep: '#312e81',
         },
+        status: {
+          red: '#C53030',
+          'red-bg': '#FFF5F5',
+          'red-border': '#FEB2B2',
+          amber: '#B7791F',
+          'amber-bg': '#FFFBEB',
+          'amber-border': '#FBD38D',
+          green: '#276749',
+          'green-bg': '#F0FFF4',
+          'green-border': '#9AE6B4',
+          blue: '#2C5282',
+          'blue-bg': '#EBF8FF',
+          'blue-border': '#BEE3F8',
+        },
+        teal: {
+          DEFAULT: '#1D9E75',
+          light: '#E6FAF5',
+          dark: '#0F6B50',
+        },
       },
       backdropBlur: {
         md: '12px',
@@ -62,11 +81,26 @@ const config: Config = {
         card: 'var(--calm-radius-card, 8px)',
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
+        sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        ui: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'Courier New', 'monospace'],
+        display: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
+      },
+      fontSize: {
+        'data-lg': ['18px', { lineHeight: '1.1', fontWeight: '500' }],
+        'data-md': ['14px', { lineHeight: '1.2', fontWeight: '500' }],
+        'data-sm': ['12px', { lineHeight: '1.4', fontWeight: '400' }],
+        'data-xs': ['10px', { lineHeight: '1.4', fontWeight: '400' }],
+        'ui-h1': ['16px', { lineHeight: '1.2', fontWeight: '600' }],
+        'ui-h2': ['14px', { lineHeight: '1.25', fontWeight: '500' }],
+        'ui-h3': ['13px', { lineHeight: '1.3', fontWeight: '500' }],
+        'ui-body': ['13px', { lineHeight: '1.6', fontWeight: '400' }],
+        'ui-sm': ['12px', { lineHeight: '1.5', fontWeight: '400' }],
+        'ui-label': ['9px', { lineHeight: '1.4', fontWeight: '400', letterSpacing: '0.08em' }],
       },
     },
   },
+  plugins: [],
 }
 
 export default config

@@ -36,12 +36,14 @@
 
 :root {
   /*
-   * Typography — Geist only (https://fonts.google.com/specimen/Geist)
-   * Weight roles mirror openai.com: regular body, medium headlines & UI, semibold emphasis
+   * Typography — Inter (clinical UI) · DM Mono (data) · Instrument Serif (marketing display)
    */
-  --font-family-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-family-serif: var(--font-instrument-serif, Georgia, serif);
-  --font-family-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-family-mono: var(--font-mono), ui-monospace, monospace;
+  /* Legacy aliases — existing CSS referencing Geist variables */
+  --font-geist-sans: var(--font-inter);
+  --font-geist-mono: var(--font-mono);
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -188,6 +190,55 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* ── DIOS CLINICAL TYPE SYSTEM ── */
+  --font-ui: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-data: var(--font-mono), 'Courier New', monospace;
+  --font-display: var(--font-instrument-serif, Georgia, serif);
+
+  --text-h1: 600 16px/1.2 var(--font-ui);
+  --text-h2: 500 14px/1.25 var(--font-ui);
+  --text-h3: 500 13px/1.3 var(--font-ui);
+  --text-body: 400 13px/1.6 var(--font-ui);
+  --text-small: 400 12px/1.5 var(--font-ui);
+  --text-label: 400 9px/1.4 var(--font-data);
+
+  --text-data-lg: 500 18px/1.1 var(--font-data);
+  --text-data-md: 500 14px/1.2 var(--font-data);
+  --text-data-sm: 400 12px/1.4 var(--font-data);
+  --text-data-xs: 400 10px/1.4 var(--font-data);
+
+  --numeric: tabular-nums;
+
+  --status-red: #c53030;
+  --status-red-bg: #fff5f5;
+  --status-red-border: #feb2b2;
+  --status-amber: #b7791f;
+  --status-amber-bg: #fffbeb;
+  --status-amber-border: #fbd38d;
+  --status-green: #276749;
+  --status-green-bg: #f0fff4;
+  --status-green-border: #9ae6b4;
+  --status-blue: #2c5282;
+  --status-blue-bg: #ebf8ff;
+  --status-blue-border: #bee3f8;
+
+  --teal: #1d9e75;
+  --teal-light: #e6faf5;
+  --teal-dark: #0f6b50;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --color-border-secondary: var(--color-border);
+  --color-border-tertiary: rgb(0 0 0 / 0.06);
+  --color-background-secondary: var(--color-surface);
+  --color-text-tertiary: var(--text-muted);
 }
 
 @theme inline {
@@ -340,6 +391,99 @@
   pre {
     font-family: var(--font-family-mono);
     font-weight: var(--font-weight-regular);
+  }
+
+  /* Dashboard and clinical pages inherit Inter */
+  .clinical-layout,
+  .clinical-layout * {
+    font-family: var(--font-ui);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .tabular,
+  .font-mono,
+  [data-value],
+  td.data,
+  .data-value {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  .clinical-layout h1 {
+    font: var(--text-h1);
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+  }
+
+  .clinical-layout h2 {
+    font: var(--text-h2);
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+  }
+
+  .clinical-layout h3 {
+    font: var(--text-h3);
+    color: var(--color-text-primary);
+  }
+
+  .data-label {
+    font: var(--text-label);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+  }
+
+  .clinical-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-ui);
+    font-size: 13px;
+  }
+
+  .clinical-table th {
+    font-family: var(--font-data);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-secondary);
+  }
+
+  .clinical-table td {
+    padding: 10px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    color: var(--color-text-primary);
+    vertical-align: middle;
+  }
+
+  .clinical-table td.mono {
+    font-family: var(--font-data);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .clinical-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .clinical-table tr:hover {
+    background: var(--color-background-secondary);
+  }
+
+  .marketing-layout h1,
+  .marketing-layout h2,
+  .marketing-layout h3,
+  .home-landing h1,
+  .home-landing h2,
+  .home-landing h3,
+  .calm-landing h1,
+  .calm-landing h2,
+  .calm-landing h3 {
+    font-family: var(--font-display);
   }
 }
 

@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Nav } from '@/components/sections/Nav'
 import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
 import { ScrollToHash } from '@/components/sections/ScrollToHash'
-import { geistSans, siteFontVariableClasses } from '@/lib/fonts/site-fonts'
+import { inter, siteFontVariableClasses } from '@/lib/fonts/site-fonts'
 
 import './globals.css'
 
@@ -55,7 +55,7 @@ export default function RootLayout({
       lang="en-GB"
       className={`${siteFontVariableClasses} h-full scroll-pt-[calc(var(--dios-site-nav-height)+1rem)]`}
     >
-      <body className={`${geistSans.className} flex min-h-full flex-col bg-[#f7fafc]`}>
+      <body className={`${inter.className} flex min-h-full flex-col bg-[#f7fafc]`}>
         <ScrollToHash />
         <Nav />
         <div className="dios-app-shell relative z-10 flex min-h-full flex-1 flex-col">

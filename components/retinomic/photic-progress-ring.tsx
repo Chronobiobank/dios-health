@@ -47,8 +47,7 @@ export function PhoticProgressRing({ current, ceiling, size = 112 }: PhoticProgr
         x={center}
         y={center - 4}
         textAnchor="middle"
-        className="fill-[var(--text-primary)] text-[15px] font-medium"
-        style={{ fontFamily: 'var(--font-family-sans)' }}
+        className="fill-[var(--text-primary)] font-sans text-[15px] font-medium tabular-nums"
       >
         {current}
       </text>
@@ -56,8 +55,7 @@ export function PhoticProgressRing({ current, ceiling, size = 112 }: PhoticProgr
         x={center}
         y={center + 14}
         textAnchor="middle"
-        className="fill-[var(--text-muted)] text-[9px] uppercase"
-        style={{ fontFamily: 'var(--font-family-mono)', letterSpacing: '0.08em' }}
+        className="fill-[var(--text-muted)] font-mono text-ui-label uppercase tracking-widest"
       >
         mLux
       </text>

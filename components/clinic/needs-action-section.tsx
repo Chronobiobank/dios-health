@@ -1,7 +1,8 @@
 import Link from 'next/link'
 
 import { StatusPill } from '@/components/clinic/status-pill'
-import { SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
+import { DATA_LABEL, SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
+import { FlagBadge } from '@/components/ui/flag-badge'
 import type { DemoClinicPatient } from '@/lib/clinic/demo-patients'
 import { CLINIC_ROUTES } from '@/lib/auth/routes'
 import { cn } from '@/lib/utils'
@@ -39,9 +40,7 @@ export function NeedsActionSection({ patients }: NeedsActionSectionProps) {
                 <dl className="mt-4 grid gap-3 text-sm">
                   {patient.alertReason ? (
                     <div>
-                      <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-black/45">
-                        Alert
-                      </dt>
+                      <dt className={DATA_LABEL}>Alert</dt>
                       <dd className="mt-1 text-[13px] leading-relaxed text-black/70">
                         {patient.alertReason}
                       </dd>
@@ -49,66 +48,56 @@ export function NeedsActionSection({ patients }: NeedsActionSectionProps) {
                   ) : null}
                   <div className="flex flex-wrap gap-2">
                     {patient.topRiskNodes.map((node) => (
-                      <span
+                      <FlagBadge
                         key={node.label}
-                        className={cn(
-                          'rounded-full px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wide',
+                        label={`${node.label} · ${node.risk}`}
+                        severity={
                           node.risk === 'high'
-                            ? 'bg-red-50 text-red-700'
-                            : node.risk === 'elevated'
-                              ? 'bg-orange-50 text-orange-700'
-                              : node.risk === 'moderate'
-                                ? 'bg-amber-50 text-amber-700'
-                                : 'bg-emerald-50 text-emerald-700'
-                        )}
-                      >
-                        {node.label} · {node.risk}
-                      </span>
+                            ? 'red'
+                            : node.risk === 'elevated' || node.risk === 'moderate'
+                              ? 'amber'
+                              : 'green'
+                        }
+                      />
                     ))}
                   </div>
                   <div className="grid grid-cols-3 gap-3">
                     <div>
-                      <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-black/45">
-                        MLux
-                      </dt>
+                      <dt className={DATA_LABEL}>MLux</dt>
                       <dd
                         className={cn(
-                          'mt-1 font-mono text-[14px] font-semibold',
+                          'mt-1 font-mono text-data-md font-semibold tabular-nums',
                           patient.mluxScore < 100
-                            ? 'text-red-600'
+                            ? 'text-status-red'
                             : patient.mluxScore < 250
-                              ? 'text-amber-600'
-                              : 'text-emerald-600'
+                              ? 'text-status-amber'
+                              : 'text-status-green'
                         )}
                       >
                         {patient.mluxScore}{' '}
-                        <span className="text-[10px] font-normal text-black/40">m-EDI</span>
+                        <span className="text-data-xs font-normal text-black/40">m-EDI</span>
                       </dd>
                     </div>
                     <div>
-                      <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-black/45">
-                        Adherence
-                      </dt>
+                      <dt className={DATA_LABEL}>Adherence</dt>
                       <dd
                         className={cn(
-                          'mt-1 font-mono text-[14px] font-semibold',
+                          'mt-1 font-mono text-data-md font-semibold tabular-nums',
                           patient.adherenceRate >= 90
-                            ? 'text-emerald-600'
+                            ? 'text-status-green'
                             : patient.adherenceRate >= 70
-                              ? 'text-amber-600'
-                              : 'text-red-600'
+                              ? 'text-status-amber'
+                              : 'text-status-red'
                         )}
                       >
                         {patient.adherenceRate}%
                       </dd>
                     </div>
                     <div>
-                      <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-black/45">
-                        DINA
-                      </dt>
-                      <dd className="mt-1 font-mono text-[14px] font-semibold text-black">
+                      <dt className={DATA_LABEL}>DINA</dt>
+                      <dd className="mt-1 font-mono text-data-md font-semibold tabular-nums text-black">
                         {patient.vayaSessionsLast30}
-                        <span className="text-[10px] font-normal text-black/40">/30</span>
+                        <span className="text-data-xs font-normal text-black/40">/30</span>
                       </dd>
                     </div>
                   </div>

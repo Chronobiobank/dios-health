@@ -161,14 +161,14 @@ export function ChronoimmunePatientCard({
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart data={chartData} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(160,160,160,0.25)" />
-              <XAxis dataKey="date" tick={{ fontSize: 10 }} />
+              <XAxis dataKey="date" tick={{ fontSize: 12 }} />
               <YAxis
                 domain={[profile.pthReferenceLower - 2, profile.pthReferenceUpper + 5]}
-                tick={{ fontSize: 10 }}
+                tick={{ fontSize: 12 }}
                 width={32}
               />
               <Tooltip
-                contentStyle={{ fontSize: 11, borderRadius: 8 }}
+                contentStyle={{ fontSize: 12, borderRadius: 8 }}
                 formatter={(value, name) => [
                   value,
                   name === 'pth' ? 'PTH' : 'Dose at test',

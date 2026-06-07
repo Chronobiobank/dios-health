@@ -12,17 +12,22 @@ export const DASHBOARD_BODY = 'type-dashboard-body'
 export const SECTION_LABEL = 'type-dashboard-label'
 
 export const DASHBOARD_HEADLINE = DASHBOARD_H1
-export const CARD_HEADLINE = 'text-xl font-medium leading-snug text-black'
+export const CARD_HEADLINE = 'font-ui text-ui-h2 text-black'
 export const CARD_BODY = DASHBOARD_BODY
-export const DATA_VALUE = 'text-[15px] font-medium text-black'
-export const MONO_DATA = 'font-mono text-[11px] text-black/40'
-export const CAPTION = 'font-mono text-[11px] text-black/40'
+
+/** Mono uppercase labels — 9px minimum */
+export const DATA_LABEL = 'text-ui-label font-mono uppercase tracking-widest text-black/45'
+
+/** Numeric / identifier values */
+export const DATA_VALUE = 'font-mono text-data-md font-medium tabular-nums text-black'
+export const MONO_DATA = 'font-mono text-data-sm tabular-nums text-black/70'
+export const CAPTION = 'font-mono text-data-xs text-black/40'
 
 export const CTA_BUTTON =
-  'inline-flex h-11 w-full items-center justify-center rounded-full bg-black text-sm font-medium text-white transition-transform duration-100 active:scale-[0.97] hover:bg-black/85'
+  'inline-flex h-11 w-full items-center justify-center rounded-full bg-black font-ui text-ui-body font-medium text-white transition-transform duration-100 active:scale-[0.97] hover:bg-black/85'
 
 export const CONSULT_CTA =
-  'inline-flex h-14 w-full items-center justify-center rounded-full bg-black text-sm font-medium text-white transition-transform duration-100 active:scale-[0.97] hover:bg-black/85'
+  'inline-flex h-14 w-full items-center justify-center rounded-full bg-black font-ui text-ui-body font-medium text-white transition-transform duration-100 active:scale-[0.97] hover:bg-black/85'
 
 /** Settings / profile routes — pair with dashboard-settings-page in patient-dashboard.css */
 export const SETTINGS_PAGE = 'dashboard-settings-page'

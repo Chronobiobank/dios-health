@@ -1,22 +1,16 @@
+import { FlagBadge } from '@/components/ui/flag-badge'
 import type { PatientStatus } from '@/lib/clinic/demo-patients'
-import { cn } from '@/lib/utils'
 
-const STATUS_STYLES: Record<PatientStatus, string> = {
-  'Act now': 'bg-teal-50 text-teal-800',
-  'Earlier dose': 'bg-amber-50 text-amber-800',
-  'Need bloods': 'bg-amber-50 text-amber-800',
-  'On track': 'bg-black/5 text-black/40',
+const STATUS_SEVERITY: Record<
+  PatientStatus,
+  'red' | 'amber' | 'green' | 'blue'
+> = {
+  'Act now': 'red',
+  'Earlier dose': 'amber',
+  'Need bloods': 'amber',
+  'On track': 'green',
 }
 
 export function StatusPill({ status }: { status: PatientStatus }) {
-  return (
-    <span
-      className={cn(
-        'inline-flex w-fit rounded-full px-2.5 py-1 text-xs font-medium',
-        STATUS_STYLES[status]
-      )}
-    >
-      {status}
-    </span>
-  )
+  return <FlagBadge label={status} severity={STATUS_SEVERITY[status]} />
 }

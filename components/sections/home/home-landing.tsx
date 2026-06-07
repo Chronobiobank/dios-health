@@ -18,7 +18,7 @@ import {
 
 export function HomeLanding() {
   return (
-    <div className="home-landing dios-nav-tone-paper">
+    <div className="marketing-layout home-landing dios-nav-tone-paper">
       <HomeLandingReveal />
 
       <section

@@ -19,6 +19,7 @@ import {
   MONO_DATA,
   SECTION_LABEL,
 } from '@/components/dashboard/dashboard-styles'
+import { FlagBadge } from '@/components/ui/flag-badge'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
 import type { InsightsData, PatientProtocolRow, RiskSeverity } from '@/lib/dashboard/insights-data'
 import { riskSeverityLabel } from '@/lib/dashboard/insights-data'
@@ -28,10 +29,10 @@ type InsightsViewProps = {
   data: InsightsData
 }
 
-const SEVERITY_PILL: Record<RiskSeverity, string> = {
-  watch: 'bg-amber-100 text-amber-900 ring-amber-200/80',
-  moderate: 'bg-orange-100 text-orange-900 ring-orange-200/80',
-  act: 'bg-red-100 text-red-900 ring-red-200/80',
+const SEVERITY_FLAG: Record<RiskSeverity, 'red' | 'amber' | 'blue'> = {
+  watch: 'amber',
+  moderate: 'amber',
+  act: 'red',
 }
 
 const ZEITGEBER_ICONS = {
@@ -90,9 +91,7 @@ function BodyClockHeader({ data }: { data: InsightsData }) {
       <p className={`${MONO_DATA} mt-1`}>MLux phase</p>
 
       {data.dominantLayerLabel ? (
-        <span className="mt-4 inline-flex rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-800">
-          {data.dominantLayerLabel}
-        </span>
+        <FlagBadge label={data.dominantLayerLabel} severity="blue" className="mt-4" />
       ) : null}
 
       <div className="mt-6">
@@ -169,14 +168,11 @@ function RiskFlagCard({ flag }: { flag: InsightsData['riskFlags'][number] }) {
             <p className={`${DASHBOARD_BODY} mt-2 text-black/65`}>{flag.summary}</p>
           </div>
         </div>
-        <span
-          className={cn(
-            'shrink-0 rounded-full px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-wider ring-1 ring-inset',
-            SEVERITY_PILL[flag.severity]
-          )}
-        >
-          {riskSeverityLabel(flag.severity)}
-        </span>
+        <FlagBadge
+          className="shrink-0"
+          label={riskSeverityLabel(flag.severity)}
+          severity={SEVERITY_FLAG[flag.severity]}
+        />
       </div>
     </article>
   )
@@ -300,9 +296,7 @@ function D3ProtocolCard({
           {supervised ? 'Coimbra high-dose D3' : 'Gominak D3 protocol'}
         </p>
         {supervised ? (
-          <span className="rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-900">
-            Clinician supervision
-          </span>
+          <FlagBadge label="Clinician supervision" severity="amber" />
         ) : null}
       </div>
       <dl className="mt-4 space-y-2">
