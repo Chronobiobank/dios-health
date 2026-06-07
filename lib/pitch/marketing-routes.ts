@@ -5,6 +5,8 @@ export const MARKETING_ROUTES = {
   howItWorks: '/how-it-works',
   howItWorksDemo: '/how-it-works/demo',
   science: '/science',
+  /** HTML prototype `/learn` — maps to science curriculum */
+  learn: '/science',
   evidence: '/evidence',
   onboarding: '/onboarding',
   clinicians: '/clinicians',

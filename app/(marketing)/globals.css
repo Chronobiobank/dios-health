@@ -1,0 +1,18 @@
+/**
+ * Marketing landing design tokens — scoped to .marketing-v2-root only.
+ * Do not import in dashboard or clinical layouts.
+ */
+.marketing-v2-root {
+  --mkt-bg: #f7fafc;
+  --mkt-bg2: #edf2f7;
+  --mkt-text: #1a202c;
+  --mkt-muted: #718096;
+  --mkt-faint: #a0aec0;
+  --mkt-border: #e2e8f0;
+  --mkt-border2: #cbd5e0;
+  --mkt-teal: #1d9e75;
+  --mkt-teal-lt: #e6faf5;
+  --mkt-serif: var(--font-lora), Georgia, serif;
+  --mkt-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --mkt-mono: var(--font-mkt-mono), monospace;
+}
