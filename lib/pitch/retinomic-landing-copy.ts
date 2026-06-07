@@ -56,7 +56,7 @@ export const ONBOARDING_COPY = {
   subheadline:
     'Your phone reads iris pigment and skin tone — the first signals for your personal light dose and dose window.',
   image: PITCH_IMAGES.hook,
-  imageAlt: 'Retinomic eye scan — optimise your script',
+  imageAlt: 'Retinomic eye scan — Make Time Count',
   pillars: [
     { id: 'light', label: 'Light dose', note: 'From scan', active: true },
     { id: 'eye', label: 'Eye scan', note: 'Step 1', active: true },
@@ -80,7 +80,7 @@ export const ONBOARDING_COPY = {
   },
   step3: {
     label: 'Step 3',
-    eyebrow: 'Optimise your script',
+    eyebrow: 'Make Time Count',
     title: 'What do you take?',
     body: 'Select your medications now — your first dashboard shows personal dose windows instead of examples. Skip if you prefer to add these later in Settings.',
     skipNote: 'Optional — you can add or edit medications anytime in Settings.',
@@ -271,8 +271,8 @@ export const RETINOMIC_LANDING_EVIDENCE: readonly RetinomicFeatureCopy[] = [
 ] as const
 
 export const RETINOMIC_LANDING_META = {
-  title: 'DIOS — Optimise Your Script',
+  title: 'DIOS — Make Time Count',
   description: 'Your medication has a biological window. DIOS finds it.',
-  openGraphTitle: 'DIOS — Optimise Your Script',
+  openGraphTitle: 'DIOS — Make Time Count',
   openGraphDescription: 'Chronotherapy made simple — scan your clock, time your meds, track progress.',
 } as const

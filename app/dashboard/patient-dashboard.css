@@ -591,16 +591,16 @@ button.dios-btn-on-dark {
   align-items: center;
   justify-content: center;
   gap: 0.375rem;
-  min-height: 3rem;
+  min-height: var(--legibility-touch-min, 3rem);
   min-width: 9rem;
   padding-inline: var(--dios-btn-padding-inline);
   border-radius: 9999px;
   border: 1px solid rgb(255 255 255 / 0.2);
   background: #fff;
-  font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
-  font-weight: 500;
-  line-height: 1;
-  color: var(--text-primary);
+  font-size: var(--text-button-size, clamp(1rem, 2.5vw, 1.125rem));
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-on-light-button, var(--text-primary));
   text-decoration: none;
   transition: opacity 0.2s ease;
 }

@@ -14,6 +14,7 @@ import {
   mapLabSourceToDb,
   type GominakRangeStatus,
 } from '@/lib/dashboard/blood-panel-gominak'
+import { BLOOD_PANEL_CADENCE } from '@/lib/product/intelligence-cadence'
 import { cn } from '@/lib/utils'
 
 const LAB_SOURCES = ['City Labs', 'GP', 'Awanui', 'Other'] as const
@@ -98,6 +99,8 @@ export function BloodPanelForm() {
   const [vitaminD3, setVitaminD3] = useState('')
   const [vitaminB12, setVitaminB12] = useState('')
   const [ferritin, setFerritin] = useState('')
+  const [pth, setPth] = useState('')
+  const [serumCalcium, setSerumCalcium] = useState('')
   const [vitaminB5, setVitaminB5] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -128,10 +131,12 @@ export function BloodPanelForm() {
     const d3 = parseOptionalNumber(vitaminD3)
     const b12 = parseOptionalNumber(vitaminB12)
     const ferr = parseOptionalNumber(ferritin)
+    const pthValue = parseOptionalNumber(pth)
+    const calciumValue = parseOptionalNumber(serumCalcium)
     const b5 = parseOptionalNumber(vitaminB5)
 
-    if (d3 == null || b12 == null || ferr == null) {
-      setError('Vitamin D3, B12, and ferritin are required.')
+    if (d3 == null || b12 == null || ferr == null || pthValue == null || calciumValue == null) {
+      setError('25-OH Vitamin D, B12, ferritin, PTH, and serum calcium are required.')
       setLoading(false)
       return
     }
@@ -148,6 +153,11 @@ export function BloodPanelForm() {
           vitamin_b12_pmoll: b12,
           ferritin_ugl: ferr,
           vitamin_b5_umoll: b5,
+          raw_results: {
+            pth_pg_ml: pthValue,
+            serum_calcium_mmol_l: calciumValue,
+            panel_cadence_days: BLOOD_PANEL_CADENCE.intervalDays,
+          },
         }),
       })
 
@@ -170,7 +180,7 @@ export function BloodPanelForm() {
     return (
       <div className={`${CARD} mt-8 rounded-2xl p-6`}>
         <p className="type-body text-black/80">
-          Blood results saved. Your body clock confidence has been updated.
+          90-day panel saved. Biological response markers update your clinician review window.
         </p>
         <Link
           href={PATIENT_ROUTES.dashboard}
@@ -184,6 +194,10 @@ export function BloodPanelForm() {
 
   return (
     <form onSubmit={handleSubmit} className={`${CARD} mt-8 space-y-5 rounded-2xl p-6`}>
+      <p className="text-sm text-black/60">
+        90-day Coimbra safety panel — PTH, 25-OH Vitamin D, B12, ferritin, serum calcium. Next draw
+        due in {BLOOD_PANEL_CADENCE.intervalDays} days after collection.
+      </p>
       <div>
         <label htmlFor="collection_date" className={`${LABEL} mb-2 block`}>
           Collection date
@@ -223,7 +237,7 @@ export function BloodPanelForm() {
 
       <BloodField
         id="vitamin_d3"
-        label="Vitamin D3 (nmol/L)"
+        label="25-OH Vitamin D (nmol/L)"
         hint="Target range 150–200 nmol/L (Gominak protocol)"
         value={vitaminD3}
         onChange={setVitaminD3}
@@ -246,6 +260,26 @@ export function BloodPanelForm() {
         value={ferritin}
         onChange={setFerritin}
         status={ferritinStatus}
+        disabled={loading}
+      />
+
+      <BloodField
+        id="pth"
+        label="PTH (pg/mL)"
+        hint="Coimbra target — suppressed below 20 pg/mL when protocol is working"
+        value={pth}
+        onChange={setPth}
+        status="missing"
+        disabled={loading}
+      />
+
+      <BloodField
+        id="serum_calcium"
+        label="Serum calcium (mmol/L)"
+        hint="Safety gate — contact clinician if above reference range"
+        value={serumCalcium}
+        onChange={setSerumCalcium}
+        status="missing"
         disabled={loading}
       />
 

@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils'
 
-/** Official wordmark — ʘ is U+0298 LATIN LETTER BILABIAL CLICK */
-export const DIOS_WORDMARK = 'DI\u0298S'
+/** Official wordmark — plain ASCII DIOS only */
+export const DIOS_WORDMARK = 'DIOS'
 
-export const DIOS_TAGLINE = 'Optimise Your Script'
+export const DIOS_TAGLINE = 'Make Time Count'
 
 const SIZE_CLASSES = {
   sm: 'text-[18px] leading-none',
@@ -79,7 +79,7 @@ export function DiosLogoGallery() {
         </h1>
         <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-black/60">
           Rendered with <code className="font-mono text-xs">.dios-wordmark</code> (Montserrat, 500).
-          The ʘ glyph is U+0298 — independent of site body Geist.
+          Plain ASCII wordmark — no unicode variants.
         </p>
 
         <ul className="mt-16 divide-y divide-black/10 border-t border-black/10">

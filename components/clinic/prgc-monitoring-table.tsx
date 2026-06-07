@@ -18,6 +18,7 @@ import {
   type PrgcMetricCell,
   type PrgcMonitoringPatient,
 } from '@/lib/clinic/prgc-monitoring'
+import { PRGC_CADENCE_LINE } from '@/lib/product/intelligence-cadence'
 import { cn } from '@/lib/utils'
 
 type PrgcMonitoringTableProps = {
@@ -77,8 +78,7 @@ export function PrgcMonitoringTable({ patients }: PrgcMonitoringTableProps) {
         <div>
           <h2 className={SECTION_LABEL}>Cohort — pRGC readouts</h2>
           <p className="mt-1 max-w-2xl font-ui text-ui-sm leading-relaxed text-black/60">
-            Sleep architecture nightly from TipTraQ. PTH quarterly from bloods. D3 timing is the
-            one variable the patient controls.
+            {PRGC_CADENCE_LINE} D3 timing is the variable the patient confirms daily through DINA.
           </p>
         </div>
         <p className={cn(DATA_LABEL, 'text-black/40')}>
@@ -166,7 +166,8 @@ export function PrgcMonitoringTable({ patients }: PrgcMonitoringTableProps) {
       </div>
 
       <p className={cn(DATA_LABEL, 'mt-2 text-black/40')}>
-        Tap a row for clinical read. TipTraQ updates sleep columns nightly; PTH updates on lab draw.
+        Tap a row for clinical read. Sleep columns refresh after each TipTraQ block; PTH updates on
+        90-day draw; D3 timing from daily DINA confirmations.
       </p>
     </section>
   )

@@ -2,8 +2,9 @@
 
 @layer base {
   html {
-    font-size: var(--legibility-root-size, 125%);
+    font-size: var(--legibility-root-size, 137.5%);
     text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {

@@ -18,7 +18,7 @@ export const CHRONOBIOBANK_SECTIONS = [
   {
     id: 'what',
     eyebrow: 'What it is',
-    body: 'A dual-indexed outcomes layer: each dose event, lab draw, and sleep session is tagged with BTI (biological time) and wall-clock time. Coimbra, Gominak, and circadian cohorts contribute structured protocol data with granular, revocable consent.',
+    body: 'A dual-indexed outcomes layer: daily DINA dose confirmations, monthly MLux proxies, 90-day blood panels, and six-month TipTraQ blocks — each tagged with BTI (biological time) and wall-clock time. Coimbra, Gominak, and circadian cohorts contribute structured protocol data with granular, revocable consent.',
   },
   {
     id: 'why',

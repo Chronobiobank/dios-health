@@ -1,4 +1,10 @@
-/** DIOS diagnostic tier architecture — L1 TipTraQ · L2 bloods · L3 smartphone. */
+/** DIOS diagnostic tier architecture — aligned to intelligence cadence model. */
+
+import {
+  BLOOD_PANEL_CADENCE,
+  INTELLIGENCE_CADENCES,
+  TIPTRAQ_CALIBRATION,
+} from '@/lib/product/intelligence-cadence'
 
 export type DiagnosticTier = 'L1' | 'L2' | 'L3'
 
@@ -6,6 +12,8 @@ export interface TierConfig {
   tier: DiagnosticTier
   name: string
   device: string
+  cadence: string
+  intelligenceRole: string
   dlmoConfidencePct: number
   windowPrecisionMins: number
   description: string
@@ -19,51 +27,40 @@ export const DIAGNOSTIC_TIERS: Record<DiagnosticTier, TierConfig> = {
     tier: 'L1',
     name: 'TipTraQ sleep sensor',
     device: 'TipTraQ by PranaQ',
+    cadence: `Every ${TIPTRAQ_CALIBRATION.intervalMonths} months · ${TIPTRAQ_CALIBRATION.nightsPerBlock} nights`,
+    intelligenceRole: INTELLIGENCE_CADENCES.tiptraq.roleLabel,
     dlmoConfidencePct: 90,
     windowPrecisionMins: 18,
     description:
-      'Wearable overnight sensor measuring autonomic nervous system activity, sleep staging, REM latency, AHI, and skin temperature. The only non-invasive direct DLMO proxy available outside a sleep lab. Exclusively available in the UK through DIOS.',
-    outputs: [
-      'dlmo_proxy',
-      'sns_activity',
-      'rem_latency_mins',
-      'sleep_efficiency',
-      'ahi',
-      'rdi',
-      'waso_mins',
-      'mlux_score',
-    ],
+      'Periodic clinical assessment — not a continuous monitor. Three nights every six months delivers a high-confidence DLMO snapshot and sleep architecture read that resets personalised dose windows until the next block. UK via DIOS.',
+    outputs: [...TIPTRAQ_CALIBRATION.outputs],
     entryPoint: false,
     ukExclusive: true,
   },
   L2: {
     tier: 'L2',
-    name: 'Gominak blood panel',
-    device: 'GP blood test — NHS requestable',
+    name: '90-day blood panel',
+    device: 'GP or City Labs draw',
+    cadence: `Every ${BLOOD_PANEL_CADENCE.intervalDays} days`,
+    intelligenceRole: INTELLIGENCE_CADENCES.blood_panel.roleLabel,
     dlmoConfidencePct: 65,
     windowPrecisionMins: 60,
     description:
-      'Four-marker blood panel used as indirect proxies for pRGC system function. Low 25-OH Vitamin D signals pRGC dysfunction. Elevated PTH indicates VDR resistance. B12 deficit correlates with sleep stage 3 failure. Requestable by any UK GP at no cost to patient.',
-    outputs: [
-      'twenty_five_oh_vit_d_ng_ml',
-      'b12_pmol_l',
-      'ferritin_ug_l',
-      'pth_pg_ml',
-      'serum_calcium_mmol_l',
-      'twenty_four_hr_urine_calcium_mg',
-      'egfr_ml_min',
-    ],
+      'PTH, 25-OH Vitamin D, B12, ferritin, and serum calcium — the Coimbra safety gate and VDR activation marker. Clinician reviews protocol progress and decides whether to escalate, hold, or bridge cofactors.',
+    outputs: BLOOD_PANEL_CADENCE.markers.map((m) => m.id),
     entryPoint: true,
     ukExclusive: false,
   },
   L3: {
     tier: 'L3',
-    name: 'Smartphone camera proxy',
+    name: 'MLux camera proxy',
     device: 'Patient smartphone',
+    cadence: INTELLIGENCE_CADENCES.mlux_camera.interval,
+    intelligenceRole: INTELLIGENCE_CADENCES.mlux_camera.roleLabel,
     dlmoConfidencePct: 40,
     windowPrecisionMins: 90,
     description:
-      'Ambient light and screen exposure logged via phone camera at wake and sleep times. Provides a population-average DLMO estimate adjusted for latitude, season, and self-reported chronotype. Entry point for all patients. Explicitly provisional — DINA prompts upgrade to L2 or L1 as confidence builds.',
+      'Monthly smartphone light capture refreshes the provisional DLMO estimate between TipTraQ blocks — adjusted for seasonal light and reported wake and sleep times. Entry point for all patients; explicitly provisional until blood or TipTraQ calibration.',
     outputs: [
       'melanopic_lux_estimate',
       'chronotype_proxy',

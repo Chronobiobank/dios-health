@@ -12,12 +12,13 @@ export const TILE_CARD = `${CARD} w-full gap-0 overflow-hidden py-0`
 export const TILE_IMAGE = 'aspect-[3/2] w-full rounded-t-lg object-cover'
 export const TILE_HEADER = 'gap-3 px-6 pt-6'
 export const TILE_BODY = 'space-y-3 px-6 pb-6'
-export const LIST_LINE = 'font-sans text-lg font-medium leading-snug text-black sm:text-xl'
+export const LIST_LINE =
+  'font-sans text-[length:var(--text-step-title-size)] font-medium leading-snug text-black'
 
 export const BTN_PRIMARY =
-  'btn-primary type-button inline-flex h-10 items-center justify-center rounded-full bg-black text-white transition-colors hover:bg-black/80 sm:h-11'
+  'btn-primary type-button inline-flex min-h-[3rem] items-center justify-center rounded-full bg-black px-6 text-white transition-colors hover:bg-black/80'
 
 export const BTN_HERO =
-  'btn-hero type-button inline-flex items-center justify-center rounded-full bg-white py-2.5 text-black transition-colors hover:bg-white/90'
+  'btn-hero type-button inline-flex min-h-[3rem] items-center justify-center rounded-full bg-white px-6 text-[var(--text-primary)] transition-colors hover:bg-white/90'
 
 export const LABEL = 'type-label'

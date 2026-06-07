@@ -82,7 +82,7 @@ export function buildNextStepsSummary(input: BuildPatientNextStepsInput): string
       tonight.length > 0
         ? tonight.map((m) => `${m.name} at ${m.time}`).join(' · ')
         : 'evening doses in your script below'
-    return `First Light anchored today — hold tonight's windows (${medLine}) and keep your eating window through close.`
+    return `Doses confirmed today — hold tonight's windows (${medLine}) and keep your eating window through close.`
   }
 
   if (daily?.completeToday) {
@@ -224,7 +224,7 @@ export function buildPatientNextSteps(input: BuildPatientNextStepsInput): Patien
     steps.push({
       id: 'tiptraq-upload',
       priority: 'this-week',
-      title: 'Upload TipTraQ nights',
+      title: 'Complete TipTraQ three-night block',
       detail: 'At least five nights give sleep grading, breathing flags, and clock drift for your D dose and curfew timing.',
       href: PATIENT_ROUTES.streams,
     })

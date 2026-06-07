@@ -6,6 +6,7 @@ import { DASHBOARD_HEADLINE } from '@/components/dashboard/dashboard-styles'
 import { getTimeGreeting } from '@/lib/auth/greeting'
 import { getClinicianSurname, requireClinicianSession } from '@/lib/auth/require-clinician'
 import { PRGC_MONITORING_PATIENTS } from '@/lib/clinic/prgc-monitoring'
+import { PRGC_CADENCE_LINE } from '@/lib/product/intelligence-cadence'
 
 export default async function ClinicPage() {
   const { user, profile, clinician } = await requireClinicianSession()
@@ -20,8 +21,7 @@ export default async function ClinicPage() {
       <section>
         <h1 className={`${DASHBOARD_HEADLINE} capitalize`}>Good {greeting}, Dr {surname}.</h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-black/70">
-          Is the pRGC system working? Four numbers per patient — sleep architecture nightly, PTH
-          quarterly, D3 timing daily.
+          Is the pRGC system working? Four numbers per patient — {PRGC_CADENCE_LINE}
         </p>
       </section>
 

@@ -1,112 +1,158 @@
-/** Clinician-first home — concise, mobile-first, four-metric pRGC narrative. */
+/** Clinician education landing — Precision Immunology / Soltriol narrative. */
 
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 
 export { MARKETING_ROUTES }
 
 export const HOME_LANDING_META = {
-  title: 'DIOS — Is the pRGC system working?',
+  title: 'DIOS — Vitamin D is a steroid hormone',
   description:
-    'Four numbers per patient. Sleep, REM latency, PTH, D3 timing — nightly TipTraQ, quarterly bloods. Built for Coimbra and Gominak practice.',
-  openGraphTitle: 'DIOS — Cohort intelligence for high-dose D',
+    'Soltriol regulates immune tolerance in every patient in your practice. DIOS closes the 90-day visibility gap with TipTraQ sleep architecture, quarterly bloods, and DINA dose timing.',
+  openGraphTitle: 'DIOS — Precision Immunology for your practice',
   openGraphDescription:
-    'TipTraQ turns a quarterly blood test into a nightly progress report.',
+    'Sleep architecture is your missing biomarker. Four readouts. One complete picture — before your patient walks through the door.',
 } as const
 
 export const HOME_HERO = {
-  eyebrow: 'High-dose D practice',
-  tagline: ['Four numbers.', 'One answer.'] as const,
-  subline: 'Sleep · REM · PTH · D3 timing. Nightly TipTraQ. Quarterly bloods.',
+  eyebrow: 'For clinicians',
+  lines: [
+    'Vitamin D is not a vitamin.',
+    'It is a steroid hormone.',
+  ] as const,
+  emphasisLine: 'It regulates the immune system of every patient in your practice. And the curriculum you trained under did not teach you that.',
+  pullQuote: 'The science moved on. Prescribing did not.',
+  primaryCta: { label: 'Enrol your first patient', href: '/signup/clinician' },
   video: '/optimise-your-script.mp4',
   poster: '/your-light-dose.jpg',
-  primaryCta: { label: 'Open cohort demo', href: MARKETING_ROUTES.cliniciansTriage },
-  secondaryCta: { label: 'Enrol practice', href: '/signup/clinician' },
 } as const
 
-export const HOME_METRICS = {
-  eyebrow: 'The readout',
-  question: 'Is the pRGC system working?',
+export const HOME_SOLTRIOL = {
+  eyebrow: '1,25-dihydroxyvitamin D3',
+  headline: 'Soltriol binds nuclear VDR receptors.',
+  paragraphs: [
+    'Soltriol regulates over 200 genes including the entire Th17 immune tolerance pathway.',
+    'Your patients with MS, Hashimoto\'s, rheumatoid arthritis, and lupus are on a protocol that depends on this hormone working precisely. It only works precisely when it is timed correctly.',
+  ],
+} as const
+
+export const HOME_BLIND = {
+  eyebrow: 'The visibility gap',
+  headline: ['You are currently flying blind', 'for 87 days out of every 90.'] as const,
+  emphasisLine: 0,
+  paragraphs: [
+    'You adjust the dose. You wait for the next blood panel. You hope the protocol is working.',
+    'It is not good enough. And you know it.',
+  ],
+} as const
+
+export const HOME_SLEEP = {
+  eyebrow: 'Your missing biomarker',
+  headline: 'Sleep architecture is your missing biomarker.',
+  paragraphs: [
+    'When Soltriol activates the pRGC system correctly, sleep efficiency exceeds 85% and REM latency falls below 90 minutes. These changes appear weeks before PTH moves on a blood panel.',
+    'Your patient\'s sleep is telling you whether the protocol is working. You just have not had a way to hear it.',
+  ],
+} as const
+
+export const HOME_UNTIL_NOW = {
+  eyebrow: 'Until now',
+  headline: 'TipTraQ plus DIOS.',
+  headlineEmphasis: 'A complete immune picture.',
+  paragraphs: [
+    'TipTraQ measures three nights of sleep architecture every six months. DIOS reads that data alongside your quarterly blood panels and your patient\'s daily dose timing.',
+    'The result is a complete picture of immune response — not a quarterly guess.',
+  ],
+} as const
+
+export const HOME_DASHBOARD = {
+  eyebrow: 'Your clinical dashboard',
+  headline: 'Four readouts. One Precision Immunology picture.',
+  intro:
+    'The DIOS clinical dashboard shows you four things. That is the complete picture — updated as data arrives. Available before your patient walks through the door.',
   columns: [
     { id: 'sleep', label: 'Sleep efficiency', target: '>85%' },
     { id: 'rem', label: 'REM latency', target: '<90 min' },
-    { id: 'pth', label: 'PTH', target: '<20 pg/mL' },
-    { id: 'd3', label: 'D3 timing', target: 'Morning window' },
+    { id: 'pth', label: 'PTH trajectory', target: 'Trend + target' },
+    { id: 'soltriol', label: 'Soltriol timing score', target: 'Morning window' },
   ],
-  footnote: 'Everything else is downstream.',
+  cta: { label: 'See the dashboard', href: MARKETING_ROUTES.cliniciansTriage },
 } as const
 
-export const HOME_PROBLEM = {
-  eyebrow: 'The gap',
-  headline: ['D3 works.', 'Your stack doesn’t.'] as const,
-  emphasisLine: 1,
-  lede: 'PTH on a spreadsheet. Sleep invisible for ninety days. DIOS closes the loop.',
-  primaryCta: { label: 'See the board', href: MARKETING_ROUTES.cliniciansTriage },
-  evidenceCta: { label: 'Evidence', href: MARKETING_ROUTES.evidence },
-} as const
-
-export const HOME_INSIGHT = {
-  eyebrow: 'Dose Intelligence OS',
-  headline: 'Quarterly labs.',
-  headlineEmphasis: 'Nightly proof.',
-  statement:
-    'TipTraQ shows whether the protocol works every night — not every ninety days.',
-  ctaLabel: 'Circadian model',
-  ctaHref: '/circadian-digital-twin',
-} as const
-
-export const HOME_CASE_STUDY = {
-  eyebrow: 'Summit Immune',
-  headline: '38 patients. Monday scan.',
-  subhead: 'Denver · NHS evaluation arm',
-  metrics: [
-    { label: 'Review', value: '3', tone: 'red' as const },
-    { label: 'Watch', value: '4', tone: 'amber' as const },
-    { label: 'On track', value: '31', tone: 'green' as const },
+export const HOME_DINA = {
+  eyebrow: 'What you give your patient',
+  headline: 'You give your patient DINA.',
+  paragraphs: [
+    'DINA is the patient agent built into DIOS. It tells your patient when to take their Soltriol, confirms the morning window is met, monitors cofactor adherence, and flags conflicts before they become clinical problems.',
+    'Your patient does not need to understand chrono-immunotherapy. DINA understands it for them.',
   ],
-  rows: [
+} as const
+
+export const HOME_VISIBILITY = {
+  eyebrow: 'The 90-day gap',
+  headline: 'Closed.',
+  paragraphs: [
+    'Your patient took their Soltriol at the wrong time last Tuesday. DIOS saw it. DINA corrected it. You will see it in the dashboard on Monday morning.',
+    'You do not need to wait for the next blood draw.',
+  ],
+} as const
+
+export const HOME_CLINICIAN_TYPES = {
+  eyebrow: 'Built for three kinds of clinician',
+  headline: 'Wherever you are in the journey.',
+  types: [
     {
-      patient: 'Sarah Mitchell',
-      read: '71% sleep · PTH 38 · D3 29% in window — timing education, not dose.',
-      tone: 'red' as const,
+      id: 'coimbra',
+      title: 'Coimbra or Gominak practice',
+      body: 'You already use the protocol. DIOS gives you the infrastructure your protocol has never had.',
     },
     {
-      patient: 'Sean James',
-      read: 'PTH 27 ↓ · sleep 79% ↑ — protocol working six weeks before next draw.',
-      tone: 'amber' as const,
+      id: 'gp',
+      title: 'GP — curriculum sceptic',
+      body: 'You suspect Vitamin D is more important than the curriculum suggested. DIOS will show you why — and give you the tools to act on it.',
+    },
+    {
+      id: 'registrar',
+      title: 'Registrar or foundation doctor',
+      body: 'You want to understand precision immunology before it becomes mainstream. DIOS has a structured clinical curriculum that starts with why Soltriol is a hormone and ends with how to monitor it properly.',
     },
   ],
-  quote: {
-    attribution: 'Dr. Amara Okonkwo',
-    text: 'Three patients need me before coffee. The board tells me why.',
-  },
-  cta: { label: 'Open triage demo', href: MARKETING_ROUTES.cliniciansTriage },
 } as const
 
-export const HOME_AUDIENCE = {
-  eyebrow: 'Two surfaces',
-  headline: ['You read.', 'They time.'] as const,
-  clinician: {
-    who: 'Practitioner',
-    line: 'Four columns. One row per patient.',
-    href: MARKETING_ROUTES.cliniciansTriage,
-  },
-  patient: {
-    who: 'Patient',
-    line: 'DINA — three sentences. Right window.',
-    href: MARKETING_ROUTES.dina,
-  },
-} as const
-
-export const HOME_STEPS = {
-  eyebrow: 'How it works',
-  headline: 'Scan. Time. Triage.',
-  steps: [
-    { n: '01', line: 'TipTraQ — sleep architecture nightly.' },
-    { n: '02', line: 'Morning D3 window — patient-controlled.' },
-    { n: '03', line: 'Cohort board — PTH confirms what sleep shows.' },
+export const HOME_CHRONOBIOBANK = {
+  eyebrow: 'Free for your patients',
+  headline: 'Evidence-generating for the field.',
+  paragraphs: [
+    'Every patient on DIOS contributes de-identified data to the Chronobiobank — the only longitudinal dataset linking Soltriol timing, sleep architecture, and immune markers in a single research instrument.',
+    'You are not just improving your patient\'s protocol. You are building the evidence base that will change how the NHS prescribes this hormone.',
   ],
-  walkthroughCta: { label: 'Clinician walkthrough', href: MARKETING_ROUTES.clinicians },
-  demoCta: { label: 'DINA demo', href: MARKETING_ROUTES.dina },
+  cta: { label: 'Chronobiobank', href: MARKETING_ROUTES.chronobiobank },
+} as const
+
+export const HOME_START = {
+  eyebrow: 'Start here',
+  headline: 'Start with one patient.',
+  body: 'Not a demo. Not a procurement process. One patient on one protocol. Eight weeks of data. You decide whether it changes how you practice.',
+  ctas: [
+    {
+      id: 'enrol',
+      label: 'Enrol your first patient',
+      href: '/signup/clinician',
+      variant: 'primary' as const,
+    },
+    {
+      id: 'curriculum',
+      label: 'Learn the Soltriol curriculum',
+      detail: '13 CPD modules · RCGP accredited',
+      href: MARKETING_ROUTES.science,
+      variant: 'secondary' as const,
+    },
+    {
+      id: 'patient',
+      label: 'Your patient has DIOS — get DINA',
+      href: MARKETING_ROUTES.dina,
+      variant: 'tertiary' as const,
+    },
+  ],
 } as const
 
 export const HOME_CLINICAL_DISCLAIMER =
@@ -115,6 +161,7 @@ export const HOME_CLINICAL_DISCLAIMER =
 export const HOME_GOVERNANCE_LINE =
   'Clinician review before dose changes · UK GDPR · HIPAA path · FDA-cleared TipTraQ where stated' as const
 
+/** Science page — unchanged export */
 export const HOME_PROOF = {
   headline: ['Published.', 'Cited in clinic.'] as const,
   ctaLabel: 'Evidence library',
@@ -152,27 +199,30 @@ export const HOME_PROOF = {
   ],
 } as const
 
+/** How-it-works page — re-export */
+export const HOME_INSIGHT = {
+  eyebrow: 'Dose Intelligence OS',
+  headline: 'TipTraQ sets the clock.',
+  headlineEmphasis: 'DINA proves adherence.',
+  statement:
+    'Three nights every six months. Quarterly bloods. Daily dose confirmations. A complete Precision Immunology picture.',
+  ctaLabel: 'Circadian model',
+  ctaHref: '/circadian-digital-twin',
+} as const
+
 export const HOME_CTA_MEDIA = {
   video: '/first-light.mp4',
   poster: '/your-light-dose.jpg',
 } as const
 
-export const HOME_CTA = {
-  headline: 'Enrol your cohort.',
-  clinician: {
-    who: 'Practitioner',
-    line: 'Start with the demo',
-    detail: 'US · UK PCN · integrative',
-    href: MARKETING_ROUTES.cliniciansTriage,
-  },
-  patient: {
-    who: 'Patient',
-    line: 'Meet DINA',
-    detail: 'Invited by your clinic',
-    href: MARKETING_ROUTES.dina,
-  },
-  briefing: {
-    label: 'ICS briefing',
-    href: '/contact?intent=clinical-briefing',
-  },
+export const HOME_STEPS = {
+  eyebrow: 'How it works',
+  headline: 'Scan. Time. Triage.',
+  steps: [
+    { n: '01', line: 'TipTraQ — three nights every six months.' },
+    { n: '02', line: 'Daily DINA — Soltriol window confirmations.' },
+    { n: '03', line: 'Quarterly bloods — PTH confirms what sleep shows.' },
+  ],
+  walkthroughCta: { label: 'Clinician walkthrough', href: MARKETING_ROUTES.clinicians },
+  demoCta: { label: 'DINA demo', href: MARKETING_ROUTES.dina },
 } as const

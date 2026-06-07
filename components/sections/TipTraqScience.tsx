@@ -27,18 +27,23 @@ const GOLD_STANDARD = [
 const LAYERS = [
   {
     id: 'tiptraq',
-    title: 'Layer 1 TipTraQ',
-    body: 'FDA 510(k)-cleared clinical-grade home monitoring. Sleep onset, REM latency, ANS balance, AHI, SpO₂. Confidence: 38% night one to 94% night seven.',
+    title: 'Every 6 months — TipTraQ',
+    body: 'Three-night calibration block — not a continuous monitor. Sets DLMO and dose windows with L1 precision until the next read.',
   },
   {
     id: 'bloods',
-    title: 'Layer 2 Bloods',
-    body: 'Gominak panel — D3, B12, ferritin, B5. Metabolic substrate of the circadian system. D3 target: 150-200 nmol/L. Confidence: up to 75%.',
+    title: 'Every 90 days — blood panel',
+    body: 'PTH, 25-OH Vitamin D, B12, ferritin, serum calcium. Coimbra safety gate and VDR activation marker.',
   },
   {
     id: 'smartphone',
-    title: 'Layer 3 Smartphone',
-    body: 'Sleep timing. Morning light. Solar zenith for VDR activation. Fitzpatrick skin calibration. Confidence: up to 60%.',
+    title: 'Monthly — MLux camera proxy',
+    body: 'Smartphone light data refreshes provisional DLMO between TipTraQ blocks — seasonal light and wake/sleep adjustments.',
+  },
+  {
+    id: 'dina',
+    title: 'Daily — DINA dose confirmations',
+    body: 'Drug and supplement timing logged with every patient tap. Adherence to windows set by the last TipTraQ calibration.',
   },
 ] as const
 
@@ -47,7 +52,7 @@ const CALCULATION_STEPS = [
   'REM latency correction: Delayed REM beyond 85 minutes shifts MLux phase time estimate later by 0.25 minutes per minute of delay.',
   'ANS correction: Low parasympathetic activity at sleep onset indicates melatonin has not fully risen.',
   'AHI modifier: Apnea events above AHI 15 reduce confidence score — sympathetic activation suppresses the PNS signal.',
-  'Rolling average: Each additional night narrows the confidence band.',
+  'Calibration block: Three nights every six months deliver high-confidence DLMO — like polysomnography, not a daily feed.',
 ] as const
 
 const CONFIDENCE_STATS = [
@@ -160,8 +165,8 @@ export function TipTraqScience() {
 
       <section className={`${SECTION} ${SECTION_ALT}`}>
         <div className={CONTAINER}>
-          <SectionLabel title="Confidence builds nightly" />
-          <h2 className={`${SECTION_TITLE} mt-4 max-w-3xl`}>More nights. More precision.</h2>
+          <SectionLabel title="Confidence builds in layers" />
+          <h2 className={`${SECTION_TITLE} mt-4 max-w-3xl`}>Four cadences. One intelligence stack.</h2>
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {CONFIDENCE_STATS.map((stat) => (
               <Card key={stat.night} className={`${CARD} gap-0 py-0`}>

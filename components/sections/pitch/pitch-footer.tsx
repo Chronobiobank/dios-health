@@ -10,8 +10,7 @@ import {
 } from '@/components/sections/navigation'
 
 function FooterNavItem({ link }: { link: FooterNavLink }) {
-  const className =
-    'text-[13px] leading-snug text-[#0D0D0D]/72 transition-colors hover:text-[#0D0D0D]'
+  const className = 'pitch-footer__link'
 
   if (link.href.includes('#')) {
     return (
@@ -29,36 +28,34 @@ function FooterNavItem({ link }: { link: FooterNavLink }) {
 }
 
 export function PitchFooter() {
+  const year = new Date().getFullYear()
+
   return (
-    <footer className="pitch-footer relative overflow-hidden border-t border-black/10 bg-transparent">
-      <div className="relative z-10 mx-auto max-w-[76rem] px-4 py-12 sm:px-6 sm:py-14">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,2fr)] lg:gap-12">
-          <div className="flex max-w-md flex-col gap-4">
-            <Link href="/" className="w-fit" aria-label={`DIOS — ${DIOS_TAGLINE}`}>
+    <footer className="pitch-footer">
+      <div className="pitch-footer__inner">
+        <div className="pitch-footer__top">
+          <div className="pitch-footer__brand">
+            <Link
+              href="/"
+              className="pitch-footer__logo-link"
+              aria-label={`DIOS — ${DIOS_TAGLINE}`}
+            >
               <Image
                 src="/DIOS icon black.png"
-                alt="DIOS icon"
-                width={68}
-                height={68}
-                className="h-[68px] w-[68px]"
-                priority
+                alt=""
+                width={76}
+                height={76}
+                className="pitch-footer__logo"
               />
             </Link>
-            <p className="text-xl font-medium tracking-tight text-[#0D0D0D]/90 sm:text-2xl">
-              {DIOS_MISSION_STATEMENT}
-            </p>
+            <p className="pitch-footer__mission">{DIOS_MISSION_STATEMENT}</p>
           </div>
 
-          <nav
-            className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6"
-            aria-label="Site"
-          >
+          <nav className="pitch-footer__nav" aria-label="Site">
             {LANDING_FOOTER_SECTIONS.map((section) => (
               <div key={section.title}>
-                <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#0D0D0D]/55">
-                  {section.title}
-                </p>
-                <ul className="mt-3 flex flex-col gap-2.5">
+                <p className="pitch-footer__col-title">{section.title}</p>
+                <ul className="pitch-footer__links">
                   {section.links.map((link) => (
                     <li key={link.label}>
                       <FooterNavItem link={link} />
@@ -70,9 +67,9 @@ export function PitchFooter() {
           </nav>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-black/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[12px] text-[#0D0D0D]/58">© {new Date().getFullYear()} DIOS</p>
-          <p className="text-[12px] text-[#0D0D0D]/58">{DIOS_TAGLINE}</p>
+        <div className="pitch-footer__bottom">
+          <p className="pitch-footer__copy">© {year} DIOS</p>
+          <p className="pitch-footer__tagline">{DIOS_TAGLINE}</p>
         </div>
       </div>
     </footer>

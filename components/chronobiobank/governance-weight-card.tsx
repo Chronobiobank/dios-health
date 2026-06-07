@@ -17,7 +17,7 @@ export function GovernanceWeightCard({ contributions }: GovernanceWeightCardProp
       <p className="mt-1 text-sm text-black/65">{weight.votingLabel}</p>
       <dl className="mt-4 grid gap-2 text-xs text-black/55">
         <div className="flex justify-between gap-3">
-          <dt>First Light scan days</dt>
+          <dt>DINA dose confirmation days</dt>
           <dd className="font-mono">{contributions.firstLightScanDays} · {weight.basePoints} pts</dd>
         </div>
         <div className="flex justify-between gap-3">
@@ -25,7 +25,7 @@ export function GovernanceWeightCard({ contributions }: GovernanceWeightCardProp
           <dd className="font-mono">×{weight.cityLabsMultiplier}</dd>
         </div>
         <div className="flex justify-between gap-3">
-          <dt>TipTraQ nights contributed</dt>
+          <dt>TipTraQ blocks completed</dt>
           <dd className="font-mono">
             {contributions.tiptraqNightsContributed} · ×{weight.tiptraqMultiplier}
           </dd>

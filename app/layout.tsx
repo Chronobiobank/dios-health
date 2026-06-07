@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Dose Intelligence · dios.health',
     description:
-      'Optimise your script. Scan your body clock, time your meds, and track progress with dose intelligence.',
+      'Make Time Count. Scan your body clock, time your meds, and track progress with dose intelligence.',
     type: 'website',
     url: siteUrl,
   },
@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${siteFontVariableClasses} h-full scroll-pt-[calc(var(--dios-site-nav-height)+1rem)]`}
+      className={`${siteFontVariableClasses} dios-legible h-full scroll-pt-[calc(var(--dios-site-nav-height)+1rem)]`}
     >
       <body className={`${inter.className} flex min-h-full flex-col bg-[#f7fafc]`}>
         <ScrollToHash />

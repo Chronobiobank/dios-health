@@ -1,5 +1,6 @@
 import Image from 'next/image'
 
+import { INTELLIGENCE_CADENCES } from '@/lib/product/intelligence-cadence'
 import { SITE_IMAGES } from '@/lib/site-images'
 
 import { BODY, CONTAINER, SECTION, SECTION_TITLE } from './layout'
@@ -9,26 +10,26 @@ const STREAMS = [
   {
     image: SITE_IMAGES.streams.mobile,
     alt: 'Smartphone on a desk',
-    headline: 'DIOS computes melanopic dose — intensity, wavelength, timing',
-    caption: 'Dose Intelligence OS · passive phone stream',
+    headline: INTELLIGENCE_CADENCES.dose_adherence.label,
+    caption: `${INTELLIGENCE_CADENCES.dose_adherence.interval} — ${INTELLIGENCE_CADENCES.dose_adherence.roleLabel}`,
   },
   {
     image: SITE_IMAGES.streams.mobile,
     alt: 'Smartphone camera at wake and sleep',
-    headline: 'Smartphone camera logs ambient light and screen exposure',
-    caption: 'Layer 3 provisional DLMO proxy — entry point for all patients',
+    headline: INTELLIGENCE_CADENCES.mlux_camera.label,
+    caption: `${INTELLIGENCE_CADENCES.mlux_camera.interval} — ${INTELLIGENCE_CADENCES.mlux_camera.roleLabel}`,
   },
   {
     image: SITE_IMAGES.streams.lab,
     alt: 'Blood test vials in a lab tray',
-    headline: 'Biochemical fuel titration — D3, B5, B12 for deep sleep chemistry',
-    caption: 'Quarterly metabolic panel',
+    headline: INTELLIGENCE_CADENCES.blood_panel.label,
+    caption: `${INTELLIGENCE_CADENCES.blood_panel.interval} — ${INTELLIGENCE_CADENCES.blood_panel.roleLabel}`,
   },
   {
     image: SITE_IMAGES.streams.wearable,
     alt: 'TipTraQ fingertip sleep sensor',
-    headline: 'PranaQ TipTraQ verifies neural sleep recovery',
-    caption: 'FDA-cleared fingertip telemetry',
+    headline: INTELLIGENCE_CADENCES.tiptraq.label,
+    caption: `${INTELLIGENCE_CADENCES.tiptraq.interval} — ${INTELLIGENCE_CADENCES.tiptraq.roleLabel}`,
   },
 ] as const
 
@@ -38,11 +39,11 @@ export function Platform() {
       <div className={CONTAINER}>
         <SectionLabel title="How it works" />
         <h2 className={`${SECTION_TITLE} mt-4 max-w-xl`}>
-          Dose Intelligence — four automated inputs, one dose engine
+          Four cadences, one dose engine
         </h2>
         <p className={`${BODY} mt-4 max-w-xl`}>
-          Passive light sensing, GP blood panels, and TipTraQ sleep verification —
-          three diagnostic tiers, one dose engine
+          TipTraQ sets the clock. Blood confirms response. Camera maintains the estimate. DINA proves
+          adherence.
         </p>
 
         <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">

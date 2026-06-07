@@ -245,7 +245,7 @@ export const PITCH_DETAIL_PAGES: readonly PitchDetailPage[] = [
       },
       {
         title: 'Governance proportional to data fidelity',
-        body: 'Daily First Light scans establish base contribution. Verified City Labs panels and 90-day TipTraQ sleep files increase your voting weight on data access proposals. Phase 2 adds zero-knowledge proofs so institutions can verify cohort facts without seeing identity. Phase 3 activates the collective veto — participants vote on pharmaceutical and research access terms.',
+        body: 'Daily DINA dose confirmations establish base contribution. Monthly MLux camera proxies, verified 90-day blood panels, and completed six-month TipTraQ three-night blocks increase your voting weight on data access proposals. Phase 2 adds zero-knowledge proofs so institutions can verify cohort facts without seeing identity. Phase 3 activates the collective veto — participants vote on pharmaceutical and research access terms.',
         bullets: [
           'Academic non-profit research — allow or deny',
           'Pharmaceutical discovery — allow or deny',

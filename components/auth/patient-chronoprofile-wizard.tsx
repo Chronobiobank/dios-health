@@ -146,7 +146,7 @@ export function PatientChronoprofileWizard() {
             {step === 2 && 'Personalises light and melanopic lux for your skin.'}
             {step === 3 && 'Season and solar timing depend on your latitude.'}
             {step === 4 && 'Optional — only if your schedule is irregular.'}
-            {step === 5 && 'Shapes your chronoprofile until TipTraQ data is available.'}
+            {step === 5 && 'Shapes your provisional chronoprofile until your first TipTraQ three-night block or monthly MLux proxy.'}
           </p>
         </div>
 

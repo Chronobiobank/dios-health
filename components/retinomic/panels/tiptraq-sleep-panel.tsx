@@ -58,7 +58,7 @@ export function TipTraqSleepPanel({
             <div className="dios-glass-inner retinomic-teaser-device opacity-80">
               <div className="retinomic-teaser-device__visual" aria-hidden />
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-[var(--text-primary)]">TipTraQ overnight stream</p>
+                <p className="text-sm font-medium text-[var(--text-primary)]">TipTraQ calibration block</p>
                 <p className="dash-sub mt-1 text-xs">REM stages and autonomic strain from your ring.</p>
               </div>
             </div>
@@ -91,7 +91,7 @@ export function TipTraqSleepPanel({
             </div>
           </div>
           <p className="dash-sub mt-3 text-xs">
-            Source: PranaQ TipTraQ webhook · last verified night on file.
+            Source: PranaQ TipTraQ · last three-night block on file (every six months).
           </p>
           <div className="mt-3">
             <Link

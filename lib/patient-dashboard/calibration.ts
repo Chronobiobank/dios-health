@@ -120,11 +120,12 @@ function chronotypeDisplay(
   return { chronotype, chronotypeSource: '' }
 }
 
-function formatTipTraqSource(dateIso: string | null): string {
-  if (!dateIso) return 'confirmed TipTraQ study'
+function formatTipTraqSource(dateIso: string | null, nightsCount: number): string {
+  if (!dateIso) return 'TipTraQ block pending'
   const date = new Date(dateIso)
-  if (Number.isNaN(date.getTime())) return 'confirmed TipTraQ study'
-  return `confirmed TipTraQ ${date.toLocaleDateString('en-NZ', { month: 'short', year: 'numeric' })}`
+  if (Number.isNaN(date.getTime())) return 'TipTraQ block pending'
+  const blockLabel = nightsCount >= 3 ? '3-night block' : `${nightsCount}-night block`
+  return `TipTraQ ${blockLabel} · ${date.toLocaleDateString('en-NZ', { month: 'short', year: 'numeric' })}`
 }
 
 export function buildPatientCalibration(input: BuildCalibrationInput): PatientCalibrationFields {
@@ -150,10 +151,10 @@ export function buildPatientCalibration(input: BuildCalibrationInput): PatientCa
 
   const chronotypeSource =
     input.tipTraqNightsCount > 0
-      ? formatTipTraqSource(input.latestTiptraqDate)
+      ? formatTipTraqSource(input.latestTiptraqDate, input.tipTraqNightsCount)
       : input.patient.chronotype_q2
-        ? 'from your chronotype answers'
-        : 'estimated — connect TipTraQ to confirm'
+        ? 'provisional — from chronotype answers'
+        : 'provisional — monthly MLux proxy until TipTraQ block'
 
   return {
     fitzpatrickType,

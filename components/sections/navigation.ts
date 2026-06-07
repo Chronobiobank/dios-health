@@ -31,7 +31,7 @@ export const NAV_MENU_LINKS = [
   { label: 'Contact DIOS', href: '/contact' },
 ] as const
 
-export const DIOS_MISSION_STATEMENT = 'Dose Intelligence'
+export const DIOS_MISSION_STATEMENT = 'The Home of Chronoimmunology'
 
 export const FOOTER_LINKS = [
   { label: 'How it works', href: '/how-it-works' },

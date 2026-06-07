@@ -147,7 +147,7 @@ export const PRGC_MONITORING_PATIENTS: PrgcMonitoringPatient[] = [
       status: pthStatus(27, 'improving'),
       trend: 'improving',
       prior: '34 pg/mL',
-      hint: 'Quarterly draw due in 8 weeks',
+      hint: '90-day draw due in 8 weeks',
     },
     d3Timing: {
       value: '96%',
@@ -155,7 +155,7 @@ export const PRGC_MONITORING_PATIENTS: PrgcMonitoringPatient[] = [
       hint: 'Morning window adherence excellent',
     },
     clinicalRead:
-      'Three amber trending green. Nightly TipTraQ shows protocol working six weeks before the next blood panel.',
+      'Three amber trending green. Daily DINA adherence and monthly MLux proxy show progress six weeks before the next 90-day draw.',
     action: 'Hold dose — trajectory is the insight',
   },
 ]

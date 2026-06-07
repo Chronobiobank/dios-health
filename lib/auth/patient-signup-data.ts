@@ -60,7 +60,7 @@ export const WEARABLE_OPTIONS = [
   {
     id: 'tiptraq',
     name: 'TipTraQ',
-    body: 'Medical-grade body clock reading. The most accurate data source for DIOS.',
+    body: 'Three nights every six months — high-confidence DLMO calibration, like polysomnography. Sets your dose windows until the next block.',
     cta: 'Connect TipTraQ',
     recommended: true,
   },

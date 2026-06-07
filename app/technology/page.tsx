@@ -5,7 +5,7 @@ import { DiosTechnology } from '@/components/sections/TipTraqScience'
 export const metadata: Metadata = {
   title: 'Technology — DIOS',
   description:
-    'How DIOS derives MLux phase time from smartphone, blood panel, and TipTraQ data — the three-layer measurement stack for precision chronotherapy.',
+    'How DIOS builds dose intelligence from four cadences — daily DINA, monthly MLux, 90-day bloods, six-month TipTraQ calibration.',
 }
 
 export default function TechnologyPage() {

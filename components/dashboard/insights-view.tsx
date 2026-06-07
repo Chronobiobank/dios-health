@@ -66,7 +66,7 @@ function BodyClockHeader({ data }: { data: InsightsData }) {
     return (
       <section className={DASHBOARD_CARD}>
         <p className={`${DASHBOARD_BODY} text-black/70`}>
-          Your body clock reading is not ready yet. Upload a TipTraQ night or log your sleep on the
+          Your body clock reading is not ready yet. Complete a TipTraQ three-night block or log your sleep on the
           Streams page.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
@@ -135,7 +135,7 @@ function RiskIndicators({ data }: { data: InsightsData }) {
         {data.riskFlags.length === 0 ? (
           <article className={`${DASHBOARD_CARD} border-teal-100 bg-teal-50/50`}>
             <p className={`${DASHBOARD_BODY} font-medium text-teal-900`}>
-              No significant circadian risk flags detected from your last TipTraQ night.
+              No significant circadian risk flags detected from your last TipTraQ calibration block.
             </p>
           </article>
         ) : (

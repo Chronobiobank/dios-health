@@ -1,7 +1,21 @@
 /**
  * DIOS · Dose Intelligence OS — canonical product model (June 2026 memo).
- * Single source for thresholds, layer labels, and protocol module ids.
+ * Cadence definitions live in intelligence-cadence.ts; this file holds protocol thresholds.
  */
+
+import {
+  BLOOD_PANEL_CADENCE,
+  INTELLIGENCE_CADENCES,
+  INTELLIGENCE_LAYER_SUMMARY,
+  TIPTRAQ_CALIBRATION,
+} from '@/lib/product/intelligence-cadence'
+
+export {
+  BLOOD_PANEL_CADENCE,
+  INTELLIGENCE_CADENCES,
+  INTELLIGENCE_LAYER_SUMMARY,
+  TIPTRAQ_CALIBRATION,
+} from '@/lib/product/intelligence-cadence'
 
 export const PRODUCT_NAME = 'DIOS' as const
 export const PRODUCT_TAGLINE = 'Dose Intelligence OS' as const
@@ -12,25 +26,41 @@ export const AGE_LABELS = {
   burdenYears: 'chronopenic burden',
 } as const
 
-/** Layer 1 — First Light Protocol (free, daily) */
-export const LAYER_1 = {
-  id: 'morning-scan',
-  label: 'Layer 1 — First Light scan',
-  description: 'Daily morning scan — MLux, chronotype, social jet lag, autonomic index.',
+/** Daily — DINA dose confirmations (adherence to TipTraQ windows) */
+export const LAYER_DAILY = {
+  id: INTELLIGENCE_CADENCES.dose_adherence.id,
+  label: 'Daily — DINA dose confirmations',
+  description: INTELLIGENCE_CADENCES.dose_adherence.description,
 } as const
 
-export const LAYER_2 = {
-  id: 'biochemical',
-  label: 'Layer 2 — Biochemical panel',
-  gominakPanel: 'Gominak panel (D3, B12, ferritin, B5)',
-  chronoimmunePanel: 'Chronoimmune panel (PTH, calcium, urine calcium, eGFR)',
+/** Monthly — MLux camera proxy between TipTraQ blocks */
+export const LAYER_MONTHLY = {
+  id: INTELLIGENCE_CADENCES.mlux_camera.id,
+  label: 'Monthly — MLux camera proxy',
+  description: INTELLIGENCE_CADENCES.mlux_camera.description,
 } as const
 
-export const LAYER_3 = {
-  id: 'architectural',
-  label: 'Layer 3 — Architectural verification',
-  description: 'TipTraQ sleep sensor (UK via DIOS), optional CGM.',
+/** Every 90 days — blood panel (Coimbra safety gate) */
+export const LAYER_BLOOD = {
+  id: INTELLIGENCE_CADENCES.blood_panel.id,
+  label: 'Every 90 days — blood panel',
+  panel: BLOOD_PANEL_CADENCE.markers.map((m) => m.label).join(', '),
+  description: INTELLIGENCE_CADENCES.blood_panel.description,
 } as const
+
+/** Every 6 months — TipTraQ three-night calibration */
+export const LAYER_TIPTRAQ = {
+  id: INTELLIGENCE_CADENCES.tiptraq.id,
+  label: 'Every 6 months — TipTraQ',
+  description: TIPTRAQ_CALIBRATION.summary,
+} as const
+
+/** @deprecated Use LAYER_DAILY — kept for imports that expected numbered layers */
+export const LAYER_1 = LAYER_MONTHLY
+/** @deprecated Use LAYER_BLOOD */
+export const LAYER_2 = LAYER_BLOOD
+/** @deprecated Use LAYER_TIPTRAQ */
+export const LAYER_3 = LAYER_TIPTRAQ
 
 export const FIRST_LIGHT_PROTOCOL = {
   name: 'First Light Protocol',

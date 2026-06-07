@@ -332,9 +332,9 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
       value: tiptraqSummary.qualityLabel,
       label: 'Sleep quality',
       subtitle: tileSubhead(
-        'Five TipTraQ nights show mild OSA with sleep rhythm slip.'
+        'Last TipTraQ block shows mild OSA with sleep rhythm slip.'
       ),
-      badge: 'TipTraQ · 5/5 nights',
+      badge: 'TipTraQ · block complete',
       badgeTone: 'study',
       source: 'TipTraQ',
       panelRows: [

@@ -39,4 +39,4 @@ TipTraQ captures the signal → MLux calculates the biological clock → **DIOS*
 
 This document is the primary reference for NHS, research, and pharma partners evaluating DIOS as **infrastructure** — not a single-feature app. Technical module boundaries are described in `lib/dios/README.md`.
 
-**Optimise Your Script.**
+**Make Time Count.**

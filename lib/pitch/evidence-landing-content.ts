@@ -91,8 +91,8 @@ export const EVIDENCE_PILLARS: readonly EvidencePillar[] = [
       'Global vitamin D deficiency affects over one billion people — modern indoor life eliminated the primary evolutionary source of D3 synthesis.',
     bullets: [
       {
-        label: 'First Light Protocol',
-        body: 'Morning outdoor exposure at civil twilight activates melanopsin-driven circadian entrainment and cutaneous UVB D3 precursor synthesis simultaneously. One ritual. Two mechanisms. Both measured by DIOS.',
+        label: 'MLux camera proxy',
+        body: 'Monthly smartphone light capture refreshes provisional DLMO between TipTraQ blocks — melanopsin-driven entrainment and seasonal light adjustment measured by DIOS.',
         href: 'https://www.nejm.org/doi/full/10.1056/NEJMra070553',
         linkLabel: "Holick's 2007 NEJM paper",
       },

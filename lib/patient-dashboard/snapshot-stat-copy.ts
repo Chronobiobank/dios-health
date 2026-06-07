@@ -13,7 +13,7 @@ export type BuildSnapshotStatNotesInput = {
 export function buildSnapshotStatNotes(input: BuildSnapshotStatNotesInput): SnapshotStatNotes {
   const nights = input.tipTraqNights ?? 0
   const nightsPhrase =
-    nights >= 5 ? 'your five TipTraQ nights' : nights > 1 ? `your last ${nights} TipTraQ nights` : 'your tracked nights'
+    nights >= 3 ? 'your last TipTraQ three-night block' : nights > 0 ? `your TipTraQ block (${nights} of 3 nights)` : 'your scheduled TipTraQ block'
 
   const sct = input.sleepTimingCentre
   const darkYearsHours = input.darkYearsHours

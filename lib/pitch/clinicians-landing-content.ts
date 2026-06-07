@@ -1,5 +1,10 @@
-/** Clinician acquisition — med timing lead (Option 1: Optimise Your Script). */
+/** Clinician acquisition — Precision Immunology / Make Time Count. */
 
+import {
+  PRGC_CADENCE_LINE,
+  TIPTRAQ_CALIBRATION,
+  TIPTRAQ_POSITIONING,
+} from '@/lib/product/intelligence-cadence'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 
 export const CLINICIANS_LANDING_META = {
@@ -27,19 +32,19 @@ export const CLINICIANS_GAP = {
   },
   after: {
     label: 'What DIOS does',
-    body: 'A 60-second body-clock scan estimates circadian phase. Each drug gets a personal timing window — updated when sleep, light, or labs shift the clock.',
+    body: 'Monthly MLux camera proxy maintains circadian phase between TipTraQ blocks. Each drug gets a personal timing window — reset every six months when TipTraQ calibrates, adjusted when bloods or light shift the clock.',
   },
 } as const
 
 export const CLINICIANS_TIPTRAQ_VD3 = {
   eyebrow: 'For Coimbra and Gominak practitioners',
-  headline: 'TipTraQ turns a quarterly blood test into a nightly progress report.',
-  body: 'PTH tells you where the patient is in the protocol once every 90 days. TipTraQ tells you whether the protocol is working every single night. Sleep efficiency, REM latency, and WASO are the primary biomarkers of pRGC function between lab draws — not a side effect of vitamin D deficiency, but the mechanism.',
+  headline: 'TipTraQ sets the clock. DINA proves adherence.',
+  body: `${TIPTRAQ_POSITIONING} ${TIPTRAQ_CALIBRATION.summary} PTH every 90 days confirms biological response. Daily DINA dose confirmations show whether patients hit the windows that last TipTraQ block defined.`,
   metrics: [
-    'Sleep efficiency — restorative sleep above 85%',
+    'Sleep efficiency — from last TipTraQ block, target above 85%',
     'REM latency — under 90 minutes when D3 and cofactors are working',
-    'PTH — suppressed below 20 pg/mL on quarterly draw',
-    'D3 timing — morning window adherence the patient controls',
+    'PTH — suppressed below 20 pg/mL on 90-day draw',
+    'D3 timing — daily DINA confirmations in morning window',
   ],
 } as const
 
@@ -50,7 +55,7 @@ export const CLINICIANS_STEPS = {
     {
       num: '01',
       name: 'Scan the body clock',
-      desc: '60-second phone scan at first light. TipTraQ nightly for sleep architecture. PTH quarterly from bloods.',
+      desc: 'Monthly MLux camera proxy. TipTraQ three nights every six months. PTH every 90 days from bloods.',
       mono: 'Four numbers — one clinical question',
     },
     {
@@ -76,7 +81,7 @@ export const CLINICIANS_USERS = {
     cvp: 'Is the pRGC system working?',
     points: [
       'Four numbers per patient — sleep, REM latency, PTH, D3 timing',
-      'TipTraQ nightly between quarterly blood draws',
+      PRGC_CADENCE_LINE,
       'Clinical read when sleep and PTH disagree or agree',
       'DINA timing education — not dose escalation by default',
       'Exportable summary for the EHR',

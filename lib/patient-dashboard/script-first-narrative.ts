@@ -27,7 +27,7 @@ export const PATIENT_TRIAGE_STRIP: Record<
   },
   amber: {
     label: 'Amber',
-    detail: 'Needs attention today — complete your morning scan or safety checkpoints.',
+    detail: 'Needs attention today — confirm today\'s doses in DINA or complete your monthly MLux proxy.',
   },
   red: {
     label: 'Red',
@@ -78,8 +78,8 @@ export function applyScriptFirstMeasureTiles(
         label: 'Clock drift',
         subtitle:
           nights > 0
-            ? `TipTraQ shows ${driftLine} — your evening dose windows shift with this anchor, not wall-clock labels.`
-            : 'Connect sleep data to refine when your evening dose windows open.',
+            ? `Last TipTraQ block shows ${driftLine} — evening dose windows follow that calibration, not wall-clock labels.`
+            : 'Complete a TipTraQ three-night block to set your dose windows.',
         badge: 'Feeds dose timing',
         badgeTone: 'watch' as const,
         panelActions: [
@@ -94,11 +94,11 @@ export function applyScriptFirstMeasureTiles(
     if (tile.id === 'vitd') {
       return {
         ...tile,
-        label: 'Layer 2 — bloods',
+        label: '90-day blood panel',
         subtitle: ctx.bloodPanel.collectedAt
-          ? 'Bloods on file — refine D and metabolic modules behind your script.'
-          : 'Add baseline bloods to refine biochemical modules behind your script.',
-        badge: ctx.bloodPanel.collectedAt ? 'L2 connected' : 'Unlock L2',
+          ? 'Last draw on file — PTH and cofactors confirm whether the protocol is working.'
+          : 'Add your 90-day panel — PTH, D, B12, ferritin, calcium.',
+        badge: ctx.bloodPanel.collectedAt ? 'Panel on file' : 'Due panel',
         badgeTone: ctx.bloodPanel.collectedAt ? ('watch' as const) : ('act' as const),
         panelActions: [
           {
@@ -113,16 +113,16 @@ export function applyScriptFirstMeasureTiles(
       return {
         ...tile,
         subtitle: ctx.hasTipTraq
-          ? nights >= 5
-            ? `${nights} nights graded — sleep architecture validates your DLMO estimate for tonight's windows.`
-            : `${nights} TipTraQ night${nights === 1 ? '' : 's'} — more nights sharpen tonight's dose windows.`
-          : 'Upload TipTraQ nights to validate your DLMO estimate for dose timing.',
-        badge: ctx.hasTipTraq ? 'Layer 3 · sleep' : 'Add sleep',
+          ? nights >= 3
+            ? `Last ${nights >= 3 ? '3-night' : `${nights}-night`} block — sleep architecture set your dose windows for the next six months.`
+            : `${nights} of 3 nights in current block — finish the calibration read.`
+          : 'Schedule a TipTraQ three-night block — sets your clock until the next read.',
+        badge: ctx.hasTipTraq ? 'Clock calibration' : 'Schedule block',
         badgeTone: 'study' as const,
         panelActions: [
           {
             label: 'Sleep and my script ↗',
-            prompt: 'How does last night\'s sleep affect my dose windows today?',
+            prompt: 'How does my last TipTraQ block affect my dose windows today?',
           },
         ],
       }
@@ -139,11 +139,11 @@ export function applyScriptFirstMeasureTiles(
         ...tile,
         subtitle: scanComplete
           ? ctx.completenessGaps === 0
-            ? 'First Light complete today — all streams feeding your script.'
-            : 'First Light complete today — connect remaining streams for full calibration.'
+            ? 'Today\'s dose confirmations logged — all four cadences feeding your script.'
+            : 'Doses confirmed today — connect remaining cadences for full calibration.'
           : ctx.completenessGaps === 0
-            ? 'Streams connected — run First Light to anchor today\'s windows.'
-            : 'Connect missing streams and complete First Light for full script precision.',
+            ? 'Streams connected — confirm doses in DINA and refresh monthly MLux proxy.'
+            : 'Connect missing cadences: daily DINA, monthly MLux, 90-day bloods, six-month TipTraQ.',
         badge: gapLabel,
         badgeTone: ctx.completenessGaps > 0 ? ('action' as const) : ('watch' as const),
         panelActions: [

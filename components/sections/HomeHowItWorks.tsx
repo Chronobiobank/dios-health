@@ -1,18 +1,20 @@
+import { INTELLIGENCE_CADENCES } from '@/lib/product/intelligence-cadence'
+
 import { CONTAINER, LIST_LINE, SECTION, SECTION_TITLE } from './layout'
 import { SectionLabel } from './SectionLabel'
 
 const STEPS = [
-  'Patient wears TipTraQ for three nights.',
-  'DIOS calculates their personal body clock.',
-  'Clinician receives a one-page dose timing report.',
-  'Patient gets daily reminders. Timed to their biology.',
+  `Patient completes TipTraQ — ${INTELLIGENCE_CADENCES.tiptraq.interval.toLowerCase()}, ${INTELLIGENCE_CADENCES.tiptraq.inputs[0]}.`,
+  'DIOS sets personalised dose windows from the calibration read.',
+  'Monthly MLux proxy maintains the estimate; 90-day bloods confirm biological response.',
+  'Daily DINA dose confirmations prove adherence to the windows TipTraQ defined.',
 ] as const
 
 export function HomeHowItWorks() {
   return (
     <section id="how-it-works" className={`${SECTION} ${CONTAINER}`}>
       <SectionLabel title="How it works" />
-      <h2 className={`${SECTION_TITLE} mt-4 max-w-2xl`}>Three nights. One reading. Better outcomes.</h2>
+      <h2 className={`${SECTION_TITLE} mt-4 max-w-2xl`}>Three nights. Six months of precision.</h2>
       <ol className="mt-8 max-w-2xl space-y-4">
         {STEPS.map((step, index) => (
           <li key={step} className="flex gap-4">
