@@ -24,7 +24,7 @@ type DashboardClientProps = PatientDashboardProps & {
 
 /**
  * Single patient dashboard UI — used by /dashboard, /how-it-works, and /dev/dashboard.
- * Lead: dose windows + First Light. Drill-down: body clock detail (Photonic Age, spectrum).
+ * Lead: dose windows + First Light. Drill-down: body clock detail (Chronopathic Age, spectrum).
  */
 export function DashboardClient({
   greeting,

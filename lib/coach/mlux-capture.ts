@@ -71,5 +71,3 @@ export function startCoachSession(): void {
   void fetch('/api/coach/session', { method: 'POST' }).catch(() => {})
 }
 
-/** @deprecated Use {@link startCoachSession}. */
-export const startVayaSession = startCoachSession

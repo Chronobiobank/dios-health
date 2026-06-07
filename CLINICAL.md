@@ -24,7 +24,7 @@ TipTraQ captures the signal → MLux calculates the biological clock → **DIOS*
 
 1. **Layered confidence** — Outputs are labelled ESTIMATED, PRECISION, or CONFIRMED according to active data layers. The UI presents risk (magenta), optimal (orange), and informational blue tones as **informative**, not alarmist.
 2. **Consent** — Chronobiobank clinical use is required; research contribution is optional and revocable. Consent records are stored separately from raw streams.
-3. **Session integrity** — DINA engagement sessions (`coach_sessions`, table `vaya_sessions`) are append-only logs for audit and model improvement governance.
+3. **Session integrity** — DINA engagement sessions (`coach_sessions`, table `dina_sessions`) are append-only logs for audit and model improvement governance.
 4. **No silent substitution** — When ElevenLabs, Deepgram, or camera access is unavailable, DINA degrades to text input; sessions remain usable.
 5. **Human in the loop** — Protocol cards and spectrum nodes support clinician review; DIOS does not autonomously change prescribed medicines.
 

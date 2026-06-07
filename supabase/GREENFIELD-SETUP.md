@@ -41,7 +41,7 @@ Override emails/password via `DEMO_*` vars in `.env.local`.
 | Public demo dashboard | `/how-it-works` | Mock data, no login |
 | Sign up | `/auth/signup` | New patient registration |
 | Sign in | `/auth/signin` | Login |
-| Onboarding | `/onboarding` | Camera + Siloton flow |
+| Onboarding | `/onboarding` | Camera baseline + diagnostic tier prompt |
 | Live dashboard | `/dashboard` | Requires sign-in |
 
 ---
@@ -80,7 +80,7 @@ You now have an empty Postgres database plus built-in **Auth** (`auth.users`).
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxxxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 SUPABASE_SERVICE_ROLE_KEY=eyJ...
-SILOTON_WEBHOOK_SECRET=dios-dev-siloton-change-me
+PRANAQ_WEBHOOK_SECRET=dios-dev-pranaq-change-me
 TIPTRAQ_WEBHOOK_SECRET=dios-dev-tiptraq-change-me
 ```
 
@@ -115,7 +115,8 @@ For each file: **New query** → paste full contents from Cursor → **Run** →
 | 18 | `supabase/migrations/020_chronoprofile_onboarding.sql` | Chronoprofile onboarding |
 | 19 | `supabase/migrations/021_chronoprofile_date_of_birth.sql` | Chronoprofile DOB RPC |
 | 20 | `supabase/migrations/022_retinomic_protocol.sql` | Retinomic tier, webhooks, hardware baseline |
-| 21 | `supabase/migrations/023_retinomic_auth_seed.sql` | Siloton integration JSON slot |
+| 21 | `supabase/migrations/023_retinomic_auth_seed.sql` | Retinomic auth seed (legacy) |
+| 22 | `supabase/migrations/030_architecture_v2.sql` | Diagnostic tiers L1–L3, dina_sessions, OCT removal |
 
 **Shortcut (same as 20 + 21):** After 001–019, you may run `supabase/run-retinomic-bootstrap.sql` instead of 022 + 023 separately. It bundles Retinomic + verification queries.
 

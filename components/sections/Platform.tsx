@@ -13,10 +13,10 @@ const STREAMS = [
     caption: 'Dose Intelligence OS · passive phone stream',
   },
   {
-    image: SITE_IMAGES.streams.retina,
-    alt: 'Handheld eye scan device',
-    headline: 'Siloton GiraffeOCT maps retinal light-receptor density',
-    caption: 'Quantum photonic-chip eye-clock scan',
+    image: SITE_IMAGES.streams.mobile,
+    alt: 'Smartphone camera at wake and sleep',
+    headline: 'Smartphone camera logs ambient light and screen exposure',
+    caption: 'Layer 3 provisional DLMO proxy — entry point for all patients',
   },
   {
     image: SITE_IMAGES.streams.lab,
@@ -41,8 +41,8 @@ export function Platform() {
           Dose Intelligence — four automated inputs, one dose engine
         </h2>
         <p className={`${BODY} mt-4 max-w-xl`}>
-          Eye-clock structure, biochemical fuel, passive light sensing, and medical-grade sleep verification —
-          no guesswork wearables
+          Passive light sensing, GP blood panels, and TipTraQ sleep verification —
+          three diagnostic tiers, one dose engine
         </p>
 
         <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">

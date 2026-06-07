@@ -97,7 +97,7 @@ export function AllPatientsTable({ patients }: AllPatientsTableProps) {
                     {patient.adherenceRate}%
                   </p>
                   <p className={cn(DATA_LABEL, 'text-black/35')}>
-                    {patient.vayaSessionsLast30}/30 days
+                    {patient.dinaSessionsLast30}/30 days
                   </p>
                 </TableDataCell>
 

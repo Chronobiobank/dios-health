@@ -98,12 +98,10 @@ export type PatientNextSteps = {
   steps: PatientNextStep[]
 }
 
-/** Onboarding camera scan ± Siloton OCT — feeds calibration, not a separate dashboard. */
+/** Onboarding camera scan — feeds calibration, not a separate dashboard. */
 export type RetinomicBaselineSummary = {
   irisLabel: string
   skinIta: number
-  gclIplMicrons: number | null
-  hasOctThickness: boolean
 }
 
 export type BurdenTrendDirection = 'improving' | 'stable' | 'worsening'
@@ -168,9 +166,9 @@ export type ChronoimmuneProfile = {
 export type PatientSnapshot = {
   /** Memo: Calendar Age — years since birth */
   calendarAge: number
-  /** Memo: Photonic Age — biological age from light, biochemistry, sleep */
+  /** Memo: Chronopathic Age — biological clock score from light, biochemistry, sleep */
   photonicAge: number
-  /** Years between Photonic and Calendar Age */
+  /** Years between Chronopathic and Calendar Age */
   chronopenicBurdenYears: number
   /** 0–100 composite; Layer 1 uses gap estimate until L2/L3 refine */
   chronopenicBurdenScore: number
@@ -180,7 +178,7 @@ export type PatientSnapshot = {
   lightAlignment: number
   clockDrift: number
   dlmoEstimate: string
-  /** Camera / OCT baseline when present */
+  /** Smartphone camera baseline when present */
   retinomicBaseline: RetinomicBaselineSummary | null
   /** Explanations under Dark Years / Light alignment / Clock drift stat pills. */
   statNotes: SnapshotStatNotes

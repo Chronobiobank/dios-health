@@ -140,14 +140,14 @@ async function seedPremiumStreams(admin: ReturnType<typeof createAdminClient>, p
 }
 
 function printWebhookCurlExamples(premiumUserId: string) {
-  const silotonSecret = process.env.SILOTON_WEBHOOK_SECRET ?? 'change-me-siloton'
   const tiptraqSecret = process.env.TIPTRAQ_WEBHOOK_SECRET ?? 'change-me-tiptraq'
+  const pranaqSecret = process.env.PRANAQ_WEBHOOK_SECRET ?? 'change-me-pranaq'
 
   console.log('\n── Webhook smoke tests (dev server: npm run dev) ──\n')
-  console.log(`curl -X POST ${APP_ORIGIN}/api/hardware/siloton/webhook \\
+  console.log(`curl -X POST ${APP_ORIGIN}/api/tiptraq/webhook \\
   -H "Content-Type: application/json" \\
-  -H "x-webhook-secret: ${silotonSecret}" \\
-  -d '{"userId":"${premiumUserId}","irisPigment":"LIGHT","skinITA":42,"gclIplThicknessMicrons":{"leftEye":78.2,"rightEye":79.1}}'`)
+  -H "x-pranaq-signature: ${pranaqSecret}" \\
+  -d '{"patient_id":"${premiumUserId}","device_id":"demo-tiptraq-1","dlmo_proxy":"22:30","sns_activity":42,"sleep_efficiency":0.88,"recorded_at":"2026-06-05T08:00:00Z"}'`)
 
   console.log(`\ncurl -X POST ${APP_ORIGIN}/api/telemetry/tiptraq \\
   -H "Content-Type: application/json" \\

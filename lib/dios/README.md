@@ -22,6 +22,6 @@ Foundational **Operating System for Dose Intelligence** logic — separate from 
 | `lib/spectrum/` | Circadian Desynchrony Spectrum scoring |
 | `app/api/` | HTTP boundaries (auth, Supabase) |
 
-## coach_sessions ↔ vaya_sessions
+## coach_sessions ↔ dina_sessions
 
-Clinical and engineering docs refer to **coach_sessions** (DINA engagement logs). The database table remains **`vaya_sessions`** for migration stability. All Supabase queries must use `COACH_SESSIONS_TABLE` from `lib/dios/constants/tables.ts`.
+Clinical and engineering docs refer to **coach_sessions** (DINA engagement logs). The physical Postgres table is **`dina_sessions`** (renamed from `vaya_sessions` in migration 030). All Supabase queries must use `COACH_SESSIONS_TABLE` from `lib/dios/constants/tables.ts`.

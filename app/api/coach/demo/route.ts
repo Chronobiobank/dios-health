@@ -1,19 +1,11 @@
 import { NextResponse } from 'next/server'
 
 import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
+import { DINA_MAX_TOKENS, DINA_MODEL, DINA_SYSTEM_PROMPT } from '@/lib/coach/dina-system-prompt'
 import { buildSeanDemoCoachContext } from '@/lib/coach/sean-demo-context'
 import { createAnthropicClient, mapAnthropicError } from '@/lib/tiptraq/anthropic-client'
 
-const DEMO_MODEL = 'claude-sonnet-4-6'
-
-const DEMO_SYSTEM = `You are ${COACH_DISPLAY_NAME} — the DIOS Dose Intelligence Agent for patients.
-
-DIOS COPY RULES (mandatory):
-- Plain English only — no pharmacological jargon. Use everyday names: blood pressure tablet, bone tablet, thyroid tablet, statin, D3, calcium.
-- Maximum 3 sentences per response.
-- No exclamation marks.
-- Warm, calm, BBC-science-presenter tone — never alarmist.
-- Never diagnose or change prescriptions. Encourage discussing changes with their GP when needed.
+const DEMO_SYSTEM = `${DINA_SYSTEM_PROMPT}
 
 You are answering questions in the Sean James public demo. Use the patient context provided.`
 
@@ -39,8 +31,8 @@ export async function POST(request: Request) {
     const anthropic = createAnthropicClient()
 
     const response = await anthropic.messages.create({
-      model: DEMO_MODEL,
-      max_tokens: 400,
+      model: DINA_MODEL,
+      max_tokens: DINA_MAX_TOKENS,
       system: DEMO_SYSTEM,
       messages: [
         {

@@ -68,15 +68,9 @@ function buildRetinomicBaselineSummary(
   hardware: StoredHardwareBaseline | null | undefined
 ): RetinomicBaselineSummary | null {
   if (!hardware) return null
-  const gclValues = [hardware.gclIplThicknessMicrons.leftEye, hardware.gclIplThicknessMicrons.rightEye].filter(
-    (v): v is number => v != null && Number.isFinite(v)
-  )
-  const gclIplMicrons = gclValues.length > 0 ? Math.min(...gclValues) : null
   return {
     irisLabel: hardware.irisPigment === 'LIGHT' ? 'Light' : 'Dark',
     skinIta: hardware.skinITA,
-    gclIplMicrons,
-    hasOctThickness: gclIplMicrons != null,
   }
 }
 
@@ -470,6 +464,16 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
   }
 
   const sleepDrift = sleepDelay || clockDrift
+  const tierDaysOnCurrent =
+    profile?.last_updated != null
+      ? Math.max(
+          0,
+          Math.floor(
+            (Date.now() - new Date(profile.last_updated).getTime()) / (1000 * 60 * 60 * 24)
+          )
+        )
+      : 0
+
   const nextSteps = buildPatientNextStepsBlock({
     medicationsDueTonight: medicationsDueTonight || (medications.length > 0 ? 2 : 0),
     medications,
@@ -485,6 +489,11 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     hasRetinomicScan: retinomicBaseline != null,
     firstLightDailyStatus: input.firstLightDailyStatus,
     firstLightScanActionable: input.firstLightScanActionable,
+    tierUpgradeContext: {
+      countryCode: input.patient.location_country ?? '',
+      daysOnCurrentTier: tierDaysOnCurrent,
+      clusterId: 'vd-core',
+    },
   })
 
   const baseSnapshot: PatientSnapshot = {

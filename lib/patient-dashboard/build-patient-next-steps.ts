@@ -1,6 +1,9 @@
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
 import type { FirstLightDailyStatus } from '@/lib/product/first-light-daily-status'
 import { FIRST_LIGHT_PROTOCOL } from '@/lib/product/dose-intelligence-model'
+import { getActiveTier } from '@/lib/types/diagnostic-tiers'
+import { scheduleDinaTierUpgradePrompt } from '@/lib/utils/dina-notification-scheduling'
+import { normalizeCountryCode } from '@/lib/utils/tiptraq-availability'
 import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
 import { isElevatedSeverity } from '@/lib/patient-dashboard/dashboard-indicators'
 import {
@@ -36,6 +39,12 @@ export type BuildPatientNextStepsInput = {
   firstLightDailyStatus?: FirstLightDailyStatus | null
   /** True when entrainment window is open or past — skip before civil dawn */
   firstLightScanActionable?: boolean
+  /** DINA tier upgrade prompt context (country, tenure, practitioner cluster). */
+  tierUpgradeContext?: {
+    countryCode: string
+    daysOnCurrentTier: number
+    clusterId: string
+  }
 }
 
 const MAX_STEPS = 5
@@ -219,6 +228,35 @@ export function buildPatientNextSteps(input: BuildPatientNextStepsInput): Patien
       detail: 'At least five nights give sleep grading, breathing flags, and clock drift for your D dose and curfew timing.',
       href: PATIENT_ROUTES.streams,
     })
+  }
+
+  if (input.tierUpgradeContext) {
+    const currentTier = getActiveTier({
+      has_tipraq: input.hasTipTraq,
+      has_blood_panel: Boolean(input.bloodPanel.collectedAt),
+    })
+    const upgrade = scheduleDinaTierUpgradePrompt({
+      country_code: normalizeCountryCode(input.tierUpgradeContext.countryCode),
+      current_tier: currentTier,
+      days_on_current_tier: input.tierUpgradeContext.daysOnCurrentTier,
+      cluster_id: input.tierUpgradeContext.clusterId,
+    })
+    if (upgrade.should_prompt && upgrade.target_tier && !steps.some((s) => s.id.startsWith('tier-upgrade-'))) {
+      steps.push({
+        id: `tier-upgrade-${upgrade.target_tier}`,
+        priority: 'this-week',
+        title:
+          upgrade.target_tier === 'L2'
+            ? 'Upgrade to blood panel (L2)'
+            : 'Upgrade to TipTraQ (L1)',
+        detail: upgrade.message,
+        href: upgrade.target_tier === 'L2' ? PATIENT_ROUTES.streamsBloods : PATIENT_ROUTES.streams,
+        prompt:
+          upgrade.target_tier === 'L2'
+            ? 'Which blood tests should I ask my GP for?'
+            : 'How does TipTraQ improve my timing windows?',
+      })
+    }
   }
 
   if (

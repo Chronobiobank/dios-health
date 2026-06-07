@@ -15,7 +15,7 @@ export const SITE_IMAGES = {
   streams: {
     wearable: '/tiptraq-wearable.jpg',
     lab: '/city-labs-panel.jpg',
-    retina: '/siloton-giraffe-oct.jpg',
+    retina: '/smartphone-passive.jpg',
     mobile: '/smartphone-passive.jpg',
   },
   buyers: {

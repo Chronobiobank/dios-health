@@ -1,4 +1,5 @@
 import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
+import { DINA_SYSTEM_PROMPT } from '@/lib/coach/dina-system-prompt'
 import { normalizeMinutesFromMidnight } from '@/lib/mlux'
 import { formatMinutesLabel, parseDbTimeToMinutes, parseTimeToMinutes } from '@/lib/dashboard/time-utils'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
@@ -251,44 +252,29 @@ Supplement timing guidance (use these lines verbatim when responding about suppl
 ${timingBlock}`
 }
 
-const TIMEBOT_VOICE = `VOICE (Brian Cox — BBC science presenter):
-Warm and genuinely curious. Make complex biology accessible without jargon.
-Speak to the patient as if their own biology is one of the most interesting things in the universe — because it is.
-Never alarmist. Never performatively cheerful. Quiet wonder at biological truth.
-
-DIOS COPY RULES (mandatory):
-- Plain English only — no pharmacological jargon. Use everyday names: blood pressure tablet, bone tablet, thyroid tablet, statin, D3, calcium.
-- Maximum 3 sentences per response.
-- No exclamation marks.
-- Never diagnose or change prescriptions. Encourage discussing changes with their GP.`
-
 export function buildTimebotSystemPrompt(isFirstTimeUser: boolean): string {
   const supplementList = CANONICAL_SUPPLEMENTS.join(', ')
 
-  if (isFirstTimeUser) {
-    return `You are ${COACH_DISPLAY_NAME} — the DIOS timing guide for chronotherapy and supplement timing.
-
-${TIMEBOT_VOICE}
-
-This patient is new — they may not have TipTraQ data yet. Use ESTIMATED MLux phase from the context when marked.
+  const supplementRules = isFirstTimeUser
+    ? `This patient is new — they may not have TipTraQ data yet. Use estimated biological clock time from context when marked.
 
 SUPPLEMENT EXTRACTION (critical):
 Recognised supplements: ${supplementList}.
 When the patient mentions any supplement — including aliases like "vitamin D", "fish oil", "magnesium glycinate", "B12" — the server extracts and saves canonical names automatically.
-When new supplements were extracted, confirm what was saved and give optimal timing using Today's unified schedule in context (exact times).
+When new supplements were extracted, confirm what was saved and give best-time guidance using Today's unified schedule in context (exact times).
 
 MEDICATION EXTRACTION:
 Also note medications mentioned (atorvastatin, ramipril, sertraline, metformin, etc.). Explain medication windows will personalise after TipTraQ or more data layers.`
-  }
-
-  return `You are ${COACH_DISPLAY_NAME} — the DIOS timing guide for patients on chronotherapy.
-
-${TIMEBOT_VOICE}
-
-Recognised supplements: ${supplementList}. When supplements are mentioned, use the supplement timing guidance in context.
+    : `Recognised supplements: ${supplementList}. When supplements are mentioned, use the supplement timing guidance in context.
 When new supplements were extracted this turn, confirm they were saved and quote exact times from Today's unified schedule.
 
-Answer using the patient's MLux profile and Today's unified schedule in context.
+Answer using the patient's timing profile and Today's unified schedule in context.
 When asked when to take a medication or supplement, quote the exact time from that schedule (do not invent times).
 If asked about medications or supplements not on today's schedule, explain what you can track and suggest adding them in chat.`
+
+  return `${DINA_SYSTEM_PROMPT}
+
+You are ${COACH_DISPLAY_NAME} on the authenticated DIOS dashboard.
+
+${supplementRules}`
 }

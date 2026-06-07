@@ -18,7 +18,6 @@ export type DemoPatientTwin = DemoClinicPatient & {
   streams: {
     tiptraq: boolean
     cityLabs: string
-    siloton: boolean
     smartphone: boolean
   }
   bodyClockSummary: {
@@ -48,7 +47,6 @@ const TWIN_DETAILS: Record<string, Omit<DemoPatientTwin, keyof DemoClinicPatient
     streams: {
       tiptraq: true,
       cityLabs: 'Results current',
-      siloton: false,
       smartphone: true,
     },
     bodyClockSummary: {
@@ -76,7 +74,6 @@ const TWIN_DETAILS: Record<string, Omit<DemoPatientTwin, keyof DemoClinicPatient
     streams: {
       tiptraq: true,
       cityLabs: 'Results current',
-      siloton: false,
       smartphone: true,
     },
     bodyClockSummary: {
@@ -104,7 +101,6 @@ const TWIN_DETAILS: Record<string, Omit<DemoPatientTwin, keyof DemoClinicPatient
     streams: {
       tiptraq: false,
       cityLabs: 'Results pending',
-      siloton: false,
       smartphone: false,
     },
     bodyClockSummary: {
@@ -132,7 +128,6 @@ const TWIN_DETAILS: Record<string, Omit<DemoPatientTwin, keyof DemoClinicPatient
     streams: {
       tiptraq: true,
       cityLabs: 'Results current',
-      siloton: true,
       smartphone: true,
     },
     bodyClockSummary: {
@@ -160,7 +155,6 @@ const TWIN_DETAILS: Record<string, Omit<DemoPatientTwin, keyof DemoClinicPatient
     streams: {
       tiptraq: false,
       cityLabs: 'Not ordered',
-      siloton: false,
       smartphone: true,
     },
     bodyClockSummary: {

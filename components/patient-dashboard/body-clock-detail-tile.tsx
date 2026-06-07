@@ -62,7 +62,7 @@ export function BodyClockDetailTile({
           <p className="body-clock-detail-tile__eyebrow">Drill-down</p>
           <p className="body-clock-detail-tile__title">Body clock detail</p>
           <p className="body-clock-detail-tile__summary">
-            Photonic Age {photonicAge} vs Calendar {calendarAge} ·{' '}
+            Chronopathic Age {photonicAge} vs Calendar {calendarAge} ·{' '}
             {chronoimmuneProfile ? 'Chronoimmune zone' : 'metabolic spectrum'} · calibration
           </p>
         </div>
@@ -86,7 +86,7 @@ export function BodyClockDetailTile({
             lightAlignment={lightAlignment}
             darkCycleNote={statNotes.clockDrift}
             lightCycleNote={statNotes.lightAlignment}
-            photonicAgeNote={`Photonic Age is how old your circadian system is running — Calendar Age plus chronopenic burden from light, sleep, and rhythm drift. ${statNotes.darkYearsHours}`}
+            photonicAgeNote={`Chronopathic Age is how old your circadian system is running — Calendar Age plus chronopenic burden from light, sleep, and rhythm drift. ${statNotes.darkYearsHours}`}
             calendarAgeNote="Calendar Age is years since birth — the baseline before photic drift."
           />
 

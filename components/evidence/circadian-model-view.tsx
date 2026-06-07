@@ -22,7 +22,7 @@ export function CircadianModelView() {
             Patient view
           </p>
           <p className="mt-2 dash-panel-muted leading-relaxed">
-            Photonic Age vs Calendar Age — how DIOS tracks whether chronotherapy is closing your
+            Chronopathic Age vs Calendar Age — how DIOS tracks whether medication timing is closing your
             chronopenic burden over time.
           </p>
           <div className="mt-4 flex flex-wrap gap-4">

@@ -1,7 +1,7 @@
 /**
  * DINA — patient-facing Dose Intelligence Agent (cf. ChatGPT on OpenAI).
  * Clinicians use DIOS; patients talk to DINA. Her timing engine runs on MLux
- * (melanopsin-grounded melanopic lux) — the science layer Mel referred to.
+ * (melanopsin-grounded melanopic lux).
  */
 export const COACH_DISPLAY_NAME = 'DINA' as const
 

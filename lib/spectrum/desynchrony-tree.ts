@@ -7,7 +7,7 @@ export type DesynchronyCategory = 'metabolic' | 'immune' | 'neurological' | 'reg
 export type ProtocolModule =
   | 'Chronoimmune'
   | 'Sleep Architecture'
-  | 'Chronopharmacology'
+  | 'Medication timing'
   | 'Metabolic Clock'
 
 export type DesynchronyTreeNode = {
@@ -113,7 +113,7 @@ export const DESYNCHRONY_BRANCHES: DesynchronyBranchSpec[] = [
         reclassificationNote: 'Immune plaque formation — JUPITER trial hsCRP evidence.',
         nlrp3Mechanism: 'Vascular NLRP3 drives inflammatory plaque remodelling.',
         diosMeasurement: 'Layer 2 — hsCRP, lipids; Layer 3 — non-dipping BP pattern on TipTraQ.',
-        protocolModule: 'Chronopharmacology',
+        protocolModule: 'Medication timing',
         typicalZoneId: 2,
       },
       {
@@ -125,7 +125,7 @@ export const DESYNCHRONY_BRANCHES: DesynchronyBranchSpec[] = [
         reclassificationNote: 'Vascular inflammatory remodelling — chronotherapy-sensitive.',
         nlrp3Mechanism: 'Autonomic-inflammatory coupling when circadian dipping fails.',
         diosMeasurement: 'Layer 3 — overnight dipping; Layer 1 — evening chronotype flag.',
-        protocolModule: 'Chronopharmacology',
+        protocolModule: 'Medication timing',
         typicalZoneId: 2,
       },
       {
@@ -283,7 +283,7 @@ export const DESYNCHRONY_BRANCHES: DesynchronyBranchSpec[] = [
         reclassificationNote: 'Depression and anxiety as circadian immune conditions — reclassified in current literature.',
         nlrp3Mechanism: 'IL-1β and kynurenine pathway shift when amplitude dampening persists.',
         diosMeasurement: 'Layer 1 — phase delay; Layer 3 — sleep architecture fragmentation.',
-        protocolModule: 'Chronopharmacology',
+        protocolModule: 'Medication timing',
         typicalZoneId: 2,
       },
       {
@@ -294,7 +294,7 @@ export const DESYNCHRONY_BRANCHES: DesynchronyBranchSpec[] = [
         category: 'neurological',
         reclassificationNote: "Alzheimer's and Parkinson's prodrome — Zone 5 surveillance.",
         nlrp3Mechanism: 'Sustained NLRP3 microglial activation precedes proteinopathy spread.',
-        diosMeasurement: 'Layer 3 — REM and slow-wave metrics; retinal GCL-IPL when OCT available.',
+        diosMeasurement: 'Layer 3 — REM and slow-wave metrics from TipTraQ overnight readings.',
         protocolModule: 'Chronoimmune',
         typicalZoneId: 5,
       },

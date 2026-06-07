@@ -56,7 +56,7 @@ export function SnapshotTile({
         lightAlignment={lightAlignment}
         darkCycleNote={statNotes.clockDrift}
         lightCycleNote={statNotes.lightAlignment}
-        photonicAgeNote={`Photonic Age is how old your circadian system is running — Calendar Age plus chronopenic burden from light, sleep, and rhythm drift. ${statNotes.darkYearsHours}`}
+        photonicAgeNote={`Chronopathic Age is how old your circadian system is running — Calendar Age plus chronopenic burden from light, sleep, and rhythm drift. ${statNotes.darkYearsHours}`}
         calendarAgeNote="Calendar Age is years since birth — the baseline before photic drift."
       />
 

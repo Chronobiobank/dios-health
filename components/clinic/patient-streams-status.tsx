@@ -7,9 +7,8 @@ type PatientStreamsStatusProps = {
 
 export function PatientStreamsStatus({ streams }: PatientStreamsStatusProps) {
   const rows = [
-    { name: 'TipTraQ', status: streams.tiptraq ? 'Connected' : 'Not connected' },
+    { name: 'TipTraQ', status: streams.tiptraq ? 'Connected · Live' : 'Not connected' },
     { name: 'City Labs', status: streams.cityLabs },
-    { name: 'Siloton OCT', status: streams.siloton ? 'Connected' : 'Not connected' },
     { name: 'Smartphone', status: streams.smartphone ? 'Active' : 'Not active' },
   ]
 

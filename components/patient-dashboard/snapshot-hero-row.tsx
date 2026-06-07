@@ -110,10 +110,10 @@ export function SnapshotHeroRow({
       <div className="snapshot-age-center">
         <AgeStack
           value={photonicYears}
-          title={AGE_LABELS.photonic}
+          title={AGE_LABELS.chronopathic}
           sub={burdenSub}
           size="primary"
-          ariaLabel={`${AGE_LABELS.photonic} ${photonicYears}, ${burdenSub}`}
+          ariaLabel={`${AGE_LABELS.chronopathic} ${photonicYears}, ${burdenSub}`}
         />
         <p className="snapshot-burden-score font-mono text-[10px] uppercase tracking-widest text-[var(--photic-muted)]">
           Chronopenic Burden {chronopenicBurdenScore}/100 · {trendSub}

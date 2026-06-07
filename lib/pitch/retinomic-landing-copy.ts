@@ -74,9 +74,9 @@ export const ONBOARDING_COPY = {
   },
   step2: {
     label: 'Step 2',
-    eyebrow: 'Optional · clinical depth',
-    title: 'In-person scan node',
-    body: 'Book a nearby Siloton GiraffeOCT node when you want retina verification beyond the phone baseline.',
+    eyebrow: 'Upgrade path',
+    title: 'Blood panel or TipTraQ',
+    body: 'Ask your GP for the Gominak blood panel to sharpen your timing windows. UK patients can add TipTraQ — the only non-invasive DLMO proxy outside a sleep lab, available exclusively through DIOS.',
   },
   step3: {
     label: 'Step 3',
@@ -207,11 +207,11 @@ export const RETINOMIC_LANDING_FEATURES: readonly RetinomicFeatureCopy[] = [
     href: '/how-it-works',
   },
   {
-    id: 'siloton',
-    lead: 'Eye scan',
-    body: 'Your retina clock — not population averages.',
+    id: 'smartphone-proxy',
+    lead: 'Phone baseline',
+    body: 'Your wake and sleep light — provisional timing from day one.',
     image: PITCH_IMAGES.retinomic.eyeScan,
-    imageAlt: 'Personal retinomic eye scan for chronotherapy',
+    imageAlt: 'Smartphone camera baseline for provisional DLMO proxy',
     href: '/how-it-works',
   },
   {

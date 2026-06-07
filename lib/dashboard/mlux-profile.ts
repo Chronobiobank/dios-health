@@ -26,6 +26,10 @@ export type MLuxProfileRow = {
   salmeterol_optimal_time: string | null
   light_dose_window_start: string | null
   light_dose_window_end: string | null
+  diagnostic_tier?: 'L1' | 'L2' | 'L3' | null
+  has_tipraq?: boolean | null
+  has_blood_panel?: boolean | null
+  last_updated?: string | null
 }
 
 export type TipTraqNightRow = {

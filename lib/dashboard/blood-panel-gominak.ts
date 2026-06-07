@@ -69,7 +69,7 @@ function countCoreInRange(input: BloodPanelInput): number {
   return count
 }
 
-/** Layer 2 proxy DLMO estimate from Gominak panel + optional existing baseline. */
+/** Layer 2 DLMO proxy estimate from Gominak panel + optional existing baseline. */
 export function calculateBloodPanelDlmo(input: BloodPanelInput): BloodPanelDlmoResult {
   const baseline = input.baselineDlmoMinutes ?? DEFAULT_DLMO_MINUTES
   let phaseMinutes = baseline

@@ -66,7 +66,7 @@ export const CHRONOTYPE_MORNING_BEFORE_MINUTES = 19 * 60
 /** DLMO after 21:00 → Evening type; 19:00–21:00 inclusive → Intermediate */
 export const CHRONOTYPE_EVENING_AFTER_MINUTES = 21 * 60
 
-/** Minutes after proxy DLMO for zeitgeber / entrainment windows (local wall clock). */
+/** Minutes after DLMO proxy for zeitgeber / entrainment windows (local wall clock). */
 export const ZEITGEber_LIGHT_START_OFFSET = 600 // +10h ≈ wake
 export const ZEITGEber_LIGHT_END_OFFSET = 720 // +12h
 export const ZEITGEber_FOOD_OFFSET = 660 // +11h

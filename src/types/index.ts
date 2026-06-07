@@ -6,15 +6,9 @@ export type RetinomicTier = 'FREE_SCREENING' | 'PREMIUM_VERIFICATION'
 
 export type IrisPigment = 'LIGHT' | 'DARK'
 
-export type GclIplThicknessMicrons = {
-  leftEye: number | null
-  rightEye: number | null
-}
-
 export type HardwareBaseline = {
   irisPigment: IrisPigment
   skinITA: number
-  gclIplThicknessMicrons: GclIplThicknessMicrons
 }
 
 export type BiochemicalFuel = {
@@ -28,17 +22,8 @@ export type User = {
   tier: RetinomicTier
   hardwareBaseline: HardwareBaseline | null
   biochemicalFuel: BiochemicalFuel | null
-  /** Siloton-derived; 1.2 when GCL-IPL below 75 µm. */
-  hardwareBandwidthCoefficient?: number
-  /** Daily morning mLux exposure window (minutes); boosted when coefficient > 1. */
+  /** Daily morning MLux exposure window (minutes). */
   morningMluxTargetDurationMinutes?: number
-}
-
-export type SilotonWebhookPayload = {
-  userId: string
-  gclIplThicknessMicrons: GclIplThicknessMicrons
-  irisPigment?: IrisPigment
-  skinITA?: number
 }
 
 export type TipTraqWebhookPayload = {

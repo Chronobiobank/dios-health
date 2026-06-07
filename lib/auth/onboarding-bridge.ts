@@ -62,7 +62,6 @@ export function buildHardwareBaselineFromBridge(
   return {
     irisPigment: bridge.irisPigment,
     skinITA: bridge.skinITA,
-    gclIplThicknessMicrons: { leftEye: null, rightEye: null },
     onboardingGeo: {
       ...bridge.onboardingLatLong,
       solarZenithDegrees,

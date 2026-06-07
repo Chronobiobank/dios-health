@@ -7,28 +7,14 @@ import type { LiveMluxFeedInput } from '@/lib/retinomic/live-mlux-feed'
 
 export type {
   BiochemicalFuel,
-  GclIplThicknessMicrons,
   HardwareBaseline,
   IrisPigment,
   RetinomicTier,
-  SilotonWebhookPayload,
   TipTraqWebhookPayload,
   User,
 } from '@/src/types'
 
 export type PhoticDayPhase = 'morning' | 'midday' | 'evening'
-
-export type SilotonScanNode = {
-  id: string
-  name: string
-  hubType: 'pharmacy' | 'clinical_hub'
-  address: string
-  distanceKm: number
-  lat: number
-  lng: number
-  openUntil: string
-  slotsAvailable: number
-}
 
 export type DayOneLockedCopy = {
   title: string

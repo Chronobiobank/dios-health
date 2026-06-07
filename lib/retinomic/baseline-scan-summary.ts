@@ -33,21 +33,6 @@ export function parseStoredHardwareBaseline(
   const skinITA = typeof raw.skinITA === 'number' && Number.isFinite(raw.skinITA) ? raw.skinITA : null
   if (!irisPigment || skinITA == null) return null
 
-  const gcl = raw.gclIplThicknessMicrons
-  const gclIplThicknessMicrons =
-    gcl && typeof gcl === 'object'
-      ? {
-          leftEye:
-            typeof (gcl as { leftEye?: unknown }).leftEye === 'number'
-              ? (gcl as { leftEye: number }).leftEye
-              : null,
-          rightEye:
-            typeof (gcl as { rightEye?: unknown }).rightEye === 'number'
-              ? (gcl as { rightEye: number }).rightEye
-              : null,
-        }
-      : { leftEye: null, rightEye: null }
-
   const geo = raw.onboardingGeo
   const onboardingGeo =
     geo && typeof geo === 'object'
@@ -64,7 +49,6 @@ export function parseStoredHardwareBaseline(
   return {
     irisPigment,
     skinITA,
-    gclIplThicknessMicrons,
     onboardingGeo,
   }
 }

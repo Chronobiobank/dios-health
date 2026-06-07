@@ -106,10 +106,10 @@ export const PITCH_HOW_IT_WORKS = [
   },
   {
     step: '02',
-    title: 'Siloton OCT',
-    body: 'Retinal light-receptor density — no manual uploads.',
+    title: 'Gominak panel',
+    body: 'GP blood test — indirect DLMO proxy via vitamin D, PTH, and B12.',
     image: PITCH_IMAGES.steps.camera,
-    imageAlt: 'GiraffeOCT eye-clock scan',
+    imageAlt: 'Gominak blood panel for timing precision',
   },
   {
     step: '03',

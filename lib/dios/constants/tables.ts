@@ -2,9 +2,9 @@
  * DIOS core table identifiers.
  *
  * Domain term: coach_sessions (DINA camera / voice engagement logs).
- * Physical Postgres table: vaya_sessions (retained for migration stability).
+ * Physical Postgres table: dina_sessions (renamed from vaya_sessions in migration 030).
  */
-export const COACH_SESSIONS_TABLE = 'vaya_sessions' as const
+export const COACH_SESSIONS_TABLE = 'dina_sessions' as const
 
 /** @deprecated Use {@link COACH_SESSIONS_TABLE}. */
 export const MEL_SESSIONS_TABLE = COACH_SESSIONS_TABLE

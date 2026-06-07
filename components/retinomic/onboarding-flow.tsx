@@ -7,7 +7,7 @@ import { useCallback, useState } from 'react'
 import type { BiometricScanResult } from '@/components/retinomic/camera-biometric-modal'
 import { CameraBiometricModal } from '@/components/retinomic/camera-biometric-modal'
 import { MedicationChipPicker } from '@/components/retinomic/medication-chip-picker'
-import { SilotonNodeLocator } from '@/components/retinomic/siloton-node-locator'
+import { TipTraQTierPrompt } from '@/components/retinomic/tiptraq-tier-prompt'
 import {
   bridgeToQueryString,
   persistOnboardingBridge,
@@ -129,9 +129,7 @@ export function OnboardingFlow() {
             {copy.step2.title}
           </h2>
           <p className="type-body mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{copy.step2.body}</p>
-          <div className="mt-4">
-            <SilotonNodeLocator />
-          </div>
+          <TipTraQTierPrompt className="mt-4" countryCode="GB" />
         </section>
 
         <section className="dios-glass-outer mt-4 p-4 sm:p-5">

@@ -8,7 +8,7 @@ export const PRODUCT_TAGLINE = 'Dose Intelligence OS' as const
 
 export const AGE_LABELS = {
   calendar: 'Calendar Age',
-  photonic: 'Photonic Age',
+  chronopathic: 'Chronopathic Age',
   burdenYears: 'chronopenic burden',
 } as const
 
@@ -29,7 +29,7 @@ export const LAYER_2 = {
 export const LAYER_3 = {
   id: 'architectural',
   label: 'Layer 3 — Architectural verification',
-  description: 'TipTraQ sleep, optional OCT, optional CGM.',
+  description: 'TipTraQ sleep sensor (UK via DIOS), optional CGM.',
 } as const
 
 export const FIRST_LIGHT_PROTOCOL = {
@@ -63,8 +63,8 @@ export const PROTOCOL_MODULES = [
     titration: 'B5 dose escalation',
   },
   {
-    id: 'chronopharmacology',
-    name: 'Chronopharmacology',
+    id: 'medication-timing',
+    name: 'Medication timing',
     feedback: 'MLux and HRV vs chronotype',
     titration: 'Medication timing (not dose quantity)',
   },
@@ -85,9 +85,9 @@ export const CLINICIAN_RISK = {
 } as const
 
 export const CHRONOPENIC_BURDEN = {
-  /** Score 0 = Photonic Age equals Calendar Age; 100 = maximum measurable gap */
+  /** Score 0 = Chronopathic Age equals Calendar Age; 100 = maximum measurable gap */
   min: 0,
   max: 100,
-  /** Years of photonic–calendar gap that maps to score 100 at Layer 1 only */
+  /** Years of chronopathic–calendar gap that maps to score 100 at Layer 1 only */
   maxGapYearsLayer1: 15,
 } as const

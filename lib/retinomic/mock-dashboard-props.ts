@@ -32,7 +32,6 @@ const MOCK_HARDWARE_BASELINE: HardwareBaseline & {
 } = {
   irisPigment: 'LIGHT',
   skinITA: 41.2,
-  gclIplThicknessMicrons: { leftEye: null, rightEye: null },
   onboardingGeo: {
     lat: MOCK_BASELINE_SCAN.lat,
     lng: MOCK_BASELINE_SCAN.lng,

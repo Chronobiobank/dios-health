@@ -639,7 +639,7 @@
     color: var(--text-muted);
   }
 
-  /* Top nav: DIʘS wordmark left; tagline sits beside the menu trigger */
+  /* Top nav: DIOS wordmark left; tagline sits beside the menu trigger */
   .nav-brand-wordmark {
     font-weight: 600;
   }
@@ -1220,7 +1220,7 @@
     color: var(--text-primary);
   }
 
-  /* DIʘS Timebot — clinical sonar pulse */
+  /* DIOS Timebot — clinical sonar pulse */
   .timebot-pulse {
     position: relative;
     width: 120px;
@@ -1323,7 +1323,7 @@
   }
 }
 
-  /* Vaya — voice-reactive melanopic orb */
+  /* DINA — voice-reactive melanopic orb */
   .coach-orb {
     position: relative;
     width: 168px;

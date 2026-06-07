@@ -44,13 +44,6 @@ export function StreamsStatus({
       actionLabel: 'Enter results →',
     },
     {
-      name: 'Siloton',
-      fill: 0,
-      status: 'Optional',
-      href: PATIENT_ROUTES.streams,
-      actionLabel: 'Optional →',
-    },
-    {
       name: 'Smartphone',
       fill: smartphoneActive ? 0.55 : 0.12,
       status: smartphoneActive ? 'Active' : 'Not active',

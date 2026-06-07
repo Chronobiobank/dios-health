@@ -122,7 +122,7 @@ export const CHRONOIMMUNE_ZONES: ChronoimmuneZoneSpec[] = [
     shortLabel: 'Neuro risk',
     title: 'Neurodegeneration Risk',
     indication:
-      'Early cognitive decline, Alzheimer risk, Parkinson prodrome, elevated Chronopenic Burden Score with retinal GCL-IPL thinning.',
+      'Early cognitive decline, Alzheimer risk, Parkinson prodrome, elevated Chronopenic Burden Score with sustained clock drift.',
     d3Guidance: 'Zone 4 dose range with CircadiAgeing referral pathway flagged.',
     pthExpectation: 'Lower third mandatory — dual boundary alerts active.',
     micronutrients: [

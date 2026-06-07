@@ -21,7 +21,7 @@ export type DemoClinicPatient = {
   mluxScore: number
   mluxTrend: 'improving' | 'declining' | 'stable'
   adherenceRate: number
-  vayaSessionsLast30: number
+  dinaSessionsLast30: number
   lastSessionHoursAgo: number
   chronotype: string
   topRiskNodes: DemoSpectrumNode[]
@@ -46,7 +46,7 @@ export const DEMO_CLINIC_PATIENTS: DemoClinicPatient[] = [
     mluxScore: 87,
     mluxTrend: 'declining',
     adherenceRate: 71,
-    vayaSessionsLast30: 26,
+    dinaSessionsLast30: 26,
     lastSessionHoursAgo: 3,
     chronotype: 'Evening type',
     layerConfidence: 'CONFIRMED',
@@ -74,7 +74,7 @@ export const DEMO_CLINIC_PATIENTS: DemoClinicPatient[] = [
     mluxScore: 203,
     mluxTrend: 'stable',
     adherenceRate: 88,
-    vayaSessionsLast30: 28,
+    dinaSessionsLast30: 28,
     lastSessionHoursAgo: 1,
     chronotype: 'Intermediate type',
     layerConfidence: 'PRECISION',
@@ -102,7 +102,7 @@ export const DEMO_CLINIC_PATIENTS: DemoClinicPatient[] = [
     mluxScore: 312,
     mluxTrend: 'improving',
     adherenceRate: 94,
-    vayaSessionsLast30: 29,
+    dinaSessionsLast30: 29,
     lastSessionHoursAgo: 5,
     chronotype: 'Morning type',
     layerConfidence: 'ESTIMATED',
@@ -130,7 +130,7 @@ export const DEMO_CLINIC_PATIENTS: DemoClinicPatient[] = [
     mluxScore: 267,
     mluxTrend: 'stable',
     adherenceRate: 97,
-    vayaSessionsLast30: 30,
+    dinaSessionsLast30: 30,
     lastSessionHoursAgo: 2,
     chronotype: 'Intermediate type',
     layerConfidence: 'CONFIRMED',
@@ -157,7 +157,7 @@ export const DEMO_CLINIC_PATIENTS: DemoClinicPatient[] = [
     mluxScore: 54,
     mluxTrend: 'declining',
     adherenceRate: 79,
-    vayaSessionsLast30: 23,
+    dinaSessionsLast30: 23,
     lastSessionHoursAgo: 6,
     chronotype: 'Evening type',
     layerConfidence: 'ESTIMATED',

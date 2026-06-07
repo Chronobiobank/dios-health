@@ -78,14 +78,14 @@ export function SnapshotAgeRow({
           </p>
           <p className="snapshot-dark-years-label">Chronopenic burden</p>
           <p className="snapshot-age-card-note snapshot-age-card-note--center">
-            (gap between Calendar and Photonic Age)
+            (gap between Calendar and Chronopathic Age)
           </p>
         </div>
       </div>
 
       <AgeValueCell
         years={photonicAge}
-        title={AGE_LABELS.photonic}
+        title={AGE_LABELS.chronopathic}
         note="(how old your body clock is running)"
         variant="circadian"
       />

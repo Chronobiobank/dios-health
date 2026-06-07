@@ -466,8 +466,6 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
     retinomicBaseline: {
       irisLabel: 'Light',
       skinIta: 41.2,
-      gclIplMicrons: null,
-      hasOctThickness: false,
     },
     statNotes,
     medications: SEAN_MEDICATIONS,

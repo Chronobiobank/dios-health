@@ -96,7 +96,7 @@ export function NeedsActionSection({ patients }: NeedsActionSectionProps) {
                     <div>
                       <dt className={DATA_LABEL}>DINA</dt>
                       <dd className="mt-1 font-mono text-data-md font-semibold tabular-nums text-black">
-                        {patient.vayaSessionsLast30}
+                        {patient.dinaSessionsLast30}
                         <span className="text-data-xs font-normal text-black/40">/30</span>
                       </dd>
                     </div>

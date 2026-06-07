@@ -42,7 +42,6 @@ export async function seedRetinomicPatientRecord(
   } = {
     irisPigment: input.irisPigment,
     skinITA: input.skinITA,
-    gclIplThicknessMicrons: { leftEye: null, rightEye: null },
     onboardingGeo: {
       lat: input.lat,
       lng: input.lng,
@@ -74,7 +73,6 @@ export async function seedRetinomicPatientRecord(
     retinomic_tier: 'FREE_SCREENING',
     hardware_baseline: hardwareBaseline,
     biochemical_fuel: { vitaminD3: null, vitaminB5: null },
-    siloton_integration: { linked: false, accessToken: null },
     onboarding_complete: true,
     data_share_policy: true,
     current_medications:
