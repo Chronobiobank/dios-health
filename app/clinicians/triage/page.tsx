@@ -1,16 +1,14 @@
 import type { Metadata } from 'next'
 
-import { GpCohortTriageDashboard } from '@/components/clinicians/gp-cohort-triage-dashboard'
-
-import '@/app/styles/clinician-triage-shell.css'
+import { PrgcMonitoringDemo } from '@/components/clinic/prgc-monitoring-demo'
 
 export const metadata: Metadata = {
-  title: 'Cohort triage — Monday morning review — DIOS',
+  title: 'pRGC monitoring — Coimbra cohort — DIOS',
   description:
-    'Twelve patients sorted red, amber, green. GP workload at a glance — timing conflicts, DINA handoff, export and lab orders from one screen.',
+    'Four columns per patient: sleep efficiency, REM latency, PTH, D3 timing. The Coimbra monitoring dashboard — nightly TipTraQ, quarterly bloods.',
   robots: { index: false, follow: false },
 }
 
 export default function CliniciansTriagePage() {
-  return <GpCohortTriageDashboard />
+  return <PrgcMonitoringDemo />
 }

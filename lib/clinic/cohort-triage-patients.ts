@@ -1,6 +1,10 @@
 import { buildSeanJamesChronoimmuneProfile } from '@/lib/chronoimmune/sean-james-demo'
 import { getChronoimmuneZone } from '@/lib/chronoimmune/indication-zones'
 import { calculatePthTarget } from '@/lib/chronoimmune/pth-target'
+import {
+  getPrgcMonitoringPatient,
+  PRGC_MONITORING_PATIENTS,
+} from '@/lib/clinic/prgc-monitoring'
 import type {
   ChronoimmuneLabPoint,
   ChronoimmuneMicronutrientLog,
@@ -17,7 +21,6 @@ export type CohortTriagePatient = {
   scanCompliancePercent7d: number
   adherenceConfirmed: boolean
   urgentFlag: string | null
-  /** Lower = more urgent within a triage column */
   urgency: number
 }
 
@@ -48,7 +51,6 @@ function buildProfile(input: {
   nextReviewDate: string
   titrationLocked: boolean
   lockReason: string | null
-  consentOnFile?: boolean
 }): ChronoimmuneProfile {
   const zone = getChronoimmuneZone(input.zoneId)
   const latest = input.labHistory[input.labHistory.length - 1]
@@ -73,7 +75,7 @@ function buildProfile(input: {
     safetyGateLevel: zone.safetyGateLevel,
     labReviewFrequency: zone.labReviewFrequency,
     calciumCascade: input.calciumCascade,
-    consentOnFile: input.consentOnFile ?? true,
+    consentOnFile: true,
     cohortTriageStatus: input.cohortTriageStatus,
     nextReviewDate: input.nextReviewDate,
     titrationLocked: input.titrationLocked,
@@ -83,14 +85,111 @@ function buildProfile(input: {
 
 const seanJamesProfile = buildSeanJamesChronoimmuneProfile()
 
+function cohortStatusFromPrgc(id: string): CohortTriageStatus {
+  const row = getPrgcMonitoringPatient(id)
+  if (!row) return 'amber'
+  const red =
+    row.sleepEfficiency.status === 'red' ||
+    row.remLatency.status === 'red' ||
+    row.pth.status === 'red' ||
+    row.d3Timing.status === 'red'
+  if (red) return 'red'
+  const allGreen =
+    row.sleepEfficiency.status === 'green' &&
+    row.remLatency.status === 'green' &&
+    row.pth.status === 'green' &&
+    row.d3Timing.status === 'green'
+  return allGreen ? 'green' : 'amber'
+}
+
+/** Minimal Chronoimmune profiles aligned with pRGC monitoring demo rows. */
 export const COHORT_TRIAGE_DEMO_PATIENTS: CohortTriagePatient[] = [
+  {
+    id: 'sarah-mitchell',
+    displayName: 'Sarah Mitchell',
+    age: 51,
+    profile: buildProfile({
+      recordId: 'SM-014',
+      zoneId: 2,
+      indicationLabel: 'Vitamin D protocol — timing failure pattern',
+      bodyWeightKg: 72,
+      currentDoseIu: 28_000,
+      doseRangeMinIu: 20_000,
+      doseRangeMaxIu: 40_000,
+      labHistory: [
+        {
+          testDate: '2026-03-18',
+          serum25ohdNgMl: 58,
+          pth: 38,
+          serumCalcium: 9.4,
+          urineCalcium24hrMg: 198,
+          egfr: 92,
+          doseIuAtTest: 28_000,
+        },
+      ],
+      micronutrientLogged: ['d3-k2'],
+      calciumCascade: { serumCalcium: 'clear', urineCalcium: 'clear', egfr: 'clear' },
+      cohortTriageStatus: 'red',
+      nextReviewDate: '2026-06-18',
+      titrationLocked: false,
+      lockReason: null,
+    }),
+    daysSinceLastScan: 2,
+    scanCompliancePercent7d: 71,
+    adherenceConfirmed: false,
+    urgentFlag: 'D3 timing 29% in window — evening dosing pattern',
+    urgency: 1,
+  },
+  {
+    id: 'ngozi-eze',
+    displayName: 'Ngozi Eze',
+    age: 44,
+    profile: buildProfile({
+      recordId: 'NE-022',
+      zoneId: 2,
+      indicationLabel: 'Autoimmune — protocol concordant',
+      bodyWeightKg: 68,
+      currentDoseIu: 24_000,
+      doseRangeMinIu: 18_000,
+      doseRangeMaxIu: 36_000,
+      labHistory: [
+        {
+          testDate: '2026-04-02',
+          serum25ohdNgMl: 72,
+          pth: 16,
+          serumCalcium: 9.2,
+          urineCalcium24hrMg: 175,
+          egfr: 94,
+          doseIuAtTest: 24_000,
+        },
+      ],
+      micronutrientLogged: ['d3-k2', 'b5', 'b12', 'magnesium-glycinate', 'omega-3'],
+      calciumCascade: { serumCalcium: 'clear', urineCalcium: 'clear', egfr: 'clear' },
+      cohortTriageStatus: 'green',
+      nextReviewDate: '2026-07-02',
+      titrationLocked: false,
+      lockReason: null,
+    }),
+    daysSinceLastScan: 0,
+    scanCompliancePercent7d: 100,
+    adherenceConfirmed: true,
+    urgentFlag: null,
+    urgency: 30,
+  },
   {
     id: 'sean-001',
     displayName: 'Sean James',
     age: 47,
     profile: {
       ...seanJamesProfile,
-      cohortTriageStatus: 'green',
+      labHistory: [
+        ...seanJamesProfile.labHistory.slice(0, -1),
+        {
+          ...seanJamesProfile.labHistory[seanJamesProfile.labHistory.length - 1],
+          pth: 27,
+        },
+      ],
+      cohortTriageStatus: 'amber',
       titrationLocked: false,
       lockReason: null,
     },
@@ -98,134 +197,15 @@ export const COHORT_TRIAGE_DEMO_PATIENTS: CohortTriagePatient[] = [
     scanCompliancePercent7d: 93,
     adherenceConfirmed: true,
     urgentFlag: null,
-    urgency: 30,
+    urgency: 15,
   },
-  {
-    id: 'demo-patient-red',
-    displayName: 'Elena R.',
-    age: 52,
-    profile: buildProfile({
-      recordId: 'RED-001',
-      zoneId: 4,
-      indicationLabel: 'Multiple sclerosis — severe neurological',
-      bodyWeightKg: 68,
-      currentDoseIu: 68_000,
-      doseRangeMinIu: 60_000,
-      doseRangeMaxIu: 100_000,
-      labHistory: [
-        {
-          testDate: '2026-01-10',
-          serum25ohdNgMl: 112,
-          pth: 18,
-          serumCalcium: 9.1,
-          urineCalcium24hrMg: 240,
-          egfr: 88,
-          doseIuAtTest: 60_000,
-        },
-        {
-          testDate: '2026-03-05',
-          serum25ohdNgMl: 128,
-          pth: 11,
-          serumCalcium: 9.6,
-          urineCalcium24hrMg: 310,
-          egfr: 86,
-          doseIuAtTest: 64_000,
-        },
-        {
-          testDate: '2026-05-20',
-          serum25ohdNgMl: 134,
-          pth: 6,
-          serumCalcium: 10.4,
-          urineCalcium24hrMg: 340,
-          egfr: 84,
-          doseIuAtTest: 68_000,
-        },
-      ],
-      micronutrientLogged: [
-        'd3-k2',
-        'b5',
-        'b12',
-        'magnesium-glycinate',
-        'omega-3',
-        'riboflavin-b2',
-        'magnesium-citrate',
-      ],
-      calciumCascade: {
-        serumCalcium: 'alert',
-        urineCalcium: 'hold',
-        egfr: 'watch',
-      },
-      cohortTriageStatus: 'red',
-      nextReviewDate: '2026-05-28',
-      titrationLocked: true,
-      lockReason: 'PTH floor alert and calcium cascade — clinician note required before any dose change',
-      consentOnFile: true,
-    }),
-    daysSinceLastScan: 5,
-    scanCompliancePercent7d: 28,
-    adherenceConfirmed: false,
-    urgentFlag: 'PTH floor alert · calcium cascade flagged · 5 missed morning scans',
-    urgency: 1,
+].map((row) => ({
+  ...row,
+  profile: {
+    ...row.profile,
+    cohortTriageStatus: cohortStatusFromPrgc(row.id),
   },
-  {
-    id: 'demo-patient-amber',
-    displayName: 'Marcus H.',
-    age: 44,
-    profile: buildProfile({
-      recordId: 'AMB-001',
-      zoneId: 3,
-      indicationLabel: 'Rheumatoid arthritis — moderate autoimmune',
-      bodyWeightKg: 79,
-      currentDoseIu: 42_000,
-      doseRangeMinIu: 30_000,
-      doseRangeMaxIu: 60_000,
-      labHistory: [
-        {
-          testDate: '2025-11-18',
-          serum25ohdNgMl: 72,
-          pth: 54,
-          serumCalcium: 9.3,
-          urineCalcium24hrMg: 210,
-          egfr: 91,
-          doseIuAtTest: 36_000,
-        },
-        {
-          testDate: '2026-02-12',
-          serum25ohdNgMl: 88,
-          pth: 48,
-          serumCalcium: 9.4,
-          urineCalcium24hrMg: 225,
-          egfr: 90,
-          doseIuAtTest: 40_000,
-        },
-        {
-          testDate: '2026-04-22',
-          serum25ohdNgMl: 94,
-          pth: 46,
-          serumCalcium: 9.2,
-          urineCalcium24hrMg: 218,
-          egfr: 89,
-          doseIuAtTest: 42_000,
-        },
-      ],
-      micronutrientLogged: ['d3-k2', 'b5', 'b12', 'magnesium-glycinate', 'omega-3'],
-      calciumCascade: {
-        serumCalcium: 'clear',
-        urineCalcium: 'clear',
-        egfr: 'clear',
-      },
-      cohortTriageStatus: 'amber',
-      nextReviewDate: '2026-05-08',
-      titrationLocked: false,
-      lockReason: null,
-    }),
-    daysSinceLastScan: 1,
-    scanCompliancePercent7d: 60,
-    adherenceConfirmed: true,
-    urgentFlag: 'Lab review overdue 3 weeks · PTH still in middle third',
-    urgency: 10,
-  },
-]
+}))
 
 export function patientsByTriageColumn(
   patients: CohortTriagePatient[] = COHORT_TRIAGE_DEMO_PATIENTS
@@ -253,3 +233,6 @@ export function cohortTriageCounts(patients: CohortTriagePatient[] = COHORT_TRIA
     total: patients.length,
   }
 }
+
+/** @deprecated Use PRGC_MONITORING_PATIENTS — kept for imports during transition. */
+export { PRGC_MONITORING_PATIENTS }

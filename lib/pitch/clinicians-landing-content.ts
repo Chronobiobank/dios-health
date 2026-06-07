@@ -31,6 +31,18 @@ export const CLINICIANS_GAP = {
   },
 } as const
 
+export const CLINICIANS_TIPTRAQ_VD3 = {
+  eyebrow: 'For Coimbra and Gominak practitioners',
+  headline: 'TipTraQ turns a quarterly blood test into a nightly progress report.',
+  body: 'PTH tells you where the patient is in the protocol once every 90 days. TipTraQ tells you whether the protocol is working every single night. Sleep efficiency, REM latency, and WASO are the primary biomarkers of pRGC function between lab draws — not a side effect of vitamin D deficiency, but the mechanism.',
+  metrics: [
+    'Sleep efficiency — restorative sleep above 85%',
+    'REM latency — under 90 minutes when D3 and cofactors are working',
+    'PTH — suppressed below 20 pg/mL on quarterly draw',
+    'D3 timing — morning window adherence the patient controls',
+  ],
+} as const
+
 export const CLINICIANS_STEPS = {
   eyebrow: 'How it works',
   headline: 'Scan. Time. Triage.',
@@ -38,8 +50,8 @@ export const CLINICIANS_STEPS = {
     {
       num: '01',
       name: 'Scan the body clock',
-      desc: '60-second phone scan at first light. Optional TipTraQ nights and lab panels when risk is flagged.',
-      mono: 'Circadian phase + confidence tier',
+      desc: '60-second phone scan at first light. TipTraQ nightly for sleep architecture. PTH quarterly from bloods.',
+      mono: 'Four numbers — one clinical question',
     },
     {
       num: '02',
@@ -61,13 +73,13 @@ export const CLINICIANS_USERS = {
   headline: 'Built for you. Simple for them.',
   clinician: {
     who: 'Clinician',
-    cvp: 'Who needs attention this week?',
+    cvp: 'Is the pRGC system working?',
     points: [
-      'Cohort triage — red, amber, green',
-      'Personal dose windows per patient',
-      'Safety gates lock titration until you review',
-      'Exportable clinical summary for the EHR',
-      'Peer-reviewed timing evidence on tap',
+      'Four numbers per patient — sleep, REM latency, PTH, D3 timing',
+      'TipTraQ nightly between quarterly blood draws',
+      'Clinical read when sleep and PTH disagree or agree',
+      'DINA timing education — not dose escalation by default',
+      'Exportable summary for the EHR',
     ],
   },
   patient: {
@@ -149,8 +161,8 @@ export const CLINICIANS_PRODUCT_DEMOS = {
   headline: 'Three surfaces. One platform.',
   items: [
     {
-      label: 'Cohort triage',
-      detail: 'Twelve patients, red → amber → green. Monday morning workload at a glance.',
+      label: 'pRGC monitoring',
+      detail: 'Four columns per patient — sleep efficiency, REM latency, PTH, D3 timing. One scan answers the clinical question.',
       href: MARKETING_ROUTES.cliniciansTriage,
     },
     {

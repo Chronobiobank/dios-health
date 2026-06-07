@@ -3,24 +3,24 @@ import { getCohortTriagePatient } from '@/lib/clinic/cohort-triage-patients'
 
 /** Demo delivery addresses for cohort triage patients. */
 const DEMO_DELIVERY: Record<string, PatientDeliveryProfile> = {
+  'sarah-mitchell': {
+    line1: '18 Cavendish Square',
+    city: 'London',
+    postcode: 'W1G 0PP',
+    country: 'United Kingdom',
+  },
+  'ngozi-eze': {
+    line1: '24 Bishopsgate',
+    city: 'London',
+    postcode: 'EC2N 4AJ',
+    country: 'United Kingdom',
+  },
   'sean-001': {
     line1: '14 Ponsonby Road',
     line2: 'Freemans Bay',
     city: 'Auckland',
     postcode: '1011',
     country: 'New Zealand',
-  },
-  'demo-patient-red': {
-    line1: 'Rua Augusta 1200',
-    city: 'São Paulo',
-    postcode: '01305-100',
-    country: 'Brazil',
-  },
-  'demo-patient-amber': {
-    line1: '42 Harley Street',
-    city: 'London',
-    postcode: 'W1G 9PP',
-    country: 'United Kingdom',
   },
 }
 

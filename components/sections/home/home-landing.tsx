@@ -10,7 +10,7 @@ import {
   HOME_CTA,
   HOME_HERO,
   HOME_INSIGHT,
-  HOME_MARKETS,
+  HOME_METRICS,
   HOME_PROBLEM,
   HOME_PROOF,
   HOME_STEPS,
@@ -47,7 +47,23 @@ export function HomeLanding() {
         </div>
       </section>
 
-      <section className="home-landing__idea home-landing__idea--paper" id="problem">
+      <section className="home-landing__metric-band" id="metrics" aria-label="Core readouts">
+        <div className="home-landing__inner">
+          <p className="home-landing__kicker">{HOME_METRICS.eyebrow}</p>
+          <p className="home-landing__metric-question">{HOME_METRICS.question}</p>
+          <div className="home-landing__metric-grid">
+            {HOME_METRICS.columns.map((col) => (
+              <div key={col.id} className="home-landing__metric-cell">
+                <p className="home-landing__metric-label">{col.label}</p>
+                <p className="home-landing__metric-target">{col.target}</p>
+              </div>
+            ))}
+          </div>
+          <p className="home-landing__metric-foot">{HOME_METRICS.footnote}</p>
+        </div>
+      </section>
+
+      <section className="home-landing__idea home-landing__idea--paper home-landing__idea--snap" id="problem">
         <div className="home-landing__inner">
           <p className="home-landing__kicker">{HOME_PROBLEM.eyebrow}</p>
           <h1 className="home-landing__hero-title">
@@ -58,7 +74,7 @@ export function HomeLanding() {
               </span>
             ))}
           </h1>
-          <p className="home-landing__card-detail home-landing__lede">{HOME_PROBLEM.lede}</p>
+          <p className="home-landing__lede">{HOME_PROBLEM.lede}</p>
           <div className="home-landing__hero-actions">
             <Link className="home-landing__btn-solid" href={HOME_PROBLEM.primaryCta.href}>
               {HOME_PROBLEM.primaryCta.label}
@@ -71,7 +87,7 @@ export function HomeLanding() {
       </section>
 
       <section
-        className="home-landing__idea home-landing__idea--from-top dios-surface-dark"
+        className="home-landing__idea home-landing__idea--from-top dios-surface-dark home-landing__idea--snap"
         data-nav-surface="dark"
         id="insight"
       >
@@ -92,35 +108,11 @@ export function HomeLanding() {
         </div>
       </section>
 
-      <section className="home-landing__idea home-landing__idea--muted home-landing__idea--from-top" id="markets">
+      <section className="home-landing__idea home-landing__idea--muted home-landing__idea--stack" id="case-study">
         <div className="home-landing__inner">
-          <p className="home-landing__kicker">{HOME_MARKETS.eyebrow}</p>
-          <h2 className="home-landing__title">{HOME_MARKETS.headline}</h2>
-          <div className="home-landing__market-lanes">
-            {HOME_MARKETS.lanes.map((lane) => (
-              <article key={lane.id} className="home-landing__market-lane">
-                <p className="home-landing__market-label">{lane.label}</p>
-                <p className="home-landing__market-line">{lane.line}</p>
-                <ul className="home-landing__market-bullets">
-                  {lane.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-          <p className="home-landing__proof-more">
-            <Link href={HOME_MARKETS.cta.href}>{HOME_MARKETS.cta.label} ↗</Link>
-          </p>
-        </div>
-      </section>
-
-      <section className="home-landing__idea home-landing__idea--paper home-landing__idea--stack" id="case-study">
-        <div className="home-landing__inner home-landing__inner--wide">
           <p className="home-landing__kicker">{HOME_CASE_STUDY.eyebrow}</p>
           <h2 className="home-landing__title">{HOME_CASE_STUDY.headline}</h2>
           <p className="home-landing__case-subhead">{HOME_CASE_STUDY.subhead}</p>
-          <p className="home-landing__card-detail home-landing__lede">{HOME_CASE_STUDY.lede}</p>
 
           <div className="home-landing__case-metrics" aria-label="Cohort summary">
             {HOME_CASE_STUDY.metrics.map((metric) => (
@@ -134,48 +126,30 @@ export function HomeLanding() {
             ))}
           </div>
 
-          <div className="home-landing__case-grid">
-            <article className="home-landing__case-card home-landing__case-card--alert">
-              <p className="home-landing__case-card-label">Needs review</p>
-              <p className="home-landing__case-card-title">
-                {HOME_CASE_STUDY.spotlight.patient} · {HOME_CASE_STUDY.spotlight.ref}
-              </p>
-              <p className="home-landing__case-card-issue">{HOME_CASE_STUDY.spotlight.issue}</p>
-              <p className="home-landing__case-card-copy">
-                <strong>Without DIOS:</strong> {HOME_CASE_STUDY.spotlight.withoutDios}
-              </p>
-              <p className="home-landing__case-card-copy">
-                <strong>With DIOS:</strong> {HOME_CASE_STUDY.spotlight.withDios}
-              </p>
-              <p className="home-landing__case-card-outcome">{HOME_CASE_STUDY.spotlight.outcome}</p>
-            </article>
-
-            <article className="home-landing__case-card home-landing__case-card--ok">
-              <p className="home-landing__case-card-label">On track</p>
-              <p className="home-landing__case-card-title">
-                {HOME_CASE_STUDY.onTrack.patient} · {HOME_CASE_STUDY.onTrack.ref}
-              </p>
-              <p className="home-landing__case-card-copy">{HOME_CASE_STUDY.onTrack.line}</p>
-            </article>
-          </div>
+          <ul className="home-landing__case-rows">
+            {HOME_CASE_STUDY.rows.map((row) => (
+              <li
+                key={row.patient}
+                className={`home-landing__case-row home-landing__case-row--${row.tone}`}
+              >
+                <span className="home-landing__case-row-name">{row.patient}</span>
+                <span className="home-landing__case-row-read">{row.read}</span>
+              </li>
+            ))}
+          </ul>
 
           <blockquote className="home-landing__case-quote">
             <p>&ldquo;{HOME_CASE_STUDY.quote.text}&rdquo;</p>
             <footer>{HOME_CASE_STUDY.quote.attribution}</footer>
           </blockquote>
 
-          <div className="home-landing__hero-actions home-landing__hero-actions--wide">
-            <Link className="home-landing__btn-solid" href={HOME_CASE_STUDY.cta.href}>
-              {HOME_CASE_STUDY.cta.label}
-            </Link>
-            <Link className="home-landing__btn-ghost" href={HOME_CASE_STUDY.chronobiobankCta.href}>
-              {HOME_CASE_STUDY.chronobiobankCta.label}
-            </Link>
-          </div>
+          <p className="home-landing__proof-more">
+            <Link href={HOME_CASE_STUDY.cta.href}>{HOME_CASE_STUDY.cta.label} ↗</Link>
+          </p>
         </div>
       </section>
 
-      <section className="home-landing__idea home-landing__idea--muted home-landing__idea--from-top" id="who">
+      <section className="home-landing__idea home-landing__idea--paper home-landing__idea--snap" id="who">
         <div className="home-landing__inner">
           <p className="home-landing__kicker">{HOME_AUDIENCE.eyebrow}</p>
           <h2 className="home-landing__title">
@@ -200,7 +174,7 @@ export function HomeLanding() {
         </div>
       </section>
 
-      <section className="home-landing__idea home-landing__idea--bronze" id="how">
+      <section className="home-landing__idea home-landing__idea--bronze home-landing__idea--snap" id="how">
         <div className="home-landing__inner">
           <p className="home-landing__kicker home-landing__kicker--on-bronze">{HOME_STEPS.eyebrow}</p>
           <h2 className="home-landing__title home-landing__title--on-bronze">{HOME_STEPS.headline}</h2>
@@ -254,7 +228,7 @@ export function HomeLanding() {
         <HomeCtaVideo />
         <div className="home-landing__cta-scrim" aria-hidden />
         <div className="home-landing__inner">
-          <h2 className="type-hero home-landing__title home-landing__title--one-line">{HOME_CTA.headline}</h2>
+          <h2 className="home-landing__title home-landing__title--cta">{HOME_CTA.headline}</h2>
           <div className="home-landing__cta-cards">
             <Link className="home-landing__cta-card" href={HOME_CTA.clinician.href}>
               <div className="home-landing__cta-top dios-dark-block dios-dark-block--ink">

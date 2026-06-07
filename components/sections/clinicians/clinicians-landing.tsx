@@ -11,6 +11,7 @@ import {
   CLINICIANS_HERO,
   CLINICIANS_MOAT,
   CLINICIANS_STEPS,
+  CLINICIANS_TIPTRAQ_VD3,
   CLINICIANS_USERS,
 } from '@/lib/pitch/clinicians-landing-content'
 
@@ -60,6 +61,21 @@ export function CliniciansLanding() {
               <p className="dios-on-dark-copy dios-on-dark-copy--strong">{CLINICIANS_GAP.after.body}</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="clinicians-landing__section clinicians-landing__section--muted" id="vd3">
+        <div className="clinicians-landing__inner">
+          <p className="clinicians-landing__eyebrow clinicians-landing__reveal">{CLINICIANS_TIPTRAQ_VD3.eyebrow}</p>
+          <h2 className="clinicians-landing__title clinicians-landing__reveal">{CLINICIANS_TIPTRAQ_VD3.headline}</h2>
+          <p className="clinicians-landing__lede clinicians-landing__reveal">{CLINICIANS_TIPTRAQ_VD3.body}</p>
+          <ul className="clinicians-landing__reveal mt-6 space-y-2">
+            {CLINICIANS_TIPTRAQ_VD3.metrics.map((metric) => (
+              <li key={metric} className="font-ui text-ui-sm text-black/70">
+                — {metric}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
