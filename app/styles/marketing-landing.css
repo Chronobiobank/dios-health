@@ -142,13 +142,6 @@ html.marketing-v2-active .dios-app-shell {
   text-decoration: none;
 }
 
-.marketing-v2-root .kz-nav-logo.exiq-wordmark {
-  font-family: var(--mkt-sans);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  text-transform: none;
-}
-
 .marketing-v2-root .kz-nav-links {
   display: flex;
   gap: 1.75rem;
@@ -424,7 +417,12 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-s--bronze .kz-h1 {
-  color: var(--mkt-text);
+  color: #fff;
+}
+
+.marketing-v2-root .kz-s--bronze .kz-h1 em {
+  color: #fff;
+  font-style: italic;
 }
 
 /* ── SUPPORT LINE ── */
@@ -756,13 +754,6 @@ html.marketing-v2-active .dios-app-shell {
   line-height: 1.5;
   max-width: 36ch;
   text-transform: none;
-}
-
-.marketing-v2-root .kz-f-glyph.exiq-wordmark {
-  color: var(--mkt-bronze, #b8872e);
-  font-family: var(--mkt-sans);
-  font-weight: 600;
-  letter-spacing: -0.04em;
 }
 
 .marketing-v2-root .kz-f-ecosystem {

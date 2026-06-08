@@ -1,10 +1,10 @@
-import { BRAND_ECOSYSTEM, EXIQ_BRAND, EXIQ_ELEVATOR, Q_NARRATIVE } from '@/lib/brand/exiq-brand'
+import { BRAND_ECOSYSTEM, EIOS_BRAND, EIOS_ELEVATOR, Q_NARRATIVE } from '@/lib/brand/eios-brand'
 import type { KawasakiSlideMedia } from '@/lib/pitch/marketing-landing-content'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 
 export const CORPORATE_BRAND = {
-  ...EXIQ_BRAND,
-  logoClassName: 'exiq-wordmark',
+  ...EIOS_BRAND,
+  logoClassName: 'dios-wordmark',
 } as const
 
 export const CORPORATE_NAV = {
@@ -17,9 +17,9 @@ export const CORPORATE_NAV = {
 } as const
 
 export const CORPORATE_FOOTER = {
-  brandName: EXIQ_BRAND.name,
-  descriptor: EXIQ_ELEVATOR,
-  tagline: EXIQ_BRAND.category,
+  brandName: EIOS_BRAND.name,
+  descriptor: EIOS_ELEVATOR,
+  tagline: EIOS_BRAND.category,
   copyrightYear: 2026,
   ecosystem: BRAND_ECOSYSTEM,
   links: [
@@ -37,24 +37,24 @@ export const CORPORATE_PEAK_WINDOW = {
   eyebrow: 'The deliverable',
   title: 'Peak Window',
   headline: 'Two hours of prime cognition — protected, every day',
-  support: 'EIOS maps biology through exIQ. Q cues light, timing, and movement to hold it.',
+  support: 'EIOS maps it from wearables. Q cues light, timing, and movement to hold it.',
   hoursPerLeader: 2,
 } as const
 
 export const CORPORATE_LANDING_META = {
-  title: 'exIQ on EIOS · Executive Intelligence',
+  title: 'EIOS · Executive Intelligence',
   description:
-    'Q delivers your daily cues. exIQ on EIOS maps Peak Window — EI alongside AI.',
-  openGraphTitle: 'exIQ · Q delivers your cues',
+    'Q delivers your daily cues. EIOS maps Peak Window from wearables — EI alongside AI.',
+  openGraphTitle: 'EIOS · Q delivers your cues',
   openGraphDescription:
-    'Corporate Executive Intelligence on EIOS. Light, timing, movement — zeitgeber cues for leadership teams.',
+    'Executive Intelligence OS for CPOs. Light, timing, movement — zeitgeber cues for leadership teams.',
 } as const
 
 /** 01 — Hero: one problem, one claim, one action */
 export const CORPORATE_HERO = {
   id: 'hero',
   slideNum: '01',
-  eyebrow: 'exIQ on EIOS',
+  eyebrow: 'Executive Intelligence',
   headlineHtml: 'Your talent loses <em>44 days</em> a year',
   support: 'Circadian misalignment — not burnout. Biology vs calendar.',
   media: {
@@ -83,7 +83,7 @@ export const CORPORATE_MECHANISM = {
   ],
 } as const
 
-/** 03 — Product: EIOS platform · exIQ product · Q AI */
+/** 03 — Product: EIOS platform + Q cue intelligence */
 export const CORPORATE_PRODUCT = {
   id: 'product',
   slideNum: '03',
@@ -99,7 +99,7 @@ export const CORPORATE_PRODUCT = {
     {
       symbol: '◎',
       title: 'Calculate',
-      body: 'exIQ on EIOS maps DLMO and Peak Window.',
+      body: 'EIOS maps DLMO and Peak Window per leader.',
     },
     {
       symbol: 'Q',
@@ -152,7 +152,7 @@ export const CORPORATE_CLOSE = {
   slideNum: '05',
   eyebrow: 'Founding partners',
   headlineHtml: 'They have AI. <em>You have Q.</em>',
-  support: 'EIOS for the platform. exIQ for corporate. Q for the cues — 10–50 leaders, signal in 90 days.',
+  support: 'EIOS for the platform. Q for the cues — 10–50 leaders, signal in 90 days.',
   sectors: [
     { title: 'Banking & PE', body: 'One bad 3am call costs millions.' },
     { title: 'Law & professional services', body: 'Time zones erode billable cognition.' },
