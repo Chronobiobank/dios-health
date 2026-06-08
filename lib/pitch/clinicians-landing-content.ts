@@ -10,7 +10,7 @@ import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 export const CLINICIANS_LANDING_META = {
   title: 'For clinicians — DIOS',
   description:
-    'Your patients have a biological dose window. DIOS maps meds to body clocks and triages who needs attention this week.',
+    'Map each patient’s meds to their body clock. See who needs attention this week.',
 } as const
 
 export const CLINICIANS_HERO = {
@@ -18,8 +18,8 @@ export const CLINICIANS_HERO = {
   headline: 'Same script.',
   headlineEmphasis: 'Wrong time for most patients.',
   subheadline:
-    'DIOS scans each patient’s body clock, times every med and supplement to their biological window, and surfaces a red–amber–green cohort view — before outcomes slip.',
-  primaryCta: { label: 'Enrol your cohort', href: 'mailto:grant@dios.health' },
+    'DIOS maps each patient’s meds to their body clock and shows who needs attention this week — before outcomes slip.',
+  primaryCta: { label: 'Enrol your cohort', href: MARKETING_ROUTES.signupClinician },
   secondaryCta: { label: 'See triage demo', href: MARKETING_ROUTES.cliniciansTriage },
 } as const
 
@@ -32,7 +32,7 @@ export const CLINICIANS_GAP = {
   },
   after: {
     label: 'What DIOS does',
-    body: 'Monthly MLux camera proxy maintains circadian phase between TipTraQ blocks. Each drug gets a personal timing window — reset every six months when TipTraQ calibrates, adjusted when bloods or light shift the clock.',
+    body: 'Monthly phone light scans maintain your estimate between TipTraQ blocks. Each medicine gets a personal time — reset every six months when TipTraQ runs, adjusted when bloods or light shift your clock.',
   },
 } as const
 
@@ -156,7 +156,7 @@ export const CLINICIANS_EVIDENCE = {
 export const CLINICIANS_CTA = {
   headline: 'Optimise scripts across your cohort.',
   sub: 'Primary care, pharmacy, and specialist practices — free patient entry, clinician triage from day one.',
-  primary: { label: 'Enrol your cohort', href: 'mailto:grant@dios.health' },
+  primary: { label: 'Enrol your cohort', href: MARKETING_ROUTES.signupClinician },
   secondary: { label: 'See triage demo', href: MARKETING_ROUTES.cliniciansTriage },
 } as const
 
@@ -166,8 +166,8 @@ export const CLINICIANS_PRODUCT_DEMOS = {
   headline: 'Three surfaces. One platform.',
   items: [
     {
-      label: 'pRGC monitoring',
-      detail: 'Four columns per patient — sleep efficiency, REM latency, PTH, D3 timing. One scan answers the clinical question.',
+      label: 'Triage demo',
+      detail: 'Cohort queue plus pRGC drill-down — who needs attention, then four columns that explain why.',
       href: MARKETING_ROUTES.cliniciansTriage,
     },
     {

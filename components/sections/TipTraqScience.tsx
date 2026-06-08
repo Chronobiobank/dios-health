@@ -28,22 +28,22 @@ const LAYERS = [
   {
     id: 'tiptraq',
     title: 'Every 6 months — TipTraQ',
-    body: 'Three-night calibration block — not a continuous monitor. Sets DLMO and dose windows with L1 precision until the next read.',
+    body: 'Three nights at home — not a nightly monitor. Sets your body clock and medicine times until the next read.',
   },
   {
     id: 'bloods',
     title: 'Every 90 days — blood panel',
-    body: 'PTH, 25-OH Vitamin D, B12, ferritin, serum calcium. Coimbra safety gate and VDR activation marker.',
+    body: 'PTH, vitamin D, B12, ferritin, and calcium. Confirms your protocol is working and stays safe.',
   },
   {
     id: 'smartphone',
-    title: 'Monthly — MLux camera proxy',
-    body: 'Smartphone light data refreshes provisional DLMO between TipTraQ blocks — seasonal light and wake/sleep adjustments.',
+    title: 'Monthly — phone light scan',
+    body: 'Your phone tracks light between TipTraQ blocks — adjusted for season and sleep.',
   },
   {
     id: 'dina',
-    title: 'Daily — DINA dose confirmations',
-    body: 'Drug and supplement timing logged with every patient tap. Adherence to windows set by the last TipTraQ calibration.',
+    title: 'Daily — DINA',
+    body: 'Each medicine logged when you confirm it. Shows if you took it in the window TipTraQ set.',
   },
 ] as const
 
@@ -110,8 +110,8 @@ export function TipTraqScience() {
           <h1 className="type-hero-overlay mt-4 max-w-3xl text-white">
             How DIOS reads your body clock.
           </h1>
-          <p className="type-hero-meta mt-6 max-w-2xl text-white/85">
-            TipTraQ clinical monitoring, blood panels, then smartphone sensors — one MLux phase reading.
+          <p className="kz-lead mt-6 max-w-2xl text-white/85">
+            TipTraQ sleep, blood tests, and your phone — combined into one body-clock reading.
           </p>
           <HashLink href="/contact?intent=clinical-briefing" className={`${BTN_HERO} mt-8`}>
             Book a clinical demo →

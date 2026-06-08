@@ -24,7 +24,7 @@ export const RETINOMIC_LANDING_CONSEQUENCE = {
   eyebrow: 'Technology',
   headline: 'Dose intelligence synchronised to body clocks.',
   subheadline:
-    'Most scripts are standardised. We match the dose to suit — measured from light, sleep, and labs when you need clinical depth.',
+    'Most scripts use one schedule. We match timing to your light, sleep, and labs when you need depth.',
   image: PITCH_IMAGES.spectrum,
   imageAlt: 'Dose intelligence mapped to circadian phase',
   detailHref: '/how-it-works',
@@ -39,7 +39,7 @@ export const RETINOMIC_LANDING_PHOTONIC_AGE = {
   eyebrow: 'Solution',
   headline: 'One App. Two Views.',
   subheadline:
-    'Patients see today’s timing guidance. Clinicians see who needs attention this week — same data, different jobs.',
+    'Patients see when to take medicine. Clinicians see who needs a call this week.',
   image: PITCH_IMAGES.retinomic.howWeThink,
   imageAlt: 'Patient timing guidance and clinician cohort triage',
   detailHref: '/clinicians',
@@ -97,7 +97,7 @@ export const HOW_IT_WORKS_DEMO_COPY = {
   eyebrow: 'Live demo',
   headline: 'Your dashboard after the baseline scan',
   subheadline:
-    'Sample day-one dose intelligence below. Start your free eye scan to replace this placeholder with your light, eye, blood, and sleep biology.',
+    'Sample day-one timing below. Start your free eye scan to replace this with your own light, sleep, and blood data.',
   sampleLabel: 'Sample patient · Sean · Auckland',
   disclaimer: 'Illustrative data only · not medical advice',
   primaryCta: 'Start free baseline scan',
@@ -126,7 +126,7 @@ export const RETINOMIC_LANDING_VISION = {
   eyebrow: 'Get started',
   headline: 'Get in sync.',
   subheadline:
-    'Patients track their clock. Clinicians enrol their cohort. Both feed the same dose intelligence OS.',
+    'Patients track their clock. Clinicians enrol their patients. Both use the same timing data.',
   image: '/chronobiobank.png',
   imageAlt: 'Patient and clinician entry to DIOS',
   detailHref: '/onboarding',

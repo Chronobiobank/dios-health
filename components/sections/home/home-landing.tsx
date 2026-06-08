@@ -86,7 +86,7 @@ export function HomeLanding() {
             <br />
             <em>{HOME_HERO.lines[1]}</em>
           </h1>
-          <p className="home-landing__hero-edu-lede">{HOME_HERO.emphasisLine}</p>
+          <p className="home-landing__hero-edu-lede kz-lead">{HOME_HERO.emphasisLine}</p>
           <p className="home-landing__pull-quote home-landing__pull-quote--on-dark">
             {HOME_HERO.pullQuote}
           </p>

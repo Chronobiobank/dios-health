@@ -221,7 +221,12 @@ function LabsModal({
   )
 }
 
-export function GpCohortTriageDashboard() {
+type GpCohortTriageDashboardProps = {
+  /** Marketing embed on /how-it-works — no full-page clinical shell */
+  embedded?: boolean
+}
+
+export function GpCohortTriageDashboard({ embedded = false }: GpCohortTriageDashboardProps) {
   const cohort = useMemo(() => getSortedGpCohort(), [])
   const summary = useMemo(() => getGpCohortSummary(cohort), [cohort])
 
@@ -239,8 +244,13 @@ export function GpCohortTriageDashboard() {
   }
 
   return (
-    <div className="clinical-layout ct-shell dios-nav-tone-surface dios-page-top-bleed">
-      <div className="ct-shell__frame">
+    <div
+      className={cn(
+        'ct-shell',
+        embedded ? 'gp-cohort-demo' : 'clinical-layout dios-nav-tone-surface dios-page-top-bleed'
+      )}
+    >
+      <div className={cn('ct-shell__frame', embedded && 'gp-cohort-demo__frame')}>
         <header className="ct-shell__top">
           <p className="ct-shell__eyebrow">Monday morning review</p>
           <h1 className="ct-shell__title">Who needs attention this week?</h1>

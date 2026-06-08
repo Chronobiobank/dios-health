@@ -67,7 +67,7 @@ export const INTELLIGENCE_CADENCES: Record<CadenceId, CadenceDefinition> = {
     role: 'window_adherence',
     roleLabel: 'Adherence layer',
     description:
-      'Drug and supplement timing logged with every patient tap. Shows whether the patient is hitting personalised windows set by the last TipTraQ calibration.',
+      'Each medicine logged when the patient confirms it. Shows if they took it in the window TipTraQ set.',
     inputs: ['dose_confirm_tap', 'medication_window'],
     outputs: ['adherence_pct', 'window_hits', 'missed_doses'],
   },
@@ -79,7 +79,7 @@ export const INTELLIGENCE_CADENCES: Record<CadenceId, CadenceDefinition> = {
     role: 'maintains_estimate',
     roleLabel: 'Provisional DLMO bridge',
     description:
-      'Smartphone light data refreshes the provisional DLMO estimate each month — adjusted for seasonal light and reported wake and sleep times between TipTraQ blocks.',
+      'Phone light data updates your body-clock estimate each month between TipTraQ blocks.',
     inputs: ['ambient_light', 'screen_exposure', 'wake_sleep_times', 'latitude_season'],
     outputs: ['provisional_dlmo', 'melanopic_lux_estimate', 'light_alignment'],
   },
@@ -116,7 +116,7 @@ export const INTELLIGENCE_LAYER_ORDER: readonly CadenceId[] = [
 ]
 
 export const INTELLIGENCE_LAYER_SUMMARY =
-  'TipTraQ sets the clock. The blood panel confirms biological response. The camera proxy maintains the estimate between TipTraQ reads. Daily dose events show whether the patient is hitting the windows TipTraQ defined.'
+  'TipTraQ sets your clock every six months. Bloods confirm response. Monthly phone scans bridge the gap. Daily medicine logs show if you hit your windows.'
 
 export const CADENCE_TAGLINE = 'Four cadences. One intelligence stack.'
 

@@ -12,7 +12,7 @@
   --cl-pad-y: clamp(2.5rem, 8vw, 5rem);
   --cl-max: 54rem;
   --cl-max-wide: 68rem;
-  --cl-serif: var(--font-instrument-serif, Georgia, serif);
+  --cl-serif: var(--cl-sans);
   --cl-mono: var(--font-geist-mono, ui-monospace, monospace);
   --cl-sans: var(--font-geist-sans, system-ui, sans-serif);
   color: var(--cl-ink);
@@ -101,6 +101,7 @@
 .clinicians-landing__split-cvp {
   font-family: var(--cl-serif);
   font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold, 600);
   line-height: 1.25;
 }
 
@@ -397,7 +398,7 @@
 .clinicians-landing__title {
   font-family: var(--cl-serif);
   font-size: clamp(1.75rem, 7vw, 3.25rem);
-  font-weight: 400;
+  font-weight: var(--font-weight-semibold, 600);
   line-height: 1.08;
   margin-bottom: 1rem;
 }
@@ -415,6 +416,13 @@
   line-height: 1.6;
   margin-bottom: 1.5rem;
   max-width: 36rem;
+}
+
+.clinicians-landing__lede.kz-lead {
+  font-size: var(--kz-narrative-lead-size);
+  font-weight: 400;
+  line-height: var(--kz-narrative-lead-leading);
+  max-width: var(--kz-narrative-lead-max);
 }
 
 .clinicians-landing__actions {
@@ -561,6 +569,7 @@
 .clinicians-landing__user-cvp {
   font-family: var(--cl-serif);
   font-size: 1.25rem;
+  font-weight: var(--font-weight-semibold, 600);
   line-height: 1.2;
 }
 

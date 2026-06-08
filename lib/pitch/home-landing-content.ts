@@ -19,7 +19,7 @@ export const HOME_HERO = {
     'Vitamin D is not a vitamin.',
     'It is a steroid hormone.',
   ] as const,
-  emphasisLine: 'It regulates the immune system of every patient in your practice. And the curriculum you trained under did not teach you that.',
+  emphasisLine: 'It regulates every patient’s immune system. Standard training rarely teaches that.',
   pullQuote: 'The science moved on. Prescribing did not.',
   primaryCta: { label: 'Enrol your first patient', href: '/signup/clinician' },
   video: '/optimise-your-script.mp4',
@@ -82,8 +82,8 @@ export const HOME_DINA = {
   eyebrow: 'What you give your patient',
   headline: 'You give your patient DINA.',
   paragraphs: [
-    'DINA is the patient agent built into DIOS. It tells your patient when to take their Soltriol, confirms the morning window is met, monitors cofactor adherence, and flags conflicts before they become clinical problems.',
-    'Your patient does not need to understand chrono-immunotherapy. DINA understands it for them.',
+    'DINA tells your patient when to take each medicine, confirms the morning dose, and warns before unsafe mixes.',
+    'Your patient does not need to understand the science. DINA handles the timing for them.',
   ],
 } as const
 

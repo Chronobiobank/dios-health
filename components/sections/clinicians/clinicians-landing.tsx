@@ -28,7 +28,7 @@ export function CliniciansLanding() {
             <br />
             <em>{CLINICIANS_HERO.headlineEmphasis}</em>
           </h1>
-          <p className="clinicians-landing__lede">{CLINICIANS_HERO.subheadline}</p>
+          <p className="clinicians-landing__lede kz-lead">{CLINICIANS_HERO.subheadline}</p>
           <div className="clinicians-landing__actions">
             <Link className="clinicians-landing__btn clinicians-landing__btn--dark" href={CLINICIANS_HERO.primaryCta.href}>
               {CLINICIANS_HERO.primaryCta.label}

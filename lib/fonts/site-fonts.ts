@@ -16,7 +16,7 @@ export const dmMono = DM_Mono({
   weight: ['300', '400', '500'],
 })
 
-/** Instrument Serif — marketing headlines only (home, pitch, evidence landings) */
+/** Instrument Serif — loaded for legacy tokens; product pages use Inter headings (see marketing-typography.css) */
 export const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
   weight: '400',

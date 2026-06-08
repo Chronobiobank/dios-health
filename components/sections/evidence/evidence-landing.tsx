@@ -1,116 +1,84 @@
 import Link from 'next/link'
 
-import { HomeLandingReveal } from '@/components/sections/home/home-landing-reveal'
+import { MarketingFontScope } from '@/components/sections/marketing/marketing-font-scope'
 import {
-  EVIDENCE_CTA,
-  EVIDENCE_HERO,
-  EVIDENCE_LOOP,
-  EVIDENCE_PILLARS,
+  MarketingKawasakiFooter,
+  MarketingKawasakiNav,
+} from '@/components/sections/marketing/marketing-kawasaki-chrome'
+import { MarketingKawasakiHtml } from '@/components/sections/marketing/marketing-kawasaki-html'
+import { MarketingKawasakiSection } from '@/components/sections/marketing/marketing-kawasaki-section'
+import {
+  EVIDENCE_CLOSING_SLIDE,
+  EVIDENCE_CTA_SECTION,
+  EVIDENCE_CYCLE,
+  EVIDENCE_STORY_SLIDES,
 } from '@/lib/pitch/evidence-landing-content'
-
-function PillarBullet({
-  label,
-  body,
-  href,
-  linkLabel,
-}: {
-  label: string
-  body: string
-  href?: string
-  linkLabel?: string
-}) {
-  return (
-    <li className="home-landing__pillar-bullet">
-      <span className="home-landing__pillar-bullet-mark" aria-hidden>
-        →
-      </span>
-      <span>
-        <strong>{label}:</strong> {body}
-        {href && linkLabel ? (
-          <>
-            {' '}
-            <a className="home-landing__pillar-link" href={href} target="_blank" rel="noopener noreferrer">
-              {linkLabel}
-            </a>
-          </>
-        ) : null}
-      </span>
-    </li>
-  )
-}
 
 export function EvidenceLanding() {
   return (
-    <div className="home-landing dios-nav-tone-paper">
-      <HomeLandingReveal />
+    <MarketingFontScope>
+      <MarketingKawasakiNav />
 
-      <section className="home-landing__idea home-landing__idea--paper home-landing__idea--from-top dios-page-top-bleed">
-        <div className="home-landing__inner">
-          <p className="home-landing__kicker">{EVIDENCE_HERO.eyebrow}</p>
-          <h1 className="home-landing__hero-title">
-            {EVIDENCE_HERO.headline}
-            <br />
-            <em>{EVIDENCE_HERO.headlineEmphasis}</em>
-          </h1>
-          <p className="home-landing__card-detail home-landing__lede">{EVIDENCE_HERO.lede}</p>
-        </div>
-      </section>
+      {EVIDENCE_STORY_SLIDES.map((slide, index) => (
+        <MarketingKawasakiSection
+          key={slide.id}
+          {...slide}
+          headingLevel={index === 0 ? 'h1' : 'h2'}
+        />
+      ))}
 
       <section
-        className="home-landing__idea home-landing__idea--from-top dios-surface-dark"
-        data-nav-surface="dark"
-        id="framework"
+        id={EVIDENCE_CYCLE.id}
+        className="kz-s kz-s--dark"
+        aria-labelledby={`${EVIDENCE_CYCLE.id}-heading`}
       >
-        <div className="home-landing__inner">
-          <p className="dios-on-dark-eyebrow">Four pillars</p>
-          <h2 className="home-landing__title dios-on-dark-title">
-            Measure. Fuel. Verify. <em>Synthesise.</em>
+        <div className="kz-s__content">
+          <p className="kz-ey">{EVIDENCE_CYCLE.eyebrow}</p>
+          <h2 id={`${EVIDENCE_CYCLE.id}-heading`} className="kz-h1">
+            <MarketingKawasakiHtml html={EVIDENCE_CYCLE.headlineHtml} />
           </h2>
-          <p className="home-landing__insight-statement dios-on-dark-copy">
-            Each layer closes a gap that population dosing ignores — from melanopsin thresholds to
-            overnight sleep architecture.
-          </p>
-        </div>
-      </section>
-
-      <section className="home-landing__idea home-landing__idea--muted home-landing__idea--stack" id="pillars">
-        <div className="home-landing__inner home-landing__inner--wide">
-          <div className="home-landing__pillars">
-            {EVIDENCE_PILLARS.map((pillar) => (
-              <article key={pillar.id} className="home-landing__pillar">
-                <p className="home-landing__pillar-label">{pillar.label}</p>
-                <h3 className="home-landing__pillar-title">{pillar.title}</h3>
-                <p className="home-landing__pillar-summary">{pillar.summary}</p>
-                <ul className="home-landing__pillar-bullets">
-                  {pillar.bullets.map((bullet) => (
-                    <PillarBullet key={bullet.label} {...bullet} />
-                  ))}
-                </ul>
-                <p className="home-landing__pillar-ref">{pillar.reference}</p>
-              </article>
+          <p className="kz-sup">{EVIDENCE_CYCLE.support}</p>
+          <div className="kz-metrics">
+            {EVIDENCE_CYCLE.metrics.map((metric) => (
+              <div key={metric.label} className="kz-metrics__item">
+                <p className="kz-metrics__label">{metric.label}</p>
+                <p className="kz-metrics__value kz-tabular">{metric.value}</p>
+              </div>
             ))}
           </div>
         </div>
+        <div className="kz-num">{EVIDENCE_CYCLE.slideNum}</div>
       </section>
 
-      <section className="home-landing__idea home-landing__idea--paper home-landing__idea--stack">
-        <div className="home-landing__inner">
-          <h2 className="home-landing__title">{EVIDENCE_LOOP.headline}</h2>
-          <p className="home-landing__card-detail home-landing__lede">{EVIDENCE_LOOP.body}</p>
-          <div className="home-landing__hero-actions home-landing__hero-actions--wide">
-            <Link className="home-landing__btn-solid" href={EVIDENCE_CTA.primary.href}>
-              {EVIDENCE_CTA.primary.label}
+      <MarketingKawasakiSection {...EVIDENCE_CLOSING_SLIDE} />
+
+      <section
+        id={EVIDENCE_CTA_SECTION.id}
+        className="kz-s"
+        aria-labelledby={`${EVIDENCE_CTA_SECTION.id}-heading`}
+      >
+        <div className="kz-s__content">
+          <p className="kz-ey">{EVIDENCE_CTA_SECTION.eyebrow}</p>
+          <h2 id={`${EVIDENCE_CTA_SECTION.id}-heading`} className="kz-h1">
+            <MarketingKawasakiHtml html={EVIDENCE_CTA_SECTION.headlineHtml} />
+          </h2>
+          <p className="kz-sup">{EVIDENCE_CTA_SECTION.support}</p>
+          <div className="kz-cta-stack">
+            <Link href={EVIDENCE_CTA_SECTION.ctas.primary.href} className="kz-cta-btn kz-cta-stack__btn">
+              {EVIDENCE_CTA_SECTION.ctas.primary.label}
             </Link>
-            <Link className="home-landing__btn-ghost" href={EVIDENCE_CTA.secondary.href}>
-              {EVIDENCE_CTA.secondary.label}
+            <Link href={EVIDENCE_CTA_SECTION.ctas.secondary.href} className="kz-cta-btn kz-cta-stack__btn">
+              {EVIDENCE_CTA_SECTION.ctas.secondary.label}
+            </Link>
+            <Link href={EVIDENCE_CTA_SECTION.ctas.tertiary.href} className="kz-cta-btn kz-cta-stack__btn">
+              {EVIDENCE_CTA_SECTION.ctas.tertiary.label}
             </Link>
           </div>
-          <p className="home-landing__proof-more">
-            <Link href={EVIDENCE_CTA.tertiary.href}>{EVIDENCE_CTA.tertiary.label} ↗</Link>
-          </p>
         </div>
+        <div className="kz-num">{EVIDENCE_CTA_SECTION.slideNum}</div>
       </section>
 
-    </div>
+      <MarketingKawasakiFooter />
+    </MarketingFontScope>
   )
 }

@@ -1,0 +1,156 @@
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * KAWASAKI NARRATIVE STYLE GUIDE — DIOS marketing copy contract
+ * ═══════════════════════════════════════════════════════════════════════════
+ *
+ * Reference: lib/pitch/marketing-landing-content.ts (KAWASAKI_STORY_SLIDES)
+ *
+ * VOICE
+ * - One idea per block. Scan in under three seconds.
+ * - Plain language first — readable by patients, carers, and clinicians.
+ *   Avoid insider terms (sequence, stack, conflict, triage, MLux) unless
+ *   the same screen explains them. Prefer: medicine, timing, unsafe, warn.
+ * - Active voice. Concrete nouns. British English.
+ * - No filler: “actually”, “really”, “simply”, “in order to”.
+ *
+ * STRUCTURE (every section)
+ * - Eyebrow: 1–2 words, mono uppercase (e.g. Patients, Platform).
+ * - Headline: one thought; stress one word with <em> (gold italic in UI).
+ * - Support: one or two short sentences, ≤42ch each. Never trade clarity
+ *   for brevity — split the idea rather than use jargon.
+ * - CTA: verb + object, ≤4 words; append → on text links.
+ *
+ * LENGTH LIMITS (enforce in content + CSS measure)
+ * - Hero headline: ≤12ch (landing slides) or ≤22ch (detail pages).
+ * - Support / lead: ≤42ch, one sentence.
+ * - Body / card copy: one sentence, ≤42ch.
+ * - List items: ≤8 words each.
+ * - Chat demo lines: ≤2 short sentences; ≤48ch per bubble.
+ * - Captions: one line, ≤42ch.
+ *
+ * PUNCTUATION
+ * - Prefer periods. Use em dash sparingly (one per block max).
+ * - No semicolon chains. No parenthetical asides.
+ *
+ * MARKUP
+ * - Wrap marketing story pages: .calm-landing > .marketing-main.kz-narrative
+ * - Use .type-pitch-eyebrow, .type-section, .type-body, .type-caption
+ * - Headline emphasis: <em>stress word</em> only — never full sentences italic
+ * - Page intro: one .kz-lead per page (NHS lead-paragraph pattern)
+ * - Dose times / values: .kz-tabular or clinical-data selectors below
+ *
+ * READING (NHS service manual + HCA Neutron)
+ * - Lead paragraph: larger than body, once per page, introduces the page
+ * - Body: sans-serif, line-height ≥ 1.5, max ~42ch per block
+ * - Clinical data: tabular numerals so times and doses align in columns
+ * - Section gap: ≥ 2× body size between narrative blocks
+ *
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+:root {
+  --kz-narrative-hero-max: 12ch;
+  --kz-narrative-head-max: 22ch;
+  --kz-narrative-support-max: 42ch;
+  --kz-narrative-lead-size: clamp(1.25rem, 0.45vw + 1.125rem, 1.625rem);
+  --kz-narrative-lead-leading: 1.5;
+  --kz-narrative-lead-max: 48ch;
+  --kz-narrative-body-max: 42ch;
+  --kz-narrative-card-body-max: 38ch;
+  --kz-narrative-list-max: 36ch;
+  --kz-narrative-chat-max: 48ch;
+  --kz-narrative-caption-max: 42ch;
+  --kz-narrative-block-gap: calc(var(--text-body-size, 1.0625rem) * 2);
+}
+
+/* ── NHS-style lead paragraph — one per page ── */
+.kz-lead {
+  color: var(--text-secondary);
+  font-family: var(--font-family-sans);
+  font-size: var(--kz-narrative-lead-size);
+  font-weight: 400;
+  line-height: var(--kz-narrative-lead-leading);
+  margin-block: 0 var(--kz-narrative-block-gap);
+  max-width: var(--kz-narrative-lead-max);
+  text-wrap: pretty;
+}
+
+/* Dark marketing heroes */
+:is(.dios-surface-dark, .home-landing__hero--edu, .bg-black) .kz-lead {
+  color: rgb(255 255 255 / 0.9);
+  text-shadow: 0 1px 16px rgb(0 0 0 / 0.35);
+}
+
+/* Page heroes outside MarketingShell */
+:is(.home-landing, .clinicians-landing) .kz-lead {
+  max-width: var(--kz-narrative-lead-max);
+  text-wrap: pretty;
+}
+
+.calm-landing .pitch-detail .kz-lead {
+  color: var(--text-secondary);
+  max-width: var(--kz-narrative-lead-max);
+}
+
+/* ── Neutron-style tabular numerals for clinical data ── */
+.kz-tabular {
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ── Narrative measure — all calm-landing marketing pages ── */
+.calm-landing .marketing-main :is(.type-section, .type-pitch-title, .dina-product__title) {
+  max-width: var(--kz-narrative-head-max);
+  text-wrap: balance;
+}
+
+.calm-landing .marketing-main :is(.type-body, .type-pitch-sub:not(.kz-lead)) {
+  max-width: var(--kz-narrative-support-max);
+  text-wrap: pretty;
+}
+
+.calm-landing .marketing-main .kz-lead,
+.calm-landing .marketing-main .dina-product__lead {
+  max-width: var(--kz-narrative-lead-max);
+  text-wrap: pretty;
+}
+
+/* Dose times, IU/mcg values, clocks — align for scanning */
+.calm-landing .marketing-main :is(
+    .kz-tabular,
+    .dina-product__stack-window,
+    .dina-product__stack-name,
+    .dina-product__context-pill,
+    .dina-product__bubble--dina,
+    .dina-product__bubble--user,
+    .dina-product__contrast-item--dina
+  ) {
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.calm-landing .marketing-main .dina-product__card-body,
+.calm-landing .marketing-main .dina-product__contrast-item--dina {
+  max-width: var(--kz-narrative-card-body-max);
+  text-wrap: pretty;
+}
+
+.calm-landing .marketing-main :is(.type-caption, .dina-product__chat-caption, .dina-product__footnote) {
+  max-width: var(--kz-narrative-caption-max);
+  text-wrap: pretty;
+}
+
+.calm-landing .marketing-main .dina-product__contrast-item {
+  max-width: var(--kz-narrative-list-max);
+}
+
+.calm-landing .marketing-main .dina-product__bubble--dina,
+.calm-landing .marketing-main .dina-product__bubble--user {
+  max-width: var(--kz-narrative-chat-max);
+}
+
+.calm-landing .marketing-main .type-section em,
+.calm-landing .marketing-main .dina-product__title em {
+  color: var(--gold);
+  font-style: italic;
+}

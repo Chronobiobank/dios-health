@@ -1,4 +1,5 @@
 import { COACH_ASK_LABEL } from '@/lib/coach/brand'
+import { CLINICIAN_ENTRY, PATIENT_PREVIEW_ENTRY } from '@/lib/pitch/audience-entry-content'
 
 export function isPatientDashboardPath(pathname: string): boolean {
   const normalized =
@@ -20,12 +21,14 @@ export const NAV_COACH_LINK = {
 
 export const AUTH_LINKS = [
   { label: 'Sign in', href: '/auth/signin' },
-  { label: 'Sign up', href: '/onboarding' },
+  { label: PATIENT_PREVIEW_ENTRY.navLabel, href: PATIENT_PREVIEW_ENTRY.href },
+  { label: CLINICIAN_ENTRY.navLabel, href: CLINICIAN_ENTRY.href },
 ] as const
 
 /** Off-canvas / hamburger menu — keep to primary routes only */
 export const NAV_MENU_LINKS = [
   { label: 'How it works', href: '/how-it-works' },
+  { label: 'For clinicians', href: '/clinicians' },
   { label: 'DINA', href: '/dina' },
   { label: 'Clinical evidence', href: '/evidence' },
   { label: 'Contact DIOS', href: '/contact' },
@@ -62,7 +65,8 @@ export const LANDING_FOOTER_SECTIONS: readonly FooterNavSection[] = [
     links: [
       { label: 'How it works', href: '/how-it-works' },
       { label: 'DINA', href: '/dina' },
-      { label: 'Get started', href: '/onboarding' },
+      { label: PATIENT_PREVIEW_ENTRY.navLabel, href: PATIENT_PREVIEW_ENTRY.href },
+      { label: CLINICIAN_ENTRY.navLabel, href: CLINICIAN_ENTRY.href },
       { label: 'For clinicians', href: '/clinicians' },
       { label: 'Sign in', href: '/auth/signin' },
       { label: 'Contact', href: '/contact' },

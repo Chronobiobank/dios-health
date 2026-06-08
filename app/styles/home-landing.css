@@ -15,7 +15,8 @@
   --hl-green: #1d9e75;
   --hl-accent: var(--aubergine-mid, #5c3050);
   --hl-gold: var(--hl-bronze);
-  --hl-serif: var(--font-instrument-serif, Georgia, serif);
+  --hl-serif: var(--font-family-sans);
+  --hl-headline-weight: var(--font-weight-semibold, 600);
   --hl-sans: var(--font-geist-sans, system-ui, sans-serif);
   --hl-mono: var(--font-geist-mono, ui-monospace, monospace);
   --hl-headline-size: var(--text-heading-hero);
@@ -28,6 +29,18 @@
 /* Base globals set h1–h4 to --text-primary (dark); inherit section tone instead */
 .home-landing :is(h1, h2, h3, h4) {
   color: inherit;
+}
+
+.home-landing :is(
+  .home-landing__title,
+  .home-landing__hero-title,
+  .home-landing__hero-tagline,
+  .home-landing__hero-edu-title,
+  .home-landing__pillar-title,
+  .home-landing__metric-question,
+  .home-landing__audience-title
+) {
+  font-weight: var(--hl-headline-weight);
 }
 
 .home-landing__idea {
@@ -426,7 +439,7 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__ask-dios:hover {
 
 /* Mirrors global .type-hero — senior legibility token (--text-heading-hero) */
 .home-landing__title {
-  font-family: var(--font-family-serif, var(--hl-serif));
+  font-family: var(--hl-serif);
   font-size: clamp(2rem, 9vw, var(--text-heading-hero));
   font-weight: 400;
   letter-spacing: -0.03em;
@@ -487,6 +500,12 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__ask-dios:hover {
   margin: 0;
   max-width: 32ch;
   padding: 0;
+}
+
+.home-landing__lede.kz-lead {
+  font-size: var(--kz-narrative-lead-size);
+  line-height: var(--kz-narrative-lead-leading);
+  max-width: var(--kz-narrative-lead-max);
 }
 
 .home-landing__lede--block {
@@ -1356,15 +1375,12 @@ body:has(.home-landing) .dios-site-nav--on-dark .dios-site-nav__ask-dios:hover {
 
 .home-landing__hero-edu-lede {
   animation: home-landing-up 0.45s 0.2s forwards;
-  color: rgb(255 255 255 / 0.9);
-  font-family: var(--hl-sans);
-  font-size: var(--text-body-size);
-  font-weight: 400;
-  line-height: var(--text-body-leading);
   margin: 1.25rem 0 0;
-  max-width: 42ch;
   opacity: 0;
-  text-shadow: 0 1px 16px rgb(0 0 0 / 0.35);
+}
+
+.home-landing__hero-edu-lede.kz-lead {
+  font-family: var(--hl-sans);
 }
 
 .home-landing__pull-quote {

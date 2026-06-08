@@ -208,3 +208,40 @@
   font-size: 0.8125rem;
   margin-top: 0.75rem;
 }
+
+.dina-onboarding__audience {
+  background: rgb(255 255 255 / 0.72);
+  border: 0.5px solid rgb(0 0 0 / 0.08);
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 0.875rem;
+}
+
+.dina-onboarding__audience-label {
+  color: var(--mo-accent);
+  font-family: var(--mo-mono);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.dina-onboarding__audience-body {
+  color: var(--mo-muted);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  margin: 0.35rem 0 0;
+}
+
+.dina-onboarding__audience-links {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  margin: 0.5rem 0 0;
+}
+
+.dina-onboarding__audience-links a {
+  color: var(--mo-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

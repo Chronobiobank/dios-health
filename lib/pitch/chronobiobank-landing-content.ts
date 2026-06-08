@@ -1,29 +1,30 @@
 import { COIMBRA_PARADOX_STATEMENT } from '@/lib/chronobiobank/coimbra-paradox'
+import { CLINICIAN_ENTRY, PATIENT_PREVIEW_ENTRY } from '@/lib/pitch/audience-entry-content'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 
 export const CHRONOBIOBANK_LANDING_META = {
   title: 'Chronobiobank — DIOS',
   description:
-    'The first clinical dataset indexed by biological time and clock time together. Cannot be retrofitted.',
+    'The first clinical dataset with biological time and clock time together. Cannot be rebuilt from old records.',
 } as const
 
 export const CHRONOBIOBANK_HERO = {
   eyebrow: 'Data infrastructure',
   headline: 'Chronobiobank',
   headlineEmphasis: 'indexed by biological time.',
-  lede: 'Every drug was developed assuming clock time. DIOS is built on biological time — and the Chronobiobank is the first clinical dataset indexed by both.',
+  lede: 'Every drug was tested on clock time. DIOS records biological time too — the first dataset with both.',
 } as const
 
 export const CHRONOBIOBANK_SECTIONS = [
   {
     id: 'what',
     eyebrow: 'What it is',
-    body: 'A dual-indexed outcomes layer: daily DINA dose confirmations, monthly MLux proxies, 90-day blood panels, and six-month TipTraQ blocks — each tagged with BTI (biological time) and wall-clock time. Coimbra, Gominak, and circadian cohorts contribute structured protocol data with granular, revocable consent.',
+    body: 'Daily medicine logs, monthly phone light scans, 90-day bloods, and six-month TipTraQ sleep blocks — each tagged with biological time and wall-clock time. Patients choose what they share.',
   },
   {
     id: 'why',
     eyebrow: 'Why it cannot be retrofitted',
-    body: 'Medisafe, Huma, and UK Biobank record when a dose happened on the wall clock. They do not record biological time at confirmation. Without BTI at dose, chronomedicine outcomes cannot be reconstructed from existing datasets.',
+    body: 'Most health apps record when a dose happened on the wall clock. They do not record biological time at that moment. You cannot rebuild timed-medicine outcomes from those datasets alone.',
   },
   {
     id: 'contribute',
@@ -33,10 +34,10 @@ export const CHRONOBIOBANK_SECTIONS = [
 ] as const
 
 export const CHRONOBIOBANK_CTA = {
-  primary: { label: 'Start as patient', href: MARKETING_ROUTES.onboarding },
+  primary: { label: PATIENT_PREVIEW_ENTRY.ctaLabel, href: PATIENT_PREVIEW_ENTRY.href },
   secondary: {
-    label: 'Enrol a cohort',
-    href: 'mailto:grant@dios.health?subject=Chronobiobank%20cohort%20enquiry',
+    label: CLINICIAN_ENTRY.cohortLabel,
+    href: CLINICIAN_ENTRY.href,
   },
   tertiary: { label: 'Clinical evidence', href: MARKETING_ROUTES.evidence },
 } as const

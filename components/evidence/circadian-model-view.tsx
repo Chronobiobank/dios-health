@@ -33,10 +33,10 @@ export function CircadianModelView() {
               Live dashboard demo →
             </Link>
             <Link
-              href="/clinicians"
+              href="/signup/clinician"
               className="dash-panel-action font-medium text-[var(--text-primary)] transition-opacity hover:opacity-70"
             >
-              Enrol your practice →
+              Clinician sign up →
             </Link>
           </div>
         </div>

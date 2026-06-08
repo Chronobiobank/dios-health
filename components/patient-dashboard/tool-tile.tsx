@@ -162,9 +162,12 @@ function MedsPanel({
           Add your medications during onboarding to see personalised timing windows.
         </p>
       ) : (
-        <ul className="dash-panel-stack list-none p-0">
+        <ul className="dash-meds-table dash-panel-stack list-none p-0">
           {medications.map((med) => (
-            <li key={`${med.name}-${med.time}`} className="flex items-start justify-between dash-panel-row dash-panel-inline">
+            <li
+              key={`${med.name}-${med.time}`}
+              className="dash-meds-row flex items-start justify-between dash-panel-row dash-panel-inline"
+            >
               <div className="min-w-0">
                 <div className="flex items-center dash-panel-inline">
                   <span
@@ -172,11 +175,16 @@ function MedsPanel({
                     style={{ background: med.colour }}
                     aria-hidden
                   />
-                  <span className="dash-head font-medium">
+                  <span className="dash-head dash-meds-name font-medium">
                     {med.name}
-                    {med.dose ? ` · ${med.dose}` : ''}
+                    {med.dose ? (
+                      <>
+                        {' · '}
+                        <span className="kz-tabular">{med.dose}</span>
+                      </>
+                    ) : null}
                   </span>
-                  <span className="dash-sub">{med.time}</span>
+                  <span className="dash-sub kz-tabular">{med.time}</span>
                 </div>
                 <p className="mt-1 pl-[18px] dash-panel-muted">{med.reason}</p>
               </div>

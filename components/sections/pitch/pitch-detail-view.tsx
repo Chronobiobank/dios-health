@@ -19,7 +19,7 @@ export function PitchDetailView({ page, showFounderOrigin = false }: PitchDetail
       <header className="pitch-detail__head max-w-[var(--pitch-tile-copy-max,40rem)]">
         <p className="type-pitch-eyebrow">{page.eyebrow}</p>
         <h1 className="type-pitch-title mt-3">{page.title}</h1>
-        <p className="type-pitch-sub mt-3">{page.subtitle}</p>
+        <p className="kz-lead type-pitch-sub mt-3">{page.subtitle}</p>
       </header>
 
       <div className="pitch-detail__hero dios-glass-outer mt-8">

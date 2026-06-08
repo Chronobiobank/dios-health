@@ -38,8 +38,8 @@ export function ScienceLanding() {
             <br />
             <em>{HOME_PROOF.headline[1]}</em>
           </h1>
-          <p className="home-landing__card-detail home-landing__lede">
-            Chronomedicine evidence library — indexed for clinician and patient sharing.
+          <p className="home-landing__card-detail home-landing__lede kz-lead">
+            Published studies and clinical notes — shared for patients and clinicians.
           </p>
           <ul className="home-landing__proof-bites">
             {HOME_PROOF.soundbites.map((bite) => (
@@ -73,6 +73,9 @@ export function ScienceLanding() {
             })}
           </div>
           <p className="home-landing__proof-more">
+            <Link href={MARKETING_ROUTES.circadianDigitalTwin}>See the 24-hour timing matrix ↗</Link>
+          </p>
+          <p className="home-landing__proof-more">
             <Link href={MARKETING_ROUTES.technology}>Technology deep dive ↗</Link>
           </p>
         </div>
@@ -100,7 +103,10 @@ export function ScienceLanding() {
             ))}
           </div>
           <p className="home-landing__proof-more">
-            <Link href={MARKETING_ROUTES.evidence}>Extended clinical validation framework ↗</Link>
+            <Link href={MARKETING_ROUTES.circadianDigitalTwin}>Chronomedicine timing matrix ↗</Link>
+          </p>
+          <p className="home-landing__proof-more">
+            <Link href={MARKETING_ROUTES.visibilityGap}>Why protocols go blind ↗</Link>
           </p>
         </div>
       </section>

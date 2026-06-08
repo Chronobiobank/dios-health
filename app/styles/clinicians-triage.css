@@ -609,3 +609,138 @@
   margin-top: 0.875rem;
   padding-left: 0.75rem;
 }
+
+/* —— Unified demo — /clinicians/triage —— */
+
+.clinicians-triage-demo {
+  margin-inline: auto;
+  max-width: 80rem;
+  padding: 1.25rem 1rem 2.5rem;
+  width: 100%;
+}
+
+@media (min-width: 48rem) {
+  .clinicians-triage-demo {
+    padding-inline: 1.5rem;
+  }
+}
+
+.clinicians-triage-demo__intro {
+  margin-bottom: 1.25rem;
+  max-width: 48rem;
+}
+
+.clinicians-triage-demo__eyebrow {
+  color: var(--ct-muted);
+  font-family: var(--ct-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.clinicians-triage-demo__title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0.35rem 0 0;
+}
+
+.clinicians-triage-demo__lede {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  margin: 0.65rem 0 0;
+}
+
+.clinicians-triage-demo__bridge {
+  color: var(--ct-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+  max-width: 42ch;
+}
+
+.clinicians-triage-demo__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.clinicians-triage-demo__tab {
+  background: #fff;
+  border: 1px solid var(--ct-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-height: 48px;
+  min-width: 10rem;
+  padding: 0.6rem 0.85rem;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.clinicians-triage-demo__tab:hover {
+  border-color: rgb(0 0 0 / 0.18);
+}
+
+.clinicians-triage-demo__tab:focus-visible {
+  outline: 2px solid var(--dios-focus-ring, #185fa5);
+  outline-offset: 2px;
+}
+
+.clinicians-triage-demo__tab--active {
+  border-color: color-mix(in srgb, var(--ct-accent) 45%, var(--ct-border));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ct-accent) 20%, transparent);
+}
+
+.clinicians-triage-demo__tab-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.clinicians-triage-demo__tab-detail {
+  color: var(--ct-muted);
+  font-size: 0.6875rem;
+  line-height: 1.35;
+}
+
+.clinicians-triage-demo__panel {
+  min-width: 0;
+}
+
+.clinicians-triage-demo__panel .ct-shell.dios-page-top-bleed {
+  margin-top: 0;
+}
+
+.clinicians-triage-demo__loading {
+  padding: 2rem 1rem;
+}
+
+.prgc-monitoring-demo--embedded {
+  background: transparent;
+  color: var(--ct-ink);
+}
+
+.prgc-monitoring-demo__inner {
+  max-width: 72rem;
+}
+
+.prgc-monitoring-demo__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.prgc-monitoring-demo__lede {
+  color: var(--ct-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+  max-width: 42rem;
+}

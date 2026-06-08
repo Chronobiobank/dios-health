@@ -20,7 +20,7 @@ export function ChronobiobankLanding() {
             <br />
             <em>{CHRONOBIOBANK_HERO.headlineEmphasis}</em>
           </h1>
-          <p className="home-landing__card-detail home-landing__lede">{CHRONOBIOBANK_HERO.lede}</p>
+          <p className="home-landing__card-detail home-landing__lede kz-lead">{CHRONOBIOBANK_HERO.lede}</p>
         </div>
       </section>
 

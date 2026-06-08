@@ -1,5 +1,27 @@
 /* Clinician triage shell — ultra-clean minimalist SPA layout */
 
+/* Embedded on /how-it-works — inside marketing shell */
+.gp-cohort-demo.ct-shell {
+  background: transparent;
+  min-height: auto;
+}
+
+.gp-cohort-demo .gp-cohort-demo__frame {
+  min-height: auto;
+  padding: 1.5rem 0 0;
+}
+
+.gp-cohort-demo .ct-shell__top {
+  border-bottom: none;
+  margin-bottom: 1rem;
+  padding-bottom: 0;
+}
+
+.gp-cohort-demo .ct-shell__eyebrow,
+.gp-cohort-demo .ct-shell__title {
+  display: none;
+}
+
 .ct-shell {
   --ct-ink: var(--aubergine-dark, #3b1f35);
   --ct-muted: #6b7280;

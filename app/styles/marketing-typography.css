@@ -1,55 +1,56 @@
-/* Marketing typography — Instrument Serif headlines aligned with home landing */
+/* Product pages — clinical triage headings (Inter). Kawasaki `/` keeps Lora in marketing-landing.css */
 
 :root {
-  --font-family-serif: var(--font-instrument-serif, Georgia, serif);
+  --font-heading-clinical: var(--font-family-sans);
+  --font-heading-weight: var(--font-weight-semibold, 600);
   --marketing-headline-size: var(--text-heading-hero);
   --marketing-section-size: var(--text-heading-section);
   --marketing-card-headline-size: clamp(2rem, 6.5vw, 3.375rem);
 }
 
-/* Global marketing type utilities */
 .type-hero {
-  font-family: var(--font-family-serif);
+  font-family: var(--font-heading-clinical);
   font-size: var(--marketing-headline-size);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1;
+  font-weight: var(--font-heading-weight);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .type-section,
 .type-pitch-title {
-  font-family: var(--font-family-serif);
+  font-family: var(--font-heading-clinical);
   font-size: var(--marketing-section-size);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.05;
+  font-weight: var(--font-heading-weight);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
-/* Calm landing shell — serif headlines on all marketing routes */
-.calm-landing .calm-headline,
-.calm-landing .dios-on-dark-title,
-.calm-landing .marketing-detail :is(h1, h2) {
-  font-family: var(--font-family-serif);
-  font-weight: 400;
-  letter-spacing: -0.01em;
+/* Calm UI shell — exclude Kawasaki landing (marketing-v2-shell) */
+.calm-landing:not(.marketing-v2-shell) .calm-headline,
+.calm-landing:not(.marketing-v2-shell) .dios-on-dark-title,
+.calm-landing:not(.marketing-v2-shell) .marketing-detail :is(h1, h2) {
+  font-family: var(--font-heading-clinical);
+  font-weight: var(--font-heading-weight);
+  letter-spacing: -0.02em;
 }
 
-.calm-landing .dios-on-dark-title {
+.calm-landing:not(.marketing-v2-shell) .dios-on-dark-title {
   font-size: var(--marketing-headline-size);
-  line-height: 1;
-}
-
-.calm-landing .dios-on-dark-headline {
-  font-family: var(--font-family-serif);
-  font-size: var(--marketing-card-headline-size);
-  font-weight: 400;
   line-height: 1.1;
 }
 
-.calm-landing .dios-on-dark-title em,
-.calm-landing .type-pitch-title em,
-.calm-landing .type-section em,
-.calm-landing .type-hero em {
+.calm-landing:not(.marketing-v2-shell) .dios-on-dark-headline {
+  font-family: var(--font-heading-clinical);
+  font-size: var(--marketing-card-headline-size);
+  font-weight: var(--font-heading-weight);
+  line-height: 1.2;
+}
+
+.calm-landing:not(.marketing-v2-shell) .dios-on-dark-title em,
+.calm-landing:not(.marketing-v2-shell) .type-pitch-title em,
+.calm-landing:not(.marketing-v2-shell) .type-section em,
+.calm-landing:not(.marketing-v2-shell) .type-hero em {
   color: var(--gold);
   font-style: italic;
+  font-weight: inherit;
 }

@@ -1,27 +1,23 @@
+import { CLINICIAN_ENTRY, PATIENT_PREVIEW_ENTRY } from '@/lib/pitch/audience-entry-content'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 
 /** `/learn` is not a route; curriculum links use science */
 export const MARKETING_LEARN_ROUTE = MARKETING_ROUTES.learn
 
-export const MARKETING_LANDING_META = {
-  title: 'DIOS · Make Time Count',
-  description: 'Close the 90-day visibility gap in chronoimmunology.',
-  openGraphTitle: 'DIOS · Make Time Count',
-  openGraphDescription: 'Close the 90-day visibility gap in chronoimmunology.',
-} as const
+export { CORPORATE_LANDING_META as MARKETING_LANDING_META } from '@/lib/pitch/corporate-landing-content'
 
 export const KAWASAKI_NAV = {
   links: [
-    { label: 'Learn', href: MARKETING_LEARN_ROUTE },
-    { label: 'Science', href: MARKETING_ROUTES.science },
-    { label: 'For clinicians', href: MARKETING_ROUTES.clinicians },
-    { label: 'DINA', href: MARKETING_ROUTES.dina },
+    { label: 'Product', href: '#product' },
+    { label: 'ROI', href: '#roi' },
+    { label: 'Evidence', href: MARKETING_ROUTES.evidence },
+    { label: 'Clinicians', href: MARKETING_ROUTES.clinicians },
   ],
-  cta: { label: 'Enrol', href: MARKETING_ROUTES.onboarding },
+  cta: { label: 'Request briefing', href: MARKETING_ROUTES.cpoBriefing },
 } as const
 
 export const KAWASAKI_FOOTER = {
-  descriptor: 'Dose intelligence for high-dose protocols',
+  descriptor: 'Biological performance intelligence',
   tagline: 'Make Time Count',
   copyrightYear: 2026,
   links: [
@@ -34,14 +30,15 @@ export const KAWASAKI_FOOTER = {
     { label: 'Clinicians', href: MARKETING_ROUTES.clinicians },
     { label: 'DINA', href: MARKETING_ROUTES.dina },
     { label: 'Chronobiobank', href: MARKETING_ROUTES.chronobiobank },
-    { label: 'Enrol', href: MARKETING_ROUTES.onboarding },
+    { label: PATIENT_PREVIEW_ENTRY.navLabel, href: PATIENT_PREVIEW_ENTRY.href },
+    { label: CLINICIAN_ENTRY.navLabel, href: CLINICIAN_ENTRY.href },
     { label: 'Contact', href: '/contact' },
     { label: 'Privacy', href: '/privacy' },
     { label: 'Terms', href: '/terms' },
   ],
 } as const
 
-export type KawasakiSlideVariant = 'default' | 'dark' | 'teal' | 'center'
+export type KawasakiSlideVariant = 'default' | 'dark' | 'teal' | 'bronze' | 'center'
 
 export type KawasakiSlideLink = {
   label: string
@@ -77,6 +74,7 @@ export const KAWASAKI_STORY_SLIDES: readonly KawasakiStorySlide[] = [
     eyebrow: 'Problem',
     headlineHtml: '87 days <em>blind</em>',
     support: 'You cannot see your protocol working between blood draws.',
+    link: { label: 'Why protocols go blind', href: MARKETING_ROUTES.visibilityGap },
     media: {
       image: '/standardised.jpg',
       video: '/first-light.mp4',
@@ -98,13 +96,9 @@ export const KAWASAKI_STORY_SLIDES: readonly KawasakiStorySlide[] = [
     slideNum: '03',
     eyebrow: 'Solution',
     headlineHtml: 'We close the <em>90-day gap</em>',
-    support: 'Four cadences show what quarterly bloods cannot.',
-    link: { label: 'See the model →', href: MARKETING_ROUTES.scienceFourCadences },
-    variant: 'teal',
-    media: {
-      image: '/the-solution.webp',
-      scrim: 'teal',
-    },
+    support: 'Four signals show what quarterly bloods miss.',
+    link: { label: 'See the model', href: MARKETING_ROUTES.scienceFourCadences },
+    variant: 'bronze',
   },
   {
     id: 's3',
@@ -112,7 +106,7 @@ export const KAWASAKI_STORY_SLIDES: readonly KawasakiStorySlide[] = [
     eyebrow: 'How',
     headlineHtml: 'Sleep is your <em>early signal</em>',
     support: 'Sleep changes weeks before your next blood panel.',
-    link: { label: 'The technology →', href: MARKETING_ROUTES.technology },
+    link: { label: 'The technology', href: MARKETING_ROUTES.technology },
     media: {
       image: '/sleep-is%20your-early-signal.jpg',
       scrim: 'light',
@@ -124,11 +118,7 @@ export const KAWASAKI_STORY_SLIDES: readonly KawasakiStorySlide[] = [
     eyebrow: 'Platform',
     headlineHtml: '<em>DIOS</em> for clinicians',
     support: 'Every confirmed dose appears on your dashboard.',
-    link: { label: 'Live demo →', href: MARKETING_ROUTES.howItWorksDemo },
-    media: {
-      image: '/for%20clinicians.jpg',
-      scrim: 'light',
-    },
+    link: { label: 'Live demo', href: MARKETING_ROUTES.howItWorksDemo },
   },
   {
     id: 's5',
@@ -136,19 +126,17 @@ export const KAWASAKI_STORY_SLIDES: readonly KawasakiStorySlide[] = [
     eyebrow: 'Patients',
     headlineHtml: '<em>DINA</em> for patients',
     support:
-      'Confirms each dose window daily and flags safety issues your triage dashboard sees.',
-    media: {
-      image: '/for%20patients.jpg',
-      scrim: 'light',
-    },
+      'Tells you when to take each medicine. Warns your clinic if timing is unsafe.',
+    link: { label: 'Meet DINA', href: MARKETING_ROUTES.dina },
+    variant: 'bronze',
   },
   {
     id: 's6',
     slideNum: '07',
     eyebrow: 'Practitioners',
-    headlineHtml: 'We support <em>high-dose Soltriol</em>',
-    support:
-      'Built for advanced immunology practitioners prescribing vitamin D as a hormone.',
+    headlineHtml: 'Built for <em>high-dose D3</em>',
+    support: 'For practitioners who prescribe vitamin D as a hormone.',
+    link: { label: 'For clinicians', href: MARKETING_ROUTES.clinicians },
     media: {
       image: '/practitioners.jpg',
       scrim: 'dark',
@@ -158,14 +146,9 @@ export const KAWASAKI_STORY_SLIDES: readonly KawasakiStorySlide[] = [
     id: 's7',
     slideNum: '08',
     eyebrow: 'Vision',
-    headlineHtml: 'User-owned <em>Chronobank</em>',
-    support:
-      'We are building it to help practitioners apply immune and metabolic care in practice.',
-    link: { label: 'Chronobiobank →', href: MARKETING_ROUTES.chronobiobank },
-    media: {
-      image: '/chronobiobank.png',
-      scrim: 'light',
-    },
+    headlineHtml: 'Your data. <em>Your consent.</em>',
+    support: 'Helps practitioners improve immune and metabolic care in practice.',
+    link: { label: 'Chronobiobank', href: MARKETING_ROUTES.chronobiobank },
   },
 ] as const
 
@@ -180,8 +163,8 @@ export const KAWASAKI_CTA_SECTION = {
     scrim: 'cta',
   },
   ctas: {
-    primary: { label: 'Enrol a patient', href: MARKETING_ROUTES.onboarding },
-    secondary: { label: 'More on Soltriol', href: MARKETING_LEARN_ROUTE },
-    tertiary: { label: 'Patient? Get DINA ↗', href: MARKETING_ROUTES.dina },
+    primary: { label: PATIENT_PREVIEW_ENTRY.ctaLabel, href: PATIENT_PREVIEW_ENTRY.href },
+    secondary: { label: CLINICIAN_ENTRY.cohortLabel, href: CLINICIAN_ENTRY.href },
+    tertiary: { label: 'Learn more →', href: MARKETING_LEARN_ROUTE },
   },
 } as const

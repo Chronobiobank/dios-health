@@ -1,8 +1,19 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, type ReactNode } from 'react'
 
+import { OnboardingAudienceBanner } from '@/components/onboarding/onboarding-audience-banner'
 import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
+function OnboardingShell({ children }: { children: ReactNode }) {
+  return (
+    <div className="dina-onboarding dios-nav-tone-paper dios-page-top-bleed">
+      <div className="dina-onboarding__inner">
+        <OnboardingAudienceBanner />
+        {children}
+      </div>
+    </div>
+  )
+}
 
 const SCAN_SECONDS = 60
 const DINA_ONBOARDING_MESSAGE =
@@ -52,8 +63,7 @@ export function DinaOnboardingFlow() {
 
   if (step === 'permission') {
     return (
-      <div className="dina-onboarding dios-nav-tone-paper dios-page-top-bleed">
-        <div className="dina-onboarding__inner">
+      <OnboardingShell>
           <p className="dina-onboarding__step-label">Step 1 of 4</p>
           <h1 className="dina-onboarding__title">Camera access</h1>
           <p className="dina-onboarding__body">
@@ -68,15 +78,13 @@ export function DinaOnboardingFlow() {
           <button type="button" className="dina-onboarding__btn" onClick={() => setStep('scan')}>
             Allow camera
           </button>
-        </div>
-      </div>
+      </OnboardingShell>
     )
   }
 
   if (step === 'scan') {
     return (
-      <div className="dina-onboarding dios-nav-tone-paper dios-page-top-bleed">
-        <div className="dina-onboarding__inner">
+      <OnboardingShell>
           <p className="dina-onboarding__step-label">Step 2 of 4</p>
           <h1 className="dina-onboarding__title">Scan your clock</h1>
           <p className="dina-onboarding__body">Hold still. Look at your screen normally.</p>
@@ -91,15 +99,13 @@ export function DinaOnboardingFlow() {
             </div>
             <p className="dina-onboarding__countdown">{secondsLeft}s</p>
           </div>
-        </div>
-      </div>
+      </OnboardingShell>
     )
   }
 
   if (step === 'result') {
     return (
-      <div className="dina-onboarding dios-nav-tone-paper dios-page-top-bleed">
-        <div className="dina-onboarding__inner">
+      <OnboardingShell>
           <p className="dina-onboarding__step-label">Step 3 of 4</p>
           <h1 className="dina-onboarding__title">Your BTI estimate</h1>
           <div className="dina-onboarding__bti-card">
@@ -114,15 +120,13 @@ export function DinaOnboardingFlow() {
           >
             Continue
           </button>
-        </div>
-      </div>
+      </OnboardingShell>
     )
   }
 
   if (step === 'notification') {
     return (
-      <div className="dina-onboarding dios-nav-tone-paper dios-page-top-bleed">
-        <div className="dina-onboarding__inner">
+      <OnboardingShell>
           <p className="dina-onboarding__step-label">Step 4 of 4</p>
           <h1 className="dina-onboarding__title">Your first window</h1>
           <div className="dina-onboarding__push-card" role="status">
@@ -138,14 +142,12 @@ export function DinaOnboardingFlow() {
           >
             Set up my protocol
           </button>
-        </div>
-      </div>
+      </OnboardingShell>
     )
   }
 
   return (
-    <div className="dina-onboarding dios-nav-tone-paper dios-page-top-bleed">
-      <div className="dina-onboarding__inner">
+    <OnboardingShell>
         <p className="dina-onboarding__step-label">Protocol</p>
         <h1 className="dina-onboarding__title">Add your first drug</h1>
         <p className="dina-onboarding__body">Enter one medication to map to your biological window.</p>
@@ -164,10 +166,9 @@ export function DinaOnboardingFlow() {
         </form>
         {saved ? (
           <p className="dina-onboarding__success">
-            Saved locally for prototype. Clinician mapping comes next.
+            Saved on this device only. Protocol mapping happens after your clinician enrols your cohort.
           </p>
         ) : null}
-      </div>
-    </div>
+    </OnboardingShell>
   )
 }

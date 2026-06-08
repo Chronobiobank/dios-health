@@ -13,7 +13,7 @@ export const CLINICAL_PROOF_PAGE = {
   eyebrow: 'Clinical proof',
   title: 'Personal timing beats standard dose.',
   subtitle:
-    'Landmark cardiovascular, metabolic, and safety studies support dose intelligence — the same biology DIOS measures through City Labs, PranaQ TipTraQ, and everyday smartphone capture.',
+    'Major heart, metabolism, and safety studies back timed dosing — the same biology DIOS tracks with bloods, TipTraQ sleep, and your phone.',
   founderBridge: GRANT_MUNRO_FOUNDER_ORIGIN.paragraphs[2],
   tiles: [
     {

@@ -79,9 +79,9 @@
 
 .dios-on-dark-title {
   color: var(--dios-surface-fg);
-  font-family: var(--font-family-serif, var(--font-instrument-serif, Georgia, serif));
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-family: var(--font-heading-clinical, var(--font-family-sans));
+  font-weight: var(--font-heading-weight, var(--font-weight-semibold, 600));
+  letter-spacing: -0.02em;
 }
 
 .dios-surface-dark .dios-on-dark-title em,
@@ -107,9 +107,9 @@
 
 .dios-on-dark-headline {
   color: #fff;
-  font-family: var(--font-family-serif, var(--font-instrument-serif, Georgia, serif));
-  font-weight: 400;
-  line-height: 1.1;
+  font-family: var(--font-heading-clinical, var(--font-family-sans));
+  font-weight: var(--font-heading-weight, var(--font-weight-semibold, 600));
+  line-height: 1.2;
 }
 
 /* Embedded dark regions (card headers on light or accent page sections) */
@@ -304,9 +304,9 @@
   align-self: center;
   color: rgb(255 255 255 / 0.92);
   flex-shrink: 0;
-  font-family: var(--font-instrument-serif, Georgia, serif);
+  font-family: var(--font-family-sans);
   font-size: 0.46em;
-  font-weight: 400;
+  font-weight: var(--font-weight-semibold, 600);
   letter-spacing: -0.01em;
   line-height: 1;
   margin: 0 0 0 -0.06em;

@@ -1,4 +1,550 @@
-/* DINA scenarios — /dina + coach gallery */
+/* DINA product page — /dina (marketing) + scenario gallery (coach) */
+
+/* ── Product page (/dina) ── */
+
+.dina-product {
+  --dina-tile-surface: color-mix(in srgb, var(--lilac-light) 42%, var(--cream));
+  --dina-tile-surface-alt: color-mix(in srgb, var(--lilac-light) 24%, var(--cream));
+  --dina-tile-border: color-mix(in srgb, var(--aubergine-light) 55%, var(--lilac));
+  --dina-tile-shadow: 0 2px 10px color-mix(in srgb, var(--aubergine-dark) 6%, transparent);
+
+  box-sizing: border-box;
+  margin-inline: auto;
+  max-width: 48rem;
+  padding-inline: max(
+      var(--dios-landing-edge-gutter, clamp(1rem, 4vw, 1.5rem)),
+      env(safe-area-inset-left, 0px)
+    )
+    max(
+      var(--dios-landing-edge-gutter, clamp(1rem, 4vw, 1.5rem)),
+      env(safe-area-inset-right, 0px)
+    );
+}
+
+.dina-product__hero {
+  padding-block: clamp(1.5rem, 4vw, 4rem) 2.5rem;
+}
+
+.dina-product .type-pitch-eyebrow {
+  margin-bottom: 0.75rem;
+}
+
+.dina-product__section > .type-pitch-eyebrow {
+  margin-bottom: 1rem;
+}
+
+.dina-product__contrast > .type-pitch-eyebrow {
+  margin-bottom: 1.25rem;
+}
+
+.dina-product__title {
+  color: var(--text-primary);
+  font-family: var(--font-family-sans);
+  font-size: var(--text-heading-section);
+  font-weight: var(--font-weight-semibold, 600);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  max-width: var(--kz-narrative-head-max, 22ch);
+  text-wrap: balance;
+}
+
+.dina-product__lead {
+  color: var(--text-secondary);
+}
+
+.dina-product__section {
+  padding-bottom: 2.5rem;
+}
+
+.dina-product__section:has(.dina-product__chat) {
+  padding-bottom: 4rem;
+}
+
+.dina-product__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.dina-product__tab {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-family-sans);
+  font-size: var(--text-nav-size);
+  justify-content: center;
+  min-height: var(--legibility-touch-min, 3rem);
+  padding: 0.5rem 1.125rem;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.dina-product__tab:hover {
+  border-color: var(--aubergine-light);
+  color: var(--text-primary);
+}
+
+.dina-product__tab:focus-visible {
+  outline: 2px solid var(--dios-focus-ring, var(--lilac-bright));
+  outline-offset: 2px;
+}
+
+.dina-product__tab--active {
+  background: var(--aubergine-dark);
+  border-color: var(--aubergine-dark);
+  color: var(--text-on-dark);
+}
+
+.dina-product__chat {
+  background: var(--cream);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.dina-product__chat[hidden] {
+  display: none;
+}
+
+.dina-product__chat-header {
+  align-items: center;
+  background: var(--cream-100);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+.dina-product__chat-avatar {
+  align-items: center;
+  background: var(--aubergine-light);
+  border-radius: 50%;
+  color: var(--aubergine-dark);
+  display: flex;
+  flex-shrink: 0;
+  font-family: var(--font-family-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+.dina-product__chat-name {
+  color: var(--text-primary);
+  font-size: var(--text-nav-size);
+  font-weight: 500;
+  margin: 0;
+}
+
+.dina-product__chat-role {
+  color: var(--text-muted);
+  font-size: var(--text-eyebrow-size);
+  margin: 0;
+}
+
+.dina-product__chat-status {
+  background: var(--status-green);
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: 0.5rem;
+  margin-left: auto;
+  width: 0.5rem;
+}
+
+.dina-product__chat-body {
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 10rem;
+  padding: 1rem;
+}
+
+.dina-product__context-pill {
+  align-self: flex-start;
+  background: var(--cream-100);
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  color: var(--text-muted);
+  display: inline-flex;
+  flex-wrap: wrap;
+  font-family: var(--font-family-mono);
+  font-size: var(--text-label-size);
+  gap: 0.375rem;
+  line-height: 1.45;
+  max-width: 100%;
+  padding: 0.35rem 0.75rem;
+  text-wrap: balance;
+}
+
+.dina-product__thread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dina-product__message {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: min(92%, 32rem);
+}
+
+.dina-product__message--user {
+  align-items: flex-end;
+  align-self: flex-end;
+}
+
+.dina-product__message--dina {
+  align-items: flex-start;
+  align-self: flex-start;
+}
+
+.dina-product__message-label {
+  color: var(--text-faint);
+  font-family: var(--font-family-mono);
+  font-size: var(--text-eyebrow-size);
+  padding-inline: 0.25rem;
+}
+
+.dina-product__bubble--dina,
+.dina-product__bubble--user {
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
+  overflow-wrap: anywhere;
+  padding: 0.625rem 0.875rem;
+  word-break: break-word;
+}
+
+.dina-product__bubble--dina {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem 0.75rem 0.75rem 0.75rem;
+  color: var(--text-primary);
+}
+
+.dina-product__bubble--user {
+  background: var(--aubergine-dark);
+  border-radius: 0.75rem 0.25rem 0.75rem 0.75rem;
+  color: var(--text-on-dark);
+}
+
+.dina-product__suggestions {
+  background: var(--cream-100);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.dina-product__suggestion {
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  color: var(--text-muted);
+  display: inline-flex;
+  font-family: var(--font-family-sans);
+  font-size: var(--text-nav-size);
+  justify-content: center;
+  line-height: 1.35;
+  min-height: var(--legibility-touch-min, 3rem);
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  text-wrap: balance;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.dina-product__suggestion:hover {
+  border-color: var(--aubergine-light);
+  color: var(--text-primary);
+}
+
+.dina-product__suggestion:focus-visible {
+  outline: 2px solid var(--dios-focus-ring, var(--lilac-bright));
+  outline-offset: 2px;
+}
+
+.dina-product__chat-caption {
+  border-top: 1px solid var(--color-border);
+  color: var(--text-faint);
+  margin: 0;
+  padding: 0.625rem 1rem;
+  text-align: center;
+}
+
+.dina-product__footnote {
+  color: var(--text-faint);
+  margin-top: 0.75rem;
+}
+
+.dina-product__divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin-bottom: 3rem;
+}
+
+.dina-product__grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 640px) {
+  .dina-product__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dina-product__card {
+  background: var(--dina-tile-surface);
+  border: 1px solid var(--dina-tile-border);
+  border-radius: 0.875rem;
+  box-shadow: var(--dina-tile-shadow);
+  padding: 1.25rem;
+}
+
+.dina-product__card-title {
+  color: var(--text-primary);
+  font-size: var(--text-nav-size);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.dina-product__card-body {
+  color: var(--text-secondary);
+  font-size: var(--text-step-detail-size, var(--text-body-size));
+  line-height: var(--text-body-leading);
+}
+
+.dina-product__contrast {
+  background: var(--dina-tile-surface);
+  border: 1px solid var(--dina-tile-border);
+  border-radius: 0.875rem;
+  box-shadow: var(--dina-tile-shadow);
+  padding: 1.5rem;
+}
+
+.dina-product__contrast-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 640px) {
+  .dina-product__contrast-grid {
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+}
+
+.dina-product__contrast-label {
+  color: var(--text-faint);
+  font-family: var(--font-family-mono);
+  font-size: var(--text-eyebrow-size);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.dina-product__contrast-label--dina {
+  color: var(--text-muted);
+}
+
+.dina-product__contrast-item {
+  border-bottom: 1px solid var(--color-border);
+  color: var(--text-faint);
+  font-size: var(--text-caption-size);
+  line-height: 1.5;
+  margin: 0;
+  padding-block: 0.375rem;
+  text-decoration: line-through;
+}
+
+.dina-product__contrast-item--dina {
+  color: var(--text-primary);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
+  text-decoration: none;
+}
+
+.dina-product__stack {
+  background: var(--dina-tile-surface);
+  border: 1px solid var(--dina-tile-border);
+  border-radius: 0.875rem;
+  box-shadow: var(--dina-tile-shadow);
+  overflow: hidden;
+}
+
+.dina-product__stack-row {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+}
+
+.dina-product__stack-row:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dina-product__stack-row:nth-child(odd) {
+  background: var(--dina-tile-surface-alt);
+}
+
+.dina-product__stack-row:nth-child(even) {
+  background: transparent;
+}
+
+.dina-product__stack-name {
+  color: var(--text-primary);
+  flex: 1;
+  font-size: var(--text-body-size);
+  min-width: 0;
+}
+
+.dina-product__stack-window {
+  color: var(--text-muted);
+  flex: 1;
+  font-family: var(--font-family-mono);
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-size: var(--text-label-size);
+  font-variant-numeric: tabular-nums lining-nums;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.dina-product__stack-badge {
+  border-radius: 9999px;
+  flex-shrink: 0;
+  font-family: var(--font-family-mono);
+  font-size: var(--text-eyebrow-size);
+  font-weight: 500;
+  padding: 0.2rem 0.75rem;
+}
+
+.dina-product__stack-badge--open {
+  background: var(--status-green-bg);
+  border: 1px solid var(--status-green-border);
+  color: var(--status-green);
+}
+
+.dina-product__stack-badge--later {
+  background: var(--cream-100);
+  border: 1px solid var(--color-border);
+  color: var(--text-muted);
+}
+
+.dina-product__stack-badge--stopped {
+  background: var(--status-amber-bg);
+  border: 1px solid var(--status-amber-border);
+  color: var(--status-amber);
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .dina-product__stack-row {
+    align-items: center;
+    display: grid;
+    gap: 0.35rem 1rem;
+    grid-template-columns: 1fr auto;
+  }
+
+  .dina-product__stack-name {
+    grid-column: 1 / -1;
+  }
+
+  .dina-product__stack-window {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .dina-product__stack-badge {
+    justify-self: end;
+  }
+}
+
+@media (max-width: 640px) {
+  .dina-product__stack-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .dina-product__stack-window {
+    text-align: left;
+  }
+}
+
+.dina-product__cta-section {
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.dina-product__cta-section--mid {
+  margin-top: 1.5rem;
+  padding-bottom: 0;
+}
+
+.dina-product__cta-copy {
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.dina-product__cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.dina-product__btn-primary {
+  align-items: center;
+  background: var(--aubergine-dark);
+  border-radius: 9999px;
+  color: var(--text-on-dark);
+  display: inline-flex;
+  font-size: var(--text-button-size, var(--text-nav-size));
+  font-weight: 500;
+  justify-content: center;
+  min-height: var(--legibility-touch-min, 3rem);
+  padding: 0.625rem 1.5rem;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.dina-product__btn-primary:hover {
+  opacity: 0.92;
+}
+
+.dina-product__btn-ghost {
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  color: var(--text-muted);
+  display: inline-flex;
+  font-size: var(--text-button-size, var(--text-nav-size));
+  justify-content: center;
+  min-height: var(--legibility-touch-min, 3rem);
+  padding: 0.625rem 1.5rem;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.dina-product__btn-ghost:hover {
+  border-color: var(--aubergine-light);
+  color: var(--text-primary);
+}
+
+/* ── Legacy gallery (coach / dashboard) ── */
 
 .dina-page {
   padding-bottom: 4rem;
@@ -15,27 +561,25 @@
 }
 
 .dina-page__eyebrow {
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.6875rem;
+  color: var(--text-muted);
+  font-family: var(--font-family-mono);
+  font-size: var(--text-eyebrow-size);
   letter-spacing: 0.14em;
-  opacity: 0.5;
   text-transform: uppercase;
 }
 
 .dina-page__title {
+  color: var(--text-primary);
   font-size: clamp(1.75rem, 5vw, 2.25rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: var(--tracking-tight);
   line-height: 1.15;
   margin-top: 0.75rem;
 }
 
 .dina-page__lead {
-  color: rgb(0 0 0 / 0.62);
-  font-size: 1rem;
-  line-height: 1.6;
+  color: var(--text-secondary);
   margin-top: 1rem;
-  max-width: 36rem;
 }
 
 .dina-page__scenarios {
@@ -43,14 +587,14 @@
 }
 
 .dina-page__cta {
-  border-top: 1px solid rgb(0 0 0 / 0.08);
+  border-top: 1px solid var(--color-border);
   padding-block: 2rem;
 }
 
 .dina-page__cta-copy {
-  color: rgb(0 0 0 / 0.6);
-  font-size: 0.9375rem;
-  line-height: 1.55;
+  color: var(--text-muted);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
 }
 
 .dina-page__cta-actions {
@@ -71,16 +615,14 @@
 }
 
 .dina-page__btn-solid {
-  background: #111213;
-  color: #fff;
+  background: var(--aubergine-dark);
+  color: var(--text-on-dark);
 }
 
 .dina-page__btn-ghost {
-  border: 1px solid rgb(0 0 0 / 0.14);
-  color: rgb(0 0 0 / 0.75);
+  border: 1px solid var(--color-border);
+  color: var(--text-secondary);
 }
-
-/* Gallery */
 
 .dina-scenarios {
   display: flex;
@@ -95,26 +637,28 @@
 }
 
 .dina-scenarios__tab {
-  background: rgb(255 255 255 / 0.7);
-  border: 1px solid rgb(0 0 0 / 0.1);
+  background: var(--cream);
+  border: 1px solid var(--color-border);
   border-radius: 999px;
-  color: rgb(0 0 0 / 0.62);
+  color: var(--text-muted);
   cursor: pointer;
-  font-size: 0.8125rem;
+  font-size: var(--text-caption-size);
   padding: 0.45rem 0.85rem;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
 
 .dina-scenarios__tab--active {
-  background: rgb(17 18 19 / 0.06);
-  border-color: rgb(17 18 19 / 0.22);
-  color: #111213;
+  background: var(--cream-100);
+  border-color: var(--aubergine-light);
+  color: var(--text-primary);
   font-weight: 500;
 }
 
 .dina-scenarios__panel {
-  background: rgb(255 255 255 / 0.72);
-  border: 1px solid rgb(0 0 0 / 0.08);
+  background: var(--cream);
+  border: 1px solid var(--color-border);
   border-radius: 14px;
   display: flex;
   flex-direction: column;
@@ -123,42 +667,44 @@
 }
 
 .dina-scenarios__job {
-  color: rgb(0 0 0 / 0.5);
-  font-size: 0.8125rem;
+  color: var(--text-muted);
+  font-size: var(--text-caption-size);
   line-height: 1.45;
 }
 
 .dina-scenarios__context {
-  color: rgb(0 0 0 / 0.58);
-  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-size: var(--text-caption-size);
   line-height: 1.5;
 }
 
 .dina-scenarios__patient {
+  color: var(--text-primary);
   display: block;
   font-weight: 600;
   margin-bottom: 0.15rem;
 }
 
 .dina-scenarios__showcase {
-  background: rgb(17 18 19 / 0.03);
+  background: var(--cream-100);
   border-radius: 12px;
   padding: 1rem 1.1rem;
 }
 
 .dina-scenarios__speaker {
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.625rem;
+  color: var(--text-faint);
+  font-family: var(--font-family-mono);
+  font-size: var(--text-eyebrow-size);
   letter-spacing: 0.12em;
   margin-bottom: 0.45rem;
-  opacity: 0.45;
   text-transform: uppercase;
 }
 
 .dina-scenarios__bubble {
-  font-size: 1.0625rem;
+  color: var(--text-primary);
+  font-size: var(--text-body-size);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: var(--text-body-leading);
 }
 
 .dina-scenarios__actions {
@@ -168,12 +714,12 @@
 }
 
 .dina-scenarios__action {
-  background: #111213;
+  background: var(--aubergine-dark);
   border: none;
   border-radius: 999px;
-  color: #fff;
+  color: var(--text-on-dark);
   cursor: pointer;
-  font-size: 0.8125rem;
+  font-size: var(--text-caption-size);
   font-weight: 500;
   padding: 0.55rem 1rem;
   transition: opacity 0.15s ease;
@@ -189,7 +735,7 @@
 }
 
 .dina-scenarios__live {
-  border-top: 1px solid rgb(0 0 0 / 0.08);
+  border-top: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -199,9 +745,9 @@
 .dina-scenarios__orb-wrap {
   display: flex;
   justify-content: center;
+  margin-bottom: -2.5rem;
   transform: scale(0.55);
   transform-origin: top center;
-  margin-bottom: -2.5rem;
 }
 
 .dina-scenarios__thread {
@@ -216,40 +762,41 @@
 }
 
 .dina-scenarios__line--user {
-  background: rgb(17 18 19 / 0.04);
+  background: var(--cream-100);
   margin-left: 1.5rem;
 }
 
 .dina-scenarios__line--dina {
-  background: rgb(255 255 255 / 0.85);
-  border: 1px solid rgb(0 0 0 / 0.07);
+  background: #fff;
+  border: 1px solid var(--color-border);
   margin-right: 1.5rem;
 }
 
 .dina-scenarios__line-label {
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.625rem;
+  color: var(--text-faint);
+  font-family: var(--font-family-mono);
+  font-size: var(--text-eyebrow-size);
   letter-spacing: 0.1em;
   margin-bottom: 0.35rem;
-  opacity: 0.45;
   text-transform: uppercase;
 }
 
 .dina-scenarios__line-text {
-  font-size: 0.9375rem;
-  line-height: 1.5;
+  color: var(--text-primary);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
 }
 
 .dina-scenarios__status {
-  color: rgb(0 0 0 / 0.4);
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.75rem;
+  color: var(--text-faint);
+  font-family: var(--font-family-mono);
+  font-size: var(--text-caption-size);
   text-align: center;
 }
 
 .dina-scenarios__error {
-  color: #b91c1c;
-  font-size: 0.8125rem;
+  color: var(--status-red);
+  font-size: var(--text-caption-size);
   text-align: center;
 }
 
@@ -258,5 +805,5 @@
 }
 
 .dina-scenarios--compact .dina-scenarios__bubble {
-  font-size: 1rem;
+  font-size: var(--text-body-size);
 }

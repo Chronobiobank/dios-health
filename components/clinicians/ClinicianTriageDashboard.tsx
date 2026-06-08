@@ -1,5 +1,10 @@
 'use client'
 
+/**
+ * Live Supabase-backed triage board — reserved for /clinic workflow.
+ * Public demos use ClinicianTriageDemo (/clinicians/triage) instead.
+ */
+
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { TriageBadges } from '@/components/clinicians/triage-badges'
