@@ -3,7 +3,14 @@
 html.marketing-v2-active {
   height: 100%;
   overflow: hidden;
+  color-scheme: light;
   --kz-nav-height: clamp(4rem, 2.5vw + 3.25rem, 4.75rem);
+}
+
+/* Kawasaki shell — hide legacy site chrome without waiting for client hydration */
+body:has(.marketing-v2-shell) .dios-site-nav,
+body:has(.marketing-v2-shell) .pitch-footer {
+  display: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -63,6 +70,8 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root {
+  /* Light-only marketing palette — ignore prefers-color-scheme dark (calmer base flips h1 to #ececec) */
+  color-scheme: light;
   /* Kawasaki landing only — Lora display, DM Sans body (not clinical Inter headings) */
   --mkt-serif: var(--font-lora, Georgia, serif);
   --mkt-sans: var(--font-dm-sans, var(--font-family-sans));
@@ -386,6 +395,7 @@ html.marketing-v2-active .dios-app-shell {
   letter-spacing: -0.02em;
   max-width: 12ch;
   margin-bottom: 1.75rem;
+  color: var(--mkt-text);
 }
 
 .marketing-v2-root .kz-h1 em {

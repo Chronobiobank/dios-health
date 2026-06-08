@@ -14,7 +14,7 @@ export const CORPORATE_HERO = {
   id: 'hero',
   slideNum: '01',
   eyebrow: 'The problem',
-  headlineHtml: 'Your executives lose <em>44 days</em> a year',
+  headlineHtml: 'Your talent loses <em>44 days</em> a year',
   support: 'Not burnout. Circadian misalignment — biology vs calendar.',
   media: {
     image: '/standardised.jpg',
