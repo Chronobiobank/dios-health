@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react'
 
-import { CORPORATE_ROI } from '@/lib/pitch/corporate-landing-content'
+import { CORPORATE_PEAK_WINDOW, CORPORATE_PROOF } from '@/lib/pitch/corporate-landing-content'
 import {
   calculateCorporateRoi,
   formatGbp,
@@ -36,10 +36,10 @@ function useRoiContext() {
 }
 
 export function CorporateRoiProvider({ children }: { children: ReactNode }) {
-  const [executives, setExecutives] = useState<number>(CORPORATE_ROI.defaults.executives)
-  const [salaryK, setSalaryK] = useState<number>(CORPORATE_ROI.defaults.salaryK)
-  const [travelDays, setTravelDays] = useState<number>(CORPORATE_ROI.defaults.travelDaysPerMonth)
-  const [sector, setSector] = useState<CorporateSectorId>(CORPORATE_ROI.defaults.sector)
+  const [executives, setExecutives] = useState<number>(CORPORATE_PROOF.defaults.executives)
+  const [salaryK, setSalaryK] = useState<number>(CORPORATE_PROOF.defaults.salaryK)
+  const [travelDays, setTravelDays] = useState<number>(CORPORATE_PROOF.defaults.travelDaysPerMonth)
+  const [sector, setSector] = useState<CorporateSectorId>(CORPORATE_PROOF.defaults.sector)
 
   const inputs = useMemo(
     () => ({ executives, salaryK, travelDaysPerMonth: travelDays, sector }),
@@ -136,15 +136,32 @@ export function CorporateRoiControls() {
 }
 
 export function CorporateRoiResults() {
-  const { result } = useRoiContext()
+  const { inputs, result } = useRoiContext()
+  const protectedHours = inputs.executives * CORPORATE_PEAK_WINDOW.hoursPerLeader
 
   return (
     <div className="kz-roi__results kz-roi__results--card">
-      <p className="kz-roi__results-ey">Annual cost of circadian disruption</p>
-      <p className="kz-roi__results-total kz-tabular" aria-live="polite">
-        {formatGbp(result.totalCost, true)}
-      </p>
-      <p className="kz-roi__results-sub">leadership team · measurable misalignment</p>
+      <div className="kz-roi__peak">
+        <p className="kz-roi__peak-ey">{CORPORATE_PEAK_WINDOW.eyebrow}</p>
+        <p className="kz-roi__peak-title">{CORPORATE_PEAK_WINDOW.title}</p>
+        <p className="kz-roi__peak-headline">{CORPORATE_PEAK_WINDOW.headline}</p>
+        <p className="kz-roi__peak-support">{CORPORATE_PEAK_WINDOW.support}</p>
+        <p className="kz-roi__peak-stat kz-tabular" aria-live="polite">
+          {CORPORATE_PEAK_WINDOW.hoursPerLeader}h × {inputs.executives} leaders ={' '}
+          <strong>{protectedHours.toLocaleString('en-GB')} protected hours / day</strong>
+        </p>
+      </div>
+
+      <div className="kz-roi__cost">
+        <p className="kz-roi__results-ey">Annual cost of circadian disruption</p>
+        <p className="kz-roi__results-total kz-tabular" aria-live="polite">
+          {formatGbp(result.totalCost, true)}
+        </p>
+        <p className="kz-roi__results-sub">
+          Recover {formatGbp(result.recoverable, true)} by protecting Peak Window — not adding
+          another wellness perk.
+        </p>
+      </div>
 
       <div className="kz-roi__recovery">
         <div>
@@ -163,9 +180,25 @@ export function CorporateRoiResults() {
         </div>
       </div>
 
-      <Link href={CORPORATE_ROI.ctas.primary.href} className="kz-cta-btn kz-roi__cta">
-        {CORPORATE_ROI.ctas.primary.label}
+      <Link href={CORPORATE_PROOF.cta.href} className="kz-cta-btn kz-roi__cta">
+        {CORPORATE_PROOF.cta.label}
       </Link>
+    </div>
+  )
+}
+
+export function CorporateProofEvidence() {
+  return (
+    <div className="kz-proof__evidence" aria-label="Evidence sources">
+      <ul className="kz-proof__citations">
+        {CORPORATE_PROOF.citations.map((item) => (
+          <li key={item.source}>
+            <span className="kz-proof__citation-source">{item.source}</span>
+            <span className="kz-proof__citation-quote">{item.quote}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="kz-proof__method">{CORPORATE_PROOF.methodology}</p>
     </div>
   )
 }

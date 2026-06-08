@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import {
+  CorporateProofEvidence,
   CorporateRoiControls,
   CorporateRoiProvider,
   CorporateRoiResults,
@@ -15,16 +16,15 @@ import { MarketingKawasakiHtml } from '@/components/sections/marketing/marketing
 import { MarketingKawasakiProgress } from '@/components/sections/marketing/marketing-kawasaki-progress'
 import { MarketingSlideBackground } from '@/components/sections/marketing/marketing-slide-background'
 import {
-  CORPORATE_BUYER,
-  CORPORATE_CLOSING,
-  CORPORATE_EVIDENCE,
+  CORPORATE_BRAND,
+  CORPORATE_CLOSE,
+  CORPORATE_FOOTER,
   CORPORATE_HERO,
-  CORPORATE_PROBLEM,
-  CORPORATE_PROBLEM_PILLARS,
+  CORPORATE_MECHANISM,
+  CORPORATE_NAV,
   CORPORATE_PRODUCT,
-  CORPORATE_ROI,
+  CORPORATE_PROOF,
   CORPORATE_SECTION_IDS,
-  CORPORATE_STATS,
 } from '@/lib/pitch/corporate-landing-content'
 
 function SnapSection({
@@ -49,7 +49,7 @@ function SnapSection({
 export function MarketingLanding() {
   return (
     <MarketingFontScope className="marketing-v2-root--corporate">
-      <MarketingKawasakiNav />
+      <MarketingKawasakiNav config={CORPORATE_NAV} brand={CORPORATE_BRAND} />
       <MarketingKawasakiProgress sectionIds={CORPORATE_SECTION_IDS} />
 
       <SnapSection id={CORPORATE_HERO.id} slideNum={CORPORATE_HERO.slideNum} className="kz-s--has-media kz-s--under-nav">
@@ -60,26 +60,23 @@ export function MarketingLanding() {
             <MarketingKawasakiHtml html={CORPORATE_HERO.headlineHtml} />
           </h1>
           <p className="kz-sup">{CORPORATE_HERO.support}</p>
-          <div className="kz-cta-stack kz-cta-stack--row">
-            <Link href={CORPORATE_HERO.ctas.primary.href} className="kz-btn-p">
-              {CORPORATE_HERO.ctas.primary.label}
-            </Link>
-            <Link href={CORPORATE_HERO.ctas.secondary.href} className="kz-btn-s">
-              {CORPORATE_HERO.ctas.secondary.label}
+          <div className="kz-cta-stack">
+            <Link href={CORPORATE_HERO.cta.href} className="kz-btn-p">
+              {CORPORATE_HERO.cta.label}
             </Link>
           </div>
         </div>
       </SnapSection>
 
-      <SnapSection id={CORPORATE_STATS.id} slideNum={CORPORATE_STATS.slideNum} className="kz-s--dark">
+      <SnapSection id={CORPORATE_MECHANISM.id} slideNum={CORPORATE_MECHANISM.slideNum} className="kz-s--dark">
         <div className="kz-s__content kz-s__content--wide">
-          <p className="kz-ey">{CORPORATE_STATS.eyebrow}</p>
-          <h2 id={`${CORPORATE_STATS.id}-heading`} className="kz-h1">
-            <MarketingKawasakiHtml html={CORPORATE_STATS.headlineHtml} />
+          <p className="kz-ey">{CORPORATE_MECHANISM.eyebrow}</p>
+          <h2 id={`${CORPORATE_MECHANISM.id}-heading`} className="kz-h1">
+            <MarketingKawasakiHtml html={CORPORATE_MECHANISM.headlineHtml} />
           </h2>
-          <p className="kz-sup">{CORPORATE_STATS.support}</p>
+          <p className="kz-sup">{CORPORATE_MECHANISM.support}</p>
           <div className="kz-stat-band">
-            {CORPORATE_STATS.stats.map((stat) => (
+            {CORPORATE_MECHANISM.stats.map((stat) => (
               <div key={stat.label} className="kz-stat-band__item">
                 <p className="kz-stat-band__value kz-tabular">{stat.value}</p>
                 <p className="kz-stat-band__label">{stat.label}</p>
@@ -88,30 +85,6 @@ export function MarketingLanding() {
           </div>
         </div>
       </SnapSection>
-
-      <SnapSection id={CORPORATE_PROBLEM.id} slideNum={CORPORATE_PROBLEM.slideNum}>
-        <div className="kz-s__content">
-          <p className="kz-ey">{CORPORATE_PROBLEM.eyebrow}</p>
-          <h2 id={`${CORPORATE_PROBLEM.id}-heading`} className="kz-h1">
-            <MarketingKawasakiHtml html={CORPORATE_PROBLEM.headlineHtml} />
-          </h2>
-          <p className="kz-sup">{CORPORATE_PROBLEM.support}</p>
-        </div>
-      </SnapSection>
-
-      {CORPORATE_PROBLEM_PILLARS.map((pillar) => (
-        <SnapSection key={pillar.id} id={pillar.id} slideNum={pillar.slideNum} className="kz-s--dark">
-          <div className="kz-s__content">
-            <p className="kz-ey">{pillar.eyebrow}</p>
-            <h2 id={`${pillar.id}-heading`} className="kz-h1">
-              <MarketingKawasakiHtml html={pillar.headlineHtml} />
-            </h2>
-            <p className="kz-sup">{pillar.support}</p>
-            <p className="kz-pillar-metric kz-tabular">{pillar.metric}</p>
-            <p className="kz-pillar-metric-note">{pillar.metricNote}</p>
-          </div>
-        </SnapSection>
-      ))}
 
       <SnapSection id={CORPORATE_PRODUCT.id} slideNum={CORPORATE_PRODUCT.slideNum} className="kz-s--dark">
         <div className="kz-s__content kz-s__content--wide">
@@ -132,17 +105,34 @@ export function MarketingLanding() {
         </div>
       </SnapSection>
 
-      <SnapSection id={CORPORATE_BUYER.id} slideNum={CORPORATE_BUYER.slideNum}>
+      <CorporateRoiProvider>
+        <SnapSection id={CORPORATE_PROOF.id} slideNum={CORPORATE_PROOF.slideNum} className="kz-s--dark kz-s--proof">
+          <div className="kz-s__content kz-s__content--wide">
+            <p className="kz-ey">{CORPORATE_PROOF.eyebrow}</p>
+            <h2 id={`${CORPORATE_PROOF.id}-heading`} className="kz-h1 kz-h1--panel">
+              <MarketingKawasakiHtml html={CORPORATE_PROOF.headlineHtml} />
+            </h2>
+            <p className="kz-sup kz-sup--tight">{CORPORATE_PROOF.support}</p>
+            <div className="kz-proof__workspace">
+              <CorporateRoiControls />
+              <CorporateRoiResults />
+            </div>
+            <CorporateProofEvidence />
+          </div>
+        </SnapSection>
+      </CorporateRoiProvider>
+
+      <SnapSection id={CORPORATE_CLOSE.id} slideNum={CORPORATE_CLOSE.slideNum} className="kz-s--bronze">
         <div className="kz-s__content kz-s__content--wide">
-          <p className="kz-ey">{CORPORATE_BUYER.eyebrow}</p>
-          <h2 id={`${CORPORATE_BUYER.id}-heading`} className="kz-h1">
-            <MarketingKawasakiHtml html={CORPORATE_BUYER.headlineHtml} />
+          <p className="kz-ey">{CORPORATE_CLOSE.eyebrow}</p>
+          <h2 id={`${CORPORATE_CLOSE.id}-heading`} className="kz-h1">
+            <MarketingKawasakiHtml html={CORPORATE_CLOSE.headlineHtml} />
           </h2>
-          <p className="kz-sup">{CORPORATE_BUYER.support}</p>
-          <ol className="kz-sector-list kz-sector-list--compact">
-            {CORPORATE_BUYER.sectors.map((sector) => (
-              <li key={sector.num} className="kz-sector-list__item">
-                <span className="kz-sector-list__num">{sector.num}</span>
+          <p className="kz-sup">{CORPORATE_CLOSE.support}</p>
+          <ol className="kz-sector-list kz-sector-list--compact kz-sector-list--close">
+            {CORPORATE_CLOSE.sectors.map((sector, index) => (
+              <li key={sector.title} className="kz-sector-list__item">
+                <span className="kz-sector-list__num">{String(index + 1).padStart(2, '0')}</span>
                 <div>
                   <h3 className="kz-sector-list__title">{sector.title}</h3>
                   <p className="kz-sector-list__body">{sector.body}</p>
@@ -150,76 +140,21 @@ export function MarketingLanding() {
               </li>
             ))}
           </ol>
-          <Link href={CORPORATE_BUYER.cta.href} className="kz-cta-btn kz-slide-link">
-            {CORPORATE_BUYER.cta.label}
-          </Link>
-        </div>
-      </SnapSection>
-
-      <CorporateRoiProvider>
-        <SnapSection id={CORPORATE_ROI.intro.id} slideNum={CORPORATE_ROI.intro.slideNum}>
-          <div className="kz-s__content">
-            <p className="kz-ey">{CORPORATE_ROI.intro.eyebrow}</p>
-            <h2 id={`${CORPORATE_ROI.intro.id}-heading`} className="kz-h1">
-              <MarketingKawasakiHtml html={CORPORATE_ROI.intro.headlineHtml} />
-            </h2>
-            <p className="kz-sup">{CORPORATE_ROI.intro.support}</p>
-            <CorporateRoiControls />
-          </div>
-        </SnapSection>
-
-        <SnapSection id="roi-result" slideNum="10" className="kz-s--dark kz-s--roi-result">
-          <div className="kz-s__content">
-            <p className="kz-ey">Your estimate</p>
-            <CorporateRoiResults />
-          </div>
-        </SnapSection>
-      </CorporateRoiProvider>
-
-      <SnapSection id={CORPORATE_EVIDENCE.id} slideNum={CORPORATE_EVIDENCE.slideNum} className="kz-s--dark">
-        <div className="kz-s__content kz-s__content--wide">
-          <p className="kz-ey">{CORPORATE_EVIDENCE.eyebrow}</p>
-          <h2 id={`${CORPORATE_EVIDENCE.id}-heading`} className="kz-h1">
-            <MarketingKawasakiHtml html={CORPORATE_EVIDENCE.headlineHtml} />
-          </h2>
-          <ul className="kz-evidence-list">
-            {CORPORATE_EVIDENCE.citations.map((item) => (
-              <li key={item.source}>
-                <p className="kz-evidence-list__source">{item.source}</p>
-                <p className="kz-evidence-list__quote">{item.quote}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </SnapSection>
-
-      <SnapSection id={CORPORATE_CLOSING.id} slideNum={CORPORATE_CLOSING.slideNum} className="kz-s--bronze">
-        <div className="kz-s__content kz-s__content--wide">
-          <p className="kz-ey">{CORPORATE_CLOSING.eyebrow}</p>
-          <h2 id={`${CORPORATE_CLOSING.id}-heading`} className="kz-h1">
-            <MarketingKawasakiHtml html={CORPORATE_CLOSING.headlineHtml} />
-          </h2>
-          <p className="kz-sup">{CORPORATE_CLOSING.support}</p>
           <dl className="kz-programme kz-programme--compact">
-            {CORPORATE_CLOSING.programme.map((row) => (
+            {CORPORATE_CLOSE.programme.map((row) => (
               <div key={row.label} className="kz-programme__row">
                 <dt>{row.label}</dt>
                 <dd>{row.value}</dd>
               </div>
             ))}
           </dl>
-          <div className="kz-cta-stack kz-cta-stack--row">
-            <Link href={CORPORATE_CLOSING.ctas.primary.href} className="kz-btn-p">
-              {CORPORATE_CLOSING.ctas.primary.label}
-            </Link>
-            <Link href={CORPORATE_CLOSING.ctas.secondary.href} className="kz-btn-s">
-              {CORPORATE_CLOSING.ctas.secondary.label}
-            </Link>
-          </div>
+          <Link href={CORPORATE_CLOSE.cta.href} className="kz-btn-p kz-close-cta">
+            {CORPORATE_CLOSE.cta.label}
+          </Link>
         </div>
       </SnapSection>
 
-      <MarketingKawasakiFooter />
+      <MarketingKawasakiFooter config={CORPORATE_FOOTER} brand={CORPORATE_BRAND} />
     </MarketingFontScope>
   )
 }

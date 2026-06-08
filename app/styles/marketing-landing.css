@@ -142,6 +142,13 @@ html.marketing-v2-active .dios-app-shell {
   text-decoration: none;
 }
 
+.marketing-v2-root .kz-nav-logo.exiq-wordmark {
+  font-family: var(--mkt-sans);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  text-transform: none;
+}
+
 .marketing-v2-root .kz-nav-links {
   display: flex;
   gap: 1.75rem;
@@ -742,6 +749,54 @@ html.marketing-v2-active .dios-app-shell {
   max-width: 16ch;
 }
 
+.marketing-v2-root.marketing-v2-root--corporate .kz-f-descriptor {
+  font-family: var(--mkt-sans);
+  font-size: var(--mkt-type-card-body);
+  letter-spacing: 0;
+  line-height: 1.5;
+  max-width: 36ch;
+  text-transform: none;
+}
+
+.marketing-v2-root .kz-f-glyph.exiq-wordmark {
+  color: var(--mkt-bronze, #b8872e);
+  font-family: var(--mkt-sans);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.marketing-v2-root .kz-f-ecosystem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  width: 100%;
+}
+
+.marketing-v2-root .kz-f-ecosystem li {
+  display: grid;
+  gap: 0.125rem;
+}
+
+.marketing-v2-root .kz-f-ecosystem__name {
+  color: var(--mkt-text);
+  font-family: var(--mkt-sans);
+  font-size: var(--mkt-type-card-body);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.marketing-v2-root .kz-f-ecosystem__role {
+  color: var(--mkt-faint);
+  font-family: var(--mkt-mono);
+  font-size: var(--mkt-type-label);
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
 .marketing-v2-root .kz-footer__nav {
   flex: 1 1 16rem;
 }
@@ -1034,6 +1089,139 @@ html.marketing-v2-active .dios-app-shell {
   padding: clamp(1.25rem, 3vw, 2rem);
 }
 
+.marketing-v2-root .kz-roi__peak {
+  border-bottom: 1px solid rgb(255 255 255 / 0.12);
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.marketing-v2-root .kz-roi__peak-ey {
+  color: rgb(255 255 255 / 0.55);
+  font-family: var(--mkt-mono);
+  font-size: var(--mkt-type-label);
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.marketing-v2-root .kz-roi__peak-title {
+  color: var(--mkt-bronze, #b8872e);
+  font-family: var(--mkt-serif);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0.5rem 0 0;
+}
+
+.marketing-v2-root .kz-roi__peak-headline {
+  font-family: var(--mkt-sans);
+  font-size: var(--mkt-type-card-head);
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 0.625rem 0 0;
+  max-width: 36ch;
+}
+
+.marketing-v2-root .kz-roi__peak-support {
+  color: rgb(255 255 255 / 0.72);
+  font-size: var(--mkt-type-card-body);
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+  max-width: 42ch;
+}
+
+.marketing-v2-root .kz-roi__peak-stat {
+  color: rgb(255 255 255 / 0.82);
+  font-size: var(--mkt-type-card-body);
+  line-height: 1.45;
+  margin: 0.875rem 0 0;
+}
+
+.marketing-v2-root .kz-roi__peak-stat strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+.marketing-v2-root .kz-roi__cost {
+  margin-bottom: 0.25rem;
+}
+
+.marketing-v2-root .kz-sup--tight {
+  margin-bottom: 0.75rem;
+}
+
+.marketing-v2-root .kz-proof__workspace {
+  display: grid;
+  gap: 0.875rem;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  margin-top: 0.75rem;
+  width: 100%;
+}
+
+.marketing-v2-root .kz-proof__evidence {
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+  margin-top: 0.875rem;
+  padding-top: 0.75rem;
+}
+
+.marketing-v2-root .kz-proof__citations {
+  display: grid;
+  gap: 0.375rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.marketing-v2-root .kz-proof__citations li {
+  display: grid;
+  gap: 0.25rem 0.75rem;
+  grid-template-columns: minmax(6.5rem, 8.5rem) minmax(0, 1fr);
+}
+
+.marketing-v2-root .kz-proof__citation-source {
+  color: rgb(255 255 255 / 0.55);
+  font-family: var(--mkt-mono);
+  font-size: var(--mkt-type-label);
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.marketing-v2-root .kz-proof__citation-quote {
+  color: rgb(255 255 255 / 0.78);
+  font-size: var(--mkt-type-caption);
+  line-height: 1.45;
+}
+
+.marketing-v2-root .kz-proof__method {
+  color: rgb(255 255 255 / 0.4);
+  font-size: 0.625rem;
+  line-height: 1.45;
+  margin: 0.5rem 0 0;
+}
+
+.marketing-v2-root .kz-close-cta {
+  align-self: flex-start;
+  margin-top: 1.25rem;
+}
+
+.marketing-v2-root .kz-s--proof .kz-roi__peak-headline,
+.marketing-v2-root .kz-s--proof .kz-roi__peak-support {
+  display: none;
+}
+
+.marketing-v2-root .kz-s--proof .kz-roi__peak {
+  border-bottom: none;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0;
+}
+
+.marketing-v2-root .kz-s--proof .kz-roi__peak-stat {
+  font-size: var(--mkt-type-caption);
+  margin-top: 0.5rem;
+}
+
 .marketing-v2-root .kz-roi__results-ey {
   color: rgb(255 255 255 / 0.55);
   font-family: var(--mkt-mono);
@@ -1249,6 +1437,16 @@ html.marketing-v2-active .dios-app-shell {
   color: var(--mkt-bronze);
   font-size: 1.125rem;
   margin: 0 0 0.5rem;
+}
+
+.marketing-v2-root .kz-step-strip__item:last-child .kz-step-strip__symbol,
+.marketing-v2-root .kz-step-strip__item:last-child .kz-step-strip__title {
+  color: var(--mkt-bronze, #b8872e);
+  font-family: var(--mkt-sans);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
 }
 
 .marketing-v2-root .kz-step-strip__title {
@@ -1541,6 +1739,58 @@ html.marketing-v2-active .dios-app-shell {
 
   .marketing-v2-root.marketing-v2-root--corporate .kz-roi__recovery-value {
     font-size: 0.9375rem;
+  }
+
+  .marketing-v2-root .kz-roi__peak-title {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  .marketing-v2-root .kz-roi__peak-headline {
+    font-size: 0.9375rem;
+  }
+
+  .marketing-v2-root .kz-roi__peak-support,
+  .marketing-v2-root .kz-roi__peak-stat {
+    font-size: 0.8125rem;
+  }
+
+  .marketing-v2-root .kz-roi__results-total {
+    font-size: clamp(2rem, 10vw, 2.75rem);
+  }
+
+  .marketing-v2-root .kz-proof__workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .marketing-v2-root .kz-s--proof .kz-h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .marketing-v2-root .kz-s--proof .kz-sup--tight {
+    margin-bottom: 0.5rem;
+  }
+
+  .marketing-v2-root .kz-proof__citations li {
+    grid-template-columns: 1fr;
+  }
+
+  .marketing-v2-root .kz-sector-list--close .kz-sector-list__body {
+    display: none;
+  }
+
+  .marketing-v2-root .kz-programme--compact {
+    margin-top: 1rem;
+  }
+
+  .marketing-v2-root .kz-programme--compact .kz-programme__row {
+    gap: 0.25rem;
+    grid-template-columns: 6.5rem 1fr;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .marketing-v2-root .kz-close-cta {
+    margin-top: 1rem;
+    width: 100%;
   }
 
   .marketing-v2-root .kz-cta-stack--row {

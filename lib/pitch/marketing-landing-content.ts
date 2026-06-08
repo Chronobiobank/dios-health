@@ -6,6 +6,32 @@ export const MARKETING_LEARN_ROUTE = MARKETING_ROUTES.learn
 
 export { CORPORATE_LANDING_META as MARKETING_LANDING_META } from '@/lib/pitch/corporate-landing-content'
 
+export type KawasakiNavConfig = {
+  links: readonly { label: string; href: string }[]
+  cta: { label: string; href: string }
+}
+
+export type KawasakiEcosystemItem = {
+  name: string
+  role: string
+}
+
+export type KawasakiBrandConfig = {
+  name: string
+  logoMark: string
+  logoGlyph: string
+  logoClassName?: string
+}
+
+export type KawasakiFooterConfig = {
+  brandName: string
+  descriptor: string
+  tagline: string
+  copyrightYear: number
+  links: readonly { label: string; href: string }[]
+  ecosystem?: readonly KawasakiEcosystemItem[]
+}
+
 export const KAWASAKI_NAV = {
   links: [
     { label: 'Product', href: '#product' },
@@ -17,6 +43,7 @@ export const KAWASAKI_NAV = {
 } as const
 
 export const KAWASAKI_FOOTER = {
+  brandName: 'DIOS',
   descriptor: 'Biological performance intelligence',
   tagline: 'Make Time Count',
   copyrightYear: 2026,

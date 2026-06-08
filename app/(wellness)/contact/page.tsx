@@ -37,13 +37,13 @@ const INTENT_COPY: Record<
     ],
   },
   'cpo-briefing': {
-    title: 'CPO briefing — corporate performance programme',
-    lead: 'Tell us your leadership cohort size and sector. We will outline a 90-day pilot, ROI methodology, and wearable onboarding.',
+    title: 'CPO briefing — exIQ on EIOS',
+    lead: 'Tell us your leadership cohort size and sector. We will outline EIOS, exIQ, Q cue delivery, and Peak Window ROI.',
     bullets: [
-      'Connect existing Oura, Whoop, or Apple Watch — no new hardware required',
-      'Proxy DLMO and biological prime-time windows for each executive',
+      'Connect existing Oura, Whoop, or Apple Watch — feeds EIOS, no new hardware',
+      'exIQ maps Peak Window on EIOS; Q delivers light, timing, and movement cues',
       'Pilot design: 10–50 leaders, completion metrics, productivity recovery model',
-      'Founding partner pricing and programme format for UK deployment',
+      'Founding partner pricing — Executive Intelligence OS, not another wellness perk',
     ],
   },
 }
@@ -60,7 +60,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
     : intent === 'ics-pilot'
       ? 'ICS%20pilot%20enquiry'
       : intent === 'cpo-briefing'
-        ? 'CPO%20briefing%20request'
+        ? 'exIQ%20CPO%20briefing'
         : 'DIOS%20enquiry'
 
   return (

@@ -26,10 +26,10 @@ async function auditHome(page, label) {
   )
 
   const eyebrow = (await page.locator('.kz-s .kz-ey').first().textContent())?.trim() ?? ''
-  record(`${label}: hero eyebrow`, /problem/i.test(eyebrow), eyebrow)
+  record(`${label}: hero eyebrow`, /exiq/i.test(eyebrow), eyebrow)
 
   const sectionCount = await page.locator('.kz-s').count()
-  record(`${label}: snap sections`, sectionCount >= 10, `${sectionCount} sections`)
+  record(`${label}: snap sections`, sectionCount === 5, `${sectionCount} sections`)
 
   const snapType = await page.evaluate(() => ({
     htmlClass: document.documentElement.classList.contains('marketing-v2-active'),
@@ -75,20 +75,16 @@ async function auditHome(page, label) {
   })
   record(`${label}: #product in viewport`, productSnap.ok, `top=${productSnap.top}px`)
 
-  // ROI intro + slider
-  await page.evaluate(() => document.getElementById('roi')?.scrollIntoView())
+  // Proof section — calculator + results on one slide
+  await page.evaluate(() => document.getElementById('proof')?.scrollIntoView())
   await page.waitForTimeout(700)
   const roiSlider = page.locator('.kz-roi__range').first()
   const hasRoiControls = (await roiSlider.count()) > 0
-  record(`${label}: ROI controls visible`, hasRoiControls)
+  record(`${label}: proof calculator visible`, hasRoiControls)
   if (hasRoiControls) {
     await roiSlider.fill('100')
     await page.waitForTimeout(200)
   }
-
-  // ROI results slide — scroll to #roi-result
-  await page.evaluate(() => document.getElementById('roi-result')?.scrollIntoView())
-  await page.waitForTimeout(700)
   const roiTotal = await page.locator('.kz-roi__results-total').textContent()
   const roiVisible = await page.evaluate(() => {
     const el = document.querySelector('.kz-roi__results-total')

@@ -1,21 +1,62 @@
+import { BRAND_ECOSYSTEM, EXIQ_BRAND, EXIQ_ELEVATOR, Q_NARRATIVE } from '@/lib/brand/exiq-brand'
 import type { KawasakiSlideMedia } from '@/lib/pitch/marketing-landing-content'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 
-export const CORPORATE_LANDING_META = {
-  title: 'DIOS · Biological performance intelligence',
-  description:
-    'Measure your leadership team’s biological clock. Align calendars to circadian prime time.',
-  openGraphTitle: 'DIOS · Biological performance intelligence',
-  openGraphDescription:
-    'Corporate circadian intelligence for executives who already wear Oura, Whoop, or Apple Watch.',
+export const CORPORATE_BRAND = {
+  ...EXIQ_BRAND,
+  logoClassName: 'exiq-wordmark',
 } as const
 
+export const CORPORATE_NAV = {
+  links: [
+    { label: 'Mechanism', href: '#mechanism' },
+    { label: 'Product', href: '#product' },
+    { label: 'Proof', href: '#proof' },
+  ],
+  cta: { label: 'Request briefing', href: MARKETING_ROUTES.cpoBriefing },
+} as const
+
+export const CORPORATE_FOOTER = {
+  brandName: EXIQ_BRAND.name,
+  descriptor: EXIQ_ELEVATOR,
+  tagline: EXIQ_BRAND.category,
+  copyrightYear: 2026,
+  ecosystem: BRAND_ECOSYSTEM,
+  links: [
+    { label: 'Mechanism', href: '#mechanism' },
+    { label: 'Product', href: '#product' },
+    { label: 'Proof', href: '#proof' },
+    { label: 'Request briefing', href: MARKETING_ROUTES.cpoBriefing },
+    { label: 'Contact', href: '/contact' },
+    { label: 'Privacy', href: '/privacy' },
+    { label: 'Terms', href: '/terms' },
+  ],
+} as const
+
+export const CORPORATE_PEAK_WINDOW = {
+  eyebrow: 'The deliverable',
+  title: 'Peak Window',
+  headline: 'Two hours of prime cognition — protected, every day',
+  support: 'EIOS maps biology through exIQ. Q cues light, timing, and movement to hold it.',
+  hoursPerLeader: 2,
+} as const
+
+export const CORPORATE_LANDING_META = {
+  title: 'exIQ on EIOS · Executive Intelligence',
+  description:
+    'Q delivers your daily cues. exIQ on EIOS maps Peak Window — EI alongside AI.',
+  openGraphTitle: 'exIQ · Q delivers your cues',
+  openGraphDescription:
+    'Corporate Executive Intelligence on EIOS. Light, timing, movement — zeitgeber cues for leadership teams.',
+} as const
+
+/** 01 — Hero: one problem, one claim, one action */
 export const CORPORATE_HERO = {
   id: 'hero',
   slideNum: '01',
-  eyebrow: 'The problem',
+  eyebrow: 'exIQ on EIOS',
   headlineHtml: 'Your talent loses <em>44 days</em> a year',
-  support: 'Not burnout. Circadian misalignment — biology vs calendar.',
+  support: 'Circadian misalignment — not burnout. Biology vs calendar.',
   media: {
     image: '/standardised.jpg',
     video: '/first-light.mp4',
@@ -23,182 +64,113 @@ export const CORPORATE_HERO = {
     priority: true,
     extendsUnderNav: true,
   } satisfies KawasakiSlideMedia,
-  ctas: {
-    primary: { label: 'Request briefing', href: MARKETING_ROUTES.cpoBriefing },
-    secondary: { label: 'See product', href: '#product' },
-  },
+  cta: { label: 'Request briefing', href: MARKETING_ROUTES.cpoBriefing },
 } as const
 
-export const CORPORATE_STATS = {
-  id: 'stats',
+/** 02 — Mechanism: why the problem exists and why nothing else solves it */
+export const CORPORATE_MECHANISM = {
+  id: 'mechanism',
   slideNum: '02',
-  eyebrow: 'The cost',
-  headlineHtml: 'Presenteeism is <em>£103bn</em> a year',
-  support: 'UK employers pay for days worked — not days performed.',
+  eyebrow: 'The mechanism',
+  headlineHtml: 'Six hours between <em>peak minds</em>',
+  support:
+    'DLMO sets when cognition peaks. Wellness counts steps. No platform maps biological prime time.',
   stats: [
-    { value: '£103bn', label: 'UK presenteeism / yr' },
-    { value: '44', label: 'Days lost / employee' },
-    { value: '77%', label: 'Drift in high-performers' },
-    { value: '0', label: 'Platforms measuring clock time' },
+    { value: '£103bn', label: 'UK presenteeism' },
+    { value: '44', label: 'Days lost / leader' },
+    { value: '6h', label: 'DLMO spread' },
+    { value: '0', label: 'EI OS platforms' },
   ],
 } as const
 
-export const CORPORATE_PROBLEM = {
-  id: 'problem',
-  slideNum: '03',
-  eyebrow: 'The problem',
-  headlineHtml: 'Wellness everywhere. <em>Clock nowhere.</em>',
-  support: 'Bupa checks vitals. Vitality counts steps. Nobody maps biological prime time.',
-} as const
-
-export const CORPORATE_PROBLEM_PILLARS = [
-  {
-    id: 'mechanism',
-    slideNum: '04',
-    eyebrow: '01 — Mechanism',
-    headlineHtml: 'Every leader has a <em>prime time</em>',
-    support:
-      'DLMO — when the brain shifts toward sleep — varies by six hours. One executive peaks at 9am. Another is in biological night.',
-    metric: 'DLMO',
-    metricNote: 'Up to 6h variance',
-  },
-  {
-    id: 'cost',
-    slideNum: '05',
-    eyebrow: '02 — Cost',
-    headlineHtml: 'Presenteeism <em>dwarfs</em> absenteeism',
-    support:
-      'They show up. They sit in meetings. Misalignment suppresses decision quality — silently, every day.',
-    metric: '£21bn',
-    metricNote: 'UK absenteeism alone',
-  },
-  {
-    id: 'gap',
-    slideNum: '06',
-    eyebrow: '03 — Gap',
-    headlineHtml: 'No wellness product <em>closes this</em>',
-    support:
-      'Apps track steps and mood. None tell you when to schedule the board meeting — or when not to fly.',
-    metric: '—',
-    metricNote: 'Category whitespace',
-  },
-] as const
-
+/** 03 — Product: EIOS platform · exIQ product · Q AI */
 export const CORPORATE_PRODUCT = {
   id: 'product',
-  slideNum: '07',
-  eyebrow: 'What DIOS does',
-  headlineHtml: 'Measure the clock. <em>Recover the days.</em>',
-  support: 'Plug into wearables they already own. Output a daily performance protocol.',
+  slideNum: '03',
+  eyebrow: 'Meet Q',
+  headlineHtml: 'Q delivers your <em>daily cues</em>',
+  support: Q_NARRATIVE,
   steps: [
     {
       symbol: '◌',
       title: 'Connect',
-      body: 'Oura, Whoop, Apple Watch — OAuth in minutes. Three nights. No new device.',
+      body: 'Oura, Whoop, Apple Watch feed EIOS — three nights.',
     },
     {
       symbol: '◎',
       title: 'Calculate',
-      body: 'Proxy DLMO: peak cognition, worst call window, travel recovery curve.',
+      body: 'exIQ on EIOS maps DLMO and Peak Window.',
     },
     {
-      symbol: '◉',
-      title: 'Deliver',
-      body: 'Meeting timing, light cues, travel recovery, medicine windows where needed.',
+      symbol: 'Q',
+      title: 'Q',
+      body: 'Light. Timing. Movement. Zeitgeber cues — daily.',
     },
   ],
 } as const
 
-export const CORPORATE_BUYER = {
-  id: 'buyers',
-  slideNum: '08',
-  eyebrow: 'Who it is for',
-  headlineHtml: 'Leaders you <em>cannot afford</em> to lose',
-  support: 'One CPO decision. Senior leadership covered. Not a perk — infrastructure.',
-  sectors: [
-    { num: '01', title: 'Law & professional services', body: 'Time zones erode billable cognition.' },
-    { num: '02', title: 'Banking & private equity', body: 'One bad 3am decision costs millions.' },
-    { num: '03', title: 'FTSE leadership teams', body: 'Boards built on diaries, not biology.' },
-    { num: '04', title: 'Management consultancies', body: 'Weekly travel accumulates jet lag.' },
-    { num: '05', title: 'Founders & scale-up CEOs', body: 'Irreplaceable by Monday morning.' },
+/** 04 — Proof: numbers, calculator, evidence */
+export const CORPORATE_PROOF = {
+  id: 'proof',
+  slideNum: '04',
+  eyebrow: 'The proof',
+  headlineHtml: 'Name the cost. <em>Protect Peak Window.</em>',
+  support: 'Adjust your cohort. IPPR-backed model. Conservative 15% recovery.',
+  methodology: 'IPPR 2024 · Cheng et al. · Projections only.',
+  citations: [
+    {
+      source: 'IPPR 2024',
+      quote: '£103bn presenteeism · 44 days lost per employee.',
+    },
+    {
+      source: 'J. Occup. Health 2022',
+      quote: 'Circadian misalignment linked to presenteeism — 8,155 workers.',
+    },
+    {
+      source: 'EHJ · Hermida',
+      quote: 'Personalised biological timing changed prospective outcomes.',
+    },
   ],
-  cta: { label: 'Request briefing', href: MARKETING_ROUTES.cpoBriefing },
-} as const
-
-export const CORPORATE_ROI = {
-  intro: {
-    id: 'roi',
-    slideNum: '09',
-    eyebrow: 'ROI calculator',
-    headlineHtml: 'What misalignment <em>costs you</em>',
-    support: 'Adjust your cohort. Conservative 15% recovery.',
-  },
-  methodology: 'IPPR 2024 · Cheng et al. · NHS reference costs. Projections only.',
   defaults: {
     executives: 50,
     salaryK: 220,
     travelDaysPerMonth: 4,
     sector: 'corporate' as const,
   },
-  ctas: {
-    primary: { label: 'Request business case', href: MARKETING_ROUTES.cpoBriefing },
-  },
+  cta: { label: 'Request business case', href: MARKETING_ROUTES.cpoBriefing },
 } as const
 
-export const CORPORATE_EVIDENCE = {
-  id: 'evidence',
-  slideNum: '11',
-  eyebrow: 'Evidence',
-  headlineHtml: 'Peer-reviewed. <em>Not wellness.</em>',
-  citations: [
-    {
-      source: 'IPPR · 2024',
-      quote: '£103bn presenteeism. 44 productivity days lost per employee per year.',
-      href: 'https://www.ippr.org/',
-    },
-    {
-      source: 'J. Occupational Health · 2022',
-      quote: 'Circadian misalignment directly linked to presenteeism across 8,155 office workers.',
-      href: MARKETING_ROUTES.evidence,
-    },
-    {
-      source: 'EHJ · Hermida',
-      quote: 'Personalised biological timing changed cardiovascular outcomes in prospective trials.',
-      href: MARKETING_ROUTES.evidence,
-    },
-  ],
+/** @deprecated Use CORPORATE_PROOF — kept for calculator imports */
+export const CORPORATE_ROI = {
+  defaults: CORPORATE_PROOF.defaults,
+  ctas: { primary: CORPORATE_PROOF.cta },
 } as const
 
-export const CORPORATE_CLOSING = {
-  id: 'closing',
-  slideNum: '12',
+/** 05 — Close: who, cost, one CTA */
+export const CORPORATE_CLOSE = {
+  id: 'close',
+  slideNum: '05',
   eyebrow: 'Founding partners',
-  headlineHtml: 'They have Bupa. <em>You have DIOS.</em>',
-  support: 'Pilot 10–50 executives. Signal in 90 days. Five UK founding slots.',
-  programme: [
-    { label: 'Size', value: '10–500 executives' },
-    { label: 'Entry', value: 'Existing wearable' },
-    { label: 'Onboarding', value: '3 nights · no clinic' },
-    { label: 'Pricing', value: 'From £500/head/yr' },
-    { label: 'Class', value: 'Clinical decision support' },
-    { label: 'Pilot', value: '5 partners · UK' },
+  headlineHtml: 'They have AI. <em>You have Q.</em>',
+  support: 'EIOS for the platform. exIQ for corporate. Q for the cues — 10–50 leaders, signal in 90 days.',
+  sectors: [
+    { title: 'Banking & PE', body: 'One bad 3am call costs millions.' },
+    { title: 'Law & professional services', body: 'Time zones erode billable cognition.' },
+    { title: 'FTSE leadership', body: 'Boards built on diaries, not biology.' },
   ],
-  ctas: {
-    primary: { label: 'Request briefing', href: MARKETING_ROUTES.cpoBriefing },
-    secondary: { label: 'Clinicians', href: MARKETING_ROUTES.clinicians },
-    tertiary: { label: 'Evidence', href: MARKETING_ROUTES.evidence },
-  },
+  programme: [
+    { label: 'Cohort', value: '10–500 leaders' },
+    { label: 'Entry', value: 'Wearable · 3 nights' },
+    { label: 'Pricing', value: 'From £500/head/yr' },
+    { label: 'Pilot', value: '5 UK founding slots' },
+  ],
+  cta: { label: 'Request briefing', href: MARKETING_ROUTES.cpoBriefing },
 } as const
 
 export const CORPORATE_SECTION_IDS = [
   CORPORATE_HERO.id,
-  CORPORATE_STATS.id,
-  CORPORATE_PROBLEM.id,
-  ...CORPORATE_PROBLEM_PILLARS.map((p) => p.id),
+  CORPORATE_MECHANISM.id,
   CORPORATE_PRODUCT.id,
-  CORPORATE_BUYER.id,
-  CORPORATE_ROI.intro.id,
-  'roi-result',
-  CORPORATE_EVIDENCE.id,
-  CORPORATE_CLOSING.id,
+  CORPORATE_PROOF.id,
+  CORPORATE_CLOSE.id,
 ] as const

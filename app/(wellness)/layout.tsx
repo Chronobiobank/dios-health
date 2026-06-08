@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 
+import { SiteChromeGate } from '@/components/sections/marketing/site-chrome-gate'
 import { Nav } from '@/components/sections/Nav'
 import { PitchFooter } from '@/components/sections/pitch/pitch-footer'
 import { ScrollToHash } from '@/components/sections/ScrollToHash'
@@ -15,10 +16,14 @@ export default function WellnessLayout({ children }: WellnessLayoutProps) {
   return (
     <>
       <ScrollToHash />
-      <Nav />
+      <SiteChromeGate>
+        <Nav />
+      </SiteChromeGate>
       <div className="dios-app-shell relative z-10 flex min-h-full flex-1 flex-col">
         <div className="flex min-h-0 flex-1 flex-col">{children}</div>
-        <PitchFooter />
+        <SiteChromeGate>
+          <PitchFooter />
+        </SiteChromeGate>
       </div>
     </>
   )
