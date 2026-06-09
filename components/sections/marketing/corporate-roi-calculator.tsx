@@ -71,7 +71,7 @@ export function CorporateRoiControls() {
     <div className="kz-roi__controls">
       <label className="kz-roi__field">
         <span className="kz-roi__label">
-          Executives — <strong>{inputs.executives}</strong>
+          Professionals — <strong>{inputs.executives}</strong>
         </span>
         <input
           type="range"
@@ -147,7 +147,7 @@ export function CorporateRoiResults() {
         <p className="kz-roi__peak-headline">{CORPORATE_PEAK_WINDOW.headline}</p>
         <p className="kz-roi__peak-support">{CORPORATE_PEAK_WINDOW.support}</p>
         <p className="kz-roi__peak-stat kz-tabular" aria-live="polite">
-          {CORPORATE_PEAK_WINDOW.hoursPerLeader}h × {inputs.executives} leaders ={' '}
+          {CORPORATE_PEAK_WINDOW.hoursPerLeader}h × {inputs.executives} professionals ={' '}
           <strong>{protectedHours.toLocaleString('en-GB')} protected hours / day</strong>
         </p>
       </div>

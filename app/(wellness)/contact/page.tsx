@@ -37,13 +37,13 @@ const INTENT_COPY: Record<
     ],
   },
   'cpo-briefing': {
-    title: 'CPO briefing — EIOS Executive Intelligence',
-    lead: 'Tell us your leadership cohort size and sector. We will outline EIOS, Q cue delivery, and Peak Window ROI.',
+    title: 'CPO briefing — CLOQ Health / BodycloQ score',
+    lead: 'Tell us your cohort size and sector. We will outline the BodycloQ score, Q cue delivery, and Peak Window ROI.',
     bullets: [
-      'Connect existing Oura, Whoop, or Apple Watch — feeds EIOS, no new hardware',
-      'EIOS maps Peak Window; Q delivers light, timing, and movement cues daily',
-      'Pilot design: 10–50 leaders, completion metrics, productivity recovery model',
-      'Founding partner pricing — Executive Intelligence OS, not another wellness perk',
+      'Connect existing Oura, Whoop, or Apple Watch — feeds BodycloQ, no new hardware',
+      'BodycloQ scores circadian alignment; Q delivers light, timing, and movement cues daily',
+      'Pilot design: 10–50 professionals, CloQ score movement, productivity recovery model',
+      'Founding partner pricing — circadian score for peak cognition, not another wellness perk',
     ],
   },
 }
@@ -60,7 +60,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
     : intent === 'ics-pilot'
       ? 'ICS%20pilot%20enquiry'
       : intent === 'cpo-briefing'
-        ? 'EIOS%20CPO%20briefing'
+        ? 'BodycloQ%20CPO%20briefing'
         : 'DIOS%20enquiry'
 
   return (

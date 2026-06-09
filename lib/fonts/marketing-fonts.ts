@@ -1,4 +1,4 @@
-import { DM_Mono, DM_Sans, Lora } from 'next/font/google'
+import { DM_Mono, DM_Sans, Lora, Unbounded } from 'next/font/google'
 
 /** Lora — marketing headings and display text only */
 export const lora = Lora({
@@ -25,4 +25,12 @@ export const marketingDmMono = DM_Mono({
   weight: ['300', '400'],
 })
 
-export const marketingFontVariableClasses = `${lora.variable} ${dmSans.variable} ${marketingDmMono.variable}`
+/** Unbounded Light — BodycloQ logo and tag only */
+export const unbounded = Unbounded({
+  subsets: ['latin'],
+  variable: '--font-unbounded',
+  display: 'swap',
+  weight: ['300'],
+})
+
+export const marketingFontVariableClasses = `${lora.variable} ${dmSans.variable} ${marketingDmMono.variable} ${unbounded.variable}`

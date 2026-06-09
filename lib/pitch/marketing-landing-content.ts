@@ -23,12 +23,21 @@ export type KawasakiBrandConfig = {
   logoClassName?: string
 }
 
+export type KawasakiFooterLinkColumn = {
+  title: string
+  links: readonly { label: string; href: string }[]
+}
+
 export type KawasakiFooterConfig = {
+  /** Title-case legal entity — footer bar right */
   brandName: string
+  /** Unbounded caps mark — footer bar left after © year */
+  copyrightMark?: string
   descriptor: string
   tagline: string
   copyrightYear: number
-  links: readonly { label: string; href: string }[]
+  links?: readonly { label: string; href: string }[]
+  linkColumns?: readonly KawasakiFooterLinkColumn[]
   ecosystem?: readonly KawasakiEcosystemItem[]
 }
 

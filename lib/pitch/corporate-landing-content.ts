@@ -1,11 +1,9 @@
-import { BRAND_ECOSYSTEM, EIOS_BRAND, EIOS_ELEVATOR, Q_NARRATIVE } from '@/lib/brand/eios-brand'
+import { Q_NARRATIVE } from '@/lib/brand/bodycloq-brand'
+import { CLOQ_HEALTH_BRAND, CLOQ_TAGLINE } from '@/lib/brand/cloq-health'
 import type { KawasakiSlideMedia } from '@/lib/pitch/marketing-landing-content'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 
-export const CORPORATE_BRAND = {
-  ...EIOS_BRAND,
-  logoClassName: 'dios-wordmark',
-} as const
+export const CORPORATE_BRAND = CLOQ_HEALTH_BRAND
 
 export const CORPORATE_NAV = {
   links: [
@@ -17,19 +15,40 @@ export const CORPORATE_NAV = {
 } as const
 
 export const CORPORATE_FOOTER = {
-  brandName: EIOS_BRAND.name,
-  descriptor: EIOS_ELEVATOR,
-  tagline: EIOS_BRAND.category,
+  brandName: CLOQ_HEALTH_BRAND.legalName,
+  copyrightMark: CLOQ_HEALTH_BRAND.copyrightMark,
+  descriptor: CLOQ_TAGLINE,
+  tagline: '',
   copyrightYear: 2026,
-  ecosystem: BRAND_ECOSYSTEM,
-  links: [
-    { label: 'Mechanism', href: '#mechanism' },
-    { label: 'Product', href: '#product' },
-    { label: 'Proof', href: '#proof' },
-    { label: 'Request briefing', href: MARKETING_ROUTES.cpoBriefing },
-    { label: 'Contact', href: '/contact' },
-    { label: 'Privacy', href: '/privacy' },
-    { label: 'Terms', href: '/terms' },
+  linkColumns: [
+    {
+      title: 'Product',
+      links: [
+        { label: 'How it works', href: MARKETING_ROUTES.howItWorks },
+        { label: 'DINA', href: MARKETING_ROUTES.dina },
+        { label: 'Get started', href: '/signup' },
+        { label: 'For clinicians', href: MARKETING_ROUTES.clinicians },
+        { label: 'Sign in', href: '/signin' },
+        { label: 'Contact', href: '/contact' },
+      ],
+    },
+    {
+      title: 'Science',
+      links: [
+        { label: 'Clinical evidence', href: MARKETING_ROUTES.evidence },
+        { label: 'Science', href: MARKETING_ROUTES.science },
+        { label: 'Chronobiobank', href: MARKETING_ROUTES.chronobiobank },
+        { label: 'Circadian model', href: `${MARKETING_ROUTES.evidence}#circadian-model` },
+        { label: 'TipTraQ', href: '/tiptraq' },
+      ],
+    },
+    {
+      title: 'Legal',
+      links: [
+        { label: 'Privacy', href: '/privacy' },
+        { label: 'Terms', href: '/terms' },
+      ],
+    },
   ],
 } as const
 
@@ -37,24 +56,24 @@ export const CORPORATE_PEAK_WINDOW = {
   eyebrow: 'The deliverable',
   title: 'Peak Window',
   headline: 'Two hours of prime cognition — protected, every day',
-  support: 'EIOS maps it from wearables. Q cues light, timing, and movement to hold it.',
+  support: 'Your BodycloQ score maps it from wearables. Q cues light, timing, and movement to hold it.',
   hoursPerLeader: 2,
 } as const
 
 export const CORPORATE_LANDING_META = {
-  title: 'EIOS · Executive Intelligence',
+  title: 'CLOQ Health · BodycloQ circadian score',
   description:
-    'Q delivers your daily cues. EIOS maps Peak Window from wearables — EI alongside AI.',
-  openGraphTitle: 'EIOS · Q delivers your cues',
+    'BodycloQ is your circadian score for peak cognition. CLOQ Health — wearables in, score out, Q delivers the cues.',
+  openGraphTitle: 'BodycloQ · Your circadian score',
   openGraphDescription:
-    'Executive Intelligence OS for CPOs. Light, timing, movement — zeitgeber cues for leadership teams.',
+    'CLOQ Health. One circadian score linked to peak cognition — TipTraQ calibrates, Q protects the window.',
 } as const
 
 /** 01 — Hero: one problem, one claim, one action */
 export const CORPORATE_HERO = {
   id: 'hero',
   slideNum: '01',
-  eyebrow: 'Executive Intelligence',
+  eyebrow: 'Circadian score for peak cognition',
   headlineHtml: 'Your talent loses <em>44 days</em> a year',
   support: 'Circadian misalignment — not burnout. Biology vs calendar.',
   media: {
@@ -74,16 +93,16 @@ export const CORPORATE_MECHANISM = {
   eyebrow: 'The mechanism',
   headlineHtml: 'Six hours between <em>peak minds</em>',
   support:
-    'DLMO sets when cognition peaks. Wellness counts steps. No platform maps biological prime time.',
+    'DLMO sets when cognition peaks. Wellness counts steps. No platform scores biological prime time.',
   stats: [
     { value: '£103bn', label: 'UK presenteeism' },
-    { value: '44', label: 'Days lost / leader' },
+    { value: '44', label: 'Days lost / professional' },
     { value: '6h', label: 'DLMO spread' },
-    { value: '0', label: 'EI OS platforms' },
+    { value: '0', label: 'Circadian score platforms' },
   ],
 } as const
 
-/** 03 — Product: EIOS platform + Q cue intelligence */
+/** 03 — Product: BodycloQ score + Q cue intelligence */
 export const CORPORATE_PRODUCT = {
   id: 'product',
   slideNum: '03',
@@ -94,12 +113,12 @@ export const CORPORATE_PRODUCT = {
     {
       symbol: '◌',
       title: 'Connect',
-      body: 'Oura, Whoop, Apple Watch feed EIOS — three nights.',
+      body: 'Oura, Whoop, Apple Watch feed BodycloQ — three nights.',
     },
     {
       symbol: '◎',
-      title: 'Calculate',
-      body: 'EIOS maps DLMO and Peak Window per leader.',
+      title: 'Score',
+      body: 'BodycloQ maps DLMO, CloQ score, and Peak Window per person.',
     },
     {
       symbol: 'Q',
@@ -152,14 +171,14 @@ export const CORPORATE_CLOSE = {
   slideNum: '05',
   eyebrow: 'Founding partners',
   headlineHtml: 'They have AI. <em>You have Q.</em>',
-  support: 'EIOS for the platform. Q for the cues — 10–50 leaders, signal in 90 days.',
+  support: 'BodycloQ for the score. Q for the cues — 10–50 professionals, signal in 90 days.',
   sectors: [
     { title: 'Banking & PE', body: 'One bad 3am call costs millions.' },
     { title: 'Law & professional services', body: 'Time zones erode billable cognition.' },
-    { title: 'FTSE leadership', body: 'Boards built on diaries, not biology.' },
+    { title: 'Surgery & high-cognition roles', body: 'Diaries built on shifts, not biology.' },
   ],
   programme: [
-    { label: 'Cohort', value: '10–500 leaders' },
+    { label: 'Cohort', value: '10–500 professionals' },
     { label: 'Entry', value: 'Wearable · 3 nights' },
     { label: 'Pricing', value: 'From £500/head/yr' },
     { label: 'Pilot', value: '5 UK founding slots' },

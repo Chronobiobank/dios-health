@@ -4,9 +4,9 @@ import { inter, siteFontVariableClasses } from '@/lib/fonts/site-fonts'
 
 import './globals.css'
 
-const siteUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'https://dios-health.vercel.app'
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://cloq.health')
 
 export const metadata: Metadata = {
   title: 'Dose Intelligence · DIOS',

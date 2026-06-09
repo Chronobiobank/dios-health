@@ -142,6 +142,145 @@ html.marketing-v2-active .dios-app-shell {
   text-decoration: none;
 }
 
+/* ── CLOQ — Unbounded Light, all caps (logo + tag) ── */
+.marketing-v2-root .cloq-wordmark {
+  font-family: var(--font-unbounded), var(--mkt-sans);
+  font-weight: 300;
+  font-size: inherit;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.marketing-v2-root .cloq-wordmark__q {
+  display: inline-block;
+  position: relative;
+  width: 0.88em;
+  height: 0.88em;
+  margin-left: 0.04em;
+  font-size: 1em;
+  vertical-align: -0.08em;
+}
+
+.marketing-v2-root .cloq-wordmark__q::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 0.09em solid currentColor;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.marketing-v2-root .cloq-wordmark__q::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.24em;
+  height: 0.24em;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+
+.marketing-v2-root .cloq-tag {
+  display: block;
+  font-family: var(--font-unbounded), var(--mkt-sans);
+  font-weight: 300;
+  font-size: clamp(0.6875rem, 0.2vw + 0.64rem, 0.8125rem);
+  letter-spacing: 0.22em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  color: var(--mkt-text);
+  margin: 0;
+}
+
+.marketing-v2-root .cloq-mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(2.75rem, 5vw + 1.5rem, 3.5rem);
+  height: clamp(2.75rem, 5vw + 1.5rem, 3.5rem);
+  flex-shrink: 0;
+}
+
+.marketing-v2-root .cloq-mark__ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--mkt-text);
+  border-radius: 50%;
+}
+
+.marketing-v2-root .cloq-mark__dot {
+  width: 22%;
+  height: 22%;
+  border-radius: 50%;
+  background: var(--mkt-text);
+}
+
+.marketing-v2-root .kz-f-tag {
+  margin-top: 0.125rem;
+}
+
+.marketing-v2-root .kz-f-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(7.5rem, 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+  width: 100%;
+}
+
+.marketing-v2-root .kz-f-column__title {
+  font-family: var(--font-unbounded), var(--mkt-sans);
+  font-weight: 300;
+  font-size: var(--mkt-type-label);
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--mkt-faint);
+  margin: 0 0 0.875rem;
+}
+
+.marketing-v2-root .kz-f-column__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.marketing-v2-root .kz-f-column__links a {
+  font-size: var(--mkt-type-nav);
+  line-height: var(--text-nav-leading, 1.45);
+  color: var(--mkt-muted);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  transition: color 0.15s;
+}
+
+.marketing-v2-root .kz-f-column__links a:hover {
+  color: var(--mkt-text);
+}
+
+.marketing-v2-root .kz-footer__copy-mark {
+  font-size: inherit;
+  letter-spacing: 0.16em;
+}
+
+.marketing-v2-root .kz-footer__legal {
+  font-family: var(--mkt-sans);
+  font-size: var(--mkt-type-caption);
+  font-weight: 400;
+  line-height: var(--text-caption-leading, 1.5);
+  color: var(--mkt-faint);
+  margin: 0;
+  text-align: right;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 .marketing-v2-root .kz-nav-links {
   display: flex;
   gap: 1.75rem;
@@ -753,6 +892,16 @@ html.marketing-v2-active .dios-app-shell {
   letter-spacing: 0;
   line-height: 1.5;
   max-width: 36ch;
+  text-transform: none;
+}
+
+.marketing-v2-root.marketing-v2-root--corporate .kz-footer__copy {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  font-family: var(--mkt-sans);
+  font-weight: 400;
+  letter-spacing: 0;
   text-transform: none;
 }
 
@@ -1818,8 +1967,20 @@ html.marketing-v2-active .dios-app-shell {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .marketing-v2-root .kz-f-columns {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
   .marketing-v2-root .kz-footer__bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
     width: 100%;
+  }
+
+  .marketing-v2-root .kz-footer__legal {
+    text-align: left;
   }
 
   .marketing-v2-root .kz-btn-p,
