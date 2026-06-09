@@ -106,7 +106,11 @@ export function MarketingLanding() {
       </SnapSection>
 
       <CorporateRoiProvider>
-        <SnapSection id={CORPORATE_PROOF.id} slideNum={CORPORATE_PROOF.slideNum} className="kz-s--dark kz-s--proof">
+        <SnapSection
+          id={CORPORATE_PROOF.id}
+          slideNum={CORPORATE_PROOF.slideNum}
+          className="kz-s--dark kz-s--proof kz-s--flow"
+        >
           <div className="kz-s__content kz-s__content--wide">
             <p className="kz-ey">{CORPORATE_PROOF.eyebrow}</p>
             <h2 id={`${CORPORATE_PROOF.id}-heading`} className="kz-h1 kz-h1--panel">
@@ -122,7 +126,7 @@ export function MarketingLanding() {
         </SnapSection>
       </CorporateRoiProvider>
 
-      <SnapSection id={CORPORATE_CLOSE.id} slideNum={CORPORATE_CLOSE.slideNum} className="kz-s--bronze">
+      <SnapSection id={CORPORATE_CLOSE.id} slideNum={CORPORATE_CLOSE.slideNum} className="kz-s--bronze kz-s--flow">
         <div className="kz-s__content kz-s__content--wide">
           <p className="kz-ey">{CORPORATE_CLOSE.eyebrow}</p>
           <h2 id={`${CORPORATE_CLOSE.id}-heading`} className="kz-h1">

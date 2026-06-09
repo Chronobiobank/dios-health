@@ -24,7 +24,7 @@ html.marketing-v2-active body {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   scroll-behavior: smooth;
   scroll-padding-top: 0;
   background: var(--cloq-white, #ffffff);
@@ -391,10 +391,10 @@ html.marketing-v2-active .dios-app-shell {
 .marketing-v2-root .kz-s__scrim--light {
   background: linear-gradient(
     105deg,
-    rgb(var(--cloq-white-rgb) / 0.96) 0%,
-    rgb(var(--cloq-white-rgb) / 0.82) 38%,
-    rgb(var(--cloq-white-rgb) / 0.45) 68%,
-    rgb(var(--cloq-white-rgb) / 0.2) 100%
+    rgb(var(--cloq-white-rgb) / 0.98) 0%,
+    rgb(var(--cloq-white-rgb) / 0.94) 36%,
+    rgb(var(--cloq-white-rgb) / 0.78) 58%,
+    rgb(var(--cloq-white-rgb) / 0.42) 100%
   );
 }
 
@@ -440,8 +440,28 @@ html.marketing-v2-active .dios-app-shell {
 
 .marketing-v2-root .kz-s__content {
   max-width: 42rem;
+  max-height: var(--kz-s-content-max);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   position: relative;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
   z-index: 2;
+}
+
+.marketing-v2-root .kz-s--flow {
+  block-size: auto;
+  max-height: none;
+  min-height: 100dvh;
+  overflow: visible;
+  justify-content: flex-start;
+  scroll-snap-stop: normal;
+}
+
+.marketing-v2-root .kz-s--flow .kz-s__content {
+  max-height: none;
+  overflow: visible;
 }
 
 .marketing-v2-root .kz-s--has-media .kz-num {
@@ -554,6 +574,61 @@ html.marketing-v2-active .dios-app-shell {
 
 .marketing-v2-root .kz-s--bronze .kz-sup {
   color: rgb(var(--cloq-silver-rgb) / 0.95);
+}
+
+/* Dark / bronze — force light ink (palette defaults are for white sections) */
+.marketing-v2-root .kz-s--dark .kz-roi__label,
+.marketing-v2-root .kz-s--bronze .kz-roi__label {
+  color: rgb(255 255 255 / 0.82);
+}
+
+.marketing-v2-root .kz-s--dark .kz-roi__label strong,
+.marketing-v2-root .kz-s--bronze .kz-roi__label strong {
+  color: var(--cloq-white);
+}
+
+.marketing-v2-root .kz-s--dark .kz-roi__range-hints,
+.marketing-v2-root .kz-s--bronze .kz-roi__range-hints {
+  color: rgb(255 255 255 / 0.55);
+}
+
+.marketing-v2-root .kz-s--dark .kz-roi__controls,
+.marketing-v2-root .kz-s--bronze .kz-roi__controls {
+  background: rgb(0 0 0 / 0.22);
+  border-color: rgb(255 255 255 / 0.16);
+}
+
+.marketing-v2-root .kz-s--dark .kz-roi__sector,
+.marketing-v2-root .kz-s--bronze .kz-roi__sector {
+  color: rgb(255 255 255 / 0.88);
+}
+
+.marketing-v2-root .kz-s--bronze .kz-sector-list__item {
+  border-top-color: rgb(255 255 255 / 0.14);
+}
+
+.marketing-v2-root .kz-s--bronze .kz-sector-list__title {
+  color: var(--cloq-white);
+}
+
+.marketing-v2-root .kz-s--bronze .kz-sector-list__body {
+  color: rgb(var(--cloq-silver-rgb) / 0.92);
+}
+
+.marketing-v2-root .kz-s--bronze .kz-programme {
+  border-color: rgb(255 255 255 / 0.14);
+}
+
+.marketing-v2-root .kz-s--bronze .kz-programme__row {
+  border-top-color: rgb(255 255 255 / 0.1);
+}
+
+.marketing-v2-root .kz-s--bronze .kz-programme__row dt {
+  color: rgb(255 255 255 / 0.58);
+}
+
+.marketing-v2-root .kz-s--bronze .kz-programme__row dd {
+  color: var(--cloq-white);
 }
 
 /* ── SLIDE NUMBER ── */
@@ -811,7 +886,8 @@ html.marketing-v2-active .dios-app-shell {
 
 /* ── FOOTER ── */
 .marketing-v2-root .kz-footer {
-  scroll-snap-align: none;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   min-height: auto;
   height: auto;
   padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 3rem)
@@ -1032,7 +1108,7 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-s--dark .kz-stat-band__label {
-  color: rgb(255 255 255 / 0.55);
+  color: rgb(255 255 255 / 0.72);
 }
 
 .marketing-v2-root .kz-g3-item--dark {
@@ -1704,12 +1780,15 @@ html.marketing-v2-active .dios-app-shell {
     --mkt-type-body: 0.9375rem;
     --mkt-type-nav: 0.9375rem;
     --mkt-type-button: 0.9375rem;
+    --mkt-type-label: 0.6875rem;
+    --mkt-type-caption: 0.75rem;
     --mkt-type-card-head: 1.0625rem;
     --mkt-type-card-body: 0.875rem;
     --mkt-body-leading: 1.45;
     --mkt-touch-min: 2.75rem;
     --kz-nav-pad-y: 0.5rem;
     --kz-nav-pad-x: 1rem;
+    --kz-s-content-max: calc(100dvh - var(--kz-nav-height) - 2.25rem - 2.75rem);
   }
 
   .marketing-v2-root .kz-ey {
@@ -1724,6 +1803,12 @@ html.marketing-v2-active .dios-app-shell {
     block-size: 100svh;
     block-size: 100dvh;
     padding: calc(var(--kz-nav-height) + 0.75rem) 1rem 1.5rem;
+  }
+
+  .marketing-v2-root .kz-s--flow {
+    block-size: auto;
+    min-height: 100dvh;
+    padding-bottom: clamp(2rem, 6vh, 3rem);
   }
 
   .marketing-v2-root .kz-nav-links {
