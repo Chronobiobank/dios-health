@@ -106,7 +106,7 @@ html.marketing-v2-active .dios-app-shell {
   text-decoration: none;
 }
 
-/* ── CLOQ — Unbounded Light, all caps (logo + tag) ── */
+/* ── CLOQ — Unbounded Light; O = ʘ (U+0298) in logo mark only ── */
 .marketing-v2-root .cloq-wordmark {
   font-family: var(--font-unbounded), var(--mkt-sans);
   font-weight: 300;
@@ -115,37 +115,13 @@ html.marketing-v2-active .dios-app-shell {
   line-height: 1;
   text-transform: uppercase;
   color: inherit;
+  white-space: nowrap;
 }
 
-.marketing-v2-root .cloq-wordmark__q {
-  display: inline-block;
-  position: relative;
-  width: 0.88em;
-  height: 0.88em;
-  margin-left: 0.04em;
-  font-size: 1em;
-  vertical-align: -0.08em;
-}
-
-.marketing-v2-root .cloq-wordmark__q::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 0.09em solid currentColor;
-  border-radius: 50%;
-  box-sizing: border-box;
-}
-
-.marketing-v2-root .cloq-wordmark__q::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0.24em;
-  height: 0.24em;
-  border-radius: 50%;
-  background: currentColor;
-  transform: translate(-50%, -50%);
+.marketing-v2-root .cloq-wordmark__o {
+  font-family: 'Montserrat', var(--font-unbounded), var(--mkt-sans);
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .marketing-v2-root .cloq-tag {
@@ -161,27 +137,15 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .cloq-mark {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: clamp(2.75rem, 5vw + 1.5rem, 3.5rem);
-  height: clamp(2.75rem, 5vw + 1.5rem, 3.5rem);
   flex-shrink: 0;
-}
-
-.marketing-v2-root .cloq-mark__ring {
-  position: absolute;
-  inset: 0;
-  border: 2px solid var(--mkt-text);
-  border-radius: 50%;
-}
-
-.marketing-v2-root .cloq-mark__dot {
-  width: 22%;
-  height: 22%;
-  border-radius: 50%;
-  background: var(--mkt-text);
+  font-family: 'Montserrat', var(--font-unbounded), var(--mkt-sans);
+  font-size: clamp(2.75rem, 5vw + 1.5rem, 3.5rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--mkt-text);
 }
 
 .marketing-v2-root .kz-f-tag {

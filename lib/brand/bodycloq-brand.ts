@@ -11,6 +11,7 @@ import {
   CLOQ_HEALTH,
   CLOQ_HEALTH_LEGAL_NAME,
   CLOQ_HEALTH_SITE_URL,
+  CLOQ_LOGO_GLYPH,
 } from '@/lib/brand/cloq-health'
 
 export { BODYCLOQ_METRIC_URL, CLOQ_HEALTH, CLOQ_HEALTH_LEGAL_NAME, CLOQ_HEALTH_SITE_URL, BRAND_ECOSYSTEM } from '@/lib/brand/cloq-health'
@@ -24,9 +25,10 @@ export const BODYCLOQ_SITE_URL = CLOQ_HEALTH_SITE_URL
 export const BODYCLOQ_METRIC_NAME = 'BodycloQ' as const
 
 /** Display wordmark — rendered via BodycloQWordmark (Unbounded Light, all caps). */
-export const BODYCLOQ_LOGO_MARK = 'BODYCLOQ' as const
+/** Visual wordmark — O replaced with ʘ (U+0298) */
+export const BODYCLOQ_LOGO_MARK = `BODYCL${CLOQ_LOGO_GLYPH}Q`
 
-export const BODYCLOQ_LOGO_GLYPH = 'Q' as const
+export const BODYCLOQ_LOGO_GLYPH = CLOQ_LOGO_GLYPH
 
 export const BODYCLOQ_CATEGORY = CLOQ_CATEGORY
 

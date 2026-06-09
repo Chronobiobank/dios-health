@@ -24,15 +24,19 @@ export const CLOQ_DESCRIPTOR = 'CLOQ Health — Circadian Nootropics' as const
 
 export const CLOQ_TAGLINE = 'MAKE TIME COUNT' as const
 
-export const CLOQ_LOGO_MARK = 'CLOQ' as const
+/** Single ʘ glyph (U+0298) — compact brand moments */
+export const CLOQ_LOGO_GLYPH = String.fromCodePoint(0x0298)
 
-/** Footer copyright glyph — Unbounded caps */
-export const CLOQ_COPYRIGHT_MARK = 'CLOQ' as const
+/** Visual wordmark — O replaced with ʘ (U+0298 latin letter bilabial click) */
+export const CLOQ_LOGO_MARK = `CL${CLOQ_LOGO_GLYPH}Q`
+
+/** Footer copyright — same mark as nav */
+export const CLOQ_COPYRIGHT_MARK = CLOQ_LOGO_MARK
 
 export const CLOQ_HEALTH_BRAND = {
   name: 'CLOQ Health',
   logoMark: CLOQ_LOGO_MARK,
-  logoGlyph: 'Q',
+  logoGlyph: CLOQ_LOGO_GLYPH,
   logoClassName: 'cloq-wordmark',
   category: CLOQ_CATEGORY,
   descriptor: CLOQ_DESCRIPTOR,
