@@ -1,4 +1,6 @@
+import { isCalibrationComplete, nightsRemainingInBlock } from '@/lib/bodycloq'
 import { PATIENT_ROUTES } from '@/lib/auth/routes'
+import { TIPTRAQ_CALIBRATION } from '@/lib/product/intelligence-cadence'
 import type { FirstLightDailyStatus } from '@/lib/product/first-light-daily-status'
 import { FIRST_LIGHT_PROTOCOL } from '@/lib/product/dose-intelligence-model'
 import { getActiveTier } from '@/lib/types/diagnostic-tiers'
@@ -220,19 +222,26 @@ export function buildPatientNextSteps(input: BuildPatientNextStepsInput): Patien
     })
   }
 
-  if (!input.hasTipTraq) {
+  if (!isCalibrationComplete(input.tipTraqNightsCount)) {
+    const remaining = nightsRemainingInBlock(input.tipTraqNightsCount)
     steps.push({
       id: 'tiptraq-upload',
       priority: 'this-week',
-      title: 'Complete TipTraQ three-night block',
-      detail: 'At least five nights give sleep grading, breathing flags, and clock drift for your D dose and curfew timing.',
+      title:
+        input.tipTraqNightsCount > 0
+          ? `Finish TipTraQ calibration (${input.tipTraqNightsCount} of ${TIPTRAQ_CALIBRATION.nightsPerBlock})`
+          : 'Complete TipTraQ three-night block',
+      detail:
+        input.tipTraqNightsCount > 0
+          ? `Upload ${remaining} more night${remaining === 1 ? '' : 's'} to unlock your BodycloQ score and personalised dose windows.`
+          : `Three nights every six months calibrate BodycloQ and set dose windows until the next block.`,
       href: PATIENT_ROUTES.streams,
     })
   }
 
   if (input.tierUpgradeContext) {
     const currentTier = getActiveTier({
-      has_tipraq: input.hasTipTraq,
+      has_tipraq: isCalibrationComplete(input.tipTraqNightsCount),
       has_blood_panel: Boolean(input.bloodPanel.collectedAt),
     })
     const upgrade = scheduleDinaTierUpgradePrompt({

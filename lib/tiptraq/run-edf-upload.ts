@@ -21,6 +21,13 @@ export type TipTraqUploadResult = {
     chronotype: string
     dose_windows: Record<string, string>
   }
+  bodycloq?: {
+    score: number | null
+    gate: 'pending' | 'partial' | 'complete'
+    displayLabel: string
+    isProvisional: boolean
+    nightsRemaining: number
+  }
 }
 
 const EXTRACT_MAX_JSON_BYTES = 4096

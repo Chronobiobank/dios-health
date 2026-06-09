@@ -5,6 +5,7 @@ import {
 } from '@/lib/mlux'
 import { buildPatientCalibration } from '@/lib/patient-dashboard/calibration'
 import { buildChronosomaticSpectrumNodes } from '@/lib/patient-dashboard/spectrum-nodes'
+import { computeBodycloQScore } from '@/lib/bodycloq'
 import {
   chronopenicBurdenScoreFromGapYears,
   photonicAgeFromCalendarAndGap,
@@ -249,6 +250,12 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
   const chronopenicBurdenYears = Math.round(metrics.darkYearsHours * 2.3 * 10) / 10
   const photonicAge = photonicAgeFromCalendarAndGap(calendarAge, chronopenicBurdenYears)
   const chronopenicBurdenScore = chronopenicBurdenScoreFromGapYears(chronopenicBurdenYears)
+  const bodycloq = computeBodycloQScore({
+    nightsCount: metrics.nightsLoaded,
+    mluxConfidence: metrics.lightAlignment,
+    confidenceBandMinutes: metrics.clockDriftMinutes,
+    clockDriftMinutes: metrics.clockDriftMinutes,
+  })
   const recoveryYears = Math.round(chronopenicBurdenYears * 0.75 * 10) / 10
 
   const bloodPanel: BloodPanel = {
@@ -457,6 +464,11 @@ export function buildSeanJamesSnapshot(): PatientSnapshot {
     photonicAge,
     chronopenicBurdenYears,
     chronopenicBurdenScore,
+    bodycloqScore: bodycloq.score,
+    bodycloqGate: bodycloq.gate,
+    bodycloqScoreLabel: bodycloq.displayLabel,
+    bodycloqProvisional: bodycloq.isProvisional,
+    bodycloqNightsRemaining: bodycloq.nightsRemaining,
     burdenTrendDirection: 'stable' as const,
     recoveryYears,
     darkYearsHours: metrics.darkYearsHours,

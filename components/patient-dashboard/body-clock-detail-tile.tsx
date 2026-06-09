@@ -31,6 +31,9 @@ export function BodyClockDetailTile({
     photonicAge,
     chronopenicBurdenYears,
     chronopenicBurdenScore,
+    bodycloqScore,
+    bodycloqScoreLabel,
+    bodycloqProvisional,
     burdenTrendDirection,
     lightAlignment,
     clockDrift,
@@ -82,6 +85,9 @@ export function BodyClockDetailTile({
             photonicAge={photonicAge}
             calendarAge={calendarAge}
             chronopenicBurdenScore={chronopenicBurdenScore}
+            bodycloqScore={bodycloqScore}
+            bodycloqScoreLabel={bodycloqScoreLabel}
+            bodycloqProvisional={bodycloqProvisional}
             burdenTrendDirection={burdenTrendDirection}
             lightAlignment={lightAlignment}
             darkCycleNote={statNotes.clockDrift}

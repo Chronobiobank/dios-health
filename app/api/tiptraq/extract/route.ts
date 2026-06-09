@@ -246,7 +246,10 @@ export async function POST(request: NextRequest) {
       storagePath,
     })
 
-    const { error: syncError, rolling } = await syncMLuxProfileForPatient(supabase, user.id)
+    const { error: syncError, rolling, bodycloq } = await syncMLuxProfileForPatient(
+      supabase,
+      user.id
+    )
 
     if (syncError || !rolling) {
       console.error('[TipTraQ] DLMO profile sync failed after insert', {
@@ -300,6 +303,15 @@ export async function POST(request: NextRequest) {
           light_end: rolling.light_window_end,
         },
       },
+      bodycloq: bodycloq
+        ? {
+            score: bodycloq.score,
+            gate: bodycloq.gate,
+            displayLabel: bodycloq.displayLabel,
+            isProvisional: bodycloq.isProvisional,
+            nightsRemaining: bodycloq.nightsRemaining,
+          }
+        : undefined,
     })
   } catch (error) {
     console.error('TipTraQ EDF pipeline error:', error)

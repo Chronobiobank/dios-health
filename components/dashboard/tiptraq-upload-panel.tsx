@@ -3,6 +3,8 @@
 import { useCallback, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { BODYCLOQ_METRIC_NAME } from '@/lib/brand/bodycloq-brand'
+import { isCalibrationComplete, nightsRemainingInBlock } from '@/lib/bodycloq'
 import { runTipTraqEdfUpload, type TipTraqUploadResult } from '@/lib/tiptraq/run-edf-upload'
 
 export type { TipTraqUploadResult }
@@ -148,15 +150,29 @@ export function TipTraQUploadPanel() {
             </div>
             <div className="mt-2 font-mono text-[11px] text-black/45">
               ± {state.result.rolling.confidence_band_minutes} minutes
-              {state.result.rolling.nights_count < 3 && (
+              {!isCalibrationComplete(state.result.rolling.nights_count) && (
                 <span>
                   {' '}
-                  · Upload {3 - state.result.rolling.nights_count} more night
-                  {state.result.rolling.nights_count !== 1 ? 's' : ''} for clinical confidence
+                  · Upload {nightsRemainingInBlock(state.result.rolling.nights_count)} more night
+                  {nightsRemainingInBlock(state.result.rolling.nights_count) !== 1 ? 's' : ''} to
+                  calibrate {BODYCLOQ_METRIC_NAME}
                 </span>
               )}
             </div>
           </div>
+
+          {state.result.bodycloq?.score != null ? (
+            <div className="mt-5 rounded-xl border border-teal-100 bg-teal-50/60 px-4 py-3">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-black/70">{BODYCLOQ_METRIC_NAME} score</span>
+                <span className="font-mono font-medium text-black">
+                  {state.result.bodycloq.score}/100
+                  {state.result.bodycloq.isProvisional ? ' · provisional' : ''}
+                </span>
+              </div>
+              <p className="mt-1 text-xs text-black/50">{state.result.bodycloq.displayLabel}</p>
+            </div>
+          ) : null}
 
           <button
             type="button"

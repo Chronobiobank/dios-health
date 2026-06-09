@@ -1,3 +1,5 @@
+import { isCalibrationComplete } from '@/lib/bodycloq'
+import { TIPTRAQ_CALIBRATION } from '@/lib/product/intelligence-cadence'
 import type { FirstLightDailyStatus } from '@/lib/product/first-light-daily-status'
 import type {
   BloodPanel,
@@ -112,12 +114,12 @@ export function applyScriptFirstMeasureTiles(
     if (tile.id === 'tiptraq') {
       return {
         ...tile,
-        subtitle: ctx.hasTipTraq
-          ? nights >= 3
-            ? `Last ${nights >= 3 ? '3-night' : `${nights}-night`} block — sleep architecture set your dose windows for the next six months.`
-            : `${nights} of 3 nights in current block — finish the calibration read.`
-          : 'Schedule a TipTraQ three-night block — sets your clock until the next read.',
-        badge: ctx.hasTipTraq ? 'Clock calibration' : 'Schedule block',
+        subtitle: isCalibrationComplete(nights)
+          ? `Last ${TIPTRAQ_CALIBRATION.nightsPerBlock}-night block — BodycloQ calibrated; dose windows set for six months.`
+          : nights > 0
+            ? `${nights} of ${TIPTRAQ_CALIBRATION.nightsPerBlock} nights — finish calibration to unlock BodycloQ.`
+            : 'Schedule a TipTraQ three-night block — calibrates BodycloQ until the next read.',
+        badge: isCalibrationComplete(nights) ? 'BodycloQ calibrated' : nights > 0 ? 'Calibrating' : 'Schedule block',
         badgeTone: 'study' as const,
         panelActions: [
           {

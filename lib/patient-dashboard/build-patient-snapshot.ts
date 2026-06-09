@@ -1,3 +1,4 @@
+import { computeBodycloQScore } from '@/lib/bodycloq'
 import { COACH_DISPLAY_NAME } from '@/lib/coach/brand'
 import { buildInsightsData, type BloodPanelSnapshot, type NightFlagsRow } from '@/lib/dashboard/insights-data'
 import type { MLuxProfileRow } from '@/lib/dashboard/mlux-profile'
@@ -390,6 +391,12 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
   const bloodPanel = buildBloodPanel(input.latestBloodPanel)
 
   const sleepDelay = input.sleepOnsetDelayMinutes ?? (hasTipTraq ? 38 : 0)
+  const bodycloq = computeBodycloQScore({
+    nightsCount: input.tipTraqNightsCount,
+    mluxConfidence: profile?.confidence_score ?? null,
+    confidenceBandMinutes: profile?.confidence_band_minutes ?? null,
+    clockDriftMinutes: sleepDelay || clockDrift,
+  })
 
   const tiptraqSummary: TiptraqSummary = {
     sleepOnsetDelayMinutes: sleepDelay,
@@ -501,6 +508,11 @@ export function buildPatientSnapshot(input: BuildPatientSnapshotInput): PatientS
     photonicAge,
     chronopenicBurdenYears,
     chronopenicBurdenScore,
+    bodycloqScore: profile?.mlux_score ?? bodycloq.score,
+    bodycloqGate: bodycloq.gate,
+    bodycloqScoreLabel: bodycloq.displayLabel,
+    bodycloqProvisional: bodycloq.isProvisional,
+    bodycloqNightsRemaining: bodycloq.nightsRemaining,
     burdenTrendDirection: null,
     recoveryYears,
     darkYearsHours,

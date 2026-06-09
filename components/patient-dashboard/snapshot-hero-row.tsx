@@ -1,4 +1,5 @@
 import { formatAgeYears } from '@/components/patient-dashboard/snapshot-age-row'
+import { BODYCLOQ_METRIC_NAME } from '@/lib/brand/bodycloq-brand'
 import { AGE_LABELS } from '@/lib/product/dose-intelligence-model'
 import {
   burdenTrendLabel,
@@ -14,6 +15,9 @@ type SnapshotHeroRowProps = {
   photonicAge: number
   calendarAge: number
   chronopenicBurdenScore: number
+  bodycloqScore: number | null
+  bodycloqScoreLabel: string
+  bodycloqProvisional: boolean
   burdenTrendDirection: BurdenTrendDirection | null
   lightAlignment: number
   darkCycleNote: string
@@ -86,6 +90,9 @@ export function SnapshotHeroRow({
   photonicAge,
   calendarAge,
   chronopenicBurdenScore,
+  bodycloqScore,
+  bodycloqScoreLabel,
+  bodycloqProvisional,
   burdenTrendDirection,
   lightAlignment,
   darkCycleNote,
@@ -116,7 +123,18 @@ export function SnapshotHeroRow({
           ariaLabel={`${AGE_LABELS.chronopathic} ${photonicYears}, ${burdenSub}`}
         />
         <p className="snapshot-burden-score font-mono text-[10px] uppercase tracking-widest text-[var(--photic-muted)]">
-          Chronopenic Burden {chronopenicBurdenScore}/100 · {trendSub}
+          {bodycloqScore != null ? (
+            <>
+              {BODYCLOQ_METRIC_NAME} {bodycloqScore}/100
+              {bodycloqProvisional ? ` · ${bodycloqScoreLabel}` : ` · ${bodycloqScoreLabel.split(' · ').pop()}`}
+            </>
+          ) : (
+            <>
+              {BODYCLOQ_METRIC_NAME} — {bodycloqScoreLabel}
+            </>
+          )}
+          {' · '}
+          Burden {chronopenicBurdenScore}/100 · {trendSub}
         </p>
         <hr className="snapshot-age-center__rule" aria-hidden />
         <AgeStack

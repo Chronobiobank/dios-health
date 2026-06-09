@@ -1,5 +1,7 @@
 import { FITZPATRICK_TYPES } from '@/lib/auth/patient-signup-data'
 import type { PatientProfileRow } from '@/lib/auth/require-patient'
+import { isCalibrationComplete } from '@/lib/bodycloq'
+import { TIPTRAQ_CALIBRATION } from '@/lib/product/intelligence-cadence'
 
 const FITZPATRICK_ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'] as const
 
@@ -124,7 +126,9 @@ function formatTipTraqSource(dateIso: string | null, nightsCount: number): strin
   if (!dateIso) return 'TipTraQ block pending'
   const date = new Date(dateIso)
   if (Number.isNaN(date.getTime())) return 'TipTraQ block pending'
-  const blockLabel = nightsCount >= 3 ? '3-night block' : `${nightsCount}-night block`
+  const blockLabel = isCalibrationComplete(nightsCount)
+    ? `${TIPTRAQ_CALIBRATION.nightsPerBlock}-night block`
+    : `${nightsCount} of ${TIPTRAQ_CALIBRATION.nightsPerBlock} nights`
   return `TipTraQ ${blockLabel} · ${date.toLocaleDateString('en-NZ', { month: 'short', year: 'numeric' })}`
 }
 

@@ -1,3 +1,8 @@
+import {
+  buildBodycloQProfilePatch,
+  computeBodycloQScore,
+  type BodycloQScoreResult,
+} from '@/lib/bodycloq'
 import { calculateRollingMLux, type MLuxResult, type RollingMLux } from '@/lib/mlux'
 import { mapFetchError, mapProfileUpsertError } from '@/lib/tiptraq/extraction'
 import type { createClient } from '@/lib/supabase/server'
@@ -32,7 +37,7 @@ export function toRollingNightResults(nights: NightSummaryRow[]): MLuxResult[] {
 export async function syncMLuxProfileForPatient(
   supabase: SupabaseServerClient,
   patientId: string
-): Promise<{ error: string | null; rolling: RollingMLux | null }> {
+): Promise<{ error: string | null; rolling: RollingMLux | null; bodycloq?: BodycloQScoreResult }> {
   const { data: allNights, error: fetchError } = await supabase
     .from('tiptraq_nights')
     .select('mlux_phase_minutes, confidence_score, confidence_band_minutes')
@@ -60,6 +65,8 @@ export async function syncMLuxProfileForPatient(
         salmeterol_optimal_time: null,
         light_dose_window_start: null,
         light_dose_window_end: null,
+        mlux_score: null,
+        has_tipraq: false,
         last_updated: new Date().toISOString(),
       },
       { onConflict: 'patient_id' }
@@ -73,6 +80,14 @@ export async function syncMLuxProfileForPatient(
   }
 
   const rolling = calculateRollingMLux(toRollingNightResults(allNights))
+  const bodycloqPatch = buildBodycloQProfilePatch(
+    {
+      nightsCount: rolling.nights_count,
+      mluxConfidence: rolling.confidence_score,
+      confidenceBandMinutes: rolling.confidence_band_minutes,
+    },
+    false
+  )
 
   const { error: upsertError } = await supabase.from('mlux_profiles').upsert(
     {
@@ -90,6 +105,8 @@ export async function syncMLuxProfileForPatient(
       salmeterol_optimal_time: rolling.salmeterol_optimal,
       light_dose_window_start: rolling.light_window_start,
       light_dose_window_end: rolling.light_window_end,
+      mlux_score: bodycloqPatch.mlux_score,
+      has_tipraq: bodycloqPatch.has_tipraq,
       last_updated: new Date().toISOString(),
     },
     { onConflict: 'patient_id' }
@@ -99,7 +116,15 @@ export async function syncMLuxProfileForPatient(
     return { error: mapProfileUpsertError(upsertError.message), rolling: null }
   }
 
-  return { error: null, rolling }
+  return {
+    error: null,
+    rolling,
+    bodycloq: computeBodycloQScore({
+      nightsCount: rolling.nights_count,
+      mluxConfidence: rolling.confidence_score,
+      confidenceBandMinutes: rolling.confidence_band_minutes,
+    }),
+  }
 }
 
 export function mapTipTraqDeleteError(message: string): string {

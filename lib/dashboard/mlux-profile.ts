@@ -29,6 +29,7 @@ export type MLuxProfileRow = {
   diagnostic_tier?: 'L1' | 'L2' | 'L3' | null
   has_tipraq?: boolean | null
   has_blood_panel?: boolean | null
+  mlux_score?: number | null
   last_updated?: string | null
 }
 

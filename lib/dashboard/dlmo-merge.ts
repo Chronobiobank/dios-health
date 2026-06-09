@@ -1,3 +1,4 @@
+import { isCalibrationComplete } from '@/lib/bodycloq'
 import { normalizeMinutesFromMidnight } from '@/lib/mlux'
 import { mapProfileUpsertError } from '@/lib/tiptraq/extraction'
 import type { createClient } from '@/lib/supabase/server'
@@ -50,9 +51,11 @@ function resolveDominantLayer(
   bloodConfidence: number | null,
   bloodMinutes: number | null,
   smartphoneConfidence: number | null,
-  smartphoneMinutes: number | null
+  smartphoneMinutes: number | null,
+  tiptraqCalibrated: boolean
 ): DominantLayer {
   if (
+    tiptraqCalibrated &&
     layer3Confidence != null &&
     layer3Confidence >= TIPTRAQ_DOMINANCE_THRESHOLD &&
     layer3Minutes != null
@@ -164,7 +167,8 @@ export async function mergeDlmoLayers(
   let layersActive = 0
   if (smartphone) layersActive |= LAYER_BIT_SMARTPHONE
   if (blood) layersActive |= LAYER_BIT_BLOOD
-  if ((profile?.nights_count ?? 0) > 0) layersActive |= LAYER_BIT_TIPTRAQ
+  const tiptraqCalibrated = isCalibrationComplete(profile?.nights_count ?? 0)
+  if (tiptraqCalibrated) layersActive |= LAYER_BIT_TIPTRAQ
 
   const dominantLayer = resolveDominantLayer(
     layer3Confidence,
@@ -172,15 +176,20 @@ export async function mergeDlmoLayers(
     blood?.confidence_score ?? null,
     blood?.mlux_phase_minutes ?? null,
     smartphone?.confidence_score ?? null,
-    smartphone?.mlux_phase_minutes ?? null
+    smartphone?.mlux_phase_minutes ?? null,
+    tiptraqCalibrated
   )
 
   const canonical = canonicalFromLayer(dominantLayer, profile, blood, smartphone)
+
+  const diagnosticTier = tiptraqCalibrated ? 'L1' : blood ? 'L2' : 'L3'
 
   const mergePayload = {
     patient_id: patientId,
     dominant_layer: dominantLayer,
     layers_active: layersActive,
+    has_tipraq: tiptraqCalibrated,
+    diagnostic_tier: diagnosticTier,
     layer1_proxy_dlmo_minutes: smartphone?.mlux_phase_minutes ?? null,
     layer1_confidence_score: smartphone?.confidence_score ?? null,
     layer1_observation_id: smartphone?.id ?? null,

@@ -1,3 +1,4 @@
+import type { CalibrationGateStatus } from '@/lib/bodycloq/calibration-gate'
 import type { FirstLightDailyStatus } from '@/lib/product/first-light-daily-status'
 import type { FirstLightWindowStatus } from '@/lib/product/first-light-window'
 import type { FeedFreshness } from '@/lib/retinomic/feed-retention'
@@ -172,6 +173,12 @@ export type PatientSnapshot = {
   chronopenicBurdenYears: number
   /** 0–100 composite; Layer 1 uses gap estimate until L2/L3 refine */
   chronopenicBurdenScore: number
+  /** BodycloQ circadian score — null until first TipTraQ night. */
+  bodycloqScore: number | null
+  bodycloqGate: CalibrationGateStatus
+  bodycloqScoreLabel: string
+  bodycloqProvisional: boolean
+  bodycloqNightsRemaining: number
   burdenTrendDirection: BurdenTrendDirection | null
   recoveryYears: number
   darkYearsHours: number
