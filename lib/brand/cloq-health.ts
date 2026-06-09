@@ -17,6 +17,11 @@ export const BRAND_ECOSYSTEM = [
   { name: 'PranaQ', role: 'Device partner' },
 ] as const
 
+/** Social-first category — aspirational, not academic */
+export const CLOQ_CATEGORY = 'Circadian Nootropics' as const
+
+export const CLOQ_DESCRIPTOR = 'CLOQ Health — Circadian Nootropics' as const
+
 export const CLOQ_TAGLINE = 'MAKE TIME COUNT' as const
 
 export const CLOQ_LOGO_MARK = 'CLOQ' as const
@@ -29,6 +34,8 @@ export const CLOQ_HEALTH_BRAND = {
   logoMark: CLOQ_LOGO_MARK,
   logoGlyph: 'Q',
   logoClassName: 'cloq-wordmark',
+  category: CLOQ_CATEGORY,
+  descriptor: CLOQ_DESCRIPTOR,
   tagline: CLOQ_TAGLINE,
   legalName: CLOQ_HEALTH_LEGAL_NAME,
   copyrightMark: CLOQ_COPYRIGHT_MARK,

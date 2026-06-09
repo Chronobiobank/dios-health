@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { MarketingPublicShell } from '@/components/sections/marketing/marketing-public-shell'
-import { CLOQ_HEALTH_LEGAL_NAME } from '@/lib/brand/cloq-health'
+import { CLOQ_DESCRIPTOR, CLOQ_HEALTH_LEGAL_NAME } from '@/lib/brand/cloq-health'
 import { GRANT_MUNRO_FOUNDER } from '@/lib/pitch/grant-munro-founder'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 import { cn } from '@/lib/utils'
@@ -12,7 +12,7 @@ const PARTNERSHIP_EMAIL = 'hello@cloq.health'
 
 export const metadata: Metadata = {
   title: 'Contact — CLOQ Health',
-  description: 'Partner briefings and enquiries for CLOQ Health and the BodycloQ circadian score.',
+  description: `Partner briefings and enquiries for ${CLOQ_DESCRIPTOR}.`,
 }
 
 const INTENT_COPY: Record<string, { title: string; lead: string; bullets: readonly string[] }> = {
@@ -23,7 +23,7 @@ const INTENT_COPY: Record<string, { title: string; lead: string; bullets: readon
       'Connect existing Oura, Whoop, or Apple Watch — feeds BodycloQ, no new hardware',
       'BodycloQ scores circadian alignment; Q delivers light, timing, and movement cues daily',
       'Pilot design: 10–50 professionals, score movement, productivity recovery model',
-      'Founding partner pricing — circadian score for peak cognition',
+      'Founding partner pricing — circadian nootropics for your cohort',
     ],
   },
 }

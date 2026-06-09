@@ -1,10 +1,10 @@
-/* Kawasaki UI — full-viewport scroll-snap marketing landing (senior-legible) */
+/* CLOQ marketing — Function-sharp spacing, eggplant palette */
+@import './cloq-marketing-tokens.css';
 
 html.marketing-v2-active {
   height: 100%;
   overflow: hidden;
   color-scheme: light;
-  --kz-nav-height: clamp(4rem, 2.5vw + 3.25rem, 4.75rem);
 }
 
 /* Kawasaki shell — hide legacy site chrome without waiting for client hydration */
@@ -27,7 +27,7 @@ html.marketing-v2-active body {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   scroll-padding-top: 0;
-  background: #f7fafc;
+  background: var(--cloq-white, #ffffff);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -48,8 +48,8 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .calm-landing.marketing-v2-shell {
-  color: #1a202c;
-  background: #f7fafc;
+  color: var(--cloq-black, #000000);
+  background: var(--cloq-white, #ffffff);
   min-height: 100%;
   overflow: visible;
 }
@@ -69,44 +69,8 @@ html.marketing-v2-active .dios-app-shell {
   font-family: var(--mkt-serif);
 }
 
+/* Base tokens: cloq-marketing-tokens.css */
 .marketing-v2-root {
-  /* Light-only marketing palette — ignore prefers-color-scheme dark (calmer base flips h1 to #ececec) */
-  color-scheme: light;
-  /* Kawasaki landing only — Lora display, DM Sans body (not clinical Inter headings) */
-  --mkt-serif: var(--font-lora, Georgia, serif);
-  --mkt-sans: var(--font-dm-sans, var(--font-family-sans));
-  --mkt-mono: var(--font-mkt-mono, var(--font-family-mono));
-  --mkt-bg: #f7fafc;
-  --mkt-text: #1a202c;
-  --mkt-muted: #4a5568;
-  --mkt-faint: #718096;
-  --mkt-border: #e2e8f0;
-  --mkt-bronze: #b8872e;
-  --mkt-gold: #c9973a;
-  --mkt-type-hero: clamp(2.5rem, 10vw, 5.5rem);
-  --mkt-type-body: clamp(1.0625rem, 0.35vw + 1rem, 1.25rem);
-  --mkt-type-nav: clamp(1rem, 0.25vw + 0.94rem, 1.125rem);
-  --mkt-type-label: 0.6875rem;
-  --mkt-type-caption: 0.75rem;
-  --mkt-type-button: clamp(1rem, 0.2vw + 0.94rem, 1.125rem);
-  --mkt-type-card-head: clamp(1.25rem, 3vw, 1.625rem);
-  --mkt-type-card-body: clamp(1rem, 0.25vw + 0.94rem, 1.125rem);
-  --mkt-body-leading: 1.65;
-  --mkt-touch-min: 3rem;
-  --kz-nav-pad-y: clamp(0.75rem, 1.2vw + 0.5rem, 1rem);
-  --kz-nav-pad-x: clamp(1.25rem, 4vw, 2rem);
-  /* Logo — restrained cap height inside nav, scales gently by breakpoint */
-  --kz-nav-logo-size: clamp(
-    1.0625rem,
-    calc((var(--kz-nav-height) - 2 * var(--kz-nav-pad-y)) * 0.56),
-    1.4375rem
-  );
-  background: var(--mkt-bg);
-  color: var(--mkt-text);
-  font-family: var(--mkt-sans);
-  font-size: var(--mkt-type-body);
-  line-height: var(--mkt-body-leading);
-  -webkit-font-smoothing: antialiased;
   overflow: visible;
   position: relative;
 }
@@ -125,10 +89,10 @@ html.marketing-v2-active .dios-app-shell {
   height: var(--kz-nav-height);
   min-height: var(--kz-nav-height);
   padding: var(--kz-nav-pad-y) var(--kz-nav-pad-x);
-  background: rgb(247 250 252 / 0.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgb(226 232 240 / 0.65);
+  background: rgb(var(--cloq-white-rgb) / 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgb(var(--cloq-silver-rgb) / 0.85);
 }
 
 .marketing-v2-root .kz-nav-logo {
@@ -306,11 +270,12 @@ html.marketing-v2-active .dios-app-shell {
   font-size: clamp(0.8125rem, 0.15vw + 0.76rem, 0.9375rem);
   line-height: 1.25;
   min-height: 0;
-  padding: 0.3125rem 0.75rem;
+  padding: 0.375rem 0.875rem;
   display: inline-flex;
   align-items: center;
-  background: var(--mkt-text);
-  color: var(--mkt-bg);
+  background: var(--cloq-black);
+  color: var(--cloq-white);
+  border-radius: 2px;
   border-radius: 3px;
   text-decoration: none;
   font-weight: 500;
@@ -333,7 +298,8 @@ html.marketing-v2-active .dios-app-shell {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: calc(var(--kz-nav-height) + 1.25rem) clamp(1.25rem, 8vw, 6rem) 2rem;
+  padding: calc(var(--kz-nav-height) + var(--kz-section-pad-y))
+    var(--kz-section-pad-x) var(--kz-section-pad-y);
   position: relative;
   overflow: hidden;
 }
@@ -425,50 +391,50 @@ html.marketing-v2-active .dios-app-shell {
 .marketing-v2-root .kz-s__scrim--light {
   background: linear-gradient(
     105deg,
-    rgb(247 250 252 / 0.96) 0%,
-    rgb(247 250 252 / 0.82) 38%,
-    rgb(247 250 252 / 0.45) 68%,
-    rgb(247 250 252 / 0.2) 100%
+    rgb(var(--cloq-white-rgb) / 0.96) 0%,
+    rgb(var(--cloq-white-rgb) / 0.82) 38%,
+    rgb(var(--cloq-white-rgb) / 0.45) 68%,
+    rgb(var(--cloq-white-rgb) / 0.2) 100%
   );
 }
 
 .marketing-v2-root .kz-s--under-nav .kz-s__scrim--light {
   background: linear-gradient(
     180deg,
-    rgb(247 250 252 / 0.72) 0%,
-    rgb(247 250 252 / 0.88) 12%,
-    rgb(247 250 252 / 0.92) 38%,
-    rgb(247 250 252 / 0.65) 72%,
-    rgb(247 250 252 / 0.35) 100%
+    rgb(var(--cloq-white-rgb) / 0.72) 0%,
+    rgb(var(--cloq-white-rgb) / 0.88) 12%,
+    rgb(var(--cloq-white-rgb) / 0.92) 38%,
+    rgb(var(--cloq-white-rgb) / 0.65) 72%,
+    rgb(var(--cloq-white-rgb) / 0.35) 100%
   );
 }
 
 .marketing-v2-root .kz-s__scrim--dark {
   background: linear-gradient(
     105deg,
-    rgb(26 32 44 / 0.94) 0%,
-    rgb(26 32 44 / 0.8) 42%,
-    rgb(26 32 44 / 0.5) 72%,
-    rgb(26 32 44 / 0.28) 100%
+    rgb(var(--cloq-mortar-rgb) / 0.94) 0%,
+    rgb(var(--cloq-mortar-rgb) / 0.8) 42%,
+    rgb(var(--cloq-mortar-rgb) / 0.5) 72%,
+    rgb(var(--cloq-mortar-rgb) / 0.28) 100%
   );
 }
 
 .marketing-v2-root .kz-s__scrim--teal {
   background: linear-gradient(
     105deg,
-    rgb(184 135 46 / 0.88) 0%,
-    rgb(184 135 46 / 0.65) 40%,
-    rgb(184 135 46 / 0.35) 70%,
-    rgb(26 32 44 / 0.2) 100%
+    rgb(var(--cloq-mortar-rgb) / 0.92) 0%,
+    rgb(var(--cloq-mortar-rgb) / 0.72) 40%,
+    rgb(var(--cloq-mortar-rgb) / 0.4) 70%,
+    rgb(var(--cloq-black-rgb) / 0.15) 100%
   );
 }
 
 .marketing-v2-root .kz-s__scrim--cta {
   background: linear-gradient(
     105deg,
-    rgb(26 32 44 / 0.93) 0%,
-    rgb(26 32 44 / 0.78) 45%,
-    rgb(26 32 44 / 0.45) 100%
+    rgb(var(--cloq-mortar-rgb) / 0.93) 0%,
+    rgb(var(--cloq-mortar-rgb) / 0.78) 45%,
+    rgb(var(--cloq-mortar-rgb) / 0.45) 100%
   );
 }
 
@@ -488,18 +454,18 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-s--dark {
-  background: var(--mkt-text);
-  color: var(--mkt-bg);
+  background: var(--mkt-mortar);
+  color: var(--cloq-white);
 }
 
 .marketing-v2-root .kz-s--teal {
-  background: var(--mkt-bronze);
-  color: var(--mkt-text);
+  background: var(--mkt-mortar);
+  color: var(--cloq-white);
 }
 
 .marketing-v2-root .kz-s--bronze {
-  background: var(--mkt-bronze);
-  color: var(--mkt-text);
+  background: var(--cloq-black);
+  color: var(--cloq-white);
 }
 
 /* ── EYEBROW ── */
@@ -507,10 +473,10 @@ html.marketing-v2-active .dios-app-shell {
   font-family: var(--mkt-mono);
   font-size: var(--mkt-type-label);
   line-height: var(--text-label-leading, 1.45);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--mkt-muted);
-  margin-bottom: 1.75rem;
+  color: var(--mkt-faint);
+  margin-bottom: 2rem;
 }
 
 .marketing-v2-root .kz-s--dark .kz-ey {
@@ -518,11 +484,11 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-s--teal .kz-ey {
-  color: rgb(26 32 44 / 0.72);
+  color: rgb(var(--cloq-lilac-rgb) / 0.95);
 }
 
 .marketing-v2-root .kz-s--bronze .kz-ey {
-  color: rgb(26 32 44 / 0.72);
+  color: rgb(var(--cloq-silver-rgb) / 0.95);
 }
 
 /* ── MAIN HEADLINE ── */
@@ -530,21 +496,21 @@ html.marketing-v2-active .dios-app-shell {
   font-family: var(--mkt-serif);
   font-size: var(--mkt-type-hero);
   font-weight: 400;
-  line-height: 1.06;
-  letter-spacing: -0.02em;
-  max-width: 12ch;
-  margin-bottom: 1.75rem;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  max-width: 11ch;
+  margin-bottom: 2rem;
   color: var(--mkt-text);
 }
 
 .marketing-v2-root .kz-h1 em {
-  color: var(--gold, #c9973a);
+  color: var(--mkt-lilac);
   font-style: italic;
 }
 
 .marketing-v2-root .kz-s--dark .kz-h1 em,
 .marketing-v2-root .kz-s--teal .kz-h1 em {
-  color: var(--mkt-bronze, #b8872e);
+  color: var(--mkt-lilac);
 }
 
 .marketing-v2-root .kz-s--dark .kz-h1 {
@@ -552,15 +518,15 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-s--teal .kz-h1 {
-  color: var(--mkt-text);
+  color: var(--cloq-white);
 }
 
 .marketing-v2-root .kz-s--bronze .kz-h1 {
-  color: #fff;
+  color: var(--cloq-white);
 }
 
 .marketing-v2-root .kz-s--bronze .kz-h1 em {
-  color: #fff;
+  color: var(--mkt-lilac);
   font-style: italic;
 }
 
@@ -583,11 +549,11 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-s--teal .kz-sup {
-  color: rgb(26 32 44 / 0.82);
+  color: rgb(var(--cloq-white-rgb) / 0.82);
 }
 
 .marketing-v2-root .kz-s--bronze .kz-sup {
-  color: rgb(26 32 44 / 0.82);
+  color: rgb(var(--cloq-silver-rgb) / 0.95);
 }
 
 /* ── SLIDE NUMBER ── */
@@ -607,11 +573,11 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-s--teal .kz-num {
-  color: rgb(26 32 44 / 0.45);
+  color: rgb(var(--cloq-lilac-rgb) / 0.55);
 }
 
 .marketing-v2-root .kz-s--bronze .kz-num {
-  color: rgb(26 32 44 / 0.45);
+  color: rgb(var(--cloq-silver-rgb) / 0.55);
 }
 
 /* ── CTA STACK — touch-friendly ── */
@@ -684,19 +650,26 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-btn-p {
-  background: var(--mkt-text);
-  color: var(--mkt-bg);
+  background: var(--cloq-black);
+  color: var(--cloq-white);
   border: none;
-  transition: opacity 0.15s;
+  border-radius: 2px;
+  letter-spacing: 0.02em;
+  transition: background 0.15s, color 0.15s;
 }
 
 .marketing-v2-root .kz-btn-p:hover {
-  opacity: 0.85;
+  background: var(--mkt-mortar);
 }
 
 .marketing-v2-root .kz-s--dark .kz-btn-p {
-  background: #fff;
-  color: #1a202c;
+  background: var(--cloq-white);
+  color: var(--cloq-black);
+}
+
+.marketing-v2-root .kz-s--dark .kz-btn-p:hover {
+  background: var(--mkt-lilac);
+  color: var(--cloq-black);
 }
 
 .marketing-v2-root .kz-btn-s {
@@ -752,11 +725,11 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-s--bronze .kz-btn-t {
-  color: rgb(26 32 44 / 0.72);
+  color: rgb(var(--cloq-silver-rgb) / 0.95);
 }
 
 .marketing-v2-root .kz-s--bronze .kz-btn-t:hover {
-  color: var(--mkt-text);
+  color: var(--mkt-lilac);
 }
 
 /* ── THREE GRID ── */
@@ -832,7 +805,7 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-pd--active {
-  background: var(--mkt-text);
+  background: var(--mkt-mortar);
   transform: scale(1.35);
 }
 
@@ -1102,12 +1075,12 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-g3-item--teal {
-  background: rgb(26 32 44 / 0.04);
+  background: rgb(var(--cloq-mortar-rgb) / 0.04);
   color: var(--mkt-text);
 }
 
 .marketing-v2-root .kz-s--teal .kz-grid-3 {
-  background: rgb(26 32 44 / 0.08);
+  background: rgb(var(--cloq-mortar-rgb) / 0.08);
 }
 
 .marketing-v2-root .kz-g3-item--teal .kz-g3-label {
@@ -1245,7 +1218,7 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-roi__peak-title {
-  color: var(--mkt-bronze, #b8872e);
+  color: var(--mkt-lilac);
   font-family: var(--mkt-serif);
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 400;
@@ -1451,9 +1424,13 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-roi__cta {
-  background: #fff;
-  color: var(--mkt-text);
+  background: var(--cloq-white);
+  color: var(--cloq-black);
   margin-top: 1.25rem;
+}
+
+.marketing-v2-root .kz-roi__cta:hover {
+  background: var(--mkt-lilac);
 }
 
 .marketing-v2-root .kz-evidence-grid {
@@ -1465,7 +1442,7 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-evidence-card {
-  background: rgb(26 32 44 / 0.65);
+  background: rgb(var(--cloq-mortar-rgb) / 0.72);
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
@@ -1503,7 +1480,7 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-programme {
-  border: 1px solid rgb(26 32 44 / 0.12);
+  border: 1px solid rgb(var(--cloq-mortar-rgb) / 0.12);
   border-radius: 4px;
   display: grid;
   gap: 0;
@@ -1512,7 +1489,7 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-programme__row {
-  border-top: 1px solid rgb(26 32 44 / 0.08);
+  border-top: 1px solid rgb(var(--cloq-mortar-rgb) / 0.08);
   display: grid;
   gap: 1rem;
   grid-template-columns: 11rem 1fr;
@@ -1524,7 +1501,7 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root .kz-programme__row dt {
-  color: rgb(26 32 44 / 0.55);
+  color: rgb(var(--cloq-mortar-rgb) / 0.55);
   font-family: var(--mkt-mono);
   font-size: var(--mkt-type-caption);
   letter-spacing: 0.06em;
@@ -1581,7 +1558,7 @@ html.marketing-v2-active .dios-app-shell {
 
 .marketing-v2-root .kz-step-strip__item:last-child .kz-step-strip__symbol,
 .marketing-v2-root .kz-step-strip__item:last-child .kz-step-strip__title {
-  color: var(--mkt-bronze, #b8872e);
+  color: var(--mkt-lilac);
   font-family: var(--mkt-sans);
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 600;
@@ -1992,8 +1969,8 @@ html.marketing-v2-active .dios-app-shell {
 /* Public detail pages (contact, privacy, terms) — no scroll-snap deck */
 .marketing-v2-root--detail {
   min-height: 100svh;
-  background: var(--kz-paper, #f7f4ef);
-  color: var(--kz-ink, #0d0d0d);
+  background: var(--cloq-white);
+  color: var(--cloq-black);
 }
 
 .marketing-v2-root--detail .kz-detail {
@@ -2001,8 +1978,16 @@ html.marketing-v2-active .dios-app-shell {
 }
 
 .marketing-v2-root--detail .kz-sup {
-  color: var(--kz-ink-muted, rgba(13, 13, 13, 0.72));
+  color: var(--mkt-muted);
   font-size: 1.05rem;
   line-height: 1.6;
   max-width: 42rem;
+}
+
+.marketing-v2-root--detail .kz-h1 {
+  color: var(--cloq-black);
+}
+
+.marketing-v2-root--detail .kz-ey {
+  color: var(--mkt-mortar);
 }

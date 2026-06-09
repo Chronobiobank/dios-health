@@ -26,7 +26,7 @@ async function auditHome(page, label) {
   )
 
   const eyebrow = (await page.locator('.kz-s .kz-ey').first().textContent())?.trim() ?? ''
-  record(`${label}: hero eyebrow`, /circadian score/i.test(eyebrow), eyebrow)
+  record(`${label}: hero eyebrow`, /circadian nootropics/i.test(eyebrow), eyebrow)
 
   const sectionCount = await page.locator('.kz-s').count()
   record(`${label}: snap sections`, sectionCount === 5, `${sectionCount} sections`)

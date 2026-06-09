@@ -7,6 +7,7 @@
 
 import {
   BODYCLOQ_METRIC_URL,
+  CLOQ_CATEGORY,
   CLOQ_HEALTH,
   CLOQ_HEALTH_LEGAL_NAME,
   CLOQ_HEALTH_SITE_URL,
@@ -27,13 +28,13 @@ export const BODYCLOQ_LOGO_MARK = 'BODYCLOQ' as const
 
 export const BODYCLOQ_LOGO_GLYPH = 'Q' as const
 
-export const BODYCLOQ_CATEGORY = 'Your circadian score for peak cognition' as const
+export const BODYCLOQ_CATEGORY = CLOQ_CATEGORY
 
 /** Footer / brand tag — Unbounded Light, all caps */
 export const BODYCLOQ_TAGLINE = 'MAKE TIME COUNT' as const
 
 export const BODYCLOQ_ELEVATOR =
-  'BodycloQ is your circadian score. TipTraQ calibrates it. Q delivers the cues.' as const
+  'Wearables in. BodycloQ scores your prime time. Q delivers the cues.' as const
 
 export const Q_BRAND_NAME = 'Q' as const
 

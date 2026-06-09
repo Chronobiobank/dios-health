@@ -1,20 +1,20 @@
-import { DM_Mono, DM_Sans, Lora, Unbounded } from 'next/font/google'
+import { DM_Mono, DM_Sans, Instrument_Serif, Unbounded } from 'next/font/google'
 
-/** Lora — marketing headings and display text only */
-export const lora = Lora({
+/** Instrument Serif — editorial display (Function Health Financier Display analogue) */
+export const marketingSerif = Instrument_Serif({
   subsets: ['latin'],
-  variable: '--font-lora',
+  variable: '--font-instrument-serif',
   display: 'swap',
-  weight: ['400', '500', '600'],
+  weight: '400',
   style: ['normal', 'italic'],
 })
 
-/** DM Sans — marketing body and navigation */
+/** DM Sans — sharp UI body and navigation (Function Health FT Base analogue) */
 export const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
   display: 'swap',
-  weight: ['300', '400', '500'],
+  weight: ['400', '500', '600'],
 })
 
 /** DM Mono — marketing eyebrows, labels, metadata (reuses site mono variable name in scope) */
@@ -33,4 +33,4 @@ export const unbounded = Unbounded({
   weight: ['300'],
 })
 
-export const marketingFontVariableClasses = `${lora.variable} ${dmSans.variable} ${marketingDmMono.variable} ${unbounded.variable}`
+export const marketingFontVariableClasses = `${marketingSerif.variable} ${dmSans.variable} ${marketingDmMono.variable} ${unbounded.variable}`

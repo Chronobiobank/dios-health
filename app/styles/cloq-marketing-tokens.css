@@ -1,0 +1,87 @@
+/**
+ * CLOQ marketing design tokens — Function Health–sharp spacing, eggplant palette.
+ * Scoped to .marketing-v2-root; import before marketing-landing.css rules.
+ */
+.marketing-v2-root {
+  /* Palette */
+  --cloq-mortar: #523b50;
+  --cloq-black: #000000;
+  --cloq-white: #ffffff;
+  --cloq-lilac: #c8a2c8;
+  --cloq-silver: #c0c0c0;
+
+  --cloq-mortar-rgb: 82 59 80;
+  --cloq-black-rgb: 0 0 0;
+  --cloq-white-rgb: 255 255 255;
+  --cloq-lilac-rgb: 200 162 200;
+  --cloq-silver-rgb: 192 192 192;
+
+  /* Semantic aliases (legacy --mkt-* vars) */
+  --mkt-bg: var(--cloq-white);
+  --mkt-surface: var(--cloq-white);
+  --mkt-surface-muted: rgb(var(--cloq-silver-rgb) / 0.22);
+  --mkt-text: var(--cloq-black);
+  --mkt-mortar: var(--cloq-mortar);
+  --mkt-muted: rgb(var(--cloq-mortar-rgb) / 0.78);
+  --mkt-faint: rgb(var(--cloq-mortar-rgb) / 0.52);
+  --mkt-border: var(--cloq-silver);
+  --mkt-lilac: var(--cloq-lilac);
+  --mkt-accent: var(--cloq-lilac);
+  --mkt-bronze: var(--cloq-lilac);
+  --mkt-gold: var(--cloq-lilac);
+
+  /* Typography — Instrument Serif display + DM Sans body (Function: Financier + FT Base) */
+  --mkt-serif: var(--font-instrument-serif, var(--font-lora, Georgia, serif));
+  --mkt-sans: var(--font-dm-sans, system-ui, sans-serif);
+  --mkt-mono: var(--font-mkt-mono, monospace);
+
+  /* Sharp type scale */
+  --mkt-type-hero: clamp(2.75rem, 7.2vw, 6.25rem);
+  --mkt-type-body: clamp(1rem, 0.28vw + 0.94rem, 1.1875rem);
+  --mkt-type-nav: clamp(0.9375rem, 0.2vw + 0.88rem, 1.0625rem);
+  --mkt-type-label: 0.6875rem;
+  --mkt-type-caption: 0.75rem;
+  --mkt-type-button: clamp(0.9375rem, 0.18vw + 0.88rem, 1.0625rem);
+  --mkt-type-card-head: clamp(1.125rem, 2.2vw, 1.5rem);
+  --mkt-type-card-body: clamp(0.9375rem, 0.22vw + 0.88rem, 1.0625rem);
+  --mkt-body-leading: 1.55;
+  --mkt-touch-min: 2.75rem;
+
+  /* Layout — generous horizontal rhythm */
+  --kz-nav-height: clamp(3.75rem, 2vw + 3rem, 4.5rem);
+  --kz-nav-pad-y: clamp(0.625rem, 1vw + 0.4rem, 0.875rem);
+  --kz-nav-pad-x: clamp(1.5rem, 5vw, 3rem);
+  --kz-section-pad-x: clamp(1.5rem, 6vw, 5.5rem);
+  --kz-section-pad-y: clamp(2rem, 6vh, 4rem);
+  --kz-nav-logo-size: clamp(
+    1rem,
+    calc((var(--kz-nav-height) - 2 * var(--kz-nav-pad-y)) * 0.54),
+    1.375rem
+  );
+
+  --kz-paper: var(--cloq-white);
+  --kz-ink: var(--cloq-black);
+  --kz-ink-muted: var(--mkt-muted);
+
+  color-scheme: light;
+  background: var(--mkt-bg);
+  color: var(--mkt-text);
+  font-family: var(--mkt-sans);
+  font-size: var(--mkt-type-body);
+  line-height: var(--mkt-body-leading);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.marketing-v2-active {
+  --kz-nav-height: clamp(3.75rem, 2vw + 3rem, 4.5rem);
+}
+
+html.marketing-v2-active body {
+  background: var(--cloq-white);
+}
+
+.calm-landing.marketing-v2-shell {
+  color: var(--cloq-black);
+  background: var(--cloq-white);
+}

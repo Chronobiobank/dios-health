@@ -1,5 +1,11 @@
 import { Q_NARRATIVE } from '@/lib/brand/bodycloq-brand'
-import { BRAND_ECOSYSTEM, CLOQ_HEALTH_BRAND, CLOQ_TAGLINE } from '@/lib/brand/cloq-health'
+import {
+  BRAND_ECOSYSTEM,
+  CLOQ_CATEGORY,
+  CLOQ_DESCRIPTOR,
+  CLOQ_HEALTH_BRAND,
+  CLOQ_TAGLINE,
+} from '@/lib/brand/cloq-health'
 import type { KawasakiSlideMedia } from '@/lib/pitch/marketing-landing-content'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 
@@ -51,19 +57,19 @@ export const CORPORATE_PEAK_WINDOW = {
 } as const
 
 export const CORPORATE_LANDING_META = {
-  title: 'CLOQ Health · BodycloQ circadian score',
+  title: CLOQ_DESCRIPTOR,
   description:
-    'BodycloQ is your circadian score for peak cognition. CLOQ Health — wearables in, score out, Q delivers the cues.',
-  openGraphTitle: 'BodycloQ · Your circadian score',
+    'Circadian nootropics for peak performance. BodycloQ scores your prime time — Q delivers the cues.',
+  openGraphTitle: CLOQ_DESCRIPTOR,
   openGraphDescription:
-    'CLOQ Health. One circadian score linked to peak cognition — TipTraQ calibrates, Q protects the window.',
+    'Wearables in, score out. BodycloQ maps your Peak Window — Q protects it every day.',
 } as const
 
 /** 01 — Hero: one problem, one claim, one action */
 export const CORPORATE_HERO = {
   id: 'hero',
   slideNum: '01',
-  eyebrow: 'Circadian score for peak cognition',
+  eyebrow: CLOQ_CATEGORY,
   headlineHtml: 'Your talent loses <em>44 days</em> a year',
   support: 'Circadian misalignment — not burnout. Biology vs calendar.',
   media: {
