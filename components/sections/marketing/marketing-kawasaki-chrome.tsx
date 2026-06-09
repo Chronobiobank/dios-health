@@ -1,21 +1,16 @@
 import Link from 'next/link'
 
 import { BodycloQWordmark, CloQMark, CloQTag, CloQWordmark } from '@/components/brand/cloq-wordmark'
-import { DIOS_BRAND_NAME, DIOS_LOGO_GLYPH, DIOS_LOGO_MARK } from '@/components/DiosLogo'
 import {
-  KAWASAKI_FOOTER,
-  KAWASAKI_NAV,
-  type KawasakiBrandConfig,
-  type KawasakiFooterConfig,
-  type KawasakiNavConfig,
+  CORPORATE_BRAND,
+  CORPORATE_FOOTER,
+  CORPORATE_NAV,
+} from '@/lib/pitch/corporate-landing-content'
+import type {
+  KawasakiBrandConfig,
+  KawasakiFooterConfig,
+  KawasakiNavConfig,
 } from '@/lib/pitch/marketing-landing-content'
-
-const DEFAULT_BRAND: KawasakiBrandConfig = {
-  name: DIOS_BRAND_NAME,
-  logoMark: DIOS_LOGO_MARK,
-  logoGlyph: DIOS_LOGO_GLYPH,
-  logoClassName: 'dios-wordmark',
-}
 
 function isCloqWordmark(brand: KawasakiBrandConfig) {
   return brand.logoClassName === 'cloq-wordmark' || brand.logoClassName === 'bodycloq-wordmark'
@@ -37,8 +32,8 @@ type MarketingKawasakiNavProps = {
 }
 
 export function MarketingKawasakiNav({
-  config = KAWASAKI_NAV,
-  brand = DEFAULT_BRAND,
+  config = CORPORATE_NAV,
+  brand = CORPORATE_BRAND,
 }: MarketingKawasakiNavProps) {
   return (
     <nav className="kz-nav" aria-label="Site">
@@ -69,8 +64,8 @@ type MarketingKawasakiFooterProps = {
 }
 
 export function MarketingKawasakiFooter({
-  config = KAWASAKI_FOOTER,
-  brand = DEFAULT_BRAND,
+  config = CORPORATE_FOOTER,
+  brand = CORPORATE_BRAND,
 }: MarketingKawasakiFooterProps) {
   const cloqBrand = isCloqWordmark(brand)
 

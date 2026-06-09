@@ -1,5 +1,5 @@
 import { Q_NARRATIVE } from '@/lib/brand/bodycloq-brand'
-import { CLOQ_HEALTH_BRAND, CLOQ_TAGLINE } from '@/lib/brand/cloq-health'
+import { BRAND_ECOSYSTEM, CLOQ_HEALTH_BRAND, CLOQ_TAGLINE } from '@/lib/brand/cloq-health'
 import type { KawasakiSlideMedia } from '@/lib/pitch/marketing-landing-content'
 import { MARKETING_ROUTES } from '@/lib/pitch/marketing-routes'
 
@@ -20,31 +20,21 @@ export const CORPORATE_FOOTER = {
   descriptor: CLOQ_TAGLINE,
   tagline: '',
   copyrightYear: 2026,
+  ecosystem: BRAND_ECOSYSTEM,
   linkColumns: [
     {
-      title: 'Product',
+      title: 'Explore',
       links: [
-        { label: 'How it works', href: MARKETING_ROUTES.howItWorks },
-        { label: 'DINA', href: MARKETING_ROUTES.dina },
-        { label: 'Get started', href: '/signup' },
-        { label: 'For clinicians', href: MARKETING_ROUTES.clinicians },
-        { label: 'Sign in', href: '/signin' },
+        { label: 'Mechanism', href: '/#mechanism' },
+        { label: 'Product', href: '/#product' },
+        { label: 'Proof', href: '/#proof' },
+        { label: 'Request briefing', href: MARKETING_ROUTES.cpoBriefing },
+      ],
+    },
+    {
+      title: 'Company',
+      links: [
         { label: 'Contact', href: '/contact' },
-      ],
-    },
-    {
-      title: 'Science',
-      links: [
-        { label: 'Clinical evidence', href: MARKETING_ROUTES.evidence },
-        { label: 'Science', href: MARKETING_ROUTES.science },
-        { label: 'Chronobiobank', href: MARKETING_ROUTES.chronobiobank },
-        { label: 'Circadian model', href: `${MARKETING_ROUTES.evidence}#circadian-model` },
-        { label: 'TipTraQ', href: '/tiptraq' },
-      ],
-    },
-    {
-      title: 'Legal',
-      links: [
         { label: 'Privacy', href: '/privacy' },
         { label: 'Terms', href: '/terms' },
       ],
@@ -118,7 +108,7 @@ export const CORPORATE_PRODUCT = {
     {
       symbol: '◎',
       title: 'Score',
-      body: 'BodycloQ maps DLMO, CloQ score, and Peak Window per person.',
+      body: 'BodycloQ maps DLMO, circadian score, and Peak Window per person.',
     },
     {
       symbol: 'Q',

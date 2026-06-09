@@ -1988,3 +1988,21 @@ html.marketing-v2-active .dios-app-shell {
     max-width: none;
   }
 }
+
+/* Public detail pages (contact, privacy, terms) — no scroll-snap deck */
+.marketing-v2-root--detail {
+  min-height: 100svh;
+  background: var(--kz-paper, #f7f4ef);
+  color: var(--kz-ink, #0d0d0d);
+}
+
+.marketing-v2-root--detail .kz-detail {
+  flex: 1;
+}
+
+.marketing-v2-root--detail .kz-sup {
+  color: var(--kz-ink-muted, rgba(13, 13, 13, 0.72));
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 42rem;
+}

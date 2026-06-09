@@ -10,7 +10,34 @@ const nextConfig: NextConfig = {
     root: projectRoot,
   },
   async redirects() {
+    const legacyMarketing = [
+      '/evidence',
+      '/how-it-works',
+      '/science',
+      '/technology',
+      '/tiptraq',
+      '/dina',
+      '/clinicians',
+      '/chronobiobank',
+      '/circadian-digital-twin',
+      '/pitch',
+      '/onboarding',
+      '/shop',
+      '/logo',
+      '/dev',
+    ] as const
+
     return [
+      ...legacyMarketing.map((source) => ({
+        source,
+        destination: '/',
+        permanent: true,
+      })),
+      ...legacyMarketing.map((source) => ({
+        source: `${source}/:path*`,
+        destination: '/',
+        permanent: true,
+      })),
       { source: '/vaya', destination: '/dashboard/coach', permanent: true },
       { source: '/mel', destination: '/dashboard/coach', permanent: true },
       { source: '/dashboard/vaya', destination: '/dashboard/coach', permanent: true },

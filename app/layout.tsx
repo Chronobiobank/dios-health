@@ -9,14 +9,14 @@ const siteUrl =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://cloq.health')
 
 export const metadata: Metadata = {
-  title: 'Dose Intelligence · DIOS',
+  title: 'CLOQ Health · BodycloQ circadian score',
   description:
-    'Your medication has a biological window. DIOS finds it — chronotherapy made simple for patients and clinicians.',
+    'BodycloQ is your circadian score for peak cognition. CLOQ Health — wearables in, score out, Q delivers the cues.',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'DIOS',
+    title: 'CLOQ',
   },
   other: {
     'mobile-web-app-capable': 'yes',
@@ -24,17 +24,17 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
   },
   openGraph: {
-    title: 'Dose Intelligence · dios.health',
+    title: 'CLOQ Health · BodycloQ circadian score',
     description:
-      'Make Time Count. Scan your body clock, time your meds, and track progress with dose intelligence.',
+      'One circadian score linked to peak cognition — TipTraQ calibrates, Q protects the window.',
     type: 'website',
     url: siteUrl,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dose Intelligence · dios.health',
+    title: 'CLOQ Health · BodycloQ circadian score',
     description:
-      'Your medication has a biological window. DIOS finds it.',
+      'BodycloQ scores circadian alignment. Q delivers daily cues. MAKE TIME COUNT.',
   },
 }
 
