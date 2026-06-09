@@ -1,29 +1,21 @@
 import type { ReactNode } from 'react'
 
-import { MarketingFontScope } from '@/components/sections/marketing/marketing-font-scope'
-import {
-  MarketingKawasakiFooter,
-  MarketingKawasakiNav,
-} from '@/components/sections/marketing/marketing-kawasaki-chrome'
-import {
-  CORPORATE_BRAND,
-  CORPORATE_FOOTER,
-  CORPORATE_NAV,
-} from '@/lib/pitch/corporate-landing-content'
+import { CloqLandingFooter, CloqLandingNav } from '@/components/sections/marketing/cloq-landing-chrome'
+import { unbounded } from '@/lib/fonts/marketing-fonts'
 
-import '@/app/styles/marketing-landing.css'
+import '@/app/styles/cloq-landing.css'
 
 type MarketingPublicShellProps = {
   children: ReactNode
 }
 
-/** CLOQ chrome for public pages outside the scroll-snap landing deck. */
+/** CLOQ chrome for contact, privacy, and terms. */
 export function MarketingPublicShell({ children }: MarketingPublicShellProps) {
   return (
-    <MarketingFontScope className="marketing-v2-root--corporate marketing-v2-root--detail">
-      <MarketingKawasakiNav config={CORPORATE_NAV} brand={CORPORATE_BRAND} />
-      {children}
-      <MarketingKawasakiFooter config={CORPORATE_FOOTER} brand={CORPORATE_BRAND} />
-    </MarketingFontScope>
+    <div className={`clq-site ${unbounded.variable}`}>
+      <CloqLandingNav />
+      <main className="clq-detail">{children}</main>
+      <CloqLandingFooter />
+    </div>
   )
 }

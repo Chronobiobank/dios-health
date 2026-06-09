@@ -68,9 +68,9 @@ export function CorporateRoiControls() {
   const { inputs, setExecutives, setSalaryK, setTravelDays, setSector } = useRoiContext()
 
   return (
-    <div className="kz-roi__controls">
-      <label className="kz-roi__field">
-        <span className="kz-roi__label">
+    <div className="clq-roi__controls">
+      <label className="clq-roi__field">
+        <span className="clq-roi__label">
           Professionals — <strong>{inputs.executives}</strong>
         </span>
         <input
@@ -80,12 +80,12 @@ export function CorporateRoiControls() {
           step={10}
           value={inputs.executives}
           onChange={(e) => setExecutives(Number(e.target.value))}
-          className="kz-roi__range"
+          className="clq-roi__range"
         />
       </label>
 
-      <label className="kz-roi__field">
-        <span className="kz-roi__label">
+      <label className="clq-roi__field">
+        <span className="clq-roi__label">
           Avg salary — <strong>{formatGbp(inputs.salaryK * 1000)}</strong>
         </span>
         <input
@@ -95,12 +95,12 @@ export function CorporateRoiControls() {
           step={10}
           value={inputs.salaryK}
           onChange={(e) => setSalaryK(Number(e.target.value))}
-          className="kz-roi__range"
+          className="clq-roi__range"
         />
       </label>
 
-      <label className="kz-roi__field">
-        <span className="kz-roi__label">
+      <label className="clq-roi__field">
+        <span className="clq-roi__label">
           Travel days / month — <strong>{inputs.travelDaysPerMonth}</strong>
         </span>
         <input
@@ -110,15 +110,15 @@ export function CorporateRoiControls() {
           step={1}
           value={inputs.travelDaysPerMonth}
           onChange={(e) => setTravelDays(Number(e.target.value))}
-          className="kz-roi__range"
+          className="clq-roi__range"
         />
       </label>
 
-      <fieldset className="kz-roi__field">
-        <legend className="kz-roi__label">Sector</legend>
-        <div className="kz-roi__sectors">
+      <fieldset className="clq-roi__field">
+        <legend className="clq-roi__label">Sector</legend>
+        <div className="clq-roi__sectors">
           {SECTORS.map((item) => (
-            <label key={item.id} className="kz-roi__sector">
+            <label key={item.id} className="clq-roi__sector">
               <input
                 type="radio"
                 name="sector"
@@ -140,47 +140,43 @@ export function CorporateRoiResults() {
   const protectedHours = inputs.executives * CORPORATE_PEAK_WINDOW.hoursPerLeader
 
   return (
-    <div className="kz-roi__results kz-roi__results--card">
-      <div className="kz-roi__peak">
-        <p className="kz-roi__peak-ey">{CORPORATE_PEAK_WINDOW.eyebrow}</p>
-        <p className="kz-roi__peak-title">{CORPORATE_PEAK_WINDOW.title}</p>
-        <p className="kz-roi__peak-headline">{CORPORATE_PEAK_WINDOW.headline}</p>
-        <p className="kz-roi__peak-support">{CORPORATE_PEAK_WINDOW.support}</p>
-        <p className="kz-roi__peak-stat kz-tabular" aria-live="polite">
+    <div className="clq-roi__results">
+      <div className="clq-roi__peak">
+        <p className="clq-roi__peak-ey">{CORPORATE_PEAK_WINDOW.eyebrow}</p>
+        <p className="clq-roi__peak-title">{CORPORATE_PEAK_WINDOW.title}</p>
+        <p className="clq-roi__peak-stat" aria-live="polite">
           {CORPORATE_PEAK_WINDOW.hoursPerLeader}h × {inputs.executives} professionals ={' '}
           <strong>{protectedHours.toLocaleString('en-GB')} protected hours / day</strong>
         </p>
       </div>
 
-      <div className="kz-roi__cost">
-        <p className="kz-roi__results-ey">Annual cost of circadian disruption</p>
-        <p className="kz-roi__results-total kz-tabular" aria-live="polite">
+      <div className="clq-roi__cost">
+        <p className="clq-roi__results-ey">Annual cost of circadian disruption</p>
+        <p className="clq-roi__results-total" aria-live="polite">
           {formatGbp(result.totalCost, true)}
         </p>
-        <p className="kz-roi__results-sub">
+        <p className="clq-roi__results-sub">
           Recover {formatGbp(result.recoverable, true)} by protecting Peak Window — not adding
           another wellness perk.
         </p>
       </div>
 
-      <div className="kz-roi__recovery">
+      <div className="clq-roi__recovery">
         <div>
-          <p className="kz-roi__recovery-label">Recoverable</p>
-          <p className="kz-roi__recovery-value kz-tabular">{formatGbp(result.recoverable, true)}</p>
+          <p className="clq-roi__recovery-label">Recoverable</p>
+          <p className="clq-roi__recovery-value">{formatGbp(result.recoverable, true)}</p>
         </div>
         <div>
-          <p className="kz-roi__recovery-label">Programme</p>
-          <p className="kz-roi__recovery-value kz-tabular">
-            {formatGbp(result.diosProgrammeCost, true)}
-          </p>
+          <p className="clq-roi__recovery-label">Programme</p>
+          <p className="clq-roi__recovery-value">{formatGbp(result.diosProgrammeCost, true)}</p>
         </div>
         <div>
-          <p className="kz-roi__recovery-label">ROI</p>
-          <p className="kz-roi__recovery-value kz-tabular">{result.roiMultiple.toFixed(1)}×</p>
+          <p className="clq-roi__recovery-label">ROI</p>
+          <p className="clq-roi__recovery-value">{result.roiMultiple.toFixed(1)}×</p>
         </div>
       </div>
 
-      <Link href={CORPORATE_PROOF.cta.href} className="kz-cta-btn kz-roi__cta">
+      <Link href={CORPORATE_PROOF.cta.href} className="clq-nav__cta clq-roi__cta">
         {CORPORATE_PROOF.cta.label}
       </Link>
     </div>
@@ -189,16 +185,16 @@ export function CorporateRoiResults() {
 
 export function CorporateProofEvidence() {
   return (
-    <div className="kz-proof__evidence" aria-label="Evidence sources">
-      <ul className="kz-proof__citations">
+    <div aria-label="Evidence sources">
+      <ul className="clq-citations">
         {CORPORATE_PROOF.citations.map((item) => (
           <li key={item.source}>
-            <span className="kz-proof__citation-source">{item.source}</span>
-            <span className="kz-proof__citation-quote">{item.quote}</span>
+            <span className="clq-citations__source">{item.source}</span>
+            <span className="clq-citations__quote">{item.quote}</span>
           </li>
         ))}
       </ul>
-      <p className="kz-proof__method">{CORPORATE_PROOF.methodology}</p>
+      <p className="clq-method">{CORPORATE_PROOF.methodology}</p>
     </div>
   )
 }

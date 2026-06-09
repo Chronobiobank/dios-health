@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 
-import { MarketingLanding } from '@/components/sections/marketing/marketing-landing'
+import { CloqLanding } from '@/components/sections/marketing/cloq-landing'
 import { MarketingShell } from '@/components/sections/marketing-shell'
 import { CLOQ_HEALTH_SITE_URL } from '@/lib/brand/cloq-health'
 import { CORPORATE_LANDING_META } from '@/lib/pitch/corporate-landing-content'
 
-import '@/app/styles/marketing-landing.css'
+import '@/app/styles/cloq-landing.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(CLOQ_HEALTH_SITE_URL),
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 
 export default function MarketingHomePage() {
   return (
-    <MarketingShell prefetchRoutes className="marketing-v2-shell">
-      <MarketingLanding />
+    <MarketingShell prefetchRoutes>
+      <CloqLanding />
     </MarketingShell>
   )
 }

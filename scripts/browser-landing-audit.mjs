@@ -19,47 +19,31 @@ function record(name, pass, detail = '') {
 
 async function auditHome(page, label) {
   await page.goto(BASE, { waitUntil: 'load', timeout: 90000 })
-  await page.waitForSelector('.kz-s', { timeout: 60000 })
-  await page.waitForFunction(
-    () => document.documentElement.classList.contains('marketing-v2-active'),
-    { timeout: 15000 },
-  )
+  await page.waitForSelector('.clq-section', { timeout: 60000 })
 
-  const eyebrow = (await page.locator('.kz-s .kz-ey').first().textContent())?.trim() ?? ''
+  const eyebrow = (await page.locator('.clq-section--hero .clq-eyebrow').first().textContent())?.trim() ?? ''
   record(`${label}: hero eyebrow`, /circadian nootropics/i.test(eyebrow), eyebrow)
 
-  const sectionCount = await page.locator('.kz-s').count()
-  record(`${label}: snap sections`, sectionCount === 5, `${sectionCount} sections`)
+  const sectionCount = await page.locator('.clq-section').count()
+  record(`${label}: landing sections`, sectionCount === 5, `${sectionCount} sections`)
 
-  const snapType = await page.evaluate(() => ({
-    htmlClass: document.documentElement.classList.contains('marketing-v2-active'),
+  const scrollType = await page.evaluate(() => ({
+    hasClqSite: document.querySelector('.clq-site') !== null,
     bodySnap: getComputedStyle(document.body).scrollSnapType,
+    sectionOverflow: getComputedStyle(document.querySelector('#mechanism .clq-container') || document.body).overflowY,
   }))
   record(
-    `${label}: scroll-snap active`,
-    snapType.htmlClass && snapType.bodySnap.includes('mandatory'),
-    `class=${snapType.htmlClass}, snap=${snapType.bodySnap}`,
+    `${label}: normal document scroll`,
+    scrollType.hasClqSite && scrollType.bodySnap === 'none',
+    `snap=${scrollType.bodySnap}`,
   )
 
-  const sectionMetrics = await page.evaluate(() => {
-    const vh = window.innerHeight
-    return [...document.querySelectorAll('.kz-s')].slice(0, 5).map((el) => {
-      const h = el.getBoundingClientRect().height
-      return { id: el.id, height: Math.round(h), vh: Math.round(vh), ratio: h / vh }
-    })
+  const mechanismOverflow = await page.evaluate(() => {
+    const el = document.getElementById('mechanism')
+    if (!el) return 'missing'
+    return getComputedStyle(el).overflowY
   })
-
-  const fullViewport = sectionMetrics.every((s) => s.ratio >= 0.92 && s.ratio <= 1.08)
-  record(
-    `${label}: sections ~100vh (first 5)`,
-    fullViewport,
-    sectionMetrics.map((s) => `${s.id}:${s.height}/${s.vh}`).join(', '),
-  )
-
-  const hasTealBg = await page.evaluate(() =>
-    [...document.querySelectorAll('.kz-s')].some((el) => el.classList.contains('kz-s--teal')),
-  )
-  record(`${label}: no teal sections`, !hasTealBg)
+  record(`${label}: no section scroll trap`, mechanismOverflow === 'visible', mechanismOverflow)
 
   // Scroll to #product (nav links hidden on mobile)
   await page.evaluate(() => {
@@ -78,16 +62,16 @@ async function auditHome(page, label) {
   // Proof section — calculator + results on one slide
   await page.evaluate(() => document.getElementById('proof')?.scrollIntoView())
   await page.waitForTimeout(700)
-  const roiSlider = page.locator('.kz-roi__range').first()
+  const roiSlider = page.locator('.clq-roi__range').first()
   const hasRoiControls = (await roiSlider.count()) > 0
   record(`${label}: proof calculator visible`, hasRoiControls)
   if (hasRoiControls) {
     await roiSlider.fill('100')
     await page.waitForTimeout(200)
   }
-  const roiTotal = await page.locator('.kz-roi__results-total').textContent()
+  const roiTotal = await page.locator('.clq-roi__results-total').textContent()
   const roiVisible = await page.evaluate(() => {
-    const el = document.querySelector('.kz-roi__results-total')
+    const el = document.querySelector('.clq-roi__results-total')
     if (!el) return false
     const r = el.getBoundingClientRect()
     const style = getComputedStyle(el)
@@ -111,9 +95,9 @@ async function auditHome(page, label) {
 
 async function auditEvidence(page, label) {
   await page.goto(`${BASE}/evidence`, { waitUntil: 'load', timeout: 90000 })
-  await page.waitForSelector('.kz-s', { timeout: 60000 })
+  await page.waitForSelector('.clq-section', { timeout: 60000 })
 
-  const ctaHref = await page.locator('a.kz-btn-p, a.kz-cta-btn').first().getAttribute('href')
+  const ctaHref = await page.locator('a.clq-btn, a.clq-nav__cta').first().getAttribute('href')
   record(`${label}: evidence CTA present`, !!ctaHref, ctaHref ?? '')
 
   if (ctaHref?.includes('/science')) {
