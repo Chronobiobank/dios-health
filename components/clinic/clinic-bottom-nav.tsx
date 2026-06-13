@@ -3,15 +3,15 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { CLINIC_ROUTES, SHOP_ROUTES } from '@/lib/auth/routes'
+import { CLINIC_ROUTES, FULFILLMENT_ROUTES } from '@/lib/auth/routes'
 import { cn } from '@/lib/utils'
 
 const TABS = [
   { label: 'Cohort', href: CLINIC_ROUTES.panel, match: (path: string) => path === CLINIC_ROUTES.panel },
   {
-    label: 'Shop',
-    href: SHOP_ROUTES.catalog,
-    match: (path: string) => path.startsWith('/shop'),
+    label: 'Orders',
+    href: FULFILLMENT_ROUTES.clinicOrders,
+    match: (path: string) => path.startsWith(FULFILLMENT_ROUTES.clinicOrders),
   },
   {
     label: 'List',

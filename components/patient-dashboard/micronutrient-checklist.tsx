@@ -6,8 +6,8 @@ import {
   MICRONUTRIENT_LABELS,
   getChronoimmuneZone,
 } from '@/lib/chronoimmune/indication-zones'
-import { productForMicronutrient, shopProductUrl } from '@/lib/shop/catalog'
-import { CLINIC_ROUTES } from '@/lib/auth/routes'
+import { productForMicronutrient } from '@/lib/shop/catalog'
+import { CLINIC_ROUTES, FULFILLMENT_ROUTES } from '@/lib/auth/routes'
 import type { ChronoimmuneProfile } from '@/lib/patient-dashboard/types'
 import { cn } from '@/lib/utils'
 
@@ -38,11 +38,7 @@ export function MicronutrientChecklist({
           const orderHref = showOrder
             ? orderContext === 'clinician' && patientId
               ? `${CLINIC_ROUTES.order(patientId)}?product=${product.slug}&micronutrient=${item.id}`
-              : shopProductUrl(product.slug, {
-                  qty: product.quantityOptions[0]?.id,
-                  source: 'checklist',
-                  micronutrient: item.id,
-                })
+              : `${FULFILLMENT_ROUTES.patientOrders}?requirement=supplement-${item.id}`
             : null
 
           return (

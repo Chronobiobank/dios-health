@@ -1,11 +1,11 @@
 'use client'
 
-import { Bot, House, Lightbulb, ShoppingBag, SlidersHorizontal } from 'lucide-react'
+import { Bot, House, Lightbulb, Package, SlidersHorizontal } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { LucideIcon } from 'lucide-react'
 
-import { PATIENT_ROUTES, SHOP_ROUTES } from '@/lib/auth/routes'
+import { FULFILLMENT_ROUTES, PATIENT_ROUTES } from '@/lib/auth/routes'
 import { cn } from '@/lib/utils'
 
 type NavTab = {
@@ -35,10 +35,10 @@ const TABS: NavTab[] = [
     match: (path) => path === PATIENT_ROUTES.insights,
   },
   {
-    label: 'Shop',
-    href: SHOP_ROUTES.catalog,
-    icon: ShoppingBag,
-    match: (path) => path.startsWith('/shop'),
+    label: 'Orders',
+    href: FULFILLMENT_ROUTES.patientOrders,
+    icon: Package,
+    match: (path) => path.startsWith(FULFILLMENT_ROUTES.patientOrders),
   },
   {
     label: 'Settings',

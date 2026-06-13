@@ -1,4 +1,5 @@
 import '@/app/(wellness)/dashboard/retinomic-dashboard.css'
+import '@/app/styles/fulfillment.css'
 
 import { PatientBottomNav } from '@/components/dashboard/patient-bottom-nav'
 import { PatientDashboardLayoutShell } from '@/components/dashboard/patient-dashboard-layout-shell'

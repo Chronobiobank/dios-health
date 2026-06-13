@@ -49,6 +49,13 @@ export const SHOP_ROUTES = {
   success: '/shop/success',
 } as const
 
+/** Protocol-driven fulfillment — labs, assessments, protocol supplements */
+export const FULFILLMENT_ROUTES = {
+  patientOrders: '/dashboard/orders',
+  clinicOrders: '/clinic/orders',
+  clinicPatientOrder: (patientId: string) => `/clinic/order/${patientId}`,
+} as const
+
 export const PROTECTED_PREFIXES = ['/dashboard', '/clinic', '/shop', '/pending-verification'] as const
 
 export const PUBLIC_AUTH_PREFIXES = ['/signin', '/signup', '/auth'] as const

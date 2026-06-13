@@ -1,4 +1,5 @@
 import { DashboardClient } from '@/components/patient-dashboard/dashboard-client'
+import { PatientFulfillmentWidgets } from '@/components/fulfillment/patient-fulfillment-widgets'
 import { resolveDashboardAvatar } from '@/components/patient-dashboard/constants'
 import { getLocalizedPatientGreeting, getPatientFirstName } from '@/lib/auth/greeting'
 import { requirePatientSession } from '@/lib/auth/require-patient'
@@ -19,6 +20,7 @@ import { estimateMelanopicLuxCeiling, resolvePhoticDayPhase } from '@/lib/retino
 import { resolveFirstLightDailyStatus } from '@/lib/product/first-light-daily-status'
 import { resolveFirstLightWindow } from '@/lib/product/first-light-window'
 import { createClient } from '@/lib/supabase/server'
+import { getPatientFulfillmentSummary } from '@/lib/fulfillment/service'
 
 export const dynamic = 'force-dynamic'
 
@@ -175,8 +177,11 @@ export default async function PatientDashboardPage() {
     firstLightScanActionable,
   })
 
+  const fulfillmentSummary = await getPatientFulfillmentSummary(supabase, user.id)
+
   return (
-    <DashboardClient
+    <>
+      <DashboardClient
       greeting={greeting}
       firstName={firstName}
       fullName={profile.full_name ?? firstName}
@@ -190,6 +195,10 @@ export default async function PatientDashboardPage() {
         fitzpatrickType: patient.fitzpatrick_type,
         defaultSleepOnset: patient.chronotype_q3 ?? '22:30',
       }}
-    />
+      />
+      <div className="dash-dashboard-main px-4 pb-8 md:px-6">
+        <PatientFulfillmentWidgets summary={fulfillmentSummary} />
+      </div>
+    </>
   )
 }
