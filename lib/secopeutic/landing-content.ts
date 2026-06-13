@@ -1,3 +1,4 @@
+import { SECOPEUTIC_UK_STARTER_CLINICS } from '@/lib/secopeutic/certified-clinics'
 import { CLINICAL_GUIDE_CLINICIANS } from '@/lib/secopeutic/clinical-guide-clinicians'
 import { SECOPUTIC_DEMO_PATH } from '@/lib/secopeutic/site'
 
@@ -68,6 +69,7 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
       icon: 'tools',
       panelTitle: 'Monitoring this week',
       panelSeeAll: { label: 'Open demo', href: SECOPUTIC_DEMO_PATH },
+      panelLayout: 'grid',
       panelItems: [
         {
           title: 'Cohort safety dashboard.',
@@ -75,14 +77,19 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
           href: SECOPUTIC_DEMO_PATH,
         },
         {
-          title: 'Helena Kowalski record.',
-          meta: 'Sleep-led demo patient.',
-          href: `${SECOPUTIC_DEMO_PATH}/patients/helena-kowalski`,
-        },
-        {
           title: 'Marcus Okonkwo record.',
           meta: 'PTH-led demo patient.',
           href: `${SECOPUTIC_DEMO_PATH}/patients/marcus-okonkwo`,
+        },
+        {
+          title: 'Renata Ferreira record.',
+          meta: 'Review zone · timing gate.',
+          href: `${SECOPUTIC_DEMO_PATH}/patients/renata-ferreira`,
+        },
+        {
+          title: 'Helena Kowalski record.',
+          meta: 'Sleep-led demo patient.',
+          href: `${SECOPUTIC_DEMO_PATH}/patients/helena-kowalski`,
         },
       ],
     },
@@ -93,25 +100,14 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
       href: '/clinicians',
       linkLabel: 'Find certified clinics',
       icon: 'clinics',
-      panelTitle: 'Clinician pathways',
+      panelTitle: 'UK starter clinics',
       panelSeeAll: { label: 'Find clinics', href: '/clinicians' },
-      panelItems: [
-        {
-          title: 'Exploring high-dose vitamin D.',
-          meta: 'Connect before your first panel.',
-          href: '/science',
-        },
-        {
-          title: 'Sleep-led certified practices.',
-          meta: 'TipTraQ blocks between lab panels.',
-          href: '/clinicians',
-        },
-        {
-          title: 'PTH-led certified practices.',
-          meta: 'Safety ledger plus timing adherence.',
-          href: '/clinicians',
-        },
-      ],
+      panelLayout: 'grid',
+      panelItems: SECOPEUTIC_UK_STARTER_CLINICS.map((clinic) => ({
+        title: clinic.cardTitle,
+        meta: clinic.cardMeta,
+        href: clinic.href,
+      })),
     },
   ],
 } as const

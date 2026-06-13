@@ -1,31 +1,31 @@
 import Link from 'next/link'
 
-import { SecopeuticWordmark } from '@/components/brand/secopeutic-wordmark'
-import { SECOPEUTIC_LANDING_DISCLAIMER } from '@/lib/secopeutic/landing-content'
-import { SECOPUTIC_DEMO_PATH } from '@/lib/secopeutic/site'
+import { SECOPEUTIC_BRAND_NAME, SECOPEUTIC_LOGO_GLYPH } from '@/lib/brand/secopeutic-brand'
+import { SECOPUTIC_DEMO_PATH, SECOPUTIC_LANDING_PATH } from '@/lib/secopeutic/site'
 
 const FOOTER_LINKS = [
   { label: 'Evidence library', href: '/science' },
   { label: 'Monitoring demo', href: SECOPUTIC_DEMO_PATH },
-  { label: 'Claim pilot', href: '/clinicians' },
-  { label: 'Certified clinics', href: '/secopeutic#clinics' },
+  { label: 'Claim free pilot', href: '/clinicians' },
+  { label: 'Certified clinics', href: '/clinicians' },
 ] as const
 
 export function SecopeuticFooter() {
-  const year = new Date().getFullYear()
-
   return (
     <footer className="seco-footer">
       <div className="seco-landing__section-inner">
         <div className="seco-footer__main">
-          <div className="seco-footer__brand">
-            <SecopeuticWordmark />
-            <p className="seco-footer__tagline">High-dose vitamin D monitoring for clinicians.</p>
-          </div>
+          <Link href={SECOPUTIC_LANDING_PATH} className="seco-footer__brand" aria-label={SECOPEUTIC_BRAND_NAME}>
+            <span className="seco-footer__glyph" aria-hidden="true">
+              {SECOPEUTIC_LOGO_GLYPH}
+            </span>
+            <span className="seco-footer__tag">VD3 Therapy</span>
+          </Link>
+
           <nav className="seco-footer__nav" aria-label="Secopeutic">
             <ul className="seco-footer__links">
               {FOOTER_LINKS.map((link) => (
-                <li key={link.href}>
+                <li key={link.href + link.label}>
                   <Link href={link.href} className="seco-footer__link">
                     {link.label}
                   </Link>
@@ -34,9 +34,17 @@ export function SecopeuticFooter() {
             </ul>
           </nav>
         </div>
+
         <div className="seco-footer__bar">
-          <p className="seco-footer__copy">© {year} Secopeutic</p>
-          <p className="seco-footer__legal">{SECOPEUTIC_LANDING_DISCLAIMER}</p>
+          <p className="seco-footer__copy">© 2026 SECOMED</p>
+          <nav className="seco-footer__legal-nav" aria-label="Legal">
+            <Link href="/privacy" className="seco-footer__legal-link">
+              Privacy
+            </Link>
+            <Link href="/secopeutic/terms" className="seco-footer__legal-link">
+              Terms
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>

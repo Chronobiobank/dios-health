@@ -119,18 +119,6 @@ body:has(.seco-shell--dark) {
   white-space: nowrap;
 }
 
-.secopeutic-demo .seco-footer .secopeutic-wordmark {
-  display: inline-flex;
-  align-items: center;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
 .secopeutic-demo .clinical-site-nav__context {
   display: none;
   font-family: var(--seco-font-data);
