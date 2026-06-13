@@ -16,10 +16,11 @@
 
 :root {
   /*
-   * Typography — Inter (clinical UI) · DM Mono (data) · Instrument Serif (marketing display)
+   * Typography — Inter (clinical UI) · DM Mono (data) · Merriweather (display) · Bureau Sans (marketing UI)
    */
   --font-family-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-family-serif: var(--font-instrument-serif, Georgia, serif);
+  --font-family-serif: var(--font-merriweather, Georgia, serif);
+  --font-family-display-sans: var(--font-bureau-sans, var(--font-inter), system-ui, sans-serif);
   --font-family-mono: var(--font-mono), ui-monospace, monospace;
   /* Legacy aliases — existing CSS referencing Geist variables */
   --font-geist-sans: var(--font-inter);
@@ -175,7 +176,7 @@
   /* ── DIOS CLINICAL TYPE SYSTEM ── */
   --font-ui: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-data: var(--font-mono), 'Courier New', monospace;
-  --font-display: var(--font-instrument-serif, Georgia, serif);
+  --font-display: var(--font-merriweather, Georgia, serif);
 
   --text-h1: 600 1.125rem/1.25 var(--font-ui);
   --text-h2: 500 1.0625rem/1.3 var(--font-ui);
@@ -374,9 +375,9 @@
     font-weight: var(--font-weight-regular);
   }
 
-  /* Dashboard and clinical pages inherit Inter — logo mark keeps Montserrat via .dios-wordmark */
+  /* Dashboard and clinical pages inherit Inter — logo marks keep Montserrat */
   .clinical-layout,
-  .clinical-layout *:not(.dios-wordmark) {
+  .clinical-layout *:not(.dios-wordmark):not(.secopeutic-wordmark) {
     font-family: var(--font-ui);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

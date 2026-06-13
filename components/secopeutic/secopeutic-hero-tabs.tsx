@@ -10,7 +10,18 @@ import { cn } from '@/lib/utils'
 
 type HeroPillar = (typeof SECOPEUTIC_LANDING_PLATFORM.pillars)[number]
 type HeroPanelItem = HeroPillar['panelItems'][number]
-type HeroClinician = NonNullable<HeroPanelItem['clinicians']>[number]
+
+type HeroClinician = {
+  name: string
+  image?: string
+  imageAlt?: string
+  initials?: string
+  tone?: 'violet' | 'amber' | 'teal'
+}
+
+function getPanelClinicians(item: HeroPanelItem): readonly HeroClinician[] {
+  return 'clinicians' in item ? item.clinicians : []
+}
 
 const HERO_TAB_ICONS: Record<HeroPillar['icon'], LucideIcon> = {
   book: BookOpen,
@@ -63,9 +74,9 @@ function HeroPanelCard({
 }: {
   item: HeroPanelItem
   index: number
-  layout: HeroPillar['panelLayout'] | undefined
+  layout?: 'grid'
 }) {
-  const clinicians = item.clinicians ?? []
+  const clinicians = getPanelClinicians(item)
   const clinicianLabel = clinicians.map((clinician) => clinician.name).join(', ')
 
   return (
@@ -103,7 +114,8 @@ export function SecopeuticHeroTabs() {
 
   const activePillar = pillars.find((pillar) => pillar.id === activeId) ?? pillars[0]
   const activeIndex = pillars.findIndex((pillar) => pillar.id === activeId)
-  const panelLayout = 'panelLayout' in activePillar ? activePillar.panelLayout : undefined
+  const panelLayout =
+    'panelLayout' in activePillar && activePillar.panelLayout === 'grid' ? 'grid' : undefined
 
   return (
     <div className="seco-hero-tabs" data-active-index={activeIndex}>
