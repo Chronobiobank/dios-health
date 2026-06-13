@@ -1,3 +1,4 @@
+import { CLINICAL_GUIDE_CLINICIANS } from '@/lib/secopeutic/clinical-guide-clinicians'
 import { SECOPUTIC_DEMO_PATH } from '@/lib/secopeutic/site'
 
 export const SECOPEUTIC_LANDING_META = {
@@ -7,8 +8,9 @@ export const SECOPEUTIC_LANDING_META = {
 } as const
 
 export const SECOPEUTIC_LANDING_HERO = {
-  eyebrow: 'For clinicians worldwide',
-  headline: 'Your home for high-dose vitamin D.',
+  headlineLead: 'Activate',
+  headlineAccent: 'Vitamin D Therapy',
+  headlineSub: 'with clinical precision',
   support:
     'Evidence, monitoring tools, and verified clinics for practitioners ready to learn more.',
   primaryCta: { label: 'Claim free pilot', href: '/clinicians' },
@@ -29,24 +31,94 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
   pillars: [
     {
       id: 'learn',
-      label: 'Clinician guidance',
-      body: 'Curated evidence and protocol context. Education for licensed prescribers, not patient dosing advice.',
+      label: 'Clinical guide',
+      body: 'Curated evidence and protocol context for licensed prescribers.',
       href: '/science',
       linkLabel: 'Browse evidence',
+      icon: 'book',
+      panelTitle: 'Evidence for prescribers',
+      panelSeeAll: { label: 'See all', href: '/science' },
+      panelLayout: 'grid',
+      panelItems: [
+        {
+          title: 'Sleep architecture and high-dose vitamin D.',
+          meta: 'Clinical guide · Sleep-led practice',
+          href: `${SECOPUTIC_DEMO_PATH}/patients/helena-kowalski`,
+          clinicians: [CLINICAL_GUIDE_CLINICIANS.gominak, CLINICAL_GUIDE_CLINICIANS.munro],
+        },
+        {
+          title: 'PTH suppression between lab draws.',
+          meta: 'Clinical guide · PTH-led practice',
+          href: `${SECOPUTIC_DEMO_PATH}/patients/marcus-okonkwo`,
+          clinicians: [CLINICAL_GUIDE_CLINICIANS.coimbra],
+        },
+        {
+          title: 'Population dosing misses biology.',
+          meta: 'Position paper · Precision chronotherapy',
+          href: '/science',
+          clinicians: [CLINICAL_GUIDE_CLINICIANS.munro],
+        },
+        {
+          title: 'Low vitamin D worsens COVID outcomes.',
+          meta: 'Clinical guide · COVID review',
+          href: '/science',
+          clinicians: [CLINICAL_GUIDE_CLINICIANS.seheult],
+        },
+      ],
     },
     {
       id: 'tools',
       label: 'Safety tools',
-      body: 'Calcium, PTH, 25-OH-D, urinary calcium, and eGFR on one timeline between blood draws.',
+      body: 'Calcium, PTH, 25-OH-D, and eGFR on one timeline.',
       href: SECOPUTIC_DEMO_PATH,
       linkLabel: 'Open monitoring demo',
+      icon: 'tools',
+      panelTitle: 'Monitoring this week',
+      panelSeeAll: { label: 'Open demo', href: SECOPUTIC_DEMO_PATH },
+      panelItems: [
+        {
+          title: 'Cohort safety dashboard.',
+          meta: 'Stable, Review, and Hold on one row.',
+          href: SECOPUTIC_DEMO_PATH,
+        },
+        {
+          title: 'Helena Kowalski record.',
+          meta: 'Sleep-led demo patient.',
+          href: `${SECOPUTIC_DEMO_PATH}/patients/helena-kowalski`,
+        },
+        {
+          title: 'Marcus Okonkwo record.',
+          meta: 'PTH-led demo patient.',
+          href: `${SECOPUTIC_DEMO_PATH}/patients/marcus-okonkwo`,
+        },
+      ],
     },
     {
       id: 'clinics',
       label: 'Certified clinics',
-      body: 'Verified practices opt in only. Find colleagues running supervised high-dose vitamin D near you.',
+      body: 'Verified practices opt in only. Find colleagues near you.',
       href: '/clinicians',
       linkLabel: 'Find certified clinics',
+      icon: 'clinics',
+      panelTitle: 'Clinician pathways',
+      panelSeeAll: { label: 'Find clinics', href: '/clinicians' },
+      panelItems: [
+        {
+          title: 'Exploring high-dose vitamin D.',
+          meta: 'Connect before your first panel.',
+          href: '/science',
+        },
+        {
+          title: 'Sleep-led certified practices.',
+          meta: 'TipTraQ blocks between lab panels.',
+          href: '/clinicians',
+        },
+        {
+          title: 'PTH-led certified practices.',
+          meta: 'Safety ledger plus timing adherence.',
+          href: '/clinicians',
+        },
+      ],
     },
   ],
 } as const

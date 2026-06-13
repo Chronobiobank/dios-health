@@ -1,54 +1,168 @@
 /**
- * Secopeutic pilot demo — clinical stylesheet (3 layers)
- * 1. Tokens aligned to clinical-globals
- * 2. Page layout and responsive spacing
- * 3. Component polish (panels, metrics, table, audience cards)
+ * Secopeutic — maven.com patterns (education platform, not Maven Clinic)
+ * Dark navy hero · pinstripe texture · spectrum gradient display type · course cards
  */
 
 .secopeutic-demo {
-  --seco-accent: var(--ct-accent, #185fa5);
-  --seco-ink: var(--ct-ink, #0f1012);
-  --seco-canvas: #faf9f7;
+  --seco-navy: #0b1220;
+  --seco-navy-2: #121c2e;
+  --seco-navy-card: #151f33;
+  --seco-navy-border: rgb(255 255 255 / 0.1);
+  --seco-ink: #111213;
+  --seco-muted: rgb(17 18 19 / 0.62);
+  --seco-faint: rgb(17 18 19 / 0.42);
   --seco-surface: #fff;
-  --seco-muted: rgb(15 16 18 / 0.65);
-  --seco-border: rgb(0 0 0 / 0.08);
-  --seco-radius-lg: 1rem;
-  --seco-radius-md: 0.75rem;
-  --seco-page-pad: clamp(1.25rem, 4vw, 1.5rem);
-  --seco-stack-gap: clamp(1.5rem, 3vw, 2rem);
-  --seco-copy-measure: 58ch;
+  --seco-canvas: #f7f8fa;
+  --seco-border: rgb(17 18 19 / 0.08);
+  --seco-spectrum: linear-gradient(92deg, #5ec8f5 0%, #8b9cf8 42%, #c4a0ff 100%);
+  --seco-spectrum-hero: linear-gradient(
+    90deg,
+    #f2b8a2 0%,
+    #e8a8c8 38%,
+    #c8b0f0 72%,
+    #a8c8ff 100%
+  );
+  --seco-radius-md: 0.875rem;
+  --seco-radius-lg: 1.125rem;
+  --seco-radius-xl: 1.375rem;
+  --seco-page-pad: clamp(1.25rem, 4vw, 2rem);
+  --seco-page-max: 76rem;
+  --seco-stack-gap: clamp(1.75rem, 4vw, 2.5rem);
+  --seco-copy-measure: 52ch;
+  --seco-font-display: var(--font-merriweather, Georgia, serif);
+  --seco-font-accent: var(--font-bureau-sans, var(--font-dm-sans), system-ui, sans-serif);
+  --seco-font-ui: var(--font-bureau-sans, var(--font-dm-sans), system-ui, sans-serif);
+  --seco-font-data: var(--font-mkt-mono, var(--font-mono), monospace);
   min-height: 100vh;
   background: var(--seco-canvas);
   color: var(--seco-ink);
+  font-family: var(--seco-font-ui);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ——— Task 1: typography tokens ——— */
-.secopeutic-demo .type-dashboard-h1 {
-  font-size: clamp(1.5rem, 4vw, 1.875rem);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+.secopeutic-demo.seco-shell--dark {
+  background: var(--seco-navy);
+  color: #fff;
 }
 
-.secopeutic-demo .font-ui.text-ui-body {
-  font-size: max(17px, 1.0625rem);
-  line-height: 1.55;
+body:has(.seco-shell--dark) {
+  background-color: var(--seco-navy);
 }
 
-.secopeutic-demo .font-ui.text-ui-sm {
-  font-size: max(15px, 0.9375rem);
-  line-height: 1.5;
+.secopeutic-demo .seco-display {
+  font-family: var(--seco-font-display);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
-/* ——— Task 2: page layout ——— */
+/* Dark nav — maven.com header */
+.secopeutic-demo.seco-shell--dark .clinical-site-nav {
+  border-bottom: 1px solid var(--seco-navy-border);
+  background: rgb(11 18 32 / 0.92);
+  backdrop-filter: blur(12px);
+  box-shadow: none;
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__brand,
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__context {
+  color: #fff;
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__link {
+  color: rgb(255 255 255 / 0.82);
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__link:hover {
+  background: rgb(255 255 255 / 0.08);
+  color: #fff;
+}
+
+.secopeutic-demo .clinical-site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  min-height: 3.75rem;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.secopeutic-demo .clinical-site-nav__brand {
+  font-size: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* SECOPEUTIC — Montserrat Regular, all caps; O = ʘ (U+0298) */
+.secopeutic-demo .secopeutic-wordmark {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.secopeutic-demo .secopeutic-wordmark__o {
+  display: inline-block;
+  letter-spacing: 0;
+  vertical-align: 0.04em;
+}
+
+.secopeutic-demo .clinical-site-nav__context {
+  display: none;
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--seco-faint);
+}
+
+@media (min-width: 900px) {
+  .secopeutic-demo .clinical-site-nav__context {
+    display: block;
+  }
+}
+
+.secopeutic-demo .clinical-site-nav__link {
+  padding: 0.45rem 0.7rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.secopeutic-demo .clinical-site-nav__link:hover {
+  text-decoration: none;
+}
+
+.secopeutic-demo .seco-nav__cta {
+  margin-left: 0.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--seco-navy);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.secopeutic-demo .seco-nav__cta:hover {
+  background: rgb(255 255 255 / 0.9);
+  text-decoration: none;
+}
+
 .secopeutic-demo__page {
   margin-inline: auto;
-  max-width: 72rem;
+  width: 100%;
+  max-width: var(--seco-page-max);
   padding: var(--seco-page-pad);
-  padding-bottom: 4rem;
 }
 
 .secopeutic-demo__lede {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
   max-width: var(--seco-copy-measure);
   color: var(--seco-muted);
 }
@@ -64,39 +178,21 @@
   margin-top: var(--seco-stack-gap);
 }
 
-/* ——— Shell / wordmark ——— */
-.secopeutic-demo__wordmark {
-  font-family: var(--font-body, 'Geist', sans-serif);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.8125rem;
-  color: var(--seco-ink);
-}
-
-/* ——— Task 3: panels ——— */
+/* Demo pages — light clinical panels */
 .secopeutic-panel {
-  border: 0.5px solid var(--seco-border);
+  border: 1px solid var(--seco-border);
   border-radius: var(--seco-radius-lg);
   background: var(--seco-surface);
-  padding: clamp(1.125rem, 3vw, 1.5rem);
-  box-shadow: 0 1px 0 rgb(0 0 0 / 0.03);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  box-shadow: 0 1px 2px rgb(17 18 19 / 0.04);
 }
 
-.secopeutic-panel + .secopeutic-panel {
-  margin-top: 1.5rem;
-}
-
-/* Metric cards */
 .secopeutic-metric-card {
-  border: 0.5px solid rgb(0 0 0 / 0.06);
+  border: 1px solid var(--seco-border);
   border-radius: var(--seco-radius-md);
   background: var(--seco-canvas);
-  padding: 1rem 1.125rem;
-  min-height: 6.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  padding: 1.125rem 1.25rem;
+  min-height: 6.75rem;
 }
 
 .secopeutic-metric-grid {
@@ -111,7 +207,6 @@
   }
 }
 
-/* Audience cards */
 .secopeutic-audience-cards {
   display: grid;
   gap: 1rem;
@@ -123,118 +218,97 @@
   }
 }
 
+@media (min-width: 1100px) {
+  .secopeutic-audience-cards--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Maven-style course cards on light sections */
+.seco-maven-course-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border: 1px solid var(--seco-border);
+  border-radius: var(--seco-radius-lg);
+  background: var(--seco-surface);
+  padding: 1.125rem 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.seco-maven-course-card:hover {
+  box-shadow: 0 10px 28px rgb(17 18 19 / 0.08);
+  transform: translateY(-2px);
+}
+
+.seco-maven-course-card__rank {
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  color: var(--seco-faint);
+}
+
+.seco-maven-course-card__title {
+  margin-top: 0.5rem;
+  font-family: var(--seco-font-ui);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--seco-ink);
+}
+
+.seco-maven-course-card__meta {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--seco-muted);
+}
+
+.seco-maven-course-card__link {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2f5fd4;
+}
+
 .secopeutic-audience-card {
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  border: 0.5px solid rgb(0 0 0 / 0.1);
-  border-radius: var(--seco-radius-md);
+  border: 1px solid var(--seco-border);
+  border-radius: var(--seco-radius-lg);
   background: var(--seco-surface);
-  padding: 1.25rem 1.5rem;
+  padding: 1.25rem 1.375rem;
   text-decoration: none;
   color: inherit;
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease,
-    transform 0.15s ease;
-}
-
-.secopeutic-audience-card:hover {
-  border-color: rgb(24 95 165 / 0.4);
-  box-shadow: 0 8px 24px rgb(24 95 165 / 0.1);
-  transform: translateY(-1px);
 }
 
 .secopeutic-audience-card__link {
-  display: inline-block;
   margin-top: auto;
   padding-top: 1rem;
-  font-size: max(15px, 0.9375rem);
-  font-weight: 500;
-  color: var(--seco-accent);
-}
-
-/* Cohort table wrapper */
-.secopeutic-cohort-table {
-  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2f5fd4;
 }
 
 .secopeutic-cohort-table__frame {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border: 0.5px solid var(--seco-border);
-  border-radius: var(--seco-radius-lg);
+  border: 1px solid var(--seco-border);
+  border-radius: var(--seco-radius-xl);
   background: var(--seco-surface);
 }
 
-.secopeutic-cohort-table__frame table {
-  min-width: 52rem;
-}
-
-.secopeutic-cohort-table__frame tbody tr {
-  transition: background-color 0.12s ease;
-}
-
-.secopeutic-cohort-table__frame tbody tr:hover {
-  background: rgb(0 0 0 / 0.02);
-}
-
-.secopeutic-cohort-table__footnote {
-  margin-top: 0.5rem;
-  font-family: var(--font-data, monospace);
-  font-size: 0.625rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgb(0 0 0 / 0.4);
-}
-
-/* Lab history table */
-.secopeutic-lab-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: max(15px, 0.9375rem);
-}
-
-.secopeutic-lab-table th,
-.secopeutic-lab-table td {
-  padding: 0.625rem 0.75rem;
-  text-align: left;
-  border-bottom: 1px solid rgb(0 0 0 / 0.06);
-  white-space: nowrap;
-}
-
-.secopeutic-lab-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
 .secopeutic-lab-table th {
-  font-family: var(--font-data, monospace);
+  font-family: var(--seco-font-data);
   font-size: 0.625rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgb(0 0 0 / 0.45);
-  background: rgb(250 249 247);
+  color: var(--seco-faint);
+  background: var(--seco-canvas);
 }
 
-.secopeutic-lab-table tbody tr:hover {
-  background: rgb(24 95 165 / 0.04);
-}
-
-/* CTA */
-.secopeutic-demo__cta {
-  display: inline-block;
-  margin-top: 1rem;
-  font-size: max(17px, 1.0625rem);
-  font-weight: 500;
-  color: var(--seco-accent);
-  text-decoration: none;
-}
-
-.secopeutic-demo__cta:hover {
-  text-decoration: underline;
-}
-
-/* Patient detail header band */
 .secopeutic-patient-header {
   display: flex;
   flex-wrap: wrap;

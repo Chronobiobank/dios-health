@@ -1,88 +1,94 @@
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 
-import { DATA_LABEL, DASHBOARD_HEADLINE } from '@/components/dashboard/dashboard-styles'
+import { SecopeuticFooter } from '@/components/secopeutic/secopeutic-footer'
+import { SecopeuticHeroHeadline } from '@/components/secopeutic/secopeutic-hero-headline'
+import { SecopeuticHeroTabs } from '@/components/secopeutic/secopeutic-hero-tabs'
 import {
   SECOPEUTIC_LANDING_DISCLAIMER,
   SECOPEUTIC_LANDING_HERO,
   SECOPEUTIC_LANDING_PATHWAYS,
   SECOPEUTIC_LANDING_PILOT,
-  SECOPEUTIC_LANDING_PLATFORM,
   SECOPEUTIC_LANDING_PRODUCT,
   SECOPEUTIC_LANDING_SPECTRUM,
   SECOPEUTIC_LANDING_STAKES,
 } from '@/lib/secopeutic/landing-content'
 import { cn } from '@/lib/utils'
 
-function SectionNumber({ value }: { value: string }) {
-  return <p className={cn(DATA_LABEL, 'seco-landing__number')}>{value}</p>
+function LightSection({
+  id,
+  title,
+  support,
+  canvas,
+  seeAllHref,
+  seeAllLabel,
+  children,
+}: {
+  id?: string
+  title: string
+  support?: string
+  canvas?: boolean
+  seeAllHref?: string
+  seeAllLabel?: string
+  children: ReactNode
+}) {
+  return (
+    <section
+      id={id}
+      className={cn('seco-landing__light', canvas && 'seco-landing__light--canvas')}
+    >
+      <div className="seco-landing__section-inner">
+        <div className="seco-landing__section-head">
+          <h2 className="seco-landing__section-title">{title}</h2>
+          {seeAllHref ? (
+            <Link href={seeAllHref} className="seco-landing__section-link">
+              {seeAllLabel ?? 'See all'} →
+            </Link>
+          ) : null}
+        </div>
+        {support ? <p className="seco-landing__support">{support}</p> : null}
+        {children}
+      </div>
+    </section>
+  )
 }
 
 export function SecopeuticLanding() {
   return (
-    <div className="seco-landing">
-      <section className="seco-landing__hero secopeutic-demo__page">
-        <p className={DATA_LABEL}>{SECOPEUTIC_LANDING_HERO.eyebrow}</p>
-        <h1 className={`${DASHBOARD_HEADLINE} seco-landing__headline`}>
-          {SECOPEUTIC_LANDING_HERO.headline}
-        </h1>
-        <p className="secopeutic-demo__lede font-ui text-ui-body">{SECOPEUTIC_LANDING_HERO.support}</p>
-        <div className="seco-landing__actions">
-          <Link href={SECOPEUTIC_LANDING_HERO.primaryCta.href} className="seco-landing__btn seco-landing__btn--primary">
-            {SECOPEUTIC_LANDING_HERO.primaryCta.label} →
-          </Link>
-          <Link
-            href={SECOPEUTIC_LANDING_HERO.secondaryCta.href}
-            className="seco-landing__btn seco-landing__btn--secondary"
-          >
-            {SECOPEUTIC_LANDING_HERO.secondaryCta.label} →
-          </Link>
+    <div className="seco-landing seco-landing--maven">
+      <section className="seco-landing__hero">
+        <div className="seco-landing__hero-navy">
+          <div className="seco-landing__section-inner">
+            <SecopeuticHeroHeadline />
+            <p className="seco-landing__hero-lede">{SECOPEUTIC_LANDING_HERO.support}</p>
+          </div>
+        </div>
+        <div className="seco-landing__section-inner">
+          <SecopeuticHeroTabs />
         </div>
       </section>
 
-      <section className="seco-landing__section secopeutic-demo__page">
-        <SectionNumber value={SECOPEUTIC_LANDING_STAKES.number} />
-        <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_STAKES.headline}</h2>
-        <p className="seco-landing__support">{SECOPEUTIC_LANDING_STAKES.support}</p>
-      </section>
+      <LightSection title={SECOPEUTIC_LANDING_STAKES.headline} support={SECOPEUTIC_LANDING_STAKES.support} />
 
-      <section id="platform" className="seco-landing__section secopeutic-demo__page">
-        <SectionNumber value={SECOPEUTIC_LANDING_PLATFORM.number} />
-        <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_PLATFORM.headline}</h2>
-        <p className="seco-landing__support">{SECOPEUTIC_LANDING_PLATFORM.support}</p>
-        <ul className="seco-landing__layer-grid">
-          {SECOPEUTIC_LANDING_PLATFORM.pillars.map((pillar) => (
-            <li key={pillar.id} className="secopeutic-panel seco-landing__layer-card">
-              <p className={DATA_LABEL}>{pillar.label}</p>
-              <p className="seco-landing__card-body">{pillar.body}</p>
-              <Link
-                href={pillar.href}
-                className="secopeutic-audience-card__link mt-4 inline-block"
-              >
-                {pillar.linkLabel} →
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="seco-landing__section secopeutic-demo__page">
-        <SectionNumber value={SECOPEUTIC_LANDING_PRODUCT.number} />
-        <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_PRODUCT.headline}</h2>
-        <p className="seco-landing__support">{SECOPEUTIC_LANDING_PRODUCT.support}</p>
+      <LightSection
+        title={SECOPEUTIC_LANDING_PRODUCT.headline}
+        support={SECOPEUTIC_LANDING_PRODUCT.support}
+        canvas
+      >
         <ul className="seco-landing__layer-grid">
           {SECOPEUTIC_LANDING_PRODUCT.layers.map((layer) => (
-            <li key={layer.id} className="secopeutic-panel seco-landing__layer-card">
-              <p className={DATA_LABEL}>{layer.label}</p>
+            <li key={layer.id} className="seco-landing__feature-card">
+              <p className="seco-landing__card-label">{layer.label}</p>
               <p className="seco-landing__card-body">{layer.body}</p>
             </li>
           ))}
         </ul>
-      </section>
+      </LightSection>
 
-      <section className="seco-landing__section secopeutic-demo__page">
-        <SectionNumber value={SECOPEUTIC_LANDING_SPECTRUM.number} />
-        <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_SPECTRUM.headline}</h2>
-        <p className="seco-landing__support">{SECOPEUTIC_LANDING_SPECTRUM.support}</p>
+      <LightSection
+        title={SECOPEUTIC_LANDING_SPECTRUM.headline}
+        support={SECOPEUTIC_LANDING_SPECTRUM.support}
+      >
         <ul className="seco-landing__zone-rail">
           {SECOPEUTIC_LANDING_SPECTRUM.zones.map((zone) => (
             <li
@@ -99,38 +105,56 @@ export function SecopeuticLanding() {
             </li>
           ))}
         </ul>
-      </section>
+      </LightSection>
 
-      <section id="clinics" className="seco-landing__section secopeutic-demo__page">
-        <SectionNumber value={SECOPEUTIC_LANDING_PATHWAYS.number} />
-        <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_PATHWAYS.headline}</h2>
-        <p className="seco-landing__support">{SECOPEUTIC_LANDING_PATHWAYS.support}</p>
-        <div className="secopeutic-audience-cards secopeutic-demo__section">
-          {SECOPEUTIC_LANDING_PATHWAYS.cards.map((card) => (
-            <Link key={card.id} href={card.demoHref} className="secopeutic-audience-card">
-              <p className={DATA_LABEL}>{card.label}</p>
-              <p className="mt-2 font-ui text-ui-body font-semibold text-black">{card.headline}</p>
-              <p className="mt-2 font-ui text-ui-sm leading-relaxed text-black/65">{card.support}</p>
-              <span className="secopeutic-audience-card__link">{card.demoLabel} →</span>
+      <LightSection
+        id="clinics"
+        title="Clinician pathways"
+        support={SECOPEUTIC_LANDING_PATHWAYS.support}
+        seeAllHref="/clinicians"
+        seeAllLabel="Find certified clinics"
+        canvas
+      >
+        <div className="seco-maven-chips" aria-label="Practice types">
+          <span className="seco-maven-chip">Exploring</span>
+          <span className="seco-maven-chip">Sleep-led</span>
+          <span className="seco-maven-chip">PTH-led</span>
+        </div>
+        <div className="seco-maven-trending">
+          {SECOPEUTIC_LANDING_PATHWAYS.cards.map((card, index) => (
+            <Link key={card.id} href={card.demoHref} className="seco-maven-course-card">
+              <span className="seco-maven-course-card__rank">{index + 1}</span>
+              <p className="seco-maven-course-card__title">{card.headline}</p>
+              <p className="seco-maven-course-card__meta">{card.support}</p>
+              <span className="seco-maven-course-card__link">{card.demoLabel} →</span>
             </Link>
           ))}
         </div>
+      </LightSection>
+
+      <section className="seco-landing__close-navy">
+        <div className="seco-landing__section-inner">
+          <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_PILOT.headline}</h2>
+          <p className="seco-landing__support">{SECOPEUTIC_LANDING_PILOT.support}</p>
+          <div className="seco-landing__actions">
+            <Link
+              href={SECOPEUTIC_LANDING_PILOT.cta.href}
+              className="seco-landing__btn seco-landing__btn--primary"
+            >
+              {SECOPEUTIC_LANDING_PILOT.cta.label} →
+            </Link>
+            <Link
+              href={SECOPEUTIC_LANDING_PILOT.demoCta.href}
+              className="seco-landing__btn seco-landing__btn--secondary"
+            >
+              {SECOPEUTIC_LANDING_PILOT.demoCta.label} →
+            </Link>
+          </div>
+          <p className="seco-landing__disclaimer">{SECOPEUTIC_LANDING_DISCLAIMER}</p>
+        </div>
       </section>
 
-      <section className="seco-landing__section seco-landing__close secopeutic-demo__page">
-        <SectionNumber value={SECOPEUTIC_LANDING_PILOT.number} />
-        <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_PILOT.headline}</h2>
-        <p className="seco-landing__support">{SECOPEUTIC_LANDING_PILOT.support}</p>
-        <div className="seco-landing__actions">
-          <Link href={SECOPEUTIC_LANDING_PILOT.cta.href} className="seco-landing__btn seco-landing__btn--primary">
-            {SECOPEUTIC_LANDING_PILOT.cta.label} →
-          </Link>
-          <Link href={SECOPEUTIC_LANDING_PILOT.demoCta.href} className="seco-landing__btn seco-landing__btn--secondary">
-            {SECOPEUTIC_LANDING_PILOT.demoCta.label} →
-          </Link>
-        </div>
-        <p className="seco-landing__disclaimer">{SECOPEUTIC_LANDING_DISCLAIMER}</p>
-      </section>
+      <SecopeuticFooter />
     </div>
   )
 }

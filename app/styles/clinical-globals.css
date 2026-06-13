@@ -29,6 +29,11 @@
   flex-direction: column;
 }
 
+[data-clinical-layout].seco-shell--dark {
+  background-color: var(--seco-navy, #0b1220);
+  color: #fff;
+}
+
 [data-clinical-layout] :is(.ct-shell, .clinicians-triage) {
   --ct-accent: #185fa5;
   --ct-ink: #0f1012;

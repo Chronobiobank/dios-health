@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { SecopeuticCohortTable } from '@/components/secopeutic/secopeutic-cohort-table'
 import { TipTraqPractitionerBanner } from '@/components/clinic/tiptraq-practitioner-banner'
-import { DASHBOARD_HEADLINE, DATA_LABEL } from '@/components/dashboard/dashboard-styles'
+import { DATA_LABEL } from '@/components/dashboard/dashboard-styles'
 import { FlagBadge } from '@/components/ui/flag-badge'
 import { SECOPUTIC_DEMO_PATIENTS } from '@/lib/secopeutic/demo-cohort'
 
@@ -15,7 +15,7 @@ export function SecopeuticCohortDashboard() {
   return (
     <div className="secopeutic-demo__page">
       <p className={DATA_LABEL}>Secopeutic OS · pilot demo</p>
-      <h1 className={`${DASHBOARD_HEADLINE} mt-2 max-w-3xl`}>
+      <h1 className="seco-display mt-2 max-w-3xl">
         Safety ledger plus sleep and timing between blood draws.
       </h1>
       <p className="secopeutic-demo__lede font-ui text-ui-body leading-relaxed">
