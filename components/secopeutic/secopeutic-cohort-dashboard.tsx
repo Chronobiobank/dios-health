@@ -65,9 +65,14 @@ export function SecopeuticCohortDashboard() {
           Run three real patients on Secopeutic for six months at no cost. Keep City Labs. Add
           TipTraQ and dose window logging on one timeline.
         </p>
-        <Link href="/clinicians" className="secopeutic-demo__cta mt-4 inline-block">
-          Claim free pilot seat →
-        </Link>
+        <div className="seco-landing__actions mt-4">
+          <Link href="/clinicians" className="seco-landing__btn seco-landing__btn--primary">
+            Claim free pilot →
+          </Link>
+          <Link href="/secopeutic" className="seco-landing__btn seco-landing__btn--secondary">
+            Back to home →
+          </Link>
+        </div>
       </section>
     </div>
   )

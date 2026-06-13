@@ -56,8 +56,8 @@ export function SecopeuticPatientDetail({ patient }: SecopeuticPatientDetailProp
 
   return (
     <div className="secopeutic-demo__page">
-      <Link href="/secopeutic/demo" className="font-ui text-ui-sm text-black/50 hover:text-black">
-        ← Cohort
+      <Link href="/secopeutic" className="font-ui text-ui-sm text-black/50 hover:text-black">
+        ← Home
       </Link>
 
       <div className="secopeutic-patient-header mt-4">

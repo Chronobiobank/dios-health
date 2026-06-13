@@ -3,13 +3,13 @@
     {
       "source": "/",
       "has": [{ "type": "host", "value": "secopeutic.com" }],
-      "destination": "/secopeutic/demo",
+      "destination": "/secopeutic",
       "permanent": false
     },
     {
       "source": "/",
       "has": [{ "type": "host", "value": "www.secopeutic.com" }],
-      "destination": "/secopeutic/demo",
+      "destination": "/secopeutic",
       "permanent": false
     }
   ]

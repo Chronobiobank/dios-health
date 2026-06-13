@@ -13,16 +13,16 @@ export function SecopeuticDemoShell({
   return (
     <div data-clinical-layout className="clinical-layout secopeutic-demo">
       <header className="clinical-site-nav">
-        <Link href="/secopeutic/demo" className="clinical-site-nav__brand secopeutic-demo__wordmark">
+        <Link href="/secopeutic" className="clinical-site-nav__brand secopeutic-demo__wordmark">
           Secopeutic
         </Link>
         <span className="clinical-site-nav__context">{context}</span>
         <div className="clinical-site-nav__actions">
           <Link href="/secopeutic/demo" className="clinical-site-nav__link">
-            Cohort
+            Pilot demo
           </Link>
           <Link href="/clinicians" className="clinical-site-nav__link">
-            For clinicians
+            Claim pilot
           </Link>
         </div>
       </header>
