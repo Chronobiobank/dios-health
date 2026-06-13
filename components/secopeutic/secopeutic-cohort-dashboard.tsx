@@ -19,8 +19,9 @@ export function SecopeuticCohortDashboard() {
         Safety ledger plus sleep and timing between blood draws.
       </h1>
       <p className="secopeutic-demo__lede font-ui text-ui-body leading-relaxed">
-        City Labs ingested as you already run it. TipTraQ blocks ordered from the dashboard. Three
-        illustrative patients — tap a row or open a record.
+        Illustrative monitoring for clinicians exploring or running high-dose vitamin D. City Labs
+        ingested as you already run it. TipTraQ blocks ordered from the dashboard. Tap a row or
+        open a record.
       </p>
 
       <div className="secopeutic-demo__badges">
@@ -31,7 +32,7 @@ export function SecopeuticCohortDashboard() {
 
       <div className="secopeutic-audience-cards secopeutic-demo__section">
         <Link href="/secopeutic/demo/patients/helena-kowalski" className="secopeutic-audience-card">
-          <p className={DATA_LABEL}>For Gominak practice</p>
+          <p className={DATA_LABEL}>Sleep-led practice</p>
           <p className="mt-2 font-ui text-ui-body font-semibold text-black">Helena Kowalski</p>
           <p className="mt-2 font-ui text-ui-sm leading-relaxed text-black/65">
             Sleep recovery leads the B-vitamin phase. TipTraQ shows REM falling before the next City
@@ -40,7 +41,7 @@ export function SecopeuticCohortDashboard() {
           <span className="secopeutic-audience-card__link">Open record →</span>
         </Link>
         <Link href="/secopeutic/demo/patients/marcus-okonkwo" className="secopeutic-audience-card">
-          <p className={DATA_LABEL}>For Coimbra practice</p>
+          <p className={DATA_LABEL}>PTH-led practice</p>
           <p className="mt-2 font-ui text-ui-body font-semibold text-black">Marcus Okonkwo</p>
           <p className="mt-2 font-ui text-ui-sm leading-relaxed text-black/65">
             PTH trajectory and calcium cascade on one audit trail. Hold IU with concordant sleep.

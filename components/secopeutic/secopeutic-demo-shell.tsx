@@ -19,7 +19,10 @@ export function SecopeuticDemoShell({
         <span className="clinical-site-nav__context">{context}</span>
         <div className="clinical-site-nav__actions">
           <Link href="/secopeutic/demo" className="clinical-site-nav__link">
-            Pilot demo
+            Monitoring demo
+          </Link>
+          <Link href="/secopeutic#clinics" className="clinical-site-nav__link">
+            Certified clinics
           </Link>
           <Link href="/clinicians" className="clinical-site-nav__link">
             Claim pilot

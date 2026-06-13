@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SECOPUTIC_SITE_URL),
   title: 'Secopeutic pilot demo',
   description:
-    'Clinician dashboard for high-dose secohormone monitoring — City Labs, TipTraQ sleep blocks, and dose windows on one timeline.',
+    'Clinician monitoring demo for high-dose vitamin D. City Labs, TipTraQ sleep blocks, and dose windows on one timeline.',
   openGraph: {
     url: SECOPUTIC_SITE_URL,
     siteName: 'Secopeutic',

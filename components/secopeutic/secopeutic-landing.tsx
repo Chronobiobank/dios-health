@@ -4,8 +4,9 @@ import { DATA_LABEL, DASHBOARD_HEADLINE } from '@/components/dashboard/dashboard
 import {
   SECOPEUTIC_LANDING_DISCLAIMER,
   SECOPEUTIC_LANDING_HERO,
+  SECOPEUTIC_LANDING_PATHWAYS,
   SECOPEUTIC_LANDING_PILOT,
-  SECOPEUTIC_LANDING_PRACTICES,
+  SECOPEUTIC_LANDING_PLATFORM,
   SECOPEUTIC_LANDING_PRODUCT,
   SECOPEUTIC_LANDING_SPECTRUM,
   SECOPEUTIC_LANDING_STAKES,
@@ -44,6 +45,26 @@ export function SecopeuticLanding() {
         <p className="seco-landing__support">{SECOPEUTIC_LANDING_STAKES.support}</p>
       </section>
 
+      <section id="platform" className="seco-landing__section secopeutic-demo__page">
+        <SectionNumber value={SECOPEUTIC_LANDING_PLATFORM.number} />
+        <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_PLATFORM.headline}</h2>
+        <p className="seco-landing__support">{SECOPEUTIC_LANDING_PLATFORM.support}</p>
+        <ul className="seco-landing__layer-grid">
+          {SECOPEUTIC_LANDING_PLATFORM.pillars.map((pillar) => (
+            <li key={pillar.id} className="secopeutic-panel seco-landing__layer-card">
+              <p className={DATA_LABEL}>{pillar.label}</p>
+              <p className="seco-landing__card-body">{pillar.body}</p>
+              <Link
+                href={pillar.href}
+                className="secopeutic-audience-card__link mt-4 inline-block"
+              >
+                {pillar.linkLabel} →
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section className="seco-landing__section secopeutic-demo__page">
         <SectionNumber value={SECOPEUTIC_LANDING_PRODUCT.number} />
         <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_PRODUCT.headline}</h2>
@@ -80,12 +101,12 @@ export function SecopeuticLanding() {
         </ul>
       </section>
 
-      <section className="seco-landing__section secopeutic-demo__page">
-        <SectionNumber value={SECOPEUTIC_LANDING_PRACTICES.number} />
-        <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_PRACTICES.headline}</h2>
-        <p className="seco-landing__support">{SECOPEUTIC_LANDING_PRACTICES.support}</p>
+      <section id="clinics" className="seco-landing__section secopeutic-demo__page">
+        <SectionNumber value={SECOPEUTIC_LANDING_PATHWAYS.number} />
+        <h2 className="seco-landing__section-title">{SECOPEUTIC_LANDING_PATHWAYS.headline}</h2>
+        <p className="seco-landing__support">{SECOPEUTIC_LANDING_PATHWAYS.support}</p>
         <div className="secopeutic-audience-cards secopeutic-demo__section">
-          {SECOPEUTIC_LANDING_PRACTICES.cards.map((card) => (
+          {SECOPEUTIC_LANDING_PATHWAYS.cards.map((card) => (
             <Link key={card.id} href={card.demoHref} className="secopeutic-audience-card">
               <p className={DATA_LABEL}>{card.label}</p>
               <p className="mt-2 font-ui text-ui-body font-semibold text-black">{card.headline}</p>
