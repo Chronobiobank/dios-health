@@ -26,7 +26,7 @@ export default async function SecopeuticDemoPatientPage({ params }: Props) {
   if (!patient) notFound()
 
   return (
-    <SecopeuticDemoShell context={patient.recordId}>
+    <SecopeuticDemoShell context={patient.recordId} variant="dark">
       <SecopeuticPatientDetail patient={patient} />
     </SecopeuticDemoShell>
   )

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function SecopeuticDemoPage() {
   return (
-    <SecopeuticDemoShell context="Pilot demo">
+    <SecopeuticDemoShell context="Monitoring demo" variant="dark">
       <SecopeuticCohortDashboard />
     </SecopeuticDemoShell>
   )

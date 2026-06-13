@@ -8,6 +8,7 @@ import {
   zoneLabel,
   zoneSeverity,
 } from '@/lib/secopeutic/demo-cohort'
+import { SECOPUTIC_DEMO_PATH } from '@/lib/secopeutic/site'
 import { cn } from '@/lib/utils'
 
 type SecopeuticPatientDetailProps = {
@@ -55,9 +56,9 @@ export function SecopeuticPatientDetail({ patient }: SecopeuticPatientDetailProp
   const latest = patient.labHistory[0]
 
   return (
-    <div className="secopeutic-demo__page">
-      <Link href="/secopeutic" className="font-ui text-ui-sm text-black/50 hover:text-black">
-        ← Home
+    <div className="seco-demo-workspace secopeutic-demo__page">
+      <Link href={SECOPUTIC_DEMO_PATH} className="seco-demo-back">
+        ← Back to cohort
       </Link>
 
       <div className="secopeutic-patient-header mt-4">

@@ -1,73 +1,103 @@
 import Link from 'next/link'
 
 import { SecopeuticCohortTable } from '@/components/secopeutic/secopeutic-cohort-table'
-import { TipTraqPractitionerBanner } from '@/components/clinic/tiptraq-practitioner-banner'
-import { DATA_LABEL } from '@/components/dashboard/dashboard-styles'
-import { FlagBadge } from '@/components/ui/flag-badge'
-import { SECOPUTIC_DEMO_PATIENTS } from '@/lib/secopeutic/demo-cohort'
-import { SECOPUTIC_LANDING_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
+import {
+  protocolLabel,
+  SECOPUTIC_DEMO_PATIENTS,
+  zoneLabel,
+} from '@/lib/secopeutic/demo-cohort'
+import { SECOPEUTIC_DEMO_PAGE } from '@/lib/secopeutic/demo-content'
+import { SECOPUTIC_DEMO_PATH, SECOPUTIC_LANDING_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
+import { cn } from '@/lib/utils'
+
+const ZONE_CLASS = {
+  stable: 'seco-demo-zone--stable',
+  review: 'seco-demo-zone--review',
+  hold: 'seco-demo-zone--hold',
+} as const
 
 export function SecopeuticCohortDashboard() {
   const stable = SECOPUTIC_DEMO_PATIENTS.filter((p) => p.safetyZone === 'stable').length
   const review = SECOPUTIC_DEMO_PATIENTS.filter(
     (p) => p.safetyZone === 'review' || p.responseZone === 'review'
   ).length
+  const hold = SECOPUTIC_DEMO_PATIENTS.filter(
+    (p) => p.safetyZone === 'hold' || p.responseZone === 'hold'
+  ).length
 
   return (
-    <div className="secopeutic-demo__page">
-      <p className={DATA_LABEL}>Secopeutic OS · pilot demo</p>
-      <h1 className="seco-display mt-2 max-w-3xl">
-        Safety ledger plus sleep and timing between blood draws.
-      </h1>
-      <p className="secopeutic-demo__lede font-ui text-ui-body leading-relaxed">
-        Illustrative monitoring for clinicians exploring or running high-dose vitamin D. City Labs
-        ingested as you already run it. TipTraQ blocks ordered from the dashboard. Tap a row or
-        open a record.
-      </p>
+    <div className="seco-demo-workspace">
+      <header className="seco-demo-hero">
+        <p className="seco-demo-hero__eyebrow">{SECOPEUTIC_DEMO_PAGE.eyebrow}</p>
+        <h1 className="seco-demo-hero__title">{SECOPEUTIC_DEMO_PAGE.headline}</h1>
+        <p className="seco-demo-hero__support">{SECOPEUTIC_DEMO_PAGE.support}</p>
+      </header>
 
-      <div className="secopeutic-demo__badges">
-        <FlagBadge label={`${SECOPUTIC_DEMO_PATIENTS.length} active patients`} severity="blue" />
-        <FlagBadge label={`${stable} safety stable`} severity="green" />
-        <FlagBadge label={`${review} need review`} severity="amber" />
+      <div className="seco-demo-stats">
+        <div className="seco-demo-stat">
+          <p className="seco-demo-stat__label">Active patients</p>
+          <p className="seco-demo-stat__value">{SECOPUTIC_DEMO_PATIENTS.length}</p>
+        </div>
+        <div className="seco-demo-stat">
+          <p className="seco-demo-stat__label">Safety stable</p>
+          <p className="seco-demo-stat__value seco-demo-stat__value--stable">{stable}</p>
+        </div>
+        <div className="seco-demo-stat">
+          <p className="seco-demo-stat__label">Need review</p>
+          <p className="seco-demo-stat__value seco-demo-stat__value--review">{review}</p>
+        </div>
+        <div className="seco-demo-stat">
+          <p className="seco-demo-stat__label">On hold</p>
+          <p className="seco-demo-stat__value seco-demo-stat__value--hold">{hold}</p>
+        </div>
       </div>
 
-      <div className="secopeutic-audience-cards secopeutic-demo__section">
-        <Link href="/secopeutic/demo/patients/helena-kowalski" className="secopeutic-audience-card">
-          <p className={DATA_LABEL}>Sleep-led practice</p>
-          <p className="mt-2 font-ui text-ui-body font-semibold text-black">Helena Kowalski</p>
-          <p className="mt-2 font-ui text-ui-sm leading-relaxed text-black/65">
-            Sleep recovery leads the B-vitamin phase. TipTraQ shows REM falling before the next City
-            Labs draw.
-          </p>
-          <span className="secopeutic-audience-card__link">Open record →</span>
-        </Link>
-        <Link href="/secopeutic/demo/patients/marcus-okonkwo" className="secopeutic-audience-card">
-          <p className={DATA_LABEL}>PTH-led practice</p>
-          <p className="mt-2 font-ui text-ui-body font-semibold text-black">Marcus Okonkwo</p>
-          <p className="mt-2 font-ui text-ui-sm leading-relaxed text-black/65">
-            PTH trajectory and calcium cascade on one audit trail. Hold IU with concordant sleep.
-          </p>
-          <span className="secopeutic-audience-card__link">Open record →</span>
-        </Link>
-      </div>
-
-      <div className="secopeutic-demo__section">
-        <SecopeuticCohortTable patients={SECOPUTIC_DEMO_PATIENTS} />
-      </div>
-
-      <div className="secopeutic-demo__section">
-        <TipTraqPractitionerBanner />
-      </div>
-
-      <section className="secopeutic-panel secopeutic-demo__section">
-        <h2 className="font-mono text-ui-label uppercase tracking-widest text-black/45">
-          Free pilot
+      <section className="seco-demo-section" aria-labelledby="seco-demo-patients">
+        <h2 id="seco-demo-patients" className="seco-demo-section__title">
+          Featured records
         </h2>
-        <p className="mt-2 max-w-xl font-ui text-ui-sm leading-relaxed text-black/70">
-          Run three real patients on Secopeutic for six months at no cost. Keep City Labs. Add
-          TipTraQ and dose window logging on one timeline.
-        </p>
-        <div className="seco-landing__actions mt-4">
+        <div className="seco-demo-patient-grid">
+          {SECOPUTIC_DEMO_PATIENTS.map((patient) => (
+            <Link
+              key={patient.id}
+              href={`${SECOPUTIC_DEMO_PATH}/patients/${patient.id}`}
+              className="seco-demo-patient-card"
+            >
+              <div className="seco-demo-patient-card__head">
+                <p className="seco-demo-patient-card__pathway">{protocolLabel(patient.protocol)}</p>
+                <span className={cn('seco-demo-zone', ZONE_CLASS[patient.safetyZone])}>
+                  {zoneLabel(patient.safetyZone)}
+                </span>
+              </div>
+              <h3 className="seco-demo-patient-card__name">{patient.displayName}</h3>
+              <p className="seco-demo-patient-card__meta">
+                {patient.recordId} · {patient.age}
+              </p>
+              <p className="seco-demo-patient-card__copy">{patient.clinicalRead}</p>
+              <span className="seco-demo-patient-card__link">Open record →</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="seco-demo-section">
+        <SecopeuticCohortTable
+          patients={SECOPUTIC_DEMO_PATIENTS}
+          title={SECOPEUTIC_DEMO_PAGE.cohortTitle}
+          support={SECOPEUTIC_DEMO_PAGE.cohortSupport}
+          variant="dark"
+        />
+      </section>
+
+      <aside className="seco-demo-band">
+        <p className="seco-demo-band__eyebrow">{SECOPEUTIC_DEMO_PAGE.tiptraqTitle}</p>
+        <p className="seco-demo-band__copy">{SECOPEUTIC_DEMO_PAGE.tiptraqSupport}</p>
+      </aside>
+
+      <section className="seco-demo-cta">
+        <h2 className="seco-demo-cta__title">{SECOPEUTIC_DEMO_PAGE.pilotHeadline}</h2>
+        <p className="seco-demo-cta__support">{SECOPEUTIC_DEMO_PAGE.pilotSupport}</p>
+        <div className="seco-demo-cta__actions">
           <Link href={SECOPUTIC_PILOT_PATH} className="seco-landing__btn seco-landing__btn--primary">
             Claim free pilot →
           </Link>
