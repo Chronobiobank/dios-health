@@ -20,6 +20,9 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  /* background-clip:text + tight line-height clips descenders (p, y) */
+  line-height: 1.12;
+  padding-bottom: 0.06em;
 }
 
 /* Hero display — Merriweather serif; beats .clinical-layout h1 sans shorthand */
@@ -32,13 +35,14 @@
   margin: 0;
   font-size: clamp(2.5rem, 7.5vw, 4.75rem);
   font-weight: 300;
-  line-height: 1;
+  line-height: 1.08;
   letter-spacing: -0.035em;
   color: #fff;
 }
 
 .seco-landing__hero-line {
   display: block;
+  line-height: 1.1;
 }
 
 .seco-landing__hero-line + .seco-landing__hero-line {
