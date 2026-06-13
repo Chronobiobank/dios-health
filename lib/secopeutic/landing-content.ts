@@ -96,7 +96,7 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
     {
       id: 'clinics',
       label: 'Certified clinics',
-      body: 'Verified opt-in practices and a UK directory to start.',
+      body: 'Verified opt-in soon. UK directory below.',
       href: SECOPUTIC_CLINICS_PATH,
       linkLabel: 'Open clinic directory',
       icon: 'clinics',
