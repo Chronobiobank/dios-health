@@ -13,23 +13,23 @@ export function SecopeuticCohortDashboard() {
   ).length
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-8 pb-16 sm:px-6">
+    <div className="secopeutic-demo__page">
       <p className={DATA_LABEL}>Secopeutic OS · pilot demo</p>
       <h1 className={`${DASHBOARD_HEADLINE} mt-2 max-w-3xl`}>
         Safety ledger plus sleep and timing between blood draws.
       </h1>
-      <p className="mt-3 max-w-2xl font-ui text-ui-body leading-relaxed text-black/70">
+      <p className="secopeutic-demo__lede font-ui text-ui-body leading-relaxed">
         City Labs ingested as you already run it. TipTraQ blocks ordered from the dashboard. Three
         illustrative patients — tap a row or open a record.
       </p>
 
-      <div className="mt-6 flex flex-wrap gap-2">
+      <div className="secopeutic-demo__badges">
         <FlagBadge label={`${SECOPUTIC_DEMO_PATIENTS.length} active patients`} severity="blue" />
         <FlagBadge label={`${stable} safety stable`} severity="green" />
         <FlagBadge label={`${review} need review`} severity="amber" />
       </div>
 
-      <div className="secopeutic-audience-cards mt-8 grid gap-4 md:grid-cols-2">
+      <div className="secopeutic-audience-cards secopeutic-demo__section">
         <Link href="/secopeutic/demo/patients/helena-kowalski" className="secopeutic-audience-card">
           <p className={DATA_LABEL}>For Gominak practice</p>
           <p className="mt-2 font-ui text-ui-body font-semibold text-black">Helena Kowalski</p>
@@ -49,11 +49,15 @@ export function SecopeuticCohortDashboard() {
         </Link>
       </div>
 
-      <SecopeuticCohortTable patients={SECOPUTIC_DEMO_PATIENTS} />
+      <div className="secopeutic-demo__section">
+        <SecopeuticCohortTable patients={SECOPUTIC_DEMO_PATIENTS} />
+      </div>
 
-      <TipTraqPractitionerBanner />
+      <div className="secopeutic-demo__section">
+        <TipTraqPractitionerBanner />
+      </div>
 
-      <section className="secopeutic-panel mt-8">
+      <section className="secopeutic-panel secopeutic-demo__section">
         <h2 className="font-mono text-ui-label uppercase tracking-widest text-black/45">
           Free pilot
         </h2>

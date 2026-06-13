@@ -55,18 +55,18 @@ export function SecopeuticPatientDetail({ patient }: SecopeuticPatientDetailProp
   const latest = patient.labHistory[0]
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-8 pb-16 sm:px-6">
+    <div className="secopeutic-demo__page">
       <Link href="/secopeutic/demo" className="font-ui text-ui-sm text-black/50 hover:text-black">
         ← Cohort
       </Link>
 
-      <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
+      <div className="secopeutic-patient-header mt-4">
         <div>
           <p className={DATA_LABEL}>Illustrative record · {patient.recordId}</p>
           <h1 className={`${DASHBOARD_HEADLINE} mt-1`}>{patient.displayName}</h1>
           <p className="mt-2 max-w-xl font-ui text-ui-sm text-black/65">{patient.indication}</p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="secopeutic-patient-header__badges">
           <FlagBadge label={protocolLabel(patient.protocol)} severity="blue" />
           <FlagBadge
             label={`Safety · ${zoneLabel(patient.safetyZone)}`}
@@ -85,7 +85,7 @@ export function SecopeuticPatientDetail({ patient }: SecopeuticPatientDetailProp
           Clinician-interpreted composite. Hibernation burden and window alignment between City Labs
           draws.
         </p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="secopeutic-metric-grid mt-4">
           <MetricCard
             label="Response index"
             value={`${patient.secologicalResponseIndex}`}
@@ -137,7 +137,7 @@ export function SecopeuticPatientDetail({ patient }: SecopeuticPatientDetailProp
 
       <section className="secopeutic-panel mt-6">
         <h2 className={SECTION_LABEL}>Four-pathway readout</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="secopeutic-metric-grid mt-4">
           <MetricCard
             label="Sleep efficiency"
             value={patient.sleepEfficiency.value}

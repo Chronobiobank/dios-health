@@ -53,7 +53,7 @@ export function SecopeuticCohortTable({ patients }: SecopeuticCohortTableProps) 
   const [expandedId, setExpandedId] = useState<string | null>(patients[0]?.id ?? null)
 
   return (
-    <section className="mt-8">
+    <section className="secopeutic-cohort-table">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 className={SECTION_LABEL}>Active cohort</h2>
@@ -63,7 +63,7 @@ export function SecopeuticCohortTable({ patients }: SecopeuticCohortTableProps) 
         </div>
       </div>
 
-      <div className="mt-4 overflow-x-auto rounded-2xl border-[0.5px] border-black/[0.08] bg-white">
+      <div className="secopeutic-cohort-table__frame">
         <Table className="min-w-[880px]">
           <TableHeader>
             <TableRow className="border-b border-black/10 bg-neutral-50">
@@ -155,7 +155,7 @@ export function SecopeuticCohortTable({ patients }: SecopeuticCohortTableProps) 
         </Table>
       </div>
 
-      <p className={cn(DATA_LABEL, 'mt-2 text-black/40')}>
+      <p className="secopeutic-cohort-table__footnote">
         Illustrative demo data only. Targets: sleep &gt;{PRGC_THRESHOLDS.sleepEfficiency.target}% · REM
         &lt;{PRGC_THRESHOLDS.remLatencyMins.target} min · PTH &lt;
         {PRGC_THRESHOLDS.pthPgMl.suppressedBelow} pg/mL.
