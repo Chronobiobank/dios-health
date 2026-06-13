@@ -1092,3 +1092,202 @@
   line-height: 1.6;
   color: rgb(255 255 255 / 0.72);
 }
+
+/* Clinic directory */
+.seco-clinics-page {
+  padding-block: clamp(2.5rem, 6vw, 4rem) clamp(3rem, 7vw, 5rem);
+  color: #fff;
+}
+
+.seco-clinics__intro {
+  max-width: 52ch;
+}
+
+.seco-clinics__eyebrow {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+}
+
+.seco-clinics__title {
+  margin: 0.75rem 0 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.seco-clinics__support,
+.seco-clinics__section-support {
+  margin: 1rem 0 0;
+  max-width: var(--seco-copy-measure);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.68);
+}
+
+.seco-clinics__section {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: clamp(2rem, 4vw, 2.75rem);
+  border-top: 1px solid var(--seco-navy-border);
+}
+
+.seco-clinics__section-title {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.seco-clinics__empty {
+  margin: 1.25rem 0 0;
+  padding: 1rem 1.25rem;
+  border: 1px dashed rgb(255 255 255 / 0.2);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.58);
+}
+
+.seco-clinics__grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .seco-clinics__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.seco-clinics__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: 0.875rem;
+  background: rgb(255 255 255 / 0.03);
+  scroll-margin-top: 5rem;
+}
+
+.seco-clinics__card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.seco-clinics__card-title {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.seco-clinics__badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.625rem;
+  padding-inline: 0.625rem;
+  border-radius: 999px;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.seco-clinics__badge--injection {
+  background: rgb(255 255 255 / 0.08);
+  color: rgb(255 255 255 / 0.72);
+}
+
+.seco-clinics__badge--pth {
+  background: rgb(167 139 250 / 0.16);
+  color: #d8c4ff;
+}
+
+.seco-clinics__badge--sleep {
+  background: rgb(45 212 191 / 0.14);
+  color: #9ef0e4;
+}
+
+.seco-clinics__card-location {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.48);
+}
+
+.seco-clinics__card-summary {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.78);
+}
+
+.seco-clinics__facts {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.25rem 0 0;
+}
+
+.seco-clinics__facts div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.seco-clinics__facts dt {
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+}
+
+.seco-clinics__facts dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.seco-clinics__card-link {
+  margin-top: auto;
+  padding-top: 0.25rem;
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+}
+
+.seco-clinics__card-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.seco-clinics__opt-in {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding: 1.5rem;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: 0.875rem;
+  background: rgb(255 255 255 / 0.04);
+}
+
+.seco-clinics__opt-in .seco-landing__btn--primary {
+  margin-top: 1.25rem;
+  border: none;
+}

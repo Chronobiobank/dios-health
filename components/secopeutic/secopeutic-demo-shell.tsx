@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { SecopeuticWordmark } from '@/components/brand/secopeutic-wordmark'
-import { SECOPUTIC_DEMO_PATH, SECOPUTIC_LANDING_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
+import { SECOPUTIC_CLINICS_PATH, SECOPUTIC_DEMO_PATH, SECOPUTIC_LANDING_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
 
 type SecopeuticDemoShellProps = {
   children: ReactNode
@@ -30,7 +30,7 @@ export function SecopeuticDemoShell({
           <Link href={SECOPUTIC_DEMO_PATH} className="clinical-site-nav__link">
             Monitoring demo
           </Link>
-          <Link href={`${SECOPUTIC_LANDING_PATH}#clinics`} className="clinical-site-nav__link">
+          <Link href={SECOPUTIC_CLINICS_PATH} className="clinical-site-nav__link">
             Certified clinics
           </Link>
           <Link href={SECOPUTIC_PILOT_PATH} className="seco-nav__cta">

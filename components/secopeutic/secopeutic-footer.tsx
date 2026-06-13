@@ -1,13 +1,13 @@
 import Link from 'next/link'
 
 import { SECOPEUTIC_BRAND_NAME, SECOPEUTIC_LOGO_GLYPH } from '@/lib/brand/secopeutic-brand'
-import { SECOPUTIC_DEMO_PATH, SECOPUTIC_LANDING_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
+import { SECOPUTIC_CLINICS_PATH, SECOPUTIC_DEMO_PATH, SECOPUTIC_LANDING_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
 
 const FOOTER_LINKS = [
   { label: 'Evidence library', href: '/science' },
   { label: 'Monitoring demo', href: SECOPUTIC_DEMO_PATH },
   { label: 'Claim free pilot', href: SECOPUTIC_PILOT_PATH },
-  { label: 'Certified clinics', href: `${SECOPUTIC_LANDING_PATH}#clinics` },
+  { label: 'Certified clinics', href: SECOPUTIC_CLINICS_PATH },
 ] as const
 
 export function SecopeuticFooter() {

@@ -1,6 +1,6 @@
 import { SECOPEUTIC_UK_STARTER_CLINICS } from '@/lib/secopeutic/certified-clinics'
 import { CLINICAL_GUIDE_CLINICIANS } from '@/lib/secopeutic/clinical-guide-clinicians'
-import { SECOPUTIC_DEMO_PATH, SECOPUTIC_LANDING_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
+import { SECOPUTIC_CLINICS_PATH, SECOPUTIC_DEMO_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
 
 export const SECOPEUTIC_LANDING_META = {
   title: 'Secopeutic — High-dose vitamin D for clinicians',
@@ -96,17 +96,17 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
     {
       id: 'clinics',
       label: 'Certified clinics',
-      body: 'Verified practices opt in only. Find colleagues near you.',
-      href: `${SECOPUTIC_LANDING_PATH}#clinics`,
-      linkLabel: 'Find certified clinics',
+      body: 'Verified opt-in practices and a UK directory to start.',
+      href: SECOPUTIC_CLINICS_PATH,
+      linkLabel: 'Open clinic directory',
       icon: 'clinics',
-      panelTitle: 'UK starter clinics',
-      panelSeeAll: { label: 'Find clinics', href: `${SECOPUTIC_LANDING_PATH}#clinics` },
+      panelTitle: 'UK high-dose D3 directory',
+      panelSeeAll: { label: 'Open directory', href: SECOPUTIC_CLINICS_PATH },
       panelLayout: 'grid',
       panelItems: SECOPEUTIC_UK_STARTER_CLINICS.map((clinic) => ({
         title: clinic.cardTitle,
         meta: clinic.cardMeta,
-        href: clinic.href,
+        href: `${SECOPUTIC_CLINICS_PATH}#${clinic.id}`,
       })),
     },
   ],
