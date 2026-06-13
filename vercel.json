@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "secopeutic.com" }],
+      "destination": "/secopeutic/demo",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.secopeutic.com" }],
+      "destination": "/secopeutic/demo",
+      "permanent": false
+    }
+  ]
+}

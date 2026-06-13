@@ -1,0 +1,81 @@
+.secopeutic-demo__wordmark {
+  font-family: var(--font-body, 'Geist', sans-serif);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+}
+
+.secopeutic-panel {
+  border: 0.5px solid rgb(0 0 0 / 0.08);
+  border-radius: 1rem;
+  background: #fff;
+  padding: 1.25rem 1.5rem;
+}
+
+.secopeutic-metric-card {
+  border: 0.5px solid rgb(0 0 0 / 0.06);
+  border-radius: 0.75rem;
+  background: rgb(250 249 247);
+  padding: 1rem 1.125rem;
+}
+
+.secopeutic-lab-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.secopeutic-lab-table th,
+.secopeutic-lab-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgb(0 0 0 / 0.06);
+}
+
+.secopeutic-lab-table th {
+  font-family: var(--font-data, monospace);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(0 0 0 / 0.45);
+}
+
+.secopeutic-audience-cards {
+  display: grid;
+}
+
+.secopeutic-audience-card {
+  display: block;
+  border: 0.5px solid rgb(0 0 0 / 0.1);
+  border-radius: 0.75rem;
+  background: #fff;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.secopeutic-audience-card:hover {
+  border-color: rgb(24 95 165 / 0.35);
+  box-shadow: 0 4px 20px rgb(24 95 165 / 0.08);
+}
+
+.secopeutic-audience-card__link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #185fa5;
+}
+
+.secopeutic-demo__cta {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #185fa5;
+  text-decoration: none;
+}
+
+.secopeutic-demo__cta:hover {
+  text-decoration: underline;
+}
