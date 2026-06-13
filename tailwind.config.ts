@@ -84,7 +84,8 @@ const config: Config = {
         sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         ui: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'Courier New', 'monospace'],
-        display: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
+        display: ['var(--font-merriweather)', 'Georgia', 'serif'],
+        'display-sans': ['var(--font-bureau-sans)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'data-lg': ['1.25rem', { lineHeight: '1.15', fontWeight: '500' }],

@@ -1,15 +1,11 @@
-import { DM_Mono, DM_Sans, Instrument_Serif, Unbounded } from 'next/font/google'
+import { DM_Mono, DM_Sans, Unbounded } from 'next/font/google'
 
-/** Instrument Serif — editorial display (Function Health Financier Display analogue) */
-export const marketingSerif = Instrument_Serif({
-  subsets: ['latin'],
-  variable: '--font-instrument-serif',
-  display: 'swap',
-  weight: '400',
-  style: ['normal', 'italic'],
-})
+import { bureauSans, merriweather } from '@/lib/fonts/maven-reference-fonts'
 
-/** DM Sans — sharp UI body and navigation (Function Health FT Base analogue) */
+/** Merriweather — display headings (site-wide) */
+export const marketingSerif = merriweather
+
+/** DM Sans — body UI where Bureau Sans is not loaded */
 export const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
@@ -17,7 +13,7 @@ export const dmSans = DM_Sans({
   weight: ['400', '500', '600'],
 })
 
-/** DM Mono — marketing eyebrows, labels, metadata (reuses site mono variable name in scope) */
+/** DM Mono — marketing eyebrows, labels, metadata */
 export const marketingDmMono = DM_Mono({
   subsets: ['latin'],
   variable: '--font-mkt-mono',
@@ -33,4 +29,7 @@ export const unbounded = Unbounded({
   weight: ['300'],
 })
 
-export const marketingFontVariableClasses = `${marketingSerif.variable} ${dmSans.variable} ${marketingDmMono.variable} ${unbounded.variable}`
+/** Maven Bureau Sans — hero accent / UI (gradient headline on maven.com) */
+export const marketingSans = bureauSans
+
+export const marketingFontVariableClasses = `${marketingSerif.variable} ${marketingSans.variable} ${dmSans.variable} ${marketingDmMono.variable} ${unbounded.variable}`

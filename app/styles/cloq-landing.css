@@ -18,7 +18,7 @@
   --clq-pad-y: clamp(3.5rem, 8vh, 6rem);
   --clq-max: 72rem;
 
-  --clq-serif: var(--font-instrument-serif, Georgia, serif);
+  --clq-serif: var(--font-merriweather, Georgia, serif);
   --clq-sans: var(--font-dm-sans, system-ui, sans-serif);
   --clq-mono: var(--font-mkt-mono, monospace);
 

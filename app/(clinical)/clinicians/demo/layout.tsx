@@ -4,6 +4,6 @@ type LayoutProps = {
   children: ReactNode
 }
 
-export default function SecopeuticDemoLayout({ children }: LayoutProps) {
+export default function DiosCliniciansDemoLayout({ children }: LayoutProps) {
   return children
 }

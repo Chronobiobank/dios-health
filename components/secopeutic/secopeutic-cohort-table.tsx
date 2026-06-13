@@ -161,8 +161,9 @@ export function SecopeuticCohortTable({
                             {patient.action}
                           </span>
                           <span className="seco-demo-table__detail-note">
-                            Hibernation lag {patient.hibernationBurdenWeeks} wk · Window{' '}
-                            {patient.windowAlignmentPct}%
+                            Dose window{' '}
+                            {patient.doseWindowPct === null ? 'Pending' : `${patient.doseWindowPct}%`} ·
+                            Mobile {patient.mobileLight.value} · TipTraQ {patient.tiptraqBlock.value}
                           </span>
                         </div>
                       </td>

@@ -1,19 +1,19 @@
 import { SECOPEUTIC_UK_STARTER_CLINICS } from '@/lib/secopeutic/certified-clinics'
 import { CLINICAL_GUIDE_CLINICIANS } from '@/lib/secopeutic/clinical-guide-clinicians'
-import { SECOPUTIC_CLINICS_PATH, SECOPUTIC_DEMO_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
+import { SECOPUTIC_CLINICS_PATH, SECOPUTIC_DEMO_PATH, SECOPUTIC_EVIDENCE_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
 
 export const SECOPEUTIC_LANDING_META = {
-  title: 'Secopeutic — High-dose vitamin D for clinicians',
+  title: 'DIOS — Dose intelligence for clinicians',
   description:
-    'Guidance, safety monitoring tools, and verified clinic connections for clinicians exploring high-dose vitamin D worldwide.',
+    'Dose windows from mobile diagnostics, blood panels, and TipTraQ sleep blocks for high-dose vitamin D practice.',
 } as const
 
 export const SECOPEUTIC_LANDING_HERO = {
-  headlineLead: 'Activate',
-  headlineAccent: 'Vitamin D Therapy',
-  headlineSub: 'with clinical precision',
+  headlineLead: 'Learn',
+  headlineAccent: 'Dose Intelligence',
+  headlineSub: 'from leading experts',
   support:
-    'Evidence, monitoring tools, and verified clinics for practitioners ready to learn more.',
+    'Our clinical-grade tools ensure protocols are tailored to your patients changing needs.',
   primaryCta: { label: 'Claim free pilot', href: SECOPUTIC_PILOT_PATH },
   secondaryCta: { label: 'View monitoring demo', href: SECOPUTIC_DEMO_PATH },
 } as const
@@ -26,36 +26,36 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
     {
       id: 'learn',
       label: 'Clinical guide',
-      body: 'Curated evidence and protocol context for licensed prescribers.',
-      href: '/science',
+      body: 'Studies on titration and outcomes.',
+      href: SECOPUTIC_EVIDENCE_PATH,
       linkLabel: 'Browse evidence',
       icon: 'book',
       panelTitle: 'Evidence for prescribers',
-      panelSeeAll: { label: 'See all', href: '/science' },
+      panelSeeAll: { label: 'See all', href: SECOPUTIC_EVIDENCE_PATH },
       panelLayout: 'grid',
       panelItems: [
         {
           title: 'Sleep architecture and high-dose vitamin D.',
           meta: 'Clinical guide · Sleep-led practice',
-          href: `${SECOPUTIC_DEMO_PATH}/patients/helena-kowalski`,
+          href: `${SECOPUTIC_EVIDENCE_PATH}#gominak-sleep-2012`,
           clinicians: [CLINICAL_GUIDE_CLINICIANS.gominak, CLINICAL_GUIDE_CLINICIANS.munro],
         },
         {
           title: 'PTH suppression between lab draws.',
           meta: 'Clinical guide · PTH-led practice',
-          href: `${SECOPUTIC_DEMO_PATH}/patients/marcus-okonkwo`,
+          href: `${SECOPUTIC_EVIDENCE_PATH}#coimbra-cns-2014`,
           clinicians: [CLINICAL_GUIDE_CLINICIANS.coimbra],
         },
         {
           title: 'Population dosing misses biology.',
           meta: 'Position paper · Precision chronotherapy',
-          href: '/science',
+          href: `${SECOPUTIC_EVIDENCE_PATH}#munro-precision-timing`,
           clinicians: [CLINICAL_GUIDE_CLINICIANS.munro],
         },
         {
           title: 'Low vitamin D worsens COVID outcomes.',
           meta: 'Clinical guide · COVID review',
-          href: '/science',
+          href: `${SECOPUTIC_EVIDENCE_PATH}#castillo-covid-2020`,
           clinicians: [CLINICAL_GUIDE_CLINICIANS.seheult],
         },
       ],
@@ -63,7 +63,7 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
     {
       id: 'tools',
       label: 'Safety tools',
-      body: 'Calcium, PTH, 25-OH-D, and eGFR on one timeline.',
+      body: 'Tools shaped to your practice.',
       href: SECOPUTIC_DEMO_PATH,
       linkLabel: 'Open monitoring demo',
       icon: 'tools',
@@ -71,6 +71,11 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
       panelSeeAll: { label: 'Open demo', href: SECOPUTIC_DEMO_PATH },
       panelLayout: 'grid',
       panelItems: [
+        {
+          title: 'Sean James record.',
+          meta: 'TipTraQ leads the 90-day draw.',
+          href: `${SECOPUTIC_DEMO_PATH}/patients/sean-james`,
+        },
         {
           title: 'Cohort safety dashboard.',
           meta: 'Stable, Review, and Hold on one row.',
@@ -82,11 +87,6 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
           href: `${SECOPUTIC_DEMO_PATH}/patients/marcus-okonkwo`,
         },
         {
-          title: 'Renata Ferreira record.',
-          meta: 'Review zone · timing gate.',
-          href: `${SECOPUTIC_DEMO_PATH}/patients/renata-ferreira`,
-        },
-        {
           title: 'Helena Kowalski record.',
           meta: 'Sleep-led demo patient.',
           href: `${SECOPUTIC_DEMO_PATH}/patients/helena-kowalski`,
@@ -96,7 +96,7 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
     {
       id: 'clinics',
       label: 'Certified clinics',
-      body: 'Verified opt-in soon. UK directory below.',
+      body: 'UK directory. Verified opt-in soon.',
       href: SECOPUTIC_CLINICS_PATH,
       linkLabel: 'Open clinic directory',
       icon: 'clinics',
@@ -121,4 +121,4 @@ export const SECOPEUTIC_LANDING_PILOT = {
 } as const
 
 export const SECOPEUTIC_LANDING_DISCLAIMER =
-  'Education and monitoring infrastructure only. Secopeutic flags and escalates. It does not prescribe. The licensed clinician owns every treatment decision.'
+  'Education and monitoring infrastructure only. DIOS flags and escalates. It does not prescribe. The licensed clinician owns every treatment decision.'

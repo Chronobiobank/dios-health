@@ -11,6 +11,7 @@ import {
   type PrgcMetricCell,
   type PrgcMonitoringPatient,
 } from '@/lib/clinic/prgc-monitoring'
+import { buildSeanJamesClinicianDemoPatient } from '@/lib/secopeutic/sean-james-clinician-demo'
 
 export type SecopeuticProtocol = 'gominak' | 'coimbra'
 
@@ -26,20 +27,35 @@ export type SecopeuticLabPoint = {
   b12Pmol: number | null
 }
 
+export type SecopeuticPatientDemographics = {
+  dateOfBirth: string
+  city: string
+  country: string
+  fitzpatrickType: number
+}
+
 export type SecopeuticDemoPatient = PrgcMonitoringPatient & {
   protocol: SecopeuticProtocol
   indication: string
   safetyZone: SecopeuticZone
   responseZone: SecopeuticZone
-  calendarAge: number
-  /** Response index — clinician-interpreted, not a diagnostic label */
-  secologicalResponseIndex: number
-  hibernationBurdenWeeks: number
-  hibernationPriorWeeks: number | null
-  windowAlignmentPct: number
-  lastCityLabsDraw: string
+  /** Full inputs vs demographics and TipTraQ only */
+  profileScope?: 'full' | 'tiptraq-demographics'
+  demographics?: SecopeuticPatientDemographics
+  /** TipTraQ-only strip — sleep onset and total sleep */
+  tiptraqSleepOnset?: PrgcMetricCell
+  tiptraqTotalSleep?: PrgcMetricCell
+  /** Morning D3 window adherence — last 30 days; null when inputs missing */
+  doseWindowPct: number | null
+  /** Phone melanopic diagnostic panel */
+  mobileLight: PrgcMetricCell
+  /** City Labs blood panel */
+  bloodPanel: PrgcMetricCell
+  /** Three-night TipTraQ sleep block */
+  tiptraqBlock: PrgcMetricCell
+  lastCityLabsDraw: string | null
   lastTipTraqBlock: string | null
-  nextPanelDue: string
+  nextPanelDue: string | null
   labHistory: SecopeuticLabPoint[]
   safetySummary: string
   demoAudience: 'gominak' | 'coimbra' | 'both'
@@ -54,6 +70,7 @@ function cell(
 }
 
 export const SECOPUTIC_DEMO_PATIENTS: SecopeuticDemoPatient[] = [
+  buildSeanJamesClinicianDemoPatient(),
   {
     id: 'helena-kowalski',
     displayName: 'Helena Kowalski',
@@ -63,11 +80,16 @@ export const SECOPUTIC_DEMO_PATIENTS: SecopeuticDemoPatient[] = [
     indication: 'Treatment-resistant depression · sleep architecture recovery',
     safetyZone: 'stable',
     responseZone: 'review',
-    calendarAge: 38,
-    secologicalResponseIndex: 39,
-    hibernationBurdenWeeks: 2.1,
-    hibernationPriorWeeks: 5.8,
-    windowAlignmentPct: 92,
+    doseWindowPct: 92,
+    mobileLight: cell('88%', d3TimingStatus(88), {
+      hint: 'Phone melanopic panel · on schedule',
+    }),
+    bloodPanel: cell('18 Apr 2026', pthStatus(19), {
+      hint: 'City Labs · D3 168 nmol/L',
+    }),
+    tiptraqBlock: cell('3 nights', sleepEfficiencyStatus(83, 'improving'), {
+      hint: 'May block · REM latency falling',
+    }),
     lastCityLabsDraw: '2026-04-18',
     lastTipTraqBlock: '2026-05-28',
     nextPanelDue: '2026-07-18',
@@ -122,11 +144,16 @@ export const SECOPUTIC_DEMO_PATIENTS: SecopeuticDemoPatient[] = [
     indication: 'Relapsing-remitting MS · supervised high-dose D3',
     safetyZone: 'stable',
     responseZone: 'stable',
-    calendarAge: 52,
-    secologicalResponseIndex: 51,
-    hibernationBurdenWeeks: 0.8,
-    hibernationPriorWeeks: 2.4,
-    windowAlignmentPct: 97,
+    doseWindowPct: 97,
+    mobileLight: cell('91%', d3TimingStatus(91), {
+      hint: 'Phone melanopic panel · stable rhythm',
+    }),
+    bloodPanel: cell('12 Mar 2026', pthStatus(24, 'improving'), {
+      hint: 'City Labs · draw in 11 days',
+    }),
+    tiptraqBlock: cell('3 nights', sleepEfficiencyStatus(87), {
+      hint: 'May block · concordant with PTH',
+    }),
     lastCityLabsDraw: '2026-03-12',
     lastTipTraqBlock: '2026-05-14',
     nextPanelDue: '2026-06-10',
@@ -188,11 +215,16 @@ export const SECOPUTIC_DEMO_PATIENTS: SecopeuticDemoPatient[] = [
     indication: 'Psoriasis · Coimbra protocol induction',
     safetyZone: 'review',
     responseZone: 'review',
-    calendarAge: 45,
-    secologicalResponseIndex: 47,
-    hibernationBurdenWeeks: 6.4,
-    hibernationPriorWeeks: null,
-    windowAlignmentPct: 31,
+    doseWindowPct: 31,
+    mobileLight: cell('42%', d3TimingStatus(42), {
+      hint: 'Phone panel · evening light drift',
+    }),
+    bloodPanel: cell('2 May 2026', pthStatus(40), {
+      hint: 'City Labs · Ca upper watch',
+    }),
+    tiptraqBlock: cell('3 nights', sleepEfficiencyStatus(73), {
+      hint: 'May block · timing failure pattern',
+    }),
     lastCityLabsDraw: '2026-05-02',
     lastTipTraqBlock: '2026-05-30',
     nextPanelDue: '2026-08-02',

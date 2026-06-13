@@ -4,11 +4,11 @@ import { SecopeuticDemoShell } from '@/components/secopeutic/secopeutic-demo-she
 import { SECOPEUTIC_LANDING_DISCLAIMER } from '@/lib/secopeutic/landing-content'
 
 export const metadata: Metadata = {
-  title: 'Terms — Secopeutic',
-  description: 'Terms of use for the Secopeutic clinician monitoring platform.',
+  title: 'Terms — DIOS',
+  description: 'Terms of use for the DIOS clinician monitoring platform.',
 }
 
-export default function SecopeuticTermsPage() {
+export default function DiosCliniciansTermsPage() {
   return (
     <SecopeuticDemoShell context="Terms of use" variant="dark">
       <main className="seco-legal">
@@ -16,7 +16,7 @@ export default function SecopeuticTermsPage() {
           <p className="seco-legal__eyebrow">Legal</p>
           <h1 className="seco-legal__title">Terms of use</h1>
           <p className="seco-legal__lede">
-            Secopeutic is operated by Secomed Limited. These terms govern clinician access to the platform.
+            DIOS is operated by Secomed Limited. These terms govern clinician access to the platform.
           </p>
           <section className="seco-legal__section">
             <h2 className="seco-legal__head">Clinical responsibility</h2>

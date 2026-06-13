@@ -1,12 +1,35 @@
-/** Production URL for Secopeutic marketing and pilot demo. */
-export const SECOPUTIC_SITE_URL = 'https://secopeutic.com'
+/** Production URL for the DIOS clinician platform. */
+export const DIOS_SITE_URL = 'https://dios.health'
 
-export const SECOPUTIC_LANDING_PATH = '/secopeutic'
+/** @deprecated Use DIOS_SITE_URL */
+export const SECOPUTIC_SITE_URL = DIOS_SITE_URL
 
-export const SECOPUTIC_DEMO_PATH = '/secopeutic/demo'
+export const DIOS_CLINICIANS_PATH = '/clinicians'
 
-export const SECOPUTIC_PILOT_PATH = '/secopeutic/pilot'
+/** @deprecated Use DIOS_CLINICIANS_PATH */
+export const SECOPUTIC_LANDING_PATH = DIOS_CLINICIANS_PATH
 
-export const SECOPUTIC_CLINICS_PATH = '/secopeutic/clinics'
+export const DIOS_CLINICIANS_DEMO_PATH = '/clinicians/demo'
 
-export const SECOPUTIC_DEMO_URL = `${SECOPUTIC_SITE_URL}${SECOPUTIC_DEMO_PATH}`
+/** @deprecated Use DIOS_CLINICIANS_DEMO_PATH */
+export const SECOPUTIC_DEMO_PATH = DIOS_CLINICIANS_DEMO_PATH
+
+export const DIOS_CLINICIANS_PILOT_PATH = '/clinicians/pilot'
+
+/** @deprecated Use DIOS_CLINICIANS_PILOT_PATH */
+export const SECOPUTIC_PILOT_PATH = DIOS_CLINICIANS_PILOT_PATH
+
+export const DIOS_CLINICIANS_CLINICS_PATH = '/clinicians/clinics'
+
+/** @deprecated Use DIOS_CLINICIANS_CLINICS_PATH */
+export const SECOPUTIC_CLINICS_PATH = DIOS_CLINICIANS_CLINICS_PATH
+
+export const DIOS_CLINICIANS_EVIDENCE_PATH = '/clinicians/evidence'
+
+/** @deprecated Use DIOS_CLINICIANS_EVIDENCE_PATH */
+export const SECOPUTIC_EVIDENCE_PATH = DIOS_CLINICIANS_EVIDENCE_PATH
+
+export const DIOS_CLINICIANS_DEMO_URL = `${DIOS_SITE_URL}${DIOS_CLINICIANS_DEMO_PATH}`
+
+/** @deprecated Use DIOS_CLINICIANS_DEMO_URL */
+export const SECOPUTIC_DEMO_URL = DIOS_CLINICIANS_DEMO_URL

@@ -1,13 +1,19 @@
 import Link from 'next/link'
 
-import { SECOPEUTIC_BRAND_NAME, SECOPEUTIC_LOGO_GLYPH } from '@/lib/brand/secopeutic-brand'
-import { SECOPUTIC_CLINICS_PATH, SECOPUTIC_DEMO_PATH, SECOPUTIC_LANDING_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
+import { DIOS_BRAND_NAME, DIOS_LOGO_GLYPH, DIOS_TAGLINE } from '@/lib/brand/dios-brand'
+import {
+  DIOS_CLINICIANS_CLINICS_PATH,
+  DIOS_CLINICIANS_DEMO_PATH,
+  DIOS_CLINICIANS_EVIDENCE_PATH,
+  DIOS_CLINICIANS_PATH,
+  DIOS_CLINICIANS_PILOT_PATH,
+} from '@/lib/secopeutic/site'
 
 const FOOTER_LINKS = [
-  { label: 'Evidence library', href: '/science' },
-  { label: 'Monitoring demo', href: SECOPUTIC_DEMO_PATH },
-  { label: 'Claim free pilot', href: SECOPUTIC_PILOT_PATH },
-  { label: 'Certified clinics', href: SECOPUTIC_CLINICS_PATH },
+  { label: 'Evidence library', href: DIOS_CLINICIANS_EVIDENCE_PATH },
+  { label: 'Monitoring demo', href: DIOS_CLINICIANS_DEMO_PATH },
+  { label: 'Claim free pilot', href: DIOS_CLINICIANS_PILOT_PATH },
+  { label: 'Certified clinics', href: DIOS_CLINICIANS_CLINICS_PATH },
 ] as const
 
 export function SecopeuticFooter() {
@@ -15,14 +21,14 @@ export function SecopeuticFooter() {
     <footer className="seco-footer">
       <div className="seco-landing__section-inner">
         <div className="seco-footer__main">
-          <Link href={SECOPUTIC_LANDING_PATH} className="seco-footer__brand" aria-label={SECOPEUTIC_BRAND_NAME}>
+          <Link href={DIOS_CLINICIANS_PATH} className="seco-footer__brand" aria-label={DIOS_BRAND_NAME}>
             <span className="seco-footer__glyph" aria-hidden="true">
-              {SECOPEUTIC_LOGO_GLYPH}
+              {DIOS_LOGO_GLYPH}
             </span>
-            <span className="seco-footer__tag">VD3 Therapy</span>
+            <span className="seco-footer__tag">{DIOS_TAGLINE}</span>
           </Link>
 
-          <nav className="seco-footer__nav" aria-label="Secopeutic">
+          <nav className="seco-footer__nav" aria-label="DIOS">
             <ul className="seco-footer__links">
               {FOOTER_LINKS.map((link) => (
                 <li key={link.href + link.label}>
@@ -36,12 +42,12 @@ export function SecopeuticFooter() {
         </div>
 
         <div className="seco-footer__bar">
-          <p className="seco-footer__copy">© 2026 SECOMED</p>
+          <p className="seco-footer__copy">© 2026 DIOS</p>
           <nav className="seco-footer__legal-nav" aria-label="Legal">
             <Link href="/privacy" className="seco-footer__legal-link">
               Privacy
             </Link>
-            <Link href="/secopeutic/terms" className="seco-footer__legal-link">
+            <Link href="/clinicians/terms" className="seco-footer__legal-link">
               Terms
             </Link>
           </nav>

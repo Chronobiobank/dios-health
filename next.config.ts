@@ -17,7 +17,6 @@ const nextConfig: NextConfig = {
       '/technology',
       '/tiptraq',
       '/dina',
-      '/clinicians',
       '/chronobiobank',
       '/circadian-digital-twin',
       '/pitch',
@@ -27,7 +26,13 @@ const nextConfig: NextConfig = {
       '/dev',
     ] as const
 
+    const secopeuticLegacy = [
+      { source: '/secopeutic', destination: '/clinicians', permanent: true },
+      { source: '/secopeutic/:path*', destination: '/clinicians/:path*', permanent: true },
+    ] as const
+
     return [
+      ...secopeuticLegacy,
       ...legacyMarketing.map((source) => ({
         source,
         destination: '/',

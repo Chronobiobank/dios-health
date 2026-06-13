@@ -3,15 +3,15 @@ import type { Metadata } from 'next'
 import { SecopeuticDemoShell } from '@/components/secopeutic/secopeutic-demo-shell'
 import { SecopeuticPilotForm } from '@/components/secopeutic/secopeutic-pilot-form'
 import { SECOPEUTIC_LANDING_DISCLAIMER, SECOPEUTIC_LANDING_PILOT } from '@/lib/secopeutic/landing-content'
-import { SECOPUTIC_SITE_URL } from '@/lib/secopeutic/site'
+import { DIOS_SITE_URL } from '@/lib/secopeutic/site'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SECOPUTIC_SITE_URL),
-  title: 'Claim free pilot — Secopeutic',
+  metadataBase: new URL(DIOS_SITE_URL),
+  title: 'Claim free pilot — DIOS',
   description: SECOPEUTIC_LANDING_PILOT.support,
 }
 
-export default function SecopeuticPilotPage() {
+export default function DiosCliniciansPilotPage() {
   return (
     <SecopeuticDemoShell context="Free pilot" variant="dark">
       <main className="seco-pilot">

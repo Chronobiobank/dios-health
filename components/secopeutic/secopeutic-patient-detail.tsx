@@ -1,7 +1,5 @@
 import Link from 'next/link'
 
-import { FlagBadge } from '@/components/ui/flag-badge'
-import { DATA_LABEL, DASHBOARD_HEADLINE, SECTION_LABEL } from '@/components/dashboard/dashboard-styles'
 import {
   protocolLabel,
   type SecopeuticDemoPatient,
@@ -15,6 +13,8 @@ type SecopeuticPatientDetailProps = {
   patient: SecopeuticDemoPatient
 }
 
+type MetricStatus = 'green' | 'amber' | 'red'
+
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-GB', {
     day: 'numeric',
@@ -23,205 +23,289 @@ function formatDate(iso: string): string {
   })
 }
 
-function MetricCard({
+function StatusPill({
+  label,
+  severity,
+}: {
+  label: string
+  severity: MetricStatus | 'blue'
+}) {
+  return (
+    <span
+      className={cn(
+        'seco-record__pill',
+        severity === 'green' && 'seco-record__pill--green',
+        severity === 'amber' && 'seco-record__pill--amber',
+        severity === 'red' && 'seco-record__pill--red',
+        severity === 'blue' && 'seco-record__pill--blue'
+      )}
+    >
+      {label}
+    </span>
+  )
+}
+
+function KpiTile({
   label,
   value,
   status,
-  sub,
+  hint,
+  prior,
+  large,
 }: {
   label: string
   value: string
-  status: 'green' | 'amber' | 'red'
-  sub?: string
+  status: MetricStatus
+  hint?: string
+  prior?: string
+  large?: boolean
 }) {
   return (
-    <div className="secopeutic-metric-card">
-      <p className={DATA_LABEL}>{label}</p>
+    <div className={cn('seco-record__kpi', large && 'seco-record__kpi--large')}>
+      <p className="seco-record__kpi-label">{label}</p>
       <p
         className={cn(
-          'mt-1 font-mono text-2xl font-semibold tabular-nums',
-          status === 'green' && 'text-status-green',
-          status === 'amber' && 'text-status-amber',
-          status === 'red' && 'text-status-red'
+          'seco-record__kpi-value',
+          status === 'green' && 'seco-record__kpi-value--green',
+          status === 'amber' && 'seco-record__kpi-value--amber',
+          status === 'red' && 'seco-record__kpi-value--red'
         )}
       >
         {value}
       </p>
-      {sub ? <p className="mt-1 font-ui text-ui-sm text-black/55">{sub}</p> : null}
+      {prior ? <p className="seco-record__kpi-prior">was {prior}</p> : null}
+      {hint ? <p className="seco-record__kpi-hint">{hint}</p> : null}
     </div>
   )
 }
 
 export function SecopeuticPatientDetail({ patient }: SecopeuticPatientDetailProps) {
-  const latest = patient.labHistory[0]
+  const latestLab = patient.labHistory[patient.labHistory.length - 1]
+  const responseSeverity = zoneSeverity(patient.responseZone)
+  const tiptraqOnly = patient.profileScope === 'tiptraq-demographics'
 
   return (
-    <div className="seco-demo-workspace secopeutic-demo__page">
+    <div className="seco-demo-workspace seco-record">
       <Link href={SECOPUTIC_DEMO_PATH} className="seco-demo-back">
-        ← Back to cohort
+        ← Cohort dashboard
       </Link>
 
-      <div className="secopeutic-patient-header mt-4">
-        <div>
-          <p className={DATA_LABEL}>Illustrative record · {patient.recordId}</p>
-          <h1 className={`${DASHBOARD_HEADLINE} mt-1`}>{patient.displayName}</h1>
-          <p className="mt-2 max-w-xl font-ui text-ui-sm text-black/65">{patient.indication}</p>
+      <header className="seco-record__header">
+        <div className="seco-record__identity">
+          <p className="seco-record__eyebrow">
+            {patient.recordId} · {patient.age} · {protocolLabel(patient.protocol)}
+          </p>
+          <h1 className="seco-record__name">{patient.displayName}</h1>
+          <p className="seco-record__indication">{patient.indication}</p>
+          {patient.demographics ? (
+            <p className="seco-record__demographics">
+              {patient.demographics.city}, {patient.demographics.country} · Fitzpatrick{' '}
+              {patient.demographics.fitzpatrickType} · DOB{' '}
+              {formatDate(patient.demographics.dateOfBirth)}
+            </p>
+          ) : null}
         </div>
-        <div className="secopeutic-patient-header__badges">
-          <FlagBadge label={protocolLabel(patient.protocol)} severity="blue" />
-          <FlagBadge
-            label={`Safety · ${zoneLabel(patient.safetyZone)}`}
-            severity={zoneSeverity(patient.safetyZone)}
-          />
-          <FlagBadge
+        <div className="seco-record__status">
+          <StatusPill label={`Safety · ${zoneLabel(patient.safetyZone)}`} severity={zoneSeverity(patient.safetyZone)} />
+          <StatusPill
             label={`Response · ${zoneLabel(patient.responseZone)}`}
-            severity={zoneSeverity(patient.responseZone)}
+            severity={responseSeverity}
           />
         </div>
-      </div>
+      </header>
 
-      <section className="secopeutic-panel mt-8">
-        <h2 className={SECTION_LABEL}>Secological response index</h2>
-        <p className="mt-1 font-ui text-ui-sm text-black/60">
-          Clinician-interpreted composite. Hibernation burden and window alignment between City Labs
-          draws.
+      <section
+        className="seco-record__strip"
+        aria-label={tiptraqOnly ? 'TipTraQ readout' : 'Four-pathway readout'}
+      >
+        <p className="seco-record__strip-label">
+          {tiptraqOnly ? 'TipTraQ readout' : 'Four-pathway readout'}
         </p>
-        <div className="secopeutic-metric-grid mt-4">
-          <MetricCard
-            label="Response index"
-            value={`${patient.secologicalResponseIndex}`}
-            status={
-              patient.responseZone === 'stable'
-                ? 'green'
-                : patient.responseZone === 'review'
-                  ? 'amber'
-                  : 'red'
-            }
-            sub={`Calendar age ${patient.calendarAge}`}
-          />
-          <MetricCard
-            label="Hibernation lag"
-            value={`${patient.hibernationBurdenWeeks} wk`}
-            status={
-              patient.hibernationBurdenWeeks <= 2
-                ? 'green'
-                : patient.hibernationBurdenWeeks <= 4
-                  ? 'amber'
-                  : 'red'
-            }
-            sub={
-              patient.hibernationPriorWeeks
-                ? `was ${patient.hibernationPriorWeeks} wk`
-                : 'Sleep architecture debt'
-            }
-          />
-          <MetricCard
-            label="Window alignment"
-            value={`${patient.windowAlignmentPct}%`}
-            status={
-              patient.windowAlignmentPct >= 90
-                ? 'green'
-                : patient.windowAlignmentPct >= 70
-                  ? 'amber'
-                  : 'red'
-            }
-            sub="Morning D3 confirmations · last 30 days"
-          />
-          <MetricCard
-            label="REM latency"
-            value={patient.remLatency.value}
-            status={patient.remLatency.status}
-            sub={patient.remLatency.hint}
-          />
-        </div>
-      </section>
-
-      <section className="secopeutic-panel mt-6">
-        <h2 className={SECTION_LABEL}>Four-pathway readout</h2>
-        <div className="secopeutic-metric-grid mt-4">
-          <MetricCard
+        <div className="seco-record__strip-grid">
+          <KpiTile
             label="Sleep efficiency"
             value={patient.sleepEfficiency.value}
             status={patient.sleepEfficiency.status}
-            sub={patient.sleepEfficiency.hint}
+            hint={patient.sleepEfficiency.hint}
+            prior={patient.sleepEfficiency.prior}
+            large
           />
-          <MetricCard
-            label="PTH"
-            value={patient.pth.value}
-            status={patient.pth.status}
-            sub={patient.pth.hint}
+          <KpiTile
+            label="REM latency"
+            value={patient.remLatency.value}
+            status={patient.remLatency.status}
+            hint={patient.remLatency.hint}
+            prior={patient.remLatency.prior}
+            large
           />
-          <MetricCard
-            label="D3 timing"
-            value={patient.d3Timing.value}
-            status={patient.d3Timing.status}
-            sub={patient.d3Timing.hint}
-          />
-          <MetricCard
-            label="Next City Labs draw"
-            value={formatDate(patient.nextPanelDue)}
-            status="green"
-            sub={`Last ${formatDate(patient.lastCityLabsDraw)}`}
-          />
-        </div>
-        <p className="mt-4 font-ui text-ui-sm leading-relaxed text-black/75">{patient.clinicalRead}</p>
-        <div className="mt-3">
-          <FlagBadge label={patient.action} severity={zoneSeverity(patient.responseZone)} />
+          {tiptraqOnly && patient.tiptraqSleepOnset && patient.tiptraqTotalSleep ? (
+            <>
+              <KpiTile
+                label="Sleep onset"
+                value={patient.tiptraqSleepOnset.value}
+                status={patient.tiptraqSleepOnset.status}
+                hint={patient.tiptraqSleepOnset.hint}
+                large
+              />
+              <KpiTile
+                label="Total sleep"
+                value={patient.tiptraqTotalSleep.value}
+                status={patient.tiptraqTotalSleep.status}
+                hint={patient.tiptraqTotalSleep.hint}
+                large
+              />
+            </>
+          ) : (
+            <>
+              <KpiTile
+                label="PTH"
+                value={patient.pth.value}
+                status={patient.pth.status}
+                hint={patient.pth.hint}
+                prior={patient.pth.prior}
+                large
+              />
+              <KpiTile
+                label="D3 timing"
+                value={patient.d3Timing.value}
+                status={patient.d3Timing.status}
+                hint={patient.d3Timing.hint}
+                large
+              />
+            </>
+          )}
         </div>
       </section>
 
-      <section className="secopeutic-panel mt-6">
-        <h2 className={SECTION_LABEL}>Safety gate</h2>
-        <p className="mt-1 font-ui text-ui-sm text-black/60">{patient.safetySummary}</p>
-        {latest ? (
-          <div className="mt-4 overflow-x-auto">
-            <table className="secopeutic-lab-table">
-              <thead>
-                <tr>
-                  <th>Drawn</th>
-                  <th>PTH</th>
-                  <th>25-OH-D</th>
-                  <th>Ca</th>
-                  <th>Urine Ca</th>
-                  <th>eGFR</th>
-                  <th>B12</th>
-                </tr>
-              </thead>
-              <tbody>
-                {patient.labHistory.map((row) => (
-                  <tr key={row.drawnAt}>
-                    <td>{formatDate(row.drawnAt)}</td>
-                    <td>{row.pthPgMl} pg/mL</td>
-                    <td>{row.vitaminDNmol} nmol/L</td>
-                    <td>{row.calciumMmol} mmol/L</td>
-                    <td>{row.urinaryCalciumMg ?? '—'} mg</td>
-                    <td>{row.egfr}</td>
-                    <td>{row.b12Pmol ?? '—'} pmol/L</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <aside
+        className={cn(
+          'seco-record__callout',
+          responseSeverity === 'green' && 'seco-record__callout--green',
+          responseSeverity === 'amber' && 'seco-record__callout--amber',
+          responseSeverity === 'red' && 'seco-record__callout--red'
+        )}
+      >
+        <p className="seco-record__callout-label">Clinical read</p>
+        <p className="seco-record__callout-text">{patient.clinicalRead}</p>
+        <p className="seco-record__callout-action">{patient.action}</p>
+      </aside>
+
+      <div className="seco-record__body">
+        <section className="seco-record__panel">
+          <h2 className="seco-record__panel-title">Dose window inputs</h2>
+          <p className="seco-record__panel-sub">
+            Mobile diagnostics, blood panels, and TipTraQ set the daily window.
+          </p>
+          <div className="seco-record__panel-grid">
+            <KpiTile
+              label="Mobile light panel"
+              value={patient.mobileLight.value}
+              status={patient.mobileLight.status}
+              hint={patient.mobileLight.hint}
+            />
+            <KpiTile
+              label="Blood panel"
+              value={patient.bloodPanel.value}
+              status={patient.bloodPanel.status}
+              hint={patient.bloodPanel.hint}
+            />
+            <KpiTile
+              label="TipTraQ block"
+              value={patient.tiptraqBlock.value}
+              status={patient.tiptraqBlock.status}
+              hint={patient.tiptraqBlock.hint}
+            />
+            <KpiTile
+              label="Dose window"
+              value={patient.doseWindowPct === null ? 'Pending' : `${patient.doseWindowPct}%`}
+              status={
+                patient.doseWindowPct === null
+                  ? 'amber'
+                  : patient.doseWindowPct >= 90
+                    ? 'green'
+                    : patient.doseWindowPct >= 70
+                      ? 'amber'
+                      : 'red'
+              }
+              hint={
+                patient.doseWindowPct === null
+                  ? 'Needs phone and blood inputs'
+                  : 'Morning D3 confirmations · 30 days'
+              }
+            />
           </div>
-        ) : null}
-      </section>
+        </section>
 
-      <section className="secopeutic-panel mt-6">
-        <h2 className={SECTION_LABEL}>Data streams</h2>
-        <ul className="mt-3 space-y-2 font-ui text-ui-sm text-black/70">
-          <li>
-            City Labs panel — last draw {formatDate(patient.lastCityLabsDraw)}
-          </li>
-          <li>
-            TipTraQ block —{' '}
-            {patient.lastTipTraqBlock
-              ? `last block ${formatDate(patient.lastTipTraqBlock)}`
-              : 'not ordered'}
-          </li>
-          <li>Dose intelligence — daily window log via Secopeutic Link</li>
-        </ul>
-      </section>
+        <section className="seco-record__panel">
+          <h2 className="seco-record__panel-title">Safety gate</h2>
+          <p className="seco-record__panel-sub">{patient.safetySummary}</p>
+          {patient.labHistory.length > 0 ? (
+            <div className="seco-record__table-wrap">
+              <table className="seco-record__table">
+                <thead>
+                  <tr>
+                    <th>Drawn</th>
+                    <th>PTH</th>
+                    <th>25-OH-D</th>
+                    <th>Ca</th>
+                    <th>Urine Ca</th>
+                    <th>eGFR</th>
+                    <th>B12</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[...patient.labHistory].reverse().map((row) => (
+                    <tr key={row.drawnAt} className={row === latestLab ? 'seco-record__table-row--latest' : undefined}>
+                      <td>{formatDate(row.drawnAt)}</td>
+                      <td>{row.pthPgMl}</td>
+                      <td>{row.vitaminDNmol}</td>
+                      <td>{row.calciumMmol}</td>
+                      <td>{row.urinaryCalciumMg ?? '—'}</td>
+                      <td>{row.egfr}</td>
+                      <td>{row.b12Pmol ?? '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="seco-record__table-units">
+                PTH pg/mL · 25-OH-D nmol/L · Ca mmol/L · urine Ca mg · B12 pmol/L
+              </p>
+            </div>
+          ) : (
+            <p className="seco-record__panel-sub">Blood panel not yet ingested.</p>
+          )}
+        </section>
 
-      <p className={cn(DATA_LABEL, 'mt-8 text-black/40')}>
+        <section className="seco-record__panel seco-record__panel--streams">
+          <h2 className="seco-record__panel-title">Input cadence</h2>
+          <dl className="seco-record__streams">
+            <div>
+              <dt>Mobile diagnostics</dt>
+              <dd>Monthly melanopic light panel from phone</dd>
+            </div>
+            <div>
+              <dt>City Labs</dt>
+              <dd>
+                {patient.lastCityLabsDraw
+                  ? `Last draw ${formatDate(patient.lastCityLabsDraw)}${
+                      patient.nextPanelDue ? ` · Next ${formatDate(patient.nextPanelDue)}` : ''
+                    }`
+                  : 'No panel on file · order first draw'}
+              </dd>
+            </div>
+            <div>
+              <dt>TipTraQ</dt>
+              <dd>
+                {patient.lastTipTraqBlock
+                  ? `Three nights ending ${formatDate(patient.lastTipTraqBlock)}`
+                  : 'Block not ordered'}
+              </dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+
+      <p className="seco-record__disclaimer">
         Illustrative demo only. Platform flags and exports — clinician owns all treatment decisions.
       </p>
     </div>

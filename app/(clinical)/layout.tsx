@@ -1,14 +1,12 @@
 import type { ReactNode } from 'react'
 
-import { ClinicalShell } from '@/components/clinical/clinical-shell'
-
 import '@/app/styles/clinical-globals.css'
 
 type ClinicalLayoutProps = {
   children: ReactNode
 }
 
-/** Clinician triage and clinic routes — no wellness globals, no marketing footer. */
+/** Shared clinical styles — shell is applied per-route (clinic, triage), not clinicians marketing. */
 export default function ClinicalLayout({ children }: ClinicalLayoutProps) {
-  return <ClinicalShell>{children}</ClinicalShell>
+  return children
 }

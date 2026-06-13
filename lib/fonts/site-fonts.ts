@@ -1,4 +1,6 @@
-import { DM_Mono, Instrument_Serif, Inter } from 'next/font/google'
+import { DM_Mono, Inter } from 'next/font/google'
+
+import { bureauSans, merriweather } from '@/lib/fonts/maven-reference-fonts'
 
 /** Inter — clinical UI chrome, dashboard prose, navigation */
 export const inter = Inter({
@@ -16,14 +18,11 @@ export const dmMono = DM_Mono({
   weight: ['300', '400', '500'],
 })
 
-/** Instrument Serif — loaded for legacy tokens; product pages use Inter headings (see marketing-typography.css) */
-export const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-serif',
-  display: 'swap',
-})
+/** Merriweather — marketing display headings */
+export const displaySerif = merriweather
+
+/** Maven Bureau Sans — marketing UI and hero accent type */
+export const displaySans = bureauSans
 
 /** @deprecated Use `inter` — kept as alias for gradual CSS migration */
 export const geistSans = inter
@@ -31,4 +30,4 @@ export const geistSans = inter
 /** @deprecated Use `dmMono` — kept as alias for gradual CSS migration */
 export const geistMono = dmMono
 
-export const siteFontVariableClasses = `${inter.variable} ${dmMono.variable} ${instrumentSerif.variable}`
+export const siteFontVariableClasses = `${inter.variable} ${dmMono.variable} ${displaySerif.variable} ${displaySans.variable}`

@@ -1,4 +1,4 @@
-/* Product pages — clinical triage headings (Inter). Kawasaki `/` keeps Lora in marketing-landing.css */
+/* Product pages — clinical triage headings (Inter). Marketing v2 uses Merriweather in marketing-landing.css */
 
 :root {
   --font-heading-clinical: var(--font-family-sans);

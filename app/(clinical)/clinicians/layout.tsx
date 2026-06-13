@@ -10,7 +10,7 @@ type LayoutProps = {
   children: ReactNode
 }
 
-/** Public Secopeutic routes — no auth required. */
-export default function SecopeuticLayout({ children }: LayoutProps) {
+/** Public DIOS clinician routes — no auth required. */
+export default function DiosCliniciansLayout({ children }: LayoutProps) {
   return <div className={marketingFontVariableClasses}>{children}</div>
 }

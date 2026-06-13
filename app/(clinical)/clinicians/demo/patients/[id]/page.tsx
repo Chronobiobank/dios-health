@@ -15,12 +15,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!patient) return { title: 'Patient not found' }
 
   return {
-    title: `${patient.displayName} · Secopeutic demo`,
+    title: `${patient.displayName} · DIOS demo`,
     robots: { index: false, follow: false },
   }
 }
 
-export default async function SecopeuticDemoPatientPage({ params }: Props) {
+export default async function DiosCliniciansDemoPatientPage({ params }: Props) {
   const { id } = await params
   const patient = getSecopeuticDemoPatient(id)
   if (!patient) notFound()

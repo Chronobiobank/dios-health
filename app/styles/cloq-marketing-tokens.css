@@ -30,9 +30,9 @@
   --mkt-bronze: var(--cloq-lilac);
   --mkt-gold: var(--cloq-lilac);
 
-  /* Typography — Instrument Serif display + DM Sans body (Function: Financier + FT Base) */
-  --mkt-serif: var(--font-instrument-serif, var(--font-lora, Georgia, serif));
-  --mkt-sans: var(--font-dm-sans, system-ui, sans-serif);
+  /* Typography — Merriweather display + Bureau Sans body */
+  --mkt-serif: var(--font-merriweather, Georgia, serif);
+  --mkt-sans: var(--font-bureau-sans, var(--font-dm-sans), system-ui, sans-serif);
   --mkt-mono: var(--font-mkt-mono, monospace);
 
   /* Sharp type scale */
