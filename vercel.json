@@ -11,6 +11,18 @@
       "has": [{ "type": "host", "value": "www.secopeutic.com" }],
       "destination": "/secopeutic",
       "permanent": false
+    },
+    {
+      "source": "/clinicians",
+      "has": [{ "type": "host", "value": "secopeutic.com" }],
+      "destination": "/secopeutic/pilot",
+      "permanent": false
+    },
+    {
+      "source": "/clinicians",
+      "has": [{ "type": "host", "value": "www.secopeutic.com" }],
+      "destination": "/secopeutic/pilot",
+      "permanent": false
     }
   ]
 }

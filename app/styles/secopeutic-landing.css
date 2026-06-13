@@ -715,6 +715,109 @@
   color: rgb(255 255 255 / 0.48);
 }
 
+/* Pilot claim */
+.seco-pilot {
+  padding-block: clamp(2.5rem, 6vw, 4rem) clamp(3rem, 7vw, 5rem);
+  color: #fff;
+}
+
+.seco-pilot__eyebrow {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+}
+
+.seco-pilot__title {
+  margin: 0.75rem 0 0;
+  max-width: 20ch;
+  font-family: var(--seco-font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.seco-pilot__support {
+  margin: 1rem 0 0;
+  max-width: var(--seco-copy-measure);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.68);
+}
+
+.seco-pilot__form {
+  display: grid;
+  gap: 1rem;
+  max-width: 28rem;
+  margin-top: 2rem;
+}
+
+.seco-pilot__field {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.seco-pilot__label {
+  font-family: var(--seco-font-ui);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.seco-pilot__input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 0.5rem;
+  background: rgb(255 255 255 / 0.06);
+  color: #fff;
+  font-family: var(--seco-font-ui);
+  font-size: 1rem;
+}
+
+.seco-pilot__input--area {
+  min-height: 5.5rem;
+  resize: vertical;
+}
+
+.seco-pilot__input:focus {
+  outline: 2px solid rgb(255 255 255 / 0.35);
+  outline-offset: 1px;
+}
+
+.seco-pilot__error {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #f5a8a8;
+}
+
+.seco-pilot__success {
+  margin: 2rem 0 0;
+  max-width: 28rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.88);
+}
+
+.seco-pilot .seco-landing__btn--primary {
+  width: fit-content;
+  margin-top: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.seco-pilot .seco-landing__btn--primary:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
 /* ——— Full-page dark navy (landing home) ——— */
 .secopeutic-demo.seco-shell--dark .seco-landing--maven {
   background: var(--seco-navy);

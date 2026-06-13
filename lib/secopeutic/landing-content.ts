@@ -1,6 +1,6 @@
 import { SECOPEUTIC_UK_STARTER_CLINICS } from '@/lib/secopeutic/certified-clinics'
 import { CLINICAL_GUIDE_CLINICIANS } from '@/lib/secopeutic/clinical-guide-clinicians'
-import { SECOPUTIC_DEMO_PATH } from '@/lib/secopeutic/site'
+import { SECOPUTIC_DEMO_PATH, SECOPUTIC_LANDING_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
 
 export const SECOPEUTIC_LANDING_META = {
   title: 'Secopeutic — High-dose vitamin D for clinicians',
@@ -14,7 +14,7 @@ export const SECOPEUTIC_LANDING_HERO = {
   headlineSub: 'with clinical precision',
   support:
     'Evidence, monitoring tools, and verified clinics for practitioners ready to learn more.',
-  primaryCta: { label: 'Claim free pilot', href: '/clinicians' },
+  primaryCta: { label: 'Claim free pilot', href: SECOPUTIC_PILOT_PATH },
   secondaryCta: { label: 'View monitoring demo', href: SECOPUTIC_DEMO_PATH },
 } as const
 
@@ -97,11 +97,11 @@ export const SECOPEUTIC_LANDING_PLATFORM = {
       id: 'clinics',
       label: 'Certified clinics',
       body: 'Verified practices opt in only. Find colleagues near you.',
-      href: '/clinicians',
+      href: `${SECOPUTIC_LANDING_PATH}#clinics`,
       linkLabel: 'Find certified clinics',
       icon: 'clinics',
       panelTitle: 'UK starter clinics',
-      panelSeeAll: { label: 'Find clinics', href: '/clinicians' },
+      panelSeeAll: { label: 'Find clinics', href: `${SECOPUTIC_LANDING_PATH}#clinics` },
       panelLayout: 'grid',
       panelItems: SECOPEUTIC_UK_STARTER_CLINICS.map((clinic) => ({
         title: clinic.cardTitle,
@@ -116,7 +116,7 @@ export const SECOPEUTIC_LANDING_PILOT = {
   number: '06',
   headline: 'Free pilot for three patients.',
   support: 'Run real cases for six months. Keep your existing lab workflow.',
-  cta: { label: 'Claim free pilot', href: '/clinicians' },
+  cta: { label: 'Claim free pilot', href: SECOPUTIC_PILOT_PATH },
   demoCta: { label: 'Open monitoring demo', href: SECOPUTIC_DEMO_PATH },
 } as const
 

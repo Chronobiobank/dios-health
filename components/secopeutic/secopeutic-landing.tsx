@@ -19,7 +19,7 @@ export function SecopeuticLanding() {
             <p className="seco-landing__hero-lede">{SECOPEUTIC_LANDING_HERO.support}</p>
           </div>
         </div>
-        <div className="seco-landing__section-inner">
+        <div className="seco-landing__section-inner" id="clinics">
           <SecopeuticHeroTabs />
         </div>
       </section>

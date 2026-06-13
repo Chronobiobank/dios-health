@@ -5,6 +5,7 @@ import { TipTraqPractitionerBanner } from '@/components/clinic/tiptraq-practitio
 import { DATA_LABEL } from '@/components/dashboard/dashboard-styles'
 import { FlagBadge } from '@/components/ui/flag-badge'
 import { SECOPUTIC_DEMO_PATIENTS } from '@/lib/secopeutic/demo-cohort'
+import { SECOPUTIC_LANDING_PATH, SECOPUTIC_PILOT_PATH } from '@/lib/secopeutic/site'
 
 export function SecopeuticCohortDashboard() {
   const stable = SECOPUTIC_DEMO_PATIENTS.filter((p) => p.safetyZone === 'stable').length
@@ -67,10 +68,10 @@ export function SecopeuticCohortDashboard() {
           TipTraQ and dose window logging on one timeline.
         </p>
         <div className="seco-landing__actions mt-4">
-          <Link href="/clinicians" className="seco-landing__btn seco-landing__btn--primary">
+          <Link href={SECOPUTIC_PILOT_PATH} className="seco-landing__btn seco-landing__btn--primary">
             Claim free pilot →
           </Link>
-          <Link href="/secopeutic" className="seco-landing__btn seco-landing__btn--secondary">
+          <Link href={SECOPUTIC_LANDING_PATH} className="seco-landing__btn seco-landing__btn--secondary">
             Back to home →
           </Link>
         </div>
