@@ -67,10 +67,12 @@ App-layer types `LabOrder`, `SupplementOrder`, `AssessmentOrder` are discriminat
 ## Implementation phases
 
 ### Phase 1 (this PR) — Foundation
-- Schema + RLS
+- Schema + RLS (`031_protocol_fulfillment.sql`, `032_product_spine.sql`)
 - Domain layer + APIs
 - Patient/clinician widgets + orders pages
 - Protocol requirements panel on patient record
+- Honest empty states (no demo order masking when tables exist)
+- Ingest hooks: blood panels → `results_imported`; TipTraQ → `report_available`
 
 ### Phase 2 — Persistence + ingestion
 - Run migration on Supabase production

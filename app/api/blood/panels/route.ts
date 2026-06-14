@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 
 import { calculateBloodPanelDlmo } from '@/lib/dashboard/blood-panel-gominak'
 import { mergeDlmoLayers } from '@/lib/dashboard/dlmo-merge'
+import { syncLabFulfillmentAfterPanel } from '@/lib/fulfillment/ingest-sync'
 import { syncRetinomicPatientState } from '@/lib/retinomic/sync-tier'
 import { createClient } from '@/lib/supabase/server'
 
@@ -116,6 +117,8 @@ export async function POST(request: Request) {
     if (tierSyncError) {
       console.error('[Blood panel] retinomic tier sync failed', tierSyncError)
     }
+
+    await syncLabFulfillmentAfterPanel(supabase, user.id)
 
     return NextResponse.json({
       success: true,

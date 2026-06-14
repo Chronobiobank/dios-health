@@ -16,6 +16,7 @@ import {
   toNightInput,
 } from '@/lib/tiptraq/extraction'
 import { mergeDlmoLayers } from '@/lib/dashboard/dlmo-merge'
+import { syncAssessmentFulfillmentAfterTipTraq } from '@/lib/fulfillment/ingest-sync'
 import { syncMLuxProfileForPatient } from '@/lib/tiptraq/sync-dlmo-profile'
 
 export const maxDuration = 60
@@ -270,6 +271,8 @@ export async function POST(request: NextRequest) {
       })
       return errorResponse(mergeError, 500)
     }
+
+    await syncAssessmentFulfillmentAfterTipTraq(supabase, user.id)
 
     return jsonResponse({
       success: true,

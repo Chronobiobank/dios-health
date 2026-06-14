@@ -40,9 +40,15 @@ export default async function PatientOrdersPage() {
           avatarUrl={avatarUrl}
         />
         <Section label="Protocol fulfillment">
-          <p className="dash-sub max-w-[44ch]">
-            Order tests, sleep assessments, and supplements required by your active protocol.
+        <p className="dash-sub max-w-[44ch]">
+          Order tests, sleep assessments, and supplements required by your active protocol.
+        </p>
+        {summary.requirements.length === 0 ? (
+          <p className="fulfillment-panel__sub mt-3">
+            No active protocol on file yet. Your clinician will assign a protocol before
+            requirements appear here.
           </p>
+        ) : null}
           <PatientFulfillmentWidgets summary={summary} />
           <FulfillmentOrdersView summary={summary} patientProfileId={user.id} />
         </Section>

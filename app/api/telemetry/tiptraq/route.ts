@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import { verifyWebhookSecret } from '@/lib/api/webhook-auth'
+import { syncAssessmentFulfillmentAfterTipTraq } from '@/lib/fulfillment/ingest-sync'
 import { syncRetinomicPatientState } from '@/lib/retinomic/sync-tier'
 import { createAdminClient } from '@/lib/supabase/admin'
 import type { TipTraqWebhookPayload } from '@/src/types'
@@ -138,6 +139,8 @@ export async function POST(request: Request) {
     if (syncError) {
       console.error('TipTraQ tier sync:', syncError)
     }
+
+    await syncAssessmentFulfillmentAfterTipTraq(supabase, payload.userId)
 
     return NextResponse.json({
       ok: true,

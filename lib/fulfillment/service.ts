@@ -3,8 +3,6 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import { getCatalogEntry } from '@/lib/fulfillment/catalog'
 import {
   buildProtocolRequirements,
-  demoOrdersForPatient,
-  demoProtocolContext,
   mapDbItem,
   mapDbOrder,
   splitRequirements,
@@ -36,8 +34,12 @@ export async function fetchPatientOrders(
     .eq('patient_profile_id', patientProfileId)
     .order('created_at', { ascending: false })
 
-  if (!tablesAvailable(error) || !orderRows?.length) {
-    return demoOrdersForPatient(patientProfileId)
+  if (!tablesAvailable(error)) {
+    return []
+  }
+
+  if (!orderRows?.length) {
+    return []
   }
 
   const orderIds = orderRows.map((r) => r.id as string)
@@ -84,9 +86,10 @@ export async function resolvePatientProtocolContext(
 
   if (!protocol?.protocol_type) {
     return {
-      ...demoProtocolContext('coimbra_d3'),
+      protocolType: 'unassigned',
       hasBloodPanel: (bloodCount ?? 0) > 0,
       hasTipTraqBlock: (tiptraqCount ?? 0) >= 3,
+      reviewAt: null,
     }
   }
 
