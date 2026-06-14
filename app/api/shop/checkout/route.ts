@@ -3,9 +3,10 @@ import { NextResponse } from 'next/server'
 import type { MicronutrientItemId } from '@/lib/chronoimmune/indication-zones'
 import { getShopProduct, SHOP_PRODUCTS } from '@/lib/shop/catalog'
 import { syncShopCheckoutToFulfillment } from '@/lib/shop/fulfillment-bridge'
-import { appendSupplementOrder, createOrderId } from '@/lib/shop/order-store'
+import { createShopOrderId } from '@/lib/shop/order-id'
 import { createStripeCheckoutSession, stripeConfigured } from '@/lib/shop/stripe'
 import type { OrderFlow, PatientDeliveryProfile } from '@/lib/shop/types'
+import type { ShopProductSlug } from '@/lib/shop/types'
 import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
@@ -22,6 +23,12 @@ type CheckoutBody = {
   successPath?: string
   cancelPath?: string
 }
+
+const FULFILLMENT_SHOP_SLUGS = new Set<ShopProductSlug>([
+  'd3-k2-protocol',
+  'b-complex-gominak',
+  'magnesium-glycinate',
+])
 
 function originFromRequest(request: Request): string {
   const host = request.headers.get('host') ?? 'localhost:3000'
@@ -58,10 +65,11 @@ export async function POST(request: Request) {
       .maybeSingle<{ full_name: string | null; role: 'patient' | 'clinician' }>()
 
     const orderedBy = profile?.full_name ?? user.email ?? 'DIOS user'
-    const orderId = createOrderId()
+    const shopOrderId = createShopOrderId()
     const origin = originFromRequest(request)
     const successPath = body.successPath ?? '/shop/success'
     const cancelPath = body.cancelPath ?? `/shop/${product.slug}`
+    const protocolDose = body.protocolDose ?? product.defaultProtocolDose
 
     const validMicronutrientIds = new Set(
       SHOP_PRODUCTS.flatMap((p) => p.micronutrientIds)
@@ -71,25 +79,26 @@ export async function POST(request: Request) {
         ? (body.micronutrientId as MicronutrientItemId)
         : null
 
-    const orderEvent = {
-      id: orderId,
-      patientRecordId: body.patientRecordId,
-      patientName: body.patientName,
+    const requiresFulfillment = FULFILLMENT_SHOP_SLUGS.has(product.slug)
+
+    const syncInput = {
       productSlug: product.slug,
       productName: product.name,
-      micronutrientId,
-      quantity: qty.units,
+      patientRecordId: body.patientRecordId,
+      patientName: body.patientName,
+      orderFlow: body.orderFlow,
+      orderedByProfileId: user.id,
+      orderedByName: orderedBy,
+      shopOrderId,
+      quantityLabel: qty.label,
+      quantityUnits: qty.units,
       unitPriceGbp: qty.priceGbp,
       totalGbp: qty.priceGbp,
-      protocolDose: body.protocolDose ?? product.defaultProtocolDose,
-      orderFlow: body.orderFlow,
-      orderedBy,
+      protocolDose,
       deliveryLine1: body.delivery.line1,
       deliveryCity: body.delivery.city,
       deliveryPostcode: body.delivery.postcode,
       deliveryCountry: body.delivery.country,
-      status: 'pending_fulfilment' as const,
-      createdAt: new Date().toISOString(),
       stripeSessionId: null as string | null,
     }
 
@@ -101,73 +110,48 @@ export async function POST(request: Request) {
           priceGbp: qty.priceGbp,
           label: qty.label,
         },
-        orderId,
+        orderId: shopOrderId,
         patientRecordId: body.patientRecordId,
         patientName: body.patientName,
         orderFlow: body.orderFlow,
         orderedBy,
         delivery: body.delivery,
-        successUrl: `${origin}${successPath}?order_id=${orderId}`,
+        successUrl: `${origin}${successPath}?order_id=${shopOrderId}`,
         cancelUrl: `${origin}${cancelPath}`,
       })
 
       if (session?.url) {
-        orderEvent.stripeSessionId = session.id
-        appendSupplementOrder(orderEvent)
+        syncInput.stripeSessionId = session.id
 
-        const fulfillment = await syncShopCheckoutToFulfillment(supabase, {
-          productSlug: product.slug,
-          patientRecordId: body.patientRecordId,
-          patientName: body.patientName,
-          orderFlow: body.orderFlow,
-          orderedByProfileId: user.id,
-          shopOrderId: orderId,
-          quantityLabel: qty.label,
-          totalGbp: qty.priceGbp,
-          protocolDose: body.protocolDose ?? product.defaultProtocolDose,
-        })
-
-        if (!fulfillment.synced) {
-          console.warn('[shop/checkout] fulfillment sync skipped', {
-            orderId,
-            reason: fulfillment.error,
-          })
+        const fulfillment = await syncShopCheckoutToFulfillment(supabase, syncInput)
+        if (!fulfillment.synced && requiresFulfillment) {
+          return NextResponse.json(
+            { error: fulfillment.error ?? 'Could not record fulfillment order' },
+            { status: 500 }
+          )
         }
 
         return NextResponse.json({
           mode: 'stripe',
           url: session.url,
-          orderId,
+          orderId: shopOrderId,
           fulfillmentOrderId: fulfillment.orderId ?? null,
         })
       }
     }
 
-    appendSupplementOrder({ ...orderEvent, status: 'confirmed' })
-
-    const fulfillment = await syncShopCheckoutToFulfillment(supabase, {
-      productSlug: product.slug,
-      patientRecordId: body.patientRecordId,
-      patientName: body.patientName,
-      orderFlow: body.orderFlow,
-      orderedByProfileId: user.id,
-      shopOrderId: orderId,
-      quantityLabel: qty.label,
-      totalGbp: qty.priceGbp,
-      protocolDose: body.protocolDose ?? product.defaultProtocolDose,
-    })
-
-    if (!fulfillment.synced) {
-      console.warn('[shop/checkout] fulfillment sync skipped', {
-        orderId,
-        reason: fulfillment.error,
-      })
+    const fulfillment = await syncShopCheckoutToFulfillment(supabase, syncInput)
+    if (!fulfillment.synced && requiresFulfillment) {
+      return NextResponse.json(
+        { error: fulfillment.error ?? 'Could not record fulfillment order' },
+        { status: 500 }
+      )
     }
 
     return NextResponse.json({
       mode: 'demo',
-      orderId,
-      redirectUrl: `${successPath}?order_id=${orderId}`,
+      orderId: shopOrderId,
+      redirectUrl: `${successPath}?order_id=${shopOrderId}`,
       fulfillmentOrderId: fulfillment.orderId ?? null,
     })
   } catch (err) {

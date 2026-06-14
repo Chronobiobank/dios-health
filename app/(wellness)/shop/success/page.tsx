@@ -1,7 +1,10 @@
 import Link from 'next/link'
 
-import { getSupplementOrder } from '@/lib/shop/order-store'
 import { CLINIC_ROUTES, PATIENT_ROUTES, SHOP_ROUTES } from '@/lib/auth/routes'
+import { getSupplementOrderById } from '@/lib/shop/supplement-history'
+import { createClient } from '@/lib/supabase/server'
+
+export const dynamic = 'force-dynamic'
 
 type Props = {
   searchParams: Promise<{ order_id?: string }>
@@ -9,7 +12,8 @@ type Props = {
 
 export default async function ShopSuccessPage({ searchParams }: Props) {
   const { order_id: orderId } = await searchParams
-  const order = orderId ? getSupplementOrder(orderId) : null
+  const supabase = await createClient()
+  const order = orderId ? await getSupplementOrderById(supabase, orderId) : null
 
   return (
     <main className="shop-page">
@@ -28,18 +32,22 @@ export default async function ShopSuccessPage({ searchParams }: Props) {
           </p>
         </div>
       ) : (
-        <p className="mt-4 text-sm text-black/65">Your order has been queued.</p>
+        <p className="mt-4 text-sm text-black/65">
+          Your order has been queued. Sign in to view order details in your dashboard.
+        </p>
       )}
       <div className="mt-8 flex flex-wrap gap-3">
         <Link href={PATIENT_ROUTES.dashboard} className="shop-checkout-btn inline-block">
           Back to dashboard
         </Link>
-        <Link
-          href={`${CLINIC_ROUTES.panel}?ordered=${order?.patientRecordId ?? 'SEAN-001'}`}
-          className="text-sm text-black/60 underline"
-        >
-          View in clinician cohort
-        </Link>
+        {order ? (
+          <Link
+            href={`${CLINIC_ROUTES.panel}?ordered=${order.patientRecordId}`}
+            className="text-sm text-black/60 underline"
+          >
+            View in clinician cohort
+          </Link>
+        ) : null}
         <Link href={SHOP_ROUTES.catalog} className="text-sm text-black/60 underline">
           Continue shopping
         </Link>

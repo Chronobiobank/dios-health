@@ -17,14 +17,23 @@ const SHOP_TO_FULFILLMENT_SKU: Partial<Record<ShopProductSlug, string>> = {
 
 export type ShopFulfillmentSyncInput = {
   productSlug: ShopProductSlug
+  productName: string
   patientRecordId: string
   patientName: string
   orderFlow: 'patient_self' | 'practitioner_for_patient'
   orderedByProfileId: string
+  orderedByName: string
   shopOrderId: string
   quantityLabel: string
+  quantityUnits: number
+  unitPriceGbp: number
   totalGbp: number
   protocolDose: string
+  deliveryLine1: string
+  deliveryCity: string
+  deliveryPostcode: string
+  deliveryCountry: string
+  stripeSessionId?: string | null
 }
 
 function mapOrderFlow(flow: ShopFulfillmentSyncInput['orderFlow']): FulfillmentOrderFlow {
@@ -102,11 +111,22 @@ export async function syncShopCheckoutToFulfillment(
       .from('fulfillment_items')
       .update({
         metadata: {
+          source: 'shop_checkout',
           shop_order_id: input.shopOrderId,
+          product_slug: input.productSlug,
+          product_name: input.productName,
+          patient_name: input.patientName,
           quantity_label: input.quantityLabel,
+          quantity_units: input.quantityUnits,
+          unit_price_gbp: input.unitPriceGbp,
           total_gbp: input.totalGbp,
           protocol_dose: input.protocolDose,
-          source: 'shop_checkout',
+          ordered_by_name: input.orderedByName,
+          delivery_line1: input.deliveryLine1,
+          delivery_city: input.deliveryCity,
+          delivery_postcode: input.deliveryPostcode,
+          delivery_country: input.deliveryCountry,
+          stripe_session_id: input.stripeSessionId ?? null,
         },
         updated_at: new Date().toISOString(),
       })

@@ -2,6 +2,8 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { DIOS_BRAND_NAME, DIOS_LOGO_MARK } from '@/components/DiosLogo'
+import { MobileOverflowMenu } from '@/components/navigation/mobile-overflow-menu'
+import { CLINICIAN_MOBILE_NAV_LINKS } from '@/lib/auth/mobile-nav-links'
 
 type ClinicalShellProps = {
   children: ReactNode
@@ -18,12 +20,15 @@ export function ClinicalShell({ children, context = 'Clinical workspace' }: Clin
         </Link>
         <span className="clinical-site-nav__context">{context}</span>
         <div className="clinical-site-nav__actions">
-          <Link href="/clinic/patients" className="clinical-site-nav__link">
-            Patients
-          </Link>
-          <Link href="/" className="clinical-site-nav__link">
-            Exit
-          </Link>
+          <div className="clinical-site-nav__actions-desktop">
+            <Link href="/clinic/patients" className="clinical-site-nav__link">
+              Patients
+            </Link>
+            <Link href="/" className="clinical-site-nav__link">
+              Exit
+            </Link>
+          </div>
+          <MobileOverflowMenu links={CLINICIAN_MOBILE_NAV_LINKS} />
         </div>
       </header>
       <div className="clinical-site-nav__main flex min-h-0 flex-1 flex-col">{children}</div>

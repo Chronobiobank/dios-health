@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { listSupplementOrders } from '@/lib/shop/order-store'
+import { fetchSupplementHistory } from '@/lib/shop/supplement-history'
 import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
@@ -21,5 +21,9 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'patientRecordId required' }, { status: 400 })
   }
 
-  return NextResponse.json({ orders: listSupplementOrders(patientRecordId) })
+  const orders = await fetchSupplementHistory(supabase, patientRecordId, {
+    viewerUserId: user.id,
+  })
+
+  return NextResponse.json({ orders })
 }

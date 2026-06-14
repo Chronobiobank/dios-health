@@ -87,6 +87,97 @@ body:has([data-clinical-layout]) {
   gap: 0.75rem;
 }
 
+.clinical-site-nav__actions-desktop {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .clinical-site-nav__actions-desktop {
+    display: flex;
+  }
+
+  .mobile-overflow-menu {
+    display: none;
+  }
+}
+
+.mobile-overflow-menu {
+  position: relative;
+}
+
+.mobile-overflow-menu__trigger {
+  display: inline-flex;
+  height: 2rem;
+  width: 2rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: var(--ct-ink, #0f1012);
+  cursor: pointer;
+}
+
+.mobile-overflow-menu__trigger:hover {
+  background: rgb(15 16 18 / 0.06);
+}
+
+.mobile-overflow-menu__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgb(15 16 18 / 0.2);
+}
+
+.mobile-overflow-menu__panel {
+  position: fixed;
+  inset-inline: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgb(15 16 18 / 0.1);
+  background: #fff;
+  padding: 1rem 1.25rem 1.5rem;
+}
+
+.mobile-overflow-menu__eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-data, var(--font-family-mono));
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.mobile-overflow-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mobile-overflow-menu__link {
+  display: block;
+  border-radius: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ct-ink, #0f1012);
+  text-decoration: none;
+}
+
+.mobile-overflow-menu__link:hover {
+  background: rgb(15 16 18 / 0.04);
+}
+
+.mobile-overflow-menu__link--active {
+  background: rgb(24 95 165 / 0.08);
+  color: #185fa5;
+}
+
 .clinical-site-nav__link {
   font-size: 0.8125rem;
   font-weight: 500;
