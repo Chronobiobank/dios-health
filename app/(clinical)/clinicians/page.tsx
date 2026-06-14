@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function DiosCliniciansLandingPage() {
   return (
-    <SecopeuticDemoShell context="Dose intelligence for clinicians" variant="dark">
+    <SecopeuticDemoShell variant="dark">
       <SecopeuticLanding />
     </SecopeuticDemoShell>
   )

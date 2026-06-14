@@ -19,7 +19,7 @@ type SecopeuticDemoShellProps = {
 
 export function SecopeuticDemoShell({
   children,
-  context = 'Pilot demo',
+  context,
   variant = 'light',
 }: SecopeuticDemoShellProps) {
   return (
@@ -31,7 +31,7 @@ export function SecopeuticDemoShell({
         <Link href={DIOS_CLINICIANS_PATH} className="clinical-site-nav__brand">
           <DiosWordmark />
         </Link>
-        <span className="clinical-site-nav__context">{context}</span>
+        {context ? <span className="clinical-site-nav__context">{context}</span> : null}
         <div className="clinical-site-nav__actions">
           <Link href={DIOS_CLINICIANS_DEMO_PATH} className="clinical-site-nav__link">
             Monitoring demo

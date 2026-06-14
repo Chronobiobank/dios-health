@@ -11,7 +11,7 @@ export const SECOPEUTIC_LANDING_META = {
 export const SECOPEUTIC_LANDING_HERO = {
   headlineLead: 'Learn',
   headlineAccent: 'Dose Intelligence',
-  headlineSub: 'from leading experts',
+  headlineSub: 'from expert clinicians',
   support:
     'Our clinical-grade tools ensure protocols are tailored to your patients changing needs.',
   primaryCta: { label: 'Claim free pilot', href: SECOPUTIC_PILOT_PATH },
