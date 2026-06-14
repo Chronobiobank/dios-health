@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 
 import type { MicronutrientItemId } from '@/lib/chronoimmune/indication-zones'
 import { getShopProduct, SHOP_PRODUCTS } from '@/lib/shop/catalog'
+import { syncShopCheckoutToFulfillment } from '@/lib/shop/fulfillment-bridge'
 import { appendSupplementOrder, createOrderId } from '@/lib/shop/order-store'
 import { createStripeCheckoutSession, stripeConfigured } from '@/lib/shop/stripe'
 import type { OrderFlow, PatientDeliveryProfile } from '@/lib/shop/types'
@@ -113,15 +114,61 @@ export async function POST(request: Request) {
       if (session?.url) {
         orderEvent.stripeSessionId = session.id
         appendSupplementOrder(orderEvent)
-        return NextResponse.json({ mode: 'stripe', url: session.url, orderId })
+
+        const fulfillment = await syncShopCheckoutToFulfillment(supabase, {
+          productSlug: product.slug,
+          patientRecordId: body.patientRecordId,
+          patientName: body.patientName,
+          orderFlow: body.orderFlow,
+          orderedByProfileId: user.id,
+          shopOrderId: orderId,
+          quantityLabel: qty.label,
+          totalGbp: qty.priceGbp,
+          protocolDose: body.protocolDose ?? product.defaultProtocolDose,
+        })
+
+        if (!fulfillment.synced) {
+          console.warn('[shop/checkout] fulfillment sync skipped', {
+            orderId,
+            reason: fulfillment.error,
+          })
+        }
+
+        return NextResponse.json({
+          mode: 'stripe',
+          url: session.url,
+          orderId,
+          fulfillmentOrderId: fulfillment.orderId ?? null,
+        })
       }
     }
 
     appendSupplementOrder({ ...orderEvent, status: 'confirmed' })
+
+    const fulfillment = await syncShopCheckoutToFulfillment(supabase, {
+      productSlug: product.slug,
+      patientRecordId: body.patientRecordId,
+      patientName: body.patientName,
+      orderFlow: body.orderFlow,
+      orderedByProfileId: user.id,
+      shopOrderId: orderId,
+      quantityLabel: qty.label,
+      totalGbp: qty.priceGbp,
+      protocolDose: body.protocolDose ?? product.defaultProtocolDose,
+    })
+
+    if (!fulfillment.synced) {
+      console.warn('[shop/checkout] fulfillment sync skipped', {
+        orderId,
+        reason: fulfillment.error,
+      })
+    }
+
     return NextResponse.json({
       mode: 'demo',
       orderId,
       redirectUrl: `${successPath}?order_id=${orderId}`,
+      fulfillmentOrderId: fulfillment.orderId ?? null,
     })
   } catch (err) {
     console.error('[shop/checkout]', err)

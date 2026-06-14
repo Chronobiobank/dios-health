@@ -74,6 +74,10 @@ App-layer types `LabOrder`, `SupplementOrder`, `AssessmentOrder` are discriminat
 - Honest empty states (no demo order masking when tables exist)
 - Ingest hooks: blood panels → `results_imported`; TipTraQ → `report_available`
 
+### Phase 2 — Shop + clinic cohort
+- `POST /api/shop/checkout` mirrors mapped supplement SKUs into `fulfillment_orders` / `fulfillment_items`
+- `/clinic` and `/clinic/orders` load cohort from `clinician_triage_dashboard` when clinician has linked patients; demo pRGC rows otherwise
+
 ### Phase 2 — Persistence + ingestion
 - Run migration on Supabase production
 - Wire `POST /api/ingest/labs` to set lab items `results_imported`

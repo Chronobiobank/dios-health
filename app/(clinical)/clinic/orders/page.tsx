@@ -2,8 +2,9 @@ import { ClinicianFulfillmentWidgets } from '@/components/fulfillment/clinician-
 import { ClinicTopBar } from '@/components/clinic/clinic-top-bar'
 import { DASHBOARD_HEADLINE } from '@/components/dashboard/dashboard-styles'
 import { requireClinicianSession } from '@/lib/auth/require-clinician'
+import { fetchClinicCohort } from '@/lib/clinic/fetch-clinic-cohort'
 import { buildClinicianFulfillmentSummary } from '@/lib/fulfillment/service'
-import { PRGC_MONITORING_PATIENTS } from '@/lib/clinic/prgc-monitoring'
+import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,14 +14,16 @@ export const metadata = {
 
 export default async function ClinicOrdersPage() {
   const { user, profile } = await requireClinicianSession()
+  const supabase = await createClient()
+  const cohort = await fetchClinicCohort(supabase, user.id)
 
-  const cohort = PRGC_MONITORING_PATIENTS.map((p) => ({
-    ref: p.recordId,
-    name: p.displayName,
-    protocol: 'coimbra',
-  }))
-
-  const summary = buildClinicianFulfillmentSummary(cohort)
+  const summary = buildClinicianFulfillmentSummary(
+    cohort.entries.map((entry) => ({
+      ref: entry.prgc.recordId,
+      name: entry.prgc.displayName,
+      protocol: entry.protocol,
+    }))
+  )
 
   return (
     <>
