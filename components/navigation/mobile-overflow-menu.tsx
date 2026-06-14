@@ -13,6 +13,10 @@ type MobileOverflowMenuProps = {
   /** Sticky nav offset — clinical shell uses its own header height token. */
   panelTop?: string
   className?: string
+  /** Keep plus menu at all breakpoints (clinicians marketing nav). */
+  alwaysVisible?: boolean
+  tone?: 'light' | 'dark'
+  eyebrow?: string
 }
 
 function normalizePath(pathname: string): string {
@@ -23,6 +27,9 @@ export function MobileOverflowMenu({
   links,
   panelTop = 'var(--dios-site-nav-height)',
   className,
+  alwaysVisible = false,
+  tone = 'light',
+  eyebrow = 'All pages',
 }: MobileOverflowMenuProps) {
   const pathname = usePathname()
   const normalizedPath = normalizePath(pathname)
@@ -64,14 +71,22 @@ export function MobileOverflowMenu({
   }, [open])
 
   return (
-    <div ref={rootRef} className={cn('mobile-overflow-menu', className)}>
+    <div
+      ref={rootRef}
+      className={cn(
+        'mobile-overflow-menu',
+        alwaysVisible && 'mobile-overflow-menu--always',
+        tone === 'dark' && 'mobile-overflow-menu--dark',
+        className
+      )}
+    >
       <button
         type="button"
         className="mobile-overflow-menu__trigger"
         aria-expanded={open}
         aria-controls={menuId}
         aria-haspopup="menu"
-        aria-label={open ? 'Close pages menu' : 'Open pages menu'}
+        aria-label={open ? 'Close menu' : 'Open menu'}
         onClick={() => setOpen((value) => !value)}
       >
         {open ? (
@@ -92,11 +107,11 @@ export function MobileOverflowMenu({
 
           <nav
             id={menuId}
-            aria-label="All pages"
+            aria-label={eyebrow}
             className="mobile-overflow-menu__panel"
             style={{ top: panelTop }}
           >
-            <p className="mobile-overflow-menu__eyebrow">All pages</p>
+            <p className="mobile-overflow-menu__eyebrow">{eyebrow}</p>
             <ul className="mobile-overflow-menu__list">
               {links.map((link) => {
                 const active =
@@ -109,7 +124,8 @@ export function MobileOverflowMenu({
                       href={link.href}
                       className={cn(
                         'mobile-overflow-menu__link',
-                        active && 'mobile-overflow-menu__link--active'
+                        active && 'mobile-overflow-menu__link--active',
+                        link.cta && 'mobile-overflow-menu__link--cta'
                       )}
                       aria-current={active ? 'page' : undefined}
                       onClick={() => setOpen(false)}

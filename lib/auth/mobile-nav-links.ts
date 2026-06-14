@@ -3,6 +3,7 @@ import { CLINIC_ROUTES, FULFILLMENT_ROUTES, PATIENT_ROUTES, SHOP_ROUTES } from '
 export type MobileNavLink = {
   label: string
   href: string
+  cta?: boolean
 }
 
 export function isClinicAppPath(pathname: string): boolean {

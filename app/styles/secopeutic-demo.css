@@ -5,6 +5,7 @@
 
 .secopeutic-demo {
   --seco-navy: #0b1220;
+  --seco-nav-height: 4rem;
   --seco-navy-2: #121c2e;
   --seco-navy-card: #151f33;
   --seco-navy-border: rgb(255 255 255 / 0.1);
@@ -85,8 +86,18 @@ body:has(.seco-shell--dark) {
   z-index: 50;
   display: flex;
   align-items: center;
-  min-height: 4rem;
+  gap: 0.75rem;
+  min-height: var(--seco-nav-height);
   padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.secopeutic-demo .clinical-site-nav__actions {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  gap: 0.75rem;
 }
 
 .secopeutic-demo .clinical-site-nav__brand {
@@ -98,15 +109,6 @@ body:has(.seco-shell--dark) {
   text-decoration: none;
   color: inherit;
 }
-
-.secopeutic-demo .clinical-site-nav__actions {
-  display: flex;
-  align-items: center;
-  align-self: center;
-  gap: 0.75rem;
-}
-
-/* DIOS — Montserrat Regular, all caps; full mark like clinical shell */
 .secopeutic-demo .clinical-site-nav__brand .dios-wordmark,
 .secopeutic-demo .clinical-site-nav__brand .secopeutic-wordmark {
   display: inline-flex;
@@ -129,6 +131,8 @@ body:has(.seco-shell--dark) {
 
 .secopeutic-demo .clinical-site-nav__context {
   display: none;
+  min-width: 0;
+  flex: 1;
   font-family: var(--seco-font-data);
   font-size: 0.625rem;
   letter-spacing: 0.14em;
@@ -142,39 +146,53 @@ body:has(.seco-shell--dark) {
   }
 }
 
-.secopeutic-demo .clinical-site-nav__link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.375rem;
-  padding: 0.45rem 0.7rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background-color 0.15s ease, color 0.15s ease;
+.secopeutic-demo .mobile-overflow-menu--always {
+  display: block;
 }
 
-.secopeutic-demo .clinical-site-nav__link:hover {
-  text-decoration: none;
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__trigger {
+  height: 2.375rem;
+  width: 2.375rem;
+  color: rgb(255 255 255 / 0.92);
 }
 
-.secopeutic-demo .seco-nav__cta {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.375rem;
-  margin-left: 0.25rem;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__trigger:hover {
+  background: rgb(255 255 255 / 0.1);
+  color: #fff;
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__panel {
+  background: var(--seco-navy-2);
+  border-bottom-color: var(--seco-navy-border);
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__eyebrow {
+  color: rgb(255 255 255 / 0.45);
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__link {
+  color: rgb(255 255 255 / 0.9);
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__link:hover {
+  background: rgb(255 255 255 / 0.08);
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__link--active {
+  background: rgb(255 255 255 / 0.12);
+  color: #fff;
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__link--cta {
+  margin-top: 0.5rem;
   background: #fff;
   color: var(--seco-navy);
-  font-size: 0.875rem;
   font-weight: 600;
-  text-decoration: none;
+  text-align: center;
 }
 
-.secopeutic-demo .seco-nav__cta:hover {
-  background: rgb(255 255 255 / 0.9);
-  text-decoration: none;
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__link--cta:hover {
+  background: rgb(255 255 255 / 0.92);
 }
 
 .secopeutic-demo__page {
