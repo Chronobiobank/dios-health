@@ -22,10 +22,12 @@ export function SecopeuticFooter() {
       <div className="seco-landing__section-inner">
         <div className="seco-footer__main">
           <Link href={DIOS_CLINICIANS_PATH} className="seco-footer__brand" aria-label={DIOS_BRAND_NAME}>
-            <span className="seco-footer__glyph" aria-hidden="true">
-              {DIOS_LOGO_GLYPH}
+            <span className="seco-footer__lockup">
+              <span className="seco-footer__glyph" aria-hidden="true">
+                {DIOS_LOGO_GLYPH}
+              </span>
+              <span className="seco-footer__tag">{DIOS_TAGLINE}</span>
             </span>
-            <span className="seco-footer__tag">{DIOS_TAGLINE}</span>
           </Link>
 
           <nav className="seco-footer__nav" aria-label="DIOS">

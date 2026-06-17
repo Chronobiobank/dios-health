@@ -952,18 +952,34 @@
 }
 
 .seco-footer__main {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 2.5rem 3rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .seco-footer__main {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: start;
+    gap: 2.5rem 3rem;
+  }
+
+  .seco-footer__brand {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .seco-footer__nav {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    margin-left: 0;
+  }
 }
 
 .seco-footer__brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
   text-decoration: none;
   color: inherit;
 }
@@ -972,33 +988,51 @@
   color: rgb(255 255 255 / 0.82);
 }
 
+.seco-footer__lockup {
+  display: inline-grid;
+  justify-items: center;
+  gap: 0.5rem;
+}
+
 .seco-footer__glyph {
-  display: block;
-  font-family: 'Montserrat', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  font-family: 'Segoe UI Symbol', 'Noto Sans', 'DejaVu Sans', sans-serif;
   font-size: clamp(4.5rem, 11vw, 6.75rem);
   font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: -0.04em;
+  line-height: 1;
   color: #fff;
-  text-align: center;
+  /* U+0298 draws right of its advance width in most IPA fallbacks */
+  transform: translateX(-0.085em);
 }
 
 .seco-footer__tag {
+  margin: 0;
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(1rem, 2.2vw, 1.25rem);
   font-weight: 400;
   letter-spacing: 0.12em;
-  line-height: 1;
-  padding-left: 0.12em;
+  line-height: 1.2;
   text-align: center;
   text-transform: uppercase;
   color: rgb(255 255 255 / 0.58);
   transition: color 0.15s ease;
+  /* Balance trailing letter-space so tracked caps center on the glyph */
+  padding-left: 0.12em;
+  margin-right: -0.12em;
 }
 
 .seco-footer__nav {
-  margin-left: auto;
   padding-top: 0.35rem;
+}
+
+@media (min-width: 768px) {
+  .seco-footer__nav {
+    margin-left: auto;
+  }
 }
 
 .seco-footer__links {
@@ -1027,14 +1061,14 @@
   text-underline-offset: 0.2em;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .seco-footer__nav {
-    margin-left: 0;
     width: 100%;
+    justify-self: stretch;
   }
 
   .seco-footer__links {
-    align-items: flex-start;
+    align-items: center;
   }
 }
 
