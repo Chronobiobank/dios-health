@@ -65,6 +65,12 @@ export default async function PatientDashboardPage() {
 
   const context = await getPatientCircadianContext(supabase, user.id)
 
+  const { data: deviceProfile } = await supabase
+    .from('patient_profiles')
+    .select('device_alert_triggered')
+    .eq('id', user.id)
+    .maybeSingle()
+
   const { data: meds } = await supabase
     .from('patient_medications')
     .select('medication_code, dose_mg, current_timing')
@@ -115,6 +121,16 @@ export default async function PatientDashboardPage() {
           <Link href="/patient/onboarding/consent" className="font-medium underline">
             Continue setup
           </Link>
+        </Callout>
+      )}
+
+      {deviceProfile?.device_alert_triggered && (
+        <Callout tone="warning">
+          Device sync interrupted — reconnect or sync your wearable in{' '}
+          <Link href="/patient/dashboard/data" className="font-medium underline">
+            Smart devices
+          </Link>
+          .
         </Callout>
       )}
 
