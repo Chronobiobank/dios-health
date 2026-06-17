@@ -1,0 +1,14 @@
+/* Logo marks only — pair with DIOS_LOGO_MARK / DEEPDOSE_WORDMARK, never body copy */
+.dios-wordmark,
+.deepdose-wordmark {
+  font-family: var(--font-montserrat), 'Montserrat', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.deepdose-wordmark--compact {
+  font-size: 0.875rem;
+}

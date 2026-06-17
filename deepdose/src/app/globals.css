@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@import "../styles/dios-wordmark.css";
+@import "../styles/dios-tokens.css";
+@import "../styles/dios-components.css";
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-light: var(--accent-light);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-surface: var(--accent-surface);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-phase: var(--phase);
+  --color-aubergine: var(--aubergine-dark);
+  --color-aubergine-mid: var(--aubergine-mid);
+  --color-aubergine-light: var(--aubergine-light);
+  --color-gold: var(--gold);
+  --color-lilac: var(--lilac);
+  --color-lilac-bright: var(--lilac-bright);
+  --color-maven-navy: var(--maven-navy);
+  --font-sans: var(--font-ui);
+  --font-family-display: var(--font-display);
+  --font-mono: var(--font-data);
+  --radius-card: var(--radius-card);
+  --radius-button: var(--radius-md);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-ui);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink);
+}
+
+/* Marquee — maven topic rail pattern */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 45s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+  .motion-safe-fade {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.motion-safe-fade {
+  animation: fadeUp 0.4s ease-out both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

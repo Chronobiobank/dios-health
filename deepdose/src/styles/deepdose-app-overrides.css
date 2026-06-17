@@ -1,0 +1,798 @@
+/**
+ * Patient / clinical app UI inside Secopeutic shell —
+ * remap legacy dios-tokens primitives to dios.health Maven tokens.
+ */
+
+:root {
+  --dios-glass-radius-outer: 1.25rem;
+  --dios-glass-radius-inner: 1rem;
+  --dios-glass-outer-blur: blur(40px) saturate(1.75);
+  --dios-glass-outer-bg: linear-gradient(
+    152deg,
+    rgb(255 255 255 / 0.44) 0%,
+    rgb(255 255 255 / 0.3) 42%,
+    rgb(255 255 255 / 0.38) 100%
+  );
+  --dios-glass-outer-border: rgb(255 255 255 / 0.58);
+  --dios-glass-outer-highlight: inset 0 1px 0 rgb(255 255 255 / 0.9);
+  --dios-glass-outer-shadow: 0 12px 40px rgb(13 13 13 / 0.07);
+}
+
+.secopeutic-demo.seco-shell--dark {
+  --ink: var(--seco-ink);
+  --ink-muted: var(--seco-muted);
+  --ink-faint: var(--seco-faint);
+  --surface: var(--seco-surface);
+  --surface-muted: var(--seco-canvas);
+  --border: var(--seco-border);
+  --canvas: var(--seco-navy);
+  --font-ui: var(--seco-font-ui);
+  --font-display: var(--seco-font-display);
+  --font-data: var(--seco-font-data);
+  --accent: var(--seco-spectrum-cyan);
+  --accent-hover: var(--seco-spectrum-mid);
+  --accent-light: var(--seco-dial-window-glow-from);
+  --accent-surface: var(--seco-spectrum-mid);
+  --gold: var(--seco-on-dark-faint);
+  --aubergine-light: var(--seco-navy-border);
+  --aubergine-mid: var(--seco-spectrum-cyan);
+  --lilac-light: var(--seco-dial-surface);
+  --status-amber-bg: rgb(216 160 120 / 0.18);
+  --status-amber-border: rgb(216 160 120 / 0.4);
+  --status-green-bg: rgb(120 210 160 / 0.18);
+  --status-green-border: rgb(120 210 160 / 0.4);
+  --warning: #f0c090;
+  --success: #9de8c0;
+
+  /* Navy glass — frosted tiles in relief on pinstripe shell */
+  --dios-glass-outer-bg: linear-gradient(
+    152deg,
+    rgb(255 255 255 / 0.11) 0%,
+    rgb(255 255 255 / 0.05) 44%,
+    rgb(255 255 255 / 0.08) 100%
+  );
+  --dios-glass-outer-border: rgb(255 255 255 / 0.16);
+  --dios-glass-outer-highlight: inset 0 1px 0 rgb(255 255 255 / 0.14);
+  --dios-glass-outer-shadow: 0 16px 48px rgb(0 0 0 / 0.28);
+  --dios-glass-outer-blur: blur(28px) saturate(1.6);
+  --dios-glass-inner-bg: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.1) 0%,
+    rgb(255 255 255 / 0.05) 100%
+  );
+  --dios-glass-inner-border: rgb(255 255 255 / 0.12);
+  --dios-glass-inner-highlight: inset 0 1px 0 rgb(255 255 255 / 0.1);
+  --dios-glass-inner-shadow: 0 8px 28px rgb(0 0 0 / 0.18);
+}
+
+.secopeutic-demo.seco-shell--dark h1,
+.secopeutic-demo.seco-shell--dark h2,
+.secopeutic-demo.seco-shell--dark h3,
+.secopeutic-demo.seco-shell--dark h4,
+.secopeutic-demo.seco-shell--dark .dios-heading {
+  color: #fff;
+}
+
+.secopeutic-demo.seco-shell--dark .dios-eyebrow {
+  color: rgb(255 255 255 / 0.42);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-page {
+  color: rgb(255 255 255 / 0.82);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-page .text-ink,
+.secopeutic-demo.seco-shell--dark .seco-app-card .text-ink {
+  color: rgb(255 255 255 / 0.92);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-page .text-ink-muted,
+.secopeutic-demo.seco-shell--dark .seco-app-card .text-ink-muted {
+  color: rgb(255 255 255 / 0.58);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-page .text-ink-faint,
+.secopeutic-demo.seco-shell--dark .seco-app-card .text-ink-faint {
+  color: rgb(255 255 255 / 0.42);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-page .text-accent,
+.secopeutic-demo.seco-shell--dark .seco-app-card .text-accent {
+  color: #8fd4ff;
+}
+
+.secopeutic-demo.seco-shell--dark .dios-callout--warning {
+  border-color: rgb(216 160 120 / 0.35);
+  background: linear-gradient(152deg, rgb(216 160 120 / 0.14), rgb(216 160 120 / 0.06));
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 8px 24px rgb(0 0 0 / 0.15);
+  color: #f0c090;
+}
+
+.secopeutic-demo.seco-shell--dark .dios-callout--success {
+  border-color: rgb(120 210 160 / 0.35);
+  background: linear-gradient(152deg, rgb(120 210 160 / 0.14), rgb(120 210 160 / 0.06));
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 8px 24px rgb(0 0 0 / 0.15);
+  color: #9de8c0;
+}
+
+.secopeutic-demo {
+  --ink: var(--seco-ink);
+  --ink-muted: var(--seco-muted);
+  --ink-faint: var(--seco-faint);
+  --surface: var(--seco-surface);
+  --surface-muted: var(--seco-canvas);
+  --border: var(--seco-border);
+  --canvas: var(--seco-canvas);
+  --font-ui: var(--seco-font-ui);
+  --font-display: var(--seco-font-display);
+  --font-data: var(--seco-font-data);
+  --accent: #185fa5;
+  --accent-hover: #134a82;
+  --accent-light: rgb(24 95 165 / 0.1);
+  --accent-surface: #185fa5;
+  --gold: var(--seco-muted);
+  --aubergine-light: var(--seco-border);
+  --aubergine-mid: #185fa5;
+  --lilac-light: rgb(24 95 165 / 0.08);
+  --status-amber-bg: rgb(216 160 120 / 0.14);
+  --status-amber-border: rgb(216 160 120 / 0.35);
+  --status-green-bg: rgb(120 210 160 / 0.14);
+  --status-green-border: rgb(120 210 160 / 0.35);
+  --warning: #9a6530;
+  --success: #2d8f62;
+}
+
+.secopeutic-demo h1,
+.secopeutic-demo h2,
+.secopeutic-demo h3,
+.secopeutic-demo h4,
+.secopeutic-demo .dios-heading {
+  font-family: var(--seco-font-display);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--seco-ink);
+}
+
+.secopeutic-demo .dios-heading {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.secopeutic-demo .dios-eyebrow {
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  color: var(--seco-muted);
+}
+
+.secopeutic-demo .dios-card,
+.secopeutic-demo .seco-app-card {
+  border-radius: var(--dios-glass-radius-outer, var(--seco-radius-lg));
+  background: var(--dios-glass-outer-bg);
+  backdrop-filter: var(--dios-glass-outer-blur);
+  -webkit-backdrop-filter: var(--dios-glass-outer-blur);
+  border: 1px solid var(--dios-glass-outer-border);
+  box-shadow: var(--dios-glass-outer-highlight), var(--dios-glass-outer-shadow);
+  color: var(--seco-ink);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-card,
+.secopeutic-demo.seco-shell--dark .seco-app-card {
+  color: rgb(255 255 255 / 0.9);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-card__title {
+  color: rgb(255 255 255 / 0.92);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-card .seco-page__eyebrow {
+  color: rgb(255 255 255 / 0.42);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-card .seco-page__lede {
+  color: rgb(255 255 255 / 0.62);
+}
+
+.secopeutic-demo .seco-app-card__title {
+  margin: 0 0 1.25rem;
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--seco-ink);
+}
+
+.secopeutic-demo:not(.seco-shell--dark) .seco-app-card .seco-page__lede {
+  color: var(--seco-muted);
+}
+
+.secopeutic-demo .seco-app-section-title {
+  margin: 0.25rem 0 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--seco-ink);
+}
+
+.secopeutic-demo .dios-callout {
+  border-radius: var(--seco-radius-md);
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.secopeutic-demo .dios-callout--warning {
+  border-color: rgb(216 160 120 / 0.35);
+  background: rgb(216 160 120 / 0.12);
+  color: #7a4e1f;
+}
+
+.secopeutic-demo .dios-callout--success {
+  border-color: rgb(120 210 160 / 0.35);
+  background: rgb(120 210 160 / 0.12);
+  color: #1f6b47;
+}
+
+.secopeutic-demo .dios-callout--info {
+  border-color: var(--seco-border);
+  background: var(--seco-canvas);
+  color: var(--seco-ink);
+}
+
+.secopeutic-demo .dios-step-rail__dot--active {
+  background: #185fa5;
+  color: #fff;
+}
+
+.secopeutic-demo .dios-step-rail__dot--done {
+  background: rgb(24 95 165 / 0.12);
+  color: #185fa5;
+}
+
+.secopeutic-demo .seco-app-page {
+  font-family: var(--seco-font-ui);
+  color: var(--seco-ink);
+}
+
+.secopeutic-demo .seco-app-page .text-ink {
+  color: var(--seco-ink);
+}
+
+.secopeutic-demo .seco-app-page .text-ink-muted {
+  color: var(--seco-muted);
+}
+
+.secopeutic-demo .seco-app-page .text-ink-faint {
+  color: var(--seco-faint);
+}
+
+.secopeutic-demo .seco-app-page .text-accent {
+  color: #185fa5;
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-page .bg-surface-muted {
+  background: rgb(255 255 255 / 0.08);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-page .bg-aubergine-mid {
+  background: rgb(94 200 245 / 0.55);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-page .divide-border > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgb(255 255 255 / 0.1);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-score-gauge__track {
+  stroke: rgb(255 255 255 / 0.14);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-score-gauge__value {
+  fill: #fff;
+}
+
+.secopeutic-demo.seco-shell--dark .seco-score-gauge__max {
+  fill: rgb(255 255 255 / 0.45);
+}
+
+/* ── Shared dial readout (HTML overlay — always above graphics) ── */
+.dial-readout {
+  position: absolute;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  text-align: center;
+  background: var(--seco-dial-readout-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--seco-navy-border);
+  box-shadow: var(--dios-glass-outer-shadow);
+  pointer-events: none;
+}
+
+.dial-readout__primary {
+  margin: 0;
+  line-height: 1;
+}
+
+.dial-readout__value {
+  font-family: var(--seco-font-display);
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--seco-on-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+.dial-readout__value--time {
+  font-family: var(--seco-font-ui);
+  font-size: 1.35rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+.dial-readout__unit {
+  font-family: var(--seco-font-data);
+  font-size: 0.65rem;
+  color: var(--seco-on-dark-faint);
+  margin-left: 0.15rem;
+}
+
+.dial-readout__status {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.dial-readout__status--excellent,
+.dial-readout__status--good,
+.dial-readout__status--active {
+  color: var(--accent);
+}
+
+.dial-readout__status--fair,
+.dial-readout__status--outside {
+  color: var(--seco-on-dark-muted);
+}
+
+.dial-readout__status--poor {
+  color: var(--warning);
+}
+
+.dial-readout__status--idle {
+  color: var(--seco-on-dark-faint);
+}
+
+.dial-readout__meta {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.55rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--seco-on-dark-faint);
+}
+
+.dial-readout__meta--dlmo {
+  color: var(--seco-spectrum-lilac);
+  text-transform: none;
+  letter-spacing: 0.03em;
+}
+
+/* ── Circadian score gauge (simple semi-circle) ── */
+.score-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.score-gauge__stage {
+  position: relative;
+  width: 100%;
+  max-width: 16rem;
+}
+
+.score-gauge__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.score-gauge__track {
+  stroke: var(--seco-dial-track);
+}
+
+.score-gauge__stop--lilac {
+  stop-color: var(--seco-spectrum-lilac);
+}
+
+.score-gauge__stop--mid {
+  stop-color: var(--seco-spectrum-mid);
+}
+
+.score-gauge__stop--cyan {
+  stop-color: var(--seco-spectrum-cyan);
+}
+
+.score-gauge__progress {
+  stroke: url(#score-gauge-spectrum);
+}
+
+.score-gauge__readout {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.score-gauge__scale {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: -0.15rem;
+  padding: 0 0.15rem;
+  font-family: var(--seco-font-data);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--seco-on-dark-subtle);
+}
+
+.score-gauge__score {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: 1.85rem;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--seco-on-dark);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.score-gauge__score-max {
+  font-family: var(--seco-font-data);
+  font-size: 0.7rem;
+  color: var(--seco-on-dark-faint);
+  margin-left: 0.1rem;
+}
+
+.score-gauge__status {
+  margin: 0.2rem 0 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.score-gauge__status--excellent,
+.score-gauge__status--good {
+  color: var(--accent);
+}
+
+.score-gauge__status--fair {
+  color: var(--seco-on-dark-muted);
+}
+
+.score-gauge__status--poor {
+  color: var(--warning);
+}
+
+.score-gauge__chronotype {
+  margin: 0.5rem 0 0;
+  text-align: center;
+  font-family: var(--seco-font-ui);
+  font-size: 0.72rem;
+  color: var(--seco-on-dark-faint);
+}
+
+.score-gauge__breakdown-label {
+  margin: 1.25rem 0 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--seco-on-dark-faint);
+}
+
+.score-gauge__breakdown {
+  width: 100%;
+  margin-top: 0.625rem;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.score-gauge__breakdown-head {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--seco-font-ui);
+  font-size: 0.72rem;
+  color: var(--seco-on-dark-muted);
+}
+
+.score-gauge__breakdown-val {
+  font-family: var(--seco-font-data);
+  font-variant-numeric: tabular-nums;
+  color: var(--seco-on-dark-faint);
+}
+
+.score-gauge__breakdown-track {
+  height: 0.3rem;
+  margin-top: 0.3rem;
+  border-radius: 999px;
+  background: var(--seco-dial-surface);
+  overflow: hidden;
+}
+
+.score-gauge__breakdown-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--seco-spectrum);
+}
+
+.secopeutic-demo .seco-app-page .bg-surface-muted {
+  background: var(--seco-canvas);
+}
+
+.secopeutic-demo .seco-app-page .divide-border > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--seco-border);
+}
+
+.secopeutic-demo .seco-app-page .bg-aubergine-mid {
+  background: #185fa5;
+}
+
+.secopeutic-demo .seco-score-gauge__track {
+  stroke: var(--seco-border);
+}
+
+.secopeutic-demo .seco-score-gauge__value {
+  font-family: var(--seco-font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  fill: var(--seco-ink);
+}
+
+.secopeutic-demo .seco-score-gauge__max {
+  font-family: var(--seco-font-data);
+  font-size: 0.7rem;
+  fill: var(--seco-muted);
+}
+
+.secopeutic-demo .seco-page__title {
+  max-width: none;
+}
+
+.secopeutic-demo .seco-page__lede {
+  margin-bottom: 0;
+}
+
+/* Dashboard overview — reuse landing hero headline stack */
+.seco-dashboard-overview.seco-landing__hero-head {
+  max-width: none;
+}
+
+/* ── Circadian clock dial ── */
+.circadian-clock__stop--track-from { stop-color: var(--seco-dial-track-from); }
+.circadian-clock__stop--track-to { stop-color: var(--seco-dial-track-to); }
+.circadian-clock__stop--spectrum-cyan { stop-color: var(--seco-spectrum-cyan); }
+.circadian-clock__stop--spectrum-mid { stop-color: var(--seco-spectrum-mid); }
+.circadian-clock__stop--spectrum-lilac { stop-color: var(--seco-spectrum-lilac); }
+.circadian-clock__stop--window-glow-from { stop-color: var(--seco-dial-window-glow-from); }
+.circadian-clock__stop--window-glow-to { stop-color: var(--seco-dial-window-glow-to); }
+.circadian-clock__stop--face-from { stop-color: var(--seco-dial-face-from); }
+.circadian-clock__stop--face-mid { stop-color: var(--seco-dial-face-mid); }
+.circadian-clock__stop--face-to { stop-color: var(--seco-dial-face-to); }
+
+.circadian-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.circadian-clock__stage {
+  position: relative;
+  width: 100%;
+  max-width: 22rem;
+  padding: 0.25rem;
+}
+
+.circadian-clock__readout {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.circadian-clock__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.circadian-clock__bezel {
+  stroke: var(--seco-dial-surface);
+  stroke-width: 1;
+}
+
+.circadian-clock__track {
+  stroke: var(--seco-navy-border);
+  stroke-width: 0.5;
+}
+
+.circadian-clock__window {
+  opacity: 0.92;
+}
+
+.circadian-clock__window-shine {
+  opacity: 0.35;
+  mix-blend-mode: soft-light;
+}
+
+.circadian-clock__tick {
+  stroke: var(--seco-dial-track);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.circadian-clock__tick--major {
+  stroke: var(--seco-on-dark-subtle);
+  stroke-width: 1.5;
+}
+
+.circadian-clock__hour-label {
+  font-family: var(--seco-font-data);
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  fill: var(--seco-on-dark-faint);
+  text-transform: uppercase;
+  paint-order: stroke fill;
+  stroke: var(--seco-dial-label-halo);
+  stroke-width: 3px;
+}
+
+.circadian-clock__face {
+  stroke: var(--seco-navy-border);
+  stroke-width: 0.75;
+}
+
+.circadian-clock__dlmo-line {
+  stroke: var(--seco-spectrum-lilac);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 3 4;
+}
+
+.circadian-clock__dlmo-dot {
+  fill: var(--seco-dial-window-glow-to);
+  stroke: var(--seco-spectrum-lilac);
+  stroke-width: 1.5;
+}
+
+.circadian-clock__hand {
+  transform-box: view-box;
+  transform-origin: 200px 200px;
+  transition: transform 0.85s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.circadian-clock__hand-line {
+  stroke-width: 2.25;
+  stroke-linecap: round;
+}
+
+.circadian-clock__hand--active .circadian-clock__hand-line {
+  stroke: var(--accent);
+}
+
+.circadian-clock__hand--outside .circadian-clock__hand-line {
+  stroke: var(--seco-on-dark-muted);
+}
+
+.circadian-clock__hand-cap {
+  stroke-width: 2;
+}
+
+.circadian-clock__hand--active .circadian-clock__hand-cap {
+  fill: var(--accent);
+  stroke: var(--seco-on-dark);
+}
+
+.circadian-clock__hand--outside .circadian-clock__hand-cap {
+  fill: var(--seco-on-dark);
+  stroke: var(--seco-navy-border);
+}
+
+.circadian-clock__hub {
+  fill: var(--seco-dial-surface);
+  stroke: var(--seco-navy-border);
+  stroke-width: 1;
+}
+
+.circadian-clock__hub-core {
+  fill: var(--seco-on-dark-muted);
+}
+
+.circadian-clock__legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1.25rem;
+  padding: 0;
+  list-style: none;
+  font-family: var(--seco-font-ui);
+  font-size: 0.72rem;
+  color: var(--seco-on-dark-muted);
+}
+
+.circadian-clock__legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.circadian-clock__swatch {
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: 999px;
+}
+
+.circadian-clock__swatch--window {
+  width: 1.125rem;
+  height: 0.375rem;
+  background: var(--seco-spectrum);
+  border-radius: 999px;
+}
+
+.circadian-clock__swatch--track {
+  width: 1.125rem;
+  height: 0.375rem;
+  background: var(--seco-dial-surface);
+  border-radius: 999px;
+}
+
+.circadian-clock__swatch--dlmo {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--seco-spectrum-lilac);
+}
+
+.circadian-clock__swatch--now {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--seco-on-dark);
+  border: 1px solid var(--seco-navy-border);
+}
+
+.circadian-clock__swatch--now-active {
+  background: var(--accent);
+  border-color: var(--seco-dial-window-glow-from);
+}
+
+.circadian-clock__windows-detail {
+  margin-top: 0.625rem;
+  text-align: center;
+  font-family: var(--seco-font-data);
+  font-size: 0.65rem;
+  letter-spacing: 0.02em;
+  color: var(--seco-on-dark-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circadian-clock__hand {
+    transition: none;
+  }
+}

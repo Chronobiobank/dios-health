@@ -1,0 +1,219 @@
+/**
+ * Clinical layout shell — from dios.health app/styles/clinical-globals.css
+ * Loaded with Secopeutic marketing pages.
+ */
+
+:root {
+  --dios-site-nav-height: calc(
+    var(--dios-site-nav-safe-top, env(safe-area-inset-top, 0px)) + var(--dios-site-nav-content-height, 3rem)
+  );
+  --dios-site-nav-safe-top: env(safe-area-inset-top, 0px);
+  --dios-site-nav-inset-top: 0;
+  --dios-site-nav-content-height: 3rem;
+  --dios-site-nav-padding-inline: 1rem;
+}
+
+[data-clinical-layout] {
+  --dios-focus-ring: #185fa5;
+  --legibility-root-size: 100%;
+  --ct-accent: #185fa5;
+  --ct-ink: #0f1012;
+  --aubergine-dark: #0f1012;
+  background-color: var(--seco-navy, #0b1220);
+  color: #fff;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-clinical-layout].seco-shell--dark {
+  background-color: var(--seco-navy, #0b1220);
+  color: #fff;
+}
+
+body:has([data-clinical-layout]) {
+  background-color: var(--seco-navy, #0b1220);
+  font-size: var(--legibility-root-size, 100%);
+}
+
+.clinical-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.clinical-layout,
+.clinical-layout *:not(.dios-wordmark):not(.deepdose-wordmark):not(.secopeutic-wordmark) {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-clinical-layout] .clinical-site-nav__main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.clinical-site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  box-sizing: border-box;
+  min-height: var(--dios-site-nav-height);
+  padding-top: var(--dios-site-nav-safe-top);
+  padding-inline: max(var(--dios-site-nav-padding-inline), env(safe-area-inset-left, 0px))
+    max(var(--dios-site-nav-padding-inline), env(safe-area-inset-right, 0px));
+  border-bottom: 1px solid rgb(15 16 18 / 0.08);
+  background: transparent;
+}
+
+.clinical-site-nav__brand {
+  font-size: 0.875rem;
+  text-decoration: none;
+  color: var(--ct-ink, #0f1012);
+}
+
+.clinical-site-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.clinical-site-nav__actions-desktop {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .clinical-site-nav__actions-desktop {
+    display: flex;
+  }
+}
+
+.clinical-site-nav__link {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #185fa5;
+  text-decoration: none;
+}
+
+.clinical-site-nav__link:hover {
+  text-decoration: underline;
+}
+
+/* Simple interior pages (login, about, patient app) */
+.seco-page {
+  flex: 1;
+  padding-block: clamp(2rem, 6vw, 4rem);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-page {
+  background-color: var(--seco-navy);
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 3.75rem,
+    rgb(255 255 255 / 0.028) 3.75rem,
+    rgb(255 255 255 / 0.028) 3.8125rem
+  );
+  color: #fff;
+}
+
+.secopeutic-demo:not(.seco-shell--dark) .seco-page {
+  background: var(--seco-canvas, #f7f8fa);
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-site-nav {
+  border-bottom: 1px solid var(--seco-navy-border);
+  background: rgb(11 18 32 / 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__brand {
+  color: #fff;
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__link {
+  color: rgb(255 255 255 / 0.82);
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__link:hover {
+  background: rgb(255 255 255 / 0.08);
+  color: #fff;
+  text-decoration: none;
+}
+
+.secopeutic-demo.seco-shell--dark .seco-page__eyebrow {
+  color: rgb(255 255 255 / 0.42);
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-layout .seco-page__title,
+.secopeutic-demo.seco-shell--dark .seco-page__title {
+  color: #fff;
+}
+
+.secopeutic-demo.seco-shell--dark .seco-page__lede {
+  color: rgb(255 255 255 / 0.72);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-section-title {
+  color: #fff;
+}
+
+.seco-page__eyebrow {
+  margin: 0 0 0.5rem;
+  font-family: var(--seco-font-data, var(--font-mono), monospace);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--seco-muted, rgb(17 18 19 / 0.62));
+}
+
+.seco-page__title {
+  margin: 0 0 1rem;
+  max-width: 20ch;
+  font-family: var(--seco-font-display, var(--font-merriweather), Georgia, serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--seco-ink, #111213);
+}
+
+.seco-page__lede {
+  margin: 0 0 1rem;
+  max-width: 52ch;
+  font-family: var(--seco-font-ui);
+  font-size: 1.0625rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--seco-muted, rgb(17 18 19 / 0.62));
+}
+
+.seco-page .seco-landing__btn {
+  margin-top: 1.5rem;
+  display: inline-flex;
+}
+
+/* Patient / clinical / enterprise app pages inside marketing shell */
+.seco-app-page {
+  min-height: 0;
+}
+
+.seco-app-page .seco-landing__section-inner {
+  padding-block: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.secopeutic-demo .clinical-site-nav__actions .clinical-site-nav__link {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}

@@ -1,0 +1,1256 @@
+/**
+ * Secopeutic — maven.com patterns (education platform, not Maven Clinic)
+ * Dark navy hero · pinstripe texture · spectrum gradient display type · course cards
+ */
+
+.secopeutic-demo {
+  --seco-navy: #0b1220;
+  --seco-nav-height: 4rem;
+  --seco-navy-2: #121c2e;
+  --seco-navy-card: #151f33;
+  --seco-navy-border: rgb(255 255 255 / 0.1);
+  --seco-ink: #111213;
+  --seco-muted: rgb(17 18 19 / 0.62);
+  --seco-faint: rgb(17 18 19 / 0.42);
+  --seco-surface: #fff;
+  --seco-canvas: #f7f8fa;
+  --seco-border: rgb(17 18 19 / 0.08);
+  --seco-spectrum-cyan: #5ec8f5;
+  --seco-spectrum-mid: #8b9cf8;
+  --seco-spectrum-lilac: #c4a0ff;
+  --seco-spectrum: linear-gradient(92deg, var(--seco-spectrum-cyan) 0%, var(--seco-spectrum-mid) 42%, var(--seco-spectrum-lilac) 100%);
+  --seco-on-dark: #fff;
+  --seco-on-dark-muted: rgb(255 255 255 / 0.58);
+  --seco-on-dark-faint: rgb(255 255 255 / 0.42);
+  --seco-on-dark-subtle: rgb(255 255 255 / 0.38);
+  --seco-dial-track: rgb(255 255 255 / 0.14);
+  --seco-dial-track-from: rgb(255 255 255 / 0.11);
+  --seco-dial-track-to: rgb(255 255 255 / 0.04);
+  --seco-dial-face-from: rgb(255 255 255 / 0.14);
+  --seco-dial-face-mid: rgb(255 255 255 / 0.06);
+  --seco-dial-face-to: rgb(255 255 255 / 0.02);
+  --seco-dial-window-glow-from: rgb(94 200 245 / 0.55);
+  --seco-dial-window-glow-to: rgb(196 160 255 / 0.35);
+  --seco-dial-surface: rgb(255 255 255 / 0.08);
+  --seco-dial-readout-bg: rgb(11 18 32 / 0.9);
+  --seco-dial-label-halo: rgb(11 18 32 / 0.85);
+  --seco-spectrum-hero: linear-gradient(
+    90deg,
+    #f2b8a2 0%,
+    #e8a8c8 38%,
+    #c8b0f0 72%,
+    #a8c8ff 100%
+  );
+  --seco-radius-md: 0.875rem;
+  --seco-radius-lg: 1.125rem;
+  --seco-radius-xl: 1.375rem;
+  --seco-page-pad: clamp(1.25rem, 4vw, 2rem);
+  --seco-page-max: 76rem;
+  --seco-stack-gap: clamp(1.75rem, 4vw, 2.5rem);
+  --seco-copy-measure: 52ch;
+  --seco-font-display: var(--font-merriweather, Georgia, serif);
+  --seco-font-accent: var(--font-bureau-sans, var(--font-dm-sans), system-ui, sans-serif);
+  --seco-font-ui: var(--font-bureau-sans, var(--font-dm-sans), system-ui, sans-serif);
+  --seco-font-data: var(--font-mkt-mono, var(--font-mono), monospace);
+  min-height: 100vh;
+  background: var(--seco-canvas);
+  color: var(--seco-ink);
+  font-family: var(--seco-font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+.secopeutic-demo.seco-shell--dark {
+  background: var(--seco-navy);
+  color: #fff;
+}
+
+body:has(.seco-shell--dark) {
+  background-color: var(--seco-navy);
+}
+
+.secopeutic-demo .seco-display {
+  font-family: var(--seco-font-display);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* Dark nav — maven.com header */
+.secopeutic-demo.seco-shell--dark .clinical-site-nav {
+  border-bottom: 1px solid var(--seco-navy-border);
+  background: rgb(11 18 32 / 0.92);
+  backdrop-filter: blur(12px);
+  box-shadow: none;
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__brand,
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__context {
+  color: #fff;
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__link {
+  color: rgb(255 255 255 / 0.82);
+}
+
+.secopeutic-demo.seco-shell--dark .clinical-site-nav__link:hover {
+  background: rgb(255 255 255 / 0.08);
+  color: #fff;
+}
+
+.secopeutic-demo .clinical-site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: var(--seco-nav-height);
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.secopeutic-demo .clinical-site-nav__actions {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  gap: 0.75rem;
+}
+
+.secopeutic-demo .clinical-site-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  flex-shrink: 0;
+  line-height: 1;
+  text-decoration: none;
+  color: inherit;
+}
+.secopeutic-demo .clinical-site-nav__brand .dios-wordmark,
+.secopeutic-demo .clinical-site-nav__brand .deepdose-wordmark,
+.secopeutic-demo .clinical-site-nav__brand .secopeutic-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 1.125rem;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .secopeutic-demo .clinical-site-nav__brand .dios-wordmark,
+  .secopeutic-demo .clinical-site-nav__brand .deepdose-wordmark,
+  .secopeutic-demo .clinical-site-nav__brand .secopeutic-wordmark {
+    font-size: 1.25rem;
+  }
+}
+
+.secopeutic-demo .clinical-site-nav__context {
+  display: none;
+  min-width: 0;
+  flex: 1;
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--seco-faint);
+}
+
+@media (min-width: 900px) {
+  .secopeutic-demo .clinical-site-nav__context {
+    display: block;
+  }
+}
+
+.secopeutic-demo .mobile-overflow-menu--always {
+  display: block;
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__trigger {
+  height: 2.375rem;
+  width: 2.375rem;
+  color: rgb(255 255 255 / 0.92);
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__trigger:hover {
+  background: rgb(255 255 255 / 0.1);
+  color: #fff;
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__panel {
+  background: var(--seco-navy-2);
+  border-bottom-color: var(--seco-navy-border);
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__eyebrow {
+  color: rgb(255 255 255 / 0.45);
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__link {
+  color: rgb(255 255 255 / 0.9);
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__link:hover {
+  background: rgb(255 255 255 / 0.08);
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__link--active {
+  background: rgb(255 255 255 / 0.12);
+  color: #fff;
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__link--cta {
+  margin-top: 0.5rem;
+  background: #fff;
+  color: var(--seco-navy);
+  font-weight: 600;
+  text-align: center;
+}
+
+.secopeutic-demo .mobile-overflow-menu--dark .mobile-overflow-menu__link--cta:hover {
+  background: rgb(255 255 255 / 0.92);
+}
+
+.secopeutic-demo__page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--seco-page-max);
+  padding: var(--seco-page-pad);
+}
+
+.secopeutic-demo__lede {
+  margin-top: 1rem;
+  max-width: var(--seco-copy-measure);
+  color: var(--seco-muted);
+}
+
+.secopeutic-demo__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.secopeutic-demo__section {
+  margin-top: var(--seco-stack-gap);
+}
+
+/* Demo pages — light clinical panels */
+.secopeutic-panel {
+  border: 1px solid var(--seco-border);
+  border-radius: var(--seco-radius-lg);
+  background: var(--seco-surface);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  box-shadow: 0 1px 2px rgb(17 18 19 / 0.04);
+}
+
+.secopeutic-metric-card {
+  border: 1px solid var(--seco-border);
+  border-radius: var(--seco-radius-md);
+  background: var(--seco-canvas);
+  padding: 1.125rem 1.25rem;
+  min-height: 6.75rem;
+}
+
+.secopeutic-metric-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .secopeutic-metric-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.secopeutic-audience-cards {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .secopeutic-audience-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .secopeutic-audience-cards--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Maven-style course cards on light sections */
+.seco-maven-course-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border: 1px solid var(--seco-border);
+  border-radius: var(--seco-radius-lg);
+  background: var(--seco-surface);
+  padding: 1.125rem 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.seco-maven-course-card:hover {
+  box-shadow: 0 10px 28px rgb(17 18 19 / 0.08);
+  transform: translateY(-2px);
+}
+
+.seco-maven-course-card__rank {
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  color: var(--seco-faint);
+}
+
+.seco-maven-course-card__title {
+  margin-top: 0.5rem;
+  font-family: var(--seco-font-ui);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--seco-ink);
+}
+
+.seco-maven-course-card__meta {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--seco-muted);
+}
+
+.seco-maven-course-card__link {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2f5fd4;
+}
+
+.secopeutic-audience-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border: 1px solid var(--seco-border);
+  border-radius: var(--seco-radius-lg);
+  background: var(--seco-surface);
+  padding: 1.25rem 1.375rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.secopeutic-audience-card__link {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2f5fd4;
+}
+
+.secopeutic-cohort-table__frame {
+  overflow-x: auto;
+  border: 1px solid var(--seco-border);
+  border-radius: var(--seco-radius-xl);
+  background: var(--seco-surface);
+}
+
+.secopeutic-lab-table th {
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--seco-faint);
+  background: var(--seco-canvas);
+}
+
+.secopeutic-patient-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.secopeutic-patient-header__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ——— Dark demo workspace ——— */
+.seco-demo-workspace {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--seco-page-max);
+  padding: clamp(1.5rem, 4vw, 2.5rem) var(--seco-page-pad) clamp(3rem, 6vw, 4rem);
+  color: #fff;
+}
+
+.seco-shell--dark .seco-demo-workspace {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 3.75rem,
+    rgb(255 255 255 / 0.028) 3.75rem,
+    rgb(255 255 255 / 0.028) 3.8125rem
+  );
+}
+
+.seco-demo-hero {
+  max-width: 52ch;
+}
+
+.seco-demo-hero__eyebrow {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+}
+
+.seco-demo-hero__title {
+  margin: 0.75rem 0 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.seco-demo-hero__support {
+  margin: 1rem 0 0;
+  max-width: var(--seco-copy-measure);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.68);
+}
+
+.seco-demo-stats {
+  display: grid;
+  gap: 0.875rem;
+  margin-top: 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .seco-demo-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.seco-demo-stat {
+  padding: 1.125rem 1.25rem;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-md);
+  background: rgb(255 255 255 / 0.04);
+}
+
+.seco-demo-stat__label {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.45);
+}
+
+.seco-demo-stat__value {
+  margin: 0.5rem 0 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.seco-demo-stat__value--stable {
+  color: #8ee4b8;
+}
+
+.seco-demo-stat__value--review {
+  color: #f5d08a;
+}
+
+.seco-demo-stat__value--hold {
+  color: #f5a8a8;
+}
+
+.seco-demo-section {
+  margin-top: clamp(2.25rem, 5vw, 3rem);
+}
+
+.seco-demo-section__title {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: 1.375rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.seco-demo-patient-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .seco-demo-patient-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.seco-demo-patient-grid .seco-demo-patient-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.seco-demo-patient-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  min-height: 100%;
+  padding: 1.25rem 1.375rem;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-lg);
+  background: rgb(255 255 255 / 0.03);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.seco-demo-patient-card:hover {
+  background: rgb(255 255 255 / 0.06);
+  border-color: rgb(255 255 255 / 0.16);
+}
+
+.seco-demo-patient-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.seco-demo-patient-card__pathway {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.48);
+}
+
+.seco-demo-patient-card__name {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.seco-demo-patient-card__meta {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: rgb(255 255 255 / 0.42);
+}
+
+.seco-demo-patient-card__copy {
+  margin: 0.25rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.68);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.seco-demo-patient-card__link {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.seco-demo-zone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.5rem;
+  padding-inline: 0.625rem;
+  border-radius: 999px;
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.seco-demo-zone--stable {
+  background: rgb(142 228 184 / 0.14);
+  color: #8ee4b8;
+}
+
+.seco-demo-zone--review {
+  background: rgb(245 208 138 / 0.14);
+  color: #f5d08a;
+}
+
+.seco-demo-zone--hold {
+  background: rgb(245 168 168 / 0.14);
+  color: #f5a8a8;
+}
+
+.seco-demo-band {
+  margin-top: clamp(2.25rem, 5vw, 3rem);
+  padding: 1.25rem 1.375rem;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-lg);
+  background: rgb(255 255 255 / 0.03);
+}
+
+.seco-demo-band__eyebrow {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.seco-demo-band__copy {
+  margin: 0.625rem 0 0;
+  max-width: var(--seco-copy-measure);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.62);
+}
+
+.seco-demo-cta {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-xl);
+  background: rgb(255 255 255 / 0.04);
+}
+
+.seco-demo-cta__title {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.seco-demo-cta__support {
+  margin: 0.75rem 0 0;
+  max-width: var(--seco-copy-measure);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.65);
+}
+
+.seco-demo-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.seco-demo-cta .seco-landing__btn--primary {
+  border: none;
+}
+
+.seco-demo-back {
+  display: inline-flex;
+  margin-bottom: 1.25rem;
+  font-family: var(--seco-font-ui);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(255 255 255 / 0.58);
+  text-decoration: none;
+}
+
+.seco-demo-back:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Cohort table — dark */
+.seco-demo-table--dark .seco-demo-table__title {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: 1.375rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.seco-demo-table--dark .seco-demo-table__support {
+  margin: 0.5rem 0 0;
+  max-width: var(--seco-copy-measure);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.58);
+}
+
+.seco-demo-table--dark .seco-demo-table__frame {
+  margin-top: 1.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-xl);
+  background: rgb(255 255 255 / 0.02);
+}
+
+.seco-demo-table__grid {
+  width: 100%;
+  min-width: 52rem;
+  border-collapse: collapse;
+}
+
+.seco-demo-table__grid th {
+  padding: 0.875rem 1.125rem;
+  border-bottom: 1px solid var(--seco-navy-border);
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+  background: rgb(255 255 255 / 0.03);
+}
+
+.seco-demo-table__grid td {
+  padding: 1rem 1.125rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  vertical-align: top;
+}
+
+.seco-demo-table__row {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.seco-demo-table__row:hover,
+.seco-demo-table__row--expanded {
+  background: rgb(255 255 255 / 0.04);
+}
+
+.seco-demo-table__name {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #fff;
+}
+
+.seco-demo-table__meta {
+  margin: 0.25rem 0 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: rgb(255 255 255 / 0.4);
+}
+
+.seco-demo-table__indication {
+  margin: 0.375rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: rgb(255 255 255 / 0.55);
+}
+
+.seco-demo-table__protocol {
+  display: inline-flex;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  background: rgb(255 255 255 / 0.06);
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.seco-demo-metric {
+  font-family: var(--seco-font-data);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.seco-demo-metric--green {
+  color: #8ee4b8;
+}
+
+.seco-demo-metric--amber {
+  color: #f5d08a;
+}
+
+.seco-demo-metric--red {
+  color: #f5a8a8;
+}
+
+.seco-demo-table__open {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.seco-demo-table__open:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.seco-demo-table__detail-row td {
+  background: rgb(255 255 255 / 0.03);
+}
+
+.seco-demo-table__read {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: rgb(255 255 255 / 0.78);
+}
+
+.seco-demo-table__detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.875rem;
+}
+
+.seco-demo-table__detail-note {
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: rgb(255 255 255 / 0.45);
+}
+
+.seco-demo-table--dark .seco-demo-table__footnote {
+  margin: 0.875rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.38);
+}
+
+/* Patient detail on dark shell — legacy panels (deprecated) */
+.seco-shell--dark .seco-demo-workspace .secopeutic-panel {
+  border-color: var(--seco-navy-border);
+  background: rgb(255 255 255 / 0.04);
+  box-shadow: none;
+  color: #fff;
+}
+
+.seco-shell--dark .seco-demo-workspace .secopeutic-metric-card {
+  border-color: var(--seco-navy-border);
+  background: rgb(255 255 255 / 0.03);
+}
+
+/* ——— Clinical patient record ——— */
+.seco-record {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.seco-record__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  margin-top: 1.25rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--seco-navy-border);
+}
+
+.seco-record__eyebrow {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+}
+
+.seco-record__name {
+  margin: 0.5rem 0 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.375rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.seco-record__indication {
+  margin: 0.5rem 0 0;
+  max-width: 42ch;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.62);
+}
+
+.seco-record__demographics {
+  margin: 0.35rem 0 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: rgb(255 255 255 / 0.48);
+}
+
+.seco-record__status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.seco-record__pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.seco-record__pill--green {
+  border-color: rgb(72 187 120 / 0.35);
+  background: rgb(72 187 120 / 0.12);
+  color: #9ef0c4;
+}
+
+.seco-record__pill--amber {
+  border-color: rgb(236 201 75 / 0.35);
+  background: rgb(236 201 75 / 0.12);
+  color: #f5d78e;
+}
+
+.seco-record__pill--red {
+  border-color: rgb(248 113 113 / 0.35);
+  background: rgb(248 113 113 / 0.12);
+  color: #fca5a5;
+}
+
+.seco-record__pill--blue {
+  border-color: rgb(96 165 250 / 0.35);
+  background: rgb(96 165 250 / 0.12);
+  color: #93c5fd;
+}
+
+/* Primary four-pathway strip */
+.seco-record__strip {
+  padding: 1.25rem 1.375rem 1.375rem;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-lg);
+  background: rgb(255 255 255 / 0.04);
+}
+
+.seco-record__strip-label {
+  margin: 0 0 1rem;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+}
+
+.seco-record__strip-grid {
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: 0.625rem;
+  background: var(--seco-navy-border);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .seco-record__strip-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Clinical callout */
+.seco-record__callout {
+  padding: 1.125rem 1.25rem 1.125rem 1rem;
+  border: 1px solid var(--seco-navy-border);
+  border-left-width: 3px;
+  border-radius: var(--seco-radius-md);
+  background: rgb(255 255 255 / 0.03);
+}
+
+.seco-record__callout--green {
+  border-left-color: #48bb78;
+  background: rgb(72 187 120 / 0.06);
+}
+
+.seco-record__callout--amber {
+  border-left-color: #ecc94b;
+  background: rgb(236 201 75 / 0.06);
+}
+
+.seco-record__callout--red {
+  border-left-color: #f56565;
+  background: rgb(248 113 113 / 0.06);
+}
+
+.seco-record__callout-label {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.45);
+}
+
+.seco-record__callout-text {
+  margin: 0.625rem 0 0;
+  max-width: 62ch;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.88);
+}
+
+.seco-record__callout-action {
+  margin: 0.75rem 0 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.55);
+}
+
+/* KPI tiles */
+.seco-record__kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 1.125rem;
+  background: rgb(11 18 32 / 0.65);
+}
+
+.seco-record__kpi--large {
+  padding: 1.125rem 1.25rem 1.25rem;
+}
+
+.seco-record__kpi-label {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+}
+
+.seco-record__kpi-value {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 1.375rem;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+
+.seco-record__kpi--large .seco-record__kpi-value {
+  font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+}
+
+.seco-record__kpi-value--green {
+  color: #9ef0c4;
+}
+
+.seco-record__kpi-value--amber {
+  color: #f5d78e;
+}
+
+.seco-record__kpi-value--red {
+  color: #fca5a5;
+}
+
+.seco-record__kpi-prior {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  color: rgb(255 255 255 / 0.38);
+}
+
+.seco-record__kpi-hint {
+  margin: 0.125rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: rgb(255 255 255 / 0.48);
+}
+
+/* Body panels */
+.seco-record__body {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 960px) {
+  .seco-record__body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .seco-record__panel--streams {
+    grid-column: 1 / -1;
+  }
+}
+
+.seco-record__panel {
+  padding: 1.25rem 1.375rem;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-lg);
+  background: rgb(255 255 255 / 0.03);
+}
+
+.seco-record__panel-title {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.seco-record__panel-sub {
+  margin: 0.375rem 0 0;
+  max-width: 48ch;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.52);
+}
+
+.seco-record__panel-grid {
+  display: grid;
+  gap: 1px;
+  margin-top: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: 0.625rem;
+  background: var(--seco-navy-border);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.seco-record__panel-grid .seco-record__kpi {
+  background: rgb(255 255 255 / 0.02);
+}
+
+/* Lab table */
+.seco-record__table-wrap {
+  margin-top: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: 0.625rem;
+}
+
+.seco-record__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.seco-record__table th {
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid var(--seco-navy-border);
+  background: rgb(255 255 255 / 0.04);
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+  white-space: nowrap;
+}
+
+.seco-record__table td {
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.05);
+  color: rgb(255 255 255 / 0.78);
+  white-space: nowrap;
+}
+
+.seco-record__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.seco-record__table-row--latest td {
+  background: rgb(255 255 255 / 0.04);
+  color: #fff;
+  font-weight: 500;
+}
+
+.seco-record__table-units {
+  margin: 0;
+  padding: 0.5rem 0.875rem;
+  border-top: 1px solid var(--seco-navy-border);
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  color: rgb(255 255 255 / 0.32);
+}
+
+/* Data streams */
+.seco-record__streams {
+  display: grid;
+  gap: 0.875rem;
+  margin: 1rem 0 0;
+}
+
+@media (min-width: 640px) {
+  .seco-record__streams {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.seco-record__streams dt {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.38);
+}
+
+.seco-record__streams dd {
+  margin: 0.25rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.seco-record__disclaimer {
+  margin: 0.5rem 0 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: rgb(255 255 255 / 0.32);
+}
