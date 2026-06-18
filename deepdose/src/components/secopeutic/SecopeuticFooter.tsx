@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
-import { DeepdoseWordmark } from '@/components/brand/DeepdoseWordmark'
-import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_LOGO_GLYPH, DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
 
 const FOOTER_LINKS = [
   { label: 'About', href: '/about' },
@@ -18,7 +17,9 @@ export function SecopeuticFooter() {
         <div className="seco-footer__main">
           <Link href="/" className="seco-footer__brand" aria-label={DEEPDOSE_NAME}>
             <span className="seco-footer__lockup">
-              <DeepdoseWordmark />
+              <span className="seco-footer__glyph" aria-hidden="true">
+                {DEEPDOSE_LOGO_GLYPH}
+              </span>
               <span className="seco-footer__tag">{DEEPDOSE_TAGLINE}</span>
             </span>
           </Link>

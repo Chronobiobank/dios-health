@@ -961,25 +961,25 @@
 .seco-footer__main {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  justify-items: center;
+  justify-items: start;
   gap: 2.5rem;
 }
 
 @media (min-width: 768px) {
   .seco-footer__main {
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr);
     align-items: start;
     gap: 2.5rem 3rem;
   }
 
   .seco-footer__brand {
-    grid-column: 2;
+    grid-column: 1;
     grid-row: 1;
-    justify-self: center;
+    justify-self: start;
   }
 
   .seco-footer__nav {
-    grid-column: 3;
+    grid-column: 2;
     grid-row: 1;
     justify-self: end;
     margin-left: 0;
@@ -996,28 +996,38 @@
 }
 
 .seco-footer__lockup {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.625rem;
+  display: inline-grid;
+  justify-items: start;
+  gap: 0.5rem;
 }
 
-.seco-footer__lockup .deepdose-wordmark {
-  font-size: clamp(1.125rem, 2.4vw, 1.25rem);
+.seco-footer__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  font-family: 'Segoe UI Symbol', 'Noto Sans', 'DejaVu Sans', sans-serif;
+  font-size: clamp(4.5rem, 11vw, 6.75rem);
+  font-weight: 400;
+  line-height: 1;
   color: #fff;
+  transform: translateX(-0.085em);
 }
 
 .seco-footer__tag {
   margin: 0;
   font-family: var(--font-montserrat), 'Montserrat', sans-serif;
-  font-size: clamp(0.8125rem, 1.8vw, 0.9375rem);
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
   font-weight: 400;
   letter-spacing: 0.12em;
   line-height: 1.2;
-  text-align: center;
+  text-align: left;
   text-transform: uppercase;
   color: rgb(255 255 255 / 0.58);
   transition: color 0.15s ease;
+  padding-left: 0.12em;
+  margin-right: -0.12em;
 }
 
 .seco-footer__nav {
@@ -1063,7 +1073,7 @@
   }
 
   .seco-footer__links {
-    align-items: center;
+    align-items: flex-start;
   }
 }
 
