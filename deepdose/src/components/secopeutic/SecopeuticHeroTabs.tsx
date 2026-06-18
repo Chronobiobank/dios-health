@@ -57,6 +57,7 @@ function ClinicianAvatar({ clinician }: { clinician: LandingClinician }) {
         alt={clinician.imageAlt ?? clinician.name}
         width={32}
         height={32}
+        unoptimized
         className="seco-hero-tabs__panel-avatar"
       />
     )
