@@ -3,16 +3,18 @@ import { notFound, redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { clinicianCanAccessPatient } from '@/lib/clinical/triage'
 import { getPatientCircadianContext } from '@/lib/medications/patient-phase'
+import { loadPatientBti } from '@/lib/bti/load-patient-bti'
+import { fetchPatientRecommendationsForClinician } from '@/lib/prescribing/recommendations'
 import { buildClockWindows } from '@/lib/medications/clock-windows'
 import {
   MEDICATION_TIMINGS,
-  adjustTimingForPhase,
   type MedicationCode,
 } from '@/lib/circadian/medications'
 import { decimalHoursToHHMM } from '@/lib/utils/time'
 import ScoreGauge from '@/components/shared/ScoreGauge'
 import CircadianClock from '@/components/shared/CircadianClock'
 import { Badge } from '@/components/ui/Layout'
+import { PrescribingForm } from '@/components/clinical/PrescribingForm'
 
 const CHRONOTYPE_LABELS: Record<string, string> = {
   extreme_early: 'Extreme early',
@@ -20,6 +22,18 @@ const CHRONOTYPE_LABELS: Record<string, string> = {
   intermediate: 'Intermediate',
   late: 'Late',
   extreme_late: 'Extreme late',
+}
+
+const STATUS_LABEL: Record<string, string> = {
+  pending: 'Pending',
+  accepted: 'Accepted',
+  declined: 'Declined',
+  modified: 'Modified',
+}
+
+function formatTime(t: string | null): string {
+  if (!t) return '—'
+  return t.slice(0, 5)
 }
 
 export default async function ClinicalPatientPage({
@@ -62,6 +76,10 @@ export default async function ClinicalPatientPage({
     .eq('is_active', true)
 
   const context = await getPatientCircadianContext(supabase, patientId)
+  const btiPayloads = await loadPatientBti(supabase, patientId)
+  const btiByMed = new Map(btiPayloads.map((p) => [p.medication_id, p]))
+  const recommendations = await fetchPatientRecommendationsForClinician(supabase, patientId)
+
   const chronotypeLabel = context.chronotypeCat
     ? CHRONOTYPE_LABELS[context.chronotypeCat] ?? context.chronotypeCat
     : undefined
@@ -119,9 +137,46 @@ export default async function ClinicalPatientPage({
         </div>
       )}
 
+      <section className="seco-app-card p-5 md:p-6">
+        <p className="seco-page__eyebrow mb-1">Prescribing</p>
+        <h2 className="seco-app-card__title mb-4">Propose timing change</h2>
+        <PrescribingForm
+          patientId={patientId}
+          medications={meds ?? []}
+        />
+      </section>
+
+      {recommendations.length > 0 && (
+        <section className="seco-app-card overflow-hidden !p-0">
+          <div className="border-b border-border p-5 md:p-6">
+            <p className="seco-page__eyebrow mb-1">History</p>
+            <h2 className="seco-app-card__title">Recommendations</h2>
+          </div>
+          <ul className="divide-y divide-border">
+            {recommendations.map((rec) => (
+              <li key={rec.id} className="p-5 md:p-6">
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="font-medium text-ink">
+                    {rec.medication_code in MEDICATION_TIMINGS
+                      ? MEDICATION_TIMINGS[rec.medication_code as MedicationCode].displayName
+                      : rec.medication_code}
+                  </p>
+                  <Badge tone={rec.status === 'pending' ? 'warning' : 'success'}>
+                    {STATUS_LABEL[rec.status] ?? rec.status}
+                  </Badge>
+                </div>
+                <p className="text-sm text-ink-muted">
+                  {formatTime(rec.current_timing)} → {formatTime(rec.recommended_timing)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section className="seco-app-card overflow-hidden !p-0">
         <div className="border-b border-border p-5 md:p-6">
-          <p className="seco-page__eyebrow mb-1">Medications</p>
+          <p className="seco-page__eyebrow mb-1">BTI status</p>
           <h2 className="seco-app-card__title">Active prescriptions</h2>
         </div>
         {!meds?.length ? (
@@ -133,9 +188,7 @@ export default async function ClinicalPatientPage({
                 m.medication_code in MEDICATION_TIMINGS
                   ? MEDICATION_TIMINGS[m.medication_code as MedicationCode]
                   : null
-              const window = timing
-                ? adjustTimingForPhase(timing, context.phaseOffsetMinutes)
-                : null
+              const bti = btiByMed.get(m.medication_code)
               return (
                 <li key={m.medication_code} className="p-5 md:p-6">
                   <p className="font-medium text-ink">
@@ -145,14 +198,17 @@ export default async function ClinicalPatientPage({
                     )}
                   </p>
                   <p className="text-sm text-ink-muted">
-                    Current: {m.current_timing?.slice(0, 5) ?? '—'}
-                    {window && (
+                    Current: {formatTime(m.current_timing)}
+                    {bti && (
                       <span className="text-accent">
                         {' '}
-                        · Recommended: {window.start} – {window.end}
+                        · {bti.bti_status.replace('_', ' ')}
                       </span>
                     )}
                   </p>
+                  {bti && (
+                    <p className="mt-1 text-xs text-ink-faint">{bti.display_instruction}</p>
+                  )}
                 </li>
               )
             })}

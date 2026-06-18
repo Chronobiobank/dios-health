@@ -2,18 +2,21 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { getPatientCircadianContext } from '@/lib/medications/patient-phase'
+import { loadPatientBti } from '@/lib/bti/load-patient-bti'
+import { fetchPendingRecommendations } from '@/lib/prescribing/recommendations'
 import { buildClockWindows } from '@/lib/medications/clock-windows'
 import {
   MEDICATION_TIMINGS,
-  adjustTimingForPhase,
   type MedicationCode,
 } from '@/lib/circadian/medications'
-import { decimalHoursToHHMM, isTimeInWindow } from '@/lib/utils/time'
+import { decimalHoursToHHMM } from '@/lib/utils/time'
 import ScoreGauge from '@/components/shared/ScoreGauge'
 import CircadianClock from '@/components/shared/CircadianClock'
 import { Badge } from '@/components/ui/Layout'
 import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
+import { PendingRecommendationsPanel } from '@/components/patient/PendingRecommendationsPanel'
+import { DosingReminderBanner } from '@/components/patient/DosingReminderBanner'
 
 const CHRONOTYPE_LABELS: Record<string, string> = {
   extreme_early: 'Extreme early',
@@ -55,6 +58,18 @@ function alignmentStatus(score: number): OverviewHeadline {
   }
 }
 
+const BTI_BADGE_TONE = {
+  WINDOW_OPEN: 'success',
+  WINDOW_CLOSED: 'warning',
+  CRITICAL_DRIFT: 'warning',
+} as const
+
+const BTI_BADGE_LABEL = {
+  WINDOW_OPEN: 'In window',
+  WINDOW_CLOSED: 'Outside window',
+  CRITICAL_DRIFT: 'Drift alert',
+} as const
+
 export default async function PatientDashboardPage() {
   const supabase = await createClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -67,7 +82,7 @@ export default async function PatientDashboardPage() {
 
   const { data: deviceProfile } = await supabase
     .from('patient_profiles')
-    .select('device_alert_triggered')
+    .select('device_alert_triggered, reminders_enabled')
     .eq('id', user.id)
     .maybeSingle()
 
@@ -85,6 +100,17 @@ export default async function PatientDashboardPage() {
     .order('completed_at', { ascending: false })
     .limit(1)
     .maybeSingle()
+
+  const today = new Date().toISOString().slice(0, 10)
+  const { data: todayAcks } = await supabase
+    .from('medication_reminder_acks')
+    .select('medication_code')
+    .eq('patient_id', user.id)
+    .eq('ack_date', today)
+
+  const btiPayloads = await loadPatientBti(supabase, user.id)
+  const btiByMed = new Map(btiPayloads.map((p) => [p.medication_id, p]))
+  const pendingRecommendations = await fetchPendingRecommendations(supabase, user.id)
 
   const hasOnboarding = Boolean(chronotype)
   const hasMeds = (meds?.length ?? 0) > 0
@@ -133,6 +159,16 @@ export default async function PatientDashboardPage() {
           .
         </Callout>
       )}
+
+      {hasMeds && (
+        <DosingReminderBanner
+          payloads={btiPayloads}
+          remindersEnabled={deviceProfile?.reminders_enabled ?? true}
+          todayAcks={(todayAcks ?? []).map((a) => a.medication_code)}
+        />
+      )}
+
+      <PendingRecommendationsPanel recommendations={pendingRecommendations} />
 
       {hasOnboarding && context.circadianScore > 0 && (
         <div className="grid gap-6 lg:grid-cols-2">
@@ -190,14 +226,10 @@ export default async function PatientDashboardPage() {
                   m.medication_code in MEDICATION_TIMINGS
                     ? MEDICATION_TIMINGS[m.medication_code as MedicationCode]
                     : null
-                const window = timing
-                  ? adjustTimingForPhase(timing, context.phaseOffsetMinutes)
-                  : null
+                const bti = btiByMed.get(m.medication_code)
+                const windowStart = bti?.dosing_window_start.slice(11, 16)
+                const windowEnd = bti?.dosing_window_end.slice(11, 16)
                 const current = formatTime(m.current_timing)
-                const inWindow =
-                  window && m.current_timing
-                    ? isTimeInWindow(current, window.start, window.end)
-                    : null
 
                 return (
                   <li key={m.medication_code} className="space-y-1.5 p-5 md:p-6">
@@ -208,21 +240,24 @@ export default async function PatientDashboardPage() {
                           <span className="ml-2 font-normal text-ink-muted">{m.dose_mg} mg</span>
                         )}
                       </p>
-                      {inWindow !== null && (
-                        <Badge tone={inWindow ? 'success' : 'warning'}>
-                          {inWindow ? 'In window' : 'Outside window'}
+                      {bti && (
+                        <Badge tone={BTI_BADGE_TONE[bti.bti_status]}>
+                          {BTI_BADGE_LABEL[bti.bti_status]}
                         </Badge>
                       )}
                     </div>
                     <p className="text-sm text-ink-muted">
                       Current: {current}
-                      {window && (
+                      {windowStart && windowEnd && (
                         <span className="text-accent">
                           {' '}
-                          · Recommended: {window.start} – {window.end}
+                          · Window: {windowStart} – {windowEnd}
                         </span>
                       )}
                     </p>
+                    {bti && (
+                      <p className="text-xs text-ink-faint">{bti.display_instruction}</p>
+                    )}
                   </li>
                 )
               })}
