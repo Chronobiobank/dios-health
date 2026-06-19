@@ -320,6 +320,24 @@
   color: #2f5fd4;
 }
 
+.seco-hero-tabs__panel-hook {
+  margin: 0;
+  padding: 1rem 1.125rem;
+  font-family: var(--seco-font-ui);
+  font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--seco-ink);
+  background: linear-gradient(
+    135deg,
+    rgba(47, 95, 212, 0.08) 0%,
+    rgba(47, 95, 212, 0.03) 100%
+  );
+  border: 1px solid rgba(47, 95, 212, 0.18);
+  border-radius: 0.75rem;
+}
+
 .seco-hero-tabs__panel-rail {
   display: grid;
   grid-auto-flow: column;
@@ -1007,9 +1025,10 @@
   justify-content: center;
   width: 1em;
   height: 1em;
-  font-family: 'Segoe UI Symbol', 'Noto Sans', 'DejaVu Sans', sans-serif;
+  font-family: var(--font-montserrat), 'Montserrat', sans-serif;
   font-size: clamp(4.5rem, 11vw, 6.75rem);
   font-weight: 400;
+  font-style: normal;
   line-height: 1;
   color: #fff;
   transform: translateX(-0.085em);

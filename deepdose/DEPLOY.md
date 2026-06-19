@@ -116,3 +116,38 @@ Verify Supabase any time:
 ```powershell
 node scripts/check-supabase.mjs
 ```
+
+## 8. Google Search Console (auto sitemap on deploy)
+
+Legacy `google.com/ping` is deprecated. Deploys now call the **Search Console API** when a service account is configured.
+
+### One-time setup
+
+1. [Google Cloud Console](https://console.cloud.google.com/) → create/select project → **APIs & Services** → enable **Google Search Console API**
+2. **IAM** → **Service Accounts** → create → **Keys** → JSON key download
+3. [Search Console](https://search.google.com/search-console) → **Settings** → **Users and permissions** → add the service account email (`...@....iam.gserviceaccount.com`) with **Full** access
+4. Note your property URL exactly (URL-prefix is usually `https://deepdose.org/` with trailing slash; domain properties use `sc-domain:deepdose.org`)
+
+### Local env (`deepdose/.env.local`)
+
+```powershell
+# Base64-encode the JSON key (PowerShell)
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\path\to\key.json")) | Set-Clipboard
+```
+
+```env
+GOOGLE_SEARCH_CONSOLE_SERVICE_ACCOUNT_JSON_B64=<paste>
+GOOGLE_SEARCH_CONSOLE_SITE_URL=https://deepdose.org/
+```
+
+Add the same vars in **Vercel → Settings → Environment Variables** (mark sensitive).
+
+### Run
+
+```powershell
+node scripts/submit-google-index.mjs          # submit only
+node scripts/deploy.mjs --step index          # after deploy
+node scripts/deploy.mjs                       # deploy + auto-submit at end
+```
+
+If credentials are missing, the step skips with a warning and deploy still succeeds.

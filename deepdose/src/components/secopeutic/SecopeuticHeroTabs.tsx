@@ -119,7 +119,7 @@ function HeroPanelCard({
 
 export function SecopeuticHeroTabs() {
   const pillars = DEEPDOSE_LANDING_PLATFORM.pillars
-  const [activeId, setActiveId] = useState<HeroPillar['id']>(pillars[0].id)
+  const [activeId, setActiveId] = useState<HeroPillar['id']>('clinics')
 
   const activePillar = pillars.find((pillar) => pillar.id === activeId) ?? pillars[0]
   const activeIndex = pillars.findIndex((pillar) => pillar.id === activeId)
@@ -174,6 +174,10 @@ export function SecopeuticHeroTabs() {
             {activePillar.panelSeeAll.label} →
           </Link>
         </div>
+
+        {'panelHook' in activePillar && activePillar.panelHook ? (
+          <p className="seco-hero-tabs__panel-hook">{activePillar.panelHook}</p>
+        ) : null}
 
         <div
           className={cn(

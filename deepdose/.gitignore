@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# GCP Search Console service account key (local test only)
+gsc-service-account.json
+gsc-*.json
+
 # vercel
 .vercel
 

@@ -7,6 +7,7 @@
  *   node scripts/deploy.mjs --step auth  # Supabase auth URLs only
  *   node scripts/deploy.mjs --step db      # supabase db push
  *   node scripts/deploy.mjs --step deploy # vercel --prod
+ *   node scripts/deploy.mjs --step index   # Google Search Console sitemap (optional)
  */
 import { spawnSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
@@ -62,6 +63,19 @@ if (shouldRun('deploy')) {
   run('Production deploy', 'vercel', ['--prod', '--yes'])
   console.log('\nNext: add deepdose.org in Vercel → Domains and point DNS.')
   console.log('Smoke test: /, /login, /patient/dashboard (auth required)')
+}
+
+if (shouldRun('index') || step === 'all') {
+  console.log('\n▶ Submit sitemap to Google Search Console')
+  const indexResult = spawnSync('node', ['scripts/submit-google-index.mjs'], {
+    stdio: 'inherit',
+    shell: true,
+  })
+  if (indexResult.status !== 0) {
+    console.warn('⚠ Sitemap submit skipped or failed — deploy is unaffected.')
+  } else {
+    console.log('✓ Submit sitemap to Google Search Console')
+  }
 }
 
 if (step === 'all') {

@@ -5,6 +5,12 @@ import { clinicianCanAccessPatient } from '@/lib/clinical/triage'
 import { getPatientCircadianContext } from '@/lib/medications/patient-phase'
 import { loadPatientBti } from '@/lib/bti/load-patient-bti'
 import { fetchPatientRecommendationsForClinician } from '@/lib/prescribing/recommendations'
+import { fetchPatientTipTraqAssessment } from '@/lib/clinical/tiptraq-assessments'
+import {
+  buildBlockMetricsFromRecords,
+  fetchPatientTipTraqNights,
+} from '@/lib/clinical/tiptraq-nights'
+import { TIPTRAQ_BASELINE_NIGHTS } from '@/lib/clinical/tiptraq-program'
 import { buildClockWindows } from '@/lib/medications/clock-windows'
 import {
   MEDICATION_TIMINGS,
@@ -15,6 +21,8 @@ import ScoreGauge from '@/components/shared/ScoreGauge'
 import CircadianClock from '@/components/shared/CircadianClock'
 import { Badge } from '@/components/ui/Layout'
 import { PrescribingForm } from '@/components/clinical/PrescribingForm'
+import { TipTraqPatientPanel } from '@/components/clinical/TipTraqGpProgramPanel'
+import { TipTraqReadingsPanel } from '@/components/clinical/TipTraqReadingsPanel'
 
 const CHRONOTYPE_LABELS: Record<string, string> = {
   extreme_early: 'Extreme early',
@@ -79,6 +87,16 @@ export default async function ClinicalPatientPage({
   const btiPayloads = await loadPatientBti(supabase, patientId)
   const btiByMed = new Map(btiPayloads.map((p) => [p.medication_id, p]))
   const recommendations = await fetchPatientRecommendationsForClinician(supabase, patientId)
+  const tiptraqAssessment = await fetchPatientTipTraqAssessment(supabase, patientId, user.id)
+  const tiptraqNights = await fetchPatientTipTraqNights(
+    supabase,
+    patientId,
+    tiptraqAssessment?.id ?? null
+  )
+  const tiptraqMetrics = buildBlockMetricsFromRecords(
+    tiptraqNights,
+    tiptraqAssessment?.nights_required ?? TIPTRAQ_BASELINE_NIGHTS
+  )
 
   const chronotypeLabel = context.chronotypeCat
     ? CHRONOTYPE_LABELS[context.chronotypeCat] ?? context.chronotypeCat
@@ -113,6 +131,15 @@ export default async function ClinicalPatientPage({
           </p>
         )}
       </header>
+
+      <TipTraqPatientPanel patientId={patientId} assessment={tiptraqAssessment} />
+
+      <TipTraqReadingsPanel
+        patientId={patientId}
+        assessment={tiptraqAssessment}
+        nights={tiptraqNights}
+        metrics={tiptraqMetrics}
+      />
 
       {context.circadianScore > 0 && (
         <div className="grid gap-6 lg:grid-cols-2">

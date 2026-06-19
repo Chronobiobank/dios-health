@@ -8,3 +8,5 @@ export const DEEPDOSE_WORDMARK = `DEEPD${DEEPDOSE_LOGO_GLYPH}SE` as const
 export const DEEPDOSE_NAME = 'Deepdose' as const
 
 export const DEEPDOSE_TAGLINE = 'Dose intelligence' as const
+
+/** Dose = each zeitgeber (light, meals, meds/supps, exercise, sleep) — see lib/chronobiology/zeitgebers.ts */

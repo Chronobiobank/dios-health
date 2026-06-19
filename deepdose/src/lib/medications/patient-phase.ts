@@ -2,6 +2,7 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import { calculateCCS } from '@/lib/circadian/score'
 import { countRecentSleepNights } from '@/lib/wearables/sync-oura'
 import { wearableQualityScore } from '@/lib/wearables/device-health'
+import { resolvePrimaryWearableConnection } from '@/lib/wearables/tiers'
 
 export interface PatientCircadianContext {
   phaseOffsetMinutes: number
@@ -44,18 +45,19 @@ export async function getPatientCircadianContext(
   const sjlHours = Number(chronotype.sjl_hours)
   const dlmoEstimateHours = ((msfSc - 2.5) % 24 + 24) % 24
 
-  const { data: ouraConnection } = await supabase
+  const { data: wearableConnections } = await supabase
     .from('wearable_connections')
-    .select('last_sync_at')
+    .select('provider, last_sync_at')
     .eq('patient_id', patientId)
-    .eq('provider', 'oura')
-    .maybeSingle()
+
+  const primaryWearable = resolvePrimaryWearableConnection(wearableConnections ?? [])
 
   const recentNights = await countRecentSleepNights(supabase, patientId)
   const wearableScore = wearableQualityScore({
-    connected: Boolean(ouraConnection),
-    lastSyncAt: ouraConnection?.last_sync_at ?? null,
+    connected: Boolean(primaryWearable),
+    lastSyncAt: primaryWearable?.last_sync_at ?? null,
     recentSleepNights: recentNights,
+    provider: primaryWearable?.provider ?? null,
   })
 
   const ccs = calculateCCS({

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: `%s — ${DEEPDOSE_NAME}`,
   },
   description:
-    'Precision chronotherapy platform. Patient-owned chronobiobank, circadian alignment scoring, and optimised medication timing windows.',
+    'Dose intelligence for light, meals, medicines, exercise, and sleep — timed to your body clock with clinician support.',
   applicationName: DEEPDOSE_NAME,
   keywords: [
     'Deepdose',
@@ -37,13 +37,13 @@ export const metadata: Metadata = {
     siteName: DEEPDOSE_NAME,
     title: `${DEEPDOSE_NAME} — ${DEEPDOSE_TAGLINE}`,
     description:
-      'Precision chronotherapy platform. Patient-owned chronobiobank and optimised dosing windows.',
+      'Dose intelligence — best times for light, meals, medicines, exercise, and sleep.',
   },
   twitter: {
     card: 'summary_large_image',
     title: `${DEEPDOSE_NAME} — ${DEEPDOSE_TAGLINE}`,
     description:
-      'Precision chronotherapy platform. Patient-owned chronobiobank and optimised dosing windows.',
+      'Dose intelligence — best times for light, meals, medicines, exercise, and sleep.',
   },
   robots: {
     index: true,

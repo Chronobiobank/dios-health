@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { getPatientCircadianContext } from '@/lib/medications/patient-phase'
+import { buildZeitgeberSchedule } from '@/lib/chronobiology/build-zeitgeber-schedule'
 import { loadPatientBti } from '@/lib/bti/load-patient-bti'
 import { fetchPendingRecommendations } from '@/lib/prescribing/recommendations'
 import { buildClockWindows } from '@/lib/medications/clock-windows'
@@ -17,6 +18,7 @@ import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
 import { PendingRecommendationsPanel } from '@/components/patient/PendingRecommendationsPanel'
 import { DosingReminderBanner } from '@/components/patient/DosingReminderBanner'
+import { ZeitgeberSchedulePanel } from '@/components/patient/ZeitgeberSchedulePanel'
 
 const CHRONOTYPE_LABELS: Record<string, string> = {
   extreme_early: 'Extreme early',
@@ -95,7 +97,7 @@ export default async function PatientDashboardPage() {
 
   const { data: chronotype } = await supabase
     .from('chronotype_profiles')
-    .select('chronotype_cat')
+    .select('chronotype_cat, msf_sc')
     .eq('patient_id', user.id)
     .order('completed_at', { ascending: false })
     .limit(1)
@@ -120,6 +122,13 @@ export default async function PatientDashboardPage() {
 
   const dlmoTime = decimalHoursToHHMM(context.dlmoEstimateHours)
   const clockWindows = buildClockWindows(meds ?? [], context.phaseOffsetMinutes)
+  const zeitgeberSchedule = hasOnboarding
+    ? buildZeitgeberSchedule({
+        dlmoEstimateHours: context.dlmoEstimateHours,
+        msfScHours: chronotype?.msf_sc != null ? Number(chronotype.msf_sc) : null,
+        btiPayloads,
+      })
+    : []
   const status = alignmentStatus(context.circadianScore)
 
   return (
@@ -194,11 +203,15 @@ export default async function PatientDashboardPage() {
         </div>
       )}
 
+      {hasOnboarding && zeitgeberSchedule.length > 0 && (
+        <ZeitgeberSchedulePanel items={zeitgeberSchedule} />
+      )}
+
       <section className="space-y-4">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="seco-page__eyebrow">Medications</p>
-            <h2 className="seco-app-section-title">Active prescriptions</h2>
+            <p className="seco-page__eyebrow">Medicines & supplements</p>
+            <h2 className="seco-app-section-title">Your prescriptions</h2>
           </div>
           {!hasMeds && hasOnboarding && (
             <Button href="/patient/onboarding/medications" variant="secondary" className="!px-4 !py-2 text-sm">
