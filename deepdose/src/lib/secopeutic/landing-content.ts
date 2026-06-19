@@ -1,68 +1,106 @@
 /** Deepdose marketing — Secopeutic/Maven landing content (dios.health stylesheet classes). */
 
-import {
-  DOSE_ZEITGEBER_EDUCATION,
-  ZEITGEBER_PLAIN_LIST,
-} from '@/lib/chronobiology/zeitgebers'
 import { TIPTRAQ_HOME_HOOK } from '@/lib/clinical/tiptraq-program'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { LANDING_CLINICIANS } from '@/lib/secopeutic/landing-clinicians'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} — Why timing matters`,
+  title: `${DEEPDOSE_NAME} — Find your right time`,
   description:
-    `Learn the best time for ${ZEITGEBER_PLAIN_LIST} from your body clock — with your clinician.`,
+    'The same dose at the wrong clock phase can mean weaker effect or worse side effects. DeepDose makes circadian timing visible for patients and clinicians.',
 } as const
 
 export const DEEPDOSE_LANDING_HERO = {
-  headline: 'Why Timing Matters',
+  headline: 'Your medicines work better at the right time.',
   support:
-    'Your body clock sets the best time for your habits — we use advanced tracking tools to optimise your goals.',
+    'Most people take them at the wrong one. The same dose at the wrong clock phase can mean weaker effect or worse side effects — circadian timing is a variable most prescribing ignores. DeepDose makes it visible.',
+} as const
+
+export const DEEPDOSE_LANDING_COST = {
+  text: 'In the UK, medicines not taken as intended contribute to hundreds of millions of pounds in avoidable NHS harm each year — often because timing never matched the person’s body clock.',
+} as const
+
+export const DEEPDOSE_LANDING_PROOF = {
+  title: 'Built on chronobiology research',
+  scholars: [
+    {
+      clinician: LANDING_CLINICIANS.roenneberg,
+      cite: 'Chronotype and social jet lag shape when the body best responds to light, sleep, and routine cues.',
+    },
+    {
+      clinician: LANDING_CLINICIANS.foster,
+      cite: 'Circadian light pathways set biological phase — the foundation for timing medicines and daily habits.',
+    },
+  ],
+} as const
+
+export const DEEPDOSE_LANDING_CONSENT = {
+  title: 'You choose what data we can use.',
+  meta: 'Consent first · UK GDPR · Your clinician stays in the loop',
+  href: '/login',
 } as const
 
 export const DEEPDOSE_LANDING_PLATFORM = {
   pillars: [
     {
-      id: 'learn',
-      label: 'The idea',
-      body: 'Consent, quiz, clock, cues, and score.',
+      id: 'quiz',
+      label: 'The quiz',
+      body: 'Validated chronotype · your phase.',
       icon: 'book' as const,
-      panelTitle: 'What is a dose?',
-      panelSeeAll: { label: 'See all', href: '/about' },
+      panelTitle: 'Chronotype assessment',
+      panelSeeAll: { label: 'Start quiz', href: '/login' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'You choose what data we can use.',
-          meta: 'Consent first · UK GDPR',
+          title: 'A short, validated quiz maps your chronotype — morning or evening phase.',
+          meta: 'MEQ-style · Phase identification',
           href: '/login',
-          clinicians: [LANDING_CLINICIANS.munro],
         },
         {
-          title: 'A short quiz maps whether you are a morning or night person.',
-          meta: 'Body clock · Sleep pattern',
+          title: 'Output is a biological phase, not a wellness personality label.',
+          meta: 'Clinical pathway · Feeds your score',
           href: '/login',
-          clinicians: [LANDING_CLINICIANS.roenneberg],
         },
         {
-          title: DOSE_ZEITGEBER_EDUCATION,
-          meta: `Light · Meals · Meds · Movement · Sleep`,
-          href: '/about',
-          clinicians: [LANDING_CLINICIANS.foster, LANDING_CLINICIANS.roenneberg],
-        },
-        {
-          title: 'A simple score shows how aligned your daily cues are.',
-          meta: 'Dashboard · 0–100',
+          title: 'Your clinician can see phase alongside medicines and daily cues.',
+          meta: 'Shared record · Decision support',
           href: '/login',
-          clinicians: [LANDING_CLINICIANS.foster, LANDING_CLINICIANS.munro],
         },
       ],
     },
     {
-      id: 'tools',
-      label: 'The dose',
-      body: 'Light, meals, meds, movement, and sleep.',
+      id: 'score',
+      label: 'The score',
+      body: 'Alignment 0–100 · act on drift.',
       icon: 'tools' as const,
-      panelTitle: `Timed cues on your ${DEEPDOSE_NAME} dashboard`,
+      panelTitle: 'Alignment score',
+      panelSeeAll: { label: 'See your score', href: '/login' },
+      panelLayout: 'grid' as const,
+      panelHook: TIPTRAQ_HOME_HOOK,
+      panelItems: [
+        {
+          title: 'A 0–100 score from how your daily cues align with your phase.',
+          meta: 'Dashboard · Clinician-actionable',
+          href: '/login',
+        },
+        {
+          title: 'Window status and drift — when timing is on track or slipping.',
+          meta: 'BTI · Open, closed, or critical',
+          href: '/login',
+        },
+        {
+          title: 'Optional home sleep test for verified clinical-grade timing data.',
+          meta: 'TipTraQ · Three nights · GP programme',
+          href: '/login',
+        },
+      ],
+    },
+    {
+      id: 'dose',
+      label: 'The dose',
+      body: 'Light, meals, meds, movement, sleep.',
+      icon: 'clinics' as const,
+      panelTitle: 'Zeitgeber timing doses',
       panelSeeAll: { label: 'Open dashboard', href: '/login' },
       panelLayout: 'grid' as const,
       panelItems: [
@@ -70,79 +108,21 @@ export const DEEPDOSE_LANDING_PLATFORM = {
           title: 'Morning light — when to get outside.',
           meta: 'Zeitgeber · Sets the day',
           href: '/login',
-          clinicians: [LANDING_CLINICIANS.foster],
         },
         {
           title: 'Meals — when to eat to support your clock.',
           meta: 'Zeitgeber · Metabolic timing',
           href: '/login',
-          clinicians: [LANDING_CLINICIANS.roenneberg],
         },
         {
           title: 'Medicines and supplements — take it now or wait.',
           meta: 'Dose cards · Phase-adjusted',
           href: '/login',
-          clinicians: [LANDING_CLINICIANS.pigazzani, LANDING_CLINICIANS.hermida],
         },
         {
           title: 'Exercise and sleep — movement and bedtime windows.',
           meta: 'Zeitgeber · Recovery & rest',
           href: '/login',
-          clinicians: [LANDING_CLINICIANS.munro, LANDING_CLINICIANS.foster],
-        },
-      ],
-    },
-    {
-      id: 'clinics',
-      label: 'The test',
-      body: 'GP advised kit, three nights, quarterly.',
-      icon: 'clinics' as const,
-      panelTitle: 'What to expect from a home sleep test',
-      panelHook: TIPTRAQ_HOME_HOOK,
-      panelSeeAll: { label: 'Patient sign in', href: '/login' },
-      panelLayout: 'grid' as const,
-      panelItems: [
-        {
-          title: 'Your GP recommends a kit — you wear it for three nights at home.',
-          meta: '£149 · About half a typical private test',
-          href: '/login',
-          clinicians: [LANDING_CLINICIANS.munro, LANDING_CLINICIANS.foster],
-        },
-        {
-          title: 'Your clinician adds the report — your dashboard updates.',
-          meta: `Timing for ${ZEITGEBER_PLAIN_LIST}`,
-          href: '/login',
-          clinicians: [LANDING_CLINICIANS.munro, LANDING_CLINICIANS.foster],
-        },
-        {
-          title: 'Check again every three months — like a routine blood test.',
-          meta: '£99 per check · Track changes over time',
-          href: '/login',
-          clinicians: [LANDING_CLINICIANS.munro],
-        },
-        {
-          title: 'Free kit if you join our research programme.',
-          meta: 'Anonymous data · You stay in control',
-          href: '/about',
-          clinicians: [LANDING_CLINICIANS.munro, LANDING_CLINICIANS.foster],
-        },
-        {
-          title: 'Oura Ring — sleep, heart rate, recovery.',
-          meta: 'Wearable · Good accuracy',
-          href: '/about',
-          clinicians: [LANDING_CLINICIANS.foster],
-        },
-        {
-          title: 'Whoop — strain, sleep, and recovery.',
-          meta: 'Wearable · Daily tracking',
-          href: '/about',
-          clinicians: [LANDING_CLINICIANS.munro],
-        },
-        {
-          title: 'Apple Health — sleep and activity from your phone.',
-          meta: 'Wearable · Connect in app',
-          href: '/about',
-          clinicians: [LANDING_CLINICIANS.roenneberg],
         },
       ],
     },
@@ -150,11 +130,11 @@ export const DEEPDOSE_LANDING_PLATFORM = {
 } as const
 
 export const DEEPDOSE_LANDING_CLOSE = {
-  headline: 'Start your precision dosing regimen today',
+  headline: 'Find your right time',
   support:
-    'Sign up in minutes — agree how we use your data, answer a short sleep quiz, then add your medicines and daily cues.',
-  cta: { label: 'Start onboarding', href: '/login' },
-  secondaryCta: { label: `About ${DEEPDOSE_NAME}`, href: '/about' },
+    'Start with a short chronotype quiz, track your daily cues, and see an alignment score your clinician can act on.',
+  cta: { label: 'For clinicians', href: '/about' },
+  secondaryCta: { label: 'Start your assessment', href: '/login' },
 } as const
 
 export const DEEPDOSE_TERMS_DECISION_SUPPORT =

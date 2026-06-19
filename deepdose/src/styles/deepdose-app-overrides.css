@@ -80,27 +80,31 @@
   color: rgb(255 255 255 / 0.42);
 }
 
+/* Navy interior pages/cards — light ink tokens (never dark text on dark canvas) */
+.secopeutic-demo.seco-shell--dark :is(.seco-page, .seco-app-page, .seco-app-card) {
+  --ink: rgb(255 255 255 / 0.92);
+  --ink-muted: rgb(255 255 255 / 0.58);
+  --ink-faint: rgb(255 255 255 / 0.42);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-page,
 .secopeutic-demo.seco-shell--dark .seco-app-page {
   color: rgb(255 255 255 / 0.82);
 }
 
-.secopeutic-demo.seco-shell--dark .seco-app-page .text-ink,
-.secopeutic-demo.seco-shell--dark .seco-app-card .text-ink {
+.secopeutic-demo.seco-shell--dark :is(.seco-page, .seco-app-page, .seco-app-card) .text-ink {
   color: rgb(255 255 255 / 0.92);
 }
 
-.secopeutic-demo.seco-shell--dark .seco-app-page .text-ink-muted,
-.secopeutic-demo.seco-shell--dark .seco-app-card .text-ink-muted {
+.secopeutic-demo.seco-shell--dark :is(.seco-page, .seco-app-page, .seco-app-card) .text-ink-muted {
   color: rgb(255 255 255 / 0.58);
 }
 
-.secopeutic-demo.seco-shell--dark .seco-app-page .text-ink-faint,
-.secopeutic-demo.seco-shell--dark .seco-app-card .text-ink-faint {
+.secopeutic-demo.seco-shell--dark :is(.seco-page, .seco-app-page, .seco-app-card) .text-ink-faint {
   color: rgb(255 255 255 / 0.42);
 }
 
-.secopeutic-demo.seco-shell--dark .seco-app-page .text-accent,
-.secopeutic-demo.seco-shell--dark .seco-app-card .text-accent {
+.secopeutic-demo.seco-shell--dark :is(.seco-page, .seco-app-page, .seco-app-card) .text-accent {
   color: #8fd4ff;
 }
 
@@ -219,6 +223,10 @@
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--seco-ink);
+}
+
+.secopeutic-demo.seco-shell--dark .seco-app-section-title {
+  color: rgb(255 255 255 / 0.92);
 }
 
 .secopeutic-demo .dios-callout {
@@ -1067,6 +1075,11 @@
 .secopeutic-demo.seco-shell--dark .about-founder__name,
 .secopeutic-demo.seco-shell--dark .about-founder__headline {
   color: rgb(255 255 255 / 0.92);
+}
+
+.secopeutic-demo.seco-shell--dark .about-founder__role,
+.secopeutic-demo.seco-shell--dark .about-founder__affiliation {
+  color: rgb(255 255 255 / 0.58);
 }
 
 .secopeutic-demo.seco-shell--dark .about-founder__body {

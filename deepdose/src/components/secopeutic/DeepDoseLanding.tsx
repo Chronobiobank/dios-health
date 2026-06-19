@@ -1,10 +1,13 @@
 import Link from 'next/link'
 
+import { SecopeuticConsentStrip } from '@/components/secopeutic/SecopeuticConsentStrip'
 import { SecopeuticFooter } from '@/components/secopeutic/SecopeuticFooter'
 import { SecopeuticHeroHeadline } from '@/components/secopeutic/SecopeuticHeroHeadline'
+import { SecopeuticHeroProof } from '@/components/secopeutic/SecopeuticHeroProof'
 import { SecopeuticHeroTabs } from '@/components/secopeutic/SecopeuticHeroTabs'
 import {
   DEEPDOSE_LANDING_CLOSE,
+  DEEPDOSE_LANDING_COST,
   DEEPDOSE_LANDING_HERO,
 } from '@/lib/secopeutic/landing-content'
 
@@ -16,9 +19,12 @@ export function DeepDoseLanding() {
           <div className="seco-landing__section-inner">
             <SecopeuticHeroHeadline />
             <p className="seco-landing__hero-lede">{DEEPDOSE_LANDING_HERO.support}</p>
+            <p className="seco-landing__hero-cost">{DEEPDOSE_LANDING_COST.text}</p>
+            <SecopeuticHeroProof />
           </div>
         </div>
         <div className="seco-landing__section-inner">
+          <SecopeuticConsentStrip />
           <SecopeuticHeroTabs />
         </div>
       </section>

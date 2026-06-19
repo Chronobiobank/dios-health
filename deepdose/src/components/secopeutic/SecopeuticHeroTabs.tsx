@@ -1,20 +1,14 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
 
 import { DEEPDOSE_LANDING_PLATFORM } from '@/lib/secopeutic/landing-content'
-import type { LandingClinician } from '@/lib/secopeutic/landing-clinicians'
 import { cn } from '@/lib/utils/cn'
 
 type HeroPillar = (typeof DEEPDOSE_LANDING_PLATFORM.pillars)[number]
 type HeroPanelItem = HeroPillar['panelItems'][number]
-
-function getPanelClinicians(item: HeroPanelItem): readonly LandingClinician[] {
-  return 'clinicians' in item && item.clinicians ? item.clinicians : []
-}
 
 const HERO_TAB_ICONS: Record<HeroPillar['icon'], ReactElement> = {
   book: (
@@ -43,39 +37,6 @@ const HERO_TAB_ICON_TONES: Record<HeroPillar['icon'], string> = {
   clinics: 'clinics',
 }
 
-const AVATAR_TONE_CLASS: Record<NonNullable<LandingClinician['tone']>, string> = {
-  violet: 'seco-hero-tabs__panel-avatar--violet',
-  amber: 'seco-hero-tabs__panel-avatar--amber',
-  teal: 'seco-hero-tabs__panel-avatar--teal',
-}
-
-function ClinicianAvatar({ clinician }: { clinician: LandingClinician }) {
-  if (clinician.image) {
-    return (
-      <Image
-        src={clinician.image}
-        alt={clinician.imageAlt ?? clinician.name}
-        width={32}
-        height={32}
-        unoptimized
-        className="seco-hero-tabs__panel-avatar"
-      />
-    )
-  }
-
-  const initials = clinician.initials ?? clinician.name.slice(0, 2).toUpperCase()
-  const toneClass = clinician.tone ? AVATAR_TONE_CLASS[clinician.tone] : ''
-
-  return (
-    <span
-      className={cn('seco-hero-tabs__panel-avatar seco-hero-tabs__panel-avatar--initials', toneClass)}
-      aria-hidden="true"
-    >
-      {initials}
-    </span>
-  )
-}
-
 function HeroPanelCard({
   item,
   index,
@@ -85,24 +46,10 @@ function HeroPanelCard({
   index: number
   layout?: 'grid'
 }) {
-  const clinicians = getPanelClinicians(item)
-  const clinicianLabel = clinicians.map((clinician) => clinician.name).join(', ')
-
   return (
     <Link href={item.href} className="seco-hero-tabs__panel-card">
       <p className="seco-hero-tabs__panel-card-title">{item.title}</p>
       <p className="seco-hero-tabs__panel-card-meta">{item.meta}</p>
-
-      {layout === 'grid' && clinicians.length > 0 ? (
-        <div className="seco-hero-tabs__panel-card-footer">
-          <div className="seco-hero-tabs__panel-avatars" aria-hidden="true">
-            {clinicians.map((clinician) => (
-              <ClinicianAvatar key={clinician.name} clinician={clinician} />
-            ))}
-          </div>
-          <p className="seco-hero-tabs__panel-clinicians">{clinicianLabel}</p>
-        </div>
-      ) : null}
 
       <span
         className={cn(
@@ -119,7 +66,7 @@ function HeroPanelCard({
 
 export function SecopeuticHeroTabs() {
   const pillars = DEEPDOSE_LANDING_PLATFORM.pillars
-  const [activeId, setActiveId] = useState<HeroPillar['id']>('learn')
+  const [activeId, setActiveId] = useState<HeroPillar['id']>('quiz')
 
   const activePillar = pillars.find((pillar) => pillar.id === activeId) ?? pillars[0]
   const activeIndex = pillars.findIndex((pillar) => pillar.id === activeId)
@@ -128,7 +75,7 @@ export function SecopeuticHeroTabs() {
 
   return (
     <div className="seco-hero-tabs" data-active-index={activeIndex}>
-      <div className="seco-hero-tabs__list" role="tablist" aria-label="Platform pathways">
+      <div className="seco-hero-tabs__list" role="tablist" aria-label="Clinical pathway">
         {pillars.map((pillar) => {
           const isActive = pillar.id === activeId
 
