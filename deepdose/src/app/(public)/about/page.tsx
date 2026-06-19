@@ -1,11 +1,7 @@
 import Link from 'next/link'
 
-import {
-  DOSE_INTELLIGENCE_TAGLINE_SUPPORT,
-  DOSE_ZEITGEBER_EDUCATION,
-  ZEITGEBER_DOMAINS,
-  ZEITGEBER_PLAIN_LIST,
-} from '@/lib/chronobiology/zeitgebers'
+import { AboutFounderSection } from '@/components/secopeutic/AboutFounderSection'
+import { ZEITGEBER_DOMAINS, ZEITGEBER_PLAIN_LIST } from '@/lib/chronobiology/zeitgebers'
 import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
 
 export default function AboutPage() {
@@ -13,28 +9,36 @@ export default function AboutPage() {
     <article className="seco-page">
       <div className="seco-landing__section-inner">
         <p className="seco-page__eyebrow">About {DEEPDOSE_NAME}</p>
-        <h1 className="seco-page__title">Chronotherapy for everyone</h1>
+        <h1 className="seco-page__title">Built for patients. Clear for clinicians.</h1>
         <p className="seco-page__lede">
-          {DEEPDOSE_NAME} is patient-owned {DEEPDOSE_TAGLINE.toLowerCase()} within the DIOS Health
-          ecosystem — timing {ZEITGEBER_PLAIN_LIST} to your body clock.
+          {DEEPDOSE_NAME} is patient-owned {DEEPDOSE_TAGLINE.toLowerCase()} — timing{' '}
+          {ZEITGEBER_PLAIN_LIST} to each person&apos;s body clock, with you in the loop when
+          clinical data matters.
         </p>
-        <p className="seco-page__lede">{DOSE_INTELLIGENCE_TAGLINE_SUPPORT}</p>
-        <p className="seco-page__lede">{DOSE_ZEITGEBER_EDUCATION}</p>
-        <ul className="mt-6 space-y-3 text-sm text-ink-muted">
-          {ZEITGEBER_DOMAINS.map((domain) => (
-            <li key={domain.id}>
-              <strong className="text-ink">{domain.label}</strong> — {domain.description}
-            </li>
-          ))}
-        </ul>
-        <p className="seco-page__lede mt-6">
-          We combine home sleep tests, wearables, validated chronotype assessment, and
-          evidence-graded timing to help patients and clinicians align daily cues. Your data stays
-          under your control through dynamic consent.
-        </p>
-        <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
-          Start onboarding →
-        </Link>
+
+        <AboutFounderSection />
+
+        <section className="mt-10 space-y-4">
+          <h2 className="seco-app-section-title">What we time</h2>
+          <ul className="space-y-3 text-sm text-ink-muted">
+            {ZEITGEBER_DOMAINS.map((domain) => (
+              <li key={domain.id}>
+                <strong className="text-ink">{domain.label}</strong> — {domain.description}
+              </li>
+            ))}
+          </ul>
+          <p className="text-sm leading-relaxed text-ink-muted">
+            Home sleep tests, wearables, and validated chronotype assessment feed a single dose
+            dash. Patients see what to do next; clinicians see nights, drift, and when to intervene.
+            Data stays under patient control through dynamic consent.
+          </p>
+        </section>
+
+        <div className="mt-10">
+          <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
+            Start onboarding →
+          </Link>
+        </div>
       </div>
     </article>
   )

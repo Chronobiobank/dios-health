@@ -744,10 +744,12 @@
 
 .seco-landing__close-navy .seco-landing__section-title {
   color: #fff;
+  margin: 0 0 clamp(1.5rem, 5vw, 1.75rem);
 }
 
 .seco-landing__close-navy .seco-landing__support {
   color: rgb(255 255 255 / 0.68);
+  margin: 0;
 }
 
 .seco-landing__actions {

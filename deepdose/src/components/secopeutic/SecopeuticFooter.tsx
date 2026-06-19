@@ -4,6 +4,7 @@ import { DEEPDOSE_LOGO_GLYPH, DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/bran
 
 const FOOTER_LINKS = [
   { label: 'About', href: '/about' },
+  { label: 'Terms', href: '/terms' },
   { label: 'Sign in', href: '/login' },
   { label: 'Patient dashboard', href: '/login' },
 ] as const

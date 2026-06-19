@@ -5,7 +5,6 @@ import { SecopeuticHeroHeadline } from '@/components/secopeutic/SecopeuticHeroHe
 import { SecopeuticHeroTabs } from '@/components/secopeutic/SecopeuticHeroTabs'
 import {
   DEEPDOSE_LANDING_CLOSE,
-  DEEPDOSE_LANDING_DISCLAIMER,
   DEEPDOSE_LANDING_HERO,
 } from '@/lib/secopeutic/landing-content'
 
@@ -42,7 +41,6 @@ export function DeepDoseLanding() {
               {DEEPDOSE_LANDING_CLOSE.secondaryCta.label} →
             </Link>
           </div>
-          <p className="seco-landing__disclaimer">{DEEPDOSE_LANDING_DISCLAIMER}</p>
         </div>
       </section>
 

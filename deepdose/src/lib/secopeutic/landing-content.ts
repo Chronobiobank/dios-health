@@ -17,14 +17,14 @@ export const DEEPDOSE_LANDING_META = {
 export const DEEPDOSE_LANDING_HERO = {
   headline: 'Why Timing Matters',
   support:
-    'Your body clock sets the best time for your habits — not a fixed daily routine.',
+    'Your body clock sets the best time for your habits — we use advanced tracking tools to optimise your goals.',
 } as const
 
 export const DEEPDOSE_LANDING_PLATFORM = {
   pillars: [
     {
       id: 'learn',
-      label: 'How it works',
+      label: `How ${DEEPDOSE_NAME} works`,
       body: 'Consent, quiz, clock, cues, and score.',
       icon: 'book' as const,
       panelTitle: 'What is a dose?',
@@ -150,14 +150,14 @@ export const DEEPDOSE_LANDING_PLATFORM = {
 } as const
 
 export const DEEPDOSE_LANDING_CLOSE = {
-  headline: 'Start with consent. Own your rhythm.',
+  headline: 'Start your precision dosing regimen today',
   support:
     'Sign up in minutes — agree how we use your data, answer a short sleep quiz, then add your medicines and daily cues.',
   cta: { label: 'Start onboarding', href: '/login' },
   secondaryCta: { label: `About ${DEEPDOSE_NAME}`, href: '/about' },
 } as const
 
-export const DEEPDOSE_LANDING_DISCLAIMER =
+export const DEEPDOSE_TERMS_DECISION_SUPPORT =
   `Decision support only. ${DEEPDOSE_NAME} suggests the best times for your daily cues — it does not prescribe. Your clinician makes every treatment decision.`
 
 export const DEEPDOSE_NAV_LINKS = [

@@ -992,3 +992,83 @@
 .secopeutic-demo.seco-shell--dark .dios-icon-chip {
   background: rgb(255 255 255 / 0.08);
 }
+
+/* ── About — founder profile ── */
+.about-founder__layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .about-founder__layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+}
+
+.about-founder__portrait {
+  flex-shrink: 0;
+}
+
+.about-founder__photo {
+  display: block;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--dios-glass-outer-border);
+  object-fit: cover;
+  object-position: center top;
+  box-shadow: var(--dios-glass-outer-shadow);
+}
+
+.about-founder__copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.about-founder__name {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.about-founder__role,
+.about-founder__affiliation {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
+
+.about-founder__headline {
+  margin: 1rem 0 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.about-founder__body {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--ink-muted);
+}
+
+.secopeutic-demo.seco-shell--dark .about-founder__name,
+.secopeutic-demo.seco-shell--dark .about-founder__headline {
+  color: rgb(255 255 255 / 0.92);
+}
+
+.secopeutic-demo.seco-shell--dark .about-founder__body {
+  color: rgb(255 255 255 / 0.62);
+}
