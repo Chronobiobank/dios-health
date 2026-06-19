@@ -55,23 +55,35 @@ export default function ResearchPage() {
   const { lede, cost, consent } = DEEPDOSE_RESEARCH_INTRO
 
   return (
-    <article className="seco-page">
+    <article className="seco-page seco-research">
       <div className="seco-landing__section-inner">
-        <p className="seco-page__eyebrow">Research</p>
-        <h1 className="seco-page__title">Why timing matters</h1>
-        <p className="seco-page__lede">{lede}</p>
-        <p className="seco-research-cost text-sm text-ink-muted">
-          <a
-            href={cost.href}
-            className="seco-research-inline-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {cost.label} ↗
-          </a>
-        </p>
+        <header className="seco-research__intro seco-reveal seco-reveal--1">
+          <div className="seco-research__intro-copy">
+            <p className="seco-page__eyebrow">Research</p>
+            <h1 className="seco-page__title">Why timing matters</h1>
+            <p className="seco-page__lede">{lede}</p>
+          </div>
+          <aside className="seco-research__stat" aria-label="Cost of mistimed medicines">
+            <p className="seco-research__stat-figure">£100s of millions</p>
+            <p className="seco-research__stat-caption">
+              Avoidable NHS medicines harm each year, often because timing never matched the
+              person&rsquo;s body clock.
+            </p>
+            <a
+              href={cost.href}
+              className="seco-research-inline-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {cost.label} ↗
+            </a>
+          </aside>
+        </header>
 
-        <section className="seco-research-scholars mt-10" aria-label="Key researchers">
+        <section
+          className="seco-research-scholars seco-reveal seco-reveal--2"
+          aria-label="Key researchers"
+        >
           <h2 className="seco-app-section-title">Built on chronobiology research</h2>
           <ul className="seco-research-scholars-list">
             {DEEPDOSE_RESEARCH_SCHOLARS.map(({ clinician, cite, href, sourceLabel }) => (
@@ -94,22 +106,30 @@ export default function ResearchPage() {
           </ul>
         </section>
 
-        <section className="mt-10">
-          <h2 className="seco-app-section-title">Key papers</h2>
-          <p className="mt-2 text-sm text-ink-muted">
-            Peer-reviewed sources {DEEPDOSE_NAME} draws on. Click through to read the original
-            work.
-          </p>
+        <section className="seco-research-papers seco-reveal seco-reveal--3">
+          <div className="seco-research__section-head">
+            <h2 className="seco-app-section-title">Key papers</h2>
+            <p className="seco-research__section-sub">
+              Peer-reviewed sources {DEEPDOSE_NAME} draws on. Click through to read the original
+              work.
+            </p>
+          </div>
           <ResearchPaperTiles papers={DEEPDOSE_RESEARCH_PAPERS} />
         </section>
 
-        <p className="seco-research-consent mt-10 text-sm text-ink-muted">{consent}</p>
-
-        <div className="mt-10">
-          <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
-            Start assessment →
-          </Link>
-        </div>
+        <section className="seco-research__close seco-reveal seco-reveal--4">
+          <p className="seco-research__close-eyebrow">Decision support, clinician-led</p>
+          <h2 className="seco-research__close-title">Put timing to work</h2>
+          <p className="seco-research__close-sub">{consent}</p>
+          <div className="seco-research__close-actions">
+            <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
+              Start assessment →
+            </Link>
+            <Link href="/home-test" className="seco-landing__btn seco-landing__btn--ghost">
+              Get your test →
+            </Link>
+          </div>
+        </section>
       </div>
     </article>
   )
