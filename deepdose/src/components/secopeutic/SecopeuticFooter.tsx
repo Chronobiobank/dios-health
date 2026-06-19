@@ -17,13 +17,18 @@ export function SecopeuticFooter() {
     <footer className="seco-footer">
       <div className="seco-landing__section-inner">
         <div className="seco-footer__main">
-          <Link href="/" className="seco-footer__brand" aria-label={DEEPDOSE_NAME}>
-            <span className="seco-footer__lockup">
-              <span className="seco-footer__glyph" aria-hidden="true">
-                {DEEPDOSE_LOGO_GLYPH}
+          <div className="seco-footer__brand-col">
+            <Link href="/" className="seco-footer__brand" aria-label={DEEPDOSE_NAME}>
+              <span className="seco-footer__lockup">
+                <span className="seco-footer__glyph" aria-hidden="true">
+                  {DEEPDOSE_LOGO_GLYPH}
+                </span>
               </span>
-            </span>
-          </Link>
+            </Link>
+            <p className="seco-footer__mission">
+              Timing everyday care to your body clock, so the same dose does more.
+            </p>
+          </div>
 
           <nav className="seco-footer__nav" aria-label={DEEPDOSE_NAME}>
             <ul className="seco-footer__links">

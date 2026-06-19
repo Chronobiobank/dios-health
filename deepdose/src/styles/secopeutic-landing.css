@@ -1951,7 +1951,7 @@
     gap: 2.5rem 3rem;
   }
 
-  .seco-footer__brand {
+  .seco-footer__brand-col {
     grid-column: 1;
     grid-row: 1;
     justify-self: start;
@@ -1965,9 +1965,26 @@
   }
 }
 
+.seco-footer__brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  max-width: 22rem;
+}
+
 .seco-footer__brand {
   text-decoration: none;
   color: inherit;
+}
+
+.seco-footer__mission {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(0.9375rem, 1.6vw, 1.0625rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: rgb(255 255 255 / 0.62);
 }
 
 .seco-footer__brand:hover .seco-footer__tag {
