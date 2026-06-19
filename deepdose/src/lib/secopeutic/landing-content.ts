@@ -10,11 +10,11 @@ export const DEEPDOSE_LANDING_META = {
 } as const
 
 export const DEEPDOSE_LANDING_HERO = {
-  eyebrow: 'Precision chronotherapy',
+  eyebrow: 'Chronotherapy',
   headlineWhite: 'Optimise',
   headlineAccent: 'your window',
   support:
-    'DeepDose translates your unique biology into a precise treatment plan, delivering exactly what you need to heal safely and effectively.',
+    'DeepDose translates your unique biology into a precise treatment plan, delivering exactly what you need to heal.',
   actions: {
     primary: { label: 'Start your assessment', href: '/login' },
     secondary: { label: 'See the science', href: '/research' },
@@ -95,7 +95,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     },
     {
       id: 'social',
-      label: 'Social feed',
+      label: 'Peer support',
       body: 'Share progress · see what works.',
       icon: 'social' as const,
       panelTitle: 'Community & social proof',

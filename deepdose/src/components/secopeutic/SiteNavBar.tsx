@@ -74,6 +74,12 @@ export function SiteNavBar({
         {signOut ? <SignOutButton className="seco-nav__link" /> : null}
       </nav>
 
+      {cta ? (
+        <Link href={cta.href} className="seco-nav__cta seco-nav__cta--bar">
+          {cta.label}
+        </Link>
+      ) : null}
+
       <button
         type="button"
         className="seco-nav__toggle"
@@ -112,11 +118,6 @@ export function SiteNavBar({
             </Link>
           ))}
         </nav>
-        {cta ? (
-          <Link href={cta.href} className="seco-nav__panel-cta">
-            {cta.label}
-          </Link>
-        ) : null}
         {signOut ? <SignOutButton className="seco-nav__panel-cta" /> : null}
       </div>
     </header>

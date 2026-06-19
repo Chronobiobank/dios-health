@@ -269,6 +269,19 @@ body:has(.seco-shell--dark) {
   opacity: 0.92;
 }
 
+/* Mobile: keep the CTA pill in the bar (out of the off-canvas menu), grouped
+   to the right beside the hamburger. Hidden on desktop where the inline nav
+   already carries it. */
+.secopeutic-demo .seco-nav__cta--bar {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.secopeutic-demo .seco-nav__cta--bar + .seco-nav__toggle {
+  margin-left: 0.5rem;
+}
+
 /* Hamburger toggle */
 .secopeutic-demo .seco-nav__toggle {
   position: relative;
@@ -427,14 +440,16 @@ body:has(.seco-shell--dark) {
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
+/* Hamburger on phones only — tablets and up get the inline desktop nav */
+@media (min-width: 600px) {
   .secopeutic-demo .seco-nav__desktop {
     display: flex;
   }
 
   .secopeutic-demo .seco-nav__toggle,
   .secopeutic-demo .seco-nav__panel,
-  .secopeutic-demo .seco-nav__backdrop {
+  .secopeutic-demo .seco-nav__backdrop,
+  .secopeutic-demo .seco-nav__cta--bar {
     display: none;
   }
 }
