@@ -281,12 +281,15 @@
   align-items: stretch;
   column-gap: 0.5rem;
   margin: 0;
-  /* Dark breathing room above and beside the tabs so the curved tops show */
-  padding: 0.5rem 0.5rem 0;
+  /* Dark breathing room only above and between the tabs — the outer edges stay
+     flush so the active tab lines up with the full-width panel below it. */
+  padding: 0.5rem 0 0;
   list-style: none;
 }
 
-@media (max-width: 767px) {
+/* Stack the icon over the title on phones only — tablet and desktop keep the
+   icon beside the title (the default row layout below). */
+@media (max-width: 600px) {
   .seco-hero-tabs__tab {
     flex-direction: column;
     align-items: center;
@@ -344,6 +347,15 @@
   color: var(--seco-ink);
   border-top-left-radius: var(--seco-radius-lg);
   border-top-right-radius: var(--seco-radius-lg);
+}
+
+/* Outer corners hug the card so the flush ends match the container radius */
+.seco-hero-tabs__tab:first-child {
+  border-top-left-radius: var(--seco-radius-xl);
+}
+
+.seco-hero-tabs__tab:last-child {
+  border-top-right-radius: var(--seco-radius-xl);
 }
 
 .seco-hero-tabs__tab:focus-visible {
@@ -735,12 +747,14 @@
   }
 }
 
-/* Chrono test — glanceable preview of the real patient dose dash */
+/* Chrono test — glanceable preview of the real patient dose dash.
+   No padding of its own — the panel already pads, so content sits flush under
+   the title with no doubled-up white space at the top. */
 .seco-dashpreview {
   display: flex;
   flex-direction: column;
   gap: 1.125rem;
-  padding: clamp(1.125rem, 2.4vw, 1.5rem);
+  padding: 0;
 }
 
 .seco-dashpreview__top {
@@ -1065,12 +1079,13 @@
   color: var(--seco-ink);
 }
 
-/* Dosing plan — high-fidelity preview: 24h timeline + dose cards */
+/* Dosing plan — high-fidelity preview: 24h timeline + dose cards.
+   No padding of its own (the panel pads) so the content sits flush up top. */
 .seco-planpreview {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  padding: clamp(1.125rem, 2.4vw, 1.5rem);
+  padding: 0;
 }
 
 .seco-planpreview__head {
