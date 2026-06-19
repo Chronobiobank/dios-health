@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { DEEPDOSE_LOGO_GLYPH, DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_LOGO_GLYPH, DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 const FOOTER_LINKS = [
   { label: 'Research', href: '/research' },
@@ -22,7 +22,6 @@ export function SecopeuticFooter() {
               <span className="seco-footer__glyph" aria-hidden="true">
                 {DEEPDOSE_LOGO_GLYPH}
               </span>
-              <span className="seco-footer__tag">{DEEPDOSE_TAGLINE}</span>
             </span>
           </Link>
 
