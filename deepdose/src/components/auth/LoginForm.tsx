@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
+import { Callout } from '@/components/ui/Form'
 import { Input, Label } from '@/components/ui/Input'
 
 type Mode = 'signin' | 'signup'
@@ -119,23 +120,23 @@ export default function LoginForm() {
         </div>
 
         {callbackError === 'auth_callback_failed' && !error && (
-          <p className="rounded-xl bg-amber-50 px-3 py-2 text-sm text-warning" role="alert">
+          <Callout tone="warning" className="text-sm">
             Email confirmation failed.
             {callbackReason ? ` ${callbackReason}` : ' The link may have expired.'}
             {' '}Try signing in below.
-          </p>
+          </Callout>
         )}
 
         {error && (
-          <p className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700" role="alert">
+          <Callout tone="error" className="text-sm">
             {error}
-          </p>
+          </Callout>
         )}
 
         {message && (
-          <p className="rounded-xl bg-accent-light px-3 py-2 text-sm text-accent" role="status">
+          <Callout tone="info" className="text-sm">
             {message}
-          </p>
+          </Callout>
         )}
 
         <Button type="submit" disabled={loading} className="w-full">

@@ -98,7 +98,7 @@ export default function ConsentPanel({
         description={framework.description ?? undefined}
       />
 
-      <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface">
+      <ul className="dios-inset-panel divide-y divide-border">
         {purposes.map((purpose) => {
           const checked = grants[purpose.code] ?? false
           return (

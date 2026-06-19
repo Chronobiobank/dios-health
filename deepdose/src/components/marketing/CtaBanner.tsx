@@ -1,5 +1,5 @@
+import Link from 'next/link'
 import { Container } from '@/components/ui/Layout'
-import { Button } from '@/components/ui/Button'
 import { marketingImages } from '@/lib/marketing/images'
 import { BackgroundSection } from '@/components/marketing/LifestyleImagery'
 
@@ -17,9 +17,9 @@ export function CtaBanner() {
           Join Deepdose and align your medication schedule with your circadian rhythm.
         </p>
         <div className="mt-8">
-          <Button href="/login" className="!bg-white !text-ink hover:!bg-white/90">
+          <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
             Get started
-          </Button>
+          </Link>
         </div>
       </Container>
     </BackgroundSection>

@@ -30,7 +30,7 @@ export function ClinicalTriageList({ rows }: ClinicalTriageListProps) {
         <li key={row.patientId}>
           <Link
             href={`/clinical/dashboard/patient/${row.patientId}`}
-            className="flex flex-wrap items-center justify-between gap-3 p-5 transition hover:bg-surface-muted md:p-6"
+            className="dios-interactive-row flex flex-wrap items-center justify-between gap-3 p-5 md:p-6"
           >
             <div className="min-w-0 space-y-1">
               <div className="flex flex-wrap items-center gap-2">

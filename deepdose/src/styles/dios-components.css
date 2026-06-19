@@ -163,7 +163,7 @@
 }
 
 .dios-callout--error {
-  border-color: #feb2b2;
+  border-color: var(--status-red-border, #feb2b2);
   background: var(--status-red-bg);
   color: var(--status-red);
 }

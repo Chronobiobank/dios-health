@@ -117,7 +117,7 @@ export function TipTraqReadingsPanel({
         <div className="overflow-x-auto">
           <table className="w-full min-w-[48rem] text-left text-sm">
             <thead>
-              <tr className="border-b border-border bg-surface-muted/50 text-xs uppercase tracking-wide text-ink-faint">
+              <tr className="dios-table-head text-xs uppercase tracking-wide text-ink-faint">
                 <th className="px-5 py-3 font-medium">Night</th>
                 <th className="px-3 py-3 font-medium">Onset</th>
                 <th className="px-3 py-3 font-medium">Wake</th>

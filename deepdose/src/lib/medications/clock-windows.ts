@@ -6,8 +6,14 @@ import {
 } from '@/lib/circadian/medications'
 
 const WINDOW_COLORS = [
-  '#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6',
-  '#67e8f9', '#22d3ee', '#a5b4fc', '#c4b5fd',
+  '#5ec8f5',
+  '#8b9cf8',
+  '#c4a0ff',
+  '#67d4f8',
+  '#9eb0fa',
+  '#d4b8ff',
+  '#4eb8e8',
+  '#7a8ef0',
 ]
 
 interface ActiveMedication {

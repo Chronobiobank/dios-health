@@ -41,6 +41,9 @@
   --status-amber-border: rgb(216 160 120 / 0.4);
   --status-green-bg: rgb(120 210 160 / 0.18);
   --status-green-border: rgb(120 210 160 / 0.4);
+  --status-red: #f0a0a0;
+  --status-red-bg: rgb(240 120 120 / 0.14);
+  --status-red-border: rgb(240 120 120 / 0.38);
   --warning: #f0c090;
   --success: #9de8c0;
 
@@ -856,4 +859,136 @@
 .secopeutic-demo:not(.seco-shell--dark) .dose-dash-cluster-expand {
   border-color: var(--seco-border);
   background: var(--seco-canvas);
+}
+
+/* ── Dark navy — form, callout, and surface primitives ── */
+.secopeutic-demo.seco-shell--dark .dios-heading,
+.secopeutic-demo.seco-shell--dark .dios-heading-display {
+  color: rgb(255 255 255 / 0.92);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-input,
+.secopeutic-demo.seco-shell--dark select.dios-input,
+.secopeutic-demo.seco-shell--dark textarea.dios-input {
+  border-color: rgb(255 255 255 / 0.14);
+  background: rgb(255 255 255 / 0.06);
+  color: rgb(255 255 255 / 0.92);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-input::placeholder,
+.secopeutic-demo.seco-shell--dark textarea.dios-input::placeholder {
+  color: rgb(255 255 255 / 0.38);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-input:focus,
+.secopeutic-demo.seco-shell--dark select.dios-input:focus,
+.secopeutic-demo.seco-shell--dark textarea.dios-input:focus {
+  border-color: rgb(94 200 245 / 0.55);
+  box-shadow: 0 0 0 3px rgb(94 200 245 / 0.18);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-checkbox {
+  border-color: rgb(255 255 255 / 0.22);
+  background: rgb(255 255 255 / 0.06);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-callout--info {
+  border-color: rgb(255 255 255 / 0.14);
+  background: rgb(255 255 255 / 0.06);
+  color: rgb(255 255 255 / 0.82);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-callout--error {
+  border-color: var(--status-red-border);
+  background: linear-gradient(152deg, rgb(240 120 120 / 0.16), rgb(240 120 120 / 0.06));
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  color: var(--status-red);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-step-rail__dot--done {
+  background: rgb(94 200 245 / 0.14);
+  color: var(--accent);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-step-rail__dot--pending {
+  background: rgb(255 255 255 / 0.08);
+  color: rgb(255 255 255 / 0.42);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-btn-secondary {
+  border-color: rgb(255 255 255 / 0.28);
+  color: rgb(255 255 255 / 0.9);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-btn-secondary:hover {
+  background: rgb(255 255 255 / 0.08);
+}
+
+.dios-select-card {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.dios-select-card--selected {
+  border-color: rgb(94 200 245 / 0.35);
+  background: rgb(94 200 245 / 0.08);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-select-card {
+  border-color: rgb(255 255 255 / 0.14);
+  background: rgb(255 255 255 / 0.05);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-select-card--selected {
+  border-color: rgb(94 200 245 / 0.4);
+  background: rgb(94 200 245 / 0.12);
+}
+
+.dios-inset-panel {
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-inset-panel {
+  border-color: rgb(255 255 255 / 0.12);
+  background: rgb(255 255 255 / 0.04);
+}
+
+.dios-table-head {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-muted);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-table-head {
+  border-color: rgb(255 255 255 / 0.1);
+  background: rgb(255 255 255 / 0.06);
+}
+
+.dios-interactive-row {
+  transition: background 0.15s ease;
+}
+
+.dios-interactive-row:hover {
+  background: var(--surface-muted);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-interactive-row:hover {
+  background: rgb(255 255 255 / 0.06);
+}
+
+.dios-icon-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: var(--surface-muted);
+}
+
+.secopeutic-demo.seco-shell--dark .dios-icon-chip {
+  background: rgb(255 255 255 / 0.08);
 }

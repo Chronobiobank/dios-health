@@ -25,7 +25,7 @@ export function ZeitgeberSchedulePanel({ items }: { items: ZeitgeberScheduleItem
           {items.map((item) => (
             <li key={item.id} className="flex gap-4 p-5 md:p-6">
               <span
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-muted text-lg"
+                className="dios-icon-chip h-10 w-10 shrink-0 text-lg"
                 aria-hidden="true"
               >
                 {ZEITGEBER_ICONS[item.id]}

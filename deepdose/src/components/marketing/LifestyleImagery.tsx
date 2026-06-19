@@ -3,9 +3,9 @@ import Image from 'next/image'
 type Overlay = 'light' | 'warm' | 'dark'
 
 const overlays: Record<Overlay, string> = {
-  light: 'bg-canvas/45',
-  warm: 'bg-[#f8f7f4]/50',
-  dark: 'bg-ink/55',
+  light: 'bg-[var(--seco-navy)]/40',
+  warm: 'bg-[var(--seco-navy)]/55',
+  dark: 'bg-black/55',
 }
 
 interface BackgroundSectionProps {

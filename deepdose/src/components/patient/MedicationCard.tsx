@@ -30,8 +30,8 @@ export default function MedicationCard({
 }: MedicationCardProps) {
   return (
     <li
-      className={`rounded-2xl border p-4 transition-colors md:p-5 ${
-        selected ? 'border-aubergine-mid/40 bg-lilac-light/50' : 'border-border bg-surface'
+      className={`dios-select-card p-4 md:p-5 ${
+        selected ? 'dios-select-card--selected' : ''
       }`}
     >
       <label className="flex cursor-pointer items-start gap-3">
@@ -52,7 +52,7 @@ export default function MedicationCard({
 
           <p className="text-sm leading-relaxed text-ink-muted">{medication.rationale}</p>
 
-          <p className="text-sm font-medium text-aubergine-mid">
+          <p className="text-sm font-medium text-accent">
             Recommended window: {medication.recommendedStart} – {medication.recommendedEnd}
             {medication.phaseAdjusted && (
               <span className="ml-1 font-normal text-ink-muted">
