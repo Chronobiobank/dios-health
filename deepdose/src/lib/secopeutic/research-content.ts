@@ -1,21 +1,20 @@
-/** Research & evidence — dedicated page content and external source tiles. */
+/** Research & evidence: dedicated page content and external source tiles. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { LANDING_CLINICIANS } from '@/lib/secopeutic/landing-clinicians'
 
 export const DEEPDOSE_RESEARCH_META = {
-  title: `Research — ${DEEPDOSE_NAME}`,
+  title: `Research · ${DEEPDOSE_NAME}`,
   description:
-    'Chronobiology and chronotherapy evidence behind precision dosing — peer-reviewed sources and clinical context.',
+    'Chronobiology and chronotherapy evidence behind precision dosing: peer-reviewed sources and clinical context.',
 } as const
 
 export const DEEPDOSE_RESEARCH_INTRO = {
   lede:
-    'Most people take medicines at the wrong clock phase. The same dose can mean weaker effect or worse side effects — circadian timing is a variable most prescribing ignores.',
+    'Medicines are often taken at the wrong point in the body clock. The same dose can mean weaker effects, more side effects, and hundreds of millions in avoidable NHS harm each year.',
   cost: {
-    text: 'In the UK, medicines not taken as intended contribute to hundreds of millions of pounds in avoidable NHS harm each year — often because timing never matched the person’s body clock.',
     href: 'https://www.england.nhs.uk/medicines-2/medicines-optimisation/',
-    label: 'NHS — medicines optimisation',
+    label: 'NHS medicines optimisation',
   },
   consent:
     'You choose what data we can use. Consent first · UK GDPR · Your clinician stays in the loop.',
@@ -24,7 +23,7 @@ export const DEEPDOSE_RESEARCH_INTRO = {
 export const DEEPDOSE_RESEARCH_SCHOLARS = [
   {
     clinician: LANDING_CLINICIANS.foster,
-    cite: 'Circadian light pathways set biological phase — the foundation for timing medicines and daily habits.',
+    cite: 'Circadian light pathways set biological phase, the foundation for timing medicines and daily habits.',
     href: 'https://www.penguin.co.uk/books/446135/life-time-by-russell-foster/',
     sourceLabel: 'Life Time (2022)',
   },
@@ -44,6 +43,9 @@ export type ResearchPaperTile = {
   year: string
   meta: string
   href: string
+  /** Optional banner image (used on the landing evidence tiles). */
+  image?: string
+  imageAlt?: string
 }
 
 export const DEEPDOSE_RESEARCH_PAPERS: ResearchPaperTile[] = [
@@ -59,20 +61,24 @@ export const DEEPDOSE_RESEARCH_PAPERS: ResearchPaperTile[] = [
   {
     id: 'pigazzani-2024',
     tier: 'Foundational',
-    title: 'Timed antihypertensives by chronotype — TIME substudy',
+    title: 'Timed antihypertensives by chronotype (TIME substudy)',
     authors: 'Pigazzani, F. et al.',
     year: '2024',
     meta: 'eClinicalMedicine',
     href: 'https://doi.org/10.1016/j.eclinm.2024.102633',
+    image: '/research/evidence-antihypertensives.png',
+    imageAlt: 'Heartbeat pulse tracing across a dawn-to-night sky',
   },
   {
     id: 'hermida-2020',
     tier: 'Drug-specific',
-    title: 'Bedtime hypertension treatment — Hygia Chronotherapy Trial',
+    title: 'Bedtime hypertension treatment (Hygia Chronotherapy Trial)',
     authors: 'Hermida, R.C. et al.',
     year: '2020',
     meta: 'European Heart Journal',
     href: 'https://doi.org/10.1093/eurheartj/ehaa152',
+    image: '/research/evidence-bedtime.png',
+    imageAlt: 'Crescent moon over a glowing blood vessel at night',
   },
   {
     id: 'dallmann-2016',
@@ -95,11 +101,13 @@ export const DEEPDOSE_RESEARCH_PAPERS: ResearchPaperTile[] = [
   {
     id: 'wallace-2003',
     tier: 'Drug-specific',
-    title: 'Simvastatin morning vs evening — RCT',
+    title: 'Simvastatin morning vs evening (RCT)',
     authors: 'Wallace, A. et al.',
     year: '2003',
     meta: 'BMJ',
     href: 'https://doi.org/10.1136/bmj.327.7418.788',
+    image: '/research/evidence-statin.png',
+    imageAlt: 'Glowing capsule between a sunrise and an evening sky',
   },
   {
     id: 'smolensky-2007',

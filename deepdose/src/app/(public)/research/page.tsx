@@ -61,7 +61,6 @@ export default function ResearchPage() {
         <h1 className="seco-page__title">Why timing matters</h1>
         <p className="seco-page__lede">{lede}</p>
         <p className="seco-research-cost text-sm text-ink-muted">
-          {cost.text}{' '}
           <a
             href={cost.href}
             className="seco-research-inline-link"
@@ -98,7 +97,7 @@ export default function ResearchPage() {
         <section className="mt-10">
           <h2 className="seco-app-section-title">Key papers</h2>
           <p className="mt-2 text-sm text-ink-muted">
-            Peer-reviewed sources {DEEPDOSE_NAME} draws on — click through to read the original
+            Peer-reviewed sources {DEEPDOSE_NAME} draws on. Click through to read the original
             work.
           </p>
           <ResearchPaperTiles papers={DEEPDOSE_RESEARCH_PAPERS} />

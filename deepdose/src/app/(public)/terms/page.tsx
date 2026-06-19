@@ -4,7 +4,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_TERMS_DECISION_SUPPORT } from '@/lib/secopeutic/landing-content'
 
 export const metadata: Metadata = {
-  title: `Terms of service — ${DEEPDOSE_NAME}`,
+  title: `Terms of service · ${DEEPDOSE_NAME}`,
   description: `Terms governing use of ${DEEPDOSE_NAME} and clinical decision-support boundaries.`,
 }
 

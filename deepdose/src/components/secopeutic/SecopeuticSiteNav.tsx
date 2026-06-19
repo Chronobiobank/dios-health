@@ -6,7 +6,7 @@ export function SecopeuticSiteNav() {
   return (
     <SiteNavBar
       brandHref="/"
-      brandAriaLabel={`${DEEPDOSE_NAME} — home`}
+      brandAriaLabel={`${DEEPDOSE_NAME} home`}
       navAriaLabel={DEEPDOSE_NAME}
       links={DEEPDOSE_NAV_LINKS}
       cta={DEEPDOSE_GET_TEST_CTA}

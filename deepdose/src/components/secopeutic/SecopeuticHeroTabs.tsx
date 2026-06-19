@@ -125,14 +125,14 @@ const PLAN_DOSES = [
   {
     label: 'Morning light',
     time: '08:00',
-    note: 'Outside 10 min — anchors your clock.',
+    note: 'Outside 10 min. Anchors your clock.',
     status: 'done',
     tone: 'peach',
   },
   {
     label: 'Metformin 500 mg',
     time: '08:30',
-    note: 'Take now — your window is open.',
+    note: 'Take now. Your window is open.',
     status: 'now',
     tone: 'lilac',
   },
@@ -146,7 +146,7 @@ const PLAN_DOSES = [
   {
     label: 'Wind-down',
     time: '22:00',
-    note: 'Dim light, no screens — protect melatonin.',
+    note: 'Dim light, no screens. Protects melatonin.',
     status: 'upcoming',
     tone: 'blue',
   },

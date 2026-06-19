@@ -4,9 +4,9 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_RESEARCH_PAPERS } from '@/lib/secopeutic/research-content'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} — Know your window`,
+  title: `${DEEPDOSE_NAME} · Know your window`,
   description:
-    'DeepDose translates your unique biology into a precise treatment plan — timed light, meals, medicines, and sleep.',
+    'DeepDose translates your biology into a precise treatment plan: timed light, meals, medicines, and sleep.',
 } as const
 
 export const DEEPDOSE_LANDING_HERO = {
@@ -27,7 +27,7 @@ export const DEEPDOSE_LANDING_EVIDENCE = {
   eyebrow: 'The evidence',
   headline: 'Timing is a clinical variable',
   support:
-    'Decades of chronotherapy research show the same dose can do more — or harm less — depending on when it meets your body clock.',
+    'Decades of chronotherapy research show the same dose can do more, or harm less, depending on when it meets your body clock.',
   seeAll: { label: 'All research', href: '/research' },
   papers: EVIDENCE_PAPER_IDS.map(
     (id) => DEEPDOSE_RESEARCH_PAPERS.find((paper) => paper.id === id)!
@@ -46,7 +46,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'A short, validated test maps your chronotype — morning or evening phase.',
+          title: 'A short, validated test maps your chronotype: morning or evening phase.',
           meta: 'MEQ-style · Phase identification',
           href: '/login',
         },
@@ -77,17 +77,17 @@ export const DEEPDOSE_LANDING_PLATFORM = {
           href: '/login',
         },
         {
-          title: 'Morning light and meals — timed to anchor your clock.',
+          title: 'Morning light and meals, timed to anchor your clock.',
           meta: 'Zeitgebers · Sets the day',
           href: '/login',
         },
         {
-          title: 'Medicines and supplements — take it now or wait.',
+          title: 'Medicines and supplements: take now or wait.',
           meta: 'Dose cards · Phase-adjusted',
           href: '/login',
         },
         {
-          title: 'Movement and sleep — your recovery and bedtime windows.',
+          title: 'Movement and sleep: your recovery and bedtime windows.',
           meta: 'Zeitgebers · Rest & recovery',
           href: '/login',
         },
@@ -103,7 +103,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Share your alignment streaks and timing wins — you choose what’s visible.',
+          title: 'Share your alignment streaks and timing wins. You choose what’s visible.',
           meta: 'Opt-in · You control sharing',
           href: '/login',
         },
@@ -113,12 +113,12 @@ export const DEEPDOSE_LANDING_PLATFORM = {
           href: '/login',
         },
         {
-          title: 'Follow what’s working across the community — real timing experiments.',
+          title: 'Follow what’s working across the community: real timing experiments.',
           meta: 'Quantified-self · Outcomes feed',
           href: '/login',
         },
         {
-          title: 'Privacy-first by design — consent-based, UK GDPR, nothing shared without you.',
+          title: 'Privacy-first by design: consent-based, UK GDPR, nothing shared without you.',
           meta: 'Chronobiobank · Anonymous telemetry',
           href: '/login',
         },
@@ -136,7 +136,7 @@ export const DEEPDOSE_LANDING_CLOSE = {
 } as const
 
 export const DEEPDOSE_TERMS_DECISION_SUPPORT =
-  `Decision support only. ${DEEPDOSE_NAME} suggests the best times for your daily cues — it does not prescribe. Your clinician makes every treatment decision.`
+  `Decision support only. ${DEEPDOSE_NAME} suggests the best times for your daily cues. It does not prescribe. Your clinician makes every treatment decision.`
 
 export const DEEPDOSE_NAV_LINKS = [
   { label: 'Research', href: '/research' },
@@ -144,5 +144,5 @@ export const DEEPDOSE_NAV_LINKS = [
   { label: 'Sign in', href: '/login' },
 ] as const
 
-/** Primary conversion CTA in the top nav — the TipTraQ home-test page. */
+/** Primary conversion CTA in the top nav: the TipTraQ home-test page. */
 export const DEEPDOSE_GET_TEST_CTA = { label: 'Get your test', href: '/home-test' } as const

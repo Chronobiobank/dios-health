@@ -11,7 +11,7 @@ export function PatientSiteNav() {
   return (
     <SiteNavBar
       brandHref="/"
-      brandAriaLabel={`${DEEPDOSE_NAME} — home`}
+      brandAriaLabel={`${DEEPDOSE_NAME} home`}
       navAriaLabel={DEEPDOSE_NAME}
       links={PATIENT_NAV}
       signOut

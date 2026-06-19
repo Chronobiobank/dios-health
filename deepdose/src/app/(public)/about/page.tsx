@@ -11,7 +11,7 @@ export default function AboutPage() {
         <p className="seco-page__eyebrow">About {DEEPDOSE_NAME}</p>
         <h1 className="seco-page__title">Built for patients. Clear for clinicians.</h1>
         <p className="seco-page__lede">
-          {DEEPDOSE_NAME} is patient-owned {DEEPDOSE_TAGLINE.toLowerCase()} — timing{' '}
+          {DEEPDOSE_NAME} is patient-owned {DEEPDOSE_TAGLINE.toLowerCase()}. It times{' '}
           {ZEITGEBER_PLAIN_LIST} to each person&apos;s body clock, with you in the loop when
           clinical data matters.
         </p>
@@ -23,7 +23,7 @@ export default function AboutPage() {
           <ul className="space-y-3 text-sm text-ink-muted">
             {ZEITGEBER_DOMAINS.map((domain) => (
               <li key={domain.id}>
-                <strong className="text-ink">{domain.label}</strong> — {domain.description}
+                <strong className="text-ink">{domain.label}</strong>: {domain.description}
               </li>
             ))}
           </ul>

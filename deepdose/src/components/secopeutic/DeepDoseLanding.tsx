@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { SecopeuticFooter } from '@/components/secopeutic/SecopeuticFooter'
@@ -67,14 +68,27 @@ export function DeepDoseLanding() {
                   rel="noopener noreferrer"
                   className="seco-evidence-band__link-overlay"
                 >
-                  <span className="seco-evidence-band__tier">
-                    {paper.tier} · {paper.year}
+                  {paper.image ? (
+                    <span className="seco-evidence-band__media">
+                      <Image
+                        src={paper.image}
+                        alt={paper.imageAlt ?? ''}
+                        fill
+                        sizes="(min-width: 768px) 33vw, 100vw"
+                        className="seco-evidence-band__img"
+                      />
+                    </span>
+                  ) : null}
+                  <span className="seco-evidence-band__body">
+                    <span className="seco-evidence-band__tier">
+                      {paper.tier} · {paper.year}
+                    </span>
+                    <span className="seco-evidence-band__title">{paper.title}</span>
+                    <span className="seco-evidence-band__meta">
+                      {paper.authors} · {paper.meta}
+                    </span>
+                    <span className="seco-evidence-band__cue">Read source →</span>
                   </span>
-                  <span className="seco-evidence-band__title">{paper.title}</span>
-                  <span className="seco-evidence-band__meta">
-                    {paper.authors} · {paper.meta}
-                  </span>
-                  <span className="seco-evidence-band__cue">Read source →</span>
                 </a>
               </li>
             ))}

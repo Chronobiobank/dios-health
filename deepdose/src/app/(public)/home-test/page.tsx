@@ -9,15 +9,15 @@ import {
 } from '@/lib/clinical/tiptraq-program'
 
 export const metadata: Metadata = {
-  title: `Home sleep test — ${DEEPDOSE_NAME}`,
+  title: `Home sleep test · ${DEEPDOSE_NAME}`,
   description:
-    'A three-night home sleep test for £149 — about half a typical private test. Your clinician adds the results to DeepDose and your dashboard shows the best times for light, meals, medicines, exercise, and sleep.',
+    'A three-night home sleep test for £149, about half a typical private test. Your clinician adds the results to DeepDose and your dashboard shows the best times for light, meals, medicines, exercise, and sleep.',
 }
 
 const STEPS = [
   {
     title: 'Order on your GP’s advice',
-    body: 'If your GP suggests a home sleep test, order a TipTraQ kit — no clinic visit, no waiting list.',
+    body: 'If your GP suggests a home sleep test, order a TipTraQ kit. No clinic visit, no waiting list.',
   },
   {
     title: 'Three nights at home',
@@ -25,11 +25,11 @@ const STEPS = [
   },
   {
     title: 'Your clinician adds the results',
-    body: `Your clinician reviews the nights and adds your profile to ${DEEPDOSE_NAME} — setting your body-clock baseline and chronotype.`,
+    body: `Your clinician reviews the nights and adds your profile to ${DEEPDOSE_NAME}, setting your body-clock baseline and chronotype.`,
   },
   {
     title: 'See your best times',
-    body: 'Your dashboard shows the best times for light, meals, medicines, exercise, and sleep — personalised to your body clock.',
+    body: 'Your dashboard shows the best times for light, meals, medicines, exercise, and sleep, personalised to your body clock.',
   },
   {
     title: 'Re-check every three months',
@@ -40,7 +40,7 @@ const STEPS = [
 const BENEFITS = [
   'Personalised timing windows for light, meals, medicines, exercise, and sleep.',
   'A verified clinical-grade data badge on your record.',
-  'Early warning for metabolic drift — before it shows in routine labs.',
+  'Early warning for metabolic drift, before it shows in routine labs.',
   'A quarterly check-in, like a blood panel, to keep your plan accurate.',
 ] as const
 
@@ -64,10 +64,10 @@ export default function HomeTestPage() {
         <p className="seco-page__eyebrow">TipTraQ home kit</p>
         <h1 className="seco-page__title">Get your home sleep test</h1>
         <p className="seco-page__lede">
-          If your GP suggests a home sleep test, three nights at home costs {baseline} — about half a
+          If your GP suggests a home sleep test, three nights at home costs {baseline}, about half a
           typical private test. Your clinician adds your results to {DEEPDOSE_NAME}, and we show the
           best times for light, meals, medicines, exercise, and sleep on your dashboard. Check again
-          every three months, like a blood test — free if you join our research programme.
+          every three months, like a blood test. Free if you join our research programme.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -106,7 +106,7 @@ export default function HomeTestPage() {
               <p className="seco-page__eyebrow">Baseline</p>
               <p className="mt-1 text-2xl font-medium text-ink">{baseline}</p>
               <p className="mt-1 text-sm text-ink-muted">
-                Three nights at home — sets your dosing baseline.
+                Three nights at home. Sets your dosing baseline.
               </p>
             </div>
             <div className="seco-app-card p-5">
@@ -125,7 +125,7 @@ export default function HomeTestPage() {
             </div>
           </div>
           <p className="mt-4 text-sm text-ink-muted">
-            About half a typical private test — a three-night clinic rental is around {privateAnchor}.
+            About half a typical private test. A three-night clinic rental is around {privateAnchor}.
           </p>
         </section>
 
