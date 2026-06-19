@@ -25,7 +25,7 @@ export function DosingReminderBanner({
   todayAcks,
 }: DosingReminderBannerProps) {
   const router = useRouter()
-  const [notified, setNotified] = useState<Set<string>>(new Set())
+  const notifiedRef = useRef<Set<string>>(new Set())
   const [logging, setLogging] = useState<string | null>(null)
   const permissionRequested = useRef(false)
 
@@ -51,14 +51,14 @@ export function DosingReminderBanner({
     if (Notification.permission !== 'granted') return
 
     for (const payload of openWindows) {
-      if (notified.has(payload.medication_id)) continue
+      if (notifiedRef.current.has(payload.medication_id)) continue
       new Notification('DeepDose — dosing window open', {
         body: payload.display_instruction,
         tag: `deepdose-${payload.medication_id}`,
       })
-      setNotified((prev) => new Set(prev).add(payload.medication_id))
+      notifiedRef.current.add(payload.medication_id)
     }
-  }, [openWindows, notified, remindersEnabled])
+  }, [openWindows, remindersEnabled])
 
   async function logTaken(medicationCode: string) {
     setLogging(medicationCode)

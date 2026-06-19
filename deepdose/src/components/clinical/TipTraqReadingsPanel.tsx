@@ -38,7 +38,7 @@ function remLatency(night: TipTraqNightRecord): number {
     const [h, m] = c.split(':').map(Number)
     return h * 60 + m
   }
-  let onset = toM(night.sleep_onset)
+  const onset = toM(night.sleep_onset)
   let rem = toM(night.first_rem_onset)
   if (rem < onset) rem += 1440
   return rem - onset

@@ -24,7 +24,7 @@ function remLatencyMinutes(onset: string, firstRem: string | null | undefined): 
     const [h, m] = clock.split(':').map(Number)
     return h * 60 + m
   }
-  let onsetM = clockToMinutes(onset)
+  const onsetM = clockToMinutes(onset)
   let remM = clockToMinutes(firstRem)
   if (remM < onsetM) remM += 1440
   return remM - onsetM

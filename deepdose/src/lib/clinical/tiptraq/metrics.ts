@@ -38,7 +38,7 @@ function sleepMidpointMinutes(onset: string, offset: string): number {
 
 function remLatencyMinutes(night: TipTraqNightInput): number {
   if (!night.first_rem_onset) return 0
-  let onset = clockToMinutes(night.sleep_onset)
+  const onset = clockToMinutes(night.sleep_onset)
   let firstRem = clockToMinutes(night.first_rem_onset)
   if (firstRem < onset) firstRem += 1440
   return firstRem - onset
