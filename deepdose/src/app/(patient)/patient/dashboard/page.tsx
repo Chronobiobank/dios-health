@@ -2,75 +2,42 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { getPatientCircadianContext } from '@/lib/medications/patient-phase'
-import { buildZeitgeberSchedule } from '@/lib/chronobiology/build-zeitgeber-schedule'
 import { loadPatientBti } from '@/lib/bti/load-patient-bti'
 import { fetchPendingRecommendations } from '@/lib/prescribing/recommendations'
-import { buildClockWindows } from '@/lib/medications/clock-windows'
-import {
-  MEDICATION_TIMINGS,
-  type MedicationCode,
-} from '@/lib/circadian/medications'
-import { decimalHoursToHHMM } from '@/lib/utils/time'
-import ScoreGauge from '@/components/shared/ScoreGauge'
-import CircadianClock from '@/components/shared/CircadianClock'
-import { Badge } from '@/components/ui/Layout'
+import { fetchPatientTipTraqNights } from '@/lib/clinical/tiptraq-nights'
+import { buildDoseDash, medClusterDetail } from '@/lib/patient/build-dose-dash'
+import type { TipTraqNightInput, TipTraqNightRecord } from '@/lib/clinical/tiptraq/types'
 import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
 import { PendingRecommendationsPanel } from '@/components/patient/PendingRecommendationsPanel'
 import { DosingReminderBanner } from '@/components/patient/DosingReminderBanner'
-import { ZeitgeberSchedulePanel } from '@/components/patient/ZeitgeberSchedulePanel'
+import { DoseDashStack } from '@/components/patient/DoseDashStack'
 
-const CHRONOTYPE_LABELS: Record<string, string> = {
-  extreme_early: 'Extreme early',
-  early: 'Early',
-  intermediate: 'Intermediate',
-  late: 'Late',
-  extreme_late: 'Extreme late',
-}
-
-function formatTime(t: string | null): string {
-  if (!t) return '—'
-  return t.slice(0, 5)
-}
-
-type OverviewHeadline = {
-  titleLead: string
-  titleAccent?: string
-  sub?: string
-}
-
-function alignmentStatus(score: number): OverviewHeadline {
-  if (score >= 70) {
-    return {
-      titleLead: 'Your circadian rhythm is',
-      titleAccent: 'well aligned today.',
-    }
-  }
-  if (score >= 50) {
-    return {
-      titleLead: 'Moderate',
-      titleAccent: 'misalignment',
-      sub: 'consider shifting sleep earlier.',
-    }
-  }
+function toNightInput(row: TipTraqNightRecord): TipTraqNightInput | null {
+  if (!row.sleep_onset || !row.sleep_offset) return null
   return {
-    titleLead: 'Significant',
-    titleAccent: 'drift detected',
-    sub: 'Review your sleep schedule.',
+    report_date: row.report_date,
+    night_index: row.night_index ?? undefined,
+    day_type: row.day_type === 'weekend' ? 'weekend' : 'weekday',
+    sleep_onset: row.sleep_onset.slice(0, 5),
+    sleep_offset: row.sleep_offset.slice(0, 5),
+    sleep_latency_minutes: row.sleep_latency_minutes ?? 0,
+    tst_minutes: row.tst_minutes ?? 0,
+    waso_minutes: row.waso_minutes ?? 0,
+    sleep_efficiency_pct: row.sleep_efficiency_pct ?? 0,
+    rem_duration_minutes: row.rem_duration_minutes ?? 0,
+    rem_pct_tst: Number(row.rem_pct_tst ?? 0),
+    first_rem_onset: row.first_rem_onset?.slice(0, 5) ?? null,
+    ahi: Number(row.ahi),
+    min_spo2: row.min_spo2,
+    mean_pr: row.mean_pr,
+    min_pr: row.min_pr,
+    sns_pct: row.sns_pct,
+    pns_pct: row.pns_pct,
+    hypoxic_burden: row.hypoxic_burden != null ? Number(row.hypoxic_burden) : null,
+    signal_quality_pct: row.signal_quality_pct,
   }
 }
-
-const BTI_BADGE_TONE = {
-  WINDOW_OPEN: 'success',
-  WINDOW_CLOSED: 'warning',
-  CRITICAL_DRIFT: 'warning',
-} as const
-
-const BTI_BADGE_LABEL = {
-  WINDOW_OPEN: 'In window',
-  WINDOW_CLOSED: 'Outside window',
-  CRITICAL_DRIFT: 'Drift alert',
-} as const
 
 export default async function PatientDashboardPage() {
   const supabase = await createClient()
@@ -90,16 +57,23 @@ export default async function PatientDashboardPage() {
 
   const { data: meds } = await supabase
     .from('patient_medications')
-    .select('medication_code, dose_mg, current_timing')
+    .select('medication_code')
     .eq('patient_id', user.id)
     .eq('is_active', true)
-    .order('medication_code')
 
   const { data: chronotype } = await supabase
     .from('chronotype_profiles')
-    .select('chronotype_cat, msf_sc')
+    .select('msf_sc')
     .eq('patient_id', user.id)
     .order('completed_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+
+  const { data: assessment } = await supabase
+    .from('tiptraq_assessments')
+    .select('metabolic_alert_triggered')
+    .eq('patient_id', user.id)
+    .order('created_at', { ascending: false })
     .limit(1)
     .maybeSingle()
 
@@ -111,48 +85,42 @@ export default async function PatientDashboardPage() {
     .eq('ack_date', today)
 
   const btiPayloads = await loadPatientBti(supabase, user.id)
-  const btiByMed = new Map(btiPayloads.map((p) => [p.medication_id, p]))
   const pendingRecommendations = await fetchPendingRecommendations(supabase, user.id)
+  const tiptraqRecords = await fetchPatientTipTraqNights(supabase, user.id)
+  const tiptraqNights = tiptraqRecords
+    .map((r) => toNightInput(r))
+    .filter((n): n is TipTraqNightInput => n != null)
 
   const hasOnboarding = Boolean(chronotype)
   const hasMeds = (meds?.length ?? 0) > 0
-  const chronotypeLabel = chronotype?.chronotype_cat
-    ? CHRONOTYPE_LABELS[chronotype.chronotype_cat] ?? chronotype.chronotype_cat
-    : undefined
 
-  const dlmoTime = decimalHoursToHHMM(context.dlmoEstimateHours)
-  const clockWindows = buildClockWindows(meds ?? [], context.phaseOffsetMinutes)
-  const zeitgeberSchedule = hasOnboarding
-    ? buildZeitgeberSchedule({
+  const doseDash = hasOnboarding
+    ? buildDoseDash({
         dlmoEstimateHours: context.dlmoEstimateHours,
-        msfScHours: chronotype?.msf_sc != null ? Number(chronotype.msf_sc) : null,
+        circadianScore: context.circadianScore,
+        sjlHours: context.sjlHours,
+        metabolicAlertTriggered: assessment?.metabolic_alert_triggered ?? false,
         btiPayloads,
+        tiptraqNights,
+        hasMeds,
+        msfScHours: chronotype?.msf_sc != null ? Number(chronotype.msf_sc) : null,
       })
-    : []
-  const status = alignmentStatus(context.circadianScore)
+    : null
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-8">
       <header>
-        <p className="seco-page__eyebrow">Overview</p>
-        {hasOnboarding && context.circadianScore > 0 && (
-          <div className="seco-landing__hero-head seco-dashboard-overview">
-            <h1 className="seco-landing__hero-title">
-              <span className="seco-landing__hero-line">{status.titleLead}</span>
-              {status.titleAccent && (
-                <span className="seco-landing__hero-line seco-landing__hero-spectrum">
-                  {status.titleAccent}
-                </span>
-              )}
-            </h1>
-            {status.sub && <p className="seco-landing__hero-sub">{status.sub}</p>}
-          </div>
-        )}
+        <p className="seco-page__eyebrow">Dose dash</p>
+        <h1 className="seco-app-section-title">Your timing today</h1>
+        <p className="mt-2 max-w-xl text-sm text-ink-muted">
+          One view: metabolic risk from your sleep block, what to do next, and when to dose each
+          daily cue.
+        </p>
       </header>
 
       {!hasOnboarding && (
         <Callout tone="warning">
-          Complete onboarding to unlock personalised dosing windows.{' '}
+          Complete onboarding to unlock your dose dash.{' '}
           <Link href="/patient/onboarding/consent" className="font-medium underline">
             Continue setup
           </Link>
@@ -161,7 +129,7 @@ export default async function PatientDashboardPage() {
 
       {deviceProfile?.device_alert_triggered && (
         <Callout tone="warning">
-          Device sync interrupted — reconnect or sync your wearable in{' '}
+          Device sync interrupted — reconnect in{' '}
           <Link href="/patient/dashboard/data" className="font-medium underline">
             Smart devices
           </Link>
@@ -179,105 +147,17 @@ export default async function PatientDashboardPage() {
 
       <PendingRecommendationsPanel recommendations={pendingRecommendations} />
 
-      {hasOnboarding && context.circadianScore > 0 && (
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="seco-app-card p-5 md:p-6">
-              <p className="seco-page__eyebrow mb-1">Circadian score</p>
-              <h2 className="seco-app-card__title">Alignment today</h2>
-              <ScoreGauge
-                score={context.circadianScore}
-                chronotypeLabel={chronotypeLabel}
-                components={context.scoreComponents ?? undefined}
-              />
-          </div>
-
-          <div className="seco-app-card p-5 md:p-6">
-              <p className="seco-page__eyebrow mb-1">24-hour rhythm</p>
-              <h2 className="seco-app-card__title">Dosing windows</h2>
-              <CircadianClock
-                dlmoTime={dlmoTime}
-                windows={clockWindows}
-                chronotypeLabel={chronotypeLabel}
-            />
-          </div>
-        </div>
+      {doseDash && (
+        <DoseDashStack model={doseDash} medDetail={medClusterDetail(btiPayloads)} />
       )}
 
-      {hasOnboarding && zeitgeberSchedule.length > 0 && (
-        <ZeitgeberSchedulePanel items={zeitgeberSchedule} />
-      )}
-
-      <section className="space-y-4">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <p className="seco-page__eyebrow">Medicines & supplements</p>
-            <h2 className="seco-app-section-title">Your prescriptions</h2>
-          </div>
-          {!hasMeds && hasOnboarding && (
-            <Button href="/patient/onboarding/medications" variant="secondary" className="!px-4 !py-2 text-sm">
-              Add medications
-            </Button>
-          )}
+      {hasOnboarding && !hasMeds && (
+        <div className="flex justify-center">
+          <Button href="/patient/onboarding/medications" variant="secondary">
+            Add medicines
+          </Button>
         </div>
-
-        {!hasMeds ? (
-          <div className="seco-app-card border-dashed p-5 text-center md:p-6">
-            <p className="text-sm text-ink-muted">
-              No medications added yet. Add medications to see dosing windows on your circadian clock.
-            </p>
-            {hasOnboarding && (
-              <Button href="/patient/onboarding/medications" className="mt-4">
-                Add medications
-              </Button>
-            )}
-          </div>
-        ) : (
-          <div className="seco-app-card overflow-hidden !p-0">
-            <ul className="divide-y divide-border">
-              {meds!.map((m) => {
-                const timing =
-                  m.medication_code in MEDICATION_TIMINGS
-                    ? MEDICATION_TIMINGS[m.medication_code as MedicationCode]
-                    : null
-                const bti = btiByMed.get(m.medication_code)
-                const windowStart = bti?.dosing_window_start.slice(11, 16)
-                const windowEnd = bti?.dosing_window_end.slice(11, 16)
-                const current = formatTime(m.current_timing)
-
-                return (
-                  <li key={m.medication_code} className="space-y-1.5 p-5 md:p-6">
-                    <div className="flex items-center justify-between gap-2">
-                      <p className="font-medium text-ink">
-                        {timing?.displayName ?? m.medication_code}
-                        {m.dose_mg != null && (
-                          <span className="ml-2 font-normal text-ink-muted">{m.dose_mg} mg</span>
-                        )}
-                      </p>
-                      {bti && (
-                        <Badge tone={BTI_BADGE_TONE[bti.bti_status]}>
-                          {BTI_BADGE_LABEL[bti.bti_status]}
-                        </Badge>
-                      )}
-                    </div>
-                    <p className="text-sm text-ink-muted">
-                      Current: {current}
-                      {windowStart && windowEnd && (
-                        <span className="text-accent">
-                          {' '}
-                          · Window: {windowStart} – {windowEnd}
-                        </span>
-                      )}
-                    </p>
-                    {bti && (
-                      <p className="text-xs text-ink-faint">{bti.display_instruction}</p>
-                    )}
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        )}
-      </section>
+      )}
     </div>
   )
 }

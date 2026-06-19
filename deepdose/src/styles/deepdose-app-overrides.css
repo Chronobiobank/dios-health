@@ -796,3 +796,64 @@
     transition: none;
   }
 }
+
+/* ── Dose dash (patient) — navy glass palette ── */
+.dose-dash-triage {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--seco-font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.dose-dash-triage--on-track {
+  border-color: var(--status-green-border);
+  background: var(--status-green-bg);
+  color: var(--success);
+}
+
+.dose-dash-triage--attention {
+  border-color: var(--status-amber-border);
+  background: var(--status-amber-bg);
+  color: var(--warning);
+}
+
+.dose-dash-triage--review {
+  border-color: rgb(240 140 100 / 0.42);
+  background: rgb(240 120 90 / 0.14);
+  color: #f0a080;
+}
+
+.dose-dash-risk-row:hover,
+.dose-dash-cluster-btn:hover {
+  background: rgb(255 255 255 / 0.06);
+}
+
+.dose-dash-cluster-expand {
+  border-color: rgb(255 255 255 / 0.08);
+  background: rgb(255 255 255 / 0.05);
+}
+
+.dose-dash-step-index {
+  background: rgb(255 255 255 / 0.08);
+  color: rgb(255 255 255 / 0.58);
+}
+
+.secopeutic-demo:not(.seco-shell--dark) .dose-dash-step-index {
+  background: var(--seco-canvas);
+  color: var(--seco-muted);
+}
+
+.secopeutic-demo:not(.seco-shell--dark) .dose-dash-risk-row:hover,
+.secopeutic-demo:not(.seco-shell--dark) .dose-dash-cluster-btn:hover {
+  background: var(--seco-canvas);
+}
+
+.secopeutic-demo:not(.seco-shell--dark) .dose-dash-cluster-expand {
+  border-color: var(--seco-border);
+  background: var(--seco-canvas);
+}
