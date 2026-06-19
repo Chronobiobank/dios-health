@@ -17,7 +17,7 @@ export const DEEPDOSE_LANDING_META = {
 export const DEEPDOSE_LANDING_HERO = {
   headline: 'Why Timing Matters',
   support:
-    `Your body clock sets the best time for ${ZEITGEBER_PLAIN_LIST} — not a fixed daily routine.`,
+    'Your body clock sets the best time for your habits — not a fixed daily routine.',
 } as const
 
 export const DEEPDOSE_LANDING_PLATFORM = {
@@ -25,7 +25,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'learn',
       label: 'How it works',
-      body: 'Consent, quiz, clock, cues, score.',
+      body: 'Consent, quiz, clock, cues, and score.',
       icon: 'book' as const,
       panelTitle: 'What is a dose?',
       panelSeeAll: { label: 'See all', href: '/about' },
@@ -60,7 +60,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'tools',
       label: 'Your daily doses',
-      body: 'Light, meals, meds, movement, sleep.',
+      body: 'Light, meals, meds, movement, and sleep.',
       icon: 'tools' as const,
       panelTitle: `Timed cues on your ${DEEPDOSE_NAME} dashboard`,
       panelSeeAll: { label: 'Open dashboard', href: '/login' },
@@ -95,7 +95,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'clinics',
       label: 'Home sleep tests',
-      body: 'On GP advice · from £149.',
+      body: 'GP advised kit, three nights, quarterly.',
       icon: 'clinics' as const,
       panelTitle: 'What to expect from a home sleep test',
       panelHook: TIPTRAQ_HOME_HOOK,
