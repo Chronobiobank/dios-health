@@ -24,7 +24,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
   pillars: [
     {
       id: 'learn',
-      label: `How ${DEEPDOSE_NAME} works`,
+      label: 'The idea',
       body: 'Consent, quiz, clock, cues, and score.',
       icon: 'book' as const,
       panelTitle: 'What is a dose?',
@@ -59,7 +59,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     },
     {
       id: 'tools',
-      label: 'Your daily doses',
+      label: 'The dose',
       body: 'Light, meals, meds, movement, and sleep.',
       icon: 'tools' as const,
       panelTitle: `Timed cues on your ${DEEPDOSE_NAME} dashboard`,
@@ -94,7 +94,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     },
     {
       id: 'clinics',
-      label: 'Home sleep tests',
+      label: 'The test',
       body: 'GP advised kit, three nights, quarterly.',
       icon: 'clinics' as const,
       panelTitle: 'What to expect from a home sleep test',
