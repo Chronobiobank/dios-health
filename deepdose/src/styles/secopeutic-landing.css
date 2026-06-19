@@ -31,7 +31,7 @@
 }
 
 .clinical-layout .seco-landing__hero-title {
-  max-width: 18ch;
+  max-width: 12ch;
   margin: 0;
   font-size: clamp(2.5rem, 7.5vw, 4.75rem);
   font-weight: 300;
@@ -49,6 +49,12 @@
   margin-top: 0.125rem;
 }
 
+.seco-landing__hero-line--white {
+  color: #fff;
+  background: none;
+  -webkit-text-fill-color: #fff;
+}
+
 .clinical-layout .seco-landing__hero-sub {
   margin: 0.375rem 0 0;
   font-size: clamp(1.25rem, 3vw, 1.625rem);
@@ -60,7 +66,7 @@
 
 .clinical-layout .seco-landing__hero-lede {
   margin-top: 0.875rem;
-  max-width: 52ch;
+  max-width: 56ch;
   font-family: var(--seco-font-ui);
   font-size: clamp(1.125rem, 2.5vw, 1.375rem);
   font-weight: 300;

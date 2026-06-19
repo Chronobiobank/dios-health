@@ -2,42 +2,18 @@
 
 import { TIPTRAQ_HOME_HOOK } from '@/lib/clinical/tiptraq-program'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
-import { LANDING_CLINICIANS } from '@/lib/secopeutic/landing-clinicians'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} — Find your right time`,
+  title: `${DEEPDOSE_NAME} — Know your window`,
   description:
-    'The same dose at the wrong clock phase can mean weaker effect or worse side effects. DeepDose makes circadian timing visible for patients and clinicians.',
+    'DeepDose translates your unique biology into a precise treatment plan — timed light, meals, medicines, and sleep.',
 } as const
 
 export const DEEPDOSE_LANDING_HERO = {
-  headline: 'Your medicines work better at the right time.',
+  headlineWhite: 'Know',
+  headlineAccent: 'your window',
   support:
-    'Most people take them at the wrong one. The same dose at the wrong clock phase can mean weaker effect or worse side effects — circadian timing is a variable most prescribing ignores. DeepDose makes it visible.',
-} as const
-
-export const DEEPDOSE_LANDING_COST = {
-  text: 'In the UK, medicines not taken as intended contribute to hundreds of millions of pounds in avoidable NHS harm each year — often because timing never matched the person’s body clock.',
-} as const
-
-export const DEEPDOSE_LANDING_PROOF = {
-  title: 'Built on chronobiology research',
-  scholars: [
-    {
-      clinician: LANDING_CLINICIANS.roenneberg,
-      cite: 'Chronotype and social jet lag shape when the body best responds to light, sleep, and routine cues.',
-    },
-    {
-      clinician: LANDING_CLINICIANS.foster,
-      cite: 'Circadian light pathways set biological phase — the foundation for timing medicines and daily habits.',
-    },
-  ],
-} as const
-
-export const DEEPDOSE_LANDING_CONSENT = {
-  title: 'You choose what data we can use.',
-  meta: 'Consent first · UK GDPR · Your clinician stays in the loop',
-  href: '/login',
+    'DeepDose translates your unique biology into a precise treatment plan, delivering exactly what you need to heal safely and effectively.',
 } as const
 
 export const DEEPDOSE_LANDING_PLATFORM = {
@@ -141,6 +117,7 @@ export const DEEPDOSE_TERMS_DECISION_SUPPORT =
   `Decision support only. ${DEEPDOSE_NAME} suggests the best times for your daily cues — it does not prescribe. Your clinician makes every treatment decision.`
 
 export const DEEPDOSE_NAV_LINKS = [
+  { label: 'Research', href: '/research' },
   { label: 'About', href: '/about' },
   { label: 'Sign in', href: '/login' },
 ] as const

@@ -34,9 +34,12 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <div className="mt-10">
+        <div className="mt-10 flex flex-wrap gap-3">
           <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
             Start onboarding →
+          </Link>
+          <Link href="/research" className="seco-landing__btn seco-landing__btn--secondary">
+            Research →
           </Link>
         </div>
       </div>
