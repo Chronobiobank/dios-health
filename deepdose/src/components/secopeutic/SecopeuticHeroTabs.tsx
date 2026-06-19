@@ -225,7 +225,7 @@ function HeroPlanPreview() {
     <div className="seco-planpreview" aria-hidden="true">
       <div className="seco-planpreview__head">
         <div>
-          <p className="seco-planpreview__day">Today · Tue</p>
+          <p className="seco-planpreview__day">Today · Tuesday</p>
           <p className="seco-planpreview__phase">Body clock 22:30 · +38m drift</p>
         </div>
         <span className="seco-planpreview__window">
@@ -301,47 +301,49 @@ function HeroDashPreview() {
 
   return (
     <div className="seco-dashpreview" aria-hidden="true">
-      <div className="seco-dashpreview__top">
-        <div className="seco-dashpreview__id">
-          <span className="seco-dashpreview__avatar" />
-          <div>
-            <p className="seco-dashpreview__name">Sean James</p>
-            <p className="seco-dashpreview__sub">Moderate evening type · DLMO 22:30</p>
+      <div className="seco-dashpreview__main">
+        <div className="seco-dashpreview__top">
+          <div className="seco-dashpreview__id">
+            <span className="seco-dashpreview__avatar" />
+            <div>
+              <p className="seco-dashpreview__name">Sean James</p>
+              <p className="seco-dashpreview__sub">Moderate evening type · DLMO 22:30</p>
+            </div>
           </div>
+          <span className="seco-dashpreview__triage">On track</span>
         </div>
-        <span className="seco-dashpreview__triage">On track</span>
-      </div>
 
-      <div className="seco-dashpreview__hero">
-        <span className="seco-dashpreview__ring" style={ringStyle}>
-          <span className="seco-dashpreview__ring-track" />
-          <span className="seco-dashpreview__ring-arc" />
-          <span className="seco-dashpreview__ring-cap seco-dashpreview__ring-cap--start" />
-          <span className="seco-dashpreview__ring-cap seco-dashpreview__ring-cap--end" />
-          <span className="seco-dashpreview__ring-num">
-            <span className="seco-dashpreview__ring-figure">
-              {score}
-              <span className="seco-dashpreview__ring-denom">/100</span>
+        <div className="seco-dashpreview__hero">
+          <span className="seco-dashpreview__ring" style={ringStyle}>
+            <span className="seco-dashpreview__ring-track" />
+            <span className="seco-dashpreview__ring-arc" />
+            <span className="seco-dashpreview__ring-cap seco-dashpreview__ring-cap--start" />
+            <span className="seco-dashpreview__ring-cap seco-dashpreview__ring-cap--end" />
+            <span className="seco-dashpreview__ring-num">
+              <span className="seco-dashpreview__ring-figure">
+                {score}
+                <span className="seco-dashpreview__ring-denom">/100</span>
+              </span>
             </span>
           </span>
-        </span>
 
-        <div className="seco-dashpreview__hero-meta">
-          <p className="seco-dashpreview__score-label">Alignment score</p>
-          <p className="seco-dashpreview__status">
-            <span className="seco-hero-tabs__dot seco-hero-tabs__dot--open" />
-            Window open · dose now
-          </p>
-          <p className="seco-dashpreview__diagnostic">
-            Your body clock is running a little late, but you&rsquo;re on track.
-          </p>
-          <div className="seco-dashpreview__stats">
-            {DASH_PREVIEW_STATS.map((stat) => (
-              <span key={stat.label} className="seco-dashpreview__stat">
-                <span className="seco-dashpreview__stat-label">{stat.label}</span>
-                <span className="seco-dashpreview__stat-value">{stat.value}</span>
-              </span>
-            ))}
+          <div className="seco-dashpreview__hero-meta">
+            <p className="seco-dashpreview__score-label">Alignment score</p>
+            <p className="seco-dashpreview__status">
+              <span className="seco-hero-tabs__dot seco-hero-tabs__dot--open" />
+              Window open · dose now
+            </p>
+            <p className="seco-dashpreview__diagnostic">
+              Your body clock is running a little late, but you&rsquo;re on track.
+            </p>
+            <div className="seco-dashpreview__stats">
+              {DASH_PREVIEW_STATS.map((stat) => (
+                <span key={stat.label} className="seco-dashpreview__stat">
+                  <span className="seco-dashpreview__stat-label">{stat.label}</span>
+                  <span className="seco-dashpreview__stat-value">{stat.value}</span>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -452,10 +454,6 @@ export function SecopeuticHeroTabs() {
         className="seco-hero-tabs__panel"
       >
         <div key={activePillar.id} className="seco-hero-tabs__panel-inner">
-          <div className="seco-hero-tabs__panel-head">
-            <h2 className="seco-hero-tabs__panel-title">{activePillar.panelTitle}</h2>
-          </div>
-
           {activePillar.id === 'test' ? (
             <HeroDashPreview />
           ) : activePillar.id === 'plan' ? (

@@ -315,7 +315,7 @@
    one continuous shape with no seam line. Curved top corners make it read as a
    tab head rising into the panel (like maven). */
 .seco-hero-tabs__tab--active {
-  background: var(--seco-surface);
+  background: #f1f6fc;
   color: var(--seco-ink);
   border-top-left-radius: var(--seco-radius-lg);
   border-top-right-radius: var(--seco-radius-lg);
@@ -350,13 +350,13 @@
 
 /* Icon tones aligned to the hero gradient — peach · lilac · blue (no green) */
 .seco-hero-tabs__icon--peach {
-  background: rgb(242 184 162 / 0.2);
-  color: #f4b89e;
+  background: rgb(220 78 96 / 0.18);
+  color: #e76a78;
 }
 
 .seco-hero-tabs__tab--active .seco-hero-tabs__icon--peach {
-  background: rgb(242 184 162 / 0.24);
-  color: #c0673f;
+  background: rgb(220 78 96 / 0.22);
+  color: #b42d44;
 }
 
 .seco-hero-tabs__icon--lilac {
@@ -443,10 +443,10 @@
 .seco-hero-tabs__panel {
   position: relative;
   z-index: 1;
-  /* Tight top padding so the title + content sit right under the tab strip;
-     keep the fuller padding on the sides and bottom. */
-  padding: 0.5rem clamp(1.25rem, 2.5vw, 1.625rem) clamp(1.25rem, 2.5vw, 1.625rem);
-  background: var(--seco-surface);
+  /* Equal margins around the tiles on every side (top matches left/right/bottom). */
+  padding: clamp(1.25rem, 2.5vw, 1.625rem);
+  /* Very pale blue so the active tile reads as a soft, distinct surface. */
+  background: #f1f6fc;
   color: var(--seco-ink);
 }
 
@@ -755,10 +755,37 @@
    No padding of its own — the panel already pads, so content sits flush under
    the title with no doubled-up white space at the top. */
 .seco-dashpreview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.875rem;
+  padding: 0;
+  /* Fill the panel so the tiles meet the bottom CTA with the same gap as the
+     other two tabs (whose content is naturally taller). */
+  flex: 1;
+}
+
+/* Two distinct tiles on the chrono-test preview: profile + dial on the left,
+   today's cues on the right. Single column on small screens. */
+@media (max-width: 640px) {
+  .seco-dashpreview {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.seco-dashpreview__main,
+.seco-dashpreview__cues {
   display: flex;
   flex-direction: column;
+  padding: clamp(1rem, 2.4vw, 1.25rem);
+  border: 1px solid var(--seco-border);
+  border-radius: var(--seco-radius-lg);
+  background: var(--seco-surface);
+  box-shadow: 0 1px 2px rgb(5 9 17 / 0.04);
+}
+
+.seco-dashpreview__main {
   gap: 1.125rem;
-  padding: 0;
 }
 
 .seco-dashpreview__top {
@@ -824,6 +851,7 @@
 
 .seco-dashpreview__hero {
   display: flex;
+  flex: 1;
   align-items: center;
   gap: clamp(1rem, 3vw, 1.5rem);
 }
@@ -1024,13 +1052,8 @@
   color: var(--seco-ink);
 }
 
-.seco-dashpreview__cues {
-  border-top: 1px solid var(--seco-border);
-  padding-top: 1.125rem;
-}
-
 .seco-dashpreview__cues-title {
-  margin: 0 0 0.625rem;
+  margin: 0 0 0.75rem;
   font-family: var(--seco-font-data);
   font-size: 0.6875rem;
   font-weight: 600;
@@ -1041,7 +1064,9 @@
 
 .seco-dashpreview__cue-list {
   display: flex;
+  flex: 1;
   flex-direction: column;
+  justify-content: space-between;
   gap: 0.5rem;
   margin: 0;
   padding: 0;
@@ -1732,8 +1757,31 @@
 }
 
 .seco-landing__btn--primary {
-  background: #fff;
+  /* Soft day-to-night gradient instead of bright white, to knock the CTA back.
+     Oversized so the colours can slowly drift (see seco-cta-flow). */
+  background: var(--seco-spectrum-hero);
+  background-size: 220% 100%;
+  background-position: 0% 50%;
   color: var(--seco-navy);
+  animation: seco-cta-flow 7s ease-in-out infinite;
+}
+
+@keyframes seco-cta-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seco-landing__btn--primary {
+    animation: none;
+  }
 }
 
 .seco-landing__btn--secondary {
