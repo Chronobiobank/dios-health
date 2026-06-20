@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { getPatientCircadianContext } from '@/lib/medications/patient-phase'
+import { loadDlmoProxy } from '@/lib/circadian/load-dlmo-proxy'
 import { loadPatientBti } from '@/lib/bti/load-patient-bti'
 import { fetchPendingRecommendations } from '@/lib/prescribing/recommendations'
 import { fetchPatientTipTraqNights } from '@/lib/clinical/tiptraq-nights'
@@ -85,6 +86,7 @@ export default async function PatientDashboardPage() {
     .eq('ack_date', today)
 
   const btiPayloads = await loadPatientBti(supabase, user.id)
+  const dlmoProxy = await loadDlmoProxy(supabase, user.id)
   const pendingRecommendations = await fetchPendingRecommendations(supabase, user.id)
   const tiptraqRecords = await fetchPatientTipTraqNights(supabase, user.id)
   const tiptraqNights = tiptraqRecords
@@ -104,6 +106,7 @@ export default async function PatientDashboardPage() {
         tiptraqNights,
         hasMeds,
         msfScHours: chronotype?.msf_sc != null ? Number(chronotype.msf_sc) : null,
+        dlmoProxy,
       })
     : null
 
@@ -111,8 +114,8 @@ export default async function PatientDashboardPage() {
     <div className="space-y-8">
       <header>
         <p className="seco-page__eyebrow">Dose dash</p>
-        <h1 className="seco-app-section-title">Your timing today</h1>
-        <p className="mt-2 max-w-xl text-sm text-ink-muted">
+        <h1 className="seco-page__title">Your timing today</h1>
+        <p className="seco-page__lede">
           One view: metabolic risk from your sleep block, what to do next, and when to dose each
           daily cue.
         </p>

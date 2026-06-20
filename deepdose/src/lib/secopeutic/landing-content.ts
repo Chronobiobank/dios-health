@@ -140,6 +140,7 @@ export const DEEPDOSE_TERMS_DECISION_SUPPORT =
 
 export const DEEPDOSE_NAV_LINKS = [
   { label: 'Research', href: '/research' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
   { label: 'Sign in', href: '/login' },
 ] as const

@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { SecopeuticFooter } from '@/components/secopeutic/SecopeuticFooter'
 import { SecopeuticHeroHeadline } from '@/components/secopeutic/SecopeuticHeroHeadline'
 import { SecopeuticHeroTabs } from '@/components/secopeutic/SecopeuticHeroTabs'
 import {
@@ -116,8 +115,6 @@ export function DeepDoseLanding() {
           </div>
         </div>
       </section>
-
-      <SecopeuticFooter />
     </div>
   )
 }

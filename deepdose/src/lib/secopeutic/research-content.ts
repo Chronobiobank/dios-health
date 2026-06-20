@@ -11,10 +11,14 @@ export const DEEPDOSE_RESEARCH_META = {
 
 export const DEEPDOSE_RESEARCH_INTRO = {
   lede:
-    'Medicines are often taken at the wrong point in the body clock. The same dose can mean weaker effects, more side effects, and hundreds of millions in avoidable NHS harm each year.',
+    'Your body runs on a clock. Take a medicine, eat, or sleep at the wrong point in that clock and the same dose does less, harms more, and — repeated night after night — costs healthy years of life.',
   cost: {
     href: 'https://www.england.nhs.uk/medicines-2/medicines-optimisation/',
     label: 'NHS medicines optimisation',
+  },
+  human: {
+    href: 'https://doi.org/10.1073/pnas.2405924121',
+    label: 'UK Biobank · PNAS (2024)',
   },
   consent:
     'You choose what data we can use. Consent first · UK GDPR · Your clinician stays in the loop.',
@@ -22,16 +26,22 @@ export const DEEPDOSE_RESEARCH_INTRO = {
 
 export const DEEPDOSE_RESEARCH_SCHOLARS = [
   {
+    clinician: LANDING_CLINICIANS.halberg,
+    cite: 'Founded chronobiology and coined the word "circadian" in 1959. He showed that body rhythms decide health or disease, and that medicines work better when timed to them. Everything below proves him right.',
+    href: 'https://en.wikipedia.org/wiki/Franz_Halberg',
+    sourceLabel: 'Biography & works',
+  },
+  {
     clinician: LANDING_CLINICIANS.foster,
-    cite: 'Circadian light pathways set biological phase, the foundation for timing medicines and daily habits.',
-    href: 'https://www.penguin.co.uk/books/446135/life-time-by-russell-foster/',
-    sourceLabel: 'Life Time (2022)',
+    cite: 'Maps the light pathways that set the body clock Halberg described, and why the timing of a dose changes its effect.',
+    href: 'https://www.scni.ox.ac.uk/team/russell-foster',
+    sourceLabel: 'Oxford profile & papers',
   },
   {
     clinician: LANDING_CLINICIANS.roenneberg,
-    cite: 'Chronotype and social jet lag shape when the body best responds to light, sleep, and routine cues.',
-    href: 'https://doi.org/10.1016/j.sleep.2007.05.001',
-    sourceLabel: 'Sleep Medicine Reviews (2007)',
+    cite: 'Measures each person\u2019s body-clock type at population scale, putting numbers to the individual timing Halberg called for.',
+    href: 'https://scholar.google.com/citations?user=NvUedX8AAAAJ',
+    sourceLabel: 'Publications (Scholar)',
   },
 ] as const
 
@@ -49,6 +59,15 @@ export type ResearchPaperTile = {
 }
 
 export const DEEPDOSE_RESEARCH_PAPERS: ResearchPaperTile[] = [
+  {
+    id: 'halberg-1969',
+    tier: 'Foundational',
+    title: 'Chronobiology — the science that started it all',
+    authors: 'Halberg, F.',
+    year: '1969',
+    meta: 'Annual Review of Physiology · Coined “circadian”',
+    href: 'https://doi.org/10.1146/annurev.ph.31.030169.003331',
+  },
   {
     id: 'foster-2022',
     tier: 'Foundational',
@@ -135,6 +154,15 @@ export const DEEPDOSE_RESEARCH_PAPERS: ResearchPaperTile[] = [
     year: '2016',
     meta: 'Pharmaceutics · PMC',
     href: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4932476/',
+  },
+  {
+    id: 'windred-2024',
+    tier: 'Population',
+    title: 'Brighter nights, darker days predict higher mortality',
+    authors: 'Windred, D.P. et al.',
+    year: '2024',
+    meta: 'PNAS · 88,905 UK Biobank participants',
+    href: 'https://doi.org/10.1073/pnas.2405924121',
   },
   {
     id: 'cajochen-2025',

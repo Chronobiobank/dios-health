@@ -52,22 +52,48 @@ function ScholarAvatar({ clinician }: { clinician: LandingClinician }) {
 }
 
 export default function ResearchPage() {
-  const { lede, cost, consent } = DEEPDOSE_RESEARCH_INTRO
+  const { lede, cost, human, consent } = DEEPDOSE_RESEARCH_INTRO
 
   return (
     <article className="seco-page seco-research">
       <div className="seco-landing__section-inner">
         <header className="seco-research__intro seco-reveal seco-reveal--1">
-          <div className="seco-research__intro-copy">
-            <p className="seco-page__eyebrow">Research</p>
-            <h1 className="seco-page__title">Why timing matters</h1>
-            <p className="seco-page__lede">{lede}</p>
-          </div>
-          <aside className="seco-research__stat" aria-label="Cost of mistimed medicines">
-            <p className="seco-research__stat-figure">£100s of millions</p>
-            <p className="seco-research__stat-caption">
-              Avoidable NHS medicines harm each year, often because timing never matched the
-              person&rsquo;s body clock.
+          <p className="seco-page__eyebrow">Research</p>
+          <h1 className="seco-page__title">Why timing matters</h1>
+          <p className="seco-page__lede">{lede}</p>
+        </header>
+
+        <section
+          className="seco-research__costs seco-reveal seco-reveal--2"
+          aria-label="Why timing matters"
+        >
+          <article className="seco-research__cost seco-research__cost--human">
+            <p className="seco-research__cost-eyebrow">The human cost</p>
+            <p className="seco-research__cost-figure">21–34% ↑</p>
+            <p className="seco-research__cost-lead">higher risk of death with bright nights</p>
+            <p className="seco-research__cost-body">
+              Your melatonin onset (DLMO) is the nightly signal that switches on cellular repair —
+              for brain and body. When it drifts out of sync, repair is blunted, and the damage
+              compounds into disease and fewer healthy years. The UK Biobank&rsquo;s 88,905-person
+              study found disrupted light&ndash;dark cycles predict higher mortality.
+            </p>
+            <a
+              href={human.href}
+              className="seco-research-inline-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {human.label} ↗
+            </a>
+          </article>
+          <article className="seco-research__cost seco-research__cost--nhs">
+            <p className="seco-research__cost-eyebrow">The cost to the NHS</p>
+            <p className="seco-research__cost-figure">£100s of millions</p>
+            <p className="seco-research__cost-lead">avoidable medicines harm each year</p>
+            <p className="seco-research__cost-body">
+              Much of it because a medicine&rsquo;s timing never matched the person&rsquo;s body
+              clock — the same drug, given at the wrong phase, working against the patient instead of
+              with them.
             </p>
             <a
               href={cost.href}
@@ -77,14 +103,20 @@ export default function ResearchPage() {
             >
               {cost.label} ↗
             </a>
-          </aside>
-        </header>
+          </article>
+        </section>
 
         <section
-          className="seco-research-scholars seco-reveal seco-reveal--2"
+          className="seco-research-scholars seco-reveal seco-reveal--3"
           aria-label="Key researchers"
         >
-          <h2 className="seco-app-section-title">Built on research</h2>
+          <div className="seco-research__section-head">
+            <h2 className="seco-research__h2">Built on Halberg</h2>
+            <p className="seco-research__section-sub">
+              Franz Halberg founded chronobiology decades ago. Today&rsquo;s researchers keep
+              proving him right.
+            </p>
+          </div>
           <ul className="seco-research-scholars-list">
             {DEEPDOSE_RESEARCH_SCHOLARS.map(({ clinician, cite, href, sourceLabel }) => (
               <li key={clinician.name} className="seco-research-scholar">
@@ -106,9 +138,9 @@ export default function ResearchPage() {
           </ul>
         </section>
 
-        <section className="seco-research-papers seco-reveal seco-reveal--3">
+        <section className="seco-research-papers seco-reveal seco-reveal--4">
           <div className="seco-research__section-head">
-            <h2 className="seco-app-section-title">Key papers</h2>
+            <h2 className="seco-research__h2">Key papers</h2>
             <p className="seco-research__section-sub">
               Peer-reviewed sources {DEEPDOSE_NAME} draws on. Click through to read the original
               work.

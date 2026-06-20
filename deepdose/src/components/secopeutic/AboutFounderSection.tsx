@@ -8,7 +8,7 @@ export function AboutFounderSection() {
 
   return (
     <section className="about-founder seco-app-card mt-10 p-5 md:p-6">
-      <div className="about-founder__layout">
+      <div className="about-founder__header">
         <div className="about-founder__portrait">
           <Image
             src={founder.image}
@@ -20,7 +20,7 @@ export function AboutFounderSection() {
           />
         </div>
 
-        <div className="about-founder__copy">
+        <div className="about-founder__identity">
           <p className="seco-page__eyebrow mb-2">Founder</p>
           <h2 className="about-founder__name">{founder.name}</h2>
           <p className="about-founder__affiliation">
@@ -33,13 +33,13 @@ export function AboutFounderSection() {
               {founder.affiliation}
             </Link>
           </p>
-          <p className="about-founder__headline">{founder.headline}</p>
-          <div className="about-founder__body">
-            {founder.paragraphs.map((paragraph) => (
-              <p key={paragraph.slice(0, 48)}>{paragraph}</p>
-            ))}
-          </div>
         </div>
+      </div>
+
+      <div className="about-founder__body">
+        {founder.paragraphs.map((paragraph) => (
+          <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+        ))}
       </div>
     </section>
   )

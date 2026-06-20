@@ -63,6 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${siteFontVariableClasses} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">

@@ -9,6 +9,13 @@ export type LandingClinician = {
 }
 
 export const LANDING_CLINICIANS = {
+  halberg: {
+    name: 'Prof. Franz Halberg',
+    image: '/authors/franz-halberg.jpg',
+    imageAlt: 'Prof. Franz Halberg',
+    initials: 'FH',
+    tone: 'violet',
+  },
   munro: {
     name: 'Grant Munro',
     image: '/authors/grant-munro.jpeg',

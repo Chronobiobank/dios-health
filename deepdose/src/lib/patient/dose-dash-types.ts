@@ -25,8 +25,20 @@ export type DoseCluster = {
   detail: string
 }
 
+export type DlmoSource = {
+  /** Short label for where the body-clock estimate came from. */
+  label: string
+  /** 'low' | 'moderate' | 'high' — confidence in the estimate. */
+  confidenceLabel: string
+  /** ± uncertainty band in minutes, or null for clinical-grade. */
+  bandMinutes: number | null
+  /** Plain-English sentence describing the evidence behind the estimate. */
+  detail: string
+}
+
 export type DoseDashModel = {
   dlmoLabel: string
+  dlmoSource: DlmoSource | null
   clockDriftMinutes: number | null
   tiptraqNights: number
   tiptraqComplete: boolean

@@ -5,8 +5,10 @@ import { ahiStatus } from '@/lib/clinical/tiptraq/clinical-status'
 import { computeTipTraqBlockMetrics } from '@/lib/clinical/tiptraq/metrics'
 import type { TipTraqNightInput } from '@/lib/clinical/tiptraq/types'
 import { MEDICATION_TIMINGS, type MedicationCode } from '@/lib/circadian/medications'
+import type { DlmoProxyResult } from '@/lib/circadian/dlmo'
 import { decimalHoursToHHMM } from '@/lib/utils/time'
 import type {
+  DlmoSource,
   DoseCluster,
   DoseDashModel,
   MetabolicRiskSignal,
@@ -203,8 +205,8 @@ export function buildDoseDash(input: {
   tiptraqNights: TipTraqNightInput[]
   hasMeds: boolean
   msfScHours?: number | null
+  dlmoProxy?: DlmoProxyResult | null
 }): DoseDashModel {
-  const dlmoLabel = decimalHoursToHHMM(input.dlmoEstimateHours)
   const metrics =
     input.tiptraqNights.length > 0
       ? computeTipTraqBlockMetrics(input.tiptraqNights)
@@ -213,6 +215,11 @@ export function buildDoseDash(input: {
   const driftMinutes = metrics?.clockDriftMinutes ?? null
   const meanAhi = metrics?.meanAhi ?? null
   const nights = input.tiptraqNights.length
+
+  // Pick the best available DLMO source: clinical TipTraQ block > free-tier
+  // smartphone/wearable proxy > chronotype-questionnaire fallback.
+  const { dlmoHours, dlmoSource } = resolveDlmoSource(input, metrics, nights)
+  const dlmoLabel = decimalHoursToHHMM(dlmoHours)
 
   const risks: MetabolicRiskSignal[] = [
     buildSleepApnoeaRisk(meanAhi, nights),
@@ -225,9 +232,7 @@ export function buildDoseDash(input: {
   ]
 
   const schedule = buildZeitgeberSchedule({
-    dlmoEstimateHours: metrics?.dlmoEstimate
-      ? parseDlmoHours(metrics.dlmoEstimate)
-      : input.dlmoEstimateHours,
+    dlmoEstimateHours: dlmoHours,
     msfScHours: input.msfScHours,
     btiPayloads: input.btiPayloads,
   })
@@ -244,7 +249,7 @@ export function buildDoseDash(input: {
   const nextSteps = buildNextSteps({
     risks,
     dlmoLabel,
-    dlmoHours: input.dlmoEstimateHours,
+    dlmoHours,
     clusters,
     hasMeds: input.hasMeds,
     tiptraqComplete: metrics?.blockComplete ?? false,
@@ -252,6 +257,7 @@ export function buildDoseDash(input: {
 
   return {
     dlmoLabel,
+    dlmoSource,
     clockDriftMinutes: driftMinutes,
     tiptraqNights: nights,
     tiptraqComplete: metrics?.blockComplete ?? false,
@@ -265,6 +271,66 @@ export function buildDoseDash(input: {
 function parseDlmoHours(clock: string): number {
   const [h, m] = clock.split(':').map(Number)
   return h + m / 60
+}
+
+const CONFIDENCE_DISPLAY: Record<string, string> = {
+  none: 'low',
+  low: 'low',
+  moderate: 'moderate',
+  high: 'high',
+}
+
+function resolveDlmoSource(
+  input: { dlmoEstimateHours: number; msfScHours?: number | null; dlmoProxy?: DlmoProxyResult | null },
+  metrics: ReturnType<typeof computeTipTraqBlockMetrics> | null,
+  nights: number
+): { dlmoHours: number; dlmoSource: DlmoSource | null } {
+  // 1. Clinical-grade TipTraQ block wins outright.
+  if (metrics?.dlmoEstimate && nights > 0) {
+    return {
+      dlmoHours: parseDlmoHours(metrics.dlmoEstimate),
+      dlmoSource: {
+        label: 'TipTraQ clinical block',
+        confidenceLabel: 'high',
+        bandMinutes: null,
+        detail: `Measured from ${nights} night${nights === 1 ? '' : 's'} of clinical-grade sleep data.`,
+      },
+    }
+  }
+
+  // 2. Free-tier smartphone / wearable proxy.
+  const proxy = input.dlmoProxy
+  if (proxy?.available && proxy.dlmoMinutes != null) {
+    const hasWearable = proxy.nightsUsed > 0
+    const hasQuestionnaire = proxy.sources.questionnaire != null
+    const detail = hasWearable
+      ? `Estimated from ${proxy.nightsUsed} night${proxy.nightsUsed === 1 ? '' : 's'} of phone & wearable sleep data${hasQuestionnaire ? ' and your chronotype answers' : ''}.`
+      : 'Estimated from your chronotype answers until phone or wearable data syncs.'
+
+    return {
+      dlmoHours: proxy.dlmoMinutes / 60,
+      dlmoSource: {
+        label: hasWearable ? 'Phone & wearable estimate' : 'Chronotype estimate',
+        confidenceLabel: CONFIDENCE_DISPLAY[proxy.confidenceLabel] ?? 'low',
+        bandMinutes: proxy.confidenceBandMinutes,
+        detail,
+      },
+    }
+  }
+
+  // 3. Chronotype-questionnaire fallback (legacy path).
+  return {
+    dlmoHours: input.dlmoEstimateHours,
+    dlmoSource:
+      input.msfScHours != null
+        ? {
+            label: 'Chronotype estimate',
+            confidenceLabel: 'low',
+            bandMinutes: 90,
+            detail: 'Estimated from your chronotype answers. Connect a wearable to sharpen it.',
+          }
+        : null,
+  }
 }
 
 export function medClusterDetail(
