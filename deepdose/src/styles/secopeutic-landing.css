@@ -2025,6 +2025,7 @@
 
 .seco-footer__mission {
   margin: 0;
+  max-width: 12rem;
   font-family: var(--seco-font-display);
   font-size: clamp(0.9375rem, 1.6vw, 1.0625rem);
   font-weight: 400;
@@ -2122,12 +2123,27 @@
   border-top: 1px solid var(--seco-navy-border);
 }
 
+.seco-footer__copy-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 62ch;
+}
+
 .seco-footer__copy {
   margin: 0;
   font-family: var(--seco-font-data);
   font-size: 0.75rem;
   letter-spacing: 0.06em;
   color: rgb(255 255 255 / 0.42);
+}
+
+.seco-footer__legal {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.38);
 }
 
 .seco-footer__legal-nav {

@@ -19,12 +19,14 @@ type WearableDeviceCardProps = {
   provider: WearableProvider
   connection: ConnectionState | null
   ouraConfigured?: boolean
+  whoopConfigured?: boolean
 }
 
 export function WearableDeviceCard({
   provider,
   connection,
   ouraConfigured = false,
+  whoopConfigured = false,
 }: WearableDeviceCardProps) {
   const router = useRouter()
   const [syncing, setSyncing] = useState(false)
@@ -99,19 +101,34 @@ export function WearableDeviceCard({
             Oura OAuth is not configured yet (set OURA_CLIENT_ID and OURA_CLIENT_SECRET).
           </p>
         )}
-        {provider.id === 'oura' && connected && (
+        {provider.id === 'whoop' && !connected && whoopConfigured && (
+          <Button href="/api/wearables/whoop/authorize">Connect Whoop</Button>
+        )}
+        {provider.id === 'whoop' && !connected && !whoopConfigured && (
+          <p className="text-sm text-ink-muted">
+            Whoop OAuth is not configured yet (set WHOOP_CLIENT_ID and WHOOP_CLIENT_SECRET).
+          </p>
+        )}
+        {(provider.id === 'oura' || provider.id === 'whoop') && connected && (
           <Button type="button" variant="secondary" onClick={handleSync} disabled={syncing}>
             {syncing ? 'Syncing…' : 'Sync now'}
           </Button>
         )}
-        {!provider.connectable && !connected && (
+        {provider.id === 'apple_health' && (
           <p className="text-sm text-ink-muted">
-            {provider.id === 'tiptraq'
-              ? 'On your GP’s advice: wear the kit for three nights at home (£149). Your clinician adds the report — then your dashboard shows the best times for light, meals, medicines, exercise, and sleep.'
-              : 'Connection coming soon. Oura is available today.'}
+            {connected
+              ? 'Receiving sleep data from your iPhone. Keep the DeepDose Shortcut automation running to stay in sync.'
+              : 'Connect on your iPhone: add the DeepDose Health Shortcut to share sleep automatically. HealthKit data stays on your device until you choose to send it.'}
           </p>
         )}
-        {provider.id === 'oura' && (
+        {provider.id === 'tiptraq' && !connected && (
+          <p className="text-sm text-ink-muted">
+            On your GP’s advice: wear the kit for three nights at home (£149). Your clinician adds
+            the report — then your dashboard shows the best times for light, meals, medicines,
+            exercise, and sleep.
+          </p>
+        )}
+        {(provider.id === 'oura' || provider.id === 'whoop') && (
           <Link href="/patient/profile" className="text-sm text-accent underline">
             Clinician sharing →
           </Link>

@@ -55,7 +55,7 @@ export const WEARABLE_PROVIDERS: Record<WearableProviderId, WearableProvider> = 
     streams: 'HRV · Recovery · Sleep duration',
     clinicalReliabilityMax: 76,
     setsPremiumTier: false,
-    connectable: false,
+    connectable: true,
   },
   apple_health: {
     id: 'apple_health',

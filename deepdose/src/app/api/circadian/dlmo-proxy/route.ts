@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { clinicianCanAccessPatient } from '@/lib/clinical/triage'
 import { loadDlmoProxy } from '@/lib/circadian/load-dlmo-proxy'
+import { resolveCanonicalDlmo } from '@/lib/circadian/dlmo-merge'
 
 async function resolvePatientId(
   supabase: Awaited<ReturnType<typeof createClient>>,
@@ -36,8 +37,11 @@ export async function GET(request: Request) {
     return Response.json({ error: resolved.error }, { status: resolved.status })
   }
 
-  const proxy = await loadDlmoProxy(supabase, resolved.patientId)
-  return Response.json({ proxy })
+  const [proxy, canonical] = await Promise.all([
+    loadDlmoProxy(supabase, resolved.patientId),
+    resolveCanonicalDlmo(supabase, resolved.patientId),
+  ])
+  return Response.json({ proxy, canonical })
 }
 
 // Compute and persist a snapshot into dlmo_estimates (patient-owned, smartphone_l3).

@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { adminClient } from '@/lib/supabase/admin'
 import { WearableDeviceCard } from '@/components/patient/WearableDeviceCard'
 import { isOuraConfigured } from '@/lib/wearables/oura'
+import { isWhoopConfigured } from '@/lib/wearables/whoop'
 import { hoursSince, DEVICE_STALE_HOURS } from '@/lib/wearables/device-health'
 import { refreshDeviceAlert } from '@/lib/wearables/refresh-device-alert'
 import {
@@ -13,7 +14,7 @@ import {
 export default async function PatientDataPage({
   searchParams,
 }: {
-  searchParams: Promise<{ oura?: string }>
+  searchParams: Promise<{ oura?: string; whoop?: string }>
 }) {
   const supabase = await createClient()
   const {
@@ -65,6 +66,12 @@ export default async function PatientDataPage({
       {params.oura === 'error' && (
         <p className="text-sm text-warning">Oura connection failed. Try again.</p>
       )}
+      {params.whoop === 'connected' && (
+        <p className="text-sm text-success">Whoop connected successfully.</p>
+      )}
+      {params.whoop === 'error' && (
+        <p className="text-sm text-warning">Whoop connection failed. Try again.</p>
+      )}
 
       <div className="space-y-4">
         {WEARABLE_PROVIDERS_ORDERED.map((provider) => {
@@ -74,6 +81,7 @@ export default async function PatientDataPage({
               key={provider.id}
               provider={provider}
               ouraConfigured={isOuraConfigured()}
+              whoopConfigured={isWhoopConfigured()}
               connection={
                 row
                   ? {

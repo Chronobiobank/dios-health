@@ -45,7 +45,12 @@ export function SecopeuticFooter() {
         </div>
 
         <div className="seco-footer__bar">
-          <p className="seco-footer__copy">© {year} {DEEPDOSE_NAME}</p>
+          <div className="seco-footer__copy-block">
+            <p className="seco-footer__copy">© {year} Chronobiobank Ltd</p>
+            <p className="seco-footer__legal">
+              {`${DEEPDOSE_NAME} is a trademark and asset of Chronobiobank Ltd, a UK non-profit company limited by guarantee, registered in England & Wales (Company No. 00000000). Registered office: 167-169 Great Portland Street, London, W1W 5PF.`}
+            </p>
+          </div>
         </div>
       </div>
     </footer>

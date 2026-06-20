@@ -2436,3 +2436,364 @@
 .seco-about__actions .seco-landing__btn {
   margin-top: 0;
 }
+
+/* ───────────────────────── Chronobiobank / Enterprise ───────────────────── */
+
+.cbb-kpi-grid {
+  display: grid;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .cbb-kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.cbb-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: clamp(1rem, 2.5vw, 1.375rem);
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-lg);
+  background: var(--seco-navy-card);
+}
+
+.cbb-kpi__value {
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.625rem, 4vw, 2.25rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #fff;
+}
+
+.cbb-kpi__label {
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  color: rgb(255 255 255 / 0.6);
+}
+
+.cbb-chart-grid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+@media (min-width: 768px) {
+  .cbb-chart-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cbb-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cbb-chart__row {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, 32%) 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cbb-chart__label {
+  font-size: 0.8125rem;
+  color: rgb(255 255 255 / 0.78);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cbb-chart__track {
+  position: relative;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.08);
+  overflow: hidden;
+}
+
+.cbb-chart__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  min-width: 0.5rem;
+  border-radius: 999px;
+  background: var(--seco-spectrum-hero);
+}
+
+.cbb-chart__value {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #fff;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.cbb-chart__share {
+  font-weight: 400;
+  color: rgb(255 255 255 / 0.45);
+}
+
+.cbb-stat-grid {
+  display: grid;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .cbb-stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.cbb-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: clamp(0.875rem, 2vw, 1.125rem);
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-md);
+  background: var(--seco-navy-card);
+}
+
+.cbb-stat__value {
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.375rem, 3vw, 1.75rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.cbb-stat__label {
+  font-size: 0.75rem;
+  color: rgb(255 255 255 / 0.58);
+}
+
+/* Cohort builder */
+.cbb-facets {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cbb-facet {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.cbb-facet__legend {
+  margin-bottom: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--seco-spectrum-cyan);
+}
+
+.cbb-facet__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cbb-chip {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.04);
+  font-size: 0.8125rem;
+  color: rgb(255 255 255 / 0.78);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.cbb-chip:hover {
+  border-color: rgb(255 255 255 / 0.3);
+  color: #fff;
+}
+
+.cbb-chip--active {
+  background: var(--seco-spectrum-hero);
+  border-color: transparent;
+  color: #0b1020;
+  font-weight: 600;
+}
+
+/* Licensing */
+.cbb-license-list,
+.cbb-log,
+.cbb-org-list,
+.cbb-policy {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cbb-license-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cbb-license {
+  padding: 1.125rem;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-md);
+  background: var(--seco-navy-card);
+}
+
+.cbb-license__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+}
+
+.cbb-license__type {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.cbb-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cbb-badge--active {
+  background: rgb(52 211 153 / 0.16);
+  color: rgb(110 231 183);
+}
+
+.cbb-badge--expired {
+  background: rgb(148 163 184 / 0.18);
+  color: rgb(203 213 225);
+}
+
+.cbb-badge--suspended {
+  background: rgb(251 191 36 / 0.16);
+  color: rgb(252 211 77);
+}
+
+.cbb-license__meta {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+}
+
+.cbb-license__meta dt {
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.45);
+}
+
+.cbb-license__meta dd {
+  margin: 0.2rem 0 0;
+  font-size: 0.875rem;
+  color: rgb(255 255 255 / 0.82);
+}
+
+.cbb-log {
+  display: flex;
+  flex-direction: column;
+}
+
+.cbb-log__row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0;
+  border-top: 1px solid rgb(255 255 255 / 0.07);
+  font-size: 0.8125rem;
+}
+
+.cbb-log__row:first-child {
+  border-top: 0;
+}
+
+.cbb-log__hash {
+  font-family: var(--seco-font-mono, monospace);
+  color: rgb(255 255 255 / 0.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cbb-log__count {
+  color: #fff;
+  white-space: nowrap;
+}
+
+.cbb-log__time {
+  color: rgb(255 255 255 / 0.5);
+  white-space: nowrap;
+}
+
+/* Settings */
+.cbb-org-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.cbb-org {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--seco-navy-border);
+  border-radius: var(--seco-radius-md);
+  background: var(--seco-navy-card);
+}
+
+.cbb-org__name {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.cbb-org__type {
+  font-size: 0.8125rem;
+  color: rgb(255 255 255 / 0.55);
+}
+
+.cbb-policy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.cbb-policy li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.cbb-policy li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--seco-spectrum-hero);
+}
