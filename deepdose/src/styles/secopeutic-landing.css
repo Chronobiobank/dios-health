@@ -2360,6 +2360,14 @@
   margin-top: 1.5rem;
 }
 
+.seco-clinics__access-note {
+  margin: 0 0 1rem;
+  max-width: 42ch;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.52);
+}
+
 .seco-clinics__cta .seco-landing__btn--primary {
   border: none;
 }

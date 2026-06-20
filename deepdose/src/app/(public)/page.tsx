@@ -5,7 +5,7 @@ import { DeepDoseSplashHome } from '@/components/secopeutic/DeepDoseSplashHome'
 export const metadata: Metadata = {
   title: 'DeepDose.org · Timing is the other half',
   description:
-    'DeepDose tracks your daily biological clock to tell you exactly when to take care — not just how much.',
+    'Standard drug dosing means 10m don\'t heal. Deepdose changes that — precision timing for patients, clinicians, and enterprise.',
   alternates: { canonical: '/' },
 }
 

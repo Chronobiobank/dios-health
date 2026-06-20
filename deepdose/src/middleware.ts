@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { resolvePostLoginPath } from '@/lib/auth/post-login-path'
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
@@ -24,11 +25,6 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   const { pathname } = request.nextUrl
 
-  // Signed-in users should not see login
-  if (user && pathname === '/login') {
-    return NextResponse.redirect(new URL('/patient/onboarding/consent', request.url))
-  }
-
   // Unauthenticated users cannot access protected tiers
   if (!user) {
     if (
@@ -36,12 +32,13 @@ export async function middleware(request: NextRequest) {
       pathname.startsWith('/clinical') ||
       pathname.startsWith('/enterprise')
     ) {
-      return NextResponse.redirect(new URL('/login', request.url))
+      const loginUrl = new URL('/login', request.url)
+      loginUrl.searchParams.set('next', pathname)
+      return NextResponse.redirect(loginUrl)
     }
     return supabaseResponse
   }
 
-  // Fetch user tier from user_profiles
   const { data: profile } = await supabase
     .from('user_profiles')
     .select('tier')
@@ -49,6 +46,14 @@ export async function middleware(request: NextRequest) {
     .single()
 
   const tier = profile?.tier ?? 'patient'
+
+  // Signed-in users should not see login — route by tier (or explicit next)
+  if (pathname === '/login') {
+    const next = request.nextUrl.searchParams.get('next')
+    return NextResponse.redirect(
+      new URL(resolvePostLoginPath(tier, next), request.url)
+    )
+  }
 
   // Enterprise routes: enterprise tier only
   if (pathname.startsWith('/enterprise') && tier !== 'enterprise') {

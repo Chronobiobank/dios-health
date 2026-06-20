@@ -1,8 +1,14 @@
 import Link from 'next/link'
 
 import { DeepdoseWordmark } from '@/components/brand/DeepdoseWordmark'
-import { DEEPDOSE_LOGO_GLYPH } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_LOGO_GLYPH, DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { SplashFrame } from '@/components/secopeutic/SplashFrame'
+
+const SPLASH_PORTALS = [
+  { label: 'For patients', href: '/patient-landing' },
+  { label: 'For clinicians', href: '/clinician-landing' },
+  { label: 'For enterprise', href: '/login?next=/enterprise/dashboard' },
+] as const
 
 export function DeepDoseSplashHome() {
   return (
@@ -16,20 +22,23 @@ export function DeepDoseSplashHome() {
 
         <div className="seco-splash__core">
           <h1 className="seco-splash__title">
-            10 million UK citizens are on weighted meds that don&apos;t work because they were
-            designed to a standardised (white) mean.
+            Standard drug dosing means 10m don&apos;t heal.{' '}
+            <span className="seco-splash__title-accent">{DEEPDOSE_NAME} changes that.</span>
           </h1>
 
           <nav
             className="seco-landing__hero-actions seco-splash__actions"
             aria-label="Choose your portal"
           >
-            <Link href="/patient-landing" className="seco-landing__btn seco-landing__btn--ghost">
-              Dosing for patients
-            </Link>
-            <Link href="/clinician-landing" className="seco-landing__btn seco-landing__btn--ghost">
-              Dosing for clinicians
-            </Link>
+            {SPLASH_PORTALS.map((portal) => (
+              <Link
+                key={portal.href}
+                href={portal.href}
+                className="seco-landing__btn seco-landing__btn--ghost"
+              >
+                {portal.label}
+              </Link>
+            ))}
           </nav>
         </div>
 

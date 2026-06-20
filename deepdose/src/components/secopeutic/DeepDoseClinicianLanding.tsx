@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { DEEPDOSE_CLINICIAN_LANDING } from '@/lib/secopeutic/landing-content'
 
 export function DeepDoseClinicianLanding() {
-  const { eyebrow, title, support, steps, cta } = DEEPDOSE_CLINICIAN_LANDING
+  const { eyebrow, title, support, steps, cta, accessNote } = DEEPDOSE_CLINICIAN_LANDING
 
   return (
     <div className="seco-clinics-page">
@@ -33,6 +33,7 @@ export function DeepDoseClinicianLanding() {
         </p>
 
         <div className="seco-clinics__cta seco-reveal seco-reveal--3">
+          <p className="seco-clinics__access-note">{accessNote}</p>
           <Link href={cta.href} className="seco-landing__btn seco-landing__btn--primary">
             {cta.label} →
           </Link>

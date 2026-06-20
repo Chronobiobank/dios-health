@@ -154,6 +154,8 @@ export const DEEPDOSE_CLINICIAN_LANDING = {
     },
   ],
   cta: { label: 'Sign in', href: '/login?next=/clinical/dashboard' },
+  accessNote:
+    'Clinician accounts are issued by your practice. Contact us if you need access.',
 } as const
 
 export const DEEPDOSE_TERMS_DECISION_SUPPORT =

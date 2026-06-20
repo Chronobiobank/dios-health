@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { createClient } from '@/lib/supabase/client'
+import { isStaffLoginPath, loginLede, resolvePostLoginPath } from '@/lib/auth/post-login-path'
 import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
 import { Input, Label } from '@/components/ui/Input'
@@ -13,17 +14,39 @@ type Mode = 'signin' | 'signup'
 export default function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const next = searchParams.get('next') ?? '/patient/onboarding/consent'
+  const next = searchParams.get('next')
+  const staffLogin = isStaffLoginPath(next)
   const callbackError = searchParams.get('error')
   const callbackReason = searchParams.get('reason')
 
   const [mode, setMode] = useState<Mode>('signin')
+  const effectiveMode: Mode = staffLogin ? 'signin' : mode
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+
+  async function redirectAfterAuth() {
+    const supabase = createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    let tier: string | undefined
+    if (user) {
+      const { data: profile } = await supabase
+        .from('user_profiles')
+        .select('tier')
+        .eq('id', user.id)
+        .maybeSingle()
+      tier = profile?.tier
+    }
+
+    router.push(resolvePostLoginPath(tier, next))
+    router.refresh()
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -33,7 +56,7 @@ export default function LoginForm() {
 
     const supabase = createClient()
 
-    if (mode === 'signup') {
+    if (effectiveMode === 'signup') {
       const { error: signUpError } = await supabase.auth.signUp({
         email,
         password,
@@ -51,8 +74,7 @@ export default function LoginForm() {
 
       const { data: sessionData } = await supabase.auth.getSession()
       if (sessionData.session) {
-        router.push(next)
-        router.refresh()
+        await redirectAfterAuth()
         return
       }
 
@@ -70,18 +92,17 @@ export default function LoginForm() {
       return
     }
 
-    router.push(next)
-    router.refresh()
+    await redirectAfterAuth()
   }
 
   return (
     <div className="space-y-6">
       <p className="seco-page__lede" style={{ marginBottom: '1.5rem' }}>
-        {mode === 'signin' ? 'Sign in to your account' : 'Create your patient account'}
+        {loginLede(next, effectiveMode)}
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {mode === 'signup' && (
+        {effectiveMode === 'signup' && (
           <div className="space-y-1.5">
             <Label htmlFor="displayName">Display name</Label>
             <Input
@@ -113,7 +134,7 @@ export default function LoginForm() {
             type="password"
             required
             minLength={8}
-            autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+            autoComplete={effectiveMode === 'signup' ? 'new-password' : 'current-password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -140,12 +161,12 @@ export default function LoginForm() {
         )}
 
         <Button type="submit" disabled={loading} className="w-full">
-          {loading ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
+          {loading ? 'Please wait…' : effectiveMode === 'signin' ? 'Sign in' : 'Create account'}
         </Button>
       </form>
 
       <p className="text-center text-sm text-ink-muted">
-        {mode === 'signin' ? (
+        {!staffLogin && (mode === 'signin' ? (
           <>
             New to {DEEPDOSE_NAME}?{' '}
             <button
@@ -167,7 +188,7 @@ export default function LoginForm() {
               Sign in
             </button>
           </>
-        )}
+        ))}
       </p>
     </div>
   )

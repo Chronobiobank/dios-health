@@ -1388,7 +1388,129 @@
   color: rgb(255 255 255 / 0.58);
 }
 
-/* Paper tiles with a day-to-night gradient header band */
+/* Research clusters — three domain tiles with papers listed inside */
+.seco-research-clusters {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 900px) {
+  .seco-research-clusters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.125rem;
+  }
+}
+
+.seco-research-cluster {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border-radius: var(--seco-radius-lg);
+  border: 1px solid var(--seco-navy-border);
+  background: var(--seco-navy-card);
+  overflow: hidden;
+}
+
+.seco-research-cluster__head {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-height: 5.5rem;
+  padding: 1rem 1.125rem;
+  overflow: hidden;
+}
+
+.seco-research-cluster__head--foundational {
+  background: linear-gradient(105deg, #acd3de 0%, #8b9cf8 58%, #c4a0ff 100%);
+}
+
+.seco-research-cluster__head--drug {
+  background: linear-gradient(105deg, #c4a0ff 0%, #e8a8c8 54%, #f2b8a2 100%);
+}
+
+.seco-research-cluster__head--population {
+  background: linear-gradient(105deg, #f2b8a2 0%, #c8b0f0 54%, #acd3de 100%);
+}
+
+.seco-research-cluster__head::after {
+  content: '';
+  position: absolute;
+  right: -15%;
+  top: -70%;
+  width: 60%;
+  height: 220%;
+  background: radial-gradient(closest-side, rgb(255 255 255 / 0.5), transparent);
+  opacity: 0.45;
+}
+
+.seco-research-cluster__title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(11 18 32 / 0.82);
+}
+
+.seco-research-cluster__summary {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: rgb(11 18 32 / 0.72);
+}
+
+.seco-research-cluster__papers {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seco-research-cluster__paper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.875rem 1.125rem;
+  border-top: 1px solid var(--seco-navy-border);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.seco-research-cluster__paper:hover {
+  background: rgb(255 255 255 / 0.04);
+}
+
+.seco-research-cluster__paper-title {
+  font-family: var(--seco-font-display);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.seco-research-cluster__paper-meta {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.52);
+}
+
+.seco-research-cluster__paper:hover .seco-research-cluster__paper-meta {
+  color: var(--seco-spectrum-cyan);
+}
+
+/* Legacy single-tile styles (landing evidence band) */
 .seco-research-tiles {
   display: grid;
   gap: 1rem;
@@ -3093,13 +3215,17 @@ html.splash-route body {
 
 .seco-splash__title {
   margin: 0;
-  max-width: 32ch;
+  max-width: 22ch;
   font-family: var(--seco-font-display);
   font-size: clamp(1.875rem, 5.8vw, 3.25rem);
   font-weight: 300;
   line-height: 1.42;
   letter-spacing: -0.025em;
   color: #fff;
+}
+
+.seco-splash__title-accent {
+  color: rgb(255 255 255 / 0.92);
 }
 
 .seco-splash__title--gateway {
@@ -3111,12 +3237,12 @@ html.splash-route body {
 .seco-splash__actions {
   justify-content: center;
   margin-top: 0;
-  width: min(100%, 26rem);
+  width: min(100%, 40rem);
 }
 
 .seco-splash__actions .seco-landing__btn {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 calc(33.333% - 0.5rem);
+  min-width: min(100%, 9.5rem);
 }
 
 @media (min-width: 640px) {

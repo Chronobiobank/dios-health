@@ -7,7 +7,6 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {
   DEEPDOSE_RESEARCH_INTRO,
   DEEPDOSE_RESEARCH_META,
-  DEEPDOSE_RESEARCH_PAPERS,
   DEEPDOSE_RESEARCH_SCHOLARS,
 } from '@/lib/secopeutic/research-content'
 import type { LandingClinician } from '@/lib/secopeutic/landing-clinicians'
@@ -142,11 +141,11 @@ export default function ResearchPage() {
           <div className="seco-research__section-head">
             <h2 className="seco-research__h2">Key papers</h2>
             <p className="seco-research__section-sub">
-              Peer-reviewed sources {DEEPDOSE_NAME} draws on. Click through to read the original
-              work.
+              Three evidence clusters — foundational science, drug timing, and population scale.
+              Click through to read the original work.
             </p>
           </div>
-          <ResearchPaperTiles papers={DEEPDOSE_RESEARCH_PAPERS} />
+          <ResearchPaperTiles />
         </section>
 
         <section className="seco-research__close seco-reveal seco-reveal--4">
