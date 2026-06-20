@@ -6,13 +6,14 @@ import { ZEITGEBER_DOMAINS, type ZeitgeberId } from '@/lib/chronobiology/zeitgeb
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 /** Time-of-day marker (0 = dawn, 100 = night) + colour, per cue. */
+/** Six defined circadian shades — dawn (white) through to night (dark lilac). */
 const ZEITGEBER_TIMING: Record<ZeitgeberId, { pct: number; label: string; color: string }> = {
-  light: { pct: 12, label: 'Morning', color: '#acd3de' },
-  meals: { pct: 40, label: 'Daytime', color: '#c4a0ff' },
-  meds: { pct: 55, label: 'Right phase', color: '#8b9cf8' },
-  exercise: { pct: 64, label: 'Afternoon', color: '#f2b8a2' },
-  cognition: { pct: 34, label: 'Midday', color: '#7ed4b8' },
-  sleep: { pct: 90, label: 'Night', color: '#9a8fce' },
+  light: { pct: 6, label: 'Dawn', color: '#eef4f8' },
+  meals: { pct: 22, label: 'Morning', color: '#acd3de' },
+  meds: { pct: 40, label: 'Midday', color: '#f4c19e' },
+  exercise: { pct: 58, label: 'Afternoon', color: '#f2a3c0' },
+  cognition: { pct: 76, label: 'Evening', color: '#c9b6f2' },
+  sleep: { pct: 94, label: 'Night', color: '#8a76c6' },
 }
 
 function ZeitgeberIcon({ id }: { id: ZeitgeberId }) {
@@ -57,10 +58,13 @@ function ZeitgeberIcon({ id }: { id: ZeitgeberId }) {
     case 'cognition':
       return (
         <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-          <path
-            d="M12 5.5a3 3 0 0 0-3 3 2.6 2.6 0 0 0-1 5 2.6 2.6 0 0 0 2 3.4 3 3 0 0 0 2 1.1M12 5.5a3 3 0 0 1 3 3 2.6 2.6 0 0 1 1 5 2.6 2.6 0 0 1-2 3.4 3 3 0 0 1-2 1.1M12 5.5V18"
-            {...common}
-          />
+          <g transform="translate(12 11.75) scale(1.4) translate(-12 -11.75)">
+            <path
+              d="M12 5.5a3 3 0 0 0-3 3 2.6 2.6 0 0 0-1 5 2.6 2.6 0 0 0 2 3.4 3 3 0 0 0 2 1.1M12 5.5a3 3 0 0 1 3 3 2.6 2.6 0 0 1 1 5 2.6 2.6 0 0 1-2 3.4 3 3 0 0 1-2 1.1M12 5.5V18"
+              {...common}
+              vectorEffect="non-scaling-stroke"
+            />
+          </g>
         </svg>
       )
     case 'sleep':
@@ -89,8 +93,8 @@ export default function AboutPage() {
         <section className="seco-about__section seco-reveal seco-reveal--1">
           <h2 className="seco-about__h2">Your daily doses</h2>
           <p className="seco-about__intro">
-            Six everyday cues keep your body clock on track. {DEEPDOSE_NAME} treats each as a dose
-            and finds the best time of day to take it.
+            Six cues set your body clock, and each has a distinct job in the body. {DEEPDOSE_NAME}{' '}
+            treats every one as a dose and finds the best time of day to take it.
           </p>
           <ul className="seco-about__list">
             {ZEITGEBER_DOMAINS.map((domain) => {

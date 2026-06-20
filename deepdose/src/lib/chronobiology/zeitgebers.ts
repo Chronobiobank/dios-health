@@ -22,48 +22,48 @@ export const ZEITGEBER_DOMAINS: readonly ZeitgeberDomain[] = [
     label: 'Sunlight Dose',
     shortLabel: 'Sunlight',
     cue: 'Light',
-    description: 'Morning daylight and a dim evening set your melatonin timing.',
+    description: 'Morning light reaches the retina and sets the master clock (SCN), the timekeeper every other rhythm follows.',
   },
   {
     id: 'meals',
     label: 'Nutrient Dose',
     shortLabel: 'Nutrient',
     cue: 'Food',
-    description: 'When you eat anchors your metabolic clock through the day.',
+    description: 'Meal timing entrains the peripheral clocks in your liver and gut, shaping insulin response and glucose control.',
   },
   {
     id: 'meds',
     label: 'Biomedical Dose',
     shortLabel: 'Biomedical',
     cue: 'Medicines & supplements',
-    description: 'Tablets and supplements work better at the right phase of your day.',
+    description: 'Absorption, metabolism, and clearance shift across the day, so timing changes both efficacy and side effects.',
   },
   {
     id: 'exercise',
     label: 'Physiological Dose',
     shortLabel: 'Physiological',
     cue: 'Movement',
-    description: 'Movement is a strong daily cue, and timing shapes recovery and sleep.',
+    description: 'Movement raises core temperature and cortisol, reinforcing the clock and driving cardiovascular repair.',
   },
   {
     id: 'cognition',
     label: 'Neurological Dose',
     shortLabel: 'Neurological',
     cue: 'Focus & mindfulness',
-    description: 'Deep focus and mindful rest land best at the right point in your day.',
+    description: 'Alertness and dopamine peak through the day; a mindful evening downshift lowers cortisol before sleep.',
   },
   {
     id: 'sleep',
-    label: 'Moonlight Dose',
-    shortLabel: 'Moonlight',
-    cue: 'Sleep',
-    description: 'Bedtime and wake time are the anchor for every other dose.',
+    label: 'Blackout Dose',
+    shortLabel: 'Blackout',
+    cue: 'Darkness',
+    description: 'Darkness triggers melatonin release, the signal for deep sleep, tissue repair, and overnight recovery.',
   },
 ] as const
 
 /** Plain-language list for marketing — no jargon */
 export const ZEITGEBER_PLAIN_LIST =
-  'light, food, medicines, movement, focus, and sleep'
+  'light, food, medicines, movement, focus, and darkness'
 
 /** One-line education: zeitgeber → dose */
 export const DOSE_ZEITGEBER_EDUCATION =

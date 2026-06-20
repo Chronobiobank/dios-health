@@ -1899,11 +1899,12 @@
   border-radius: 999px;
   background: linear-gradient(
     90deg,
-    #acd3de 0%,
-    #c8b0f0 34%,
-    #f2b8a2 60%,
-    #8b6f9e 80%,
-    #1a2440 100%
+    #eef4f8 0%,
+    #acd3de 20%,
+    #f4c19e 40%,
+    #f2a3c0 58%,
+    #c9b6f2 78%,
+    #8a76c6 100%
   );
 }
 
