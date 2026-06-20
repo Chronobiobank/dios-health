@@ -23,9 +23,6 @@ export function AboutFounderSection() {
         <div className="about-founder__copy">
           <p className="seco-page__eyebrow mb-2">Founder</p>
           <h2 className="about-founder__name">{founder.name}</h2>
-          <p className="about-founder__role">
-            {founder.role} · {founder.product}
-          </p>
           <p className="about-founder__affiliation">
             <Link
               href={founder.nihiUrl}

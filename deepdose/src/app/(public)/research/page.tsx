@@ -84,7 +84,7 @@ export default function ResearchPage() {
           className="seco-research-scholars seco-reveal seco-reveal--2"
           aria-label="Key researchers"
         >
-          <h2 className="seco-app-section-title">Built on chronobiology research</h2>
+          <h2 className="seco-app-section-title">Built on research</h2>
           <ul className="seco-research-scholars-list">
             {DEEPDOSE_RESEARCH_SCHOLARS.map(({ clinician, cite, href, sourceLabel }) => (
               <li key={clinician.name} className="seco-research-scholar">

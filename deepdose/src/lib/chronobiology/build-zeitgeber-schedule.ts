@@ -90,6 +90,7 @@ export function buildZeitgeberSchedule(input: {
 
   const morningLight = minutesToClock(phase - 600)
   const firstMeal = minutesToClock(phase - 540)
+  const focusBlock = minutesToClock(phase - 480)
   const exercise = minutesToClock(phase - 420)
   const lightCurfew = minutesToClock(phase - 90)
   const sleepTarget = minutesToClock(phase + 45)
@@ -102,6 +103,7 @@ export function buildZeitgeberSchedule(input: {
 
   const lightActive = isTimeInWindow(nowClock, morningLight, minutesToClock(phase - 360))
   const mealActive = isTimeInWindow(nowClock, firstMeal, minutesToClock(phase - 480))
+  const focusActive = isTimeInWindow(nowClock, focusBlock, minutesToClock(phase - 300))
   const exerciseActive = isTimeInWindow(nowClock, exercise, minutesToClock(phase - 240))
   const sleepActive =
     isTimeInWindow(nowClock, lightCurfew, '23:59') ||
@@ -135,6 +137,13 @@ export function buildZeitgeberSchedule(input: {
       timeLabel: exercise,
       instruction: `Move your body around ${exercise}. Exercise is a strong daily time cue.`,
       activeNow: exerciseActive,
+    },
+    {
+      id: 'cognition',
+      label: domainById.cognition,
+      timeLabel: focusBlock,
+      instruction: `Save demanding focus for around ${focusBlock}, and ease into mindful rest as the evening winds down.`,
+      activeNow: focusActive,
     },
     {
       id: 'meds',

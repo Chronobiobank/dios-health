@@ -105,7 +105,7 @@ export default function HomeTestPage() {
         <header className="seco-hometest__hero seco-reveal seco-reveal--1">
           <div className="seco-hometest__hero-copy">
             <p className="seco-page__eyebrow">TipTraQ home kit</p>
-            <h1 className="seco-page__title">Get your home sleep test</h1>
+            <h1 className="seco-page__title">Your home sleep test</h1>
             <p className="seco-page__lede">
               If your GP suggests a home sleep test, three nights at home costs {baseline}, about
               half a typical private test. Your clinician adds your results to {DEEPDOSE_NAME}, and

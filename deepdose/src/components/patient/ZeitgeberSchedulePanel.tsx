@@ -8,6 +8,7 @@ const ZEITGEBER_ICONS: Record<ZeitgeberId, string> = {
   meals: '🍽️',
   meds: '💊',
   exercise: '🏃',
+  cognition: '🧠',
   sleep: '🌙',
 }
 
