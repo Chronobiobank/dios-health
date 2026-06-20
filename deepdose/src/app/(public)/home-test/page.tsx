@@ -118,6 +118,12 @@ export default function HomeTestPage() {
               </li>
             ))}
           </ol>
+          <Link
+            href="/tiptraq"
+            className="seco-landing__btn seco-landing__btn--ghost seco-hometest__guide-link"
+          >
+            See the full setup guide →
+          </Link>
         </section>
 
         <section className="seco-hometest__section seco-reveal seco-reveal--3">

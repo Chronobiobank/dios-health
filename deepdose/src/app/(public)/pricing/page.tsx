@@ -42,7 +42,7 @@ export default function PricingPage() {
     },
     {
       id: 'clinical-baseline',
-      name: 'Clinical baseline',
+      name: 'Clinical sleep test',
       figure: baseline,
       cadence: 'TipTraQ kit · three nights',
       note: 'Three nights with the TipTraQ home kit for a clinically-driven DLMO reading and your verified data badge.',
@@ -119,7 +119,7 @@ export default function PricingPage() {
             the best times for light, meals, medicines, exercise, and sleep.
           </p>
           <Link
-            href="/home-test"
+            href="/tiptraq"
             className="seco-landing__btn seco-landing__btn--ghost seco-pricing__close-btn"
           >
             How the home test works →
