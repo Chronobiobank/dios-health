@@ -32,7 +32,7 @@ export async function middleware(request: NextRequest) {
   // Unauthenticated users cannot access protected tiers
   if (!user) {
     if (
-      pathname.startsWith('/patient') ||
+      pathname.startsWith('/patient/') ||
       pathname.startsWith('/clinical') ||
       pathname.startsWith('/enterprise')
     ) {

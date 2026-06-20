@@ -21,23 +21,9 @@ export function DeepDoseLanding() {
             <p className="seco-landing__hero-lede seco-reveal seco-reveal--2">
               {DEEPDOSE_LANDING_HERO.support}
             </p>
-            <div className="seco-landing__hero-actions seco-reveal seco-reveal--3">
-              <Link
-                href={DEEPDOSE_LANDING_HERO.actions.primary.href}
-                className="seco-landing__btn seco-landing__btn--primary"
-              >
-                {DEEPDOSE_LANDING_HERO.actions.primary.label} →
-              </Link>
-              <Link
-                href={DEEPDOSE_LANDING_HERO.actions.secondary.href}
-                className="seco-landing__btn seco-landing__btn--ghost"
-              >
-                {DEEPDOSE_LANDING_HERO.actions.secondary.label} →
-              </Link>
-            </div>
           </div>
         </div>
-        <div className="seco-landing__section-inner seco-reveal seco-reveal--4">
+        <div className="seco-landing__section-inner seco-reveal seco-reveal--3">
           <SecopeuticHeroTabs />
         </div>
       </section>
@@ -105,12 +91,6 @@ export function DeepDoseLanding() {
               className="seco-landing__btn seco-landing__btn--primary"
             >
               {DEEPDOSE_LANDING_CLOSE.cta.label} →
-            </Link>
-            <Link
-              href={DEEPDOSE_LANDING_CLOSE.secondaryCta.href}
-              className="seco-landing__btn seco-landing__btn--secondary"
-            >
-              {DEEPDOSE_LANDING_CLOSE.secondaryCta.label} →
             </Link>
           </div>
         </div>

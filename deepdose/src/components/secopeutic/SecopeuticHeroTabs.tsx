@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import type { CSSProperties, ReactElement, ReactNode } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
@@ -382,8 +381,7 @@ function HeroPanelCard({
   media?: ReactNode
 }) {
   return (
-    <Link
-      href={item.href}
+    <article
       className={cn('seco-hero-tabs__panel-card', Boolean(media) && 'seco-hero-tabs__panel-card--media')}
     >
       {media}
@@ -399,7 +397,7 @@ function HeroPanelCard({
       >
         {index + 1}
       </span>
-    </Link>
+    </article>
   )
 }
 
@@ -481,13 +479,6 @@ export function SecopeuticHeroTabs() {
               })}
             </div>
           )}
-
-          <Link
-            href={activePillar.panelSeeAll.href}
-            className="seco-hero-tabs__panel-link seco-hero-tabs__panel-link--footer"
-          >
-            {activePillar.panelSeeAll.label} →
-          </Link>
         </div>
       </div>
     </div>

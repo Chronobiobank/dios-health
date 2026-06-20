@@ -155,10 +155,7 @@ export default function ResearchPage() {
           <p className="seco-research__close-sub">{consent}</p>
           <div className="seco-research__close-actions">
             <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
-              Start assessment →
-            </Link>
-            <Link href="/home-test" className="seco-landing__btn seco-landing__btn--ghost">
-              Get your test →
+              Start free →
             </Link>
           </div>
         </section>

@@ -15,10 +15,6 @@ export const DEEPDOSE_LANDING_HERO = {
   headlineAccent: 'your window',
   support:
     'DeepDose translates your unique biology into a precise treatment plan, delivering exactly what you need to heal.',
-  actions: {
-    primary: { label: 'Start your assessment', href: '/login' },
-    secondary: { label: 'See the science', href: '/research' },
-  },
 } as const
 
 const EVIDENCE_PAPER_IDS = ['hermida-2020', 'pigazzani-2024', 'wallace-2003'] as const
@@ -130,9 +126,34 @@ export const DEEPDOSE_LANDING_PLATFORM = {
 export const DEEPDOSE_LANDING_CLOSE = {
   headline: 'Find your right time',
   support:
-    'Start with a short chronotype quiz, track your daily cues, and see an alignment score your clinician can act on.',
-  cta: { label: 'For clinicians', href: '/about' },
-  secondaryCta: { label: 'Start your assessment', href: '/login' },
+    'Start with a free body-clock baseline from your phone and wearables — then see when to take light, meals, medicines, and sleep.',
+  cta: { label: 'Start free', href: '/login' },
+} as const
+
+export const DEEPDOSE_CLINICIAN_LANDING = {
+  eyebrow: 'For clinicians',
+  title: 'Make time count for your panel.',
+  support:
+    'Device alerts first, then misalignment. TipTraQ nights profile patients for precision dosing — you review flagged records before outcomes slip.',
+  steps: [
+    {
+      title: 'Triage by drift',
+      meta: 'Device alerts and BTI misalignment rise to the top of your queue.',
+    },
+    {
+      title: 'TipTraQ home nights',
+      meta: 'Three-night kits set a dosing baseline and metabolic early warning.',
+    },
+    {
+      title: 'Timing recommendations',
+      meta: 'Evidence-graded windows you approve — decision support only.',
+    },
+    {
+      title: 'Invite & link patients',
+      meta: 'Share a code; patients opt in to clinical care sharing on their terms.',
+    },
+  ],
+  cta: { label: 'Sign in', href: '/login?next=/clinical/dashboard' },
 } as const
 
 export const DEEPDOSE_TERMS_DECISION_SUPPORT =
@@ -144,6 +165,3 @@ export const DEEPDOSE_NAV_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Sign in', href: '/login' },
 ] as const
-
-/** Primary conversion CTA in the top nav: the TipTraQ home-test page. */
-export const DEEPDOSE_GET_TEST_CTA = { label: 'Get your test', href: '/home-test' } as const

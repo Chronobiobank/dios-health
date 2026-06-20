@@ -109,15 +109,6 @@ export const DEEPDOSE_RESEARCH_PAPERS: ResearchPaperTile[] = [
     href: 'https://doi.org/10.1016/j.molmed.2016.03.004',
   },
   {
-    id: 'hermida-2008',
-    tier: 'Drug-specific',
-    title: 'Time of day of blood pressure treatment in diabetes',
-    authors: 'Hermida, R.C. et al.',
-    year: '2008',
-    meta: 'Diabetes Care',
-    href: 'https://doi.org/10.2337/dc08-0293',
-  },
-  {
     id: 'wallace-2003',
     tier: 'Drug-specific',
     title: 'Simvastatin morning vs evening (RCT)',
@@ -129,15 +120,6 @@ export const DEEPDOSE_RESEARCH_PAPERS: ResearchPaperTile[] = [
     imageAlt: 'Glowing capsule between a sunrise and an evening sky',
   },
   {
-    id: 'smolensky-2007',
-    tier: 'Drug-specific',
-    title: 'Chronobiology, drug delivery, and chronotherapeutics',
-    authors: 'Smolensky, M.H. et al.',
-    year: '2007',
-    meta: 'Advanced Drug Delivery Reviews',
-    href: 'https://doi.org/10.1016/j.addr.2007.05.009',
-  },
-  {
     id: 'roenneberg-2007',
     tier: 'Population',
     title: 'Epidemiology of the human circadian clock',
@@ -145,15 +127,6 @@ export const DEEPDOSE_RESEARCH_PAPERS: ResearchPaperTile[] = [
     year: '2007',
     meta: 'Sleep Medicine Reviews',
     href: 'https://doi.org/10.1016/j.sleep.2007.05.001',
-  },
-  {
-    id: 'amiama-roig-2022',
-    tier: 'Population',
-    title: 'Timing of administration for common medicines',
-    authors: 'Amiama-Roig, A. et al.',
-    year: '2016',
-    meta: 'Pharmaceutics · PMC',
-    href: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4932476/',
   },
   {
     id: 'windred-2024',

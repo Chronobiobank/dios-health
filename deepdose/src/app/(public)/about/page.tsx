@@ -68,10 +68,7 @@ export default function AboutPage() {
 
         <div className="seco-about__actions seco-reveal seco-reveal--3">
           <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
-            Start onboarding →
-          </Link>
-          <Link href="/research" className="seco-landing__btn seco-landing__btn--ghost">
-            Research →
+            Start free →
           </Link>
         </div>
       </div>

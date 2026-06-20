@@ -46,7 +46,7 @@ export default function PricingPage() {
       figure: baseline,
       cadence: 'TipTraQ kit · three nights',
       note: 'Three nights with the TipTraQ home kit for a clinically-driven DLMO reading and your verified data badge.',
-      cta: { label: 'Order your test', href: '/login' },
+      cta: { label: 'Order your test', href: '/home-test' },
       includes: [
         ...TIPTRAQ_STUDY_PRICING_UK.includes,
         'Personalised dosing windows on your dashboard',
@@ -60,7 +60,7 @@ export default function PricingPage() {
       figure: quarterly,
       cadence: 'Every three months',
       note: 'A clinical TipTraQ re-read every quarter, like a blood panel, to keep your plan accurate.',
-      cta: { label: 'Order a re-read', href: '/login' },
+      cta: { label: 'Order a re-read', href: '/home-test' },
       includes: [
         'Re-order the reusable TipTraQ kit every three months',
         'Fresh clinical DLMO and chronotype read',
@@ -116,14 +116,11 @@ export default function PricingPage() {
           <p className="seco-pricing__close-note">
             Order on the advice of your GP or another healthcare professional — no clinic visit, no
             waiting list. Your clinician adds the results to {DEEPDOSE_NAME} and your dashboard shows
-            the best times for light, meals, medicines, exercise, and sleep.
+            the best times for light, meals, medicines, exercise, and sleep.{' '}
+            <Link href="/tiptraq" className="seco-research-inline-link">
+              How the home test works ↗
+            </Link>
           </p>
-          <Link
-            href="/tiptraq"
-            className="seco-landing__btn seco-landing__btn--ghost seco-pricing__close-btn"
-          >
-            How the home test works →
-          </Link>
         </section>
       </div>
     </article>

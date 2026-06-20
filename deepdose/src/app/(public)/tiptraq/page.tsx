@@ -134,9 +134,6 @@ export default function TipTraqGuidePage() {
           <Link href="/pricing" className="seco-landing__btn seco-landing__btn--primary">
             Order your test →
           </Link>
-          <Link href="/home-test" className="seco-landing__btn seco-landing__btn--ghost">
-            Back to the home test →
-          </Link>
         </div>
       </div>
     </article>

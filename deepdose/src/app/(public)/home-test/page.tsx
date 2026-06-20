@@ -79,14 +79,6 @@ export default function HomeTestPage() {
               A clinical-grade sleep test you take at home over three nights — {baseline}, about half
               a typical private test.
             </p>
-            <div className="seco-hometest__hero-actions">
-              <Link href="/pricing" className="seco-landing__btn seco-landing__btn--primary">
-                Order your test →
-              </Link>
-              <Link href="/research" className="seco-landing__btn seco-landing__btn--ghost">
-                See the research →
-              </Link>
-            </div>
           </div>
           <figure className="seco-hometest__hero-media">
             <Image
@@ -118,12 +110,11 @@ export default function HomeTestPage() {
               </li>
             ))}
           </ol>
-          <Link
-            href="/tiptraq"
-            className="seco-landing__btn seco-landing__btn--ghost seco-hometest__guide-link"
-          >
-            See the full setup guide →
-          </Link>
+          <p className="seco-hometest__guide-note">
+            <Link href="/tiptraq" className="seco-research-inline-link">
+              See the full setup guide ↗
+            </Link>
+          </p>
         </section>
 
         <section className="seco-hometest__section seco-reveal seco-reveal--3">
@@ -164,9 +155,6 @@ export default function HomeTestPage() {
         <div className="seco-hometest__order seco-reveal seco-reveal--4">
           <Link href="/pricing" className="seco-landing__btn seco-landing__btn--primary">
             Order your test →
-          </Link>
-          <Link href="/research" className="seco-landing__btn seco-landing__btn--ghost">
-            Read the science →
           </Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { SiteNavBar } from '@/components/secopeutic/SiteNavBar'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
-import { DEEPDOSE_GET_TEST_CTA, DEEPDOSE_NAV_LINKS } from '@/lib/secopeutic/landing-content'
+import { DEEPDOSE_NAV_LINKS } from '@/lib/secopeutic/landing-content'
 
 export function SecopeuticSiteNav() {
   return (
@@ -9,7 +9,6 @@ export function SecopeuticSiteNav() {
       brandAriaLabel={`${DEEPDOSE_NAME} home`}
       navAriaLabel={DEEPDOSE_NAME}
       links={DEEPDOSE_NAV_LINKS}
-      cta={DEEPDOSE_GET_TEST_CTA}
     />
   )
 }
