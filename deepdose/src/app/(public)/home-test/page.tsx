@@ -79,13 +79,6 @@ export default function HomeTestPage() {
   const quarterly = formatTipTraqQuarterlyFee()
   const privateAnchor = `£${TIPTRAQ_STUDY_PRICING_UK.ukWatchPat3NightGbp}`
 
-  const heroPoints = [
-    'Three nights at home',
-    `${baseline} baseline`,
-    'About half a private test',
-    'Free on the research programme',
-  ]
-
   const priceTiers: PriceTier[] = [
     {
       tier: 'Baseline',
@@ -118,13 +111,6 @@ export default function HomeTestPage() {
               half a typical private test. Your clinician adds your results to {DEEPDOSE_NAME}, and
               your dashboard shows the best times for light, meals, medicines, exercise, and sleep.
             </p>
-            <ul className="seco-hometest__chips">
-              {heroPoints.map((point) => (
-                <li key={point} className="seco-hometest__chip">
-                  {point}
-                </li>
-              ))}
-            </ul>
             <div className="seco-hometest__hero-actions">
               <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
                 Get your test →
@@ -150,7 +136,7 @@ export default function HomeTestPage() {
         </header>
 
         <section className="seco-hometest__section seco-reveal seco-reveal--2">
-          <h2 className="seco-app-section-title">How it works</h2>
+          <h2 className="seco-hometest__h2">How it works</h2>
           <ol className="seco-hometest__steps">
             {STEPS.map((step, index) => (
               <li key={step.title} className="seco-hometest__step">
@@ -168,7 +154,7 @@ export default function HomeTestPage() {
 
         <section className="seco-hometest__section seco-reveal seco-reveal--3">
           <div className="seco-hometest__section-head">
-            <h2 className="seco-app-section-title">Simple pricing</h2>
+            <h2 className="seco-hometest__h2">Simple pricing</h2>
             <p className="seco-hometest__section-sub">
               About half a typical private test. A three-night clinic rental is around{' '}
               {privateAnchor}.

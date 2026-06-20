@@ -57,13 +57,13 @@
   --maven-navy-card: #151f33;
   --maven-navy-border: rgb(255 255 255 / 0.1);
   --maven-canvas: #f7f8fa;
-  --maven-spectrum: linear-gradient(92deg, #5ec8f5 0%, #8b9cf8 42%, #c4a0ff 100%);
+  --maven-spectrum: linear-gradient(92deg, #acd3de 0%, #8b9cf8 42%, #c4a0ff 100%);
   --maven-spectrum-hero: linear-gradient(
     90deg,
     #f2b8a2 0%,
     #e8a8c8 38%,
     #c8b0f0 72%,
-    #a8c8ff 100%
+    #acd3de 100%
   );
 
   /* ── Clinical status ── */

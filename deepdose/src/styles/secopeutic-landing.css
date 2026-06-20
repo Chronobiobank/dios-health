@@ -370,13 +370,13 @@
 }
 
 .seco-hero-tabs__icon--blue {
-  background: rgb(168 200 255 / 0.22);
-  color: #a8c8ff;
+  background: rgb(172 211 222 / 0.22);
+  color: #acd3de;
 }
 
 .seco-hero-tabs__tab--active .seco-hero-tabs__icon--blue {
-  background: rgb(168 200 255 / 0.24);
-  color: #3f6cc4;
+  background: rgb(172 211 222 / 0.24);
+  color: #3f7d8c;
 }
 
 .seco-hero-tabs__copy {
@@ -1951,7 +1951,7 @@
 
 .secopeutic-demo.seco-shell--dark .seco-maven-course-card__link,
 .secopeutic-demo.seco-shell--dark .seco-landing__card-link {
-  color: #8fd4ff;
+  color: #acd3de;
 }
 
 .secopeutic-demo.seco-shell--dark .seco-maven-course-card:hover {

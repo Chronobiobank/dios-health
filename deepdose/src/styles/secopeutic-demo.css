@@ -15,7 +15,7 @@
   --seco-surface: #fff;
   --seco-canvas: #f7f8fa;
   --seco-border: rgb(17 18 19 / 0.08);
-  --seco-spectrum-cyan: #5ec8f5;
+  --seco-spectrum-cyan: #acd3de;
   --seco-spectrum-mid: #8b9cf8;
   --seco-spectrum-lilac: #c4a0ff;
   --seco-spectrum: linear-gradient(92deg, var(--seco-spectrum-cyan) 0%, var(--seco-spectrum-mid) 42%, var(--seco-spectrum-lilac) 100%);
@@ -29,7 +29,7 @@
   --seco-dial-face-from: rgb(255 255 255 / 0.14);
   --seco-dial-face-mid: rgb(255 255 255 / 0.06);
   --seco-dial-face-to: rgb(255 255 255 / 0.02);
-  --seco-dial-window-glow-from: rgb(94 200 245 / 0.55);
+  --seco-dial-window-glow-from: rgb(172 211 222 / 0.55);
   --seco-dial-window-glow-to: rgb(196 160 255 / 0.35);
   --seco-dial-surface: rgb(255 255 255 / 0.08);
   --seco-dial-readout-bg: rgb(11 18 32 / 0.9);
@@ -39,7 +39,7 @@
     #f2b8a2 0%,
     #e8a8c8 38%,
     #c8b0f0 72%,
-    #a8c8ff 100%
+    #acd3de 100%
   );
   --seco-radius-md: 0.875rem;
   --seco-radius-lg: 1.125rem;
