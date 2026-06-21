@@ -239,3 +239,29 @@ body:has([data-clinical-layout].seco-shell--dark) {
   background: rgb(255 255 255 / 0.1);
   border-color: rgb(255 255 255 / 0.2);
 }
+
+/* ── Full-height canvas: ambient visible nav → footer ── */
+.deepdose-shell.seco-shell--dark,
+.deepdose-shell.seco-shell--dark .clinical-layout,
+.deepdose-shell.seco-shell--dark .clinical-site-nav__main,
+.deepdose-shell.seco-shell--dark .seco-landing,
+.deepdose-shell.seco-shell--dark .seco-landing--maven,
+.deepdose-shell.seco-shell--dark .seco-landing__light,
+.deepdose-shell.seco-shell--dark .seco-landing__light--canvas,
+.deepdose-shell.seco-shell--dark .seco-landing__close-navy,
+.deepdose-shell.seco-shell--dark .seco-evidence-band,
+.deepdose-shell.seco-shell--dark .seco-page,
+.deepdose-shell.seco-shell--dark .seco-app-page {
+  background: transparent;
+  background-image: none;
+}
+
+/* No inset stripe highlights on dark-shell marketing cards */
+.deepdose-shell.seco-shell--dark .seco-evidence-band__card::before {
+  display: none;
+}
+
+/* Frosted footer — ambient shows through */
+.deepdose-shell.seco-shell--dark .seco-footer {
+  background: rgb(6 10 18 / 0.26);
+}

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { DEEPDOSE_LOGO_GLYPH, DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 const FOOTER_LINKS = [
+  { label: 'Science & trust', href: '/science' },
   { label: 'Research', href: '/research' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Home test', href: '/home-test' },

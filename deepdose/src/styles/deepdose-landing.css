@@ -35,7 +35,7 @@
   margin: 0;
   font-size: clamp(2.5rem, 7.5vw, 4.75rem);
   font-weight: 300;
-  line-height: 1.08;
+  line-height: var(--text-display-leading-hero);
   letter-spacing: var(--seco-display-tracking-hero);
   color: #fff;
 }
@@ -79,7 +79,7 @@
 
 .seco-landing__hero-line {
   display: block;
-  line-height: 1.1;
+  line-height: var(--text-display-leading-hero);
 }
 
 .seco-landing__hero-line + .seco-landing__hero-line {
@@ -2619,16 +2619,57 @@
   cursor: wait;
 }
 
-/* ——— Full-page dark navy (landing home) ——— */
+/* ——— Full-page dark shell (landing home) ——— */
 .deepdose-shell.seco-shell--dark .seco-landing--maven {
-  background: var(--seco-navy);
+  background: transparent;
   color: #fff;
 }
 
 .deepdose-shell.seco-shell--dark .seco-landing__light,
 .deepdose-shell.seco-shell--dark .seco-landing__light--canvas {
-  background: var(--seco-navy);
+  background: transparent;
   color: #fff;
+}
+
+.deepdose-shell.seco-shell--dark .seco-landing__close-navy,
+.deepdose-shell.seco-shell--dark .seco-evidence-band {
+  background: transparent;
+}
+
+.deepdose-shell.seco-shell--dark .seco-landing__feature-card,
+.deepdose-shell.seco-shell--dark .seco-landing__zone,
+.deepdose-shell.seco-shell--dark .seco-maven-course-card,
+.deepdose-shell.seco-shell--dark .seco-evidence-band__card {
+  border-color: var(--dios-glass-outer-border);
+  background: var(--dios-glass-outer-bg);
+  backdrop-filter: var(--dios-glass-outer-blur);
+  -webkit-backdrop-filter: var(--dios-glass-outer-blur);
+  box-shadow: var(--dios-glass-outer-shadow);
+}
+
+.deepdose-shell.seco-shell--dark .seco-maven-chip {
+  border-color: var(--dios-glass-outer-border);
+  background: var(--dios-glass-inner-bg);
+  backdrop-filter: var(--dios-glass-inner-blur);
+  -webkit-backdrop-filter: var(--dios-glass-inner-blur);
+  color: rgb(255 255 255 / 0.82);
+}
+
+.deepdose-shell.seco-shell--dark .seco-hero-tabs {
+  border: 1px solid var(--dios-glass-outer-border);
+  background: var(--dios-glass-outer-bg);
+  backdrop-filter: var(--dios-glass-outer-blur);
+  -webkit-backdrop-filter: var(--dios-glass-outer-blur);
+  box-shadow: var(--dios-glass-outer-shadow);
+}
+
+.deepdose-shell.seco-shell--dark .seco-hero-tabs__tab:not(.seco-hero-tabs__tab--active) {
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+.deepdose-shell.seco-shell--dark .seco-hero-tabs__tab:hover:not(.seco-hero-tabs__tab--active) {
+  background: rgb(255 255 255 / 0.1);
 }
 
 .deepdose-shell.seco-shell--dark .seco-landing__section-title {
@@ -2649,13 +2690,6 @@
 
 .deepdose-shell.seco-shell--dark .seco-landing__points li {
   color: rgb(255 255 255 / 0.72);
-}
-
-.deepdose-shell.seco-shell--dark .seco-landing__feature-card,
-.deepdose-shell.seco-shell--dark .seco-landing__zone,
-.deepdose-shell.seco-shell--dark .seco-maven-course-card {
-  border-color: var(--seco-navy-border);
-  background: var(--seco-navy-card);
 }
 
 .deepdose-shell.seco-shell--dark .seco-landing__card-label,
@@ -2679,12 +2713,6 @@
 
 .deepdose-shell.seco-shell--dark .seco-maven-course-card:hover {
   box-shadow: 0 10px 28px rgb(0 0 0 / 0.28);
-}
-
-.deepdose-shell.seco-shell--dark .seco-maven-chip {
-  border-color: var(--seco-navy-border);
-  background: var(--seco-navy-card);
-  color: rgb(255 255 255 / 0.82);
 }
 
 .deepdose-shell.seco-shell--dark .seco-maven-chip:hover {

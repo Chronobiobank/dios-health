@@ -18,7 +18,7 @@ export function ResearchPaperTiles() {
               CLUSTER_HEAD_CLASS[cluster.tier] ?? 'seco-research-cluster__head--foundational'
             )}
           >
-            <h3 className="seco-research-cluster__title">{cluster.tier}</h3>
+            <p className="seco-page__eyebrow seco-research-cluster__eyebrow">{cluster.tier}</p>
             <p className="seco-research-cluster__summary">{cluster.summary}</p>
           </div>
 
