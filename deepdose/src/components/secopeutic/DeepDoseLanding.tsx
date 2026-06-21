@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { SecopeuticHeroHeadline } from '@/components/secopeutic/SecopeuticHeroHeadline'
+import { LandingHeroIntro } from '@/components/secopeutic/LandingHeroIntro'
 import { SecopeuticHeroTabs } from '@/components/secopeutic/SecopeuticHeroTabs'
 import {
   DEEPDOSE_LANDING_CLOSE,
@@ -13,16 +13,7 @@ export function DeepDoseLanding() {
   return (
     <div className="seco-landing seco-landing--maven">
       <section className="seco-landing__hero">
-        <div className="seco-landing__hero-navy">
-          <div className="seco-landing__section-inner">
-            <div className="seco-reveal seco-reveal--1">
-              <SecopeuticHeroHeadline />
-            </div>
-            <p className="seco-landing__hero-lede seco-reveal seco-reveal--2">
-              {DEEPDOSE_LANDING_HERO.support}
-            </p>
-          </div>
-        </div>
+        <LandingHeroIntro hero={DEEPDOSE_LANDING_HERO} />
         <div className="seco-landing__section-inner seco-reveal seco-reveal--3">
           <SecopeuticHeroTabs />
         </div>

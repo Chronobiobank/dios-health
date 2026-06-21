@@ -2266,7 +2266,7 @@
 }
 
 .seco-clinics__panel {
-  margin-top: 1.75rem;
+  margin-top: 0;
   border: 1px solid var(--seco-navy-border);
   border-radius: var(--seco-radius-lg);
   background: rgb(255 255 255 / 0.03);

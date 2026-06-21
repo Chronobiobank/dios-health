@@ -3114,12 +3114,14 @@ html.splash-route body {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--seco-navy, #0b1220) 68%, transparent) 0%,
-    color-mix(in srgb, var(--seco-navy, #0b1220) 78%, transparent) 50%,
-    color-mix(in srgb, var(--seco-navy, #0b1220) 86%, transparent) 100%
-  );
+  background:
+    linear-gradient(
+      180deg,
+      rgb(11 18 32 / 0.55) 0%,
+      rgb(11 18 32 / 0.68) 48%,
+      rgb(11 18 32 / 0.78) 100%
+    ),
+    rgb(11 18 32 / 0.42);
 }
 
 .seco-splash__page {
@@ -3214,14 +3216,23 @@ html.splash-route body {
 }
 
 .seco-splash__title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
   margin: 0;
-  max-width: 26ch;
+  width: min(100%, 20em);
+  max-width: none;
   font-family: var(--seco-font-display);
-  font-size: clamp(1.875rem, 5.8vw, 3.25rem);
+  font-size: clamp(1.5rem, 3.8vw + 0.65rem, 3rem);
   font-weight: 300;
-  line-height: 1.42;
+  line-height: 1.16;
   letter-spacing: -0.025em;
   color: #fff;
+  text-wrap: balance;
+}
+
+.seco-splash__title-line {
+  display: block;
 }
 
 .seco-splash__title-accent {
@@ -3266,7 +3277,8 @@ html.splash-route body {
   }
 
   .seco-splash__title {
-    font-size: clamp(1.5rem, 5.5vw, 2.25rem);
-    line-height: 1.38;
+    width: min(100%, 18em);
+    font-size: clamp(1.375rem, 4.8vw, 2rem);
+    line-height: 1.14;
   }
 }

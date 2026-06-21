@@ -1,15 +1,19 @@
-import { DEEPDOSE_LANDING_HERO } from '@/lib/secopeutic/landing-content'
+import type { LandingHeroContent } from '@/lib/secopeutic/landing-hero'
 
-export function SecopeuticHeroHeadline() {
+type SecopeuticHeroHeadlineProps = {
+  hero: LandingHeroContent
+}
+
+export function SecopeuticHeroHeadline({ hero }: SecopeuticHeroHeadlineProps) {
   return (
     <div className="seco-landing__hero-head">
-      <p className="seco-landing__hero-eyebrow">{DEEPDOSE_LANDING_HERO.eyebrow}</p>
+      <p className="seco-landing__hero-eyebrow">{hero.eyebrow}</p>
       <h1 className="seco-landing__hero-title">
         <span className="seco-landing__hero-line seco-landing__hero-line--white">
-          {DEEPDOSE_LANDING_HERO.headlineWhite}
+          {hero.headlineWhite}
         </span>
         <span className="seco-landing__hero-line seco-landing__hero-spectrum">
-          {DEEPDOSE_LANDING_HERO.headlineAccent}
+          {hero.headlineAccent}
         </span>
       </h1>
     </div>

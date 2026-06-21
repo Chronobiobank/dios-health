@@ -7,7 +7,7 @@ import { SplashFrame } from '@/components/secopeutic/SplashFrame'
 const SPLASH_PORTALS = [
   { label: 'For patients', href: '/patient-landing' },
   { label: 'For clinicians', href: '/clinician-landing' },
-  { label: 'For enterprise', href: '/login?next=/enterprise/dashboard' },
+  { label: 'For enterprise', href: '/enterprise-landing' },
 ] as const
 
 export function DeepDoseSplashHome() {
@@ -22,8 +22,12 @@ export function DeepDoseSplashHome() {
 
         <div className="seco-splash__core">
           <h1 className="seco-splash__title">
-            {DEEPDOSE_NAME} tailors meds to your body clock{' '}
-            <span className="seco-splash__title-accent">so they work better.</span>
+            <span className="seco-splash__title-line">
+              {DEEPDOSE_NAME} knows your body clock
+            </span>
+            <span className="seco-splash__title-line seco-splash__title-accent">
+              so meds work better.
+            </span>
           </h1>
 
           <nav

@@ -2,6 +2,7 @@
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_RESEARCH_PAPERS } from '@/lib/secopeutic/research-content'
+import type { LandingHeroContent } from '@/lib/secopeutic/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
   title: `${DEEPDOSE_NAME} · Know your window`,
@@ -9,7 +10,7 @@ export const DEEPDOSE_LANDING_META = {
     'DeepDose translates your biology into a precise treatment plan: timed light, meals, medicines, and sleep.',
 } as const
 
-export const DEEPDOSE_LANDING_HERO = {
+export const DEEPDOSE_LANDING_HERO: LandingHeroContent = {
   eyebrow: 'Chronotherapy',
   headlineWhite: 'Optimise',
   headlineAccent: 'your window',
@@ -131,10 +132,13 @@ export const DEEPDOSE_LANDING_CLOSE = {
 } as const
 
 export const DEEPDOSE_CLINICIAN_LANDING = {
-  eyebrow: 'For clinicians',
-  title: 'Make time count for your panel.',
-  support:
-    'Device alerts first, then misalignment. TipTraQ nights profile patients for precision dosing — you review flagged records before outcomes slip.',
+  hero: {
+    eyebrow: 'For clinicians',
+    headlineWhite: 'Make time count',
+    headlineAccent: 'for your panel.',
+    support:
+      'Device alerts first, then misalignment. TipTraQ nights profile patients for precision dosing — you review flagged records before outcomes slip.',
+  },
   steps: [
     {
       title: 'Triage by drift',
@@ -153,9 +157,42 @@ export const DEEPDOSE_CLINICIAN_LANDING = {
       meta: 'Share a code; patients opt in to clinical care sharing on their terms.',
     },
   ],
+  note: 'Decision support only. You make every treatment decision.',
   cta: { label: 'Sign in', href: '/login?next=/clinical/dashboard' },
   accessNote:
     'Clinician accounts are issued by your practice. Contact us if you need access.',
+} as const
+
+export const DEEPDOSE_ENTERPRISE_LANDING = {
+  hero: {
+    eyebrow: 'Chronobiobank',
+    headlineWhite: 'Population',
+    headlineAccent: 'intelligence',
+    support:
+      'Pseudonymised, consent-gated cohort data for ICBs, pharma R&D, and research — aggregates only, no identifiable patient records.',
+  },
+  steps: [
+    {
+      title: 'Licensed cohorts',
+      meta: 'Query contributed records under active data licenses with purpose-bound access.',
+    },
+    {
+      title: 'Population analytics',
+      meta: 'Chronotype, timing shift, and outcome distributions across your licensed panel.',
+    },
+    {
+      title: 'Cohort builder',
+      meta: 'Filter by age band, medication, chronotype, and consent purpose codes.',
+    },
+    {
+      title: 'Privacy by design',
+      meta: 'Chronobiobank isolation — pseudonymised tokens only, full access audit trail.',
+    },
+  ],
+  note: 'Licensed research and population planning only. Not a substitute for individual clinical care.',
+  cta: { label: 'Sign in', href: '/login?next=/enterprise/dashboard' },
+  accessNote:
+    'Enterprise accounts are issued under data license. Contact us to access Chronobiobank.',
 } as const
 
 export const DEEPDOSE_TERMS_DECISION_SUPPORT =
