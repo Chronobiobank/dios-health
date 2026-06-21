@@ -11,7 +11,7 @@ const STEPS = [
   {
     num: '02',
     title: 'Map your rhythm',
-    body: 'Complete the Munich Chronotype Questionnaire. We estimate your DLMO and circadian alignment score.',
+    body: 'We use the Munich Chronotype Questionnaire (MCTQ) to estimate your circadian phase.',
   },
   {
     num: '03',

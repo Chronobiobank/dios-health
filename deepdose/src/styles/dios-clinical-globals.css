@@ -1,6 +1,6 @@
 /**
  * Clinical layout shell — from dios.health app/styles/clinical-globals.css
- * Loaded with Secopeutic marketing pages.
+ * Loaded with DeepDose marketing pages.
  */
 
 :root {
@@ -43,7 +43,7 @@ body:has([data-clinical-layout]) {
 }
 
 .clinical-layout,
-.clinical-layout *:not(.dios-wordmark):not(.deepdose-wordmark):not(.secopeutic-wordmark) {
+.clinical-layout *:not(.dios-wordmark):not(.deepdose-wordmark):not(.deepdose-wordmark) {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -113,7 +113,7 @@ body:has([data-clinical-layout]) {
   padding-block: clamp(2rem, 6vw, 4rem);
 }
 
-.secopeutic-demo.seco-shell--dark .seco-page {
+.deepdose-shell.seco-shell--dark .seco-page {
   background-color: var(--seco-navy);
   background-image: repeating-linear-gradient(
     90deg,
@@ -125,44 +125,44 @@ body:has([data-clinical-layout]) {
   color: #fff;
 }
 
-.secopeutic-demo:not(.seco-shell--dark) .seco-page {
+.deepdose-shell:not(.seco-shell--dark) .seco-page {
   background: var(--seco-canvas, #f7f8fa);
 }
 
-.secopeutic-demo.seco-shell--dark .clinical-site-nav {
+.deepdose-shell.seco-shell--dark .clinical-site-nav {
   border-bottom: 1px solid var(--seco-navy-border);
   background: rgb(11 18 32 / 0.92);
   backdrop-filter: blur(12px);
 }
 
-.secopeutic-demo.seco-shell--dark .clinical-site-nav__brand {
+.deepdose-shell.seco-shell--dark .clinical-site-nav__brand {
   color: #fff;
 }
 
-.secopeutic-demo.seco-shell--dark .clinical-site-nav__link {
+.deepdose-shell.seco-shell--dark .clinical-site-nav__link {
   color: rgb(255 255 255 / 0.82);
 }
 
-.secopeutic-demo.seco-shell--dark .clinical-site-nav__link:hover {
+.deepdose-shell.seco-shell--dark .clinical-site-nav__link:hover {
   background: rgb(255 255 255 / 0.08);
   color: #fff;
   text-decoration: none;
 }
 
-.secopeutic-demo.seco-shell--dark .seco-page__eyebrow {
+.deepdose-shell.seco-shell--dark .seco-page__eyebrow {
   color: rgb(255 255 255 / 0.42);
 }
 
-.secopeutic-demo.seco-shell--dark .clinical-layout .seco-page__title,
-.secopeutic-demo.seco-shell--dark .seco-page__title {
+.deepdose-shell.seco-shell--dark .clinical-layout .seco-page__title,
+.deepdose-shell.seco-shell--dark .seco-page__title {
   color: #fff;
 }
 
-.secopeutic-demo.seco-shell--dark .seco-page__lede {
+.deepdose-shell.seco-shell--dark .seco-page__lede {
   color: rgb(255 255 255 / 0.72);
 }
 
-.secopeutic-demo.seco-shell--dark .seco-app-section-title {
+.deepdose-shell.seco-shell--dark .seco-app-section-title {
   color: #fff;
 }
 
@@ -183,17 +183,17 @@ body:has([data-clinical-layout]) {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 300;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: var(--seco-display-tracking);
   color: var(--seco-ink, #111213);
 }
 
 .seco-page__lede {
   margin: 0 0 1rem;
-  max-width: 52ch;
+  max-width: var(--seco-copy-measure, 52ch);
   font-family: var(--seco-font-ui);
-  font-size: 1.0625rem;
+  font-size: var(--text-body-size);
   font-weight: 300;
-  line-height: 1.55;
+  line-height: var(--text-body-leading);
   color: var(--seco-muted, rgb(17 18 19 / 0.62));
 }
 
@@ -211,7 +211,7 @@ body:has([data-clinical-layout]) {
   padding-block: clamp(1.5rem, 4vw, 2.5rem);
 }
 
-.secopeutic-demo .clinical-site-nav__actions .clinical-site-nav__link {
+.deepdose-shell .clinical-site-nav__actions .clinical-site-nav__link {
   border: none;
   background: transparent;
   cursor: pointer;

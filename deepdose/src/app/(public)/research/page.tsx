@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ResearchPaperTiles } from '@/components/secopeutic/ResearchPaperTiles'
+import { ResearchPaperTiles } from '@/components/deepdose/ResearchPaperTiles'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {
   DEEPDOSE_RESEARCH_INTRO,
   DEEPDOSE_RESEARCH_META,
   DEEPDOSE_RESEARCH_SCHOLARS,
-} from '@/lib/secopeutic/research-content'
-import type { LandingClinician } from '@/lib/secopeutic/landing-clinicians'
+} from '@/lib/deepdose-marketing/research-content'
+import type { LandingClinician } from '@/lib/deepdose-marketing/landing-clinicians'
 import { cn } from '@/lib/utils/cn'
 
 export const metadata: Metadata = {

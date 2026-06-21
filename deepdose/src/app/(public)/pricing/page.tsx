@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import { PricingTiers, type PricingTier } from '@/components/secopeutic/PricingTiers'
+import { PricingTiers, type PricingTier } from '@/components/deepdose/PricingTiers'
+import { BodyClockCompareStrip } from '@/components/deepdose/BodyClockCompareStrip'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {
   TIPTRAQ_STUDY_PRICING_UK,
@@ -12,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: `Pricing · ${DEEPDOSE_NAME}`,
   description:
-    'Start free with a phone-based proxy DLMO, or order a clinically-driven TipTraQ home sleep test — £149 for three nights, about half a typical private test, with £99 quarterly re-reads.',
+    'Start free with a body-clock baseline from your phone and wearables, or order a TipTraQ home sleep test — £149 for three nights, about half a typical private test, with £99 quarterly re-reads.',
 }
 
 export default function PricingPage() {
@@ -26,15 +27,15 @@ export default function PricingPage() {
   const tiers: PricingTier[] = [
     {
       id: 'dlmo-baseline',
-      name: 'DLMO Baseline',
+      name: 'Body clock baseline',
       figure: 'Free',
       cadence: 'Phone & wearable data',
-      note: 'Share your phone and wearable sensor data — our AI estimates your body-clock timing (a proxy DLMO) at no cost.',
+      note: 'Share your phone and wearable sensor data — we estimate your body-clock timing at no cost.',
       flag: 'Start here',
       feature: true,
       cta: { label: 'Start free', href: '/login' },
       includes: [
-        'Proxy DLMO from your phone and wearable data',
+        'Body-clock estimate from your phone and wearable data',
         'Personalised dosing windows on your dashboard',
         'Contributes to our chronotherapy research',
         'Upgrade to a clinical-grade reading anytime',
@@ -45,7 +46,7 @@ export default function PricingPage() {
       name: 'Clinical sleep test',
       figure: baseline,
       cadence: 'TipTraQ kit · three nights',
-      note: 'Three nights with the TipTraQ home kit for a clinically-driven DLMO reading and your verified data badge.',
+      note: 'Three nights with the TipTraQ home kit for a clinical body-clock read and your verified data badge.',
       cta: { label: 'Order your test', href: '/home-test' },
       includes: [
         ...TIPTRAQ_STUDY_PRICING_UK.includes,
@@ -63,7 +64,7 @@ export default function PricingPage() {
       cta: { label: 'Order a re-read', href: '/home-test' },
       includes: [
         'Re-order the reusable TipTraQ kit every three months',
-        'Fresh clinical DLMO and chronotype read',
+        'Fresh clinical body-clock and chronotype read',
         'Catches circadian drift before it shows in labs',
         'Contributes to our chronotherapy research',
       ],
@@ -108,11 +109,13 @@ export default function PricingPage() {
           </aside>
         </header>
 
-        <section className="seco-pricing__tiers seco-reveal seco-reveal--2" aria-label="Plans">
+        <BodyClockCompareStrip clinicalFigure={baseline} />
+
+        <section className="seco-pricing__tiers seco-reveal seco-reveal--3" aria-label="Plans">
           <PricingTiers tiers={tiers} />
         </section>
 
-        <section className="seco-pricing__close seco-reveal seco-reveal--3">
+        <section className="seco-pricing__close seco-reveal seco-reveal--4">
           <p className="seco-pricing__close-note">
             Order on the advice of your GP or another healthcare professional — no clinic visit, no
             waiting list. Your clinician adds the results to {DEEPDOSE_NAME} and your dashboard shows

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { MEDICATION_TIMINGS, type MedicationCode } from '@/lib/circadian/medications'
+import { getCatalogEntry, getMedicationDisplayName, isOptimisedCode } from '@/lib/medications/catalog'
 import { Button } from '@/components/ui/Button'
 import { FormError } from '@/components/ui/Form'
 import { TimeInput } from '@/components/ui/Form'
@@ -76,17 +76,17 @@ export function PrescribingForm({
           onChange={(e) => {
             setMedicationCode(e.target.value)
             const med = medications.find((m) => m.medication_code === e.target.value)
-            if (med && med.medication_code in MEDICATION_TIMINGS) {
-              const timing = MEDICATION_TIMINGS[med.medication_code as MedicationCode]
-              setRecommendedTiming(timing.populationWindowStart)
+            if (med && isOptimisedCode(med.medication_code)) {
+              const entry = getCatalogEntry(med.medication_code)
+              if (entry?.timing) {
+                setRecommendedTiming(entry.timing.populationWindowStart)
+              }
             }
           }}
         >
           {medications.map((m) => (
             <option key={m.medication_code} value={m.medication_code}>
-              {m.medication_code in MEDICATION_TIMINGS
-                ? MEDICATION_TIMINGS[m.medication_code as MedicationCode].displayName
-                : m.medication_code}
+              {getMedicationDisplayName(m.medication_code)}
               {m.current_timing ? ` (current ${m.current_timing.slice(0, 5)})` : ''}
             </option>
           ))}

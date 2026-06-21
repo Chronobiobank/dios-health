@@ -1,4 +1,4 @@
-import { SiteNavBar } from '@/components/secopeutic/SiteNavBar'
+import { SiteNavBar } from '@/components/deepdose/SiteNavBar'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 const CLINICAL_NAV = [

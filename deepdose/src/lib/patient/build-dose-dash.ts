@@ -4,7 +4,7 @@ import type { BtiPayload } from '@/lib/bti/types'
 import { ahiStatus } from '@/lib/clinical/tiptraq/clinical-status'
 import { computeTipTraqBlockMetrics } from '@/lib/clinical/tiptraq/metrics'
 import type { TipTraqNightInput } from '@/lib/clinical/tiptraq/types'
-import { MEDICATION_TIMINGS, type MedicationCode } from '@/lib/circadian/medications'
+import { getMedicationDisplayName } from '@/lib/medications/catalog'
 import type { DlmoProxyResult } from '@/lib/circadian/dlmo'
 import { decimalHoursToHHMM } from '@/lib/utils/time'
 import type {
@@ -79,9 +79,7 @@ function buildClockDriftRisk(
     ? drift > 0
       ? `+${drift}m late vs sleep target`
       : 'Sleep timing on target'
-    : circadianScore > 0
-      ? `Circadian score ${circadianScore}`
-      : 'Clock baseline pending'
+    : 'Body clock baseline set'
 
   const detail =
     severity === 'low'
@@ -339,8 +337,7 @@ export function medClusterDetail(
   if (btiPayloads.length === 0) return null
   return btiPayloads
     .map((p) => {
-      const code = p.medication_id as MedicationCode
-      const name = MEDICATION_TIMINGS[code]?.displayName ?? p.medication_id
+      const name = getMedicationDisplayName(p.medication_id)
       const start = p.dosing_window_start.slice(11, 16)
       const end = p.dosing_window_end.slice(11, 16)
       return `${name}: ${start}–${end}`

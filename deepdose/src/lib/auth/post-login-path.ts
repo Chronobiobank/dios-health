@@ -6,6 +6,15 @@ function isSafeInternalPath(path: string | null | undefined): path is string {
   return Boolean(path && path.startsWith('/') && !path.startsWith('//'))
 }
 
+/** Patient sign-up from home search or dose-dash onboarding. */
+export function isPatientDoseDashPath(next?: string | null): boolean {
+  if (!next) return true
+  return (
+    next.startsWith('/patient/onboarding') ||
+    next.startsWith('/patient/dashboard')
+  )
+}
+
 /** Where to send a user after auth, honouring an explicit `next` when present. */
 export function resolvePostLoginPath(
   tier: UserTier | string | null | undefined,
@@ -25,10 +34,17 @@ export function resolvePostLoginPath(
   }
 }
 
-export function loginEyebrow(next?: string | null): string {
-  if (next?.startsWith('/clinical')) return 'Clinician access'
-  if (next?.startsWith('/enterprise')) return 'Chronobiobank access'
-  return 'Patient access'
+/** Short context line — omit when the title is enough (patient sign-in). */
+export function loginEyebrow(next?: string | null): string | null {
+  if (next?.startsWith('/clinical')) return 'Clinical'
+  if (next?.startsWith('/enterprise')) return 'Enterprise'
+  return null
+}
+
+export function loginTitle(next: string | null | undefined, mode: 'signin' | 'signup'): string {
+  if (next?.startsWith('/clinical')) return 'Sign in'
+  if (next?.startsWith('/enterprise')) return 'Sign in'
+  return mode === 'signup' ? 'Create account' : 'Sign in'
 }
 
 /** Staff portals (clinical / enterprise) — no self-serve signup. */
@@ -36,12 +52,16 @@ export function isStaffLoginPath(next?: string | null): boolean {
   return Boolean(next?.startsWith('/clinical') || next?.startsWith('/enterprise'))
 }
 
-export function loginLede(next: string | null | undefined, mode: 'signin' | 'signup'): string {
+/** One supporting line — only when it adds information sign-in titles do not cover. */
+export function loginLede(next: string | null | undefined, mode: 'signin' | 'signup'): string | null {
   if (next?.startsWith('/clinical')) {
-    return 'Sign in with the credentials issued by your practice.'
+    return 'Use credentials from your practice administrator.'
   }
   if (next?.startsWith('/enterprise')) {
-    return 'Sign in with your organisation Chronobiobank credentials.'
+    return 'Use your organisation credentials.'
   }
-  return mode === 'signin' ? 'Sign in to your account' : 'Create your patient account'
+  if (mode === 'signup') {
+    return 'Consent first, then add your medications.'
+  }
+  return null
 }

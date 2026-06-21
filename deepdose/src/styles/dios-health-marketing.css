@@ -1,10 +1,11 @@
 /**
- * dios.health marketing stylesheet stack — Secopeutic / Maven landing.
- * Copied from parent repo: secopeutic-demo.css, secopeutic-landing.css
+ * dios.health marketing stylesheet stack — DeepDose landing.
+ * deepdose-shell.css, deepdose-landing.css
  */
 
 @import "./dios-wordmark.css";
 @import "./dios-clinical-globals.css";
-@import "./secopeutic-demo.css";
-@import "./secopeutic-landing.css";
+@import "./deepdose-shell.css";
+@import "./deepdose-landing.css";
 @import "./deepdose-app-overrides.css";
+@import "./deepdose-ambient.css";

@@ -1,4 +1,5 @@
 import { requireEnterprise } from '@/lib/chronobiobank/require-enterprise'
+import { CHI_ABBREV } from '@/lib/circadian/chi'
 import { activeLicenses } from '@/lib/chronobiobank/enterprise-access'
 import { fetchChronobiobankRecords, computeAggregates } from '@/lib/chronobiobank/records'
 import { PopulationChart } from '@/components/enterprise/PopulationChart'
@@ -49,7 +50,7 @@ export default async function EnterpriseDashboardPage() {
       <section className="cbb-kpi-grid" aria-label="Cohort summary">
         <Kpi label="Contributed records" value={aggregates.totalRecords} />
         <Kpi label="Unique participants" value={aggregates.uniqueCohorts} />
-        <Kpi label="Mean circadian score" value={fmt(aggregates.meanCircadianScore)} />
+        <Kpi label={CHI_ABBREV} value={fmt(aggregates.meanCircadianScore)} />
         <Kpi
           label="Mean timing shift"
           value={aggregates.meanTimingShiftMinutes == null ? '—' : `${aggregates.meanTimingShiftMinutes} min`}

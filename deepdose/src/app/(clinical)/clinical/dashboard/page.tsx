@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { fetchClinicianTriageRows } from '@/lib/clinical/triage'
 import { fetchClinicianTipTraqQueue } from '@/lib/clinical/tiptraq-assessments'
 import { fetchClinicianTipTraqNightsSummary } from '@/lib/clinical/tiptraq-nights'
+import { fetchClinicianInviteCodes } from '@/lib/clinical/invites'
 import { ClinicalTriageList } from '@/components/clinical/ClinicalTriageList'
 import { ClinicianInvitePanel } from '@/components/clinical/ClinicianInvitePanel'
 import { TipTraqGpProgramPanel } from '@/components/clinical/TipTraqGpProgramPanel'
@@ -29,6 +30,7 @@ export default async function ClinicalDashboardPage() {
   }
 
   const rows = await fetchClinicianTriageRows(supabase, user.id)
+  const invites = await fetchClinicianInviteCodes(supabase, user.id)
   const tiptraqQueue = await fetchClinicianTipTraqQueue(supabase, user.id)
   const tiptraqNightsSummary = await fetchClinicianTipTraqNightsSummary(supabase, user.id)
   const nightsByPatient = Object.fromEntries(
@@ -51,23 +53,22 @@ export default async function ClinicalDashboardPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <header>
+    <div className="dash-meds space-y-8">
+      <header className="seco-landing__copy-stack dash-meds__page-head">
         <p className="seco-page__eyebrow">Clinical</p>
-        <h1 className="seco-app-section-title">Patient triage</h1>
-        <p className="mt-2 text-sm text-ink-muted">
-          Device alerts first, then misalignment. TipTraQ kits profile patients for precision dosing
-          and metabolic early warning.
-        </p>
+        <h1 className="seco-page__title dash-meds__page-title">Patient triage</h1>
       </header>
 
-      <ClinicianInvitePanel />
-      <TipTraqGpProgramPanel
-        queue={tiptraqQueue}
-        patientNames={patientNames}
-        nightsByPatient={nightsByPatient}
-      />
       <ClinicalTriageList rows={rows} />
+
+      <div className="dash-meds__form">
+        <ClinicianInvitePanel initialInvites={invites} variant="compact" />
+        <TipTraqGpProgramPanel
+          queue={tiptraqQueue}
+          patientNames={patientNames}
+          nightsByPatient={nightsByPatient}
+        />
+      </div>
     </div>
   )
 }

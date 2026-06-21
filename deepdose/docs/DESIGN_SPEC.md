@@ -10,7 +10,7 @@
 | Layer | Reference | Role in DeepDose |
 |-------|-----------|------------------|
 | **DIOS platform** | `dios-health/app/globals-base.css` | Aubergine surfaces, cream canvas, gold accent, Inter clinical type |
-| **Maven education** | `dios-health/app/styles/secopeutic-demo.css` | Dark navy hero, spectrum gradient display, course-card grids, mono data labels |
+| **Maven education** | `dios-health/app/styles/deepdose-shell.css` | Dark navy hero, spectrum gradient display, course-card grids, mono data labels |
 | **Clinical UI** | `dios-health/app/styles/calm-ui.css` | 8px card radius, restrained motion, data-forward dashboards |
 
 DeepDose is **not** a consumer wellness brand (no Function Health lifestyle editorial, no pill CTAs, no stock-photo hero splits). It reads as **clinical chronotherapy software** within the DIOS family.
@@ -159,4 +159,4 @@ Section gap:          1.5–2.5rem (clinical — not 80–128px consumer gaps)
 | `src/app/globals.css` | Tailwind `@theme` bridge |
 | `src/components/ui/*` | React wrappers using primitives |
 
-When dios.health tokens change, update `dios-tokens.css` from `app/globals-base.css` and `app/styles/secopeutic-demo.css`.
+When dios.health tokens change, update `dios-tokens.css` from `app/globals-base.css` and `app/styles/deepdose-shell.css`.

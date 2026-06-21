@@ -30,6 +30,21 @@ const STATUS_WEIGHT: Record<TriageStatus, number> = {
   ON_TRACK: 2,
 }
 
+export const TRIAGE_STATUS_LABEL: Record<TriageStatus, string> = {
+  URGENT: 'Urgent',
+  REVIEW: 'Review',
+  ON_TRACK: 'On track',
+}
+
+export function triageRowMeta(row: ClinicianTriageRow, chiAbbrev: string): string {
+  const parts = [TRIAGE_STATUS_LABEL[row.triageStatus]]
+  if (row.deviceAlertTriggered) {
+    parts.push('Device alert')
+  }
+  parts.push(`${chiAbbrev} ${row.circadianScore ?? '—'}`)
+  return parts.join(' · ')
+}
+
 function deriveTriageStatus(
   deviceAlert: boolean,
   score: number

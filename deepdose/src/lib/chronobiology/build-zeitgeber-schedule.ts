@@ -1,7 +1,7 @@
 import type { BtiPayload } from '@/lib/bti/types'
 import type { ZeitgeberId } from '@/lib/chronobiology/zeitgebers'
 import { ZEITGEBER_DOMAINS } from '@/lib/chronobiology/zeitgebers'
-import { MEDICATION_TIMINGS, type MedicationCode } from '@/lib/circadian/medications'
+import { getMedicationDisplayName } from '@/lib/medications/catalog'
 import { decimalHoursToHHMM, isTimeInWindow, timeToMinutes } from '@/lib/utils/time'
 
 export type ZeitgeberScheduleItem = {
@@ -40,12 +40,7 @@ function buildMedsZeitgeber(
 
   const open = btiPayloads.filter((p) => p.bti_status === 'WINDOW_OPEN')
   if (open.length > 0) {
-    const names = open
-      .map((p) => {
-        const code = p.medication_id as MedicationCode
-        return MEDICATION_TIMINGS[code]?.displayName ?? p.medication_id
-      })
-      .join(', ')
+    const names = open.map((p) => getMedicationDisplayName(p.medication_id)).join(', ')
     return {
       timeLabel: 'Now',
       instruction: `Good time to take: ${names}.`,
@@ -57,8 +52,7 @@ function buildMedsZeitgeber(
     .map((p) => {
       const start = p.dosing_window_start.slice(11, 16)
       const end = p.dosing_window_end.slice(11, 16)
-      const code = p.medication_id as MedicationCode
-      const name = MEDICATION_TIMINGS[code]?.displayName ?? p.medication_id
+      const name = getMedicationDisplayName(p.medication_id)
       return { name, start, end, inWindow: isTimeInWindow(nowClock, start, end) }
     })
     .sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start))

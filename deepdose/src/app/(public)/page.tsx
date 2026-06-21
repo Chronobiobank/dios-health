@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 
-import { DeepDoseSplashHome } from '@/components/secopeutic/DeepDoseSplashHome'
+import { DeepDoseSplashHome } from '@/components/deepdose/DeepDoseSplashHome'
+import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
 
 export const metadata: Metadata = {
-  title: 'DeepDose.org · Timing is the other half',
+  title: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
   description:
-    'Your meds timed to cycles that matter — for patients, clinicians, and enterprise.',
+    'Search your meds and supplements. See if your timing is right — then personalise doses to your body clock.',
   alternates: { canonical: '/' },
 }
 

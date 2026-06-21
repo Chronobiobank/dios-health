@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { getPatientCircadianContext } from '@/lib/medications/patient-phase'
@@ -8,8 +7,12 @@ import { fetchPendingRecommendations } from '@/lib/prescribing/recommendations'
 import { fetchPatientTipTraqNights } from '@/lib/clinical/tiptraq-nights'
 import { buildDoseDash, medClusterDetail } from '@/lib/patient/build-dose-dash'
 import type { TipTraqNightInput, TipTraqNightRecord } from '@/lib/clinical/tiptraq/types'
-import { Button } from '@/components/ui/Button'
-import { Callout } from '@/components/ui/Form'
+import {
+  onboardingPathForStep,
+  resolveOnboardingStep,
+} from '@/lib/onboarding/resolve'
+import { buildDashSetupRows } from '@/lib/patient/dash-setup-status'
+import { DashSetupTile } from '@/components/patient/DashSetupTile'
 import { PendingRecommendationsPanel } from '@/components/patient/PendingRecommendationsPanel'
 import { DosingReminderBanner } from '@/components/patient/DosingReminderBanner'
 import { DoseDashStack } from '@/components/patient/DoseDashStack'
@@ -48,6 +51,11 @@ export default async function PatientDashboardPage() {
     redirect('/login?next=/patient/dashboard')
   }
 
+  const nextOnboardingStep = await resolveOnboardingStep(supabase, user.id)
+  if (nextOnboardingStep === 'consent' || nextOnboardingStep === 'medications') {
+    redirect(onboardingPathForStep(nextOnboardingStep))
+  }
+
   const context = await getPatientCircadianContext(supabase, user.id)
 
   const { data: deviceProfile } = await supabase
@@ -69,6 +77,11 @@ export default async function PatientDashboardPage() {
     .order('completed_at', { ascending: false })
     .limit(1)
     .maybeSingle()
+
+  const { data: connections } = await supabase
+    .from('wearable_connections')
+    .select('provider, last_sync_at')
+    .eq('patient_id', user.id)
 
   const { data: assessment } = await supabase
     .from('tiptraq_assessments')
@@ -95,8 +108,16 @@ export default async function PatientDashboardPage() {
 
   const hasOnboarding = Boolean(chronotype)
   const hasMeds = (meds?.length ?? 0) > 0
+  const showDoseDash = hasMeds || hasOnboarding
 
-  const doseDash = hasOnboarding
+  const setupRows = buildDashSetupRows({
+    medCount: meds?.length ?? 0,
+    hasRhythm: hasOnboarding,
+    deviceAlertTriggered: deviceProfile?.device_alert_triggered ?? false,
+    connections: connections ?? [],
+  })
+
+  const doseDash = showDoseDash
     ? buildDoseDash({
         dlmoEstimateHours: context.dlmoEstimateHours,
         circadianScore: context.circadianScore,
@@ -111,34 +132,12 @@ export default async function PatientDashboardPage() {
     : null
 
   return (
-    <div className="space-y-8">
-      <header>
-        <p className="seco-page__eyebrow">Dose dash</p>
-        <h1 className="seco-page__title">Your timing today</h1>
-        <p className="seco-page__lede">
-          One view: metabolic risk from your sleep block, what to do next, and when to dose each
-          daily cue.
-        </p>
+    <div className="dash-meds space-y-8">
+      <header className="seco-landing__copy-stack dash-meds__page-head">
+        <h1 className="seco-page__title dash-meds__page-title">Your timing today</h1>
       </header>
 
-      {!hasOnboarding && (
-        <Callout tone="warning">
-          Complete onboarding to unlock your dose dash.{' '}
-          <Link href="/patient/onboarding/consent" className="font-medium underline">
-            Continue setup
-          </Link>
-        </Callout>
-      )}
-
-      {deviceProfile?.device_alert_triggered && (
-        <Callout tone="warning">
-          Device sync interrupted — reconnect in{' '}
-          <Link href="/patient/dashboard/data" className="font-medium underline">
-            Smart devices
-          </Link>
-          .
-        </Callout>
-      )}
+      <DashSetupTile rows={setupRows} />
 
       {hasMeds && (
         <DosingReminderBanner
@@ -152,14 +151,6 @@ export default async function PatientDashboardPage() {
 
       {doseDash && (
         <DoseDashStack model={doseDash} medDetail={medClusterDetail(btiPayloads)} />
-      )}
-
-      {hasOnboarding && !hasMeds && (
-        <div className="flex justify-center">
-          <Button href="/patient/onboarding/medications" variant="secondary">
-            Add medicines
-          </Button>
-        </div>
       )}
     </div>
   )

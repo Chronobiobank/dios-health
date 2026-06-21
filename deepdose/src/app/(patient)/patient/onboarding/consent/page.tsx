@@ -1,11 +1,15 @@
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import {
   getConsentPurposes,
   getCurrentFramework,
   getPatientConsents,
-  hasCompletedRequiredConsents,
 } from '@/lib/consent/dynamic-consent'
+import {
+  onboardingPathForStep,
+  resolveOnboardingStep,
+} from '@/lib/onboarding/resolve'
 import ConsentPanel from '@/components/patient/ConsentPanel'
 import { FormError } from '@/components/ui/Form'
 
@@ -19,6 +23,11 @@ export default async function ConsentOnboardingPage() {
 
   if (authError || !user) {
     redirect('/login?next=/patient/onboarding/consent')
+  }
+
+  const step = await resolveOnboardingStep(supabase, user.id)
+  if (step !== 'consent') {
+    redirect(onboardingPathForStep(step))
   }
 
   const { framework, error: frameworkError } = await getCurrentFramework(supabase)
@@ -36,9 +45,9 @@ export default async function ConsentOnboardingPage() {
     return <ErrorState message={`Could not load your consents: ${consentsError}`} />
   }
 
-  if (hasCompletedRequiredConsents(purposes, consents)) {
-    redirect('/patient/onboarding/chronotype')
-  }
-
-  return <ConsentPanel framework={framework} purposes={purposes} initialConsents={consents} />
+  return (
+    <Suspense fallback={null}>
+      <ConsentPanel framework={framework} purposes={purposes} initialConsents={consents} />
+    </Suspense>
+  )
 }

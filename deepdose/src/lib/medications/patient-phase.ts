@@ -8,6 +8,7 @@ export interface PatientCircadianContext {
   phaseOffsetMinutes: number
   dlmoEstimateHours: number
   sjlHours: number
+  /** Circadian Health Index (CHI) — composite 0–100 for clinician triage */
   circadianScore: number
   chronotypeCat: string | null
   scoreComponents: {

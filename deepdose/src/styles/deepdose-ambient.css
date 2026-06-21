@@ -1,0 +1,241 @@
+/**
+ * Dark-shell ambient canvas — slow navy / sunset drift behind glass tiles.
+ * Scoped to .deepdose-shell.seco-shell--dark only.
+ */
+
+.deepdose-shell.seco-shell--dark {
+  position: relative;
+  background: transparent;
+}
+
+body:has(.deepdose-shell.seco-shell--dark),
+body:has([data-clinical-layout].seco-shell--dark) {
+  background-color: #060a12;
+}
+
+[data-clinical-layout].seco-shell--dark {
+  background-color: transparent;
+}
+
+/* ── Fixed ambient layer ── */
+.deepdose-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, rgb(18 28 48 / 0.95) 0%, transparent 58%),
+    linear-gradient(168deg, #060a12 0%, #0a1020 42%, #0d1528 100%);
+}
+
+.deepdose-ambient__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform;
+  animation: deepdose-ambient-drift 32s ease-in-out infinite alternate;
+}
+
+.deepdose-ambient__orb--navy {
+  width: min(88vmax, 72rem);
+  height: min(88vmax, 72rem);
+  top: -28%;
+  left: -22%;
+  background: radial-gradient(
+    circle at 38% 42%,
+    rgb(42 78 128 / 0.72) 0%,
+    rgb(18 36 68 / 0.45) 38%,
+    transparent 68%
+  );
+  opacity: 0.85;
+  animation-duration: 36s;
+}
+
+.deepdose-ambient__orb--sunset {
+  width: min(72vmax, 58rem);
+  height: min(72vmax, 58rem);
+  bottom: -32%;
+  right: -18%;
+  background: radial-gradient(
+    circle at 55% 45%,
+    rgb(210 98 72 / 0.42) 0%,
+    rgb(168 72 96 / 0.28) 32%,
+    rgb(120 48 88 / 0.12) 55%,
+    transparent 72%
+  );
+  opacity: 0.9;
+  animation-duration: 44s;
+  animation-delay: -12s;
+}
+
+.deepdose-ambient__orb--twilight {
+  width: min(52vmax, 42rem);
+  height: min(52vmax, 42rem);
+  top: 28%;
+  right: 18%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgb(88 72 148 / 0.38) 0%,
+    rgb(56 88 132 / 0.18) 42%,
+    transparent 70%
+  );
+  opacity: 0.75;
+  animation-duration: 26s;
+  animation-delay: -20s;
+}
+
+.deepdose-ambient__orb--ember {
+  width: min(38vmax, 30rem);
+  height: min(38vmax, 30rem);
+  bottom: 18%;
+  left: 12%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgb(180 96 68 / 0.22) 0%,
+    rgb(120 56 72 / 0.1) 45%,
+    transparent 68%
+  );
+  opacity: 0.65;
+  animation-duration: 30s;
+  animation-delay: -6s;
+}
+
+.deepdose-ambient__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(6 10 18 / 0.15) 0%,
+      transparent 28%,
+      transparent 62%,
+      rgb(6 10 18 / 0.22) 100%
+    ),
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgb(255 255 255 / 0.025) 0%, transparent 55%);
+  opacity: 0.9;
+}
+
+@keyframes deepdose-ambient-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate3d(4%, -3%, 0) scale(1.06);
+  }
+
+  66% {
+    transform: translate3d(-3.5%, 4.5%, 0) scale(0.97);
+  }
+
+  100% {
+    transform: translate3d(2.5%, 2%, 0) scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deepdose-ambient__orb {
+    animation: none;
+  }
+}
+
+/* ── Content stack above ambient ── */
+.deepdose-shell.seco-shell--dark .clinical-site-nav {
+  position: sticky;
+  z-index: 50;
+  background: rgb(6 10 18 / 0.28);
+  backdrop-filter: blur(22px) saturate(1.85);
+  -webkit-backdrop-filter: blur(22px) saturate(1.85);
+  border-bottom-color: rgb(255 255 255 / 0.08);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+.deepdose-shell.seco-shell--dark .clinical-site-nav__main {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+.deepdose-shell.seco-shell--dark .seco-nav__panel {
+  background: rgb(6 10 18 / 0.68);
+  backdrop-filter: blur(24px) saturate(1.85);
+  -webkit-backdrop-filter: blur(24px) saturate(1.85);
+  border-bottom-color: rgb(255 255 255 / 0.1);
+}
+
+.deepdose-shell.seco-shell--dark .seco-nav__backdrop {
+  backdrop-filter: blur(10px) saturate(1.5);
+  -webkit-backdrop-filter: blur(10px) saturate(1.5);
+}
+
+.deepdose-shell.seco-shell--dark .seco-footer {
+  position: relative;
+  z-index: 1;
+  background: rgb(6 10 18 / 0.26);
+  backdrop-filter: blur(22px) saturate(1.85);
+  -webkit-backdrop-filter: blur(22px) saturate(1.85);
+  border-top-color: rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+}
+
+/* Let the ambient canvas show through page areas */
+.deepdose-shell.seco-shell--dark .seco-page,
+.deepdose-shell.seco-shell--dark .seco-app-page {
+  background: transparent;
+  background-image: none;
+}
+
+/* ── Enhanced glass tokens for dark ambient shell ── */
+.deepdose-shell.seco-shell--dark {
+  --dios-glass-outer-bg: rgb(255 255 255 / 0.07);
+  --dios-glass-outer-border: rgb(255 255 255 / 0.14);
+  --dios-glass-outer-highlight: none;
+  --dios-glass-outer-shadow: 0 8px 32px rgb(0 0 0 / 0.22);
+  --dios-glass-outer-blur: blur(24px) saturate(1.75);
+  --dios-glass-inner-bg: rgb(255 255 255 / 0.05);
+  --dios-glass-inner-border: rgb(255 255 255 / 0.1);
+  --dios-glass-inner-highlight: none;
+  --dios-glass-inner-shadow: 0 4px 20px rgb(0 0 0 / 0.16);
+  --dios-glass-inner-blur: blur(20px) saturate(1.7);
+}
+
+/* Inner rows — nested glass over outer tiles */
+.deepdose-shell.seco-shell--dark .dash-med-row.dios-select-card {
+  background: var(--dios-glass-inner-bg);
+  backdrop-filter: var(--dios-glass-inner-blur);
+  -webkit-backdrop-filter: var(--dios-glass-inner-blur);
+  border-color: var(--dios-glass-inner-border);
+  box-shadow: var(--dios-glass-inner-shadow);
+}
+
+.deepdose-shell.seco-shell--dark .dash-med-row.dios-select-card--selected {
+  border-color: rgb(172 211 222 / 0.28);
+  background: rgb(172 211 222 / 0.08);
+}
+
+.deepdose-shell.seco-shell--dark .dios-select-card:not(.dash-med-row) {
+  background: var(--dios-glass-inner-bg);
+  backdrop-filter: var(--dios-glass-inner-blur);
+  -webkit-backdrop-filter: var(--dios-glass-inner-blur);
+  border-color: var(--dios-glass-inner-border);
+  box-shadow: var(--dios-glass-inner-shadow);
+}
+
+.deepdose-shell.seco-shell--dark .dios-inset-panel {
+  background: var(--dios-glass-inner-bg);
+  backdrop-filter: var(--dios-glass-inner-blur);
+  -webkit-backdrop-filter: var(--dios-glass-inner-blur);
+  border-color: var(--dios-glass-inner-border);
+  box-shadow: var(--dios-glass-inner-shadow);
+}
+
+.deepdose-shell.seco-shell--dark .clinical-patient-nav__link {
+  backdrop-filter: blur(10px) saturate(1.4);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
+}
+
+.deepdose-shell.seco-shell--dark .clinical-patient-nav__link--active {
+  background: rgb(255 255 255 / 0.1);
+  border-color: rgb(255 255 255 / 0.2);
+}

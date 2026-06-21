@@ -51,7 +51,7 @@ export const LANDING_MECHANISM = {
     'DLMO sets when drugs peak in your system. Standard apps remind you at 8am. Chronotherapy adjusts for your phase.',
   stats: [
     { value: '8', label: 'BNF-aligned medications' },
-    { value: '100', label: 'Circadian score points' },
+    { value: '100', label: 'CHI points' },
     { value: 'MCTQ', label: 'Chronotype assessment' },
     { value: '4', label: 'Consent purposes' },
   ],
@@ -124,14 +124,14 @@ export const LANDING_CLOSE = {
   eyebrow: 'Patient-owned chronobiobank',
   headlineHtml: 'Your rhythm. <em>Your data.</em>',
   support:
-    'Deepdose is the dosing layer of the DIOS platform — consent-first, clinician-ready, research-licensable telemetry.',
+    'Deepdose is the dosing layer of the DIOS platform — you declare your meds and supps first, then everything else follows.',
   sectors: [
     { title: 'Patients', body: 'See when each medication works best for your body — not a generic alarm.' },
     { title: 'Clinicians', body: 'Triage-aligned windows, device sync alerts, and premium-tier verification.' },
     { title: 'Researchers', body: 'Pseudonymised chronobiobank access under explicit patient licence.' },
   ],
   programme: [
-    { label: 'Onboarding', value: 'Consent → MCTQ → Medications' },
+    { label: 'Onboarding', value: 'Meds & supps → Consent → Rhythm' },
     { label: 'Data', value: 'Oura · Whoop · Apple Health' },
     { label: 'Compliance', value: 'UK GDPR · RLS enforced' },
     { label: 'Entry', value: 'Sign in to begin' },

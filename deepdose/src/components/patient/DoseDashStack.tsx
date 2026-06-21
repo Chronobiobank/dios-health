@@ -1,10 +1,12 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
 import type { DoseDashModel, MetabolicRiskSignal, RiskSeverity } from '@/lib/patient/dose-dash-types'
 import { Badge } from '@/components/ui/Layout'
 import { DoseIcon, DOSE_TIMING } from '@/components/chronobiology/DoseVisual'
+import { BodyClockHelpPanel } from '@/components/patient/BodyClockHelpPanel'
 
 const SEVERITY_TONE: Record<RiskSeverity, 'success' | 'warning' | 'neutral'> = {
   low: 'success',
@@ -39,6 +41,7 @@ type DoseDashStackProps = {
 export function DoseDashStack({ model, medDetail }: DoseDashStackProps) {
   const [openRisk, setOpenRisk] = useState<string | null>(null)
   const [openCluster, setOpenCluster] = useState<string | null>(null)
+  const [bodyClockHelpOpen, setBodyClockHelpOpen] = useState(false)
 
   return (
     <div className="space-y-6">
@@ -139,6 +142,13 @@ export function DoseDashStack({ model, medDetail }: DoseDashStackProps) {
               )}
             </p>
           )}
+          <BodyClockHelpPanel
+            open={bodyClockHelpOpen}
+            onToggle={() => setBodyClockHelpOpen((prev) => !prev)}
+            dlmoSource={model.dlmoSource}
+            tiptraqComplete={model.tiptraqComplete}
+            tiptraqNights={model.tiptraqNights}
+          />
         </div>
 
         <div className="dose-dash-inner dose-dash-inner--flush overflow-hidden">
@@ -181,6 +191,14 @@ export function DoseDashStack({ model, medDetail }: DoseDashStackProps) {
                     <p className="text-sm text-ink-muted">{cluster.detail}</p>
                     {extraDetail && (
                       <p className="mt-2 text-sm font-medium text-ink">{extraDetail}</p>
+                    )}
+                    {cluster.id === 'meds' && (
+                      <Link
+                        href="/patient/dashboard/medications"
+                        className="dash-meds__inline-link mt-3 inline-flex text-sm font-medium"
+                      >
+                        Manage medicines
+                      </Link>
                     )}
                   </div>
                 )}

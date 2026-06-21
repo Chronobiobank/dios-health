@@ -1,6 +1,6 @@
 import { Eyebrow } from '@/components/ui/Layout'
 
-const STEPS = ['Consent', 'Rhythm', 'Medications'] as const
+const STEPS = ['Consent', 'Meds', 'Rhythm'] as const
 
 export function OnboardingProgress({ current }: { current: 1 | 2 | 3 }) {
   return (
@@ -56,7 +56,7 @@ export function OnboardingHeader({ step, eyebrow, title, description }: Onboardi
   return (
     <>
       <OnboardingProgress current={step} />
-      <header className="mb-8 space-y-3">
+      <header className="mb-5 space-y-2 md:mb-8 md:space-y-3">
         <Eyebrow>{eyebrow ?? `Step ${step} of 3`}</Eyebrow>
         <h1 className="dios-heading">{title}</h1>
         {description && (

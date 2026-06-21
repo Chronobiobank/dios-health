@@ -9,6 +9,8 @@ interface ScoreGaugeProps {
   score: number
   chronotypeLabel?: string
   components?: ScoreComponents
+  /** Clinician-facing CHI vs patient-facing BCA labelling */
+  variant?: 'chi' | 'bca'
 }
 
 const CX = 120
@@ -55,11 +57,13 @@ function describeArc(cx: number, cy: number, r: number, startAngle: number, endA
   return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArc} ${sweepFlag} ${end.x} ${end.y}`
 }
 
-export default function ScoreGauge({ score, chronotypeLabel, components }: ScoreGaugeProps) {
+export default function ScoreGauge({ score, chronotypeLabel, components, variant = 'chi' }: ScoreGaugeProps) {
   const clamped = Math.min(100, Math.max(0, Math.round(score)))
   const tier = scoreTier(clamped)
   const startAngle = -180
   const scoreAngle = startAngle + (clamped / 100) * 180
+  const scoreName = variant === 'bca' ? 'Body clock alignment' : 'Circadian Health Index'
+  const scoreAbbrev = variant === 'bca' ? 'BCA' : 'CHI'
 
   return (
     <div className="score-gauge">
@@ -68,7 +72,7 @@ export default function ScoreGauge({ score, chronotypeLabel, components }: Score
           viewBox="0 0 240 130"
           className="score-gauge__svg"
           role="img"
-          aria-label={`Circadian alignment score ${clamped} out of 100, ${scoreLabel(clamped)}${chronotypeLabel ? `, ${chronotypeLabel} chronotype` : ''}`}
+          aria-label={`${scoreName} ${clamped} out of 100, ${scoreLabel(clamped)}${chronotypeLabel ? `, ${chronotypeLabel} chronotype` : ''}`}
         >
           <defs>
             <linearGradient
@@ -106,7 +110,7 @@ export default function ScoreGauge({ score, chronotypeLabel, components }: Score
         <div className="score-gauge__readout">
           <p className="score-gauge__score">
             {clamped}
-            <span className="score-gauge__score-max">/ 100</span>
+            <span className="score-gauge__score-max">/ 100 {scoreAbbrev}</span>
           </p>
           <p className={`score-gauge__status score-gauge__status--${tier}`}>
             {scoreLabel(clamped)}

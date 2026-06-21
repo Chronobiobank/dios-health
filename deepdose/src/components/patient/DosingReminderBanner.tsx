@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { BtiPayload } from '@/lib/bti/types'
-import { MEDICATION_TIMINGS, type MedicationCode } from '@/lib/circadian/medications'
+import { getMedicationDisplayName } from '@/lib/medications/catalog'
 import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
 
@@ -14,9 +14,7 @@ interface DosingReminderBannerProps {
 }
 
 function medicationName(code: string): string {
-  return code in MEDICATION_TIMINGS
-    ? MEDICATION_TIMINGS[code as MedicationCode].displayName
-    : code
+  return getMedicationDisplayName(code)
 }
 
 export function DosingReminderBanner({

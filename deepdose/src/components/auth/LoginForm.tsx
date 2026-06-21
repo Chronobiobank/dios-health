@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { createClient } from '@/lib/supabase/client'
-import { isStaffLoginPath, loginLede, resolvePostLoginPath } from '@/lib/auth/post-login-path'
+import { isStaffLoginPath, loginEyebrow, loginLede, loginTitle, resolvePostLoginPath } from '@/lib/auth/post-login-path'
 import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
 import { Input, Label } from '@/components/ui/Input'
@@ -62,7 +62,9 @@ export default function LoginForm() {
         password,
         options: {
           data: { display_name: displayName || email.split('@')[0] },
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: `${window.location.origin}/auth/callback${
+            next ? `?next=${encodeURIComponent(next)}` : ''
+          }`,
         },
       })
 
@@ -96,12 +98,18 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="space-y-6">
-      <p className="seco-page__lede" style={{ marginBottom: '1.5rem' }}>
-        {loginLede(next, effectiveMode)}
-      </p>
+    <div className="seco-auth-form">
+      <header className="seco-auth-head">
+        {loginEyebrow(next) ? (
+          <p className="seco-page__eyebrow seco-auth-head__eyebrow">{loginEyebrow(next)}</p>
+        ) : null}
+        <h1 className="seco-page__title seco-auth-head__title">{loginTitle(next, effectiveMode)}</h1>
+        {loginLede(next, effectiveMode) ? (
+          <p className="seco-page__lede seco-auth-head__lede">{loginLede(next, effectiveMode)}</p>
+        ) : null}
+      </header>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="seco-auth-form__fields space-y-4">
         {effectiveMode === 'signup' && (
           <div className="space-y-1.5">
             <Label htmlFor="displayName">Display name</Label>
@@ -165,7 +173,7 @@ export default function LoginForm() {
         </Button>
       </form>
 
-      <p className="text-center text-sm text-ink-muted">
+      <p className="seco-auth-form__switch text-center text-sm text-ink-muted">
         {!staffLogin && (mode === 'signin' ? (
           <>
             New to {DEEPDOSE_NAME}?{' '}

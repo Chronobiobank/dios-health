@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { CHI_ABBREV } from '@/lib/circadian/chi'
 import { Button } from '@/components/ui/Button'
 
 type FilterOptions = {
@@ -142,7 +143,7 @@ export function CohortBuilder({ options }: { options: FilterOptions }) {
               <Stat label="Records" value={result.aggregates.totalRecords} />
               <Stat label="Unique participants" value={result.aggregates.uniqueCohorts} />
               <Stat
-                label="Mean circadian score"
+                label={`Mean ${CHI_ABBREV}`}
                 value={fmt(result.aggregates.meanCircadianScore)}
               />
               <Stat label="Mean social jet lag" value={fmtUnit(result.aggregates.meanSjlHours, 'h')} />

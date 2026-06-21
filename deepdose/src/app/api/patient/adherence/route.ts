@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { isTimeInWindow } from '@/lib/utils/time'
-import { MEDICATION_TIMINGS, type MedicationCode } from '@/lib/circadian/medications'
+import { getMedicationDisplayName, isCatalogCode } from '@/lib/medications/catalog'
 import { loadPatientBti } from '@/lib/bti/load-patient-bti'
 
 export async function POST(request: Request) {
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   }
 
   const medicationCode = body.medication_code?.trim()
-  if (!medicationCode || !(medicationCode in MEDICATION_TIMINGS)) {
+  if (!medicationCode || !isCatalogCode(medicationCode)) {
     return Response.json({ error: 'Valid medication_code is required' }, { status: 400 })
   }
 
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
 
   return Response.json({
     ok: true,
-    medication: MEDICATION_TIMINGS[medicationCode as MedicationCode].displayName,
+    medication: getMedicationDisplayName(medicationCode),
     in_window: inWindow,
   })
 }

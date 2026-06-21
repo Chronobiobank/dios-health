@@ -1,4 +1,5 @@
 import { requireEnterprise } from '@/lib/chronobiobank/require-enterprise'
+import { CHI_ABBREV } from '@/lib/circadian/chi'
 import { activeLicenses } from '@/lib/chronobiobank/enterprise-access'
 import { fetchChronobiobankRecords, computeAggregates } from '@/lib/chronobiobank/records'
 import { PopulationChart } from '@/components/enterprise/PopulationChart'
@@ -38,7 +39,7 @@ export default async function EnterpriseAnalyticsPage() {
       </header>
 
       <section className="cbb-stat-grid" aria-label="Headline metrics">
-        <Metric label="Mean circadian score" value={fmt(aggregates.meanCircadianScore)} />
+        <Metric label={`Mean ${CHI_ABBREV}`} value={fmt(aggregates.meanCircadianScore)} />
         <Metric label="Mean social jet lag" value={fmtUnit(aggregates.meanSjlHours, 'h')} />
         <Metric label="Mean timing shift" value={fmtUnit(aggregates.meanTimingShiftMinutes, 'min')} />
         <Metric label="Outcomes recorded" value={aggregates.outcomesRecorded} />

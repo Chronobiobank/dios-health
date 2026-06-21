@@ -35,10 +35,10 @@ const HAND_INNER = 58
 const HAND_OUTER = OUTER_R - 14
 
 const HOUR_LABELS = [
-  { hour: 0, label: '12 AM' },
-  { hour: 6, label: '6 AM' },
-  { hour: 12, label: '12 PM' },
-  { hour: 18, label: '6 PM' },
+  { hour: 0, label: '00:00' },
+  { hour: 6, label: '06:00' },
+  { hour: 12, label: '12:00' },
+  { hour: 18, label: '18:00' },
 ]
 
 function nowHHMM(): string {

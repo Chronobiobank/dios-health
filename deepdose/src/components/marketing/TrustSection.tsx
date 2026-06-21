@@ -4,7 +4,7 @@ import { LifestyleImage } from '@/components/marketing/LifestyleImagery'
 
 const STATS = [
   { value: '8', label: 'Chronotherapy medications', sub: 'BNF-aligned evidence grades' },
-  { value: '100', label: 'Point circadian score', sub: 'Phase · jet lag · data quality' },
+  { value: '100', label: 'Point CHI', sub: 'Phase · jet lag · data quality' },
   { value: '4', label: 'Consent purposes', sub: 'Granular patient control' },
 ]
 

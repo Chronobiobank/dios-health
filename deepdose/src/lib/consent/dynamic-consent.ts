@@ -115,3 +115,32 @@ export function hasCompletedRequiredConsents(
   const state = buildConsentState(purposes, existing)
   return validateRequiredConsents(purposes, state).valid
 }
+
+/** Server check — required consents granted before health data processing. */
+export async function patientHasRequiredConsents(
+  supabase: SupabaseClient,
+  patientId: string
+): Promise<{ granted: boolean; error: string | null }> {
+  const { framework, error: frameworkError } = await getCurrentFramework(supabase)
+  if (frameworkError) {
+    return { granted: false, error: frameworkError }
+  }
+  if (!framework) {
+    return { granted: true, error: null }
+  }
+
+  const { purposes, error: purposesError } = await getConsentPurposes(supabase, framework.id)
+  if (purposesError) {
+    return { granted: false, error: purposesError }
+  }
+
+  const { consents, error: consentsError } = await getPatientConsents(supabase, patientId)
+  if (consentsError) {
+    return { granted: false, error: consentsError }
+  }
+
+  return {
+    granted: hasCompletedRequiredConsents(purposes, consents),
+    error: null,
+  }
+}

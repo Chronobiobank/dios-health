@@ -1,64 +1,100 @@
-import Link from 'next/link'
-import type { ClinicianTriageRow } from '@/lib/clinical/triage'
-import { Badge } from '@/components/ui/Layout'
+'use client'
 
-const STATUS_TONE = {
-  URGENT: 'warning',
-  REVIEW: 'warning',
-  ON_TRACK: 'success',
-} as const
+import type { ClinicianTriageRow } from '@/lib/clinical/triage'
+import { triageRowMeta, TRIAGE_STATUS_LABEL } from '@/lib/clinical/triage'
+import { CHI_ABBREV } from '@/lib/circadian/chi'
+import { formatDateTime24 } from '@/lib/utils/time'
+import { ProfileCollapsibleRow } from '@/components/patient/ProfileCollapsibleRow'
+import { Button } from '@/components/ui/Button'
+import { Badge } from '@/components/ui/Layout'
 
 type ClinicalTriageListProps = {
   rows: ClinicianTriageRow[]
 }
 
-export function ClinicalTriageList({ rows }: ClinicalTriageListProps) {
-  if (!rows.length) {
-    return (
-      <div className="seco-app-card border-dashed p-8 text-center">
-        <p className="text-sm text-ink-muted">
-          No linked patients yet. Generate an invite code and share it with patients who have
-          granted clinical care consent.
-        </p>
-      </div>
-    )
-  }
+function TriagePatientRow({ row }: { row: ClinicianTriageRow }) {
+  const chartHref = `/clinical/dashboard/patient/${row.patientId}`
 
   return (
-    <ul className="seco-app-card divide-y divide-border overflow-hidden !p-0">
-      {rows.map((row) => (
-        <li key={row.patientId}>
-          <Link
-            href={`/clinical/dashboard/patient/${row.patientId}`}
-            className="dios-interactive-row flex flex-wrap items-center justify-between gap-3 p-5 md:p-6"
-          >
-            <div className="min-w-0 space-y-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="font-medium text-ink">{row.patientName}</p>
-                {row.isPremiumTier && (
-                  <span className="text-xs" title="Verified Clinical-Grade Data via TipTraQ">
-                    🛡️ Verified Clinical-Grade Data via TipTraQ
-                  </span>
-                )}
-                {row.deviceAlertTriggered && (
-                  <Badge tone="warning">Device alert</Badge>
-                )}
-              </div>
-              <p className="text-sm text-ink-muted">
-                Ref {row.patientRef}
-                {row.chronotypeLabel ? ` · ${row.chronotypeLabel}` : ''}
-              </p>
-            </div>
-            <div className="flex items-center gap-4 text-right">
-              <div>
-                <p className="font-mono text-lg text-ink">{row.circadianScore || '—'}</p>
-                <p className="text-xs text-ink-muted">Circadian score</p>
-              </div>
-              <Badge tone={STATUS_TONE[row.triageStatus]}>{row.triageStatus.replace('_', ' ')}</Badge>
-            </div>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <ProfileCollapsibleRow
+      id={row.patientId}
+      label={row.patientName}
+      meta={triageRowMeta(row, CHI_ABBREV)}
+    >
+      <dl className="clinical-triage__facts">
+        <div>
+          <dt>Reference</dt>
+          <dd>{row.patientRef}</dd>
+        </div>
+        {row.chronotypeLabel && (
+          <div>
+            <dt>Rhythm</dt>
+            <dd>{row.chronotypeLabel}</dd>
+          </div>
+        )}
+        <div>
+          <dt>{CHI_ABBREV}</dt>
+          <dd>{row.circadianScore ?? '—'}</dd>
+        </div>
+        <div>
+          <dt>Last sync</dt>
+          <dd>{formatDateTime24(row.lastDeviceSyncAt)}</dd>
+        </div>
+      </dl>
+
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        {row.isPremiumTier && (
+          <span className="text-xs text-ink-muted">
+            🛡️ Verified Clinical-Grade Data via TipTraQ
+          </span>
+        )}
+        {row.deviceAlertTriggered && <Badge tone="warning">Device alert</Badge>}
+        <Badge
+          tone={
+            row.triageStatus === 'ON_TRACK'
+              ? 'success'
+              : 'warning'
+          }
+        >
+          {TRIAGE_STATUS_LABEL[row.triageStatus]}
+        </Badge>
+      </div>
+
+      <div className="mt-4">
+        <Button href={chartHref} className="clinical-triage__open">
+          Open chart
+        </Button>
+      </div>
+    </ProfileCollapsibleRow>
   )
 }
+
+export function ClinicalTriageList({ rows }: ClinicalTriageListProps) {
+  return (
+    <section
+      className="dash-meds__tile seco-app-card p-5 md:p-6"
+      aria-labelledby="clinical-triage-title"
+    >
+      <div className="dash-meds__section-head">
+        <h2 id="clinical-triage-title" className="dash-meds__section-title">
+          Your patients
+        </h2>
+      </div>
+
+      {rows.length === 0 ? (
+        <p className="dash-meds__empty-copy">
+          No linked patients yet. Generate an invite code below.
+        </p>
+      ) : (
+        <ul className="dash-meds__list">
+          {rows.map((row) => (
+            <TriagePatientRow key={row.patientId} row={row} />
+          ))}
+        </ul>
+      )}
+    </section>
+  )
+}
+
+/** @deprecated Use ClinicalTriageList */
+export default ClinicalTriageList

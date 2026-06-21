@@ -1,5 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { fetchClinicianInviteCodes } from '@/lib/clinical/invites'
+import { ClinicalAccountPanel } from '@/components/clinical/ClinicalAccountPanel'
 import { ClinicianInvitePanel } from '@/components/clinical/ClinicianInvitePanel'
 
 export default async function ClinicalSettingsPage() {
@@ -10,7 +12,7 @@ export default async function ClinicalSettingsPage() {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    redirect('/login')
+    redirect('/login?next=/clinical/settings')
   }
 
   const { data: profile } = await supabase
@@ -23,13 +25,22 @@ export default async function ClinicalSettingsPage() {
     redirect('/patient/dashboard')
   }
 
+  const invites = await fetchClinicianInviteCodes(supabase, user.id)
+
   return (
-    <div className="space-y-8">
-      <header>
+    <div className="dash-meds space-y-8">
+      <header className="seco-landing__copy-stack dash-meds__page-head">
         <p className="seco-page__eyebrow">Clinical</p>
-        <h1 className="seco-app-section-title">Settings</h1>
+        <h1 className="seco-page__title dash-meds__page-title">Settings</h1>
       </header>
-      <ClinicianInvitePanel />
+
+      <div className="dash-meds__form">
+        <ClinicalAccountPanel
+          displayName={profile.display_name ?? 'Clinician'}
+          tier={profile.tier}
+        />
+        <ClinicianInvitePanel initialInvites={invites} variant="full" />
+      </div>
     </div>
   )
 }

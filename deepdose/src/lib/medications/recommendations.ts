@@ -1,20 +1,10 @@
 import {
-  MEDICATION_TIMINGS,
-  adjustTimingForPhase,
-  type MedicationCode,
-  type MedicationTiming,
-} from '@/lib/circadian/medications'
+  buildMedicationRecommendation,
+  getMedicationCatalog,
+  type MedicationRecommendation,
+} from '@/lib/medications/catalog'
 
-export interface MedicationRecommendation {
-  code: MedicationCode
-  displayName: string
-  drugClass: string
-  evidenceGrade: 'A' | 'B' | 'C'
-  rationale: string
-  recommendedStart: string
-  recommendedEnd: string
-  phaseAdjusted: boolean
-}
+export type { MedicationRecommendation } from '@/lib/medications/catalog'
 
 interface DbMedication {
   code: string
@@ -23,25 +13,14 @@ interface DbMedication {
   evidence_grade: 'A' | 'B' | 'C' | null
 }
 
+/** Legacy helper — builds recommendations for DB rows that exist in the catalog. */
 export function buildMedicationRecommendations(
   dbMedications: DbMedication[],
   phaseOffsetMinutes: number
 ): MedicationRecommendation[] {
-  return dbMedications
-    .filter((m): m is DbMedication & { code: MedicationCode } => m.code in MEDICATION_TIMINGS)
-    .map((m) => {
-      const timing: MedicationTiming = MEDICATION_TIMINGS[m.code]
-      const window = adjustTimingForPhase(timing, phaseOffsetMinutes)
+  const catalogByCode = new Map(getMedicationCatalog().map((e) => [e.code, e]))
 
-      return {
-        code: m.code,
-        displayName: m.display_name,
-        drugClass: m.drug_class ?? timing.drugClass,
-        evidenceGrade: (m.evidence_grade ?? timing.evidenceGrade) as 'A' | 'B' | 'C',
-        rationale: timing.rationale,
-        recommendedStart: window.start,
-        recommendedEnd: window.end,
-        phaseAdjusted: timing.phaseOffsetSensitive && phaseOffsetMinutes !== 0,
-      }
-    })
+  return dbMedications
+    .filter((m) => catalogByCode.has(m.code))
+    .map((m) => buildMedicationRecommendation(catalogByCode.get(m.code)!, phaseOffsetMinutes))
 }

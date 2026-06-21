@@ -10,8 +10,11 @@ import {
   sleepEfficiencyStatus,
   spo2Status,
 } from '@/lib/clinical/tiptraq/clinical-status'
+import { formatTime24 } from '@/lib/utils/time'
+import { ProfileCollapsibleRow } from '@/components/patient/ProfileCollapsibleRow'
 import { Badge } from '@/components/ui/Layout'
 import { Button } from '@/components/ui/Button'
+import { FormError } from '@/components/ui/Form'
 
 const STATUS_TONE = {
   green: 'success',
@@ -27,11 +30,6 @@ function formatDate(iso: string): string {
   })
 }
 
-function formatTime(t: string | null): string {
-  if (!t) return '—'
-  return t.slice(0, 5)
-}
-
 function remLatency(night: TipTraqNightRecord): number {
   if (!night.first_rem_onset) return 0
   const toM = (c: string) => {
@@ -42,6 +40,94 @@ function remLatency(night: TipTraqNightRecord): number {
   let rem = toM(night.first_rem_onset)
   if (rem < onset) rem += 1440
   return rem - onset
+}
+
+function TipTraqNightRow({
+  night,
+  loading,
+  onDelete,
+}: {
+  night: TipTraqNightRecord
+  loading: boolean
+  onDelete: (id: string) => void
+}) {
+  const remLat = remLatency(night)
+  const tstHours = Math.floor((night.tst_minutes ?? 0) / 60)
+  const tstMins = (night.tst_minutes ?? 0) % 60
+
+  return (
+    <ProfileCollapsibleRow
+      id={night.id}
+      label={formatDate(night.report_date)}
+      meta={`AHI ${night.ahi} · ${night.sleep_efficiency_pct}% efficiency`}
+    >
+      <dl className="clinical-triage__facts">
+        <div>
+          <dt>Night index</dt>
+          <dd>
+            {night.night_index ?? '—'} · {night.day_type ?? '—'}
+          </dd>
+        </div>
+        <div>
+          <dt>Onset → wake</dt>
+          <dd>
+            {formatTime24(night.sleep_onset)} → {formatTime24(night.sleep_offset)}
+          </dd>
+        </div>
+        <div>
+          <dt>Total sleep</dt>
+          <dd>
+            {tstHours}h {tstMins}m
+          </dd>
+        </div>
+        <div>
+          <dt>DLMO proxy</dt>
+          <dd>{formatTime24(night.proxy_dlmo_time)}</dd>
+        </div>
+        <div>
+          <dt>Efficiency</dt>
+          <dd>
+            <Badge tone={STATUS_TONE[sleepEfficiencyStatus(night.sleep_efficiency_pct)]}>
+              {night.sleep_efficiency_pct}%
+            </Badge>
+          </dd>
+        </div>
+        <div>
+          <dt>AHI</dt>
+          <dd>
+            <Badge tone={STATUS_TONE[ahiStatus(Number(night.ahi))]}>
+              {night.ahi} · {night.ahi_severity ?? '—'}
+            </Badge>
+          </dd>
+        </div>
+        <div>
+          <dt>SpO₂ min</dt>
+          <dd>
+            <Badge tone={STATUS_TONE[spo2Status(night.min_spo2)]}>
+              {night.min_spo2 ?? '—'}%
+            </Badge>
+          </dd>
+        </div>
+        <div>
+          <dt>REM latency</dt>
+          <dd>
+            <Badge tone={STATUS_TONE[remLatencyStatus(remLat)]}>{remLat} min</Badge>
+          </dd>
+        </div>
+      </dl>
+
+      <div className="mt-4">
+        <button
+          type="button"
+          className="text-sm text-warning underline"
+          disabled={loading}
+          onClick={() => onDelete(night.id)}
+        >
+          Remove night
+        </button>
+      </div>
+    </ProfileCollapsibleRow>
+  )
 }
 
 export function TipTraqReadingsPanel({
@@ -91,123 +177,92 @@ export function TipTraqReadingsPanel({
     router.refresh()
   }
 
+  const summaryMeta = `${metrics.nightsLoaded}/${metrics.nightsRequired} nights · AHI ${metrics.meanAhi}`
+
   return (
-    <section className="seco-app-card overflow-hidden !p-0">
-      <div className="border-b border-border p-5 md:p-6">
-        <p className="seco-page__eyebrow mb-1">TipTraQ readings</p>
-        <h2 className="seco-app-card__title">3-night clinical block</h2>
-        <p className="mt-2 text-sm text-ink-muted">{metrics.clinicalRead}</p>
+    <section
+      className="dash-meds__tile seco-app-card p-5 md:p-6"
+      aria-labelledby="tiptraq-readings-title"
+    >
+      <div className="dash-meds__section-head">
+        <h2 id="tiptraq-readings-title" className="dash-meds__section-title">
+          TipTraQ readings
+        </h2>
       </div>
 
-      <div className="grid gap-0 border-b border-border sm:grid-cols-2 lg:grid-cols-4">
-        <MetricCell label="Nights" value={`${metrics.nightsLoaded}/${metrics.nightsRequired}`} />
-        <MetricCell label="Mean AHI" value={`${metrics.meanAhi} · ${metrics.ahiSeverityBand}`} />
-        <MetricCell label="Sleep efficiency" value={`${metrics.meanEfficiencyPct}%`} />
-        <MetricCell label="DLMO proxy" value={metrics.dlmoEstimate} />
-      </div>
+      <ul className="dash-meds__list">
+        <ProfileCollapsibleRow id="tiptraq-block-summary" label="3-night block" meta={summaryMeta}>
+          <p>{metrics.clinicalRead}</p>
 
-      <div className="grid gap-0 border-b border-border sm:grid-cols-2 lg:grid-cols-4">
-        <MetricCell label="Mean onset" value={metrics.meanSleepOnset} />
-        <MetricCell label="Mean wake" value={metrics.meanWake} />
-        <MetricCell label="Total sleep" value={metrics.meanTstLabel} />
-        <MetricCell label="Social jet lag" value={metrics.socialJetlagLabel} />
-      </div>
+          <dl className="clinical-triage__facts">
+            <div>
+              <dt>Mean AHI</dt>
+              <dd>
+                {metrics.meanAhi} · {metrics.ahiSeverityBand}
+              </dd>
+            </div>
+            <div>
+              <dt>Sleep efficiency</dt>
+              <dd>{metrics.meanEfficiencyPct}%</dd>
+            </div>
+            <div>
+              <dt>DLMO proxy</dt>
+              <dd>{metrics.dlmoEstimate}</dd>
+            </div>
+            <div>
+              <dt>Mean onset</dt>
+              <dd>{metrics.meanSleepOnset}</dd>
+            </div>
+            <div>
+              <dt>Mean wake</dt>
+              <dd>{metrics.meanWake}</dd>
+            </div>
+            <div>
+              <dt>Total sleep</dt>
+              <dd>{metrics.meanTstLabel}</dd>
+            </div>
+            <div>
+              <dt>Social jet lag</dt>
+              <dd>{metrics.socialJetlagLabel}</dd>
+            </div>
+          </dl>
+        </ProfileCollapsibleRow>
 
-      {nights.length > 0 ? (
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[48rem] text-left text-sm">
-            <thead>
-              <tr className="dios-table-head text-xs uppercase tracking-wide text-ink-faint">
-                <th className="px-5 py-3 font-medium">Night</th>
-                <th className="px-3 py-3 font-medium">Onset</th>
-                <th className="px-3 py-3 font-medium">Wake</th>
-                <th className="px-3 py-3 font-medium">TST</th>
-                <th className="px-3 py-3 font-medium">Eff.</th>
-                <th className="px-3 py-3 font-medium">AHI</th>
-                <th className="px-3 py-3 font-medium">SpO₂</th>
-                <th className="px-3 py-3 font-medium">REM lat.</th>
-                <th className="px-3 py-3 font-medium">DLMO</th>
-                <th className="px-5 py-3 font-medium" />
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {nights.map((night) => {
-                const remLat = remLatency(night)
-                return (
-                  <tr key={night.id}>
-                    <td className="px-5 py-4">
-                      <p className="font-medium text-ink">{formatDate(night.report_date)}</p>
-                      <p className="text-xs text-ink-faint">
-                        Night {night.night_index ?? '—'} · {night.day_type ?? '—'}
-                      </p>
-                    </td>
-                    <td className="px-3 py-4 font-mono text-ink">{formatTime(night.sleep_onset)}</td>
-                    <td className="px-3 py-4 font-mono text-ink">{formatTime(night.sleep_offset)}</td>
-                    <td className="px-3 py-4 text-ink-muted">
-                      {Math.round((night.tst_minutes ?? 0) / 60)}h {night.tst_minutes % 60}m
-                    </td>
-                    <td className="px-3 py-4">
-                      <Badge tone={STATUS_TONE[sleepEfficiencyStatus(night.sleep_efficiency_pct)]}>
-                        {night.sleep_efficiency_pct}%
-                      </Badge>
-                    </td>
-                    <td className="px-3 py-4">
-                      <Badge tone={STATUS_TONE[ahiStatus(Number(night.ahi))]}>
-                        {night.ahi} · {night.ahi_severity ?? '—'}
-                      </Badge>
-                    </td>
-                    <td className="px-3 py-4">
-                      <Badge tone={STATUS_TONE[spo2Status(night.min_spo2)]}>
-                        {night.min_spo2 ?? '—'}%
-                      </Badge>
-                    </td>
-                    <td className="px-3 py-4">
-                      <Badge tone={STATUS_TONE[remLatencyStatus(remLat)]}>{remLat} min</Badge>
-                    </td>
-                    <td className="px-3 py-4 font-mono text-ink">{formatTime(night.proxy_dlmo_time)}</td>
-                    <td className="px-5 py-4">
-                      <button
-                        type="button"
-                        className="text-xs text-warning underline"
-                        disabled={loading}
-                        onClick={() => void deleteNight(night.id)}
-                      >
-                        Remove
-                      </button>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <p className="p-5 text-sm text-ink-muted md:p-6">
-          No nights on file. Load the Sean James demo block or add nights from TipTraQ summary reports.
+        {nights.map((night) => (
+          <TipTraqNightRow
+            key={night.id}
+            night={night}
+            loading={loading}
+            onDelete={(id) => void deleteNight(id)}
+          />
+        ))}
+      </ul>
+
+      {nights.length === 0 && (
+        <p className="dash-meds__empty-copy">
+          No nights on file. Load the Sean James demo block or add nights from TipTraQ summary
+          reports.
         </p>
       )}
 
-      <div className="flex flex-wrap gap-3 border-t border-border p-5 md:p-6">
+      <div className="dash-meds__tile-foot">
         {assessment && nights.length === 0 && (
           <Button type="button" onClick={loadDemoNights} disabled={loading}>
             {loading ? 'Loading…' : 'Load Sean James demo (3 nights)'}
           </Button>
         )}
         {!assessment && (
-          <p className="text-sm text-ink-muted">Order a TipTraQ kit first to link readings to this block.</p>
+          <p className="dash-meds__empty-copy">
+            Order a TipTraQ kit first to link readings to this block.
+          </p>
         )}
       </div>
 
-      {error && <p className="px-5 pb-5 text-sm text-warning md:px-6">{error}</p>}
+      {error && (
+        <div className="dash-meds__tile-foot">
+          <FormError>{error}</FormError>
+        </div>
+      )}
     </section>
-  )
-}
-
-function MetricCell({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="border-b border-border p-5 sm:border-b-0 sm:border-r sm:last:border-r-0 md:p-6">
-      <p className="text-xs font-medium uppercase tracking-wider text-ink-faint">{label}</p>
-      <p className="mt-1 font-mono text-base text-ink">{value}</p>
-    </div>
   )
 }

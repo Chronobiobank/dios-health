@@ -2,15 +2,44 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { MEDICATION_TIMINGS, type MedicationCode } from '@/lib/circadian/medications'
+import { getMedicationDisplayName } from '@/lib/medications/catalog'
 import type { PrescribingRecommendation } from '@/lib/prescribing/recommendations'
+import { formatTime24 } from '@/lib/utils/time'
+import { ProfileCollapsibleRow } from '@/components/patient/ProfileCollapsibleRow'
 import { Button } from '@/components/ui/Button'
 import { FormError } from '@/components/ui/Form'
-import { Badge } from '@/components/ui/Layout'
 
-function formatTime(t: string | null): string {
-  if (!t) return '—'
-  return t.slice(0, 5)
+type RecommendationRowProps = {
+  recommendation: PrescribingRecommendation
+  loading: boolean
+  onAccept: () => void
+  onDecline: () => void
+}
+
+function RecommendationRow({
+  recommendation,
+  loading,
+  onAccept,
+  onDecline,
+}: RecommendationRowProps) {
+  const name = getMedicationDisplayName(recommendation.medication_code)
+  const meta = `${formatTime24(recommendation.current_timing)} → ${formatTime24(recommendation.recommended_timing)}`
+
+  return (
+    <ProfileCollapsibleRow id={recommendation.id} label={name} meta={meta}>
+      {recommendation.rationale && (
+        <p className="text-sm leading-relaxed text-ink-muted">{recommendation.rationale}</p>
+      )}
+      <div className={`flex flex-wrap gap-2 ${recommendation.rationale ? 'mt-4' : ''}`}>
+        <Button type="button" disabled={loading} onClick={onAccept}>
+          {loading ? 'Saving…' : 'Accept'}
+        </Button>
+        <Button type="button" variant="secondary" disabled={loading} onClick={onDecline}>
+          Decline
+        </Button>
+      </div>
+    </ProfileCollapsibleRow>
+  )
 }
 
 export function PendingRecommendationsPanel({
@@ -46,59 +75,33 @@ export function PendingRecommendationsPanel({
   }
 
   return (
-    <section className="space-y-4">
-      <div>
-        <p className="seco-page__eyebrow">From your clinician</p>
-        <h2 className="seco-app-section-title">Timing recommendations</h2>
+    <section
+      className="dash-meds__tile seco-app-card p-5 md:p-6"
+      aria-labelledby="dash-clinician-recs-title"
+    >
+      <div className="dash-meds__section-head">
+        <h2 id="dash-clinician-recs-title" className="dash-meds__section-title">
+          From your clinician
+        </h2>
       </div>
 
-      <div className="seco-app-card overflow-hidden !p-0">
-        <ul className="divide-y divide-border">
-          {recommendations.map((rec) => {
-            const name =
-              rec.medication_code in MEDICATION_TIMINGS
-                ? MEDICATION_TIMINGS[rec.medication_code as MedicationCode].displayName
-                : rec.medication_code
+      <ul className="dash-meds__list">
+        {recommendations.map((rec) => (
+          <RecommendationRow
+            key={rec.id}
+            recommendation={rec}
+            loading={loadingId === rec.id}
+            onAccept={() => void respond(rec.id, 'accepted')}
+            onDecline={() => void respond(rec.id, 'declined')}
+          />
+        ))}
+      </ul>
 
-            return (
-              <li key={rec.id} className="space-y-3 p-5 md:p-6">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="font-medium text-ink">{name}</p>
-                  <Badge tone="warning">Pending</Badge>
-                </div>
-                <p className="text-sm text-ink-muted">
-                  Change {formatTime(rec.current_timing)} →{' '}
-                  <span className="text-accent font-medium">
-                    {formatTime(rec.recommended_timing)}
-                  </span>
-                </p>
-                {rec.rationale && (
-                  <p className="text-sm text-ink-muted">{rec.rationale}</p>
-                )}
-                <div className="flex flex-wrap gap-2">
-                  <Button
-                    type="button"
-                    disabled={loadingId === rec.id}
-                    onClick={() => respond(rec.id, 'accepted')}
-                  >
-                    {loadingId === rec.id ? 'Saving…' : 'Accept'}
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    disabled={loadingId === rec.id}
-                    onClick={() => respond(rec.id, 'declined')}
-                  >
-                    Decline
-                  </Button>
-                </div>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-
-      {error && <FormError>{error}</FormError>}
+      {error && (
+        <div className="mt-4">
+          <FormError>{error}</FormError>
+        </div>
+      )}
     </section>
   )
 }

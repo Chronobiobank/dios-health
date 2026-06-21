@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { DeepDoseClinicianLanding } from '@/components/secopeutic/DeepDoseClinicianLanding'
+import { DeepDoseClinicianLanding } from '@/components/deepdose/DeepDoseClinicianLanding'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const metadata: Metadata = {

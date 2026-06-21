@@ -1,4 +1,4 @@
-import { SplashRouteShell } from '@/components/secopeutic/SplashRouteShell'
+import { SplashRouteShell } from '@/components/deepdose/SplashRouteShell'
 import '@/styles/dios-health-marketing.css'
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {

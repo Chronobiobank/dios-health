@@ -13,7 +13,7 @@ export type WearableProvider = {
   eyebrow: string
   description: string
   streams: string
-  /** Caps data-quality contribution to circadian score (0–100) */
+  /** Caps data-quality contribution to CHI (0–100) */
   clinicalReliabilityMax: number
   setsPremiumTier: boolean
   connectable: boolean

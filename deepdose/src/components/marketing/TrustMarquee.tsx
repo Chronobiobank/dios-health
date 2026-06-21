@@ -1,7 +1,7 @@
 const ITEMS = [
   'Atorvastatin', 'Ramipril', 'Metformin', 'Aspirin', 'Prednisolone',
   'Amlodipine', 'Warfarin', 'Alendronate', 'Social jet lag', 'DLMO',
-  'Chronotype', 'Circadian score', 'Hygia trial', 'Phase offset',
+  'Chronotype', 'CHI', 'Hygia trial', 'Phase offset',
 ]
 
 export function TrustMarquee() {

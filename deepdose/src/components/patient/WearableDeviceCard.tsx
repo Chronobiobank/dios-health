@@ -4,31 +4,32 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import type { WearableProvider } from '@/lib/wearables/tiers'
+import { formatDateTime24 } from '@/lib/utils/time'
 import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Layout'
 import { FormError } from '@/components/ui/Form'
 
-type ConnectionState = {
+export type DeviceConnectionState = {
   connected: boolean
   lastSyncAt: string | null
   syncStatus: string | null
   lastError: string | null
 }
 
-type WearableDeviceCardProps = {
+type WearableDeviceRowProps = {
   provider: WearableProvider
-  connection: ConnectionState | null
+  connection: DeviceConnectionState | null
   ouraConfigured?: boolean
   whoopConfigured?: boolean
 }
 
-export function WearableDeviceCard({
+export function WearableDeviceRow({
   provider,
   connection,
   ouraConfigured = false,
   whoopConfigured = false,
-}: WearableDeviceCardProps) {
+}: WearableDeviceRowProps) {
   const router = useRouter()
+  const [expanded, setExpanded] = useState(false)
   const [syncing, setSyncing] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -49,91 +50,99 @@ export function WearableDeviceCard({
   }
 
   return (
-    <div
-      className={`seco-app-card space-y-4 p-5 md:p-6 ${isClinical ? 'ring-1 ring-accent/25' : ''}`}
-    >
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="seco-page__eyebrow mb-1">
-            {provider.eyebrow}
+    <li className="dash-med-row dios-select-card dios-select-card--selected">
+      <button
+        type="button"
+        className="dash-med-row__toggle"
+        onClick={() => setExpanded((prev) => !prev)}
+        aria-expanded={expanded}
+        aria-controls={`dash-device-detail-${provider.id}`}
+      >
+        <span className="dash-med-row__summary min-w-0 flex-1 text-left">
+          <span className="dash-med-row__name">{provider.displayName}</span>
+          <span className="dash-med-row__meta">
+            {connected ? 'Connected' : 'Not connected'}
+            {connected && connection?.lastSyncAt
+              ? ` · ${new Date(connection.lastSyncAt).toLocaleDateString()}`
+              : ''}
+          </span>
+        </span>
+        <span className="dose-dash-expand-icon" aria-hidden>
+          {expanded ? '−' : '+'}
+        </span>
+      </button>
+
+      {expanded && (
+        <div
+          id={`dash-device-detail-${provider.id}`}
+          className="dash-med-row__detail border-t border-border px-4 pb-4 pt-3 md:px-5 md:pb-5"
+        >
+          <div className="space-y-3">
             {isClinical && (
-              <span className="ml-2 normal-case tracking-normal text-accent">
-                · Highest clinical accuracy
-              </span>
+              <p className="text-sm text-ink-muted">
+                🛡️ Verified Clinical-Grade Data via TipTraQ
+              </p>
             )}
-          </p>
-          <h2 className="seco-app-card__title">{provider.displayName}</h2>
-          <p className="mt-1 text-sm text-ink-muted">{provider.description}</p>
-          <p className="mt-1 text-xs text-ink-faint">{provider.streams}</p>
-          <p className="mt-2 text-xs text-ink-faint">
-            Data quality cap: {provider.clinicalReliabilityMax}/100
-          </p>
+
+            <p className="text-sm leading-relaxed text-ink-muted">{provider.description}</p>
+            <p className="text-xs text-ink-faint">{provider.streams}</p>
+            <p className="text-xs text-ink-faint">
+              Data quality cap: {provider.clinicalReliabilityMax}/100
+            </p>
+
+            {connected && connection?.lastSyncAt && (
+              <p className="text-sm text-ink-muted">
+                Last sync: {formatDateTime24(connection.lastSyncAt)}
+                {connection.syncStatus === 'error' && connection.lastError
+                  ? ` · ${connection.lastError}`
+                  : ''}
+              </p>
+            )}
+
+            {error && <FormError>{error}</FormError>}
+
+            <div className="flex flex-wrap gap-3 pt-1">
+              {provider.id === 'oura' && !connected && ouraConfigured && (
+                <Button href="/api/wearables/oura/authorize">Connect Oura</Button>
+              )}
+              {provider.id === 'oura' && !connected && !ouraConfigured && (
+                <p className="text-sm text-ink-muted">Oura connect is not available yet.</p>
+              )}
+              {provider.id === 'whoop' && !connected && whoopConfigured && (
+                <Button href="/api/wearables/whoop/authorize">Connect Whoop</Button>
+              )}
+              {provider.id === 'whoop' && !connected && !whoopConfigured && (
+                <p className="text-sm text-ink-muted">Whoop connect is not available yet.</p>
+              )}
+              {(provider.id === 'oura' || provider.id === 'whoop') && connected && (
+                <Button type="button" variant="secondary" onClick={handleSync} disabled={syncing}>
+                  {syncing ? 'Syncing…' : 'Sync now'}
+                </Button>
+              )}
+              {provider.id === 'apple_health' && (
+                <p className="text-sm text-ink-muted">
+                  {connected
+                    ? 'Keep the DeepDose Health Shortcut running on your iPhone.'
+                    : 'Add the DeepDose Health Shortcut on iPhone to share sleep automatically.'}
+                </p>
+              )}
+              {provider.id === 'tiptraq' && !connected && (
+                <p className="text-sm text-ink-muted">
+                  Your clinician adds the report after your three-night home kit.
+                </p>
+              )}
+              {(provider.id === 'oura' || provider.id === 'whoop') && (
+                <Link href="/patient/profile" className="dash-meds__inline-link text-sm">
+                  Clinician sharing
+                </Link>
+              )}
+            </div>
+          </div>
         </div>
-        <Badge tone={connected ? 'success' : isClinical ? 'warning' : 'warning'}>
-          {connected ? 'Connected' : 'Not connected'}
-        </Badge>
-      </div>
-
-      {isClinical && (
-        <p className="text-sm text-ink-muted">
-          🛡️ Verified Clinical-Grade Data via TipTraQ — unlocks clinician premium badge when
-          connected.
-        </p>
       )}
-
-      {connected && connection?.lastSyncAt && (
-        <p className="text-sm text-ink-muted">
-          Last sync: {new Date(connection.lastSyncAt).toLocaleString()}
-          {connection.syncStatus === 'error' && connection.lastError
-            ? ` · ${connection.lastError}`
-            : ''}
-        </p>
-      )}
-
-      {error && <FormError>{error}</FormError>}
-
-      <div className="flex flex-wrap gap-3">
-        {provider.id === 'oura' && !connected && ouraConfigured && (
-          <Button href="/api/wearables/oura/authorize">Connect Oura</Button>
-        )}
-        {provider.id === 'oura' && !connected && !ouraConfigured && (
-          <p className="text-sm text-ink-muted">
-            Oura OAuth is not configured yet (set OURA_CLIENT_ID and OURA_CLIENT_SECRET).
-          </p>
-        )}
-        {provider.id === 'whoop' && !connected && whoopConfigured && (
-          <Button href="/api/wearables/whoop/authorize">Connect Whoop</Button>
-        )}
-        {provider.id === 'whoop' && !connected && !whoopConfigured && (
-          <p className="text-sm text-ink-muted">
-            Whoop OAuth is not configured yet (set WHOOP_CLIENT_ID and WHOOP_CLIENT_SECRET).
-          </p>
-        )}
-        {(provider.id === 'oura' || provider.id === 'whoop') && connected && (
-          <Button type="button" variant="secondary" onClick={handleSync} disabled={syncing}>
-            {syncing ? 'Syncing…' : 'Sync now'}
-          </Button>
-        )}
-        {provider.id === 'apple_health' && (
-          <p className="text-sm text-ink-muted">
-            {connected
-              ? 'Receiving sleep data from your iPhone. Keep the DeepDose Shortcut automation running to stay in sync.'
-              : 'Connect on your iPhone: add the DeepDose Health Shortcut to share sleep automatically. HealthKit data stays on your device until you choose to send it.'}
-          </p>
-        )}
-        {provider.id === 'tiptraq' && !connected && (
-          <p className="text-sm text-ink-muted">
-            On your GP’s advice: wear the kit for three nights at home (£149). Your clinician adds
-            the report — then your dashboard shows the best times for light, meals, medicines,
-            exercise, and sleep.
-          </p>
-        )}
-        {(provider.id === 'oura' || provider.id === 'whoop') && (
-          <Link href="/patient/profile" className="text-sm text-accent underline">
-            Clinician sharing →
-          </Link>
-        )}
-      </div>
-    </div>
+    </li>
   )
 }
+
+/** @deprecated Use WearableDeviceRow */
+export const WearableDeviceCard = WearableDeviceRow

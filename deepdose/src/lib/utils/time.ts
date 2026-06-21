@@ -20,6 +20,27 @@ export function decimalHoursToHHMM(hours: number): string {
   return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`
 }
 
+/** Normalise stored time to HH:MM for display (24-hour clock). */
+export function formatTime24(value: string | null | undefined): string {
+  if (!value) return '—'
+  const [h, m] = value.split(':')
+  if (h === undefined || m === undefined) return value.slice(0, 5)
+  return `${h.padStart(2, '0')}:${m.padStart(2, '0').slice(0, 2)}`
+}
+
+/** Locale datetime in 24-hour clock (en-GB). */
+export function formatDateTime24(iso: string | null | undefined): string {
+  if (!iso) return '—'
+  return new Date(iso).toLocaleString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  })
+}
+
 /** Minutes since midnight from HH:MM or HH:MM:SS */
 export function timeToMinutes(time: string): number {
   const [h, m] = time.split(':').map(Number)

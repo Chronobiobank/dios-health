@@ -1,5 +1,5 @@
 // lib/circadian/score.ts
-// Central Circadian Score (CCS) — composite 0-100 alignment metric
+// Circadian Health Index (CHI) — composite 0-100 summary for clinician triage
 
 export interface CCSInput {
   dlmoEstimateHours: number     // from MCTQ or proxy

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: `%s — ${DEEPDOSE_NAME}`,
   },
   description:
-    'Dose intelligence for light, meals, medicines, exercise, and sleep — timed to your body clock with clinician support.',
+    'Search your meds and supplements. Dose smarter with timing aligned to your body clock — heal faster with clinician support.',
   applicationName: DEEPDOSE_NAME,
   keywords: [
     'Deepdose',
@@ -37,13 +37,13 @@ export const metadata: Metadata = {
     siteName: DEEPDOSE_NAME,
     title: `${DEEPDOSE_NAME} — ${DEEPDOSE_TAGLINE}`,
     description:
-      'Dose intelligence — best times for light, meals, medicines, exercise, and sleep.',
+      'Dose smarter, heal faster — personalised timing for medicines, light, meals, and sleep.',
   },
   twitter: {
     card: 'summary_large_image',
     title: `${DEEPDOSE_NAME} — ${DEEPDOSE_TAGLINE}`,
     description:
-      'Dose intelligence — best times for light, meals, medicines, exercise, and sleep.',
+      'Dose smarter, heal faster — personalised timing for medicines, light, meals, and sleep.',
   },
   robots: {
     index: true,
@@ -62,7 +62,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-GB"
       data-scroll-behavior="smooth"
       className={`${siteFontVariableClasses} h-full antialiased`}
     >

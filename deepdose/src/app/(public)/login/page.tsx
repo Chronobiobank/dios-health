@@ -1,22 +1,19 @@
 import { Suspense } from 'react'
 
 import LoginForm from '@/components/auth/LoginForm'
-import { loginEyebrow } from '@/lib/auth/post-login-path'
 
 type LoginPageProps = {
   searchParams: Promise<{ next?: string }>
 }
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
-  const { next } = await searchParams
+  await searchParams
 
   return (
-    <section className="seco-page">
-      <div className="seco-landing__section-inner">
-        <p className="seco-page__eyebrow">{loginEyebrow(next)}</p>
-        <h1 className="seco-page__title">Sign in</h1>
-        <div className="seco-app-card mt-6 p-5 md:p-6">
-          <Suspense fallback={<p className="seco-page__lede">Loading…</p>}>
+    <section className="seco-page seco-auth-page">
+      <div className="seco-landing__section-inner seco-auth-page__inner">
+        <div className="seco-app-card seco-auth-card p-5 md:p-6">
+          <Suspense fallback={<p className="text-sm text-ink-muted">Loading…</p>}>
             <LoginForm />
           </Suspense>
         </div>

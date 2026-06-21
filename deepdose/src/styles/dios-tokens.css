@@ -1,7 +1,7 @@
 /**
  * DIOS design tokens — shared with dios.health
- * Maven.com education patterns (secopeutic) + clinical aubergine/cream palette
- * Source of truth: ../app/globals-base.css, ../app/styles/secopeutic-demo.css
+ * Maven.com education patterns (DeepDose) + clinical aubergine/cream palette
+ * Source of truth: ../app/globals-base.css, ../app/styles/deepdose-shell.css
  */
 
 :root {
@@ -51,7 +51,7 @@
   --cream: #fafaf7;
   --cream-100: #f3f3ee;
 
-  /* ── Maven / Secopeutic (marketing hero bands) ── */
+  /* ── Maven / DeepDose (marketing hero bands) ── */
   --maven-navy: #0b1220;
   --maven-navy-2: #121c2e;
   --maven-navy-card: #151f33;

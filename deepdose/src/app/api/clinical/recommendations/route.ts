@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { clinicianCanAccessPatient } from '@/lib/clinical/triage'
 import { createPrescribingRecommendation } from '@/lib/prescribing/recommendations'
-import { MEDICATION_TIMINGS, type MedicationCode } from '@/lib/circadian/medications'
+import { getMedicationDisplayName, isOptimisedCode } from '@/lib/medications/catalog'
 
 export async function POST(request: Request) {
   const supabase = await createClient()
@@ -40,8 +40,8 @@ export async function POST(request: Request) {
     )
   }
 
-  if (!(medicationCode in MEDICATION_TIMINGS)) {
-    return Response.json({ error: 'Unknown medication' }, { status: 400 })
+  if (!isOptimisedCode(medicationCode)) {
+    return Response.json({ error: 'Unknown or non-optimised medication' }, { status: 400 })
   }
 
   const canAccess = await clinicianCanAccessPatient(supabase, user.id, patientId)
@@ -71,10 +71,9 @@ export async function POST(request: Request) {
     return Response.json({ error: result.error }, { status: 400 })
   }
 
-  const timing = MEDICATION_TIMINGS[medicationCode as MedicationCode]
   return Response.json({
     ok: true,
     id: result.id,
-    medication: timing.displayName,
+    medication: getMedicationDisplayName(medicationCode),
   })
 }

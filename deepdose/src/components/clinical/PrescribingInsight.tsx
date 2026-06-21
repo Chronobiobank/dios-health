@@ -1,4 +1,1 @@
-export default function Component() {
-  // TODO
-  return null
-}
+export { ClinicalPrescribingPanel as default } from '@/components/clinical/ClinicalPrescribingPanel'

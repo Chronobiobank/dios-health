@@ -28,7 +28,7 @@ async function resolvePatientId(
   return { patientId: user.id, userId: user.id }
 }
 
-// Central Circadian Score (CCS) — composite alignment metric for the patient.
+// Circadian Health Index (CHI) — composite summary for clinician triage.
 export async function GET(request: Request) {
   const supabase = await createClient()
   const resolved = await resolvePatientId(supabase, request)
@@ -50,7 +50,7 @@ export async function GET(request: Request) {
   })
 }
 
-// Persist a CCS snapshot into circadian_scores (patient-owned).
+// Persist a CHI snapshot into circadian_scores (patient-owned).
 export async function POST(request: Request) {
   const supabase = await createClient()
   const resolved = await resolvePatientId(supabase, request)

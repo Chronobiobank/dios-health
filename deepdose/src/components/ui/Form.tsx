@@ -5,14 +5,17 @@ export const checkboxClass = 'dios-checkbox'
 
 interface FormSectionProps {
   title?: string
+  titleClassName?: string
   children: React.ReactNode
   className?: string
 }
 
-export function FormSection({ title, children, className = '' }: FormSectionProps) {
+export function FormSection({ title, titleClassName, children, className = '' }: FormSectionProps) {
   return (
     <section className={`dios-card space-y-4 p-5 md:p-6 ${className}`}>
-      {title && <h2 className="text-sm font-semibold text-ink">{title}</h2>}
+      {title && (
+        <h2 className={titleClassName ?? 'text-lg font-semibold text-ink'}>{title}</h2>
+      )}
       {children}
     </section>
   )
@@ -55,9 +58,7 @@ export function Callout({
   )
 }
 
-export function TimeInput(props: InputHTMLAttributes<HTMLInputElement>) {
-  return <Input type="time" {...props} />
-}
+export { TimeInput } from './TimeInput'
 
 export function NumberInput(props: InputHTMLAttributes<HTMLInputElement>) {
   return <Input type="number" {...props} />

@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { useRouter, useSearchParams } from 'next/navigation'
 import type { ConsentFramework, ConsentPurpose, PatientConsent } from '@/lib/consent/dynamic-consent'
 import { buildConsentState, validateRequiredConsents } from '@/lib/consent/dynamic-consent'
+import { buildMedsOnboardingPath, parseMedsOnboardingParams } from '@/lib/medications/home-to-onboarding'
+import { ProfileCollapsibleRow } from '@/components/patient/ProfileCollapsibleRow'
 import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Layout'
-import { checkboxClass, FieldHint, FormError } from '@/components/ui/Form'
+import { checkboxClass, FormError } from '@/components/ui/Form'
 import { OnboardingHeader } from '@/components/patient/OnboardingShell'
 
 interface ConsentPanelProps {
@@ -16,15 +16,53 @@ interface ConsentPanelProps {
   initialConsents: PatientConsent[]
 }
 
+function consentPurposeMeta(purpose: ConsentPurpose, accepted: boolean): string {
+  if (purpose.is_required) {
+    return accepted ? 'Required · Accepted' : 'Required · Not accepted'
+  }
+  return accepted ? 'Accepted' : 'Not accepted'
+}
+
+type ConsentPurposeRowProps = {
+  purpose: ConsentPurpose
+  accepted: boolean
+  onToggle: () => void
+}
+
+function ConsentPurposeRow({ purpose, accepted, onToggle }: ConsentPurposeRowProps) {
+  return (
+    <ProfileCollapsibleRow
+      id={purpose.code}
+      label={purpose.title}
+      meta={consentPurposeMeta(purpose, accepted)}
+    >
+      <label className="flex items-center gap-2.5 text-sm text-ink-muted">
+        <input
+          type="checkbox"
+          checked={accepted}
+          onChange={onToggle}
+          className={checkboxClass}
+        />
+        I agree
+      </label>
+    </ProfileCollapsibleRow>
+  )
+}
+
 export default function ConsentPanel({
   framework,
   purposes,
   initialConsents,
 }: ConsentPanelProps) {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const { med, time } = parseMedsOnboardingParams(searchParams)
   const [grants, setGrants] = useState(() => buildConsentState(purposes, initialConsents))
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const requiredPurposes = purposes.filter((p) => p.is_required)
+  const optionalPurposes = purposes.filter((p) => !p.is_required)
 
   function toggle(code: string, isRequired: boolean) {
     setGrants((prev) => {
@@ -85,58 +123,75 @@ export default function ConsentPanel({
       return
     }
 
-    router.push('/patient/onboarding/chronotype')
+    router.push(buildMedsOnboardingPath({ med: med ?? undefined, time: time ?? undefined }))
     router.refresh()
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="dash-meds dash-meds--onboarding space-y-6">
       <OnboardingHeader
         step={1}
-        eyebrow={framework.version}
-        title={framework.title}
-        description={framework.description ?? undefined}
+        eyebrow={`Step 1 · ${framework.version}`}
+        title="Your consent"
       />
 
-      <ul className="dios-inset-panel divide-y divide-border">
-        {purposes.map((purpose) => {
-          const checked = grants[purpose.code] ?? false
-          return (
-            <li key={purpose.code} className="p-4 md:p-5">
-              <label className="flex cursor-pointer items-start gap-3">
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  onChange={() => toggle(purpose.code, purpose.is_required)}
-                  className={`mt-0.5 ${checkboxClass}`}
+      <form onSubmit={handleSubmit} className="dash-meds__form">
+        {requiredPurposes.length > 0 && (
+          <section
+            className="dash-meds__tile seco-app-card p-5 md:p-6"
+            aria-labelledby="consent-required-title"
+          >
+            <div className="dash-meds__section-head">
+              <h2 id="consent-required-title" className="dash-meds__section-title">
+                Required
+              </h2>
+            </div>
+
+            <ul className="dash-meds__list">
+              {requiredPurposes.map((purpose) => (
+                <ConsentPurposeRow
+                  key={purpose.code}
+                  purpose={purpose}
+                  accepted={grants[purpose.code] ?? false}
+                  onToggle={() => toggle(purpose.code, purpose.is_required)}
                 />
-                <span className="flex-1 space-y-1.5">
-                  <span className="flex flex-wrap items-center gap-2">
-                    <span className="text-sm font-medium text-ink">{purpose.title}</span>
-                    {purpose.is_required && <Badge tone="neutral">Required</Badge>}
-                  </span>
-                  {purpose.description && (
-                    <span className="block text-sm leading-relaxed text-ink-muted">
-                      {purpose.description}
-                    </span>
-                  )}
-                </span>
-              </label>
-            </li>
-          )
-        })}
-      </ul>
+              ))}
+            </ul>
+          </section>
+        )}
 
-      <FieldHint>
-        You control optional consents and can withdraw them later in your profile.
-        Required clinical care consent is needed to use {DEEPDOSE_NAME} with your GP.
-      </FieldHint>
+        {optionalPurposes.length > 0 && (
+          <section
+            className="dash-meds__tile seco-app-card p-5 md:p-6"
+            aria-labelledby="consent-optional-title"
+          >
+            <div className="dash-meds__section-head">
+              <h2 id="consent-optional-title" className="dash-meds__section-title">
+                Optional
+              </h2>
+            </div>
 
-      {error && <FormError>{error}</FormError>}
+            <ul className="dash-meds__list">
+              {optionalPurposes.map((purpose) => (
+                <ConsentPurposeRow
+                  key={purpose.code}
+                  purpose={purpose}
+                  accepted={grants[purpose.code] ?? false}
+                  onToggle={() => toggle(purpose.code, purpose.is_required)}
+                />
+              ))}
+            </ul>
+          </section>
+        )}
 
-      <Button type="submit" disabled={loading} className="w-full">
-        {loading ? 'Saving…' : 'Save and continue'}
-      </Button>
-    </form>
+        {error && <FormError>{error}</FormError>}
+
+        <div className="dash-meds__actions">
+          <Button type="submit" disabled={loading} className="dash-meds__submit">
+            {loading ? 'Saving…' : 'Continue to your meds'}
+          </Button>
+        </div>
+      </form>
+    </div>
   )
 }

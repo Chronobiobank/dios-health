@@ -1,7 +1,13 @@
 import { createClient } from '@/lib/supabase/server'
+import { patientHasRequiredConsents } from '@/lib/consent/dynamic-consent'
 import { getPatientCircadianContext } from '@/lib/medications/patient-phase'
+import { loadActivePatientMedications } from '@/lib/medications/patient-meds'
 import { buildMedicationRecommendations } from '@/lib/medications/recommendations'
-import { MEDICATION_TIMINGS, type MedicationCode } from '@/lib/circadian/medications'
+import {
+  defaultTimingForEntry,
+  getCatalogEntry,
+  isCatalogCode,
+} from '@/lib/medications/catalog'
 
 export interface MedicationSelection {
   code: string
@@ -13,12 +19,24 @@ function timeToDb(time: string): string {
   return time.length === 5 ? `${time}:00` : time
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   const supabase = await createClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
+  const scope = new URL(request.url).searchParams.get('scope')
+
+  if (scope === 'active') {
+    try {
+      const { context, medications } = await loadActivePatientMedications(supabase, user.id)
+      return Response.json({ context, medications })
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to load medications'
+      return Response.json({ error: message }, { status: 500 })
+    }
   }
 
   const context = await getPatientCircadianContext(supabase, user.id)
@@ -57,8 +75,19 @@ export async function POST(request: Request) {
 
   const selections = body.medications ?? []
 
+  const { granted, error: consentError } = await patientHasRequiredConsents(supabase, user.id)
+  if (consentError) {
+    return Response.json({ error: consentError }, { status: 500 })
+  }
+  if (!granted) {
+    return Response.json(
+      { error: 'Required consents must be granted before saving medicines.' },
+      { status: 403 }
+    )
+  }
+
   for (const sel of selections) {
-    if (!(sel.code in MEDICATION_TIMINGS)) {
+    if (!isCatalogCode(sel.code)) {
       return Response.json({ error: `Unknown medication: ${sel.code}` }, { status: 400 })
     }
     if (sel.dose_mg !== undefined && sel.dose_mg <= 0) {
@@ -70,7 +99,10 @@ export async function POST(request: Request) {
 
   const { error: profileError } = await supabase
     .from('patient_profiles')
-    .upsert({ id: user.id }, { onConflict: 'id' })
+    .upsert(
+      { id: user.id, onboarding_meds_completed_at: new Date().toISOString() },
+      { onConflict: 'id' }
+    )
 
   if (profileError) {
     return Response.json({ error: profileError.message }, { status: 500 })
@@ -89,8 +121,12 @@ export async function POST(request: Request) {
   const today = new Date().toISOString().slice(0, 10)
 
   for (const sel of selections) {
-    const timing = MEDICATION_TIMINGS[sel.code as MedicationCode]
-    const defaultTiming = sel.current_timing ?? timing.populationWindowStart
+    const entry = getCatalogEntry(sel.code)!
+    const defaultTiming =
+      sel.current_timing ??
+      (entry.timingTier === 'optimised' && entry.timing
+        ? entry.timing.populationWindowStart
+        : defaultTimingForEntry(entry, context.phaseOffsetMinutes))
 
     const { error: insertError } = await supabase.from('patient_medications').insert({
       patient_id: user.id,

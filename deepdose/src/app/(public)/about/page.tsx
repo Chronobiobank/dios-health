@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 
-import { AboutFounderSection } from '@/components/secopeutic/AboutFounderSection'
+import { AboutFounderSection } from '@/components/deepdose/AboutFounderSection'
 import { DoseIcon, DOSE_TIMING } from '@/components/chronobiology/DoseVisual'
 import { ZEITGEBER_DOMAINS } from '@/lib/chronobiology/zeitgebers'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
