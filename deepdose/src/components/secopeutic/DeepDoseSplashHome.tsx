@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { DeepdoseWordmark } from '@/components/brand/DeepdoseWordmark'
-import { DEEPDOSE_LOGO_GLYPH, DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_LOGO_GLYPH } from '@/lib/brand/deepdose-brand'
 import { SplashFrame } from '@/components/secopeutic/SplashFrame'
 
 const SPLASH_PORTALS = [
@@ -22,11 +22,9 @@ export function DeepDoseSplashHome() {
 
         <div className="seco-splash__core">
           <h1 className="seco-splash__title">
-            <span className="seco-splash__title-line">
-              {DEEPDOSE_NAME} knows your body clock
-            </span>
+            <span className="seco-splash__title-line">Your meds timed to</span>
             <span className="seco-splash__title-line seco-splash__title-accent">
-              so meds work better.
+              cycles that matter.
             </span>
           </h1>
 
