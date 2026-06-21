@@ -22,8 +22,8 @@ export function DeepDoseSplashHome() {
 
         <div className="seco-splash__core">
           <h1 className="seco-splash__title">
-            Standard drug dosing means 10m don&apos;t heal.{' '}
-            <span className="seco-splash__title-accent">{DEEPDOSE_NAME} changes that.</span>
+            {DEEPDOSE_NAME} tailors meds to your body clock{' '}
+            <span className="seco-splash__title-accent">so they work better.</span>
           </h1>
 
           <nav
