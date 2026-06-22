@@ -3516,19 +3516,43 @@
   color: rgb(255 255 255 / 0.6);
 }
 
-/* Hero: full-width kit graphic with integrated title */
+/* Hero: copy beside atmospheric image */
 .seco-hometest__hero {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  align-items: stretch;
+}
+
+@media (min-width: 880px) {
+  .seco-hometest__hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  }
+}
+
+.seco-hometest__hero-copy .seco-page__title,
+.seco-hometest__hero-copy .seco-page__lede {
+  margin-bottom: 0;
+}
+
+.seco-hometest__hero-copy .seco-page__title {
+  margin-bottom: 1rem;
+}
+
+.seco-hometest__hero-actions {
   display: flex;
-  flex-direction: column;
-  gap: clamp(1.25rem, 3vw, 1.75rem);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.seco-hometest__hero-actions .seco-landing__btn {
+  margin-top: 0;
 }
 
 .seco-hometest__hero-media {
   position: relative;
   margin: 0;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  min-height: clamp(14rem, 52vw, 22rem);
+  aspect-ratio: 3 / 2;
   border-radius: var(--seco-radius-xl);
   border: 1px solid var(--seco-navy-border);
   overflow: hidden;
@@ -3537,8 +3561,9 @@
 
 @media (min-width: 880px) {
   .seco-hometest__hero-media {
-    aspect-ratio: 21 / 9;
-    min-height: clamp(16rem, 24vw, 26rem);
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 100%;
   }
 }
 
@@ -3546,44 +3571,23 @@
   object-fit: cover;
 }
 
-.seco-hometest__hero-overlay {
+.seco-hometest__hero-badge {
   position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  right: 0.875rem;
+  bottom: 0.875rem;
+  display: inline-flex;
+  align-items: center;
   gap: 0.375rem;
-  padding: clamp(1.25rem, 4vw, 2.5rem);
-  text-align: left;
-  background: linear-gradient(
-    180deg,
-    rgb(11 18 32 / 0.88) 0%,
-    rgb(11 18 32 / 0.42) 38%,
-    rgb(11 18 32 / 0.05) 100%
-  );
-  pointer-events: none;
-}
-
-.seco-hometest__hero-eyebrow {
-  margin: 0;
-  font-family: var(--seco-font-data);
-  font-size: 0.6875rem;
+  padding: 0.4375rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  background: rgb(11 18 32 / 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--seco-font-ui);
+  font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgb(255 255 255 / 0.72);
-}
-
-.seco-hometest__hero-title {
-  margin: 0;
-  max-width: min(16ch, 100%);
-  font-family: var(--seco-font-display);
-  font-size: clamp(1.75rem, 4.5vw, 3rem);
-  font-weight: 300;
-  line-height: var(--text-display-leading);
-  letter-spacing: var(--seco-display-tracking);
+  letter-spacing: 0.01em;
   color: #fff;
 }
 
