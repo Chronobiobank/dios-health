@@ -37,11 +37,6 @@ const STEPS = [
     title: 'See your best times',
     body: 'Your dashboard shows the best times for light, meals, medicines, exercise, and sleep, personalised to your body clock.',
   },
-  {
-    label: 'Re-check',
-    title: 'Re-check every three months',
-    body: 'Like a blood test, a quarterly re-read catches circadian drift before it shows up in labs.',
-  },
 ] as const
 
 const BENEFITS = [
