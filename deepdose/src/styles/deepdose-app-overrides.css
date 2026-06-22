@@ -4502,7 +4502,7 @@
 }
 
 .seco-about__h2 + .seco-about__list {
-  margin-top: clamp(5rem, 12vw, 7.5rem);
+  margin-top: clamp(1.75rem, 3.5vw, 2.25rem);
 }
 
 .seco-about__list {
