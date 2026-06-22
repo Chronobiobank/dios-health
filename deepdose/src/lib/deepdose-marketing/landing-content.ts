@@ -70,7 +70,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'plan',
       label: 'Dosing',
-      body: 'Cues timed to body clock',
+      body: 'Meds timed to body clock',
       icon: 'plan' as const,
       panelTitle: 'Your dosing plan',
       panelSeeAll: { label: 'Open dashboard', href: '/login' },
