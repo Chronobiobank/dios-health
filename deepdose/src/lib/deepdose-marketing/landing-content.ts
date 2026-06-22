@@ -47,9 +47,9 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'We estimate when your melatonin switch flips — from phone, wearable, and chrono test data.',
-          meta: 'Passive proxy · No blood test required',
-          href: '/login',
+          title: 'We estimate proxy DLMO from sleep onset (−2 h) and MCTQ mid-sleep (−2.5 h) — published population markers.',
+          meta: 'Proxy DLMO · Burgess & Roenneberg',
+          href: '/science',
         },
         {
           title: 'TipTraQ three-night block validates the anchor — like calibrating a CGM.',
@@ -137,10 +137,10 @@ export const DEEPDOSE_LANDING_CLOSE = {
 export const DEEPDOSE_CLINICIAN_LANDING = {
   hero: {
     eyebrow: 'For clinicians',
-    headlineWhite: 'Make time count',
-    headlineAccent: 'for your panel.',
+    headlineWhite: 'Scripts,',
+    headlineAccent: 'timed right.',
     support:
-      'Device alerts first, then misalignment. TipTraQ nights profile patients for precision dosing — you review flagged records before outcomes slip.',
+      'Once-daily labels hide phase. Triage drift and device gaps — validate with TipTraQ.',
   },
   steps: [
     {

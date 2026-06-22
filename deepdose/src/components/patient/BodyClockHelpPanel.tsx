@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import {
   BODY_CLOCK_LAYERS,
+  PROXY_DLMO_METHODOLOGY,
   layerReached,
   resolveActiveBodyClockLayer,
 } from '@/lib/circadian/body-clock-measurement'
@@ -45,8 +46,8 @@ export function BodyClockHelpPanel({
       {open && (
         <div className="body-clock-help__panel">
           <p className="body-clock-help__lede">
-            Your body-clock anchor sets when each dose cue fires. We build it in layers — each step
-            sharpens timing.
+            Your DLMO anchor sets when each dose cue fires. Free tier uses proxy DLMO from sleep
+            timing and MCTQ — validated population markers, not lab sampling.
           </p>
 
           {dlmoSource && (
@@ -91,6 +92,20 @@ export function BodyClockHelpPanel({
               )
             })}
           </ol>
+
+          {active !== 'clinical' && (
+            <div className="body-clock-help__method">
+              <p className="body-clock-help__method-title">{PROXY_DLMO_METHODOLOGY.headline}</p>
+              <ul className="body-clock-help__method-list">
+                {PROXY_DLMO_METHODOLOGY.signals.map((signal) => (
+                  <li key={signal.id}>
+                    <span className="font-medium text-ink">{signal.formula}</span>
+                    <span className="text-ink-muted"> — {signal.title.toLowerCase()}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {showUpgrade && (
             <p className="body-clock-help__upgrade">

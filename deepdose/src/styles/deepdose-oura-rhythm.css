@@ -1,0 +1,215 @@
+/**
+ * Oura-style marketing rhythm — seamless ambient canvas; tiles + gap define structure.
+ * No horizontal hairlines between concepts on dark-shell public pages.
+ */
+
+.deepdose-shell.seco-shell--dark {
+  --seco-tile-gap: clamp(0.875rem, 2.5vw, 1.125rem);
+  --seco-section-gap: clamp(2.5rem, 6vw, 3.75rem);
+}
+
+/* ── Seamless canvas (no opaque navy bands) ── */
+.deepdose-shell.seco-shell--dark .seco-landing--maven,
+.deepdose-shell.seco-shell--dark .seco-landing,
+.deepdose-shell.seco-shell--dark .seco-landing__light,
+.deepdose-shell.seco-shell--dark .seco-landing__light--canvas,
+.deepdose-shell.seco-shell--dark .seco-landing__close-navy,
+.deepdose-shell.seco-shell--dark .seco-evidence-band,
+.deepdose-shell.seco-shell--dark .seco-landing__section,
+.deepdose-shell.seco-shell--dark .seco-landing__section-inner {
+  background: transparent;
+  background-image: none;
+}
+
+.deepdose-shell.seco-shell--dark .seco-evidence-band__card {
+  background: var(--dios-glass-outer-bg);
+  backdrop-filter: var(--dios-glass-outer-blur);
+  -webkit-backdrop-filter: var(--dios-glass-outer-blur);
+  border-color: var(--dios-glass-outer-border);
+  box-shadow: var(--dios-glass-outer-shadow);
+}
+
+/* Chrome floats over canvas — no dividing rules or inset hairlines */
+.deepdose-shell.seco-shell--dark .clinical-site-nav,
+.deepdose-shell.seco-shell--dark .seco-footer {
+  border-top: none;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.deepdose-shell.seco-shell--dark .seco-landing__close-navy {
+  border-top: none;
+}
+
+.deepdose-shell.seco-shell--dark .seco-nav__panel {
+  border-bottom: none;
+}
+
+/* Content stack above fixed ambient layer */
+.deepdose-shell.seco-shell--dark .clinical-site-nav__main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Section rhythm = whitespace, not rules ── */
+.deepdose-shell.seco-shell--dark .seco-science__section,
+.deepdose-shell.seco-shell--dark .seco-about__section,
+.deepdose-shell.seco-shell--dark .seco-research-scholars,
+.deepdose-shell.seco-shell--dark .seco-research-papers,
+.deepdose-shell.seco-shell--dark .seco-research__costs,
+.deepdose-shell.seco-shell--dark .seco-hometest__section,
+.deepdose-shell.seco-shell--dark .seco-pricing__tiers,
+.deepdose-shell.seco-shell--dark .about-founder {
+  margin-top: var(--seco-section-gap);
+}
+
+.deepdose-shell.seco-shell--dark .seco-science-folds,
+.deepdose-shell.seco-shell--dark .seco-science-evidence,
+.deepdose-shell.seco-shell--dark .seco-science-outputs,
+.deepdose-shell.seco-shell--dark .seco-science-privacy,
+.deepdose-shell.seco-shell--dark .seco-research-clusters,
+.deepdose-shell.seco-shell--dark .seco-about__list,
+.deepdose-shell.seco-shell--dark .seco-research-scholars-list,
+.deepdose-shell.seco-shell--dark .seco-pricing__grid,
+.deepdose-shell.seco-shell--dark .seco-hometest__steps,
+.deepdose-shell.seco-shell--dark .seco-hometest__pricing,
+.deepdose-shell.seco-shell--dark .seco-hometest__cols {
+  gap: var(--seco-tile-gap);
+}
+
+.deepdose-shell.seco-shell--dark .seco-science-folds {
+  margin-top: var(--seco-section-gap);
+}
+
+.deepdose-shell.seco-shell--dark .seco-body-clock-compare {
+  margin-top: var(--seco-section-gap);
+}
+
+.deepdose-shell.seco-shell--dark .seco-science-evidence {
+  gap: var(--seco-tile-gap);
+}
+
+/* Pricing detail — gap instead of rule between header and includes */
+.deepdose-shell.seco-shell--dark .seco-pricing__includes {
+  margin-top: 1.5rem;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* ── Wearables: stacked glass rows, not a bordered table ── */
+.deepdose-shell.seco-shell--dark .seco-science-wearables {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seco-tile-gap);
+  margin-top: 0;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.deepdose-shell.seco-shell--dark .seco-science-wearables__row {
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--dios-glass-inner-border);
+  border-radius: var(--seco-radius-md);
+  background: var(--dios-glass-inner-bg);
+  backdrop-filter: var(--dios-glass-inner-blur);
+  -webkit-backdrop-filter: var(--dios-glass-inner-blur);
+  box-shadow: var(--dios-glass-inner-shadow);
+}
+
+/* ── Research clusters: gap between paper links ── */
+.deepdose-shell.seco-shell--dark .seco-research-cluster__papers {
+  gap: 0.5rem;
+  padding: var(--seco-tile-gap);
+}
+
+.deepdose-shell.seco-shell--dark .seco-research-cluster__paper {
+  padding: 0.75rem 0.875rem;
+  border: none;
+  border-radius: var(--seco-radius-md);
+  background: rgb(255 255 255 / 0.03);
+}
+
+.deepdose-shell.seco-shell--dark .seco-research-cluster__paper:hover {
+  background: rgb(255 255 255 / 0.06);
+}
+
+/* ── Science fold interiors: nested tiles, not hairlines ── */
+.deepdose-shell.seco-shell--dark .seco-science-fold__body .seco-science-ladder {
+  gap: var(--seco-tile-gap);
+  margin-top: 0;
+}
+
+.deepdose-shell.seco-shell--dark .seco-science-fold__body .seco-science-ladder__step {
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--dios-glass-inner-border);
+  border-radius: var(--seco-radius-md);
+  background: var(--dios-glass-inner-bg);
+}
+
+.deepdose-shell.seco-shell--dark .seco-science-fold__body .seco-science-privacy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seco-tile-gap);
+  margin-top: 0;
+}
+
+@media (min-width: 640px) {
+  .deepdose-shell.seco-shell--dark .seco-science-fold__body .seco-science-privacy {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.deepdose-shell.seco-shell--dark .seco-science-fold__body .seco-science-privacy li {
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--dios-glass-inner-border);
+  border-radius: var(--seco-radius-md);
+  background: var(--dios-glass-inner-bg);
+}
+
+.deepdose-shell.seco-shell--dark .seco-science-folds--nested {
+  gap: var(--seco-tile-gap);
+}
+
+.deepdose-shell.seco-shell--dark .seco-science-fold--nested {
+  background: var(--dios-glass-inner-bg);
+  backdrop-filter: var(--dios-glass-inner-blur);
+  -webkit-backdrop-filter: var(--dios-glass-inner-blur);
+  border-color: var(--dios-glass-inner-border);
+}
+
+/* Body-clock help panel — stacked rows, not ruled list */
+.deepdose-shell.seco-shell--dark .body-clock-help__layers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seco-tile-gap);
+}
+
+.deepdose-shell.seco-shell--dark .body-clock-help__layer {
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--dios-glass-inner-border);
+  border-radius: var(--seco-radius-sm);
+  background: var(--dios-glass-inner-bg);
+  border-top: none;
+}
+
+.deepdose-shell.seco-shell--dark .body-clock-help__layer:first-child {
+  padding-top: 0.625rem;
+}
+
+.deepdose-shell.seco-shell--dark .body-clock-help__upgrade {
+  margin-top: var(--seco-tile-gap);
+  padding: 0.75rem;
+  border: 1px solid var(--dios-glass-inner-border);
+  border-radius: var(--seco-radius-sm);
+  background: var(--dios-glass-inner-bg);
+  border-top: none;
+}
+
+/* Endpoints / clinician lists — space only, no bullet hairlines */
+.deepdose-shell.seco-shell--dark .seco-science-endpoints li::before,
+.deepdose-shell.seco-shell--dark .seco-science-clinician li::before,
+.deepdose-shell.seco-shell--dark .seco-science-limits__list li::before {
+  background: rgb(172 211 222 / 0.55);
+}

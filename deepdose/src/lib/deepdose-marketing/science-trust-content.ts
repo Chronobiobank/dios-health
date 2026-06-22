@@ -1,7 +1,7 @@
 /** Science & trust — concise scan heads; detail in page folds where needed. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
-import { BODY_CLOCK_LAYERS } from '@/lib/circadian/body-clock-measurement'
+import { BODY_CLOCK_LAYERS, PROXY_DLMO_METHODOLOGY } from '@/lib/circadian/body-clock-measurement'
 import { DEEPDOSE_LANDING_EVIDENCE } from '@/lib/deepdose-marketing/landing-content'
 import { WEARABLE_PROVIDERS_ORDERED } from '@/lib/wearables/tiers'
 
@@ -25,25 +25,26 @@ export const SCIENCE_TRUST_CLAIMS = {
 
 export const SCIENCE_TRUST_MEASUREMENT = {
   title: 'How we measure your clock',
-  teaser: 'Free estimate → chrono test → TipTraQ validation.',
+  teaser: 'Proxy DLMO → chrono test fusion → TipTraQ validation.',
   badge: 'Measure',
   layers: BODY_CLOCK_LAYERS.map((layer) => ({
     ...layer,
     teaser:
       layer.id === 'estimate'
-        ? 'Sleep timing from phone and wearables.'
+        ? 'DLMO ≈ sleep onset − 2 h from wearables.'
         : layer.id === 'chrono'
-          ? 'MCTQ questionnaire refines phase.'
-          : 'Three nights unlocks the verified badge.',
+          ? 'DLMO ≈ MCTQ mid-sleep − 2.5 h, fused with sleep data.'
+          : 'Three nights replaces the proxy with clinical staging.',
   })),
+  proxyDlmo: PROXY_DLMO_METHODOLOGY,
   limits: {
     title: 'Limits',
     points: [
-      'Free tier uses sleep proxies, not lab DLMO.',
-      'Wearable staging varies by device.',
-      'Windows are phase-adjusted, not PK models.',
+      'Free tier estimates proxy DLMO — not salivary or lab DLMO.',
+      'Wearable sleep staging varies by device and algorithm.',
+      'Dosing windows are phase-adjusted; we do not model drug PK.',
     ],
-    goldStandard: 'DLMO and lab PSG remain the reference. TipTraQ is the validated upgrade.',
+    goldStandard: 'Salivary DLMO and lab PSG remain the reference. TipTraQ is the validated upgrade.',
   },
 } as const
 

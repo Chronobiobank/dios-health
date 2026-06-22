@@ -5,6 +5,7 @@ import { ahiStatus } from '@/lib/clinical/tiptraq/clinical-status'
 import { computeTipTraqBlockMetrics } from '@/lib/clinical/tiptraq/metrics'
 import type { TipTraqNightInput } from '@/lib/clinical/tiptraq/types'
 import { getMedicationDisplayName } from '@/lib/medications/catalog'
+import { formatProxyDlmoSourceDetail } from '@/lib/circadian/body-clock-measurement'
 import type { DlmoProxyResult } from '@/lib/circadian/dlmo'
 import { decimalHoursToHHMM } from '@/lib/utils/time'
 import type {
@@ -301,9 +302,12 @@ function resolveDlmoSource(
   if (proxy?.available && proxy.dlmoMinutes != null) {
     const hasWearable = proxy.nightsUsed > 0
     const hasQuestionnaire = proxy.sources.questionnaire != null
-    const detail = hasWearable
-      ? `Estimated from ${proxy.nightsUsed} night${proxy.nightsUsed === 1 ? '' : 's'} of phone & wearable sleep data${hasQuestionnaire ? ' and your chronotype answers' : ''}.`
-      : 'Estimated from your chronotype answers until phone or wearable data syncs.'
+    const detail = formatProxyDlmoSourceDetail({
+      nightsUsed: proxy.nightsUsed,
+      hasQuestionnaire,
+      confidenceLabel: CONFIDENCE_DISPLAY[proxy.confidenceLabel] ?? 'low',
+      bandMinutes: proxy.confidenceBandMinutes,
+    })
 
     return {
       dlmoHours: proxy.dlmoMinutes / 60,
@@ -325,7 +329,7 @@ function resolveDlmoSource(
             label: 'Chronotype estimate',
             confidenceLabel: 'low',
             bandMinutes: 90,
-            detail: 'Estimated from your chronotype answers. Connect a wearable to sharpen it.',
+            detail: 'Proxy DLMO from MCTQ mid-sleep − 2.5 h. Connect a wearable to fuse sleep onset − 2 h.',
           }
         : null,
   }

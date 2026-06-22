@@ -10,17 +10,62 @@ export type BodyClockLayer = {
   body: string
 }
 
+/** Public methodology — mirrors estimateDlmoProxy() in dlmo.ts. */
+export const PROXY_DLMO_METHODOLOGY = {
+  headline: 'Proxy DLMO (free tier)',
+  lede:
+    'Dim-Light Melatonin Onset (DLMO) is when melatonin begins rising under dim light — the reference phase marker in chronotherapy. Lab DLMO needs repeated saliva samples. We estimate it from two published behavioural proxies, then fuse them:',
+  signals: [
+    {
+      id: 'behavioural',
+      title: 'Sleep timing',
+      formula: 'DLMO ≈ habitual sleep onset − 2 h',
+      body: 'Circular mean of recent phone or wearable sleep onsets. Habitual sleep onset typically follows DLMO by about two hours (Burgess et al., 2016).',
+    },
+    {
+      id: 'questionnaire',
+      title: 'Chrono test (MCTQ)',
+      formula: 'DLMO ≈ mid-sleep on free days − 2.5 h',
+      body: 'Mid-sleep corrected for sleep debt (MSFsc) from the Munich Chronotype Questionnaire — a population-validated phase marker (Roenneberg).',
+    },
+  ] as const,
+  fusion:
+    'When both signals are present, we weight-fuse them: more synced nights increase weight on sleep timing; disagreement widens your uncertainty band (typically ±60–90 min). Confidence is capped well below clinical grade.',
+  limits:
+    'This is a proxy estimate, not a lab DLMO. TipTraQ three-night validation replaces or calibrates it with clinical-grade sleep staging.',
+} as const
+
+export function formatProxyDlmoSourceDetail(input: {
+  nightsUsed: number
+  hasQuestionnaire: boolean
+  confidenceLabel: string
+  bandMinutes: number
+}): string {
+  const parts: string[] = []
+  if (input.nightsUsed > 0) {
+    parts.push(
+      `${input.nightsUsed} night${input.nightsUsed === 1 ? '' : 's'} sleep onset − 2 h`,
+    )
+  }
+  if (input.hasQuestionnaire) {
+    parts.push('MCTQ mid-sleep − 2.5 h')
+  }
+  const signals =
+    parts.length > 0 ? parts.join(' + ') : 'chrono test answers until wearable data syncs'
+  return `Proxy DLMO from ${signals}. ±${input.bandMinutes} min · ${input.confidenceLabel} confidence — not lab DLMO.`
+}
+
 export const BODY_CLOCK_LAYERS: readonly BodyClockLayer[] = [
   {
     id: 'estimate',
     badge: 'Free',
-    title: 'Passive estimate',
-    body: 'Your phone and connected wearables report when you sleep and wake. We infer body-clock timing from those nights — a proxy, not a lab measurement.',
+    title: 'Proxy DLMO from sleep',
+    body: 'Phone and wearable sleep logs give habitual sleep onset. We apply DLMO ≈ sleep onset − 2 h (Burgess et al., 2016) — a behavioural proxy, not a lab measurement.',
   },
   {
     id: 'chrono',
-    title: 'Chrono test',
-    body: 'We use the Munich Chronotype Questionnaire (MCTQ) to estimate your circadian phase.',
+    title: 'Chrono test refines phase',
+    body: 'The Munich Chronotype Questionnaire (MCTQ) adds DLMO ≈ MSFsc − 2.5 h (Roenneberg). We fuse this with sleep timing when both are available.',
   },
   {
     id: 'clinical',
@@ -39,10 +84,10 @@ export const BODY_CLOCK_PRICING_COMPARE = {
     title: 'Phone & wearable estimate',
     figure: 'Free',
     points: [
-      'Sleep timing from your phone and wearables',
-      'Chrono test refines your phase',
-      'Dosing windows on your dashboard',
-      'Confidence capped until clinical validation',
+      'Proxy DLMO: sleep onset − 2 h (wearable/phone)',
+      'Fused with MCTQ mid-sleep − 2.5 h when you complete the chrono test',
+      'Dosing windows shift with your phase anchor',
+      'Confidence capped — TipTraQ validates when it matters',
     ],
     cta: { label: 'Start free', href: '/login' },
   },

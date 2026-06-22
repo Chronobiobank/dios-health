@@ -6,7 +6,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 export const metadata: Metadata = {
   title: `For clinicians — ${DEEPDOSE_NAME}`,
   description:
-    'Triage patients by circadian drift, TipTraQ nights, and evidence-based timing recommendations.',
+    'Optimise prescribing times to each patient\'s body clock — triage drift, device gaps, and TipTraQ-validated DLMO in one panel.',
 }
 
 export default function ClinicianLandingPage() {

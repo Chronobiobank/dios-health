@@ -71,6 +71,20 @@ export default function ScienceTrustPage() {
                 </li>
               ))}
             </ol>
+            <div className="seco-science-proxy">
+              <p className="seco-science-proxy__title">{SCIENCE_TRUST_MEASUREMENT.proxyDlmo.headline}</p>
+              <p className="seco-science-proxy__lede">{SCIENCE_TRUST_MEASUREMENT.proxyDlmo.lede}</p>
+              <ul className="seco-science-proxy__signals">
+                {SCIENCE_TRUST_MEASUREMENT.proxyDlmo.signals.map((signal) => (
+                  <li key={signal.id} className="seco-science-proxy__signal">
+                    <p className="seco-science-proxy__signal-title">{signal.title}</p>
+                    <p className="seco-science-proxy__formula">{signal.formula}</p>
+                    <p className="seco-science-proxy__signal-body">{signal.body}</p>
+                  </li>
+                ))}
+              </ul>
+              <p className="seco-science-proxy__fusion">{SCIENCE_TRUST_MEASUREMENT.proxyDlmo.fusion}</p>
+            </div>
             <div className="seco-science-limits">
               <p className="seco-science-limits__title">{SCIENCE_TRUST_MEASUREMENT.limits.title}</p>
               <ul className="seco-science-limits__list">
