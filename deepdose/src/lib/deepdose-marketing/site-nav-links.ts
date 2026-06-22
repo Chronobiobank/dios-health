@@ -1,7 +1,7 @@
 /** Primary public site navigation — footer and off-canvas menu. */
 
 export const DEEPDOSE_SITE_LINKS = [
-  { label: 'Chronobiobank', href: '/chronobiobank' },
+  { label: 'Mission', href: '/chronobiobank' },
   { label: 'Home test', href: '/home-test' },
   { label: 'About', href: '/about' },
   { label: 'Terms', href: '/terms' },

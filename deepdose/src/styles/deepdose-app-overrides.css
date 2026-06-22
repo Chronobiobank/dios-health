@@ -2318,6 +2318,31 @@
   flex: 1;
 }
 
+.seco-science-fold__head-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.seco-science-fold__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--cue, #acd3de) 38%, transparent);
+  background: color-mix(in srgb, var(--cue, #acd3de) 14%, rgb(255 255 255 / 0.04));
+  color: var(--cue, #acd3de);
+}
+
+.seco-science-fold__icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
 .seco-science-fold__badge {
   align-self: flex-start;
   padding: 0.125rem 0.5rem;
@@ -2381,6 +2406,9 @@
   font-size: 0.875rem;
   line-height: var(--text-body-leading);
   color: rgb(255 255 255 / 0.62);
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .seco-science-fold__body > :first-child {
@@ -2419,10 +2447,15 @@
   text-underline-offset: 0.12em;
 }
 
-/* ── Chronobiobank page ── */
+/* ── Mission page (route: /chronobiobank) ── */
+.seco-mission .seco-chronobiobank__intro {
+  max-width: 62ch;
+  margin-bottom: 0;
+}
+
 .seco-chronobiobank__intro {
   max-width: 62ch;
-  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 0;
 }
 
 .seco-chronobiobank__intro .seco-page__title,
@@ -2430,8 +2463,283 @@
   margin-bottom: 0;
 }
 
+.seco-chronobiobank__lede {
+  margin-top: 1rem;
+  max-width: 62ch;
+}
+
+/* ── Mission page rhythm — one gap for every tile row ── */
+.seco-mission {
+  --seco-mission-tile-gap: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.seco-chronobiobank__mission-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seco-mission-tile-gap);
+  margin-top: clamp(2rem, 5vw, 2.75rem);
+}
+
+.seco-chronobiobank__mission-stack > .seco-chronobiobank__founder-quote,
+.seco-chronobiobank__mission-stack > .seco-chronobiobank__planes,
+.seco-chronobiobank__mission-stack > .seco-chronobiobank__folds,
+.seco-chronobiobank__mission-stack > .seco-chronobiobank__deep-dive {
+  margin: 0;
+}
+
+.seco-mission .seco-chronobiobank__folds,
+.seco-mission .seco-chronobiobank__deep-dive {
+  margin-top: 0;
+}
+
+.seco-mission .seco-chronobiobank__mission-stack .seco-spectrum-tiles,
+.seco-mission .seco-chronobiobank__feature-expand .seco-spectrum-tiles,
+.seco-mission .seco-chronobiobank__feature-grid-tiles,
+.seco-mission .seco-chronobiobank__feature-grid.seco-science-folds,
+.seco-mission .seco-chronobiobank__deep-dive,
+.seco-mission .seco-chronobiobank__mission-stack .seco-science-folds {
+  gap: var(--seco-mission-tile-gap);
+}
+
+.seco-mission .seco-chronobiobank__mission-stack .seco-science-folds {
+  margin-top: 0;
+}
+
+/* Mission feature grid — headers + expansion panel below */
+.seco-chronobiobank__feature-grid.seco-science-folds {
+  display: flex;
+  flex-direction: column;
+  overflow-anchor: none;
+}
+
+.seco-chronobiobank__feature-grid-tiles {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .seco-chronobiobank__feature-grid-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.seco-science-fold--grid-trigger {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.seco-science-fold--grid-trigger.is-open {
+  border-color: color-mix(in srgb, var(--cue, #acd3de) 42%, rgb(255 255 255 / 0.14));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--cue, #acd3de) 18%, transparent),
+    var(--dios-glass-outer-shadow);
+}
+
+.seco-science-fold--grid-trigger .seco-science-fold__summary {
+  pointer-events: none;
+}
+
+.seco-science-fold__chevron--open::before {
+  transform: translate(-50%, -35%) rotate(-135deg);
+}
+
+.seco-chronobiobank__feature-expand {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+  scroll-margin-top: calc(var(--dios-site-nav-height, 3rem) + 0.75rem);
+}
+
+.seco-chronobiobank__feature-expand .seco-science-fold__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seco-mission-tile-gap, clamp(1.25rem, 3vw, 1.75rem));
+  padding-top: clamp(0.875rem, 2.4vw, 1.125rem);
+}
+
+.seco-chronobiobank__feature-expand .seco-science-fold__body > * {
+  margin: 0;
+}
+
+.seco-chronobiobank__feature-expand .seco-spectrum-tiles,
+.seco-chronobiobank__feature-expand .seco-spectrum-tile,
+.seco-chronobiobank__feature-expand .seco-body-clock-compare,
+.seco-chronobiobank__feature-expand .seco-research,
+.seco-chronobiobank__feature-expand .seco-science {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.seco-science-fold--grid-tile .seco-science-fold__head {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+
+.seco-science-fold--grid-tile .seco-science-fold__summary {
+  padding: clamp(0.75rem, 2vw, 0.9375rem) clamp(0.875rem, 2.2vw, 1rem);
+  min-height: 5.5rem;
+}
+
+.seco-science-fold--grid-tile:not([open]) .seco-science-fold__title {
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.seco-science-fold--grid-tile:not([open]) .seco-science-fold__teaser {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.75rem;
+}
+
+.seco-chronobiobank__science-anchor {
+  margin-top: clamp(1.25rem, 3vw, 1.75rem);
+  scroll-margin-top: 5.5rem;
+}
+
+.seco-chronobiobank__founder-quote {
+  width: 100%;
+}
+
+/* ── Founder quote tile (light, full-width) ── */
+.seco-founder-quote {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--seco-radius-lg);
+}
+
+.seco-founder-quote--light {
+  border: 1px solid rgb(255 255 255 / 0.72);
+  background:
+    linear-gradient(
+      118deg,
+      rgb(255 255 255 / 0.98) 0%,
+      rgb(255 244 236 / 0.96) 16%,
+      rgb(252 232 244 / 0.94) 38%,
+      rgb(242 234 252 / 0.92) 62%,
+      rgb(228 244 250 / 0.96) 100%
+    );
+  box-shadow:
+    0 20px 48px rgb(6 10 18 / 0.12),
+    inset 0 1px 0 rgb(255 255 255 / 0.95);
+}
+
+.seco-founder-quote__body {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  padding: clamp(1.25rem, 3.5vw, 2rem);
+}
+
+@media (min-width: 720px) {
+  .seco-founder-quote__body {
+    padding: clamp(1.75rem, 4.5vw, 2.75rem);
+  }
+}
+
+.seco-founder-quote--light .seco-founder-quote__text {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.25rem, 3vw, 1.625rem);
+  font-weight: 300;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: rgb(11 18 32 / 0.94);
+  text-shadow: 0 1px 0 rgb(255 255 255 / 0.35);
+}
+
+.seco-founder-quote__text {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.25rem, 3vw, 1.625rem);
+  font-weight: 300;
+  line-height: 1.42;
+  letter-spacing: -0.02em;
+  color: rgb(255 255 255 / 0.96);
+}
+
+.seco-founder-quote--light .seco-founder-quote__attrib {
+  border-top-color: rgb(11 18 32 / 0.1);
+}
+
+.seco-founder-quote__attrib {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: clamp(1.125rem, 2.5vw, 1.5rem);
+  padding-top: clamp(1rem, 2.5vw, 1.25rem);
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.seco-founder-quote--light .seco-founder-quote__eyebrow {
+  color: rgb(24 72 118 / 0.72);
+}
+
+.seco-founder-quote__eyebrow {
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(172 211 222 / 0.72);
+}
+
+.seco-founder-quote--light .seco-founder-quote__name {
+  color: rgb(11 18 32 / 0.94);
+}
+
+.seco-founder-quote__name {
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.seco-founder-quote--light .seco-founder-quote__role {
+  color: rgb(11 18 32 / 0.62);
+}
+
+.seco-founder-quote__role {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: rgb(255 255 255 / 0.55);
+}
+
+.seco-chronobiobank__title {
+  max-width: 14ch;
+  font-size: clamp(2.25rem, 6.5vw, 4rem);
+  font-weight: 300;
+  letter-spacing: var(--seco-display-tracking-hero, -0.02em);
+}
+
 .seco-chronobiobank__intro .seco-page__title {
   margin-bottom: 1rem;
+}
+
+.seco-chronobiobank__trust-quote {
+  margin-bottom: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.seco-chronobiobank__trust-quote .seco-spectrum-tile__title {
+  max-width: none;
+  font-size: clamp(1.0625rem, 2.4vw, 1.25rem);
+  line-height: 1.45;
 }
 
 .seco-chronobiobank__quote {
@@ -2504,7 +2812,7 @@
 }
 
 .seco-chronobiobank__closing {
-  margin: clamp(1.25rem, 3vw, 1.75rem) 0 0;
+  margin: 0;
   max-width: 58ch;
   font-size: 0.9375rem;
   line-height: 1.6;
@@ -2534,7 +2842,7 @@
 .seco-chronobiobank__section-sub,
 .seco-chronobiobank__prose,
 .seco-chronobiobank__note {
-  margin: 0.75rem 0 0;
+  margin: 0;
   font-size: 0.9375rem;
   line-height: var(--text-body-leading);
   color: rgb(255 255 255 / 0.62);
@@ -2542,12 +2850,61 @@
 
 .seco-chronobiobank__planes,
 .seco-chronobiobank__tiers,
-.seco-chronobiobank__audiences {
+.seco-chronobiobank__audiences,
+.seco-chronobiobank__timing-points,
+.seco-chronobiobank__plane-stack,
+.seco-chronobiobank__contrast,
+.seco-chronobiobank__federated-list,
+.seco-chronobiobank__precedents,
+.seco-chronobiobank__capture,
+.seco-chronobiobank__stores,
+.seco-chronobiobank__access,
+.seco-chronobiobank__phases,
+.seco-chronobiobank__consent {
   margin: 0;
 }
 
+.seco-chronobiobank__federated-list,
+.seco-chronobiobank__precedents,
+.seco-chronobiobank__capture,
+.seco-chronobiobank__stores,
+.seco-chronobiobank__access,
+.seco-chronobiobank__phases,
+.seco-chronobiobank__consent {
+  margin-top: var(--seco-mission-tile-gap, clamp(1.25rem, 3vw, 1.75rem));
+}
+
+.seco-chronobiobank__stores,
+.seco-chronobiobank__access {
+  margin-top: var(--seco-mission-tile-gap, clamp(1.25rem, 3vw, 1.75rem));
+}
+
+.seco-chronobiobank__cost-block {
+  margin-top: var(--seco-mission-tile-gap, clamp(1.25rem, 3vw, 1.75rem));
+}
+
+.seco-chronobiobank__access-never {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.55);
+}
+
+.seco-chronobiobank__access .seco-spectrum-tile__title {
+  font-family: var(--seco-font-ui);
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+  color: rgb(255 255 255 / 0.94);
+}
+
 .seco-chronobiobank__planes {
-  margin-top: clamp(1.75rem, 4vw, 2.5rem);
+  margin-top: 0;
+}
+
+.seco-chronobiobank__plane-stack {
+  margin: 0;
 }
 
 .seco-research--embedded .seco-research__costs,
@@ -2592,7 +2949,21 @@
 }
 
 .seco-chronobiobank__folds {
-  margin-top: clamp(2rem, 5vw, 3rem);
+  margin-top: 0;
+}
+
+.seco-chronobiobank__deep-dive {
+  display: flex;
+  flex-direction: column;
+}
+
+.seco-mission .seco-chronobiobank__deep-dive .seco-science-fold {
+  margin: 0;
+}
+
+.seco-chronobiobank__deep-links {
+  margin: 0;
+  font-size: 0.875rem;
 }
 
 .seco-chronobiobank__detail-list {

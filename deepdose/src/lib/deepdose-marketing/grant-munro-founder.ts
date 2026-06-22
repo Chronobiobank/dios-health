@@ -3,10 +3,10 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 /** Founder profile: About page and clinician context. */
 export const GRANT_MUNRO_PROFILE = {
   name: 'Grant Munro',
-  role: `Founder, DIOS Health`,
+  role: `Founder of ${DEEPDOSE_NAME}`,
   product: DEEPDOSE_NAME,
   image: '/authors/grant-munro.jpeg',
-  imageAlt: 'Grant Munro, founder of DIOS Health',
+  imageAlt: `Grant Munro, founder of ${DEEPDOSE_NAME}`,
   affiliation: 'NIHI Fellow, University of Auckland',
   nihiUrl: 'https://www.nihi.org.nz/',
   paragraphs: [

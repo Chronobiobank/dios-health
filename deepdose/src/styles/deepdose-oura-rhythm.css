@@ -29,11 +29,9 @@
   box-shadow: var(--dios-glass-outer-shadow);
 }
 
-/* Chrome floats over canvas — no dividing rules or inset hairlines */
+/* Chrome floats over canvas — hairlines only (frost from deepdose-ambient.css) */
 .deepdose-shell.seco-shell--dark .clinical-site-nav,
 .deepdose-shell.seco-shell--dark .seco-footer {
-  border-top: none;
-  border-bottom: none;
   box-shadow: none;
 }
 
@@ -87,6 +85,11 @@
 
 .deepdose-shell.seco-shell--dark .seco-chronobiobank__folds {
   margin-top: var(--seco-section-gap);
+}
+
+.deepdose-shell.seco-shell--dark .seco-mission .seco-chronobiobank__folds {
+  margin-top: 0;
+  gap: var(--seco-mission-tile-gap, var(--seco-tile-gap));
 }
 
 .deepdose-shell.seco-shell--dark .seco-body-clock-compare {

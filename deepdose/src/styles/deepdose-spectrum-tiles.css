@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
@@ -92,6 +93,78 @@
 
 .seco-spectrum-tile--compact {
   padding: clamp(0.875rem, 2.2vw, 1.125rem);
+}
+
+/* High-contrast hero wash — mission tiles, positive contrast */
+.seco-spectrum-tile--hero {
+  --spectrum-tile-wash: 32%;
+  --spectrum-tile-wash-hover: 38%;
+  --spectrum-tile-icon-bg: 24%;
+  --spectrum-tile-border-mix: 58%;
+
+  border-color: color-mix(in srgb, var(--cue) 48%, rgb(255 255 255 / 0.14));
+  background:
+    radial-gradient(130% 110% at 0% 0%, color-mix(in srgb, var(--cue) 38%, transparent), transparent 58%),
+    linear-gradient(
+      135deg,
+      rgb(172 211 222 / 0.14) 0%,
+      rgb(139 156 248 / 0.1) 48%,
+      rgb(201 182 242 / 0.08) 100%
+    ),
+    var(--dios-glass-outer-bg);
+  box-shadow:
+    var(--dios-glass-outer-shadow),
+    0 0 0 1px color-mix(in srgb, var(--cue) 18%, transparent);
+}
+
+.seco-spectrum-tile--hero:hover {
+  border-color: color-mix(in srgb, var(--cue) 62%, rgb(255 255 255 / 0.2));
+  background:
+    radial-gradient(130% 110% at 0% 0%, color-mix(in srgb, var(--cue) 44%, transparent), transparent 58%),
+    linear-gradient(
+      135deg,
+      rgb(172 211 222 / 0.18) 0%,
+      rgb(139 156 248 / 0.13) 48%,
+      rgb(201 182 242 / 0.1) 100%
+    ),
+    var(--dios-glass-outer-bg);
+}
+
+.seco-spectrum-tile--hero .seco-spectrum-tile__icon {
+  background: color-mix(in srgb, var(--cue) 28%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cue) 35%, transparent);
+}
+
+/* Muted contrast — legacy centralised model */
+.seco-spectrum-tile--muted {
+  --spectrum-tile-wash: 6%;
+  --spectrum-tile-wash-hover: 10%;
+  --spectrum-tile-icon-bg: 10%;
+
+  border-style: dashed;
+  border-color: rgb(255 255 255 / 0.14);
+  background: rgb(255 255 255 / 0.025);
+  box-shadow: none;
+}
+
+.seco-spectrum-tile--muted:hover {
+  transform: none;
+  border-color: rgb(255 255 255 / 0.2);
+  background: rgb(255 255 255 / 0.04);
+  box-shadow: none;
+}
+
+.seco-spectrum-tile--muted .seco-spectrum-tile__title {
+  color: rgb(255 255 255 / 0.72);
+}
+
+.seco-spectrum-tile--muted .seco-spectrum-tile__cue {
+  color: rgb(255 255 255 / 0.38);
+}
+
+.seco-spectrum-tile--muted .seco-spectrum-tile__icon {
+  color: rgb(255 255 255 / 0.45);
+  background: rgb(255 255 255 / 0.06);
 }
 
 /* ── Head: icon + eyebrow ── */

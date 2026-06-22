@@ -7,18 +7,19 @@ import {
 } from '@/lib/deepdose-marketing/site-nav-links'
 
 export const CHRONOBIOBANK_META = {
-  title: `Chronobiobank · ${DEEPDOSE_NAME}`,
+  title: `Mission · ${DEEPDOSE_NAME}`,
   description:
-    'A direct response to centralised biobank trust: distributed circadian intelligence where your data stays on your device — federated learning, privacy-preserving upload, and licensed population insight.',
+    'Your sleep and timing stay on your phone. Deepdose helps you dose smarter — and lets research learn from patterns, not from hoarding your private health data.',
 } as const
 
 export const CHRONOBIOBANK_INTRO = {
-  eyebrow: 'Chronobiobank',
-  title: 'Distributed intelligence, not a database',
+  eyebrow: 'Mission',
+  titleWhite: 'User-owned',
+  titleAccent: 'chronobiobank',
   lede:
-    'Half a million body clocks should not live in one warehouse. Chronobiobank learns how timing improves outcomes — without asking you to hand your most intimate biological data to an institution and hope for the best.',
+    'Half a million sleep histories should not sit in one warehouse. We help you take medicines and build habits at the right time for your body — while keeping your nights and numbers on your phone, under your control.',
   quote:
-    'We\u2019re not building a database. We\u2019re building a distributed intelligence layer that learns from circadian clocks without centralising the data on any of them.',
+    'We\u2019re not building a giant database. We\u2019re building a way to learn what works for real people — without pulling everyone\u2019s private biology into a central vault.',
 } as const
 
 export const CHRONOBIOBANK_TRUST = {
@@ -50,32 +51,172 @@ export const CHRONOBIOBANK_TRUST = {
     'A generation primed by Cambridge Analytica and NHS data-sale rows does not need another citizen-science biobank that quietly ships the asset to a server. Chronobiobank is research infrastructure built for people who want population insight without surrendering personal biology.',
 } as const
 
-export const CHRONOBIOBANK_PLANES = [
+export const CHRONOBIOBANK_PLANE = {
+  label: 'How it works',
+  cue: '#8b9cf8',
+  title: 'Your phone holds the detail. The cloud only sees patterns.',
+  body:
+    'Sleep, meds, and daily rhythm stay on your device. When you choose to take part, we combine anonymised learnings from many people to improve timing advice — never your raw nights, never a sellable health file with your name on it.',
+} as const
+
+/** Plain-language steps — used in the “Together” mission tile. */
+export const CHRONOBIOBANK_MISSION_STEPS = [
   {
-    id: 'edge',
-    label: 'Edge',
+    id: 'phone',
+    label: 'On your phone',
     cue: '#acd3de',
-    title: 'Capture on your device',
+    title: 'Your nights stay with you',
     body:
-      'Sleep, chronotype, medication timing, and outcomes stay patient-owned under row-level security. Feature extraction runs locally before anything is considered for learning.',
+      'Sleep, light, and dose times are read on your phone or wearable. You can see what\u2019s stored and delete it.',
   },
   {
-    id: 'learning',
-    label: 'Learning plane',
+    id: 'learn',
+    label: 'Smarter together',
     cue: '#8b9cf8',
-    title: 'Train without hoarding',
+    title: 'The model learns without hoarding',
     body:
-      'A federated coordinator merges encrypted contributions — weight deltas or differentially private summaries — into global timing models. Model weights never surface in the patient app.',
+      'Your device sends small, anonymised updates — not a dump of every heartbeat. Together they teach the system what good timing looks like.',
   },
   {
-    id: 'licensing',
-    label: 'Licensing plane',
+    id: 'share',
+    label: 'If you say yes',
     cue: '#f2b8a2',
-    title: 'Insight enterprises can license',
+    title: 'Research sees summaries, not you',
     body:
-      'Pseudonymised outcome records, cohort aggregates, and audited access logs — what ICBs, pharma, and academics buy. Not raw sleep traces. Not individual gradients.',
+      'Clinicians and approved studies may use grouped, anonymised results. They never browse your individual sleep chart.',
   },
 ] as const
+
+/** Four mission tiles — plain language, joy to read. */
+export const CHRONOBIOBANK_MISSION_FEATURES = [
+  {
+    id: 'yours',
+    badge: 'Privacy',
+    title: 'Your data stays yours',
+    teaser: 'On your phone · you choose what to share',
+    cue: '#f2b8a2',
+  },
+  {
+    id: 'together',
+    badge: 'Together',
+    title: 'Better advice, safely',
+    teaser: 'Learn from many people · keep private nights private',
+    cue: '#8b9cf8',
+  },
+  {
+    id: 'timing',
+    badge: 'Why it matters',
+    title: 'Timing changes outcomes',
+    teaser: 'Meds, light, meals, and sleep in sync with your body',
+    cue: '#acd3de',
+  },
+  {
+    id: 'join',
+    badge: 'Take part',
+    title: 'For patients, clinicians, and researchers',
+    teaser: 'Start on your phone · bring your team · study with consent',
+    cue: '#c9b6f2',
+  },
+] as const
+
+export const CHRONOBIOBANK_MISSION_YOURS = {
+  intro:
+    'Big health studies often ask you to trust a distant institution with samples and records. When that trust wobbles, people disengage. We took a different path: your biology stays close to you.',
+  contrasts: [
+    {
+      id: 'central',
+      label: 'Old model',
+      cue: '#6b7280',
+      title: 'Everything ships to a warehouse',
+      body:
+        'Your records live on someone else\u2019s servers. Every news story about a leak or a sale erodes the deal you thought you made.',
+    },
+    {
+      id: 'distributed',
+      label: 'Deepdose',
+      cue: '#acd3de',
+      title: 'You keep the original',
+      body:
+        'Sleep and timing stay on your phone. Sharing is optional, visible, and revocable. Research works from anonymised patterns — not from copying your nights.',
+    },
+  ],
+  closing:
+    'Consent should feel like a door you control, not fine print you scroll past. That\u2019s the bar we build to.',
+} as const
+
+export const CHRONOBIOBANK_MISSION_TOGETHER = {
+  intro:
+    'Apple showed that phones can learn your habits without uploading your photos. We apply the same idea to body-clock health: compute locally, improve globally, hoard nothing intimate.',
+} as const
+
+export const CHRONOBIOBANK_MISSION_TIMING = {
+  intro:
+    'Your body runs on a roughly 24-hour rhythm. When sleep, light, meals, and medicines drift out of sync, recovery and drug effect drift too. Small shifts in when you dose can matter as much as what you take.',
+  points: [
+    {
+      cue: '#f2b8a2',
+      title: 'Medicines',
+      body: 'Blood pressure pills, statins, and many others work differently depending on time of day. We help you find your window.',
+    },
+    {
+      cue: '#acd3de',
+      title: 'Light & sleep',
+      body: 'Morning light anchors your clock. Regular sleep times help repair and mood. We read what your wearables already capture.',
+    },
+    {
+      cue: '#8b9cf8',
+      title: 'Meals & movement',
+      body: 'When you eat and move nudges the same rhythm. Timing advice works best when it sees the whole day, not one pill in isolation.',
+    },
+  ],
+  footnote:
+    'Curious about the studies and how we estimate your rhythm? The research library and measurement notes are linked below — no PhD required to start.',
+} as const
+
+export const CHRONOBIOBANK_MISSION_JOIN = {
+  intro:
+    'Deepdose is built for everyday life: a clear app on your phone, tools for the clinician who supports you, and a careful path for approved research.',
+  audiences: [
+    {
+      id: 'patient',
+      label: 'Patients',
+      cue: '#acd3de',
+      title: 'Start on your phone',
+      body: 'Connect a wearable, add your medicines, and see if your timing fits your rhythm. You stay in charge of your data.',
+      cta: { label: 'Patient app', href: '/patient-landing' },
+    },
+    {
+      id: 'researcher',
+      label: 'Clinicians',
+      cue: '#8b9cf8',
+      title: 'Support people you already see',
+      body: 'View timing insight and adherence with consent — not a raw dump of someone\u2019s nights.',
+      cta: { label: 'Clinician tools', href: '/clinician-landing' },
+    },
+    {
+      id: 'funder',
+      label: 'Researchers',
+      cue: '#f2b8a2',
+      title: 'Study with consent',
+      body: 'Work from anonymised cohort patterns and audited access — built for ethics boards, not shadow databases.',
+      cta: { label: 'Research & science', href: CHRONOBIOBANK_SCIENCE_HREF },
+    },
+  ],
+} as const
+
+/** Bottom-of-page deep dives — descriptive badges for research & measurement detail. */
+export const CHRONOBIOBANK_DEEP_DIVE = {
+  research: {
+    badge: 'Evidence',
+    title: 'Research library',
+    teaser: 'Peer-reviewed studies on timing, sleep, and health outcomes',
+  },
+  science: {
+    badge: 'Measurement',
+    title: 'Science & trust',
+    teaser: 'How we read your rhythm · wearables · what we can and can\u2019t claim',
+  },
+} as const
 
 export const CHRONOBIOBANK_APPLE = {
   eyebrow: 'Privacy as architecture',
@@ -353,3 +494,4 @@ export const CHRONOBIOBANK_AUDIENCES = [
     cta: { label: 'Science & trust', href: CHRONOBIOBANK_SCIENCE_HREF },
   },
 ] as const
+
