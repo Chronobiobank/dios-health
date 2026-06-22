@@ -4933,7 +4933,6 @@ html.splash-route body {
   height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
-  scrollbar-gutter: stable;
 }
 
 html.splash-route body {

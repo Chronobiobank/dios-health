@@ -103,6 +103,8 @@ export function HomeDrugSearch() {
             ref={inputRef}
             id="home-med-search"
             type="search"
+            inputMode="search"
+            enterKeyHint="search"
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
