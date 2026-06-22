@@ -383,10 +383,8 @@
 }
 
 .med-search--hero .med-search__input {
-  /* 16px floor — sub-16px inputs trigger iOS Safari zoom on focus/touch */
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2.6vw, 1.0625rem);
   padding: 0.875rem 0;
-  touch-action: manipulation;
 }
 
 .med-search--hero .med-search__input::placeholder {
@@ -484,16 +482,6 @@
   border-top: 1px solid rgb(255 255 255 / 0.1);
 }
 
-.home-drug-search__cta-slot {
-  display: flex;
-  align-items: flex-end;
-  margin-top: 0.75rem;
-}
-
-.home-drug-search__cta-slot .home-drug-search__cta {
-  margin-top: 0;
-}
-
 .home-drug-search__time-input {
   width: auto;
   min-width: 7rem;
@@ -536,6 +524,7 @@
   display: inline-flex;
   width: 100%;
   justify-content: center;
+  margin-top: 1.25rem;
 }
 
 .home-drug-search__foot-nav {
@@ -556,27 +545,21 @@
   color: rgb(255 255 255 / 0.75);
 }
 
-.seco-splash__core.seco-splash__core--search {
+.seco-splash__core--search {
   gap: 0;
-  justify-content: safe center;
-  overflow-x: clip;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
 }
 
 .seco-splash__search-stack {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 100%;
-  max-width: min(42rem, calc(100% - 1.5rem));
-  margin-inline: auto;
+  width: fit-content;
+  max-width: calc(100% - 1.5rem);
   gap: clamp(1.25rem, 3vh, 2rem);
 }
 
 .seco-splash__search-stack .seco-splash__tagline {
-  width: 100%;
+  width: auto;
   align-self: center;
 }
 
@@ -588,16 +571,14 @@
   font-size: clamp(1.375rem, 5.2vw + 0.65rem, 4rem);
   font-weight: 300;
   letter-spacing: var(--seco-display-tracking);
-  line-height: 1.08;
+  line-height: 1;
   text-align: center;
-  text-wrap: balance;
-  white-space: normal;
+  white-space: nowrap;
   color: rgb(255 255 255 / 0.95);
 }
 
 .seco-splash__stage--search {
   justify-content: space-between;
-  overflow-x: clip;
   overflow-y: auto;
   max-width: min(100%, 52rem);
 }
@@ -609,13 +590,6 @@
   gap: 1.25rem;
   padding-top: clamp(1.5rem, 4vh, 2.5rem);
   padding-bottom: clamp(0.5rem, 2vh, 1rem);
-}
-
-@media (min-width: 640px) {
-  .seco-splash__tagline {
-    white-space: nowrap;
-    line-height: 1;
-  }
 }
 
 .seco-splash__logo--foot {

@@ -4,7 +4,6 @@ import { useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import {
   buildMedicationRecommendation,
-  getCatalogEntry,
   searchMedicationCatalog,
   type MedicationRecommendation,
 } from '@/lib/medications/catalog'
@@ -103,8 +102,6 @@ export function HomeDrugSearch() {
             ref={inputRef}
             id="home-med-search"
             type="search"
-            inputMode="search"
-            enterKeyHint="search"
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
@@ -192,16 +189,14 @@ export function HomeDrugSearch() {
             </div>
           )}
 
-          <div className="home-drug-search__cta-slot" aria-hidden={!hasTime}>
-            {hasTime && (
-              <Link
-                href={landingHref}
-                className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta"
-              >
-                Get your free precision dosing plan
-              </Link>
-            )}
-          </div>
+          {hasTime && (
+            <Link
+              href={landingHref}
+              className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta"
+            >
+              Get your free precision dosing plan
+            </Link>
+          )}
         </div>
       )}
     </div>

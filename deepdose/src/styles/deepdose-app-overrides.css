@@ -4942,7 +4942,6 @@ html.splash-route,
 html.splash-route body {
   height: 100%;
   overflow: hidden;
-  overflow-x: clip;
   overscroll-behavior: none;
 }
 
