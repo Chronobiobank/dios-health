@@ -43,7 +43,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
   pillars: [
     {
       id: 'test',
-      label: 'Chrono test',
+      label: 'Testing',
       body: 'Your melatonin anchor · tracked passively.',
       icon: 'test' as const,
       panelTitle: 'Your melatonin readout',
@@ -69,7 +69,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     },
     {
       id: 'plan',
-      label: 'Dosing plan',
+      label: 'Dosing',
       body: 'Six cues · timed to your anchor.',
       icon: 'plan' as const,
       panelTitle: 'Your dosing plan',
@@ -100,7 +100,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     },
     {
       id: 'social',
-      label: 'Peer support',
+      label: 'Sharing',
       body: 'Share progress · see what works.',
       icon: 'social' as const,
       panelTitle: 'Community & social proof',
