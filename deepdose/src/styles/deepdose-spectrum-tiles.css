@@ -1,0 +1,343 @@
+/**
+ * Spectrum glass tiles — global marketing tile pattern.
+ * Set --cue on each tile (hex or css colour). Used across portal landings,
+ * about doses, home-test steps, research callouts, and science methodology.
+ */
+
+.seco-spectrum-tiles {
+  display: grid;
+  gap: clamp(0.875rem, 2.5vw, 1.125rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .seco-spectrum-tiles--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 1.25rem);
+  }
+}
+
+@media (min-width: 640px) {
+  .seco-spectrum-tiles--2-sm {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .seco-spectrum-tiles--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ── Tile shell ── */
+.seco-spectrum-tile {
+  --spectrum-tile-wash: 16%;
+  --spectrum-tile-wash-hover: 22%;
+  --spectrum-tile-icon-bg: 18%;
+  --spectrum-tile-border-mix: 42%;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin: 0;
+  padding: clamp(1.125rem, 2.6vw, 1.375rem);
+  border: 1px solid var(--dios-glass-outer-border);
+  border-radius: var(--seco-radius-lg);
+  background:
+    radial-gradient(
+      120% 90% at 0% 0%,
+      color-mix(in srgb, var(--cue) var(--spectrum-tile-wash), transparent),
+      transparent 62%
+    ),
+    var(--dios-glass-outer-bg);
+  backdrop-filter: var(--dios-glass-outer-blur);
+  -webkit-backdrop-filter: var(--dios-glass-outer-blur);
+  box-shadow: var(--dios-glass-outer-shadow);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.seco-spectrum-tile:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--cue) var(--spectrum-tile-border-mix), var(--dios-glass-outer-border));
+  background:
+    radial-gradient(
+      120% 90% at 0% 0%,
+      color-mix(in srgb, var(--cue) var(--spectrum-tile-wash-hover), transparent),
+      transparent 62%
+    ),
+    var(--dios-glass-outer-bg);
+  box-shadow: 0 12px 36px rgb(0 0 0 / 0.24);
+}
+
+.seco-spectrum-tile--rank {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(3.25rem, 17%, 4.5rem);
+  grid-template-areas: 'content rank';
+  align-items: end;
+  column-gap: 0.75rem;
+  min-height: 10.5rem;
+}
+
+.seco-spectrum-tile__content {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.seco-spectrum-tile--compact {
+  padding: clamp(0.875rem, 2.2vw, 1.125rem);
+}
+
+/* ── Head: icon + eyebrow ── */
+.seco-spectrum-tile__head {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 0.875rem;
+}
+
+.seco-spectrum-tile__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.625rem;
+  height: 2.625rem;
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--cue) var(--spectrum-tile-icon-bg), transparent);
+  color: var(--cue);
+}
+
+.seco-spectrum-tile__icon svg {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.seco-spectrum-tile__cue {
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--cue) 72%, rgb(255 255 255 / 0.55));
+}
+
+/* ── Copy ── */
+.seco-spectrum-tile__title {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: rgb(255 255 255 / 0.94);
+}
+
+.seco-spectrum-tile--rank .seco-spectrum-tile__title {
+  max-width: none;
+}
+
+.seco-spectrum-tile__title--display {
+  font-family: var(--seco-font-display);
+  font-weight: 400;
+  font-size: clamp(1.0625rem, 2.2vw, 1.1875rem);
+  letter-spacing: -0.02em;
+}
+
+.seco-spectrum-tile__title--formula {
+  font-family: var(--seco-font-data);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #acd3de;
+}
+
+.seco-spectrum-tile__body {
+  flex: 1;
+  margin: 0.625rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgb(255 255 255 / 0.62);
+}
+
+.seco-spectrum-tile__foot {
+  margin-top: 1rem;
+}
+
+/* Decorative rank — portal workflow steps */
+.seco-spectrum-tile__rank {
+  grid-area: rank;
+  align-self: end;
+  justify-self: end;
+  font-family: var(--seco-font-display);
+  font-size: clamp(3rem, 5vw, 4.25rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: color-mix(in srgb, var(--cue) 22%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Research / stat tiles — larger display title */
+.seco-spectrum-tile--stat .seco-spectrum-tile__title {
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.875rem, 4.4vw, 2.75rem);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: var(--seco-display-tracking);
+  max-width: none;
+}
+
+.seco-spectrum-tile--stat .seco-spectrum-tile__lead {
+  margin: 0.25rem 0 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgb(255 255 255 / 0.82);
+}
+
+.seco-spectrum-tile__foot .seco-research-inline-link {
+  font-size: 0.8125rem;
+}
+
+.seco-spectrum-tile__body .seco-hometest__checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seco-spectrum-tile__body .seco-hometest__check-item {
+  display: flex;
+  gap: 0.625rem;
+  align-items: flex-start;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.74);
+}
+
+/* Selectable pricing tiles */
+button.seco-spectrum-tile {
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  width: 100%;
+  appearance: none;
+}
+
+.seco-spectrum-tile--selectable {
+  gap: 0.25rem;
+  padding: clamp(1.375rem, 3vw, 1.75rem);
+  padding-right: 2.75rem;
+}
+
+.seco-spectrum-tile--selectable .seco-spectrum-tile__body {
+  margin-top: 0.5rem;
+}
+
+.seco-spectrum-tile--selected {
+  border-color: color-mix(in srgb, var(--cue) 55%, var(--dios-glass-outer-border));
+  box-shadow:
+    0 12px 40px rgb(0 0 0 / 0.28),
+    0 0 0 1px color-mix(in srgb, var(--cue) 35%, transparent);
+}
+
+.seco-spectrum-tile__radio {
+  position: absolute;
+  top: 1.125rem;
+  right: 1.125rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 999px;
+  border: 1.5px solid rgb(255 255 255 / 0.3);
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.seco-spectrum-tile--selected .seco-spectrum-tile__radio {
+  border-color: var(--cue);
+  background: radial-gradient(circle, var(--cue) 0 42%, transparent 47%);
+}
+
+.seco-spectrum-tile__flag {
+  align-self: flex-start;
+  margin-bottom: 0.25rem;
+  padding: 0.1875rem 0.5rem;
+  border-radius: 999px;
+  background: var(--seco-spectrum-hero);
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0b1220;
+}
+
+.seco-spectrum-tile__figure {
+  margin-top: 0.25rem;
+  font-family: var(--seco-font-display);
+  font-size: clamp(2.25rem, 5vw, 2.75rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: var(--seco-display-tracking-figure);
+  color: #fff;
+}
+
+.seco-spectrum-tile__cadence {
+  font-family: var(--seco-font-data);
+  font-size: 0.75rem;
+  color: rgb(255 255 255 / 0.5);
+}
+
+.seco-spectrum-tile--detail {
+  margin-top: 1.25rem;
+  padding: clamp(1.5rem, 3.4vw, 2rem);
+}
+
+.seco-spectrum-tile--detail:hover {
+  transform: none;
+}
+
+/* Scholar portrait in icon slot */
+.seco-spectrum-tile__icon:has(.seco-spectrum-tile__avatar-img),
+.seco-spectrum-tile__icon:has(.seco-spectrum-tile__avatar-initials) {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.seco-spectrum-tile__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.seco-spectrum-tile__avatar-initials {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.seco-spectrum-tile__avatar-initials.seco-spectrum-tile__avatar--violet {
+  background: rgb(130 110 220 / 0.55);
+}
+
+.seco-spectrum-tile__avatar-initials.seco-spectrum-tile__avatar--amber {
+  background: rgb(200 140 80 / 0.55);
+}
+
+.seco-spectrum-tile__avatar-initials.seco-spectrum-tile__avatar--teal {
+  background: rgb(70 170 150 / 0.55);
+}

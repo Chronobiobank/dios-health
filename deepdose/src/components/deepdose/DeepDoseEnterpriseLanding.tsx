@@ -2,5 +2,5 @@ import { DeepDosePortalLanding } from '@/components/deepdose/DeepDosePortalLandi
 import { DEEPDOSE_ENTERPRISE_LANDING } from '@/lib/deepdose-marketing/landing-content'
 
 export function DeepDoseEnterpriseLanding() {
-  return <DeepDosePortalLanding {...DEEPDOSE_ENTERPRISE_LANDING} />
+  return <DeepDosePortalLanding {...DEEPDOSE_ENTERPRISE_LANDING} tileIcons={[]} />
 }

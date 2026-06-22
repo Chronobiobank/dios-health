@@ -1,7 +1,7 @@
-import type { CSSProperties } from 'react'
 import Link from 'next/link'
 
 import { AboutFounderSection } from '@/components/deepdose/AboutFounderSection'
+import { SpectrumTile, SpectrumTileGrid } from '@/components/deepdose/SpectrumTile'
 import { DoseIcon, DOSE_TIMING } from '@/components/chronobiology/DoseVisual'
 import { ZEITGEBER_DOMAINS } from '@/lib/chronobiology/zeitgebers'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
@@ -26,35 +26,31 @@ export default function AboutPage() {
             Six cues set your body clock, and each has a distinct job in the body. {DEEPDOSE_NAME}{' '}
             treats every one as a dose and finds the best time of day to take it.
           </p>
-          <ul className="seco-about__list">
+          <SpectrumTileGrid as="ul" cols={3} className="seco-about__list">
             {ZEITGEBER_DOMAINS.map((domain) => {
               const timing = DOSE_TIMING[domain.id]
               return (
-                <li
+                <SpectrumTile
                   key={domain.id}
-                  className="seco-about__item"
-                  style={{ '--cue': timing.color } as CSSProperties}
-                >
-                  <div className="seco-about__item-head">
-                    <span className="seco-about__item-icon" aria-hidden="true">
-                      <DoseIcon id={domain.id} />
-                    </span>
-                    <span className="seco-about__item-heads">
-                      <span className="seco-about__item-cue">{domain.cue}</span>
-                      <span className="seco-about__item-label">{domain.label}</span>
-                    </span>
-                  </div>
-                  <p className="seco-about__item-desc">{domain.description}</p>
-                  <div className="seco-about__timing">
-                    <span className="seco-about__track" aria-hidden="true">
-                      <span className="seco-about__marker" style={{ left: `${timing.pct}%` }} />
-                    </span>
-                    <span className="seco-about__time-label">{timing.label}</span>
-                  </div>
-                </li>
+                  as="li"
+                  cue={timing.color}
+                  label={domain.cue}
+                  title={domain.label}
+                  body={domain.description}
+                  titleTag="h3"
+                  icon={<DoseIcon id={domain.id} />}
+                  foot={
+                    <div className="seco-about__timing">
+                      <span className="seco-about__track" aria-hidden="true">
+                        <span className="seco-about__marker" style={{ left: `${timing.pct}%` }} />
+                      </span>
+                      <span className="seco-about__time-label">{timing.label}</span>
+                    </div>
+                  }
+                />
               )
             })}
-          </ul>
+          </SpectrumTileGrid>
         </section>
 
         <section className="seco-about__section seco-reveal seco-reveal--2">

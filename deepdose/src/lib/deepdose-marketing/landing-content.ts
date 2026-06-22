@@ -2,6 +2,10 @@
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_RESEARCH_PAPERS } from '@/lib/deepdose-marketing/research-content'
+import {
+  CHRONOBIOBANK_RESEARCH_HREF,
+  CHRONOBIOBANK_SCIENCE_HREF,
+} from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
@@ -29,7 +33,7 @@ export const DEEPDOSE_LANDING_EVIDENCE = {
   eyebrow: 'The evidence',
   headline: 'Timing matters',
   support: 'Peer-reviewed trials across blood pressure, glucose, sleep, and more.',
-  seeAll: { label: 'All research', href: '/research' },
+  seeAll: { label: 'All research', href: CHRONOBIOBANK_RESEARCH_HREF },
   papers: EVIDENCE_PAPER_IDS.map(
     (id) => DEEPDOSE_RESEARCH_PAPERS.find((paper) => paper.id === id)!
   ),
@@ -49,7 +53,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
         {
           title: 'We estimate proxy DLMO from sleep onset (−2 h) and MCTQ mid-sleep (−2.5 h) — published population markers.',
           meta: 'Proxy DLMO · Burgess & Roenneberg',
-          href: '/science',
+          href: CHRONOBIOBANK_SCIENCE_HREF,
         },
         {
           title: 'TipTraQ three-night block validates the anchor — like calibrating a CGM.',
@@ -121,7 +125,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
         {
           title: 'Privacy-first by design: consent-based, UK GDPR, nothing shared without you.',
           meta: 'Chronobiobank · Anonymous telemetry',
-          href: '/login',
+          href: '/chronobiobank',
         },
       ],
     },
@@ -144,18 +148,26 @@ export const DEEPDOSE_CLINICIAN_LANDING = {
   },
   steps: [
     {
+      label: 'Queue',
+      cue: '#f2b8a2',
       title: 'Triage by drift',
       meta: 'Device alerts and BTI misalignment rise to the top of your queue.',
     },
     {
+      label: 'Validate',
+      cue: '#acd3de',
       title: 'TipTraQ home nights',
       meta: 'Three-night kits set a dosing baseline and metabolic early warning.',
     },
     {
+      label: 'Retime',
+      cue: '#c9b6f2',
       title: 'Timing recommendations',
       meta: 'Evidence-graded windows you approve — decision support only.',
     },
     {
+      label: 'Link',
+      cue: '#8b9cf8',
       title: 'Invite & link patients',
       meta: 'Share a code; patients opt in to clinical care sharing on their terms.',
     },
@@ -176,18 +188,26 @@ export const DEEPDOSE_ENTERPRISE_LANDING = {
   },
   steps: [
     {
+      label: 'License',
+      cue: '#acd3de',
       title: 'Licensed cohorts',
       meta: 'Query contributed records under active data licenses with purpose-bound access.',
     },
     {
+      label: 'Analytics',
+      cue: '#c9b6f2',
       title: 'Population analytics',
       meta: 'Chronotype, timing shift, and outcome distributions across your licensed panel.',
     },
     {
+      label: 'Cohorts',
+      cue: '#8b9cf8',
       title: 'Cohort builder',
       meta: 'Filter by age band, medication, chronotype, and consent purpose codes.',
     },
     {
+      label: 'Privacy',
+      cue: '#f2b8a2',
       title: 'Privacy by design',
       meta: 'Chronobiobank isolation — pseudonymised tokens only, full access audit trail.',
     },
@@ -201,9 +221,4 @@ export const DEEPDOSE_ENTERPRISE_LANDING = {
 export const DEEPDOSE_TERMS_DECISION_SUPPORT =
   `Decision support only. ${DEEPDOSE_NAME} suggests the best times for your daily cues. It does not prescribe. Your clinician makes every treatment decision.`
 
-export const DEEPDOSE_NAV_LINKS = [
-  { label: 'Research', href: '/research' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'About', href: '/about' },
-  { label: 'Sign in', href: '/login' },
-] as const
+export { DEEPDOSE_SITE_LINKS as DEEPDOSE_NAV_LINKS } from '@/lib/deepdose-marketing/site-nav-links'

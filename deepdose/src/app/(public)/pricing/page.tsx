@@ -28,6 +28,7 @@ export default function PricingPage() {
     {
       id: 'dlmo-baseline',
       name: 'Body clock baseline',
+      cue: '#acd3de',
       figure: 'Free',
       cadence: 'Phone & wearable data',
       note: 'Share your phone and wearable sensor data — we estimate your body-clock timing at no cost.',
@@ -44,6 +45,7 @@ export default function PricingPage() {
     {
       id: 'clinical-baseline',
       name: 'Clinical sleep test',
+      cue: '#c9b6f2',
       figure: baseline,
       cadence: 'TipTraQ kit · three nights',
       note: 'Three nights with the TipTraQ home kit for a clinical body-clock read and your verified data badge.',
@@ -58,6 +60,7 @@ export default function PricingPage() {
     {
       id: 'quarterly',
       name: 'Quarterly re-read',
+      cue: '#f2b8a2',
       figure: quarterly,
       cadence: 'Every three months',
       note: 'A clinical TipTraQ re-read every quarter, like a blood panel, to keep your plan accurate.',

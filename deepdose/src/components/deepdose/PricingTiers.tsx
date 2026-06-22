@@ -1,8 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import Link from 'next/link'
 
+import { SpectrumTileGrid } from '@/components/deepdose/SpectrumTile'
+import { spectrumCue } from '@/lib/design/spectrum-cues'
 import { cn } from '@/lib/utils/cn'
 
 export type PricingTier = {
@@ -11,6 +13,7 @@ export type PricingTier = {
   figure: string
   cadence: string
   note: string
+  cue?: string
   flag?: string
   feature?: boolean
   cta: { label: string; href: string }
@@ -39,9 +42,11 @@ export function PricingTiers({ tiers }: { tiers: readonly PricingTier[] }) {
 
   return (
     <>
-      <div className="seco-pricing__grid" role="radiogroup" aria-label="Choose a plan">
-        {tiers.map((tier) => {
+      <SpectrumTileGrid cols={3} className="seco-pricing__grid" as="div" role="radiogroup" aria-label="Choose a plan">
+        {tiers.map((tier, index) => {
           const selected = tier.id === active.id
+          const cue = tier.cue ?? spectrumCue(index)
+
           return (
             <button
               key={tier.id}
@@ -50,23 +55,33 @@ export function PricingTiers({ tiers }: { tiers: readonly PricingTier[] }) {
               aria-checked={selected}
               onClick={() => setSelectedId(tier.id)}
               className={cn(
-                'seco-pricing__card',
-                tier.feature && 'seco-pricing__card--feature',
-                selected && 'seco-pricing__card--selected'
+                'seco-spectrum-tile',
+                'seco-spectrum-tile--selectable',
+                tier.feature && 'seco-spectrum-tile--featured',
+                selected && 'seco-spectrum-tile--selected',
               )}
+              style={{ '--cue': cue } as CSSProperties}
             >
-              <span className="seco-pricing__radio" aria-hidden="true" />
-              {tier.flag ? <span className="seco-pricing__flag">{tier.flag}</span> : null}
-              <span className="seco-pricing__tier">{tier.name}</span>
-              <span className="seco-pricing__figure">{tier.figure}</span>
-              <span className="seco-pricing__cadence">{tier.cadence}</span>
-              <span className="seco-pricing__note">{tier.note}</span>
+              <span className="seco-spectrum-tile__radio" aria-hidden="true" />
+              {tier.flag ? <span className="seco-spectrum-tile__flag">{tier.flag}</span> : null}
+              <span className="seco-spectrum-tile__cue">{tier.name}</span>
+              <span className="seco-spectrum-tile__figure">{tier.figure}</span>
+              <span className="seco-spectrum-tile__cadence">{tier.cadence}</span>
+              <p className="seco-spectrum-tile__body">{tier.note}</p>
             </button>
           )
         })}
-      </div>
+      </SpectrumTileGrid>
 
-      <div className="seco-pricing__detail" aria-live="polite">
+      <div
+        className="seco-pricing__detail seco-spectrum-tile seco-spectrum-tile--detail"
+        aria-live="polite"
+        style={
+          {
+            '--cue': active.cue ?? spectrumCue(Math.max(0, tiers.findIndex((t) => t.id === active.id))),
+          } as CSSProperties
+        }
+      >
         <div className="seco-pricing__detail-head">
           <div>
             <p className="seco-page__eyebrow">Your selection</p>

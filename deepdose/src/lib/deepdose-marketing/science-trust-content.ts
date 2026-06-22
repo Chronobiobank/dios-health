@@ -3,6 +3,7 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { BODY_CLOCK_LAYERS, PROXY_DLMO_METHODOLOGY } from '@/lib/circadian/body-clock-measurement'
 import { DEEPDOSE_LANDING_EVIDENCE } from '@/lib/deepdose-marketing/landing-content'
+import { CHRONOBIOBANK_RESEARCH_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import { WEARABLE_PROVIDERS_ORDERED } from '@/lib/wearables/tiers'
 
 export const SCIENCE_TRUST_META = {
@@ -133,8 +134,9 @@ export const SCIENCE_TRUST_PRIVACY = {
     },
   ],
   links: [
+    { label: 'Chronobiobank architecture', href: '/chronobiobank' },
     { label: 'Terms & clinical boundary', href: '/terms' },
-    { label: 'Full research library', href: '/research' },
+    { label: 'Full research library', href: CHRONOBIOBANK_RESEARCH_HREF },
   ],
 } as const
 

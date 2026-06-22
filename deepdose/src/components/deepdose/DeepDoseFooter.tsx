@@ -1,16 +1,7 @@
 import Link from 'next/link'
 
-import { DEEPDOSE_LOGO_GLYPH, DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
-
-const FOOTER_LINKS = [
-  { label: 'Science & trust', href: '/science' },
-  { label: 'Research', href: '/research' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Home test', href: '/home-test' },
-  { label: 'About', href: '/about' },
-  { label: 'Terms', href: '/terms' },
-  { label: 'Sign in', href: '/login' },
-] as const
+import { DEEPDOSE_FOOTER_LEGAL, DEEPDOSE_LEGAL_NAME, DEEPDOSE_LOGO_GLYPH, DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_SITE_LINKS } from '@/lib/deepdose-marketing/site-nav-links'
 
 export function DeepDoseFooter() {
   const year = new Date().getFullYear()
@@ -34,7 +25,7 @@ export function DeepDoseFooter() {
 
           <nav className="seco-footer__nav" aria-label={DEEPDOSE_NAME}>
             <ul className="seco-footer__links">
-              {FOOTER_LINKS.map((link) => (
+              {DEEPDOSE_SITE_LINKS.map((link) => (
                 <li key={link.href + link.label}>
                   <Link href={link.href} className="seco-footer__link">
                     {link.label}
@@ -47,10 +38,8 @@ export function DeepDoseFooter() {
 
         <div className="seco-footer__bar">
           <div className="seco-footer__copy-block">
-            <p className="seco-footer__copy">© {year} Chronobiobank Ltd</p>
-            <p className="seco-footer__legal">
-              {`${DEEPDOSE_NAME} is a trademark and asset of Chronobiobank Ltd, a UK non-profit company limited by guarantee, registered in England & Wales (Company No. 00000000). Registered office: 167-169 Great Portland Street, London, W1W 5PF.`}
-            </p>
+            <p className="seco-footer__copy">© {year} {DEEPDOSE_LEGAL_NAME}</p>
+            <p className="seco-footer__legal">{DEEPDOSE_FOOTER_LEGAL}</p>
           </div>
         </div>
       </div>

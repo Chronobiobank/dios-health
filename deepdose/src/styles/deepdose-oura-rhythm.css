@@ -54,6 +54,8 @@
 /* ── Section rhythm = whitespace, not rules ── */
 .deepdose-shell.seco-shell--dark .seco-science__section,
 .deepdose-shell.seco-shell--dark .seco-about__section,
+.deepdose-shell.seco-shell--dark .seco-chronobiobank__section,
+.deepdose-shell.seco-shell--dark .seco-chronobiobank__trust,
 .deepdose-shell.seco-shell--dark .seco-research-scholars,
 .deepdose-shell.seco-shell--dark .seco-research-papers,
 .deepdose-shell.seco-shell--dark .seco-research__costs,
@@ -64,11 +66,13 @@
 }
 
 .deepdose-shell.seco-shell--dark .seco-science-folds,
+.deepdose-shell.seco-shell--dark .seco-chronobiobank__folds,
 .deepdose-shell.seco-shell--dark .seco-science-evidence,
 .deepdose-shell.seco-shell--dark .seco-science-outputs,
 .deepdose-shell.seco-shell--dark .seco-science-privacy,
 .deepdose-shell.seco-shell--dark .seco-research-clusters,
 .deepdose-shell.seco-shell--dark .seco-about__list,
+.deepdose-shell.seco-shell--dark .seco-spectrum-tiles,
 .deepdose-shell.seco-shell--dark .seco-research-scholars-list,
 .deepdose-shell.seco-shell--dark .seco-pricing__grid,
 .deepdose-shell.seco-shell--dark .seco-hometest__steps,
@@ -78,6 +82,10 @@
 }
 
 .deepdose-shell.seco-shell--dark .seco-science-folds {
+  margin-top: var(--seco-section-gap);
+}
+
+.deepdose-shell.seco-shell--dark .seco-chronobiobank__folds {
   margin-top: var(--seco-section-gap);
 }
 
