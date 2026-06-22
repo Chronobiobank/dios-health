@@ -22,10 +22,6 @@ export default function AboutPage() {
 
         <section className="seco-about__section seco-reveal seco-reveal--1">
           <h2 className="seco-about__h2">Your daily doses</h2>
-          <p className="seco-about__intro">
-            Six cues set your body clock, and each has a distinct job in the body. {DEEPDOSE_NAME}{' '}
-            treats every one as a dose and finds the best time of day to take it.
-          </p>
           <SpectrumTileGrid as="ul" cols={3} className="seco-about__list">
             {ZEITGEBER_DOMAINS.map((domain) => {
               const timing = DOSE_TIMING[domain.id]

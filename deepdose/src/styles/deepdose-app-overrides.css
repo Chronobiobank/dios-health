@@ -4501,6 +4501,10 @@
   color: rgb(255 255 255 / 0.64);
 }
 
+.seco-about__h2 + .seco-about__list {
+  margin-top: clamp(5rem, 12vw, 7.5rem);
+}
+
 .seco-about__list {
   margin: 1.5rem 0 0;
 }
