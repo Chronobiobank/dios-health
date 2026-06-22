@@ -1,3 +1,4 @@
+import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { requireEnterprise } from '@/lib/chronobiobank/require-enterprise'
 import { CHI_ABBREV } from '@/lib/circadian/chi'
 import { activeLicenses } from '@/lib/chronobiobank/enterprise-access'
@@ -25,8 +26,8 @@ export default async function EnterpriseDashboardPage() {
         <section className="seco-app-card">
           <h2 className="seco-app-card__title">No active data license</h2>
           <p className="text-sm text-ink-faint">
-            Your organisation does not currently hold an active Chronobiobank license. Contact
-            DeepDose to license a population cohort for analytics.
+            Your organisation does not currently hold an active Chronobiobank license. Contact{' '}
+            {DEEPDOSE_NAME} to license a population cohort for analytics.
           </p>
         </section>
       </div>

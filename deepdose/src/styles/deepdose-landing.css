@@ -2739,8 +2739,10 @@
 }
 
 .deepdose-shell.seco-shell--dark .seco-footer {
-  background: transparent;
-  border-top-color: transparent;
+  background: var(--seco-chrome-frost-bg);
+  backdrop-filter: var(--seco-chrome-frost-blur);
+  -webkit-backdrop-filter: var(--seco-chrome-frost-blur);
+  border-top: 1px solid rgb(255 255 255 / 0.06);
 }
 
 .seco-footer__main {

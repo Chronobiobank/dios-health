@@ -11,7 +11,7 @@ import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 export const DEEPDOSE_LANDING_META = {
   title: `${DEEPDOSE_NAME} · Precision dosing for your body clock`,
   description:
-    'Precision dosing aligns each medicine with your personal biological window — not a fixed alarm. Learn how DeepDose times doses to when your body is ready.',
+    `Precision dosing aligns each medicine with your personal biological window — not a fixed alarm. Learn how ${DEEPDOSE_NAME} times doses to when your body is ready.`,
 } as const
 
 export const DEEPDOSE_HOME_SPLASH = {
@@ -24,7 +24,7 @@ export const DEEPDOSE_LANDING_HERO: LandingHeroContent = {
   headlineWhite: 'Dose when your',
   headlineAccent: 'biology is ready',
   support:
-    'The right dose at the wrong time is the wrong dose. DeepDose finds your window — then times each med to it.',
+    `The right dose at the wrong time is the wrong dose. ${DEEPDOSE_NAME} finds your window — then times each med to it.`,
 } as const
 
 const EVIDENCE_PAPER_IDS = ['hermida-2020', 'pigazzani-2024', 'wallace-2003'] as const

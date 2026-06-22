@@ -9,7 +9,7 @@ import { WEARABLE_PROVIDERS_ORDERED } from '@/lib/wearables/tiers'
 export const SCIENCE_TRUST_META = {
   title: `Science & trust · ${DEEPDOSE_NAME}`,
   description:
-    'How DeepDose estimates body-clock timing, what we measure, and what we do not claim.',
+    `How ${DEEPDOSE_NAME} estimates body-clock timing, what we measure, and what we do not claim.`,
 } as const
 
 export const SCIENCE_TRUST_INTRO = {
@@ -21,7 +21,7 @@ export const SCIENCE_TRUST_INTRO = {
 export const SCIENCE_TRUST_CLAIMS = {
   title: 'What we do not claim',
   teaser: 'Honest limits on timing support.',
-  body: `${DEEPDOSE_NAME} is not a MedTech accelerator or prescriber. We do not publish DeepDose-specific outcome trials here yet.`,
+  body: `${DEEPDOSE_NAME} is not a MedTech accelerator or prescriber. We do not publish ${DEEPDOSE_NAME}-specific outcome trials here yet.`,
 } as const
 
 export const SCIENCE_TRUST_MEASUREMENT = {

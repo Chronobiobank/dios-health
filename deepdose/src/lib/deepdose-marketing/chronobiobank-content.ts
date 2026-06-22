@@ -322,7 +322,7 @@ export const CHRONOBIOBANK_ECOSYSTEM = {
     },
   ],
   prototype: {
-    title: 'The prototype is DeepDose',
+    title: `The prototype is ${DEEPDOSE_NAME}`,
     body:
       'Wearable pull-sync, proxy DLMO fusion, clinician triage, pseudonymised Chronobiobank ingest, and licensed enterprise analytics already ship in the codebase. Federated rounds are the next layer on architecture that is live today.',
     cta: { label: `See ${DEEPDOSE_NAME} science`, href: CHRONOBIOBANK_SCIENCE_HREF },

@@ -10,7 +10,12 @@
  *   node scripts/deploy.mjs --step index   # Google Search Console sitemap (optional)
  */
 import { spawnSync } from 'node:child_process'
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const deepdoseRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
+const repoRoot = join(deepdoseRoot, '..')
 
 const step = process.argv.includes('--step')
   ? process.argv[process.argv.indexOf('--step') + 1]
@@ -60,7 +65,18 @@ if (shouldRun('db')) {
 }
 
 if (shouldRun('deploy')) {
-  run('Production deploy', 'vercel', ['--prod', '--yes'])
+  const projectFile = join(deepdoseRoot, '.vercel/project.json')
+  const deployEnv = { ...process.env }
+  if (existsSync(projectFile)) {
+    const { orgId, projectId } = JSON.parse(readFileSync(projectFile, 'utf8'))
+    deployEnv.VERCEL_ORG_ID = orgId
+    deployEnv.VERCEL_PROJECT_ID = projectId
+  }
+  // Vercel Root Directory = deepdose — run from monorepo root, not deepdose/deepdose.
+  run('Production deploy', 'vercel', ['--prod', '--yes'], {
+    cwd: repoRoot,
+    env: deployEnv,
+  })
   console.log('\nNext: add deepdose.org in Vercel → Domains and point DNS.')
   console.log('Smoke test: /, /login, /patient/dashboard (auth required)')
 }

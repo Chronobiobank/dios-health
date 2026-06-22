@@ -17,6 +17,6 @@ export const DEEPDOSE_TAGLINE = 'Dose smarter, heal faster.' as const
 /** Dose = each zeitgeber (light, meals, meds/supps, exercise, sleep) — see lib/chronobiology/zeitgebers.ts */
 
 /**
- * Copy hierarchy: DeepDose = precision dosing (splash, landings, pricing hero).
+ * Copy hierarchy: Deepdose = precision dosing (splash, landings, pricing hero).
  * Melatonin phase / DLMO = metric layer — chrono test, onboarding, dashboards, /research only.
  */

@@ -5,8 +5,8 @@
 
 .deepdose-shell.seco-shell--dark {
   position: relative;
-  --seco-chrome-frost-bg: rgb(6 10 18 / 0.14);
-  --seco-chrome-frost-blur: blur(26px) saturate(1.9);
+  --seco-chrome-frost-bg: rgb(6 10 18 / 0.04);
+  --seco-chrome-frost-blur: blur(28px) saturate(1.15);
   background: transparent;
 }
 
@@ -26,9 +26,7 @@ body:has([data-clinical-layout].seco-shell--dark) {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background:
-    radial-gradient(ellipse 120% 80% at 50% 100%, rgb(18 28 48 / 0.95) 0%, transparent 58%),
-    linear-gradient(168deg, #060a12 0%, #0a1020 42%, #0d1528 100%);
+  background: #060a12;
 }
 
 .deepdose-ambient__orb {
@@ -42,15 +40,15 @@ body:has([data-clinical-layout].seco-shell--dark) {
 .deepdose-ambient__orb--navy {
   width: min(88vmax, 72rem);
   height: min(88vmax, 72rem);
-  top: -28%;
-  left: -22%;
+  top: -12%;
+  left: -18%;
   background: radial-gradient(
     circle at 38% 42%,
-    rgb(42 78 128 / 0.72) 0%,
-    rgb(18 36 68 / 0.45) 38%,
+    rgb(32 58 96 / 0.42) 0%,
+    rgb(18 32 58 / 0.22) 38%,
     transparent 68%
   );
-  opacity: 0.85;
+  opacity: 0.62;
   animation-duration: 36s;
 }
 
@@ -109,13 +107,12 @@ body:has([data-clinical-layout].seco-shell--dark) {
   background:
     linear-gradient(
       180deg,
-      rgb(6 10 18 / 0.15) 0%,
-      transparent 28%,
-      transparent 62%,
-      rgb(6 10 18 / 0.22) 100%
-    ),
-    radial-gradient(ellipse 90% 60% at 50% 0%, rgb(255 255 255 / 0.025) 0%, transparent 55%);
-  opacity: 0.9;
+      rgb(6 10 18 / 0.08) 0%,
+      transparent 22%,
+      transparent 78%,
+      rgb(6 10 18 / 0.1) 100%
+    );
+  opacity: 0.85;
 }
 
 @keyframes deepdose-ambient-drift {
@@ -145,6 +142,7 @@ body:has([data-clinical-layout].seco-shell--dark) {
 /* ── Content stack above ambient ── */
 .deepdose-shell.seco-shell--dark .clinical-site-nav {
   position: sticky;
+  top: 0;
   z-index: 50;
   background: var(--seco-chrome-frost-bg);
   backdrop-filter: var(--seco-chrome-frost-blur);
@@ -160,7 +158,14 @@ body:has([data-clinical-layout].seco-shell--dark) {
 }
 
 .deepdose-shell.seco-shell--dark .seco-nav__panel {
-  background: rgb(6 10 18 / 0.52);
+  background: rgb(6 10 18 / 0.38);
+  backdrop-filter: var(--seco-chrome-frost-blur);
+  -webkit-backdrop-filter: var(--seco-chrome-frost-blur);
+  border-bottom-color: rgb(255 255 255 / 0.08);
+}
+
+.deepdose-shell.seco-shell--dark .mobile-overflow-menu--dark .mobile-overflow-menu__panel {
+  background: rgb(6 10 18 / 0.38);
   backdrop-filter: var(--seco-chrome-frost-blur);
   -webkit-backdrop-filter: var(--seco-chrome-frost-blur);
   border-bottom-color: rgb(255 255 255 / 0.08);
@@ -248,12 +253,17 @@ body:has([data-clinical-layout].seco-shell--dark) {
 .deepdose-shell.seco-shell--dark .clinical-site-nav__main,
 .deepdose-shell.seco-shell--dark .seco-landing,
 .deepdose-shell.seco-shell--dark .seco-landing--maven,
+.deepdose-shell.seco-shell--dark .seco-landing__hero,
 .deepdose-shell.seco-shell--dark .seco-landing__light,
 .deepdose-shell.seco-shell--dark .seco-landing__light--canvas,
 .deepdose-shell.seco-shell--dark .seco-landing__close-navy,
 .deepdose-shell.seco-shell--dark .seco-evidence-band,
 .deepdose-shell.seco-shell--dark .seco-page,
-.deepdose-shell.seco-shell--dark .seco-app-page {
+.deepdose-shell.seco-shell--dark .seco-app-page,
+.deepdose-shell.seco-shell--dark .seco-mission,
+.deepdose-shell.seco-shell--dark .seco-chronobiobank,
+.deepdose-shell.seco-shell--dark .seco-splash,
+.deepdose-shell.seco-shell--dark .seco-splash__page {
   background: transparent;
   background-image: none;
 }

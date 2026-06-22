@@ -21,7 +21,7 @@ export const TIPTRAQ_STUDY_PRICING_UK = {
     'Reusable device setup and home onboarding',
     'Multi-night capture (3-night baseline or quarterly re-read)',
     'FDA-cleared AI sleep staging and respiratory analysis',
-    'Clinician review workflow — precision dosing profile in DeepDose',
+    'Clinician review workflow — precision dosing profile in Deepdose',
   ],
 } as const
 

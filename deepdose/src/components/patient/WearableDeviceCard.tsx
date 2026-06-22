@@ -122,8 +122,8 @@ export function WearableDeviceRow({
               {provider.id === 'apple_health' && (
                 <p className="text-sm text-ink-muted">
                   {connected
-                    ? 'Keep the DeepDose Health Shortcut running on your iPhone.'
-                    : 'Add the DeepDose Health Shortcut on iPhone to share sleep automatically.'}
+                    ? 'Keep the Deepdose Health Shortcut running on your iPhone.'
+                    : 'Add the Deepdose Health Shortcut on iPhone to share sleep automatically.'}
                 </p>
               )}
               {provider.id === 'tiptraq' && !connected && (

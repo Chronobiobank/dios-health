@@ -190,14 +190,16 @@ export function HomeDrugSearch() {
             </div>
           )}
 
-          {hasTime && (
-            <Link
-              href={landingHref}
-              className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta"
-            >
-              Get your free precision dosing plan
-            </Link>
-          )}
+          <div className="home-drug-search__cta-slot" aria-hidden={!hasTime}>
+            {hasTime && (
+              <Link
+                href={landingHref}
+                className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta"
+              >
+                Get your free precision dosing plan
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </div>

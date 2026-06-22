@@ -11,6 +11,7 @@
 /* ── Seamless canvas (no opaque navy bands) ── */
 .deepdose-shell.seco-shell--dark .seco-landing--maven,
 .deepdose-shell.seco-shell--dark .seco-landing,
+.deepdose-shell.seco-shell--dark .seco-landing__hero,
 .deepdose-shell.seco-shell--dark .seco-landing__light,
 .deepdose-shell.seco-shell--dark .seco-landing__light--canvas,
 .deepdose-shell.seco-shell--dark .seco-landing__close-navy,

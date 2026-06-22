@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { BtiPayload } from '@/lib/bti/types'
+import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { getMedicationDisplayName } from '@/lib/medications/catalog'
 import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
@@ -50,7 +51,7 @@ export function DosingReminderBanner({
 
     for (const payload of openWindows) {
       if (notifiedRef.current.has(payload.medication_id)) continue
-      new Notification('DeepDose — dosing window open', {
+      new Notification(`${DEEPDOSE_NAME} — dosing window open`, {
         body: payload.display_instruction,
         tag: `deepdose-${payload.medication_id}`,
       })

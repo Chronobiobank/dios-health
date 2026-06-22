@@ -13,7 +13,7 @@ import { spectrumCue } from '@/lib/design/spectrum-cues'
 export const metadata: Metadata = {
   title: `Home sleep test · ${DEEPDOSE_NAME}`,
   description:
-    'A three-night home sleep test for £149, about half a typical private test. Your clinician adds the results to DeepDose and your dashboard shows the best times for light, meals, medicines, exercise, and sleep.',
+    `A three-night home sleep test for £149, about half a typical private test. Your clinician adds the results to ${DEEPDOSE_NAME} and your dashboard shows the best times for light, meals, medicines, exercise, and sleep.`,
 }
 
 const STEPS = [

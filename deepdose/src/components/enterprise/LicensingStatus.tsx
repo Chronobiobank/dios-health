@@ -1,3 +1,4 @@
+import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import type { DataLicense } from '@/lib/chronobiobank/enterprise-access'
 
 const LICENSE_LABELS: Record<string, string> = {
@@ -44,7 +45,7 @@ export function LicensingStatus({
         <h2 className="seco-app-card__title">Data licenses</h2>
         {licenses.length === 0 ? (
           <p className="text-sm text-ink-faint">
-            No data licenses on file. Contact DeepDose to license a cohort.
+            No data licenses on file. Contact {DEEPDOSE_NAME} to license a cohort.
           </p>
         ) : (
           <ul className="cbb-license-list">

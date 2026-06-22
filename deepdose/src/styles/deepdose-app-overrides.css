@@ -4933,6 +4933,7 @@ html.splash-route body {
   height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
+  scrollbar-gutter: stable;
 }
 
 html.splash-route body {
@@ -4945,7 +4946,7 @@ html.splash-route body {
   min-height: 100dvh;
   max-height: 100dvh;
   overflow: hidden;
-  background-color: var(--seco-navy);
+  background-color: transparent;
 }
 
 .seco-splash__media {
