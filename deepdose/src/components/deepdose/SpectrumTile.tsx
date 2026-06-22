@@ -12,6 +12,7 @@ export type SpectrumTileProps = {
   icon?: ReactNode
   foot?: ReactNode
   className?: string
+  variant?: 'default' | 'hero' | 'muted' | 'compact'
   titleVariant?: 'default' | 'display' | 'formula'
   titleTag?: 'h2' | 'h3' | 'p'
   as?: ElementType
@@ -27,6 +28,7 @@ export function SpectrumTile({
   icon,
   foot,
   className,
+  variant = 'default',
   titleVariant = 'default',
   titleTag: TitleTag = 'h2',
   as: Tag = 'article',
@@ -64,6 +66,9 @@ export function SpectrumTile({
         'seco-spectrum-tile',
         rank != null && 'seco-spectrum-tile--rank',
         lead != null && 'seco-spectrum-tile--stat',
+        variant === 'hero' && 'seco-spectrum-tile--hero',
+        variant === 'muted' && 'seco-spectrum-tile--muted',
+        variant === 'compact' && 'seco-spectrum-tile--compact',
         className,
       )}
       style={{ '--cue': cue } as CSSProperties}

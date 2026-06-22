@@ -92,15 +92,7 @@ body:has(.seco-shell--dark) {
   line-height: var(--text-body-leading);
 }
 
-/* Dark nav — frosted glass over ambient canvas */
-.deepdose-shell.seco-shell--dark .clinical-site-nav {
-  border-bottom: 1px solid rgb(255 255 255 / 0.08);
-  background: rgb(6 10 18 / 0.28);
-  backdrop-filter: blur(22px) saturate(1.85);
-  -webkit-backdrop-filter: blur(22px) saturate(1.85);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
-}
-
+/* Dark nav — frosted glass; chrome tokens live in deepdose-ambient.css */
 .deepdose-shell.seco-shell--dark .clinical-site-nav__brand,
 .deepdose-shell.seco-shell--dark .clinical-site-nav__context {
   color: #fff;
