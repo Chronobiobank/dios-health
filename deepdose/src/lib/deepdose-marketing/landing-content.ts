@@ -44,7 +44,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'test',
       label: 'Testing',
-      body: 'Your melatonin anchor · tracked passively.',
+      body: 'Passive melatonin track',
       icon: 'test' as const,
       panelTitle: 'Your melatonin readout',
       panelSeeAll: { label: 'Take the 3-min test', href: '/login' },
@@ -70,7 +70,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'plan',
       label: 'Dosing',
-      body: 'Six cues · timed to your anchor.',
+      body: 'Cues timed to anchor',
       icon: 'plan' as const,
       panelTitle: 'Your dosing plan',
       panelSeeAll: { label: 'Open dashboard', href: '/login' },
@@ -101,7 +101,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'social',
       label: 'Sharing',
-      body: 'Share progress · see what works.',
+      body: 'Share progress results',
       icon: 'social' as const,
       panelTitle: 'Community & social proof',
       panelSeeAll: { label: 'See the feed', href: '/login' },
