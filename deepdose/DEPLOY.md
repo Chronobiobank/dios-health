@@ -90,9 +90,11 @@ Or manually in Supabase → Authentication → URL configuration:
 
 ## 5. Domain
 
-- [ ] Add `deepdose.org` in [Vercel Domains](https://vercel.com/circadian-foundation/deepdose/settings/domains)
-- [ ] Point DNS to Vercel (A/CNAME per Vercel instructions)
+- [x] `deepdose.org` on [Vercel deepdose project](https://vercel.com/circadian-foundation/deepdose/settings/domains)
 - [x] `www.deepdose.org` → `deepdose.org` redirect in `vercel.json`
+- [ ] **Retire legacy domains** — add `dios.health` and `www.dios.health` to the **deepdose** Vercel project (remove from old `dios-health` project if attached). `vercel.json` redirects them to `https://deepdose.org/:path*`.
+- [ ] Optional: same for `secopeutic.com` / `www.secopeutic.com` (also in `vercel.json`).
+- [ ] After redirects verified, pause/delete the old **dios-health-dev** Supabase project.
 
 ## 6. Pre-flight
 

@@ -10,6 +10,30 @@
       "has": [{ "type": "host", "value": "www.deepdose.org" }],
       "destination": "https://deepdose.org/:path*",
       "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "dios.health" }],
+      "destination": "https://deepdose.org/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.dios.health" }],
+      "destination": "https://deepdose.org/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "secopeutic.com" }],
+      "destination": "https://deepdose.org/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.secopeutic.com" }],
+      "destination": "https://deepdose.org/:path*",
+      "permanent": true
     }
   ]
 }

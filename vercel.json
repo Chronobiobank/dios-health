@@ -1,37 +1,27 @@
 {
   "redirects": [
     {
-      "source": "/",
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "dios.health" }],
-      "destination": "/clinicians",
-      "permanent": false
+      "destination": "https://deepdose.org/:path*",
+      "permanent": true
     },
     {
-      "source": "/",
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "www.dios.health" }],
-      "destination": "/clinicians",
-      "permanent": false
+      "destination": "https://deepdose.org/:path*",
+      "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "secopeutic.com" }],
-      "destination": "https://dios.health/:path*",
+      "destination": "https://deepdose.org/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.secopeutic.com" }],
-      "destination": "https://dios.health/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/secopeutic",
-      "destination": "/clinicians",
-      "permanent": true
-    },
-    {
-      "source": "/secopeutic/:path*",
-      "destination": "/clinicians/:path*",
+      "destination": "https://deepdose.org/:path*",
       "permanent": true
     }
   ]
