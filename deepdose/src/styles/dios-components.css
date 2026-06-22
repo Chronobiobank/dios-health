@@ -548,7 +548,6 @@
 .seco-splash__core--search {
   gap: 0;
   min-height: 0;
-  overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -590,15 +589,12 @@
 
 .seco-splash__stage--search {
   justify-content: space-between;
-  overflow: hidden;
   max-width: min(100%, 52rem);
 }
 
-@media (min-width: 640px) {
-  .seco-splash__tagline {
-    line-height: 1;
-    white-space: nowrap;
-  }
+.seco-splash__top .seco-footer__glyph {
+  overflow: visible;
+  padding-block: 0.15em;
 }
 
 .seco-splash__foot--search {

@@ -5009,7 +5009,12 @@ html.splash-route body {
   min-height: 100dvh;
   max-height: 100dvh;
   padding: clamp(1.25rem, 4vw, 2.5rem);
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: hidden;
+}
+
+.seco-splash__page:has(.seco-splash__stage--search) {
+  padding-top: clamp(1.5rem, 5vw, 3rem);
 }
 
 .seco-splash__page:has(> .seco-splash__inner) {
@@ -5035,7 +5040,8 @@ html.splash-route body {
   flex: none;
   justify-content: center;
   width: 100%;
-  padding-top: clamp(0.25rem, 1.5vh, 1rem);
+  overflow: visible;
+  padding-top: clamp(0.5rem, 2vh, 1.25rem);
 }
 
 .seco-splash__glyph {
