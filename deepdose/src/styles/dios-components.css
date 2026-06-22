@@ -559,6 +559,7 @@
 .seco-splash__core.seco-splash__core--search {
   gap: 0;
   justify-content: safe center;
+  overflow-x: clip;
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
@@ -568,13 +569,14 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: fit-content;
-  max-width: calc(100% - 1.5rem);
+  width: 100%;
+  max-width: min(42rem, calc(100% - 1.5rem));
+  margin-inline: auto;
   gap: clamp(1.25rem, 3vh, 2rem);
 }
 
 .seco-splash__search-stack .seco-splash__tagline {
-  width: auto;
+  width: 100%;
   align-self: center;
 }
 
@@ -586,14 +588,16 @@
   font-size: clamp(1.375rem, 5.2vw + 0.65rem, 4rem);
   font-weight: 300;
   letter-spacing: var(--seco-display-tracking);
-  line-height: 1;
+  line-height: 1.08;
   text-align: center;
-  white-space: nowrap;
+  text-wrap: balance;
+  white-space: normal;
   color: rgb(255 255 255 / 0.95);
 }
 
 .seco-splash__stage--search {
   justify-content: space-between;
+  overflow-x: clip;
   overflow-y: auto;
   max-width: min(100%, 52rem);
 }
@@ -607,10 +611,10 @@
   padding-bottom: clamp(0.5rem, 2vh, 1rem);
 }
 
-@media (max-width: 24rem) {
+@media (min-width: 640px) {
   .seco-splash__tagline {
-    white-space: normal;
-    font-size: clamp(1.25rem, 4.8vw + 0.5rem, 2rem);
+    white-space: nowrap;
+    line-height: 1;
   }
 }
 
