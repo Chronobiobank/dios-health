@@ -15,7 +15,7 @@ export default function AboutPage() {
           </span>
         </h1>
         <p className="seco-page__lede">
-          Timing changes how medicines feel — in your body, in clinic, and in the products we build.
+          Timing changes how medicines feel — in your body, in clinic, and in the products we build.{' '}
           {DEEPDOSE_NAME} exists so that moment is not left to chance.
         </p>
 
