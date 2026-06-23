@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { HomeDrugSearch } from '@/components/deepdose/HomeDrugSearch'
 import { DeepdoseWordmark } from '@/components/brand/DeepdoseWordmark'
-import { DEEPDOSE_LOGO_GLYPH, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_HOME_HEADLINE, DEEPDOSE_LOGO_GLYPH } from '@/lib/brand/deepdose-brand'
 import { SplashFrame } from '@/components/deepdose/SplashFrame'
 
 const FOOTER_LINKS = [
@@ -25,7 +25,7 @@ export function DeepDoseSplashHome() {
       <div className="seco-splash__stage seco-splash__stage--search seco-reveal seco-reveal--1">
         <div className="seco-splash__core seco-splash__core--search">
           <div className="seco-splash__search-stack">
-            <p className="seco-splash__tagline">{DEEPDOSE_TAGLINE}</p>
+            <p className="seco-splash__tagline">{DEEPDOSE_HOME_HEADLINE}</p>
             <HomeDrugSearch />
             <nav className="seco-splash__subnav home-drug-search__foot-nav" aria-label="Site links">
               {FOOTER_LINKS.map((link) => (

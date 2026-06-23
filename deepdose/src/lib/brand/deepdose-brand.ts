@@ -19,6 +19,10 @@ export const DEEPDOSE_FOOTER_LEGAL =
 
 export const DEEPDOSE_TAGLINE = 'Dose smarter, heal faster.' as const
 
+/** Homepage hero headline — distinct from site-wide tagline in metadata */
+export const DEEPDOSE_HOME_HEADLINE =
+  'Precision dosing, to your biology.' as const
+
 /** Dose = each zeitgeber (light, meals, meds/supps, exercise, sleep) — see lib/chronobiology/zeitgebers.ts */
 
 /**
