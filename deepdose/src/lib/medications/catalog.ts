@@ -21,6 +21,7 @@ export type ClusterId =
   | 'hiv'
   | 'mental_health'
   | 'adhd'
+  | 'supplements'
   | 'other'
 
 export interface MedicationCluster {
@@ -84,6 +85,11 @@ export const MEDICATION_CLUSTERS: readonly MedicationCluster[] = [
     id: 'adhd',
     label: 'ADHD & focus',
     description: 'Stimulant and non-stimulant ADHD medicines — consistent daily timing matters.',
+  },
+  {
+    id: 'supplements',
+    label: 'Vitamins & minerals',
+    description: 'Common supplements, nutrients, and minerals — tracked at your current time.',
   },
   {
     id: 'other',
@@ -245,6 +251,7 @@ interface TrackedMedDef {
   clusterId: ClusterId
   searchTerms: string[]
   doseUnit: DoseUnit
+  itemType?: ItemType
 }
 
 const TRACKED_MEDICATIONS: Record<string, TrackedMedDef> = {
@@ -724,37 +731,370 @@ const TRACKED_MEDICATIONS: Record<string, TrackedMedDef> = {
   ferrous_sulfate: {
     displayName: 'Ferrous sulfate',
     drugClass: 'Iron supplement',
-    clusterId: 'other',
+    clusterId: 'supplements',
+    itemType: 'supplement',
     doseUnit: 'mg',
-    searchTerms: ['ferrous sulfate', 'iron', 'iron tablets', 'anaemia'],
+    searchTerms: ['ferrous sulfate', 'ferrous sulphate', 'iron', 'iron tablets', 'anaemia', 'anemia'],
   },
   folic_acid: {
     displayName: 'Folic acid',
     drugClass: 'Vitamin supplement',
-    clusterId: 'other',
+    clusterId: 'supplements',
+    itemType: 'supplement',
     doseUnit: 'mcg',
-    searchTerms: ['folic acid', 'folate', 'vitamin', 'pregnancy'],
+    searchTerms: ['folic acid', 'folate', 'vitamin b9', 'pregnancy'],
   },
   omega_3: {
     displayName: 'Omega-3',
     drugClass: 'Fish oil supplement',
-    clusterId: 'other',
+    clusterId: 'supplements',
+    itemType: 'supplement',
     doseUnit: 'mg',
-    searchTerms: ['omega 3', 'omega-3', 'fish oil', 'supplement', 'epa', 'dha'],
+    searchTerms: ['omega 3', 'omega-3', 'fish oil', 'cod liver oil', 'epa', 'dha', 'supplement'],
   },
   zinc: {
     displayName: 'Zinc',
     drugClass: 'Mineral supplement',
-    clusterId: 'other',
+    clusterId: 'supplements',
+    itemType: 'supplement',
     doseUnit: 'mg',
-    searchTerms: ['zinc', 'supplement', 'immune'],
+    searchTerms: ['zinc', 'zinc picolinate', 'zinc gluconate', 'mineral', 'immune'],
   },
   calcium: {
     displayName: 'Calcium',
     drugClass: 'Mineral supplement',
-    clusterId: 'other',
+    clusterId: 'supplements',
+    itemType: 'supplement',
     doseUnit: 'mg',
-    searchTerms: ['calcium', 'supplement', 'bones'],
+    searchTerms: ['calcium', 'calcium carbonate', 'calcium citrate', 'mineral', 'bones'],
+  },
+  vitamin_c: {
+    displayName: 'Vitamin C',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['vitamin c', 'ascorbic acid', 'immune', 'supplement'],
+  },
+  vitamin_e: {
+    displayName: 'Vitamin E',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'iu',
+    searchTerms: ['vitamin e', 'tocopherol', 'supplement'],
+  },
+  vitamin_a: {
+    displayName: 'Vitamin A',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'iu',
+    searchTerms: ['vitamin a', 'retinol', 'beta carotene', 'supplement'],
+  },
+  vitamin_k: {
+    displayName: 'Vitamin K',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mcg',
+    searchTerms: ['vitamin k', 'phylloquinone', 'supplement'],
+  },
+  vitamin_k2: {
+    displayName: 'Vitamin K2',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mcg',
+    searchTerms: ['vitamin k2', 'mk-7', 'mk7', 'menaquinone', 'supplement'],
+  },
+  thiamine_b1: {
+    displayName: 'Vitamin B1 (thiamine)',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['vitamin b1', 'b1', 'thiamine', 'supplement'],
+  },
+  riboflavin_b2: {
+    displayName: 'Vitamin B2 (riboflavin)',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['vitamin b2', 'b2', 'riboflavin', 'supplement'],
+  },
+  niacin_b3: {
+    displayName: 'Vitamin B3 (niacin)',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['vitamin b3', 'b3', 'niacin', 'nicotinamide', 'supplement'],
+  },
+  pantothenic_acid_b5: {
+    displayName: 'Vitamin B5 (pantothenic acid)',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['vitamin b5', 'b5', 'pantothenic acid', 'supplement'],
+  },
+  biotin_b7: {
+    displayName: 'Biotin (vitamin B7)',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mcg',
+    searchTerms: ['biotin', 'vitamin b7', 'b7', 'hair skin nails', 'supplement'],
+  },
+  multivitamin: {
+    displayName: 'Multivitamin',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['multivitamin', 'multi vitamin', 'daily vitamin', 'supplement'],
+  },
+  coq10: {
+    displayName: 'CoQ10',
+    drugClass: 'Antioxidant supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['coq10', 'coenzyme q10', 'ubiquinol', 'ubiquinone', 'supplement'],
+  },
+  selenium: {
+    displayName: 'Selenium',
+    drugClass: 'Mineral supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mcg',
+    searchTerms: ['selenium', 'selenomethionine', 'mineral', 'supplement'],
+  },
+  potassium: {
+    displayName: 'Potassium',
+    drugClass: 'Mineral supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['potassium', 'potassium citrate', 'mineral', 'electrolyte', 'supplement'],
+  },
+  chromium: {
+    displayName: 'Chromium',
+    drugClass: 'Mineral supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mcg',
+    searchTerms: ['chromium', 'chromium picolinate', 'mineral', 'glucose', 'supplement'],
+  },
+  iodine: {
+    displayName: 'Iodine',
+    drugClass: 'Mineral supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mcg',
+    searchTerms: ['iodine', 'kelp', 'thyroid', 'mineral', 'supplement'],
+  },
+  magnesium_citrate: {
+    displayName: 'Magnesium citrate',
+    drugClass: 'Mineral supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['magnesium citrate', 'magnesium', 'mag citrate', 'mineral', 'supplement'],
+  },
+  magnesium_glycinate: {
+    displayName: 'Magnesium glycinate',
+    drugClass: 'Mineral supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['magnesium glycinate', 'mag glycinate', 'magnesium', 'mineral', 'sleep', 'supplement'],
+  },
+  probiotics: {
+    displayName: 'Probiotics',
+    drugClass: 'Gut health supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['probiotics', 'probiotic', 'lactobacillus', 'gut health', 'supplement'],
+  },
+  collagen: {
+    displayName: 'Collagen',
+    drugClass: 'Protein supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['collagen', 'collagen peptides', 'joints', 'skin', 'supplement'],
+  },
+  glucosamine: {
+    displayName: 'Glucosamine',
+    drugClass: 'Joint supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['glucosamine', 'joint', 'arthritis', 'supplement'],
+  },
+  chondroitin: {
+    displayName: 'Chondroitin',
+    drugClass: 'Joint supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['chondroitin', 'joint', 'glucosamine chondroitin', 'supplement'],
+  },
+  creatine: {
+    displayName: 'Creatine',
+    drugClass: 'Performance supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['creatine', 'creatine monohydrate', 'supplement'],
+  },
+  curcumin: {
+    displayName: 'Turmeric / curcumin',
+    drugClass: 'Botanical supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['turmeric', 'curcumin', 'inflammation', 'supplement'],
+  },
+  l_theanine: {
+    displayName: 'L-theanine',
+    drugClass: 'Amino acid supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['l-theanine', 'theanine', 'calm', 'sleep', 'supplement'],
+  },
+  valerian_root: {
+    displayName: 'Valerian root',
+    drugClass: 'Herbal supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['valerian', 'valerian root', 'sleep', 'herbal', 'supplement'],
+  },
+  ashwagandha: {
+    displayName: 'Ashwagandha',
+    drugClass: 'Adaptogen supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['ashwagandha', 'adaptogen', 'stress', 'supplement'],
+  },
+  evening_primrose_oil: {
+    displayName: 'Evening primrose oil',
+    drugClass: 'Botanical supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['evening primrose', 'epo', 'gamma linolenic', 'supplement'],
+  },
+  psyllium_husk: {
+    displayName: 'Psyllium husk',
+    drugClass: 'Fibre supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['psyllium', 'fibre', 'fiber', 'ispaghula', 'gut', 'supplement'],
+  },
+  berberine: {
+    displayName: 'Berberine',
+    drugClass: 'Botanical supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['berberine', 'glucose', 'metabolic', 'supplement'],
+  },
+  nac: {
+    displayName: 'NAC',
+    drugClass: 'Amino acid supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['nac', 'n-acetylcysteine', 'n acetyl cysteine', 'supplement'],
+  },
+  alpha_lipoic_acid: {
+    displayName: 'Alpha-lipoic acid',
+    drugClass: 'Antioxidant supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['alpha lipoic acid', 'ala', 'antioxidant', 'supplement'],
+  },
+  milk_thistle: {
+    displayName: 'Milk thistle',
+    drugClass: 'Herbal supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['milk thistle', 'silymarin', 'liver', 'supplement'],
+  },
+  electrolytes: {
+    displayName: 'Electrolytes',
+    drugClass: 'Mineral supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['electrolytes', 'electrolyte', 'hydration', 'mineral', 'supplement'],
+  },
+  boron: {
+    displayName: 'Boron',
+    drugClass: 'Mineral supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['boron', 'mineral', 'bones', 'supplement'],
+  },
+  copper: {
+    displayName: 'Copper',
+    drugClass: 'Mineral supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['copper', 'mineral', 'supplement'],
+  },
+  five_htp: {
+    displayName: '5-HTP',
+    drugClass: 'Amino acid supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['5-htp', '5 htp', 'serotonin', 'sleep', 'mood', 'supplement'],
+  },
+  sam_e: {
+    displayName: 'SAM-e',
+    drugClass: 'Methyl donor supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['sam-e', 'sam e', 's-adenosyl methionine', 'mood', 'joints', 'supplement'],
+  },
+  msm: {
+    displayName: 'MSM',
+    drugClass: 'Sulfur supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['msm', 'methylsulfonylmethane', 'joints', 'supplement'],
+  },
+  vitamin_d2: {
+    displayName: 'Vitamin D2',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'iu',
+    searchTerms: ['vitamin d2', 'd2', 'ergocalciferol', 'vitamin d', 'supplement'],
+  },
+  iron_bisglycinate: {
+    displayName: 'Iron bisglycinate',
+    drugClass: 'Iron supplement',
+    clusterId: 'supplements',
+    itemType: 'supplement',
+    doseUnit: 'mg',
+    searchTerms: ['iron bisglycinate', 'iron', 'gentle iron', 'anaemia', 'anemia', 'supplement'],
   },
   levodopa: {
     displayName: 'Levodopa',
@@ -775,6 +1115,9 @@ const TRACKED_MEDICATIONS: Record<string, TrackedMedDef> = {
 function buildOptimisedEntry(code: MedicationCode): MedicationCatalogEntry {
   const timing = MEDICATION_TIMINGS[code]
   const meta = OPTIMISED_META[code]
+  const sharedTerms =
+    meta.itemType === 'supplement' ? (['supplement', 'supp'] as const) : ([] as const)
+
   return {
     code,
     displayName: timing.displayName,
@@ -782,7 +1125,12 @@ function buildOptimisedEntry(code: MedicationCode): MedicationCatalogEntry {
     timingTier: 'optimised',
     clusterId: meta.clusterId,
     itemType: meta.itemType,
-    searchTerms: [code.replace(/_/g, ' '), timing.displayName.toLowerCase(), ...meta.searchTerms],
+    searchTerms: [
+      code.replace(/_/g, ' '),
+      timing.displayName.toLowerCase(),
+      ...meta.searchTerms,
+      ...sharedTerms,
+    ],
     doseUnit: meta.doseUnit,
     evidenceGrade: timing.evidenceGrade,
     rationale: timing.rationale,
@@ -791,14 +1139,23 @@ function buildOptimisedEntry(code: MedicationCode): MedicationCatalogEntry {
 }
 
 function buildTrackedEntry(code: string, def: TrackedMedDef): MedicationCatalogEntry {
+  const itemType = def.itemType ?? 'prescription'
+  const sharedTerms =
+    itemType === 'supplement' ? (['supplement', 'supp'] as const) : ([] as const)
+
   return {
     code,
     displayName: def.displayName,
     drugClass: def.drugClass,
     timingTier: 'tracked',
     clusterId: def.clusterId,
-    itemType: 'prescription',
-    searchTerms: [code.replace(/_/g, ' '), def.displayName.toLowerCase(), ...def.searchTerms],
+    itemType,
+    searchTerms: [
+      code.replace(/_/g, ' '),
+      def.displayName.toLowerCase(),
+      ...def.searchTerms,
+      ...sharedTerms,
+    ],
     doseUnit: def.doseUnit,
     evidenceGrade: null,
     rationale: null,
@@ -848,6 +1205,19 @@ function normaliseQuery(query: string): string {
 function entryMatchesQuery(entry: MedicationCatalogEntry, query: string): number {
   const q = normaliseQuery(query)
   if (!q) return 0
+
+  if (
+    (q === 'supp' || q === 'supplement' || q === 'supplements') &&
+    entry.itemType === 'supplement'
+  ) {
+    return 45
+  }
+  if ((q === 'vitamin' || q === 'vitamins') && entry.drugClass.toLowerCase().includes('vitamin')) {
+    return 55
+  }
+  if ((q === 'mineral' || q === 'minerals') && entry.drugClass.toLowerCase().includes('mineral')) {
+    return 55
+  }
 
   if (entry.code.replace(/_/g, ' ') === q) return 100
   if (entry.displayName.toLowerCase() === q) return 95
