@@ -9,7 +9,7 @@ import {
 } from '@/lib/deepdose-marketing/research-content'
 import { scholarToneCue, spectrumCue } from '@/lib/design/spectrum-cues'
 
-export function ResearchSections() {
+export function ResearchSections({ showClose = true }: { showClose?: boolean }) {
   const { lede, cost, human, consent } = DEEPDOSE_RESEARCH_INTRO
 
   return (
@@ -106,12 +106,14 @@ export function ResearchSections() {
         <ResearchPaperTiles />
       </div>
 
-      <div className="seco-research__close">
-        <p className="seco-research__close-sub">{consent}</p>
-        <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
-          Start free →
-        </Link>
-      </div>
+      {showClose ? (
+        <div className="seco-research__close">
+          <p className="seco-research__close-sub">{consent}</p>
+          <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
+            Start free →
+          </Link>
+        </div>
+      ) : null}
     </div>
   )
 }

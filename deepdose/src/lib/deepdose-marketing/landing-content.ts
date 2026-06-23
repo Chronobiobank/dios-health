@@ -2,10 +2,7 @@
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_RESEARCH_PAPERS } from '@/lib/deepdose-marketing/research-content'
-import {
-  CHRONOBIOBANK_RESEARCH_HREF,
-  TECHNOLOGY_DLMO_PROXY_HREF,
-} from '@/lib/deepdose-marketing/site-nav-links'
+import { EVIDENCE_HREF, TECHNOLOGY_DLMO_PROXY_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
@@ -33,7 +30,7 @@ export const DEEPDOSE_LANDING_EVIDENCE = {
   eyebrow: 'The evidence',
   headline: 'Timing matters',
   support: 'Peer-reviewed trials across blood pressure, glucose, sleep, and more.',
-  seeAll: { label: 'All research', href: CHRONOBIOBANK_RESEARCH_HREF },
+  seeAll: { label: 'All research', href: EVIDENCE_HREF },
   papers: EVIDENCE_PAPER_IDS.map(
     (id) => DEEPDOSE_RESEARCH_PAPERS.find((paper) => paper.id === id)!
   ),

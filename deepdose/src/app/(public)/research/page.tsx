@@ -2,11 +2,11 @@
 
 import { useEffect } from 'react'
 
-import { CHRONOBIOBANK_RESEARCH_HREF } from '@/lib/deepdose-marketing/site-nav-links'
+import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 
 export default function ResearchRedirectPage() {
   useEffect(() => {
-    window.location.replace(CHRONOBIOBANK_RESEARCH_HREF)
+    window.location.replace(EVIDENCE_HREF)
   }, [])
 
   return null

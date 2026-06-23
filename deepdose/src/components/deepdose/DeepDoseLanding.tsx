@@ -1,11 +1,10 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { LandingHeroIntro } from '@/components/deepdose/LandingHeroIntro'
 import { DeepDoseHeroTabs } from '@/components/deepdose/DeepDoseHeroTabs'
+import { PatientDailyDosesSection } from '@/components/deepdose/PatientDailyDosesSection'
 import {
   DEEPDOSE_LANDING_CLOSE,
-  DEEPDOSE_LANDING_EVIDENCE,
   DEEPDOSE_LANDING_HERO,
 } from '@/lib/deepdose-marketing/landing-content'
 
@@ -32,58 +31,8 @@ export function DeepDoseLanding({
         <div className="seco-landing__section-inner seco-reveal seco-reveal--3">
           <DeepDoseHeroTabs />
         </div>
-      </section>
-
-      <section className="seco-evidence-band">
-        <div className="seco-landing__section-inner">
-          <div className="seco-landing__section-head">
-            <div>
-              <p className="seco-evidence-band__eyebrow">{DEEPDOSE_LANDING_EVIDENCE.eyebrow}</p>
-              <h2 className="seco-landing__section-title">{DEEPDOSE_LANDING_EVIDENCE.headline}</h2>
-            </div>
-            <Link
-              href={DEEPDOSE_LANDING_EVIDENCE.seeAll.href}
-              className="seco-landing__section-link"
-            >
-              {DEEPDOSE_LANDING_EVIDENCE.seeAll.label} →
-            </Link>
-          </div>
-          <p className="seco-landing__support">{DEEPDOSE_LANDING_EVIDENCE.support}</p>
-
-          <ul className="seco-evidence-band__grid">
-            {DEEPDOSE_LANDING_EVIDENCE.papers.map((paper) => (
-              <li key={paper.id} className="seco-evidence-band__card">
-                <a
-                  href={paper.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="seco-evidence-band__link-overlay"
-                >
-                  {paper.image ? (
-                    <span className="seco-evidence-band__media">
-                      <Image
-                        src={paper.image}
-                        alt={paper.imageAlt ?? ''}
-                        fill
-                        sizes="(min-width: 768px) 33vw, 100vw"
-                        className="seco-evidence-band__img"
-                      />
-                    </span>
-                  ) : null}
-                  <span className="seco-evidence-band__body">
-                    <span className="seco-evidence-band__tier">
-                      {paper.tier} · {paper.year}
-                    </span>
-                    <span className="seco-evidence-band__title">{paper.title}</span>
-                    <span className="seco-evidence-band__meta">
-                      {paper.authors} · {paper.meta}
-                    </span>
-                    <span className="seco-evidence-band__cue">Read source →</span>
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="seco-landing__section-inner seco-patient-landing__doses">
+          <PatientDailyDosesSection signupHref={signupHref} />
         </div>
       </section>
 
