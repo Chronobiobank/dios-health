@@ -1,17 +1,6 @@
 # DeepDose — Vercel deploy checklist
 
-Deploy as a **separate Vercel project** from the `dios-health` repo. Do not reuse the dios.health project or root `vercel.json`.
-
-## Already done (this session)
-
-- [x] **Vercel project created:** `circadian-foundation/deepdose`
-- [x] **Local link:** `deepdose/.vercel/project.json` → project `deepdose`
-- [x] **`vercel.json`** — pnpm build, London region, www redirect
-- [x] **Pre-flight build** — `pnpm build` passes
-- [x] **Supabase connectivity** — project `yavqgklsfmawhrqvuvuf` (DeepDose), tables + auth healthy
-- [x] **Supabase auth URLs** — `npx supabase config push` (site `https://deepdose.org`, Vercel preview callback)
-- [x] **Production env vars** — synced to Vercel (9 vars)
-- [x] **Production deploy** — live at **https://deepdose.org**
+Production app lives in **`deepdose/`** inside the `dios-health` GitHub repo. Legacy root prototype apps and Supabase projects are retired.
 
 ## Run the deploy (one command)
 
@@ -85,16 +74,14 @@ Or manually in Supabase → Authentication → URL configuration:
 
 ## 4. Database
 
-- [x] Migrations appear applied (medications, consent_frameworks, user_profiles return 200)
-- [ ] Reconcile if needed: `npx supabase db push --yes`
+- [ ] Apply migrations: `npx supabase db push --yes` (from `deepdose/`)
+- [ ] Security lint: `npx supabase db advisors --linked` — zero `rls_disabled_in_public` errors before production deploy
 
 ## 5. Domain
 
 - [x] `deepdose.org` on [Vercel deepdose project](https://vercel.com/circadian-foundation/deepdose/settings/domains)
 - [x] `www.deepdose.org` → `deepdose.org` redirect in `vercel.json`
-- [ ] **Retire legacy domains** — add `dios.health` and `www.dios.health` to the **deepdose** Vercel project (remove from old `dios-health` project if attached). `vercel.json` redirects them to `https://deepdose.org/:path*`.
-- [ ] Optional: same for `secopeutic.com` / `www.secopeutic.com` (also in `vercel.json`).
-- [ ] After redirects verified, pause/delete the old **dios-health-dev** Supabase project.
+- [x] Legacy domains (`dios.health`, `secopeutic.com`) redirect to `deepdose.org` via `deepdose/vercel.json`
 
 ## 6. Pre-flight
 
@@ -117,6 +104,7 @@ Verify Supabase any time:
 
 ```powershell
 node scripts/check-supabase.mjs
+npx supabase db advisors --linked
 ```
 
 ## 8. Google Search Console (auto sitemap on deploy)

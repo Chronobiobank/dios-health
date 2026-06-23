@@ -1,19 +1,19 @@
 # DeepDose Design Specification
 
-> **Aligned with [dios.health](https://dios.health)** — clinical aubergine/cream palette, Inter UI, Maven.com education patterns for marketing hero bands.  
+> Clinical aubergine/cream palette, Inter UI, Maven.com education patterns for marketing hero bands.  
 > Token source: `src/styles/dios-tokens.css` · Primitives: `src/styles/dios-components.css`
 
 ---
 
 ## 1. Design lineage
 
-| Layer | Reference | Role in DeepDose |
-|-------|-----------|------------------|
-| **DIOS platform** | `dios-health/app/globals-base.css` | Aubergine surfaces, cream canvas, gold accent, Inter clinical type |
-| **Maven education** | `dios-health/app/styles/deepdose-shell.css` | Dark navy hero, spectrum gradient display, course-card grids, mono data labels |
-| **Clinical UI** | `dios-health/app/styles/calm-ui.css` | 8px card radius, restrained motion, data-forward dashboards |
+| Layer | In-repo source | Role in DeepDose |
+|-------|----------------|------------------|
+| **Clinical tokens** | `src/styles/dios-tokens.css` | Aubergine surfaces, cream canvas, gold accent, Inter clinical type |
+| **Marketing shell** | `src/styles/deepdose-spectrum-tiles.css`, `dios-health-marketing.css` | Dark navy hero, spectrum gradient display, course-card grids |
+| **Clinical UI** | `src/styles/dios-clinical-globals.css` | 8px card radius, restrained motion, data-forward dashboards |
 
-DeepDose is **not** a consumer wellness brand (no Function Health lifestyle editorial, no pill CTAs, no stock-photo hero splits). It reads as **clinical chronotherapy software** within the DIOS family.
+DeepDose is **not** a consumer wellness brand. It reads as **clinical chronotherapy software**.
 
 ---
 
@@ -137,7 +137,7 @@ Section gap:          1.5–2.5rem (clinical — not 80–128px consumer gaps)
 ## 8. Do / Don't
 
 **Do**
-- Match dios.health token names where possible
+- Match token names in `dios-tokens.css` for consistency across marketing and app shells
 - Use gold eyebrows + aubergine CTAs
 - Keep dashboards data-dense and legible
 - Use Maven navy + spectrum only on marketing hero bands
@@ -159,4 +159,4 @@ Section gap:          1.5–2.5rem (clinical — not 80–128px consumer gaps)
 | `src/app/globals.css` | Tailwind `@theme` bridge |
 | `src/components/ui/*` | React wrappers using primitives |
 
-When dios.health tokens change, update `dios-tokens.css` from `app/globals-base.css` and `app/styles/deepdose-shell.css`.
+When design tokens change, update `src/styles/dios-tokens.css` and dependent marketing styles under `src/styles/`.

@@ -1,31 +1,47 @@
-# DIOS Project Blueprint & Rules
+# DeepDose Project Blueprint & Rules
 
-## 🎯 System Overview
-DIOS is a Clinical Decision Support & Personalized Chronotherapy Platform. It ingests passive circadian biometric data from wearable public APIs (via user-authorized consent) to calculate and output an optimized medication timing window (Biological Time Index).
+## Repository hygiene
 
-## 🛠️ Codebase Rules & Tech Stack
-- **Frontend Architecture:** React (TypeScript) SPA built via Vite.
-- **Database & Backend:** Supabase (PostgreSQL, Row Level Security, Edge Functions) using the Supabase JS Client.
-- **Deployment Strategy:** Static hosting, fully decoupled from database infrastructure.
-- **Architecture Style:** Decoupled, modular service patterns. Never mix algorithmic math with UI controllers.
-- **Data Compliance:** UK GDPR and HIPAA compliant design. Mock user authentication loops using standard OAuth 2.0 principles.
+- **Single active app:** `deepdose/` only. Do not add root-level app code, migrations, or deploy config.
+- **Supabase:** `deepdose/supabase/` → project **DeepDose** (`yavqgklsfmawhrqvuvuf`). Run `npx supabase` and `db push` from `deepdose/`.
+- **Deploy:** Vercel project `deepdose` (root directory `deepdose/`). See `deepdose/DEPLOY.md`.
+- **After schema changes:** `npx supabase db advisors --linked` from `deepdose/` — treat `rls_disabled_in_public` as a blocker.
+- **Secrets:** `service_role` and `SUPABASE_ACCESS_TOKEN` never in frontend or git.
 
 ---
 
-## 🏛️ ARCHITECTURE REQUIREMENTS FROM INVESTMENT DECK
+## System overview
 
-The following parameters must govern all database schemas, API route design, and frontend service classes built by Cursor.
+DeepDose is a Clinical Decision Support & Personalized Chronotherapy Platform. It ingests passive circadian biometric data from wearable public APIs (via user-authorized consent) to calculate and output an optimized medication timing window (Biological Time Index).
 
-### 1. Ingestion Layer Data Schema
-Data syncs are pull-based on trigger (e.g., dashboard load). No continuous real-time streaming overhead.
-- **Core Tiers (Oura, Whoop, Apple HealthKit):** 
-  - *Sleep Stream:* `sleep_onset_timestamp`, `wake_timestamp`, `deep_sleep_duration_minutes`, `rem_duration_minutes`.
-  - *HRV Stream:* `daily_average_hrv`, `intra_night_hrv_series` (array of timestamps/values).
-  - *Light Stream:* `lux_exposure_hours`.
-- **Premium Tier (TipTraQ & Medical Hardware):** Core sleep architecture PLUS continuous SpO2 (oxygen saturation), real-time respiratory event localization, and pulse rate variability.
+## Codebase rules & tech stack
 
-### 2. Biological Time Index (BTI) Engine Payload
-The core engine calculation must be decoupled as an isolated service class. It consumes the Ingestion Layer Schema and returns a strictly formatted JSON payload:
+- **Frontend:** Next.js (TypeScript), React, Tailwind — `deepdose/src/`
+- **Database & backend:** Supabase (PostgreSQL, Row Level Security, Edge Functions) via Supabase JS Client
+- **Deployment:** Vercel (app) + Supabase (database), decoupled
+- **Architecture:** Decoupled, modular service patterns. Never mix algorithmic math with UI controllers.
+- **Compliance:** UK GDPR and HIPAA compliant design. OAuth 2.0 for user-authorized integrations.
+
+---
+
+## Architecture requirements (investment deck)
+
+These parameters govern database schemas, API routes, and frontend services in **DeepDose**.
+
+### 1. Ingestion layer data schema
+
+Pull-based sync on trigger (e.g. dashboard load). No continuous real-time streaming overhead.
+
+- **Core tiers (Oura, Whoop, Apple HealthKit):**
+  - *Sleep:* `sleep_onset_timestamp`, `wake_timestamp`, `deep_sleep_duration_minutes`, `rem_duration_minutes`
+  - *HRV:* `daily_average_hrv`, `intra_night_hrv_series`
+  - *Light:* `lux_exposure_hours`
+- **Premium tier (TipTraQ & medical hardware):** Core sleep plus continuous SpO2, respiratory events, pulse rate variability
+
+### 2. Biological Time Index (BTI) engine payload
+
+Isolated service class consuming ingestion schema; returns:
+
 ```json
 {
   "patient_id": "uuid",
@@ -39,14 +55,18 @@ The core engine calculation must be decoupled as an isolated service class. It c
 }
 ```
 
-### 3. User-Authorized Auth Architecture (No Corporate Blockers)
-Bypass enterprise hardware partnerships by leveraging user-authorized public developer portals.
-- **Table Constraints:** The `patients` schema must contain standard user tokens and an explicit tier column: `is_premium_tier` (boolean). Nullable columns for integration tokens must include: `oura_oauth_token`, `whoop_oauth_token`, `tiptraq_api_key`, `apple_health_connected` (boolean).
+### 3. User-authorized auth architecture
 
-### 4. Chronobiobank Isolation Policy
-- **Architectural Boundary:** Frontend interfaces must never access raw calculation weights, scoring baselines, or demographic training models.
-- **Data Flow:** UI components may only hit endpoints serving the structured BTI payload. Telemetry is processed and anonymously saved to a centralized `chronobiobank_telemetry` table.
+- **`patients` / profile tier:** `is_premium_tier` (boolean)
+- **Integration tokens (nullable):** `oura_oauth_token`, `whoop_oauth_token`, `tiptraq_api_key`, `apple_health_connected`
 
-### 5. Clinician Triage Panel Alerting Rules
-- **Clinical Grade Verification Badge:** Any patient record displaying `is_premium_tier = true` must render a prominent visual badge (`🛡️ Verified Clinical-Grade Data via TipTraQ`).
-- **Automated Device Interruption Alerts:** If a patient's hardware sync fails (e.g., empty token fields, expired session, or no raw telemetry logs pulled within the last 36 hours), the triage controller must automatically flag that patient record with `device_alert_triggered = true` and push them to the top of the clinician's priority workflow queue.
+### 4. Chronobiobank isolation
+
+- UI must not access raw calculation weights, baselines, or demographic training models
+- UI hits endpoints serving structured BTI payload only
+- Anonymous outcomes → `chronobiobank_telemetry` (contributor hash, no PII)
+
+### 5. Clinician triage alerting
+
+- **`is_premium_tier = true`:** render `🛡️ Verified Clinical-Grade Data via TipTraQ`
+- **Device alert:** empty tokens or no telemetry sync within 36h → `device_alert_triggered = true`, priority queue
