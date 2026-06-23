@@ -45,8 +45,9 @@ create policy "Clinicians read practitioners"
   on public.practitioners for select to authenticated
   using (
     exists (
-      select 1 from public.clinician_profiles cp
-      where cp.id = auth.uid()
+      select 1 from public.profiles p
+      where p.id = auth.uid()
+        and p.role = 'clinician'
     )
   );
 
@@ -148,17 +149,27 @@ end $$;
 
 -- ─── 4. Webhook tables: RLS on, service_role only (edge functions ingest) ─────
 
-alter table if exists public.siloton_webhook_events enable row level security;
-alter table if exists public.tiptraq_webhook_events enable row level security;
+do $$
+begin
+  if to_regclass('public.siloton_webhook_events') is not null then
+    execute 'alter table public.siloton_webhook_events enable row level security';
+    execute 'drop policy if exists "Service role manages siloton webhooks" on public.siloton_webhook_events';
+    execute $policy$
+      create policy "Service role manages siloton webhooks"
+        on public.siloton_webhook_events for all
+        using (auth.role() = 'service_role')
+        with check (auth.role() = 'service_role')
+    $policy$;
+  end if;
 
-drop policy if exists "Service role manages siloton webhooks" on public.siloton_webhook_events;
-create policy "Service role manages siloton webhooks"
-  on public.siloton_webhook_events for all
-  using (auth.role() = 'service_role')
-  with check (auth.role() = 'service_role');
-
-drop policy if exists "Service role manages tiptraq webhooks" on public.tiptraq_webhook_events;
-create policy "Service role manages tiptraq webhooks"
-  on public.tiptraq_webhook_events for all
-  using (auth.role() = 'service_role')
-  with check (auth.role() = 'service_role');
+  if to_regclass('public.tiptraq_webhook_events') is not null then
+    execute 'alter table public.tiptraq_webhook_events enable row level security';
+    execute 'drop policy if exists "Service role manages tiptraq webhooks" on public.tiptraq_webhook_events';
+    execute $policy$
+      create policy "Service role manages tiptraq webhooks"
+        on public.tiptraq_webhook_events for all
+        using (auth.role() = 'service_role')
+        with check (auth.role() = 'service_role')
+    $policy$;
+  end if;
+end $$;

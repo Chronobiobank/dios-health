@@ -14,6 +14,22 @@ create table if not exists public.practitioners (
 
 -- ─── Patients (cohort enrolment) ─────────────────────────────────────────────
 
+-- Orphan migration 0012 / db-pull may have created a different public.patients shape.
+do $$
+begin
+  if to_regclass('public.patients') is not null
+     and not exists (
+       select 1
+       from information_schema.columns
+       where table_schema = 'public'
+         and table_name = 'patients'
+         and column_name = 'ref'
+     )
+  then
+    execute 'alter table public.patients rename to patients_legacy_pre025';
+  end if;
+end $$;
+
 create table if not exists public.patients (
   id uuid primary key default gen_random_uuid(),
   ref text unique not null,

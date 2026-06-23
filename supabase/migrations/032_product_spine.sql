@@ -11,6 +11,11 @@ create table if not exists public.demo_requests (
   created_at timestamptz not null default now()
 );
 
+alter table public.demo_requests add column if not exists full_name text;
+alter table public.demo_requests add column if not exists email text;
+alter table public.demo_requests add column if not exists organisation text;
+alter table public.demo_requests add column if not exists created_at timestamptz default now();
+
 create index if not exists demo_requests_created_idx on public.demo_requests (created_at desc);
 
 alter table public.demo_requests enable row level security;
