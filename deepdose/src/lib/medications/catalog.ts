@@ -19,6 +19,8 @@ export type ClusterId =
   | 'bones'
   | 'coagulation'
   | 'hiv'
+  | 'mental_health'
+  | 'adhd'
   | 'other'
 
 export interface MedicationCluster {
@@ -72,6 +74,16 @@ export const MEDICATION_CLUSTERS: readonly MedicationCluster[] = [
     id: 'hiv',
     label: 'PrEP & HIV treatment',
     description: 'Daily PrEP and antiretroviral regimens — same-time dosing matters.',
+  },
+  {
+    id: 'mental_health',
+    label: 'Mental health',
+    description: 'Antidepressants and anxiolytics tracked at your current time.',
+  },
+  {
+    id: 'adhd',
+    label: 'ADHD & focus',
+    description: 'Stimulant and non-stimulant ADHD medicines — consistent daily timing matters.',
   },
   {
     id: 'other',
@@ -260,16 +272,16 @@ const TRACKED_MEDICATIONS: Record<string, TrackedMedDef> = {
   sertraline: {
     displayName: 'Sertraline',
     drugClass: 'SSRI antidepressant',
-    clusterId: 'other',
+    clusterId: 'mental_health',
     doseUnit: 'mg',
-    searchTerms: ['sertraline', 'lustral', 'antidepressant'],
+    searchTerms: ['sertraline', 'lustral', 'zoloft', 'ssri', 'antidepressant', 'depression', 'anxiety'],
   },
   citalopram: {
     displayName: 'Citalopram',
     drugClass: 'SSRI antidepressant',
-    clusterId: 'other',
+    clusterId: 'mental_health',
     doseUnit: 'mg',
-    searchTerms: ['citalopram', 'cipramil', 'antidepressant'],
+    searchTerms: ['citalopram', 'cipramil', 'ssri', 'antidepressant', 'depression', 'anxiety'],
   },
   bisoprolol: {
     displayName: 'Bisoprolol',
@@ -302,9 +314,9 @@ const TRACKED_MEDICATIONS: Record<string, TrackedMedDef> = {
   amitriptyline: {
     displayName: 'Amitriptyline',
     drugClass: 'Tricyclic antidepressant',
-    clusterId: 'sleep',
+    clusterId: 'mental_health',
     doseUnit: 'mg',
-    searchTerms: ['amitriptyline', 'sleep', 'pain'],
+    searchTerms: ['amitriptyline', 'sleep', 'pain', 'depression', 'antidepressant'],
   },
   gabapentin: {
     displayName: 'Gabapentin',
@@ -361,6 +373,402 @@ const TRACKED_MEDICATIONS: Record<string, TrackedMedDef> = {
     clusterId: 'hiv',
     doseUnit: 'mg',
     searchTerms: ['tenofovir alafenamide', 'taf', 'vemlidy', 'hiv'],
+  },
+  // Mental health — depression & anxiety
+  fluoxetine: {
+    displayName: 'Fluoxetine',
+    drugClass: 'SSRI antidepressant',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['fluoxetine', 'prozac', 'ssri', 'antidepressant', 'depression', 'anxiety'],
+  },
+  escitalopram: {
+    displayName: 'Escitalopram',
+    drugClass: 'SSRI antidepressant',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['escitalopram', 'cipralex', 'lexapro', 'ssri', 'antidepressant', 'depression', 'anxiety'],
+  },
+  paroxetine: {
+    displayName: 'Paroxetine',
+    drugClass: 'SSRI antidepressant',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['paroxetine', 'seroxat', 'ssri', 'antidepressant', 'depression', 'anxiety'],
+  },
+  venlafaxine: {
+    displayName: 'Venlafaxine',
+    drugClass: 'SNRI antidepressant',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['venlafaxine', 'effexor', 'snri', 'antidepressant', 'depression', 'anxiety'],
+  },
+  duloxetine: {
+    displayName: 'Duloxetine',
+    drugClass: 'SNRI antidepressant',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['duloxetine', 'cymbalta', 'snri', 'antidepressant', 'depression', 'anxiety', 'pain'],
+  },
+  mirtazapine: {
+    displayName: 'Mirtazapine',
+    drugClass: 'NaSSA antidepressant',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['mirtazapine', 'zispin', 'antidepressant', 'depression', 'sleep'],
+  },
+  bupropion: {
+    displayName: 'Bupropion',
+    drugClass: 'NDRI antidepressant',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['bupropion', 'wellbutrin', 'zyban', 'antidepressant', 'depression', 'smoking'],
+  },
+  trazodone: {
+    displayName: 'Trazodone',
+    drugClass: 'Serotonin antagonist antidepressant',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['trazodone', 'antidepressant', 'depression', 'sleep', 'insomnia'],
+  },
+  vortioxetine: {
+    displayName: 'Vortioxetine',
+    drugClass: 'Multimodal antidepressant',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['vortioxetine', 'brintellix', 'antidepressant', 'depression'],
+  },
+  diazepam: {
+    displayName: 'Diazepam',
+    drugClass: 'Benzodiazepine',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['diazepam', 'valium', 'anxiety', 'benzodiazepine'],
+  },
+  lorazepam: {
+    displayName: 'Lorazepam',
+    drugClass: 'Benzodiazepine',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['lorazepam', 'ativan', 'anxiety', 'benzodiazepine'],
+  },
+  propranolol: {
+    displayName: 'Propranolol',
+    drugClass: 'Beta blocker',
+    clusterId: 'mental_health',
+    doseUnit: 'mg',
+    searchTerms: ['propranolol', 'beta blocker', 'anxiety', 'migraine'],
+  },
+  // ADHD / ADD
+  methylphenidate: {
+    displayName: 'Methylphenidate',
+    drugClass: 'ADHD stimulant',
+    clusterId: 'adhd',
+    doseUnit: 'mg',
+    searchTerms: ['methylphenidate', 'ritalin', 'concerta', 'medikinet', 'equasym', 'adhd', 'add', 'attention'],
+  },
+  dexamfetamine: {
+    displayName: 'Dexamfetamine',
+    drugClass: 'ADHD stimulant',
+    clusterId: 'adhd',
+    doseUnit: 'mg',
+    searchTerms: ['dexamfetamine', 'dextroamphetamine', 'dexedrine', 'adhd', 'add', 'attention'],
+  },
+  lisdexamfetamine: {
+    displayName: 'Lisdexamfetamine',
+    drugClass: 'ADHD stimulant',
+    clusterId: 'adhd',
+    doseUnit: 'mg',
+    searchTerms: ['lisdexamfetamine', 'elvanse', 'vyvanse', 'adhd', 'add', 'attention'],
+  },
+  atomoxetine: {
+    displayName: 'Atomoxetine',
+    drugClass: 'ADHD non-stimulant',
+    clusterId: 'adhd',
+    doseUnit: 'mg',
+    searchTerms: ['atomoxetine', 'strattera', 'adhd', 'add', 'attention'],
+  },
+  guanfacine: {
+    displayName: 'Guanfacine',
+    drugClass: 'ADHD non-stimulant',
+    clusterId: 'adhd',
+    doseUnit: 'mg',
+    searchTerms: ['guanfacine', 'intuniv', 'adhd', 'add', 'attention'],
+  },
+  modafinil: {
+    displayName: 'Modafinil',
+    drugClass: 'Wakefulness promoter',
+    clusterId: 'adhd',
+    doseUnit: 'mg',
+    searchTerms: ['modafinil', 'provigil', 'adhd', 'narcolepsy', 'focus'],
+  },
+  // Common cardiovascular & metabolic
+  rosuvastatin: {
+    displayName: 'Rosuvastatin',
+    drugClass: 'Statin',
+    clusterId: 'cholesterol',
+    doseUnit: 'mg',
+    searchTerms: ['rosuvastatin', 'crestor', 'statin', 'cholesterol'],
+  },
+  pravastatin: {
+    displayName: 'Pravastatin',
+    drugClass: 'Statin',
+    clusterId: 'cholesterol',
+    doseUnit: 'mg',
+    searchTerms: ['pravastatin', 'lipostat', 'statin', 'cholesterol'],
+  },
+  candesartan: {
+    displayName: 'Candesartan',
+    drugClass: 'ARB',
+    clusterId: 'heart',
+    doseUnit: 'mg',
+    searchTerms: ['candesartan', 'amias', 'blood pressure', 'heart'],
+  },
+  perindopril: {
+    displayName: 'Perindopril',
+    drugClass: 'ACE inhibitor',
+    clusterId: 'heart',
+    doseUnit: 'mg',
+    searchTerms: ['perindopril', 'coversyl', 'ace inhibitor', 'blood pressure'],
+  },
+  enalapril: {
+    displayName: 'Enalapril',
+    drugClass: 'ACE inhibitor',
+    clusterId: 'heart',
+    doseUnit: 'mg',
+    searchTerms: ['enalapril', 'innovace', 'ace inhibitor', 'blood pressure'],
+  },
+  lisinopril: {
+    displayName: 'Lisinopril',
+    drugClass: 'ACE inhibitor',
+    clusterId: 'heart',
+    doseUnit: 'mg',
+    searchTerms: ['lisinopril', 'zestril', 'ace inhibitor', 'blood pressure'],
+  },
+  hydrochlorothiazide: {
+    displayName: 'Hydrochlorothiazide',
+    drugClass: 'Thiazide diuretic',
+    clusterId: 'heart',
+    doseUnit: 'mg',
+    searchTerms: ['hydrochlorothiazide', 'hctz', 'diuretic', 'blood pressure', 'water tablet'],
+  },
+  spironolactone: {
+    displayName: 'Spironolactone',
+    drugClass: 'Potassium-sparing diuretic',
+    clusterId: 'heart',
+    doseUnit: 'mg',
+    searchTerms: ['spironolactone', 'aldactone', 'diuretic', 'blood pressure'],
+  },
+  apixaban: {
+    displayName: 'Apixaban',
+    drugClass: 'DOAC anticoagulant',
+    clusterId: 'coagulation',
+    doseUnit: 'mg',
+    searchTerms: ['apixaban', 'eliquis', 'anticoagulant', 'blood thinner'],
+  },
+  rivaroxaban: {
+    displayName: 'Rivaroxaban',
+    drugClass: 'DOAC anticoagulant',
+    clusterId: 'coagulation',
+    doseUnit: 'mg',
+    searchTerms: ['rivaroxaban', 'xarelto', 'anticoagulant', 'blood thinner'],
+  },
+  edoxaban: {
+    displayName: 'Edoxaban',
+    drugClass: 'DOAC anticoagulant',
+    clusterId: 'coagulation',
+    doseUnit: 'mg',
+    searchTerms: ['edoxaban', 'lixiana', 'anticoagulant', 'blood thinner'],
+  },
+  clopidogrel: {
+    displayName: 'Clopidogrel',
+    drugClass: 'Antiplatelet',
+    clusterId: 'blood_thinning',
+    doseUnit: 'mg',
+    searchTerms: ['clopidogrel', 'plavix', 'antiplatelet', 'blood thinner'],
+  },
+  empagliflozin: {
+    displayName: 'Empagliflozin',
+    drugClass: 'SGLT2 inhibitor',
+    clusterId: 'glucose',
+    doseUnit: 'mg',
+    searchTerms: ['empagliflozin', 'jardiance', 'diabetes', 'sglt2'],
+  },
+  dapagliflozin: {
+    displayName: 'Dapagliflozin',
+    drugClass: 'SGLT2 inhibitor',
+    clusterId: 'glucose',
+    doseUnit: 'mg',
+    searchTerms: ['dapagliflozin', 'forxiga', 'diabetes', 'sglt2'],
+  },
+  sitagliptin: {
+    displayName: 'Sitagliptin',
+    drugClass: 'DPP-4 inhibitor',
+    clusterId: 'glucose',
+    doseUnit: 'mg',
+    searchTerms: ['sitagliptin', 'januvia', 'diabetes'],
+  },
+  semaglutide: {
+    displayName: 'Semaglutide',
+    drugClass: 'GLP-1 agonist',
+    clusterId: 'glucose',
+    doseUnit: 'mg',
+    searchTerms: ['semaglutide', 'ozempic', 'wegovy', 'rybelsus', 'diabetes', 'weight loss'],
+  },
+  liraglutide: {
+    displayName: 'Liraglutide',
+    drugClass: 'GLP-1 agonist',
+    clusterId: 'glucose',
+    doseUnit: 'mg',
+    searchTerms: ['liraglutide', 'victoza', 'saxenda', 'diabetes', 'weight loss'],
+  },
+  insulin_aspart: {
+    displayName: 'Insulin aspart',
+    drugClass: 'Rapid insulin',
+    clusterId: 'glucose',
+    doseUnit: 'units',
+    searchTerms: ['insulin aspart', 'novorapid', 'insulin', 'diabetes'],
+  },
+  // Pain, nerve & common daily meds
+  pregabalin: {
+    displayName: 'Pregabalin',
+    drugClass: 'Anticonvulsant',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['pregabalin', 'lyrica', 'nerve pain', 'anxiety'],
+  },
+  ibuprofen: {
+    displayName: 'Ibuprofen',
+    drugClass: 'NSAID',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['ibuprofen', 'nurofen', 'pain', 'anti-inflammatory'],
+  },
+  naproxen: {
+    displayName: 'Naproxen',
+    drugClass: 'NSAID',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['naproxen', 'naprosyn', 'pain', 'anti-inflammatory'],
+  },
+  tramadol: {
+    displayName: 'Tramadol',
+    drugClass: 'Opioid analgesic',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['tramadol', 'pain', 'analgesic'],
+  },
+  co_codamol: {
+    displayName: 'Co-codamol',
+    drugClass: 'Opioid combination analgesic',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['co-codamol', 'cocodamol', 'codeine', 'paracetamol', 'pain'],
+  },
+  allopurinol: {
+    displayName: 'Allopurinol',
+    drugClass: 'Urate-lowering therapy',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['allopurinol', 'zyloric', 'gout'],
+  },
+  tamsulosin: {
+    displayName: 'Tamsulosin',
+    drugClass: 'Alpha blocker',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['tamsulosin', 'flomax', 'prostate', 'bph'],
+  },
+  finasteride: {
+    displayName: 'Finasteride',
+    drugClass: '5-alpha reductase inhibitor',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['finasteride', 'propecia', 'proscar', 'prostate', 'hair loss'],
+  },
+  montelukast: {
+    displayName: 'Montelukast',
+    drugClass: 'Leukotriene receptor antagonist',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['montelukast', 'singulair', 'asthma', 'allergy'],
+  },
+  beclometasone: {
+    displayName: 'Beclometasone',
+    drugClass: 'Inhaled corticosteroid',
+    clusterId: 'other',
+    doseUnit: 'mcg',
+    searchTerms: ['beclometasone', 'clenil', 'inhaler', 'asthma', 'copd'],
+  },
+  fluticasone: {
+    displayName: 'Fluticasone',
+    drugClass: 'Inhaled corticosteroid',
+    clusterId: 'other',
+    doseUnit: 'mcg',
+    searchTerms: ['fluticasone', 'flixotide', 'inhaler', 'asthma', 'nasal spray'],
+  },
+  cetirizine: {
+    displayName: 'Cetirizine',
+    drugClass: 'Antihistamine',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['cetirizine', 'zyrtec', 'piriteze', 'allergy', 'hay fever'],
+  },
+  loratadine: {
+    displayName: 'Loratadine',
+    drugClass: 'Antihistamine',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['loratadine', 'clarityn', 'allergy', 'hay fever'],
+  },
+  ferrous_sulfate: {
+    displayName: 'Ferrous sulfate',
+    drugClass: 'Iron supplement',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['ferrous sulfate', 'iron', 'iron tablets', 'anaemia'],
+  },
+  folic_acid: {
+    displayName: 'Folic acid',
+    drugClass: 'Vitamin supplement',
+    clusterId: 'other',
+    doseUnit: 'mcg',
+    searchTerms: ['folic acid', 'folate', 'vitamin', 'pregnancy'],
+  },
+  omega_3: {
+    displayName: 'Omega-3',
+    drugClass: 'Fish oil supplement',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['omega 3', 'omega-3', 'fish oil', 'supplement', 'epa', 'dha'],
+  },
+  zinc: {
+    displayName: 'Zinc',
+    drugClass: 'Mineral supplement',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['zinc', 'supplement', 'immune'],
+  },
+  calcium: {
+    displayName: 'Calcium',
+    drugClass: 'Mineral supplement',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['calcium', 'supplement', 'bones'],
+  },
+  levodopa: {
+    displayName: 'Levodopa',
+    drugClass: 'Dopamine precursor',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['levodopa', 'madopar', 'sinemet', 'parkinsons'],
+  },
+  carbamazepine: {
+    displayName: 'Carbamazepine',
+    drugClass: 'Anticonvulsant',
+    clusterId: 'other',
+    doseUnit: 'mg',
+    searchTerms: ['carbamazepine', 'tegretol', 'epilepsy', 'nerve pain'],
   },
 }
 
@@ -450,11 +858,11 @@ function entryMatchesQuery(entry: MedicationCatalogEntry, query: string): number
     const t = term.toLowerCase()
     if (t === q) return 90
     if (t.startsWith(q)) return 70
-    if (t.includes(q)) return 50
+    if (q.length >= 3 && t.includes(q)) return 50
   }
 
   if (entry.displayName.toLowerCase().includes(q)) return 40
-  if (entry.drugClass.toLowerCase().includes(q)) return 30
+  if (entry.drugClass.toLowerCase().includes(q)) return 35
 
   return 0
 }

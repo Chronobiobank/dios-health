@@ -105,8 +105,8 @@ export function HomeDrugSearch() {
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
-            placeholder="What meds/supps are you on?"
-            aria-label="What meds/supps are you on?"
+            placeholder="Search a medication or supplement"
+            aria-label="Search a medication or supplement"
             value={query}
             onChange={(e) => handleQueryChange(e.target.value)}
             className="med-search__input"

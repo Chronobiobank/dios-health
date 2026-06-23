@@ -5039,6 +5039,10 @@ html.splash-route body {
   text-align: center;
 }
 
+.seco-splash__stage.seco-splash__stage--search {
+  max-width: none;
+}
+
 .seco-splash__top {
   display: flex;
   flex: none;
