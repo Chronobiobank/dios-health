@@ -5018,7 +5018,8 @@ html.splash-route body {
 }
 
 .seco-splash__page:has(.seco-splash__stage--search) {
-  padding-top: clamp(1.5rem, 5vw, 3rem);
+  padding-top: clamp(2.5rem, 7vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 7vw, 4.5rem);
 }
 
 .seco-splash__page:has(> .seco-splash__inner) {
