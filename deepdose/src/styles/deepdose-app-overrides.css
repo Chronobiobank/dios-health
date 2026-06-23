@@ -3516,7 +3516,196 @@
   color: rgb(255 255 255 / 0.6);
 }
 
-/* Hero: copy beside atmospheric image */
+/* Hero: centred intro + full-width panorama + kit spotlight */
+.seco-hometest__intro {
+  max-width: 52rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.seco-hometest__intro .seco-page__title,
+.seco-hometest__intro .seco-page__lede {
+  margin-bottom: 0;
+}
+
+.seco-hometest__intro .seco-page__title {
+  margin-bottom: 1rem;
+}
+
+.seco-hometest__intro-lede {
+  margin-inline: auto;
+  max-width: 48ch;
+}
+
+.seco-hometest__hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1.75rem;
+}
+
+.seco-hometest__hero-actions .seco-landing__btn {
+  margin-top: 0;
+}
+
+.seco-hometest__panorama {
+  position: relative;
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
+  aspect-ratio: 21 / 9;
+  min-height: clamp(12rem, 32vw, 18rem);
+  border-radius: var(--seco-radius-xl);
+  border: 1px solid var(--seco-navy-border);
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgb(0 0 0 / 0.4);
+}
+
+@media (min-width: 880px) {
+  .seco-hometest__panorama {
+    aspect-ratio: 2.4 / 1;
+    min-height: clamp(16rem, 28vw, 22rem);
+  }
+}
+
+.seco-hometest__panorama-img {
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+.seco-hometest__hero-badge {
+  position: absolute;
+  right: clamp(0.875rem, 2vw, 1.25rem);
+  bottom: clamp(0.875rem, 2vw, 1.25rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4375rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  background: rgb(11 18 32 / 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--seco-font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+/* Kit spotlight — large product render */
+.seco-hometest__kit-band {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  align-items: center;
+  margin-top: clamp(2.75rem, 6vw, 4rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--dios-glass-outer-border);
+  border-radius: var(--seco-radius-xl);
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgb(172 211 222 / 0.12), transparent 55%),
+    radial-gradient(90% 80% at 100% 100%, rgb(201 182 242 / 0.1), transparent 50%),
+    var(--dios-glass-outer-bg);
+  backdrop-filter: var(--dios-glass-outer-blur);
+  -webkit-backdrop-filter: var(--dios-glass-outer-blur);
+  box-shadow: var(--dios-glass-outer-shadow);
+}
+
+@media (min-width: 880px) {
+  .seco-hometest__kit-band {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+}
+
+.seco-hometest__kit-figure {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  min-height: clamp(16rem, 42vw, 24rem);
+  border-radius: var(--seco-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--seco-navy-border);
+  background:
+    radial-gradient(90% 80% at 28% 18%, rgb(124 196 214 / 0.22) 0%, rgb(124 196 214 / 0) 60%),
+    linear-gradient(155deg, #20355c 0%, #1a2c4c 45%, #14233d 100%);
+}
+
+@media (min-width: 880px) {
+  .seco-hometest__kit-figure {
+    aspect-ratio: auto;
+    min-height: clamp(20rem, 36vw, 28rem);
+    height: 100%;
+  }
+}
+
+.seco-hometest__kit-img {
+  object-fit: contain;
+  padding: clamp(1rem, 3vw, 2rem);
+  transform: scale(1.12);
+  filter: drop-shadow(0 28px 40px rgb(0 0 0 / 0.45));
+}
+
+.seco-hometest__kit-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.seco-hometest__kit-eyebrow {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.45);
+}
+
+.seco-hometest__kit-title {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.5rem, 3.2vw, 2.125rem);
+  font-weight: 300;
+  line-height: var(--text-heading-leading);
+  letter-spacing: var(--seco-display-tracking);
+  color: #fff;
+}
+
+.seco-hometest__kit-lede {
+  margin: 0;
+  font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
+  line-height: 1.55;
+  color: rgb(255 255 255 / 0.62);
+  max-width: 42ch;
+}
+
+.seco-hometest__kit-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.875rem;
+  margin: 0.5rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.seco-hometest__kit-price-figure {
+  font-family: var(--seco-font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: var(--seco-display-tracking-figure);
+  line-height: 1;
+  color: #fff;
+}
+
+.seco-hometest__kit-price-note {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: rgb(255 255 255 / 0.5);
+}
+
+/* Legacy hero grid — kept for reference if reused */
 .seco-hometest__hero {
   display: grid;
   gap: clamp(1.5rem, 4vw, 2.75rem);
@@ -3536,17 +3725,6 @@
 
 .seco-hometest__hero-copy .seco-page__title {
   margin-bottom: 1rem;
-}
-
-.seco-hometest__hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
-
-.seco-hometest__hero-actions .seco-landing__btn {
-  margin-top: 0;
 }
 
 .seco-hometest__hero-media {
@@ -3571,26 +3749,6 @@
   object-fit: cover;
 }
 
-.seco-hometest__hero-badge {
-  position: absolute;
-  right: 0.875rem;
-  bottom: 0.875rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.4375rem 0.75rem;
-  border-radius: 999px;
-  border: 1px solid rgb(255 255 255 / 0.18);
-  background: rgb(11 18 32 / 0.62);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  font-family: var(--seco-font-ui);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: #fff;
-}
-
 /* How it works — spectrum tile grid */
 .seco-hometest__steps {
   margin: 0;
@@ -3607,6 +3765,19 @@
   .seco-hometest__pricing {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+.seco-hometest__price-card--muted {
+  opacity: 0.72;
+  border-style: dashed;
+}
+
+.seco-hometest__checklist--benefits {
+  margin-top: 0.25rem;
+}
+
+.seco-hometest__checklist--benefits .seco-hometest__check-item {
+  font-size: clamp(0.9375rem, 1.8vw, 1rem);
 }
 
 .seco-hometest__price-card {
