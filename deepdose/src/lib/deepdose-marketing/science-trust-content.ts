@@ -3,7 +3,10 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { BODY_CLOCK_LAYERS, PROXY_DLMO_METHODOLOGY } from '@/lib/circadian/body-clock-measurement'
 import { DEEPDOSE_LANDING_EVIDENCE } from '@/lib/deepdose-marketing/landing-content'
-import { CHRONOBIOBANK_RESEARCH_HREF } from '@/lib/deepdose-marketing/site-nav-links'
+import {
+  CHRONOBIOBANK_RESEARCH_HREF,
+  TECHNOLOGY_DLMO_PROXY_HREF,
+} from '@/lib/deepdose-marketing/site-nav-links'
 import { WEARABLE_PROVIDERS_ORDERED } from '@/lib/wearables/tiers'
 
 export const SCIENCE_TRUST_META = {
@@ -144,6 +147,7 @@ export const SCIENCE_TRUST_CLINICIAN = {
   title: 'For clinicians',
   teaser: 'Triage-first, not another portal.',
   badge: 'Clinicians',
+  methodology: { label: 'Proxy DLMO methodology', href: TECHNOLOGY_DLMO_PROXY_HREF },
   points: [
     'Device sync failures surface first (36-hour rule)',
     'Verified clinical-grade badge on TipTraQ records',

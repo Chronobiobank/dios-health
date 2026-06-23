@@ -17,7 +17,7 @@ import {
   SCIENCE_TRUST_STUDY,
   SCIENCE_TRUST_WEARABLES,
 } from '@/lib/deepdose-marketing/science-trust-content'
-import { CHRONOBIOBANK_RESEARCH_HREF } from '@/lib/deepdose-marketing/site-nav-links'
+import { CHRONOBIOBANK_RESEARCH_HREF, TECHNOLOGY_DLMO_PROXY_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import { spectrumCue } from '@/lib/design/spectrum-cues'
 
 export function ScienceTrustSections() {
@@ -75,6 +75,9 @@ export function ScienceTrustSections() {
               ))}
             </SpectrumTileGrid>
             <p className="seco-science-proxy__fusion">{SCIENCE_TRUST_MEASUREMENT.proxyDlmo.fusion}</p>
+            <Link href={TECHNOLOGY_DLMO_PROXY_HREF} className="seco-research-inline-link">
+              Full proxy DLMO methodology →
+            </Link>
           </div>
           <div className="seco-science-limits">
             <p className="seco-science-limits__title">{SCIENCE_TRUST_MEASUREMENT.limits.title}</p>
@@ -168,6 +171,9 @@ export function ScienceTrustSections() {
             ))}
           </ul>
           <div className="seco-science-clinician__actions">
+            <Link href={SCIENCE_TRUST_CLINICIAN.methodology.href} className="seco-research-inline-link">
+              {SCIENCE_TRUST_CLINICIAN.methodology.label} →
+            </Link>
             <Link href={SCIENCE_TRUST_CLINICIAN.cta.href} className="seco-landing__btn seco-landing__btn--primary">
               {SCIENCE_TRUST_CLINICIAN.cta.label} →
             </Link>

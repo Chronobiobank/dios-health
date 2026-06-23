@@ -4,7 +4,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_RESEARCH_PAPERS } from '@/lib/deepdose-marketing/research-content'
 import {
   CHRONOBIOBANK_RESEARCH_HREF,
-  CHRONOBIOBANK_SCIENCE_HREF,
+  TECHNOLOGY_DLMO_PROXY_HREF,
 } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
@@ -53,7 +53,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
         {
           title: 'We estimate proxy DLMO from sleep onset (−2 h) and MCTQ mid-sleep (−2.5 h) — published population markers.',
           meta: 'Proxy DLMO · Burgess & Roenneberg',
-          href: CHRONOBIOBANK_SCIENCE_HREF,
+          href: TECHNOLOGY_DLMO_PROXY_HREF,
         },
         {
           title: 'TipTraQ three-night block validates the anchor — like calibrating a CGM.',

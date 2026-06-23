@@ -2,7 +2,6 @@ import Link from 'next/link'
 
 import {
   DEEPDOSE_FOOTER_LEGAL,
-  DEEPDOSE_LEGAL_NAME,
   DEEPDOSE_LOGO_GLYPH,
   DEEPDOSE_NAME,
   DEEPDOSE_REGISTRATION_LINE,
@@ -44,7 +43,7 @@ export function DeepDoseFooter() {
 
         <div className="seco-footer__bar">
           <div className="seco-footer__copy-block">
-            <p className="seco-footer__copy">© {year} {DEEPDOSE_LEGAL_NAME}</p>
+            <p className="seco-footer__copy">© {year} {DEEPDOSE_NAME}</p>
             <p className="seco-footer__legal">{DEEPDOSE_REGISTRATION_LINE}</p>
             <p className="seco-footer__legal">{DEEPDOSE_FOOTER_LEGAL}</p>
           </div>

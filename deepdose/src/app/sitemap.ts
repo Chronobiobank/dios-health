@@ -9,6 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: BASE, lastModified, changeFrequency: 'weekly', priority: 1 },
     { url: `${BASE}/about`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/chronobiobank`, lastModified, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE}/technology`, lastModified, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE}/technology/dlmo-proxy`, lastModified, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE}/home-test`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/terms`, lastModified, changeFrequency: 'yearly', priority: 0.5 },
     { url: `${BASE}/login`, lastModified, changeFrequency: 'monthly', priority: 0.6 },
