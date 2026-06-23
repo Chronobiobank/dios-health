@@ -3705,6 +3705,11 @@
   color: rgb(255 255 255 / 0.5);
 }
 
+.seco-hometest__kit-pricing-link {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
 /* Legacy hero grid — kept for reference if reused */
 .seco-hometest__hero {
   display: grid;

@@ -7,7 +7,6 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {
   TIPTRAQ_STUDY_PRICING_UK,
   formatTipTraqBaselineFee,
-  formatTipTraqQuarterlyFee,
 } from '@/lib/clinical/tiptraq-program'
 import { spectrumCue } from '@/lib/design/spectrum-cues'
 
@@ -70,7 +69,6 @@ function CheckIcon() {
 
 export default function HomeTestPage() {
   const baseline = formatTipTraqBaselineFee()
-  const quarterly = formatTipTraqQuarterlyFee()
   const privateAnchor = `£${TIPTRAQ_STUDY_PRICING_UK.ukWatchPat3NightGbp}`
 
   return (
@@ -86,7 +84,7 @@ export default function HomeTestPage() {
           </p>
           <div className="seco-hometest__hero-actions">
             <Link href="/pricing" className="seco-landing__btn seco-landing__btn--primary">
-              Order your test →
+              View pricing →
             </Link>
             <Link href="/tiptraq" className="seco-landing__btn seco-landing__btn--secondary">
               How the kit works
@@ -138,6 +136,11 @@ export default function HomeTestPage() {
             <p className="seco-hometest__kit-price">
               <span className="seco-hometest__kit-price-figure">{baseline}</span>
               <span className="seco-hometest__kit-price-note">three-night baseline · reusable device</span>
+            </p>
+            <p className="seco-hometest__kit-pricing-link">
+              <Link href="/pricing" className="seco-research-inline-link">
+                Compare plans and quarterly re-reads ↗
+              </Link>
             </p>
           </div>
         </section>
@@ -198,48 +201,12 @@ export default function HomeTestPage() {
           />
         </section>
 
-        <section className="seco-hometest__section seco-reveal seco-reveal--6" aria-labelledby="hometest-pricing-title">
-          <div className="seco-hometest__section-head">
-            <h2 id="hometest-pricing-title" className="seco-hometest__h2">
-              Simple pricing
-            </h2>
-            <p className="seco-hometest__section-sub">
-              About half the cost of a typical private three-night test.
-            </p>
-          </div>
-          <div className="seco-hometest__pricing">
-            <article className="seco-hometest__price-card seco-hometest__price-card--feature">
-              <span className="seco-hometest__price-flag">Start here</span>
-              <p className="seco-hometest__price-tier">Baseline</p>
-              <p className="seco-hometest__price-figure">{baseline}</p>
-              <p className="seco-hometest__price-note">
-                Three nights at home · reusable TipTraQ kit · clinician-reviewed report
-              </p>
-            </article>
-            <article className="seco-hometest__price-card">
-              <p className="seco-hometest__price-tier">Quarterly re-read</p>
-              <p className="seco-hometest__price-figure">{quarterly}</p>
-              <p className="seco-hometest__price-note">
-                Every three months — like a blood panel, to catch circadian drift early
-              </p>
-            </article>
-            <article className="seco-hometest__price-card seco-hometest__price-card--muted">
-              <p className="seco-hometest__price-tier">Private clinic</p>
-              <p className="seco-hometest__price-figure">~{privateAnchor}</p>
-              <p className="seco-hometest__price-note">
-                Typical UK WatchPAT three-night rental — for comparison
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <aside className="seco-hometest__close seco-reveal seco-reveal--7">
+        <aside className="seco-hometest__close seco-reveal seco-reveal--6">
           <p className="seco-hometest__close-eyebrow">Ready when your GP agrees</p>
-          <h2 className="seco-hometest__close-title">Order your three-night test</h2>
+          <h2 className="seco-hometest__close-title">Get your three-night test</h2>
           <p className="seco-hometest__close-sub">
-            {baseline} for the baseline kit. Your clinician adds the nights to {DEEPDOSE_NAME}; you
-            get verified clinical-grade timing on your dashboard — and optional quarterly re-reads at{' '}
-            {quarterly}.
+            Your clinician adds the nights to {DEEPDOSE_NAME} and you get verified clinical-grade
+            timing on your dashboard. See pricing for the baseline kit and quarterly re-reads.
           </p>
           <div className="seco-hometest__close-actions">
             <Link href="/pricing" className="seco-landing__btn seco-landing__btn--primary">
