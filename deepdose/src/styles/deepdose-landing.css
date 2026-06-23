@@ -3130,6 +3130,20 @@
   margin: 0;
 }
 
+.seco-clinics__grid--tiles .seco-spectrum-tile__title,
+.seco-clinics__grid--tiles .seco-spectrum-tile__title--display {
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.3125rem, 2.8vw, 1.625rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: rgb(255 255 255 / 0.96);
+}
+
+.seco-clinics__grid--tiles .seco-spectrum-tile__body {
+  margin-top: 0.3125rem;
+}
+
 /* Evidence library */
 .seco-evidence-page {
   padding-block: clamp(2rem, 5vw, 3.25rem) clamp(2.5rem, 5vw, 3.5rem);

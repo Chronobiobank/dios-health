@@ -18,9 +18,9 @@ export type PortalLandingStep = {
 export type PortalLandingContent = {
   hero: LandingHeroContent
   steps: readonly PortalLandingStep[]
-  note: string
   cta: { label: string; href: string }
-  accessNote: string
+  note?: string
+  accessNote?: string
   tileIcons?: readonly (typeof CLINICIAN_TILE_ICONS)[number][]
 }
 
@@ -60,10 +60,10 @@ export function DeepDosePortalLanding({
             </SpectrumTileGrid>
           </div>
 
-          <p className="seco-clinics__note">{note}</p>
+          {note ? <p className="seco-clinics__note">{note}</p> : null}
 
           <div className="seco-clinics__cta">
-            <p className="seco-clinics__access-note">{accessNote}</p>
+            {accessNote ? <p className="seco-clinics__access-note">{accessNote}</p> : null}
             <Link href={cta.href} className="seco-landing__btn seco-landing__btn--primary">
               {cta.label} →
             </Link>

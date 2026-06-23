@@ -141,38 +141,35 @@ export const DEEPDOSE_CLINICIAN_LANDING = {
     headlineWhite: 'Scripts,',
     headlineAccent: 'timed right.',
     support:
-      'Once-daily labels hide phase. Triage drift and device gaps — validate with TipTraQ.',
+      'Fixed pill times ignore body clock. See who needs you first — and confirm timing with a short home sleep test.',
   },
   steps: [
     {
       label: 'Queue',
       cue: '#f2b8a2',
-      title: 'Triage by drift',
-      meta: 'Device alerts and BTI misalignment rise to the top of your queue.',
+      title: 'Who needs attention first',
+      meta: 'Missing wearable data and shifting sleep patterns rise to the top of your list.',
     },
     {
       label: 'Validate',
       cue: '#acd3de',
-      title: 'TipTraQ home nights',
-      meta: 'Three-night kits set a dosing baseline and metabolic early warning.',
+      title: 'Home sleep test',
+      meta: 'Three nights at home set a reliable bedtime anchor before you adjust dose times.',
     },
     {
       label: 'Retime',
       cue: '#c9b6f2',
       title: 'Timing recommendations',
-      meta: 'Evidence-graded windows you approve — decision support only.',
+      meta: 'Suggested dose times from published trials — you review and approve every change.',
     },
     {
       label: 'Link',
       cue: '#8b9cf8',
       title: 'Invite & link patients',
-      meta: 'Share a code; patients opt in to clinical care sharing on their terms.',
+      meta: 'Send an invite code. Patients choose what to share with you.',
     },
   ],
-  note: 'Decision support only. You make every treatment decision.',
   cta: { label: 'Sign in', href: '/login?next=/clinical/dashboard' },
-  accessNote:
-    'Clinician accounts are issued by your practice. Contact us if you need access.',
 } as const
 
 export const DEEPDOSE_ENTERPRISE_LANDING = {
