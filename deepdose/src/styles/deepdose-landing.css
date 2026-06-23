@@ -3117,9 +3117,13 @@
   border: none;
 }
 
+.seco-landing__hero-navy:has(+ .seco-landing__section-inner .seco-clinics__panel--tiles) {
+  padding-bottom: clamp(0.25rem, 0.75vw, 0.4375rem);
+}
+
 /* Clinician / enterprise portal — spectrum tile grid spacing */
 .seco-clinics__panel--tiles {
-  margin-top: clamp(1.5rem, 4vw, 2.25rem);
+  margin-top: clamp(0.75rem, 2vw, 1.125rem);
   border: none;
   border-radius: 0;
   background: transparent;
@@ -3130,18 +3134,22 @@
   margin: 0;
 }
 
+.seco-clinics__grid--tiles .seco-spectrum-tile__head {
+  margin-bottom: 0.4375rem;
+}
+
 .seco-clinics__grid--tiles .seco-spectrum-tile__title,
 .seco-clinics__grid--tiles .seco-spectrum-tile__title--display {
   font-family: var(--seco-font-display);
   font-size: clamp(1.3125rem, 2.8vw, 1.625rem);
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.08;
   letter-spacing: -0.02em;
   color: rgb(255 255 255 / 0.96);
 }
 
 .seco-clinics__grid--tiles .seco-spectrum-tile__body {
-  margin-top: 0.3125rem;
+  margin-top: 0.125rem;
 }
 
 /* Evidence library */
