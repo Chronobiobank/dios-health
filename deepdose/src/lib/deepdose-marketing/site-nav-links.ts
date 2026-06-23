@@ -3,7 +3,7 @@
 export const DEEPDOSE_SITE_LINKS = [
   { label: 'Mission', href: '/chronobiobank' },
   { label: 'Technology', href: '/technology' },
-  { label: 'Evidence', href: '/evidence' },
+  { label: 'Foundation', href: '/foundation' },
   { label: 'Home test', href: '/home-test' },
   { label: 'About', href: '/about' },
   { label: 'Terms', href: '/terms' },
@@ -13,7 +13,7 @@ export const DEEPDOSE_SITE_LINKS = [
 export const CHRONOBIOBANK_RESEARCH_ANCHOR = 'research'
 export const CHRONOBIOBANK_SCIENCE_ANCHOR = 'science-trust'
 
-export const EVIDENCE_HREF = '/evidence'
+export const EVIDENCE_HREF = '/foundation'
 export const CHRONOBIOBANK_RESEARCH_HREF = EVIDENCE_HREF
 export const CHRONOBIOBANK_SCIENCE_HREF = `/chronobiobank#${CHRONOBIOBANK_SCIENCE_ANCHOR}`
 

@@ -136,7 +136,7 @@ export const SCIENCE_TRUST_PRIVACY = {
   links: [
     { label: 'Chronobiobank architecture', href: '/chronobiobank' },
     { label: 'Terms & clinical boundary', href: '/terms' },
-    { label: 'Full research library', href: EVIDENCE_HREF },
+    { label: 'Foundation', href: EVIDENCE_HREF },
   ],
 } as const
 

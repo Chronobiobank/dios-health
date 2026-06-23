@@ -30,7 +30,7 @@ export const DEEPDOSE_LANDING_EVIDENCE = {
   eyebrow: 'The evidence',
   headline: 'Timing matters',
   support: 'Peer-reviewed trials across blood pressure, glucose, sleep, and more.',
-  seeAll: { label: 'All research', href: EVIDENCE_HREF },
+  seeAll: { label: 'Foundation', href: EVIDENCE_HREF },
   papers: EVIDENCE_PAPER_IDS.map(
     (id) => DEEPDOSE_RESEARCH_PAPERS.find((paper) => paper.id === id)!
   ),

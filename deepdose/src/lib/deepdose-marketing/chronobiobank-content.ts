@@ -207,7 +207,7 @@ export const CHRONOBIOBANK_MISSION_JOIN = {
 /** Bottom-of-page deep dives — descriptive badges for research & measurement detail. */
 export const CHRONOBIOBANK_DEEP_DIVE = {
   research: {
-    badge: 'Evidence',
+    badge: 'Foundation',
     title: 'Research library',
     teaser: 'Peer-reviewed studies on timing, sleep, and health outcomes',
   },

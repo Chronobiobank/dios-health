@@ -1,4 +1,4 @@
-/** Evidence page — compressed theme tiles for patients, clinicians, and investors. */
+/** Foundation page — compressed theme tiles for patients, clinicians, and investors. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {
@@ -8,13 +8,13 @@ import {
 } from '@/lib/deepdose-marketing/research-content'
 
 export const EVIDENCE_PAGE_META = {
-  title: `Chronotherapy sources · ${DEEPDOSE_NAME}`,
+  title: `Foundation · ${DEEPDOSE_NAME}`,
   description:
     'Peer-reviewed science on why when you take a medicine can matter as much as what you take.',
 } as const
 
 export const EVIDENCE_PAGE_INTRO = {
-  eyebrow: 'Evidence',
+  eyebrow: 'Foundation',
   titleWhite: 'Timing',
   titleAccent: 'really matters',
 } as const

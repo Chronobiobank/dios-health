@@ -1,13 +1,13 @@
-import type { Metadata } from 'next'
+'use client'
 
-import { EvidencePage } from '@/components/deepdose/marketing/EvidencePage'
-import { EVIDENCE_PAGE_META } from '@/lib/deepdose-marketing/evidence-content'
+import { useEffect } from 'react'
 
-export const metadata: Metadata = {
-  title: EVIDENCE_PAGE_META.title,
-  description: EVIDENCE_PAGE_META.description,
-}
+import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 
-export default function EvidenceRoute() {
-  return <EvidencePage />
+export default function EvidenceRedirectPage() {
+  useEffect(() => {
+    window.location.replace(EVIDENCE_HREF)
+  }, [])
+
+  return null
 }

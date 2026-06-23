@@ -24,7 +24,7 @@ export function ChronobiobankMissionDeepDive() {
       >
         <p className="seco-chronobiobank__prose">{DEEPDOSE_RESEARCH_INTRO.lede}</p>
         <Link href={EVIDENCE_HREF} className="seco-landing__btn seco-landing__btn--ghost">
-          Open evidence library →
+          Foundation →
         </Link>
       </HashOpenDisclosure>
 
