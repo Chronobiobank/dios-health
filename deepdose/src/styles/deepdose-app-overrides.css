@@ -3552,24 +3552,29 @@
 .seco-hometest__panorama {
   position: relative;
   margin: clamp(2rem, 5vw, 3rem) 0 0;
-  aspect-ratio: 21 / 9;
-  min-height: clamp(12rem, 32vw, 18rem);
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 3 / 2;
+  min-height: clamp(14rem, 48vw, 22rem);
   border-radius: var(--seco-radius-xl);
   border: 1px solid var(--seco-navy-border);
   overflow: hidden;
   box-shadow: 0 24px 48px rgb(0 0 0 / 0.4);
+  background:
+    radial-gradient(90% 70% at 50% 20%, rgb(124 196 214 / 0.12) 0%, transparent 55%),
+    linear-gradient(180deg, #1a2844 0%, #0f1828 100%);
 }
 
 @media (min-width: 880px) {
   .seco-hometest__panorama {
-    aspect-ratio: 2.4 / 1;
-    min-height: clamp(16rem, 28vw, 22rem);
+    aspect-ratio: 16 / 10;
+    min-height: clamp(18rem, 34vw, 26rem);
   }
 }
 
 .seco-hometest__panorama-img {
-  object-fit: cover;
-  object-position: center 42%;
+  object-fit: contain;
+  object-position: center center;
 }
 
 .seco-hometest__hero-badge {
@@ -3608,6 +3613,8 @@
   backdrop-filter: var(--dios-glass-outer-blur);
   -webkit-backdrop-filter: var(--dios-glass-outer-blur);
   box-shadow: var(--dios-glass-outer-shadow);
+  overflow: hidden;
+  min-width: 0;
 }
 
 @media (min-width: 880px) {
@@ -3618,38 +3625,50 @@
   }
 }
 
+.seco-hometest__kit-band > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .seco-hometest__kit-figure {
   position: relative;
   margin: 0;
+  width: 100%;
+  max-width: 100%;
   aspect-ratio: 4 / 3;
-  min-height: clamp(16rem, 42vw, 24rem);
+  min-height: clamp(14rem, 56vw, 20rem);
   border-radius: var(--seco-radius-lg);
   overflow: hidden;
+  isolation: isolate;
   border: 1px solid var(--seco-navy-border);
   background:
     radial-gradient(90% 80% at 28% 18%, rgb(124 196 214 / 0.22) 0%, rgb(124 196 214 / 0) 60%),
     linear-gradient(155deg, #20355c 0%, #1a2c4c 45%, #14233d 100%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.04);
 }
 
 @media (min-width: 880px) {
   .seco-hometest__kit-figure {
-    aspect-ratio: auto;
-    min-height: clamp(20rem, 36vw, 28rem);
-    height: 100%;
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+    height: auto;
+    max-height: 28rem;
   }
 }
 
 .seco-hometest__kit-img {
   object-fit: contain;
-  padding: clamp(1rem, 3vw, 2rem);
-  transform: scale(1.12);
-  filter: drop-shadow(0 28px 40px rgb(0 0 0 / 0.45));
+  object-position: center;
+  padding: clamp(0.75rem, 2.5vw, 1.5rem);
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .seco-hometest__kit-copy {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
+  min-width: 0;
 }
 
 .seco-hometest__kit-eyebrow {
@@ -3757,6 +3776,46 @@
 /* How it works — spectrum tile grid */
 .seco-hometest__steps {
   margin: 0;
+  width: 100%;
+}
+
+.seco-hometest__steps.seco-spectrum-tiles--2-sm {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .seco-hometest__steps.seco-spectrum-tiles--2-sm {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.seco-hometest .seco-spectrum-tile {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.seco-hometest__steps .seco-spectrum-tile--rank {
+  grid-template-columns: minmax(0, 1fr) minmax(2.5rem, 3.25rem);
+  column-gap: 0.5rem;
+  min-height: 9.5rem;
+}
+
+.seco-hometest__steps .seco-spectrum-tile__rank {
+  font-size: clamp(1.75rem, 6vw, 3rem);
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.seco-hometest__steps .seco-spectrum-tile__title {
+  overflow-wrap: break-word;
+}
+
+.seco-hometest__section .seco-spectrum-tile--hero {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* Pricing tiers */
