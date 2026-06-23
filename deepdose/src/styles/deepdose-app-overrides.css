@@ -5008,6 +5008,12 @@
 }
 
 /* ── About page ── */
+.seco-about__title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
 .seco-about__section {
   margin-top: clamp(2.5rem, 6vw, 3.5rem);
 }
