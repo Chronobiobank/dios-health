@@ -32,7 +32,7 @@ export function DeepDoseLanding({
           <DeepDoseHeroTabs />
         </div>
         <div className="seco-landing__section-inner seco-patient-landing__doses">
-          <PatientDailyDosesSection signupHref={signupHref} />
+          <PatientDailyDosesSection />
         </div>
       </section>
 
