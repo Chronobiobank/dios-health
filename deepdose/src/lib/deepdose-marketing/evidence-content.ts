@@ -19,6 +19,58 @@ export const EVIDENCE_PAGE_INTRO = {
   titleAccent: 'really matters',
 } as const
 
+export type MelatoninCascadeStep = {
+  id: string
+  cue: string
+  phase: string
+  title: string
+  body: string
+}
+
+export const EVIDENCE_MELATONIN_CASCADE = {
+  label: 'What we track',
+  title: 'The melatonin cascade',
+  support:
+    'From evening melatonin rise through sleep repair to dose timing — this is the chain Deepdose monitors and helps you align.',
+  steps: [
+    {
+      id: 'dlmo',
+      cue: '#c9b6f2',
+      phase: 'DLMO',
+      title: 'Melatonin rises',
+      body: 'Dim-light onset marks when your night phase begins — the anchor we estimate from sleep and chronotype.',
+    },
+    {
+      id: 'sleep',
+      cue: '#8a76c6',
+      phase: 'Sleep',
+      title: 'Onset & staging',
+      body: 'Sleep onset and deep/REM architecture from your phone, wearable, or TipTraQ nights.',
+    },
+    {
+      id: 'repair',
+      cue: '#acd3de',
+      phase: 'Repair',
+      title: 'Cellular recovery',
+      body: 'Deep sleep switches on brain and body maintenance — when repair peaks if timing is right.',
+    },
+    {
+      id: 'health',
+      cue: '#8b9cf8',
+      phase: 'Health',
+      title: 'Long-run outcomes',
+      body: 'Steady light–dark rhythm protects metabolism and healthy years; drift compounds harm.',
+    },
+    {
+      id: 'meds',
+      cue: '#f2b8a2',
+      phase: 'Meds',
+      title: 'Dose timing',
+      body: 'The same medicine lands better in the right window — precision dosing is what we optimise.',
+    },
+  ] as const satisfies readonly MelatoninCascadeStep[],
+} as const
+
 export type EvidenceThemeLink = {
   href: string
   label: string

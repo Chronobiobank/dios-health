@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { MelatoninCascadeStrip } from '@/components/deepdose/marketing/MelatoninCascadeStrip'
 import { SpectrumTile, SpectrumTileGrid } from '@/components/deepdose/SpectrumTile'
 import {
   EVIDENCE_PAGE_INTRO,
@@ -45,8 +46,10 @@ export function EvidencePage() {
           </h1>
         </header>
 
-        <SpectrumTileGrid as="ul" cols={2} sm2 className="seco-evidence-page__themes seco-reveal seco-reveal--2">
-          {EVIDENCE_THEMES.map((theme, index) => (
+        <MelatoninCascadeStrip />
+
+        <SpectrumTileGrid as="ul" cols={2} sm2 className="seco-evidence-page__themes seco-reveal seco-reveal--3">
+          {EVIDENCE_THEMES.map((theme) => (
             <SpectrumTile
               key={theme.id}
               as="li"
@@ -60,7 +63,7 @@ export function EvidencePage() {
                 </>
               }
               titleTag="h2"
-              titleVariant={index === 0 ? 'display' : 'default'}
+              titleVariant="display"
               className={theme.id === 'apply' ? 'seco-spectrum-tile--compact' : undefined}
               variant={theme.id === 'stakes' ? 'hero' : 'default'}
             />
