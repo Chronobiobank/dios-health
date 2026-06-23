@@ -1,0 +1,13 @@
+# DIOS-Platform Supabase CLI config (repo root migrations → project lkfjiboswnmeoiyymqbu)
+# DeepDose uses deepdose/supabase/ separately (project yavqgklsfmawhrqvuvuf).
+
+project_id = "dios-platform"
+
+[db]
+major_version = 17
+
+[api]
+enabled = true
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
