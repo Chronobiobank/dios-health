@@ -4,6 +4,7 @@ import { ClinicianPortalTileIcon } from '@/components/deepdose/ClinicianPortalTi
 import { LandingHeroIntro } from '@/components/deepdose/LandingHeroIntro'
 import { SpectrumTile, SpectrumTileGrid } from '@/components/deepdose/SpectrumTile'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
+import { MARKETING_CTA_CLASS, MARKETING_TILES_CLASS } from '@/lib/design/marketing-system'
 import { spectrumCue } from '@/lib/design/spectrum-cues'
 
 const CLINICIAN_TILE_ICONS = ['triage', 'tiptraq', 'timing', 'invite'] as const
@@ -38,8 +39,8 @@ export function DeepDosePortalLanding({
         <LandingHeroIntro hero={hero} />
 
         <div className="seco-landing__section-inner seco-reveal seco-reveal--3">
-          <div className="seco-clinics__panel seco-clinics__panel--tiles">
-            <SpectrumTileGrid cols={2} className="seco-clinics__grid--tiles">
+          <div className="seco-marketing-panel--tiles">
+            <SpectrumTileGrid cols={2} className={MARKETING_TILES_CLASS}>
               {steps.map((step, index) => (
                 <SpectrumTile
                   key={step.title}
@@ -60,10 +61,10 @@ export function DeepDosePortalLanding({
             </SpectrumTileGrid>
           </div>
 
-          {note ? <p className="seco-clinics__note">{note}</p> : null}
+          {note ? <p className="seco-marketing-note">{note}</p> : null}
 
-          <div className="seco-clinics__cta">
-            {accessNote ? <p className="seco-clinics__access-note">{accessNote}</p> : null}
+          <div className={MARKETING_CTA_CLASS}>
+            {accessNote ? <p className="seco-marketing-cta__note">{accessNote}</p> : null}
             <Link href={cta.href} className="seco-landing__btn seco-landing__btn--primary">
               {cta.label} →
             </Link>

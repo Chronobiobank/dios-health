@@ -7,6 +7,7 @@ import {
   DEEPDOSE_RESEARCH_INTRO,
   DEEPDOSE_RESEARCH_SCHOLARS,
 } from '@/lib/deepdose-marketing/research-content'
+import { marketingCtaClass, marketingTilesClass } from '@/lib/design/marketing-system'
 import { scholarToneCue, spectrumCue } from '@/lib/design/spectrum-cues'
 
 export function ResearchSections({ showClose = true }: { showClose?: boolean }) {
@@ -16,7 +17,7 @@ export function ResearchSections({ showClose = true }: { showClose?: boolean }) 
     <div className="seco-research seco-research--embedded">
       <p className="seco-chronobiobank__prose">{lede}</p>
 
-      <SpectrumTileGrid cols={2} className="seco-research__costs">
+      <SpectrumTileGrid cols={2} className={marketingTilesClass('seco-research__costs')}>
         <SpectrumTile
           cue="#f2b8a2"
           label="The human cost"
@@ -72,7 +73,7 @@ export function ResearchSections({ showClose = true }: { showClose?: boolean }) 
           Franz Halberg founded chronobiology decades ago. Today&rsquo;s researchers keep proving
           him right.
         </p>
-        <SpectrumTileGrid as="ul" cols={2} className="seco-research-scholars-list">
+        <SpectrumTileGrid as="ul" cols={2} className={marketingTilesClass('seco-research-scholars-list')}>
           {DEEPDOSE_RESEARCH_SCHOLARS.map(({ clinician, cite, href, sourceLabel }, index) => (
             <SpectrumTile
               key={clinician.name}
@@ -107,8 +108,8 @@ export function ResearchSections({ showClose = true }: { showClose?: boolean }) 
       </div>
 
       {showClose ? (
-        <div className="seco-research__close">
-          <p className="seco-research__close-sub">{consent}</p>
+        <div className={marketingCtaClass('seco-research__close')}>
+          <p className="seco-research__close-sub seco-marketing-cta__note">{consent}</p>
           <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
             Start free →
           </Link>

@@ -18,6 +18,7 @@ import {
   SCIENCE_TRUST_WEARABLES,
 } from '@/lib/deepdose-marketing/science-trust-content'
 import { CHRONOBIOBANK_RESEARCH_HREF, TECHNOLOGY_DLMO_PROXY_HREF } from '@/lib/deepdose-marketing/site-nav-links'
+import { marketingCtaClass, marketingTilesClass } from '@/lib/design/marketing-system'
 import { spectrumCue } from '@/lib/design/spectrum-cues'
 
 export function ScienceTrustSections() {
@@ -59,7 +60,7 @@ export function ScienceTrustSections() {
           <div className="seco-science-proxy">
             <p className="seco-science-proxy__title">{SCIENCE_TRUST_MEASUREMENT.proxyDlmo.headline}</p>
             <p className="seco-science-proxy__lede">{SCIENCE_TRUST_MEASUREMENT.proxyDlmo.lede}</p>
-            <SpectrumTileGrid as="ul" cols={2} sm2 className="seco-science-proxy__signals">
+            <SpectrumTileGrid as="ul" cols={2} sm2 className={marketingTilesClass('seco-science-proxy__signals')}>
               {SCIENCE_TRUST_MEASUREMENT.proxyDlmo.signals.map((signal, index) => (
                 <SpectrumTile
                   key={signal.id}
@@ -170,7 +171,7 @@ export function ScienceTrustSections() {
               <li key={point}>{point}</li>
             ))}
           </ul>
-          <div className="seco-science-clinician__actions">
+          <div className={marketingCtaClass('seco-science-clinician__actions')}>
             <Link href={SCIENCE_TRUST_CLINICIAN.methodology.href} className="seco-research-inline-link">
               {SCIENCE_TRUST_CLINICIAN.methodology.label} →
             </Link>

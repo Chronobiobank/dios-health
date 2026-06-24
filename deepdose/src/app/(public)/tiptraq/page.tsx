@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { marketingCtaClass } from '@/lib/design/marketing-system'
 
 export const metadata: Metadata = {
   title: `Using your TipTraQ kit · ${DEEPDOSE_NAME}`,
@@ -130,7 +131,7 @@ export default function TipTraqGuidePage() {
           ))}
         </ol>
 
-        <div className="seco-tiptraq__order seco-reveal seco-reveal--6">
+        <div className={marketingCtaClass('seco-tiptraq__order seco-reveal seco-reveal--6')}>
           <Link href="/pricing" className="seco-landing__btn seco-landing__btn--primary">
             Order your test →
           </Link>

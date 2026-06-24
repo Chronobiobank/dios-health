@@ -17,6 +17,7 @@ import {
   TECHNOLOGY_STACK,
   TECHNOLOGY_VALIDATION,
 } from '@/lib/deepdose-marketing/technology-content'
+import { marketingCtaClass, marketingTilesClass } from '@/lib/design/marketing-system'
 
 const STACK_ICONS = {
   ingest: 'device',
@@ -64,7 +65,7 @@ export function TechnologyHubPage() {
             </h2>
             <p className="seco-technology__support">{TECHNOLOGY_STACK.support}</p>
           </div>
-          <SpectrumTileGrid as="ul" cols={2} sm2 className="seco-technology__grid">
+          <SpectrumTileGrid as="ul" cols={2} sm2 className={marketingTilesClass('seco-technology__grid')}>
             {TECHNOLOGY_STACK.layers.map((layer) => (
               <SpectrumTile
                 key={layer.id}
@@ -92,7 +93,7 @@ export function TechnologyHubPage() {
             </h2>
             <p className="seco-technology__support">{TECHNOLOGY_VALIDATION.support}</p>
           </div>
-          <SpectrumTileGrid as="ol" cols={3} className="seco-technology__grid seco-technology__grid--tiers">
+          <SpectrumTileGrid as="ol" cols={3} className={marketingTilesClass('seco-technology__grid seco-technology__grid--tiers')}>
             {TECHNOLOGY_VALIDATION.tiers.map((tier) => (
               <SpectrumTile
                 key={tier.id}
@@ -125,7 +126,7 @@ export function TechnologyHubPage() {
               {TECHNOLOGY_BOUNDARY.title}
             </h2>
           </div>
-          <SpectrumTileGrid cols={2} className="seco-technology__contrast">
+          <SpectrumTileGrid cols={2} className={marketingTilesClass('seco-technology__contrast')}>
             {TECHNOLOGY_BOUNDARY.contrasts.map((item) => (
               <SpectrumTile
                 key={item.id}
@@ -150,7 +151,7 @@ export function TechnologyHubPage() {
               {TECHNOLOGY_AI.title}
             </h2>
           </div>
-          <SpectrumTileGrid cols={2} className="seco-technology__contrast">
+          <SpectrumTileGrid cols={2} className={marketingTilesClass('seco-technology__contrast')}>
             {TECHNOLOGY_AI.contrasts.map((item) => (
               <SpectrumTile
                 key={item.id}
@@ -178,7 +179,7 @@ export function TechnologyHubPage() {
             </h2>
             <p className="seco-technology__support">{TECHNOLOGY_CMO_FLOW.support}</p>
           </div>
-          <SpectrumTileGrid as="ol" cols={2} sm2 className="seco-technology__grid">
+          <SpectrumTileGrid as="ol" cols={2} sm2 className={marketingTilesClass('seco-technology__grid')}>
             {TECHNOLOGY_CMO_FLOW.steps.map((step, index) => (
               <SpectrumTile
                 key={step.title}
@@ -204,7 +205,7 @@ export function TechnologyHubPage() {
             </h2>
             <p className="seco-technology__support">{TECHNOLOGY_OUTPUTS.support}</p>
           </div>
-          <SpectrumTileGrid as="ul" cols={2} sm2 className="seco-technology__grid">
+          <SpectrumTileGrid as="ul" cols={2} sm2 className={marketingTilesClass('seco-technology__grid')}>
             {TECHNOLOGY_OUTPUTS.metrics.map((metric) => (
               <SpectrumTile
                 key={metric.id}
@@ -274,7 +275,7 @@ export function TechnologyHubPage() {
             body={TECHNOLOGY_CTA.support}
             titleTag="h2"
             foot={
-              <div className="seco-technology__cta-actions">
+              <div className={marketingCtaClass('seco-marketing-cta--row seco-technology__cta-actions')}>
                 <Link href={TECHNOLOGY_CTA.primary.href} className="seco-landing__btn seco-landing__btn--primary">
                   {TECHNOLOGY_CTA.primary.label} →
                 </Link>

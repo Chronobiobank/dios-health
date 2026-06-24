@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { AboutFounderSection } from '@/components/deepdose/AboutFounderSection'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { marketingCtaClass } from '@/lib/design/marketing-system'
 
 export default function AboutPage() {
   return (
@@ -21,7 +22,7 @@ export default function AboutPage() {
 
         <AboutFounderSection />
 
-        <div className="seco-about__actions seco-reveal seco-reveal--3">
+        <div className={marketingCtaClass('seco-about__actions seco-reveal seco-reveal--3')}>
           <Link href="/patient-landing" className="seco-landing__btn seco-landing__btn--primary">
             See how it works →
           </Link>

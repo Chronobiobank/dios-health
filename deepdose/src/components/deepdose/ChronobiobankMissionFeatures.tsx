@@ -14,6 +14,7 @@ import {
   CHRONOBIOBANK_MISSION_TOGETHER,
   CHRONOBIOBANK_MISSION_YOURS,
 } from '@/lib/deepdose-marketing/chronobiobank-content'
+import { marketingTilesClass } from '@/lib/design/marketing-system'
 import { CHRONOBIOBANK_RESEARCH_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 
 type MissionFeatureId = (typeof CHRONOBIOBANK_MISSION_FEATURES)[number]['id']
@@ -62,7 +63,7 @@ function buildMissionFeatures(): MissionFeature[] {
       body: (
         <>
           <p className="seco-chronobiobank__prose">{CHRONOBIOBANK_MISSION_YOURS.intro}</p>
-          <SpectrumTileGrid cols={2} className="seco-chronobiobank__contrast">
+          <SpectrumTileGrid cols={2} className={marketingTilesClass('seco-chronobiobank__contrast')}>
             {CHRONOBIOBANK_MISSION_YOURS.contrasts.map((item) => (
               <SpectrumTile
                 key={item.id}
@@ -88,7 +89,7 @@ function buildMissionFeatures(): MissionFeature[] {
       body: (
         <>
           <p className="seco-chronobiobank__prose">{CHRONOBIOBANK_MISSION_TOGETHER.intro}</p>
-          <SpectrumTileGrid cols={3} className="seco-chronobiobank__plane-stack">
+          <SpectrumTileGrid cols={3} className={marketingTilesClass('seco-chronobiobank__plane-stack')}>
             {CHRONOBIOBANK_MISSION_STEPS.map((step) => (
               <SpectrumTile
                 key={step.id}
@@ -110,7 +111,7 @@ function buildMissionFeatures(): MissionFeature[] {
       body: (
         <>
           <p className="seco-chronobiobank__prose">{CHRONOBIOBANK_MISSION_TIMING.intro}</p>
-          <SpectrumTileGrid cols={3} className="seco-chronobiobank__timing-points">
+          <SpectrumTileGrid cols={3} className={marketingTilesClass('seco-chronobiobank__timing-points')}>
             {CHRONOBIOBANK_MISSION_TIMING.points.map((point) => (
               <SpectrumTile
                 key={point.title}
@@ -141,7 +142,7 @@ function buildMissionFeatures(): MissionFeature[] {
       body: (
         <>
           <p className="seco-chronobiobank__prose">{CHRONOBIOBANK_MISSION_JOIN.intro}</p>
-          <SpectrumTileGrid cols={3} className="seco-chronobiobank__audiences">
+          <SpectrumTileGrid cols={3} className={marketingTilesClass('seco-chronobiobank__audiences')}>
             {CHRONOBIOBANK_MISSION_JOIN.audiences.map((audience) => (
               <SpectrumTile
                 key={audience.id}

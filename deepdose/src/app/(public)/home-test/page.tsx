@@ -8,6 +8,7 @@ import {
   TIPTRAQ_STUDY_PRICING_UK,
   formatTipTraqBaselineFee,
 } from '@/lib/clinical/tiptraq-program'
+import { marketingCtaClass, marketingTilesClass } from '@/lib/design/marketing-system'
 import { spectrumCue } from '@/lib/design/spectrum-cues'
 
 export const metadata: Metadata = {
@@ -152,7 +153,7 @@ export default function HomeTestPage() {
               From GP referral to personalised dosing windows — four clear steps.
             </p>
           </div>
-          <SpectrumTileGrid as="ol" cols={2} sm2 className="seco-hometest__steps">
+          <SpectrumTileGrid as="ol" cols={2} sm2 className={marketingTilesClass('seco-hometest__steps')}>
             {STEPS.map((step, index) => (
               <SpectrumTile
                 key={step.title}
@@ -208,7 +209,7 @@ export default function HomeTestPage() {
             Your clinician adds the nights to {DEEPDOSE_NAME} and you get verified clinical-grade
             timing on your dashboard. See pricing for the baseline kit and quarterly re-reads.
           </p>
-          <div className="seco-hometest__close-actions">
+          <div className={marketingCtaClass('seco-marketing-cta--row seco-hometest__close-actions')}>
             <Link href="/pricing" className="seco-landing__btn seco-landing__btn--primary">
               View pricing →
             </Link>

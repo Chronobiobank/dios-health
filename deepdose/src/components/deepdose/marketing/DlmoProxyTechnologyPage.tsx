@@ -13,6 +13,7 @@ import {
   DLMO_PROXY_SIGNALS,
   DLMO_PROXY_TIERS,
 } from '@/lib/deepdose-marketing/technology-content'
+import { marketingTilesClass } from '@/lib/design/marketing-system'
 import { spectrumCue } from '@/lib/design/spectrum-cues'
 
 export function DlmoProxyTechnologyPage() {
@@ -40,7 +41,7 @@ export function DlmoProxyTechnologyPage() {
               Reference standard vs free-tier proxy
             </h2>
           </div>
-          <SpectrumTileGrid cols={2} className="seco-technology__contrast">
+          <SpectrumTileGrid cols={2} className={marketingTilesClass('seco-technology__contrast')}>
             {DLMO_PROXY_CONTRAST.contrasts.map((item) => (
               <SpectrumTile
                 key={item.id}
@@ -61,7 +62,7 @@ export function DlmoProxyTechnologyPage() {
           <div className="seco-science-proxy">
             <p className="seco-science-proxy__title">{DLMO_PROXY_SIGNALS.headline}</p>
             <p className="seco-science-proxy__lede">{DLMO_PROXY_SIGNALS.lede}</p>
-            <SpectrumTileGrid as="ul" cols={2} sm2 className="seco-science-proxy__signals">
+            <SpectrumTileGrid as="ul" cols={2} sm2 className={marketingTilesClass('seco-science-proxy__signals')}>
               {DLMO_PROXY_SIGNALS.signals.map((signal, index) => (
                 <SpectrumTile
                   key={signal.id}
@@ -88,7 +89,7 @@ export function DlmoProxyTechnologyPage() {
             </h2>
             <p className="seco-technology__support">{DLMO_PROXY_FUSION.support}</p>
           </div>
-          <SpectrumTileGrid as="ol" cols={2} sm2 className="seco-technology__grid">
+          <SpectrumTileGrid as="ol" cols={2} sm2 className={marketingTilesClass('seco-technology__grid')}>
             {DLMO_PROXY_FUSION.steps.map((step, index) => (
               <SpectrumTile
                 key={step.title}
@@ -113,7 +114,7 @@ export function DlmoProxyTechnologyPage() {
             </h2>
             <p className="seco-technology__support">{DLMO_PROXY_CONFIDENCE.support}</p>
           </div>
-          <SpectrumTileGrid as="ul" cols={3} className="seco-technology__grid seco-technology__grid--bands">
+          <SpectrumTileGrid as="ul" cols={3} className={marketingTilesClass('seco-technology__grid seco-technology__grid--bands')}>
             {DLMO_PROXY_CONFIDENCE.bands.map((band, index) => (
               <SpectrumTile
                 key={band.label}
@@ -143,7 +144,7 @@ export function DlmoProxyTechnologyPage() {
             </h2>
             <p className="seco-technology__support">{DLMO_PROXY_TIERS.lede}</p>
           </div>
-          <SpectrumTileGrid as="ol" cols={3} className="seco-technology__grid seco-technology__grid--tiers">
+          <SpectrumTileGrid as="ol" cols={3} className={marketingTilesClass('seco-technology__grid seco-technology__grid--tiers')}>
             {DLMO_PROXY_TIERS.layers.map((layer, index) => (
               <SpectrumTile
                 key={layer.id}
@@ -185,7 +186,7 @@ export function DlmoProxyTechnologyPage() {
               {DLMO_PROXY_REFERENCES.title}
             </h2>
           </div>
-          <SpectrumTileGrid as="ul" cols={2} className="seco-technology__grid">
+          <SpectrumTileGrid as="ul" cols={2} className={marketingTilesClass('seco-technology__grid')}>
             {DLMO_PROXY_REFERENCES.papers.map((paper) => (
               <SpectrumTile
                 key={paper.id}

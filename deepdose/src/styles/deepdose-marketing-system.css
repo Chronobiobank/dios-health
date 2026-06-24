@@ -1,0 +1,225 @@
+/**
+ * DeepDose marketing design system
+ * Canonical reference: /clinician-landing (DeepDosePortalLanding)
+ * Typography, spectrum tiles, hero rhythm, and page CTAs for all public marketing pages.
+ */
+
+/* ── Hero typography (dark marketing pages) ── */
+.deepdose-shell.seco-shell--dark .seco-page__eyebrow {
+  margin: 0 0 clamp(0.625rem, 0.45rem + 0.7vw, 0.875rem);
+  font-family: var(--seco-font-data);
+  font-size: var(--mkt-eyebrow-size);
+  font-weight: 500;
+  letter-spacing: clamp(0.1em, 0.07em + 0.18vw, 0.16em);
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.5);
+}
+
+.deepdose-shell.seco-shell--dark .seco-page__title {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: var(--mkt-hero-title-size);
+  font-weight: 300;
+  line-height: var(--text-display-leading-hero);
+  letter-spacing: var(--seco-display-tracking-hero);
+  color: #fff;
+}
+
+.deepdose-shell.seco-shell--dark .seco-page__title:has(.seco-landing__hero-line) {
+  max-width: 12ch;
+}
+
+.deepdose-shell.seco-shell--dark .seco-page__lede,
+.deepdose-shell.seco-shell--dark .clinical-layout .seco-landing__hero-lede {
+  margin-block: var(--mkt-hero-lede-gap);
+  max-width: 56ch;
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-hero-lede-size);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.deepdose-shell.seco-shell--dark .seco-page .seco-landing__section-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mkt-section-gap);
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+/* Portal landing hero band — symmetric lede when tiles follow */
+.seco-landing__hero-navy:has(+ .seco-landing__section-inner .seco-marketing-panel--tiles),
+.seco-landing__hero-navy:has(+ .seco-landing__section-inner .seco-clinics__panel--tiles) {
+  padding-bottom: 0;
+}
+
+.seco-landing__hero-navy:has(+ .seco-landing__section-inner .seco-marketing-panel--tiles) .seco-landing__hero-lede,
+.seco-landing__hero-navy:has(+ .seco-landing__section-inner .seco-clinics__panel--tiles) .seco-landing__hero-lede {
+  margin-block: var(--mkt-hero-lede-gap);
+}
+
+.seco-landing__hero-navy:has(+ .seco-landing__section-inner .seco-marketing-panel--tiles)
+  + .seco-landing__section-inner
+  .seco-marketing-panel--tiles,
+.seco-landing__hero-navy:has(+ .seco-landing__section-inner .seco-clinics__panel--tiles)
+  + .seco-landing__section-inner
+  .seco-clinics__panel--tiles {
+  margin-top: 0;
+}
+
+/* Section sub copy — matches marketing tile body */
+.deepdose-shell.seco-shell--dark .seco-page :is(.seco-hometest__section-sub, .seco-technology__section-sub, .seco-research__section-sub, .seco-chronobiobank__section-sub) {
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-tile-body-size);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.seco-marketing-panel--tiles,
+.seco-clinics__panel--tiles {
+  margin-top: clamp(0.75rem, 2vw, 1.125rem);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+/* ── Spectrum tile grid (canonical clinician-landing formatting) ── */
+.seco-marketing-tiles,
+.seco-clinics__grid--tiles {
+  margin: 0;
+}
+
+.seco-marketing-tiles .seco-spectrum-tile--rank,
+.seco-clinics__grid--tiles .seco-spectrum-tile--rank {
+  align-items: stretch;
+}
+
+.seco-marketing-tiles .seco-spectrum-tile__content,
+.seco-clinics__grid--tiles .seco-spectrum-tile__content {
+  gap: 0.5rem;
+}
+
+.seco-marketing-tiles .seco-spectrum-tile__rank,
+.seco-clinics__grid--tiles .seco-spectrum-tile__rank {
+  align-self: end;
+}
+
+.seco-marketing-tiles .seco-spectrum-tile__head,
+.seco-clinics__grid--tiles .seco-spectrum-tile__head {
+  margin-bottom: 0;
+}
+
+.seco-marketing-tiles .seco-spectrum-tile__cue,
+.seco-clinics__grid--tiles .seco-spectrum-tile__cue {
+  font-size: var(--mkt-tile-cue-size);
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, var(--cue) 82%, rgb(255 255 255 / 0.68));
+}
+
+.seco-marketing-tiles .seco-spectrum-tile__title,
+.seco-marketing-tiles .seco-spectrum-tile__title--display,
+.seco-clinics__grid--tiles .seco-spectrum-tile__title,
+.seco-clinics__grid--tiles .seco-spectrum-tile__title--display {
+  font-family: var(--seco-font-display);
+  font-size: var(--mkt-tile-title-size);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: rgb(255 255 255 / 0.96);
+  white-space: nowrap;
+}
+
+.seco-marketing-tiles .seco-spectrum-tile__title--formula,
+.seco-clinics__grid--tiles .seco-spectrum-tile__title--formula {
+  white-space: normal;
+  font-family: var(--seco-font-data);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
+
+/* Stat / metric tiles keep display scale */
+.seco-marketing-tiles .seco-spectrum-tile--stat .seco-spectrum-tile__title,
+.seco-clinics__grid--tiles .seco-spectrum-tile--stat .seco-spectrum-tile__title {
+  white-space: normal;
+  font-size: clamp(1.875rem, 4.4vw, 2.75rem);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: var(--seco-display-tracking);
+}
+
+.seco-marketing-tiles .seco-spectrum-tile__body,
+.seco-clinics__grid--tiles .seco-spectrum-tile__body {
+  margin-top: 0;
+  max-width: var(--mkt-tile-body-measure);
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-tile-body-size);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.72);
+  min-height: calc(2 * 1.5 * var(--mkt-tile-body-size));
+}
+
+/* Nested copy inside marketing tiles */
+.seco-marketing-tiles .seco-evidence-theme-links__lede,
+.seco-marketing-tiles .seco-hometest__section-sub {
+  margin: 0 0 0.75rem;
+  max-width: var(--mkt-tile-body-measure);
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-tile-body-size);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.72);
+}
+
+/* ── Page notes ── */
+.seco-marketing-note,
+.seco-clinics__note {
+  margin: 0;
+  max-width: 44ch;
+  font-family: var(--seco-font-ui);
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.45);
+}
+
+/* ── Bottom-of-page CTA (right-aligned primary action) ── */
+.seco-marketing-cta,
+.seco-clinics__cta {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--mkt-cta-gap);
+}
+
+.seco-marketing-cta__note,
+.seco-clinics__access-note {
+  margin: 0;
+  align-self: flex-start;
+  max-width: 42ch;
+  font-family: var(--seco-font-ui);
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.52);
+}
+
+.seco-marketing-cta .seco-landing__btn--primary,
+.seco-clinics__cta .seco-landing__btn--primary {
+  border: none;
+}
+
+/* Multi-button CTA rows — primary stays right */
+.seco-marketing-cta--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.seco-marketing-cta--row .seco-marketing-cta__note,
+.seco-marketing-cta--row .seco-clinics__access-note {
+  flex: 1 1 100%;
+}

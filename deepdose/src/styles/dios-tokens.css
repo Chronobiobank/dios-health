@@ -94,6 +94,18 @@
   --stack-gap-relaxed: 1.5rem;
   --copy-measure: 52ch;
 
+  /* ── Marketing system (clinician-landing reference) ── */
+  --mkt-eyebrow-size: clamp(0.6875rem, 0.62rem + 0.35vw, 0.8125rem);
+  --mkt-hero-title-size: clamp(2.5rem, 7.5vw, 4.75rem);
+  --mkt-hero-lede-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  --mkt-tile-cue-size: clamp(0.75rem, 1.65vw, 0.8125rem);
+  --mkt-tile-title-size: clamp(1.1875rem, 2.75vw, 1.625rem);
+  --mkt-tile-body-size: 1rem;
+  --mkt-tile-body-measure: 28ch;
+  --mkt-hero-lede-gap: clamp(1rem, 2.5vw, 1.25rem);
+  --mkt-section-gap: clamp(2rem, 5vw, 2.75rem);
+  --mkt-cta-gap: 1rem;
+
   /* ── DeepDose semantic aliases (Tailwind @theme) ── */
   --canvas: var(--cream);
   --surface: #ffffff;
