@@ -3141,11 +3141,12 @@
 .seco-clinics__grid--tiles .seco-spectrum-tile__title,
 .seco-clinics__grid--tiles .seco-spectrum-tile__title--display {
   font-family: var(--seco-font-display);
-  font-size: clamp(1.3125rem, 2.8vw, 1.625rem);
+  font-size: clamp(1.0625rem, 2.35vw, 1.375rem);
   font-weight: 400;
   line-height: 1.08;
   letter-spacing: -0.02em;
   color: rgb(255 255 255 / 0.96);
+  white-space: nowrap;
 }
 
 .seco-clinics__grid--tiles .seco-spectrum-tile__body {

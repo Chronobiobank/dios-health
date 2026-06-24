@@ -147,7 +147,7 @@ export const DEEPDOSE_CLINICIAN_LANDING = {
     {
       label: 'Queue',
       cue: '#f2b8a2',
-      title: 'Who needs attention first',
+      title: 'Patients first',
       meta: 'Missing wearable data and shifting sleep patterns rise to the top of your list.',
     },
     {
@@ -159,13 +159,13 @@ export const DEEPDOSE_CLINICIAN_LANDING = {
     {
       label: 'Retime',
       cue: '#c9b6f2',
-      title: 'Timing recommendations',
+      title: 'Suggested times',
       meta: 'Suggested dose times from published trials — you review and approve every change.',
     },
     {
       label: 'Link',
       cue: '#8b9cf8',
-      title: 'Invite & link patients',
+      title: 'Invite patients',
       meta: 'Send an invite code. Patients choose what to share with you.',
     },
   ],
@@ -190,7 +190,7 @@ export const DEEPDOSE_ENTERPRISE_LANDING = {
     {
       label: 'Analytics',
       cue: '#c9b6f2',
-      title: 'Population analytics',
+      title: 'Cohort analytics',
       meta: 'Chronotype, timing shift, and outcome distributions across your licensed panel.',
     },
     {
@@ -202,7 +202,7 @@ export const DEEPDOSE_ENTERPRISE_LANDING = {
     {
       label: 'Privacy',
       cue: '#f2b8a2',
-      title: 'Privacy by design',
+      title: 'Privacy first',
       meta: 'Chronobiobank isolation — pseudonymised tokens only, full access audit trail.',
     },
   ],
