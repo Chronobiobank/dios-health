@@ -568,27 +568,51 @@
   container-type: inline-size;
 }
 
-.seco-splash__search-stack .home-drug-search {
-  align-items: center;
-}
-
-.seco-splash__search-stack .med-search--hero {
-  width: min(100%, 40rem);
-  max-width: 100%;
-  align-self: center;
-}
-
-@media (max-width: 640px) {
-  .seco-splash__search-stack .med-search--hero {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
 .seco-splash__search-stack .seco-splash__tagline {
   align-self: center;
   width: 100%;
   max-width: 100%;
+}
+
+/* Search + footer links share one width (whichever row is wider). */
+.seco-splash__search-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
+  gap: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+.seco-splash__search-band .home-drug-search {
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+}
+
+.seco-splash__search-band .med-search--hero {
+  width: 100%;
+  max-width: none;
+}
+
+.seco-splash__search-band .seco-splash__subnav {
+  margin-top: 0;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+@media (max-width: 520px) {
+  .seco-splash__search-band {
+    width: 100%;
+  }
+
+  .seco-splash__search-band .seco-splash__subnav {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 3vw, 1.5rem);
+  }
 }
 
 .seco-splash__tagline {
@@ -657,11 +681,6 @@
   color: rgb(255 255 255 / 0.42);
   pointer-events: none;
   transform: translateX(calc(-50% - 0.085em));
-}
-
-.seco-splash__search-stack .seco-splash__subnav {
-  margin-top: clamp(0.5rem, 1.5vh, 1rem);
-  gap: clamp(0.75rem, 2vw, 1.25rem) clamp(1.25rem, 4vw, 2rem);
 }
 
 .seco-splash__search-stack .home-drug-search__foot-link {

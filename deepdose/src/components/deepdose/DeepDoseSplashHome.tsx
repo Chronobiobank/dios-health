@@ -26,14 +26,16 @@ export function DeepDoseSplashHome() {
         <div className="seco-splash__core seco-splash__core--search">
           <div className="seco-splash__search-stack">
             <p className="seco-splash__tagline">{DEEPDOSE_HOME_HEADLINE}</p>
-            <HomeDrugSearch />
-            <nav className="seco-splash__subnav home-drug-search__foot-nav" aria-label="Site links">
-              {FOOTER_LINKS.map((link) => (
-                <Link key={link.href} href={link.href} className="home-drug-search__foot-link">
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+            <div className="seco-splash__search-band">
+              <HomeDrugSearch />
+              <nav className="seco-splash__subnav home-drug-search__foot-nav" aria-label="Site links">
+                {FOOTER_LINKS.map((link) => (
+                  <Link key={link.href} href={link.href} className="home-drug-search__foot-link">
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </div>
         </div>
       </div>
