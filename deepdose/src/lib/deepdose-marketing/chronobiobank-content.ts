@@ -9,7 +9,7 @@ import {
 export const CHRONOBIOBANK_META = {
   title: `Mission · ${DEEPDOSE_NAME}`,
   description:
-    'Your sleep and timing stay on your phone. Deepdose helps you dose smarter — and lets research learn from patterns, not from hoarding your private health data.',
+    'Federated chronobiology: phase and sleep on the participant\u2019s device, population timing insight without centralising intimate traces.',
 } as const
 
 export const CHRONOBIOBANK_INTRO = {
@@ -17,9 +17,14 @@ export const CHRONOBIOBANK_INTRO = {
   titleWhite: 'User-owned',
   titleAccent: 'chronobiobank',
   lede:
-    'Half a million sleep histories should not sit in one warehouse. We help you take medicines and build habits at the right time for your body — while keeping your nights and numbers on your phone, under your control.',
+    'National cohorts showed what scale can discover — and what trust costs when biology sits in one vault. Phase and sleep stay on the participant\u2019s device; science learns from patterns, not from hoarding nights.',
   quote:
-    'We\u2019re not building a giant database. We\u2019re building a way to learn what works for real people — without pulling everyone\u2019s private biology into a central vault.',
+    'We are not building a central repository of nights. We are building federated chronobiology: population timing insight without exporting raw sleep architecture.',
+} as const
+
+export const CHRONOBIOBANK_MISSION_CTA = {
+  label: 'Start on your phone',
+  href: '/patient-landing',
 } as const
 
 export const CHRONOBIOBANK_TRUST = {
@@ -54,9 +59,13 @@ export const CHRONOBIOBANK_TRUST = {
 export const CHRONOBIOBANK_PLANE = {
   label: 'How it works',
   cue: '#8b9cf8',
-  title: 'Your phone holds the detail. The cloud only sees patterns.',
-  body:
-    'Sleep, meds, and daily rhythm stay on your device. When you choose to take part, we combine anonymised learnings from many people to improve timing advice — never your raw nights, never a sellable health file with your name on it.',
+  title: 'Phone not cloud',
+  beats: [
+    'Sleep, phase markers, and dose timing are computed on the participant\u2019s device.',
+    'Anonymised updates aggregate — never raw night-by-night exports.',
+    'Consent governs every share; individuals retain delete and revoke.',
+    'Timing, recovery, and inter-individual difference feed better phase-aware advice and open findings for chronobiology research.',
+  ],
 } as const
 
 /** Plain-language steps — used in the “Together” mission tile. */
@@ -87,34 +96,34 @@ export const CHRONOBIOBANK_MISSION_STEPS = [
   },
 ] as const
 
-/** Four mission tiles — plain language, joy to read. */
+/** Four mission tiles — scannable for researchers and clinicians. */
 export const CHRONOBIOBANK_MISSION_FEATURES = [
   {
     id: 'yours',
     badge: 'Privacy',
-    title: 'Your data stays yours',
-    teaser: 'On your phone · you choose what to share',
+    title: 'Data stays local',
+    teaser: 'On-device storage · consent-gated share',
     cue: '#f2b8a2',
   },
   {
     id: 'together',
-    badge: 'Together',
-    title: 'Better advice, safely',
-    teaser: 'Learn from many people · keep private nights private',
+    badge: 'Knowledge',
+    title: 'Federated learning',
+    teaser: 'Aggregate phase patterns · never raw nights',
     cue: '#8b9cf8',
   },
   {
     id: 'timing',
     badge: 'Why it matters',
-    title: 'Timing changes outcomes',
-    teaser: 'Meds, light, meals, and sleep in sync with your body',
+    title: 'Phase variance',
+    teaser: 'Circadian timing shapes drug response and recovery',
     cue: '#acd3de',
   },
   {
     id: 'join',
     badge: 'Take part',
-    title: 'For patients, clinicians, and researchers',
-    teaser: 'Start on your phone · bring your team · study with consent',
+    title: 'Study with us',
+    teaser: 'Participants · clinicians · chronobiology labs',
     cue: '#c9b6f2',
   },
 ] as const

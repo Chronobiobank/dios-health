@@ -2790,17 +2790,8 @@
 }
 
 .seco-footer__glyph {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1em;
-  height: 1em;
-  font-family: var(--font-montserrat), 'Montserrat', sans-serif;
+  display: inline-block;
   font-size: clamp(4.5rem, 11vw, 6.75rem);
-  font-weight: 400;
-  font-style: normal;
-  line-height: 1;
-  color: #fff;
   transform: translateX(-0.085em);
 }
 

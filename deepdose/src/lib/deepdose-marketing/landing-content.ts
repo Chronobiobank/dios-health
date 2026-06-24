@@ -215,4 +215,4 @@ export const DEEPDOSE_ENTERPRISE_LANDING = {
 export const DEEPDOSE_TERMS_DECISION_SUPPORT =
   `Decision support only. ${DEEPDOSE_NAME} suggests the best times for your daily cues. It does not prescribe. Your clinician makes every treatment decision.`
 
-export { DEEPDOSE_SITE_LINKS as DEEPDOSE_NAV_LINKS } from '@/lib/deepdose-marketing/site-nav-links'
+export { DEEPDOSE_SITE_LINKS as DEEPDOSE_NAV_LINKS, DEEPDOSE_FOOTER_LINKS } from '@/lib/deepdose-marketing/site-nav-links'

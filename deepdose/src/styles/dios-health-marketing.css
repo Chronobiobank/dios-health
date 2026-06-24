@@ -12,3 +12,8 @@
 @import "./deepdose-spectrum-tiles.css";
 @import "./deepdose-oura-rhythm.css";
 @import "./deepdose-marketing-system.css";
+
+/* Turbopack dev: entry must include a real rule after @imports (PostCSS runs before import inlining). */
+:root {
+  --deepdose-marketing-stack: 1;
+}

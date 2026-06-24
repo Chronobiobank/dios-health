@@ -1,15 +1,17 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
-import { ChronobiobankTileIcon } from '@/components/deepdose/ChronobiobankTileIcon'
-import { ChronobiobankMissionDeepDive } from '@/components/deepdose/ChronobiobankMissionDeepDive'
 import { ChronobiobankMissionFeatures } from '@/components/deepdose/ChronobiobankMissionFeatures'
+import { ChronobiobankPlaneTile } from '@/components/deepdose/ChronobiobankPlaneTile'
 import { FounderQuoteTile } from '@/components/deepdose/FounderQuoteTile'
-import { SpectrumTile } from '@/components/deepdose/SpectrumTile'
 import {
   CHRONOBIOBANK_INTRO,
   CHRONOBIOBANK_META,
+  CHRONOBIOBANK_MISSION_CTA,
   CHRONOBIOBANK_PLANE,
 } from '@/lib/deepdose-marketing/chronobiobank-content'
+import { marketingCtaClass } from '@/lib/design/marketing-system'
+import { marketingImages } from '@/lib/marketing/images'
 
 export const metadata: Metadata = {
   title: CHRONOBIOBANK_META.title,
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function ChronobiobankPage() {
   return (
-    <article className="seco-page seco-chronobiobank seco-mission">
+    <article className="seco-page seco-chronobiobank seco-mission seco-marketing-page">
       <div className="seco-landing__section-inner">
         <header className="seco-chronobiobank__intro seco-reveal seco-reveal--1">
           <p className="seco-page__eyebrow">{CHRONOBIOBANK_INTRO.eyebrow}</p>
@@ -39,21 +41,22 @@ export default function ChronobiobankPage() {
             className="seco-chronobiobank__founder-quote seco-reveal seco-reveal--2"
           />
 
-          <SpectrumTile
+          <ChronobiobankPlaneTile
             cue={CHRONOBIOBANK_PLANE.cue}
-            variant="hero"
             className="seco-chronobiobank__planes seco-reveal seco-reveal--3"
             label={CHRONOBIOBANK_PLANE.label}
             title={CHRONOBIOBANK_PLANE.title}
-            body={CHRONOBIOBANK_PLANE.body}
-            titleTag="h2"
-            titleVariant="display"
-            icon={<ChronobiobankTileIcon id="device" />}
+            beats={CHRONOBIOBANK_PLANE.beats}
+            image={marketingImages.phoneNight}
           />
 
           <ChronobiobankMissionFeatures className="seco-chronobiobank__folds seco-chronobiobank__feature-grid seco-reveal seco-reveal--4" />
+        </div>
 
-          <ChronobiobankMissionDeepDive />
+        <div className={marketingCtaClass('seco-chronobiobank__cta seco-reveal seco-reveal--5')}>
+          <Link href={CHRONOBIOBANK_MISSION_CTA.href} className="seco-landing__btn seco-landing__btn--primary">
+            {CHRONOBIOBANK_MISSION_CTA.label} →
+          </Link>
         </div>
       </div>
     </article>

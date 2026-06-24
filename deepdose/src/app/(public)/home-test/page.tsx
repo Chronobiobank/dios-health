@@ -2,49 +2,50 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { SpectrumTile, SpectrumTileGrid } from '@/components/deepdose/SpectrumTile'
+import { TechnologyLayerStack } from '@/components/deepdose/TechnologyLayerStack'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
-import {
-  TIPTRAQ_STUDY_PRICING_UK,
-  formatTipTraqBaselineFee,
-} from '@/lib/clinical/tiptraq-program'
-import { marketingCtaClass, marketingTilesClass } from '@/lib/design/marketing-system'
-import { spectrumCue } from '@/lib/design/spectrum-cues'
+import { TIPTRAQ_STUDY_PRICING_UK } from '@/lib/clinical/tiptraq-program'
+import { marketingCtaClass } from '@/lib/design/marketing-system'
 
 export const metadata: Metadata = {
   title: `Home sleep test · ${DEEPDOSE_NAME}`,
   description:
-    `A three-night home sleep test for £149, about half a typical private test. Your clinician adds the results to ${DEEPDOSE_NAME} and your dashboard shows the best times for light, meals, medicines, exercise, and sleep.`,
+    `A three-night TipTraQ home sleep test. Your clinician adds the results to ${DEEPDOSE_NAME} and your dashboard shows personalised timing for light, meals, medicines, movement, and sleep.`,
 }
 
-const STEPS = [
+const HOME_TEST_STEPS = [
   {
+    id: 'order',
+    rank: 1,
     label: 'Order',
-    title: 'Order on your GP’s advice',
-    body: 'If your GP suggests a home sleep test, order a TipTraQ kit. No clinic visit, no waiting list.',
+    cue: '#acd3de',
+    title: 'On your GP\u2019s advice',
+    body: 'When your GP suggests a home sleep test, order a TipTraQ kit — no clinic visit, no waiting list.',
   },
   {
+    id: 'wear',
+    rank: 2,
     label: 'Wear',
+    cue: '#c9b6f2',
     title: 'Three nights at home',
-    body: 'Wear the reusable device for three nights. It captures medical-grade oxygen (SpO₂), breathing events, and sleep staging.',
+    body: 'Wear the reusable finger sensor. It captures SpO\u2082, breathing events, and FDA-cleared sleep staging.',
   },
   {
+    id: 'review',
+    rank: 3,
     label: 'Review',
-    title: 'Your clinician adds the results',
-    body: `Your clinician reviews the nights and adds your profile to ${DEEPDOSE_NAME}, setting your body-clock baseline and chronotype.`,
+    cue: '#f2b8a2',
+    title: 'Clinician uploads results',
+    body: `Your clinician reviews the nights and adds your body-clock baseline to ${DEEPDOSE_NAME}.`,
   },
   {
+    id: 'plan',
+    rank: 4,
     label: 'Plan',
+    cue: '#8b9cf8',
     title: 'See your best times',
-    body: 'Your dashboard shows the best times for light, meals, medicines, exercise, and sleep, personalised to your body clock.',
+    body: 'Your dashboard shows personalised windows for light, meals, medicines, movement, and sleep.',
   },
-] as const
-
-const BENEFITS = [
-  'Personalised timing windows for light, meals, medicines, exercise, and sleep.',
-  'A verified clinical-grade data badge on your record.',
-  'Early warning for metabolic drift, before it shows in routine labs.',
-  'A quarterly check-in, like a blood panel, to keep your plan accurate.',
 ] as const
 
 function CheckIcon() {
@@ -69,45 +70,22 @@ function CheckIcon() {
 }
 
 export default function HomeTestPage() {
-  const baseline = formatTipTraqBaselineFee()
-  const privateAnchor = `£${TIPTRAQ_STUDY_PRICING_UK.ukWatchPat3NightGbp}`
-
   return (
-    <article className="seco-page seco-hometest">
+    <article className="seco-page seco-hometest seco-marketing-page">
       <div className="seco-landing__section-inner">
         <header className="seco-hometest__intro seco-reveal seco-reveal--1">
           <p className="seco-page__eyebrow">TipTraQ home kit</p>
-          <h1 className="seco-page__title">Clinical sleep insight, from your bedside</h1>
-          <p className="seco-page__lede seco-hometest__intro-lede">
-            Three nights at home with a reusable TipTraQ sensor — {baseline} for the baseline read,
-            about half a typical private test (~{privateAnchor}). Your clinician uploads the results;
-            {` ${DEEPDOSE_NAME}`} turns them into precision dosing windows on your dashboard.
+          <h1 className="seco-page__title seco-hometest__title">
+            <span className="seco-landing__hero-line seco-landing__hero-line--white">Monitor</span>
+            <span className="seco-landing__hero-line seco-landing__hero-spectrum">from home</span>
+          </h1>
+          <p className="seco-page__lede seco-hometest__lede">
+            Three nights at home with a reusable TipTraQ sensor. Your clinician adds the read;{' '}
+            {DEEPDOSE_NAME} turns it into precision dosing windows on your dashboard.
           </p>
-          <div className="seco-hometest__hero-actions">
-            <Link href="/pricing" className="seco-landing__btn seco-landing__btn--primary">
-              View pricing →
-            </Link>
-            <Link href="/tiptraq" className="seco-landing__btn seco-landing__btn--secondary">
-              How the kit works
-            </Link>
-          </div>
         </header>
 
-        <figure className="seco-hometest__panorama seco-reveal seco-reveal--2">
-          <Image
-            src="/home-test/three-nights.png"
-            alt="A sleep sensor on a bedside at twilight, with three moon phases over a dawn-to-dusk sky"
-            fill
-            priority
-            sizes="(min-width: 960px) 72rem, 100vw"
-            className="seco-hometest__panorama-img"
-          />
-          <figcaption className="seco-hometest__hero-badge">
-            <span aria-hidden="true">🛡️</span> Verified clinical-grade data
-          </figcaption>
-        </figure>
-
-        <section className="seco-hometest__kit-band seco-reveal seco-reveal--3" aria-labelledby="hometest-kit-title">
+        <section className="seco-hometest__kit-band seco-reveal seco-reveal--2" aria-labelledby="hometest-kit-title">
           <figure className="seco-hometest__kit-figure">
             <Image
               src="/tiptraq/tiptraq-v3-1.png"
@@ -120,11 +98,11 @@ export default function HomeTestPage() {
           <div className="seco-hometest__kit-copy">
             <p className="seco-hometest__kit-eyebrow">The kit</p>
             <h2 id="hometest-kit-title" className="seco-hometest__kit-title">
-              Everything you need for three nights at home
+              Three nights, one reusable sensor
             </h2>
             <p className="seco-hometest__kit-lede">
-              A soft fabric finger sensor, charging case, and companion app — FDA-cleared sleep staging
-              and respiratory analysis, reviewed by your clinician.
+              Soft fabric finger sensor, charging case, and companion app — sleep staging and respiratory
+              analysis your clinician can trust.
             </p>
             <ul className="seco-hometest__checklist">
               {TIPTRAQ_STUDY_PRICING_UK.includes.map((item) => (
@@ -134,90 +112,16 @@ export default function HomeTestPage() {
                 </li>
               ))}
             </ul>
-            <p className="seco-hometest__kit-price">
-              <span className="seco-hometest__kit-price-figure">{baseline}</span>
-              <span className="seco-hometest__kit-price-note">three-night baseline · reusable device</span>
-            </p>
-            <p className="seco-hometest__kit-pricing-link">
-              <Link href="/pricing" className="seco-research-inline-link">
-                Compare plans and quarterly re-reads ↗
-              </Link>
-            </p>
           </div>
         </section>
 
-        <section className="seco-hometest__section seco-reveal seco-reveal--4">
-          <div className="seco-hometest__section-head">
-            <h2 className="seco-hometest__h2">How it works</h2>
-            <p className="seco-hometest__section-sub">
-              From GP referral to personalised dosing windows — four clear steps.
-            </p>
-          </div>
-          <SpectrumTileGrid as="ol" cols={2} sm2 className={marketingTilesClass('seco-hometest__steps')}>
-            {STEPS.map((step, index) => (
-              <SpectrumTile
-                key={step.title}
-                as="li"
-                cue={spectrumCue(index)}
-                label={step.label}
-                title={step.title}
-                body={step.body}
-                rank={index + 1}
-                titleVariant="display"
-              />
-            ))}
-          </SpectrumTileGrid>
-          <p className="seco-hometest__guide-note">
-            <Link href="/tiptraq" className="seco-research-inline-link">
-              See the full setup guide ↗
-            </Link>
-          </p>
-        </section>
+        <TechnologyLayerStack className="seco-hometest__steps seco-reveal seco-reveal--3" layers={HOME_TEST_STEPS} />
 
-        <section className="seco-hometest__section seco-reveal seco-reveal--5" aria-labelledby="hometest-benefits-title">
-          <div className="seco-hometest__section-head">
-            <h2 id="hometest-benefits-title" className="seco-hometest__h2">
-              What you get on {DEEPDOSE_NAME}
-            </h2>
-            <p className="seco-hometest__section-sub">
-              More than a sleep report — a body-clock baseline that powers your daily plan.
-            </p>
-          </div>
-          <SpectrumTile
-            cue="#c9b6f2"
-            label="Outcome"
-            title="Your precision dosing profile"
-            titleTag="h3"
-            variant="hero"
-            body={
-              <ul className="seco-hometest__checklist seco-hometest__checklist--benefits">
-                {BENEFITS.map((item) => (
-                  <li key={item} className="seco-hometest__check-item">
-                    <CheckIcon />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            }
-          />
-        </section>
-
-        <aside className="seco-hometest__close seco-reveal seco-reveal--6">
-          <p className="seco-hometest__close-eyebrow">Ready when your GP agrees</p>
-          <h2 className="seco-hometest__close-title">Get your three-night test</h2>
-          <p className="seco-hometest__close-sub">
-            Your clinician adds the nights to {DEEPDOSE_NAME} and you get verified clinical-grade
-            timing on your dashboard. See pricing for the baseline kit and quarterly re-reads.
-          </p>
-          <div className={marketingCtaClass('seco-marketing-cta--row seco-hometest__close-actions')}>
-            <Link href="/pricing" className="seco-landing__btn seco-landing__btn--primary">
-              View pricing →
-            </Link>
-            <Link href="/tiptraq" className="seco-landing__btn seco-landing__btn--secondary">
-              Setup guide
-            </Link>
-          </div>
-        </aside>
+        <div className={marketingCtaClass('seco-hometest__cta seco-reveal seco-reveal--4')}>
+          <Link href="/tiptraq" className="seco-landing__btn seco-landing__btn--primary">
+            How the kit works →
+          </Link>
+        </div>
       </div>
     </article>
   )

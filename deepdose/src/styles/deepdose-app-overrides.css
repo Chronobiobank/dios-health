@@ -2109,10 +2109,8 @@
 }
 
 /* Technology hub + methodology pages */
-.seco-technology .seco-landing__section-inner {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(2.75rem, 6vw, 4rem);
+.seco-technology.seco-marketing-page .seco-landing__section-inner {
+  gap: clamp(1.25rem, 3vw, 1.75rem);
 }
 
 .seco-technology__intro {
@@ -2150,10 +2148,111 @@
   margin: 0;
 }
 
+.seco-technology__hero-tile .seco-marketing-wide-tile__title {
+  white-space: normal;
+}
+
+.seco-technology__fold-grid {
+  margin: 0;
+}
+
+.seco-technology__layer-stack {
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid var(--dios-glass-outer-border);
+  border-radius: var(--seco-radius-xl);
+  background: var(--dios-glass-outer-bg);
+}
+
+.seco-technology__layer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seco-technology__layer {
+  position: relative;
+  margin: 0;
+  padding: clamp(1rem, 2.5vw, 1.375rem) 0;
+}
+
+.seco-technology__layer + .seco-technology__layer {
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.seco-technology__layer-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: start;
+  column-gap: clamp(0.75rem, 2vw, 1rem);
+  row-gap: 0.125rem;
+  margin-bottom: 0.625rem;
+}
+
+.seco-technology__layer-head .seco-marketing-num {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: center;
+}
+
+.seco-technology__layer-heading {
+  display: contents;
+  min-width: 0;
+}
+
+.seco-technology__layer-label {
+  grid-column: 2;
+  grid-row: 1;
+  display: block;
+  font-family: var(--seco-font-data);
+  font-size: var(--mkt-tile-cue-size);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--cue, #8b9cf8) 82%, rgb(255 255 255 / 0.68));
+}
+
+.seco-technology__layer-title {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: rgb(255 255 255 / 0.96);
+}
+
+.seco-technology__layer-body {
+  margin: 0 0 0 calc(2.25rem + clamp(0.75rem, 2vw, 1rem));
+  max-width: 62ch;
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-tile-body-size);
+  font-weight: 300;
+  line-height: 1.55;
+  color: rgb(255 255 255 / 0.72);
+}
+
+@media (max-width: 479px) {
+  .seco-technology__layer-body {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}
+
+.seco-technology__research {
+  margin: 0;
+}
+
 .seco-technology__section {
   display: flex;
   flex-direction: column;
-  gap: clamp(1.5rem, 3.5vw, 2rem);
+  gap: clamp(0.875rem, 2vw, 1.125rem);
   margin: 0;
 }
 
@@ -2340,22 +2439,8 @@
   color: rgb(172 211 222 / 0.9);
 }
 
-.seco-technology__close {
+.seco-technology__cta {
   margin: 0;
-  padding: 0;
-}
-
-.seco-technology__cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1rem;
-  margin-top: 1rem;
-}
-
-.seco-technology__cta-actions--links {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.625rem;
 }
 
 .seco-technology__rules {
@@ -2771,7 +2856,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--seco-mission-tile-gap);
-  margin-top: clamp(2rem, 5vw, 2.75rem);
+  margin-top: 0;
 }
 
 .seco-chronobiobank__mission-stack > .seco-chronobiobank__founder-quote,
@@ -2788,8 +2873,10 @@
 
 .seco-mission .seco-chronobiobank__mission-stack .seco-spectrum-tiles,
 .seco-mission .seco-chronobiobank__feature-expand .seco-spectrum-tiles,
-.seco-mission .seco-chronobiobank__feature-grid-tiles,
-.seco-mission .seco-chronobiobank__feature-grid.seco-science-folds,
+.seco-marketing-page .seco-chronobiobank__feature-grid-tiles,
+.seco-marketing-page .seco-marketing-fold-grid__tiles,
+.seco-marketing-page .seco-chronobiobank__feature-grid.seco-science-folds,
+.seco-marketing-page .seco-marketing-fold-grid.seco-science-folds,
 .seco-mission .seco-chronobiobank__deep-dive,
 .seco-mission .seco-chronobiobank__mission-stack .seco-science-folds {
   gap: var(--seco-mission-tile-gap);
@@ -2806,16 +2893,24 @@
   overflow-anchor: none;
 }
 
-.seco-chronobiobank__feature-grid-tiles {
+.seco-chronobiobank__feature-grid-tiles,
+.seco-marketing-fold-grid__tiles {
   display: grid;
   grid-template-columns: 1fr;
   min-width: 0;
 }
 
 @media (min-width: 640px) {
-  .seco-chronobiobank__feature-grid-tiles {
+  .seco-chronobiobank__feature-grid-tiles,
+  .seco-marketing-fold-grid__tiles {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+.seco-marketing-fold-grid.seco-science-folds {
+  display: flex;
+  flex-direction: column;
+  overflow-anchor: none;
 }
 
 .seco-science-fold--grid-trigger {
@@ -2929,7 +3024,8 @@
 .seco-founder-quote {
   position: relative;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: stretch;
   min-height: 0;
   margin: 0;
   padding: 0;
@@ -2941,6 +3037,13 @@
   border: 1px solid var(--seco-light-glass-border);
   background: var(--seco-light-glass-bg);
   box-shadow: var(--seco-light-glass-shadow);
+  padding: clamp(1.25rem, 3.5vw, 2rem);
+}
+
+@media (min-width: 720px) {
+  .seco-founder-quote--light {
+    padding: clamp(1.75rem, 4.5vw, 2.75rem);
+  }
 }
 
 .seco-founder-quote__body {
@@ -2957,13 +3060,45 @@
   }
 }
 
+.seco-founder-quote--light .seco-founder-quote__grounding {
+  margin: 0 0 clamp(0.875rem, 2vw, 1.125rem);
+  max-width: 58ch;
+  font-family: var(--seco-font-ui);
+  font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: var(--seco-light-quote-ink-accent);
+}
+
+.seco-founder-quote__pull {
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 clamp(2rem, 4.5vw, 2.75rem);
+}
+
+.seco-founder-quote__pull::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.12em;
+  left: 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(2.75rem, 6.5vw, 3.75rem);
+  font-weight: 300;
+  line-height: 1;
+  color: color-mix(in srgb, var(--seco-light-quote-ink-accent) 38%, transparent);
+  pointer-events: none;
+}
+
 .seco-founder-quote--light .seco-founder-quote__text {
   margin: 0;
+  max-width: 58ch;
   font-family: var(--seco-font-display);
-  font-size: var(--seco-light-quote-size);
+  font-size: clamp(1.25rem, 2.8vw, 1.625rem);
   font-weight: 300;
-  line-height: 1.45;
-  letter-spacing: -0.02em;
+  font-style: italic;
+  line-height: 1.42;
+  letter-spacing: -0.012em;
   color: var(--seco-light-quote-ink);
   text-shadow: 0 1px 0 rgb(255 255 255 / 0.35);
 }
@@ -2979,7 +3114,14 @@
 }
 
 .seco-founder-quote--light .seco-founder-quote__attrib {
-  border-top-color: var(--seco-light-quote-divider);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.125rem;
+  margin: clamp(1rem, 2.5vw, 1.375rem) 0 0;
+  padding: 0;
+  border-top: none;
+  text-align: right;
 }
 
 .seco-founder-quote__attrib {
@@ -2991,20 +3133,12 @@
   border-top: 1px solid rgb(255 255 255 / 0.12);
 }
 
-.seco-founder-quote--light .seco-founder-quote__eyebrow {
-  color: rgb(24 72 118 / 0.72);
-}
-
-.seco-founder-quote__eyebrow {
-  font-family: var(--seco-font-data);
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgb(172 211 222 / 0.72);
-}
-
 .seco-founder-quote--light .seco-founder-quote__name {
+  font-style: normal;
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--seco-light-quote-ink);
 }
 
@@ -3016,6 +3150,8 @@
 }
 
 .seco-founder-quote--light .seco-founder-quote__role {
+  font-size: 0.8125rem;
+  line-height: 1.4;
   color: rgb(11 18 32 / 0.62);
 }
 
@@ -3774,6 +3910,40 @@
 }
 
 /* ── Home sleep test (TipTraQ) page ── */
+.seco-hometest.seco-marketing-page .seco-landing__section-inner {
+  gap: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.seco-hometest__title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.seco-hometest__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 42rem;
+}
+
+.seco-hometest__intro .seco-page__title,
+.seco-hometest__intro .seco-page__lede {
+  margin: 0;
+}
+
+.seco-hometest__lede {
+  max-width: 38rem;
+}
+
+.seco-hometest__steps {
+  margin: 0;
+}
+
+.seco-hometest__cta {
+  margin-top: 0.25rem;
+}
+
 .seco-hometest__section {
   display: flex;
   flex-direction: column;
@@ -3803,42 +3973,10 @@
   color: rgb(255 255 255 / 0.6);
 }
 
-/* Hero: centred intro + full-width panorama + kit spotlight */
-.seco-hometest__intro {
-  max-width: 52rem;
-  margin-inline: auto;
-  text-align: center;
-}
-
-.seco-hometest__intro .seco-page__title,
-.seco-hometest__intro .seco-page__lede {
-  margin-bottom: 0;
-}
-
-.seco-hometest__intro .seco-page__title {
-  margin-bottom: 1rem;
-}
-
-.seco-hometest__intro-lede {
-  margin-inline: auto;
-  max-width: 48ch;
-}
-
-.seco-hometest__hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
-  margin-top: 1.75rem;
-}
-
-.seco-hometest__hero-actions .seco-landing__btn {
-  margin-top: 0;
-}
-
+/* Hero: intro + panorama + kit spotlight */
 .seco-hometest__panorama {
   position: relative;
-  margin: clamp(2rem, 5vw, 3rem) 0 0;
+  margin: 0;
   width: 100%;
   max-width: 100%;
   aspect-ratio: 3 / 2;
@@ -3889,7 +4027,7 @@
   display: grid;
   gap: clamp(1.5rem, 4vw, 2.75rem);
   align-items: center;
-  margin-top: clamp(2.75rem, 6vw, 4rem);
+  margin-top: 0;
   padding: clamp(1.25rem, 3vw, 2rem);
   border: 1px solid var(--dios-glass-outer-border);
   border-radius: var(--seco-radius-xl);
@@ -4351,19 +4489,7 @@
   align-items: center;
 }
 
-.seco-tiptraq__num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  margin: 0;
-  border-radius: 999px;
-  font-family: var(--seco-font-display);
-  font-size: 1.0625rem;
-  font-weight: 500;
-  color: #0b1020;
-  background: var(--seco-spectrum-hero);
+.seco-tiptraq__copy .seco-marketing-num {
   grid-column: 1;
   grid-row: 1;
 }
@@ -5075,16 +5201,17 @@
   color: var(--cue);
 }
 
-/* Dedicated evidence page — compressed theme tiles */
-.seco-evidence-page .seco-landing__section-inner {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(2rem, 5vw, 2.75rem);
+/* Foundation page — marketing rhythm + scannable sections */
+.seco-evidence-page.seco-marketing-page .seco-landing__section-inner {
+  gap: clamp(1.25rem, 3vw, 1.75rem);
   padding-bottom: clamp(2rem, 5vw, 3rem);
 }
 
 .seco-evidence-page__intro {
-  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 42rem;
 }
 
 .seco-evidence-page__title {
@@ -5093,14 +5220,31 @@
   gap: 0.125rem;
 }
 
-.seco-evidence-page__intro .seco-page__title {
-  margin: 0.375rem 0 0;
+.seco-evidence-page__intro .seco-page__title,
+.seco-evidence-page__intro .seco-page__lede {
+  margin: 0;
 }
 
-.seco-evidence-page__themes {
+.seco-evidence-page__lede {
+  max-width: 38rem;
+}
+
+.seco-evidence-page__why-now {
+  margin: 0;
+}
+
+.seco-evidence-page__track {
+  margin: 0;
+}
+
+.seco-evidence-page__research .seco-evidence-theme-links {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.seco-evidence-page__research .seco-marketing-wide-tile__foot {
+  margin-top: 0.25rem;
 }
 
 .seco-evidence-theme-links__lede {

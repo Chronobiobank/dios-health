@@ -1,285 +1,76 @@
-/** Technology — investor, CMO, and clinical diligence content. */
+/** Technology hub — four-layer stack for patients and clinicians. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { BODY_CLOCK_LAYERS, PROXY_DLMO_METHODOLOGY } from '@/lib/circadian/body-clock-measurement'
 import { DLMO_PROXY_VERSION } from '@/lib/circadian/dlmo'
 import {
   CHRONOBIOBANK_SCIENCE_HREF,
-  TECHNOLOGY_DLMO_PROXY_HREF,
 } from '@/lib/deepdose-marketing/site-nav-links'
 
 export const TECHNOLOGY_HUB_META = {
   title: `Technology · ${DEEPDOSE_NAME}`,
   description:
-    'Phase-aware precision dosing: ingest, compute, and govern — decision support for clinicians, not a black-box prescriber.',
+    'Four layers that compound: passive signals, proxy DLMO, TipTraQ validation, and six personalised daily dose cues.',
 } as const
 
 export const TECHNOLOGY_HUB_INTRO = {
-  eyebrow: 'Technology',
-  titleWhite: 'AI precision dosing,',
-  titleAccent: 'clinically bounded.',
+  eyebrow: 'The Stack',
+  titleWhite: 'Layers that',
+  titleAccent: 'compound.',
   lede:
-    `${DEEPDOSE_NAME} turns passive circadian data into structured timing windows — versioned engines, explicit uncertainty, and a validation ladder your CMO can audit.`,
+    'Passive signals, proxy DLMO, TipTraQ validation, daily dose cues — four layers, each sharpening the estimate.',
 } as const
 
-export const TECHNOLOGY_HERO = {
-  label: 'The stack',
-  cue: '#8b9cf8',
-  title: 'Phase anchor → BTI windows → clinician triage',
-  body:
-    'Pull-sync wearables and questionnaires on dashboard load. Fuse a proxy DLMO, shift medication windows, surface drift — upgrade to TipTraQ when clinical grade matters.',
-} as const
-
-export const TECHNOLOGY_STACK = {
-  eyebrow: 'Platform',
-  title: 'Four layers, one decision-support loop',
-  support: 'Modular services — algorithmic math never mixed with UI controllers.',
-  layers: [
-    {
-      id: 'ingest',
-      label: 'Ingest',
-      cue: '#acd3de',
-      title: 'Authorised device pull-sync',
-      body: 'Oura, Whoop, Apple HealthKit, MCTQ, and TipTraQ — triggered on dashboard load, not continuous streaming.',
-    },
-    {
-      id: 'phase',
-      label: 'Phase',
-      cue: '#c9b6f2',
-      title: 'DLMO fusion ladder',
-      body: 'Proxy DLMO from published behavioural markers; three-tier resolution elevates TipTraQ clinical blocks when present.',
-    },
-    {
-      id: 'compute',
-      label: 'Compute',
-      cue: '#f2b8a2',
-      title: 'Isolated BTI engine',
-      body: 'Biological Time Index, CHI, and dosing windows — structured JSON payloads only. Evidence-graded phase offsets, not opaque ML scores.',
-    },
-    {
-      id: 'govern',
-      label: 'Govern',
-      cue: '#8b9cf8',
-      title: 'Chronobiobank isolation',
-      body: 'Model weights and demographic baselines stay server-side. UI receives timing outputs; telemetry is anonymised.',
-    },
-  ],
-} as const
-
-export const TECHNOLOGY_VALIDATION = {
-  eyebrow: 'Validation',
-  title: 'Estimate first. Prove when it counts.',
-  support: 'Every patient starts free; clinical grade is an upgrade path, not a gate.',
-  tiers: [
-    {
-      id: 'l3',
+export const TECHNOLOGY_LAYERS = [
+  {
+    id: 'signals',
       rank: 1,
-      badge: 'L3 · Free',
+      label: 'Layer 1',
       cue: '#acd3de',
-      title: 'Smartphone proxy',
-      body: 'Sleep onset − 2 h fused with MCTQ mid-sleep − 2.5 h. Confidence capped at 0.55.',
-      href: TECHNOLOGY_DLMO_PROXY_HREF,
-      linkLabel: 'Proxy DLMO methodology',
+      title: 'Passive signal capture',
+      body:
+        'Smartphone sensors run continuously in the background — light exposure, screen-on patterns, movement, social rhythm irregularity, and sleep/wake timing from the accelerometer. No active input required. Social jet lag score is computed here: the surface metric that maps to Ersche\u2019s clinical framework.',
     },
     {
-      id: 'l2',
+      id: 'proxy',
       rank: 2,
-      badge: 'L2 · Panel',
+      label: 'Layer 2',
       cue: '#c9b6f2',
-      title: 'Blood-panel phase',
-      body: 'Optional melatonin or metabolite panels when ordered — resolves above proxy when confidence threshold met.',
+      title: 'Proxy DLMO estimation',
+      body:
+        'The algorithm takes the passive signal stream and estimates where dim-light melatonin onset currently sits — without a saliva test or a lab. Actigraphy-derived phase estimates correlate with DLMO at r\u22480.8 in published studies. Our contribution is doing it continuously, on-device, from consumer hardware.',
     },
     {
-      id: 'l1',
+      id: 'tiptraq',
       rank: 3,
-      badge: 'L1 · Clinical',
+      label: 'Layer 3',
       cue: '#f2b8a2',
-      title: 'TipTraQ three nights',
-      body: 'Home sleep staging, SpO₂, and respiratory events replace the proxy. Verified clinical-grade badge on record.',
-      href: '/home-test',
-      linkLabel: 'Home test overview',
-    },
-  ],
-} as const
-
-export const TECHNOLOGY_BOUNDARY = {
-  eyebrow: 'Clinical boundary',
-  title: 'What we are — and what we are not',
-  contrasts: [
-    {
-      id: 'support',
-      label: 'Decision support',
-      cue: '#acd3de',
-      variant: 'hero' as const,
-      title: 'Timing recommendations you approve',
+      title: 'Physiological validation (TipTraQ)',
       body:
-        'Clinicians prescribe; patients accept in-app. BTI surfaces window open, closed, or critical drift — never autonomous dose changes.',
+        'For users who opt into clinical-grade validation. TipTraQ adds skin temperature, heart rate variability, and peripheral vasoconstriction — physiological markers that confirm the proxy estimate is tracking real circadian phase. This is what turns the platform from a wellness app into a research instrument.',
     },
     {
-      id: 'limits',
-      label: 'Not a prescriber',
-      cue: '#6b7280',
-      variant: 'muted' as const,
-      title: 'No diagnosis. No PK modelling.',
+      id: 'doses',
+      rank: 4,
+      label: 'Layer 4',
+      cue: '#8b9cf8',
+      title: 'Personalised dose prompts',
       body:
-        'Not a MedTech accelerator or autonomous prescriber. Windows are phase-adjusted from published chronotherapy offsets — not drug-specific PK/PD simulation.',
+        'The output — six daily dose prompts (light, meals, meds, movement, wind-down, blackout) timed to your phase anchor from the layers below. When drift shifts your clock, every cue moves with it — not fixed alarms. Take-now and wait windows for medicines sit inside the same plan on the patient dashboard.',
     },
-  ],
-} as const
+] as const
 
-export const TECHNOLOGY_AI = {
-  eyebrow: 'AI transparency',
-  title: 'Rules you can read. Learning you can govern.',
-  contrasts: [
-    {
-      id: 'rules',
-      label: 'Rules-first',
-      cue: '#c9b6f2',
-      variant: 'hero' as const,
-      title: 'Versioned, auditable engines',
-      body: `DLMO proxy (${DLMO_PROXY_VERSION}), CHI v1, and BTI payloads ship as documented formulas — inspectable, not a black box.`,
-    },
-    {
-      id: 'federated',
-      label: 'Federated edge',
-      cue: '#8b9cf8',
-      variant: 'default' as const,
-      title: 'Patterns, not patient warehouses',
-      body:
-        'Chronobiobank ingests anonymised telemetry — consent-gated, pseudonymised. Population models improve without centralising raw nights.',
-    },
+export const TECHNOLOGY_RESEARCH = {
+  label: 'Research',
+  cue: '#8b9cf8',
+  title: 'Chronobiology',
+  beats: [
+    'Population phase insight without centralising intimate sleep traces.',
+    'Consent-gated cohorts and pseudonymised outcomes for chronobiology labs and clinical teams.',
+    'A path from on-device proxy DLMO to TipTraQ clinical-grade validation when it matters.',
+    'Governed partnership for cohort access — detailed methodology under research agreement.',
   ],
-} as const
-
-export const TECHNOLOGY_CMO_FLOW = {
-  eyebrow: 'CMO workflow',
-  title: 'Built for triage, not another portal',
-  support: 'Device gaps and drift rise to the top — validated records earn the clinical badge.',
-  steps: [
-    {
-      label: 'Queue',
-      cue: '#f2b8a2',
-      title: 'Drift & device alerts first',
-      body: '36-hour sync rule flags empty tokens and stale telemetry. BTI misalignment prioritises the panel.',
-    },
-    {
-      label: 'Validate',
-      cue: '#acd3de',
-      title: 'TipTraQ when grade matters',
-      body: 'Three-night home kits set a clinical baseline — sleep staging replaces the proxy anchor.',
-    },
-    {
-      label: 'Retime',
-      cue: '#c9b6f2',
-      title: 'Evidence-graded windows',
-      body: 'Medication-specific offsets shifted by phase. Clinician approves; patient sees plain-language take-now cues.',
-    },
-    {
-      label: 'Audit',
-      cue: '#8b9cf8',
-      title: 'Consent & access trail',
-      body: 'Dynamic consent per purpose — care, research, analytics. Withdraw any time; RLS on every patient row.',
-    },
-  ],
-} as const
-
-export const TECHNOLOGY_OUTPUTS = {
-  eyebrow: 'Outputs',
-  title: 'Structured payloads only',
-  support: 'Every dashboard metric maps to a defined schema — suitable for integration and diligence.',
-  metrics: [
-    {
-      id: 'bti',
-      cue: '#f2b8a2',
-      label: 'BTI',
-      title: 'Biological Time Index',
-      body: 'Window open · closed · critical drift — plus clock-relative biological time and dosing window ISO timestamps.',
-    },
-    {
-      id: 'chi',
-      cue: '#acd3de',
-      label: 'CHI',
-      title: 'Circadian Health Index',
-      body: '0–100 composite: phase offset, social jet lag, vitamin D band, and signal quality — capped when data are stale.',
-    },
-    {
-      id: 'bca',
-      cue: '#c9b6f2',
-      label: 'BCA',
-      title: 'Body clock alignment',
-      body: 'Melatonin readiness vs lights-out habit — triage hint for adherence drift, not a diagnosis.',
-    },
-    {
-      id: 'windows',
-      cue: '#8b9cf8',
-      label: 'Windows',
-      title: 'Phase-shifted dosing',
-      body: 'Per-medication windows adjusted by DLMO phase offset — evidence-graded where literature supports timing.',
-    },
-  ],
-} as const
-
-export const TECHNOLOGY_DILIGENCE = {
-  eyebrow: 'Due diligence',
-  title: 'What investors and CMOs ask first',
-  items: [
-    { id: 'versioned', stat: 'Versioned', label: 'Engines ship with explicit version tags in every payload.' },
-    { id: 'isolation', stat: 'Isolated', label: 'BTI math decoupled from UI — Chronobiobank weights never in patient UI.' },
-    { id: 'alert', stat: '36 h', label: 'Device interruption rule auto-flags stale sync for triage queue.' },
-    { id: 'badge', stat: 'Verified', label: 'Premium tier renders clinical-grade badge on validated TipTraQ records.' },
-    { id: 'gdpr', stat: 'GDPR', label: 'UK GDPR and HIPAA-shaped workflows — dynamic consent, minimum necessary.' },
-    { id: 'pilot', stat: 'Pilot', label: 'Endpoints: in-window dosing, drift, triage time, TipTraQ completion.' },
-  ],
-} as const
-
-export const TECHNOLOGY_DEEP_DIVES = {
-  eyebrow: 'Methodology',
-  title: 'Go deeper',
-  topics: [
-    {
-      id: 'dlmo-proxy',
-      href: TECHNOLOGY_DLMO_PROXY_HREF,
-      badge: 'Core',
-      cue: '#acd3de',
-      title: 'Proxy DLMO',
-      teaser: 'Fusion algorithm, confidence caps, and primary references — line by line.',
-      audience: 'CMOs · Clinical leads',
-    },
-    {
-      id: 'science-trust',
-      href: CHRONOBIOBANK_SCIENCE_HREF,
-      badge: 'Full stack',
-      cue: '#c9b6f2',
-      title: 'Science & trust',
-      teaser: 'Wearables, privacy pillars, evidence library, and clinician controls.',
-      audience: 'Investors · DPOs',
-    },
-    {
-      id: 'clinician',
-      href: '/clinician-landing',
-      badge: 'Workflow',
-      cue: '#f2b8a2',
-      title: 'Clinician panel',
-      teaser: 'Triage queue, invite codes, timing recommendations, and TipTraQ validation path.',
-      audience: 'CMOs · Practice leads',
-    },
-    {
-      id: 'chronobiobank',
-      href: '/chronobiobank',
-      badge: 'Data plane',
-      cue: '#8b9cf8',
-      title: 'Chronobiobank',
-      teaser: 'Distributed intelligence, federated learning, and licensed enterprise analytics.',
-      audience: 'Investors · Enterprise',
-    },
-  ],
-} as const
-
-export const TECHNOLOGY_CTA = {
-  headline: 'Review the clinical workflow',
-  support: 'Sign in to the triage panel or read the proxy DLMO methodology before your diligence call.',
-  primary: { label: 'Clinician sign in', href: '/login?next=/clinical/dashboard' },
-  secondary: { label: 'Proxy DLMO methodology', href: TECHNOLOGY_DLMO_PROXY_HREF },
+  cta: { label: 'Science & trust', href: CHRONOBIOBANK_SCIENCE_HREF },
 } as const
 
 /* ── Proxy DLMO sub-page ── */

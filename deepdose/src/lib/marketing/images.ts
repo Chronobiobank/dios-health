@@ -23,4 +23,20 @@ export const marketingImages = {
     src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1800&q=80',
     alt: 'Calm lifestyle moment at sunrise',
   },
+  phoneNight: {
+    src: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=1800&q=85',
+    alt: 'Person checking their phone in bed at night — health data stays on the device',
+  },
+  badSleep: {
+    src: 'https://images.unsplash.com/photo-1515895307159-f601dfc48b92?auto=format&fit=crop&w=1800&q=85',
+    alt: 'Restless night — disrupted sleep and circadian drift',
+  },
+  threeNights: {
+    src: '/home-test/three-nights.png',
+    alt: 'A sleep sensor on a bedside at twilight, with three moon phases over a dawn-to-dusk sky',
+  },
+  circadianMedicine: {
+    src: '/circadian%20medicine.webp',
+    alt: 'Circadian medicine — chronobiology research and phase-aware care',
+  },
 } as const

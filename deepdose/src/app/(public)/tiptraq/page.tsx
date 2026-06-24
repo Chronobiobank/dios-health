@@ -111,7 +111,7 @@ export default function TipTraqGuidePage() {
                 />
               </figure>
               <div className="seco-tiptraq__copy">
-                <span className="seco-tiptraq__num" aria-hidden="true">
+                <span className="seco-marketing-num" aria-hidden="true">
                   {index + 1}
                 </span>
                 <h2 className="seco-tiptraq__step-title">{step.title}</h2>

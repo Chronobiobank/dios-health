@@ -1,11 +1,7 @@
-/** Foundation page — compressed theme tiles for patients, clinicians, and investors. */
+/** Foundation page — one story, three tiles, key research links. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
-import {
-  DEEPDOSE_RESEARCH_CLUSTERS,
-  DEEPDOSE_RESEARCH_INTRO,
-  DEEPDOSE_RESEARCH_SCHOLARS,
-} from '@/lib/deepdose-marketing/research-content'
+import { DEEPDOSE_RESEARCH_INTRO } from '@/lib/deepdose-marketing/research-content'
 
 export const EVIDENCE_PAGE_META = {
   title: `Foundation · ${DEEPDOSE_NAME}`,
@@ -17,163 +13,121 @@ export const EVIDENCE_PAGE_INTRO = {
   eyebrow: 'Foundation',
   titleWhite: 'Timing',
   titleAccent: 'really matters',
+  lede:
+    'Your body runs on a clock. When dose, sleep, and light fall out of step, the same medicine does less — and the harm compounds night after night.',
 } as const
 
-export type MelatoninCascadeStep = {
-  id: string
-  cue: string
-  phase: string
-  title: string
-  body: string
-}
-
-export const EVIDENCE_MELATONIN_CASCADE = {
-  label: 'What we track',
-  title: 'The melatonin cascade',
-  support:
-    'From evening melatonin rise through sleep repair to dose timing — this is the chain Deepdose monitors and helps you align.',
-  steps: [
-    {
-      id: 'dlmo',
-      cue: '#c9b6f2',
-      phase: 'DLMO',
-      title: 'Melatonin rises',
-      body: 'Dim-light onset marks when your night phase begins — the anchor we estimate from sleep and chronotype.',
-    },
-    {
-      id: 'sleep',
-      cue: '#8a76c6',
-      phase: 'Sleep',
-      title: 'Onset & staging',
-      body: 'Sleep onset and deep/REM architecture from your phone, wearable, or TipTraQ nights.',
-    },
-    {
-      id: 'repair',
-      cue: '#acd3de',
-      phase: 'Repair',
-      title: 'Cellular recovery',
-      body: 'Deep sleep switches on brain and body maintenance — when repair peaks if timing is right.',
-    },
-    {
-      id: 'health',
-      cue: '#8b9cf8',
-      phase: 'Health',
-      title: 'Long-run outcomes',
-      body: 'Steady light–dark rhythm protects metabolism and healthy years; drift compounds harm.',
-    },
-    {
-      id: 'meds',
-      cue: '#f2b8a2',
-      phase: 'Meds',
-      title: 'Dose timing',
-      body: 'The same medicine lands better in the right window — precision dosing is what we optimise.',
-    },
-  ] as const satisfies readonly MelatoninCascadeStep[],
+export const EVIDENCE_WHY_NOW = {
+  label: 'Why now',
+  cue: '#8b9cf8',
+  title: 'Wrong hour, wrong dose',
+  beats: [
+    'The same medicine at the wrong point in your clock does less — and harms more when the pattern repeats.',
+    'Brighter nights and broken light–dark rhythms predict higher mortality in large cohorts.',
+    'Mis-timed medicines drive avoidable harm — England\u2019s medicines optimisation agenda names it plainly.',
+    'So we track the chain from evening melatonin rise through sleep repair to dose timing.',
+  ],
 } as const
 
-export type EvidenceThemeLink = {
+export const EVIDENCE_TRACK_LAYERS = [
+  {
+    id: 'dlmo',
+    rank: 1,
+    label: 'DLMO',
+    cue: '#c9b6f2',
+    title: 'Melatonin rises',
+    body: 'Dim-light onset marks when your night phase begins — the anchor we estimate from sleep and chronotype.',
+  },
+  {
+    id: 'sleep',
+    rank: 2,
+    label: 'Sleep',
+    cue: '#8a76c6',
+    title: 'Onset & staging',
+    body: 'Sleep onset and deep/REM architecture from your phone, wearable, or TipTraQ nights.',
+  },
+  {
+    id: 'repair',
+    rank: 3,
+    label: 'Repair',
+    cue: '#acd3de',
+    title: 'Cellular recovery',
+    body: 'Deep sleep switches on brain and body maintenance — when repair peaks if timing is right.',
+  },
+  {
+    id: 'health',
+    rank: 4,
+    label: 'Health',
+    cue: '#8b9cf8',
+    title: 'Long-run outcomes',
+    body: 'Steady light–dark rhythm protects metabolism and healthy years; drift compounds harm.',
+  },
+  {
+    id: 'meds',
+    rank: 5,
+    label: 'Meds',
+    cue: '#f2b8a2',
+    title: 'Dose timing',
+    body: 'The same medicine lands better in the right window — precision dosing is what we optimise.',
+  },
+] as const
+
+/** Curated sources that support the Deepdose timing approach. */
+export type EvidenceResearchLink = {
   href: string
   label: string
   meta: string
-  external?: boolean
 }
 
-export type EvidenceTheme = {
-  id: string
-  cue: string
-  label: string
-  title: string
-  body: string
-  links: readonly EvidenceThemeLink[]
-}
-
-const CLUSTER_CUES: Record<string, string> = {
-  foundational: '#c9b6f2',
-  'drug-specific': '#f2b8a2',
-  population: '#acd3de',
-}
-
-const CLUSTER_LABELS: Record<string, string> = {
-  foundational: 'Science',
-  'drug-specific': 'Trials',
-  population: 'Population',
-}
-
-const CLUSTER_TITLES: Record<string, string> = {
-  foundational: 'Body-clock foundations',
-  'drug-specific': 'Same drug, different hour',
-  population: 'Clocks at scale',
-}
-
-export const EVIDENCE_STAKES_THEME: EvidenceTheme = {
-  id: 'stakes',
-  cue: '#8b9cf8',
-  label: 'Why now',
-  title: 'Wrong hour, wrong dose',
-  body: 'Mis-timed medicines and disrupted light–dark cycles compound into harm — night after night.',
-  links: [
-    {
-      href: DEEPDOSE_RESEARCH_INTRO.human.href,
-      label: 'Brighter nights predict higher mortality',
-      meta: 'UK Biobank · PNAS 2024',
-      external: true,
-    },
-    {
-      href: DEEPDOSE_RESEARCH_INTRO.cost.href,
-      label: 'NHS medicines optimisation',
-      meta: 'England · Avoidable harm',
-      external: true,
-    },
-  ],
-} as const
-
-export const EVIDENCE_CLUSTER_THEMES: EvidenceTheme[] = DEEPDOSE_RESEARCH_CLUSTERS.map(
-  (cluster) => ({
-    id: cluster.id,
-    cue: CLUSTER_CUES[cluster.id] ?? '#8b9cf8',
-    label: CLUSTER_LABELS[cluster.id] ?? cluster.tier,
-    title: CLUSTER_TITLES[cluster.id] ?? cluster.tier,
-    body: cluster.summary,
-    links: cluster.papers.map((paper) => ({
-      href: paper.href,
-      label: paper.title,
-      meta: `${paper.authors} · ${paper.year}`,
-      external: true,
-    })),
-  })
-)
-
-export const EVIDENCE_SCHOLARS_THEME: EvidenceTheme = {
-  id: 'scholars',
-  cue: '#f2b8a2',
-  label: 'Lineage',
-  title: 'Who proved timing matters',
-  body: 'From Halberg’s chronobiology to population-scale chronotype — the science behind personalised timing.',
-  links: DEEPDOSE_RESEARCH_SCHOLARS.map(({ clinician, href, sourceLabel }) => ({
-    href,
-    label: clinician.name,
-    meta: sourceLabel,
-    external: true,
-  })),
-} as const
-
-export const EVIDENCE_APPLY_THEME: EvidenceTheme = {
-  id: 'apply',
+export const EVIDENCE_RESEARCH = {
+  label: 'Research',
   cue: '#acd3de',
-  label: 'Deepdose',
-  title: 'How we use this science',
-  body: 'Published timing research powers your personal dosing windows — explore the platform or talk to your clinician.',
+  title: 'Science behind timing',
+  body: 'Peer-reviewed chronobiology and chronotherapy — the evidence Deepdose is built on.',
   links: [
-    { href: '/technology', label: 'Technology overview', meta: 'How timing is computed' },
-    { href: '/technology/dlmo-proxy', label: 'Body-clock estimation', meta: 'Proxy DLMO · Free tier' },
-    { href: '/patient-landing', label: 'Patient dashboard', meta: 'Your daily dose cues' },
-    { href: '/clinician-landing', label: 'Clinician panel', meta: 'Triage · Home validation' },
-  ],
+    {
+      href: 'https://doi.org/10.1073/pnas.2405924121',
+      label: 'Brighter nights predict higher mortality',
+      meta: 'Windred et al. · PNAS 2024',
+    },
+    {
+      href: 'https://doi.org/10.1093/eurheartj/ehaa152',
+      label: 'Bedtime hypertension treatment',
+      meta: 'Hermida et al. · European Heart Journal 2020',
+    },
+    {
+      href: 'https://doi.org/10.1016/j.eclinm.2024.102633',
+      label: 'Timed antihypertensives by chronotype',
+      meta: 'Pigazzani et al. · eClinicalMedicine 2024',
+    },
+    {
+      href: 'https://doi.org/10.1016/j.sleep.2007.05.001',
+      label: 'Epidemiology of the human circadian clock',
+      meta: 'Roenneberg et al. · Sleep Medicine Reviews 2007',
+    },
+    {
+      href: 'https://doi.org/10.1016/j.molmed.2016.03.004',
+      label: 'Dosing-time makes the poison',
+      meta: 'Dallmann et al. · Trends in Molecular Medicine 2016',
+    },
+    {
+      href: 'https://doi.org/10.1146/annurev.ph.31.030169.003331',
+      label: 'Chronobiology — the science that started it all',
+      meta: 'Halberg · Annual Review of Physiology 1969',
+    },
+  ] as const satisfies readonly EvidenceResearchLink[],
 } as const
 
-export const EVIDENCE_THEMES: EvidenceTheme[] = [
-  EVIDENCE_STAKES_THEME,
-  ...EVIDENCE_CLUSTER_THEMES,
-  EVIDENCE_SCHOLARS_THEME,
-  EVIDENCE_APPLY_THEME,
-]
+export const EVIDENCE_PAGE_CTA = {
+  label: 'Start free',
+  href: '/login',
+  note: DEEPDOSE_RESEARCH_INTRO.consent,
+} as const
+
+/** @deprecated Used only by MelatoninCascadeStrip — prefer EVIDENCE_TRACK_LAYERS */
+export const EVIDENCE_CASCADE = {
+  label: 'What we track',
+  title: 'The melatonin cascade',
+  support: '',
+  layers: EVIDENCE_TRACK_LAYERS,
+} as const

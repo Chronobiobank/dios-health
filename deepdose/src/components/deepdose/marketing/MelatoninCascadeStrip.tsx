@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 
-import { EVIDENCE_MELATONIN_CASCADE } from '@/lib/deepdose-marketing/evidence-content'
+import { EVIDENCE_CASCADE } from '@/lib/deepdose-marketing/evidence-content'
 
 function CascadeIcon({ id }: { id: string }) {
   const common = {
@@ -52,7 +52,14 @@ function CascadeIcon({ id }: { id: string }) {
 }
 
 export function MelatoninCascadeStrip() {
-  const { label, title, support, steps } = EVIDENCE_MELATONIN_CASCADE
+  const { label, title, support, layers } = EVIDENCE_CASCADE
+  const steps = layers.map((layer) => ({
+    id: layer.id,
+    cue: layer.cue,
+    phase: layer.label,
+    title: layer.title,
+    body: layer.body,
+  }))
 
   return (
     <section className="seco-melatonin-cascade seco-reveal seco-reveal--2" aria-labelledby="melatonin-cascade-title">

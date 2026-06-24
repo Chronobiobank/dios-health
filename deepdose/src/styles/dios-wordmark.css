@@ -12,3 +12,81 @@
 .deepdose-wordmark--compact {
   font-size: 0.875rem;
 }
+
+/* Animated ʘ glyph — ring + dot glides inside on a smooth spirograph path */
+.seco-logo-glyph {
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  color: rgb(255 255 255 / 0.5);
+  vertical-align: middle;
+}
+
+.seco-logo-glyph__ring {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: 0.09em solid currentColor;
+  border-radius: 50%;
+}
+
+.seco-logo-glyph__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.17em;
+  height: 0.17em;
+  margin: -0.085em 0 0 -0.085em;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translate(0.1em, 0);
+}
+
+.seco-logo-glyph__arm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+}
+
+.seco-logo-glyph__arm--a {
+  animation: seco-logo-glyph-spin-a 11.3s linear infinite;
+}
+
+.seco-logo-glyph__arm-mount {
+  transform: translate(0.11em, 0);
+}
+
+.seco-logo-glyph__arm--b {
+  animation: seco-logo-glyph-spin-b 16.7s linear infinite;
+}
+
+@keyframes seco-logo-glyph-spin-a {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes seco-logo-glyph-spin-b {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seco-logo-glyph__arm--a,
+  .seco-logo-glyph__arm--b {
+    animation: none;
+  }
+
+  .seco-logo-glyph__arm-mount {
+    transform: none;
+  }
+
+  .seco-logo-glyph__dot {
+    transform: translate(0, 0);
+  }
+}
