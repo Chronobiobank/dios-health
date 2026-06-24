@@ -368,7 +368,7 @@
   text-align: center;
 }
 
-/* Hero search — home page entry point; width set by splash search-stack (50% of headline) */
+/* Hero search — home page entry point; width set by splash search-stack */
 .med-search--hero {
   width: 100%;
   max-width: none;
@@ -573,13 +573,14 @@
 }
 
 .seco-splash__search-stack .med-search--hero {
-  width: 50%;
-  max-width: 50%;
+  width: min(100%, 40rem);
+  max-width: 100%;
+  align-self: center;
 }
 
 @media (max-width: 640px) {
   .seco-splash__search-stack .med-search--hero {
-    width: min(100%, 22rem);
+    width: 100%;
     max-width: 100%;
   }
 }
