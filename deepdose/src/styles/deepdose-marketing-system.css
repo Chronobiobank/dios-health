@@ -227,7 +227,7 @@
   flex: 1 1 100%;
 }
 
-/* ── Marketing page rhythm (/chronobiobank, /technology, /foundation, /home-test) ── */
+/* ── Marketing page rhythm (/chronobiobank, /technology, /foundation, /home-test, /tiptraq, /pricing) ── */
 .seco-marketing-page {
   --seco-mission-tile-gap: clamp(1.25rem, 3vw, 1.75rem);
 }
@@ -663,5 +663,195 @@
   .seco-chronobiobank__plane-visual {
     min-height: 0;
     aspect-ratio: 21 / 9;
+  }
+}
+
+/* Photo step tiles — full-bleed cover image, compact copy scrim (/tiptraq) */
+.seco-marketing-step-tile {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: clamp(17rem, 44cqi, 24rem);
+  margin: 0;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--cue, #8b9cf8) 42%, rgb(255 255 255 / 0.12));
+  border-radius: var(--seco-radius-xl);
+  overflow: hidden;
+  box-shadow:
+    0 28px 56px rgb(0 0 0 / 0.45),
+    0 0 0 1px color-mix(in srgb, var(--cue, #8b9cf8) 14%, transparent);
+}
+
+.seco-marketing-step-tile__img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  object-fit: cover;
+  object-position: var(--step-img-pos, 68% center);
+}
+
+.seco-marketing-step-tile__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Left copy — default side scrim */
+.seco-marketing-step-tile:not(.seco-marketing-step-tile--copy-right) .seco-marketing-step-tile__scrim {
+  background:
+    linear-gradient(
+      105deg,
+      rgb(6 10 18 / 0.94) 0%,
+      rgb(6 10 18 / 0.82) 34%,
+      rgb(6 10 18 / 0.28) 48%,
+      transparent 58%
+    ),
+    linear-gradient(0deg, rgb(6 10 18 / 0.55) 0%, transparent 42%),
+    radial-gradient(90% 85% at 0% 100%, color-mix(in srgb, var(--cue, #8b9cf8) 22%, transparent), transparent 62%);
+}
+
+.seco-marketing-step-tile--copy-right .seco-marketing-step-tile__scrim {
+  background:
+    linear-gradient(
+      255deg,
+      rgb(6 10 18 / 0.94) 0%,
+      rgb(6 10 18 / 0.82) 34%,
+      rgb(6 10 18 / 0.28) 48%,
+      transparent 58%
+    ),
+    linear-gradient(0deg, rgb(6 10 18 / 0.55) 0%, transparent 42%),
+    radial-gradient(90% 85% at 100% 100%, color-mix(in srgb, var(--cue, #8b9cf8) 22%, transparent), transparent 62%);
+}
+
+/* Top-anchored copy — scrim weighted to upper-left */
+.seco-marketing-step-tile--copy-top:not(.seco-marketing-step-tile--copy-right) .seco-marketing-step-tile__scrim {
+  background:
+    linear-gradient(
+      155deg,
+      rgb(6 10 18 / 0.96) 0%,
+      rgb(6 10 18 / 0.84) 28%,
+      rgb(6 10 18 / 0.32) 44%,
+      transparent 54%
+    ),
+    radial-gradient(80% 70% at 8% 12%, color-mix(in srgb, var(--cue, #8b9cf8) 24%, transparent), transparent 58%);
+}
+
+/* Bottom-anchored copy — scrim weighted to lower-left */
+.seco-marketing-step-tile--copy-bottom:not(.seco-marketing-step-tile--copy-right) .seco-marketing-step-tile__scrim {
+  background:
+    linear-gradient(
+      25deg,
+      transparent 46%,
+      rgb(6 10 18 / 0.3) 52%,
+      rgb(6 10 18 / 0.86) 68%,
+      rgb(6 10 18 / 0.96) 100%
+    ),
+    linear-gradient(0deg, rgb(6 10 18 / 0.94) 0%, rgb(6 10 18 / 0.72) 38%, transparent 62%),
+    radial-gradient(85% 75% at 6% 92%, color-mix(in srgb, var(--cue, #8b9cf8) 24%, transparent), transparent 58%);
+}
+
+.seco-marketing-step-tile__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: clamp(0.5rem, 1.6cqi, 0.75rem);
+  width: min(38%, 17.5rem);
+  padding: clamp(1.125rem, 4.5cqi, 2rem);
+}
+
+.seco-marketing-step-tile--copy-center .seco-marketing-step-tile__content {
+  justify-content: center;
+}
+
+.seco-marketing-step-tile--copy-top .seco-marketing-step-tile__content {
+  justify-content: flex-start;
+  padding-top: clamp(1.25rem, 5cqi, 2.25rem);
+}
+
+.seco-marketing-step-tile--copy-bottom .seco-marketing-step-tile__content {
+  justify-content: flex-end;
+  padding-bottom: clamp(1.25rem, 5cqi, 2.25rem);
+}
+
+.seco-marketing-step-tile--copy-right .seco-marketing-step-tile__content {
+  margin-left: auto;
+  text-align: left;
+}
+
+.seco-marketing-step-tile__title {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.25rem, 4.25cqi, 1.75rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.seco-marketing-step-tile__body {
+  margin: 0;
+  max-width: 26ch;
+  font-family: var(--seco-font-ui);
+  font-size: clamp(0.9375rem, 2cqi, 1.0625rem);
+  font-weight: 300;
+  line-height: 1.42;
+  color: rgb(255 255 255 / 0.82);
+}
+
+@media (min-width: 768px) {
+  .seco-marketing-step-tile {
+    min-height: 0;
+    aspect-ratio: 5 / 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .seco-marketing-step-tile__content,
+  .seco-marketing-step-tile--copy-right .seco-marketing-step-tile__content {
+    width: min(72%, 17rem);
+    margin-left: 0;
+    padding: clamp(1rem, 4vw, 1.375rem);
+  }
+
+  .seco-marketing-step-tile--copy-right .seco-marketing-step-tile__content {
+    margin-left: auto;
+  }
+
+  .seco-marketing-step-tile--copy-top:not(.seco-marketing-step-tile--copy-right) .seco-marketing-step-tile__scrim {
+    background:
+      linear-gradient(
+        180deg,
+        rgb(6 10 18 / 0.94) 0%,
+        rgb(6 10 18 / 0.78) 36%,
+        rgb(6 10 18 / 0.2) 50%,
+        transparent 60%
+      );
+  }
+
+  .seco-marketing-step-tile--copy-bottom:not(.seco-marketing-step-tile--copy-right) .seco-marketing-step-tile__scrim,
+  .seco-marketing-step-tile--copy-center:not(.seco-marketing-step-tile--copy-right) .seco-marketing-step-tile__scrim {
+    background:
+      linear-gradient(
+        180deg,
+        transparent 40%,
+        rgb(6 10 18 / 0.24) 50%,
+        rgb(6 10 18 / 0.88) 72%,
+        rgb(6 10 18 / 0.94) 100%
+      );
+  }
+
+  .seco-marketing-step-tile--copy-right .seco-marketing-step-tile__scrim {
+    background:
+      linear-gradient(
+        180deg,
+        rgb(6 10 18 / 0.92) 0%,
+        rgb(6 10 18 / 0.78) 38%,
+        rgb(6 10 18 / 0.22) 52%,
+        transparent 62%
+      ),
+      linear-gradient(0deg, rgb(6 10 18 / 0.45) 0%, transparent 36%);
   }
 }

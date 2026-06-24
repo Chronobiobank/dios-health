@@ -4,21 +4,12 @@ import { useState, type CSSProperties } from 'react'
 import Link from 'next/link'
 
 import { SpectrumTileGrid } from '@/components/deepdose/SpectrumTile'
+import type { PricingTier } from '@/lib/deepdose-marketing/pricing-content'
+import { marketingTilesClass } from '@/lib/design/marketing-system'
 import { spectrumCue } from '@/lib/design/spectrum-cues'
 import { cn } from '@/lib/utils/cn'
 
-export type PricingTier = {
-  id: string
-  name: string
-  figure: string
-  cadence: string
-  note: string
-  cue?: string
-  flag?: string
-  feature?: boolean
-  cta: { label: string; href: string }
-  includes: readonly string[]
-}
+export type { PricingTier }
 
 function CheckIcon() {
   return (
@@ -42,7 +33,13 @@ export function PricingTiers({ tiers }: { tiers: readonly PricingTier[] }) {
 
   return (
     <>
-      <SpectrumTileGrid cols={3} className="seco-pricing__grid" as="div" role="radiogroup" aria-label="Choose a plan">
+      <SpectrumTileGrid
+        cols={3}
+        className={marketingTilesClass('seco-pricing__grid')}
+        as="div"
+        role="radiogroup"
+        aria-label="Choose a plan"
+      >
         {tiers.map((tier, index) => {
           const selected = tier.id === active.id
           const cue = tier.cue ?? spectrumCue(index)

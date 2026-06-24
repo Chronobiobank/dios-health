@@ -4421,131 +4421,17 @@
   max-width: 60ch;
 }
 
-.seco-tiptraq__steps {
+.seco-tiptraq__tiles {
   display: flex;
   flex-direction: column;
-  gap: clamp(2rem, 5vw, 3.5rem);
-  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  gap: var(--seco-mission-tile-gap, clamp(1.25rem, 3vw, 1.75rem));
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.seco-tiptraq__step {
-  display: grid;
-  gap: clamp(1.25rem, 3vw, 2.5rem);
-  align-items: stretch;
-}
-
-@media (min-width: 768px) {
-  .seco-tiptraq__step {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  }
-
-  .seco-tiptraq__step:nth-child(even) .seco-tiptraq__media {
-    order: 2;
-  }
-}
-
-.seco-tiptraq__media {
-  position: relative;
+.seco-tiptraq__tile {
   margin: 0;
-  aspect-ratio: 3 / 2;
-  border-radius: var(--seco-radius-lg);
-  overflow: hidden;
-  border: 1px solid var(--seco-navy-border);
-  background:
-    radial-gradient(90% 80% at 28% 18%, rgba(124, 196, 214, 0.2) 0%, rgba(124, 196, 214, 0) 60%),
-    linear-gradient(155deg, #20355c 0%, #1a2c4c 45%, #14233d 100%);
-}
-
-@media (min-width: 768px) {
-  .seco-tiptraq__media {
-    aspect-ratio: auto;
-    height: 100%;
-    min-height: 100%;
-    align-self: stretch;
-  }
-}
-
-.seco-tiptraq__img {
-  object-fit: contain;
-  padding: clamp(1.25rem, 4vw, 2.5rem);
-  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.5));
-}
-
-/* Scaled-up cut-out anchored into the bottom-left corner, cropped by the tile curve. */
-.seco-tiptraq__img--corner {
-  object-fit: cover;
-  object-position: left bottom;
-  padding: 0;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
-}
-
-.seco-tiptraq__copy {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 0.875rem;
-  row-gap: 0.75rem;
-  align-items: center;
-}
-
-.seco-tiptraq__copy .seco-marketing-num {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.seco-tiptraq__step-title {
-  margin: 0;
-  font-family: var(--seco-font-display);
-  font-size: clamp(1.375rem, 3vw, 1.875rem);
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  line-height: var(--text-display-leading);
-  color: #fff;
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.seco-tiptraq__step-body {
-  margin: 0;
-  font-size: clamp(1rem, 1.8vw, 1.0625rem);
-  line-height: 1.6;
-  color: rgb(255 255 255 / 0.66);
-  grid-column: 1 / -1;
-  grid-row: 2;
-}
-
-.seco-tiptraq__tips {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-  grid-column: 1 / -1;
-  grid-row: 3;
-}
-
-.seco-tiptraq__tip {
-  display: flex;
-  gap: 0.625rem;
-  align-items: flex-start;
-  font-size: 0.9375rem;
-  line-height: 1.45;
-  color: rgb(255 255 255 / 0.78);
-}
-
-.seco-tiptraq__check {
-  flex: none;
-  margin-top: 0.125rem;
-  color: var(--seco-spectrum-cyan);
-}
-
-.seco-tiptraq__order {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: clamp(2.5rem, 6vw, 4rem);
 }
 
 .seco-hometest__order .seco-landing__btn {
@@ -4553,118 +4439,16 @@
 }
 
 /* ── Pricing page ── */
-.seco-pricing__intro-copy .seco-page__title,
-.seco-pricing__intro-copy .seco-page__lede {
-  margin-bottom: 0;
+.seco-pricing__intro {
+  max-width: 60ch;
 }
 
-.seco-pricing__intro-copy .seco-page__title {
-  margin-bottom: 0.75rem;
-}
-
-@media (min-width: 860px) {
-  .seco-pricing__intro {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 21rem);
-    align-items: center;
-    gap: clamp(1.75rem, 4vw, 3rem);
-  }
-}
-
-/* Cost comparison visual */
-.seco-pricing__compare {
-  margin-top: 1.5rem;
-  padding: clamp(1.25rem, 3vw, 1.5rem);
-  border: 1px solid var(--dios-glass-outer-border);
-  border-radius: var(--seco-radius-lg);
-  background:
-    radial-gradient(130% 130% at 100% 0%, rgb(172 211 222 / 0.14), transparent 60%),
-    var(--dios-glass-outer-bg);
-  backdrop-filter: var(--dios-glass-outer-blur);
-  -webkit-backdrop-filter: var(--dios-glass-outer-blur);
-  box-shadow: var(--dios-glass-outer-shadow);
-}
-
-@media (min-width: 860px) {
-  .seco-pricing__compare {
-    margin-top: 0;
-  }
-}
-
-.seco-pricing__compare-label {
-  margin: 0;
-  font-family: var(--seco-font-data);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgb(255 255 255 / 0.45);
-}
-
-.seco-pricing__compare-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
-  margin-top: 1rem;
-}
-
-.seco-pricing__compare-row {
-  display: grid;
-  grid-template-columns: 4.75rem minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.seco-pricing__compare-name {
-  font-family: var(--seco-font-data);
-  font-size: 0.6875rem;
-  letter-spacing: 0.02em;
-  color: rgb(255 255 255 / 0.6);
-}
-
-.seco-pricing__compare-track {
-  height: 0.5rem;
-  border-radius: 999px;
-  background: rgb(255 255 255 / 0.08);
-  overflow: hidden;
-}
-
-.seco-pricing__compare-fill {
-  display: block;
-  height: 100%;
-  border-radius: 999px;
-}
-
-.seco-pricing__compare-fill--ours {
-  background: var(--seco-spectrum-hero);
-}
-
-.seco-pricing__compare-fill--theirs {
-  width: 100%;
-  background: linear-gradient(90deg, #e8b06b 0%, #d98a64 55%, #c8746a 100%);
-}
-
-.seco-pricing__compare-figure {
-  min-width: 3.25rem;
-  text-align: right;
-  font-family: var(--seco-font-display);
-  font-size: 1.125rem;
-  font-weight: 300;
-  letter-spacing: var(--seco-display-tracking-figure);
-  color: #fff;
-}
-
-.seco-pricing__compare-save {
-  margin: 1.125rem 0 0;
-  font-family: var(--seco-font-data);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--seco-spectrum-cyan);
+.seco-pricing.seco-marketing-page .seco-body-clock-compare {
+  margin-top: 0;
 }
 
 .seco-pricing__tiers {
-  margin-top: clamp(2rem, 5vw, 3rem);
+  margin-top: 0;
 }
 
 /* ── Body clock measurement (pricing compare + dashboard help) ── */
@@ -5095,27 +4879,6 @@
   color: var(--seco-spectrum-cyan);
 }
 
-.seco-pricing__close {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: clamp(2rem, 5vw, 3rem);
-}
-
-.seco-pricing__close-note {
-  margin: 0;
-  max-width: 60ch;
-  font-size: 0.9375rem;
-  line-height: 1.55;
-  color: rgb(255 255 255 / 0.6);
-}
-
-.seco-pricing__close-btn {
-  flex-shrink: 0;
-  margin-top: 0;
-}
 
 /* ── About page ── */
 .seco-about__title {
