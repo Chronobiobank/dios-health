@@ -3,12 +3,14 @@
 export const DEEPDOSE_SITE_LINKS = [
   { label: 'Mission', href: '/chronobiobank' },
   { label: 'Technology', href: '/technology' },
+  { label: 'Science', href: '/science' },
   { label: 'Foundation', href: '/foundation' },
   { label: 'Home test', href: '/home-test' },
   { label: 'Sign in', href: '/login' },
 ] as const
 
 export const DEEPDOSE_FOOTER_EXTRA_LINKS = [
+  { label: 'Research partners', href: '/partners' },
   { label: 'About', href: '/about' },
   { label: 'Terms', href: '/terms' },
 ] as const

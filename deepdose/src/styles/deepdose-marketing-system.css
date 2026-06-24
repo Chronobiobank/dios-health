@@ -100,7 +100,7 @@
 
 .seco-marketing-tiles .seco-spectrum-tile__content,
 .seco-clinics__grid--tiles .seco-spectrum-tile__content {
-  gap: 0.5rem;
+  gap: var(--mkt-tile-content-gap);
 }
 
 .seco-marketing-tiles .seco-spectrum-tile__rank,
@@ -110,7 +110,7 @@
 
 .seco-marketing-tiles .seco-spectrum-tile__head,
 .seco-clinics__grid--tiles .seco-spectrum-tile__head {
-  margin-bottom: 0;
+  margin-bottom: var(--mkt-tile-head-gap);
 }
 
 .seco-marketing-tiles .seco-spectrum-tile__cue,
@@ -227,7 +227,7 @@
   flex: 1 1 100%;
 }
 
-/* ── Marketing page rhythm (/chronobiobank, /technology, /foundation, /home-test, /tiptraq, /pricing) ── */
+/* ── Marketing page rhythm (/chronobiobank, /technology, /foundation, /home-test, /tiptraq, /pricing, /partners) ── */
 .seco-marketing-page {
   --seco-mission-tile-gap: clamp(1.25rem, 3vw, 1.75rem);
 }
@@ -247,7 +247,11 @@
 
 /* Spectrum tiles in marketing stacks — clinician-landing reference */
 .seco-marketing-page .seco-chronobiobank__mission-stack .seco-spectrum-tile__content {
-  gap: 0.5rem;
+  gap: var(--mkt-tile-content-gap);
+}
+
+.seco-marketing-page .seco-chronobiobank__mission-stack .seco-spectrum-tile__head {
+  margin-bottom: var(--mkt-tile-head-gap);
 }
 
 .seco-marketing-page .seco-chronobiobank__mission-stack .seco-spectrum-tile__cue,
