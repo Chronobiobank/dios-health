@@ -13,7 +13,7 @@ const FOOTER_LINKS = [
 
 export function DeepDoseSplashHome() {
   return (
-    <SplashFrame>
+    <SplashFrame videoBackground>
       <Link href="/" className="seco-splash__brand-corner" aria-label="Deepdose home">
         <DeepdoseWordmark />
       </Link>

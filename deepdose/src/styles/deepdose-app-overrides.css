@@ -5840,6 +5840,18 @@ html.splash-route body {
     rgb(11 18 32 / 0.42);
 }
 
+/* Home first-light video — lighter scrim so footage reads through */
+.seco-splash--video .seco-splash__scrim {
+  background:
+    linear-gradient(
+      180deg,
+      rgb(11 18 32 / 0.28) 0%,
+      rgb(11 18 32 / 0.42) 50%,
+      rgb(11 18 32 / 0.55) 100%
+    ),
+    rgb(11 18 32 / 0.18);
+}
+
 .seco-splash__page {
   position: relative;
   z-index: 2;
