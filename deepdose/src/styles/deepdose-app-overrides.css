@@ -5840,16 +5840,25 @@ html.splash-route body {
     rgb(11 18 32 / 0.42);
 }
 
-/* Home first-light video — lighter scrim so footage reads through */
+/* Home first-light video — dark sunrise tint for copy contrast */
 .seco-splash--video .seco-splash__scrim {
   background:
     linear-gradient(
       180deg,
-      rgb(11 18 32 / 0.28) 0%,
-      rgb(11 18 32 / 0.42) 50%,
-      rgb(11 18 32 / 0.55) 100%
+      rgb(6 10 20 / 0.82) 0%,
+      rgb(14 16 30 / 0.76) 30%,
+      rgb(36 22 32 / 0.72) 50%,
+      rgb(58 34 30 / 0.68) 70%,
+      rgb(42 26 22 / 0.74) 85%,
+      rgb(8 10 18 / 0.84) 100%
     ),
-    rgb(11 18 32 / 0.18);
+    radial-gradient(
+      ellipse 130% 75% at 50% 108%,
+      rgb(140 72 48 / 0.32) 0%,
+      rgb(72 40 36 / 0.38) 38%,
+      transparent 68%
+    ),
+    rgb(8 10 20 / 0.4);
 }
 
 .seco-splash__page {
