@@ -1,8 +1,6 @@
 import Link from 'next/link'
 
 import { ChronobiobankPlaneTile } from '@/components/deepdose/ChronobiobankPlaneTile'
-import { ChronobiobankTileIcon } from '@/components/deepdose/ChronobiobankTileIcon'
-import { MarketingWideTile } from '@/components/deepdose/MarketingWideTile'
 import { TechnologyLayerStack } from '@/components/deepdose/TechnologyLayerStack'
 import {
   EVIDENCE_PAGE_CTA,
@@ -53,11 +51,11 @@ export function EvidencePage() {
         </header>
 
         <ChronobiobankPlaneTile
+          variant="light"
           cue={EVIDENCE_WHY_NOW.cue}
           label={EVIDENCE_WHY_NOW.label}
           title={EVIDENCE_WHY_NOW.title}
           beats={EVIDENCE_WHY_NOW.beats}
-          image={marketingImages.badSleep}
           iconId="sleep"
           className="seco-evidence-page__why-now seco-reveal seco-reveal--2"
         />
@@ -67,12 +65,13 @@ export function EvidencePage() {
           layers={EVIDENCE_TRACK_LAYERS}
         />
 
-        <MarketingWideTile
+        <ChronobiobankPlaneTile
           cue={EVIDENCE_RESEARCH.cue}
           label={EVIDENCE_RESEARCH.label}
           title={EVIDENCE_RESEARCH.title}
-          body={EVIDENCE_RESEARCH.body}
-          icon={<ChronobiobankTileIcon id="partner-academic" />}
+          beats={[EVIDENCE_RESEARCH.body]}
+          image={marketingImages.circadianMedicine}
+          iconId="partner-academic"
           foot={<EvidenceResearchLinks links={EVIDENCE_RESEARCH.links} />}
           className="seco-evidence-page__research seco-reveal seco-reveal--4"
         />

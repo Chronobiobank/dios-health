@@ -6,7 +6,7 @@ import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
 export const metadata: Metadata = {
   title: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
   description:
-    'Passive circadian phase tracking from your phone and wearables. Personalise medicine timing to your body clock — with clinical validation when it matters.',
+    'Search your meds and supplements. See if your timing is right — then personalise doses to your body clock.',
   alternates: { canonical: '/' },
 }
 

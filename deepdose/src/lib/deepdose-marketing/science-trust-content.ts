@@ -1,10 +1,7 @@
-/** Science & trust — concise scan heads; detail in page folds where needed. */
+/** Science & trust — lean scan page; detail lives on linked routes. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
-import { BODY_CLOCK_LAYERS, PROXY_DLMO_METHODOLOGY } from '@/lib/circadian/body-clock-measurement'
-import { DEEPDOSE_LANDING_EVIDENCE } from '@/lib/deepdose-marketing/landing-content'
-import { EVIDENCE_HREF, TECHNOLOGY_DLMO_PROXY_HREF } from '@/lib/deepdose-marketing/site-nav-links'
-import { WEARABLE_PROVIDERS_ORDERED } from '@/lib/wearables/tiers'
+import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 
 export const SCIENCE_TRUST_META = {
   title: `Science & trust · ${DEEPDOSE_NAME}`,
@@ -14,143 +11,47 @@ export const SCIENCE_TRUST_META = {
 
 export const SCIENCE_TRUST_INTRO = {
   eyebrow: 'Science & trust',
-  title: 'How timing support works',
+  titleWhite: 'How timing',
+  titleAccent: 'support works',
   lede: 'Decision support for dose timing — not a prescriber or diagnosis.',
 } as const
 
-export const SCIENCE_TRUST_CLAIMS = {
-  title: 'What we do not claim',
-  teaser: 'Honest limits on timing support.',
-  body: `${DEEPDOSE_NAME} is not a MedTech accelerator or prescriber. We do not publish ${DEEPDOSE_NAME}-specific outcome trials here yet.`,
-} as const
-
-export const SCIENCE_TRUST_MEASUREMENT = {
-  title: 'How we measure your clock',
-  teaser: 'Proxy DLMO → chrono test fusion → TipTraQ validation.',
-  badge: 'Measure',
-  layers: BODY_CLOCK_LAYERS.map((layer) => ({
-    ...layer,
-    teaser:
-      layer.id === 'estimate'
-        ? 'DLMO ≈ sleep onset − 2 h from wearables.'
-        : layer.id === 'chrono'
-          ? 'DLMO ≈ MCTQ mid-sleep − 2.5 h, fused with sleep data.'
-          : 'Three nights replaces the proxy with clinical staging.',
-  })),
-  proxyDlmo: PROXY_DLMO_METHODOLOGY,
-  limits: {
-    title: 'Limits',
-    points: [
-      'Free tier estimates proxy DLMO — not salivary or lab DLMO.',
-      'Wearable sleep staging varies by device and algorithm.',
-      'Dosing windows are phase-adjusted; we do not model drug PK.',
-    ],
-    goldStandard: 'Salivary DLMO and lab PSG remain the reference. TipTraQ is the validated upgrade.',
+export const SCIENCE_TRUST_FEATURES = [
+  {
+    id: 'limits',
+    badge: 'Honesty',
+    title: 'What we do not claim',
+    teaser: 'Decision support only — not a prescriber',
+    cue: '#6b7280',
+    href: '/terms',
   },
-} as const
+  {
+    id: 'measure',
+    badge: 'Measure',
+    title: 'How we read your clock',
+    teaser: 'Proxy DLMO on-device · TipTraQ when needed',
+    cue: '#acd3de',
+    href: '/technology',
+  },
+  {
+    id: 'privacy',
+    badge: 'Privacy',
+    title: 'Your data stays close',
+    teaser: 'On-device phase · consent-gated share',
+    cue: '#f2b8a2',
+    href: '/chronobiobank',
+  },
+  {
+    id: 'evidence',
+    badge: 'Evidence',
+    title: 'Published science',
+    teaser: 'Chronotherapy trials we build on',
+    cue: '#8b9cf8',
+    href: EVIDENCE_HREF,
+  },
+] as const
 
-export const SCIENCE_TRUST_ENGINE = {
-  title: 'Dashboard outputs',
-  teaser: 'Structured timing payloads only.',
-  badge: 'Compute',
-  outputs: [
-    {
-      id: 'bti',
-      term: 'Biological Time Index',
-      teaser: 'Window open, closed, or drifting.',
-      body: 'Clock-relative timing plus plain-language take-now guidance.',
-    },
-    {
-      id: 'bca',
-      term: 'Body clock alignment',
-      teaser: 'Sleep timing vs habits.',
-      body: 'Drift from lights-out and regularity. A triage hint, not a diagnosis.',
-    },
-    {
-      id: 'chi',
-      term: 'Circadian Health Index',
-      teaser: 'Composite 0–100 score.',
-      body: 'Phase offset, social jet lag, and signal quality. Capped when data are stale.',
-    },
-    {
-      id: 'windows',
-      term: 'Dosing windows',
-      teaser: 'Shifted by your phase.',
-      body: 'Medication-specific windows. Evidence-graded where literature supports timing.',
-    },
-  ],
-} as const
-
-export const SCIENCE_TRUST_WEARABLES = {
-  title: 'Connected devices',
-  teaser: 'You authorise each sync.',
-  badge: 'Sources',
-  providers: WEARABLE_PROVIDERS_ORDERED.map((p) => ({
-    name: p.displayName,
-    tier: p.eyebrow,
-    streams: p.streams,
-  })),
-} as const
-
-export const SCIENCE_TRUST_EVIDENCE = {
-  ...DEEPDOSE_LANDING_EVIDENCE,
-  caveat:
-    'Chronotherapy is promising but not universal standard-of-care. We cite published trials.',
-} as const
-
-export const SCIENCE_TRUST_STUDY = {
-  title: 'Pilot metrics',
-  teaser: 'Early cohorts. Public data when mature.',
-  badge: 'Outcomes',
-  endpoints: [
-    'Doses inside vs outside suggested windows',
-    'BCA/CHI drift and device sync gaps',
-    'Clinician triage time and recommendation uptake',
-    'TipTraQ completion and safety posture',
-  ],
-  note: 'Chronobiobank telemetry is anonymised. Model weights stay out of patient UI.',
-} as const
-
-export const SCIENCE_TRUST_PRIVACY = {
-  title: 'Your data',
-  teaser: 'UK GDPR and HIPAA-shaped workflows.',
-  badge: 'Privacy',
-  pillars: [
-    {
-      title: 'Dynamic consent',
-      body: 'Separate care, research, and analytics. Withdraw any time.',
-    },
-    {
-      title: 'Minimum necessary',
-      body: 'No raw model weights in the UI — timing payloads only.',
-    },
-    {
-      title: 'Decision support only',
-      body: `${DEEPDOSE_NAME} suggests windows; it does not prescribe.`,
-    },
-    {
-      title: 'Security by design',
-      body: 'RLS, encrypted transport, separate TipTraQ clinical paths.',
-    },
-  ],
-  links: [
-    { label: 'Chronobiobank architecture', href: '/chronobiobank' },
-    { label: 'Terms & clinical boundary', href: '/terms' },
-    { label: 'Foundation', href: EVIDENCE_HREF },
-  ],
-} as const
-
-export const SCIENCE_TRUST_CLINICIAN = {
-  title: 'For clinicians',
-  teaser: 'Triage-first, not another portal.',
-  badge: 'Clinicians',
-  methodology: { label: 'Proxy DLMO methodology', href: TECHNOLOGY_DLMO_PROXY_HREF },
-  points: [
-    'Device sync failures surface first (36-hour rule)',
-    'Verified clinical-grade badge on TipTraQ records',
-    'Prescribe timing; patient accepts in-app',
-    'Invite codes link your panel',
-  ],
-  cta: { label: 'Clinician sign in', href: '/login?next=/clinical/dashboard' },
-  landing: { label: 'Clinician overview', href: '/clinician-landing' },
+export const SCIENCE_TRUST_CTA = {
+  label: 'See the technology stack',
+  href: '/technology',
 } as const

@@ -36,7 +36,11 @@ export const marketingImages = {
     alt: 'A sleep sensor on a bedside at twilight, with three moon phases over a dawn-to-dusk sky',
   },
   circadianMedicine: {
-    src: '/circadian%20medicine.webp',
+    src: '/circadian medicine.webp',
     alt: 'Circadian medicine — chronobiology research and phase-aware care',
+  },
+  pharma: {
+    src: '/pharma medicine.webp',
+    alt: 'Pharmaceutical research — chronopharmacology and precision dosing',
   },
 } as const

@@ -10,13 +10,14 @@ type ChronobiobankPlaneTileProps = {
   label: string
   title: string
   beats: readonly string[]
-  image: { src: string; alt: string }
+  image?: { src: string; alt: string }
   iconId?: ChronobiobankTileIconId
   foot?: ReactNode
+  variant?: 'photo' | 'light'
   className?: string
 }
 
-/** Photo-backed wide marketing tile — numbered beats over a scrim (mission “How it works” pattern). */
+/** Wide marketing tile — photo hero (mission) or light glass band (foundation). */
 export function ChronobiobankPlaneTile({
   cue,
   label,
@@ -25,30 +26,77 @@ export function ChronobiobankPlaneTile({
   image,
   iconId = 'device',
   foot,
+  variant = 'photo',
   className,
 }: ChronobiobankPlaneTileProps) {
+  const isLight = variant === 'light'
+
   return (
     <article
-      className={cn(MARKETING_WIDE_TILE_CLASS, 'seco-chronobiobank__plane-visual', className)}
+      className={cn(
+        MARKETING_WIDE_TILE_CLASS,
+        isLight ? 'seco-marketing-wide-tile--light' : 'seco-chronobiobank__plane-visual',
+        className,
+      )}
       style={{ '--cue': cue } as CSSProperties}
     >
-      <Image
-        src={image.src}
-        alt={image.alt}
-        fill
-        sizes="(min-width: 960px) 72rem, 100vw"
-        className="seco-chronobiobank__plane-visual__img"
-      />
-      <div className="seco-chronobiobank__plane-visual__scrim" aria-hidden />
-      <div className="seco-marketing-wide-tile__content seco-chronobiobank__plane-visual__content">
-        <div className="seco-marketing-wide-tile__head seco-chronobiobank__plane-visual__head">
-          <span className="seco-marketing-wide-tile__icon seco-chronobiobank__plane-visual__icon" aria-hidden>
+      {!isLight && image ? (
+        <>
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="(min-width: 960px) 72rem, 100vw"
+            className="seco-chronobiobank__plane-visual__img"
+          />
+          <div className="seco-chronobiobank__plane-visual__scrim" aria-hidden />
+        </>
+      ) : null}
+      <div
+        className={cn(
+          'seco-marketing-wide-tile__content',
+          !isLight && 'seco-chronobiobank__plane-visual__content',
+        )}
+      >
+        <div
+          className={cn(
+            'seco-marketing-wide-tile__head',
+            !isLight && 'seco-chronobiobank__plane-visual__head',
+          )}
+        >
+          <span
+            className={cn(
+              'seco-marketing-wide-tile__icon',
+              !isLight && 'seco-chronobiobank__plane-visual__icon',
+            )}
+            aria-hidden
+          >
             <ChronobiobankTileIcon id={iconId} />
           </span>
-          <span className="seco-marketing-wide-tile__cue seco-chronobiobank__plane-visual__cue">{label}</span>
+          <span
+            className={cn(
+              'seco-marketing-wide-tile__cue',
+              !isLight && 'seco-chronobiobank__plane-visual__cue',
+            )}
+          >
+            {label}
+          </span>
         </div>
-        <h2 className="seco-marketing-wide-tile__title seco-chronobiobank__plane-visual__title">{title}</h2>
-        <ol className="seco-marketing-wide-tile__body seco-chronobiobank__plane-visual__beats">
+        <h2
+          className={cn(
+            'seco-marketing-wide-tile__title',
+            !isLight && 'seco-chronobiobank__plane-visual__title',
+          )}
+        >
+          {title}
+        </h2>
+        <ol
+          className={cn(
+            'seco-marketing-wide-tile__body',
+            'seco-chronobiobank__plane-visual__beats',
+            isLight && 'seco-marketing-wide-tile__beats',
+          )}
+        >
           {beats.map((beat, index) => (
             <li key={beat} className="seco-chronobiobank__plane-visual__beat">
               <span className={MARKETING_NUM_CLASS} aria-hidden="true">
@@ -58,7 +106,11 @@ export function ChronobiobankPlaneTile({
             </li>
           ))}
         </ol>
-        {foot ? <div className="seco-chronobiobank__plane-visual__foot">{foot}</div> : null}
+        {foot ? (
+          <div className={cn('seco-marketing-wide-tile__foot', !isLight && 'seco-chronobiobank__plane-visual__foot')}>
+            {foot}
+          </div>
+        ) : null}
       </div>
     </article>
   )

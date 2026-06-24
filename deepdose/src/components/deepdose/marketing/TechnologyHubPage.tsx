@@ -1,14 +1,12 @@
 import Link from 'next/link'
 
-import { ChronobiobankPlaneTile } from '@/components/deepdose/ChronobiobankPlaneTile'
-import { TechnologyLayerStack } from '@/components/deepdose/TechnologyLayerStack'
+import { TechnologyLayerTiles } from '@/components/deepdose/TechnologyLayerTiles'
 import {
+  TECHNOLOGY_HUB_CTA,
   TECHNOLOGY_HUB_INTRO,
   TECHNOLOGY_LAYERS,
-  TECHNOLOGY_RESEARCH,
 } from '@/lib/deepdose-marketing/technology-content'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
-import { marketingImages } from '@/lib/marketing/images'
 
 export function TechnologyHubPage() {
   return (
@@ -27,21 +25,11 @@ export function TechnologyHubPage() {
           <p className="seco-page__lede seco-technology__lede">{TECHNOLOGY_HUB_INTRO.lede}</p>
         </header>
 
-        <TechnologyLayerStack className="seco-reveal seco-reveal--2" layers={TECHNOLOGY_LAYERS} />
+        <TechnologyLayerTiles layers={TECHNOLOGY_LAYERS} />
 
-        <ChronobiobankPlaneTile
-          cue={TECHNOLOGY_RESEARCH.cue}
-          className="seco-technology__research seco-reveal seco-reveal--3"
-          label={TECHNOLOGY_RESEARCH.label}
-          title={TECHNOLOGY_RESEARCH.title}
-          beats={TECHNOLOGY_RESEARCH.beats}
-          image={marketingImages.circadianMedicine}
-          iconId="partner-academic"
-        />
-
-        <div className={marketingCtaClass('seco-technology__cta seco-reveal seco-reveal--4')}>
-          <Link href={TECHNOLOGY_RESEARCH.cta.href} className="seco-landing__btn seco-landing__btn--primary">
-            {TECHNOLOGY_RESEARCH.cta.label} →
+        <div className={marketingCtaClass('seco-technology__cta seco-reveal seco-reveal--3')}>
+          <Link href={TECHNOLOGY_HUB_CTA.href} className="seco-landing__btn seco-landing__btn--primary">
+            {TECHNOLOGY_HUB_CTA.label} →
           </Link>
         </div>
       </div>

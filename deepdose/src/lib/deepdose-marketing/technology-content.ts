@@ -5,7 +5,13 @@ import { BODY_CLOCK_LAYERS, PROXY_DLMO_METHODOLOGY } from '@/lib/circadian/body-
 import { DLMO_PROXY_VERSION } from '@/lib/circadian/dlmo'
 import {
   CHRONOBIOBANK_SCIENCE_HREF,
+  TECHNOLOGY_DLMO_PROXY_HREF,
 } from '@/lib/deepdose-marketing/site-nav-links'
+
+export const TECHNOLOGY_HUB_CTA = {
+  label: 'Science & trust',
+  href: CHRONOBIOBANK_SCIENCE_HREF,
+} as const
 
 export const TECHNOLOGY_HUB_META = {
   title: `Technology · ${DEEPDOSE_NAME}`,
@@ -21,57 +27,75 @@ export const TECHNOLOGY_HUB_INTRO = {
     'Passive signals, proxy DLMO, TipTraQ validation, daily dose cues — four layers, each sharpening the estimate.',
 } as const
 
+export type TechnologyHubLayer = {
+  id: string
+  rank: number
+  label: string
+  cue: string
+  title: string
+  teaser: string
+  highlights: readonly string[]
+  icon: 'passive-signals' | 'proxy-phase' | 'tiptraq-validate' | 'dose-cues'
+}
+
 export const TECHNOLOGY_LAYERS = [
   {
     id: 'signals',
-      rank: 1,
-      label: 'Layer 1',
-      cue: '#acd3de',
-      title: 'Passive signal capture',
-      body:
-        'Smartphone sensors run continuously in the background — light exposure, screen-on patterns, movement, social rhythm irregularity, and sleep/wake timing from the accelerometer. No active input required. Social jet lag score is computed here: the surface metric that maps to Ersche\u2019s clinical framework.',
-    },
-    {
-      id: 'proxy',
-      rank: 2,
-      label: 'Layer 2',
-      cue: '#c9b6f2',
-      title: 'Proxy DLMO estimation',
-      body:
-        'The algorithm takes the passive signal stream and estimates where dim-light melatonin onset currently sits — without a saliva test or a lab. Actigraphy-derived phase estimates correlate with DLMO at r\u22480.8 in published studies. Our contribution is doing it continuously, on-device, from consumer hardware.',
-    },
-    {
-      id: 'tiptraq',
-      rank: 3,
-      label: 'Layer 3',
-      cue: '#f2b8a2',
-      title: 'Physiological validation (TipTraQ)',
-      body:
-        'For users who opt into clinical-grade validation. TipTraQ adds skin temperature, heart rate variability, and peripheral vasoconstriction — physiological markers that confirm the proxy estimate is tracking real circadian phase. This is what turns the platform from a wellness app into a research instrument.',
-    },
-    {
-      id: 'doses',
-      rank: 4,
-      label: 'Layer 4',
-      cue: '#8b9cf8',
-      title: 'Personalised dose prompts',
-      body:
-        'The output — six daily dose prompts (light, meals, meds, movement, wind-down, blackout) timed to your phase anchor from the layers below. When drift shifts your clock, every cue moves with it — not fixed alarms. Take-now and wait windows for medicines sit inside the same plan on the patient dashboard.',
-    },
-] as const
-
-export const TECHNOLOGY_RESEARCH = {
-  label: 'Research',
-  cue: '#8b9cf8',
-  title: 'Chronobiology',
-  beats: [
-    'Population phase insight without centralising intimate sleep traces.',
-    'Consent-gated cohorts and pseudonymised outcomes for chronobiology labs and clinical teams.',
-    'A path from on-device proxy DLMO to TipTraQ clinical-grade validation when it matters.',
-    'Governed partnership for cohort access — detailed methodology under research agreement.',
-  ],
-  cta: { label: 'Science & trust', href: CHRONOBIOBANK_SCIENCE_HREF },
-} as const
+    rank: 1,
+    label: 'Layer 1',
+    cue: '#acd3de',
+    title: 'Passive signals',
+    icon: 'passive-signals',
+    teaser: 'Your phone reads light, movement & sleep — passive.',
+    highlights: [
+      'Background light & screen-on',
+      'Accel. sleep & wake timing',
+      'Social jet lag on the surface',
+    ],
+  },
+  {
+    id: 'proxy',
+    rank: 2,
+    label: 'Layer 2',
+    cue: '#c9b6f2',
+    title: 'Proxy DLMO',
+    icon: 'proxy-phase',
+    teaser: 'Melatonin onset from wearables — no lab or saliva.',
+    highlights: [
+      'Sleep + chrono test answers',
+      'On-device phase anchor + band',
+      'Actigraphy–DLMO corr. (~r 0.8)',
+    ],
+  },
+  {
+    id: 'tiptraq',
+    rank: 3,
+    label: 'Layer 3',
+    cue: '#f2b8a2',
+    title: 'Physio validation',
+    icon: 'tiptraq-validate',
+    teaser: 'Three home nights upgrade proxy — clinical-grade.',
+    highlights: [
+      'TipTraQ temp, HRV, and SpO₂',
+      'Verified clinical-grade badge',
+      'Wellness signal → research',
+    ],
+  },
+  {
+    id: 'doses',
+    rank: 4,
+    label: 'Layer 4',
+    cue: '#8b9cf8',
+    title: 'Personal dose cues',
+    icon: 'dose-cues',
+    teaser: 'Six cues move when phase drifts — not fixed alarms.',
+    highlights: [
+      'Light, food, meds, movement',
+      'BTI take-now windows for meds',
+      'One plan on your dashboard',
+    ],
+  },
+] as const satisfies readonly TechnologyHubLayer[]
 
 /* ── Proxy DLMO sub-page ── */
 

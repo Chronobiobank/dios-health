@@ -17,7 +17,7 @@ export const CHRONOBIOBANK_INTRO = {
   titleWhite: 'User-owned',
   titleAccent: 'chronobiobank',
   lede:
-    'National cohorts showed what scale can discover — and what trust costs when biology sits in one vault. Phase and sleep stay on the participant\u2019s device; science learns from patterns, not from hoarding nights.',
+    'Phase and sleep stay on your device. Science learns from federated patterns—not from hoarding nights in one vault.',
   quote:
     'We are not building a central repository of nights. We are building federated chronobiology: population timing insight without exporting raw sleep architecture.',
 } as const

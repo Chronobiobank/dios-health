@@ -1887,12 +1887,160 @@
 /* ── Science & trust page ── */
 .seco-science__intro {
   max-width: 62ch;
-  margin-bottom: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 0;
 }
 
 .seco-science__intro .seco-page__title,
 .seco-science__intro .seco-page__lede {
   margin-bottom: 0;
+}
+
+.seco-science__title {
+  max-width: 16ch;
+  font-size: clamp(2.25rem, 6.5vw, 4rem);
+  font-weight: 300;
+  letter-spacing: var(--seco-display-tracking-hero, -0.02em);
+}
+
+.seco-science__intro .seco-page__title {
+  margin-bottom: 1rem;
+}
+
+.seco-science__lede {
+  margin-top: 1rem;
+  max-width: 62ch;
+}
+
+.seco-mission.seco-science .seco-science__mission-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seco-mission-tile-gap);
+  min-width: 0;
+}
+
+.seco-mission.seco-science .seco-science__compare,
+.seco-mission.seco-science .seco-body-clock-compare {
+  margin: 0;
+}
+
+.seco-mission.seco-science .seco-science__fold-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--seco-mission-tile-gap);
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .seco-mission.seco-science .seco-science__fold-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+}
+
+.seco-mission.seco-science .seco-science__fold-grid > .seco-science-fold[open] {
+  grid-column: 1 / -1;
+}
+
+.seco-mission.seco-science .seco-science-fold--grid-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+
+.seco-mission.seco-science .seco-science-fold--grid-tile .seco-science-fold__summary {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: clamp(8.5rem, 21vw, 10.25rem);
+  padding: clamp(1.125rem, 2.6vw, 1.375rem);
+  padding-right: clamp(2.75rem, 6vw, 3.25rem);
+}
+
+.seco-mission.seco-science .seco-science-fold--grid-tile .seco-science-fold__chevron {
+  position: absolute;
+  top: clamp(1rem, 2.6vw, 1.25rem);
+  right: clamp(1rem, 2.6vw, 1.25rem);
+  margin: 0;
+}
+
+.seco-mission.seco-science .seco-science-fold--grid-tile .seco-science-fold__body {
+  padding: 0 clamp(1.125rem, 2.6vw, 1.375rem) clamp(1.125rem, 2.6vw, 1.375rem);
+}
+
+.seco-mission.seco-science .seco-science-fold--grid-tile .seco-science-fold__head--mission {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  column-gap: clamp(0.875rem, 2.5vw, 1.125rem);
+  row-gap: 0.125rem;
+  align-items: start;
+  width: 100%;
+}
+
+.seco-mission.seco-science .seco-science-fold--grid-tile .seco-science-fold__head--mission .seco-science-fold__icon {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: center;
+  width: 2.625rem;
+  height: 2.625rem;
+  border-radius: 0.85rem;
+}
+
+.seco-mission.seco-science .seco-science-fold--grid-tile .seco-science-fold__head--mission .seco-science-fold__icon svg {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.seco-mission.seco-science .seco-science-fold--grid-tile .seco-science-fold__head--mission .seco-science-fold__badge {
+  grid-column: 2;
+  grid-row: 1;
+  min-height: calc(1.25 * var(--mkt-tile-cue-size));
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  font-size: var(--mkt-tile-cue-size);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--cue, #acd3de) 82%, rgb(255 255 255 / 0.68));
+}
+
+.seco-mission.seco-science .seco-science-fold--grid-tile .seco-science-fold__head--mission .seco-science-fold__title {
+  grid-column: 2;
+  grid-row: 2;
+  min-height: calc(1.08 * var(--mkt-tile-title-size));
+  font-family: var(--seco-font-display);
+  font-size: var(--mkt-tile-title-size);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: rgb(255 255 255 / 0.96);
+  white-space: nowrap;
+}
+
+.seco-mission.seco-science .seco-science-fold--grid-tile .seco-science-fold__head--mission .seco-science-fold__teaser {
+  grid-column: 2;
+  grid-row: 3;
+  margin: 0;
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: calc(2 * 1.5 * var(--mkt-tile-body-size));
+  max-width: var(--mkt-tile-body-measure);
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-tile-body-size);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.72);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+}
+
+.seco-mission.seco-science .seco-science__section {
+  margin: 0;
 }
 
 .seco-science__section {
@@ -2156,6 +2304,134 @@
   margin: 0;
 }
 
+.seco-technology__layer-tiles {
+  margin: 0;
+  gap: clamp(1.125rem, 2.75vw, 1.5rem);
+}
+
+.seco-technology__layer-tile {
+  min-height: clamp(17rem, 40vw, 20.5rem);
+  padding: clamp(1.25rem, 3vw, 1.625rem);
+  overflow: hidden;
+}
+
+.seco-technology__layer-tile::after {
+  content: '';
+  position: absolute;
+  inset: auto -18% -42% auto;
+  width: clamp(7rem, 38%, 10rem);
+  height: clamp(7rem, 38%, 10rem);
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--cue) 34%, transparent), transparent 68%);
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.seco-technology__layer-tile__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: var(--mkt-tile-head-gap);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--cue) 22%, rgb(255 255 255 / 0.08));
+}
+
+.seco-technology__layer-tile__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  color: color-mix(in srgb, var(--cue) 88%, #fff);
+  background:
+    radial-gradient(120% 120% at 30% 20%, color-mix(in srgb, var(--cue) 42%, transparent), transparent 58%),
+    color-mix(in srgb, var(--cue) 22%, rgb(255 255 255 / 0.04));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--cue) 38%, transparent),
+    0 8px 22px color-mix(in srgb, var(--cue) 18%, transparent);
+}
+
+.seco-technology__layer-tile__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.seco-technology__layer-tile__cue {
+  font-family: var(--seco-font-data);
+  font-size: var(--mkt-tile-cue-size);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--cue) 78%, rgb(255 255 255 / 0.62));
+}
+
+.seco-technology__layer-tile__title {
+  margin: 0 0 0.625rem;
+  max-width: var(--mkt-layer-title-measure);
+  font-family: var(--seco-font-display);
+  font-size: var(--mkt-tile-title-size);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: rgb(255 255 255 / 0.97);
+  white-space: nowrap;
+}
+
+.seco-technology__layer-tile__teaser {
+  margin: 0 0 1rem;
+  max-width: var(--mkt-layer-teaser-measure);
+  min-height: calc(2 * 1.5 * var(--mkt-tile-body-size));
+  max-height: calc(2 * 1.5 * var(--mkt-tile-body-size));
+  font-size: var(--mkt-tile-body-size);
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.84);
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.seco-technology__layer-tile__highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seco-technology__layer-tile__highlights li {
+  position: relative;
+  max-width: var(--mkt-layer-bullet-measure);
+  min-height: calc(1.45 * clamp(0.8125rem, 1.8vw, 0.9375rem));
+  padding-left: 1.125rem;
+  font-size: clamp(0.8125rem, 1.8vw, 0.9375rem);
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.seco-technology__layer-tile__highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cue) 82%, #fff);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--cue) 48%, transparent);
+}
+
+.seco-technology__layer-tile .seco-spectrum-tile__rank {
+  text-shadow: 0 0 40px color-mix(in srgb, var(--cue) 35%, transparent);
+  color: color-mix(in srgb, var(--cue) 28%, transparent);
+}
+
 .seco-technology__layer-stack {
   margin: 0;
   padding: clamp(1.25rem, 3vw, 1.75rem);
@@ -2246,6 +2522,10 @@
 }
 
 .seco-technology__research {
+  margin: 0;
+}
+
+.seco-science__research {
   margin: 0;
 }
 
@@ -2862,7 +3142,8 @@
 .seco-chronobiobank__mission-stack > .seco-chronobiobank__founder-quote,
 .seco-chronobiobank__mission-stack > .seco-chronobiobank__planes,
 .seco-chronobiobank__mission-stack > .seco-chronobiobank__folds,
-.seco-chronobiobank__mission-stack > .seco-chronobiobank__deep-dive {
+.seco-chronobiobank__mission-stack > .seco-chronobiobank__deep-dive,
+.seco-chronobiobank__mission-stack > .seco-science__mission-body {
   margin: 0;
 }
 

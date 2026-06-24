@@ -13,6 +13,7 @@ type ScienceTrustDisclosureProps = {
   cue?: string
   defaultOpen?: boolean
   nested?: boolean
+  gridTile?: boolean
   className?: string
   children: ReactNode
 }
@@ -20,7 +21,7 @@ type ScienceTrustDisclosureProps = {
 /** Science page fold — concise summary row; detail on tap. */
 export const ScienceTrustDisclosure = forwardRef<HTMLDetailsElement, ScienceTrustDisclosureProps>(
   function ScienceTrustDisclosure(
-    { id, title, teaser, badge, icon, cue, defaultOpen = false, nested = false, className, children },
+    { id, title, teaser, badge, icon, cue, defaultOpen = false, nested = false, gridTile = false, className, children },
     ref,
   ) {
     const detailsRef = useRef<HTMLDetailsElement>(null)
@@ -57,6 +58,7 @@ export const ScienceTrustDisclosure = forwardRef<HTMLDetailsElement, ScienceTrus
         className={cn(
           'seco-science-fold seco-app-card',
           nested && 'seco-science-fold--nested',
+          gridTile && 'seco-science-fold--grid-tile',
           className,
         )}
         style={cue ? ({ '--cue': cue } as CSSProperties) : undefined}
@@ -68,13 +70,26 @@ export const ScienceTrustDisclosure = forwardRef<HTMLDetailsElement, ScienceTrus
             scrollLockRef.current = window.scrollY
           }}
         >
-          <span className="seco-science-fold__head">
-            {icon ? <span className="seco-science-fold__icon">{icon}</span> : null}
-            <span className="seco-science-fold__head-copy">
-              {badge ? <span className="seco-science-fold__badge">{badge}</span> : null}
-              <span className="seco-science-fold__title">{title}</span>
-              {teaser ? <span className="seco-science-fold__teaser">{teaser}</span> : null}
-            </span>
+          <span
+            className={cn('seco-science-fold__head', gridTile && 'seco-science-fold__head--mission')}
+          >
+            {gridTile ? (
+              <>
+                {icon ? <span className="seco-science-fold__icon">{icon}</span> : null}
+                {badge ? <span className="seco-science-fold__badge">{badge}</span> : null}
+                <span className="seco-science-fold__title">{title}</span>
+                {teaser ? <span className="seco-science-fold__teaser">{teaser}</span> : null}
+              </>
+            ) : (
+              <>
+                {icon ? <span className="seco-science-fold__icon">{icon}</span> : null}
+                <span className="seco-science-fold__head-copy">
+                  {badge ? <span className="seco-science-fold__badge">{badge}</span> : null}
+                  <span className="seco-science-fold__title">{title}</span>
+                  {teaser ? <span className="seco-science-fold__teaser">{teaser}</span> : null}
+                </span>
+              </>
+            )}
           </span>
           <span className="seco-science-fold__chevron" aria-hidden="true" />
         </summary>
@@ -86,9 +101,20 @@ export const ScienceTrustDisclosure = forwardRef<HTMLDetailsElement, ScienceTrus
 
 type ScienceTrustFoldStackProps = {
   className?: string
+  grid?: boolean
   children: ReactNode
 }
 
-export function ScienceTrustFoldStack({ className, children }: ScienceTrustFoldStackProps) {
-  return <div className={cn('seco-science-folds', className)}>{children}</div>
+export function ScienceTrustFoldStack({ className, grid = false, children }: ScienceTrustFoldStackProps) {
+  return (
+    <div
+      className={cn(
+        'seco-science-folds',
+        grid && 'seco-science__fold-grid seco-chronobiobank__feature-grid',
+        className,
+      )}
+    >
+      {children}
+    </div>
+  )
 }

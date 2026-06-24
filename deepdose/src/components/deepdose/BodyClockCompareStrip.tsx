@@ -1,17 +1,19 @@
 import Link from 'next/link'
 
 import { BODY_CLOCK_PRICING_COMPARE } from '@/lib/circadian/body-clock-measurement'
+import { cn } from '@/lib/utils/cn'
 
 type BodyClockCompareStripProps = {
   clinicalFigure?: string
+  className?: string
 }
 
-export function BodyClockCompareStrip({ clinicalFigure }: BodyClockCompareStripProps) {
+export function BodyClockCompareStrip({ clinicalFigure, className }: BodyClockCompareStripProps) {
   const { eyebrow, headline, support, estimate, clinical } = BODY_CLOCK_PRICING_COMPARE
 
   return (
     <section
-      className="seco-body-clock-compare seco-reveal seco-reveal--2"
+      className={cn('seco-body-clock-compare', className)}
       aria-labelledby="body-clock-compare-title"
     >
       <header className="seco-body-clock-compare__head">

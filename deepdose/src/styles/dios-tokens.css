@@ -102,6 +102,9 @@
   --mkt-tile-title-size: clamp(1.1875rem, 2.75vw, 1.625rem);
   --mkt-tile-body-size: 1rem;
   --mkt-tile-body-measure: 28ch;
+  --mkt-layer-title-measure: 18ch;
+  --mkt-layer-teaser-measure: 22ch;
+  --mkt-layer-bullet-measure: 28ch;
   --mkt-tile-head-gap: clamp(0.75rem, 1.5vw, 1.125rem);
   --mkt-tile-content-gap: 0.375rem;
   --mkt-hero-lede-gap: clamp(1rem, 2.5vw, 1.25rem);
