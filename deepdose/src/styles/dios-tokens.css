@@ -161,7 +161,7 @@
   --landing-dose-tile-title-size: var(--type-subtitle);
   --landing-dose-tile-body-size: var(--type-body);
   --landing-dose-time-size: var(--type-caption);
-  /* Hero tab panel previews (chrono dash + dosing plan mock UI) */
+  /* Hero tab panel previews — overridden per-panel with cqi in deepdose-landing.css */
   --landing-preview-display: var(--type-subtitle);
   --landing-preview-title: var(--type-body-lg);
   --landing-preview-body: var(--type-body);

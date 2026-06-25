@@ -16,12 +16,20 @@ export const DEEPDOSE_HOME_SPLASH = {
   headlineAccent: 'so your medicines work better.',
 } as const
 
-export const DEEPDOSE_LANDING_HERO: LandingHeroContent = {
+/** Site-wide mission — deficit (wrong-time dosing) → benefit (chronotherapy). */
+export const DEEPDOSE_MISSION = {
   eyebrow: 'Precision dosing',
   headlineWhite: 'Dose when your',
   headlineAccent: 'biology is ready',
-  support:
-    `The right dose at the wrong time is the wrong dose. ${DEEPDOSE_NAME} finds your window — then times each med to it.`,
+  headline: 'Dose when your biology is ready',
+  lede: `The right dose at the wrong time is the wrong dose. ${DEEPDOSE_NAME} finds your window — then times each med to when your body is ready, so the same dose can work harder.`,
+} as const
+
+export const DEEPDOSE_LANDING_HERO: LandingHeroContent = {
+  eyebrow: DEEPDOSE_MISSION.eyebrow,
+  headlineWhite: DEEPDOSE_MISSION.headlineWhite,
+  headlineAccent: DEEPDOSE_MISSION.headlineAccent,
+  support: DEEPDOSE_MISSION.lede,
 } as const
 
 const EVIDENCE_PAPER_IDS = ['hermida-2020', 'pigazzani-2024', 'wallace-2003'] as const
@@ -105,7 +113,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Share your alignment streaks and timing wins. You choose what’s visible.',
+          title: 'Share your alignment streaks and timing wins. You choose what\'s visible.',
           meta: 'Opt-in · You control sharing',
           href: '/login',
         },
@@ -115,7 +123,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
           href: '/login',
         },
         {
-          title: 'Follow what’s working across the community: real timing experiments.',
+          title: 'Follow what\'s working across the community: real timing experiments.',
           meta: 'Quantified-self · Outcomes feed',
           href: '/login',
         },
@@ -126,6 +134,37 @@ export const DEEPDOSE_LANDING_PLATFORM = {
         },
       ],
     },
+    {
+      id: 'meds',
+      label: 'Medications',
+      body: 'Check your combination risk',
+      icon: 'meds' as const,
+      panelTitle: 'Your medication sync',
+      panelSeeAll: { label: 'Check my combination', href: '/' },
+      panelLayout: 'grid' as const,
+      panelItems: [
+        {
+          title: 'Most people on multiple medications have never been told that timing them against each other changes the outcome.',
+          meta: 'Polypharmacy · Timing interactions',
+          href: '/',
+        },
+        {
+          title: 'Atorvastatin works best in the evening — nocturnal cholesterol synthesis is the target. Morning dosing misses the window.',
+          meta: 'Statin timing · TIME substudy (Dundee)',
+          href: '/evidence',
+        },
+        {
+          title: 'Ramipril taken at bedtime reduces major cardiovascular events by up to 45% versus morning dosing.',
+          meta: 'ACE inhibitor · Hygia Trial, 19,084 patients',
+          href: '/evidence',
+        },
+        {
+          title: 'Enter your combination and we show you the conflicts — no account needed.',
+          meta: 'Free · Instant · No sign-up required',
+          href: '/',
+        },
+      ],
+    },
   ],
 } as const
 
@@ -133,6 +172,96 @@ export const DEEPDOSE_LANDING_CLOSE = {
   headline: 'Start free',
   support: 'Add your meds, baseline your rhythm, see when each window opens.',
   cta: { label: 'Sign up for free', href: '/login' },
+} as const
+
+export const DEEPDOSE_PATIENT_PLAN_HERO = {
+  eyebrow: DEEPDOSE_MISSION.eyebrow,
+  headlineWhite: DEEPDOSE_MISSION.headlineWhite,
+  headlineAccent: DEEPDOSE_MISSION.headlineAccent,
+  support: DEEPDOSE_MISSION.lede,
+} as const
+
+export const DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE = {
+  eyebrow: 'Next step',
+  headline: DEEPDOSE_MISSION.headline,
+  body: 'This plan uses typical wake times and trial averages — not your body clock yet. A quick three-minute test shows when you personally absorb each medicine best.',
+  cta: { label: 'Personalise my plan →' },
+  populationLabel: 'Based on typical timing · not personal yet',
+  benefitHint:
+    'When we know your body clock, each dose can land in the window where it works hardest.',
+  ladder: [
+    { label: 'Checked your medicines', status: 'done' as const },
+    { label: 'Saw how they line up today', status: 'done' as const },
+    { label: 'Three-minute body clock test', status: 'current' as const },
+    { label: 'TipTraQ home test (optional)', status: 'upcoming' as const },
+  ],
+} as const
+
+export const DEEPDOSE_PATIENT_PLAN_TABS = {
+  landing: [
+    { id: 'timing' as const, label: 'Today', body: 'How you take them now', tone: 'lilac' as const },
+    { id: 'dosing' as const, label: 'Your plan', body: 'When each one works best', tone: 'peach' as const },
+    { id: 'sharing' as const, label: 'Share', body: 'GP, family & research', tone: 'blue' as const },
+  ],
+  app: [
+    { id: 'timing' as const, label: 'Your meds', body: 'How you take them today', tone: 'lilac' as const },
+    { id: 'dosing' as const, label: 'Your windows', body: 'When to take each one', tone: 'peach' as const },
+    { id: 'sharing' as const, label: 'Share', body: 'GP, family & research', tone: 'blue' as const },
+  ],
+} as const
+
+export const DEEPDOSE_PATIENT_PLAN_TIMING = {
+  syncEyebrow: 'Timing check',
+  syncCaption: 'compared with what usually works',
+  syncedChip: (count: number) => `${count} on track`,
+  reviewChip: (count: number) => `${count} worth a look`,
+  syncMeter: (pct: number) => `${pct}% on track`,
+  syncScoreAria: (synced: number, total: number) => `${synced} of ${total} on track`,
+  dosingTitle: 'When to take each',
+} as const
+
+export const DEEPDOSE_PATIENT_PLAN_PROFILE = {
+  firstNamePlaceholder: 'First name',
+  familyNamePlaceholder: 'Family name',
+  baseline:
+    'Free to join — save your plan, get dose reminders, share with your GP, and help research if you want to.',
+} as const
+
+export const DEEPDOSE_PATIENT_PLAN_DEEPER = [
+  {
+    title: 'Body clock test — refine your anchor with a three-night home sleep test.',
+    meta: 'Optional · TipTraQ · Clinical validation',
+    href: '/home-test',
+  },
+  {
+    title: 'Read the trials and evidence behind your plan.',
+    meta: 'Optional · Hygia · TIME substudy',
+    href: '/science',
+  },
+] as const
+
+export const DEEPDOSE_PATIENT_PLAN_SHARING = {
+  linkLabel: 'Get started →',
+  items: [
+    {
+      title: 'Share with your GP or someone you trust.',
+      meta: 'Private link · you choose who sees it',
+      href: '/login',
+      showPeers: false,
+    },
+    {
+      title: 'Compare streaks with others who wake and dose like you.',
+      meta: 'Community · opt in · you control what others see',
+      href: '/login',
+      showPeers: true,
+    },
+    {
+      title: 'Help research with anonymised outcomes (optional).',
+      meta: 'Chronobiobank · UK GDPR · no personal details shared',
+      href: '/chronobiobank',
+      showPeers: false,
+    },
+  ],
 } as const
 
 export const DEEPDOSE_CLINICIAN_LANDING = {

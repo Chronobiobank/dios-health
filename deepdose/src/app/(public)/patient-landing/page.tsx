@@ -5,8 +5,9 @@ import { DEEPDOSE_LANDING_META } from '@/lib/deepdose-marketing/landing-content'
 import { getCatalogEntry } from '@/lib/medications/catalog'
 import {
   buildLoginPathForMeds,
-  parseMedsOnboardingParams,
+  parsePatientLandingParams,
 } from '@/lib/medications/home-to-onboarding'
+import { verdictForMedCodes } from '@/lib/medications/polypharmacy-timing'
 
 export const metadata: Metadata = {
   title: DEEPDOSE_LANDING_META.title,
@@ -14,26 +15,43 @@ export const metadata: Metadata = {
 }
 
 type PageProps = {
-  searchParams: Promise<{ med?: string; time?: string }>
+  searchParams: Promise<{ med?: string; meds?: string; time?: string; wake?: string }>
 }
 
 export default async function PatientLandingPage({ searchParams }: PageProps) {
   const params = await searchParams
-  const { med, time } = parseMedsOnboardingParams(
+  const { medCodes, med, time, wake } = parsePatientLandingParams(
     new URLSearchParams(
-      Object.entries(params).flatMap(([key, value]) =>
-        value ? [[key, value]] : []
-      )
+      Object.entries(params).flatMap(([key, value]) => (value ? [[key, value]] : []))
     )
   )
 
   const signupHref = buildLoginPathForMeds({
     med: med ?? undefined,
     time: time ?? undefined,
+    medCodes: medCodes.length ? medCodes : undefined,
+    wake: wake ?? undefined,
   })
 
-  const entry = med ? getCatalogEntry(med) : undefined
-  const medContext = entry ? { name: entry.displayName, time } : undefined
+  const codes = medCodes.length > 0 ? medCodes : med ? [med] : []
 
-  return <DeepDoseLanding signupHref={signupHref} medContext={medContext} />
+  if (codes.length > 0) {
+    const medNames = codes.map(
+      (code) => getCatalogEntry(code)?.displayName ?? code.charAt(0).toUpperCase() + code.slice(1)
+    )
+
+    return (
+      <DeepDoseLanding
+        signupHref={signupHref}
+        planContext={{
+          medCodes: codes,
+          medNames,
+          wake: wake ?? time,
+          verdict: verdictForMedCodes(codes),
+        }}
+      />
+    )
+  }
+
+  return <DeepDoseLanding signupHref={signupHref} />
 }

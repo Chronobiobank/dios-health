@@ -67,12 +67,28 @@ const HERO_TAB_ICONS: Record<HeroPillar['icon'], ReactElement> = {
       <path d="m8.25 13.15 7.5 3.7" />
     </svg>
   ),
+  // Medications — capsule (combination check)
+  meds: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.12"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M8.5 8.5 15.5 15.5" />
+      <path d="M9.5 5.5a4.5 4.5 0 0 1 6.4 6.4L8.1 19.7a4.5 4.5 0 0 1-6.4-6.4z" />
+    </svg>
+  ),
 }
 
 const HERO_TAB_ICON_TONES: Record<HeroPillar['icon'], string> = {
   test: 'peach',
   plan: 'lilac',
   social: 'blue',
+  meds: 'gold',
 }
 
 // Community signal for the Social feed — clusters of member faces plus a rough

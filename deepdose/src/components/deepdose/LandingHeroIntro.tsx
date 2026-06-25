@@ -15,6 +15,9 @@ export function LandingHeroIntro({ hero }: LandingHeroIntroProps) {
           <DeepDoseHeroHeadline hero={hero} />
         </div>
         <p className="seco-landing__hero-lede seco-reveal seco-reveal--2">{hero.support}</p>
+        {hero.context ? (
+          <p className="seco-landing__hero-context seco-reveal seco-reveal--2">{hero.context}</p>
+        ) : null}
         {hero.cta ? (
           <div className="seco-landing__hero-actions seco-reveal seco-reveal--2">
             <Link href={hero.cta.href} className="seco-landing__btn seco-landing__btn--primary">

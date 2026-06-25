@@ -21,7 +21,7 @@ export const DEEPDOSE_FOOTER_LEGAL =
 export const DEEPDOSE_TAGLINE = 'Dose smarter, heal faster.' as const
 
 /** Homepage hero headline — distinct from site-wide tagline in metadata */
-export const DEEPDOSE_HOME_HEADLINE = 'Make your meds count' as const
+export const DEEPDOSE_HOME_HEADLINE = 'Are your meds working together?' as const
 
 /** Dose = each zeitgeber (light, meals, meds/supps, exercise, sleep) — see lib/chronobiology/zeitgebers.ts */
 

@@ -26,6 +26,18 @@
   color: rgb(255 255 255 / 0.72);
 }
 
+.deepdose-shell.seco-shell--dark .seco-landing--maven .seco-landing__hero-context {
+  margin: 0.75rem 0 0;
+  max-width: 52ch;
+  padding: 0.875rem 0 0.875rem 1rem;
+  border-left: 2px solid rgb(172 211 222 / 0.5);
+  font-family: var(--seco-font-ui);
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.88);
+}
+
 .seco-landing--maven .seco-hero-tabs__label {
   font-size: var(--landing-tab-label-size);
 }
@@ -95,6 +107,33 @@
     width: clamp(1.75rem, 1.5rem + 0.5vw, 2rem);
     height: clamp(1.75rem, 1.5rem + 0.5vw, 2rem);
   }
+
+  /* Tab subtitles visible on tablet+ — bump above global caption cap */
+  .seco-landing--maven .seco-hero-tabs__label {
+    font-size: var(--type-subtitle);
+  }
+
+  .seco-landing--maven .seco-hero-tabs__body {
+    font-size: var(--type-body);
+  }
+}
+
+/*
+ * Tab panel mock UI (chrono / plan / social) — container-scaled type.
+ * Global Utopia steps cap micro text ~11px; this panel is full-width on desktop
+ * and needs a separate ramp tied to panel width (cqi), not viewport alone.
+ */
+.seco-landing--maven .seco-hero-tabs__panel {
+  container-type: inline-size;
+  container-name: hero-tab-panel;
+  --landing-preview-display: clamp(1.25rem, 0.95rem + 1.1cqi, 1.625rem);
+  --landing-preview-title: clamp(1.0625rem, 0.85rem + 0.75cqi, 1.375rem);
+  --landing-preview-body: clamp(0.875rem, 0.72rem + 0.55cqi, 1.0625rem);
+  --landing-preview-caption: clamp(0.8125rem, 0.68rem + 0.42cqi, 1rem);
+  --landing-preview-label: clamp(0.75rem, 0.62rem + 0.35cqi, 0.9375rem);
+  --landing-preview-micro: clamp(0.75rem, 0.62rem + 0.38cqi, 0.9375rem);
+  --landing-preview-tiny: clamp(0.6875rem, 0.55rem + 0.32cqi, 0.875rem);
+  --landing-preview-score: clamp(1.75rem, 1.25rem + 1.4cqi, 2.375rem);
 }
 
 /* Hero tab panels — chrono + dosing plan previews were fixed mobile rem sizes */
@@ -509,6 +548,736 @@
   list-style: none;
 }
 
+.seco-hero-tabs__list--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.seco-landing--patient-plan .seco-landing__hero {
+  padding-block: clamp(2rem, 6vh, 4rem);
+}
+
+/* CTA sits below the tab panel — spacing from section-inner gap (see marketing-system) */
+.seco-hero-tabs--patient-plan .seco-hero-tabs__panel {
+  border-bottom-left-radius: var(--seco-radius-lg);
+  border-bottom-right-radius: var(--seco-radius-lg);
+}
+
+/* Sharing tab — tight to profile; rank numbers sit in padded card foot */
+.seco-hero-tabs--patient-plan .seco-plan-profile + .seco-hero-tabs__panel-rail--grid {
+  margin-top: 0;
+}
+
+.seco-hero-tabs--patient-plan .seco-hero-tabs__panel-inner--sharing {
+  gap: 0.75rem;
+}
+
+.seco-hero-tabs--patient-plan .seco-hero-tabs__panel-rail--grid .seco-hero-tabs__panel-card {
+  padding: 1rem 1.25rem clamp(2.25rem, 3.5vw, 2.75rem);
+  min-height: 0;
+}
+
+.seco-hero-tabs--patient-plan .seco-hero-tabs__panel-rail--grid .seco-hero-tabs__panel-card--media {
+  padding-top: 1.125rem;
+}
+
+.seco-hero-tabs--patient-plan .seco-hero-tabs__panel-rail--grid .seco-hero-tabs__panel-card-title,
+.seco-hero-tabs--patient-plan .seco-hero-tabs__panel-rail--grid .seco-hero-tabs__panel-card-meta {
+  max-width: calc(100% - 3rem);
+}
+
+.seco-hero-tabs--patient-plan .seco-hero-tabs__panel-rank--grid {
+  right: 1rem;
+  bottom: 0.625rem;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.seco-hero-tabs--patient-plan .seco-hero-tabs__panel-card--media .seco-hero-tabs__panel-card-title {
+  padding-right: 0;
+  max-width: calc(100% - 3rem);
+}
+
+/* Dosing tab — full plan preview (gradient rail + accent dose cards) */
+.seco-hero-tabs--patient-plan .seco-planpreview {
+  gap: clamp(1rem, 2.2vw, 1.25rem);
+}
+
+.seco-hero-tabs--patient-plan .seco-planpreview__timeline {
+  padding-inline: 0.25rem;
+}
+
+.seco-hero-tabs--patient-plan .seco-planpreview__rail {
+  height: 0.5625rem;
+  box-shadow: inset 0 1px 2px rgb(5 9 17 / 0.06);
+}
+
+.seco-hero-tabs--patient-plan .seco-planpreview__doses {
+  gap: 0.5625rem;
+}
+
+/* Patient plan profile header */
+.seco-plan-profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgb(5 9 17 / 0.08);
+}
+
+.seco-plan-profile__avatar {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 1rem;
+  border: 1.5px dashed rgb(5 9 17 / 0.18);
+  background: #fff;
+  color: var(--seco-muted);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.seco-plan-profile__avatar:hover {
+  border-color: rgb(5 9 17 / 0.32);
+  background: rgb(255 255 255 / 0.9);
+}
+
+.seco-plan-profile__avatar-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.seco-plan-profile__avatar-label {
+  font-family: var(--seco-font-ui);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1.25;
+  padding: 0 0.375rem;
+  color: var(--seco-ink);
+}
+
+.seco-plan-profile__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.seco-plan-profile__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.seco-plan-profile__name-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem 0.75rem;
+}
+
+@media (max-width: 420px) {
+  .seco-plan-profile__name-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+.seco-plan-profile__name-field {
+  display: block;
+  min-width: 0;
+}
+
+.seco-plan-profile__name-input {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.4375rem 0.625rem;
+  border: 1px solid rgb(5 9 17 / 0.12);
+  border-radius: 0.5rem;
+  background: #fff;
+  font-family: var(--seco-font-display);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--seco-ink);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.seco-plan-profile__name-input::placeholder {
+  color: rgb(5 9 17 / 0.32);
+  font-weight: 400;
+}
+
+.seco-plan-profile__name-input:focus {
+  border-color: rgb(5 9 17 / 0.28);
+}
+
+.seco-plan-profile__detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem 1rem;
+  font-family: var(--seco-font-ui);
+  font-size: 0.8125rem;
+  color: var(--seco-muted);
+}
+
+.seco-plan-profile__detail-item {
+  font-variant-numeric: tabular-nums;
+}
+
+.seco-plan-profile__detail-item--wake {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.seco-plan-profile__detail-label {
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--seco-muted);
+}
+
+.seco-plan-profile__wake-input {
+  margin: 0;
+  padding: 0.125rem 0.375rem;
+  border: 1px solid rgb(5 9 17 / 0.1);
+  border-radius: 0.375rem;
+  background: #fff;
+  font-family: var(--seco-font-data);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--seco-ink);
+}
+
+.seco-plan-profile__wake-input:focus {
+  outline: none;
+  border-color: rgb(5 9 17 / 0.28);
+}
+
+.seco-plan-profile__baseline {
+  margin: 0.125rem 0 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--seco-muted);
+}
+
+.seco-dashpreview__stat-dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.seco-patient-plan-deeper {
+  margin-top: 1.5rem;
+}
+
+.seco-dashpreview__stat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin: 0.875rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seco-dashpreview__stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.seco-dashpreview__stat-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.375rem 0.75rem;
+}
+
+.seco-dashpreview__population-note,
+.seco-planpreview__population-note {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--seco-muted);
+}
+
+.seco-dashpreview__population-label {
+  margin: 0 0 0.375rem;
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--seco-muted);
+}
+
+.seco-patient-plan-bridge {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--seco-border);
+}
+
+.seco-patient-plan-bridge__headline {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--seco-ink);
+}
+
+.seco-patient-plan-bridge__body {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--seco-muted);
+}
+
+.seco-patient-plan-bridge__cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.625rem 1.125rem;
+  border-radius: var(--seco-radius-md);
+  background: var(--seco-navy);
+  color: #fff;
+  font-family: var(--seco-font-ui);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.seco-patient-plan-bridge__cta:hover {
+  opacity: 0.92;
+}
+
+/* ── Patient plan · Timing tab tiles (Oura / Health-app density) ── */
+
+.seco-plan-tiles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.seco-plan-tiles__context {
+  margin: 0 0 0.125rem;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--seco-muted);
+}
+
+.seco-plan-tile {
+  margin: 0;
+  padding: clamp(1rem, 2.2vw, 1.25rem);
+  border: 1px solid rgb(5 9 17 / 0.08);
+  border-radius: var(--seco-radius-lg);
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(5 9 17 / 0.06);
+}
+
+.seco-plan-tile--sync {
+  border-color: rgb(5 9 17 / 0.14);
+  background: linear-gradient(180deg, #fff 0%, rgb(241 246 252 / 0.65) 100%);
+}
+
+.seco-plan-tile__sync-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem 1.25rem;
+  align-items: end;
+  margin-bottom: 0.875rem;
+}
+
+@media (max-width: 420px) {
+  .seco-plan-tile__sync-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seco-plan-tile__sync-meter {
+    min-width: 0;
+  }
+
+  .seco-plan-tile__sync-meter-label {
+    text-align: left;
+  }
+}
+
+.seco-plan-tile__sync-primary {
+  min-width: 0;
+}
+
+.seco-plan-tile__sync-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 6.5rem;
+}
+
+.seco-plan-tile__sync-meter-track {
+  height: 0.375rem;
+  border-radius: 100px;
+  background: rgb(5 9 17 / 0.08);
+  overflow: hidden;
+}
+
+.seco-plan-tile__sync-meter-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #227850 0%, #34a06a 100%);
+  transition: width 0.35s ease;
+}
+
+.seco-plan-tile__sync-meter-label {
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--seco-muted);
+  text-align: right;
+}
+
+.seco-plan-tile-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seco-plan-tile__eyebrow,
+.seco-plan-tile__insight-label,
+.seco-plan-tile__next-label {
+  margin: 0 0 0.5rem;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--seco-muted);
+}
+
+.seco-plan-tile__sync-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.375rem 0.625rem;
+  margin-bottom: 0.75rem;
+}
+
+.seco-plan-tile__sync-score {
+  display: flex;
+  align-items: baseline;
+  gap: 0.375rem;
+  margin: 0;
+}
+
+.seco-plan-tile__sync-num {
+  font-family: var(--seco-font-display);
+  font-size: clamp(2rem, 5vw, 2.625rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--seco-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.seco-plan-tile__sync-of {
+  font-family: var(--seco-font-ui);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--seco-muted);
+}
+
+.seco-plan-tile__sync-caption {
+  margin: 0;
+  flex: 1 1 100%;
+  font-family: var(--seco-font-ui);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--seco-muted);
+}
+
+.seco-plan-tile__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-bottom: 0.875rem;
+}
+
+.seco-plan-tile__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  border-radius: 100px;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.seco-plan-tile__chip--synced {
+  background: rgb(34 120 80 / 0.1);
+  color: #227850;
+}
+
+.seco-plan-tile__chip--review {
+  background: rgb(180 120 40 / 0.12);
+  color: #9a6a1a;
+}
+
+.seco-plan-tile__verdict {
+  margin: 0;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--seco-border);
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--seco-ink);
+}
+
+.seco-plan-tile--med {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.seco-plan-tile__accent {
+  flex-shrink: 0;
+  width: 4px;
+  align-self: stretch;
+}
+
+.seco-plan-tile__accent--synced {
+  background: #227850;
+}
+
+.seco-plan-tile__accent--review {
+  background: #c4881a;
+}
+
+.seco-plan-tile__accent--conflict {
+  background: #b03c32;
+}
+
+.seco-plan-tile--med-synced {
+  background: rgb(34 120 80 / 0.03);
+  border-color: rgb(34 120 80 / 0.18);
+}
+
+.seco-plan-tile--med-review {
+  background: rgb(196 136 26 / 0.04);
+  border-color: rgb(196 136 26 / 0.22);
+}
+
+.seco-plan-tile--med-conflict {
+  background: rgb(176 60 50 / 0.04);
+  border-color: rgb(176 60 50 / 0.2);
+}
+
+.seco-plan-tile__med-body {
+  flex: 1;
+  min-width: 0;
+  padding: 0.875rem 1rem 0.9375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.seco-plan-tile__med-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.seco-plan-tile__med-name {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--seco-ink);
+}
+
+.seco-plan-tile__med-window {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--seco-muted);
+}
+
+.seco-plan-tile__pill {
+  flex-shrink: 0;
+  padding: 0.3125rem 0.625rem;
+  border-radius: 100px;
+  font-family: var(--seco-font-data);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.seco-plan-tile__pill--synced {
+  background: rgb(34 120 80 / 0.1);
+  color: #227850;
+}
+
+.seco-plan-tile__pill--review {
+  background: rgb(180 120 40 / 0.12);
+  color: #9a6a1a;
+}
+
+.seco-plan-tile__pill--conflict {
+  background: rgb(180 60 50 / 0.1);
+  color: #b03c32;
+}
+
+.seco-plan-tile__med-action {
+  margin: 0;
+  padding: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--seco-ink);
+  opacity: 0.72;
+}
+
+.seco-plan-tile--insight {
+  background: rgb(5 9 17 / 0.02);
+}
+
+.seco-plan-tile__insight-body {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--seco-muted);
+}
+
+.seco-plan-tile--next {
+  background: linear-gradient(180deg, rgb(172 211 222 / 0.14) 0%, var(--seco-surface) 100%);
+  border-color: rgb(172 211 222 / 0.35);
+}
+
+.seco-plan-tile__next-headline {
+  margin: 0 0 0.375rem;
+  font-family: var(--seco-font-display);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--seco-ink);
+}
+
+.seco-plan-tile__next-body {
+  margin: 0 0 1rem;
+  font-family: var(--seco-font-ui);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--seco-muted);
+}
+
+.seco-plan-tile__next-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6875rem 1.25rem;
+  border-radius: var(--seco-radius-md);
+  background: var(--seco-navy);
+  color: #fff;
+  font-family: var(--seco-font-ui);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.seco-plan-tile__next-cta:hover {
+  opacity: 0.92;
+}
+
+.seco-plan-tile__next-hint {
+  margin: 0.75rem 0 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  color: var(--seco-muted);
+}
+
+.seco-plan-dosing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.seco-plan-dosing__title {
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--seco-ink);
+}
+
+.seco-plan-dosing__list {
+  padding: clamp(1rem, 2.2vw, 1.25rem);
+  border: 1px solid var(--seco-border);
+  border-radius: var(--seco-radius-lg);
+  background: var(--seco-surface);
+  box-shadow: 0 1px 2px rgb(5 9 17 / 0.04);
+}
+
+.seco-landing__close-disclaimer {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: rgb(255 255 255 / 0.45);
+}
+
 .seco-hero-tabs__tab {
   position: relative;
   display: flex;
@@ -804,7 +1573,7 @@
   grid-auto-columns: unset;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0;
-  overflow: visible;
+  overflow: hidden;
   padding-bottom: 0;
   border: 1px solid var(--seco-border);
   border-radius: var(--seco-radius-md);
@@ -1842,6 +2611,9 @@
 }
 
 .seco-dashpreview__stat-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--seco-font-ui);
   font-size: 0.8125rem;
   font-weight: 400;
@@ -2298,6 +3070,14 @@
   .seco-dashpreview__cue-list > .seco-dashpreview__cue:nth-child(4),
   .seco-planpreview__doses > .seco-planpreview__dose:nth-child(4) {
     animation-delay: 0.43s;
+  }
+
+  .seco-planpreview__doses > .seco-planpreview__dose:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+
+  .seco-planpreview__doses > .seco-planpreview__dose:nth-child(6) {
+    animation-delay: 0.57s;
   }
 }
 
