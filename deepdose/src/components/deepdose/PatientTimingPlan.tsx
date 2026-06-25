@@ -321,6 +321,7 @@ export function PatientTimingPlan({
           )}
         </div>
       </div>
+      </div>
       <PlanFooterCta />
     </>
   )
