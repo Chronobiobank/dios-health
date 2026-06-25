@@ -8,9 +8,9 @@ import { TIPTRAQ_STUDY_PRICING_UK } from '@/lib/clinical/tiptraq-program'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
 
 export const metadata: Metadata = {
-  title: `Home sleep test · ${DEEPDOSE_NAME}`,
+  title: `Testkit · ${DEEPDOSE_NAME}`,
   description:
-    `A three-night TipTraQ home sleep test. Your clinician adds the results to ${DEEPDOSE_NAME} and your dashboard shows personalised timing for light, meals, medicines, movement, and sleep.`,
+    `A three-night TipTraQ Testkit. Your clinician adds the results to ${DEEPDOSE_NAME} and your dashboard shows personalised timing for light, meals, medicines, movement, and sleep.`,
 }
 
 const HOME_TEST_STEPS = [
@@ -74,7 +74,7 @@ export default function HomeTestPage() {
     <article className="seco-page seco-hometest seco-marketing-page">
       <div className="seco-landing__section-inner">
         <header className="seco-hometest__intro seco-reveal seco-reveal--1">
-          <p className="seco-page__eyebrow">TipTraQ home kit</p>
+          <p className="seco-page__eyebrow">Testkit</p>
           <h1 className="seco-page__title seco-hometest__title">
             <span className="seco-landing__hero-line seco-landing__hero-line--white">Monitor</span>
             <span className="seco-landing__hero-line seco-landing__hero-spectrum">from home</span>

@@ -1,13 +1,6 @@
-'use client'
+import { redirect } from 'next/navigation'
 
-import { useEffect } from 'react'
-
-import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
-
+/** Legacy route — research lives on /science#evidence */
 export default function EvidenceRedirectPage() {
-  useEffect(() => {
-    window.location.replace(EVIDENCE_HREF)
-  }, [])
-
-  return null
+  redirect('/science')
 }

@@ -19,7 +19,7 @@ export type PricingTier = {
 export const PRICING_PAGE_META = {
   title: `Pricing · ${DEEPDOSE_NAME}`,
   description:
-    'Start free with a body-clock baseline from your phone and wearables, or order a TipTraQ home sleep test with quarterly clinical re-reads.',
+    'Start free with a body-clock baseline from your phone and wearables, or order a TipTraQ Testkit with quarterly clinical re-reads.',
 } as const
 
 export const PRICING_PAGE_INTRO = {
@@ -31,7 +31,7 @@ export const PRICING_PAGE_INTRO = {
 } as const
 
 export const PRICING_PAGE_CTA = {
-  label: 'How the home test works',
+  label: 'How Testkit works',
   href: '/tiptraq',
   note: 'Order on the advice of your GP — no clinic visit, no waiting list.',
 } as const

@@ -1,10 +1,10 @@
-/** Foundation page — one story, three tiles, key research links. */
+/** Published research links — rendered on /science#evidence */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_RESEARCH_INTRO } from '@/lib/deepdose-marketing/research-content'
 
 export const EVIDENCE_PAGE_META = {
-  title: `Foundation · ${DEEPDOSE_NAME}`,
+  title: `Science · ${DEEPDOSE_NAME}`,
   description:
     'Peer-reviewed science on why when you take a medicine can matter as much as what you take.',
 } as const

@@ -2,7 +2,6 @@
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {
-  CHRONOBIOBANK_RESEARCH_HREF,
   CHRONOBIOBANK_SCIENCE_HREF,
 } from '@/lib/deepdose-marketing/site-nav-links'
 
@@ -216,7 +215,7 @@ export const CHRONOBIOBANK_MISSION_JOIN = {
 /** Bottom-of-page deep dives — descriptive badges for research & measurement detail. */
 export const CHRONOBIOBANK_DEEP_DIVE = {
   research: {
-    badge: 'Foundation',
+    badge: 'Evidence',
     title: 'Research library',
     teaser: 'Peer-reviewed studies on timing, sleep, and health outcomes',
   },

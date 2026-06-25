@@ -439,9 +439,6 @@
   container-type: inline-size;
   container-name: marketing-wide-tile;
 
-  --mkt-wide-tile-cue-size: clamp(0.8125rem, 2.15cqi, 1rem);
-  --mkt-wide-tile-title-size: clamp(2rem, 7.25cqi, 3.375rem);
-  --mkt-wide-tile-body-size: clamp(1.0625rem, 2.45cqi, 1.3125rem);
   --mkt-wide-tile-body-measure: min(50ch, 100%);
   --mkt-wide-tile-pad-block: clamp(1.5rem, 6.5cqi, 3rem);
   --mkt-wide-tile-pad-inline: clamp(1.375rem, 6cqi, 2.75rem);

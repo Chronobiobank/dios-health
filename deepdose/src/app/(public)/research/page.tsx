@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 
-/** Legacy route — research partnerships live at /partners. */
+/** Legacy route — published research lives on /science#evidence */
 export default function ResearchRedirectPage() {
-  redirect('/partners')
+  redirect('/science')
 }

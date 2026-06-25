@@ -1,7 +1,6 @@
 /** Science & trust — lean scan page; detail lives on linked routes. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
-import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 
 export const SCIENCE_TRUST_META = {
   title: `Science & trust · ${DEEPDOSE_NAME}`,
@@ -47,7 +46,7 @@ export const SCIENCE_TRUST_FEATURES = [
     title: 'Published science',
     teaser: 'Chronotherapy trials we build on',
     cue: '#8b9cf8',
-    href: EVIDENCE_HREF,
+    href: '#evidence',
   },
 ] as const
 

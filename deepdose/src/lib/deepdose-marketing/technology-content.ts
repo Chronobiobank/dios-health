@@ -236,6 +236,6 @@ export const DLMO_PROXY_CLINICIAN_CTA = {
   links: [
     { label: 'Technology overview', href: '/technology' },
     { label: 'Clinician sign in', href: '/login?next=/clinical/dashboard' },
-    { label: 'TipTraQ home test', href: '/home-test' },
+    { label: 'TipTraQ Testkit', href: '/home-test' },
   ],
 } as const

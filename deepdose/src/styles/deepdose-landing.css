@@ -4,6 +4,228 @@
   background: var(--seco-navy);
 }
 
+/* Patient landing — fluid type (hero uses vw; tabs/tiles were fixed rem) */
+.deepdose-shell.seco-shell--dark .seco-landing--maven .seco-landing__hero-title {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--seco-font-display);
+  font-size: var(--mkt-hero-title-size);
+  font-weight: 300;
+  line-height: var(--text-display-leading-hero);
+  letter-spacing: var(--seco-display-tracking-hero);
+  color: #fff;
+}
+
+.deepdose-shell.seco-shell--dark .seco-landing--maven .seco-landing__hero-lede {
+  margin-block: var(--mkt-hero-lede-gap);
+  max-width: 56ch;
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-hero-lede-size);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.seco-landing--maven .seco-hero-tabs__label {
+  font-size: var(--landing-tab-label-size);
+}
+
+.seco-landing--maven .seco-hero-tabs__body {
+  max-width: 28ch;
+  font-size: var(--landing-tab-body-size);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel-title {
+  font-size: var(--landing-panel-title-size);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel-card-title {
+  font-size: var(--landing-panel-card-title-size);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel-rail--grid .seco-hero-tabs__panel-card-title {
+  font-size: var(--landing-panel-card-title-size);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel-card-meta {
+  font-size: var(--landing-panel-card-meta-size);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel-link {
+  font-size: var(--type-body);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel-hook {
+  font-size: var(--type-body-lg);
+}
+
+.seco-landing--maven .seco-landing__close-navy .seco-landing__section-title {
+  font-size: var(--type-heading);
+}
+
+.seco-landing--maven .seco-landing__close-navy .seco-landing__support {
+  font-size: var(--landing-close-support-size);
+}
+
+.seco-landing--maven .seco-patient-doses .seco-about__h2 {
+  font-size: var(--landing-dose-section-title-size);
+}
+
+.seco-landing--maven .seco-patient-doses .seco-spectrum-tile__title,
+.seco-landing--maven .seco-patient-doses .seco-spectrum-tile__title--display {
+  font-size: var(--landing-dose-tile-title-size);
+}
+
+.seco-landing--maven .seco-patient-doses .seco-spectrum-tile__body {
+  font-size: var(--landing-dose-tile-body-size);
+  line-height: 1.5;
+}
+
+.seco-landing--maven .seco-patient-doses .seco-about__time-label {
+  font-size: var(--landing-dose-time-size);
+}
+
+@media (min-width: 768px) {
+  .seco-landing--maven .seco-hero-tabs__icon {
+    width: clamp(3.75rem, 3.25rem + 1.5vw, 4.25rem);
+    height: clamp(3.75rem, 3.25rem + 1.5vw, 4.25rem);
+  }
+
+  .seco-landing--maven .seco-hero-tabs__icon svg {
+    width: clamp(1.75rem, 1.5rem + 0.5vw, 2rem);
+    height: clamp(1.75rem, 1.5rem + 0.5vw, 2rem);
+  }
+}
+
+/* Hero tab panels — chrono + dosing plan previews were fixed mobile rem sizes */
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview--chrono .seco-dashpreview__name {
+  font-size: var(--landing-preview-display);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__profile-age {
+  font-size: var(--landing-preview-caption);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__profile-detail {
+  font-size: var(--landing-preview-caption);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__profile-location {
+  font-size: var(--landing-preview-label);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview--chrono .seco-dashpreview__metric-title {
+  font-size: var(--landing-preview-title);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__anchor-result {
+  font-size: var(--landing-preview-body);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__bca-score {
+  font-size: var(--landing-preview-score);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__bca-score-max {
+  font-size: var(--landing-preview-caption);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__tier-pill {
+  font-size: var(--landing-preview-micro);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__bca-state-label {
+  font-size: var(--landing-preview-body);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__bca-state-range {
+  font-size: var(--landing-preview-caption);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__bca-state-def {
+  font-size: var(--landing-preview-micro);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview--chrono .seco-dashpreview__bca-state-def {
+  font-size: var(--landing-preview-tiny);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__anchor-time {
+  font-size: var(--landing-preview-caption);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__anchor-label {
+  font-size: var(--landing-preview-micro);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__anchor-hint {
+  font-size: var(--landing-preview-tiny);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__anchor-gap {
+  font-size: var(--landing-preview-micro);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview--chrono .seco-dashpreview__stat-label {
+  font-size: var(--landing-preview-caption);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview--chrono .seco-dashpreview__stat-value {
+  font-size: var(--landing-preview-body);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__ladder-title {
+  font-size: var(--landing-preview-micro);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__ladder-step {
+  font-size: var(--landing-preview-label);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview--chrono .seco-dashpreview__ladder-note {
+  font-size: var(--landing-preview-micro);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-planpreview__day {
+  font-size: var(--landing-preview-title);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-planpreview__phase {
+  font-size: var(--landing-preview-caption);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-planpreview__window {
+  font-size: var(--landing-preview-label);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-planpreview__now-label {
+  font-size: var(--landing-preview-tiny);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-planpreview__tick {
+  font-size: var(--landing-preview-micro);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-planpreview__dose-label {
+  font-size: var(--landing-preview-body);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-planpreview__dose-note {
+  font-size: var(--landing-preview-caption);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-planpreview__dose-time {
+  font-size: var(--landing-preview-body);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-planpreview__pill {
+  font-size: var(--landing-preview-micro);
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-hero-tabs__peers-count {
+  font-size: var(--landing-preview-caption);
+}
+
 /* Spectrum gradient — Bureau Sans accent line (maven.com hero pattern) */
 .seco-maven-gradient {
   background: var(--seco-spectrum);

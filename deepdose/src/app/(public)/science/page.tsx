@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import { ScienceEvidenceSection } from '@/components/deepdose/ScienceEvidenceSection'
 import { ScienceTrustFeatures } from '@/components/deepdose/ScienceTrustFeatures'
 import {
   SCIENCE_TRUST_CTA,
@@ -35,7 +36,9 @@ export default function SciencePage() {
           <ScienceTrustFeatures className="seco-chronobiobank__folds seco-reveal seco-reveal--2" />
         </div>
 
-        <div className={marketingCtaClass('seco-science__cta seco-reveal seco-reveal--3')}>
+        <ScienceEvidenceSection className="seco-reveal seco-reveal--3" />
+
+        <div className={marketingCtaClass('seco-science__cta seco-reveal seco-reveal--4')}>
           <Link href={SCIENCE_TRUST_CTA.href} className="seco-landing__btn seco-landing__btn--primary">
             {SCIENCE_TRUST_CTA.label} →
           </Link>

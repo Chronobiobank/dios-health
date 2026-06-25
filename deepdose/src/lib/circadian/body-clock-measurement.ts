@@ -79,7 +79,7 @@ export const BODY_CLOCK_PRICING_COMPARE = {
   eyebrow: 'How we measure',
   headline: 'Estimate first. Validate when it matters.',
   support:
-    'Everyone starts with a free body-clock estimate from passive data. A TipTraQ home test upgrades it to a clinical read your clinician can trust.',
+    'Everyone starts with a free body-clock estimate from passive data. A TipTraQ Testkit upgrades it to a clinical read your clinician can trust.',
   estimate: {
     title: 'Phone & wearable estimate',
     figure: 'Free',
@@ -100,7 +100,7 @@ export const BODY_CLOCK_PRICING_COMPARE = {
       'Verified clinical-grade badge on your record',
       'Quarterly re-reads catch drift early',
     ],
-    cta: { label: 'Order home test', href: '/home-test' },
+    cta: { label: 'Order Testkit', href: '/home-test' },
   },
 } as const
 
