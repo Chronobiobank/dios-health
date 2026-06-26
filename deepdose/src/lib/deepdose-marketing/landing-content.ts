@@ -13,8 +13,8 @@ export const DEEPDOSE_LANDING_META = {
 
 export const DEEPDOSE_HOME_SPLASH = {
   eyebrow: 'Precision dosing',
-  headlineWhite: 'Dose smarter,',
-  headlineAccent: 'heal faster',
+  headlineWhite: 'Dose smart,',
+  headlineAccent: 'heal fast.',
   lede: 'Dosing apps guess. We align meds to your body clock so they work better.',
 } as const
 
