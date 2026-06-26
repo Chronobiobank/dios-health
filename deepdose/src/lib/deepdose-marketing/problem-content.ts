@@ -24,7 +24,7 @@ export const PROBLEM_PAGE_SECTIONS = [
   {
     id: 'rhythms',
     title: 'Key mechanisms are rhythmic',
-    body: 'Glucose tolerance, insulin sensitivity, blood pressure, and hormone systems (RAAS, cortisol) shift across 24 hours — changing how drugs work.',
+    body: 'Glucose tolerance, insulin sensitivity, blood pressure, and hormone systems — including the renin–angiotensin–aldosterone system (RAAS) and cortisol — shift across 24 hours, changing how drugs work.',
   },
   {
     id: 'subgroups',
@@ -41,7 +41,7 @@ export const PROBLEM_PAGE_SECTIONS = [
 export const PROBLEM_PAGE_OUTCOMES = {
   title: 'Why fixing it helps',
   items: [
-    'Matched timing can lower nocturnal BP, blunt morning glucose peaks, and improve side-effect profiles — especially in high cardiovascular risk.',
+    'Matched timing can lower night-time blood pressure, blunt morning glucose peaks, and improve side-effect profiles — especially in high cardiovascular risk.',
     'Individual timing respects sleep, meals, and work — improving efficacy without fighting adherence.',
   ],
 } as const
@@ -51,14 +51,14 @@ export const PROBLEM_PAGE_CLINICIAN = {
   items: [
     'Quick phenotyping: dipper vs non-dipper, sleep timing, shift work, dawn-risk — without full ambulatory testing.',
     'Evidence-graded rules: per-drug timing impact (high / medium / low) with references and confidence.',
-    'EHR-ready support: proposed times, interaction flags, patient preferences recorded.',
-    'Trial-ready modules: pragmatic n-of-1 or clinic pilots to build local evidence fast.',
+    'Electronic health record (EHR) support: proposed times, interaction flags, patient preferences recorded.',
+    'Trial-ready modules: pragmatic single-patient (n-of-1) or clinic pilots to build local evidence fast.',
   ],
 } as const
 
 export const PROBLEM_PAGE_CASE = {
   title: 'One example',
-  body: 'A 58-year-old with type 2 diabetes, dawn fasting glucose, and nocturnal hypertension may benefit from bedtime basal insulin or evening ARB dosing — after simple phenotyping confirms nocturnal BP elevation and sleep timing that supports safe evening doses.',
+  body: 'A 58-year-old with type 2 diabetes, dawn fasting glucose, and night-time high blood pressure may benefit from bedtime basal insulin or evening angiotensin receptor blocker (ARB) dosing — after simple phenotyping confirms elevated night-time blood pressure and sleep timing that supports safe evening doses.',
 } as const
 
 export const PROBLEM_PAGE_CTA = {

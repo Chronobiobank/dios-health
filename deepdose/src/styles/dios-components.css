@@ -888,11 +888,6 @@
   max-width: min(100%, 44rem);
   text-align: left;
   text-wrap: balance;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
 }
 
 /* Search + footer links share one width (whichever row is wider). */
