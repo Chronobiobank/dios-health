@@ -15,6 +15,7 @@ import {
 import { buildPersonalTimingPath } from '@/lib/medications/home-to-onboarding'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
 import { usePatientPlanProfile } from '@/lib/patient/use-patient-plan-profile'
+import { buildTakeTimeMap } from '@/lib/patient/plan-dose-preview'
 import { PatientPlanProfileHeader } from '@/components/deepdose/PatientPlanProfileHeader'
 import { PatientPlanTimingPanel } from '@/components/deepdose/PatientPlanTimingPanel'
 import { PatientPlanDosingPanel } from '@/components/deepdose/PatientPlanDosingPanel'
@@ -92,6 +93,7 @@ const APP_TABS = DEEPDOSE_PATIENT_PLAN_TABS.app
 
 type PatientTimingPlanProps = {
   medCodes: string[]
+  medTimes?: string[]
   wake: string | null
   verdict: string
   signupHref?: string
@@ -101,6 +103,7 @@ type PatientTimingPlanProps = {
 
 export function PatientTimingPlan({
   medCodes,
+  medTimes = [],
   wake,
   verdict,
   signupHref = '/login',
@@ -112,6 +115,10 @@ export function PatientTimingPlan({
   const profile = usePatientPlanProfile(wake)
 
   const meds = useMemo(() => resolvePolyPlanMeds(medCodes), [medCodes])
+  const takeTimes = useMemo(
+    () => buildTakeTimeMap(medCodes, medTimes),
+    [medCodes, medTimes]
+  )
 
   const syncedCount = meds.filter((m) => syncStateForRisk(m.meta.risk) === 'synced').length
   const reviewCount = meds.length - syncedCount
@@ -119,13 +126,15 @@ export function PatientTimingPlan({
     () =>
       buildPersonalTimingPath({
         medCodes,
+        medTimes: medTimes.length ? medTimes : undefined,
         wake: profile.wake ?? undefined,
       }),
-    [medCodes, profile.wake]
+    [medCodes, medTimes, profile.wake]
   )
 
   const timingPanelProps = {
     meds,
+    takeTimes,
     verdict,
     syncedCount,
     reviewCount,
@@ -186,7 +195,12 @@ export function PatientTimingPlan({
         )}
 
         {tab === 'dosing' && (
-          <PatientPlanDosingPanel meds={meds} wake={profile.wake} variant="app" />
+          <PatientPlanDosingPanel
+            meds={meds}
+            wake={profile.wake}
+            takeTimes={takeTimes}
+            variant="app"
+          />
         )}
 
         {tab === 'sharing' && (
@@ -317,7 +331,12 @@ export function PatientTimingPlan({
           ) : tab === 'timing' ? (
             <PatientPlanTimingPanel {...timingPanelProps} variant="landing" />
           ) : (
-            <PatientPlanDosingPanel meds={meds} wake={profile.wake} variant="landing" />
+            <PatientPlanDosingPanel
+              meds={meds}
+              wake={profile.wake}
+              takeTimes={takeTimes}
+              variant="landing"
+            />
           )}
         </div>
       </div>

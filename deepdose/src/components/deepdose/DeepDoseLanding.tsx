@@ -16,6 +16,7 @@ type MedContext = {
 type PlanContext = {
   medCodes: string[]
   medNames: string[]
+  medTimes?: string[]
   wake: string | null
   verdict: string
 }
@@ -46,6 +47,7 @@ export function DeepDoseLanding({
             <PatientTimingPlan
               variant="landing"
               medCodes={planContext.medCodes}
+              medTimes={planContext.medTimes}
               wake={planContext.wake}
               verdict={planContext.verdict}
               signupHref={signupHref}

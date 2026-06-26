@@ -15,12 +15,12 @@ export const metadata: Metadata = {
 }
 
 type PageProps = {
-  searchParams: Promise<{ med?: string; meds?: string; time?: string; wake?: string }>
+  searchParams: Promise<{ med?: string; meds?: string; times?: string; time?: string; wake?: string }>
 }
 
 export default async function PatientLandingPage({ searchParams }: PageProps) {
   const params = await searchParams
-  const { medCodes, med, time, wake } = parsePatientLandingParams(
+  const { medCodes, medTimes, med, time, wake } = parsePatientLandingParams(
     new URLSearchParams(
       Object.entries(params).flatMap(([key, value]) => (value ? [[key, value]] : []))
     )
@@ -30,6 +30,7 @@ export default async function PatientLandingPage({ searchParams }: PageProps) {
     med: med ?? undefined,
     time: time ?? undefined,
     medCodes: medCodes.length ? medCodes : undefined,
+    medTimes: medTimes.length ? medTimes : undefined,
     wake: wake ?? undefined,
   })
 
@@ -46,6 +47,7 @@ export default async function PatientLandingPage({ searchParams }: PageProps) {
         planContext={{
           medCodes: codes,
           medNames,
+          medTimes: medTimes.length ? medTimes : undefined,
           wake: wake ?? time,
           verdict: verdictForMedCodes(codes),
         }}

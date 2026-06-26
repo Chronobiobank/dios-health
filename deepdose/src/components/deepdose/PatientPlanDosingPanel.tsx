@@ -10,9 +10,9 @@ import type { PolyPlanMed } from '@/lib/medications/poly-plan-meds'
 import {
   buildDoseTimelineMarkers,
   DOSE_PREVIEW_STATUS_LABEL,
-  doseDisplayTime,
   dosePreviewStatus,
   dosePreviewTone,
+  doseTimeForMed,
   openWindowLabel,
   PLAN_TICKS,
   primaryNowMarkerPos,
@@ -21,6 +21,7 @@ import {
 type PatientPlanDosingPanelProps = {
   meds: PolyPlanMed[]
   wake: string | null
+  takeTimes?: Record<string, string>
   variant?: 'landing' | 'app'
 }
 
@@ -36,6 +37,7 @@ function useMountReveal() {
 export function PatientPlanDosingPanel({
   meds,
   wake,
+  takeTimes,
   variant = 'landing',
 }: PatientPlanDosingPanelProps) {
   const active = useMountReveal()
@@ -44,7 +46,7 @@ export function PatientPlanDosingPanel({
       (TIME_ORDER[a.meta.timing.toLowerCase()] ?? 2) -
       (TIME_ORDER[b.meta.timing.toLowerCase()] ?? 2)
   )
-  const markers = buildDoseTimelineMarkers(sorted, wake)
+  const markers = buildDoseTimelineMarkers(sorted, wake, takeTimes)
   const nowPos = primaryNowMarkerPos(markers)
   const windowLabel = openWindowLabel(sorted, wake)
   const wakeLabel = wake ?? '07:30'
@@ -125,7 +127,7 @@ export function PatientPlanDosingPanel({
                 <p className="seco-planpreview__dose-note">{meta.instruction}</p>
               </div>
               <span className="seco-planpreview__dose-time">
-                {doseDisplayTime(meta.window, wake)}
+                {doseTimeForMed(code, meta, wake, takeTimes)}
               </span>
             </li>
           )

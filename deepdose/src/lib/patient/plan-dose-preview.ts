@@ -87,17 +87,42 @@ export function primaryNowMarkerPos(markers: DoseTimelineMarker[]): number {
   return now?.pos ?? markers[0]?.pos ?? 16
 }
 
-export function buildDoseTimelineMarkers(meds: PolyPlanMed[], wake: string | null): DoseTimelineMarker[] {
+export function buildTakeTimeMap(codes: string[], times: string[]): Record<string, string> {
+  const map: Record<string, string> = {}
+  codes.forEach((code, index) => {
+    const clock = times[index]?.trim().slice(0, 5)
+    if (clock) map[code] = clock
+  })
+  return map
+}
+
+export function buildDoseTimelineMarkers(
+  meds: PolyPlanMed[],
+  wake: string | null,
+  takeTimes?: Record<string, string>
+): DoseTimelineMarker[] {
   return meds.map(({ code, name, meta }) => {
+    const takeTime = takeTimes?.[code]
     const status = dosePreviewStatus(meta.timing)
     return {
       id: code,
       label: name.split(' ')[0] ?? name,
-      pos: doseTimelinePos(meta.window, wake, meta.timing),
+      pos: takeTime
+        ? clockToTimelinePos(takeTime)
+        : doseTimelinePos(meta.window, wake, meta.timing),
       tone: dosePreviewTone(meta.timing),
       now: status === 'now',
     }
   })
+}
+
+export function doseTimeForMed(
+  code: string,
+  meta: PolyPlanMed['meta'],
+  wake: string | null,
+  takeTimes?: Record<string, string>
+): string {
+  return takeTimes?.[code] ?? doseDisplayTime(meta.window, wake)
 }
 
 export function openWindowLabel(meds: PolyPlanMed[], wake: string | null): string | null {

@@ -12,8 +12,31 @@ export const DEEPDOSE_LANDING_META = {
 } as const
 
 export const DEEPDOSE_HOME_SPLASH = {
-  headlineLine: 'We capture melatonin alignment',
-  headlineAccent: 'so your medicines work better.',
+  eyebrow: 'Precision dosing',
+  headlineWhite: 'Optimise',
+  headlineAccent: 'your medication',
+  lede: 'Dosing apps guess. We align meds to your body clock so they work better.',
+} as const
+
+export const DEEPDOSE_HOME_SPLASH_HERO = {
+  eyebrow: DEEPDOSE_HOME_SPLASH.eyebrow,
+  headlineWhite: DEEPDOSE_HOME_SPLASH.headlineWhite,
+  headlineAccent: DEEPDOSE_HOME_SPLASH.headlineAccent,
+  support: DEEPDOSE_HOME_SPLASH.lede,
+} as const
+
+/** Home poly search — wake tile copy. */
+export const DEEPDOSE_HOME_POLY_SEARCH = {
+  checkCta: 'Fix my timing',
+  expandCta: '+ Add other medications',
+  expandCtaAnother: '+ Add medication',
+  medPlaceholders: ['Blood sugar', 'Blood pressure', 'Cholesterol', 'Mood meds'],
+  medPlaceholderExtra: 'Search another medication',
+  whyTitle: 'Why does this matter?',
+  whyDetail: [
+    'On 2+ medicines, the usual issue is dose-time clash — one drug taken at the wrong time of day for your mix.',
+    'We show which times to move, using circadian evidence — not a generic interaction checker.',
+  ],
 } as const
 
 /** Site-wide mission — deficit (wrong-time dosing) → benefit (chronotherapy). */

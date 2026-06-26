@@ -8,126 +8,173 @@ import {
   type MedicationRecommendation,
 } from '@/lib/medications/catalog'
 import { buildPatientLandingPath } from '@/lib/medications/home-to-onboarding'
+import { DEEPDOSE_HOME_POLY_SEARCH } from '@/lib/deepdose-marketing/landing-content'
 import { TimeInput } from '@/components/ui/Form'
 
 const MAX_MEDS = 5
-const INITIAL_MEDS = 2
-const EXTRA_MEDS = 2
+const INITIAL_MEDS = 4
+const DEFAULT_TAKE_TIMES = ['07:30', '08:00', '20:00', '12:00', '22:00'] as const
 
-type MedRow = { query: string; selected: MedicationRecommendation | null }
+function medPlaceholder(index: number): string {
+  return (
+    DEEPDOSE_HOME_POLY_SEARCH.medPlaceholders[index] ??
+    DEEPDOSE_HOME_POLY_SEARCH.medPlaceholderExtra
+  )
+}
+
+type MedRow = {
+  query: string
+  selected: MedicationRecommendation | null
+  takeTime: string
+}
 
 function emptyRows(count: number): MedRow[] {
-  return Array.from({ length: count }, () => ({ query: '', selected: null }))
+  return Array.from({ length: count }, (_, index) => ({
+    query: '',
+    selected: null,
+    takeTime: DEFAULT_TAKE_TIMES[index] ?? '08:00',
+  }))
 }
 
 export function HomeDrugSearch() {
   const [rows, setRows] = useState<MedRow[]>(() => emptyRows(INITIAL_MEDS))
   const [extraOpen, setExtraOpen] = useState(false)
   const [activeAc, setActiveAc] = useState<number | null>(null)
-  const [wakeTime, setWakeTime] = useState('07:30')
   const inputRefs = useRef<Array<HTMLInputElement | null>>([])
 
-  const activeMeds = rows.filter((r) => r.selected)
+  const activeRows = rows.filter((row) => row.selected)
   const visibleCount = extraOpen ? rows.length : INITIAL_MEDS
 
-  function updateRow(i: number, patch: Partial<MedRow>) {
-    setRows((prev) => prev.map((r, idx) => (idx === i ? { ...r, ...patch } : r)))
+  function updateRow(index: number, patch: Partial<MedRow>) {
+    setRows((prev) => prev.map((row, idx) => (idx === index ? { ...row, ...patch } : row)))
   }
 
-  function handleQueryChange(i: number, value: string) {
-    updateRow(i, {
+  function handleQueryChange(index: number, value: string) {
+    updateRow(index, {
       query: value,
-      selected: value === rows[i].selected?.displayName ? rows[i].selected : null,
+      selected: value === rows[index].selected?.displayName ? rows[index].selected : null,
     })
   }
 
-  function handlePick(i: number, med: MedicationRecommendation) {
-    updateRow(i, { query: med.displayName, selected: med })
+  function handlePick(index: number, med: MedicationRecommendation) {
+    const defaultTime =
+      med.recommendedStart ??
+      rows[index]?.takeTime ??
+      DEFAULT_TAKE_TIMES[index] ??
+      '08:00'
+    updateRow(index, { query: med.displayName, selected: med, takeTime: defaultTime })
     setActiveAc(null)
   }
 
-  function clearRow(i: number) {
-    updateRow(i, { query: '', selected: null })
-    inputRefs.current[i]?.focus()
+  function clearRow(index: number) {
+    updateRow(index, { query: '', selected: null })
+    inputRefs.current[index]?.focus()
   }
 
   function openExtraMeds() {
     setExtraOpen(true)
-    setRows((prev) => {
-      const target = INITIAL_MEDS + EXTRA_MEDS
-      if (prev.length >= target) return prev
-      return [...prev, ...emptyRows(target - prev.length)]
-    })
+    if (rows.length < MAX_MEDS) {
+      setRows((prev) => [
+        ...prev,
+        {
+          query: '',
+          selected: null,
+          takeTime: DEFAULT_TAKE_TIMES[prev.length] ?? '08:00',
+        },
+      ])
+    }
   }
 
   function addFifthMed() {
     if (rows.length < MAX_MEDS) {
-      setRows((prev) => [...prev, { query: '', selected: null }])
+      setRows((prev) => [
+        ...prev,
+        { query: '', selected: null, takeTime: DEFAULT_TAKE_TIMES[prev.length] ?? '08:00' },
+      ])
     }
   }
 
-  function getResults(i: number) {
-    const q = rows[i].query.trim()
-    if (!q || rows[i].selected) return []
-    return searchMedicationCatalog(q, { limit: 8 }).map((entry) =>
+  function getResults(index: number) {
+    const query = rows[index].query.trim()
+    if (!query || rows[index].selected) return []
+    return searchMedicationCatalog(query, { limit: 8 }).map((entry) =>
       buildMedicationRecommendation(entry, 0)
     )
   }
 
   const checkHref = useMemo(() => {
-    const medCodes = activeMeds.map((r) => r.selected!.code)
-    return buildPatientLandingPath({ medCodes, wake: wakeTime })
-  }, [activeMeds, wakeTime])
+    const medCodes = activeRows.map((row) => row.selected!.code)
+    const medTimes = activeRows.map((row) => row.takeTime)
+    return buildPatientLandingPath({ medCodes, medTimes })
+  }, [activeRows])
 
-  const canCheck = activeMeds.length >= 1
+  const canCheck = activeRows.length >= 1
 
-  function renderSearchRow(row: MedRow, i: number) {
-    const results = getResults(i)
-    const showDropdown = activeAc === i && row.query.trim().length > 0 && !row.selected
-    const placeholder = `Med ${i + 1}`
+  function renderSearchRow(row: MedRow, index: number) {
+    const results = getResults(index)
+    const showDropdown = activeAc === index && row.query.trim().length > 0 && !row.selected
+    const placeholder = medPlaceholder(index)
+    const ariaLabel = placeholder
 
     return (
       <div
-        key={i}
-        className={`med-search med-search--hero ${row.selected ? 'med-search--selected' : ''}`}
+        key={index}
+        className={`med-search med-search--hero home-drug-search__row ${row.selected ? 'med-search--selected' : ''}`}
       >
-        <div className="med-search__bar">
+        <div className="med-search__bar home-drug-search__bar">
+          <span className="med-search__icon" aria-hidden>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
+              <path d="M20 20L16 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </span>
           <input
-            ref={(el) => {
-              inputRefs.current[i] = el
+            ref={(element) => {
+              inputRefs.current[index] = element
             }}
-            id={i === 0 ? 'home-med-search' : undefined}
+            id={index === 0 ? 'home-med-search' : undefined}
             type="search"
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
             placeholder={placeholder}
-            aria-label={placeholder}
+            aria-label={ariaLabel}
             value={row.query}
-            onChange={(e) => handleQueryChange(i, e.target.value)}
-            onFocus={() => setActiveAc(i)}
-            onBlur={() => setTimeout(() => setActiveAc((ac) => (ac === i ? null : ac)), 160)}
+            onChange={(event) => handleQueryChange(index, event.target.value)}
+            onFocus={() => setActiveAc(index)}
+            onBlur={() =>
+              setTimeout(() => setActiveAc((active) => (active === index ? null : active)), 160)
+            }
             className="med-search__input"
             role="combobox"
             aria-expanded={showDropdown}
-            aria-controls={showDropdown ? `home-med-search-results-${i}` : undefined}
+            aria-controls={showDropdown ? `home-med-search-results-${index}` : undefined}
             aria-autocomplete="list"
           />
-          {row.query && (
+          {row.query ? (
             <button
               type="button"
               className="home-drug-search__clear"
-              onClick={() => clearRow(i)}
+              onClick={() => clearRow(index)}
               aria-label="Clear"
             >
               ×
             </button>
-          )}
+          ) : null}
+          <div className="home-drug-search__take">
+            <span className="home-drug-search__take-label">Take</span>
+            <TimeInput
+              value={row.takeTime}
+              onChange={(event) => updateRow(index, { takeTime: event.target.value })}
+              className="home-drug-search__take-input"
+              aria-label={`Take time for ${placeholder}`}
+            />
+          </div>
         </div>
 
-        {showDropdown && (
+        {showDropdown ? (
           <ul
-            id={`home-med-search-results-${i}`}
+            id={`home-med-search-results-${index}`}
             className="med-search__dropdown"
             role="listbox"
             aria-label="Medication suggestions"
@@ -142,7 +189,7 @@ export function HomeDrugSearch() {
                   <button
                     type="button"
                     className="med-search__option"
-                    onMouseDown={() => handlePick(i, med)}
+                    onMouseDown={() => handlePick(index, med)}
                   >
                     <span className="med-search__option-name">{med.displayName}</span>
                     <span className="med-search__option-meta">
@@ -155,84 +202,50 @@ export function HomeDrugSearch() {
               ))
             )}
           </ul>
-        )}
+        ) : null}
       </div>
     )
   }
 
   return (
     <div className="home-drug-search home-drug-search--poly">
-      <div className="home-drug-search__med-grid">
-        {rows.slice(0, visibleCount).map((row, i) => renderSearchRow(row, i))}
+      <div className="home-drug-search__med-stack">
+        {rows.slice(0, visibleCount).map((row, index) => renderSearchRow(row, index))}
       </div>
 
-      {!extraOpen ? (
-        <button
-          type="button"
-          className="home-drug-search__foot-link home-drug-search__expand bg-transparent border-none cursor-pointer text-left p-0"
-          onClick={openExtraMeds}
-        >
-          + add other medications
-        </button>
-      ) : (
-        rows.length < MAX_MEDS && (
-          <button
-            type="button"
-            className="home-drug-search__foot-link home-drug-search__expand bg-transparent border-none cursor-pointer text-left p-0"
-            onClick={addFifthMed}
-          >
-            + add another medication
+      <div className="home-drug-search__expand-row">
+        {!extraOpen ? (
+          <button type="button" className="home-drug-search__expand-link" onClick={openExtraMeds}>
+            {DEEPDOSE_HOME_POLY_SEARCH.expandCta}
           </button>
-        )
-      )}
-
-      <div className="home-drug-search__preview">
-        <label className="home-drug-search__time-row home-drug-search__time-row--lead">
-          <span>Usual wake time</span>
-          <TimeInput
-            value={wakeTime}
-            onChange={(e) => setWakeTime(e.target.value)}
-            className="home-drug-search__time-input"
-            required
-          />
-        </label>
-
-        {canCheck ? (
-          <Link
-            href={checkHref}
-            className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta"
-          >
-            Check my risk →
-          </Link>
         ) : (
-          <button
-            type="button"
-            disabled
-            className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta opacity-50 cursor-not-allowed"
-          >
-            Check my risk →
-          </button>
+          rows.length < MAX_MEDS && (
+            <button type="button" className="home-drug-search__expand-link" onClick={addFifthMed}>
+              {DEEPDOSE_HOME_POLY_SEARCH.expandCtaAnother}
+            </button>
+          )
         )}
+      </div>
 
-        <details className="mt-4">
-          <summary className="home-drug-search__foot-link cursor-pointer list-none">
-            why does this matter?
-          </summary>
-          <div className="home-drug-search__detail mt-3 space-y-3">
-            <p>
-              Most medications have a circadian window — a time of day when they work best and carry
-              lowest risk. When you take multiple drugs, those windows can conflict.
-            </p>
-            <p>
-              Your GP prescribes each medication individually. Nobody checks the timing interactions
-              across your full combination — until now.
-            </p>
-            <p>
-              Deepdose maps your polypharmacy profile against circadian evidence from the Hygia
-              Trial (19,084 patients) and the TIME substudy to show you where your risk sits.
-            </p>
-          </div>
-        </details>
+      <div className="home-drug-search__toolbar home-drug-search__toolbar--cta">
+        <div className="home-drug-search__toolbar-end">
+          {canCheck ? (
+            <Link
+              href={checkHref}
+              className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta home-drug-search__toolbar-btn"
+            >
+              {DEEPDOSE_HOME_POLY_SEARCH.checkCta}
+            </Link>
+          ) : (
+            <button
+              type="button"
+              disabled
+              className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta home-drug-search__toolbar-btn"
+            >
+              {DEEPDOSE_HOME_POLY_SEARCH.checkCta}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )

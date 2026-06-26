@@ -16,10 +16,11 @@ export default function LoginForm() {
   const searchParams = useSearchParams()
   const next = searchParams.get('next')
   const staffLogin = isStaffLoginPath(next)
+  const signupFromUrl = searchParams.get('signup') === '1'
   const callbackError = searchParams.get('error')
   const callbackReason = searchParams.get('reason')
 
-  const [mode, setMode] = useState<Mode>('signin')
+  const [mode, setMode] = useState<Mode>(() => (signupFromUrl ? 'signup' : 'signin'))
   const effectiveMode: Mode = staffLogin ? 'signin' : mode
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

@@ -11,6 +11,7 @@ import {
 
 type PatientPlanTimingPanelProps = {
   meds: PolyPlanMed[]
+  takeTimes?: Record<string, string>
   verdict: string
   syncedCount: number
   reviewCount: number
@@ -25,6 +26,7 @@ const SYNC_ACCENT: Record<'synced' | 'review' | 'conflict', string> = {
 
 export function PatientPlanTimingPanel({
   meds,
+  takeTimes,
   verdict,
   syncedCount,
   reviewCount,
@@ -101,6 +103,13 @@ export function PatientPlanTimingPanel({
                   </span>
                 </div>
                 <p className={`${prefix}__med-window`}>
+                  {takeTimes?.[code] ? (
+                    <>
+                      You take at{' '}
+                      <span className="font-mono tabular-nums">{takeTimes[code]}</span>
+                      <span aria-hidden> · </span>
+                    </>
+                  ) : null}
                   {meta.timing}
                   <span aria-hidden> · </span>
                   {meta.window}
