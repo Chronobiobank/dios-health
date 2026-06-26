@@ -10,15 +10,15 @@ export const PROBLEM_PAGE_META = {
 
 export const PROBLEM_PAGE_INTRO = {
   eyebrow: 'The problem',
-  titleWhite: 'Clocks matter,',
-  titleAccent: "everyone's different.",
+  titleWhite: 'Clock time,',
+  titleAccent: 'is not body time.',
   lede: `Many diabetes and cardiometabolic medicines vary in effect and safety by time of day. Practice rarely accounts for each patient’s circadian context — ${DEEPDOSE_NAME} turns that gap into actionable timing.`,
 } as const
 
 export const PROBLEM_PAGE_SECTIONS = [
   {
     id: 'masking',
-    title: 'Standardized dosing hides heterogeneity',
+    title: 'Standardised dosing hides heterogeneity',
     body: 'Trials and guidelines often fix one clock time for everyone, diluting benefits that show up when dosing matches internal rhythm and daily routines.',
   },
   {
@@ -34,7 +34,7 @@ export const PROBLEM_PAGE_SECTIONS = [
   {
     id: 'barriers',
     title: 'Barriers block adoption',
-    body: 'Short visits, adherence worries, and no simple tools push GPs toward one-size instructions instead of individualized chronotherapy.',
+    body: 'Short visits, adherence worries, and no simple tools push GPs towards one-size instructions instead of individualised chronotherapy.',
   },
 ] as const
 
@@ -64,7 +64,7 @@ export const PROBLEM_PAGE_CASE = {
 export const PROBLEM_PAGE_CTA = {
   label: 'Pilot timing-smart prescriptions',
   href: '/clinician-landing',
-  note: 'Sign up to trial the DeepDose clinician toolkit and contribute anonymized outcomes to refine chronotherapy rules.',
+  note: 'Sign up to trial the DeepDose clinician toolkit and contribute anonymised outcomes to refine chronotherapy rules.',
 } as const
 
 export const PROBLEM_PAGE_HREF = '/problem' as const
