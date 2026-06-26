@@ -3,7 +3,7 @@
 import { PROBLEM_PAGE_HREF } from '@/lib/deepdose-marketing/problem-content'
 
 export const DEEPDOSE_SITE_LINKS = [
-  { label: 'The problem', href: PROBLEM_PAGE_HREF },
+  { label: 'The Fix', href: PROBLEM_PAGE_HREF },
   { label: 'Mission', href: '/chronobiobank' },
   { label: 'Technology', href: '/technology' },
   { label: 'Science', href: '/science' },

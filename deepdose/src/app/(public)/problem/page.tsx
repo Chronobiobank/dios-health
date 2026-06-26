@@ -79,7 +79,6 @@ export default function ProblemPage() {
           <Link href={PROBLEM_PAGE_CTA.href} className="seco-landing__btn seco-landing__btn--primary">
             {PROBLEM_PAGE_CTA.label} →
           </Link>
-          <p className="seco-marketing-cta__note">{PROBLEM_PAGE_CTA.note}</p>
         </div>
       </div>
     </article>

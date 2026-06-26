@@ -3,13 +3,13 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const PROBLEM_PAGE_META = {
-  title: `Why timing matters · ${DEEPDOSE_NAME}`,
+  title: `The Fix · ${DEEPDOSE_NAME}`,
   description:
     'Drug effect follows circadian biology. Standard dosing schedules hide benefits that appear when timing matches each patient’s clock.',
 } as const
 
 export const PROBLEM_PAGE_INTRO = {
-  eyebrow: 'The problem',
+  eyebrow: 'The Fix',
   titleWhite: 'Clock time,',
   titleAccent: 'is not body time.',
   lede: `Many diabetes and cardiometabolic medicines vary in effect and safety by time of day. Practice rarely accounts for each patient’s circadian context — ${DEEPDOSE_NAME} turns that gap into actionable timing.`,
@@ -64,12 +64,11 @@ export const PROBLEM_PAGE_CASE = {
 export const PROBLEM_PAGE_CTA = {
   label: 'Pilot timing-smart prescriptions',
   href: '/clinician-landing',
-  note: 'Sign up to trial the DeepDose clinician toolkit and contribute anonymised outcomes to refine chronotherapy rules.',
 } as const
 
 export const PROBLEM_PAGE_HREF = '/problem' as const
 
 export const PROBLEM_PAGE_HOME_LINK = {
-  label: 'Read why this is a problem',
+  label: 'The Fix',
   href: PROBLEM_PAGE_HREF,
 } as const
