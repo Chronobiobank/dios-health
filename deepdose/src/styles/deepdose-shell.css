@@ -479,8 +479,8 @@ body:has(.seco-shell--dark) {
   animation: seco-cta-flow 7s ease-in-out infinite;
 }
 
-/* Hamburger on phones only — tablets and up get the inline desktop nav */
-@media (min-width: 600px) {
+/* Hamburger on mobile and tablet — desktop inline links from 1024px */
+@media (min-width: 1024px) {
   .deepdose-shell .seco-nav__desktop {
     display: flex;
   }

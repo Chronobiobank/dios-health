@@ -23,8 +23,7 @@ type SiteNavBarProps = {
 
 /**
  * Shared maven-style nav used across public, patient, clinical and enterprise
- * shells — inline links + trailing action on desktop, animated hamburger
- * dropdown on mobile.
+ * shells — inline links on desktop (1024px+), hamburger dropdown on mobile and tablet.
  */
 export function SiteNavBar({
   brandHref,
