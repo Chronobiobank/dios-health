@@ -11,22 +11,23 @@ export const DEEPDOSE_LANDING_META = {
     `Precision dosing aligns each medicine with your personal biological window — not a fixed alarm. Learn how ${DEEPDOSE_NAME} times doses to when your body is ready.`,
 } as const
 
-import { PROBLEM_PAGE_HOME_LINK } from '@/lib/deepdose-marketing/problem-content'
+import { PROBLEM_PAGE_HREF } from '@/lib/deepdose-marketing/problem-content'
 
 export const DEEPDOSE_HOME_SPLASH = {
   eyebrow: 'Precision dosing',
   headlineWhite: 'Dose smart,',
   headlineAccent: 'Heal superfast.',
-  lede: 'Dosing apps guess. We align meds to your body clock so they work better.',
+  lede: 'Deepdose removes the guesswork from most dosing apps. Enter your meds below for a free chrono-dosing plan and start feeling better.',
 } as const
 
 export const DEEPDOSE_HOME_SPLASH_HERO = {
   eyebrow: DEEPDOSE_HOME_SPLASH.eyebrow,
   headlineWhite: DEEPDOSE_HOME_SPLASH.headlineWhite,
   headlineAccent: DEEPDOSE_HOME_SPLASH.headlineAccent,
-  supportBeforeLink: 'Dosing apps guess.',
-  supportLink: PROBLEM_PAGE_HOME_LINK,
-  supportAfterLink: 'We align meds to your body clock so they work better.',
+  supportBeforeLink: 'Deepdose removes the guesswork from most dosing apps',
+  supportLink: { label: '(read how)', href: PROBLEM_PAGE_HREF },
+  supportAfterLink:
+    '. Enter your meds below for a free chrono-dosing plan and start feeling better.',
 } as const
 
 /** Default catalog codes for home splash placeholder rows (Blood sugar → Mood meds). */
