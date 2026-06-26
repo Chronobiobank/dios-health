@@ -12,7 +12,7 @@ export const PROBLEM_PAGE_INTRO = {
   eyebrow: 'The Fix',
   titleWhite: 'Clock time,',
   titleAccent: 'is not body time.',
-  lede: `Many diabetes and cardiometabolic medicines vary in effect and safety by time of day. Practice rarely accounts for each patient’s circadian context — ${DEEPDOSE_NAME} turns that gap into actionable timing.`,
+  lede: `Many drugs vary in effect and safety by time of day. Practice rarely accounts for each patient’s circadian context. ${DEEPDOSE_NAME} turns that gap into actionable timing.`,
 } as const
 
 export const PROBLEM_PAGE_SECTIONS = [
