@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { DeepDoseLanding } from '@/components/deepdose/DeepDoseLanding'
+import { PatientLandingWithDraft } from '@/components/deepdose/PatientLandingWithDraft'
 import { DEEPDOSE_LANDING_META } from '@/lib/deepdose-marketing/landing-content'
 import { getCatalogEntry } from '@/lib/medications/catalog'
 import {
@@ -36,24 +36,21 @@ export default async function PatientLandingPage({ searchParams }: PageProps) {
 
   const codes = medCodes.length > 0 ? medCodes : med ? [med] : []
 
-  if (codes.length > 0) {
-    const medNames = codes.map(
-      (code) => getCatalogEntry(code)?.displayName ?? code.charAt(0).toUpperCase() + code.slice(1)
-    )
-
-    return (
-      <DeepDoseLanding
-        signupHref={signupHref}
-        planContext={{
+  const urlPlanContext =
+    codes.length > 0
+      ? {
           medCodes: codes,
-          medNames,
+          medNames: codes.map(
+            (code) =>
+              getCatalogEntry(code)?.displayName ?? code.charAt(0).toUpperCase() + code.slice(1)
+          ),
           medTimes: medTimes.length ? medTimes : undefined,
           wake: wake ?? time,
           verdict: verdictForMedCodes(codes),
-        }}
-      />
-    )
-  }
+        }
+      : undefined
 
-  return <DeepDoseLanding signupHref={signupHref} />
+  return (
+    <PatientLandingWithDraft urlPlanContext={urlPlanContext} signupHrefFromUrl={signupHref} />
+  )
 }

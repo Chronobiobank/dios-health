@@ -7,8 +7,13 @@ import {
   searchMedicationCatalog,
   type MedicationRecommendation,
 } from '@/lib/medications/catalog'
-import { buildPatientLandingPath } from '@/lib/medications/home-to-onboarding'
-import { DEEPDOSE_HOME_POLY_SEARCH } from '@/lib/deepdose-marketing/landing-content'
+import { buildPatientLandingPath, earliestTakeTime } from '@/lib/medications/home-to-onboarding'
+import {
+  DEEPDOSE_HOME_DEFAULT_MED_CODES,
+  DEEPDOSE_HOME_POLY_SEARCH,
+} from '@/lib/deepdose-marketing/landing-content'
+import { resolveHomePlanRows } from '@/lib/patient/home-plan-rows'
+import { savePlanDraft } from '@/lib/patient/plan-draft'
 import { TimeInput } from '@/components/ui/Form'
 
 const MAX_MEDS = 5
@@ -42,8 +47,20 @@ export function HomeDrugSearch() {
   const [activeAc, setActiveAc] = useState<number | null>(null)
   const inputRefs = useRef<Array<HTMLInputElement | null>>([])
 
-  const activeRows = rows.filter((row) => row.selected)
   const visibleCount = extraOpen ? rows.length : INITIAL_MEDS
+
+  const resolvedPlan = useMemo(
+    () =>
+      resolveHomePlanRows(
+        rows.map((row) => ({
+          selectedCode: row.selected?.code ?? null,
+          takeTime: row.takeTime,
+        })),
+        visibleCount,
+        DEEPDOSE_HOME_DEFAULT_MED_CODES
+      ),
+    [rows, visibleCount]
+  )
 
   function updateRow(index: number, patch: Partial<MedRow>) {
     setRows((prev) => prev.map((row, idx) => (idx === index ? { ...row, ...patch } : row)))
@@ -103,12 +120,21 @@ export function HomeDrugSearch() {
   }
 
   const checkHref = useMemo(() => {
-    const medCodes = activeRows.map((row) => row.selected!.code)
-    const medTimes = activeRows.map((row) => row.takeTime)
-    return buildPatientLandingPath({ medCodes, medTimes })
-  }, [activeRows])
+    const { medCodes, medTimes } = resolvedPlan
+    const wake = earliestTakeTime(medTimes) ?? undefined
+    return buildPatientLandingPath({ medCodes, medTimes, wake })
+  }, [resolvedPlan])
 
-  const canCheck = activeRows.length >= 1
+  const canCheck = resolvedPlan.medCodes.length >= 1
+
+  function handleFixTiming() {
+    const { medCodes, medTimes } = resolvedPlan
+    savePlanDraft({
+      medCodes,
+      medTimes,
+      wake: earliestTakeTime(medTimes),
+    })
+  }
 
   function renderSearchRow(row: MedRow, index: number) {
     const results = getResults(index)
@@ -232,6 +258,7 @@ export function HomeDrugSearch() {
           {canCheck ? (
             <Link
               href={checkHref}
+              onClick={handleFixTiming}
               className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta home-drug-search__toolbar-btn"
             >
               {DEEPDOSE_HOME_POLY_SEARCH.checkCta}

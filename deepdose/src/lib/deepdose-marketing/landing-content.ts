@@ -14,7 +14,7 @@ export const DEEPDOSE_LANDING_META = {
 export const DEEPDOSE_HOME_SPLASH = {
   eyebrow: 'Precision dosing',
   headlineWhite: 'Dose smart,',
-  headlineAccent: 'heal fast.',
+  headlineAccent: 'Heal superfast.',
   lede: 'Dosing apps guess. We align meds to your body clock so they work better.',
 } as const
 
@@ -24,6 +24,14 @@ export const DEEPDOSE_HOME_SPLASH_HERO = {
   headlineAccent: DEEPDOSE_HOME_SPLASH.headlineAccent,
   support: DEEPDOSE_HOME_SPLASH.lede,
 } as const
+
+/** Default catalog codes for home splash placeholder rows (Blood sugar → Mood meds). */
+export const DEEPDOSE_HOME_DEFAULT_MED_CODES = [
+  'metformin',
+  'ramipril',
+  'atorvastatin',
+  'sertraline',
+] as const
 
 /** Home poly search — wake tile copy. */
 export const DEEPDOSE_HOME_POLY_SEARCH = {

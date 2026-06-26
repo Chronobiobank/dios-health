@@ -869,17 +869,19 @@
 .seco-splash__hero-marketing .seco-landing__hero-title {
   max-width: none;
   text-align: left;
-  white-space: nowrap;
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-line {
-  display: inline;
-  white-space: nowrap;
+  display: block;
+  line-height: 1.08;
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-line + .seco-landing__hero-line {
-  margin-top: 0;
-  margin-left: 0.25em;
+  margin-top: 0.15em;
+}
+
+.seco-splash__hero-marketing .seco-landing__hero-spectrum {
+  padding-bottom: 0;
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-lede {
