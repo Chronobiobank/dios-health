@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 
 import { DarkAmbientBackground } from '@/components/deepdose/DarkAmbientBackground'
+import { DeepDoseSiteNav } from '@/components/deepdose/DeepDoseSiteNav'
 import { SplashVideoBackground } from '@/components/deepdose/SplashVideoBackground'
 import { cn } from '@/lib/utils/cn'
 
@@ -10,7 +11,7 @@ type SplashFrameProps = {
   videoBackground?: boolean
 }
 
-/** Fullscreen splash shell — video (home) or ambient canvas (gateway). */
+/** Fullscreen splash shell — same sticky nav as other public pages. */
 export function SplashFrame({ children, videoBackground = false }: SplashFrameProps) {
   return (
     <div
@@ -21,7 +22,10 @@ export function SplashFrame({ children, videoBackground = false }: SplashFramePr
       )}
     >
       {videoBackground ? <SplashVideoBackground /> : <DarkAmbientBackground />}
-      <article className="seco-splash__page">{children}</article>
+      <DeepDoseSiteNav />
+      <div className="clinical-site-nav__main seco-splash__main flex min-h-0 flex-1 flex-col">
+        <article className="seco-splash__page">{children}</article>
+      </div>
     </div>
   )
 }

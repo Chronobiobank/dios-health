@@ -531,15 +531,15 @@
 }
 
 .home-drug-search--poly {
-  gap: 0.375rem;
+  gap: 0;
 }
 
 .home-drug-search--poly .home-drug-search__expand-row {
-  margin-top: 0;
+  margin-top: 0.25rem;
 }
 
 .home-drug-search--poly .home-drug-search__toolbar--cta {
-  margin-top: 0.5rem;
+  margin-top: clamp(1.125rem, 3vh, 1.75rem);
 }
 
 .home-drug-search__expand-row {
@@ -869,11 +869,13 @@
 .seco-splash__hero-marketing .seco-landing__hero-title {
   max-width: none;
   text-align: left;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+}
+
+.seco-splash__hero-marketing .seco-landing__hero-line {
+  display: block;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-lede {
@@ -960,212 +962,21 @@
   max-width: none;
 }
 
-.seco-splash__page:has(.seco-splash-nav) {
-  padding-top: clamp(3.75rem, 10vw, 5.5rem);
-}
-
-.seco-splash__page:has(.seco-splash-nav) .seco-splash__stage--search {
-  padding-top: clamp(1.25rem, 3.5vh, 2rem);
-}
-
-/* Splash home — top bar + off-canvas menu */
-.seco-splash-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-block: clamp(1rem, 3vw, 2rem);
-  padding-inline: 0 clamp(1rem, 3vw, 2rem);
-  pointer-events: none;
-}
-
-.seco-splash-nav > * {
-  pointer-events: auto;
-}
-
-.seco-splash-nav__brand {
-  color: rgb(255 255 255 / 0.78);
-  text-decoration: none;
-  font-size: var(--type-body-lg);
-  line-height: 1;
-  transition: color 0.15s ease;
-}
-
-.seco-splash-nav__brand:hover {
-  color: rgb(255 255 255 / 0.95);
-}
-
-.seco-splash-nav__brand .deepdose-wordmark {
-  font-size: 1em;
-}
-
-.seco-splash-nav__toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid rgb(255 255 255 / 0.22);
-  border-radius: 0.625rem;
-  background: rgb(255 255 255 / 0.06);
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.seco-splash-nav__toggle:hover {
-  background: rgb(255 255 255 / 0.12);
-}
-
-.seco-splash-nav__toggle:focus-visible {
-  outline: 2px solid rgb(255 255 255 / 0.85);
-  outline-offset: 2px;
-}
-
-.seco-splash-nav__toggle-bars {
+/* Splash routes — shared sticky nav + scrollable main (matches PublicMarketingShell) */
+.seco-splash__main {
   position: relative;
-  display: block;
-  width: 1.125rem;
-  height: 0.875rem;
+  z-index: 2;
+  min-height: 0;
 }
 
-.seco-splash-nav__toggle-bars > span {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  border-radius: 1px;
-  background: currentcolor;
-  transition: transform 0.2s ease, opacity 0.2s ease, top 0.2s ease;
+.seco-splash .seco-splash__page:has(.seco-splash__stage--search) {
+  padding-top: 0;
+  padding-inline: var(--seco-page-pad);
 }
 
-.seco-splash-nav__toggle-bars > span:nth-child(1) {
-  top: 0;
-}
-
-.seco-splash-nav__toggle-bars > span:nth-child(2) {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.seco-splash-nav__toggle-bars > span:nth-child(3) {
-  bottom: 0;
-}
-
-.seco-splash-nav--open .seco-splash-nav__toggle-bars > span:nth-child(1) {
-  top: 50%;
-  transform: translateY(-50%) rotate(45deg);
-}
-
-.seco-splash-nav--open .seco-splash-nav__toggle-bars > span:nth-child(2) {
-  opacity: 0;
-}
-
-.seco-splash-nav--open .seco-splash-nav__toggle-bars > span:nth-child(3) {
-  bottom: 50%;
-  transform: translateY(50%) rotate(-45deg);
-}
-
-.seco-splash-nav__backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 6;
-  border: 0;
-  padding: 0;
-  background: rgb(6 10 18 / 0.55);
-  opacity: 0;
-  pointer-events: none;
-  cursor: default;
-  transition: opacity 0.22s ease;
-}
-
-.seco-splash-nav--open .seco-splash-nav__backdrop {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.seco-splash-nav__panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 7;
-  display: flex;
-  flex-direction: column;
-  width: min(100%, 18.5rem);
-  padding: clamp(4.5rem, 12vh, 6rem) clamp(1.25rem, 4vw, 2rem) 2rem;
-  background: rgb(11 18 32 / 0.98);
-  border-left: 1px solid rgb(255 255 255 / 0.1);
-  box-shadow: -12px 0 40px rgb(0 0 0 / 0.35);
-  transform: translateX(100%);
-  transition: transform 0.24s ease;
-  pointer-events: none;
-}
-
-.seco-splash-nav--open .seco-splash-nav__panel {
-  transform: translateX(0);
-  pointer-events: auto;
-}
-
-.seco-splash-nav__panel-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.seco-splash-nav__panel-link {
-  padding: 0.9375rem 0;
-  border-bottom: 1px solid rgb(255 255 255 / 0.1);
-  font-family: var(--font-ui, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: var(--type-body-lg);
-  font-weight: 500;
-  color: rgb(255 255 255 / 0.9);
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-.seco-splash-nav__panel-link:hover {
-  color: #fff;
-}
-
-.seco-splash-nav__panel-link--active {
-  color: rgb(172 211 222 / 0.95);
-}
-
-.seco-splash-nav__panel-link--cta {
-  margin-top: 1rem;
-  padding: 0.75rem 1rem;
-  border: none;
-  border-radius: 999px;
-  background: var(--seco-spectrum-hero);
-  background-size: 220% 100%;
-  background-position: 0% 50%;
-  color: var(--seco-navy);
-  font-weight: 600;
-  text-align: center;
-  animation: seco-cta-flow 7s ease-in-out infinite;
-}
-
-.seco-splash-nav__panel-link--cta:hover {
-  color: var(--seco-navy);
-  opacity: 0.92;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .seco-splash-nav__panel,
-  .seco-splash-nav__backdrop,
-  .seco-splash-nav__toggle-bars > span {
-    transition: none;
-  }
-
-  .seco-splash-nav__panel-link--cta {
-    animation: none;
-  }
+.seco-splash__page:has(.seco-splash__stage--search) .seco-splash__core {
+  align-items: stretch;
+  padding-block: 0;
 }
 
 .seco-splash__brand-corner {

@@ -900,3 +900,8 @@
       linear-gradient(0deg, rgb(6 10 18 / 0.45) 0%, transparent 36%);
   }
 }
+
+/* Home splash — tighter headline→lede than standard marketing hero bands */
+.deepdose-shell.seco-shell--dark .clinical-layout .seco-splash__hero-marketing > .seco-landing__hero-lede {
+  margin-block: 0.625rem 0;
+}
