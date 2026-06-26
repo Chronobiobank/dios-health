@@ -56,7 +56,7 @@ async function assertFullyRendered(locator: Locator) {
   const box = await locator.boundingBox()
   expect(box?.height ?? 0).toBeGreaterThan(8)
   const clipped = await locator.evaluate((el) => {
-    let node: HTMLElement | null = el
+    let node: Element | null = el
     while (node) {
       const style = window.getComputedStyle(node)
       if (style.overflow === 'hidden' && el.scrollHeight > node.clientHeight + 2) {
@@ -78,14 +78,13 @@ for (const viewport of VIEWPORTS) {
       await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toContainText(/Dose smart/i)
-      await expect(page.getByRole('heading', { level: 1 })).toContainText(/recover fast/i)
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('You are the drug.')
 
       const lede = page.locator('.seco-splash__hero-marketing .seco-landing__hero-lede')
       await assertFullyRendered(lede)
       await assertNotLineClamped(lede)
-      await expect(lede).toContainText(/guesswork/i)
-      await expect(page.getByRole('link', { name: /read how/i })).toBeVisible()
+      await expect(lede).toContainText(/Your body chemistry rocks where other meds fail/i)
+      await expect(lede).toContainText(/less may be enough/i)
       await expect(page.getByRole('link', { name: /Fix my timing/i })).toBeVisible()
     })
 
@@ -96,7 +95,9 @@ for (const viewport of VIEWPORTS) {
 
       await expect(page.getByRole('heading', { level: 1 })).toContainText(/biology is ready/i)
       await expect(page.getByText(/checked your 4 medicines/i)).toBeVisible()
-      await expect(page.getByRole('link', { name: /Personalise my plan/i })).toBeVisible()
+      await expect(page.getByRole('heading', { level: 2, name: /Here's your body clock/i })).toBeVisible()
+      await expect(page.getByText(/Sunlight dose/i)).toHaveCount(0)
+      await expect(page.getByRole('button', { name: /Continue/i })).toBeVisible()
     })
 
     test('the fix /problem', async ({ page }) => {

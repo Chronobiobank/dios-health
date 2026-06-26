@@ -11,26 +11,22 @@ export const DEEPDOSE_LANDING_META = {
     `Precision dosing aligns each medicine with your personal biological window — not a fixed alarm. Learn how ${DEEPDOSE_NAME} times doses to when your body is ready.`,
 } as const
 
-import { PROBLEM_PAGE_HREF } from '@/lib/deepdose-marketing/problem-content'
-
 export const DEEPDOSE_HOME_SPLASH = {
   eyebrow: 'Precision dosing',
-  headlineWhite: 'Dose smart,',
-  headlineAccent: 'recover fast.',
-  lede: 'Deepdose removes the guesswork from most dosing apps. Enter your meds below for a free chrono-dosing plan and start feeling better.',
+  headlineWhite: 'You are the',
+  headlineAccent: 'drug.',
+  lede:
+    'Your body chemistry rocks where other meds fail. Add your regimen and see where less may be enough.',
 } as const
 
 export const DEEPDOSE_HOME_SPLASH_HERO = {
   eyebrow: DEEPDOSE_HOME_SPLASH.eyebrow,
   headlineWhite: DEEPDOSE_HOME_SPLASH.headlineWhite,
   headlineAccent: DEEPDOSE_HOME_SPLASH.headlineAccent,
-  supportBeforeLink: 'Deepdose removes the guesswork from most dosing apps',
-  supportLink: { label: '(read how)', href: PROBLEM_PAGE_HREF },
-  supportAfterLink:
-    '. Enter your meds below for a free chrono-dosing plan and start feeling better.',
+  support: DEEPDOSE_HOME_SPLASH.lede,
 } as const
 
-/** Default catalog codes for home splash placeholder rows (Blood sugar → Mood meds). */
+/** Default catalog codes for home splash placeholder rows (metformin → sertraline). */
 export const DEEPDOSE_HOME_DEFAULT_MED_CODES = [
   'metformin',
   'ramipril',
@@ -43,7 +39,7 @@ export const DEEPDOSE_HOME_POLY_SEARCH = {
   checkCta: 'Fix my timing',
   expandCta: '+ Add other medications',
   expandCtaAnother: '+ Add medication',
-  medPlaceholders: ['Blood sugar', 'Blood pressure', 'Cholesterol', 'Mood meds'],
+  medPlaceholders: ['Type 2 diabetes', 'High blood pressure', 'High cholesterol', 'Depression'],
   medPlaceholderExtra: 'Search another medication',
   whyTitle: 'Why does this matter?',
   whyDetail: [
@@ -227,11 +223,67 @@ export function patientPlanHeroSupport(medCount: number, verdict: string): strin
   return `${intro} ${verdict}`
 }
 
+export const DEEPDOSE_PLAN_NEXT_STEPS = {
+  entryCta: 'See your body clock →',
+  continueCta: 'Continue →',
+  backCta: 'Back',
+  steps: ['Body clock', 'Six doses', 'Join Unmed'] as const,
+  clock: {
+    eyebrow: 'Step 1 of 3',
+    headline: "Here's your body clock",
+    support:
+      'Your circadian profile from wake time and when you take your medicines — no wearable data yet.',
+    stats: {
+      dlmo: 'Melatonin onset (DLMO)',
+      wake: 'Typical wake',
+      sleep: 'Sleep target',
+      chronotype: 'Chronotype hint',
+    },
+    note: 'A first estimate from what you told us. Phone data and the chrono test refine it later.',
+  },
+  doses: {
+    eyebrow: 'Step 2 of 3',
+    headline: 'Here are your six doses',
+    support:
+      'Sunlight, Nutritional, Physiological, Neuroplastic, Sociophilic, and Blackout — timed to your clock, not just your tablets.',
+    education: 'Chronobiologists call these zeitgebers — daily time cues. Unmed calls each one a dose.',
+  },
+  join: {
+    eyebrow: 'Step 3 of 3',
+    headline: "Find the people who've been where you are",
+    support: 'No pressure — stay on Commons for free, or upgrade when clinical timing matters.',
+    commons: {
+      title: 'Commons',
+      figure: 'Free',
+      points: [
+        'Save your dose protocol and timing plan',
+        'Compare streaks with people on your rhythm',
+        'Body-clock estimate from phone and wearables',
+        'Help research only if you opt in',
+      ],
+      cta: { label: 'Join Commons — free', href: '/login' },
+    },
+    paid: {
+      title: 'Clinical member',
+      figure: 'From Testkit',
+      points: [
+        'TipTraQ home sleep test — three nights',
+        'Clinical body-clock read replaces the estimate',
+        'Verified badge your GP can trust',
+        'Quarterly re-reads catch drift early',
+      ],
+      cta: { label: 'Browse membership', href: '/pricing' },
+    },
+    skip: 'Or keep browsing — no account needed.',
+  },
+} as const
+
 export const DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE = {
   eyebrow: 'Next step',
   headline: DEEPDOSE_MISSION.headline,
   body: 'This plan uses typical wake times and trial averages — not your body clock yet. A quick three-minute test shows when you personally absorb each medicine best.',
-  cta: { label: 'Personalise my plan →' },
+  cta: { label: DEEPDOSE_PLAN_NEXT_STEPS.entryCta },
+  appCta: { label: 'Personalise my plan →' },
   populationLabel: 'Based on typical timing · not personal yet',
   benefitHint:
     'When we know your body clock, each dose can land in the window where it works hardest.',

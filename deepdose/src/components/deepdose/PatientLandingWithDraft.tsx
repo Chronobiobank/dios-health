@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { DeepDoseLanding } from '@/components/deepdose/DeepDoseLanding'
 import { buildLoginPathForMeds } from '@/lib/medications/home-to-onboarding'
@@ -21,6 +22,7 @@ export function PatientLandingWithDraft({
   urlPlanContext,
   signupHrefFromUrl,
 }: PatientLandingWithDraftProps) {
+  const router = useRouter()
   const [draftPlan, setDraftPlan] = useState<PlanContextFromDraft | null>(null)
   const [ready, setReady] = useState(false)
 
@@ -42,9 +44,15 @@ export function PatientLandingWithDraft({
     setReady(true)
   }, [urlPlanContext])
 
-  if (!ready) return null
-
   const planContext = urlPlanContext ?? draftPlan ?? undefined
+
+  useEffect(() => {
+    if (ready && !planContext) {
+      router.replace('/')
+    }
+  }, [ready, planContext, router])
+
+  if (!ready || !planContext) return null
   const signupHref = planContext
     ? buildLoginPathForMeds(
         planDraftToMedsOptions({

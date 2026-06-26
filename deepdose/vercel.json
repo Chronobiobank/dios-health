@@ -7,32 +7,44 @@
   "redirects": [
     {
       "source": "/:path*",
+      "has": [{ "type": "host", "value": "unmed.net" }],
+      "destination": "https://www.unmed.net/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "www.deepdose.org" }],
-      "destination": "https://deepdose.org/:path*",
+      "destination": "https://www.unmed.net/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "deepdose.org" }],
+      "destination": "https://www.unmed.net/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "dios.health" }],
-      "destination": "https://deepdose.org/:path*",
+      "destination": "https://www.unmed.net/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.dios.health" }],
-      "destination": "https://deepdose.org/:path*",
+      "destination": "https://www.unmed.net/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "secopeutic.com" }],
-      "destination": "https://deepdose.org/:path*",
+      "destination": "https://www.unmed.net/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.secopeutic.com" }],
-      "destination": "https://deepdose.org/:path*",
+      "destination": "https://www.unmed.net/:path*",
       "permanent": true
     }
   ]

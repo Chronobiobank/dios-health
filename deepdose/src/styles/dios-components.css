@@ -870,25 +870,50 @@
 .seco-splash__hero-marketing .seco-landing__hero-title {
   max-width: none;
   text-align: left;
+  white-space: nowrap;
+  font-size: clamp(3rem, 10vw, 4.75rem);
+  letter-spacing: -0.025em;
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-line {
-  display: block;
-  line-height: 1.08;
+  display: inline;
+  line-height: 1.06;
+}
+
+@media (max-width: 480px) {
+  .seco-splash__hero-marketing .seco-landing__hero-title {
+    font-size: clamp(2.625rem, 11vw, 3.25rem);
+  }
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-line + .seco-landing__hero-line {
-  margin-top: 0.15em;
+  margin-top: 0;
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-spectrum {
-  padding-bottom: 0;
+  padding-bottom: 0.04em;
+  background: var(--seco-spectrum-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-lede {
   max-width: 100%;
   text-align: left;
   text-wrap: balance;
+}
+
+.seco-splash__hero-marketing .seco-landing__hero-context {
+  margin: 0.625rem 0 0;
+  max-width: 100%;
+  text-align: left;
+  text-wrap: balance;
+  font-size: var(--type-body-lg);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.72);
 }
 
 /* Search band fills the shared home column — never decouple from hero via max-content centering */
@@ -983,8 +1008,8 @@
   }
 
   .seco-splash__hero-marketing .seco-landing__hero-title {
-    font-size: clamp(2.875rem, 3.25vw, 4.5rem);
-    max-width: 13ch;
+    font-size: clamp(3.75rem, 5.25vw, 6rem);
+    max-width: none;
   }
 
   .seco-splash__hero-marketing .seco-landing__hero-lede {

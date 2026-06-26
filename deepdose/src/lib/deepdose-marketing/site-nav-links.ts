@@ -8,6 +8,9 @@ export const DEEPDOSE_SITE_LINKS = [
   { label: 'Technology', href: '/technology' },
   { label: 'Science', href: '/science' },
   { label: 'Testkit', href: '/home-test' },
+  { label: 'Doses', href: '/patient-landing' },
+  { label: 'Community', href: '/partners' },
+  { label: 'Membership', href: '/pricing' },
   { label: 'Sign in', href: '/login' },
 ] as const
 

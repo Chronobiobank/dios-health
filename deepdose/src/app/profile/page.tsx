@@ -11,12 +11,13 @@ export const metadata: Metadata = {
 }
 
 interface PageProps {
-  searchParams: Promise<{ meds?: string; wake?: string }>
+  searchParams: Promise<{ meds?: string; times?: string; wake?: string }>
 }
 
 export default async function ProfilePage({ searchParams }: PageProps) {
   const params = await searchParams
   const medCodes = (params.meds ?? '').split(',').filter(Boolean)
+  const medTimes = (params.times ?? '').split(',').filter(Boolean)
   const wake = params.wake ?? '07:30'
 
   if (!medCodes.length) {
@@ -30,5 +31,5 @@ export default async function ProfilePage({ searchParams }: PageProps) {
     )
   }
 
-  return <PatientDashboard medCodes={medCodes} wake={wake} />
+  return <PatientDashboard medCodes={medCodes} medTimes={medTimes} wake={wake} />
 }

@@ -1,6 +1,6 @@
 import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
 
-const BASE = process.env.NEXT_PUBLIC_APP_URL ?? 'https://deepdose.org'
+const BASE = process.env.NEXT_PUBLIC_APP_URL ?? 'https://unmed.net'
 
 export function SiteJsonLd() {
   const data = {

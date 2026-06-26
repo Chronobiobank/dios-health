@@ -19,6 +19,11 @@ import { buildTakeTimeMap } from '@/lib/patient/plan-dose-preview'
 import { PatientPlanProfileHeader } from '@/components/deepdose/PatientPlanProfileHeader'
 import { PatientPlanTimingPanel } from '@/components/deepdose/PatientPlanTimingPanel'
 import { PatientPlanDosingPanel } from '@/components/deepdose/PatientPlanDosingPanel'
+import {
+  PatientPlanNextStepsEntry,
+  PatientPlanNextStepsFlow,
+  type PatientPlanFlowStep,
+} from '@/components/deepdose/PatientPlanNextSteps'
 
 const LANDING_TABS = DEEPDOSE_PATIENT_PLAN_TABS.landing
 
@@ -99,6 +104,8 @@ type PatientTimingPlanProps = {
   signupHref?: string
   variant?: 'landing' | 'app'
   embedded?: boolean
+  /** Landing only — open clock → six doses → join flow immediately (after Fix my timing). */
+  autoStartOnboarding?: boolean
 }
 
 export function PatientTimingPlan({
@@ -109,9 +116,13 @@ export function PatientTimingPlan({
   signupHref = '/login',
   variant = 'landing',
   embedded = false,
+  autoStartOnboarding = false,
 }: PatientTimingPlanProps) {
   const [tab, setTab] = useState<PlanTab>('timing')
   const [biobankOn, setBiobankOn] = useState(false)
+  const [flowStep, setFlowStep] = useState<PatientPlanFlowStep>(
+    autoStartOnboarding && variant === 'landing' ? 1 : 0
+  )
   const profile = usePatientPlanProfile(wake)
 
   const meds = useMemo(() => resolvePolyPlanMeds(medCodes), [medCodes])
@@ -141,10 +152,14 @@ export function PatientTimingPlan({
   }
 
   function PlanFooterCta({ className }: { className?: string }) {
+    if (variant === 'landing') {
+      return <PatientPlanNextStepsEntry onStart={() => setFlowStep(1)} />
+    }
+
     return (
       <div className={marketingCtaClass(className)}>
         <Link href={chronoTestHref} className="seco-landing__btn seco-landing__btn--primary">
-          {DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE.cta.label}
+          {DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE.appCta.label}
         </Link>
       </div>
     )
@@ -258,6 +273,18 @@ export function PatientTimingPlan({
   }
 
   const activeTab = LANDING_TABS.find((item) => item.id === tab) ?? LANDING_TABS[0]
+
+  if (flowStep > 0) {
+    return (
+      <PatientPlanNextStepsFlow
+        step={flowStep}
+        setStep={setFlowStep}
+        wake={profile.wake}
+        medTimes={medTimes}
+        signupHref={signupHref}
+      />
+    )
+  }
 
   return (
     <>

@@ -6043,7 +6043,7 @@ html.splash-route body {
     rgb(11 18 32 / 0.42);
 }
 
-/* Home first-light video — dark sunrise tint for copy contrast */
+/* Home hero video — dark tint for copy contrast */
 .seco-splash--video .seco-splash__scrim {
   background:
     linear-gradient(

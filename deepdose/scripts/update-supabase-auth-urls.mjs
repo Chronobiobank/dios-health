@@ -14,9 +14,9 @@ if (!token) {
 }
 
 const body = {
-  site_url: 'https://deepdose.org',
+  site_url: 'https://unmed.net',
   uri_allow_list:
-    'http://127.0.0.1:3000,http://127.0.0.1:3000/auth/callback,https://127.0.0.1:3000,https://deepdose.org/auth/callback,https://*.vercel.app/auth/callback',
+    'http://127.0.0.1:3000,http://127.0.0.1:3000/auth/callback,https://127.0.0.1:3000,https://unmed.net/auth/callback,https://www.unmed.net/auth/callback,https://deepdose.org/auth/callback,https://*.vercel.app/auth/callback',
 }
 
 const res = await fetch(`https://api.supabase.com/v1/projects/${PROJECT_REF}/config/auth`, {

@@ -45,7 +45,7 @@ Run `node scripts/sync-vercel-env.mjs` or paste from `.env.local.example` in Ver
 | `NEXT_PUBLIC_SUPABASE_URL` | `https://yavqgklsfmawhrqvuvuf.supabase.co` |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | from Supabase → Settings → API |
 | `SUPABASE_SERVICE_ROLE_KEY` | server-only |
-| `NEXT_PUBLIC_APP_URL` | `https://deepdose.org` |
+| `NEXT_PUBLIC_APP_URL` | `https://unmed.net` |
 | `DLMO_PROXY_VERSION` | `v1` |
 | `CIRCADIAN_SCORE_VERSION` | `v1` |
 | `NEXT_PUBLIC_ENABLE_PATIENT_TIER` | `true` |
@@ -67,8 +67,10 @@ npx supabase config push --yes
 
 Or manually in Supabase → Authentication → URL configuration:
 
-- [ ] **Site URL:** `https://deepdose.org`
+- [ ] **Site URL:** `https://unmed.net`
 - [ ] **Redirect URLs:**  
+  `https://unmed.net/auth/callback`  
+  `https://www.unmed.net/auth/callback`  
   `https://deepdose.org/auth/callback`  
   `https://*.vercel.app/auth/callback`
 
@@ -79,9 +81,10 @@ Or manually in Supabase → Authentication → URL configuration:
 
 ## 5. Domain
 
-- [x] `deepdose.org` on [Vercel deepdose project](https://vercel.com/circadian-foundation/deepdose/settings/domains)
-- [x] `www.deepdose.org` → `deepdose.org` redirect in `vercel.json`
-- [x] Legacy domains (`dios.health`, `secopeutic.com`) redirect to `deepdose.org` via `deepdose/vercel.json`
+- [x] `unmed.net` + `www.unmed.net` on [Vercel deepdose project](https://vercel.com/circadian-foundation/deepdose/settings/domains) (DNS → Vercel nameservers)
+- [x] `www.unmed.net` → `unmed.net` redirect in `vercel.json`
+- [x] `deepdose.org` → `unmed.net` redirect in `vercel.json`
+- [x] Legacy domains (`dios.health`, `secopeutic.com`) redirect to `unmed.net` via `deepdose/vercel.json`
 
 ## 6. Pre-flight
 

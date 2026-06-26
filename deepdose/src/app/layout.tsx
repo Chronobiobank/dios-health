@@ -7,7 +7,7 @@ import '@/styles/dios-tokens.css'
 import '@/styles/dios-components.css'
 import './globals.css'
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://deepdose.org'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://unmed.net'
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     'Search your meds and supplements. Dose smarter with timing aligned to your body clock — heal faster with clinician support.',
   applicationName: DEEPDOSE_NAME,
   keywords: [
-    'Deepdose',
-    'deep dose',
+    'Unmed',
     'chronotherapy',
     'circadian rhythm',
     'medication timing',
+    'body clock',
     'chronobiobank',
     'precision dosing',
   ],

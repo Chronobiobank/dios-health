@@ -9,12 +9,20 @@ export function DeepDoseHeroHeadline({ hero }: DeepDoseHeroHeadlineProps) {
     <div className="seco-landing__hero-head">
       <p className="seco-landing__hero-eyebrow">{hero.eyebrow}</p>
       <h1 className="seco-landing__hero-title">
-        <span className="seco-landing__hero-line seco-landing__hero-line--white">
-          {hero.headlineWhite}
-        </span>
-        <span className="seco-landing__hero-line seco-landing__hero-spectrum">
-          {hero.headlineAccent}
-        </span>
+        {hero.headlineAccent ? (
+          <>
+            <span className="seco-landing__hero-line seco-landing__hero-line--white">
+              {hero.headlineWhite}
+            </span>{' '}
+            <span className="seco-landing__hero-line seco-landing__hero-spectrum">
+              {hero.headlineAccent}
+            </span>
+          </>
+        ) : (
+          <span className="seco-landing__hero-line seco-landing__hero-line--white">
+            {hero.headlineWhite}
+          </span>
+        )}
       </h1>
     </div>
   )

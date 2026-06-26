@@ -5,7 +5,7 @@ type DeepdoseWordmarkProps = {
   className?: string
 }
 
-/** DEEPDOSE — Montserrat Regular, all caps; O as ʘ (U+0298). Same treatment as DIʘS. */
+/** unmed — nav logo wordmark. */
 export function DeepdoseWordmark({ className }: DeepdoseWordmarkProps) {
   return (
     <span className={cn('deepdose-wordmark', className)} aria-label={DEEPDOSE_NAME}>

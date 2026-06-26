@@ -1,11 +1,11 @@
 /** Single ʘ glyph (U+0298) — logo and compact brand moments only. Never use in body copy. */
 export const DEEPDOSE_LOGO_GLYPH = String.fromCodePoint(0x0298)
 
-/** Visual wordmark — O replaced with ʘ (U+0298), same convention as DIʘS */
-export const DEEPDOSE_WORDMARK = `DEEPD${DEEPDOSE_LOGO_GLYPH}SE` as const
+/** Visual wordmark — nav logo */
+export const DEEPDOSE_WORDMARK = 'unmed' as const
 
 /** Sentence case in all user-facing copy */
-export const DEEPDOSE_NAME = 'Deepdose' as const
+export const DEEPDOSE_NAME = 'Unmed' as const
 
 /** Registered company name — footer legal line and formal disclosures only. */
 export const DEEPDOSE_LEGAL_ENTITY = 'Deepdose Ltd' as const
@@ -13,10 +13,10 @@ export const DEEPDOSE_LEGAL_ENTITY = 'Deepdose Ltd' as const
 export const DEEPDOSE_COMPANY_NUMBER = '17294916' as const
 
 export const DEEPDOSE_REGISTRATION_LINE =
-  `Registered in England and Wales. Company number ${DEEPDOSE_COMPANY_NUMBER}.` as const
+  `${DEEPDOSE_NAME} is operated by ${DEEPDOSE_LEGAL_ENTITY}, registered in England and Wales. Company number ${DEEPDOSE_COMPANY_NUMBER}.` as const
 
 export const DEEPDOSE_FOOTER_LEGAL =
-  `Chronobiobank is a trademark and trading name of ${DEEPDOSE_LEGAL_ENTITY}, a UK-based social enterprise dedicated to precision chronotherapy and privacy-preserving circadian health research.` as const
+  `Chronobiobank is a trademark of ${DEEPDOSE_NAME}, a UK-based social enterprise dedicated to precision chronotherapy and privacy-preserving circadian health research.` as const
 
 export const DEEPDOSE_TAGLINE = 'Dose smarter, heal faster.' as const
 

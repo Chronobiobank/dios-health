@@ -47,6 +47,7 @@ export function DeepDoseLanding({
           <div className="seco-landing__section-inner seco-reveal seco-reveal--3">
             <PatientTimingPlan
               variant="landing"
+              autoStartOnboarding
               medCodes={planContext.medCodes}
               medTimes={planContext.medTimes}
               wake={planContext.wake}

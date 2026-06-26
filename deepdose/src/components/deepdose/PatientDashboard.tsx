@@ -1,29 +1,39 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
 
 import { DeepdoseWordmark } from '@/components/brand/DeepdoseWordmark'
+import { DEEPDOSE_REGISTRATION_LINE } from '@/lib/brand/deepdose-brand'
 import { PatientTimingPlan } from '@/components/deepdose/PatientTimingPlan'
+import { CommunityMatchesPanel } from '@/components/patient/CommunityMatchesPanel'
+import { CommunityStoryFeed } from '@/components/patient/CommunityStoryFeed'
+import { SixDoseStrip } from '@/components/patient/SixDoseStrip'
 import { verdictForMedCodes } from '@/lib/medications/polypharmacy-timing'
+import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
 
 interface PatientDashboardProps {
   medCodes: string[]
+  medTimes?: string[]
   wake: string
 }
 
-export function PatientDashboard({ medCodes, wake }: PatientDashboardProps) {
+export function PatientDashboard({ medCodes, medTimes = [], wake }: PatientDashboardProps) {
   const [gateOpen, setGateOpen] = useState(true)
   const verdict = verdictForMedCodes(medCodes)
+  const bodyClock = useMemo(
+    () => inferLandingBodyClock(wake, medTimes),
+    [wake, medTimes]
+  )
 
   return (
     <>
       {gateOpen && (
         <div className="patient-dash__gate">
           <div className="patient-dash__gate-card">
-            <h2 className="patient-dash__gate-title">Save your plan</h2>
+            <h2 className="patient-dash__gate-title">Join Commons — free</h2>
             <p className="patient-dash__gate-body">
-              Create a free account to keep your timing plan, get reminders, and share it with your GP.
+              Save your six-dose protocol, find people on your rhythm, and keep your timing plan.
             </p>
             <input
               type="email"
@@ -50,7 +60,7 @@ export function PatientDashboard({ medCodes, wake }: PatientDashboardProps) {
       )}
 
       <nav className="patient-dash__nav">
-        <Link href="/" aria-label="Deepdose home" className="patient-dash__nav-logo no-underline">
+        <Link href="/" aria-label="Unmed home" className="patient-dash__nav-logo no-underline">
           <DeepdoseWordmark />
         </Link>
         <button
@@ -62,11 +72,19 @@ export function PatientDashboard({ medCodes, wake }: PatientDashboardProps) {
         </button>
       </nav>
 
-      <div className="patient-dash">
+      <div className="patient-dash space-y-8">
+        <div className="patient-dash__plan-surface">
+          <SixDoseStrip dlmoEstimateHours={bodyClock.dlmoEstimateHours} variant="app" />
+        </div>
+
+        <CommunityMatchesPanel />
+        <CommunityStoryFeed />
+
         <PatientTimingPlan
           variant="app"
           embedded
           medCodes={medCodes}
+          medTimes={medTimes}
           wake={wake}
           verdict={verdict}
         />
@@ -80,12 +98,10 @@ export function PatientDashboard({ medCodes, wake }: PatientDashboardProps) {
               data. Wake time: {wake}.
             </p>
             <p>
-              Decision support only. Deepdose does not prescribe. Your GP makes every treatment
+              Decision support only. Unmed does not prescribe. Your GP makes every treatment
               decision.
             </p>
-            <p className="patient-dash__legal">
-              Deepdose Ltd · Registered in England and Wales · Company number 17294916
-            </p>
+            <p className="patient-dash__legal">{DEEPDOSE_REGISTRATION_LINE}</p>
           </div>
         </details>
       </div>

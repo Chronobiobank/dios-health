@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils/cn'
 
 type SplashFrameProps = {
   children: ReactNode
-  /** First-light video on home; ambient orbs on gateway splash routes. */
+  /** You Are The Drug hero video on home; ambient orbs on gateway splash routes. */
   videoBackground?: boolean
 }
 

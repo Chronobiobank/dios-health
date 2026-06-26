@@ -16,6 +16,9 @@ import { DashSetupTile } from '@/components/patient/DashSetupTile'
 import { PendingRecommendationsPanel } from '@/components/patient/PendingRecommendationsPanel'
 import { DosingReminderBanner } from '@/components/patient/DosingReminderBanner'
 import { DoseDashStack } from '@/components/patient/DoseDashStack'
+import { SixDoseStrip } from '@/components/patient/SixDoseStrip'
+import { CommunityMatchesPanel } from '@/components/patient/CommunityMatchesPanel'
+import { CommunityStoryFeed } from '@/components/patient/CommunityStoryFeed'
 
 function toNightInput(row: TipTraqNightRecord): TipTraqNightInput | null {
   if (!row.sleep_onset || !row.sleep_offset) return null
@@ -150,7 +153,12 @@ export default async function PatientDashboardPage() {
       <PendingRecommendationsPanel recommendations={pendingRecommendations} />
 
       {doseDash && (
-        <DoseDashStack model={doseDash} medDetail={medClusterDetail(btiPayloads)} />
+        <>
+          <SixDoseStrip dlmoEstimateHours={context.dlmoEstimateHours} variant="app" />
+          <CommunityMatchesPanel />
+          <CommunityStoryFeed />
+          <DoseDashStack model={doseDash} medDetail={medClusterDetail(btiPayloads)} />
+        </>
       )}
     </div>
   )
