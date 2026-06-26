@@ -83,7 +83,7 @@ for (const viewport of VIEWPORTS) {
       const lede = page.locator('.seco-splash__hero-marketing .seco-landing__hero-lede')
       await assertFullyRendered(lede)
       await assertNotLineClamped(lede)
-      await expect(lede).toContainText(/Your body chemistry rocks where other meds fail/i)
+      await expect(lede).toContainText(/Your own body chemistry works magic/i)
       await expect(lede).toContainText(/less may be enough/i)
       await expect(page.getByRole('link', { name: /Fix my timing/i })).toBeVisible()
     })

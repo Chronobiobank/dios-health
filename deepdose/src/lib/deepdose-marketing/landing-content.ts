@@ -16,7 +16,7 @@ export const DEEPDOSE_HOME_SPLASH = {
   headlineWhite: 'You are the',
   headlineAccent: 'drug.',
   lede:
-    'Your body chemistry rocks where other meds fail. Add your regimen and see where less may be enough.',
+    'Your own body chemistry works magic most drugs can\u2019t match. Add your regimen and see where less may be enough.',
 } as const
 
 export const DEEPDOSE_HOME_SPLASH_HERO = {
@@ -39,7 +39,7 @@ export const DEEPDOSE_HOME_POLY_SEARCH = {
   checkCta: 'Fix my timing',
   expandCta: '+ Add other medications',
   expandCtaAnother: '+ Add medication',
-  medPlaceholders: ['Type 2 diabetes', 'High blood pressure', 'High cholesterol', 'Depression'],
+  medPlaceholders: ['Blood glucose meds', 'Blood pressure meds', 'Cholesterol meds', 'Mood/energy meds'],
   medPlaceholderExtra: 'Search another medication',
   whyTitle: 'Why does this matter?',
   whyDetail: [
