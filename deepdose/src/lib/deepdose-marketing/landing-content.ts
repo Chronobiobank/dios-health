@@ -11,6 +11,8 @@ export const DEEPDOSE_LANDING_META = {
     `Precision dosing aligns each medicine with your personal biological window — not a fixed alarm. Learn how ${DEEPDOSE_NAME} times doses to when your body is ready.`,
 } as const
 
+import { PROBLEM_PAGE_HOME_LINK } from '@/lib/deepdose-marketing/problem-content'
+
 export const DEEPDOSE_HOME_SPLASH = {
   eyebrow: 'Precision dosing',
   headlineWhite: 'Dose smart,',
@@ -22,7 +24,9 @@ export const DEEPDOSE_HOME_SPLASH_HERO = {
   eyebrow: DEEPDOSE_HOME_SPLASH.eyebrow,
   headlineWhite: DEEPDOSE_HOME_SPLASH.headlineWhite,
   headlineAccent: DEEPDOSE_HOME_SPLASH.headlineAccent,
-  support: DEEPDOSE_HOME_SPLASH.lede,
+  supportBeforeLink: 'Dosing apps guess.',
+  supportLink: PROBLEM_PAGE_HOME_LINK,
+  supportAfterLink: 'We align meds to your body clock so they work better.',
 } as const
 
 /** Default catalog codes for home splash placeholder rows (Blood sugar → Mood meds). */
@@ -211,15 +215,15 @@ export const DEEPDOSE_PATIENT_PLAN_HERO = {
   headlineAccent: DEEPDOSE_MISSION.headlineAccent,
 } as const
 
-/** Patient landing lede — result-focused, not home-page pitch copy. */
-export function patientPlanHeroSupport(medCount: number): string {
-  if (medCount === 1) {
-    return 'We checked your medicine at the time you take it — against when it usually works best.'
-  }
-  if (medCount > 1) {
-    return `We checked your ${medCount} medicines at the times you take them — against when each one usually works best.`
-  }
-  return 'Your medicines and take times — checked against circadian evidence for each one.'
+/** Patient landing lede — check + verdict in one line (no duplicate context). */
+export function patientPlanHeroSupport(medCount: number, verdict: string): string {
+  const intro =
+    medCount === 1
+      ? 'We checked your medicine at the time you take it.'
+      : medCount > 1
+        ? `We checked your ${medCount} medicines at the times you take them.`
+        : 'We checked your medicines at the times you take them.'
+  return `${intro} ${verdict}`
 }
 
 export const DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE = {

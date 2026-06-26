@@ -38,8 +38,7 @@ export function DeepDoseLanding({
   if (planContext) {
     const hero = {
       ...DEEPDOSE_PATIENT_PLAN_HERO,
-      support: patientPlanHeroSupport(planContext.medCodes.length),
-      context: planContext.verdict,
+      support: patientPlanHeroSupport(planContext.medCodes.length, planContext.verdict),
     }
     return (
       <div className="seco-landing seco-landing--maven seco-landing--patient-plan">

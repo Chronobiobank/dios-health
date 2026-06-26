@@ -1,6 +1,9 @@
 /** Public site navigation — header vs footer link sets. */
 
+import { PROBLEM_PAGE_HREF } from '@/lib/deepdose-marketing/problem-content'
+
 export const DEEPDOSE_SITE_LINKS = [
+  { label: 'The problem', href: PROBLEM_PAGE_HREF },
   { label: 'Mission', href: '/chronobiobank' },
   { label: 'Technology', href: '/technology' },
   { label: 'Science', href: '/science' },

@@ -10,12 +10,24 @@ type LandingHeroIntroProps = {
 }
 
 export function LandingHeroIntro({ hero, variant = 'navy' }: LandingHeroIntroProps) {
+  const lede = hero.supportLink ? (
+    <p className="seco-landing__hero-lede seco-reveal seco-reveal--2">
+      {hero.supportBeforeLink}{' '}
+      <Link href={hero.supportLink.href} className="seco-landing__hero-lede-link">
+        {hero.supportLink.label}
+      </Link>
+      {hero.supportAfterLink ? <> {hero.supportAfterLink}</> : null}
+    </p>
+  ) : (
+    <p className="seco-landing__hero-lede seco-reveal seco-reveal--2">{hero.support}</p>
+  )
+
   const content = (
     <>
       <div className="seco-reveal seco-reveal--1">
         <DeepDoseHeroHeadline hero={hero} />
       </div>
-      <p className="seco-landing__hero-lede seco-reveal seco-reveal--2">{hero.support}</p>
+      {lede}
       {hero.context ? (
         <p className="seco-landing__hero-context seco-reveal seco-reveal--2">{hero.context}</p>
       ) : null}
