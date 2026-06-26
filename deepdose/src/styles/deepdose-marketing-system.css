@@ -685,7 +685,7 @@
 
 .seco-chronobiobank__plane-visual__beat {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: clamp(0.75rem, 1.5cqi, 1rem);
   margin: 0;
   font-family: var(--seco-font-ui);
@@ -697,6 +697,10 @@
 
 .seco-chronobiobank__plane-visual__beat-text {
   min-width: 0;
+}
+
+.seco-chronobiobank__plane-visual__beat .seco-marketing-num {
+  margin-top: 0.1em;
 }
 
 .seco-chronobiobank__plane-visual__foot {
@@ -716,8 +720,9 @@
 
 @media (min-width: 768px) {
   .seco-chronobiobank__plane-visual {
-    min-height: 0;
-    aspect-ratio: 21 / 9;
+    /* Let copy height drive the tile — fixed 21:9 cropped the 4th bullet. */
+    min-height: clamp(26rem, 52cqi, 42rem);
+    aspect-ratio: auto;
   }
 }
 
