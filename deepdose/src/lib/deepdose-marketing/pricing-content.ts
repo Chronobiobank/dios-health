@@ -33,7 +33,6 @@ export const PRICING_PAGE_INTRO = {
 export const PRICING_PAGE_CTA = {
   label: 'How Testkit works',
   href: '/tiptraq',
-  note: 'Order on the advice of your GP — no clinic visit, no waiting list.',
 } as const
 
 export function buildPricingTiers(baseline: string, quarterly: string): PricingTier[] {

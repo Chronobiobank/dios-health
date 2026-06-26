@@ -48,7 +48,6 @@ export default function PricingPage() {
           <Link href={PRICING_PAGE_CTA.href} className="seco-landing__btn seco-landing__btn--primary">
             {PRICING_PAGE_CTA.label} →
           </Link>
-          <p className="seco-marketing-cta__note">{PRICING_PAGE_CTA.note}</p>
         </div>
       </div>
     </article>
