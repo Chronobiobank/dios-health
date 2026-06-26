@@ -885,6 +885,96 @@
   opacity: 0.92;
 }
 
+/* ── Patient plan · Accordion (hero-tabs stack — Sean James dashboard) ── */
+
+.seco-landing__section-inner:has(> .seco-hero-tabs--patient-accordion) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mkt-cta-stack-gap-hero);
+}
+
+.seco-hero-tabs--patient-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.625rem, 1.5vw, 0.875rem);
+  margin-top: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__stack {
+  border-radius: var(--seco-radius-xl);
+  overflow: hidden;
+  background: var(--seco-navy);
+  box-shadow: 0 24px 48px rgb(5 9 17 / 0.3);
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__tab {
+  align-items: center;
+  border-radius: var(--seco-radius-lg);
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__stack:has(.seco-hero-tabs__tab--active) .seco-hero-tabs__tab {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__stack:not(:has(.seco-hero-tabs__tab--active)) .seco-hero-tabs__tab {
+  border-radius: var(--seco-radius-lg);
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__stack:has(.seco-hero-tabs__tab--active) .seco-hero-tabs__panel {
+  border-bottom-left-radius: var(--seco-radius-lg);
+  border-bottom-right-radius: var(--seco-radius-lg);
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__chevron {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: auto;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background: rgb(255 255 255 / 0.05);
+  position: relative;
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__tab--active .seco-hero-tabs__chevron {
+  border-color: rgb(5 9 17 / 0.12);
+  background: rgb(5 9 17 / 0.04);
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__chevron::before {
+  content: '';
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translate(-50%, -65%) rotate(45deg);
+  transition: transform 0.18s ease;
+  opacity: 0.72;
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__chevron--open::before {
+  transform: translate(-50%, -35%) rotate(-135deg);
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__panel {
+  padding-top: 0;
+}
+
+.seco-hero-tabs--patient-accordion .seco-hero-tabs__panel-inner {
+  min-height: 0;
+}
+
+.seco-landing--maven .seco-hero-tabs__panel .seco-dashpreview__stat-value--danger {
+  color: #b03c32;
+}
+
 /* ── Patient plan · Timing tab tiles (Oura / Health-app density) ── */
 
 .seco-plan-tiles {

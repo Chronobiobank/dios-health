@@ -1,29 +1,37 @@
 /** DeepDose marketing — public landing content. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { PROBLEM_PAGE_HREF } from '@/lib/deepdose-marketing/problem-content'
 import { DEEPDOSE_RESEARCH_PAPERS } from '@/lib/deepdose-marketing/research-content'
 import { EVIDENCE_HREF, TECHNOLOGY_DLMO_PROXY_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} · Precision dosing for your body clock`,
+  title: `${DEEPDOSE_NAME} · Dose smart, recover fast`,
   description:
-    `Precision dosing aligns each medicine with your personal biological window — not a fixed alarm. Learn how ${DEEPDOSE_NAME} times doses to when your body is ready.`,
+    `${DEEPDOSE_NAME} removes the guesswork from most dosing apps. The right dose at the wrong hour is still the wrong dose — free chrono-dosing plan timed to your body clock.`,
 } as const
+
+/** Beachhead CVP — comparison + pain + action for polypharmacy timing. */
+export const DEEPDOSE_CVP =
+  'Most dosing apps guess one alarm for everyone. We time each medicine to your body clock — and show what to move.' as const
 
 export const DEEPDOSE_HOME_SPLASH = {
   eyebrow: 'Precision dosing',
-  headlineWhite: 'You are the',
-  headlineAccent: 'drug.',
+  headlineWhite: 'Dose smart,',
+  headlineAccent: 'recover fast.',
   lede:
-    'Your own body chemistry works magic most drugs can\u2019t match. Add your regimen and see where less may be enough.',
+    'The right dose at the wrong hour is still the wrong dose. Enter your meds below for a free chrono-dosing plan timed to your body clock — not your alarm.',
 } as const
 
 export const DEEPDOSE_HOME_SPLASH_HERO = {
   eyebrow: DEEPDOSE_HOME_SPLASH.eyebrow,
   headlineWhite: DEEPDOSE_HOME_SPLASH.headlineWhite,
   headlineAccent: DEEPDOSE_HOME_SPLASH.headlineAccent,
-  support: DEEPDOSE_HOME_SPLASH.lede,
+  supportBeforeLink: `${DEEPDOSE_NAME} removes the guesswork from most dosing apps`,
+  supportLink: { label: '(read how)', href: PROBLEM_PAGE_HREF },
+  supportAfterLink:
+    '. The right dose at the wrong hour is still the wrong dose — enter your meds below for a free chrono-dosing plan timed to your body clock, not your alarm.',
 } as const
 
 /** Default catalog codes for home splash placeholder rows (metformin → sertraline). */
@@ -36,15 +44,15 @@ export const DEEPDOSE_HOME_DEFAULT_MED_CODES = [
 
 /** Home poly search — wake tile copy. */
 export const DEEPDOSE_HOME_POLY_SEARCH = {
-  checkCta: 'Fix my timing',
+  checkCta: 'Free my melatonin',
   expandCta: '+ Add other medications',
   expandCtaAnother: '+ Add medication',
   medPlaceholders: ['Blood glucose meds', 'Blood pressure meds', 'Cholesterol meds', 'Mood/energy meds'],
   medPlaceholderExtra: 'Search another medication',
   whyTitle: 'Why does this matter?',
   whyDetail: [
-    'On 2+ medicines, the usual issue is dose-time clash — one drug taken at the wrong time of day for your mix.',
-    'We show which times to move, using circadian evidence — not a generic interaction checker.',
+    'Most dosing apps pick one alarm for everyone — they ignore when your body clock is actually ready.',
+    'We show which med times to move, using circadian evidence — not a generic interaction checker.',
   ],
 } as const
 

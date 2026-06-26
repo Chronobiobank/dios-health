@@ -6,7 +6,7 @@ import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
 export const metadata: Metadata = {
   title: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
   description:
-    'Search your meds and supplements. See if your timing is right — then personalise doses to your body clock.',
+    'Unmed removes the guesswork from most dosing apps. The right dose at the wrong hour is still the wrong dose — free chrono-dosing plan timed to your body clock.',
   alternates: { canonical: '/' },
 }
 

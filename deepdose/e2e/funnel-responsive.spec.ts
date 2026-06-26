@@ -78,14 +78,16 @@ for (const viewport of VIEWPORTS) {
       await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toHaveText('You are the drug.')
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Dose smart, recover fast.')
+      await expect(page.getByRole('link', { name: '(read how)' })).toBeVisible()
 
       const lede = page.locator('.seco-splash__hero-marketing .seco-landing__hero-lede')
       await assertFullyRendered(lede)
       await assertNotLineClamped(lede)
-      await expect(lede).toContainText(/Your own body chemistry works magic/i)
-      await expect(lede).toContainText(/less may be enough/i)
-      await expect(page.getByRole('link', { name: /Fix my timing/i })).toBeVisible()
+      await expect(lede).toContainText(/removes the guesswork from most dosing apps/i)
+      await expect(lede).toContainText(/wrong hour is still the wrong dose/i)
+      await expect(lede).toContainText(/body clock/i)
+      await expect(page.getByRole('link', { name: /Free my melatonin/i })).toBeVisible()
     })
 
     test('patient landing', async ({ page }) => {
@@ -95,9 +97,11 @@ for (const viewport of VIEWPORTS) {
 
       await expect(page.getByRole('heading', { level: 1 })).toContainText(/biology is ready/i)
       await expect(page.getByText(/checked your 4 medicines/i)).toBeVisible()
-      await expect(page.getByRole('heading', { level: 2, name: /Here's your body clock/i })).toBeVisible()
-      await expect(page.getByText(/Sunlight dose/i)).toHaveCount(0)
-      await expect(page.getByRole('button', { name: /Continue/i })).toBeVisible()
+      await expect(page.getByText('My risk')).toBeVisible()
+      await expect(page.getByText('Body Clock Score')).toBeVisible()
+      await expect(page.getByText(/L1 estimate · 40% confidence/i)).toBeVisible()
+      await expect(page.getByText('My meds')).toBeVisible()
+      await expect(page.getByText(/Here's your body clock/i)).toHaveCount(0)
     })
 
     test('the fix /problem', async ({ page }) => {
