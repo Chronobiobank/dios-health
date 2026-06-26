@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { createClient } from '@/lib/supabase/client'
 import { isStaffLoginPath, loginEyebrow, loginLede, loginTitle, resolvePostLoginPath } from '@/lib/auth/post-login-path'
+import { planProfileDisplayName, readPlanProfile } from '@/lib/patient/plan-profile'
 import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
 import { Input, Label } from '@/components/ui/Input'
@@ -28,6 +29,11 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fromPlan = planProfileDisplayName(readPlanProfile())
+    if (fromPlan) setDisplayName(fromPlan)
+  }, [])
 
   async function redirectAfterAuth() {
     const supabase = createClient()

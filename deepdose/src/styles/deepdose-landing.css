@@ -556,7 +556,13 @@
   padding-block: clamp(2rem, 6vh, 4rem);
 }
 
-/* CTA sits below the tab panel — spacing from section-inner gap (see marketing-system) */
+/* CTA sits below the tab panel — gap from section-inner flex (marketing-system) */
+.seco-landing__section-inner:has(> .seco-hero-tabs) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mkt-cta-stack-gap-hero);
+}
+
 .seco-hero-tabs--patient-plan .seco-hero-tabs__panel {
   border-bottom-left-radius: var(--seco-radius-lg);
   border-bottom-right-radius: var(--seco-radius-lg);
@@ -1444,6 +1450,7 @@
   z-index: 1;
   /* Equal margins around the tiles on every side (top matches left/right/bottom). */
   padding: clamp(1.25rem, 2.5vw, 1.625rem);
+  padding-bottom: calc(clamp(1.25rem, 2.5vw, 1.625rem) + var(--mkt-panel-foot-inset));
   /* Very pale blue so the active tile reads as a soft, distinct surface. */
   background: #f1f6fc;
   color: var(--seco-ink);
@@ -3463,7 +3470,18 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.5rem;
+  margin-top: var(--mkt-cta-stack-gap);
+}
+
+/* Copy stacks that already use flex gap should not double up */
+.seco-landing__copy-stack:has(> .seco-landing__actions) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mkt-cta-stack-gap);
+}
+
+.seco-landing__copy-stack:has(> .seco-landing__actions) > .seco-landing__actions {
+  margin-top: 0;
 }
 
 .seco-landing__btn {

@@ -1,14 +1,17 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { PatientMedicationsEditor } from '@/components/patient/PatientMedicationsEditor'
 import { OnboardingHeader } from '@/components/patient/OnboardingShell'
+import { buildChronotypeOnboardingPath } from '@/lib/medications/home-to-onboarding'
 import {
-  buildMedicationRecommendation,
-  getCatalogEntry,
-} from '@/lib/medications/catalog'
-import { parseMedsOnboardingParams } from '@/lib/medications/home-to-onboarding'
+  buildOnboardingMedEditorState,
+  medsPathOptionsFromSeed,
+  resolveOnboardingMedSeed,
+  resolveOnboardingMedSeedFromUrl,
+  type OnboardingMedSeed,
+} from '@/lib/patient/plan-onboarding-hydration'
 
 interface MedicationsOnboardingFormProps {
   phaseOffsetMinutes: number
@@ -19,30 +22,20 @@ export default function MedicationsOnboardingForm({
 }: MedicationsOnboardingFormProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const [seed, setSeed] = useState<OnboardingMedSeed>(() =>
+    resolveOnboardingMedSeedFromUrl(searchParams)
+  )
 
-  const { med: medCode, time } = parseMedsOnboardingParams(searchParams)
+  useEffect(() => {
+    setSeed(resolveOnboardingMedSeed(searchParams))
+  }, [searchParams])
 
-  const initialFromHome = useMemo(() => {
-    if (!medCode) {
-      return { selected: undefined, details: undefined }
-    }
+  const initialFromPlan = useMemo(
+    () => buildOnboardingMedEditorState(seed, phaseOffsetMinutes),
+    [seed, phaseOffsetMinutes]
+  )
 
-    const entry = getCatalogEntry(medCode)
-    if (!entry) {
-      return { selected: undefined, details: undefined }
-    }
-
-    const recommendation = buildMedicationRecommendation(entry, phaseOffsetMinutes)
-    const selected = new Map([[medCode, recommendation]])
-    const details = {
-      [medCode]: {
-        doseValue: '',
-        currentTiming: time ?? recommendation.recommendedStart ?? '08:00',
-      },
-    }
-
-    return { selected, details }
-  }, [medCode, time, phaseOffsetMinutes])
+  const medPathOptions = useMemo(() => medsPathOptionsFromSeed(seed), [seed])
 
   return (
     <div className="dash-meds dash-meds--onboarding space-y-6">
@@ -53,15 +46,15 @@ export default function MedicationsOnboardingForm({
       />
 
       <PatientMedicationsEditor
-        key={`${medCode ?? ''}-${time ?? ''}`}
+        key={initialFromPlan?.seedKey ?? 'empty'}
         phaseOffsetMinutes={phaseOffsetMinutes}
-        initialSelected={initialFromHome.selected}
-        initialDetails={initialFromHome.details}
+        initialSelected={initialFromPlan?.selected}
+        initialDetails={initialFromPlan?.details}
         submitLabel="Continue"
         savingLabel="Saving…"
         skipLabel="Skip for now"
         onSaved={() => {
-          router.push('/patient/dashboard')
+          router.push(buildChronotypeOnboardingPath(medPathOptions))
           router.refresh()
         }}
       />

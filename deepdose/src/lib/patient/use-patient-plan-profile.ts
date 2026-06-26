@@ -2,35 +2,12 @@
 
 import { useCallback, useEffect, useState } from 'react'
 
-const STORAGE_KEY = 'deepdose-plan-profile'
-
-type StoredProfile = {
-  firstName?: string
-  familyName?: string
-  /** @deprecated migrated to firstName */
-  displayName?: string
-  avatarUrl?: string | null
-  wake?: string | null
-}
-
-function readStored(): StoredProfile {
-  if (typeof window === 'undefined') return {}
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? (JSON.parse(raw) as StoredProfile) : {}
-  } catch {
-    return {}
-  }
-}
-
-function writeStored(next: StoredProfile) {
-  try {
-    const { displayName: _legacy, ...rest } = next
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(rest))
-  } catch {
-    /* quota or private mode */
-  }
-}
+import {
+  planProfileDisplayName,
+  readPlanProfile,
+  writePlanProfile,
+  type PlanProfile,
+} from '@/lib/patient/plan-profile'
 
 export function usePatientPlanProfile(initialWake: string | null) {
   const [firstName, setFirstNameState] = useState('')
@@ -40,7 +17,7 @@ export function usePatientPlanProfile(initialWake: string | null) {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const stored = readStored()
+    const stored = readPlanProfile()
     if (stored.firstName) setFirstNameState(stored.firstName)
     else if (stored.displayName) setFirstNameState(stored.displayName)
     if (stored.familyName) setFamilyNameState(stored.familyName)
@@ -50,7 +27,7 @@ export function usePatientPlanProfile(initialWake: string | null) {
   }, [])
 
   const snapshot = useCallback(
-    (): StoredProfile => ({
+    (): PlanProfile => ({
       firstName,
       familyName,
       avatarUrl,
@@ -61,26 +38,26 @@ export function usePatientPlanProfile(initialWake: string | null) {
 
   const setFirstName = useCallback((value: string) => {
     setFirstNameState(value)
-    writeStored({ ...readStored(), firstName: value })
+    writePlanProfile({ ...readPlanProfile(), firstName: value })
   }, [])
 
   const setFamilyName = useCallback((value: string) => {
     setFamilyNameState(value)
-    writeStored({ ...readStored(), familyName: value })
+    writePlanProfile({ ...readPlanProfile(), familyName: value })
   }, [])
 
   const setAvatarUrl = useCallback((value: string | null) => {
     setAvatarUrlState(value)
-    writeStored({ ...readStored(), avatarUrl: value })
+    writePlanProfile({ ...readPlanProfile(), avatarUrl: value })
   }, [])
 
   const setWake = useCallback((value: string | null) => {
     setWakeOverrideState(value)
-    writeStored({ ...readStored(), wake: value })
+    writePlanProfile({ ...readPlanProfile(), wake: value })
   }, [])
 
   const effectiveWake = wakeOverride ?? initialWake
-  const fullName = [firstName.trim(), familyName.trim()].filter(Boolean).join(' ')
+  const fullName = planProfileDisplayName({ firstName, familyName })
 
   return {
     ready,

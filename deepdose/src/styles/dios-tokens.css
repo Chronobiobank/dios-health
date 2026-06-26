@@ -149,6 +149,12 @@
   --mkt-hero-lede-gap: clamp(1rem, 2.5vw, 1.25rem);
   --mkt-section-gap: clamp(2rem, 5vw, 2.75rem);
   --mkt-cta-gap: 1rem;
+  /** Space between a content block (tiles, tab panel, form) and the CTA row below it */
+  --mkt-cta-stack-gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  /** Hero tab panels — slightly more air before the footer CTA */
+  --mkt-cta-stack-gap-hero: clamp(1.5rem, 3vw, 2.25rem);
+  /** Extra inset at the foot of hero tab panels (above the panel border) */
+  --mkt-panel-foot-inset: clamp(0.25rem, 0.6vw, 0.5rem);
 
   /* Patient landing (/patient-landing) */
   --landing-tab-label-size: var(--type-body-lg);

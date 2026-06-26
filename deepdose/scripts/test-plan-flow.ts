@@ -6,8 +6,11 @@ import assert from 'node:assert/strict'
 
 import { DEEPDOSE_HOME_DEFAULT_MED_CODES } from '../src/lib/deepdose-marketing/landing-content'
 import {
+  buildConsentOnboardingPath,
+  buildLoginPathForMeds,
   buildPatientLandingPath,
   earliestTakeTime,
+  parseMedsOnboardingParams,
   parsePatientLandingParams,
 } from '../src/lib/medications/home-to-onboarding'
 import { resolveHomePlanRows } from '../src/lib/patient/home-plan-rows'
@@ -66,5 +69,15 @@ const parsed = parsePatientLandingParams(new URLSearchParams(qs))
 assert.deepEqual(parsed.medCodes, defaults)
 assert.deepEqual(parsed.medTimes, defaultRows.medTimes)
 assert.equal(parsed.wake, earliestTakeTime(defaultRows.medTimes))
+
+// Onboarding URL round-trip (consent → meds carry full poly plan)
+const consentPath = buildConsentOnboardingPath({
+  medCodes: defaultRows.medCodes,
+  medTimes: defaultRows.medTimes,
+})
+assert.ok(consentPath.startsWith('/patient/onboarding/consent?'))
+const consentParsed = parseMedsOnboardingParams(new URLSearchParams(consentPath.split('?')[1]!))
+assert.deepEqual(consentParsed.medCodes, defaults)
+assert.deepEqual(consentParsed.medTimes, defaultRows.medTimes)
 
 console.log('plan-flow tests passed')

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import type { ConsentFramework, ConsentPurpose, PatientConsent } from '@/lib/consent/dynamic-consent'
 import { buildConsentState, validateRequiredConsents } from '@/lib/consent/dynamic-consent'
-import { buildMedsOnboardingPath, parseMedsOnboardingParams } from '@/lib/medications/home-to-onboarding'
+import { buildMedsOnboardingPath, medsPathOptionsFromParsed, parseMedsOnboardingParams } from '@/lib/medications/home-to-onboarding'
 import { ProfileCollapsibleRow } from '@/components/patient/ProfileCollapsibleRow'
 import { Button } from '@/components/ui/Button'
 import { checkboxClass, FormError } from '@/components/ui/Form'
@@ -56,7 +56,8 @@ export default function ConsentPanel({
 }: ConsentPanelProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { med, time } = parseMedsOnboardingParams(searchParams)
+  const parsed = parseMedsOnboardingParams(searchParams)
+  const medPathOptions = medsPathOptionsFromParsed(parsed)
   const [grants, setGrants] = useState(() => buildConsentState(purposes, initialConsents))
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -123,7 +124,7 @@ export default function ConsentPanel({
       return
     }
 
-    router.push(buildMedsOnboardingPath({ med: med ?? undefined, time: time ?? undefined }))
+    router.push(buildMedsOnboardingPath(medPathOptions))
     router.refresh()
   }
 

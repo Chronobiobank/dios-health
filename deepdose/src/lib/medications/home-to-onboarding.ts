@@ -22,30 +22,49 @@ export function earliestTakeTime(times: string[]): string | null {
   return clocks.reduce((earliest, clock) => (clock < earliest ? clock : earliest))
 }
 
+function appendMedsPathParams(params: URLSearchParams, options?: MedsPathOptions): void {
+  if (options?.medCodes?.length) {
+    params.set('meds', options.medCodes.map((c) => c.trim()).filter(Boolean).join(','))
+  } else if (options?.med?.trim()) {
+    params.set('med', options.med.trim())
+  }
+
+  if (options?.medTimes?.length) {
+    const clocks = options.medTimes.map((t) => normalizeClock(t)).filter(Boolean) as string[]
+    if (clocks.length) params.set('times', clocks.join(','))
+  }
+
+  const wake =
+    normalizeClock(options?.wake) ??
+    normalizeClock(options?.time) ??
+    earliestTakeTime(options?.medTimes ?? [])
+  if (wake) params.set('wake', wake)
+
+  const legacyMed = options?.med?.trim() ?? options?.medCodes?.[0]?.trim()
+  const legacyTime = wake
+  if (legacyMed && !params.has('med')) params.set('med', legacyMed)
+  if (legacyTime && !params.has('time')) params.set('time', legacyTime)
+}
+
 export function buildConsentOnboardingPath(options?: MedsPathOptions): string {
   const params = new URLSearchParams()
-  const med = options?.med?.trim() ?? options?.medCodes?.[0]?.trim()
-  const time =
-    normalizeClock(options?.time) ??
-    normalizeClock(options?.wake) ??
-    earliestTakeTime(options?.medTimes ?? [])
-  if (med) params.set('med', med)
-  if (time) params.set('time', time)
+  appendMedsPathParams(params, options)
   const qs = params.toString()
   return qs ? `/patient/onboarding/consent?${qs}` : '/patient/onboarding/consent'
 }
 
 export function buildMedsOnboardingPath(options?: MedsPathOptions): string {
   const params = new URLSearchParams()
-  const med = options?.med?.trim() ?? options?.medCodes?.[0]?.trim()
-  const time =
-    normalizeClock(options?.time) ??
-    normalizeClock(options?.wake) ??
-    earliestTakeTime(options?.medTimes ?? [])
-  if (med) params.set('med', med)
-  if (time) params.set('time', time)
+  appendMedsPathParams(params, options)
   const qs = params.toString()
   return qs ? `/patient/onboarding/medications?${qs}` : '/patient/onboarding/medications'
+}
+
+export function buildChronotypeOnboardingPath(options?: MedsPathOptions): string {
+  const params = new URLSearchParams()
+  appendMedsPathParams(params, options)
+  const qs = params.toString()
+  return qs ? `/patient/onboarding/chronotype?${qs}` : '/patient/onboarding/chronotype'
 }
 
 export function buildPatientLandingPath(options?: MedsPathOptions): string {
@@ -68,23 +87,9 @@ export function buildPatientLandingPath(options?: MedsPathOptions): string {
   return qs ? `/patient-landing?${qs}` : '/patient-landing'
 }
 
-/** Chrono test (MCTQ) — bridge from poly calculator to personal timing. */
 export function buildPersonalTimingPath(options?: MedsPathOptions): string {
   const params = new URLSearchParams()
-  if (options?.medCodes?.length) {
-    params.set('meds', options.medCodes.map((c) => c.trim()).filter(Boolean).join(','))
-  } else if (options?.med?.trim()) {
-    params.set('med', options.med.trim())
-  }
-  if (options?.medTimes?.length) {
-    const clocks = options.medTimes.map((t) => normalizeClock(t)).filter(Boolean) as string[]
-    if (clocks.length) params.set('times', clocks.join(','))
-  }
-  const wake =
-    normalizeClock(options?.wake) ??
-    normalizeClock(options?.time) ??
-    earliestTakeTime(options?.medTimes ?? [])
-  if (wake) params.set('wake', wake)
+  appendMedsPathParams(params, options)
   const qs = params.toString()
   const destination = qs
     ? `/patient/onboarding/chronotype?${qs}`
@@ -97,10 +102,23 @@ export function buildLoginPathForMeds(options?: MedsPathOptions): string {
   return `/login?next=${next}`
 }
 
-export function parseMedsOnboardingParams(searchParams: URLSearchParams | { get: (k: string) => string | null }) {
-  const med = searchParams.get('med')?.trim() ?? null
-  const time = searchParams.get('time')?.trim()?.slice(0, 5) ?? null
-  return { med, time }
+/** Same shape as patient landing — meds/times/wake flow through consent → meds → chronotype. */
+export function parseMedsOnboardingParams(
+  searchParams: URLSearchParams | { get: (k: string) => string | null }
+) {
+  return parsePatientLandingParams(searchParams)
+}
+
+export function medsPathOptionsFromParsed(
+  parsed: ReturnType<typeof parseMedsOnboardingParams>
+): MedsPathOptions {
+  return {
+    medCodes: parsed.medCodes.length ? parsed.medCodes : undefined,
+    medTimes: parsed.medTimes.length ? parsed.medTimes : undefined,
+    med: parsed.med ?? undefined,
+    wake: parsed.wake ?? undefined,
+    time: parsed.time ?? undefined,
+  }
 }
 
 export function parsePatientLandingParams(

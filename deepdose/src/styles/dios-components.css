@@ -523,7 +523,7 @@
 
 .home-drug-search__toolbar--cta {
   justify-content: flex-end;
-  margin-top: 0.5rem;
+  margin-top: var(--mkt-cta-stack-gap);
 }
 
 .home-drug-search__toolbar--cta .home-drug-search__toolbar-end {
@@ -539,7 +539,7 @@
 }
 
 .home-drug-search--poly .home-drug-search__toolbar--cta {
-  margin-top: clamp(1.125rem, 3vh, 1.75rem);
+  margin-top: var(--mkt-cta-stack-gap-hero);
 }
 
 .home-drug-search__expand-row {
