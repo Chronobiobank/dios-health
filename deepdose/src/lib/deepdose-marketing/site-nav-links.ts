@@ -1,4 +1,4 @@
-/** Public site navigation — header vs footer link sets. */
+/** Public site navigation — header (full) vs footer (essentials only). */
 
 import { PROBLEM_PAGE_HREF } from '@/lib/deepdose-marketing/problem-content'
 
@@ -14,12 +14,14 @@ export const DEEPDOSE_SITE_LINKS = [
   { label: 'Sign in', href: '/login' },
 ] as const
 
-export const DEEPDOSE_FOOTER_EXTRA_LINKS = [
-  { label: 'About', href: '/about' },
+/** Footer — primary paths only; detail pages stay in header nav. */
+export const DEEPDOSE_FOOTER_LINKS = [
+  { label: 'Your plan', href: '/patient-landing' },
+  { label: 'Science', href: '/science' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Sign in', href: '/login' },
   { label: 'Terms', href: '/terms' },
 ] as const
-
-export const DEEPDOSE_FOOTER_LINKS = [...DEEPDOSE_SITE_LINKS, ...DEEPDOSE_FOOTER_EXTRA_LINKS] as const
 
 export const CHRONOBIOBANK_RESEARCH_ANCHOR = 'research'
 export const CHRONOBIOBANK_SCIENCE_ANCHOR = 'science-trust'

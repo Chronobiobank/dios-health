@@ -1,12 +1,11 @@
 import type { Metadata } from 'next'
 
 import { DeepDoseSplashHome } from '@/components/deepdose/DeepDoseSplashHome'
-import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_LANDING_META } from '@/lib/deepdose-marketing/landing-content'
 
 export const metadata: Metadata = {
-  title: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
-  description:
-    'Unmed removes the guesswork from most dosing apps. The right dose at the wrong hour is still the wrong dose — free chrono-dosing plan timed to your body clock.',
+  title: DEEPDOSE_LANDING_META.title,
+  description: DEEPDOSE_LANDING_META.description,
   alternates: { canonical: '/' },
 }
 

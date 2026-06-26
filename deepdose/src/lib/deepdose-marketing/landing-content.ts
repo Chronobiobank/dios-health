@@ -1,40 +1,34 @@
 /** DeepDose marketing — public landing content. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
-import { PROBLEM_PAGE_HREF } from '@/lib/deepdose-marketing/problem-content'
 import { DEEPDOSE_RESEARCH_PAPERS } from '@/lib/deepdose-marketing/research-content'
 import { EVIDENCE_HREF, TECHNOLOGY_DLMO_PROXY_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} · Dose smart, recover fast`,
+  title: `${DEEPDOSE_NAME} · Activate precision sleep`,
   description:
-    `${DEEPDOSE_NAME} removes the guesswork from most dosing apps. The right dose at the wrong hour is still the wrong dose — free chrono-dosing plan timed to your body clock.`,
+    'Unmed creates precision dosing plans to optimise your sleep-wake cycle — live your best life and avoid chronic disease.',
 } as const
 
-/** Beachhead CVP — comparison + pain + action for polypharmacy timing. */
 export const DEEPDOSE_CVP =
-  'Most dosing apps guess one alarm for everyone. We time each medicine to your body clock — and show what to move.' as const
+  'Unmed creates precision dosing plans to optimise sleep-wake — data you share on your terms.' as const
 
+/** Home splash — short head, sub, med search. */
 export const DEEPDOSE_HOME_SPLASH = {
-  eyebrow: 'Precision dosing',
-  headlineWhite: 'Dose smart,',
-  headlineAccent: 'recover fast.',
-  lede:
-    'The right dose at the wrong hour is still the wrong dose. Enter your meds below for a free chrono-dosing plan timed to your body clock — not your alarm.',
+  headlineWhite: 'Activate',
+  headlineAccent: 'precision sleep.',
+  lede: 'Unmed creates precision dosing plans to optimise your sleep-wake cycle so you can live your best life and avoid chronic disease.',
 } as const
 
 export const DEEPDOSE_HOME_SPLASH_HERO = {
-  eyebrow: DEEPDOSE_HOME_SPLASH.eyebrow,
+  eyebrow: '',
   headlineWhite: DEEPDOSE_HOME_SPLASH.headlineWhite,
   headlineAccent: DEEPDOSE_HOME_SPLASH.headlineAccent,
-  supportBeforeLink: `${DEEPDOSE_NAME} removes the guesswork from most dosing apps`,
-  supportLink: { label: '(read how)', href: PROBLEM_PAGE_HREF },
-  supportAfterLink:
-    '. The right dose at the wrong hour is still the wrong dose — enter your meds below for a free chrono-dosing plan timed to your body clock, not your alarm.',
+  support: DEEPDOSE_HOME_SPLASH.lede,
 } as const
 
-/** Default catalog codes for home splash placeholder rows (metformin → sertraline). */
+/** Default catalog codes for home splash placeholder rows. */
 export const DEEPDOSE_HOME_DEFAULT_MED_CODES = [
   'metformin',
   'ramipril',
@@ -42,18 +36,18 @@ export const DEEPDOSE_HOME_DEFAULT_MED_CODES = [
   'sertraline',
 ] as const
 
-/** Home poly search — wake tile copy. */
+/** Home med search — feeds the sleep–wake risk calculator. */
 export const DEEPDOSE_HOME_POLY_SEARCH = {
-  checkCta: 'Free my melatonin',
-  expandCta: '+ Add other medications',
+  checkCta: 'Find out your risk',
+  expandCta: '+ Add medication',
   expandCtaAnother: '+ Add medication',
-  medPlaceholders: ['Blood glucose meds', 'Blood pressure meds', 'Cholesterol meds', 'Mood/energy meds'],
-  medPlaceholderExtra: 'Search another medication',
-  whyTitle: 'Why does this matter?',
-  whyDetail: [
-    'Most dosing apps pick one alarm for everyone — they ignore when your body clock is actually ready.',
-    'We show which med times to move, using circadian evidence — not a generic interaction checker.',
+  medPlaceholders: [
+    'What meds are you on?',
+    'Second med',
+    'Third med',
+    'Fourth med',
   ],
+  medPlaceholderExtra: 'Search another medication',
 } as const
 
 /** Site-wide mission — deficit (wrong-time dosing) → benefit (chronotherapy). */
@@ -231,8 +225,20 @@ export function patientPlanHeroSupport(medCount: number, verdict: string): strin
   return `${intro} ${verdict}`
 }
 
+/** Patient landing — sleep–wake glass dashboard copy. */
+export const PATIENT_SLEEP_WAKE_DASH = {
+  title: 'Your sleep–wake plan',
+  subtitle: 'Precision dosing to protect your nights and mornings.',
+  sleepLabel: 'Sleep',
+  wakeLabel: 'Wake',
+  scoreLabel: 'Sleep–wake regularity',
+  medsTitle: 'Medicines & timing',
+  cta: 'Save my plan',
+  ctaNote: 'Free account · your data stays on your phone',
+} as const
+
 export const DEEPDOSE_PLAN_NEXT_STEPS = {
-  entryCta: 'See your body clock →',
+  entryCta: 'Save my plan →',
   continueCta: 'Continue →',
   backCta: 'Back',
   steps: ['Body clock', 'Six doses', 'Join Unmed'] as const,

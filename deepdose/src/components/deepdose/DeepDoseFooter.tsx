@@ -4,7 +4,6 @@ import { DeepDoseLogoGlyph } from '@/components/brand/DeepDoseLogoGlyph'
 import {
   DEEPDOSE_FOOTER_LEGAL,
   DEEPDOSE_NAME,
-  DEEPDOSE_REGISTRATION_LINE,
 } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_FOOTER_LINKS } from '@/lib/deepdose-marketing/site-nav-links'
 
@@ -22,7 +21,7 @@ export function DeepDoseFooter() {
               </span>
             </Link>
             <p className="seco-footer__mission">
-              Timing everyday care to your body clock, so the same dose does more.
+              Precision dosing for sleep and wake — your data stays on your phone.
             </p>
           </div>
 
@@ -42,7 +41,6 @@ export function DeepDoseFooter() {
         <div className="seco-footer__bar">
           <div className="seco-footer__copy-block">
             <p className="seco-footer__copy">© {year} {DEEPDOSE_NAME}</p>
-            <p className="seco-footer__legal">{DEEPDOSE_REGISTRATION_LINE}</p>
             <p className="seco-footer__legal">{DEEPDOSE_FOOTER_LEGAL}</p>
           </div>
         </div>

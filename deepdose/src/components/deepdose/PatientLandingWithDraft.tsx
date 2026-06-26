@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-import { DeepDoseLanding } from '@/components/deepdose/DeepDoseLanding'
+import { PatientLandingDashboard } from '@/components/deepdose/PatientLandingDashboard'
 import { buildLoginPathForMeds } from '@/lib/medications/home-to-onboarding'
 import { buildDemoPlanContext } from '@/lib/patient/patient-landing-defaults'
 import {
@@ -56,5 +56,7 @@ export function PatientLandingWithDraft({
       )
     : signupHrefFromUrl
 
-  return <DeepDoseLanding signupHref={signupHref} planContext={planContext} />
+  return (
+    <PatientLandingDashboard planContext={planContext} signupHref={signupHref} />
+  )
 }

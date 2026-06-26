@@ -7,7 +7,7 @@ type DeepDoseHeroHeadlineProps = {
 export function DeepDoseHeroHeadline({ hero }: DeepDoseHeroHeadlineProps) {
   return (
     <div className="seco-landing__hero-head">
-      <p className="seco-landing__hero-eyebrow">{hero.eyebrow}</p>
+      {hero.eyebrow ? <p className="seco-landing__hero-eyebrow">{hero.eyebrow}</p> : null}
       <h1 className="seco-landing__hero-title">
         {hero.headlineAccent ? (
           <>

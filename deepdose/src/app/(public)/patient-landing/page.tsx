@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { PatientLandingWithDraft } from '@/components/deepdose/PatientLandingWithDraft'
-import { DEEPDOSE_LANDING_META } from '@/lib/deepdose-marketing/landing-content'
+import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { getCatalogEntry } from '@/lib/medications/catalog'
 import {
   buildLoginPathForMeds,
@@ -10,8 +10,9 @@ import {
 import { verdictForMedCodes } from '@/lib/medications/polypharmacy-timing'
 
 export const metadata: Metadata = {
-  title: DEEPDOSE_LANDING_META.title,
-  description: DEEPDOSE_LANDING_META.description,
+  title: `${DEEPDOSE_NAME} · Your sleep–wake plan`,
+  description:
+    'Your sleep and wake times, medicine timing, and regularity score — precision dosing to protect your nights and mornings.',
 }
 
 type PageProps = {

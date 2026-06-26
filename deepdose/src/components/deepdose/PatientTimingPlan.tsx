@@ -7,6 +7,7 @@ import {
   resolvePolyPlanMeds,
   syncStateForRisk,
 } from '@/lib/medications/poly-plan-meds'
+import { worstRiskForMedCodes } from '@/lib/medications/polypharmacy-timing'
 import {
   DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE,
   DEEPDOSE_PATIENT_PLAN_SHARING,
@@ -442,6 +443,16 @@ export function PatientTimingPlan({
   )
   const activeBcaTier = useMemo(() => resolveBcaEducationTier(bodyClockScore), [bodyClockScore])
   const bcaTone = bcaTierTone(bodyClockScore)
+  const verdictRisk = useMemo(() => worstRiskForMedCodes(medCodes), [medCodes])
+  const todayLabel = useMemo(
+    () =>
+      new Intl.DateTimeFormat('en-GB', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'short',
+      }).format(new Date()),
+    []
+  )
 
   const syncedCount = meds.filter((m) => syncStateForRisk(m.meta.risk) === 'synced').length
   const reviewCount = meds.length - syncedCount
@@ -604,46 +615,76 @@ export function PatientTimingPlan({
   )
 
   return (
-    <div className="seco-hero-tabs seco-hero-tabs--patient-plan seco-hero-tabs--patient-accordion">
-      {LANDING_ACCORDION.map((section, index) => {
-        const isOpen = openSection === section.id
-        return (
-          <div
-            key={section.id}
-            className={cn('seco-hero-tabs__stack seco-reveal', `seco-reveal--${index + 1}`)}
-          >
-            <button
-              type="button"
-              className={cn('seco-hero-tabs__tab', isOpen && 'seco-hero-tabs__tab--active')}
-              aria-expanded={isOpen}
-              id={`patient-plan-tab-${section.id}`}
-              aria-controls={`patient-plan-panel-${section.id}`}
-              onClick={() => setOpenSection(section.id)}
-            >
-              <span
-                className={cn('seco-hero-tabs__icon', `seco-hero-tabs__icon--${section.tone}`)}
-                aria-hidden
-              >
-                <AccordionIcon section={section.id} />
-              </span>
-              <span className="seco-hero-tabs__copy">
-                <span className="seco-hero-tabs__label">{section.label}</span>
-                <span className="seco-hero-tabs__body">{section.body}</span>
-              </span>
-              <span
-                className={cn('seco-hero-tabs__chevron', isOpen && 'seco-hero-tabs__chevron--open')}
-                aria-hidden
-              />
-            </button>
+    <div className="seco-patient-dash">
+      <header className="seco-patient-dash__header">
+        <div className="seco-patient-dash__header-copy">
+          <p className="seco-patient-dash__date">{todayLabel}</p>
+          <h1 className="seco-patient-dash__title">Body clock plan</h1>
+          <p className="seco-patient-dash__meta">
+            {meds.length} medicine{meds.length === 1 ? '' : 's'} · Wake{' '}
+            <span className="font-mono tabular-nums">{wakeClock}</span>
+          </p>
+        </div>
+        <div
+          className="seco-patient-dash__score"
+          aria-label={`Body clock score ${bodyClockScore} out of 100`}
+        >
+          <span className="seco-patient-dash__score-value">{bodyClockScore}</span>
+          <span className="seco-patient-dash__score-label">BCA</span>
+        </div>
+      </header>
 
-            {isOpen && (
-              <div
-                id={`patient-plan-panel-${section.id}`}
-                className="seco-hero-tabs__panel"
-                role="region"
-                aria-labelledby={`patient-plan-tab-${section.id}`}
+      <p
+        className={cn(
+          'seco-patient-dash__verdict',
+          verdictRisk === 'high' && 'seco-patient-dash__verdict--high',
+          verdictRisk === 'medium' && 'seco-patient-dash__verdict--medium',
+          verdictRisk === 'low' && 'seco-patient-dash__verdict--low'
+        )}
+      >
+        {verdict}
+      </p>
+
+      <div className="seco-hero-tabs seco-hero-tabs--patient-plan seco-hero-tabs--patient-accordion">
+        {LANDING_ACCORDION.map((section) => {
+          const isOpen = openSection === section.id
+          return (
+            <div key={section.id} className="seco-hero-tabs__stack seco-reveal">
+              <button
+                type="button"
+                className={cn('seco-hero-tabs__tab', isOpen && 'seco-hero-tabs__tab--active')}
+                aria-expanded={isOpen}
+                id={`patient-plan-tab-${section.id}`}
+                aria-controls={`patient-plan-panel-${section.id}`}
+                onClick={() => setOpenSection(section.id)}
               >
-                <div className="seco-hero-tabs__panel-inner">
+                <span
+                  className={cn('seco-hero-tabs__icon', `seco-hero-tabs__icon--${section.tone}`)}
+                  aria-hidden
+                >
+                  <AccordionIcon section={section.id} />
+                </span>
+                <span className="seco-hero-tabs__copy">
+                  <span className="seco-hero-tabs__label">{section.label}</span>
+                  <span className="seco-hero-tabs__body">{section.body}</span>
+                </span>
+                <span
+                  className={cn(
+                    'seco-hero-tabs__chevron',
+                    isOpen && 'seco-hero-tabs__chevron--open'
+                  )}
+                  aria-hidden
+                />
+              </button>
+
+              {isOpen && (
+                <div
+                  id={`patient-plan-panel-${section.id}`}
+                  className="seco-hero-tabs__panel"
+                  role="region"
+                  aria-labelledby={`patient-plan-tab-${section.id}`}
+                >
+                  <div className="seco-hero-tabs__panel-inner">
                   {section.id === 'risk' && (
                     <div className="seco-dashpreview seco-dashpreview--chrono">
                       <div className="seco-dashpreview__main">
@@ -969,12 +1010,15 @@ export function PatientTimingPlan({
                       </Link>
                     </>
                   )}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-        )
-      })}
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      <PlanFooterCta />
     </div>
   )
 }

@@ -78,16 +78,13 @@ for (const viewport of VIEWPORTS) {
       await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Dose smart, recover fast.')
-      await expect(page.getByRole('link', { name: '(read how)' })).toBeVisible()
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Activate precision sleep.')
 
       const lede = page.locator('.seco-splash__hero-marketing .seco-landing__hero-lede')
       await assertFullyRendered(lede)
-      await assertNotLineClamped(lede)
-      await expect(lede).toContainText(/removes the guesswork from most dosing apps/i)
-      await expect(lede).toContainText(/wrong hour is still the wrong dose/i)
-      await expect(lede).toContainText(/body clock/i)
-      await expect(page.getByRole('link', { name: /Free my melatonin/i })).toBeVisible()
+      await expect(lede).toContainText(/creates precision dosing plans/i)
+      await expect(lede).toContainText(/live your best life/i)
+      await expect(page.getByRole('link', { name: /Find out your risk/i })).toBeVisible()
     })
 
     test('patient landing', async ({ page }) => {
@@ -95,13 +92,14 @@ for (const viewport of VIEWPORTS) {
       await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toContainText(/biology is ready/i)
-      await expect(page.getByText(/checked your 4 medicines/i)).toBeVisible()
-      await expect(page.getByText('My risk')).toBeVisible()
-      await expect(page.getByText('Body Clock Score')).toBeVisible()
-      await expect(page.getByText(/L1 estimate · 40% confidence/i)).toBeVisible()
-      await expect(page.getByText('My meds')).toBeVisible()
-      await expect(page.getByText(/Here's your body clock/i)).toHaveCount(0)
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Your sleep–wake plan')
+      await expect(page.getByText('Sleep')).toBeVisible()
+      await expect(page.getByText('Wake')).toBeVisible()
+      await expect(page.getByText(/Sleep–wake regularity/i)).toBeVisible()
+      await expect(page.getByText('Medicines & timing')).toBeVisible()
+      await expect(page.getByRole('link', { name: 'Save my plan' })).toBeVisible()
+      await expect(page.getByText(/Body clock/i)).toHaveCount(0)
+      await expect(page.getByText('My risk')).toHaveCount(0)
     })
 
     test('the fix /problem', async ({ page }) => {

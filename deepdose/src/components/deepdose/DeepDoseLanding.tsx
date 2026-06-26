@@ -1,12 +1,9 @@
 import Link from 'next/link'
 
-import { PatientTimingPlan } from '@/components/deepdose/PatientTimingPlan'
 import { LandingHeroIntro } from '@/components/deepdose/LandingHeroIntro'
 import {
   DEEPDOSE_LANDING_CLOSE,
   DEEPDOSE_LANDING_HERO,
-  DEEPDOSE_PATIENT_PLAN_HERO,
-  patientPlanHeroSupport,
 } from '@/lib/deepdose-marketing/landing-content'
 
 type MedContext = {
@@ -14,50 +11,16 @@ type MedContext = {
   time?: string | null
 }
 
-type PlanContext = {
-  medCodes: string[]
-  medNames: string[]
-  medTimes?: string[]
-  wake: string | null
-  verdict: string
-}
-
 type DeepDoseLandingProps = {
   signupHref?: string
   medContext?: MedContext
-  planContext?: PlanContext
 }
 
 export function DeepDoseLanding({
   signupHref = '/login',
   medContext,
-  planContext,
 }: DeepDoseLandingProps) {
   const closeCta = { ...DEEPDOSE_LANDING_CLOSE.cta, href: signupHref }
-
-  if (planContext) {
-    const hero = {
-      ...DEEPDOSE_PATIENT_PLAN_HERO,
-      support: patientPlanHeroSupport(planContext.medCodes.length, planContext.verdict),
-    }
-    return (
-      <div className="seco-landing seco-landing--maven seco-landing--patient-plan">
-        <section className="seco-landing__hero">
-          <LandingHeroIntro hero={hero} />
-          <div className="seco-landing__section-inner seco-reveal seco-reveal--3">
-            <PatientTimingPlan
-              variant="landing"
-              medCodes={planContext.medCodes}
-              medTimes={planContext.medTimes}
-              wake={planContext.wake}
-              verdict={planContext.verdict}
-              signupHref={signupHref}
-            />
-          </div>
-        </section>
-      </div>
-    )
-  }
 
   return (
     <div className="seco-landing seco-landing--maven">

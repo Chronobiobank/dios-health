@@ -845,75 +845,113 @@
   width: min(100%, 44rem);
   max-width: 44rem;
   margin-inline: auto;
-  gap: clamp(1.25rem, 3vh, 2rem);
+  gap: clamp(1rem, 2.5vh, 1.5rem);
   container-type: inline-size;
 }
 
-.seco-splash__search-stack .seco-splash__tagline {
-  align-self: center;
-  width: 100%;
-  max-width: 100%;
-}
-
-/* Home splash hero — block flow like LandingHeroIntro; spacing from --mkt-hero-lede-gap only */
+/* Home splash hero — same title/lede stack as /technology, tuned for video splash */
 .seco-splash__hero-marketing {
   width: 100%;
-  max-width: 100%;
+  max-width: 42rem;
   margin-inline: 0;
   text-align: left;
 }
 
-.seco-splash__hero-marketing .seco-landing__hero-eyebrow {
-  display: none;
+.seco-splash__hero-marketing .seco-landing__hero-head {
+  margin: 0;
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
   max-width: none;
-  text-align: left;
-  white-space: nowrap;
-  font-size: clamp(3rem, 10vw, 4.75rem);
-  letter-spacing: -0.025em;
+  margin: 0;
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: var(--seco-display-tracking-hero);
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-line {
-  display: inline;
-  line-height: 1.06;
-}
-
-@media (max-width: 480px) {
-  .seco-splash__hero-marketing .seco-landing__hero-title {
-    font-size: clamp(2.625rem, 11vw, 3.25rem);
-  }
-}
-
-.seco-splash__hero-marketing .seco-landing__hero-line + .seco-landing__hero-line {
-  margin-top: 0;
-}
-
-.seco-splash__hero-marketing .seco-landing__hero-spectrum {
-  padding-bottom: 0.04em;
-  background: var(--seco-spectrum-hero);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  display: block;
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-lede {
-  max-width: 100%;
+  margin: var(--mkt-hero-lede-gap) 0 0;
+  max-width: 38rem;
   text-align: left;
   text-wrap: balance;
 }
 
-.seco-splash__hero-marketing .seco-landing__hero-context {
-  margin: 0.625rem 0 0;
-  max-width: 100%;
-  text-align: left;
-  text-wrap: balance;
-  font-size: var(--type-body-lg);
+.seco-splash__why {
+  width: 100%;
+  border: none;
+  background: transparent;
+}
+
+.seco-splash__why-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--type-body-sm);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.55);
+}
+
+.seco-splash__why-summary::-webkit-details-marker {
+  display: none;
+}
+
+.seco-splash__why-summary::after {
+  content: '+';
+  font-size: 1rem;
   font-weight: 300;
+  line-height: 1;
+  color: rgb(255 255 255 / 0.45);
+}
+
+.seco-splash__why[open] .seco-splash__why-summary::after {
+  content: '−';
+}
+
+.seco-splash__why-summary:hover,
+.seco-splash__why-summary:focus-visible {
+  color: rgb(255 255 255 / 0.82);
+}
+
+.seco-splash__why-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  max-width: 42ch;
+}
+
+.seco-splash__why-body p {
+  margin: 0;
+  font-size: var(--type-body-sm);
+  font-weight: 400;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.72);
+}
+
+.seco-splash__why-link {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  font-size: var(--type-body-sm);
+  font-weight: 500;
+  color: rgb(255 255 255 / 0.88);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.seco-splash__why-link:hover {
+  color: rgb(255 255 255 / 1);
 }
 
 /* Search band fills the shared home column — never decouple from hero via max-content centering */
@@ -1008,15 +1046,12 @@
   }
 
   .seco-splash__hero-marketing .seco-landing__hero-title {
-    font-size: clamp(3.75rem, 5.25vw, 6rem);
     max-width: none;
+    font-size: clamp(3.75rem, 5.5vw, 6.25rem);
   }
 
   .seco-splash__hero-marketing .seco-landing__hero-lede {
-    max-width: 52ch;
-    font-size: var(--type-body-lg);
-    line-height: 1.55;
-    color: rgb(255 255 255 / 0.82);
+    max-width: 38rem;
   }
 }
 

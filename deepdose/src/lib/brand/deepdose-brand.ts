@@ -12,11 +12,10 @@ export const DEEPDOSE_LEGAL_ENTITY = 'Deepdose Ltd' as const
 
 export const DEEPDOSE_COMPANY_NUMBER = '17294916' as const
 
-export const DEEPDOSE_REGISTRATION_LINE =
-  `${DEEPDOSE_NAME} is operated by ${DEEPDOSE_LEGAL_ENTITY}, registered in England and Wales. Company number ${DEEPDOSE_COMPANY_NUMBER}.` as const
-
 export const DEEPDOSE_FOOTER_LEGAL =
-  `Chronobiobank is a trademark of ${DEEPDOSE_NAME}, a UK-based social enterprise dedicated to precision chronotherapy and privacy-preserving circadian health research.` as const
+  `${DEEPDOSE_NAME} and Chronobiobank are trademarks of ${DEEPDOSE_LEGAL_ENTITY}, registered in England and Wales (company no. ${DEEPDOSE_COMPANY_NUMBER}).` as const
+
+export const DEEPDOSE_REGISTRATION_LINE = DEEPDOSE_FOOTER_LEGAL
 
 export const DEEPDOSE_TAGLINE = 'Dose smarter, heal faster.' as const
 
