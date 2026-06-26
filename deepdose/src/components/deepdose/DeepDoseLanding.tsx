@@ -6,6 +6,7 @@ import {
   DEEPDOSE_LANDING_CLOSE,
   DEEPDOSE_LANDING_HERO,
   DEEPDOSE_PATIENT_PLAN_HERO,
+  patientPlanHeroSupport,
 } from '@/lib/deepdose-marketing/landing-content'
 
 type MedContext = {
@@ -37,6 +38,7 @@ export function DeepDoseLanding({
   if (planContext) {
     const hero = {
       ...DEEPDOSE_PATIENT_PLAN_HERO,
+      support: patientPlanHeroSupport(planContext.medCodes.length),
       context: planContext.verdict,
     }
     return (

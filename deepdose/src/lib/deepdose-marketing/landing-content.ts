@@ -206,11 +206,21 @@ export const DEEPDOSE_LANDING_CLOSE = {
 } as const
 
 export const DEEPDOSE_PATIENT_PLAN_HERO = {
-  eyebrow: DEEPDOSE_MISSION.eyebrow,
+  eyebrow: 'Your timing check',
   headlineWhite: DEEPDOSE_MISSION.headlineWhite,
   headlineAccent: DEEPDOSE_MISSION.headlineAccent,
-  support: DEEPDOSE_MISSION.lede,
 } as const
+
+/** Patient landing lede — result-focused, not home-page pitch copy. */
+export function patientPlanHeroSupport(medCount: number): string {
+  if (medCount === 1) {
+    return 'We checked your medicine at the time you take it — against when it usually works best.'
+  }
+  if (medCount > 1) {
+    return `We checked your ${medCount} medicines at the times you take them — against when each one usually works best.`
+  }
+  return 'Your medicines and take times — checked against circadian evidence for each one.'
+}
 
 export const DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE = {
   eyebrow: 'Next step',
