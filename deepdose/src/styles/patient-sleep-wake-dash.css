@@ -1,4 +1,4 @@
-/* Patient landing — Apple-style glass sleep–wake dashboard */
+/* Patient landing — sleep–wake dashboard (dios-glass outer + inner) */
 
 .seco-landing--sleep-wake-dash .seco-landing__hero--sleep-wake-dash {
   padding-block: clamp(1.25rem, 3vh, 2rem);
@@ -14,32 +14,91 @@
 .sw-dash {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.875rem, 2vh, 1.125rem);
+  gap: clamp(0.75rem, 2vh, 1rem);
   min-width: 0;
 }
 
-.sw-dash__header {
+/* No hover lift on dashboard tiles */
+.sw-dash .dios-glass-outer:hover,
+.sw-dash .dios-glass-outer:active {
+  transform: none;
+  background: var(--dios-glass-outer-bg);
+  box-shadow: var(--dios-glass-outer-highlight, none), var(--dios-glass-outer-shadow);
+}
+
+/* Shared eyebrow — matches score / anchor labels */
+.sw-dash__eyebrow {
+  margin: 0;
+  font-family: var(--seco-font-data);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.48);
+}
+
+/* ── Profile tile ── */
+.sw-dash__profile {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sw-dash__profile-top {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.sw-dash__avatar {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  padding: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgb(255 255 255 / 0.92);
+}
+
+.sw-dash__profile-id {
+  min-width: 0;
+}
+
+.sw-dash__profile-name {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #fff;
+}
+
+.sw-dash__profile-date {
+  margin: 0.25rem 0 0;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: rgb(255 255 255 / 0.55);
+}
+
+.sw-dash__profile-body {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
 
-.sw-dash__date {
-  margin: 0;
-  font-family: var(--seco-font-data);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgb(255 255 255 / 0.45);
-}
-
 .sw-dash__title {
   margin: 0;
   font-family: var(--seco-font-display);
-  font-size: clamp(1.75rem, 4.5vw, 2.375rem);
+  font-size: clamp(1.625rem, 4.5vw, 2.125rem);
   font-weight: 300;
-  line-height: 1.12;
+  line-height: 1.1;
   letter-spacing: var(--seco-display-tracking-hero);
   color: #fff;
 }
@@ -49,52 +108,34 @@
   max-width: 36ch;
   font-size: var(--type-body-sm);
   font-weight: 400;
-  line-height: 1.45;
-  color: rgb(255 255 255 / 0.62);
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.68);
 }
 
-/* Glass surface — frosted panel on navy / video */
-.sw-glass {
-  border-radius: 1.25rem;
-  border: 1px solid rgb(255 255 255 / 0.16);
-  background: rgb(255 255 255 / 0.07);
-  box-shadow:
-    0 0.5rem 2rem rgb(0 0 0 / 0.22),
-    inset 0 1px 0 rgb(255 255 255 / 0.12);
-  backdrop-filter: blur(28px) saturate(160%);
-  -webkit-backdrop-filter: blur(28px) saturate(160%);
-}
-
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .sw-glass {
-    background: rgb(22 28 42 / 0.88);
-  }
-}
-
-.sw-dash__verdict {
+.sw-dash__insight {
   margin: 0;
-  padding: 0.875rem 1rem;
-  font-size: var(--type-body-sm);
-  font-weight: 500;
-  line-height: 1.45;
-  color: rgb(255 255 255 / 0.9);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.88);
+  border-left-width: 3px;
+  border-left-style: solid;
 }
 
-.sw-dash__verdict--good {
-  border-color: rgb(120 210 160 / 0.35);
-  background: rgb(80 180 130 / 0.12);
+.sw-dash__insight--good {
+  border-left-color: rgb(120 220 170);
 }
 
-.sw-dash__verdict--mid {
-  border-color: rgb(230 190 120 / 0.35);
-  background: rgb(220 160 60 / 0.1);
+.sw-dash__insight--mid {
+  border-left-color: rgb(240 200 120);
 }
 
-.sw-dash__verdict--low {
-  border-color: rgb(240 140 130 / 0.35);
-  background: rgb(220 90 80 / 0.1);
+.sw-dash__insight--low {
+  border-left-color: rgb(255 140 130);
 }
 
+/* ── Sleep / wake anchors ── */
 .sw-dash__anchors {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -105,8 +146,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  padding: 1rem 1.05rem;
-  min-height: 7.5rem;
+  min-height: 7rem;
 }
 
 .sw-dash__anchor-icon {
@@ -117,11 +157,6 @@
 
 .sw-dash__anchor-label {
   margin: 0.35rem 0 0;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgb(255 255 255 / 0.48);
 }
 
 .sw-dash__anchor-time {
@@ -135,15 +170,16 @@
 
 .sw-dash__anchor-hint {
   margin: 0;
-  font-size: 0.75rem;
-  color: rgb(255 255 255 / 0.5);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: rgb(255 255 255 / 0.52);
 }
 
+/* ── Regularity score ── */
 .sw-dash__score {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  padding: 1.125rem 1.25rem;
 }
 
 .sw-dash__score-ring {
@@ -210,15 +246,6 @@
   min-width: 0;
 }
 
-.sw-dash__score-label {
-  margin: 0;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgb(255 255 255 / 0.48);
-}
-
 .sw-dash__score-status {
   margin: 0.25rem 0 0;
   font-size: 1.0625rem;
@@ -240,119 +267,69 @@
 
 .sw-dash__score-note {
   margin: 0.35rem 0 0;
-  font-size: 0.8125rem;
-  line-height: 1.45;
-  color: rgb(255 255 255 / 0.55);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.58);
 }
 
-.sw-dash__section-title {
-  margin: 0 0 0.5rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgb(255 255 255 / 0.45);
-}
-
-.sw-dash__med-list {
+/* ── Medicines panel (outer glass + inner rows) ── */
+.sw-dash__panel {
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 0.75rem;
+}
+
+.sw-dash__med-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.sw-dash__med {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
+.sw-dash__med-row {
   padding: 0.875rem 1rem;
+  gap: 0.375rem;
 }
 
-.sw-dash__med-dot {
-  flex-shrink: 0;
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-top: 0.45rem;
-  border-radius: 50%;
-  background: rgb(255 255 255 / 0.35);
-}
-
-.sw-dash__med-dot--synced {
-  background: rgb(100 220 160);
-  box-shadow: 0 0 0.5rem rgb(100 220 160 / 0.45);
-}
-
-.sw-dash__med-dot--review {
-  background: rgb(245 200 100);
-  box-shadow: 0 0 0.5rem rgb(245 200 100 / 0.4);
-}
-
-.sw-dash__med-dot--conflict {
-  background: rgb(255 120 110);
-  box-shadow: 0 0 0.5rem rgb(255 120 110 / 0.45);
-}
-
-.sw-dash__med-body {
-  min-width: 0;
-  flex: 1;
-}
-
-.sw-dash__med-top {
+.sw-dash__med-head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 0.75rem;
 }
 
-.sw-dash__med-name {
-  margin: 0;
-  font-size: 0.9375rem;
-  font-weight: 500;
+.sw-dash__med-row .dash-med-row__name {
   color: #fff;
 }
 
-.sw-dash__med-pill {
-  flex-shrink: 0;
-  padding: 0.2rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgb(255 255 255 / 0.75);
-  background: rgb(255 255 255 / 0.08);
-}
-
-.sw-dash__med-pill--synced {
-  color: rgb(160 235 195);
-  background: rgb(80 180 130 / 0.15);
-}
-
-.sw-dash__med-pill--review {
-  color: rgb(245 210 140);
-  background: rgb(220 160 60 / 0.15);
-}
-
-.sw-dash__med-pill--conflict {
-  color: rgb(255 170 160);
-  background: rgb(220 90 80 / 0.15);
-}
-
-.sw-dash__med-time {
-  margin: 0.35rem 0 0;
-  font-size: 0.75rem;
-  color: rgb(255 255 255 / 0.52);
-}
-
-.sw-dash__med-fix {
-  margin: 0.35rem 0 0;
+.sw-dash__med-row .dash-med-row__meta {
+  color: rgb(255 255 255 / 0.58);
   font-size: 0.8125rem;
   line-height: 1.45;
-  color: rgb(255 255 255 / 0.78);
 }
 
+.sw-dash__med-action {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.82);
+}
+
+.sw-dash__med-row--synced {
+  border-left: 3px solid rgb(120 220 170);
+}
+
+.sw-dash__med-row--review {
+  border-left: 3px solid rgb(240 200 120);
+}
+
+.sw-dash__med-row--conflict {
+  border-left: 3px solid rgb(255 140 130);
+}
+
+/* ── CTA ── */
 .sw-dash__cta {
   display: flex;
   flex-direction: column;

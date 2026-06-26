@@ -12,10 +12,14 @@ import {
 type PatientPlanTimingPanelProps = {
   meds: PolyPlanMed[]
   takeTimes?: Record<string, string>
-  verdict: string
-  syncedCount: number
-  reviewCount: number
+  verdict?: string
+  syncedCount?: number
+  reviewCount?: number
   variant?: 'landing' | 'app'
+  /** Med stack only — for nesting inside a parent glass tile on sleep–wake dash. */
+  layout?: 'full' | 'meds-in-panel'
+  sectionTitle?: string
+  headingId?: string
 }
 
 const SYNC_ACCENT: Record<'synced' | 'review' | 'conflict', string> = {
@@ -24,19 +28,86 @@ const SYNC_ACCENT: Record<'synced' | 'review' | 'conflict', string> = {
   conflict: 'conflict',
 }
 
+function MedTileStack({
+  meds,
+  takeTimes,
+  prefix,
+}: {
+  meds: PolyPlanMed[]
+  takeTimes?: Record<string, string>
+  prefix: 'seco-plan-tile' | 'patient-dash-tile'
+}) {
+  const sorted = [...meds].sort((a, b) => RISK_RANK[b.meta.risk] - RISK_RANK[a.meta.risk])
+
+  return (
+    <ol className={`${prefix}-stack`}>
+      {sorted.map(({ code, name, meta }) => {
+        const sync = syncStateForRisk(meta.risk)
+        return (
+          <li
+            key={code}
+            className={cn(prefix, `${prefix}--med`, `${prefix}--med-${sync}`)}
+          >
+            <span
+              className={cn(`${prefix}__accent`, `${prefix}__accent--${SYNC_ACCENT[sync]}`)}
+              aria-hidden
+            />
+            <div className={`${prefix}__med-body`}>
+              <div className={`${prefix}__med-top`}>
+                <p className={`${prefix}__med-name`}>{name}</p>
+                <span className={cn(`${prefix}__pill`, `${prefix}__pill--${sync}`)}>
+                  {SYNC_LABEL[sync]}
+                </span>
+              </div>
+              <p className={`${prefix}__med-window`}>
+                {takeTimes?.[code] ? (
+                  <>
+                    You take at{' '}
+                    <span className="font-mono tabular-nums">{takeTimes[code]}</span>
+                    <span aria-hidden> · </span>
+                  </>
+                ) : null}
+                {meta.timing}
+                <span aria-hidden> · </span>
+                {meta.window}
+              </p>
+              <p className={`${prefix}__med-action`}>{meta.instruction}</p>
+            </div>
+          </li>
+        )
+      })}
+    </ol>
+  )
+}
+
 export function PatientPlanTimingPanel({
   meds,
   takeTimes,
-  verdict,
-  syncedCount,
-  reviewCount,
+  verdict = '',
+  syncedCount = 0,
+  reviewCount = 0,
   variant = 'landing',
+  layout = 'full',
+  sectionTitle,
+  headingId,
 }: PatientPlanTimingPanelProps) {
-  const sorted = [...meds].sort((a, b) => RISK_RANK[b.meta.risk] - RISK_RANK[a.meta.risk])
   const prefix = variant === 'landing' ? 'seco-plan-tile' : 'patient-dash-tile'
   const allClear = reviewCount === 0
   const syncPct = meds.length > 0 ? Math.round((syncedCount / meds.length) * 100) : 0
   const copy = DEEPDOSE_PATIENT_PLAN_TIMING
+
+  if (layout === 'meds-in-panel') {
+    return (
+      <>
+        {sectionTitle ? (
+          <p id={headingId} className={`${prefix}__eyebrow`}>
+            {sectionTitle}
+          </p>
+        ) : null}
+        <MedTileStack meds={meds} takeTimes={takeTimes} prefix={prefix} />
+      </>
+    )
+  }
 
   return (
     <div className={cn(variant === 'landing' ? 'seco-plan-tiles' : 'patient-dash-tiles')}>
@@ -79,47 +150,7 @@ export function PatientPlanTimingPanel({
         <p className={`${prefix}__verdict`}>{verdict}</p>
       </article>
 
-      <ol className={`${prefix}-stack`}>
-        {sorted.map(({ code, name, meta }) => {
-          const sync = syncStateForRisk(meta.risk)
-          return (
-            <li
-              key={code}
-              className={cn(
-                prefix,
-                `${prefix}--med`,
-                `${prefix}--med-${sync}`
-              )}
-            >
-              <span
-                className={cn(`${prefix}__accent`, `${prefix}__accent--${SYNC_ACCENT[sync]}`)}
-                aria-hidden
-              />
-              <div className={`${prefix}__med-body`}>
-                <div className={`${prefix}__med-top`}>
-                  <p className={`${prefix}__med-name`}>{name}</p>
-                  <span className={cn(`${prefix}__pill`, `${prefix}__pill--${sync}`)}>
-                    {SYNC_LABEL[sync]}
-                  </span>
-                </div>
-                <p className={`${prefix}__med-window`}>
-                  {takeTimes?.[code] ? (
-                    <>
-                      You take at{' '}
-                      <span className="font-mono tabular-nums">{takeTimes[code]}</span>
-                      <span aria-hidden> · </span>
-                    </>
-                  ) : null}
-                  {meta.timing}
-                  <span aria-hidden> · </span>
-                  {meta.window}
-                </p>
-                <p className={`${prefix}__med-action`}>{meta.instruction}</p>
-              </div>
-            </li>
-          )
-        })}
-      </ol>
+      <MedTileStack meds={meds} takeTimes={takeTimes} prefix={prefix} />
     </div>
   )
 }
