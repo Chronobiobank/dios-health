@@ -16,7 +16,7 @@ import { PROBLEM_PAGE_HREF } from '@/lib/deepdose-marketing/problem-content'
 export const DEEPDOSE_HOME_SPLASH = {
   eyebrow: 'Precision dosing',
   headlineWhite: 'Dose smart,',
-  headlineAccent: 'Heal superfast.',
+  headlineAccent: 'recover fast.',
   lede: 'Deepdose removes the guesswork from most dosing apps. Enter your meds below for a free chrono-dosing plan and start feeling better.',
 } as const
 
