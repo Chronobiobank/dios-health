@@ -10,9 +10,9 @@ import {
 import { verdictForMedCodes } from '@/lib/medications/polypharmacy-timing'
 
 export const metadata: Metadata = {
-  title: `${DEEPDOSE_NAME} · Your sleep–wake plan`,
+  title: `${DEEPDOSE_NAME} · Free sleep–medicine risk check`,
   description:
-    'Your sleep and wake times, medicine timing, and regularity score — precision dosing to protect your nights and mornings.',
+    'Free risk analysis from your medicines and wake time. Share a summary with your GP and discuss a 3-night home sleep test if needed.',
 }
 
 type PageProps = {

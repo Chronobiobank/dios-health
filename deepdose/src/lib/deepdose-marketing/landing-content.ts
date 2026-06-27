@@ -228,13 +228,30 @@ export function patientPlanHeroSupport(medCount: number, verdict: string): strin
 /** Patient landing — sleep–wake glass dashboard copy. */
 export const PATIENT_SLEEP_WAKE_DASH = {
   title: 'Your sleep–wake plan',
-  subtitle: 'Precision dosing to protect your nights and mornings.',
+  subtitle: 'Free risk check from your medicines and wake time — then share with your GP if needed.',
   sleepLabel: 'Sleep',
   wakeLabel: 'Wake',
-  scoreLabel: 'Sleep–wake regularity',
+  scoreLabel: 'Sleep Regularity Index (proxy)',
+  scoreHint: 'Estimated on your device from your schedule — wearable data refines this later.',
   medsTitle: 'Medicines & timing',
   cta: 'Save my plan',
   ctaNote: 'Free account · your data stays on your phone',
+} as const
+
+/** Consumer → GP handoff after public risk analysis. */
+export const LANDING_GP_HANDOFF_COPY = {
+  eyebrow: 'Risk analysis',
+  shareCta: 'Share summary with your GP',
+  shareOptionalCta: 'Print summary for your GP',
+  tiptraqCta: 'Discuss a 3-night home sleep test with your GP →',
+  disclaimer:
+    'Decision support only — not a diagnosis. Your GP decides on tests, reviews, and any changes to your medicines.',
+  summaryTitle: 'Summary for your GP',
+  summaryMeta:
+    'Printable sleep–medicine risk summary for structured medication review and GP-advised home sleep testing.',
+  summaryEmpty: 'Run a risk check on your sleep–wake plan first, then share the summary with your GP.',
+  summaryTipTraqBody:
+    'If sleep-disordered breathing is suspected, a GP-advised TipTraQ home sleep test (three nights) can confirm AHI and SpO₂ before deprescribing or cascade review.',
 } as const
 
 export const DEEPDOSE_PLAN_NEXT_STEPS = {

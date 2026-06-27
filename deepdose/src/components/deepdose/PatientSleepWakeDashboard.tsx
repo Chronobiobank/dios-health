@@ -12,10 +12,11 @@ import {
 import { RISK_RANK } from '@/lib/medications/polypharmacy-timing'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
 import { buildTakeTimeMap } from '@/lib/patient/plan-dose-preview'
+import { buildLandingRiskAnalysis } from '@/lib/patient/landing-risk-analysis'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
-import { bodyClockScoreFromProfile, buildPatientMelatoninProfile } from '@/lib/patient/patient-landing-melatonin'
 import { PATIENT_LANDING_DEMO } from '@/lib/patient/patient-landing-defaults'
 import { cn } from '@/lib/utils/cn'
+import { LandingGpHandoffPanel } from '@/components/deepdose/LandingGpHandoffPanel'
 
 type PatientSleepWakeDashboardProps = {
   medCodes: string[]
@@ -31,14 +32,14 @@ const TRIAGE_CLASS: Record<'synced' | 'review' | 'conflict', string> = {
 }
 
 function regularityLabel(score: number): string {
-  if (score >= 70) return 'On track'
-  if (score >= 45) return 'Room to improve'
-  return 'At risk'
+  if (score >= 75) return 'Stable rhythm'
+  if (score >= 50) return 'Irregular — review suggested'
+  return 'At risk — share with GP'
 }
 
 function regularityTone(score: number): 'good' | 'mid' | 'low' {
-  if (score >= 70) return 'good'
-  if (score >= 45) return 'mid'
+  if (score >= 75) return 'good'
+  if (score >= 50) return 'mid'
   return 'low'
 }
 
@@ -85,24 +86,21 @@ export function PatientSleepWakeDashboard({
   wake,
   signupHref,
 }: PatientSleepWakeDashboardProps) {
-  const wakeClock = wake?.slice(0, 5) ?? PATIENT_LANDING_DEMO.wake
   const bodyClock = useMemo(
     () => inferLandingBodyClock(wake, medTimes),
     [wake, medTimes]
-  )
-  const melatoninProfile = useMemo(
-    () => buildPatientMelatoninProfile(wakeClock, medCodes, medTimes),
-    [wakeClock, medCodes, medTimes]
-  )
-  const regularityScore = useMemo(
-    () => bodyClockScoreFromProfile(melatoninProfile),
-    [melatoninProfile]
   )
   const meds = useMemo(() => resolvePolyPlanMeds(medCodes), [medCodes])
   const sortedMeds = useMemo(
     () => [...meds].sort((a, b) => RISK_RANK[b.meta.risk] - RISK_RANK[a.meta.risk]),
     [meds]
   )
+  const riskAnalysis = useMemo(
+    () => buildLandingRiskAnalysis({ medCodes, medTimes, wake }),
+    [medCodes, medTimes, wake]
+  )
+  const regularityScore = riskAnalysis.sriProxy
+  const medNames = useMemo(() => sortedMeds.map((med) => med.name), [sortedMeds])
   const takeTimes = useMemo(() => buildTakeTimeMap(medCodes, medTimes), [medCodes, medTimes])
   const insight = useMemo(() => sleepWakeInsight(meds), [meds])
 
@@ -184,9 +182,11 @@ export function PatientSleepWakeDashboard({
           <p className={cn('sw-dash__score-status', `sw-dash__score-status--${regTone}`)}>
             {regularityLabel(regularityScore)}
           </p>
-          <p className="sw-dash__score-note">{bodyClock.chronotypeHint}</p>
+          <p className="sw-dash__score-note">{PATIENT_SLEEP_WAKE_DASH.scoreHint}</p>
         </div>
       </article>
+
+      <LandingGpHandoffPanel analysis={riskAnalysis} medNames={medNames} />
 
       <article className="dios-glass-outer sw-dash__panel" aria-labelledby="sw-dash-meds-title">
         <p id="sw-dash-meds-title" className="sw-dash__eyebrow">

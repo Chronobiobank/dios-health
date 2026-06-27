@@ -121,6 +121,9 @@ export default function HomeTestPage() {
           <Link href="/tiptraq" className="seco-landing__btn seco-landing__btn--primary">
             How the kit works →
           </Link>
+          <Link href="/patient-landing" className="seco-landing__btn seco-landing__btn--ghost">
+            Start with a free risk check
+          </Link>
         </div>
       </div>
     </article>

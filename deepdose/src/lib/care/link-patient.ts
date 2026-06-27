@@ -1,9 +1,18 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { normalizeInviteCode } from '@/lib/care/invite-codes'
 
+export type LinkPatientErrorCode =
+  | 'consent_required'
+  | 'invalid_code'
+  | 'not_found'
+  | 'expired'
+  | 'limit_reached'
+  | 'already_linked'
+  | 'unknown'
+
 export type LinkPatientResult =
   | { ok: true; clinicianName: string }
-  | { ok: false; error: string }
+  | { ok: false; error: string; code: LinkPatientErrorCode }
 
 export async function linkPatientToClinician(
   admin: SupabaseClient,
@@ -12,7 +21,7 @@ export async function linkPatientToClinician(
 ): Promise<LinkPatientResult> {
   const code = normalizeInviteCode(rawCode)
   if (code.length < 6) {
-    return { ok: false, error: 'Invalid invite code.' }
+    return { ok: false, error: 'Invalid invite code.', code: 'invalid_code' }
   }
 
   const { data: consent } = await admin
@@ -28,6 +37,7 @@ export async function linkPatientToClinician(
     return {
       ok: false,
       error: 'Enable clinical care sharing in your consent settings before linking a clinician.',
+      code: 'consent_required',
     }
   }
 
@@ -38,15 +48,15 @@ export async function linkPatientToClinician(
     .maybeSingle()
 
   if (inviteError || !invite) {
-    return { ok: false, error: 'Invite code not found.' }
+    return { ok: false, error: 'Invite code not found.', code: 'not_found' }
   }
 
   if (invite.expires_at && new Date(invite.expires_at) < new Date()) {
-    return { ok: false, error: 'This invite code has expired.' }
+    return { ok: false, error: 'This invite code has expired.', code: 'expired' }
   }
 
   if (invite.use_count >= invite.max_uses) {
-    return { ok: false, error: 'This invite code has reached its use limit.' }
+    return { ok: false, error: 'This invite code has reached its use limit.', code: 'limit_reached' }
   }
 
   const { data: existing } = await admin
@@ -58,7 +68,7 @@ export async function linkPatientToClinician(
     .maybeSingle()
 
   if (existing) {
-    return { ok: false, error: 'You are already linked to this clinician.' }
+    return { ok: false, error: 'You are already linked to this clinician.', code: 'already_linked' }
   }
 
   const { error: linkError } = await admin.from('care_relationships').insert({
@@ -69,7 +79,7 @@ export async function linkPatientToClinician(
   })
 
   if (linkError) {
-    return { ok: false, error: linkError.message }
+    return { ok: false, error: linkError.message, code: 'unknown' }
   }
 
   await admin

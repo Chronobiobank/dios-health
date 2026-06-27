@@ -1,11 +1,17 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import {
+  resolvePathAfterActivationAttempt,
+  tryActivationLinkForUser,
+} from '@/lib/care/resolve-activation-redirect'
+import { normalizeActivationCode } from '@/lib/care/pending-activation'
 import { resolvePostLoginPath } from '@/lib/auth/post-login-path'
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = request.nextUrl
   const code = searchParams.get('code')
   const next = searchParams.get('next')
+  const activation = searchParams.get('activation')
 
   if (!code) {
     return NextResponse.redirect(
@@ -55,7 +61,20 @@ export async function GET(request: NextRequest) {
       .select('tier')
       .eq('id', user.id)
       .maybeSingle()
-    redirectPath = resolvePostLoginPath(profile?.tier, next)
+
+    const normalizedActivation = activation ? normalizeActivationCode(activation) : ''
+    let linkResult = null
+
+    if (normalizedActivation.length >= 6) {
+      linkResult = await tryActivationLinkForUser(user.id, normalizedActivation)
+    }
+
+    redirectPath = resolvePathAfterActivationAttempt(
+      profile?.tier,
+      next,
+      normalizedActivation || null,
+      linkResult
+    )
     response = NextResponse.redirect(`${origin}${redirectPath}`)
   }
 

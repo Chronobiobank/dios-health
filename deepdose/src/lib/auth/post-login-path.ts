@@ -35,7 +35,8 @@ export function resolvePostLoginPath(
 }
 
 /** Short context line — omit when the title is enough (patient sign-in). */
-export function loginEyebrow(next?: string | null): string | null {
+export function loginEyebrow(next?: string | null, activation?: string | null): string | null {
+  if (activation?.trim() || next?.startsWith('/patient/dashboard/status')) return 'Clinical activation'
   if (next?.startsWith('/clinical')) return 'Clinical'
   if (next?.startsWith('/enterprise')) return 'Enterprise'
   return null
@@ -53,7 +54,19 @@ export function isStaffLoginPath(next?: string | null): boolean {
 }
 
 /** One supporting line — only when it adds information sign-in titles do not cover. */
-export function loginLede(next: string | null | undefined, mode: 'signin' | 'signup'): string | null {
+export function loginLede(
+  next: string | null | undefined,
+  mode: 'signin' | 'signup',
+  activation?: string | null
+): string | null {
+  if (activation?.trim()) {
+    return mode === 'signup'
+      ? 'Create your account, accept consent, then we link your clinician automatically.'
+      : 'Sign in to link your clinician and open your biochemistry dashboard.'
+  }
+  if (next?.startsWith('/patient/dashboard/status')) {
+    return 'Sign in to continue clinical setup.'
+  }
   if (next?.startsWith('/clinical')) {
     return 'Use credentials from your practice administrator.'
   }

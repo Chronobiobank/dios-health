@@ -3,6 +3,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 const PATIENT_NAV = [
   { href: '/patient/dashboard', label: 'Dashboard' },
+  { href: '/patient/dashboard/status', label: 'Biochemistry' },
   { href: '/patient/dashboard/data', label: 'Devices' },
   { href: '/patient/profile', label: 'Profile' },
 ] as const

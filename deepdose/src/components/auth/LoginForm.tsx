@@ -5,6 +5,13 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { createClient } from '@/lib/supabase/client'
 import { isStaffLoginPath, loginEyebrow, loginLede, loginTitle, resolvePostLoginPath } from '@/lib/auth/post-login-path'
+import { completeActivationLink } from '@/lib/care/complete-activation-link'
+import {
+  buildAuthCallbackUrl,
+  persistPendingActivation,
+  readPendingActivation,
+} from '@/lib/care/pending-activation'
+import { resolvePathAfterActivationAttempt } from '@/lib/care/resolve-activation-redirect'
 import { planProfileDisplayName, readPlanProfile } from '@/lib/patient/plan-profile'
 import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
@@ -16,10 +23,12 @@ export default function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const next = searchParams.get('next')
+  const activationParam = searchParams.get('activation')
   const staffLogin = isStaffLoginPath(next)
   const signupFromUrl = searchParams.get('signup') === '1'
   const callbackError = searchParams.get('error')
   const callbackReason = searchParams.get('reason')
+  const activationFailed = callbackError === 'activation_failed'
 
   const [mode, setMode] = useState<Mode>(() => (signupFromUrl ? 'signup' : 'signin'))
   const effectiveMode: Mode = staffLogin ? 'signin' : mode
@@ -34,6 +43,10 @@ export default function LoginForm() {
     const fromPlan = planProfileDisplayName(readPlanProfile())
     if (fromPlan) setDisplayName(fromPlan)
   }, [])
+
+  useEffect(() => {
+    if (activationParam) persistPendingActivation(activationParam)
+  }, [activationParam])
 
   async function redirectAfterAuth() {
     const supabase = createClient()
@@ -51,7 +64,18 @@ export default function LoginForm() {
       tier = profile?.tier
     }
 
-    router.push(resolvePostLoginPath(tier, next))
+    const activation = activationParam ?? readPendingActivation()
+    let destination = resolvePostLoginPath(tier, next)
+
+    if (activation) {
+      const linkResult = await completeActivationLink(activation)
+      destination = resolvePathAfterActivationAttempt(tier, next, activation, linkResult)
+      if (!linkResult.ok && linkResult.code !== 'consent_required') {
+        setError(linkResult.error)
+      }
+    }
+
+    router.push(destination)
     router.refresh()
   }
 
@@ -62,6 +86,7 @@ export default function LoginForm() {
     setMessage(null)
 
     const supabase = createClient()
+    const activation = activationParam ?? readPendingActivation()
 
     if (effectiveMode === 'signup') {
       const { error: signUpError } = await supabase.auth.signUp({
@@ -69,9 +94,7 @@ export default function LoginForm() {
         password,
         options: {
           data: { display_name: displayName || email.split('@')[0] },
-          emailRedirectTo: `${window.location.origin}/auth/callback${
-            next ? `?next=${encodeURIComponent(next)}` : ''
-          }`,
+          emailRedirectTo: buildAuthCallbackUrl(window.location.origin, next, activation),
         },
       })
 
@@ -107,12 +130,12 @@ export default function LoginForm() {
   return (
     <div className="seco-auth-form">
       <header className="seco-auth-head">
-        {loginEyebrow(next) ? (
-          <p className="seco-page__eyebrow seco-auth-head__eyebrow">{loginEyebrow(next)}</p>
+        {loginEyebrow(next, activationParam) ? (
+          <p className="seco-page__eyebrow seco-auth-head__eyebrow">{loginEyebrow(next, activationParam)}</p>
         ) : null}
         <h1 className="seco-page__title seco-auth-head__title">{loginTitle(next, effectiveMode)}</h1>
-        {loginLede(next, effectiveMode) ? (
-          <p className="seco-page__lede seco-auth-head__lede">{loginLede(next, effectiveMode)}</p>
+        {loginLede(next, effectiveMode, activationParam) ? (
+          <p className="seco-page__lede seco-auth-head__lede">{loginLede(next, effectiveMode, activationParam)}</p>
         ) : null}
       </header>
 
@@ -160,6 +183,12 @@ export default function LoginForm() {
             Email confirmation failed.
             {callbackReason ? ` ${callbackReason}` : ' The link may have expired.'}
             {' '}Try signing in below.
+          </Callout>
+        )}
+
+        {activationFailed && callbackReason && !error && (
+          <Callout tone="warning" className="text-sm">
+            Clinician link failed: {callbackReason}
           </Callout>
         )}
 

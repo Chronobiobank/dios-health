@@ -1,9 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import type { ConsentFramework, ConsentPurpose, PatientConsent } from '@/lib/consent/dynamic-consent'
 import { buildConsentState, validateRequiredConsents } from '@/lib/consent/dynamic-consent'
+import { completeActivationLink } from '@/lib/care/complete-activation-link'
+import {
+  buildStatusPathAfterLink,
+  persistPendingActivation,
+  readPendingActivation,
+} from '@/lib/care/pending-activation'
 import { buildMedsOnboardingPath, medsPathOptionsFromParsed, parseMedsOnboardingParams } from '@/lib/medications/home-to-onboarding'
 import { ProfileCollapsibleRow } from '@/components/patient/ProfileCollapsibleRow'
 import { Button } from '@/components/ui/Button'
@@ -58,9 +64,16 @@ export default function ConsentPanel({
   const searchParams = useSearchParams()
   const parsed = parseMedsOnboardingParams(searchParams)
   const medPathOptions = medsPathOptionsFromParsed(parsed)
+  const activationParam = searchParams.get('activation')
+  const [hasActivation, setHasActivation] = useState(Boolean(activationParam))
   const [grants, setGrants] = useState(() => buildConsentState(purposes, initialConsents))
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (activationParam) persistPendingActivation(activationParam)
+    setHasActivation(Boolean(activationParam || readPendingActivation()))
+  }, [activationParam])
 
   const requiredPurposes = purposes.filter((p) => p.is_required)
   const optionalPurposes = purposes.filter((p) => !p.is_required)
@@ -122,6 +135,21 @@ export default function ConsentPanel({
       setError(body.error ?? 'Failed to save consents')
       setLoading(false)
       return
+    }
+
+    const pendingActivation = readPendingActivation()
+    if (pendingActivation) {
+      const linkResult = await completeActivationLink(pendingActivation)
+      if (linkResult.ok) {
+        router.push(buildStatusPathAfterLink(linkResult.clinicianName))
+        router.refresh()
+        return
+      }
+      if (linkResult.code !== 'consent_required') {
+        setError(linkResult.error)
+        setLoading(false)
+        return
+      }
     }
 
     router.push(buildMedsOnboardingPath(medPathOptions))
@@ -189,7 +217,11 @@ export default function ConsentPanel({
 
         <div className="dash-meds__actions">
           <Button type="submit" disabled={loading} className="dash-meds__submit">
-            {loading ? 'Saving…' : 'Continue to your meds'}
+            {loading
+              ? 'Saving…'
+              : hasActivation
+                ? 'Continue to clinical setup'
+                : 'Continue to your meds'}
           </Button>
         </div>
       </form>

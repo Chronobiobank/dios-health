@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   const result = await linkPatientToClinician(adminClient, user.id, body.code)
 
   if (!result.ok) {
-    return Response.json({ error: result.error }, { status: 400 })
+    return Response.json({ error: result.error, code: result.code }, { status: 400 })
   }
 
   return Response.json({ ok: true, clinicianName: result.clinicianName })
