@@ -12,7 +12,7 @@ export function SiteJsonLd() {
         name: DEEPDOSE_NAME,
         url: BASE,
         slogan: DEEPDOSE_TAGLINE,
-        description: 'Medicine for non-conformers. Find your chemical match.',
+        description: 'Chemical soul-matching. Find your chemical match.',
       },
       {
         '@type': 'WebSite',

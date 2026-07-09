@@ -1,8 +1,8 @@
 /** Single ʘ glyph (U+0298) — logo and compact brand moments only. Never use in body copy. */
 export const DEEPDOSE_LOGO_GLYPH = String.fromCodePoint(0x0298)
 
-/** Visual wordmark — nav logo */
-export const DEEPDOSE_WORDMARK = 'Deepdose' as const
+/** Visual wordmark — O replaced with ʘ (U+0298), same convention as DIʘS */
+export const DEEPDOSE_WORDMARK = `DEEPD${DEEPDOSE_LOGO_GLYPH}SE` as const
 
 /** Sentence case in all user-facing copy */
 export const DEEPDOSE_NAME = 'Deepdose' as const

@@ -699,6 +699,11 @@
 
 .seco-chronobiobank__plane-visual__beat-text {
   min-width: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-wrap: pretty;
 }
 
 .seco-chronobiobank__plane-visual__beat .seco-marketing-num {

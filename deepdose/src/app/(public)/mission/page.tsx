@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import { ChronobiobankMissionFeatures } from '@/components/deepdose/ChronobiobankMissionFeatures'
 import { ChronobiobankPlaneTile } from '@/components/deepdose/ChronobiobankPlaneTile'
 import { FounderQuoteTile } from '@/components/deepdose/FounderQuoteTile'
 import {
@@ -49,11 +48,9 @@ export default function MissionPage() {
             beats={CHRONOBIOBANK_PLANE.beats}
             image={marketingImages.phoneNight}
           />
-
-          <ChronobiobankMissionFeatures className="seco-chronobiobank__folds seco-chronobiobank__feature-grid seco-reveal seco-reveal--4" />
         </div>
 
-        <div className={marketingCtaClass('seco-chronobiobank__cta seco-reveal seco-reveal--5')}>
+        <div className={marketingCtaClass('seco-chronobiobank__cta seco-reveal seco-reveal--4')}>
           <Link href={CHRONOBIOBANK_MISSION_CTA.href} className="seco-landing__btn seco-landing__btn--primary">
             {CHRONOBIOBANK_MISSION_CTA.label} →
           </Link>

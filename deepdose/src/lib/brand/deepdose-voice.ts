@@ -25,5 +25,5 @@ export const DEEPDOSE_VOICE = {
   closeSupport: 'Add your meds. Find your chemical match. Keep your data.',
   /** Footer under logo — short mission for the non-conformist focus. */
   footerMission:
-    'Helping non-conformists find their chemical match without stealing their attention.',
+    'Chemical soul-matching for people whose rhythm never fit the clinic clock.',
 } as const

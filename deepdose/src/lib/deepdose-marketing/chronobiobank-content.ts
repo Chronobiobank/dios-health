@@ -8,22 +8,22 @@ import {
 export const CHRONOBIOBANK_META = {
   title: `Mission · ${DEEPDOSE_NAME}`,
   description:
-    'Medicine for non-conformers. Late nights, stacked meds, lives that don’t fit the clinic clock. We map what timing works for atypical folk, globally.',
+    'Chemical soul-matching. Find people on your rhythm and meds. We match your chemistry, not steal your attention.',
 } as const
 
 export const CHRONOBIOBANK_INTRO = {
   eyebrow: 'Mission',
-  titleWhite: 'Medicine for',
-  titleAccent: 'non-conformers.',
+  titleWhite: 'Chemical',
+  titleAccent: 'soul-matching',
   lede:
-    `You keep odd hours. You stack meds. Clinics still write for a 9-to-5 body. We built ${DEEPDOSE_NAME} for atypical folk: the night workers, the late social lives, the ones whose rhythm never matched the label on the bottle.`,
+    `${DEEPDOSE_NAME} matches you with people who share your body clock, medicines, and journey. Not labels. Not a feed. Chemistry you can feel, timing you can use.`,
   quote:
-    'Modern medicine forgot atypical folk. We map what timing works for them, globally, so patterns emerge that no single clinic can see.',
+    'Other networks rank you by looks and likes. We rank you by your chemistry, then get out of the way so you can talk to someone who has lived your stack.',
 } as const
 
 export const CHRONOBIOBANK_MISSION_CTA = {
-  label: 'Claim your free lifetime membership',
-  href: '/profile',
+  label: 'Find your chemical match',
+  href: '/login',
 } as const
 
 export const CHRONOBIOBANK_TRUST = {
@@ -56,14 +56,15 @@ export const CHRONOBIOBANK_TRUST = {
 } as const
 
 export const CHRONOBIOBANK_PLANE = {
-  label: 'How it works',
+  label: 'How matching works',
   cue: '#8b9cf8',
-  title: 'Your phone does the work',
+  title: 'Chemistry first, attention never',
+  /** Keep each beat ~58–60 chars so they wrap to two lines, never three. */
   beats: [
-    'Your sleep and dose times are worked out on your phone.',
-    'We only share small, nameless updates, never your full night history.',
-    'You choose what to share. You can stop or delete any time.',
-    'Together, those updates show what timing helps people like you.',
+    'Add your meds and rhythm. That is your chemical signature.',
+    'We match people on your clock and stack, not a social feed.',
+    'Chat, compare timing wins, keep your nights on your phone.',
+    'Share for research only if you choose. Matching stays light.',
   ],
 } as const
 
@@ -71,19 +72,19 @@ export const CHRONOBIOBANK_PLANE = {
 export const CHRONOBIOBANK_MISSION_STEPS = [
   {
     id: 'phone',
-    label: 'On your phone',
+    label: 'Your signature',
     cue: '#acd3de',
-    title: 'Your nights stay with you',
+    title: 'Rhythm and meds stay with you',
     body:
-      'Sleep, light, and dose times are read on your phone or wearable. You can see what\u2019s stored and delete it.',
+      'Sleep, light, and dose times live on your phone or wearable. Matching reads a signature, not a warehouse of your nights.',
   },
   {
     id: 'learn',
-    label: 'Smarter together',
+    label: 'Your matches',
     cue: '#8b9cf8',
-    title: 'We learn without taking your nights',
+    title: 'People who have been where you are',
     body:
-      'Your phone sends small, nameless updates, not a dump of every heartbeat. Together they teach us what good timing looks like.',
+      'We pair you on body clock, medicines, and journey. Chemistry scores, not follower counts. No endless scroll.',
   },
   {
     id: 'share',
@@ -91,114 +92,118 @@ export const CHRONOBIOBANK_MISSION_STEPS = [
     cue: '#f2b8a2',
     title: 'Research sees groups, not you',
     body:
-      'Doctors and approved studies may use grouped results. They never open your personal sleep chart.',
+      'Approved studies may use grouped timing outcomes. They never open your personal sleep chart or chat.',
   },
 ] as const
 
-/** Four mission tiles under the quote. Keep words simple for translation. */
+/**
+ * Four tiles under “How matching works”.
+ * Distinct outcomes (not a restatement of the beats).
+ * Titles exactly 18 chars · teasers ~47–51 chars.
+ */
 export const CHRONOBIOBANK_MISSION_FEATURES = [
   {
     id: 'yours',
-    badge: 'Yours',
-    title: 'Your data stays with you',
-    teaser: 'On your phone. Share only if you choose.',
+    badge: 'Quiet',
+    title: 'No scroll. People.',
+    teaser: 'Connection without a feed, ads, or attention trap.',
     cue: '#f2b8a2',
   },
   {
     id: 'together',
-    badge: 'Together',
-    title: 'We learn as a group',
-    teaser: 'Patterns from many people. Never your raw nights.',
+    badge: 'Peers',
+    title: 'Peers on your meds',
+    teaser: 'Hear what retiming changed for similar late clocks.',
     cue: '#8b9cf8',
   },
   {
     id: 'timing',
-    badge: 'Timing',
-    title: 'When you take it matters',
-    teaser: 'The right hour can change how a dose works.',
+    badge: 'Wins',
+    title: 'Timing wins to try',
+    teaser: 'Copy windows that raised SRI for your chemical kin.',
     cue: '#acd3de',
   },
   {
     id: 'join',
-    badge: 'Join',
-    title: 'Be part of it',
-    teaser: 'Patients, doctors, and researchers welcome.',
+    badge: 'Free',
+    title: 'Free Commons match',
+    teaser: 'Chat and compare. Clinical tools stay optional.',
     cue: '#c9b6f2',
   },
 ] as const
 
 export const CHRONOBIOBANK_MISSION_YOURS = {
   intro:
-    'Big health studies often ask you to trust a distant institution with samples and records. When that trust wobbles, people disengage. We took a different path: your biology stays close to you.',
+    'Soul-matching needs a signature, not a surveillance feed. Your intimate nights stay close. What others see is the chemistry that helps them find you.',
   contrasts: [
     {
       id: 'central',
-      label: 'Old model',
+      label: 'Attention apps',
       cue: '#6b7280',
-      title: 'Everything ships to a warehouse',
+      title: 'They sell the scroll',
       body:
-        'Your records live on someone else\u2019s servers. Every news story about a leak or a sale erodes the deal you thought you made.',
+        'Most social products keep you watching. Your data fuels ads. Connection is a side effect of the feed.',
     },
     {
       id: 'distributed',
       label: 'Deepdose',
       cue: '#acd3de',
-      title: 'You keep the original',
+      title: 'We sell the match',
       body:
-        'Sleep and timing stay on your phone. Sharing is optional, visible, and revocable. Research works from anonymised patterns , not from copying your nights.',
+        'Sleep and timing stay on your phone. Matching uses a shared signature. Research, if you opt in, works from anonymised patterns, not a copy of your nights.',
     },
   ],
   closing:
-    'Consent should feel like a door you control, not fine print you scroll past. That\u2019s the bar we build to.',
+    'Consent should feel like a door you control. Match when you want. Leave when you want.',
 } as const
 
 export const CHRONOBIOBANK_MISSION_TOGETHER = {
   intro:
-    'Apple showed that phones can learn your habits without uploading your photos. We apply the same idea to body-clock health: compute locally, improve globally, hoard nothing intimate.',
+    'Chemical soul-matching means finding people whose clocks and scripts look like yours. Compute locally. Meet globally. Never turn your biology into an attention trap.',
 } as const
 
 export const CHRONOBIOBANK_MISSION_TIMING = {
   intro:
-    'Your body runs on a roughly 24-hour rhythm. When sleep, light, meals, and medicines drift out of sync, recovery and drug effect drift too. Small shifts in when you dose can matter as much as what you take.',
+    'Your body runs on a roughly 24-hour rhythm. Matches form when sleep, light, meals, and medicines line up the same way. Timing is how we know two chemistries fit.',
   points: [
     {
       cue: '#f2b8a2',
       title: 'Medicines',
-      body: 'Blood pressure pills, statins, and many others work differently depending on time of day. We help you find your window.',
+      body: 'Blood pressure pills, statins, and many others work differently by hour. Shared stacks are a strong match signal.',
     },
     {
       cue: '#acd3de',
       title: 'Light & sleep',
-      body: 'Morning light anchors your clock. Regular sleep times help repair and mood. We read what your wearables already capture.',
+      body: 'Late clocks find late clocks. Regular blackout and wake windows are part of your chemical signature.',
     },
     {
       cue: '#8b9cf8',
       title: 'Meals & movement',
-      body: 'When you eat and move nudges the same rhythm. Timing advice works best when it sees the whole day, not one pill in isolation.',
+      body: 'When you eat and move nudges the same rhythm. Matching sees the whole day, not one pill in isolation.',
     },
   ],
   footnote:
-    'Curious about the studies and how we estimate your rhythm? The research library and measurement notes are linked below , no PhD required to start.',
+    'Curious about the studies behind timing? The research library and measurement notes are linked from science pages. No PhD required to start matching.',
 } as const
 
 export const CHRONOBIOBANK_MISSION_JOIN = {
   intro:
-    'Deepdose is built for everyday life: a clear app on your phone, tools for the clinician who supports you, and a careful path for approved research.',
+    'Deepdose is built for everyday chemistry: match people on your phone, support from a clinician if you want it, and research only with clear consent.',
   audiences: [
     {
       id: 'patient',
-      label: 'Patients',
+      label: 'Members',
       cue: '#acd3de',
-      title: 'Start on your phone',
-      body: 'Connect a wearable, add your medicines, and see if your timing fits your rhythm. You stay in charge of your data.',
-      cta: { label: 'Patient app', href: '/profile' },
+      title: 'Find your match',
+      body: 'Add your medicines and rhythm. See people on a similar clock. Chat about what timing actually worked.',
+      cta: { label: 'Create profile', href: '/login' },
     },
     {
       id: 'researcher',
       label: 'Clinicians',
       cue: '#8b9cf8',
       title: 'Support people you already see',
-      body: 'View timing insight and adherence with consent , not a raw dump of someone\u2019s nights.',
+      body: 'View timing insight and adherence with consent, not a raw dump of someone\u2019s nights.',
       cta: { label: 'Clinician tools', href: '/clinician-landing' },
     },
     {
@@ -206,7 +211,7 @@ export const CHRONOBIOBANK_MISSION_JOIN = {
       label: 'Researchers',
       cue: '#f2b8a2',
       title: 'Study with consent',
-      body: 'Work from anonymised cohort patterns and audited access , built for ethics boards, not shadow databases.',
+      body: 'Work from anonymised cohort patterns and audited access, built for ethics boards, not shadow databases.',
       cta: { label: 'Research & science', href: CHRONOBIOBANK_SCIENCE_HREF },
     },
   ],

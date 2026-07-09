@@ -3,7 +3,7 @@
 /** Founder profile: About page and clinician context. */
 export const GRANT_MUNRO_PROFILE = {
   name: 'Grant Munro',
-  role: `Founder of ${DEEPDOSE_NAME}`,
+  role: 'Founder',
   product: DEEPDOSE_NAME,
   image: '/authors/grant-munro.jpeg',
   imageAlt: `Grant Munro, founder of ${DEEPDOSE_NAME}`,
