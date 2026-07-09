@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 
 /** Unpublished — partnerships not live yet */
 export default function PartnersRoute() {
-  redirect('/chronobiobank')
+  redirect('/mission')
 }

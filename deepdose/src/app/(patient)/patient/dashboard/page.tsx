@@ -154,7 +154,7 @@ export default async function PatientDashboardPage() {
 
       {doseDash && (
         <>
-          <SixDoseStrip dlmoEstimateHours={context.dlmoEstimateHours} variant="app" />
+          <SixDoseStrip phaseAnchorHours={context.dlmoEstimateHours} variant="app" />
           <CommunityMatchesPanel />
           <CommunityStoryFeed />
           <DoseDashStack model={doseDash} medDetail={medClusterDetail(btiPayloads)} />

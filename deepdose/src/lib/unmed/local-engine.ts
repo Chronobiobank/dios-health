@@ -5,8 +5,10 @@ export type SleepBlock = {
   end: string | Date
 }
 
-export class UnmedLocalEngine {
+/** On-device sleep matrix + Sleep Regularity Index (SRI). */
+export class DeepdoseLocalEngine {
   private readonly minutesInDay = 1440
+
 
   /**
    * Transforms raw timestamp windows into a multi-day binary array matrix.
@@ -78,6 +80,9 @@ export class UnmedLocalEngine {
     }
   }
 }
+
+/** @deprecated Use DeepdoseLocalEngine */
+export const UnmedLocalEngine = DeepdoseLocalEngine
 
 /** Map wearable sleep logs into sleep blocks for SRI. */
 export function sleepBlocksFromLogs(

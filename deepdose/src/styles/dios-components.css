@@ -866,8 +866,9 @@
   flex-direction: column;
   gap: 0.125rem;
   max-width: none;
+  width: min(100%, 18ch);
   margin: 0;
-  font-size: clamp(3rem, 9vw, 5.5rem);
+  font-size: clamp(1.875rem, 0.55rem + 7.2vw, 5.5rem);
   font-weight: 300;
   line-height: 1.04;
   letter-spacing: var(--seco-display-tracking-hero);
@@ -875,6 +876,10 @@
 
 .seco-splash__hero-marketing .seco-landing__hero-line {
   display: block;
+  width: max-content;
+  max-width: 100%;
+  white-space: nowrap;
+  font-size: inherit;
 }
 
 .seco-splash__hero-marketing .seco-landing__hero-lede {
@@ -1047,7 +1052,8 @@
 
   .seco-splash__hero-marketing .seco-landing__hero-title {
     max-width: none;
-    font-size: clamp(3.75rem, 5.5vw, 6.25rem);
+    width: min(100%, 18ch);
+    font-size: clamp(3rem, 5.5vw, 6.25rem);
   }
 
   .seco-splash__hero-marketing .seco-landing__hero-lede {

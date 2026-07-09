@@ -5,7 +5,7 @@ type DeepdoseWordmarkProps = {
   className?: string
 }
 
-/** unmed — nav logo wordmark. */
+/** Deepdose — nav logo wordmark. */
 export function DeepdoseWordmark({ className }: DeepdoseWordmarkProps) {
   return (
     <span className={cn('deepdose-wordmark', className)} aria-label={DEEPDOSE_NAME}>

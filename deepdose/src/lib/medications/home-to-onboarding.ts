@@ -84,7 +84,7 @@ export function buildPatientLandingPath(options?: MedsPathOptions): string {
     earliestTakeTime(options?.medTimes ?? [])
   if (wake) params.set('wake', wake)
   const qs = params.toString()
-  return qs ? `/patient-landing?${qs}` : '/patient-landing'
+  return qs ? `/profile?${qs}` : '/profile'
 }
 
 export function buildPersonalTimingPath(options?: MedsPathOptions): string {

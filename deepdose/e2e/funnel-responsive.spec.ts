@@ -13,7 +13,7 @@ const VIEWPORTS = [
 ] as const
 
 const PATIENT_LANDING_PATH =
-  '/patient-landing?meds=metformin,ramipril,atorvastatin,sertraline&times=07:30,08:00,20:00,12:00&wake=07:30'
+  '/profile?meds=metformin,ramipril,atorvastatin,sertraline&times=07:30,08:00,20:00,12:00&wake=07:30'
 
 const DESKTOP_NAV_MIN = 1024
 

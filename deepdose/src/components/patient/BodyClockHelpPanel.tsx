@@ -110,7 +110,7 @@ export function BodyClockHelpPanel({
           {showUpgrade && (
             <p className="body-clock-help__upgrade">
               Want a clinical read?{' '}
-              <Link href="/home-test" className="body-clock-help__link">
+              <Link href="/testkit" className="body-clock-help__link">
                 Order TipTraQ Testkit ↗
               </Link>
             </p>

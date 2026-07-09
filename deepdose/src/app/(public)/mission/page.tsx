@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: CHRONOBIOBANK_META.description,
 }
 
-export default function ChronobiobankPage() {
+export default function MissionPage() {
   return (
     <article className="seco-page seco-chronobiobank seco-mission seco-marketing-page">
       <div className="seco-landing__section-inner">

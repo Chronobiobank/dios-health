@@ -1,6 +1,6 @@
 import { normalizeInviteCode } from '@/lib/care/invite-codes'
 
-export const PENDING_ACTIVATION_KEY = 'unmed_pending_activation'
+export const PENDING_ACTIVATION_KEY = 'deepdose_pending_activation'
 
 export function normalizeActivationCode(code: string): string {
   return normalizeInviteCode(code)

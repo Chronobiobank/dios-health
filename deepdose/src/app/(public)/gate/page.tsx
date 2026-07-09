@@ -6,7 +6,7 @@ export default async function GatePage() {
   const { data: { user } } = await supabase.auth.getUser()
 
   return (
-    <section className="seco-page seco-auth-page unmed-gate-page">
+    <section className="seco-page seco-auth-page deepdose-gate-page">
       <div className="seco-landing__section-inner seco-auth-page__inner">
         <ClinicalActivationGate isAuthenticated={Boolean(user)} />
       </div>

@@ -1,6 +1,6 @@
 import type { LandingRiskAnalysis } from '@/lib/patient/landing-risk-analysis'
 
-export const GP_HANDOFF_STORAGE_KEY = 'unmed_gp_handoff_summary'
+export const GP_HANDOFF_STORAGE_KEY = 'deepdose_gp_handoff_summary'
 
 export type GpHandoffSnapshot = LandingRiskAnalysis & {
   medNames: string[]

@@ -23,7 +23,7 @@ export default function AboutPage() {
         <AboutFounderSection />
 
         <div className={marketingCtaClass('seco-about__actions seco-reveal seco-reveal--3')}>
-          <Link href="/patient-landing" className="seco-landing__btn seco-landing__btn--primary">
+          <Link href="/profile" className="seco-landing__btn seco-landing__btn--primary">
             See how it works →
           </Link>
         </div>

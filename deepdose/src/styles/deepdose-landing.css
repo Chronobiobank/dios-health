@@ -6,7 +6,7 @@
 
 /* Patient landing — fluid type (hero uses vw; tabs/tiles were fixed rem) */
 .deepdose-shell.seco-shell--dark .seco-landing--maven .seco-landing__hero-title {
-  max-width: 12ch;
+  max-width: none;
   margin: 0;
   font-family: var(--seco-font-display);
   font-size: var(--mkt-hero-title-size);
@@ -345,6 +345,29 @@
 
 .seco-landing__hero-line + .seco-landing__hero-line {
   margin-top: 0.125rem;
+}
+
+/* Hard rule: hero head is always exactly two lines (never wraps to 3). */
+.seco-landing__hero-title--two-line,
+.seco-page__title:has(> .seco-landing__hero-line + .seco-landing__hero-line) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  max-width: none;
+  width: min(100%, 18ch);
+  /* Scales down on narrow viewports so each line stays on one row */
+  font-size: clamp(1.875rem, 0.55rem + 7.2vw, var(--mkt-hero-title-size, 4.5rem));
+}
+
+.seco-landing__hero-title--two-line > .seco-landing__hero-line,
+.seco-page__title:has(> .seco-landing__hero-line + .seco-landing__hero-line) > .seco-landing__hero-line {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  white-space: nowrap;
+  margin-top: 0;
+  font-size: inherit;
 }
 
 .seco-landing__hero-line--white {

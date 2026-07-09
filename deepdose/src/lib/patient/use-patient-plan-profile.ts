@@ -13,6 +13,7 @@ export function usePatientPlanProfile(initialWake: string | null) {
   const [firstName, setFirstNameState] = useState('')
   const [familyName, setFamilyNameState] = useState('')
   const [avatarUrl, setAvatarUrlState] = useState<string | null>(null)
+  const [location, setLocationState] = useState('')
   const [wakeOverride, setWakeOverrideState] = useState<string | null>(null)
   const [ready, setReady] = useState(false)
 
@@ -22,6 +23,7 @@ export function usePatientPlanProfile(initialWake: string | null) {
     else if (stored.displayName) setFirstNameState(stored.displayName)
     if (stored.familyName) setFamilyNameState(stored.familyName)
     if (stored.avatarUrl) setAvatarUrlState(stored.avatarUrl)
+    if (stored.location) setLocationState(stored.location)
     if (stored.wake) setWakeOverrideState(stored.wake)
     setReady(true)
   }, [])
@@ -31,9 +33,10 @@ export function usePatientPlanProfile(initialWake: string | null) {
       firstName,
       familyName,
       avatarUrl,
+      location,
       wake: wakeOverride ?? initialWake,
     }),
-    [firstName, familyName, avatarUrl, wakeOverride, initialWake]
+    [firstName, familyName, avatarUrl, location, wakeOverride, initialWake]
   )
 
   const setFirstName = useCallback((value: string) => {
@@ -49,6 +52,11 @@ export function usePatientPlanProfile(initialWake: string | null) {
   const setAvatarUrl = useCallback((value: string | null) => {
     setAvatarUrlState(value)
     writePlanProfile({ ...readPlanProfile(), avatarUrl: value })
+  }, [])
+
+  const setLocation = useCallback((value: string) => {
+    setLocationState(value)
+    writePlanProfile({ ...readPlanProfile(), location: value })
   }, [])
 
   const setWake = useCallback((value: string | null) => {
@@ -68,6 +76,8 @@ export function usePatientPlanProfile(initialWake: string | null) {
     fullName,
     avatarUrl,
     setAvatarUrl,
+    location,
+    setLocation,
     wake: effectiveWake,
     setWake,
     snapshot,

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { siteFontVariableClasses } from '@/lib/fonts/site-fonts'
 import { SiteJsonLd } from '@/components/seo/SiteJsonLd'
 import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
@@ -7,25 +7,24 @@ import '@/styles/dios-tokens.css'
 import '@/styles/dios-components.css'
 import './globals.css'
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://unmed.net'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.unmed.net'
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: `${DEEPDOSE_NAME} — ${DEEPDOSE_TAGLINE}`,
-    template: `%s — ${DEEPDOSE_NAME}`,
+    default: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
+    template: `%s · ${DEEPDOSE_NAME}`,
   },
   description:
-    'Search your meds and supplements. Dose smarter with timing aligned to your body clock — heal faster with clinician support.',
+    'Max your medication. Non-conformists face the highest risk of drug clashes. We help you manage that so you maximise every dose.',
   applicationName: DEEPDOSE_NAME,
   keywords: [
-    'Unmed',
-    'chronotherapy',
-    'circadian rhythm',
+    'Deepdose',
+    'max your medication',
+    'polypharmacy risk',
     'medication timing',
     'body clock',
-    'chronobiobank',
-    'precision dosing',
+    'share outcomes',
   ],
   alternates: {
     canonical: '/',
@@ -35,15 +34,15 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     url: APP_URL,
     siteName: DEEPDOSE_NAME,
-    title: `${DEEPDOSE_NAME} — ${DEEPDOSE_TAGLINE}`,
+    title: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
     description:
-      'Dose smarter, heal faster — personalised timing for medicines, light, meals, and sleep.',
+      'Max your medication. Non-conformists face the highest risk of drug clashes. We help you manage that so you maximise every dose.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${DEEPDOSE_NAME} — ${DEEPDOSE_TAGLINE}`,
+    title: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
     description:
-      'Dose smarter, heal faster — personalised timing for medicines, light, meals, and sleep.',
+      'Max your medication. Non-conformists face the highest risk of drug clashes. We help you manage that so you maximise every dose.',
   },
   robots: {
     index: true,

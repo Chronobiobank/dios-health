@@ -1,4 +1,4 @@
-/** Research & evidence: dedicated page content and external source tiles. */
+﻿/** Research & evidence: dedicated page content and external source tiles. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { LANDING_CLINICIANS } from '@/lib/deepdose-marketing/landing-clinicians'
@@ -11,7 +11,7 @@ export const DEEPDOSE_RESEARCH_META = {
 
 export const DEEPDOSE_RESEARCH_INTRO = {
   lede:
-    'Your body runs on a clock. Take a medicine, eat, or sleep at the wrong point in that clock and the same dose does less, harms more, and — repeated night after night — costs healthy years of life.',
+    'Your body runs on a clock. Take a medicine, eat, or sleep at the wrong point in that clock and the same dose does less, harms more, and , repeated night after night , costs healthy years of life.',
   cost: {
     href: 'https://www.england.nhs.uk/medicines-2/medicines-optimisation/',
     label: 'NHS medicines optimisation',
@@ -69,12 +69,12 @@ export const DEEPDOSE_RESEARCH_CLUSTERS: ResearchCluster[] = [
   {
     id: 'foundational',
     tier: 'Foundational',
-    summary: 'Body clocks and chronobiology — the science precision timing is built on.',
+    summary: 'Body clocks and chronobiology , the science precision timing is built on.',
     papers: [
       {
         id: 'halberg-1969',
         tier: 'Foundational',
-        title: 'Chronobiology — the science that started it all',
+        title: 'Chronobiology , the science that started it all',
         authors: 'Halberg, F.',
         year: '1969',
         meta: 'Annual Review of Physiology · Coined “circadian”',
@@ -105,7 +105,7 @@ export const DEEPDOSE_RESEARCH_CLUSTERS: ResearchCluster[] = [
   {
     id: 'drug-specific',
     tier: 'Drug-specific',
-    summary: 'Same drug, different hour — when the dose lands changes what it does.',
+    summary: 'Same drug, different hour , when the dose lands changes what it does.',
     papers: [
       {
         id: 'hermida-2020',
@@ -143,7 +143,7 @@ export const DEEPDOSE_RESEARCH_CLUSTERS: ResearchCluster[] = [
   {
     id: 'population',
     tier: 'Population',
-    summary: 'Real-world body clocks at scale — why one schedule fails whole groups.',
+    summary: 'Real-world body clocks at scale , why one schedule fails whole groups.',
     papers: [
       {
         id: 'roenneberg-2007',

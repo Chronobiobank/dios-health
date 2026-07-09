@@ -1,20 +1,17 @@
 import { buildZeitgeberSchedule } from '@/lib/chronobiology/build-zeitgeber-schedule'
 import type { ZeitgeberScheduleItem } from '@/lib/chronobiology/build-zeitgeber-schedule'
+import { ZEITGEBER_DOMAINS, type ZeitgeberId } from '@/lib/chronobiology/zeitgebers'
 import type { DosePreviewStatus, DosePreviewTone } from '@/lib/patient/plan-dose-preview'
 import { timeToMinutes } from '@/lib/utils/time'
 
-export type SixDoseStripId =
-  | 'light'
-  | 'meals'
-  | 'exercise'
-  | 'cognition'
-  | 'sociophilic'
-  | 'sleep'
+/** Six medical zeitgeber doses (includes Biomedical for medicines). */
+export type SixDoseStripId = Exclude<ZeitgeberId, never>
 
 export type SixDoseStripItem = {
   id: SixDoseStripId
   label: string
   shortLabel: string
+  cue: string
   timeLabel: string
   note: string
   status: DosePreviewStatus
@@ -22,44 +19,41 @@ export type SixDoseStripItem = {
   slug: string
 }
 
-const STRIP_LABELS: Record<SixDoseStripId, { label: string; shortLabel: string; slug: string }> = {
-  light: { label: 'Sunlight dose', shortLabel: 'Sunlight', slug: 'sunlight' },
-  meals: { label: 'Nutritional dose', shortLabel: 'Nutritional', slug: 'nutritional' },
-  exercise: { label: 'Physiological dose', shortLabel: 'Physiological', slug: 'physiological' },
-  cognition: { label: 'Neuroplastic dose', shortLabel: 'Neuroplastic', slug: 'neuroplastic' },
-  sociophilic: { label: 'Sociophilic dose', shortLabel: 'Sociophilic', slug: 'sociophilic' },
-  sleep: { label: 'Blackout dose', shortLabel: 'Blackout', slug: 'blackout' },
-}
-
 const STRIP_ORDER: SixDoseStripId[] = [
   'light',
   'meals',
+  'meds',
   'exercise',
   'cognition',
-  'sociophilic',
   'sleep',
 ]
 
 const TONE_BY_ID: Record<SixDoseStripId, DosePreviewTone> = {
   light: 'peach',
   meals: 'peach',
-  exercise: 'peach',
+  meds: 'peach',
+  exercise: 'lilac',
   cognition: 'lilac',
-  sociophilic: 'lilac',
   sleep: 'blue',
 }
 
-function minutesToClock(minutes: number): string {
-  const normalized = ((minutes % 1440) + 1440) % 1440
-  const h = Math.floor(normalized / 60)
-  const m = normalized % 60
-  return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`
+const SLUG_BY_ID: Record<SixDoseStripId, string> = {
+  light: 'sunlight',
+  meals: 'nutrient',
+  meds: 'biomedical',
+  exercise: 'physiological',
+  cognition: 'neurological',
+  sleep: 'blackout',
 }
 
-function dlmoMinutes(dlmoEstimateHours: number): number {
-  const h = Math.floor(dlmoEstimateHours)
-  const m = Math.round((dlmoEstimateHours % 1) * 60)
-  return h * 60 + m
+function domainMeta(id: SixDoseStripId) {
+  const domain = ZEITGEBER_DOMAINS.find((d) => d.id === id)
+  return {
+    label: domain?.label ?? id,
+    shortLabel: domain?.shortLabel ?? id,
+    cue: domain?.cue ?? id,
+    description: domain?.description ?? '',
+  }
 }
 
 function primaryClockFromLabel(timeLabel: string): number | null {
@@ -80,15 +74,17 @@ function stripStatus(clockMinutes: number | null, now: Date): DosePreviewStatus 
   return 'upcoming'
 }
 
-function scheduleNote(id: SixDoseStripId, timeLabel: string, instruction: string): string {
-  if (id === 'sociophilic') {
-    return `Connect with someone around ${timeLabel.split(' ')[0]}. Shared rhythm is a daily time cue.`
+function scheduleNote(id: SixDoseStripId, instruction: string, description: string): string {
+  if (id === 'meds') {
+    return 'Medicines and supplements timed to your body clock. Your list sits under this dose.'
   }
   const firstSentence = instruction.split('.')[0]
-  return firstSentence ? `${firstSentence}.` : instruction
+  if (firstSentence) return `${firstSentence}.`
+  const descSentence = description.split('.')[0]
+  return descSentence ? `${descSentence}.` : description
 }
 
-/** Six lifestyle doses timed to DLMO — wireframe protocol without biomedical row. */
+/** Six medical doses timed to phase anchor — Biomedical holds medicine timing. */
 export function buildSixDoseStrip(
   dlmoEstimateHours: number,
   now: Date = new Date()
@@ -99,36 +95,20 @@ export function buildSixDoseStrip(
     ZeitgeberScheduleItem
   >
 
-  const phase = dlmoMinutes(dlmoEstimateHours)
-  const sociophilicTime = minutesToClock(phase - 240)
-
   return STRIP_ORDER.map((id) => {
-    const meta = STRIP_LABELS[id]
-    if (id === 'sociophilic') {
-      const timeLabel = sociophilicTime
-      return {
-        id,
-        label: meta.label,
-        shortLabel: meta.shortLabel,
-        timeLabel,
-        note: scheduleNote(id, timeLabel, ''),
-        status: stripStatus(timeToMinutes(timeLabel), now),
-        tone: TONE_BY_ID[id],
-        slug: meta.slug,
-      }
-    }
-
+    const meta = domainMeta(id)
     const item = byId[id]
-    const timeLabel = item.timeLabel
+    const timeLabel = item?.timeLabel ?? '—'
     return {
       id,
       label: meta.label,
       shortLabel: meta.shortLabel,
+      cue: meta.cue,
       timeLabel,
-      note: scheduleNote(id, timeLabel, item.instruction),
+      note: scheduleNote(id, item?.instruction ?? '', meta.description),
       status: stripStatus(primaryClockFromLabel(timeLabel), now),
       tone: TONE_BY_ID[id],
-      slug: meta.slug,
+      slug: SLUG_BY_ID[id],
     }
   })
 }

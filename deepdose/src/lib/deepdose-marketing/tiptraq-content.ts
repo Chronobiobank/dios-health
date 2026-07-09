@@ -1,4 +1,4 @@
-/** TipTraQ setup guide — six photo step tiles. */
+﻿/** TipTraQ setup guide , six photo step tiles. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
@@ -13,7 +13,7 @@ export const TIPTRAQ_PAGE_INTRO = {
   titleWhite: 'At-home',
   titleAccent: 'sleep testing',
   lede:
-    'Charge the sensor, set up the app, and wear TipTraQ overnight — usually across three nights. Each morning you upload; a sleep expert validates your recordings and you receive a clinical report.',
+    'Charge the sensor, set up the app, and wear TipTraQ overnight , usually across three nights. Each morning you upload; a sleep expert validates your recordings and you receive a clinical report.',
 } as const
 
 /** Which side holds the copy block. */
@@ -78,7 +78,7 @@ export const TIPTRAQ_GUIDE_STEPS: readonly TipTraqGuideStep[] = [
     rank: 4,
     cue: '#8b9cf8',
     title: 'Your nights sync',
-    body: 'End each morning to upload — usually three nights.',
+    body: 'End each morning to upload , usually three nights.',
     image: '/tiptraq/tiptraq-v3-4c.png',
     alt: 'TipTraQ sleep centre dashboard listing each night’s recording progress',
     copySide: 'left',
@@ -113,5 +113,5 @@ export const TIPTRAQ_GUIDE_STEPS: readonly TipTraqGuideStep[] = [
 
 export const TIPTRAQ_PAGE_CTA = {
   label: 'Order your test',
-  href: '/pricing',
+  href: '/membership',
 } as const

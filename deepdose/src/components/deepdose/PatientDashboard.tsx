@@ -1,10 +1,10 @@
-'use client'
+﻿'use client'
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 
 import { DeepdoseWordmark } from '@/components/brand/DeepdoseWordmark'
-import { DEEPDOSE_REGISTRATION_LINE } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_NAME, DEEPDOSE_REGISTRATION_LINE } from '@/lib/brand/deepdose-brand'
 import { PatientTimingPlan } from '@/components/deepdose/PatientTimingPlan'
 import { CommunityMatchesPanel } from '@/components/patient/CommunityMatchesPanel'
 import { CommunityStoryFeed } from '@/components/patient/CommunityStoryFeed'
@@ -31,7 +31,7 @@ export function PatientDashboard({ medCodes, medTimes = [], wake }: PatientDashb
       {gateOpen && (
         <div className="patient-dash__gate">
           <div className="patient-dash__gate-card">
-            <h2 className="patient-dash__gate-title">Join Commons — free</h2>
+            <h2 className="patient-dash__gate-title">Join Commons free</h2>
             <p className="patient-dash__gate-body">
               Save your six-dose protocol, find people on your rhythm, and keep your timing plan.
             </p>
@@ -46,21 +46,21 @@ export function PatientDashboard({ medCodes, medTimes = [], wake }: PatientDashb
               className="dios-btn-primary patient-dash__gate-submit"
               onClick={() => setGateOpen(false)}
             >
-              Save my plan — it&apos;s free
+              Save my plan · it&apos;s free
             </button>
             <button
               type="button"
               className="patient-dash__gate-skip"
               onClick={() => setGateOpen(false)}
             >
-              Skip for now — show my plan
+              Skip for now, show my plan
             </button>
           </div>
         </div>
       )}
 
       <nav className="patient-dash__nav">
-        <Link href="/" aria-label="Unmed home" className="patient-dash__nav-logo no-underline">
+        <Link href="/" aria-label={`${DEEPDOSE_NAME} home`} className="patient-dash__nav-logo no-underline">
           <DeepdoseWordmark />
         </Link>
         <button
@@ -74,7 +74,7 @@ export function PatientDashboard({ medCodes, medTimes = [], wake }: PatientDashb
 
       <div className="patient-dash space-y-8">
         <div className="patient-dash__plan-surface">
-          <SixDoseStrip dlmoEstimateHours={bodyClock.dlmoEstimateHours} variant="app" />
+          <SixDoseStrip phaseAnchorHours={bodyClock.dlmoEstimateHours} variant="app" />
         </div>
 
         <CommunityMatchesPanel />
@@ -98,7 +98,7 @@ export function PatientDashboard({ medCodes, medTimes = [], wake }: PatientDashb
               data. Wake time: {wake}.
             </p>
             <p>
-              Decision support only. Unmed does not prescribe. Your GP makes every treatment
+              Decision support only. {DEEPDOSE_NAME} does not prescribe. Your GP makes every treatment
               decision.
             </p>
             <p className="patient-dash__legal">{DEEPDOSE_REGISTRATION_LINE}</p>

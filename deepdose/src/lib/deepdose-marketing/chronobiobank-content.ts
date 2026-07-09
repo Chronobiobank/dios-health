@@ -1,4 +1,4 @@
-/** Chronobiobank — distributed intelligence, hybrid learning, licensing plane. */
+﻿/** Chronobiobank , distributed intelligence, hybrid learning, licensing plane. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {
@@ -8,29 +8,29 @@ import {
 export const CHRONOBIOBANK_META = {
   title: `Mission · ${DEEPDOSE_NAME}`,
   description:
-    'Federated chronobiology: phase and sleep on the participant\u2019s device, population timing insight without centralising intimate traces.',
+    'Medicine for non-conformers. Late nights, stacked meds, lives that don’t fit the clinic clock. We map what timing works for atypical folk, globally.',
 } as const
 
 export const CHRONOBIOBANK_INTRO = {
   eyebrow: 'Mission',
-  titleWhite: 'User-owned',
-  titleAccent: 'chronobiobank',
+  titleWhite: 'Medicine for',
+  titleAccent: 'non-conformers.',
   lede:
-    'Phase and sleep stay on your device. Science learns from federated patterns—not from hoarding nights in one vault.',
+    `You keep odd hours. You stack meds. Clinics still write for a 9-to-5 body. We built ${DEEPDOSE_NAME} for atypical folk: the night workers, the late social lives, the ones whose rhythm never matched the label on the bottle.`,
   quote:
-    'We are not building a central repository of nights. We are building federated chronobiology: population timing insight without exporting raw sleep architecture.',
+    'Modern medicine forgot atypical folk. We map what timing works for them, globally, so patterns emerge that no single clinic can see.',
 } as const
 
 export const CHRONOBIOBANK_MISSION_CTA = {
-  label: 'Start on your phone',
-  href: '/patient-landing',
+  label: 'Claim your free lifetime membership',
+  href: '/profile',
 } as const
 
 export const CHRONOBIOBANK_TRUST = {
   eyebrow: 'Why now',
   title: 'When institutional trust is tested',
   lede:
-    'UK Biobank showed what a national cohort can do for science. It also showed what happens when half a million people are asked to trust a single institution with samples, genomes, and linked health records — and that trust is questioned again and again.',
+    'UK Biobank showed what a national cohort can do for science. It also showed what happens when half a million people are asked to trust a single institution with samples, genomes, and linked health records , and that trust is questioned again and again.',
   quote:
     'UK Biobank asked half a million people to trust an institution with their most intimate biological data. That trust has been tested. We\u2019re building something different \u2014 where the data never leaves you.',
   contrasts: [
@@ -40,7 +40,7 @@ export const CHRONOBIOBANK_TRUST = {
       cue: '#6b7280',
       title: 'The asset moves to the institution',
       body:
-        'Participants contribute samples and records to a warehouse model. Research scales — but so does the trust surface every time access rules, commercial reuse, or data partnerships come under scrutiny.',
+        'Participants contribute samples and records to a warehouse model. Research scales , but so does the trust surface every time access rules, commercial reuse, or data partnerships come under scrutiny.',
     },
     {
       id: 'distributed',
@@ -48,7 +48,7 @@ export const CHRONOBIOBANK_TRUST = {
       cue: '#acd3de',
       title: 'The asset stays on your edge',
       body:
-        'Raw sleep and timing data remain patient-owned. Federated learning and privacy-preserving summaries improve models without centralising the intimate trace. Licensed research sees pseudonymised outcomes — not your nights.',
+        'Raw sleep and timing data remain patient-owned. Federated learning and privacy-preserving summaries improve models without centralising the intimate trace. Licensed research sees pseudonymised outcomes , not your nights.',
     },
   ],
   closing:
@@ -58,16 +58,16 @@ export const CHRONOBIOBANK_TRUST = {
 export const CHRONOBIOBANK_PLANE = {
   label: 'How it works',
   cue: '#8b9cf8',
-  title: 'Phone not cloud',
+  title: 'Your phone does the work',
   beats: [
-    'Sleep, phase markers, and dose timing are computed on the participant\u2019s device.',
-    'Anonymised updates aggregate — never raw night-by-night exports.',
-    'Consent governs every share; individuals retain delete and revoke.',
-    'Timing, recovery, and inter-individual difference feed better phase-aware advice and open findings for chronobiology research.',
+    'Your sleep and dose times are worked out on your phone.',
+    'We only share small, nameless updates, never your full night history.',
+    'You choose what to share. You can stop or delete any time.',
+    'Together, those updates show what timing helps people like you.',
   ],
 } as const
 
-/** Plain-language steps — used in the “Together” mission tile. */
+/** Plain-language steps , used in the “Together” mission tile. */
 export const CHRONOBIOBANK_MISSION_STEPS = [
   {
     id: 'phone',
@@ -81,48 +81,48 @@ export const CHRONOBIOBANK_MISSION_STEPS = [
     id: 'learn',
     label: 'Smarter together',
     cue: '#8b9cf8',
-    title: 'The model learns without hoarding',
+    title: 'We learn without taking your nights',
     body:
-      'Your device sends small, anonymised updates — not a dump of every heartbeat. Together they teach the system what good timing looks like.',
+      'Your phone sends small, nameless updates, not a dump of every heartbeat. Together they teach us what good timing looks like.',
   },
   {
     id: 'share',
     label: 'If you say yes',
     cue: '#f2b8a2',
-    title: 'Research sees summaries, not you',
+    title: 'Research sees groups, not you',
     body:
-      'Clinicians and approved studies may use grouped, anonymised results. They never browse your individual sleep chart.',
+      'Doctors and approved studies may use grouped results. They never open your personal sleep chart.',
   },
 ] as const
 
-/** Four mission tiles — scannable for researchers and clinicians. */
+/** Four mission tiles under the quote. Keep words simple for translation. */
 export const CHRONOBIOBANK_MISSION_FEATURES = [
   {
     id: 'yours',
-    badge: 'Privacy',
-    title: 'Data stays local',
-    teaser: 'On-device storage · consent-gated share',
+    badge: 'Yours',
+    title: 'Your data stays with you',
+    teaser: 'On your phone. Share only if you choose.',
     cue: '#f2b8a2',
   },
   {
     id: 'together',
-    badge: 'Knowledge',
-    title: 'Federated learning',
-    teaser: 'Aggregate phase patterns · never raw nights',
+    badge: 'Together',
+    title: 'We learn as a group',
+    teaser: 'Patterns from many people. Never your raw nights.',
     cue: '#8b9cf8',
   },
   {
     id: 'timing',
-    badge: 'Why it matters',
-    title: 'Phase variance',
-    teaser: 'Circadian timing shapes drug response and recovery',
+    badge: 'Timing',
+    title: 'When you take it matters',
+    teaser: 'The right hour can change how a dose works.',
     cue: '#acd3de',
   },
   {
     id: 'join',
-    badge: 'Take part',
-    title: 'Study with us',
-    teaser: 'Participants · clinicians · chronobiology labs',
+    badge: 'Join',
+    title: 'Be part of it',
+    teaser: 'Patients, doctors, and researchers welcome.',
     cue: '#c9b6f2',
   },
 ] as const
@@ -145,7 +145,7 @@ export const CHRONOBIOBANK_MISSION_YOURS = {
       cue: '#acd3de',
       title: 'You keep the original',
       body:
-        'Sleep and timing stay on your phone. Sharing is optional, visible, and revocable. Research works from anonymised patterns — not from copying your nights.',
+        'Sleep and timing stay on your phone. Sharing is optional, visible, and revocable. Research works from anonymised patterns , not from copying your nights.',
     },
   ],
   closing:
@@ -178,7 +178,7 @@ export const CHRONOBIOBANK_MISSION_TIMING = {
     },
   ],
   footnote:
-    'Curious about the studies and how we estimate your rhythm? The research library and measurement notes are linked below — no PhD required to start.',
+    'Curious about the studies and how we estimate your rhythm? The research library and measurement notes are linked below , no PhD required to start.',
 } as const
 
 export const CHRONOBIOBANK_MISSION_JOIN = {
@@ -191,14 +191,14 @@ export const CHRONOBIOBANK_MISSION_JOIN = {
       cue: '#acd3de',
       title: 'Start on your phone',
       body: 'Connect a wearable, add your medicines, and see if your timing fits your rhythm. You stay in charge of your data.',
-      cta: { label: 'Patient app', href: '/patient-landing' },
+      cta: { label: 'Patient app', href: '/profile' },
     },
     {
       id: 'researcher',
       label: 'Clinicians',
       cue: '#8b9cf8',
       title: 'Support people you already see',
-      body: 'View timing insight and adherence with consent — not a raw dump of someone\u2019s nights.',
+      body: 'View timing insight and adherence with consent , not a raw dump of someone\u2019s nights.',
       cta: { label: 'Clinician tools', href: '/clinician-landing' },
     },
     {
@@ -206,13 +206,13 @@ export const CHRONOBIOBANK_MISSION_JOIN = {
       label: 'Researchers',
       cue: '#f2b8a2',
       title: 'Study with consent',
-      body: 'Work from anonymised cohort patterns and audited access — built for ethics boards, not shadow databases.',
+      body: 'Work from anonymised cohort patterns and audited access , built for ethics boards, not shadow databases.',
       cta: { label: 'Research & science', href: CHRONOBIOBANK_SCIENCE_HREF },
     },
   ],
 } as const
 
-/** Bottom-of-page deep dives — descriptive badges for research & measurement detail. */
+/** Bottom-of-page deep dives , descriptive badges for research & measurement detail. */
 export const CHRONOBIOBANK_DEEP_DIVE = {
   research: {
     badge: 'Evidence',
@@ -228,28 +228,28 @@ export const CHRONOBIOBANK_DEEP_DIVE = {
 
 export const CHRONOBIOBANK_APPLE = {
   eyebrow: 'Privacy as architecture',
-  title: 'What Apple proved — and what it costs',
+  title: 'What Apple proved , and what it costs',
   lede:
     'Apple made on-device federated learning a competitive advantage, not a compliance checkbox. The model trains locally; only learned weight updates aggregate centrally. Your photos, typing patterns, and health metrics never leave the phone.',
   costTitle: 'Why that collapses the cost structure',
   costBody:
-    'Apple\u2019s servers do not process your intimate traces — compute is distributed across a billion devices they do not pay to run. A traditional biobank pulls every sleep log to a central server, cleans it, stores it, and queries it. Participant count scales storage and compute brutally.',
+    'Apple\u2019s servers do not process your intimate traces , compute is distributed across a billion devices they do not pay to run. A traditional biobank pulls every sleep log to a central server, cleans it, stores it, and queries it. Participant count scales storage and compute brutally.',
   federatedPoints: [
     {
       title: 'Body-clock state on the edge',
-      body: `${DEEPDOSE_NAME} computes BTI, proxy DLMO, and dosing windows on the participant\u2019s phone or wearable path — not in a central warehouse.`,
+      body: `${DEEPDOSE_NAME} computes BTI, proxy DLMO, and dosing windows on the participant\u2019s phone or wearable path , not in a central warehouse.`,
     },
     {
       title: 'Population patterns from model updates',
-      body: 'Chronotype and timing\u2013outcome relationships are learned by aggregating federated weight deltas or privacy-preserving summaries — not raw longitudinal sleep JSON.',
+      body: 'Chronotype and timing\u2013outcome relationships are learned by aggregating federated weight deltas or privacy-preserving summaries , not raw longitudinal sleep JSON.',
     },
     {
       title: 'Researchers query the model',
-      body: 'Licensed partners interrogate population-level inference and pseudonymised outcome aggregates — not a queryable lake of individual nights.',
+      body: 'Licensed partners interrogate population-level inference and pseudonymised outcome aggregates , not a queryable lake of individual nights.',
     },
     {
       title: 'Central infra is coordination',
-      body: 'The Chronobiobank runs consent governance, secure aggregation, and audit — not petabyte storage and batch ETL on intimate biology.',
+      body: 'The Chronobiobank runs consent governance, secure aggregation, and audit , not petabyte storage and batch ETL on intimate biology.',
     },
   ],
   consentLine:
@@ -258,12 +258,12 @@ export const CHRONOBIOBANK_APPLE = {
 
 export const CHRONOBIOBANK_PRECEDENTS = {
   title: 'Technical precedent',
-  teaser: 'The stack exists — chronobiology is the novel layer.',
+  teaser: 'The stack exists , chronobiology is the novel layer.',
   badge: 'Precedent',
   items: [
     {
       title: 'Apple HealthKit + Core ML',
-      body: 'On-device health metrics with local inference — the consumer proof that federated health learning works at scale.',
+      body: 'On-device health metrics with local inference , the consumer proof that federated health learning works at scale.',
     },
     {
       title: 'Federated cohort learning',
@@ -271,11 +271,11 @@ export const CHRONOBIOBANK_PRECEDENTS = {
     },
     {
       title: 'OpenMined / PySyft',
-      body: 'Open-source privacy-preserving ML infrastructure built for health research — production-grade federated training and secure aggregation.',
+      body: 'Open-source privacy-preserving ML infrastructure built for health research , production-grade federated training and secure aggregation.',
     },
     {
       title: 'HDRUK Trusted Research Environments',
-      body: 'Not fully federated yet — but the UK\u2019s national move toward governed research access without shipping raw NHS data to every analyst.',
+      body: 'Not fully federated yet , but the UK\u2019s national move toward governed research access without shipping raw NHS data to every analyst.',
     },
   ],
 } as const
@@ -284,17 +284,17 @@ export const CHRONOBIOBANK_SCIENCE = {
   eyebrow: 'Novel science',
   title: 'Longitudinal rhythm, not static snapshots',
   lede:
-    'Most federated health learning has used cross-sectional signals — a blood result, a diagnosis code. Circadian data is rhythmic and continuous: sleep timing, light exposure, medication adherence, activity phase.',
+    'Most federated health learning has used cross-sectional signals , a blood result, a diagnosis code. Circadian data is rhythmic and continuous: sleep timing, light exposure, medication adherence, activity phase.',
   body:
-    'A federated chronotype model must learn phase relationships over weeks and months, not single timepoints. That is a genuinely novel research problem — publishable, partnerable, and potentially patentable: a population chronotype inference model that improves with scale without centralising intimate traces.',
-  note: 'Hybrid Tier B/C paths exist because polypharmacy cohorts skew older and less connected — federated where capable, privacy-preserving upload elsewhere. Designed from day one, not bolted on later.',
+    'A federated chronotype model must learn phase relationships over weeks and months, not single timepoints. That is a genuinely novel research problem , publishable, partnerable, and potentially patentable: a population chronotype inference model that improves with scale without centralising intimate traces.',
+  note: 'Hybrid Tier B/C paths exist because polypharmacy cohorts skew older and less connected , federated where capable, privacy-preserving upload elsewhere. Designed from day one, not bolted on later.',
 } as const
 
 export const CHRONOBIOBANK_ECOSYSTEM = {
   eyebrow: 'London ecosystem',
   title: 'Who gets this off the ground',
   lede:
-    `${DEEPDOSE_NAME} is the working prototype — patient app, wearable ingest, BTI engine, consent-gated Chronobiobank ingest, and enterprise licensing dashboard. The partners below are the credible London stack to scale federated rounds, not claimed relationships.`,
+    `${DEEPDOSE_NAME} is the working prototype , patient app, wearable ingest, BTI engine, consent-gated Chronobiobank ingest, and enterprise licensing dashboard. The partners below are the credible London stack to scale federated rounds, not claimed relationships.`,
   partners: [
     {
       id: 'openmined',
@@ -318,7 +318,7 @@ export const CHRONOBIOBANK_ECOSYSTEM = {
       cue: '#c9b6f2',
       title: 'Academic validation',
       body:
-        'Oxford Sleep & Circadian Neuroscience (Foster), Roenneberg chronotype methods, and London chronotherapy groups — credibility for longitudinal phase modelling and trial design.',
+        'Oxford Sleep & Circadian Neuroscience (Foster), Roenneberg chronotype methods, and London chronotherapy groups , credibility for longitudinal phase modelling and trial design.',
     },
     {
       id: 'nhs',
@@ -326,7 +326,7 @@ export const CHRONOBIOBANK_ECOSYSTEM = {
       cue: '#f2b8a2',
       title: 'London ICB + NIHR',
       body:
-        'An Integrated Care Board pilot for polypharmacy timing in older adults; NIHR or digital-health infrastructure grants for federated evaluation — the path from prototype to governed cohort.',
+        'An Integrated Care Board pilot for polypharmacy timing in older adults; NIHR or digital-health infrastructure grants for federated evaluation , the path from prototype to governed cohort.',
     },
   ],
   prototype: {
@@ -345,7 +345,7 @@ export const CHRONOBIOBANK_TIERS = [
     title: 'Federated',
     audience: 'Modern phone · Oura / Whoop · reliable Wi\u2011Fi',
     body:
-      'On-device training in the background. Only encrypted weight updates leave the phone — never raw sleep JSON.',
+      'On-device training in the background. Only encrypted weight updates leave the phone , never raw sleep JSON.',
     leaves: 'Gradient contribution per learning round',
   },
   {
@@ -355,7 +355,7 @@ export const CHRONOBIOBANK_TIERS = [
     title: 'Privacy upload',
     audience: 'Older smartphone · patchy charging · intermittent sync',
     body:
-      'When federated training isn\u2019t viable, we queue minimum sufficient statistics — phase features, timing shift, outcome label — with differential-privacy noise before upload.',
+      'When federated training isn\u2019t viable, we queue minimum sufficient statistics , phase features, timing shift, outcome label , with differential-privacy noise before upload.',
     leaves: 'DP-noised feature bundle when online',
   },
   {
@@ -365,7 +365,7 @@ export const CHRONOBIOBANK_TIERS = [
     title: 'Assisted',
     audience: 'Care home · carer proxy · questionnaire-only',
     body:
-      'Human-mediated entry still improves population models. Pseudonymised prescribing outcomes join the same coordinator as federated rounds — via coarse bands, never names.',
+      'Human-mediated entry still improves population models. Pseudonymised prescribing outcomes join the same coordinator as federated rounds , via coarse bands, never names.',
     leaves: 'Pseudonymised outcome record only',
   },
 ] as const
@@ -377,7 +377,7 @@ export const CHRONOBIOBANK_CAPTURE = {
   points: [
     {
       title: 'Sleep & phase',
-      body: 'Sleep onset, wake, deep/REM duration, proxy DLMO, social jet lag, and circadian score — from wearables, phone, or TipTraQ validation.',
+      body: 'Sleep onset, wake, deep/REM duration, proxy DLMO, social jet lag, and circadian score , from wearables, phone, or TipTraQ validation.',
     },
     {
       title: 'Medication context',
@@ -385,7 +385,7 @@ export const CHRONOBIOBANK_CAPTURE = {
     },
     {
       title: 'Outcomes',
-      body: 'Blood pressure, HbA1c, symptom scores, and adverse events — linked to timing shifts when patients and clinicians record them.',
+      body: 'Blood pressure, HbA1c, symptom scores, and adverse events , linked to timing shifts when patients and clinicians record them.',
     },
   ],
 } as const
@@ -397,15 +397,15 @@ export const CHRONOBIOBANK_STORE = {
   stores: [
     {
       title: 'Patient clinical store',
-      body: 'Raw sleep logs, DLMO estimates, and prescribing data — Supabase RLS; readable only by the patient and consented clinicians.',
+      body: 'Raw sleep logs, DLMO estimates, and prescribing data , Supabase RLS; readable only by the patient and consented clinicians.',
     },
     {
       title: 'Learning coordinator',
-      body: 'Round metadata, aggregated contributions, and global model versions — internal only; no patient_id; never licensed to third parties.',
+      body: 'Round metadata, aggregated contributions, and global model versions , internal only; no patient_id; never licensed to third parties.',
     },
     {
       title: 'Chronobiobank licensing store',
-      body: 'Pseudonymised outcome rows and population aggregates — readable only under active data license with full audit trail.',
+      body: 'Pseudonymised outcome rows and population aggregates , readable only under active data license with full audit trail.',
     },
   ],
 } as const
@@ -467,7 +467,7 @@ export const CHRONOBIOBANK_CONSENT = {
     },
     {
       title: 'Research licensing',
-      body: 'Contribute pseudonymised outcomes to NHS population analytics, pharma R&D, or academic studies — each purpose is explicit.',
+      body: 'Contribute pseudonymised outcomes to NHS population analytics, pharma R&D, or academic studies , each purpose is explicit.',
     },
   ],
   note: 'UK GDPR-shaped workflows · immutable consent audit log · Chronobiobank isolation: UI never exposes model weights.',
@@ -480,7 +480,7 @@ export const CHRONOBIOBANK_AUDIENCES = [
     cue: '#acd3de',
     title: 'Your clock stays yours',
     body:
-      'Start free with phone and wearable data. Choose what to share. Tier A, B, or C — we route you to the path your device can support.',
+      'Start free with phone and wearable data. Choose what to share. Tier A, B, or C , we route you to the path your device can support.',
     cta: { label: 'Start free', href: '/login' },
   },
   {
@@ -489,7 +489,7 @@ export const CHRONOBIOBANK_AUDIENCES = [
     cue: '#8b9cf8',
     title: 'Licensed population insight',
     body:
-      'Filter by age band, chronotype, medication, and consent purpose. Pseudonymised tokens only — full access audit trail.',
+      'Filter by age band, chronotype, medication, and consent purpose. Pseudonymised tokens only , full access audit trail.',
     cta: { label: 'Enterprise overview', href: '/enterprise-landing' },
   },
   {
@@ -498,7 +498,7 @@ export const CHRONOBIOBANK_AUDIENCES = [
     cue: '#f2b8a2',
     title: 'A new category of infrastructure',
     body:
-      'AI safety, privacy tech, and digital-health infrastructure grants — fundable as distributed intelligence, not another central biobank replay. Apple\u2019s on-device health playbook applied to chronotherapy.',
+      'AI safety, privacy tech, and digital-health infrastructure grants , fundable as distributed intelligence, not another central biobank replay. Apple\u2019s on-device health playbook applied to chronotherapy.',
     cta: { label: 'Science & trust', href: CHRONOBIOBANK_SCIENCE_HREF },
   },
 ] as const

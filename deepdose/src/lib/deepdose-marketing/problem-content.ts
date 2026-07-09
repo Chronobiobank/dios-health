@@ -1,69 +1,51 @@
-/** The precision-timing problem — why one-size dosing fails. */
+﻿/** The Fix: consumer story. Clinician pitch lives on /clinician-landing. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const PROBLEM_PAGE_META = {
   title: `The Fix · ${DEEPDOSE_NAME}`,
   description:
-    'Drug effect follows circadian biology. Standard dosing schedules hide benefits that appear when timing matches each patient’s clock.',
+    'Non-conformists carry more sleep debt and more scripts. Wrong-time dosing wastes the dose. Max every dose you already take.',
 } as const
 
 export const PROBLEM_PAGE_INTRO = {
   eyebrow: 'The Fix',
-  titleWhite: 'Clock time,',
-  titleAccent: 'is not body time.',
-  lede: `Many drugs vary in effect and safety by time of day. Practice rarely accounts for each patient’s circadian context. ${DEEPDOSE_NAME} turns that gap into actionable timing.`,
+  titleWhite: 'More scripts.',
+  titleAccent: 'Less recovery.',
+  lede: `Non-conformists live off the clinic clock. Late nights, stacked meds, thin recovery. The trap: when a dose underperforms, another gets added. ${DEEPDOSE_NAME} breaks that loop by timing what you already take.`,
 } as const
 
 export const PROBLEM_PAGE_SECTIONS = [
   {
-    id: 'masking',
-    title: 'Standardised dosing hides heterogeneity',
-    body: 'Trials and guidelines often fix one clock time for everyone, diluting benefits that show up when dosing matches internal rhythm and daily routines.',
+    id: 'trap',
+    title: 'The cascade trap',
+    body: 'If a med feels weak, the rational move looks like more medicine. That is a losing game. Wrong hour, weak effect, new script. Timing flips the payoff: same dose, better return, fewer add-ons.',
   },
   {
     id: 'rhythms',
-    title: 'Key mechanisms are rhythmic',
-    body: 'Glucose tolerance, insulin sensitivity, blood pressure, and hormone systems — including the renin–angiotensin–aldosterone system (RAAS) and cortisol — shift across 24 hours, changing how drugs work.',
+    title: 'Your body still runs on a clock',
+    body: 'Blood pressure, glucose, mood chemistry, and sleep hormones shift across 24 hours. A morning label on a late life is often the wrong bet.',
   },
   {
     id: 'subgroups',
-    title: 'Highest-risk groups get missed',
-    body: 'Non-dippers, nocturnal hypertension, shift workers, sleep apnea, and dawn phenomenon often gain most from tailored timing — yet are rarely flagged in primary care.',
+    title: 'Highest-risk lives get missed',
+    body: 'Late social rhythms, night work, sleep apnea, and polypharmacy travel together. Clinics rarely map that, so meds accumulate while sleep stays broken.',
   },
   {
-    id: 'barriers',
-    title: 'Barriers block adoption',
-    body: 'Short visits, adherence worries, and no simple tools push GPs towards one-size instructions instead of individualised chronotherapy.',
+    id: 'agency',
+    title: 'Keep the life. Upgrade the dose.',
+    body: 'You should not have to become someone else for medicine to work. Smart dosing respects the life you live and makes each tablet earn its place.',
   },
 ] as const
 
-export const PROBLEM_PAGE_OUTCOMES = {
-  title: 'Why fixing it helps',
-  items: [
-    'Matched timing can lower night-time blood pressure, blunt morning glucose peaks, and improve side-effect profiles — especially in high cardiovascular risk.',
-    'Individual timing respects sleep, meals, and work — improving efficacy without fighting adherence.',
-  ],
-} as const
-
-export const PROBLEM_PAGE_CLINICIAN = {
-  title: 'What clinicians need',
-  items: [
-    'Quick phenotyping: dipper vs non-dipper, sleep timing, shift work, dawn-risk — without full ambulatory testing.',
-    'Evidence-graded rules: per-drug timing impact (high / medium / low) with references and confidence.',
-    'Electronic health record (EHR) support: proposed times, interaction flags, patient preferences recorded.',
-    'Trial-ready modules: pragmatic single-patient (n-of-1) or clinic pilots to build local evidence fast.',
-  ],
-} as const
-
 export const PROBLEM_PAGE_CASE = {
   title: 'One example',
-  body: 'A 58-year-old with type 2 diabetes, dawn fasting glucose, and night-time high blood pressure may benefit from bedtime basal insulin or evening angiotensin receptor blocker (ARB) dosing — after simple phenotyping confirms elevated night-time blood pressure and sleep timing that supports safe evening doses.',
+  body: 'Antidepressant, blood-pressure med, sleep aid. Nights after midnight. Mornings that never recover. Retiming what you already take can change how you feel before anyone adds another script.',
 } as const
 
 export const PROBLEM_PAGE_CTA = {
-  label: 'Pilot timing-smart prescriptions',
-  href: '/clinician-landing',
+  label: 'Know my risk',
+  href: '/profile',
 } as const
 
 export const PROBLEM_PAGE_HREF = '/problem' as const

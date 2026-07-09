@@ -1,10 +1,10 @@
-import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
+﻿import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
 import {
   bodyClockScoreFromProfile,
   buildPatientMelatoninProfile,
 } from '@/lib/patient/patient-landing-melatonin'
 import { resolvePolyPlanMeds, syncStateForRisk } from '@/lib/medications/poly-plan-meds'
-import { UnmedLocalEngine, sleepBlocksFromLogs } from '@/lib/unmed/local-engine'
+import { DeepdoseLocalEngine, sleepBlocksFromLogs } from '@/lib/unmed/local-engine'
 import { sriTone, type SriTone } from '@/lib/unmed/product-philosophy'
 import { timeToMinutes } from '@/lib/utils/time'
 
@@ -100,7 +100,7 @@ function computeSriProxy(
 ): number {
   const bodyClock = inferLandingBodyClock(wake, medTimes)
   const logs = syntheticSleepLogs(bodyClock.wakeLabel, bodyClock.sleepOnsetLabel, PROXY_NIGHTS)
-  const engine = new UnmedLocalEngine()
+  const engine = new DeepdoseLocalEngine()
   let base = engine.calculateWindowSRI(sleepBlocksFromLogs(logs), PROXY_NIGHTS)
 
   if (base == null) {
@@ -154,17 +154,17 @@ function deriveSleepDisorderRisk(input: {
 
   const sleepDisorderHeadline =
     sleepDisorderRisk === 'elevated'
-      ? 'Sleep disorder risk — discuss with your GP'
+      ? 'Sleep disorder risk. Discuss with your GP'
       : sleepDisorderRisk === 'watch'
         ? 'Sleep rhythm may need a GP review'
         : 'No urgent sleep disorder flags from this check'
 
   const sleepDisorderDetail =
     sleepDisorderRisk === 'elevated'
-      ? 'Your medicine timings and sleep regularity proxy suggest upstream sleep disruption that can drive prescribing cascades. A GP structured medication review and home sleep test may be appropriate.'
+      ? 'UK Biobank linked low SRI to higher disease risk and earlier death. Mistimed meds can make nights worse. Share this with your GP. A home sleep test can confirm the picture.'
       : sleepDisorderRisk === 'watch'
-        ? 'Some timing conflicts or polypharmacy patterns can disturb sleep and recovery. Worth sharing this summary with your GP.'
-        : 'Keep your regular sleep–wake routine. Re-check if your medicines change or sleep worsens.'
+        ? 'Your SRI and medicine timings suggest sleep may be under strain. Raise SRI with the six-dose protocol, and share this summary with your GP if nights stay broken.'
+        : 'Hold a regular sleep–wake pattern and your six daily doses. Re-check SRI if your medicines change or sleep worsens.'
 
   return {
     sleepDisorderRisk,
@@ -177,12 +177,12 @@ function deriveSleepDisorderRisk(input: {
 
 function buildGpSummaryBullets(analysis: Omit<LandingRiskAnalysis, 'gpSummaryBullets' | 'generatedAt'>): string[] {
   const bullets: string[] = [
-    `Sleep Regularity Index (proxy): ${analysis.sriProxy}/100 — estimated from wake time and medicine schedule (no wearable data yet).`,
+    `Sleep Regularity Index (proxy): ${analysis.sriProxy}/100, estimated from wake time and medicine schedule (no wearable data yet).`,
     `Medicines on file: ${analysis.medCount}${
       analysis.polypharmacyTier === 'hyperpolypharmacy'
-        ? ' (hyperpolypharmacy — SMR-eligible cohort)'
+        ? ' (hyperpolypharmacy, SMR-eligible cohort)'
         : analysis.polypharmacyTier === 'polypharmacy'
-          ? ' (polypharmacy — consider structured medication review)'
+          ? ' (polypharmacy; consider structured medication review)'
           : ''
     }.`,
     `Target sleep ${analysis.sleepOnsetLabel} → wake ${analysis.wakeLabel}.`,
@@ -211,7 +211,7 @@ function buildGpSummaryBullets(analysis: Omit<LandingRiskAnalysis, 'gpSummaryBul
   }
 
   bullets.push(
-    'This is decision support only — not a diagnosis. Shared decision-making and SMR documentation remain with the GP.'
+    'This is decision support only, not a diagnosis. Shared decision-making and SMR documentation remain with the GP.'
   )
 
   return bullets

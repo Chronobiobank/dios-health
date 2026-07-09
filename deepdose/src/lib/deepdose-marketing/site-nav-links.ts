@@ -1,24 +1,26 @@
-/** Public site navigation — header (full) vs footer (essentials only). */
+﻿/** Public site navigation , header (full) vs footer (essentials only). */
 
 import { PROBLEM_PAGE_HREF } from '@/lib/deepdose-marketing/problem-content'
 
 export const DEEPDOSE_SITE_LINKS = [
   { label: 'The Fix', href: PROBLEM_PAGE_HREF },
-  { label: 'Mission', href: '/chronobiobank' },
+  { label: 'Mission', href: '/mission' },
   { label: 'Technology', href: '/technology' },
   { label: 'Science', href: '/science' },
-  { label: 'Testkit', href: '/home-test' },
-  { label: 'Doses', href: '/patient-landing' },
-  { label: 'Community', href: '/partners' },
-  { label: 'Membership', href: '/pricing' },
+  { label: 'Testkit', href: '/testkit' },
+  { label: 'Profile', href: '/profile' },
+  { label: 'Dosage', href: '/dosage' },
+  { label: 'Share', href: '/share' },
+  { label: 'Connect', href: '/connect' },
+  { label: 'Membership', href: '/membership' },
   { label: 'Sign in', href: '/login' },
 ] as const
 
-/** Footer — primary paths only; detail pages stay in header nav. */
+/** Footer , primary paths only; detail pages stay in header nav. */
 export const DEEPDOSE_FOOTER_LINKS = [
-  { label: 'Your plan', href: '/patient-landing' },
-  { label: 'Science', href: '/science' },
-  { label: 'Pricing', href: '/pricing' },
+  { label: 'Profile', href: '/profile' },
+  { label: 'Dosage', href: '/dosage' },
+  { label: 'Connect', href: '/connect' },
   { label: 'Sign in', href: '/login' },
   { label: 'Terms', href: '/terms' },
 ] as const

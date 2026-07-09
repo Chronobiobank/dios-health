@@ -8,8 +8,9 @@
 @import "./deepdose-shell.css";
 @import "./deepdose-landing.css";
 @import "./dios-glass.css";
+@import "./app-bottom-nav.css";
 @import "./patient-sleep-wake-dash.css";
-@import "./unmed-clinical-dash.css";
+@import "./deepdose-clinical-dash.css";
 @import "./deepdose-app-overrides.css";
 @import "./deepdose-ambient.css";
 @import "./deepdose-spectrum-tiles.css";

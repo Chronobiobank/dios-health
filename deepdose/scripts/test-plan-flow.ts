@@ -63,7 +63,7 @@ const path = buildPatientLandingPath({
   medCodes: defaultRows.medCodes,
   medTimes: defaultRows.medTimes,
 })
-assert.ok(path.startsWith('/patient-landing?'))
+assert.ok(path.startsWith('/profile?'))
 const qs = path.split('?')[1]!
 const parsed = parsePatientLandingParams(new URLSearchParams(qs))
 assert.deepEqual(parsed.medCodes, defaults)

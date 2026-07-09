@@ -1,24 +1,24 @@
-/** DeepDose marketing — public landing content. */
+﻿/** Deepdose marketing · public landing content. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_VOICE } from '@/lib/brand/deepdose-voice'
 import { DEEPDOSE_RESEARCH_PAPERS } from '@/lib/deepdose-marketing/research-content'
-import { EVIDENCE_HREF, TECHNOLOGY_DLMO_PROXY_HREF } from '@/lib/deepdose-marketing/site-nav-links'
+import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} · Activate precision sleep`,
-  description:
-    'Unmed creates precision dosing plans to optimise your sleep-wake cycle — live your best life and avoid chronic disease.',
+  title: `${DEEPDOSE_NAME} · Max your medication.`,
+  description: `${DEEPDOSE_NAME}: non-conformists face the highest risk of drug clashes. Manage that and maximise every dose.`,
 } as const
 
 export const DEEPDOSE_CVP =
-  'Unmed creates precision dosing plans to optimise sleep-wake — data you share on your terms.' as const
+  'Max your medication. Non-conformists face the highest risk of drug clashes. We help you manage that so you maximise every dose.' as const
 
-/** Home splash — short head, sub, med search. */
+/** Home splash · short head, sub, med search. */
 export const DEEPDOSE_HOME_SPLASH = {
-  headlineWhite: 'Activate',
-  headlineAccent: 'precision sleep.',
-  lede: 'Unmed creates precision dosing plans to optimise your sleep-wake cycle so you can live your best life and avoid chronic disease.',
+  headlineWhite: DEEPDOSE_VOICE.homeHeadlineWhite,
+  headlineAccent: DEEPDOSE_VOICE.homeHeadlineAccent,
+  lede: DEEPDOSE_VOICE.homeLede,
 } as const
 
 export const DEEPDOSE_HOME_SPLASH_HERO = {
@@ -36,27 +36,27 @@ export const DEEPDOSE_HOME_DEFAULT_MED_CODES = [
   'sertraline',
 ] as const
 
-/** Home med search — feeds the sleep–wake risk calculator. */
+/** Home med search · feeds the sleep–wake risk calculator. */
 export const DEEPDOSE_HOME_POLY_SEARCH = {
-  checkCta: 'Find out your risk',
+  checkCta: 'Know my risk',
   expandCta: '+ Add medication',
   expandCtaAnother: '+ Add medication',
   medPlaceholders: [
-    'What meds are you on?',
-    'Second med',
+    'Search a medication',
+    'Add another',
     'Third med',
     'Fourth med',
   ],
   medPlaceholderExtra: 'Search another medication',
 } as const
 
-/** Site-wide mission — deficit (wrong-time dosing) → benefit (chronotherapy). */
+/** Site-wide mission · three moves (audience/problems live on /problem). */
 export const DEEPDOSE_MISSION = {
-  eyebrow: 'Precision dosing',
-  headlineWhite: 'Dose when your',
-  headlineAccent: 'biology is ready',
-  headline: 'Dose when your biology is ready',
-  lede: `The right dose at the wrong time is the wrong dose. ${DEEPDOSE_NAME} finds your window — then times each med to when your body is ready, so the same dose can work harder.`,
+  eyebrow: 'Three moves',
+  headlineWhite: DEEPDOSE_VOICE.missionHeadlineWhite,
+  headlineAccent: DEEPDOSE_VOICE.missionHeadlineAccent,
+  headline: 'Know. Fit. Share.',
+  lede: DEEPDOSE_VOICE.missionLede,
 } as const
 
 export const DEEPDOSE_LANDING_HERO: LandingHeroContent = {
@@ -71,7 +71,7 @@ const EVIDENCE_PAPER_IDS = ['hermida-2020', 'pigazzani-2024', 'wallace-2003'] as
 export const DEEPDOSE_LANDING_EVIDENCE = {
   eyebrow: 'The evidence',
   headline: 'Timing matters',
-  support: 'Peer-reviewed trials across blood pressure, glucose, sleep, and more.',
+  support: 'Peer-reviewed trials, not wellness folklore.',
   seeAll: { label: 'Published science', href: EVIDENCE_HREF },
   papers: EVIDENCE_PAPER_IDS.map(
     (id) => DEEPDOSE_RESEARCH_PAPERS.find((paper) => paper.id === id)!
@@ -90,17 +90,17 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'We estimate proxy DLMO from sleep onset (−2 h) and MCTQ mid-sleep (−2.5 h) — published population markers.',
-          meta: 'Proxy DLMO · Burgess & Roenneberg',
-          href: TECHNOLOGY_DLMO_PROXY_HREF,
+          title: 'We score Sleep Regularity Index from past, current, and future sleep signals, the same family of metrics used in UK Biobank.',
+          meta: 'SRI · UK Biobank-style regularity',
+          href: '/profile',
         },
         {
-          title: 'TipTraQ three-night block validates the anchor — like calibrating a CGM.',
+          title: 'TipTraQ three-night block validates the anchor, like calibrating a CGM.',
           meta: 'Clinical validation · Verified badge',
-          href: '/home-test',
+          href: '/testkit',
         },
         {
-          title: 'BCA tracks how steady your blackout window stays — drift moves every dose cue.',
+          title: 'BCA tracks how steady your blackout window stays, drift moves every dose cue.',
           meta: 'Body clock alignment · Time-in-range',
           href: '/login',
         },
@@ -116,7 +116,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Six dose cues — light, meals, meds, movement, wind-down, blackout — all timed to your anchor.',
+          title: 'Six dose cues · light, meals, meds, movement, wind-down, blackout · all timed to your anchor.',
           meta: 'Zeitgebers · Phase-adjusted',
           href: '/login',
         },
@@ -126,7 +126,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
           href: '/login',
         },
         {
-          title: 'When drift pushes your anchor late, every cue shifts — not fixed 8am reminders.',
+          title: 'When drift pushes your anchor late, every cue shifts, not fixed 8am reminders.',
           meta: 'Precision dosing · Moves with you',
           href: '/login',
         },
@@ -163,8 +163,8 @@ export const DEEPDOSE_LANDING_PLATFORM = {
         },
         {
           title: 'Privacy-first by design: consent-based, UK GDPR, nothing shared without you.',
-          meta: 'Chronobiobank · Anonymous telemetry',
-          href: '/chronobiobank',
+          meta: 'Mission · Anonymous telemetry',
+          href: '/mission',
         },
       ],
     },
@@ -183,7 +183,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
           href: '/',
         },
         {
-          title: 'Atorvastatin works best in the evening — nocturnal cholesterol synthesis is the target. Morning dosing misses the window.',
+          title: 'Atorvastatin works best in the evening, nocturnal cholesterol synthesis is the target. Morning dosing misses the window.',
           meta: 'Statin timing · TIME substudy (Dundee)',
           href: '/evidence',
         },
@@ -193,8 +193,8 @@ export const DEEPDOSE_LANDING_PLATFORM = {
           href: '/evidence',
         },
         {
-          title: 'Enter your combination and we show you the conflicts — no account needed.',
-          meta: 'Free · Instant · No sign-up required',
+          title: 'Enter your combination and we show you the conflicts, no account needed.',
+          meta: 'Free · Instant, no sign-up required',
           href: '/',
         },
       ],
@@ -204,7 +204,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
 
 export const DEEPDOSE_LANDING_CLOSE = {
   headline: 'Start free',
-  support: 'Add your meds, baseline your rhythm, see when each window opens.',
+  support: DEEPDOSE_VOICE.closeSupport,
   cta: { label: 'Sign up for free', href: '/login' },
 } as const
 
@@ -214,7 +214,7 @@ export const DEEPDOSE_PATIENT_PLAN_HERO = {
   headlineAccent: DEEPDOSE_MISSION.headlineAccent,
 } as const
 
-/** Patient landing lede — check + verdict in one line (no duplicate context). */
+/** Patient landing lede · check + verdict in one line (no duplicate context). */
 export function patientPlanHeroSupport(medCount: number, verdict: string): string {
   const intro =
     medCount === 1
@@ -225,97 +225,119 @@ export function patientPlanHeroSupport(medCount: number, verdict: string): strin
   return `${intro} ${verdict}`
 }
 
-/** Patient landing — sleep–wake glass dashboard copy. */
+/** Profile · Levels-style modular SRI tiles (protocols live on /dosage). */
 export const PATIENT_SLEEP_WAKE_DASH = {
-  title: 'Your sleep–wake plan',
-  subtitle: 'Free risk check from your medicines and wake time — then share with your GP if needed.',
+  title: 'Sleep matters.',
+  diagnosticEyebrow: 'Your Risk Profile',
+  subtitleBefore: 'We use AI and your phone data to calculate your ',
+  subtitleHighlight: 'Sleep Regularity Index (SRI)',
+  subtitleAfter:
+    '. It shows how regular your nights are, and which daily changes can raise your score and lower your risk of chronic disease and early death.',
+  scienceLink: 'Read the science',
+  scienceHref: '/science',
+  dosageLink: 'See the dosage',
+  scoreTile: 'Your score',
+  historyTile: 'History',
+  sleepMattersTile: 'Sleep matters',
   sleepLabel: 'Sleep',
   wakeLabel: 'Wake',
-  scoreLabel: 'Sleep Regularity Index (proxy)',
-  scoreHint: 'Estimated on your device from your schedule — wearable data refines this later.',
-  medsTitle: 'Medicines & timing',
+  sleepHint: 'lights out',
+  wakeHint: 'first light',
+  riskTile: 'Disease risk',
+  riskHint:
+    'Lower SRI, higher disease risk. Your phone SRI is a proxy from population studies (including UK Biobank-style evidence). It is not a personal diagnosis.',
+  dosageCta: 'Open dosage protocol',
   cta: 'Save my plan',
-  ctaNote: 'Free account · your data stays on your phone',
+} as const
+
+/** Six-dose protocol — expands from SRI diagnosis into what to do. */
+export const PATIENT_SIX_DOSE_PROTOCOL = {
+  eyebrow: 'Your protocol',
+  title: 'Six doses to raise your SRI',
+  support:
+    'Sunlight, nutrient, biomedical, physiological, neurological, and blackout. Hold them and your nights line up.',
+  education: 'Lined-up nights raise SRI. Higher SRI, lower disease risk.',
 } as const
 
 /** Consumer → GP handoff after public risk analysis. */
 export const LANDING_GP_HANDOFF_COPY = {
-  eyebrow: 'Risk analysis',
-  shareCta: 'Share summary with your GP',
-  shareOptionalCta: 'Print summary for your GP',
-  tiptraqCta: 'Discuss a 3-night home sleep test with your GP →',
+  eyebrow: 'Your risk picture',
+  shareCta: 'Take this to your GP',
+  shareOptionalCta: 'Print a summary for your GP',
+  tiptraqCta: 'Ask your GP about a 3-night home sleep test →',
   disclaimer:
-    'Decision support only — not a diagnosis. Your GP decides on tests, reviews, and any changes to your medicines.',
+    'Decision support only, not a diagnosis. Your GP decides on tests, reviews, and any changes to your medicines.',
   summaryTitle: 'Summary for your GP',
   summaryMeta:
-    'Printable sleep–medicine risk summary for structured medication review and GP-advised home sleep testing.',
+    'Printable sleep–medicine risk summary for a medication review and GP-advised home sleep testing.',
   summaryEmpty: 'Run a risk check on your sleep–wake plan first, then share the summary with your GP.',
   summaryTipTraqBody:
-    'If sleep-disordered breathing is suspected, a GP-advised TipTraQ home sleep test (three nights) can confirm AHI and SpO₂ before deprescribing or cascade review.',
+    'If nights feel broken or breathing may be involved, a GP-advised TipTraQ home sleep test (three nights) can confirm the picture before anyone changes your meds.',
 } as const
 
 export const DEEPDOSE_PLAN_NEXT_STEPS = {
   entryCta: 'Save my plan →',
   continueCta: 'Continue →',
   backCta: 'Back',
-  steps: ['Body clock', 'Six doses', 'Join Unmed'] as const,
+  steps: ['SRI', 'Six doses', `Join ${DEEPDOSE_NAME}`] as const,
   clock: {
     eyebrow: 'Step 1 of 3',
-    headline: "Here's your body clock",
+    headline: 'Here’s your Sleep Regularity Index',
     support:
-      'Your circadian profile from wake time and when you take your medicines — no wearable data yet.',
+      'SRI from your sleep pattern and when you take your medicines. Wearables refine past, current, and future nights.',
     stats: {
-      dlmo: 'Melatonin onset (DLMO)',
+      sri: 'Sleep Regularity Index (SRI)',
       wake: 'Typical wake',
       sleep: 'Sleep target',
-      chronotype: 'Chronotype hint',
+      chronotype: 'Rhythm hint',
     },
-    note: 'A first estimate from what you told us. Phone data and the chrono test refine it later.',
+    note: 'A first read from what you told us. Phone and wearable data sharpen it later.',
   },
   doses: {
     eyebrow: 'Step 2 of 3',
     headline: 'Here are your six doses',
     support:
-      'Sunlight, Nutritional, Physiological, Neuroplastic, Sociophilic, and Blackout — timed to your clock, not just your tablets.',
-    education: 'Chronobiologists call these zeitgebers — daily time cues. Unmed calls each one a dose.',
+      'Sunlight, food, movement, focus, connection, and blackout. Hold them to raise SRI and give your meds a fairer chance.',
+    education: `${DEEPDOSE_NAME} times six daily cues to your rhythm. More regular nights, stronger doses.`,
   },
   join: {
     eyebrow: 'Step 3 of 3',
-    headline: "Find the people who've been where you are",
-    support: 'No pressure — stay on Commons for free, or upgrade when clinical timing matters.',
+    headline: "Find people who've been where you are",
+    support:
+      'No pressure, no labels. Stay free on Commons, or upgrade when you want a clinical-grade sleep read for your GP.',
     commons: {
       title: 'Commons',
       figure: 'Free',
       points: [
-        'Save your dose protocol and timing plan',
-        'Compare streaks with people on your rhythm',
-        'Body-clock estimate from phone and wearables',
+        'Save your timing plan without the clinic waiting room',
+        'Compare with people on a similar rhythm, not a similar label',
+        'Phone and wearable estimate of your body clock',
         'Help research only if you opt in',
       ],
-      cta: { label: 'Join Commons — free', href: '/login' },
+      cta: { label: 'Join Commons free', href: '/login' },
     },
     paid: {
       title: 'Clinical member',
       figure: 'From Testkit',
       points: [
-        'TipTraQ home sleep test — three nights',
+        'TipTraQ home sleep test, three nights',
         'Clinical body-clock read replaces the estimate',
         'Verified badge your GP can trust',
         'Quarterly re-reads catch drift early',
       ],
-      cta: { label: 'Browse membership', href: '/pricing' },
+      cta: { label: 'Browse membership', href: '/membership' },
     },
-    skip: 'Or keep browsing — no account needed.',
+    skip: 'Or keep browsing, no account needed.',
   },
 } as const
 
 export const DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE = {
   eyebrow: 'Next step',
   headline: DEEPDOSE_MISSION.headline,
-  body: 'This plan uses typical wake times and trial averages — not your body clock yet. A quick three-minute test shows when you personally absorb each medicine best.',
+  body: 'This plan uses typical wake times and trial averages, not your body clock yet. A quick three-minute test shows when you personally absorb each medicine best.',
   cta: { label: DEEPDOSE_PLAN_NEXT_STEPS.entryCta },
   appCta: { label: 'Personalise my plan →' },
-  populationLabel: 'Based on typical timing · not personal yet',
+  populationLabel: 'Based on typical timing, not personal yet',
   benefitHint:
     'When we know your body clock, each dose can land in the window where it works hardest.',
   ladder: [
@@ -329,7 +351,7 @@ export const DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE = {
 export const DEEPDOSE_PATIENT_PLAN_TABS = {
   landing: [
     { id: 'timing' as const, label: 'Today', body: 'How you take them now', tone: 'lilac' as const },
-    { id: 'dosing' as const, label: 'Your plan', body: 'When each one works best', tone: 'peach' as const },
+    { id: 'dosing' as const, label: 'Your windows', body: 'When each one works best', tone: 'peach' as const },
     { id: 'sharing' as const, label: 'Share', body: 'GP, family & research', tone: 'blue' as const },
   ],
   app: [
@@ -352,15 +374,18 @@ export const DEEPDOSE_PATIENT_PLAN_TIMING = {
 export const DEEPDOSE_PATIENT_PLAN_PROFILE = {
   firstNamePlaceholder: 'First name',
   familyNamePlaceholder: 'Family name',
+  locationPlaceholder: 'Your city or region',
+  avatarEditLabel: 'Edit',
+  avatarEmptyLabel: 'Add photo',
   baseline:
-    'Free to join — save your plan, get dose reminders, share with your GP, and help research if you want to.',
+    'Free to join · save your plan, get dose reminders, share with your GP, and help research if you want to.',
 } as const
 
 export const DEEPDOSE_PATIENT_PLAN_DEEPER = [
   {
-    title: 'Body clock test — refine your anchor with a three-night home sleep test.',
+    title: 'Body clock test · refine your anchor with a three-night home sleep test.',
     meta: 'Optional · TipTraQ · Clinical validation',
-    href: '/home-test',
+    href: '/testkit',
   },
   {
     title: 'Read the trials and evidence behind your plan.',
@@ -386,8 +411,8 @@ export const DEEPDOSE_PATIENT_PLAN_SHARING = {
     },
     {
       title: 'Help research with anonymised outcomes (optional).',
-      meta: 'Chronobiobank · UK GDPR · no personal details shared',
-      href: '/chronobiobank',
+      meta: 'Optional research · UK GDPR, no personal details shared',
+      href: '/mission',
       showPeers: false,
     },
   ],
@@ -399,7 +424,7 @@ export const DEEPDOSE_CLINICIAN_LANDING = {
     headlineWhite: 'Scripts,',
     headlineAccent: 'timed right.',
     support:
-      'Fixed pill times ignore body clock. See who needs you first — and confirm timing with a short home sleep test.',
+      'Fixed pill times ignore body clock. See who needs you first, and confirm timing with a short home sleep test.',
   },
   steps: [
     {
@@ -418,7 +443,7 @@ export const DEEPDOSE_CLINICIAN_LANDING = {
       label: 'Retime',
       cue: '#c9b6f2',
       title: 'Suggested times',
-      meta: 'Published trial dose times — you approve each one.',
+      meta: 'Published trial dose times · you approve each one.',
     },
     {
       label: 'Link',
@@ -436,7 +461,7 @@ export const DEEPDOSE_ENTERPRISE_LANDING = {
     headlineWhite: 'Population',
     headlineAccent: 'intelligence',
     support:
-      'Pseudonymised, consent-gated cohort data for ICBs, pharma R&D, and research — aggregates only, no identifiable patient records.',
+      'Pseudonymised, consent-gated cohort data for ICBs, pharma R&D, and research · aggregates only, no identifiable patient records.',
   },
   steps: [
     {

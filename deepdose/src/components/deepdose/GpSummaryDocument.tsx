@@ -30,7 +30,7 @@ export function GpSummaryDocument() {
       <article className="gp-summary gp-summary--empty">
         <h1 className="gp-summary__title">{LANDING_GP_HANDOFF_COPY.summaryTitle}</h1>
         <p className="gp-summary__lede">{LANDING_GP_HANDOFF_COPY.summaryEmpty}</p>
-        <Link href="/patient-landing" className="gp-summary__back">
+        <Link href="/profile" className="gp-summary__back">
           ← Back to risk check
         </Link>
       </article>
@@ -53,7 +53,7 @@ export function GpSummaryDocument() {
         <p className="gp-summary__body">{snapshot.sleepDisorderDetail}</p>
         <dl className="gp-summary__stats">
           <div>
-            <dt>SRI proxy</dt>
+            <dt>Sleep Regularity Index (SRI)</dt>
             <dd className="font-mono tabular-nums">{snapshot.sriProxy}/100</dd>
           </div>
           <div>
@@ -99,7 +99,7 @@ export function GpSummaryDocument() {
             Confirm with home sleep test
           </h2>
           <p className="gp-summary__body">{LANDING_GP_HANDOFF_COPY.summaryTipTraqBody}</p>
-          <Link href="/home-test" className="gp-summary__link">
+          <Link href="/testkit" className="gp-summary__link">
             {LANDING_GP_HANDOFF_COPY.tiptraqCta}
           </Link>
         </section>
@@ -111,7 +111,7 @@ export function GpSummaryDocument() {
           <button type="button" className="gp-summary__print" onClick={() => window.print()}>
             Print or save PDF
           </button>
-          <Link href="/patient-landing" className="gp-summary__back">
+          <Link href="/profile" className="gp-summary__back">
             ← Back to risk check
           </Link>
         </div>

@@ -13,7 +13,7 @@ type HashOpenDisclosureProps = {
   children: ReactNode
 }
 
-/** Opens and scrolls to a fold when the URL hash matches (e.g. /chronobiobank#research). */
+/** Opens and scrolls to a fold when the URL hash matches (e.g. /mission#research). */
 export function HashOpenDisclosure({
   anchor,
   title,

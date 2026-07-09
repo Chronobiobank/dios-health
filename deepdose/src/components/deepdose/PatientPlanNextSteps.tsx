@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import Link from 'next/link'
 
+import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_PLAN_NEXT_STEPS } from '@/lib/deepdose-marketing/landing-content'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
 import {
@@ -10,14 +11,15 @@ import {
   inferLandingBodyClock,
   type OnboardingDoseItem,
 } from '@/lib/patient/infer-landing-body-clock'
+import { buildLandingRiskAnalysis } from '@/lib/patient/landing-risk-analysis'
 import { cn } from '@/lib/utils/cn'
 
 const DOSE_ICONS: Record<string, string> = {
   light: '☀️',
   meals: '🍽️',
+  meds: '💊',
   exercise: '🏃',
   cognition: '🧠',
-  sociophilic: '🤝',
   sleep: '🌙',
 }
 
@@ -37,7 +39,7 @@ function StepLadder({ current }: { current: PatientPlanFlowStep }) {
   return (
     <div className="seco-dashpreview__ladder">
       <div className="seco-dashpreview__ladder-row">
-        <p className="seco-dashpreview__ladder-title">Your path into Unmed</p>
+        <p className="seco-dashpreview__ladder-title">Your path into {DEEPDOSE_NAME}</p>
         <ol className="seco-dashpreview__ladder-steps">
           {copy.steps.map((label, index) => {
             const stepNum = (index + 1) as PatientPlanFlowStep
@@ -68,6 +70,10 @@ function StepLadder({ current }: { current: PatientPlanFlowStep }) {
 function ClockRevealPanel({ wake, medTimes }: PanelProps) {
   const copy = DEEPDOSE_PLAN_NEXT_STEPS.clock
   const profile = useMemo(() => inferLandingBodyClock(wake, medTimes), [wake, medTimes])
+  const risk = useMemo(
+    () => buildLandingRiskAnalysis({ medCodes: [], medTimes, wake }),
+    [medTimes, wake]
+  )
 
   return (
     <div className="seco-landing__copy-stack">
@@ -80,9 +86,9 @@ function ClockRevealPanel({ wake, medTimes }: PanelProps) {
         <div className="seco-dashpreview__main">
           <ul className="seco-dashpreview__stats">
             <li className="seco-dashpreview__stat">
-              <span className="seco-dashpreview__stat-label">{copy.stats.dlmo}</span>
+              <span className="seco-dashpreview__stat-label">{copy.stats.sri}</span>
               <span className="seco-dashpreview__stat-value font-mono tabular-nums">
-                {profile.dlmoLabel}
+                {risk.sriProxy}/100
               </span>
             </li>
             <li className="seco-dashpreview__stat">
@@ -150,7 +156,7 @@ function DoseProtocolPanel({ wake, medTimes }: PanelProps) {
   )
 }
 
-function JoinUnmedPanel({ signupHref }: { signupHref: string }) {
+function JoinDeepdosePanel({ signupHref }: { signupHref: string }) {
   const copy = DEEPDOSE_PLAN_NEXT_STEPS.join
 
   return (
@@ -159,13 +165,13 @@ function JoinUnmedPanel({ signupHref }: { signupHref: string }) {
       <h2 className="seco-landing__section-title">{copy.headline}</h2>
       <p className="seco-landing__support">{copy.support}</p>
 
-      <section className="seco-body-clock-compare" aria-labelledby="join-unmed-title">
+      <section className="seco-body-clock-compare" aria-labelledby="join-deepdose-title">
         <div className="seco-body-clock-compare__grid">
           <article className="seco-body-clock-compare__col">
             <p className="seco-body-clock-compare__col-badge seco-body-clock-compare__col-badge--free">
               {copy.commons.figure}
             </p>
-            <h3 id="join-unmed-title" className="seco-body-clock-compare__col-title">
+            <h3 id="join-deepdose-title" className="seco-body-clock-compare__col-title">
               {copy.commons.title}
             </h3>
             <ul className="seco-body-clock-compare__points">
@@ -234,7 +240,7 @@ export function PatientPlanNextStepsFlow({
           <StepLadder current={step} />
           {step === 1 ? <ClockRevealPanel wake={wake} medTimes={medTimes} /> : null}
           {step === 2 ? <DoseProtocolPanel wake={wake} medTimes={medTimes} /> : null}
-          {step === 3 ? <JoinUnmedPanel signupHref={signupHref} /> : null}
+          {step === 3 ? <JoinDeepdosePanel signupHref={signupHref} /> : null}
 
           {step < 3 ? (
             <div className="seco-landing__actions">

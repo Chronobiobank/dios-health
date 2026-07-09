@@ -122,7 +122,7 @@ const LANDING_ACCORDION: {
   {
     id: 'data',
     label: 'My data',
-    body: 'Your Chronobiobank contribution and sharing controls',
+    body: 'Your research contribution and sharing controls',
     tone: 'blue',
   },
 ]
@@ -286,10 +286,8 @@ function primaryTimeFromLabel(timeLabel: string): string {
 
 function SixDosePlanPreview({
   doses,
-  dlmoLabel,
 }: {
   doses: SixDoseStripItem[]
-  dlmoLabel: string
 }) {
   const active = useMountReveal()
   const markers = doses.map((dose) => ({
@@ -308,7 +306,7 @@ function SixDosePlanPreview({
         <div>
           <p className="seco-planpreview__day">Today · Six-dose protocol</p>
           <p className="seco-planpreview__phase">
-            Anchored to melatonin · <span className="font-mono tabular-nums">{dlmoLabel}</span>
+            Timed to raise your Sleep Regularity Index
           </p>
         </div>
         {liveDose ? (
@@ -545,7 +543,7 @@ export function PatientTimingPlan({
           <ul className="patient-dash__share-list">
             {DEEPDOSE_PATIENT_PLAN_SHARING.items.map((item) => (
               <li key={item.href + item.title} className="patient-dash__share-row">
-                {item.href === '/chronobiobank' ? (
+                {item.href === '/mission' ? (
                   <button
                     type="button"
                     className="patient-dash__share-toggle"
@@ -858,7 +856,7 @@ export function PatientTimingPlan({
                             <div className="dios-callout dios-callout--info">
                               <p>
                                 Improve your confidence —{' '}
-                                <Link href="/home-test" className="seco-hero-tabs__panel-link">
+                                <Link href="/testkit" className="seco-hero-tabs__panel-link">
                                   order your test kit
                                 </Link>
                               </p>
@@ -926,10 +924,7 @@ export function PatientTimingPlan({
 
                   {section.id === 'doses' && (
                     <>
-                      <SixDosePlanPreview
-                        doses={doseSchedule}
-                        dlmoLabel={melatoninProfile.adjustedDlmoLabel}
-                      />
+                      <SixDosePlanPreview doses={doseSchedule} />
                       <div className={marketingCtaClass()}>
                         <Link href={signupHref} className="seco-landing__btn seco-landing__btn--primary">
                           Start my protocol
@@ -961,7 +956,7 @@ export function PatientTimingPlan({
                         {[
                           {
                             title: 'Anonymous circadian phenotype data',
-                            meta: 'Shared with Chronobiobank',
+                            meta: 'Shared with research (optional)',
                             on: phenotypeOn,
                             toggle: () => setPhenotypeOn((v) => !v),
                           },
@@ -1005,7 +1000,7 @@ export function PatientTimingPlan({
                       <p className="seco-plan-tile__sync-caption">
                         You own your data. Researchers request access. You decide.
                       </p>
-                      <Link href="/chronobiobank" className="seco-hero-tabs__panel-link">
+                      <Link href="/mission" className="seco-hero-tabs__panel-link">
                         Full data terms →
                       </Link>
                     </>

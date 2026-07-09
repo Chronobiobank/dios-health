@@ -26,7 +26,7 @@
 }
 
 .deepdose-shell.seco-shell--dark .seco-page__title:has(.seco-landing__hero-line) {
-  max-width: 12ch;
+  max-width: none;
 }
 
 .deepdose-shell.seco-shell--dark .seco-page__lede,
@@ -506,13 +506,15 @@
 
 .seco-marketing-wide-tile__title {
   margin: 0;
+  max-width: 100%;
   font-family: var(--seco-font-display);
   font-size: var(--mkt-wide-tile-title-size);
   font-weight: 300;
-  line-height: 1.04;
+  line-height: 1.08;
   letter-spacing: clamp(-0.04em, -0.12cqi, -0.02em);
   color: #fff;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  text-wrap: balance;
 }
 
 .seco-marketing-wide-tile__body {

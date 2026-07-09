@@ -100,7 +100,7 @@ export const BODY_CLOCK_PRICING_COMPARE = {
       'Verified clinical-grade badge on your record',
       'Quarterly re-reads catch drift early',
     ],
-    cta: { label: 'Order Testkit', href: '/home-test' },
+    cta: { label: 'Order Testkit', href: '/testkit' },
   },
 } as const
 

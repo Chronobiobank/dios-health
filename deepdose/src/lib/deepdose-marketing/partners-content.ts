@@ -1,4 +1,4 @@
-/** Research & industry partnership — addiction healthcare, SSA, NIHR alignment. */
+﻿/** Research & industry partnership · addiction healthcare, SSA, NIHR alignment. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {
@@ -9,7 +9,7 @@ import {
 export const PARTNERS_PAGE_META = {
   title: `Research partners · ${DEEPDOSE_NAME}`,
   description:
-    'Smartphone-delivered circadian phase tracking for addiction treatment and recovery research — passive signals, governed cohorts, and clinical validation for community drug and alcohol services.',
+    'Smartphone-delivered circadian phase tracking for addiction treatment and recovery research · passive signals, governed cohorts, and clinical validation for community drug and alcohol services.',
 } as const
 
 export const PARTNERS_PAGE_INTRO = {
@@ -17,7 +17,7 @@ export const PARTNERS_PAGE_INTRO = {
   titleWhite: 'Timing at',
   titleAccent: 'relapse risk',
   lede:
-    'Circadian disruption is strongly linked to addiction relapse. DeepDose passively tracks phase state from the phone and wearables — then times medicines, light, and sleep to when the body is ready. Built for community treatment populations and academic study.',
+    `Circadian disruption is strongly linked to addiction relapse. ${DEEPDOSE_NAME} passively tracks phase state from the phone and wearables, then times medicines, light, and sleep to when the body is ready. Built for community treatment populations and academic study.`,
 } as const
 
 export const PARTNERS_ALIGNMENT_TILES = [
@@ -27,7 +27,7 @@ export const PARTNERS_ALIGNMENT_TILES = [
     cue: '#acd3de',
     title: 'Smartphone-delivered support',
     teaser:
-      'Continuous passive capture — light, movement, sleep timing, social jet lag — without daily questionnaires. Matches the UK push for digital treatment tools people already carry.',
+      'Continuous passive capture · light, movement, sleep timing, social jet lag, without daily questionnaires. Matches the UK push for digital treatment tools people already carry.',
   },
   {
     id: 'relapse',
@@ -43,7 +43,7 @@ export const PARTNERS_ALIGNMENT_TILES = [
     cue: '#f2b8a2',
     title: 'Community treatment settings',
     teaser:
-      'Polypharmacy, chaotic sleep, and real-world adherence — not idealised trial beds. Proxy DLMO from wearables, TipTraQ validation when clinical grade is needed, clinician-shared records.',
+      'Polypharmacy, chaotic sleep, and real-world adherence, not idealised trial beds. Proxy DLMO from wearables, TipTraQ validation when clinical grade is needed, clinician-shared records.',
   },
   {
     id: 'data',
@@ -51,7 +51,7 @@ export const PARTNERS_ALIGNMENT_TILES = [
     cue: '#8b9cf8',
     title: 'Federated research data',
     teaser:
-      'Chronobiobank keeps intimate sleep architecture on-device; consent-gated aggregates for studies — aligned with the national addiction healthcare data roadmap.',
+      'Chronobiobank keeps intimate sleep architecture on-device; consent-gated aggregates for studies, aligned with the national addiction healthcare data roadmap.',
   },
 ] as const
 
@@ -60,7 +60,7 @@ export const PARTNERS_INSTRUMENT = {
   cue: '#acd3de',
   title: 'From wellness signal to study-grade readout',
   body:
-    'Layer 1–2 estimate proxy DLMO continuously on-device. Layer 3 upgrades with TipTraQ for validated sleep staging and respiratory traces. Outputs — Biological Time Index, body-clock alignment, dosing windows — are structured for endpoints, not engagement metrics alone.',
+    'Layer 1–2 estimate proxy DLMO continuously on-device. Layer 3 upgrades with TipTraQ for validated sleep staging and respiratory traces. Outputs · Biological Time Index, body-clock alignment, dosing windows · are structured for endpoints, not engagement metrics alone.',
   links: [
     { label: 'Technology stack', href: '/technology' },
     { label: 'Proxy DLMO methodology', href: TECHNOLOGY_DLMO_PROXY_HREF },
@@ -73,11 +73,11 @@ export const PARTNERS_COLLABORATION = {
   cue: '#c9b6f2',
   title: 'Built for doctoral and fellowship programmes',
   body:
-    `${DEEPDOSE_NAME} is opening industry partnerships with UK universities for addiction healthcare research — including SSA Flagship schemes, NIHR career development, and MRC fellowship routes under Addiction Healthcare Goals. We provide the platform, passive phase instrumentation, governed data access, and clinical validation path; academic leads own protocol, ethics, and publication.`,
+    `${DEEPDOSE_NAME} is opening industry partnerships with UK universities for addiction healthcare research, including SSA Flagship schemes, NIHR career development, and MRC fellowship routes under Addiction Healthcare Goals. We provide the platform, passive phase instrumentation, governed data access, and clinical validation path; academic leads own protocol, ethics, and publication.`,
   beats: [
     'Hypothesis-led studies in community drug and alcohol treatment',
     'Endpoints: phase drift, sleep regularity, window adherence, relapse proximity',
-    'Dynamic consent and UK GDPR — model weights isolated from participant UI',
+    'Dynamic consent and UK GDPR · model weights isolated from participant UI',
     'Training and dissemination with clinicians and recovery workers',
   ],
 } as const
@@ -85,5 +85,5 @@ export const PARTNERS_COLLABORATION = {
 export const PARTNERS_PAGE_CTA = {
   primary: { label: 'Science & trust', href: CHRONOBIOBANK_SCIENCE_HREF },
   note:
-    'Academic or clinical collaboration enquiries: contact the founder via About. We do not claim government endorsement — we align with published Addiction Healthcare Goals priorities.',
+    'Academic or clinical collaboration enquiries: contact the founder via About. We do not claim government endorsement · we align with published Addiction Healthcare Goals priorities.',
 } as const

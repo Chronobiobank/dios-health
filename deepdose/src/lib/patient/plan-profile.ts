@@ -1,4 +1,4 @@
-/** Browser-local profile from patient landing (name, avatar, wake). */
+/** Browser-local profile from patient landing (name, avatar, location, wake). */
 
 export type PlanProfile = {
   firstName?: string
@@ -6,6 +6,8 @@ export type PlanProfile = {
   /** @deprecated migrated to firstName */
   displayName?: string
   avatarUrl?: string | null
+  /** City / region for solar exposure context */
+  location?: string
   wake?: string | null
 }
 

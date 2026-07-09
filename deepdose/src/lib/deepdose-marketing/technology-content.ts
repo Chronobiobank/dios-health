@@ -1,4 +1,4 @@
-/** Technology hub — four-layer stack for patients and clinicians. */
+﻿/** Technology hub , four-layer stack for patients and clinicians. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { BODY_CLOCK_LAYERS, PROXY_DLMO_METHODOLOGY } from '@/lib/circadian/body-clock-measurement'
@@ -16,7 +16,7 @@ export const TECHNOLOGY_HUB_CTA = {
 export const TECHNOLOGY_HUB_META = {
   title: `Technology · ${DEEPDOSE_NAME}`,
   description:
-    'Four layers that compound: passive signals, proxy DLMO, TipTraQ validation, and six personalised daily dose cues.',
+    'Four simple layers: your phone, your body clock estimate, a home sleep check, and daily cues for when to dose.',
 } as const
 
 export const TECHNOLOGY_HUB_INTRO = {
@@ -24,7 +24,7 @@ export const TECHNOLOGY_HUB_INTRO = {
   titleWhite: 'Layers that',
   titleAccent: 'compound.',
   lede:
-    'Passive signals, proxy DLMO, TipTraQ validation, daily dose cues — four layers, each sharpening the estimate.',
+    'Four layers. Each one makes the timing advice sharper. No lab visit required to start.',
 } as const
 
 export type TechnologyHubLayer = {
@@ -44,13 +44,13 @@ export const TECHNOLOGY_LAYERS = [
     rank: 1,
     label: 'Layer 1',
     cue: '#acd3de',
-    title: 'Passive signals',
+    title: 'Your phone',
     icon: 'passive-signals',
-    teaser: 'Your phone reads light, movement & sleep — passive.',
+    teaser: 'Reads light, movement, and sleep in the background.',
     highlights: [
-      'Background light & screen-on',
-      'Accel. sleep & wake timing',
-      'Social jet lag on the surface',
+      'Light and screen time',
+      'Sleep and wake times',
+      'Weekday vs weekend sleep',
     ],
   },
   {
@@ -58,13 +58,13 @@ export const TECHNOLOGY_LAYERS = [
     rank: 2,
     label: 'Layer 2',
     cue: '#c9b6f2',
-    title: 'Proxy DLMO',
+    title: 'Body clock estimate',
     icon: 'proxy-phase',
-    teaser: 'Melatonin onset from wearables — no lab or saliva.',
+    teaser: 'Estimates your night timing from sleep. No lab. No spit test.',
     highlights: [
-      'Sleep + chrono test answers',
-      'On-device phase anchor + band',
-      'Actigraphy–DLMO corr. (~r 0.8)',
+      'Sleep plus a short quiz',
+      'Runs on your phone',
+      'A range, not a fake exact time',
     ],
   },
   {
@@ -72,13 +72,13 @@ export const TECHNOLOGY_LAYERS = [
     rank: 3,
     label: 'Layer 3',
     cue: '#f2b8a2',
-    title: 'Physio validation',
+    title: 'Home sleep check',
     icon: 'tiptraq-validate',
-    teaser: 'Three home nights upgrade proxy — clinical-grade.',
+    teaser: 'Three TipTraQ nights make the estimate clinic-ready.',
     highlights: [
-      'TipTraQ temp, HRV, and SpO₂',
-      'Verified clinical-grade badge',
-      'Wellness signal → research',
+      'Temperature, heart, oxygen',
+      'Clinic-checked badge',
+      'Optional research share',
     ],
   },
   {
@@ -86,12 +86,12 @@ export const TECHNOLOGY_LAYERS = [
     rank: 4,
     label: 'Layer 4',
     cue: '#8b9cf8',
-    title: 'Personal dose cues',
+    title: 'Daily dose cues',
     icon: 'dose-cues',
-    teaser: 'Six cues move when phase drifts — not fixed alarms.',
+    teaser: 'Six cues that move with your clock, not fixed alarms.',
     highlights: [
       'Light, food, meds, movement',
-      'BTI take-now windows for meds',
+      'Clear windows for your meds',
       'One plan on your dashboard',
     ],
   },
@@ -102,7 +102,7 @@ export const TECHNOLOGY_LAYERS = [
 export const DLMO_PROXY_PAGE_META = {
   title: `Proxy DLMO methodology · ${DEEPDOSE_NAME}`,
   description:
-    'Published behavioural proxies, weighted fusion, confidence caps — the free-tier phase anchor your CMO can audit.',
+    'Published behavioural proxies, weighted fusion, confidence caps , the free-tier phase anchor your CMO can audit.',
 } as const
 
 export const DLMO_PROXY_PAGE_INTRO = {
@@ -110,7 +110,7 @@ export const DLMO_PROXY_PAGE_INTRO = {
   titleWhite: 'Dim-light melatonin onset,',
   titleAccent: 'estimated without a laboratory.',
   lede:
-    'Salivary DLMO under controlled dim light remains the clinical reference. Our free tier estimates the same phase marker from two population-validated behavioural signals — fused with explicit uncertainty bands.',
+    'Salivary DLMO under controlled dim light remains the clinical reference. Our free tier estimates the same phase marker from two population-validated behavioural signals , fused with explicit uncertainty bands.',
   versionLabel: `Engine ${DLMO_PROXY_VERSION}`,
 } as const
 
@@ -123,7 +123,7 @@ export const DLMO_PROXY_CONTRAST = {
       cue: '#6b7280',
       variant: 'muted' as const,
       title: 'Salivary DLMO',
-      body: 'Repeated samples under controlled dim light — clinical reference, high burden, not scalable at population entry.',
+      body: 'Repeated samples under controlled dim light , clinical reference, high burden, not scalable at population entry.',
     },
     {
       id: 'proxy',
@@ -131,7 +131,7 @@ export const DLMO_PROXY_CONTRAST = {
       cue: '#acd3de',
       variant: 'hero' as const,
       title: 'Behavioural proxy',
-      body: 'Sleep onset − 2 h and MCTQ mid-sleep − 2.5 h — published offsets, circular fusion, confidence capped at 0.55.',
+      body: 'Sleep onset − 2 h and MCTQ mid-sleep − 2.5 h , published offsets, circular fusion, confidence capped at 0.55.',
     },
   ],
 } as const
@@ -141,13 +141,13 @@ export const DLMO_PROXY_SIGNALS = PROXY_DLMO_METHODOLOGY
 export const DLMO_PROXY_FUSION = {
   eyebrow: 'Algorithm',
   title: 'Four-step fusion',
-  support: 'Live in estimateDlmoProxy() — same logic on every dashboard load.',
+  support: 'Live in estimateDlmoProxy() , same logic on every dashboard load.',
   steps: [
     {
       label: 'Extract',
       cue: '#acd3de',
       title: 'Circular mean sleep onset',
-      body: 'Up to 14 nights in a 21-day window. Local wall-clock preserved — no server timezone conversion.',
+      body: 'Up to 14 nights in a 21-day window. Local wall-clock preserved , no server timezone conversion.',
     },
     {
       label: 'Anchor',
@@ -165,14 +165,14 @@ export const DLMO_PROXY_FUSION = {
       label: 'Report',
       cue: '#8b9cf8',
       title: 'Phase offset minutes',
-      body: 'Deviation from population mean DLMO (21:00) — drives medication window shifts in the BTI engine.',
+      body: 'Deviation from population mean DLMO (21:00) , drives medication window shifts in the BTI engine.',
     },
   ],
 } as const
 
 export const DLMO_PROXY_CONFIDENCE = {
   eyebrow: 'Uncertainty',
-  title: 'Confidence is capped — by design',
+  title: 'Confidence is capped , by design',
   support: 'A proxy never claims clinical certainty. Bands narrow as evidence accumulates.',
   bands: [
     { label: 'Low', range: '±90 min', threshold: '< 0.30 confidence' },
@@ -198,9 +198,9 @@ export const DLMO_PROXY_LIMITS = {
   title: 'What this is not',
   points: [
     'Not salivary or plasma DLMO under controlled dim light.',
-    'Wearable staging varies — we use onset timestamps, not device staging labels.',
+    'Wearable staging varies , we use onset timestamps, not device staging labels.',
     'No drug PK/PD simulation; windows are phase-adjusted chronotherapy offsets.',
-    'Model weights stay server-side — UI receives timing payloads only.',
+    'Model weights stay server-side , UI receives timing payloads only.',
   ],
   upgrade:
     'TipTraQ three-night validation replaces the proxy and unlocks the verified clinical-grade badge.',
@@ -236,6 +236,6 @@ export const DLMO_PROXY_CLINICIAN_CTA = {
   links: [
     { label: 'Technology overview', href: '/technology' },
     { label: 'Clinician sign in', href: '/login?next=/clinical/dashboard' },
-    { label: 'TipTraQ Testkit', href: '/home-test' },
+    { label: 'TipTraQ Testkit', href: '/testkit' },
   ],
 } as const

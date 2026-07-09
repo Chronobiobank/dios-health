@@ -3,11 +3,9 @@ import Link from 'next/link'
 
 import {
   PROBLEM_PAGE_CASE,
-  PROBLEM_PAGE_CLINICIAN,
   PROBLEM_PAGE_CTA,
   PROBLEM_PAGE_INTRO,
   PROBLEM_PAGE_META,
-  PROBLEM_PAGE_OUTCOMES,
   PROBLEM_PAGE_SECTIONS,
 } from '@/lib/deepdose-marketing/problem-content'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
@@ -48,34 +46,12 @@ export default function ProblemPage() {
           ))}
         </ol>
 
-        <section className="seco-problem__panel seco-reveal seco-reveal--3" aria-labelledby="problem-outcomes">
-          <h2 id="problem-outcomes" className="seco-problem__panel-title">
-            {PROBLEM_PAGE_OUTCOMES.title}
-          </h2>
-          <ul className="seco-problem__list">
-            {PROBLEM_PAGE_OUTCOMES.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="seco-problem__panel seco-reveal seco-reveal--4" aria-labelledby="problem-clinician">
-          <h2 id="problem-clinician" className="seco-problem__panel-title">
-            {PROBLEM_PAGE_CLINICIAN.title}
-          </h2>
-          <ul className="seco-problem__list">
-            {PROBLEM_PAGE_CLINICIAN.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </section>
-
-        <aside className="seco-problem__case seco-reveal seco-reveal--5">
+        <aside className="seco-problem__case seco-reveal seco-reveal--3">
           <h2 className="seco-problem__case-title">{PROBLEM_PAGE_CASE.title}</h2>
           <p className="seco-problem__case-body">{PROBLEM_PAGE_CASE.body}</p>
         </aside>
 
-        <div className={marketingCtaClass('seco-problem__cta seco-reveal seco-reveal--6')}>
+        <div className={marketingCtaClass('seco-problem__cta seco-reveal seco-reveal--4')}>
           <Link href={PROBLEM_PAGE_CTA.href} className="seco-landing__btn seco-landing__btn--primary">
             {PROBLEM_PAGE_CTA.label} →
           </Link>

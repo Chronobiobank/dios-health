@@ -2,12 +2,12 @@ import { computeTipTraqBlockMetrics } from '@/lib/clinical/tiptraq/metrics'
 import type { TipTraqNightInput } from '@/lib/clinical/tiptraq/types'
 import {
   sriTone,
-  UNMED_PRODUCT_MANDATE,
+  DEEPDOSE_PRODUCT_MANDATE,
   type SriTone,
 } from '@/lib/unmed/product-philosophy'
 import {
   sleepBlocksFromLogs,
-  UnmedLocalEngine,
+  DeepdoseLocalEngine,
 } from '@/lib/unmed/local-engine'
 import type { TriFocalStatusModel } from '@/lib/unmed/tri-focal-types'
 
@@ -27,7 +27,7 @@ function computeSriDials(sleepLogs: { sleepOnset: string; wake: string }[]): {
   dials: TriFocalStatusModel['sriDials']
   note: string
 } {
-  const engine = new UnmedLocalEngine()
+  const engine = new DeepdoseLocalEngine()
   const blocks = sleepBlocksFromLogs(sleepLogs)
 
   const daySri = blocks.length >= 2 ? engine.calculateWindowSRI(blocks, Math.min(5, blocks.length + 1)) : null
@@ -126,4 +126,4 @@ export function buildTriFocalStatus(input: BuildTriFocalInput): TriFocalStatusMo
   }
 }
 
-export { UNMED_PRODUCT_MANDATE }
+export { DEEPDOSE_PRODUCT_MANDATE }

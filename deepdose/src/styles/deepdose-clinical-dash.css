@@ -1,50 +1,49 @@
-/* Unmed clinical gate + tri-focal dashboard — dios-glass on dark shell */
+/* Deepdose clinical gate + tri-focal dashboard — dios-glass on dark shell */
 
-.unmed-gate-page .seco-auth-page__inner {
+.deepdose-gate-page .seco-auth-page__inner {
   max-width: 28rem;
 }
 
-.unmed-gate {
+.deepdose-gate {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   min-width: 0;
 }
 
-.unmed-gate__head {
+.deepdose-gate__head {
   text-align: center;
 }
 
-.unmed-gate__brand {
+.deepdose-gate__brand {
   margin: 0;
   font-family: var(--seco-font-display);
   font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: -0.05em;
   color: #fff;
-  text-transform: lowercase;
 }
 
-.unmed-gate__tagline {
+.deepdose-gate__tagline {
   margin: 0.35rem 0 0;
   font-size: 0.875rem;
   color: rgb(255 255 255 / 0.62);
 }
 
-.unmed-gate__mandate {
+.deepdose-gate__mandate {
   margin: 0.75rem 0 0;
   font-size: 0.8125rem;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.52);
 }
 
-.unmed-gate__card {
+.deepdose-gate__card {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
 }
 
-.unmed-gate__label {
+.deepdose-gate__label {
   font-family: var(--seco-font-data);
   font-size: 0.6875rem;
   font-weight: 600;
@@ -53,7 +52,7 @@
   color: rgb(255 255 255 / 0.55);
 }
 
-.unmed-gate__code {
+.deepdose-gate__code {
   width: 100%;
   padding: 0.875rem 0;
   border: 1px solid var(--dios-glass-inner-border);
@@ -65,18 +64,18 @@
   letter-spacing: 0.35em;
 }
 
-.unmed-gate__code:focus {
+.deepdose-gate__code:focus {
   outline: 2px solid rgb(172 211 222 / 0.45);
   outline-offset: 2px;
 }
 
-.unmed-gate__error {
+.deepdose-gate__error {
   margin: 0;
   font-size: 0.8125rem;
   color: rgb(255 170 160);
 }
 
-.unmed-gate__submit {
+.deepdose-gate__submit {
   width: 100%;
   padding: 0.875rem 1rem;
   border: none;
@@ -89,40 +88,40 @@
   transition: transform 0.15s ease;
 }
 
-.unmed-gate__submit:hover:not(:disabled) {
+.deepdose-gate__submit:hover:not(:disabled) {
   transform: translateY(-1px);
 }
 
-.unmed-gate__submit--busy {
+.deepdose-gate__submit--busy {
   opacity: 0.7;
   cursor: wait;
 }
 
-.unmed-gate__privacy {
+.deepdose-gate__privacy {
   margin: 0;
   text-align: center;
 }
 
-.unmed-gate__privacy p {
+.deepdose-gate__privacy p {
   margin: 0;
   font-size: 0.75rem;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.48);
 }
 
-.unmed-gate__privacy strong {
+.deepdose-gate__privacy strong {
   color: rgb(255 255 255 / 0.72);
 }
 
 /* ── Tri-focal dashboard ── */
-.unmed-tri {
+.deepdose-tri {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   min-width: 0;
 }
 
-.unmed-tri__head {
+.deepdose-tri__head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -131,14 +130,14 @@
   border-bottom: 1px solid var(--dios-glass-inner-border);
 }
 
-.unmed-tri__id {
+.deepdose-tri__id {
   display: block;
   font-size: 0.6875rem;
   font-weight: 600;
   color: rgb(172 211 222 / 0.9);
 }
 
-.unmed-tri__title {
+.deepdose-tri__title {
   margin: 0.2rem 0 0;
   font-family: var(--seco-font-display);
   font-size: 1.375rem;
@@ -147,13 +146,13 @@
   color: #fff;
 }
 
-.unmed-tri__mandate {
+.deepdose-tri__mandate {
   margin: 0.35rem 0 0;
   font-size: 0.8125rem;
   color: rgb(255 255 255 / 0.52);
 }
 
-.unmed-tri__sync-badge {
+.deepdose-tri__sync-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
@@ -166,26 +165,26 @@
   border: 1px solid rgb(120 210 160 / 0.25);
 }
 
-.unmed-tri__sync-dot {
+.deepdose-tri__sync-dot {
   width: 0.375rem;
   height: 0.375rem;
   border-radius: 50%;
   background: rgb(120 220 170);
 }
 
-.unmed-tri__pillar {
+.deepdose-tri__pillar {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
 }
 
-.unmed-tri__pillar-head {
+.deepdose-tri__pillar-head {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.unmed-tri__eyebrow {
+.deepdose-tri__eyebrow {
   font-family: var(--seco-font-data);
   font-size: 0.6875rem;
   font-weight: 600;
@@ -194,79 +193,79 @@
   color: rgb(255 255 255 / 0.48);
 }
 
-.unmed-tri__pillar-title {
+.deepdose-tri__pillar-title {
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
 }
 
-.unmed-tri__sri-grid {
+.deepdose-tri__sri-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.625rem;
 }
 
-.unmed-tri__sri-box {
+.deepdose-tri__sri-box {
   padding: 0.875rem 0.5rem;
   text-align: center;
   gap: 0.25rem;
 }
 
-.unmed-tri__sri-label {
+.deepdose-tri__sri-label {
   display: block;
   font-size: 0.6875rem;
   color: rgb(255 255 255 / 0.52);
 }
 
-.unmed-tri__sri-value {
+.deepdose-tri__sri-value {
   display: block;
   font-size: 1.625rem;
   font-weight: 300;
   line-height: 1.1;
 }
 
-.unmed-tri__note {
+.deepdose-tri__note {
   margin: 0;
   font-size: 0.8125rem;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.58);
 }
 
-.unmed-tri__metric-row {
+.deepdose-tri__metric-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
 }
 
-.unmed-tri__metric {
+.deepdose-tri__metric {
   padding: 0.875rem 1rem;
   border-left-width: 3px;
   border-left-style: solid;
 }
 
-.unmed-tri__metric--optimal,
-.unmed-tri__tone--optimal.unmed-tri__metric {
+.deepdose-tri__metric--optimal,
+.deepdose-tri__tone--optimal.deepdose-tri__metric {
   border-left-color: rgb(120 220 170);
 }
 
-.unmed-tri__metric--warning,
-.unmed-tri__tone--warning.unmed-tri__metric {
+.deepdose-tri__metric--warning,
+.deepdose-tri__tone--warning.deepdose-tri__metric {
   border-left-color: rgb(240 200 120);
 }
 
-.unmed-tri__metric--critical,
-.unmed-tri__tone--critical.unmed-tri__metric {
+.deepdose-tri__metric--critical,
+.deepdose-tri__tone--critical.deepdose-tri__metric {
   border-left-color: rgb(255 140 130);
 }
 
-.unmed-tri__metric-label {
+.deepdose-tri__metric-label {
   display: block;
   font-size: 0.6875rem;
   color: rgb(255 255 255 / 0.52);
 }
 
-.unmed-tri__metric-value {
+.deepdose-tri__metric-value {
   display: block;
   margin-top: 0.15rem;
   font-size: 1.25rem;
@@ -274,7 +273,7 @@
   color: #fff;
 }
 
-.unmed-tri__metric-status {
+.deepdose-tri__metric-status {
   display: block;
   margin-top: 0.25rem;
   font-size: 0.625rem;
@@ -283,25 +282,25 @@
   letter-spacing: 0.04em;
 }
 
-.unmed-tri__tone--optimal {
+.deepdose-tri__tone--optimal {
   color: rgb(160 235 195);
 }
 
-.unmed-tri__tone--warning {
+.deepdose-tri__tone--warning {
   color: rgb(245 210 140);
 }
 
-.unmed-tri__tone--critical {
+.deepdose-tri__tone--critical {
   color: rgb(255 170 160);
 }
 
-.unmed-tri__lab-table {
+.deepdose-tri__lab-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.8125rem;
 }
 
-.unmed-tri__lab-table th {
+.deepdose-tri__lab-table th {
   padding-bottom: 0.625rem;
   font-weight: 500;
   text-align: left;
@@ -309,45 +308,45 @@
   border-bottom: 1px solid var(--dios-glass-inner-border);
 }
 
-.unmed-tri__lab-table td {
+.deepdose-tri__lab-table td {
   padding: 0.875rem 0;
   color: rgb(255 255 255 / 0.82);
   border-bottom: 1px solid rgb(255 255 255 / 0.06);
 }
 
-.unmed-tri__lab-table td:last-child {
+.deepdose-tri__lab-table td:last-child {
   text-align: right;
 }
 
-.unmed-tri__lab-state {
+.deepdose-tri__lab-state {
   font-weight: 600;
 }
 
-.unmed-tri__principle {
+.deepdose-tri__principle {
   padding: 1rem;
   border-left: 3px solid rgb(172 211 222 / 0.5);
 }
 
-.unmed-tri__principle p {
+.deepdose-tri__principle p {
   margin: 0;
   font-size: 0.8125rem;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.62);
 }
 
-.unmed-tri__principle strong {
+.deepdose-tri__principle strong {
   display: block;
   margin-bottom: 0.25rem;
   color: #fff;
 }
 
 @media (max-width: 520px) {
-  .unmed-tri__sri-grid,
-  .unmed-tri__metric-row {
+  .deepdose-tri__sri-grid,
+  .deepdose-tri__metric-row {
     grid-template-columns: 1fr;
   }
 
-  .unmed-tri__head {
+  .deepdose-tri__head {
     flex-direction: column;
   }
 }

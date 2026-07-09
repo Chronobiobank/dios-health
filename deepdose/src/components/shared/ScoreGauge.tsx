@@ -9,8 +9,8 @@ interface ScoreGaugeProps {
   score: number
   chronotypeLabel?: string
   components?: ScoreComponents
-  /** Clinician-facing CHI vs patient-facing BCA labelling */
-  variant?: 'chi' | 'bca'
+  /** CHI / BCA alignment, or SRI disease-risk continuum */
+  variant?: 'chi' | 'bca' | 'sri'
 }
 
 const CX = 120
@@ -29,14 +29,24 @@ function formatComponentScore(value: number): string {
   return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1)
 }
 
-function scoreLabel(score: number): string {
+function scoreLabel(score: number, variant: 'chi' | 'bca' | 'sri'): string {
+  if (variant === 'sri') {
+    if (score >= 75) return 'Lower disease risk'
+    if (score >= 50) return 'Rising disease risk'
+    return 'Higher disease risk'
+  }
   if (score >= 80) return 'Well aligned'
   if (score >= 60) return 'Moderately aligned'
   if (score >= 40) return 'Misaligned'
   return 'Significant drift'
 }
 
-function scoreTier(score: number): 'excellent' | 'good' | 'fair' | 'poor' {
+function scoreTier(score: number, variant: 'chi' | 'bca' | 'sri'): 'excellent' | 'good' | 'fair' | 'poor' {
+  if (variant === 'sri') {
+    if (score >= 75) return 'excellent'
+    if (score >= 50) return 'fair'
+    return 'poor'
+  }
   if (score >= 80) return 'excellent'
   if (score >= 60) return 'good'
   if (score >= 40) return 'fair'
@@ -59,11 +69,18 @@ function describeArc(cx: number, cy: number, r: number, startAngle: number, endA
 
 export default function ScoreGauge({ score, chronotypeLabel, components, variant = 'chi' }: ScoreGaugeProps) {
   const clamped = Math.min(100, Math.max(0, Math.round(score)))
-  const tier = scoreTier(clamped)
+  const tier = scoreTier(clamped, variant)
   const startAngle = -180
   const scoreAngle = startAngle + (clamped / 100) * 180
-  const scoreName = variant === 'bca' ? 'Body clock alignment' : 'Circadian Health Index'
-  const scoreAbbrev = variant === 'bca' ? 'BCA' : 'CHI'
+  const scoreName =
+    variant === 'sri'
+      ? 'Sleep Regularity Index'
+      : variant === 'bca'
+        ? 'Body clock alignment'
+        : 'Circadian Health Index'
+  const scoreAbbrev = variant === 'sri' ? 'SRI' : variant === 'bca' ? 'BCA' : 'CHI'
+  const scaleLow = variant === 'sri' ? '0 · Higher risk' : '0 · Drift'
+  const scaleHigh = variant === 'sri' ? 'Lower risk · 100' : 'Aligned · 100'
 
   return (
     <div className="score-gauge">
@@ -72,7 +89,7 @@ export default function ScoreGauge({ score, chronotypeLabel, components, variant
           viewBox="0 0 240 130"
           className="score-gauge__svg"
           role="img"
-          aria-label={`${scoreName} ${clamped} out of 100, ${scoreLabel(clamped)}${chronotypeLabel ? `, ${chronotypeLabel} chronotype` : ''}`}
+          aria-label={`${scoreName} ${clamped} out of 100, ${scoreLabel(clamped, variant)}${chronotypeLabel ? `, ${chronotypeLabel} chronotype` : ''}`}
         >
           <defs>
             <linearGradient
@@ -113,14 +130,14 @@ export default function ScoreGauge({ score, chronotypeLabel, components, variant
             <span className="score-gauge__score-max">/ 100 {scoreAbbrev}</span>
           </p>
           <p className={`score-gauge__status score-gauge__status--${tier}`}>
-            {scoreLabel(clamped)}
+            {scoreLabel(clamped, variant)}
           </p>
         </div>
 
         <div className="score-gauge__scale" aria-hidden>
-          <span>0 · Drift</span>
+          <span>{scaleLow}</span>
           <span>50</span>
-          <span>Aligned · 100</span>
+          <span>{scaleHigh}</span>
         </div>
       </div>
 

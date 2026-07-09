@@ -2,19 +2,20 @@
 
 import type { ReactNode } from 'react'
 
+import { AppBottomNav, AppBottomNavSpacer } from '@/components/deepdose/AppBottomNav'
 import { DeepDoseShell } from '@/components/deepdose/DeepDoseShell'
-import { DeepDoseFooter } from '@/components/deepdose/DeepDoseFooter'
 
 type PublicMarketingShellProps = {
   children: ReactNode
 }
 
-/** All public routes use the DeepDose dark shell with a shared footer. */
+/** Public routes: dark shell + bottom nav. Footer only on home (splash). */
 export function PublicMarketingShell({ children }: PublicMarketingShellProps) {
   return (
     <DeepDoseShell variant="dark">
       {children}
-      <DeepDoseFooter />
+      <AppBottomNavSpacer />
+      <AppBottomNav />
     </DeepDoseShell>
   )
 }

@@ -1,4 +1,4 @@
-/** Clinician / researcher profiles for landing evidence cards — initials or public/ image paths. */
+﻿/** Clinician / researcher profiles for landing evidence cards , initials or public/ image paths. */
 
 export type LandingClinician = {
   name: string

@@ -24,7 +24,7 @@ export function LandingGpHandoffPanel({ analysis, medNames }: LandingGpHandoffPa
 
   function handleShareWithGp() {
     persistGpHandoffSnapshot({ ...analysis, medNames })
-    router.push('/patient-landing/gp-summary')
+    router.push('/profile/gp-summary')
   }
 
   return (
@@ -54,7 +54,7 @@ export function LandingGpHandoffPanel({ analysis, medNames }: LandingGpHandoffPa
         ) : null}
 
         {analysis.suggestTipTraq ? (
-          <Link href="/home-test" className="sw-gp-handoff__secondary">
+          <Link href="/testkit" className="sw-gp-handoff__secondary">
             {LANDING_GP_HANDOFF_COPY.tiptraqCta}
           </Link>
         ) : null}

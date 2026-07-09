@@ -5,6 +5,7 @@ import {
   DEEPDOSE_FOOTER_LEGAL,
   DEEPDOSE_NAME,
 } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_VOICE } from '@/lib/brand/deepdose-voice'
 import { DEEPDOSE_FOOTER_LINKS } from '@/lib/deepdose-marketing/site-nav-links'
 
 export function DeepDoseFooter() {
@@ -21,7 +22,7 @@ export function DeepDoseFooter() {
               </span>
             </Link>
             <p className="seco-footer__mission">
-              Precision dosing for sleep and wake — your data stays on your phone.
+              {DEEPDOSE_VOICE.footerMission}
             </p>
           </div>
 

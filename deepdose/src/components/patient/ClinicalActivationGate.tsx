@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { UNMED_PRODUCT_MANDATE } from '@/lib/unmed/product-philosophy'
+import { DEEPDOSE_WORDMARK } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_PRODUCT_MANDATE } from '@/lib/unmed/product-philosophy'
 import { persistPendingActivation } from '@/lib/care/pending-activation'
 import { cn } from '@/lib/utils/cn'
 
@@ -53,15 +54,15 @@ export function ClinicalActivationGate({ isAuthenticated = false }: ClinicalActi
   }
 
   return (
-    <section className="unmed-gate">
-      <header className="unmed-gate__head">
-        <h1 className="unmed-gate__brand">unmed</h1>
-        <p className="unmed-gate__tagline">{UNMED_PRODUCT_MANDATE.tagline}</p>
-        <p className="unmed-gate__mandate">{UNMED_PRODUCT_MANDATE.antiAttention}</p>
+    <section className="deepdose-gate">
+      <header className="deepdose-gate__head">
+        <h1 className="deepdose-gate__brand">{DEEPDOSE_WORDMARK}</h1>
+        <p className="deepdose-gate__tagline">{DEEPDOSE_PRODUCT_MANDATE.tagline}</p>
+        <p className="deepdose-gate__mandate">{DEEPDOSE_PRODUCT_MANDATE.antiAttention}</p>
       </header>
 
-      <form className="dios-glass-outer unmed-gate__card" onSubmit={handleSubmit}>
-        <label className="unmed-gate__label" htmlFor="activation-code">
+      <form className="dios-glass-outer deepdose-gate__card" onSubmit={handleSubmit}>
+        <label className="deepdose-gate__label" htmlFor="activation-code">
           Enter clinician activation token
         </label>
         <input
@@ -69,25 +70,25 @@ export function ClinicalActivationGate({ isAuthenticated = false }: ClinicalActi
           type="text"
           maxLength={8}
           placeholder="A X 9 4 B 2"
-          className="unmed-gate__code font-mono tabular-nums"
+          className="deepdose-gate__code font-mono tabular-nums"
           value={code}
           onChange={(e) => setCode(e.target.value.toUpperCase())}
           autoComplete="off"
           spellCheck={false}
         />
-        {error ? <p className="unmed-gate__error">{error}</p> : null}
+        {error ? <p className="deepdose-gate__error">{error}</p> : null}
         <button
           type="submit"
-          className={cn('unmed-gate__submit', loading && 'unmed-gate__submit--busy')}
+          className={cn('deepdose-gate__submit', loading && 'deepdose-gate__submit--busy')}
           disabled={loading}
         >
           {loading ? 'Authorizing…' : 'Authorize clinical setup'}
         </button>
       </form>
 
-      <footer className="unmed-gate__privacy">
+      <footer className="deepdose-gate__privacy">
         <p>
-          <strong>Zero-Cloud Privacy Guard:</strong> {UNMED_PRODUCT_MANDATE.privacyGuard}
+          <strong>Zero-Cloud Privacy Guard:</strong> {DEEPDOSE_PRODUCT_MANDATE.privacyGuard}
         </p>
       </footer>
     </section>

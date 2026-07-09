@@ -30,7 +30,7 @@ export function DeepDoseLanding({
           <div className="seco-landing__copy-stack">
             {medContext ? (
               <>
-                <p className="seco-page__eyebrow">Your plan</p>
+                <p className="seco-page__eyebrow">Your search</p>
                 <p className="seco-landing__support seco-landing__personalise">
                   You searched for <strong>{medContext.name}</strong>
                   {medContext.time ? (

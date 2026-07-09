@@ -2,36 +2,50 @@
 
 import { useMemo } from 'react'
 
+import { PATIENT_SIX_DOSE_PROTOCOL } from '@/lib/deepdose-marketing/landing-content'
 import { DOSE_PREVIEW_STATUS_LABEL } from '@/lib/patient/plan-dose-preview'
 import { buildSixDoseStrip } from '@/lib/patient/six-dose-strip'
 import { cn } from '@/lib/utils/cn'
 
 type SixDoseStripProps = {
-  dlmoEstimateHours: number
+  /** Internal phase anchor hours (from sleep/wake). Not shown as DLMO to users. */
+  phaseAnchorHours: number
   variant?: 'landing' | 'app'
 }
 
-export function SixDoseStrip({ dlmoEstimateHours, variant = 'app' }: SixDoseStripProps) {
-  const doses = useMemo(
-    () => buildSixDoseStrip(dlmoEstimateHours),
-    [dlmoEstimateHours]
-  )
-
+export function SixDoseStrip({ phaseAnchorHours, variant = 'app' }: SixDoseStripProps) {
+  const doses = useMemo(() => buildSixDoseStrip(phaseAnchorHours), [phaseAnchorHours])
   const doneCount = doses.filter((d) => d.status === 'done').length
+  const copy = PATIENT_SIX_DOSE_PROTOCOL
+
+  const nested = variant === 'landing'
 
   return (
-    <section className={cn('seco-planpreview', variant === 'app' && 'seco-planpreview--app')}>
-      <div className="seco-planpreview__head">
-        <div>
-          <p className="seco-page__eyebrow">Today&apos;s six doses</p>
-          <p className="seco-planpreview__day">Your dose protocol</p>
-          <p className="seco-planpreview__phase">
-            {doneCount} of {doses.length} done · timed to your body clock
-          </p>
+    <section
+      className={cn(
+        'seco-planpreview',
+        variant === 'app' && 'seco-planpreview--app',
+        nested && 'seco-planpreview--nested'
+      )}
+    >
+      {!nested ? (
+        <div className="seco-planpreview__head">
+          <div>
+            <p className="seco-page__eyebrow">{copy.eyebrow}</p>
+            <p className="seco-planpreview__day">{copy.title}</p>
+            <p className="seco-planpreview__phase">{copy.support}</p>
+            {variant === 'app' ? (
+              <p className="seco-planpreview__phase">
+                {doneCount} of {doses.length} done · timed to raise your SRI
+              </p>
+            ) : null}
+          </div>
         </div>
-      </div>
+      ) : (
+        <p className="seco-planpreview__phase seco-planpreview__phase--nested">{copy.support}</p>
+      )}
 
-      <ul className="seco-planpreview__doses" aria-label="Today's six doses">
+      <ul className="seco-planpreview__doses" aria-label="Your six doses">
         {doses.map((dose) => (
           <li
             key={dose.id}
@@ -54,6 +68,7 @@ export function SixDoseStrip({ dlmoEstimateHours, variant = 'app' }: SixDoseStri
           </li>
         ))}
       </ul>
+      <p className="seco-planpreview__phase">{copy.education}</p>
     </section>
   )
 }

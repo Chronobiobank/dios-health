@@ -1,6 +1,6 @@
 import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
 
-const BASE = process.env.NEXT_PUBLIC_APP_URL ?? 'https://unmed.net'
+const BASE = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.unmed.net'
 
 export function SiteJsonLd() {
   const data = {
@@ -12,7 +12,7 @@ export function SiteJsonLd() {
         name: DEEPDOSE_NAME,
         url: BASE,
         slogan: DEEPDOSE_TAGLINE,
-        description: 'Precision chronotherapy and patient-owned chronobiobank platform.',
+        description: 'Medicine for non-conformers. Max your medication with timing that fits your life.',
       },
       {
         '@type': 'WebSite',

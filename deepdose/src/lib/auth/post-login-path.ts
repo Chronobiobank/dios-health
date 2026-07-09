@@ -1,4 +1,4 @@
-export type UserTier = 'patient' | 'clinician' | 'enterprise'
+﻿export type UserTier = 'patient' | 'clinician' | 'enterprise'
 
 export const DEFAULT_PATIENT_PATH = '/patient/onboarding/consent'
 
@@ -34,7 +34,7 @@ export function resolvePostLoginPath(
   }
 }
 
-/** Short context line — omit when the title is enough (patient sign-in). */
+/** Short context line · omit when the title is enough (patient sign-in). */
 export function loginEyebrow(next?: string | null, activation?: string | null): string | null {
   if (activation?.trim() || next?.startsWith('/patient/dashboard/status')) return 'Clinical activation'
   if (next?.startsWith('/clinical')) return 'Clinical'
@@ -48,12 +48,12 @@ export function loginTitle(next: string | null | undefined, mode: 'signin' | 'si
   return mode === 'signup' ? 'Create account' : 'Sign in'
 }
 
-/** Staff portals (clinical / enterprise) — no self-serve signup. */
+/** Staff portals (clinical / enterprise), no self-serve signup. */
 export function isStaffLoginPath(next?: string | null): boolean {
   return Boolean(next?.startsWith('/clinical') || next?.startsWith('/enterprise'))
 }
 
-/** One supporting line — only when it adds information sign-in titles do not cover. */
+/** One supporting line · only when it adds information sign-in titles do not cover. */
 export function loginLede(
   next: string | null | undefined,
   mode: 'signin' | 'signup',
@@ -61,11 +61,11 @@ export function loginLede(
 ): string | null {
   if (activation?.trim()) {
     return mode === 'signup'
-      ? 'Create your account, accept consent, then we link your clinician automatically.'
-      : 'Sign in to link your clinician and open your biochemistry dashboard.'
+      ? 'Create your account, accept consent, then we link your clinician, no jargon, just the next step.'
+      : 'Sign in to link your clinician and open your status dashboard.'
   }
   if (next?.startsWith('/patient/dashboard/status')) {
-    return 'Sign in to continue clinical setup.'
+    return 'Sign in to continue setup with your clinician.'
   }
   if (next?.startsWith('/clinical')) {
     return 'Use credentials from your practice administrator.'

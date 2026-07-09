@@ -1,4 +1,4 @@
-# Unmed UX Strategy & Product Requirements (v2.0)
+# Deepdose UX Strategy & Product Requirements (v2.0)
 
 **Classification:** Federated Clinical Decision Support System (CDS)  
 **Core mission:** Restoring upstream circadian chemistry to safely drive downstream drug subtraction.  
@@ -6,7 +6,7 @@
 
 ## Philosophy
 
-Unmed rejects the attention economy. We **stabilise chemistry, not optimise attention**. Success is measured by systemic subtraction — fewer medicines, less screen time, and the platform working its way out of the patient's life.
+Deepdose focuses on **outcomes, not mechanics**. Success is measured by systemic subtraction — fewer medicines, less screen time, and the platform working its way out of the patient's life.
 
 ## Implementation map (codebase)
 
@@ -14,9 +14,9 @@ Unmed rejects the attention economy. We **stabilise chemistry, not optimise atte
 |-------------|-------|------|
 | Clinician activation gate | `/gate` | `src/app/(public)/gate/page.tsx`, `ClinicalActivationGate.tsx` |
 | Tri-focal biochemical dashboard | `/patient/dashboard/status` (alias `/dashboard` when signed in) | `BiochemicalTriFocalDashboard.tsx`, `build-tri-focal-status.ts` |
-| On-device SRI engine | — | `src/lib/unmed/local-engine.ts` (`UnmedLocalEngine`) |
+| On-device SRI engine | — | `src/lib/unmed/local-engine.ts` (`DeepdoseLocalEngine`) |
 | Product copy & thresholds | — | `src/lib/unmed/product-philosophy.ts` |
-| Styles (dios-glass, no token overwrite) | — | `src/styles/unmed-clinical-dash.css` |
+| Styles (dios-glass, no token overwrite) | — | `src/styles/deepdose-clinical-dash.css` |
 
 ## Pillars
 
@@ -26,4 +26,4 @@ Unmed rejects the attention economy. We **stabilise chemistry, not optimise atte
 
 ## Cursor build prompt
 
-When extending this release, preserve existing `dios-glass` tokens and dark-shell components. Wire new clinical logic through isolated services under `src/lib/unmed/` — never mix algorithmic math with UI controllers.
+When extending this release, preserve existing `dios-glass` tokens and dark-shell components. Wire new clinical logic through isolated services under `src/lib/unmed/` — never mix algorithmic math with UI controllers. User-facing brand is always **Deepdose**.

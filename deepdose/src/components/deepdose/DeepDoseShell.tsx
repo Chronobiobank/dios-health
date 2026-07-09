@@ -11,6 +11,7 @@ type DeepDoseShellProps = {
 
 export function DeepDoseShell({ children, variant = 'light', nav }: DeepDoseShellProps) {
   const isDark = variant === 'dark'
+  const showDefaultNav = nav === undefined
 
   return (
     <div
@@ -22,7 +23,7 @@ export function DeepDoseShell({ children, variant = 'light', nav }: DeepDoseShel
       }
     >
       {isDark ? <DarkAmbientBackground /> : null}
-      {nav ?? <DeepDoseSiteNav />}
+      {showDefaultNav ? <DeepDoseSiteNav /> : nav}
       <div className="clinical-site-nav__main flex min-h-0 flex-1 flex-col">{children}</div>
     </div>
   )
