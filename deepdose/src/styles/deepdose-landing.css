@@ -2634,7 +2634,7 @@
   border-radius: 50%;
   flex: none;
   background-color: #e7ddff;
-  background-image: url('https://randomuser.me/api/portraits/men/32.jpg');
+  background-image: url('https://images.unsplash.com/photo-1525471213995-b203757ecd60?auto=format&fit=crop&w=160&h=160&q=80&crop=faces');
   background-size: cover;
   background-position: center;
   border: 2px solid var(--seco-surface);

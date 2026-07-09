@@ -18,9 +18,9 @@ export function LandingHeroIntro({ hero, variant = 'navy' }: LandingHeroIntroPro
       </Link>
       {hero.supportAfterLink ? <> {hero.supportAfterLink}</> : null}
     </p>
-  ) : (
+  ) : hero.support ? (
     <p className="seco-landing__hero-lede seco-reveal seco-reveal--2">{hero.support}</p>
-  )
+  ) : null
 
   const content = (
     <>

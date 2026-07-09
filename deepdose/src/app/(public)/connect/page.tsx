@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { CommunityMatchesPanel } from '@/components/patient/CommunityMatchesPanel'
 import { CommunityStoryFeed } from '@/components/patient/CommunityStoryFeed'
 import { CONNECT_PAGE, CONNECT_PAGE_META } from '@/lib/deepdose-marketing/dosage-content'
+import { buildPatientLandingPath } from '@/lib/medications/home-to-onboarding'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
 
 export const metadata: Metadata = {
@@ -12,8 +13,22 @@ export const metadata: Metadata = {
   alternates: { canonical: '/connect' },
 }
 
-export default function ConnectPage() {
+type PageProps = {
+  searchParams: Promise<{ med?: string; meds?: string; times?: string; time?: string; wake?: string }>
+}
+
+export default async function ConnectPage({ searchParams }: PageProps) {
   const copy = CONNECT_PAGE
+  const params = await searchParams
+  const medCodes = params.meds?.split(',').map((c) => c.trim()).filter(Boolean) ?? []
+  const medTimes = params.times?.split(',').map((t) => t.trim().slice(0, 5)).filter(Boolean) ?? []
+  const wake = params.wake?.trim().slice(0, 5) ?? params.time?.trim().slice(0, 5) ?? undefined
+  const profileHref = buildPatientLandingPath({
+    medCodes: medCodes.length ? medCodes : undefined,
+    medTimes: medTimes.length ? medTimes : undefined,
+    med: params.med?.trim() || undefined,
+    wake,
+  })
 
   return (
     <div className="seco-landing seco-landing--maven seco-landing--sleep-wake-dash">
@@ -44,6 +59,12 @@ export default function ConnectPage() {
                 className="seco-landing__btn seco-landing__btn--primary sw-dash__cta-btn"
               >
                 {copy.cta.label}
+              </Link>
+              <Link
+                href={profileHref}
+                className="seco-landing__btn seco-landing__btn--ghost sw-dash__cta-btn"
+              >
+                {copy.secondary.label}
               </Link>
             </div>
           </div>

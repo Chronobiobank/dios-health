@@ -7,14 +7,13 @@ import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} · Max your medication.`,
-  description: `${DEEPDOSE_NAME}: non-conformists face the highest risk of drug clashes. Manage that and maximise every dose.`,
+  title: `${DEEPDOSE_NAME} · Find your chemical match.`,
+  description: `${DEEPDOSE_NAME}: find your chemical match. We match your chemistry, not steal your attention.`,
 } as const
 
-export const DEEPDOSE_CVP =
-  'Max your medication. Non-conformists face the highest risk of drug clashes. We help you manage that so you maximise every dose.' as const
+export const DEEPDOSE_CVP = 'Find your chemical match.' as const
 
-/** Home splash · short head, sub, med search. */
+/** Home splash · message, face network, two doors. */
 export const DEEPDOSE_HOME_SPLASH = {
   headlineWhite: DEEPDOSE_VOICE.homeHeadlineWhite,
   headlineAccent: DEEPDOSE_VOICE.homeHeadlineAccent,
@@ -25,10 +24,15 @@ export const DEEPDOSE_HOME_SPLASH_HERO = {
   eyebrow: '',
   headlineWhite: DEEPDOSE_HOME_SPLASH.headlineWhite,
   headlineAccent: DEEPDOSE_HOME_SPLASH.headlineAccent,
-  support: DEEPDOSE_HOME_SPLASH.lede,
+  ...(DEEPDOSE_HOME_SPLASH.lede ? { support: DEEPDOSE_HOME_SPLASH.lede } : {}),
 } as const
 
-/** Default catalog codes for home splash placeholder rows. */
+export const DEEPDOSE_HOME_ACTIONS = {
+  mission: { label: 'Why Deepdose?', href: '/mission' },
+  create: { label: 'Create profile', href: '/login' },
+} as const
+
+/** Default catalog codes for home med search (used when search is shown elsewhere). */
 export const DEEPDOSE_HOME_DEFAULT_MED_CODES = [
   'metformin',
   'ramipril',
@@ -36,9 +40,9 @@ export const DEEPDOSE_HOME_DEFAULT_MED_CODES = [
   'sertraline',
 ] as const
 
-/** Home med search · feeds the sleep–wake risk calculator. */
+/** Med search copy · kept for HomeDrugSearch if reused off-home. */
 export const DEEPDOSE_HOME_POLY_SEARCH = {
-  checkCta: 'Know my risk',
+  checkCta: 'Find my chemistry',
   expandCta: '+ Add medication',
   expandCtaAnother: '+ Add medication',
   medPlaceholders: [

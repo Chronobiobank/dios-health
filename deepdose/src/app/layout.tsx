@@ -15,15 +15,14 @@ export const metadata: Metadata = {
     default: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
     template: `%s · ${DEEPDOSE_NAME}`,
   },
-  description:
-    'Max your medication. Non-conformists face the highest risk of drug clashes. We help you manage that so you maximise every dose.',
+  description: DEEPDOSE_TAGLINE,
   applicationName: DEEPDOSE_NAME,
   keywords: [
     'Deepdose',
-    'max your medication',
-    'polypharmacy risk',
+    'find your chemical match',
     'medication timing',
     'body clock',
+    'polypharmacy',
     'share outcomes',
   ],
   alternates: {
@@ -35,14 +34,12 @@ export const metadata: Metadata = {
     url: APP_URL,
     siteName: DEEPDOSE_NAME,
     title: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
-    description:
-      'Max your medication. Non-conformists face the highest risk of drug clashes. We help you manage that so you maximise every dose.',
+    description: DEEPDOSE_TAGLINE,
   },
   twitter: {
     card: 'summary_large_image',
     title: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
-    description:
-      'Max your medication. Non-conformists face the highest risk of drug clashes. We help you manage that so you maximise every dose.',
+    description: DEEPDOSE_TAGLINE,
   },
   robots: {
     index: true,

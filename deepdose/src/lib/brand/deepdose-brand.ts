@@ -17,16 +17,16 @@ export const DEEPDOSE_FOOTER_LEGAL =
 
 export const DEEPDOSE_REGISTRATION_LINE = DEEPDOSE_FOOTER_LEGAL
 
-export const DEEPDOSE_TAGLINE = 'Max your medication.' as const
+export const DEEPDOSE_TAGLINE = 'Find your chemical match.' as const
 
 /** Homepage hero headline — distinct from site-wide tagline in metadata */
-export const DEEPDOSE_HOME_HEADLINE = 'Max your medication.' as const
+export const DEEPDOSE_HOME_HEADLINE = 'Find your chemical match.' as const
 
 /** Dose = each zeitgeber (light, meals, meds/supps, exercise, sleep) — see lib/chronobiology/zeitgebers.ts */
 
 /**
  * Copy hierarchy:
- * Home = goal (max your medication) + context sub + CTA.
+ * Home = chemistry match headline + face network + Our mission / Create profile.
  * The Fix = people, problems, non-conformist motivation.
  * Profile = Sleep Regularity Index (SRI) risk + six-dose protocol.
  * Melatonin / DLMO = research / tech methodology only, never consumer doses copy.

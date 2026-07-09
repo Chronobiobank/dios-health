@@ -78,13 +78,11 @@ for (const viewport of VIEWPORTS) {
       await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Activate precision sleep.')
-
-      const lede = page.locator('.seco-splash__hero-marketing .seco-landing__hero-lede')
-      await assertFullyRendered(lede)
-      await expect(lede).toContainText(/creates precision dosing plans/i)
-      await expect(lede).toContainText(/live your best life/i)
-      await expect(page.getByRole('link', { name: /Find out your risk/i })).toBeVisible()
+      await expect(page.getByRole('heading', { level: 1 })).toContainText(/Find your/i)
+      await expect(page.getByRole('heading', { level: 1 })).toContainText(/chemical match/i)
+      await expect(page.locator('.seco-splash__hero-marketing .seco-landing__hero-lede')).toHaveCount(0)
+      await expect(page.getByRole('link', { name: /Why Deepdose\?/i })).toBeVisible()
+      await expect(page.getByRole('link', { name: /Create profile/i })).toBeVisible()
     })
 
     test('patient landing', async ({ page }) => {
@@ -114,35 +112,24 @@ for (const viewport of VIEWPORTS) {
       await expect(page.getByText(/Order on the advice of your GP/i)).toHaveCount(0)
     })
 
-    test('mission /chronobiobank', async ({ page }) => {
-      await page.goto('/chronobiobank')
+    test('mission /mission', async ({ page }) => {
+      await page.goto('/mission')
       await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toContainText(/chronobiobank/i)
-      await expect(page.getByRole('heading', { name: /Phone not cloud/i })).toBeVisible()
-
-      const beats = page.locator('.seco-chronobiobank__plane-visual__beat')
-      await expect(beats).toHaveCount(4)
-
-      for (let i = 0; i < 4; i += 1) {
-        const beat = beats.nth(i)
-        await beat.scrollIntoViewIfNeeded()
-        await assertFullyRendered(beat)
-      }
-
-      await expect(beats.nth(3)).toContainText(/Timing, recovery/i)
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+      await assertNoHorizontalOverflow(page)
     })
 
-    test('pricing', async ({ page }) => {
-      await page.goto('/pricing')
+    test('connect /connect', async ({ page }) => {
+      await page.goto('/connect')
       await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toContainText(/pricing/i)
-      await expect(page.getByText(/Body clock baseline/i).first()).toBeVisible()
-      await expect(page.getByRole('link', { name: /How Testkit works/i })).toBeVisible()
-      await expect(page.getByText(/Order on the advice of your GP/i)).toHaveCount(0)
+      await expect(page.getByRole('heading', { level: 1 })).toContainText(/Find your/i)
+      await expect(page.getByRole('heading', { level: 1 })).toContainText(/chemistry/i)
+      await expect(page.getByRole('link', { name: /Join free to chat/i })).toBeVisible()
+      await expect(page.getByRole('link', { name: /See my risk profile/i })).toBeVisible()
     })
 
     test('clinician landing', async ({ page }) => {

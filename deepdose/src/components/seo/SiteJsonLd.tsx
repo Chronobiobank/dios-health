@@ -12,7 +12,7 @@ export function SiteJsonLd() {
         name: DEEPDOSE_NAME,
         url: BASE,
         slogan: DEEPDOSE_TAGLINE,
-        description: 'Medicine for non-conformers. Max your medication with timing that fits your life.',
+        description: 'Medicine for non-conformers. Find your chemical match.',
       },
       {
         '@type': 'WebSite',

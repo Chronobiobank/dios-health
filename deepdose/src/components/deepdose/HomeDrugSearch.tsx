@@ -7,7 +7,7 @@ import {
   searchMedicationCatalog,
   type MedicationRecommendation,
 } from '@/lib/medications/catalog'
-import { buildPatientLandingPath, earliestTakeTime } from '@/lib/medications/home-to-onboarding'
+import { buildHomeChemistryPath, earliestTakeTime } from '@/lib/medications/home-to-onboarding'
 import {
   DEEPDOSE_HOME_DEFAULT_MED_CODES,
   DEEPDOSE_HOME_POLY_SEARCH,
@@ -122,7 +122,7 @@ export function HomeDrugSearch() {
   const checkHref = useMemo(() => {
     const { medCodes, medTimes } = resolvedPlan
     const wake = earliestTakeTime(medTimes) ?? undefined
-    return buildPatientLandingPath({ medCodes, medTimes, wake })
+    return buildHomeChemistryPath({ medCodes, medTimes, wake })
   }, [resolvedPlan])
 
   const canCheck = resolvedPlan.medCodes.length >= 1

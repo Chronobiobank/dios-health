@@ -889,6 +889,188 @@
   text-wrap: balance;
 }
 
+/* Simple home — message, face network, two CTAs */
+.seco-splash__core--simple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.seco-splash__simple {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: min(100%, 36rem);
+  max-width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 1.5rem);
+  gap: clamp(1.25rem, 3.5vh, 2rem);
+  text-align: center;
+}
+
+.seco-splash__simple .seco-splash__hero-marketing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+}
+
+.seco-splash__simple .seco-landing__hero-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Simple home two-line head — centered, sized for short lines */
+.seco-splash__simple .seco-landing__hero-title--two-line {
+  align-items: center;
+  width: auto;
+  max-width: none;
+  margin: 0 auto;
+  font-size: clamp(1.75rem, 1rem + 3.2vw, 3rem);
+}
+
+.seco-splash__simple .seco-landing__hero-title--two-line > .seco-landing__hero-line {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.seco-splash__simple .seco-landing__hero-lede {
+  margin-inline: auto;
+  max-width: 28rem;
+  text-align: center;
+}
+
+.seco-splash__simple-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1rem;
+  width: 100%;
+}
+
+.home-face-net {
+  position: relative;
+  width: min(100%, 22rem);
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.home-face-net__field {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-face-net__node {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform, width, height;
+  pointer-events: none;
+}
+
+.home-face-net__node--center {
+  z-index: 2;
+}
+
+.home-face-net__node--orbit {
+  z-index: 1;
+}
+
+.home-face-net__aura {
+  position: absolute;
+  inset: -42%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(255 255 255 / 0.32) 0%,
+    rgb(255 220 190 / 0.14) 38%,
+    transparent 72%
+  );
+  animation: home-face-net-attract 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.home-face-net__aura--soft {
+  inset: -78%;
+  background: radial-gradient(
+    circle,
+    rgb(255 255 255 / 0.14) 0%,
+    rgb(255 200 160 / 0.07) 42%,
+    transparent 70%
+  );
+  animation-duration: 5.6s;
+  animation-delay: 0.4s;
+}
+
+.home-face-net__aura--orbit {
+  inset: -55%;
+  background: radial-gradient(
+    circle,
+    rgb(255 255 255 / 0.22) 0%,
+    rgb(255 220 190 / 0.08) 40%,
+    transparent 70%
+  );
+  animation-duration: 3.8s;
+}
+
+.home-face-net__face {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgb(255 255 255 / 0.08);
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgb(255 255 255 / 0.4);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.06),
+    0 0 1.5rem rgb(255 255 255 / 0.14),
+    0 0.4rem 1.4rem rgb(0 0 0 / 0.4);
+}
+
+.home-face-net__node--orbit .home-face-net__face {
+  border-color: rgb(255 255 255 / 0.32);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.05),
+    0 0 0.85rem rgb(255 255 255 / 0.1),
+    0 0.25rem 0.8rem rgb(0 0 0 / 0.35);
+}
+
+@keyframes home-face-net-attract {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-face-net__aura {
+    animation: none;
+  }
+}
+
 .seco-splash__why {
   width: 100%;
   border: none;
@@ -1054,6 +1236,10 @@
     max-width: none;
     width: min(100%, 18ch);
     font-size: clamp(3rem, 5.5vw, 6.25rem);
+  }
+
+  .seco-splash__simple .seco-landing__hero-title--two-line {
+    font-size: clamp(2rem, 1.2rem + 2vw, 3.25rem);
   }
 
   .seco-splash__hero-marketing .seco-landing__hero-lede {

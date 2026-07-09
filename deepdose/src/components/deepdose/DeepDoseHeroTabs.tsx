@@ -4,6 +4,7 @@ import type { ReactElement, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
 
 import { DEEPDOSE_LANDING_PLATFORM } from '@/lib/deepdose-marketing/landing-content'
+import { communityFaceUrl } from '@/lib/deepdose-marketing/community-faces'
 import {
   BCA_EDUCATION_TIERS,
   BODY_CLOCK_ANCHOR_COMPARE,
@@ -94,13 +95,11 @@ const HERO_TAB_ICON_TONES: Record<HeroPillar['icon'], string> = {
 // Community signal for the Social feed — clusters of member faces plus a rough
 // count of people sharing, so each card reads as "connecting with others".
 const SOCIAL_PEERS = [
-  { count: '2.4k', faces: ['women/44', 'men/32', 'women/68'] },
-  { count: '860', faces: ['men/75', 'women/12', 'men/41'] },
-  { count: '1.3k', faces: ['women/90', 'men/9', 'women/29'] },
-  { count: '5.1k', faces: ['men/54', 'women/57', 'men/86'] },
+  { count: '2.4k', faces: ['ash', 'kai', 'river'] },
+  { count: '860', faces: ['sage', 'rowan', 'sol'] },
+  { count: '1.3k', faces: ['indie', 'ash', 'kai'] },
+  { count: '5.1k', faces: ['river', 'sol', 'rowan'] },
 ] as const
-
-const FACE_BASE = 'https://randomuser.me/api/portraits'
 
 // Chrono test — melatonin anchor readout (metric layer). Cues live on Dosing plan tab.
 const CHRONO_PREVIEW_ANCHOR = '22:06'
@@ -229,7 +228,7 @@ function HeroPanelAvatars({ index }: { index: number }) {
           <span
             key={face}
             className="seco-hero-tabs__avatar"
-            style={{ backgroundImage: `url(${FACE_BASE}/${face}.jpg)` }}
+            style={{ backgroundImage: `url(${communityFaceUrl(face)})` }}
           />
         ))}
       </span>

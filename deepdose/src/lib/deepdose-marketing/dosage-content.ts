@@ -41,6 +41,7 @@ export const CONNECT_PAGE = {
   eyebrow: 'Connect',
   titleBefore: 'Find your',
   titleHighlight: 'chemistry',
-  support: 'We max your biology, not your attention.',
+  support: 'Matched on body clock, medicines, and journey. Not labels.',
   cta: { label: 'Join free to chat', href: '/login' },
+  secondary: { label: 'See my risk profile', href: '/profile' },
 } as const

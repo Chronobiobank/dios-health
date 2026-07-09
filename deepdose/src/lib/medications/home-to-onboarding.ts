@@ -67,8 +67,7 @@ export function buildChronotypeOnboardingPath(options?: MedsPathOptions): string
   return qs ? `/patient/onboarding/chronotype?${qs}` : '/patient/onboarding/chronotype'
 }
 
-export function buildPatientLandingPath(options?: MedsPathOptions): string {
-  const params = new URLSearchParams()
+function appendLandingQuery(params: URLSearchParams, options?: MedsPathOptions): void {
   if (options?.medCodes?.length) {
     params.set('meds', options.medCodes.map((c) => c.trim()).filter(Boolean).join(','))
   } else if (options?.med?.trim()) {
@@ -83,8 +82,22 @@ export function buildPatientLandingPath(options?: MedsPathOptions): string {
     normalizeClock(options?.time) ??
     earliestTakeTime(options?.medTimes ?? [])
   if (wake) params.set('wake', wake)
+}
+
+/** Profile risk dashboard — SRI after the chemistry pull. */
+export function buildPatientLandingPath(options?: MedsPathOptions): string {
+  const params = new URLSearchParams()
+  appendLandingQuery(params, options)
   const qs = params.toString()
   return qs ? `/profile?${qs}` : '/profile'
+}
+
+/** Home CTA · land on Connect with meds carried for matching context. */
+export function buildHomeChemistryPath(options?: MedsPathOptions): string {
+  const params = new URLSearchParams()
+  appendLandingQuery(params, options)
+  const qs = params.toString()
+  return qs ? `/connect?${qs}` : '/connect'
 }
 
 export function buildPersonalTimingPath(options?: MedsPathOptions): string {

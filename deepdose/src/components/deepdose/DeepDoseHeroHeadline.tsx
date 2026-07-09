@@ -5,11 +5,19 @@ type DeepDoseHeroHeadlineProps = {
 }
 
 export function DeepDoseHeroHeadline({ hero }: DeepDoseHeroHeadlineProps) {
+  const isTwoLine = Boolean(hero.headlineAccent)
+
   return (
     <div className="seco-landing__hero-head">
       {hero.eyebrow ? <p className="seco-landing__hero-eyebrow">{hero.eyebrow}</p> : null}
-      <h1 className="seco-landing__hero-title seco-landing__hero-title--two-line">
-        {hero.headlineAccent ? (
+      <h1
+        className={
+          isTwoLine
+            ? 'seco-landing__hero-title seco-landing__hero-title--two-line'
+            : 'seco-landing__hero-title seco-landing__hero-title--single'
+        }
+      >
+        {isTwoLine ? (
           <>
             <span className="seco-landing__hero-line seco-landing__hero-line--white">
               {hero.headlineWhite}

@@ -5,9 +5,8 @@ import {
   DEEPDOSE_COMMUNITY_MATCHES,
   type CommunityMatch,
 } from '@/lib/deepdose-marketing/community-content'
+import { communityFaceUrl } from '@/lib/deepdose-marketing/community-faces'
 import { cn } from '@/lib/utils/cn'
-
-const FACE_BASE = 'https://randomuser.me/api/portraits'
 
 type CommunityMatchesPanelProps = {
   /** marketing = dark glass connect page; app = member dashboard cards */
@@ -29,7 +28,7 @@ function MatchCard({
         <div className="sw-connect__match-top">
           <span
             className="sw-connect__avatar"
-            style={{ backgroundImage: `url(${FACE_BASE}/${match.face}.jpg)` }}
+            style={{ backgroundImage: `url(${communityFaceUrl(match.face)})` }}
             aria-hidden
           />
           <div className="sw-connect__match-id">
@@ -58,7 +57,7 @@ function MatchCard({
       <span className="seco-hero-tabs__media seco-hero-tabs__peers" aria-hidden>
         <span
           className="seco-hero-tabs__avatar"
-          style={{ backgroundImage: `url(${FACE_BASE}/${match.face}.jpg)` }}
+          style={{ backgroundImage: `url(${communityFaceUrl(match.face)})` }}
         />
         <span className="seco-hero-tabs__peers-count">{match.chemistryPct}% chemistry</span>
       </span>
