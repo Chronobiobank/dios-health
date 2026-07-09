@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const BASE = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.unmed.net'
+const BASE = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.deepdose.org'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()

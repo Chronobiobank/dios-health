@@ -45,7 +45,7 @@ Run `node scripts/sync-vercel-env.mjs` or paste from `.env.local.example` in Ver
 | `NEXT_PUBLIC_SUPABASE_URL` | `https://yavqgklsfmawhrqvuvuf.supabase.co` |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | from Supabase → Settings → API |
 | `SUPABASE_SERVICE_ROLE_KEY` | server-only |
-| `NEXT_PUBLIC_APP_URL` | `https://www.unmed.net` (brand: Deepdose; flip to `https://www.deepdose.org` when that domain is primary) |
+| `NEXT_PUBLIC_APP_URL` | `https://www.deepdose.org` |
 | `DLMO_PROXY_VERSION` | `v1` |
 | `CIRCADIAN_SCORE_VERSION` | `v1` |
 | `NEXT_PUBLIC_ENABLE_PATIENT_TIER` | `true` |
@@ -67,12 +67,12 @@ npx supabase config push --yes
 
 Or manually in Supabase → Authentication → URL configuration:
 
-- [ ] **Site URL:** `https://www.unmed.net` (or `https://www.deepdose.org` once primary)
+- [ ] **Site URL:** `https://www.deepdose.org`
 - [ ] **Redirect URLs:**  
-  `https://www.unmed.net/auth/callback`  
-  `https://unmed.net/auth/callback`  
   `https://www.deepdose.org/auth/callback`  
   `https://deepdose.org/auth/callback`  
+  `https://www.unmed.net/auth/callback`  
+  `https://unmed.net/auth/callback`  
   `https://*.vercel.app/auth/callback`
 
 ## 4. Database
@@ -82,9 +82,9 @@ Or manually in Supabase → Authentication → URL configuration:
 
 ## 5. Domain
 
-- [x] `unmed.net` + `www.unmed.net` on [Vercel deepdose project](https://vercel.com/circadian-foundation/deepdose/settings/domains) — live host; product brand is Deepdose
-- [x] `deepdose.org` / `www.deepdose.org` redirect to `www.unmed.net` until Deepdose domain is promoted primary
-- [x] Legacy domains (`dios.health`, `secopeutic.com`) redirect to `www.unmed.net` via `deepdose/vercel.json`
+- [x] `deepdose.org` / `www.deepdose.org` on [Vercel deepdose project](https://vercel.com/circadian-foundation/deepdose/settings/domains) — primary live host
+- [x] `unmed.net` / `www.unmed.net` redirect to `www.deepdose.org` via `deepdose/vercel.json`
+- [x] Legacy domains (`dios.health`, `secopeutic.com`) redirect to `www.deepdose.org` via `deepdose/vercel.json`
 
 ## 6. Pre-flight
 
