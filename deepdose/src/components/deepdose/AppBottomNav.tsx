@@ -71,7 +71,7 @@ export function AppBottomNav() {
 
   return (
     <nav className="app-bottom-nav" aria-label="Primary">
-      <div className="dios-glass-outer app-bottom-nav__bar">
+      <div className="app-bottom-nav__bar">
         <ul className="app-bottom-nav__list">
           {APP_BOTTOM_NAV.map((item) => {
             const active = isAppBottomNavActive(item.href, pathname)
@@ -80,7 +80,7 @@ export function AppBottomNav() {
                 <Link
                   href={item.href}
                   className={cn(
-                    'dios-glass-inner app-bottom-nav__link',
+                    'app-bottom-nav__link',
                     active && 'app-bottom-nav__link--active'
                   )}
                   aria-current={active ? 'page' : undefined}

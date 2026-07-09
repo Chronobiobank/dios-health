@@ -54,7 +54,7 @@ export const DEEPDOSE_HOME_POLY_SEARCH = {
   medPlaceholderExtra: 'Search another medication',
 } as const
 
-/** Site-wide mission · three moves (audience/problems live on /problem). */
+/** Site-wide mission · three moves (Manjam letter lives on /mission). */
 export const DEEPDOSE_MISSION = {
   eyebrow: 'Three moves',
   headlineWhite: DEEPDOSE_VOICE.missionHeadlineWhite,

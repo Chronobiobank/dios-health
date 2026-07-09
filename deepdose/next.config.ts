@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/problem',
+        destination: '/mission',
+        permanent: true,
+      },
+      {
         source: '/home-test',
         destination: '/testkit',
         permanent: true,

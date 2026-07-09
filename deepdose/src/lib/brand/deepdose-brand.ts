@@ -27,7 +27,7 @@ export const DEEPDOSE_HOME_HEADLINE = 'Find your chemical match.' as const
 /**
  * Copy hierarchy:
  * Home = chemistry match headline + face network + Our mission / Create profile.
- * The Fix = people, problems, non-conformist motivation.
+ * Mission = Chemical Soul-Matching, Manjam letter, how matching works.
  * Profile = Sleep Regularity Index (SRI) risk + six-dose protocol.
  * Melatonin / DLMO = research / tech methodology only, never consumer doses copy.
  */

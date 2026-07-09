@@ -9,7 +9,7 @@ type PublicMarketingShellProps = {
   children: ReactNode
 }
 
-/** Public routes: dark shell + bottom nav. Footer only on home (splash). */
+/** Public routes: dark shell + bottom nav. */
 export function PublicMarketingShell({ children }: PublicMarketingShellProps) {
   return (
     <DeepDoseShell variant="dark">

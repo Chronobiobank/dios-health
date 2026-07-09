@@ -4,7 +4,6 @@ import type { ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
-import { DeepDoseFooter } from '@/components/deepdose/DeepDoseFooter'
 import { DeepDoseShell } from '@/components/deepdose/DeepDoseShell'
 import { PublicMarketingShell } from '@/components/deepdose/PublicMarketingShell'
 
@@ -14,7 +13,7 @@ type SplashRouteShellProps = {
   children: ReactNode
 }
 
-/** Home splash keeps the footer only; other public pages use bottom nav. */
+/** Home splash: dark shell, no chrome. Other public pages use bottom nav. */
 export function SplashRouteShell({ children }: SplashRouteShellProps) {
   const pathname = usePathname()
   const isSplash = SPLASH_PATHS.has(pathname)
@@ -30,7 +29,6 @@ export function SplashRouteShell({ children }: SplashRouteShellProps) {
     return (
       <DeepDoseShell variant="dark" nav={null}>
         {children}
-        <DeepDoseFooter />
       </DeepDoseShell>
     )
   }

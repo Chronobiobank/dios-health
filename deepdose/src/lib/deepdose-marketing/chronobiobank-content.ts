@@ -18,7 +18,21 @@ export const CHRONOBIOBANK_INTRO = {
   lede:
     `${DEEPDOSE_NAME} matches you with people who share your chemistry so your social and body clocks align.`,
   quote:
-    'Other networks rank you by looks and likes. We rank you by your chemistry, then get out of the way so you can talk to someone who has lived your stack.',
+    'The age of matching by profiles is ending. The age of matching by chemistry has begun.',
+} as const
+
+/** Radical Manjam letter — short beats, Apple-clean presentation on Mission. */
+export const CHRONOBIOBANK_LETTER = {
+  paragraphs: [
+    'For years, we matched on profiles and photos.',
+    'Now we go deeper.',
+    'Chemical Soul-Matching.',
+    'Compatibility built on sleep, energy, and real chemistry.',
+    'Not the perfect person.',
+    'The person whose rhythm fits yours.',
+    'Welcome to the evolution of Manjam.',
+    `Powered by ${DEEPDOSE_NAME}.`,
+  ],
 } as const
 
 export const CHRONOBIOBANK_MISSION_CTA = {
@@ -56,15 +70,15 @@ export const CHRONOBIOBANK_TRUST = {
 } as const
 
 export const CHRONOBIOBANK_PLANE = {
-  label: 'How matching works',
+  label: 'Why Deepdose?',
   cue: '#8b9cf8',
-  title: 'Chemistry first, attention never',
-  /** Keep each beat ~58–60 chars so they wrap to two lines, never three. */
+  title: 'Smarter profiles, deeper matches.',
+  /** Keep each beat exactly 54 chars so two-line clamp stays legible. */
   beats: [
-    'Add your meds and rhythm. That is your chemical signature.',
-    'We match people on your clock and stack, not a social feed.',
-    'Chat, compare timing wins, keep your nights on your phone.',
-    'Share for research only if you choose. Matching stays light.',
+    'Add your chemical body clock as your living signature.',
+    'We match you by chemical and social body clocks alike.',
+    'Connect, chat, and share your chemical profile freely.',
+    'Meet in person or share with labs to drive innovation.',
   ],
 } as const
 

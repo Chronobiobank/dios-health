@@ -5,6 +5,7 @@ import { ChronobiobankPlaneTile } from '@/components/deepdose/ChronobiobankPlane
 import { FounderQuoteTile } from '@/components/deepdose/FounderQuoteTile'
 import {
   CHRONOBIOBANK_INTRO,
+  CHRONOBIOBANK_LETTER,
   CHRONOBIOBANK_META,
   CHRONOBIOBANK_MISSION_CTA,
   CHRONOBIOBANK_PLANE,
@@ -39,9 +40,17 @@ export default function MissionPage() {
             className="seco-chronobiobank__founder-quote seco-reveal seco-reveal--2"
           />
 
+          <div className="seco-chronobiobank__letter seco-reveal seco-reveal--3">
+            {CHRONOBIOBANK_LETTER.paragraphs.map((paragraph) => (
+              <p key={paragraph} className="seco-chronobiobank__letter-p">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
           <ChronobiobankPlaneTile
             cue={CHRONOBIOBANK_PLANE.cue}
-            className="seco-chronobiobank__planes seco-chronobiobank__plane-visual--centered seco-reveal seco-reveal--3"
+            className="seco-chronobiobank__planes seco-chronobiobank__plane-visual--centered seco-reveal seco-reveal--4"
             label={CHRONOBIOBANK_PLANE.label}
             title={CHRONOBIOBANK_PLANE.title}
             beats={CHRONOBIOBANK_PLANE.beats}
@@ -49,7 +58,7 @@ export default function MissionPage() {
           />
         </div>
 
-        <div className={marketingCtaClass('seco-chronobiobank__cta seco-reveal seco-reveal--4')}>
+        <div className={marketingCtaClass('seco-chronobiobank__cta seco-reveal seco-reveal--5')}>
           <Link href={CHRONOBIOBANK_MISSION_CTA.href} className="seco-landing__btn seco-landing__btn--primary">
             {CHRONOBIOBANK_MISSION_CTA.label} →
           </Link>

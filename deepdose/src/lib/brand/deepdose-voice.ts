@@ -2,7 +2,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 /**
  * Home = simple chemistry message + face network + two doors.
- * The Fix = people, problems, cascade trap.
+ * Mission = Chemical Soul-Matching + Manjam letter + how matching works.
  * Prefer "non-conformists" only off-home. No em dashes.
  */
 export const DEEPDOSE_AUDIENCE = {
