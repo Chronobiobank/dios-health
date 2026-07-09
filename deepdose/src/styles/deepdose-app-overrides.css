@@ -3173,95 +3173,74 @@
   margin: 0;
 }
 
-/* Manjam letter — Apple-clean: airy, centered, no galley box */
-.seco-chronobiobank__letter {
+/* Evolution story — equal 2×2 tile matrix (50-char bodies) */
+.seco-chronobiobank__mission-stack > .seco-chronobiobank__letter-matrix {
+  margin: 0;
+}
+
+.seco-chronobiobank__letter-matrix {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
+  gap: 0.875rem;
   width: 100%;
-  max-width: 22rem;
-  margin-inline: auto;
-  padding: 0.5rem 0.25rem 0.25rem;
-  border: none;
-  border-radius: 0;
-  background: transparent;
-  box-sizing: border-box;
-  text-align: center;
+  min-width: 0;
 }
 
-@media (min-width: 640px) {
-  .seco-chronobiobank__letter {
-    gap: 1.5rem;
-    max-width: 28rem;
-    padding: 0.75rem 0;
-  }
-}
-
-@media (min-width: 960px) {
-  .seco-chronobiobank__letter {
-    gap: 1.75rem;
-    max-width: 32rem;
-  }
-}
-
-.seco-chronobiobank__letter-salutation {
+.seco-chronobiobank__letter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
   margin: 0;
-  width: 100%;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .seco-chronobiobank__letter-grid {
+    gap: 1rem;
+  }
+}
+
+.seco-chronobiobank__letter-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  min-height: 100%;
+  margin: 0;
+  padding: 1rem 0.875rem;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: var(--seco-radius-lg);
+  background: rgb(255 255 255 / 0.04);
+  box-sizing: border-box;
+}
+
+@media (min-width: 720px) {
+  .seco-chronobiobank__letter-tile {
+    padding: 1.25rem 1.125rem;
+    gap: 0.75rem;
+  }
+}
+
+.seco-chronobiobank__letter-tile-label {
+  margin: 0;
   font-family: var(--seco-font-ui);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 0.08em;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  white-space: nowrap;
   color: rgb(255 255 255 / 0.48);
 }
 
-.seco-chronobiobank__letter-p {
+.seco-chronobiobank__letter-tile-body {
   margin: 0;
-  width: 100%;
-  max-width: 22rem;
+  flex: 1;
   font-family: var(--seco-font-display);
-  font-size: 1.375rem;
+  font-size: clamp(1rem, 2.8vw, 1.1875rem);
   font-weight: 300;
-  line-height: 1.28;
-  letter-spacing: -0.02em;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
   color: rgb(255 255 255 / 0.9);
   text-wrap: balance;
-}
-
-@media (min-width: 640px) {
-  .seco-chronobiobank__letter-p {
-    max-width: 28rem;
-    font-size: 1.625rem;
-    line-height: 1.26;
-  }
-}
-
-@media (min-width: 960px) {
-  .seco-chronobiobank__letter-p {
-    max-width: 32rem;
-    font-size: 1.75rem;
-  }
-}
-
-.seco-chronobiobank__letter-p:nth-last-child(-n + 2) {
-  color: #fff;
-}
-
-.seco-chronobiobank__letter-p:last-child {
-  font-family: var(--seco-font-ui);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: rgb(255 255 255 / 0.55);
-}
-
-@media (min-width: 640px) {
-  .seco-chronobiobank__letter-p:last-child {
-    font-size: 1rem;
-  }
 }
 
 .seco-mission .seco-chronobiobank__folds,

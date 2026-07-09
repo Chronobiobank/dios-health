@@ -5,7 +5,7 @@ import { ChronobiobankPlaneTile } from '@/components/deepdose/ChronobiobankPlane
 import { FounderQuoteTile } from '@/components/deepdose/FounderQuoteTile'
 import {
   CHRONOBIOBANK_INTRO,
-  CHRONOBIOBANK_LETTER,
+  CHRONOBIOBANK_LETTER_TILES,
   CHRONOBIOBANK_META,
   CHRONOBIOBANK_MISSION_CTA,
   CHRONOBIOBANK_PLANE,
@@ -40,12 +40,15 @@ export default function MissionPage() {
             className="seco-chronobiobank__founder-quote seco-reveal seco-reveal--2"
           />
 
-          <div className="seco-chronobiobank__letter seco-reveal seco-reveal--3">
-            {CHRONOBIOBANK_LETTER.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="seco-chronobiobank__letter-p">
-                {paragraph}
-              </p>
-            ))}
+          <div className="seco-chronobiobank__letter-matrix seco-reveal seco-reveal--3">
+            <ul className="seco-chronobiobank__letter-grid">
+              {CHRONOBIOBANK_LETTER_TILES.map((tile) => (
+                <li key={tile.id} className="seco-chronobiobank__letter-tile">
+                  <p className="seco-chronobiobank__letter-tile-label">{tile.label}</p>
+                  <p className="seco-chronobiobank__letter-tile-body">{tile.body}</p>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <ChronobiobankPlaneTile

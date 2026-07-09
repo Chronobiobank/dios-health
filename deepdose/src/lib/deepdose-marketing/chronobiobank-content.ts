@@ -21,19 +21,32 @@ export const CHRONOBIOBANK_INTRO = {
     'The age of matching by profiles is ending. The age of matching by chemistry has begun.',
 } as const
 
-/** Radical Manjam letter — short beats, Apple-clean presentation on Mission. */
-export const CHRONOBIOBANK_LETTER = {
-  paragraphs: [
-    'For years, we matched on profiles and photos.',
-    'Now we go deeper.',
-    'Chemical Soul-Matching.',
-    'Compatibility built on sleep, energy, and real chemistry.',
-    'Not the perfect person.',
-    'The person whose rhythm fits yours.',
-    'Welcome to the evolution of Manjam.',
-    `Powered by ${DEEPDOSE_NAME}.`,
-  ],
-} as const
+/**
+ * Evolution story as a 2×2 tile matrix.
+ * Each body is exactly 50 characters so tiles stay equal height.
+ */
+export const CHRONOBIOBANK_LETTER_TILES = [
+  {
+    id: 'then',
+    label: 'Then',
+    body: 'For years we matched on profiles and photos alone.',
+  },
+  {
+    id: 'now',
+    label: 'Now',
+    body: 'Now we go deeper with Chemical Soul-Matching here.',
+  },
+  {
+    id: 'how',
+    label: 'How',
+    body: 'Built on sleep, energy and chemistry of belonging.',
+  },
+  {
+    id: 'who',
+    label: 'Who',
+    body: 'Not the perfect match. The rhythm that fits yours.',
+  },
+] as const
 
 export const CHRONOBIOBANK_MISSION_CTA = {
   label: 'Find your chemical match',
