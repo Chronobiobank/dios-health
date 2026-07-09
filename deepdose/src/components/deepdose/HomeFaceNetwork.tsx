@@ -63,8 +63,9 @@ export function HomeFaceNetwork() {
     if (!root || !canvas) return
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    const maybeCtx = canvas.getContext('2d')
+    if (!maybeCtx) return
+    const ctx: CanvasRenderingContext2D = maybeCtx
 
     const orbitCount = ORBIT_IDS.length
     const angles = ORBIT_IDS.map((_, i) => (i / orbitCount) * Math.PI * 2)

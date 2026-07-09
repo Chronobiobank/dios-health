@@ -16,7 +16,7 @@ export const CHRONOBIOBANK_INTRO = {
   titleWhite: 'Chemical',
   titleAccent: 'soul-matching',
   lede:
-    `${DEEPDOSE_NAME} matches you with people who share your body clock, medicines, and journey. Not labels. Not a feed. Chemistry you can feel, timing you can use.`,
+    `${DEEPDOSE_NAME} matches you with people who share your chemistry so your social and body clocks align.`,
   quote:
     'Other networks rank you by looks and likes. We rank you by your chemistry, then get out of the way so you can talk to someone who has lived your stack.',
 } as const
