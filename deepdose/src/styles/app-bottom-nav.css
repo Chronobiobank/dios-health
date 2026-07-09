@@ -10,13 +10,22 @@
   z-index: 60;
   display: flex;
   justify-content: center;
-  padding: 0.5rem 0.75rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  /* Match .seco-landing__section-inner gutters so the dock aligns with page tiles */
+  padding: 0.5rem var(--seco-page-pad, clamp(1.25rem, 4vw, 2rem))
+    calc(0.5rem + env(safe-area-inset-bottom, 0px));
   pointer-events: none;
+  box-sizing: border-box;
 }
 
 .app-bottom-nav__bar {
   pointer-events: auto;
-  width: min(32rem, 100%);
+  box-sizing: border-box;
+  width: 100%;
+  /* Match tile edges inside .seco-landing__section-inner (max − horizontal pad) */
+  max-width: calc(
+    var(--seco-content-max, var(--seco-page-max, 76rem)) -
+      (2 * var(--seco-page-pad, clamp(1.25rem, 4vw, 2rem)))
+  );
   padding: 0.4rem;
   border-radius: 1.35rem;
 }
@@ -118,12 +127,6 @@
 .deepdose-shell.seco-shell--dark .app-bottom-nav__link:hover,
 .deepdose-shell.seco-shell--dark .app-bottom-nav__link--active {
   color: #fff;
-}
-
-@media (min-width: 960px) {
-  .app-bottom-nav__bar {
-    width: min(36rem, 100%);
-  }
 }
 
 /* Splash home: float over media without shifting the locked viewport */

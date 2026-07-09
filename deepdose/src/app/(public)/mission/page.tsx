@@ -10,7 +10,6 @@ import {
   CHRONOBIOBANK_PLANE,
 } from '@/lib/deepdose-marketing/chronobiobank-content'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
-import { marketingImages } from '@/lib/marketing/images'
 
 export const metadata: Metadata = {
   title: CHRONOBIOBANK_META.title,
@@ -42,11 +41,11 @@ export default function MissionPage() {
 
           <ChronobiobankPlaneTile
             cue={CHRONOBIOBANK_PLANE.cue}
-            className="seco-chronobiobank__planes seco-reveal seco-reveal--3"
+            className="seco-chronobiobank__planes seco-chronobiobank__plane-visual--centered seco-reveal seco-reveal--3"
             label={CHRONOBIOBANK_PLANE.label}
             title={CHRONOBIOBANK_PLANE.title}
             beats={CHRONOBIOBANK_PLANE.beats}
-            image={marketingImages.phoneNight}
+            videoSrc="/first-light.mp4"
           />
         </div>
 

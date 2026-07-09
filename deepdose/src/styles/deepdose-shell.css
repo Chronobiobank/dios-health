@@ -46,6 +46,8 @@
   --seco-radius-xl: 1.375rem;
   --seco-page-pad: clamp(1.25rem, 4vw, 2rem);
   --seco-page-max: 76rem;
+  /* Active content column — bottom nav matches this so edges align with page tiles */
+  --seco-content-max: var(--seco-page-max);
   --seco-stack-gap: clamp(1.75rem, 4vw, 2.5rem);
   --seco-copy-measure: 52ch;
   --seco-font-display: var(--font-merriweather, Georgia, serif);

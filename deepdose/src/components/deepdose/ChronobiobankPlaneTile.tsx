@@ -2,6 +2,7 @@ import Image from 'next/image'
 import type { CSSProperties, ReactNode } from 'react'
 
 import { ChronobiobankTileIcon, type ChronobiobankTileIconId } from '@/components/deepdose/ChronobiobankTileIcon'
+import { PlaneTileVideoBackground } from '@/components/deepdose/PlaneTileVideoBackground'
 import { MARKETING_NUM_CLASS, MARKETING_WIDE_TILE_CLASS } from '@/lib/design/marketing-system'
 import { cn } from '@/lib/utils/cn'
 
@@ -11,19 +12,22 @@ type ChronobiobankPlaneTileProps = {
   title: string
   beats: readonly string[]
   image?: { src: string; alt: string }
+  /** Muted looping fill video (takes precedence over `image`). */
+  videoSrc?: string
   iconId?: ChronobiobankTileIconId
   foot?: ReactNode
   variant?: 'photo' | 'light'
   className?: string
 }
 
-/** Wide marketing tile — photo hero (mission) or light glass band (foundation). */
+/** Wide marketing tile — photo/video hero (mission) or light glass band (foundation). */
 export function ChronobiobankPlaneTile({
   cue,
   label,
   title,
   beats,
   image,
+  videoSrc,
   iconId = 'device',
   foot,
   variant = 'photo',
@@ -40,7 +44,9 @@ export function ChronobiobankPlaneTile({
       )}
       style={{ '--cue': cue } as CSSProperties}
     >
-      {!isLight && image ? (
+      {!isLight && videoSrc ? (
+        <PlaneTileVideoBackground src={videoSrc} />
+      ) : !isLight && image ? (
         <>
           <Image
             src={image.src}

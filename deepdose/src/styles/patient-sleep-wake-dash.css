@@ -4,11 +4,16 @@
   padding-block: clamp(1.25rem, 3vh, 2rem);
 }
 
+/* Narrow consumer column ? keep bottom nav in sync via --seco-content-max */
+.deepdose-shell:has(.sw-dash) {
+  --seco-content-max: 42rem;
+}
+
 .seco-landing__section-inner:has(> .sw-dash) {
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: min(42rem, 100%);
+  max-width: min(var(--seco-content-max), 100%);
 }
 
 .sw-dash {
