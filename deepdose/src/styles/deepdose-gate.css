@@ -142,9 +142,9 @@
   max-width: none;
   margin: 0 auto;
   font-family: var(--seco-font-display);
-  /* Size so “chemical match” naturally spans the pill column (normal word space) */
-  font-size: clamp(1.85rem, 0.55rem + 8.2vw, 3.5rem);
-  font-size: clamp(1.85rem, 13.8cqi, 3.5rem);
+  /* Slightly larger than the reduced size — still under the orbit */
+  font-size: clamp(1.55rem, 0.45rem + 6.9vw, 2.95rem);
+  font-size: clamp(1.55rem, 11.6cqi, 2.95rem);
   font-weight: 300;
   letter-spacing: var(--seco-display-tracking-hero);
   line-height: var(--text-display-leading-hero, 1.08);
@@ -163,6 +163,25 @@
 
 .dd-gate .dd-gate__headline .seco-landing__hero-line--white {
   color: #fff;
+}
+
+/* Drift the spectrum across “chemical match” (same motion language as CTAs) */
+.dd-gate .dd-gate__headline .seco-landing__hero-spectrum {
+  background: var(--seco-spectrum-hero);
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: seco-cta-flow 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dd-gate .dd-gate__headline .seco-landing__hero-spectrum {
+    animation: none;
+    background-position: 50% 50%;
+  }
 }
 
 .dd-gate__orbit {
