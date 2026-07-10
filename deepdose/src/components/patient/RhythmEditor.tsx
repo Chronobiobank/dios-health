@@ -102,7 +102,7 @@ export function RhythmEditor({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-1.5">
+          <div className="flex flex-col gap-3">
             <Label htmlFor="work-sleep-onset">Sleep onset</Label>
             <TimeInput
               id="work-sleep-onset"
@@ -111,7 +111,7 @@ export function RhythmEditor({
               onChange={(e) => setWorkSleepOnset(e.target.value)}
             />
           </div>
-          <div className="space-y-1.5">
+          <div className="flex flex-col gap-3">
             <Label htmlFor="work-sleep-end">Wake time</Label>
             <TimeInput
               id="work-sleep-end"
@@ -132,7 +132,7 @@ export function RhythmEditor({
           Alarm on work days
         </label>
 
-        <div className="mt-4 space-y-1.5">
+        <div className="mt-4 flex flex-col gap-3">
           <Label htmlFor="workdays">Work days per week</Label>
           <NumberInput
             id="workdays"
@@ -157,7 +157,7 @@ export function RhythmEditor({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-1.5">
+          <div className="flex flex-col gap-3">
             <Label htmlFor="free-sleep-onset">Sleep onset</Label>
             <TimeInput
               id="free-sleep-onset"
@@ -166,7 +166,7 @@ export function RhythmEditor({
               onChange={(e) => setFreeSleepOnset(e.target.value)}
             />
           </div>
-          <div className="space-y-1.5">
+          <div className="flex flex-col gap-3">
             <Label htmlFor="free-sleep-end">Wake time</Label>
             <TimeInput
               id="free-sleep-end"

@@ -4,7 +4,6 @@ import type { ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
-import { DeepDoseShell } from '@/components/deepdose/DeepDoseShell'
 import { PublicMarketingShell } from '@/components/deepdose/PublicMarketingShell'
 
 const SPLASH_PATHS = new Set(['/'])
@@ -25,12 +24,10 @@ export function SplashRouteShell({ children }: SplashRouteShellProps) {
     }
   }, [isSplash])
 
+  // SplashFrame already owns the dark shell + nav — do not nest another layout
+  // (nested 100dvh shells are what create a home scrollbar).
   if (isSplash) {
-    return (
-      <DeepDoseShell variant="dark" nav={null}>
-        {children}
-      </DeepDoseShell>
-    )
+    return <>{children}</>
   }
 
   return <PublicMarketingShell>{children}</PublicMarketingShell>

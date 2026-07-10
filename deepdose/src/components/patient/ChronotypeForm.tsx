@@ -32,10 +32,10 @@ export default function ChronotypeForm() {
         savingLabel="Updating dash…"
         skipLabel="Skip for now"
         onSaved={() => {
-          router.push('/patient/dashboard')
+          router.push('/connect')
           router.refresh()
         }}
-        onSkip={() => router.push('/patient/dashboard')}
+        onSkip={() => router.push('/connect')}
       />
     </div>
   )

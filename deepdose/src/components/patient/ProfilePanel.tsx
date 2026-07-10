@@ -240,7 +240,7 @@ export function ProfilePanel({
       </section>
 
       <div className="dash-meds__actions">
-        <Button href="/patient/dashboard" variant="secondary" className="dash-meds__cancel">
+        <Button href="/profile" variant="secondary" className="dash-meds__cancel">
           Back to dash
         </Button>
       </div>

@@ -12,8 +12,8 @@ export function PublicHeader() {
           <DeepdoseWordmark className="deepdose-wordmark--compact" />
         </Link>
         <nav className="flex items-center gap-4">
-          <Link href="/about" className="hidden text-sm text-ink-muted hover:text-ink sm:block">
-            About
+          <Link href="/mission" className="hidden text-sm text-ink-muted hover:text-ink sm:block">
+            Mission
           </Link>
           <Button href="/login" variant="primary" className="!px-5 !py-2 text-sm">
             Sign in

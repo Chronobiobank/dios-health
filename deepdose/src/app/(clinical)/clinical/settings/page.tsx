@@ -22,7 +22,7 @@ export default async function ClinicalSettingsPage() {
     .single()
 
   if (!profile || !['clinician', 'enterprise'].includes(profile.tier)) {
-    redirect('/patient/dashboard')
+    redirect('/connect')
   }
 
   const invites = await fetchClinicianInviteCodes(supabase, user.id)

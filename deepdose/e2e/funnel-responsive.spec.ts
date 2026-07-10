@@ -75,14 +75,18 @@ for (const viewport of VIEWPORTS) {
 
     test('home /', async ({ page }) => {
       await page.goto('/')
-      await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
       await expect(page.getByRole('heading', { level: 1 })).toContainText(/Find your/i)
       await expect(page.getByRole('heading', { level: 1 })).toContainText(/chemical match/i)
-      await expect(page.locator('.seco-splash__hero-marketing .seco-landing__hero-lede')).toHaveCount(0)
-      await expect(page.getByRole('link', { name: /Why Deepdose\?/i })).toBeVisible()
-      await expect(page.getByRole('link', { name: /Create profile/i })).toBeVisible()
+      await expect(page.getByRole('link', { name: /^About$/i })).toBeVisible()
+      await expect(page.getByRole('button', { name: /^Sign In$/i })).toBeVisible()
+      await expect(page.getByRole('button', { name: /Sign up to Deepdose/i })).toBeVisible()
+      await expect(page.getByPlaceholder('Email')).toBeVisible()
+      await expect(page.getByPlaceholder('Password')).toBeVisible()
+      await expect(page.getByText(/You must be 18\+ y\/o to enter and agree to our/i)).toBeVisible()
+      await expect(page.getByRole('link', { name: /^Terms$/i })).toBeVisible()
+      await expect(page.getByRole('link', { name: /^Report$/i })).toBeVisible()
     })
 
     test('patient landing', async ({ page }) => {
@@ -100,16 +104,14 @@ for (const viewport of VIEWPORTS) {
       await expect(page.getByText('My risk')).toHaveCount(0)
     })
 
-    test('the fix /problem', async ({ page }) => {
+    test('legacy /problem redirects to mission', async ({ page }) => {
       await page.goto('/problem')
+      await expect(page).toHaveURL(/\/mission/)
       await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toContainText(/Clock time/i)
-      await expect(page.getByRole('heading', { level: 1 })).toContainText(/body time/i)
-      await expect(page.getByText(/Many drugs vary in effect/i)).toBeVisible()
-      await expect(page.getByRole('link', { name: /Pilot timing-smart prescriptions/i })).toBeVisible()
-      await expect(page.getByText(/Order on the advice of your GP/i)).toHaveCount(0)
+      await expect(page.getByRole('heading', { level: 1 })).toContainText(/Chemical/i)
+      await expect(page.getByRole('heading', { level: 1 })).toContainText(/soul-matching/i)
     })
 
     test('mission /mission', async ({ page }) => {
@@ -128,8 +130,8 @@ for (const viewport of VIEWPORTS) {
 
       await expect(page.getByRole('heading', { level: 1 })).toContainText(/Find your/i)
       await expect(page.getByRole('heading', { level: 1 })).toContainText(/chemistry/i)
-      await expect(page.getByRole('link', { name: /Join free to chat/i })).toBeVisible()
-      await expect(page.getByRole('link', { name: /See my risk profile/i })).toBeVisible()
+      await expect(page.getByRole('link', { name: /Message/i }).first()).toBeVisible()
+      await expect(page.getByText(/Browse free\. Sign in to message/i)).toBeVisible()
     })
 
     test('clinician landing', async ({ page }) => {

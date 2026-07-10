@@ -1,26 +1,39 @@
-﻿/** Public site navigation , header (full) vs footer (essentials only). */
+/** Site navigation — lean Sniffies chrome. Product routes use bottom nav only. */
 
+/** Splash + marketing header (minimal). Product tabs live in APP_BOTTOM_NAV. */
 export const DEEPDOSE_SITE_LINKS = [
   { label: 'Mission', href: '/mission' },
-  { label: 'Technology', href: '/technology' },
   { label: 'Science', href: '/science' },
-  { label: 'Testkit', href: '/testkit' },
-  { label: 'Profile', href: '/profile' },
-  { label: 'Dosage', href: '/dosage' },
-  { label: 'Share', href: '/share' },
-  { label: 'Connect', href: '/connect' },
-  { label: 'Membership', href: '/membership' },
   { label: 'Sign in', href: '/login' },
 ] as const
 
-/** Footer , primary paths only; detail pages stay in header nav. */
+/** @deprecated Prefer DEEPDOSE_SITE_LINKS — kept for older imports. */
+export const DEEPDOSE_SPLASH_LINKS = DEEPDOSE_SITE_LINKS
+
+/** Footer essentials when mounted. */
 export const DEEPDOSE_FOOTER_LINKS = [
+  { label: 'Connect', href: '/connect' },
   { label: 'Profile', href: '/profile' },
   { label: 'Dosage', href: '/dosage' },
-  { label: 'Connect', href: '/connect' },
+  { label: 'Chat', href: '/chat' },
   { label: 'Sign in', href: '/login' },
   { label: 'Terms', href: '/terms' },
 ] as const
+
+/** Product routes: bottom nav only, no marketing header. */
+export const DEEPDOSE_PRODUCT_PATHS = [
+  '/connect',
+  '/chat',
+  '/profile',
+  '/dosage',
+  '/login',
+] as const
+
+export function isDeepdoseProductPath(pathname: string): boolean {
+  return DEEPDOSE_PRODUCT_PATHS.some(
+    (path) => pathname === path || pathname.startsWith(`${path}/`)
+  )
+}
 
 export const CHRONOBIOBANK_RESEARCH_ANCHOR = 'research'
 export const CHRONOBIOBANK_SCIENCE_ANCHOR = 'science-trust'

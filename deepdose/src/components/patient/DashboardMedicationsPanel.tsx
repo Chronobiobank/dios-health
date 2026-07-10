@@ -73,11 +73,11 @@ export function DashboardMedicationsPanel({ phaseOffsetMinutes }: DashboardMedic
       savingLabel="Updating dash…"
       allowEmptySave
       onSaved={() => {
-        router.push('/patient/dashboard')
+        router.push('/dosage')
         router.refresh()
       }}
       secondaryAction={
-        <Button href="/patient/dashboard" variant="secondary" className="dash-meds__cancel">
+        <Button href="/dosage" variant="secondary" className="dash-meds__cancel">
           Back to dash
         </Button>
       }

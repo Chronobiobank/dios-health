@@ -45,13 +45,10 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
           <path d="M8.5 12h7" />
         </svg>
       )
-    case 'share':
+    case 'chat':
       return (
         <svg {...common}>
-          <circle cx="6.5" cy="12" r="2.25" />
-          <circle cx="17.5" cy="6.5" r="2.25" />
-          <circle cx="17.5" cy="17.5" r="2.25" />
-          <path d="m8.4 10.9 5.2-3.1M8.4 13.1l5.2 3.1" />
+          <path d="M5 6.5h14a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H11l-3.5 3v-3H5A1.5 1.5 0 0 1 3.5 15V8A1.5 1.5 0 0 1 5 6.5z" />
         </svg>
       )
     case 'connect':

@@ -1,0 +1,118 @@
+/* Sniffies-lean Connect discovery — full-bleed list, one-tap Message. */
+
+.dd-connect {
+  --dd-connect-bg: #0c0c0c;
+  --dd-connect-line: rgba(255, 255, 255, 0.08);
+  --dd-connect-text: #f2f2f2;
+  --dd-connect-muted: rgba(242, 242, 242, 0.55);
+  --dd-connect-accent: #2a9d8f;
+
+  max-width: 32rem;
+  margin-inline: auto;
+  padding: 0.75rem 0.85rem calc(1rem + env(safe-area-inset-bottom, 0px));
+  color: var(--dd-connect-text);
+  background: var(--dd-connect-bg);
+  min-height: calc(100dvh - 5.5rem);
+}
+
+.dd-connect__head {
+  padding: 0.5rem 0 1rem;
+  border-bottom: 1px solid var(--dd-connect-line);
+  margin-bottom: 0.35rem;
+}
+
+.dd-connect__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.dd-connect__support {
+  margin: 0.4rem 0 0;
+  font-size: 0.875rem;
+  color: var(--dd-connect-muted);
+  line-height: 1.4;
+}
+
+.dd-connect__hint {
+  margin: 0.55rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--dd-connect-muted);
+}
+
+.dd-connect__inbox-link {
+  display: inline-block;
+  margin-top: 0.65rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--dd-connect-accent);
+  text-decoration: none;
+}
+
+.dd-connect__inbox-link:hover {
+  text-decoration: underline;
+}
+
+.dd-connect__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dd-connect__card {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--dd-connect-line);
+}
+
+.dd-connect__avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--dd-connect-line);
+}
+
+.dd-connect__card-main {
+  min-width: 0;
+}
+
+.dd-connect__name {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.dd-connect__meta {
+  margin: 0.15rem 0 0;
+  font-size: 0.75rem;
+  color: var(--dd-connect-muted);
+}
+
+.dd-connect__journey {
+  margin: 0.25rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--dd-connect-muted);
+  line-height: 1.35;
+}
+
+.dd-connect__message {
+  flex-shrink: 0;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  background: var(--dd-connect-accent);
+  color: #041412;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.dd-connect__message:hover {
+  filter: brightness(1.06);
+}

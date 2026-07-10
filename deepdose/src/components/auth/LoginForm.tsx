@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { createClient } from '@/lib/supabase/client'
-import { isStaffLoginPath, loginEyebrow, loginLede, loginTitle, resolvePostLoginPath } from '@/lib/auth/post-login-path'
+import { isStaffLoginPath, loginEyebrow, loginLede, loginTitle, resolvePatientPostLoginPath, resolvePostLoginPath } from '@/lib/auth/post-login-path'
 import { completeActivationLink } from '@/lib/care/complete-activation-link'
 import {
   buildAuthCallbackUrl,
   persistPendingActivation,
   readPendingActivation,
 } from '@/lib/care/pending-activation'
-import { resolvePathAfterActivationAttempt } from '@/lib/care/resolve-activation-redirect'
+import { resolvePathAfterActivationAttempt } from '@/lib/care/resolve-activation-path'
 import { planProfileDisplayName, readPlanProfile } from '@/lib/patient/plan-profile'
 import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
@@ -19,7 +19,12 @@ import { Input, Label } from '@/components/ui/Input'
 
 type Mode = 'signin' | 'signup'
 
-export default function LoginForm() {
+type LoginFormProps = {
+  /** Splash home gate: compact signup-first, no page chrome title. */
+  variant?: 'page' | 'splash'
+}
+
+export default function LoginForm({ variant = 'page' }: LoginFormProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const next = searchParams.get('next')
@@ -29,8 +34,11 @@ export default function LoginForm() {
   const callbackError = searchParams.get('error')
   const callbackReason = searchParams.get('reason')
   const activationFailed = callbackError === 'activation_failed'
+  const isSplash = variant === 'splash'
 
-  const [mode, setMode] = useState<Mode>(() => (signupFromUrl ? 'signup' : 'signin'))
+  const [mode, setMode] = useState<Mode>(() =>
+    isSplash || signupFromUrl ? 'signup' : 'signin'
+  )
   const effectiveMode: Mode = staffLogin ? 'signin' : mode
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -65,7 +73,10 @@ export default function LoginForm() {
     }
 
     const activation = activationParam ?? readPendingActivation()
-    let destination = resolvePostLoginPath(tier, next)
+    let destination =
+      tier === 'patient' || !tier
+        ? await resolvePatientPostLoginPath(supabase, user!.id, next)
+        : resolvePostLoginPath(tier, next)
 
     if (activation) {
       const linkResult = await completeActivationLink(activation)
@@ -127,19 +138,29 @@ export default function LoginForm() {
     await redirectAfterAuth()
   }
 
-  return (
-    <div className="seco-auth-form">
-      <header className="seco-auth-head">
-        {loginEyebrow(next, activationParam) ? (
-          <p className="seco-page__eyebrow seco-auth-head__eyebrow">{loginEyebrow(next, activationParam)}</p>
-        ) : null}
-        <h1 className="seco-page__title seco-auth-head__title">{loginTitle(next, effectiveMode)}</h1>
-        {loginLede(next, effectiveMode, activationParam) ? (
-          <p className="seco-page__lede seco-auth-head__lede">{loginLede(next, effectiveMode, activationParam)}</p>
-        ) : null}
-      </header>
+  const submitLabel = loading
+    ? 'Please wait…'
+    : isSplash
+      ? 'Enter'
+      : effectiveMode === 'signin'
+        ? 'Sign in'
+        : 'Create account'
 
-      <form onSubmit={handleSubmit} className="seco-auth-form__fields space-y-4">
+  return (
+    <div className={isSplash ? 'seco-auth-form seco-auth-form--splash' : 'seco-auth-form'}>
+      {!isSplash ? (
+        <header className="seco-auth-head">
+          {loginEyebrow(next, activationParam) ? (
+            <p className="seco-page__eyebrow seco-auth-head__eyebrow">{loginEyebrow(next, activationParam)}</p>
+          ) : null}
+          <h1 className="seco-page__title seco-auth-head__title">{loginTitle(next, effectiveMode)}</h1>
+          {loginLede(next, effectiveMode, activationParam) ? (
+            <p className="seco-page__lede seco-auth-head__lede">{loginLede(next, effectiveMode, activationParam)}</p>
+          ) : null}
+        </header>
+      ) : null}
+
+      <form onSubmit={handleSubmit} className="seco-auth-form__fields space-y-3">
         {effectiveMode === 'signup' && (
           <div className="space-y-1.5">
             <Label htmlFor="displayName">Display name</Label>
@@ -162,6 +183,7 @@ export default function LoginForm() {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder={isSplash ? 'Email' : undefined}
           />
         </div>
 
@@ -175,6 +197,7 @@ export default function LoginForm() {
             autoComplete={effectiveMode === 'signup' ? 'new-password' : 'current-password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder={isSplash ? 'Password (8+ characters)' : undefined}
           />
         </div>
 
@@ -205,7 +228,7 @@ export default function LoginForm() {
         )}
 
         <Button type="submit" disabled={loading} className="w-full">
-          {loading ? 'Please wait…' : effectiveMode === 'signin' ? 'Sign in' : 'Create account'}
+          {submitLabel}
         </Button>
       </form>
 

@@ -190,44 +190,41 @@ export function PatientSleepWakeDashboard({
             </label>
           </div>
 
-          <div className="dios-glass-inner sw-dash__diagnostic">
-            <p id="sw-tile-diagnostic" className="seco-page__eyebrow sw-dash__tile-eyebrow">
-              {copy.diagnosticEyebrow}
-            </p>
+        </article>
 
-            <p className="sw-dash__diagnostic-body">
-              {copy.subtitleBefore}
-              <span className="sw-dash__diagnostic-highlight">{copy.subtitleHighlight}</span>
-              {copy.subtitleAfter}
-            </p>
-
-            <div className="sw-dash__anchors" role="group" aria-label="Sleep and wake times">
-              <div className="dios-glass-inner sw-dash__anchor sw-dash__anchor--sleep">
-                <div className="sw-dash__anchor-head">
-                  <span className="sw-dash__anchor-icon" aria-hidden>
-                    <MoonIcon />
-                  </span>
-                  <p className="sw-dash__anchor-label">
-                    {copy.sleepLabel}{' '}
-                    <span className="sw-dash__anchor-hint">({copy.sleepHint})</span>
-                  </p>
-                </div>
-                <p className="sw-dash__anchor-time tabular-nums">{bodyClock.sleepOnsetLabel}</p>
-              </div>
-              <div className="dios-glass-inner sw-dash__anchor sw-dash__anchor--wake">
-                <div className="sw-dash__anchor-head">
-                  <span className="sw-dash__anchor-icon" aria-hidden>
-                    <SunIcon />
-                  </span>
-                  <p className="sw-dash__anchor-label">
-                    {copy.wakeLabel}{' '}
-                    <span className="sw-dash__anchor-hint">({copy.wakeHint})</span>
-                  </p>
-                </div>
-                <p className="sw-dash__anchor-time tabular-nums">{bodyClock.wakeLabel}</p>
-              </div>
+        <div className="sw-dash__anchors" role="group" aria-label="Lights off and lights on times">
+          <article className="dios-glass-outer sw-dash__tile sw-dash__tile--anchor sw-dash__anchor sw-dash__anchor--sleep">
+            <span className="sw-dash__anchor-icon" aria-hidden>
+              <MoonIcon />
+            </span>
+            <div className="sw-dash__anchor-copy">
+              <p className="sw-dash__anchor-time tabular-nums">{bodyClock.sleepOnsetLabel}</p>
+              <p className="sw-dash__anchor-label">{copy.sleepLabel}</p>
             </div>
-          </div>
+          </article>
+          <article className="dios-glass-outer sw-dash__tile sw-dash__tile--anchor sw-dash__anchor sw-dash__anchor--wake">
+            <span className="sw-dash__anchor-icon" aria-hidden>
+              <SunIcon />
+            </span>
+            <div className="sw-dash__anchor-copy">
+              <p className="sw-dash__anchor-time tabular-nums">{bodyClock.wakeLabel}</p>
+              <p className="sw-dash__anchor-label">{copy.wakeLabel}</p>
+            </div>
+          </article>
+        </div>
+
+        <article
+          className="dios-glass-outer sw-dash__tile sw-dash__tile--diagnostic"
+          aria-labelledby="sw-tile-diagnostic"
+        >
+          <p id="sw-tile-diagnostic" className="seco-page__eyebrow sw-dash__tile-eyebrow">
+            {copy.diagnosticEyebrow}
+          </p>
+          <p className="sw-dash__diagnostic-body">
+            {copy.subtitleBefore}
+            <span className="sw-dash__diagnostic-highlight">{copy.subtitleHighlight}</span>
+            {copy.subtitleAfter}
+          </p>
         </article>
 
         <article className="dios-glass-outer sw-dash__tile sw-dash__tile--score" aria-labelledby="sw-tile-score">

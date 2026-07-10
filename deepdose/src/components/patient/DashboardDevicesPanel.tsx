@@ -91,7 +91,7 @@ export function DashboardDevicesPanel({
       </section>
 
       <div className="dash-meds__actions">
-        <Button href="/patient/dashboard" variant="secondary" className="dash-meds__cancel">
+        <Button href="/dosage" variant="secondary" className="dash-meds__cancel">
           Back to dash
         </Button>
       </div>

@@ -6,7 +6,7 @@ export function Input({ className = '', ...props }: InputHTMLAttributes<HTMLInpu
 
 export function Label({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) {
   return (
-    <label htmlFor={htmlFor} className="text-sm font-medium text-ink">
+    <label htmlFor={htmlFor} className="block text-sm font-medium text-ink">
       {children}
     </label>
   )

@@ -9,19 +9,45 @@ import { communityFaceUrl } from '@/lib/deepdose-marketing/community-faces'
 import { cn } from '@/lib/utils/cn'
 
 type CommunityMatchesPanelProps = {
-  /** marketing = dark glass connect page; app = member dashboard cards */
-  variant?: 'marketing' | 'app'
+  /** discovery = Sniffies-lean connect; marketing = glass tile; app = member cards */
+  variant?: 'marketing' | 'app' | 'discovery'
+  /** Soft gate: /chat when signed in, /login?next=/chat when guest */
+  messageHref?: string
 }
 
 function MatchCard({
   match,
   index,
   variant,
+  messageHref,
 }: {
   match: CommunityMatch
   index: number
-  variant: 'marketing' | 'app'
+  variant: 'marketing' | 'app' | 'discovery'
+  messageHref: string
 }) {
+  if (variant === 'discovery') {
+    return (
+      <article className="dd-connect__card">
+        <span
+          className="dd-connect__avatar"
+          style={{ backgroundImage: `url(${communityFaceUrl(match.face)})` }}
+          aria-hidden
+        />
+        <div className="dd-connect__card-main">
+          <p className="dd-connect__name">{match.name}</p>
+          <p className="dd-connect__meta">
+            {match.location} · {match.chemistryPct}% chemistry
+          </p>
+          <p className="dd-connect__journey">{match.journey}</p>
+        </div>
+        <Link href={messageHref} className="dd-connect__message">
+          Message
+        </Link>
+      </article>
+    )
+  }
+
   if (variant === 'marketing') {
     return (
       <article className="dios-glass-inner sw-connect__match">
@@ -42,7 +68,7 @@ function MatchCard({
           </span>
         </div>
         <p className="sw-connect__match-journey">{match.journey}</p>
-        <Link href="/login" className="sw-dash__text-link sw-connect__match-link">
+        <Link href={messageHref} className="sw-dash__text-link sw-connect__match-link">
           Message
         </Link>
       </article>
@@ -51,7 +77,7 @@ function MatchCard({
 
   return (
     <Link
-      href="/connect"
+      href={messageHref}
       className={cn('seco-hero-tabs__panel-card', 'seco-hero-tabs__panel-card--media')}
     >
       <span className="seco-hero-tabs__media seco-hero-tabs__peers" aria-hidden>
@@ -72,8 +98,27 @@ function MatchCard({
   )
 }
 
-export function CommunityMatchesPanel({ variant = 'app' }: CommunityMatchesPanelProps) {
+export function CommunityMatchesPanel({
+  variant = 'app',
+  messageHref = '/login?next=/chat',
+}: CommunityMatchesPanelProps) {
   const copy = MEMBER_DASHBOARD_COMMUNITY.matches
+
+  if (variant === 'discovery') {
+    return (
+      <section className="dd-connect__list" aria-label="Your matches">
+        {DEEPDOSE_COMMUNITY_MATCHES.map((match, index) => (
+          <MatchCard
+            key={match.id}
+            match={match}
+            index={index}
+            variant="discovery"
+            messageHref={messageHref}
+          />
+        ))}
+      </section>
+    )
+  }
 
   if (variant === 'marketing') {
     return (
@@ -83,7 +128,13 @@ export function CommunityMatchesPanel({ variant = 'app' }: CommunityMatchesPanel
         </p>
         <div className="sw-connect__match-grid">
           {DEEPDOSE_COMMUNITY_MATCHES.map((match, index) => (
-            <MatchCard key={match.id} match={match} index={index} variant="marketing" />
+            <MatchCard
+              key={match.id}
+              match={match}
+              index={index}
+              variant="marketing"
+              messageHref={messageHref}
+            />
           ))}
         </div>
       </article>
@@ -103,7 +154,13 @@ export function CommunityMatchesPanel({ variant = 'app' }: CommunityMatchesPanel
 
       <div className="seco-hero-tabs__panel-rail seco-hero-tabs__panel-rail--grid">
         {DEEPDOSE_COMMUNITY_MATCHES.map((match, index) => (
-          <MatchCard key={match.id} match={match} index={index} variant="app" />
+          <MatchCard
+            key={match.id}
+            match={match}
+            index={index}
+            variant="app"
+            messageHref={messageHref}
+          />
         ))}
       </div>
     </section>

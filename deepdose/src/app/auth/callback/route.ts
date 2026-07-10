@@ -5,7 +5,7 @@ import {
   tryActivationLinkForUser,
 } from '@/lib/care/resolve-activation-redirect'
 import { normalizeActivationCode } from '@/lib/care/pending-activation'
-import { resolvePostLoginPath } from '@/lib/auth/post-login-path'
+import { resolvePatientPostLoginPath, resolvePostLoginPath } from '@/lib/auth/post-login-path'
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = request.nextUrl
@@ -69,12 +69,19 @@ export async function GET(request: NextRequest) {
       linkResult = await tryActivationLinkForUser(user.id, normalizedActivation)
     }
 
-    redirectPath = resolvePathAfterActivationAttempt(
-      profile?.tier,
-      next,
-      normalizedActivation || null,
-      linkResult
-    )
+    if (normalizedActivation.length >= 6) {
+      redirectPath = resolvePathAfterActivationAttempt(
+        profile?.tier,
+        next,
+        normalizedActivation,
+        linkResult
+      )
+    } else if (profile?.tier === 'patient' || !profile?.tier) {
+      redirectPath = await resolvePatientPostLoginPath(supabase, user.id, next)
+    } else {
+      redirectPath = resolvePostLoginPath(profile?.tier, next)
+    }
+
     response = NextResponse.redirect(`${origin}${redirectPath}`)
   }
 

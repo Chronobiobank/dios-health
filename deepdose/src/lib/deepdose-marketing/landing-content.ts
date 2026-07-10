@@ -27,9 +27,10 @@ export const DEEPDOSE_HOME_SPLASH_HERO = {
   ...(DEEPDOSE_HOME_SPLASH.lede ? { support: DEEPDOSE_HOME_SPLASH.lede } : {}),
 } as const
 
+/** @deprecated Home uses on-page signup gate; kept for older imports. */
 export const DEEPDOSE_HOME_ACTIONS = {
-  mission: { label: 'Why Deepdose?', href: '/mission' },
-  create: { label: 'Create profile', href: '/login' },
+  mission: { label: 'About us', href: '/mission' },
+  create: { label: 'Enter', href: '/#enter' },
 } as const
 
 /** Default catalog codes for home med search (used when search is shown elsewhere). */
@@ -189,12 +190,12 @@ export const DEEPDOSE_LANDING_PLATFORM = {
         {
           title: 'Atorvastatin works best in the evening, nocturnal cholesterol synthesis is the target. Morning dosing misses the window.',
           meta: 'Statin timing · TIME substudy (Dundee)',
-          href: '/evidence',
+          href: '/science',
         },
         {
           title: 'Ramipril taken at bedtime reduces major cardiovascular events by up to 45% versus morning dosing.',
           meta: 'ACE inhibitor · Hygia Trial, 19,084 patients',
-          href: '/evidence',
+          href: '/science',
         },
         {
           title: 'Enter your combination and we show you the conflicts, no account needed.',
@@ -243,10 +244,10 @@ export const PATIENT_SLEEP_WAKE_DASH = {
   scoreTile: 'Your score',
   historyTile: 'History',
   sleepMattersTile: 'Sleep matters',
-  sleepLabel: 'Sleep',
-  wakeLabel: 'Wake',
-  sleepHint: 'lights out',
-  wakeHint: 'first light',
+  sleepLabel: 'Lights off',
+  wakeLabel: 'Lights on',
+  sleepHint: '',
+  wakeHint: '',
   riskTile: 'Disease risk',
   riskHint:
     'Lower SRI, higher disease risk. Your phone SRI is a proxy from population studies (including UK Biobank-style evidence). It is not a personal diagnosis.',

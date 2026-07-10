@@ -1,5 +1,16 @@
-﻿export type UserTier = 'patient' | 'clinician' | 'enterprise'
+﻿import type { SupabaseClient } from '@supabase/supabase-js'
 
+import {
+  onboardingPathForStep,
+  resolveOnboardingStep,
+} from '@/lib/onboarding/resolve'
+
+export type UserTier = 'patient' | 'clinician' | 'enterprise'
+
+/** Match-first home after onboarding (Sniffies-slick IA). */
+export const DEFAULT_PATIENT_HOME = '/connect'
+
+/** First-time interrupt when consent is missing — prefer async resolvePatientPostLoginPath. */
 export const DEFAULT_PATIENT_PATH = '/patient/onboarding/consent'
 
 function isSafeInternalPath(path: string | null | undefined): path is string {
@@ -11,11 +22,15 @@ export function isPatientDoseDashPath(next?: string | null): boolean {
   if (!next) return true
   return (
     next.startsWith('/patient/onboarding') ||
-    next.startsWith('/patient/dashboard')
+    next.startsWith('/patient/dashboard') ||
+    next.startsWith('/dosage') ||
+    next.startsWith('/profile') ||
+    next.startsWith('/connect') ||
+    next.startsWith('/chat')
   )
 }
 
-/** Where to send a user after auth, honouring an explicit `next` when present. */
+/** Sync redirect helper — honour `next`, else tier default (patients → /connect). */
 export function resolvePostLoginPath(
   tier: UserTier | string | null | undefined,
   next?: string | null
@@ -30,8 +45,24 @@ export function resolvePostLoginPath(
     case 'enterprise':
       return '/enterprise/dashboard'
     default:
-      return DEFAULT_PATIENT_PATH
+      return DEFAULT_PATIENT_HOME
   }
+}
+
+/**
+ * Patient post-auth destination: honour `next`, else onboarding step or /connect.
+ * Use from LoginForm / auth callback (has Supabase client).
+ */
+export async function resolvePatientPostLoginPath(
+  supabase: SupabaseClient,
+  userId: string,
+  next?: string | null
+): Promise<string> {
+  if (isSafeInternalPath(next)) {
+    return next
+  }
+  const step = await resolveOnboardingStep(supabase, userId)
+  return onboardingPathForStep(step)
 }
 
 /** Short context line · omit when the title is enough (patient sign-in). */

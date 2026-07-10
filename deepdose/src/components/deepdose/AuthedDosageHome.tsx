@@ -1,0 +1,147 @@
+import { createClient } from '@/lib/supabase/server'
+import { getPatientCircadianContext } from '@/lib/medications/patient-phase'
+import { loadDlmoProxy } from '@/lib/circadian/load-dlmo-proxy'
+import { loadPatientBti } from '@/lib/bti/load-patient-bti'
+import { fetchPendingRecommendations } from '@/lib/prescribing/recommendations'
+import { fetchPatientTipTraqNights } from '@/lib/clinical/tiptraq-nights'
+import { buildDoseDash, medClusterDetail } from '@/lib/patient/build-dose-dash'
+import type { TipTraqNightInput, TipTraqNightRecord } from '@/lib/clinical/tiptraq/types'
+import { buildDashSetupRows } from '@/lib/patient/dash-setup-status'
+import { DashSetupTile } from '@/components/patient/DashSetupTile'
+import { PendingRecommendationsPanel } from '@/components/patient/PendingRecommendationsPanel'
+import { DosingReminderBanner } from '@/components/patient/DosingReminderBanner'
+import { DoseDashStack } from '@/components/patient/DoseDashStack'
+import { SixDoseStrip } from '@/components/patient/SixDoseStrip'
+
+function toNightInput(row: TipTraqNightRecord): TipTraqNightInput | null {
+  if (!row.sleep_onset || !row.sleep_offset) return null
+  return {
+    report_date: row.report_date,
+    night_index: row.night_index ?? undefined,
+    day_type: row.day_type === 'weekend' ? 'weekend' : 'weekday',
+    sleep_onset: row.sleep_onset.slice(0, 5),
+    sleep_offset: row.sleep_offset.slice(0, 5),
+    sleep_latency_minutes: row.sleep_latency_minutes ?? 0,
+    tst_minutes: row.tst_minutes ?? 0,
+    waso_minutes: row.waso_minutes ?? 0,
+    sleep_efficiency_pct: row.sleep_efficiency_pct ?? 0,
+    rem_duration_minutes: row.rem_duration_minutes ?? 0,
+    rem_pct_tst: Number(row.rem_pct_tst ?? 0),
+    first_rem_onset: row.first_rem_onset?.slice(0, 5) ?? null,
+    ahi: Number(row.ahi),
+    min_spo2: row.min_spo2,
+    mean_pr: row.mean_pr,
+    min_pr: row.min_pr,
+    sns_pct: row.sns_pct,
+    pns_pct: row.pns_pct,
+    hypoxic_burden: row.hypoxic_burden != null ? Number(row.hypoxic_burden) : null,
+    signal_quality_pct: row.signal_quality_pct,
+  }
+}
+
+/** Live dosage / protocol home for signed-in patients (matches live on /connect). */
+export async function AuthedDosageHome({ userId }: { userId: string }) {
+  const supabase = await createClient()
+  const context = await getPatientCircadianContext(supabase, userId)
+
+  const { data: deviceProfile } = await supabase
+    .from('patient_profiles')
+    .select('device_alert_triggered, reminders_enabled')
+    .eq('id', userId)
+    .maybeSingle()
+
+  const { data: meds } = await supabase
+    .from('patient_medications')
+    .select('medication_code')
+    .eq('patient_id', userId)
+    .eq('is_active', true)
+
+  const { data: chronotype } = await supabase
+    .from('chronotype_profiles')
+    .select('msf_sc')
+    .eq('patient_id', userId)
+    .order('completed_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+
+  const { data: connections } = await supabase
+    .from('wearable_connections')
+    .select('provider, last_sync_at')
+    .eq('patient_id', userId)
+
+  const { data: assessment } = await supabase
+    .from('tiptraq_assessments')
+    .select('metabolic_alert_triggered')
+    .eq('patient_id', userId)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+
+  const today = new Date().toISOString().slice(0, 10)
+  const { data: todayAcks } = await supabase
+    .from('medication_reminder_acks')
+    .select('medication_code')
+    .eq('patient_id', userId)
+    .eq('ack_date', today)
+
+  const btiPayloads = await loadPatientBti(supabase, userId)
+  const dlmoProxy = await loadDlmoProxy(supabase, userId)
+  const pendingRecommendations = await fetchPendingRecommendations(supabase, userId)
+  const tiptraqRecords = await fetchPatientTipTraqNights(supabase, userId)
+  const tiptraqNights = tiptraqRecords
+    .map((r) => toNightInput(r))
+    .filter((n): n is TipTraqNightInput => n != null)
+
+  const hasOnboarding = Boolean(chronotype)
+  const hasMeds = (meds?.length ?? 0) > 0
+  const showDoseDash = hasMeds || hasOnboarding
+
+  const setupRows = buildDashSetupRows({
+    medCount: meds?.length ?? 0,
+    hasRhythm: hasOnboarding,
+    deviceAlertTriggered: deviceProfile?.device_alert_triggered ?? false,
+    connections: connections ?? [],
+  })
+
+  const doseDash = showDoseDash
+    ? buildDoseDash({
+        dlmoEstimateHours: context.dlmoEstimateHours,
+        circadianScore: context.circadianScore,
+        sjlHours: context.sjlHours,
+        metabolicAlertTriggered: assessment?.metabolic_alert_triggered ?? false,
+        btiPayloads,
+        tiptraqNights,
+        hasMeds,
+        msfScHours: chronotype?.msf_sc != null ? Number(chronotype.msf_sc) : null,
+        dlmoProxy,
+      })
+    : null
+
+  return (
+    <div className="dash-meds space-y-8">
+      <header className="seco-landing__copy-stack dash-meds__page-head">
+        <p className="seco-page__eyebrow">Dosage</p>
+        <h1 className="seco-page__title dash-meds__page-title">Your protocol</h1>
+      </header>
+
+      <DashSetupTile rows={setupRows} />
+
+      {hasMeds && (
+        <DosingReminderBanner
+          payloads={btiPayloads}
+          remindersEnabled={deviceProfile?.reminders_enabled ?? true}
+          todayAcks={(todayAcks ?? []).map((a) => a.medication_code)}
+        />
+      )}
+
+      <PendingRecommendationsPanel recommendations={pendingRecommendations} />
+
+      {doseDash ? (
+        <>
+          <SixDoseStrip phaseAnchorHours={context.dlmoEstimateHours} variant="app" />
+          <DoseDashStack model={doseDash} medDetail={medClusterDetail(btiPayloads)} />
+        </>
+      ) : null}
+    </div>
+  )
+}

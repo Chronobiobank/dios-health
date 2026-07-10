@@ -26,7 +26,7 @@ export default async function ClinicalDashboardPage() {
     .single()
 
   if (!profile || !['clinician', 'enterprise'].includes(profile.tier)) {
-    redirect('/patient/dashboard')
+    redirect('/connect')
   }
 
   const rows = await fetchClinicianTriageRows(supabase, user.id)

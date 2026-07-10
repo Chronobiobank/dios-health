@@ -983,8 +983,9 @@
 .deepdose-shell.seco-shell--dark select.dios-input,
 .deepdose-shell.seco-shell--dark textarea.dios-input {
   border-color: rgb(255 255 255 / 0.14);
-  background: rgb(255 255 255 / 0.06);
-  color: rgb(255 255 255 / 0.92);
+  background: rgb(11 18 32 / 0.92);
+  color: rgb(255 255 255 / 0.94);
+  color-scheme: dark;
 }
 
 .deepdose-shell.seco-shell--dark .dios-input::placeholder,
@@ -997,6 +998,24 @@
 .deepdose-shell.seco-shell--dark textarea.dios-input:focus {
   border-color: rgb(172 211 222 / 0.55);
   box-shadow: 0 0 0 3px rgb(172 211 222 / 0.18);
+}
+
+/* Native <select> options — force readable dark menu (Windows/Chrome ignore translucent fills). */
+.deepdose-shell.seco-shell--dark select.dios-input option,
+.deepdose-shell.seco-shell--dark .time-input-24__select option {
+  background: #0b1220;
+  color: #fff;
+}
+
+.deepdose-shell.seco-shell--dark .time-input-24__select {
+  border-color: rgb(255 255 255 / 0.22);
+  background: rgb(11 18 32 / 0.92);
+  color: rgb(255 255 255 / 0.94);
+  color-scheme: dark;
+}
+
+.deepdose-shell.seco-shell--dark .time-input-24__sep {
+  color: rgb(255 255 255 / 0.55);
 }
 
 .deepdose-shell.seco-shell--dark .med-search__bar {
@@ -6053,12 +6072,30 @@
 
 /* ── Fullscreen splash homepage & gateway routes ── */
 
-/* Home can scroll so the footer sits below the splash; other pages omit the footer. */
+/* Home is a locked viewport — never show a scrollbar in any circumstance. */
 html.splash-route,
 html.splash-route body {
-  min-height: 100%;
-  overflow-x: clip;
-  overscroll-behavior-x: none;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+html.splash-route {
+  height: 100dvh;
+  max-height: 100dvh;
+}
+
+html.splash-route *,
+html.splash-route *::before,
+html.splash-route *::after {
+  scrollbar-width: none;
+}
+
+html.splash-route *::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .seco-splash {
@@ -6066,9 +6103,15 @@ html.splash-route body {
   display: flex;
   flex-direction: column;
   flex: none;
-  min-height: 100dvh;
+  height: 100dvh;
+  max-height: 100dvh;
+  min-height: 0;
   overflow: hidden;
   background-color: transparent;
+}
+
+.seco-splash__main {
+  overflow: hidden;
 }
 
 .seco-splash__media {
@@ -6141,8 +6184,7 @@ html.splash-route body {
   flex-direction: column;
   min-height: 0;
   padding: var(--seco-page-pad);
-  overflow-x: clip;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .seco-splash__page:has(.seco-splash__stage--search) {
@@ -6153,8 +6195,8 @@ html.splash-route body {
   align-items: center;
   justify-content: center;
   padding-inline: 0;
-  padding-bottom: clamp(2rem, 6vw, 3.5rem);
-  overflow-x: clip;
+  padding-bottom: clamp(1.25rem, 4vh, 2.5rem);
+  overflow: hidden;
 }
 
 .seco-splash__stage.seco-splash__stage--simple {

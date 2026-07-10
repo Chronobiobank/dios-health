@@ -19,11 +19,11 @@ export function DashboardRhythmPanel({ initialValues }: DashboardRhythmPanelProp
       submitLabel="Save & update dose dash"
       savingLabel="Updating dash…"
       onSaved={() => {
-        router.push('/patient/dashboard')
+        router.push('/dosage')
         router.refresh()
       }}
       secondaryAction={
-        <Button href="/patient/dashboard" variant="secondary" className="dash-meds__cancel">
+        <Button href="/dosage" variant="secondary" className="dash-meds__cancel">
           Back to dash
         </Button>
       }
