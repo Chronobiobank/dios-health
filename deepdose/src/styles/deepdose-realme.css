@@ -130,6 +130,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Soften catalog polish — closer to a phone share */
+  filter: saturate(0.92) contrast(0.96);
 }
 
 .dd-grid__blur {
@@ -336,7 +338,14 @@
 .dd-bank__gauge-label {
   margin: 0;
   font-size: var(--dd-type-md);
+  color: var(--dd-ink);
+}
+
+.dd-bank__gauge-hint {
+  margin: 0;
+  font-size: var(--dd-type-sm);
   color: var(--dd-ink-muted);
+  text-align: center;
 }
 
 .dd-bank__section-title {

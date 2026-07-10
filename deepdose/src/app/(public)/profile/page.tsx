@@ -8,7 +8,7 @@ import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
   title: `${DEEPDOSE_NAME} · Me`,
-  description: 'Your doses, SRI, and doser profile.',
+  description: 'Your doses, sleep score, and doser profile.',
   alternates: { canonical: '/profile' },
 }
 

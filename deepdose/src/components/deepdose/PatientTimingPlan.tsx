@@ -306,7 +306,7 @@ function SixDosePlanPreview({
         <div>
           <p className="seco-planpreview__day">Today · Six-dose protocol</p>
           <p className="seco-planpreview__phase">
-            Timed to raise your Sleep Regularity Index
+            Timed to raise your sleep score
           </p>
         </div>
         {liveDose ? (

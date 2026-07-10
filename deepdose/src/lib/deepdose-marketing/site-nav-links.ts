@@ -2,6 +2,7 @@
 
 /** Splash + marketing header (minimal). Product tabs live in APP_BOTTOM_NAV. */
 export const DEEPDOSE_SITE_LINKS = [
+  { label: 'How it works', href: '/how' },
   { label: 'Mission', href: '/mission' },
   { label: 'Science', href: '/science' },
   { label: 'Sign in', href: '/' },

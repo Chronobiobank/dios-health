@@ -128,7 +128,7 @@ export function RealPostComposer() {
       <div className="dd-real-post__metrics" role="group" aria-label="Today’s sleep">
         <div className="dd-real-post__metric">
           <p className="dd-real-post__metric-value tabular-nums">{riskAnalysis.sriProxy}</p>
-          <p className="dd-real-post__metric-label">SRI</p>
+          <p className="dd-real-post__metric-label">Sleep score</p>
         </div>
         <div className="dd-real-post__metric">
           <p className="dd-real-post__metric-value tabular-nums">{bodyClock.sleepOnsetLabel}</p>

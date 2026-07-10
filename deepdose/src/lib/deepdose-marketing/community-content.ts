@@ -61,7 +61,7 @@ export const DEEPDOSE_COMMUNITY_MATCHES: readonly CommunityMatch[] = [
     id: 'match-4',
     name: 'Sage L.',
     location: 'Manchester',
-    journey: 'Night-owl SRI · swaps evening fixes',
+    journey: 'Night-owl sleep score · swaps evening fixes',
     chemistryPct: 86,
     face: 'sage',
   },

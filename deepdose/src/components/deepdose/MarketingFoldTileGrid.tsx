@@ -9,7 +9,7 @@ export type MarketingFoldTileItem = {
   title: string
   teaser: string
   cue: string
-  icon: ReactNode
+  icon?: ReactNode
   href?: string
   external?: boolean
 }
@@ -22,15 +22,18 @@ type MarketingFoldTileGridProps = {
 function MarketingFoldTile({ tile }: { tile: MarketingFoldTileItem }) {
   const className = cn(
     'seco-science-fold seco-science-fold--grid-tile seco-science-fold--grid-static seco-app-card',
-    tile.href && 'seco-science-fold--linked'
+    tile.href && 'seco-science-fold--linked',
+    !tile.icon && 'seco-science-fold--no-icon'
   )
   const style = { '--cue': tile.cue } as CSSProperties
   const body = (
     <div className="seco-science-fold__summary">
       <div className="seco-science-fold__head seco-science-fold__head--mission">
-        <span className="seco-science-fold__icon" aria-hidden>
-          {tile.icon}
-        </span>
+        {tile.icon ? (
+          <span className="seco-science-fold__icon" aria-hidden>
+            {tile.icon}
+          </span>
+        ) : null}
         <span className="seco-science-fold__badge">{tile.badge}</span>
         <h3 className="seco-science-fold__title">{tile.title}</h3>
         <p className="seco-science-fold__teaser">{tile.teaser}</p>

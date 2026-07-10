@@ -8,7 +8,7 @@ import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
   title: `${DEEPDOSE_NAME} · For dosers.`,
-  description: `${DEEPDOSE_NAME}: for dosers — log Photonic, Metabolic, and Kinetic doses. Climb your SRI.`,
+  description: `${DEEPDOSE_NAME}: for dosers — log Light, Meds, and Move. Raise your sleep score.`,
 } as const
 
 export const DEEPDOSE_CVP = 'For dosers.' as const
@@ -88,19 +88,19 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'test',
       label: 'Log',
-      body: 'Photonic · Metabolic · Kinetic',
+      body: 'Light · Meds · Move',
       icon: 'test' as const,
       panelTitle: 'Your dose readout',
       panelSeeAll: { label: 'Open Chemistry', href: '/dosage' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Dosers log the night — light, meds, and movement — then climb SRI.',
+          title: 'Dosers log the night — light, meds, and movement — then raise their sleep score.',
           meta: 'Rhythm · Sleep regularity',
           href: '/grid',
         },
         {
-          title: 'Optional TipTraQ nights deepen the read when you want a stronger SRI.',
+          title: 'Optional TipTraQ nights deepen the read when you want a stronger sleep score.',
           meta: 'Deeper read · TipTraQ',
           href: '/testkit',
         },
@@ -121,7 +121,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'One dose at a time: photo plus SRI, stamped for Larks or Owls.',
+          title: 'One dose at a time: photo plus sleep score, stamped for Larks or Owls.',
           meta: 'You choose · Opt in',
           href: '/dose',
         },
@@ -230,14 +230,14 @@ export function patientPlanHeroSupport(medCount: number, verdict: string): strin
   return `${intro} ${verdict}`
 }
 
-/** Profile · Levels-style modular SRI tiles (protocols live on /dosage). */
+/** Profile · Levels-style modular sleep-score tiles (protocols live on /dosage). */
 export const PATIENT_SLEEP_WAKE_DASH = {
   title: 'Sleep matters.',
   diagnosticEyebrow: 'Your Risk Profile',
   subtitleBefore: 'We use AI and your phone data to calculate your ',
-  subtitleHighlight: 'Sleep Regularity Index (SRI)',
+  subtitleHighlight: 'sleep score',
   subtitleAfter:
-    '. It shows how regular your nights are, and which daily changes can raise your score and lower your risk of chronic disease and early death.',
+    '. It shows how locked your nights are, and which daily changes can raise your score and lower your risk of chronic disease and early death.',
   scienceLink: 'Read the science',
   scienceHref: '/science',
   dosageLink: 'See the dosage',
@@ -250,18 +250,18 @@ export const PATIENT_SLEEP_WAKE_DASH = {
   wakeHint: '',
   riskTile: 'Disease risk',
   riskHint:
-    'Lower SRI, higher disease risk. Your phone SRI is a proxy from population studies (including UK Biobank-style evidence). It is not a personal diagnosis.',
+    'Lower sleep score, higher disease risk. Your phone score is a proxy from population studies (including UK Biobank-style evidence). It is not a personal diagnosis.',
   dosageCta: 'Open dosage protocol',
   cta: 'Save my plan',
 } as const
 
-/** Six-dose protocol — expands from SRI diagnosis into what to do. */
+/** Six-dose protocol — expands from sleep-score read into what to do. */
 export const PATIENT_SIX_DOSE_PROTOCOL = {
   eyebrow: 'Your protocol',
-  title: 'Six doses to raise your SRI',
+  title: 'Six doses to raise your sleep score',
   support:
     'Sunlight, nutrient, biomedical, physiological, neurological, and blackout. Hold them and your nights line up.',
-  education: 'Lined-up nights raise SRI. Higher SRI, lower disease risk.',
+  education: 'Lined-up nights raise your sleep score. Higher score, lower disease risk.',
 } as const
 
 /** Consumer → GP handoff after public risk analysis. */
@@ -284,14 +284,14 @@ export const DEEPDOSE_PLAN_NEXT_STEPS = {
   entryCta: 'Save my plan →',
   continueCta: 'Continue →',
   backCta: 'Back',
-  steps: ['SRI', 'Six doses', `Join ${DEEPDOSE_NAME}`] as const,
+  steps: ['Sleep score', 'Six doses', `Join ${DEEPDOSE_NAME}`] as const,
   clock: {
     eyebrow: 'Step 1 of 3',
-    headline: 'Here’s your Sleep Regularity Index',
+    headline: 'Here’s your sleep score',
     support:
-      'SRI from your sleep pattern and when you take your medicines. Wearables refine past, current, and future nights.',
+      'Your sleep score from how locked your nights are and when you take your medicines. Wearables refine past, current, and future nights.',
     stats: {
-      sri: 'Sleep Regularity Index (SRI)',
+      sri: 'Sleep score',
       wake: 'Typical wake',
       sleep: 'Sleep target',
       chronotype: 'Rhythm hint',
@@ -302,8 +302,8 @@ export const DEEPDOSE_PLAN_NEXT_STEPS = {
     eyebrow: 'Step 2 of 3',
     headline: 'Here are your six doses',
     support:
-      'Sunlight, food, movement, focus, connection, and blackout. Hold them to raise SRI and give your meds a fairer chance.',
-    education: `${DEEPDOSE_NAME} times six daily cues to your rhythm. More regular nights, stronger doses.`,
+      'Sunlight, food, movement, focus, connection, and blackout. Hold them to raise your sleep score and give your meds a fairer chance.',
+    education: `${DEEPDOSE_NAME} times six daily cues to your rhythm. More locked nights, stronger doses.`,
   },
   join: {
     eyebrow: 'Step 3 of 3',
@@ -389,7 +389,7 @@ export const DEEPDOSE_PATIENT_PLAN_PROFILE = {
 
 /** Social /profile — identity + Chemistry tile (SRI). */
 export const SOCIAL_PROFILE = {
-  chemistryTitle: 'Sleep Regularity Index (SRI)',
+  chemistryTitle: 'Sleep score',
   sleepLabel: 'Lights off',
   wakeLabel: 'Lights on',
   share: 'Log dose',

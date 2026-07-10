@@ -7,20 +7,24 @@ alwaysApply: true
 
 Product routes (`/grid`, `/dose`, `/bank`, `/profile`, `/account`, `/dosage`, `/connect`, `/chat`):
 
-**North star:** dosers log Photonic / Metabolic / Kinetic doses, climb SRI, sync on the Grid.
+**North star:** dosers log Light / Meds / Move, raise sleep score, sync on the Grid.
 
 Consumer tribe = **Dosers**. Company / clinical layer = **Deepdose** (Chemistry, TipTraQ, Chronobiobank).
+
+Consumer score language = **sleep score** (“how locked your nights are”). Do not lead UI with SRI — keep SRI for engine / clinical only.
+
+Consumer dose tags = **#Light / #Meds / #Move** (engine ids stay PHOTONIC / METABOLIC / KINETIC).
 
 ## Bottom nav (4 tabs)
 
 | Tab | Route | Role |
 |---|---|---|
 | Grid | `/grid` | Chronotype feed (Larks / Owls) |
-| Log | `/dose` | #Photonic / #Metabolic / #Kinetic camera |
-| Bank | `/bank` | SRI gauge + PMK timeline + research opt-in |
+| Log | `/dose` | #Light / #Meds / #Move camera |
+| Bank | `/bank` | Sleep score gauge + PMK timeline + research opt-in |
 | Me | `/profile` | Identity, dose archive, wallet stubs |
 
-Chat / Friends / Chemistry are secondary (linked from Me / Bank).
+Chat / Friends / Chemistry are secondary (linked from Me / Bank). How it works: `/how`.
 
 ## Visual system
 
@@ -39,17 +43,19 @@ Defined in `deepdose-product-space.css`. Feature CSS (`deepdose-realme.css`) mus
 ## Copy
 
 - No waffle. Titles live in `AppTopBar` only.
-- Dose cards: SRI badge + Sync (not Likes). Premium: frosted blur + unlock stub.
-- Log Dose: photo only — **no captions** (except Metabolic → Chemistry).
+- Dose cards: sleep score badge (`Score 84`) + Sync (not Likes). Premium: frosted blur + unlock stub.
+- Log Dose: photo only — **no captions** (except #Meds → Chemistry).
+- Consumer score = **sleep score** / “how locked your nights are”. Never lead with SRI in product chrome.
+- Dose tags in UI: **#Light / #Meds / #Move** — never Photonic / Metabolic / Kinetic in chrome.
 
-## SRI
+## Sleep score (engine: SRI)
 
 - Use `@/lib/circadian/sri-engine` (`computeScheduleSri` / matrix rolling). Functional from day 1.
-- Do not invent a second SRI formula in UI components.
+- UI labels from `@/lib/brand/sleep-score`. Do not invent a second formula in UI components.
 
-## Metabolic = medical
+## Meds = medical
 
-- `#Metabolic` on Log Dose opens **Chemistry** (`/dosage?from=metabolic`) — meds & timing.
+- `#Meds` on Log Dose opens **Chemistry** (`/dosage?from=metabolic`) — meds & timing.
 - Optional “Stamp photo for Grid” stays on Log Dose; Chemistry shows a bridge CTA back to stamp.
 - TipTraQ testkit (`/testkit`) is linked from Bank Clinical and Me.
 

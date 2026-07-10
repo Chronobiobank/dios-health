@@ -13,7 +13,7 @@ export const SCIENCE_TRUST_INTRO = {
   titleWhite: 'Sleep you can',
   titleAccent: 'measure.',
   lede:
-    'We help you read your night so you can stamp an honest SRI. Here is what we measure, what we will not claim, and the published science behind timing.',
+    'We help you read your night so you can stamp an honest sleep score. Here is what we measure, what we will not claim, and the published science behind timing.',
 } as const
 
 export const SCIENCE_TRUST_FEATURES = [
@@ -29,7 +29,7 @@ export const SCIENCE_TRUST_FEATURES = [
     id: 'measure',
     badge: 'Measure',
     title: 'How we read your night',
-    teaser: 'Phone first. Home sleep check when you want a deeper SRI.',
+    teaser: 'Phone first. Home sleep check when you want a deeper sleep score.',
     cue: '#acd3de',
     href: '/technology',
   },

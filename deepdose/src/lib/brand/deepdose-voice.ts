@@ -18,11 +18,11 @@ export const DEEPDOSE_VOICE = {
   homeHeadlineAccent: 'dosers.',
   homeLede: '',
   missionHeadlineWhite: 'Log the dose.',
-  missionHeadlineAccent: 'Climb the SRI.',
-  missionLede: `${DEEPDOSE_NAME} is where dosers log Photonic, Metabolic, and Kinetic doses — and share them on the Grid.`,
-  patientSubtitle: 'Log a dose. Sync the Grid. Climb your SRI.',
+  missionHeadlineAccent: 'Raise your sleep score.',
+  missionLede: `${DEEPDOSE_NAME} is where dosers log Light, Meds, and Move — and share them on the Grid.`,
+  patientSubtitle: 'Log a dose. Sync the Grid. Raise your sleep score.',
   communitySupport: 'Dosers on your clock who see today’s doses.',
   closeSupport: 'Dosers log together. One dose at a time.',
   /** Footer under logo */
-  footerMission: 'For dosers — log the dose, climb the SRI.',
+  footerMission: 'For dosers — log the dose, raise your sleep score.',
 } as const

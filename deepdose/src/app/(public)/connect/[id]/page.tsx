@@ -55,7 +55,7 @@ export default async function ConnectMatchProfilePage({ params }: PageProps) {
           <p className="dd-connect-profile__location">{match.location}</p>
           <p className="dd-connect-profile__pct">
             <span className="dd-connect__pct-value tabular-nums">{match.chemistryPct}</span>
-            <span className="dd-connect__pct-label"> SRI</span>
+            <span className="dd-connect__pct-label"> sleep score</span>
           </p>
           <p className="dd-connect-profile__journey">{match.journey}</p>
           <Link href={messageHref} className="dd-connect__message dd-connect-profile__message">

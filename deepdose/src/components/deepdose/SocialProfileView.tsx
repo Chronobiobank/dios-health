@@ -146,7 +146,7 @@ export function SocialProfileView({
           <div className="dd-profile__stats" role="group" aria-label="Profile metrics">
             <div className="dd-profile__stat">
               <p className="dd-profile__stat-value tabular-nums">{sri}</p>
-              <p className="dd-profile__stat-label">SRI</p>
+              <p className="dd-profile__stat-label">Sleep score</p>
             </div>
             <div className="dd-profile__stat">
               <p className="dd-profile__stat-value tabular-nums">

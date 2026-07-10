@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 import Link from 'next/link'
 
 import SriScoreRing from '@/components/shared/SriScoreRing'
+import { SLEEP_SCORE } from '@/lib/brand/sleep-score'
 import { computeScheduleSri } from '@/lib/circadian/sri-engine'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
 import { DOSE_TAG_META, type DoseTag } from '@/lib/patient/dose-uploads'
@@ -37,7 +38,8 @@ export function BankDashboardView() {
     <div className="dd-bank">
       <div className="dd-bank__gauge">
         <SriScoreRing score={sriResult.score} />
-        <p className="dd-bank__gauge-label">Sleep Regularity Index</p>
+        <p className="dd-bank__gauge-label">{SLEEP_SCORE.label}</p>
+        <p className="dd-bank__gauge-hint">{SLEEP_SCORE.hint}</p>
       </div>
 
       <section className="dd-bank__pillars" aria-label="Today’s PMK">
@@ -92,7 +94,7 @@ export function BankDashboardView() {
       <section className="dd-bank__clinical" aria-label="Clinical tools">
         <h2 className="dd-bank__section-title">Clinical</h2>
         <Link href="/dosage?from=metabolic" className="dd-bank__clinical-link">
-          <span className="dd-bank__clinical-title">#Metabolic · Chemistry</span>
+          <span className="dd-bank__clinical-title">#Meds · Chemistry</span>
           <span className="dd-bank__clinical-meta">Meds & dosing windows</span>
         </Link>
         <Link href="/testkit" className="dd-bank__clinical-link">

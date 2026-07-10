@@ -6,6 +6,7 @@ import {
   buildMockGridDoses,
   mockDoseAvatar,
 } from '@/lib/deepdose-marketing/grid-feed-mocks'
+import { sleepScoreBadge } from '@/lib/brand/sleep-score'
 import { DOSE_TAG_META, type Chronotype, type DoseUpload } from '@/lib/patient/dose-uploads'
 import { usePatientDoses } from '@/lib/patient/use-patient-doses'
 import { planProfileDisplayName, readPlanProfile } from '@/lib/patient/plan-profile'
@@ -49,8 +50,8 @@ function DoseCard({
             {formatTime(dose.timestamp)}
           </p>
         </div>
-        <span className="dd-grid__sri tabular-nums" title="Sleep Regularity Index">
-          SRI {dose.sri}
+        <span className="dd-grid__sri tabular-nums" title="Sleep score — how locked your nights are">
+          {sleepScoreBadge(dose.sri)}
         </span>
       </header>
 

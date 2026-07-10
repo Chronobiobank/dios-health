@@ -14,7 +14,7 @@ export const DOSAGE_PAGE = {
 
 export const SHARE_PAGE_META = {
   title: `Log · ${DEEPDOSE_NAME}`,
-  description: 'Log a Photonic, Metabolic, or Kinetic dose — photo plus SRI.',
+  description: 'Log Light, Meds, or Move — photo plus sleep score.',
 } as const
 
 export const SHARE_PAGE = {
@@ -24,7 +24,7 @@ export const SHARE_PAGE = {
   support: 'Log a dose. Dosers on your clock see the night you actually lived.',
   pointsEyebrow: 'How doses work',
   points: [
-    'Photonic, Metabolic, or Kinetic — photo plus SRI',
+    'Light, Meds, or Move — photo plus sleep score',
     'Dosers see today’s beat',
     'You stay in control of what you stamp',
   ],

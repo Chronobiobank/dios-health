@@ -49,7 +49,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#c9b6f2',
     figure: '$149',
     cadence: 'Three nights at home',
-    note: 'TipTraQ nights for a stronger SRI to stamp.',
+    note: 'TipTraQ nights for a stronger sleep score to stamp.',
     cta: { label: 'Order Testkit', href: '/testkit' },
     includes: [
       'Reusable sensor for 3 nights',

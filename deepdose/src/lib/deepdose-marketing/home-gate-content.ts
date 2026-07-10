@@ -7,7 +7,7 @@ export const DEEPDOSE_HOME_GATE = {
   reportLabel: 'Report',
   agreeLine: 'You must be 18+ y/o to enter and agree to our',
   links: {
-    about: { label: 'About', href: '/mission' },
+    about: { label: 'How it works', href: '/how' },
     terms: { label: 'Terms', href: '/terms' },
     report: { label: 'Report', href: '/report' },
   },
@@ -27,7 +27,7 @@ export const SAFETY_PAGE = {
     },
     {
       heading: 'Health boundary',
-      body: `${DEEPDOSE_NAME} helps dosers log doses and climb SRI with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
+      body: `${DEEPDOSE_NAME} helps dosers log doses and raise their sleep score with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
     },
     {
       heading: 'Reporting',

@@ -38,7 +38,7 @@ function RealCard({ post }: { post: RealPost }) {
         <div className="dd-real__stats" aria-label="Sleep metrics">
           <span className="dd-real__stat">
             <span className="dd-real__stat-value tabular-nums">{post.sri}</span>
-            <span className="dd-real__stat-label">SRI</span>
+            <span className="dd-real__stat-label">Sleep score</span>
           </span>
           <span className="dd-real__stat">
             <span className="dd-real__stat-value tabular-nums">{post.sleepOff}</span>

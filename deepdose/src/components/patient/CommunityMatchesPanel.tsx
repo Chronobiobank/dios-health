@@ -68,7 +68,7 @@ function MatchCard({
           <div className="sw-connect__match-id">
             <p className="sw-connect__match-name">{match.name}</p>
             <p className="sw-connect__match-meta">
-              {match.location} · {match.chemistryPct} SRI
+              {match.location} · Score {match.chemistryPct}
             </p>
           </div>
           <span className="sw-connect__match-rank" aria-hidden>
@@ -93,7 +93,7 @@ function MatchCard({
           className="seco-hero-tabs__avatar"
           style={{ backgroundImage: `url(${communityFaceUrl(match.face)})` }}
         />
-        <span className="seco-hero-tabs__peers-count">{match.chemistryPct} SRI</span>
+        <span className="seco-hero-tabs__peers-count">Score {match.chemistryPct}</span>
       </span>
       <p className="seco-hero-tabs__panel-card-title">{match.name}</p>
       <p className="seco-hero-tabs__panel-card-meta">

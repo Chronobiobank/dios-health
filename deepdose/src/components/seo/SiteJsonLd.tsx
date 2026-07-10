@@ -12,7 +12,7 @@ export function SiteJsonLd() {
         name: DEEPDOSE_NAME,
         url: BASE,
         slogan: DEEPDOSE_TAGLINE,
-        description: 'For dosers — log the dose, climb the SRI.',
+        description: 'For dosers — log the dose, raise your sleep score.',
       },
       {
         '@type': 'WebSite',

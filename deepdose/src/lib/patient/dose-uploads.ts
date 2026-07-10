@@ -1,4 +1,4 @@
-/** Local PMK dose uploads — Photonic / Metabolic / Kinetic. */
+/** Local PMK dose uploads — Light / Meds / Move (engine ids stay PHOTONIC / METABOLIC / KINETIC). */
 
 export type DoseTag = 'PHOTONIC' | 'METABOLIC' | 'KINETIC'
 
@@ -27,13 +27,29 @@ export const DOSE_UPLOADS_STORAGE_KEY = 'deepdose-dose-uploads'
 export const BANK_OPT_IN_KEY = 'deepdose-bank-opt-in'
 export const DOSE_SYNCS_KEY = 'deepdose-dose-syncs'
 
+/** Consumer labels — plain language. Engine keys stay PHOTONIC / METABOLIC / KINETIC. */
 export const DOSE_TAG_META: Record<
   DoseTag,
-  { label: string; hash: string; cue: string }
+  { label: string; hash: string; cue: string; hint: string }
 > = {
-  PHOTONIC: { label: 'Photonic', hash: '#Photonic', cue: 'var(--dd-cue-photonic)' },
-  METABOLIC: { label: 'Metabolic', hash: '#Metabolic', cue: 'var(--dd-cue-metabolic)' },
-  KINETIC: { label: 'Kinetic', hash: '#Kinetic', cue: 'var(--dd-cue-kinetic)' },
+  PHOTONIC: {
+    label: 'Light',
+    hash: '#Light',
+    cue: 'var(--dd-cue-photonic)',
+    hint: 'Daylight, screens, blackout',
+  },
+  METABOLIC: {
+    label: 'Meds',
+    hash: '#Meds',
+    cue: 'var(--dd-cue-metabolic)',
+    hint: 'Meds & timing',
+  },
+  KINETIC: {
+    label: 'Move',
+    hash: '#Move',
+    cue: 'var(--dd-cue-kinetic)',
+    hint: 'Walk, train, get outside',
+  },
 }
 
 export function todayDoseDate(now = new Date()): string {

@@ -1,4 +1,4 @@
-/** Seeded Grid doses for Larks / Owls — local SVG scenes (no CDN). */
+/** Seeded Grid doses for Larks / Owls — candid Unsplash stills (not studio stock). */
 
 import { DEEPDOSE_COMMUNITY_MATCHES } from '@/lib/deepdose-marketing/community-content'
 import { communityFaceUrl } from '@/lib/deepdose-marketing/community-faces'
@@ -11,28 +11,39 @@ import {
 
 const TAGS: DoseTag[] = ['PHOTONIC', 'METABOLIC', 'KINETIC']
 
-const SCENE_COLORS: Record<DoseTag, { a: string; b: string }> = {
-  PHOTONIC: { a: '#2a2410', b: '#f5e74a' },
-  METABOLIC: { a: '#0f1c22', b: '#acd3de' },
-  KINETIC: { a: '#241014', b: '#ff5a5a' },
+/**
+ * Phone-snapshot energy: lived-in rooms, cafés, trail / POV movement.
+ * Avoid plated food, hotel beds, and gym-studio lighting.
+ */
+const SCENE_PHOTOS: Record<DoseTag, readonly string[]> = {
+  PHOTONIC: [
+    '1541781774459-bb2af2f05b55', // rumpled bed · sleeping cat
+    '1529156069898-49953e39b3ac', // friends on a ledge · daylight
+    '1522708323590-d24dbb6b0267', // apartment · window light
+    '1514565131-fce0801e5785', // city dusk · owl nights
+  ],
+  METABOLIC: [
+    '1486312338219-ce68d2c6f44d', // laptop hands · late focus
+    '1554118811-1e0d58224f24', // café floor · lived-in
+    '1453614512568-c4024d13c247', // café counter · working
+    '1522071820081-009f0129c71c', // people around a table
+  ],
+  KINETIC: [
+    '1476480862126-209bfaa8edc8', // stairs · shoe POV
+    '1551632811-561732d1e306', // trail hike · from behind
+    '1541625602330-2277a4c46182', // coastal ride
+    '1429962714451-bb934ecdc4ec', // crowd · night out
+  ],
 }
 
-/** Reliable in-browser media — no Unsplash dependency. */
-export function doseSceneDataUrl(tag: DoseTag, label: string): string {
-  const { a, b } = SCENE_COLORS[tag]
-  const safe = label.replace(/[^\w\s#.-]/g, '').slice(0, 24)
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="${a}"/>
-      <stop offset="100%" stop-color="${b}" stop-opacity="0.55"/>
-    </linearGradient>
-  </defs>
-  <rect width="720" height="720" fill="url(#g)"/>
-  <circle cx="360" cy="300" r="88" fill="${b}" fill-opacity="0.22"/>
-  <text x="360" y="520" text-anchor="middle" font-family="system-ui,sans-serif" font-size="36" fill="#ffffff" fill-opacity="0.88">${safe}</text>
-</svg>`
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+function sceneUrl(photoId: string, size = 720): string {
+  // Slightly softer encode reads more like a phone share than a catalog still.
+  return `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=${size}&h=${size}&q=72`
+}
+
+export function doseSceneUrl(tag: DoseTag, index: number): string {
+  const pool = SCENE_PHOTOS[tag]
+  return sceneUrl(pool[index % pool.length]!)
 }
 
 export function buildMockGridDoses(now = new Date()): DoseUpload[] {
@@ -46,7 +57,7 @@ export function buildMockGridDoses(now = new Date()): DoseUpload[] {
     return {
       id: `mock-dose-${match.id}-${date}`,
       tag,
-      mediaUrl: doseSceneDataUrl(tag, match.name),
+      mediaUrl: doseSceneUrl(tag, index),
       date,
       timestamp: posted.toISOString(),
       displayName: match.name,

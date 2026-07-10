@@ -110,7 +110,7 @@ export function LogDoseView() {
   return (
     <div className="dd-log">
       <p className="dd-log__hint">
-        Photonic & Kinetic: photo only. Metabolic opens Chemistry (meds & timing).
+        Light & Move: photo only. Meds opens Chemistry (timing).
       </p>
 
       <div className="dd-log__buttons">
@@ -128,9 +128,7 @@ export function LogDoseView() {
               >
                 <span className="dd-log__btn-main">
                   <span className="dd-log__btn-hash">{meta.hash}</span>
-                  {isMetabolic ? (
-                    <span className="dd-log__btn-sub">Meds & timing</span>
-                  ) : null}
+                  <span className="dd-log__btn-sub">{meta.hint}</span>
                 </span>
                 {done ? (
                   <span className="dd-log__btn-done">Logged</span>
@@ -166,7 +164,7 @@ export function LogDoseView() {
       {error ? <p className="dd-log__error">{error}</p> : null}
 
       <p className="dd-log__stamp tabular-nums">
-        Stamps SRI {sri} · Off {bodyClock.sleepOnsetLabel} · On {bodyClock.wakeLabel}
+        Stamps sleep score {sri} · Off {bodyClock.sleepOnsetLabel} · On {bodyClock.wakeLabel}
       </p>
     </div>
   )
