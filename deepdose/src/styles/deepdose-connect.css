@@ -1,45 +1,87 @@
-/* Sniffies-lean Connect discovery — full-bleed list, one-tap Message. */
+/* Connect discovery — face-forward chemistry matches (Sniffies-lean, not a stub list). */
 
 .dd-connect {
-  --dd-connect-bg: #0c0c0c;
-  --dd-connect-line: rgba(255, 255, 255, 0.08);
   --dd-connect-text: #f2f2f2;
-  --dd-connect-muted: rgba(242, 242, 242, 0.55);
-  --dd-connect-accent: #2a9d8f;
+  --dd-connect-muted: rgb(242 242 242 / 0.58);
+  --dd-connect-faint: rgb(242 242 242 / 0.4);
+  --dd-connect-line: rgb(255 255 255 / 0.1);
 
-  max-width: 32rem;
+  box-sizing: border-box;
+  width: min(100%, 36rem);
   margin-inline: auto;
-  padding: 0.75rem 0.85rem calc(1rem + env(safe-area-inset-bottom, 0px));
+  padding: 1rem clamp(1rem, 4vw, 1.5rem) calc(5.5rem + env(safe-area-inset-bottom, 0px));
   color: var(--dd-connect-text);
-  background: var(--dd-connect-bg);
   min-height: calc(100dvh - 5.5rem);
 }
 
 .dd-connect__head {
-  padding: 0.5rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid var(--dd-connect-line);
-  margin-bottom: 0.35rem;
+}
+
+.dd-connect__eyebrow {
+  margin: 0;
+  font-family: var(--seco-font-data, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dd-connect-faint);
 }
 
 .dd-connect__title {
   margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.65rem, 1.1rem + 2vw, 2.35rem);
+  font-weight: 300;
+  letter-spacing: var(--seco-display-tracking-hero, -0.02em);
+  line-height: 1.1;
+  color: #fff;
+}
+
+.dd-connect__title-line {
+  white-space: nowrap;
+}
+
+.dd-connect__title-line--white {
+  color: #fff;
+}
+
+.dd-connect__title-line--spectrum {
+  background: var(--seco-spectrum-hero);
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: seco-cta-flow 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dd-connect__title-line--spectrum {
+    animation: none;
+    background-position: 50% 50%;
+  }
 }
 
 .dd-connect__support {
-  margin: 0.4rem 0 0;
-  font-size: 0.875rem;
-  color: var(--dd-connect-muted);
+  margin: 0.35rem 0 0;
+  max-width: 28ch;
+  font-size: 0.9375rem;
   line-height: 1.4;
+  color: var(--dd-connect-muted);
 }
 
 .dd-connect__hint {
   margin: 0.55rem 0 0;
   font-size: 0.8125rem;
-  color: var(--dd-connect-muted);
+  color: var(--dd-connect-faint);
 }
 
 .dd-connect__inbox-link {
@@ -47,72 +89,139 @@
   margin-top: 0.65rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--dd-connect-accent);
-  text-decoration: none;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .dd-connect__inbox-link:hover {
-  text-decoration: underline;
+  color: var(--seco-spectrum-cyan, #acd3de);
 }
 
-.dd-connect__list {
+.dd-connect__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .dd-connect__grid {
+    gap: 1.1rem 1rem;
+  }
+}
+
+.dd-connect__tile {
   display: flex;
   flex-direction: column;
+  gap: 0.65rem;
+  min-width: 0;
 }
 
-.dd-connect__card {
-  display: grid;
-  grid-template-columns: 3rem 1fr auto;
-  gap: 0.75rem;
-  align-items: center;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--dd-connect-line);
-}
-
-.dd-connect__avatar {
-  width: 3rem;
-  height: 3rem;
+.dd-connect__tile-face {
+  display: block;
+  aspect-ratio: 1 / 1;
+  width: 100%;
   border-radius: 50%;
+  background-color: rgb(255 255 255 / 0.06);
   background-size: cover;
   background-position: center;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--dd-connect-line);
+  border: 1px solid rgb(255 255 255 / 0.28);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.04),
+    0 0.35rem 1.25rem rgb(0 0 0 / 0.35);
 }
 
-.dd-connect__card-main {
+.dd-connect__tile-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
   min-width: 0;
+  padding-inline: 0.15rem;
+}
+
+.dd-connect__tile-id {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 0.5rem;
 }
 
 .dd-connect__name {
   margin: 0;
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.dd-connect__pct {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--dd-connect-muted);
+}
+
+.dd-connect__pct-value {
+  background: var(--seco-spectrum-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 700;
+}
+
+.dd-connect__pct-label {
+  color: var(--dd-connect-muted);
+  -webkit-text-fill-color: var(--dd-connect-muted);
 }
 
 .dd-connect__meta {
-  margin: 0.15rem 0 0;
+  margin: 0;
   font-size: 0.75rem;
-  color: var(--dd-connect-muted);
+  color: var(--dd-connect-faint);
 }
 
 .dd-connect__journey {
-  margin: 0.25rem 0 0;
-  font-size: 0.8125rem;
-  color: var(--dd-connect-muted);
+  margin: 0.15rem 0 0.35rem;
+  font-size: 0.75rem;
   line-height: 1.35;
+  color: var(--dd-connect-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .dd-connect__message {
-  flex-shrink: 0;
-  padding: 0.45rem 0.75rem;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  min-height: 2.25rem;
+  margin-top: 0.15rem;
+  padding: 0.45rem 0.85rem;
+  border: 0;
   border-radius: 999px;
-  background: var(--dd-connect-accent);
-  color: #041412;
+  background: var(--seco-spectrum-hero);
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  color: var(--seco-navy, #0b1220);
   font-size: 0.8125rem;
   font-weight: 700;
+  letter-spacing: 0.01em;
   text-decoration: none;
+  animation: seco-cta-flow 7s ease-in-out infinite;
 }
 
 .dd-connect__message:hover {
-  filter: brightness(1.06);
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dd-connect__message {
+    animation: none;
+  }
 }

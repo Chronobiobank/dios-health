@@ -24,19 +24,19 @@ export default async function ChatInboxPage() {
     redirect('/login?next=/chat')
   }
 
-  await ensureGuideConversation(supabase)
+  const guide = await ensureGuideConversation(supabase)
   const { items, error } = await listInbox(supabase, user.id)
+  const alert = guide.error ?? error
 
   return (
     <div className="dd-chat-shell">
-      <div className="seco-landing__section-inner">
-        {error ? (
+      <div className="dd-chat-shell__inner">
+        {alert ? (
           <p className="dd-chat__error" role="alert">
-            {error}
+            {alert}
           </p>
-        ) : (
-          <ChatInbox items={items} />
-        )}
+        ) : null}
+        <ChatInbox items={items} />
       </div>
     </div>
   )

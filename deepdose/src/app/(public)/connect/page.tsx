@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/connect' },
 }
 
-/** Sniffies-slick discovery: matches first, Message soft-gates login. */
+/** Sniffies-slick discovery: face-forward matches, Message soft-gates login. */
 export default async function ConnectPage() {
   const copy = CONNECT_PAGE
   const supabase = await createClient()
@@ -24,7 +24,15 @@ export default async function ConnectPage() {
   return (
     <div className="dd-connect">
       <header className="dd-connect__head">
-        <h1 className="dd-connect__title">{copy.titleBefore} {copy.titleHighlight}</h1>
+        <p className="dd-connect__eyebrow">{copy.eyebrow}</p>
+        <h1 className="dd-connect__title">
+          <span className="dd-connect__title-line dd-connect__title-line--white">
+            {copy.titleBefore}
+          </span>{' '}
+          <span className="dd-connect__title-line dd-connect__title-line--spectrum">
+            {copy.titleHighlight}
+          </span>
+        </h1>
         <p className="dd-connect__support">{copy.support}</p>
         {user ? (
           <Link href="/chat" className="dd-connect__inbox-link">

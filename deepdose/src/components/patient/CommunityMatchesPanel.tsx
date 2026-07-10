@@ -28,22 +28,26 @@ function MatchCard({
 }) {
   if (variant === 'discovery') {
     return (
-      <article className="dd-connect__card">
+      <article className="dd-connect__tile">
         <span
-          className="dd-connect__avatar"
-          style={{ backgroundImage: `url(${communityFaceUrl(match.face)})` }}
+          className="dd-connect__tile-face"
+          style={{ backgroundImage: `url(${communityFaceUrl(match.face, 320)})` }}
           aria-hidden
         />
-        <div className="dd-connect__card-main">
-          <p className="dd-connect__name">{match.name}</p>
-          <p className="dd-connect__meta">
-            {match.location} · {match.chemistryPct}% chemistry
-          </p>
+        <div className="dd-connect__tile-body">
+          <div className="dd-connect__tile-id">
+            <p className="dd-connect__name">{match.name}</p>
+            <p className="dd-connect__pct">
+              <span className="dd-connect__pct-value">{match.chemistryPct}%</span>
+              <span className="dd-connect__pct-label"> chemistry</span>
+            </p>
+          </div>
+          <p className="dd-connect__meta">{match.location}</p>
           <p className="dd-connect__journey">{match.journey}</p>
+          <Link href={messageHref} className="dd-connect__message">
+            Message
+          </Link>
         </div>
-        <Link href={messageHref} className="dd-connect__message">
-          Message
-        </Link>
       </article>
     )
   }
@@ -106,7 +110,7 @@ export function CommunityMatchesPanel({
 
   if (variant === 'discovery') {
     return (
-      <section className="dd-connect__list" aria-label="Your matches">
+      <section className="dd-connect__grid" aria-label="Your matches">
         {DEEPDOSE_COMMUNITY_MATCHES.map((match, index) => (
           <MatchCard
             key={match.id}

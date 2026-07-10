@@ -39,9 +39,9 @@ export const CONNECT_PAGE_META = {
 
 export const CONNECT_PAGE = {
   eyebrow: 'Connect',
-  titleBefore: 'Find your',
-  titleHighlight: 'chemistry',
-  support: 'Matched on body clock, medicines, and journey. Not labels.',
+  titleBefore: 'Your',
+  titleHighlight: 'matches',
+  support: 'People on your body clock and meds. Message when it feels right.',
   cta: { label: 'Open chat', href: '/chat' },
   secondary: { label: 'See my profile', href: '/profile' },
 } as const

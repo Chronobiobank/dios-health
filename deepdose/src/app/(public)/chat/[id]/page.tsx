@@ -42,7 +42,7 @@ export default async function ChatThreadPage({ params }: PageProps) {
 
   return (
     <div className="dd-chat-shell">
-      <div className="seco-landing__section-inner">
+      <div className="dd-chat-shell__inner">
         <ChatThread
           conversationId={id}
           currentUserId={user.id}

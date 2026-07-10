@@ -29,48 +29,57 @@ type ChatInboxProps = {
 }
 
 export function ChatInbox({ items }: ChatInboxProps) {
-  if (items.length === 0) {
-    return (
-      <div className="dd-chat">
-        <header className="dd-chat__header">
-          <div>
-            <h1 className="dd-chat__title">Chat</h1>
-          </div>
-        </header>
-        <p className="dd-chat__empty">
-          No chats yet. When you match on chemistry, message them here.
-        </p>
-      </div>
-    )
-  }
-
   return (
     <div className="dd-chat">
       <header className="dd-chat__header">
-        <div>
-          <h1 className="dd-chat__title">Chat</h1>
+        <div className="dd-chat__header-copy">
+          <p className="dd-chat__eyebrow">Chat</p>
+          <h1 className="dd-chat__title">
+            <span className="dd-chat__title-line">Your</span>{' '}
+            <span className="dd-chat__title-line dd-chat__title-line--spectrum">messages</span>
+          </h1>
+          <p className="dd-chat__lede">Private DMs with people on your chemistry.</p>
         </div>
+        <Link href="/connect" className="dd-chat__header-cta">
+          Find matches
+        </Link>
       </header>
-      <ul className="dd-chat__inbox">
-        {items.map((item) => (
-          <li key={item.conversationId}>
-            <Link href={`/chat/${item.conversationId}`} className="dd-chat__row">
-              <span className="dd-chat__avatar" aria-hidden>
-                {initials(item.peerDisplayName)}
-              </span>
-              <span className="dd-chat__row-main">
-                <p className="dd-chat__row-name">{item.peerDisplayName}</p>
-                <p className="dd-chat__row-preview">
-                  {item.lastMessageBody ?? 'Say hello'}
-                </p>
-              </span>
-              <time className="dd-chat__row-time" dateTime={item.lastMessageAt ?? undefined}>
-                {formatInboxTime(item.lastMessageAt)}
-              </time>
-            </Link>
-          </li>
-        ))}
-      </ul>
+
+      {items.length === 0 ? (
+        <div className="dd-chat__empty">
+          <p className="dd-chat__empty-title">No chats yet</p>
+          <p className="dd-chat__empty-body">
+            When you match on chemistry, message them here — lean, private, no feed.
+          </p>
+          <Link href="/connect" className="dd-chat__empty-cta">
+            Open Connect
+          </Link>
+        </div>
+      ) : (
+        <ul className="dd-chat__inbox">
+          {items.map((item) => (
+            <li key={item.conversationId}>
+              <Link href={`/chat/${item.conversationId}`} className="dd-chat__row">
+                <span className="dd-chat__avatar" aria-hidden>
+                  {initials(item.peerDisplayName)}
+                </span>
+                <span className="dd-chat__row-main">
+                  <p className="dd-chat__row-name">{item.peerDisplayName}</p>
+                  <p className="dd-chat__row-preview">
+                    {item.lastMessageBody ?? 'Say hello'}
+                  </p>
+                </span>
+                <time
+                  className="dd-chat__row-time"
+                  dateTime={item.lastMessageAt ?? undefined}
+                >
+                  {formatInboxTime(item.lastMessageAt)}
+                </time>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }

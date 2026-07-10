@@ -58,6 +58,30 @@ export const DEEPDOSE_COMMUNITY_MATCHES: readonly CommunityMatch[] = [
     chemistryPct: 88,
     face: 'river',
   },
+  {
+    id: 'match-4',
+    name: 'Sage L.',
+    location: 'Manchester',
+    journey: 'Night-owl clock · blackout dose fixed the evenings',
+    chemistryPct: 86,
+    face: 'sage',
+  },
+  {
+    id: 'match-5',
+    name: 'Rowan K.',
+    location: 'London',
+    journey: 'Shared metformin window · fewer afternoon crashes',
+    chemistryPct: 84,
+    face: 'rowan',
+  },
+  {
+    id: 'match-6',
+    name: 'Sol A.',
+    location: 'Cardiff',
+    journey: 'Same REM pattern · timed SSRI with wake, not the clock',
+    chemistryPct: 82,
+    face: 'sol',
+  },
 ] as const
 
 /** @deprecated Use DEEPDOSE_COMMUNITY_MATCHES */
