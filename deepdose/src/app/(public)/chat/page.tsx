@@ -8,7 +8,7 @@ import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
   title: `Chat · ${DEEPDOSE_NAME}`,
-  description: 'Message people who share your chemistry.',
+  description: 'Private DMs to share chemistry, correct what drifted, and stay connected.',
   alternates: { canonical: '/chat' },
   robots: { index: false, follow: false },
 }
@@ -29,8 +29,8 @@ export default async function ChatInboxPage() {
   const alert = guide.error ?? error
 
   return (
-    <div className="dd-chat-shell">
-      <div className="dd-chat-shell__inner">
+    <article className="seco-page seco-marketing-page dd-chat-shell">
+      <div className="seco-landing__section-inner dd-chat-shell__inner">
         {alert ? (
           <p className="dd-chat__error" role="alert">
             {alert}
@@ -38,6 +38,6 @@ export default async function ChatInboxPage() {
         ) : null}
         <ChatInbox items={items} />
       </div>
-    </div>
+    </article>
   )
 }

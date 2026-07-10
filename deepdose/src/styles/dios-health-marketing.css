@@ -12,11 +12,13 @@
 @import "./deepdose-chat.css";
 @import "./deepdose-connect.css";
 @import "./deepdose-gate.css";
+@import "./deepdose-legal.css";
 @import "./patient-sleep-wake-dash.css";
 @import "./deepdose-clinical-dash.css";
 @import "./deepdose-app-overrides.css";
 @import "./deepdose-ambient.css";
 @import "./deepdose-spectrum-tiles.css";
+@import "./deepdose-tile-containment.css";
 @import "./deepdose-oura-rhythm.css";
 @import "./deepdose-marketing-system.css";
 

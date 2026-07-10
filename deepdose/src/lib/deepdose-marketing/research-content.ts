@@ -6,12 +6,12 @@ import { LANDING_CLINICIANS } from '@/lib/deepdose-marketing/landing-clinicians'
 export const DEEPDOSE_RESEARCH_META = {
   title: `Research · ${DEEPDOSE_NAME}`,
   description:
-    'Chronobiology and chronotherapy evidence behind precision dosing: peer-reviewed sources and clinical context.',
+    'Chronobiology evidence behind chemistry matching: peer-reviewed sources on rhythm, timing, and connection.',
 } as const
 
 export const DEEPDOSE_RESEARCH_INTRO = {
   lede:
-    'Your body runs on a clock. Take a medicine, eat, or sleep at the wrong point in that clock and the same dose does less, harms more, and , repeated night after night , costs healthy years of life.',
+    'Your body runs on a clock. Understanding that chemistry helps you share clearer details and connect with people on a similar rhythm — for connection, correction, and more.',
   cost: {
     href: 'https://www.england.nhs.uk/medicines-2/medicines-optimisation/',
     label: 'NHS medicines optimisation',
@@ -21,7 +21,7 @@ export const DEEPDOSE_RESEARCH_INTRO = {
     label: 'UK Biobank · PNAS (2024)',
   },
   consent:
-    'You choose what data we can use. Consent first · UK GDPR · Your clinician stays in the loop.',
+    'You choose what data we can use. Consent first · UK GDPR · Share only what you want.',
 } as const
 
 export const DEEPDOSE_RESEARCH_SCHOLARS = [

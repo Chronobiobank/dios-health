@@ -1,0 +1,86 @@
+/**
+ * HARD RULE — tile & page copy containment.
+ * Text/heads must never bleed outside tiles or the page measure.
+ */
+
+.seco-landing__section-inner,
+.seco-marketing-tiles,
+.seco-spectrum-tiles,
+.dd-connect__grid {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.seco-spectrum-tile,
+.dd-connect__tile,
+.dios-glass-outer,
+.dios-glass-inner,
+.seco-marketing-wide-tile,
+.sw-dash__tile,
+.sw-connect__match {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.seco-spectrum-tile h1,
+.seco-spectrum-tile h2,
+.seco-spectrum-tile h3,
+.seco-spectrum-tile h4,
+.seco-spectrum-tile p,
+.seco-spectrum-tile span,
+.seco-spectrum-tile a,
+.seco-spectrum-tile li,
+.dd-connect__tile h1,
+.dd-connect__tile h2,
+.dd-connect__tile h3,
+.dd-connect__tile p,
+.dd-connect__tile span,
+.dd-connect__tile a,
+.dios-glass-outer h1,
+.dios-glass-outer h2,
+.dios-glass-outer h3,
+.dios-glass-outer p,
+.dios-glass-outer span,
+.dios-glass-outer a,
+.dios-glass-inner h1,
+.dios-glass-inner h2,
+.dios-glass-inner h3,
+.dios-glass-inner p,
+.dios-glass-inner span,
+.dios-glass-inner a,
+.seco-marketing-wide-tile h1,
+.seco-marketing-wide-tile h2,
+.seco-marketing-wide-tile h3,
+.seco-marketing-wide-tile p,
+.seco-marketing-wide-tile span,
+.seco-marketing-wide-tile a,
+.sw-dash__tile h1,
+.sw-dash__tile h2,
+.sw-dash__tile h3,
+.sw-dash__tile p,
+.sw-dash__tile span,
+.sw-dash__tile a,
+.sw-connect__match h1,
+.sw-connect__match h2,
+.sw-connect__match h3,
+.sw-connect__match p,
+.sw-connect__match span,
+.sw-connect__match a {
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.seco-spectrum-tile__title,
+.seco-spectrum-tile__body,
+.seco-spectrum-tile__lead,
+.seco-spectrum-tile__cue {
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}

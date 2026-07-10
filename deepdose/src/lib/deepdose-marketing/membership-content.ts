@@ -16,7 +16,7 @@ export type MembershipTier = {
 export const MEMBERSHIP_PAGE_META = {
   title: `Membership · ${DEEPDOSE_NAME}`,
   description:
-    'Free forever. TipTraQ Testkit when you and your GP want a stronger sleep read.',
+    'Free forever to understand and share your chemistry. TipTraQ when you want a deeper sleep read.',
 } as const
 
 export const MEMBERSHIP_PAGE_INTRO = {
@@ -24,7 +24,7 @@ export const MEMBERSHIP_PAGE_INTRO = {
   titleWhite: 'Free forever.',
   titleAccent: 'Upgrade for more.',
   lede:
-    'Phone estimate first. TipTraQ when your GP wants a clinic-grade read. Built for atypical folk with odd hours and stacked meds.',
+    'Understand your chemistry, share what you choose, and connect. Phone estimate first. TipTraQ when you want a stronger sleep read.',
 } as const
 
 /** USD for the global Manjam-first cohort. */
@@ -35,11 +35,11 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#acd3de',
     figure: '$0',
     cadence: 'Phone & wearable',
-    note: 'Dose windows from your phone for odd hours.',
+    note: 'Understand your chemistry and share what you choose.',
     cta: { label: 'Start free', href: '/login' },
     includes: [
-      'Dose windows from your phone',
-      'Connect with others like you',
+      'Chemistry profile from your phone',
+      'Connect and message people on your rhythm',
       'Optional research share only',
     ],
   },
@@ -49,12 +49,12 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#c9b6f2',
     figure: '$149',
     cadence: 'Three nights at home',
-    note: 'Clinic TipTraQ nights for stronger windows.',
+    note: 'TipTraQ nights for a stronger chemistry baseline to share.',
     cta: { label: 'Order Testkit', href: '/testkit' },
     includes: [
       'Reusable sensor for 3 nights',
-      'A clinic-checked sleep badge',
-      'Stronger med windows for you',
+      'Stronger sleep and rhythm read',
+      'Clearer chemistry details to share',
     ],
   },
   {
@@ -63,12 +63,12 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#f2b8a2',
     figure: '$99',
     cadence: 'Every three months',
-    note: 'Fresh TipTraQ nights to keep plan on track.',
+    note: 'Fresh TipTraQ nights so shared details stay current.',
     cta: { label: 'Order re-read', href: '/testkit' },
     includes: [
       'Same reusable TipTraQ sensor',
-      'Updated windows each quarter',
-      'Catch drift before labs show',
+      'Updated chemistry read each quarter',
+      'Catch drift before you share stale details',
     ],
   },
 ] as const

@@ -6,7 +6,7 @@
 
 /* ── Hero typography (dark marketing pages) ── */
 .deepdose-shell.seco-shell--dark .seco-page__eyebrow {
-  margin: 0 0 clamp(0.625rem, 0.45rem + 0.7vw, 0.875rem);
+  margin: 0 0 clamp(0.35rem, 0.25rem + 0.4vw, 0.5rem);
   font-family: var(--seco-font-data);
   font-size: var(--mkt-eyebrow-size);
   font-weight: 500;
@@ -79,12 +79,15 @@
 
 .seco-marketing-panel--tiles,
 .seco-clinics__panel--tiles {
-  margin-top: clamp(0.75rem, 2vw, 1.125rem);
-  margin-bottom: clamp(0.25rem, 0.75vw, 0.5rem);
+  margin-top: 0;
+  margin-bottom: 0;
   border: none;
   border-radius: 0;
   background: transparent;
-  overflow: visible;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 /* ── Spectrum tile grid (canonical clinician-landing formatting) ── */
@@ -237,13 +240,38 @@
 
 /* ── Marketing page rhythm (/chronobiobank, /technology, /foundation, /home-test, /tiptraq, /pricing, /partners) ── */
 .seco-marketing-page {
-  --seco-mission-tile-gap: clamp(1.25rem, 3vw, 1.75rem);
+  --seco-mission-tile-gap: clamp(0.75rem, 2vw, 1.125rem);
 }
 
 .seco-marketing-page .seco-landing__section-inner {
   display: flex;
   flex-direction: column;
-  gap: var(--mkt-cta-stack-gap);
+  gap: var(--mkt-section-gap);
+  width: 100%;
+  max-width: var(--seco-page-max);
+  min-width: 0;
+  overflow-x: clip;
+}
+
+/* Contain tiles + copy inside the page measure — no bleed */
+.seco-marketing-page .seco-marketing-tiles,
+.seco-marketing-page .seco-spectrum-tile,
+.seco-marketing-page .seco-page__lede,
+.seco-marketing-page .seco-page__title {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.seco-marketing-page .seco-spectrum-tile {
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.seco-marketing-page .seco-spectrum-tile__title,
+.seco-marketing-page .seco-spectrum-tile__body,
+.seco-marketing-page .seco-spectrum-tile__lead {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .seco-mission .seco-chronobiobank__intro .seco-page__lede {

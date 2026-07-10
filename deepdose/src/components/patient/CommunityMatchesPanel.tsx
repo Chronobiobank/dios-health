@@ -15,6 +15,10 @@ type CommunityMatchesPanelProps = {
   messageHref?: string
 }
 
+function profileHref(matchId: string): string {
+  return `/connect/${matchId}`
+}
+
 function MatchCard({
   match,
   index,
@@ -29,23 +33,23 @@ function MatchCard({
   if (variant === 'discovery') {
     return (
       <article className="dd-connect__tile">
-        <span
-          className="dd-connect__tile-face"
-          style={{ backgroundImage: `url(${communityFaceUrl(match.face, 320)})` }}
-          aria-hidden
-        />
-        <div className="dd-connect__tile-body">
-          <div className="dd-connect__tile-id">
-            <p className="dd-connect__name">{match.name}</p>
-            <p className="dd-connect__pct">
-              <span className="dd-connect__pct-value">{match.chemistryPct}%</span>
-              <span className="dd-connect__pct-label"> chemistry</span>
-            </p>
-          </div>
-          <p className="dd-connect__meta">{match.location}</p>
-          <p className="dd-connect__journey">{match.journey}</p>
+        <Link
+          href={profileHref(match.id)}
+          className="dd-connect__tile-profile"
+          aria-label={`${match.name} profile`}
+        >
+          <span
+            className="dd-connect__tile-face"
+            style={{ backgroundImage: `url(${communityFaceUrl(match.face, 320)})` }}
+            aria-hidden
+          />
+        </Link>
+        <div className="dd-connect__tile-bar">
+          <Link href={profileHref(match.id)} className="dd-connect__name">
+            {match.name}
+          </Link>
           <Link href={messageHref} className="dd-connect__message">
-            Message
+            Chat
           </Link>
         </div>
       </article>

@@ -5,26 +5,26 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 export const TESTKIT_META = {
   title: `Testkit · ${DEEPDOSE_NAME}`,
   description:
-    'Three nights at home with TipTraQ. For atypical folk whose sleep and meds never fit a clinic clock. Your clinician adds the read; Deepdose shows clearer dose windows.',
+    'Three nights at home with TipTraQ. A deeper chemistry read so you can share clearer details and connect with confidence.',
 } as const
 
 export const TESTKIT_INTRO = {
   eyebrow: 'Testkit',
   titleWhite: 'Three nights.',
-  titleAccent: 'Clearer timing.',
-  lede: `Odd hours and stacked meds need a stronger read than a phone alone. Wear TipTraQ at home for three nights. Your clinician adds the results. ${DEEPDOSE_NAME} turns them into clearer windows for light, meals, meds, movement, and sleep.`,
+  titleAccent: 'Clearer chemistry.',
+  lede: `Odd hours and stacked chemistry need a stronger read than a phone alone. Wear TipTraQ at home for three nights. ${DEEPDOSE_NAME} turns the nights into clearer rhythm details you can understand, share, and correct with people on a similar clock.`,
 } as const
 
 export const TESTKIT_KIT = {
   eyebrow: 'The kit',
   title: 'One sensor. Three nights at home.',
   lede:
-    'Soft finger sensor, charging case, and app. Built for real nights, not a clinic bed. Your clinician gets a read they can trust.',
+    'Soft finger sensor, charging case, and app. Built for real nights, not a clinic bed. Stronger details for your chemistry profile.',
   includes: [
     'Reusable sensor and home setup',
     'Three nights of sleep and breathing data',
-    'Clinic-ready sleep staging',
-    'Results that feed your dose plan in Deepdose',
+    'Stronger rhythm baseline for your profile',
+    'Clearer chemistry details to share on Deepdose',
   ],
 } as const
 
@@ -34,8 +34,8 @@ export const TESTKIT_STEPS = [
     rank: 1,
     label: 'Order',
     cue: '#acd3de',
-    title: 'When your GP suggests it',
-    body: 'Order TipTraQ after your GP advises a home sleep check. No clinic overnight. No waiting list.',
+    title: 'When you want a deeper read',
+    body: 'Order TipTraQ when phone estimates are not enough. No clinic overnight. No waiting list.',
   },
   {
     id: 'wear',
@@ -50,16 +50,16 @@ export const TESTKIT_STEPS = [
     rank: 3,
     label: 'Review',
     cue: '#f2b8a2',
-    title: 'Your clinician adds the read',
-    body: `Your clinician reviews the nights and sets a stronger body-clock baseline in ${DEEPDOSE_NAME}.`,
+    title: 'Your chemistry baseline updates',
+    body: `Nights are reviewed and a stronger rhythm baseline lands in ${DEEPDOSE_NAME} for you to understand and share.`,
   },
   {
     id: 'plan',
     rank: 4,
-    label: 'Plan',
+    label: 'Share',
     cue: '#8b9cf8',
-    title: 'See your best times',
-    body: 'Your dashboard shows clearer windows for light, meals, meds, movement, and sleep.',
+    title: 'Share clearer details',
+    body: 'Your profile shows clearer windows for light, meals, meds, movement, and sleep, ready to share for connection and correction.',
   },
 ] as const
 

@@ -1,4 +1,4 @@
-/* Connect — rounded tile matrix of matches (site radius, not circles). */
+/* Connect — marketing hero type + rounded tile matrix of matches. */
 
 .dd-connect {
   --dd-connect-text: #f2f2f2;
@@ -8,67 +8,46 @@
   --dd-connect-tile: rgb(255 255 255 / 0.05);
   --dd-connect-radius: var(--seco-radius-lg, 1.125rem);
 
-  box-sizing: border-box;
-  width: min(100%, 42rem);
-  margin-inline: auto;
-  padding: 1rem clamp(1rem, 4vw, 1.5rem) calc(5.5rem + env(safe-area-inset-bottom, 0px));
   color: var(--dd-connect-text);
   min-height: calc(100dvh - 5.5rem);
+}
+
+.dd-connect.seco-marketing-page .seco-landing__section-inner.dd-connect__inner {
+  --seco-page-max: var(--page-max-app, 48rem);
+  width: 100%;
+  max-width: var(--seco-page-max);
+  gap: var(--mkt-section-gap);
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
 }
 
 .dd-connect__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem 1rem;
-  margin-bottom: 1.15rem;
-  padding-bottom: 0.85rem;
+  gap: 0.5rem 1rem;
+  padding-bottom: 0.65rem;
   border-bottom: 1px solid var(--dd-connect-line);
+  width: 100%;
+  min-width: 0;
 }
 
 .dd-connect__title {
-  margin: 0;
-  font-family: var(--seco-font-display);
-  font-size: clamp(1.65rem, 1.1rem + 2vw, 2.35rem);
-  font-weight: 300;
-  letter-spacing: var(--seco-display-tracking-hero, -0.02em);
-  line-height: 1.1;
-  color: #fff;
-}
-
-.dd-connect__title-line {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
   white-space: nowrap;
-}
-
-.dd-connect__title-line--white {
-  color: #fff;
-}
-
-.dd-connect__title-line--spectrum {
-  background: var(--seco-spectrum-hero);
-  background-size: 220% 100%;
-  background-position: 0% 50%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: seco-cta-flow 7s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dd-connect__title-line--spectrum {
-    animation: none;
-    background-position: 50% 50%;
-  }
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dd-connect__inbox-link {
   flex-shrink: 0;
-  font-size: 0.875rem;
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-tile-body-size, 0.9375rem);
   font-weight: 600;
   color: #fff;
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: 0.18em;
 }
 
 .dd-connect__inbox-link:hover {
@@ -82,10 +61,6 @@
 }
 
 @media (min-width: 720px) {
-  .dd-connect {
-    width: min(100%, 56rem);
-  }
-
   .dd-connect__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.9rem;
@@ -96,9 +71,19 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  max-width: 100%;
   border-radius: var(--dd-connect-radius);
   border: 1px solid var(--dd-connect-line);
   background: var(--dd-connect-tile);
+  overflow: hidden;
+}
+
+.dd-connect__tile-profile {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  color: inherit;
+  text-decoration: none;
   overflow: hidden;
 }
 
@@ -106,44 +91,42 @@
   display: block;
   aspect-ratio: 4 / 5;
   width: 100%;
+  max-width: 100%;
   border-radius: 0;
   background-color: rgb(255 255 255 / 0.06);
   background-size: cover;
   background-position: center;
   border: 0;
-  border-bottom: 1px solid var(--dd-connect-line);
 }
 
-.dd-connect__tile-body {
+.dd-connect__tile-bar {
   display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  min-width: 0;
-  padding: 0.75rem 0.8rem 0.85rem;
-  flex: 1;
-}
-
-.dd-connect__tile-id {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 0.2rem 0.45rem;
+  gap: 0.5rem;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0.55rem 0.65rem 0.65rem;
+  overflow: hidden;
 }
 
 .dd-connect__name {
   margin: 0;
-  font-size: 0.9375rem;
+  min-width: 0;
+  flex: 1 1 auto;
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-tile-title-size, 0.9375rem);
   font-weight: 650;
   letter-spacing: -0.01em;
   color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.dd-connect__pct {
-  margin: 0;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--dd-connect-muted);
+.dd-connect__name:hover {
+  color: var(--seco-spectrum-cyan, #acd3de);
 }
 
 .dd-connect__pct-value {
@@ -160,43 +143,26 @@
   -webkit-text-fill-color: var(--dd-connect-muted);
 }
 
-.dd-connect__meta {
-  margin: 0;
-  font-size: 0.75rem;
-  color: var(--dd-connect-faint);
-}
-
-.dd-connect__journey {
-  margin: 0.2rem 0 0.45rem;
-  font-size: 0.75rem;
-  line-height: 1.35;
-  color: var(--dd-connect-muted);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  flex: 1;
-}
-
 .dd-connect__message {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: stretch;
-  min-height: 2.25rem;
-  margin-top: auto;
-  padding: 0.45rem 0.85rem;
+  flex: 0 0 auto;
+  min-height: 1.85rem;
+  padding: 0.3rem 0.7rem;
   border: 0;
   border-radius: var(--seco-radius-md, 0.875rem);
   background: var(--seco-spectrum-hero);
   background-size: 220% 100%;
   background-position: 0% 50%;
   color: var(--seco-navy, #0b1220);
-  font-size: 0.8125rem;
+  font-family: var(--seco-font-ui);
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.01em;
   text-decoration: none;
+  white-space: nowrap;
   animation: seco-cta-flow 7s ease-in-out infinite;
 }
 
@@ -209,4 +175,92 @@
   .dd-connect__message {
     animation: none;
   }
+}
+
+/* Full match profile — detail lives here, not on the grid tile */
+.dd-connect-profile__back {
+  margin: 0;
+  font-size: var(--mkt-tile-body-size, 0.875rem);
+}
+
+.dd-connect-profile__back a {
+  color: rgb(255 255 255 / 0.7);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.dd-connect-profile__back a:hover {
+  color: #fff;
+}
+
+.dd-connect-profile__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  --cue: #acd3de;
+}
+
+.dd-connect-profile__face {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--seco-radius-md, 0.875rem);
+  background-color: rgb(255 255 255 / 0.06);
+  background-size: cover;
+  background-position: center;
+}
+
+.dd-connect-profile__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dd-connect-profile__name {
+  display: block;
+  font-size: clamp(1.75rem, 1rem + 3vw, 2.75rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dd-connect-profile__location,
+.dd-connect-profile__pct,
+.dd-connect-profile__journey {
+  margin: 0;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.dd-connect-profile__location {
+  font-size: var(--mkt-tile-body-size, 0.9375rem);
+  color: rgb(255 255 255 / 0.55);
+}
+
+.dd-connect-profile__pct {
+  font-size: var(--mkt-tile-body-size, 0.9375rem);
+  color: var(--dd-connect-muted);
+}
+
+.dd-connect-profile__journey {
+  margin-top: 0.35rem;
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-hero-lede-size, 1.0625rem);
+  font-weight: 300;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.78);
+}
+
+.dd-connect-profile__message {
+  margin-top: 0.75rem;
+  width: auto;
+  max-width: max-content;
+  align-self: flex-start;
 }

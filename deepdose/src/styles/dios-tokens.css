@@ -144,15 +144,15 @@
   --mkt-layer-title-measure: 18ch;
   --mkt-layer-teaser-measure: 22ch;
   --mkt-layer-bullet-measure: 28ch;
-  --mkt-tile-head-gap: clamp(0.75rem, 1.5vw, 1.125rem);
-  --mkt-tile-content-gap: 0.375rem;
-  --mkt-hero-lede-gap: clamp(1rem, 2.5vw, 1.25rem);
-  --mkt-section-gap: clamp(2rem, 5vw, 2.75rem);
-  --mkt-cta-gap: 1rem;
+  --mkt-tile-head-gap: clamp(0.5rem, 1vw, 0.75rem);
+  --mkt-tile-content-gap: 0.25rem;
+  --mkt-hero-lede-gap: clamp(0.5rem, 1.25vw, 0.75rem);
+  --mkt-section-gap: clamp(1rem, 2.5vw, 1.5rem);
+  --mkt-cta-gap: 0.75rem;
   /** Space between a content block (tiles, tab panel, form) and the CTA row below it */
-  --mkt-cta-stack-gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  --mkt-cta-stack-gap: clamp(0.75rem, 1.75vw, 1.125rem);
   /** Hero tab panels — slightly more air before the footer CTA */
-  --mkt-cta-stack-gap-hero: clamp(1.5rem, 3vw, 2.25rem);
+  --mkt-cta-stack-gap-hero: clamp(1rem, 2.25vw, 1.5rem);
   /** Extra inset at the foot of hero tab panels (above the panel border) */
   --mkt-panel-foot-inset: clamp(0.25rem, 0.6vw, 0.5rem);
 

@@ -60,7 +60,7 @@ export const DEEPDOSE_MISSION = {
   eyebrow: 'Three moves',
   headlineWhite: DEEPDOSE_VOICE.missionHeadlineWhite,
   headlineAccent: DEEPDOSE_VOICE.missionHeadlineAccent,
-  headline: 'Know. Fit. Share.',
+  headline: 'Know. Share. Connect.',
   lede: DEEPDOSE_VOICE.missionLede,
 } as const
 
@@ -87,120 +87,120 @@ export const DEEPDOSE_LANDING_PLATFORM = {
   pillars: [
     {
       id: 'test',
-      label: 'Testing',
-      body: 'Phase changes to melatonin',
+      label: 'Understand',
+      body: 'Read your chemistry and rhythm',
       icon: 'test' as const,
-      panelTitle: 'Your melatonin readout',
-      panelSeeAll: { label: 'Take the 3-min test', href: '/login' },
+      panelTitle: 'Your chemistry readout',
+      panelSeeAll: { label: 'Open Chemistry', href: '/dosage' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'We score Sleep Regularity Index from past, current, and future sleep signals, the same family of metrics used in UK Biobank.',
-          meta: 'SRI · UK Biobank-style regularity',
+          title: 'We read sleep regularity and rhythm signals so you can see your chemistry clearly, not guess from a 9-to-5 template.',
+          meta: 'Rhythm · Sleep regularity',
           href: '/profile',
         },
         {
-          title: 'TipTraQ three-night block validates the anchor, like calibrating a CGM.',
-          meta: 'Clinical validation · Verified badge',
+          title: 'Optional TipTraQ nights deepen the read when you want a stronger baseline to share.',
+          meta: 'Deeper read · TipTraQ',
           href: '/testkit',
         },
         {
-          title: 'BCA tracks how steady your blackout window stays, drift moves every dose cue.',
-          meta: 'Body clock alignment · Time-in-range',
-          href: '/login',
+          title: 'Drift shows when your clock slips, so you know what to correct before you share it.',
+          meta: 'Alignment · Catch drift early',
+          href: '/dosage',
         },
       ],
     },
     {
       id: 'plan',
-      label: 'Dosing',
-      body: 'Meds timed to body clock',
+      label: 'Share',
+      body: 'Details you choose to show',
       icon: 'plan' as const,
-      panelTitle: 'Your dosing plan',
-      panelSeeAll: { label: 'Open dashboard', href: '/login' },
+      panelTitle: 'Share what fits',
+      panelSeeAll: { label: 'Review sharing', href: '/share' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Six dose cues · light, meals, meds, movement, wind-down, blackout · all timed to your anchor.',
-          meta: 'Zeitgebers · Phase-adjusted',
-          href: '/login',
+          title: 'Share rhythm, chemistry notes, and what is working, only the details you turn on.',
+          meta: 'You choose · Opt in',
+          href: '/share',
         },
         {
-          title: 'Take now or wait: each medicine window opens and closes with your body clock.',
-          meta: 'BTI · Window open, closed, or drifting',
-          href: '/login',
+          title: 'Profile and Chemistry stay yours. Peers see what you publish for connection.',
+          meta: 'Control · Private by default',
+          href: '/profile',
         },
         {
-          title: 'When drift pushes your anchor late, every cue shifts, not fixed 8am reminders.',
-          meta: 'Precision dosing · Moves with you',
-          href: '/login',
+          title: 'Correct together: compare notes when nights drift and update what you share.',
+          meta: 'Correction · Shared learning',
+          href: '/connect',
         },
         {
-          title: 'Your clinician sees the same plan and can step in when windows slip.',
-          meta: 'Shared record · Decision support',
-          href: '/login',
-        },
-      ],
-    },
-    {
-      id: 'social',
-      label: 'Sharing',
-      body: 'Update gains with others',
-      icon: 'social' as const,
-      panelTitle: 'Community & social proof',
-      panelSeeAll: { label: 'See the feed', href: '/login' },
-      panelLayout: 'grid' as const,
-      panelItems: [
-        {
-          title: 'Share your alignment streaks and timing wins. You choose what\'s visible.',
-          meta: 'Opt-in · You control sharing',
-          href: '/login',
-        },
-        {
-          title: 'See anonymised results from people who share your chronotype.',
-          meta: 'Social proof · Like-for-like',
-          href: '/login',
-        },
-        {
-          title: 'Follow what\'s working across the community: real timing experiments.',
-          meta: 'Quantified-self · Outcomes feed',
-          href: '/login',
-        },
-        {
-          title: 'Privacy-first by design: consent-based, UK GDPR, nothing shared without you.',
-          meta: 'Mission · Anonymous telemetry',
+          title: 'Optional anonymised research share, never by default, stop anytime.',
+          meta: 'Research · Consent first',
           href: '/mission',
         },
       ],
     },
     {
-      id: 'meds',
-      label: 'Medications',
-      body: 'Check your combination risk',
-      icon: 'meds' as const,
-      panelTitle: 'Your medication sync',
-      panelSeeAll: { label: 'Check my combination', href: '/' },
+      id: 'social',
+      label: 'Connect',
+      body: 'People on your chemistry',
+      icon: 'social' as const,
+      panelTitle: 'Matches & messages',
+      panelSeeAll: { label: 'Open Connect', href: '/connect' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Most people on multiple medications have never been told that timing them against each other changes the outcome.',
-          meta: 'Polypharmacy · Timing interactions',
-          href: '/',
+          title: 'Match on rhythm and chemistry, not follower counts or endless scroll.',
+          meta: 'Soul-matching · Similar clocks',
+          href: '/connect',
         },
         {
-          title: 'Atorvastatin works best in the evening, nocturnal cholesterol synthesis is the target. Morning dosing misses the window.',
-          meta: 'Statin timing · TIME substudy (Dundee)',
+          title: 'Message privately when it feels right. Connection and correction, not an attention feed.',
+          meta: 'Chat · Private DMs',
+          href: '/chat',
+        },
+        {
+          title: 'See people who have been where you are and share what finally settled their nights.',
+          meta: 'Peers · Real journeys',
+          href: '/connect',
+        },
+        {
+          title: 'Privacy-first: consent-based, UK GDPR, nothing shared without you.',
+          meta: 'Trust · You stay in control',
+          href: '/privacy',
+        },
+      ],
+    },
+    {
+      id: 'meds',
+      label: 'Chemistry',
+      body: 'Timing that shapes your match',
+      icon: 'meds' as const,
+      panelTitle: 'Why timing is chemistry',
+      panelSeeAll: { label: 'See the science', href: '/science' },
+      panelLayout: 'grid' as const,
+      panelItems: [
+        {
+          title: 'Stacked chemistry and odd hours change how the same routine lands. Understanding that is how matching starts.',
+          meta: 'Stacked chemistry · Real nights',
+          href: '/dosage',
+        },
+        {
+          title: 'Published trials show when medicines land better against the body clock, the same science behind clearer chemistry reads.',
+          meta: 'Evidence · Timing trials',
           href: '/science',
         },
         {
-          title: 'Ramipril taken at bedtime reduces major cardiovascular events by up to 45% versus morning dosing.',
-          meta: 'ACE inhibitor · Hygia Trial, 19,084 patients',
-          href: '/science',
+          title: 'Share timing details with peers who get it, then correct together when drift shows up.',
+          meta: 'Share · Connect · Correct',
+          href: '/connect',
         },
         {
-          title: 'Enter your combination and we show you the conflicts, no account needed.',
-          meta: 'Free · Instant, no sign-up required',
-          href: '/',
+          title: 'Start free: understand your chemistry, share what fits, message when ready.',
+          meta: 'Free · No attention feed',
+          href: '/login',
         },
       ],
     },
@@ -307,27 +307,27 @@ export const DEEPDOSE_PLAN_NEXT_STEPS = {
   },
   join: {
     eyebrow: 'Step 3 of 3',
-    headline: "Find people who've been where you are",
+    headline: 'Share details. Connect and correct.',
     support:
-      'No pressure, no labels. Stay free on Commons, or upgrade when you want a clinical-grade sleep read for your GP.',
+      'Understand your chemistry, share what you choose, and find people on a similar rhythm. Stay free, or deepen the read with TipTraQ.',
     commons: {
       title: 'Commons',
       figure: 'Free',
       points: [
-        'Save your timing plan without the clinic waiting room',
-        'Compare with people on a similar rhythm, not a similar label',
-        'Phone and wearable estimate of your body clock',
+        'Understand and save your chemistry profile',
+        'Share details you choose for connection',
+        'Match and message people on a similar rhythm',
         'Help research only if you opt in',
       ],
       cta: { label: 'Join Commons free', href: '/login' },
     },
     paid: {
-      title: 'Clinical member',
+      title: 'Deeper read',
       figure: 'From Testkit',
       points: [
         'TipTraQ home sleep test, three nights',
-        'Clinical body-clock read replaces the estimate',
-        'Verified badge your GP can trust',
+        'Stronger chemistry baseline to share',
+        'Verified sleep badge when you want it',
         'Quarterly re-reads catch drift early',
       ],
       cta: { label: 'Browse membership', href: '/membership' },
@@ -355,14 +355,14 @@ export const DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE = {
 
 export const DEEPDOSE_PATIENT_PLAN_TABS = {
   landing: [
-    { id: 'timing' as const, label: 'Today', body: 'How you take them now', tone: 'lilac' as const },
-    { id: 'dosing' as const, label: 'Your windows', body: 'When each one works best', tone: 'peach' as const },
-    { id: 'sharing' as const, label: 'Share', body: 'GP, family & research', tone: 'blue' as const },
+    { id: 'timing' as const, label: 'Today', body: 'Your chemistry now', tone: 'lilac' as const },
+    { id: 'dosing' as const, label: 'Your windows', body: 'When rhythm fits best', tone: 'peach' as const },
+    { id: 'sharing' as const, label: 'Share', body: 'Peers, trust & research', tone: 'blue' as const },
   ],
   app: [
-    { id: 'timing' as const, label: 'Your meds', body: 'How you take them today', tone: 'lilac' as const },
-    { id: 'dosing' as const, label: 'Your windows', body: 'When to take each one', tone: 'peach' as const },
-    { id: 'sharing' as const, label: 'Share', body: 'GP, family & research', tone: 'blue' as const },
+    { id: 'timing' as const, label: 'Chemistry', body: 'What you run today', tone: 'lilac' as const },
+    { id: 'dosing' as const, label: 'Your windows', body: 'When to act on it', tone: 'peach' as const },
+    { id: 'sharing' as const, label: 'Share', body: 'Peers, trust & research', tone: 'blue' as const },
   ],
 } as const
 
@@ -383,7 +383,7 @@ export const DEEPDOSE_PATIENT_PLAN_PROFILE = {
   avatarEditLabel: 'Edit',
   avatarEmptyLabel: 'Add photo',
   baseline:
-    'Free to join · save your plan, get dose reminders, share with your GP, and help research if you want to.',
+    'Free to join · understand your chemistry, share details you choose, connect with peers, and help research if you want to.',
 } as const
 
 export const DEEPDOSE_PATIENT_PLAN_DEEPER = [
@@ -403,15 +403,15 @@ export const DEEPDOSE_PATIENT_PLAN_SHARING = {
   linkLabel: 'Get started →',
   items: [
     {
-      title: 'Share with your GP or someone you trust.',
+      title: 'Share chemistry details with someone you trust.',
       meta: 'Private link · you choose who sees it',
-      href: '/login',
+      href: '/share',
       showPeers: false,
     },
     {
-      title: 'Compare streaks with others who wake and dose like you.',
-      meta: 'Community · opt in · you control what others see',
-      href: '/login',
+      title: 'Connect with people on a similar rhythm for connection and correction.',
+      meta: 'Connect · opt in · you control what others see',
+      href: '/connect',
       showPeers: true,
     },
     {
@@ -499,8 +499,5 @@ export const DEEPDOSE_ENTERPRISE_LANDING = {
   accessNote:
     'Enterprise accounts are issued under data license. Contact us to access Chronobiobank.',
 } as const
-
-export const DEEPDOSE_TERMS_DECISION_SUPPORT =
-  `Decision support only. ${DEEPDOSE_NAME} suggests the best times for your daily cues. It does not prescribe. Your clinician makes every treatment decision.`
 
 export { DEEPDOSE_SITE_LINKS as DEEPDOSE_NAV_LINKS, DEEPDOSE_FOOTER_LINKS } from '@/lib/deepdose-marketing/site-nav-links'

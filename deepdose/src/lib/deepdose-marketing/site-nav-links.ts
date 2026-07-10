@@ -1,4 +1,4 @@
-/** Site navigation — lean Sniffies chrome. Product routes use bottom nav only. */
+﻿/** Site navigation — lean Sniffies chrome. Product routes use bottom nav only. */
 
 /** Splash + marketing header (minimal). Product tabs live in APP_BOTTOM_NAV. */
 export const DEEPDOSE_SITE_LINKS = [
@@ -14,7 +14,7 @@ export const DEEPDOSE_SPLASH_LINKS = DEEPDOSE_SITE_LINKS
 export const DEEPDOSE_FOOTER_LINKS = [
   { label: 'Connect', href: '/connect' },
   { label: 'Profile', href: '/profile' },
-  { label: 'Dosage', href: '/dosage' },
+  { label: 'Chemistry', href: '/dosage' },
   { label: 'Chat', href: '/chat' },
   { label: 'Sign in', href: '/login' },
   { label: 'Terms', href: '/terms' },

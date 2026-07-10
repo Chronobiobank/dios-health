@@ -6,15 +6,15 @@ import { DEEPDOSE_RESEARCH_INTRO } from '@/lib/deepdose-marketing/research-conte
 export const EVIDENCE_PAGE_META = {
   title: `Science · ${DEEPDOSE_NAME}`,
   description:
-    'Peer-reviewed science on why when you take a medicine can matter as much as what you take.',
+    'Peer-reviewed science behind chemistry and timing — so you can understand your rhythm and share it with confidence.',
 } as const
 
 export const EVIDENCE_PAGE_INTRO = {
   eyebrow: 'Foundation',
-  titleWhite: 'Timing',
-  titleAccent: 'really matters',
+  titleWhite: 'Chemistry',
+  titleAccent: 'has a clock',
   lede:
-    'Your body still runs on a clock · even when your nights don’t. When dose, sleep, and light fall out of step, the same medicine does less, and the harm compounds night after night.',
+    'Your body still runs on a clock · even when your nights don’t. Understanding that chemistry is how you share clearer details and connect with people who get it.',
 } as const
 
 export const EVIDENCE_WHY_NOW = {
@@ -68,7 +68,7 @@ export const EVIDENCE_TRACK_LAYERS = [
     label: 'Meds',
     cue: '#f2b8a2',
     title: 'Dose timing',
-    body: 'The same medicine lands better in the right window · precision dosing is what we optimise.',
+    body: 'The same chemistry lands better in the right window · timing is part of what you understand and share.',
   },
 ] as const
 
@@ -82,8 +82,8 @@ export type EvidenceResearchLink = {
 export const EVIDENCE_RESEARCH = {
   label: 'Research',
   cue: '#acd3de',
-  title: 'Studies that back the timing',
-  body: `Peer-reviewed work on body clocks and dose timing. The same science ${DEEPDOSE_NAME} uses for atypical folk with late nights and stacked meds.`,
+  title: 'Studies that back the chemistry',
+  body: `Peer-reviewed work on body clocks and timing. The same science ${DEEPDOSE_NAME} uses so you can understand your chemistry and share clearer details.`,
   links: [
     {
       href: 'https://doi.org/10.1073/pnas.2405924121',

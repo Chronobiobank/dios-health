@@ -41,8 +41,8 @@ export default async function ChatThreadPage({ params }: PageProps) {
   }
 
   return (
-    <div className="dd-chat-shell">
-      <div className="dd-chat-shell__inner">
+    <article className="seco-page seco-marketing-page dd-chat-shell">
+      <div className="seco-landing__section-inner dd-chat-shell__inner">
         <ChatThread
           conversationId={id}
           currentUserId={user.id}
@@ -50,6 +50,6 @@ export default async function ChatThreadPage({ params }: PageProps) {
           initialMessages={messages}
         />
       </div>
-    </div>
+    </article>
   )
 }

@@ -33,12 +33,9 @@ export function ChatInbox({ items }: ChatInboxProps) {
     <div className="dd-chat">
       <header className="dd-chat__header">
         <div className="dd-chat__header-copy">
-          <p className="dd-chat__eyebrow">Chat</p>
-          <h1 className="dd-chat__title">
-            <span className="dd-chat__title-line">Your</span>{' '}
-            <span className="dd-chat__title-line dd-chat__title-line--spectrum">messages</span>
+          <h1 className="seco-page__title dd-chat__title">
+            <span className="seco-landing__hero-spectrum">Your messages</span>
           </h1>
-          <p className="dd-chat__lede">Private DMs with people on your chemistry.</p>
         </div>
         <Link href="/connect" className="dd-chat__header-cta">
           Find matches

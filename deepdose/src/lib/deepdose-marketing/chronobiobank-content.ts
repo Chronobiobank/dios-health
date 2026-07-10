@@ -8,7 +8,7 @@ import {
 export const CHRONOBIOBANK_META = {
   title: `Mission · ${DEEPDOSE_NAME}`,
   description:
-    'Chemical soul-matching. Find people on your rhythm and meds. We match your chemistry, not steal your attention.',
+    'Understand your chemistry, share details you choose, and connect with people on a similar rhythm for connection, correction, and more.',
 } as const
 
 export const CHRONOBIOBANK_INTRO = {
@@ -16,7 +16,7 @@ export const CHRONOBIOBANK_INTRO = {
   titleWhite: 'Chemical',
   titleAccent: 'soul-matching',
   lede:
-    `${DEEPDOSE_NAME} matches you with people who share your chemistry so your social and body clocks align.`,
+    `${DEEPDOSE_NAME} helps you understand your chemistry, share details you choose, and connect with people on a similar rhythm for connection, correction, and more.`,
   quote:
     'The age of matching by profiles is ending. The age of matching by chemistry has begun.',
 } as const
@@ -99,19 +99,19 @@ export const CHRONOBIOBANK_PLANE = {
 export const CHRONOBIOBANK_MISSION_STEPS = [
   {
     id: 'phone',
-    label: 'Your signature',
+    label: 'Understand',
     cue: '#acd3de',
-    title: 'Rhythm and meds stay with you',
+    title: 'Your chemistry stays with you',
     body:
-      'Sleep, light, and dose times live on your phone or wearable. Matching reads a signature, not a warehouse of your nights.',
+      'Rhythm, sleep, and chemistry details live on your phone. Matching reads a signature, not a warehouse of your nights.',
   },
   {
     id: 'learn',
-    label: 'Your matches',
+    label: 'Connect',
     cue: '#8b9cf8',
-    title: 'People who have been where you are',
+    title: 'People on your chemistry',
     body:
-      'We pair you on body clock, medicines, and journey. Chemistry scores, not follower counts. No endless scroll.',
+      'We pair you on rhythm, chemistry, and journey. Share details for connection and correction. No endless scroll.',
   },
   {
     id: 'share',
@@ -139,22 +139,22 @@ export const CHRONOBIOBANK_MISSION_FEATURES = [
   {
     id: 'together',
     badge: 'Peers',
-    title: 'Peers on your meds',
-    teaser: 'Hear what retiming changed for similar late clocks.',
+    title: 'Peers on your clock',
+    teaser: 'Share details and correct nights with similar chemistry.',
     cue: '#8b9cf8',
   },
   {
     id: 'timing',
     badge: 'Wins',
-    title: 'Timing wins to try',
-    teaser: 'Copy windows that raised SRI for your chemical kin.',
+    title: 'What others shared',
+    teaser: 'Copy rhythm fixes that worked for your chemical kin.',
     cue: '#acd3de',
   },
   {
     id: 'join',
     badge: 'Free',
     title: 'Free Commons match',
-    teaser: 'Chat and compare. Clinical tools stay optional.',
+    teaser: 'Chat and share. Deeper TipTraQ reads stay optional.',
     cue: '#c9b6f2',
   },
 ] as const

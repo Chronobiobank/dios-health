@@ -1,47 +1,48 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const DOSAGE_PAGE_META = {
-  title: `Dosage · ${DEEPDOSE_NAME}`,
+  title: `Chemistry · ${DEEPDOSE_NAME}`,
   description:
-    'Six medical doses timed to raise Sleep Regularity Index. Medicines cluster under Biomedical.',
+    'Understand your rhythm and chemistry so you can share what fits and connect with people on a similar clock.',
 } as const
 
 export const DOSAGE_PAGE = {
-  eyebrow: 'Dosage protocol',
+  eyebrow: 'Your chemistry',
   backToProfile: '← Back to profile',
   cta: 'Save my plan',
 } as const
 
 export const SHARE_PAGE_META = {
   title: `Share · ${DEEPDOSE_NAME}`,
-  description: 'Share anonymised timing outcomes for research. You choose what leaves your phone.',
+  description: 'Share what you choose about your chemistry. You stay in control.',
 } as const
 
 export const SHARE_PAGE = {
   eyebrow: 'Share',
-  titleBefore: 'Help research,',
+  titleBefore: 'Share chemistry,',
   titleHighlight: 'keep control',
   support:
-    'Opt in to share anonymised sleep and timing outcomes. No names. No raw sensor dumps. You can stop anytime.',
+    'Share details that help others understand your rhythm. Opt in to research only if you want. You can stop anytime.',
   pointsEyebrow: 'What you share',
   points: [
-    'Contributor hash only, never your name',
-    'Outcomes that help atypical folk get better timing evidence',
-    'Off by default until you turn it on',
+    'Only what you choose to show for connection',
+    'Optional anonymised research, never by default',
+    'Off until you turn it on',
   ],
-  cta: { label: 'Turn on research sharing', href: '/login' },
+  cta: { label: 'Review sharing', href: '/login' },
 } as const
 
 export const CONNECT_PAGE_META = {
   title: `Connect · ${DEEPDOSE_NAME}`,
-  description: 'Find people on a similar rhythm for social chats and shared timing wins.',
+  description: 'Find people on a similar chemistry and rhythm. Message when it feels right.',
 } as const
 
 export const CONNECT_PAGE = {
   eyebrow: 'Connect',
   titleBefore: 'Your',
   titleHighlight: 'matches',
-  support: 'People on your body clock and meds. Message when it feels right.',
+  support:
+    'People on your rhythm. Share details, connect, and correct together.',
   cta: { label: 'Open chat', href: '/chat' },
   secondary: { label: 'See my profile', href: '/profile' },
 } as const

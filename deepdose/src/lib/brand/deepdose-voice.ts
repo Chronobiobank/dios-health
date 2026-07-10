@@ -1,14 +1,14 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 /**
- * Home = simple chemistry message + face network + two doors.
- * Mission = Chemical Soul-Matching + Manjam letter + how matching works.
+ * Home = chemistry match headline + face network.
+ * Mission = Chemical Soul-Matching + how matching works.
  * Prefer "non-conformists" only off-home. No em dashes.
  */
 export const DEEPDOSE_AUDIENCE = {
   label: 'non-conformists',
   who: 'People who don’t live on a 9-to-5 clock.',
-  why: 'Late nights stack meds. Recovery sleep doesn’t.',
+  why: 'Odd hours. Stacked chemistry. Hard to find people who get it.',
 } as const
 
 export const DEEPDOSE_VOICE = {
@@ -17,13 +17,13 @@ export const DEEPDOSE_VOICE = {
   homeHeadlineWhite: 'Find your',
   homeHeadlineAccent: 'chemical match',
   homeLede: '',
-  missionHeadlineWhite: 'Know. Fit.',
-  missionHeadlineAccent: 'Share.',
-  missionLede: `${DEEPDOSE_NAME} shows your med risk, times doses to your rhythm, and lets you share gains if you want.`,
-  patientSubtitle: 'Know your SRI. Raise it with six doses. Max every med.',
-  communitySupport: 'Share what works with people on a similar rhythm.',
-  closeSupport: 'Add your meds. Find your chemical match. Keep your data.',
-  /** Footer under logo — short mission for the non-conformist focus. */
+  missionHeadlineWhite: 'Know. Share.',
+  missionHeadlineAccent: 'Connect.',
+  missionLede: `${DEEPDOSE_NAME} helps you understand your chemistry, share details you choose, and connect with people on a similar rhythm for connection, correction, and more.`,
+  patientSubtitle: 'Understand your chemistry. Share what fits. Connect and correct.',
+  communitySupport: 'Share details with people on a similar rhythm for connection and correction.',
+  closeSupport: 'Know your chemistry. Share details. Connect and correct together.',
+  /** Footer under logo */
   footerMission:
-    'Chemical soul-matching for people whose rhythm never fit the clinic clock.',
+    'Understand your chemistry. Share what fits. Connect with people on your rhythm.',
 } as const

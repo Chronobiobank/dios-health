@@ -17,11 +17,12 @@
   padding: 0;
 }
 
-.dd-chat-shell__inner {
-  box-sizing: border-box;
-  width: min(100%, 36rem);
-  margin-inline: auto;
-  padding: 1rem clamp(1rem, 4vw, 1.5rem) calc(5.5rem + env(safe-area-inset-bottom, 0px));
+.dd-chat-shell.seco-marketing-page .seco-landing__section-inner.dd-chat-shell__inner {
+  --seco-page-max: var(--page-max-app, 48rem);
+  width: 100%;
+  max-width: var(--seco-page-max);
+  gap: var(--mkt-section-gap);
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
 }
 
 .dd-chat {
@@ -33,66 +34,48 @@
 
 .dd-chat__header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0 0 1rem;
+  gap: 0.5rem 0.75rem;
+  padding: 0 0 0.65rem;
   border-bottom: 1px solid var(--dd-chat-line);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-chat__thread .dd-chat__header {
+  justify-content: flex-start;
+}
+
+.dd-chat__thread .dd-chat__title {
+  flex: 1 1 auto;
 }
 
 .dd-chat__header-copy {
   min-width: 0;
-}
-
-.dd-chat__eyebrow {
-  margin: 0 0 0.35rem;
-  font-family: var(--seco-font-data, ui-monospace, monospace);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--dd-chat-faint);
+  max-width: 100%;
 }
 
 .dd-chat__title {
+  display: block;
   margin: 0;
   font-family: var(--seco-font-display);
-  font-size: clamp(1.65rem, 1.1rem + 2vw, 2.35rem);
+  font-size: var(--mkt-hero-title-size, clamp(1.875rem, 0.55rem + 7.2vw, 4.75rem));
   font-weight: 300;
   letter-spacing: var(--seco-display-tracking-hero, -0.02em);
-  line-height: 1.1;
+  line-height: var(--text-display-leading-hero, 1.08);
   color: #fff;
-}
-
-.dd-chat__title-line--spectrum {
-  background: var(--seco-spectrum-hero);
-  background-size: 220% 100%;
-  background-position: 0% 50%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: seco-cta-flow 7s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dd-chat__title-line--spectrum {
-    animation: none;
-    background-position: 50% 50%;
-  }
-}
-
-.dd-chat__lede {
-  margin: 0.4rem 0 0;
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: var(--dd-chat-muted);
+  max-width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dd-chat__header-cta {
   flex-shrink: 0;
-  margin-top: 0.35rem;
+  margin-top: 0;
   font-size: 0.8125rem;
   font-weight: 600;
   color: #fff;
@@ -115,10 +98,6 @@
 
 .dd-chat__back:hover {
   color: #fff;
-}
-
-.dd-chat__thread .dd-chat__header {
-  align-items: center;
 }
 
 .dd-chat__thread .dd-chat__title {

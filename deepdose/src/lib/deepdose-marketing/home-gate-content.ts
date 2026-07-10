@@ -27,7 +27,7 @@ export const SAFETY_PAGE = {
     },
     {
       heading: 'Health boundary',
-      body: `${DEEPDOSE_NAME} is decision support, not emergency care. If you are in crisis, contact local emergency services or a trusted clinician.`,
+      body: `${DEEPDOSE_NAME} helps you understand chemistry and connect with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
     },
     {
       heading: 'Reporting',
@@ -56,10 +56,17 @@ export const TAKE_IT_DOWN_PAGE = {
 } as const
 
 export const REPORT_PAGE = {
-  title: 'Report or Request Removal of Content',
-  lede: 'Tell us about harmful profiles, messages, or content you want reviewed or removed.',
+  title: 'Report',
+  lede: 'Flag a profile, message, or content for review.',
   email: 'safety@deepdose.org',
-  body: `Email ${DEEPDOSE_NAME} safety with the profile or chat link, a short description, and whether this is a safety report or a removal request (including Take It Down Act requests). Do not send passwords or full medical records.`,
+  body: 'Email the link, a short note, and whether this is a safety report or a removal request. Do not send passwords or medical records.',
+} as const
+
+/** Compact Terms copy — chemistry soul-matching network, not clinical CDS. */
+export const TERMS_PAGE = {
+  title: 'Terms',
+  lede: `By using ${DEEPDOSE_NAME} you agree to these terms. You must be 18+.`,
+  body: `By using ${DEEPDOSE_NAME} you agree to these terms. You must be 18+. We are not a clinic or emergency care.`,
 } as const
 
 export const STATEMENT_2257_PAGE = {

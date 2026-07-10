@@ -1,0 +1,188 @@
+/**
+ * Legal / policy — dense marketing system. No per-page galley layout.
+ */
+
+.seco-legal.seco-marketing-page .seco-landing__section-inner {
+  gap: var(--mkt-section-gap);
+  padding-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Dense display — same system, less air than marketing heroes */
+.seco-legal .seco-page__title {
+  font-size: clamp(2rem, 1.15rem + 3.5vw, 3.25rem);
+  line-height: 1.05;
+}
+
+.seco-legal__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.seco-legal__title {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.seco-legal__lede,
+.seco-legal__body {
+  margin: 0;
+  width: 100%;
+  max-width: min(100%, var(--copy-measure, 52ch));
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.seco-legal__meta {
+  margin: 0.25rem 0 0;
+  font-family: var(--seco-font-data);
+  font-size: var(--mkt-eyebrow-size, var(--type-micro));
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+}
+
+.seco-legal__body {
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-hero-lede-size, var(--type-body-lg, 1.125rem));
+  font-weight: 300;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.78);
+}
+
+.seco-legal__body a,
+.seco-legal__footer a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.seco-legal__body a:hover,
+.seco-legal__footer a:hover {
+  color: var(--seco-spectrum-cyan, #acd3de);
+}
+
+.seco-legal__tiles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--mkt-cta-gap, 0.75rem);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 720px) {
+  .seco-legal__tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.seco-legal__tiles .seco-spectrum-tile {
+  min-height: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.seco-legal__tiles .seco-spectrum-tile__body {
+  max-width: 100%;
+  min-height: 0;
+}
+
+.seco-legal__tiles--links {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 560px) {
+  .seco-legal__tiles--links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .seco-legal__tiles--links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+a.seco-legal__link-tile {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  min-height: 0;
+  padding-block: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+a.seco-legal__link-tile .seco-spectrum-tile__title {
+  margin: 0;
+}
+
+a.seco-legal__link-tile:hover .seco-spectrum-tile__title {
+  color: #fff;
+}
+
+.seco-legal__footer {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  margin-top: 0;
+  width: 100%;
+  max-width: 100%;
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-tile-body-size, var(--type-body));
+  font-weight: 300;
+  color: rgb(255 255 255 / 0.55);
+}
+
+.seco-legal__footer-sep {
+  color: rgb(255 255 255 / 0.28);
+}
+
+.seco-legal__contact {
+  margin: 0;
+  max-width: 100%;
+  min-width: 0;
+  font-family: var(--seco-font-display);
+  font-size: clamp(1.25rem, 0.95rem + 1.2vw, 1.75rem);
+  font-weight: 300;
+  letter-spacing: var(--seco-display-tracking, -0.02em);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.seco-legal__contact a {
+  color: #fff;
+  text-decoration: none;
+  background: var(--seco-spectrum-hero);
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: seco-cta-flow 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seco-legal__contact a {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}
+
+.seco-legal__contact a:hover {
+  -webkit-text-fill-color: #fff;
+  color: #fff;
+  background: none;
+}

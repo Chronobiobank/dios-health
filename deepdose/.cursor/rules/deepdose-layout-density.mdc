@@ -1,0 +1,44 @@
+---
+description: DeepDose layout density — maximize real estate, no waffle, shared page system
+alwaysApply: true
+---
+
+# DeepDose layout density
+
+Do **not** invent per-page layout CSS. Use `seco-marketing-page` + `seco-landing__section-inner` + spectrum tiles from `deepdose-marketing-system.css` / `dios-tokens.css`.
+
+## Maximize screen real estate
+
+- Prefer tight stack gaps (`--mkt-section-gap`, `--mkt-cta-stack-gap`). Do not add large empty bands between head and content.
+- Drop redundant eyebrows when the nav or H1 already names the page.
+- One composition: head → content. No decorative spacer blocks.
+
+## No waffle copy
+
+- If a 2–3 word head does the job, **do not** also render a lede/sub.
+- Never stack lede + body that repeat the same idea.
+- Tile titles stay short; do not duplicate the title in a teaser line unless the teaser adds new information.
+
+## Page heads (all new app / policy pages)
+
+- **One line only.** Pattern: `seco-page__title` + single `seco-landing__hero-spectrum` span.
+- Examples: `Your matches`, `Your messages`, `Terms`, `Privacy`, `Report`.
+- Do not split heads across white + spectrum lines on these surfaces.
+
+## Page width & containment
+
+- All page content lives inside `seco-landing__section-inner` (`max-width: var(--seco-page-max)`).
+- App surfaces (Connect, Chat, Profile) may use `--page-max-app` / narrower inners, still via section-inner — never a one-off full-bleed text column.
+- **HARD RULE:** Heads and copy must **never** bleed outside tiles. Global CSS: `deepdose-tile-containment.css`. Tile shells use `overflow: hidden`; tile copy uses `max-width: 100%` + `overflow-wrap: anywhere`. Do **not** set `max-width: none` or `overflow: visible` on tile copy.
+- Do not set competing `max-width` on intro copy that fights the page grid unless measuring a single prose column inside the same inner.
+
+## Connect match tiles
+
+- Discovery tiles show **only** name + Chat on one row (face above). No location on the tile.
+- Chemistry %, journey, location, and other detail live on `/connect/[id]` opened by clicking the face/name.
+
+## Shared aesthetic
+
+- Spectrum hero titles: `seco-page__title` + `seco-landing__hero-spectrum` (single line on app/policy pages).
+- Section cards: `seco-spectrum-tile` via marketing tile grids — not Tailwind `text-sm` galley stacks, not bespoke `dd-*` type scales for marketing pages.
+- New pages extend the system; they do not fork a new visual language.

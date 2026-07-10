@@ -16,15 +16,15 @@ export const TECHNOLOGY_HUB_CTA = {
 export const TECHNOLOGY_HUB_META = {
   title: `Technology · ${DEEPDOSE_NAME}`,
   description:
-    'Four simple layers: your phone, your body clock estimate, a home sleep check, and daily cues for when to dose.',
+    'Four layers that sharpen your chemistry read: phone, rhythm estimate, optional home sleep check, and details you can share.',
 } as const
 
 export const TECHNOLOGY_HUB_INTRO = {
   eyebrow: 'The Stack',
   titleWhite: 'Layers that',
-  titleAccent: 'compound.',
+  titleAccent: 'clarify chemistry.',
   lede:
-    'Four layers. Each one makes the timing advice sharper. No lab visit required to start.',
+    'Four layers. Each one makes your chemistry clearer to understand, share, and correct with people on a similar clock.',
 } as const
 
 export type TechnologyHubLayer = {

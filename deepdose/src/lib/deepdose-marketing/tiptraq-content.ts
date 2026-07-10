@@ -5,15 +5,15 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 export const TIPTRAQ_PAGE_META = {
   title: `At-home sleep testing · ${DEEPDOSE_NAME}`,
   description:
-    'Charge the TipTraQ sensor, set up the app, wear it overnight, upload each morning, get an expert review, and receive a validated clinical sleep report.',
+    'Wear TipTraQ at home for a deeper chemistry read — charge, set up, overnight wear, upload, and a clearer rhythm baseline to share.',
 } as const
 
 export const TIPTRAQ_PAGE_INTRO = {
   eyebrow: 'TipTraQ',
   titleWhite: 'At-home',
-  titleAccent: 'sleep testing',
+  titleAccent: 'deeper read',
   lede:
-    'Charge the sensor, set up the app, and wear TipTraQ overnight , usually across three nights. Each morning you upload; a sleep expert validates your recordings and you receive a clinical report.',
+    'Charge the sensor, set up the app, and wear TipTraQ overnight , usually across three nights. Each morning you upload. You get a stronger rhythm baseline for chemistry you can understand and share.',
 } as const
 
 /** Which side holds the copy block. */

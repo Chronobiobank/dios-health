@@ -47,3 +47,4 @@ export function communityFaceUrl(id: CommunityFaceId | string, size = 160): stri
   const photo = FACE_PHOTOS[id as CommunityFaceId] ?? FACE_PHOTOS.ash
   return `https://images.unsplash.com/photo-${photo}?auto=format&fit=crop&w=${size}&h=${size}&q=80&crop=faces`
 }
+

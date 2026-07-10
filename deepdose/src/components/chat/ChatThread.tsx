@@ -123,9 +123,9 @@ export function ChatThread({
         <Link href="/chat" className="dd-chat__back" aria-label="Back to inbox">
           ←
         </Link>
-        <div>
-          <h1 className="dd-chat__title">{peer.displayName}</h1>
-        </div>
+        <h1 className="seco-page__title dd-chat__title">
+          <span className="seco-landing__hero-spectrum">{peer.displayName}</span>
+        </h1>
       </header>
 
       <div className="dd-chat__messages" ref={listRef} role="log" aria-live="polite">
