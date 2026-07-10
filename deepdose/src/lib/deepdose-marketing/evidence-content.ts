@@ -120,7 +120,7 @@ export const EVIDENCE_RESEARCH = {
 
 export const EVIDENCE_PAGE_CTA = {
   label: 'Start free',
-  href: '/login',
+  href: '/',
   note: DEEPDOSE_RESEARCH_INTRO.consent,
 } as const
 

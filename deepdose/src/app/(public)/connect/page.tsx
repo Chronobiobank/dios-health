@@ -18,7 +18,7 @@ export default async function ConnectPage() {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const messageHref = user ? '/chat' : '/login?next=/chat'
+  const messageHref = user ? '/chat' : '/?next=/chat'
 
   return (
     <article className="seco-page seco-marketing-page dd-connect">
@@ -32,7 +32,7 @@ export default async function ConnectPage() {
               Inbox
             </Link>
           ) : (
-            <Link href="/login?next=/chat" className="dd-connect__inbox-link">
+            <Link href="/?next=/chat" className="dd-connect__inbox-link">
               Sign in
             </Link>
           )}

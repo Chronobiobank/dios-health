@@ -24,7 +24,7 @@ export default async function ChatThreadPage({ params }: PageProps) {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    redirect(`/login?next=/chat/${id}`)
+    redirect(`/?next=/chat/${id}`)
   }
 
   const { peer, error: peerError } = await getThreadPeer(supabase, id, user.id)

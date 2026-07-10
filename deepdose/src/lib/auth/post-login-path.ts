@@ -1,20 +1,26 @@
 ﻿import type { SupabaseClient } from '@supabase/supabase-js'
 
-import {
-  onboardingPathForStep,
-  resolveOnboardingStep,
-} from '@/lib/onboarding/resolve'
-
 export type UserTier = 'patient' | 'clinician' | 'enterprise'
 
-/** Match-first home after onboarding (Sniffies-slick IA). */
-export const DEFAULT_PATIENT_HOME = '/connect'
+/** Consumer home after auth — SRI profile from phone / plan data. */
+export const DEFAULT_PATIENT_HOME = '/profile'
 
-/** First-time interrupt when consent is missing — prefer async resolvePatientPostLoginPath. */
+/** @deprecated Clinical activation still uses consent; consumers land on DEFAULT_PATIENT_HOME. */
 export const DEFAULT_PATIENT_PATH = '/patient/onboarding/consent'
 
 function isSafeInternalPath(path: string | null | undefined): path is string {
   return Boolean(path && path.startsWith('/') && !path.startsWith('//'))
+}
+
+/**
+ * Consumer auth lives on the home gate (`/`), not `/login`.
+ * Staff portals keep `/login?next=/clinical|enterprise…`.
+ */
+export function consumerAuthPath(next?: string | null): string {
+  if (isSafeInternalPath(next) && next !== '/') {
+    return `/?next=${encodeURIComponent(next)}`
+  }
+  return '/'
 }
 
 /** Patient sign-up from home search or dose-dash onboarding. */
@@ -25,12 +31,13 @@ export function isPatientDoseDashPath(next?: string | null): boolean {
     next.startsWith('/patient/dashboard') ||
     next.startsWith('/dosage') ||
     next.startsWith('/profile') ||
+    next.startsWith('/account') ||
     next.startsWith('/connect') ||
     next.startsWith('/chat')
   )
 }
 
-/** Sync redirect helper — honour `next`, else tier default (patients → /connect). */
+/** Sync redirect helper — honour `next`, else tier default (patients → /profile). */
 export function resolvePostLoginPath(
   tier: UserTier | string | null | undefined,
   next?: string | null
@@ -50,19 +57,18 @@ export function resolvePostLoginPath(
 }
 
 /**
- * Patient post-auth destination: honour `next`, else onboarding step or /connect.
- * Use from LoginForm / auth callback (has Supabase client).
+ * Patient post-auth destination: honour `next`, else `/profile` (SRI).
+ * Clinical onboarding is only via explicit `next` (activation / patient dash).
  */
 export async function resolvePatientPostLoginPath(
-  supabase: SupabaseClient,
-  userId: string,
+  _supabase: SupabaseClient,
+  _userId: string,
   next?: string | null
 ): Promise<string> {
   if (isSafeInternalPath(next)) {
     return next
   }
-  const step = await resolveOnboardingStep(supabase, userId)
-  return onboardingPathForStep(step)
+  return DEFAULT_PATIENT_HOME
 }
 
 /** Short context line · omit when the title is enough (patient sign-in). */

@@ -18,7 +18,7 @@ export async function GET() {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.redirect(new URL('/login', process.env.NEXT_PUBLIC_APP_URL))
+    return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_APP_URL))
   }
 
   const state = crypto.randomUUID()

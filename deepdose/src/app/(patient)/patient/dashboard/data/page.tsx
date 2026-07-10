@@ -29,7 +29,7 @@ export default async function PatientDataPage({
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    redirect('/login?next=/patient/dashboard/data')
+    redirect('/?next=/patient/dashboard/data')
   }
 
   const nextOnboardingStep = await resolveOnboardingStep(supabase, user.id)

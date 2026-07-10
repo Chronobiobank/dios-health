@@ -6,7 +6,7 @@ export const LANDING_NAV = {
     { label: 'Product', href: '#product' },
     { label: 'Proof', href: '#proof' },
   ],
-  cta: { label: 'Sign in', href: '/login' },
+  cta: { label: 'Sign in', href: '/' },
 } as const
 
 export const LANDING_FOOTER = {
@@ -20,14 +20,14 @@ export const LANDING_FOOTER = {
         { label: 'Mechanism', href: '/#mechanism' },
         { label: 'Product', href: '/#product' },
         { label: 'Proof', href: '/#proof' },
-        { label: 'Sign in', href: '/login' },
+        { label: 'Sign in', href: '/' },
       ],
     },
     {
       title: 'Product',
       links: [
         { label: 'Mission', href: '/mission' },
-        { label: 'Patient onboarding', href: '/login' },
+        { label: 'Patient onboarding', href: '/' },
         { label: 'Dosage', href: '/dosage' },
       ],
     },
@@ -40,7 +40,7 @@ export const LANDING_HERO = {
   headlineHtml: 'Your medications miss the <em>biological window</em>',
   support:
     'Fixed pill times ignore circadian phase. Deepdose maps each dose to your DLMO, chronotype, and evidence-graded timing windows.',
-  cta: { label: 'Start onboarding', href: '/login' },
+  cta: { label: 'Start onboarding', href: '/' },
 } as const
 
 export const LANDING_MECHANISM = {
@@ -116,7 +116,7 @@ export const LANDING_PROOF = {
     },
   ],
   methodology: 'Evidence grades A/B/C per medication · Not a substitute for clinical advice.',
-  cta: { label: 'View your windows', href: '/login' },
+  cta: { label: 'View your windows', href: '/' },
 } as const
 
 export const LANDING_CLOSE = {
@@ -136,5 +136,5 @@ export const LANDING_CLOSE = {
     { label: 'Compliance', value: 'UK GDPR · RLS enforced' },
     { label: 'Entry', value: 'Sign in to begin' },
   ],
-  cta: { label: 'Start onboarding', href: '/login' },
+  cta: { label: 'Start onboarding', href: '/' },
 } as const

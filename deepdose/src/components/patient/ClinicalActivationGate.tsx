@@ -49,7 +49,7 @@ export function ClinicalActivationGate({ isAuthenticated = false }: ClinicalActi
     setLoading(false)
     persistPendingActivation(normalized)
     router.push(
-      `/login?next=${encodeURIComponent('/patient/dashboard/status')}&activation=${encodeURIComponent(normalized)}`
+      `/?next=${encodeURIComponent('/patient/dashboard/status')}&activation=${encodeURIComponent(normalized)}`
     )
   }
 

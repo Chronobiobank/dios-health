@@ -14,7 +14,7 @@ export const ONBOARDING_PATHS = {
   consent: '/patient/onboarding/consent',
   medications: '/patient/onboarding/medications',
   chronotype: '/patient/onboarding/chronotype',
-  complete: '/connect',
+  complete: '/profile',
 } as const
 
 export interface OnboardingStatus {

@@ -32,7 +32,7 @@ export default async function ConnectMatchProfilePage({ params }: PageProps) {
   const {
     data: { user },
   } = await supabase.auth.getUser()
-  const messageHref = user ? '/chat' : '/login?next=/chat'
+  const messageHref = user ? '/chat' : '/?next=/chat'
 
   return (
     <article className="seco-page seco-marketing-page dd-connect dd-connect-profile">

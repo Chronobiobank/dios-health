@@ -89,7 +89,7 @@ export const BODY_CLOCK_PRICING_COMPARE = {
       'Dosing windows shift with your phase anchor',
       'Confidence capped — TipTraQ validates when it matters',
     ],
-    cta: { label: 'Start free', href: '/login' },
+    cta: { label: 'Start free', href: '/' },
   },
   clinical: {
     title: 'TipTraQ validation',

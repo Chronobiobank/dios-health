@@ -36,7 +36,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     figure: '$0',
     cadence: 'Phone & wearable',
     note: 'Understand your chemistry and share what you choose.',
-    cta: { label: 'Start free', href: '/login' },
+    cta: { label: 'Start free', href: '/' },
     includes: [
       'Chemistry profile from your phone',
       'Connect and message people on your rhythm',

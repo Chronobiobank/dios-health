@@ -21,7 +21,7 @@ export default async function ChatInboxPage() {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    redirect('/login?next=/chat')
+    redirect('/?next=/chat')
   }
 
   const guide = await ensureGuideConversation(supabase)

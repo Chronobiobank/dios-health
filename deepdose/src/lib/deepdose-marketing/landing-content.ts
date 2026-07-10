@@ -200,7 +200,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
         {
           title: 'Start free: understand your chemistry, share what fits, message when ready.',
           meta: 'Free · No attention feed',
-          href: '/login',
+          href: '/',
         },
       ],
     },
@@ -210,7 +210,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
 export const DEEPDOSE_LANDING_CLOSE = {
   headline: 'Start free',
   support: DEEPDOSE_VOICE.closeSupport,
-  cta: { label: 'Sign up for free', href: '/login' },
+  cta: { label: 'Sign up for free', href: '/' },
 } as const
 
 export const DEEPDOSE_PATIENT_PLAN_HERO = {
@@ -319,7 +319,7 @@ export const DEEPDOSE_PLAN_NEXT_STEPS = {
         'Match and message people on a similar rhythm',
         'Help research only if you opt in',
       ],
-      cta: { label: 'Join Commons free', href: '/login' },
+      cta: { label: 'Join Commons free', href: '/' },
     },
     paid: {
       title: 'Deeper read',

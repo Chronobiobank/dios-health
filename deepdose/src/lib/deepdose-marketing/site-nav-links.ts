@@ -4,7 +4,7 @@
 export const DEEPDOSE_SITE_LINKS = [
   { label: 'Mission', href: '/mission' },
   { label: 'Science', href: '/science' },
-  { label: 'Sign in', href: '/login' },
+  { label: 'Sign in', href: '/' },
 ] as const
 
 /** @deprecated Prefer DEEPDOSE_SITE_LINKS — kept for older imports. */
@@ -16,7 +16,7 @@ export const DEEPDOSE_FOOTER_LINKS = [
   { label: 'Profile', href: '/profile' },
   { label: 'Chemistry', href: '/dosage' },
   { label: 'Chat', href: '/chat' },
-  { label: 'Sign in', href: '/login' },
+  { label: 'Sign in', href: '/' },
   { label: 'Terms', href: '/terms' },
 ] as const
 
@@ -25,8 +25,8 @@ export const DEEPDOSE_PRODUCT_PATHS = [
   '/connect',
   '/chat',
   '/profile',
+  '/account',
   '/dosage',
-  '/login',
 ] as const
 
 export function isDeepdoseProductPath(pathname: string): boolean {

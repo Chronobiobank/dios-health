@@ -29,7 +29,7 @@ export const SHARE_PAGE = {
     'Optional anonymised research, never by default',
     'Off until you turn it on',
   ],
-  cta: { label: 'Review sharing', href: '/login' },
+  cta: { label: 'Review sharing', href: '/' },
 } as const
 
 export const CONNECT_PAGE_META = {

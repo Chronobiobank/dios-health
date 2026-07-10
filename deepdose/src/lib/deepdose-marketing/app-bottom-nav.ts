@@ -16,5 +16,9 @@ export const APP_BOTTOM_NAV: readonly AppBottomNavItem[] = [
 
 export function isAppBottomNavActive(href: string, pathname: string): boolean {
   if (href === '/') return pathname === '/'
+  // Account is reached via Profile gear — keep Profile tab active
+  if (href === '/profile' && (pathname === '/account' || pathname.startsWith('/account/'))) {
+    return true
+  }
   return pathname === href || pathname.startsWith(`${href}/`)
 }

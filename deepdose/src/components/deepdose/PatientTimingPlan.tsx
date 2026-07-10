@@ -55,7 +55,7 @@ const LANDING_TABS = DEEPDOSE_PATIENT_PLAN_TABS.landing
 type PlanTab = (typeof LANDING_TABS)[number]['id']
 
 function resolveSharingHref(href: string, signupHref?: string) {
-  return href === '/login' && signupHref ? signupHref : href
+  return href === '/' || href === '/login' ? (signupHref ?? href) : href
 }
 
 function TabIcon({ variant }: { variant: PlanTab }) {
@@ -399,7 +399,7 @@ export function PatientTimingPlan({
   medTimes = [],
   wake,
   verdict,
-  signupHref = '/login',
+  signupHref = '/',
   variant = 'landing',
   embedded = false,
   autoStartOnboarding = false,

@@ -17,7 +17,7 @@ export function CtaBanner() {
           Join Deepdose and align your medication schedule with your circadian rhythm.
         </p>
         <div className="mt-8">
-          <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
+          <Link href="/" className="seco-landing__btn seco-landing__btn--primary">
             Get started
           </Link>
         </div>

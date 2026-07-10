@@ -17,7 +17,7 @@ export function Hero() {
             your clinician know when each medication works best for your body.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Button href="/login">Start onboarding</Button>
+            <Button href="/">Start onboarding</Button>
             <Button href="/mission" variant="secondary">
               How it works
             </Button>

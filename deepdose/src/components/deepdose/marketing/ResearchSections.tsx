@@ -110,7 +110,7 @@ export function ResearchSections({ showClose = true }: { showClose?: boolean }) 
       {showClose ? (
         <div className={marketingCtaClass('seco-research__close')}>
           <p className="seco-research__close-sub seco-marketing-cta__note">{consent}</p>
-          <Link href="/login" className="seco-landing__btn seco-landing__btn--primary">
+          <Link href="/" className="seco-landing__btn seco-landing__btn--primary">
             Start free →
           </Link>
         </div>

@@ -1,11 +1,15 @@
 'use client'
 
 import { useState, type ReactNode } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
 import { createClient } from '@/lib/supabase/client'
-import { resolvePatientPostLoginPath, resolvePostLoginPath } from '@/lib/auth/post-login-path'
+import {
+  DEFAULT_PATIENT_HOME,
+  resolvePatientPostLoginPath,
+  resolvePostLoginPath,
+} from '@/lib/auth/post-login-path'
 import { completeActivationLink } from '@/lib/care/complete-activation-link'
 import {
   buildAuthCallbackUrl,
@@ -40,12 +44,18 @@ export function SplashGateForm({
   footer,
 }: SplashGateFormProps) {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const next = searchParams.get('next')
+  const callbackError = searchParams.get('error')
+  const callbackReason = searchParams.get('reason')
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState<AuthIntent | null>(null)
   const [message, setMessage] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(() =>
+    callbackError ? callbackReason || 'Something went wrong. Try again.' : null
+  )
 
   async function redirectAfterAuth() {
     const supabase = createClient()
@@ -66,12 +76,12 @@ export function SplashGateForm({
     const activation = readPendingActivation()
     let destination =
       tier === 'patient' || !tier
-        ? await resolvePatientPostLoginPath(supabase, user!.id, null)
-        : resolvePostLoginPath(tier, null)
+        ? await resolvePatientPostLoginPath(supabase, user!.id, next)
+        : resolvePostLoginPath(tier, next)
 
     if (activation) {
       const linkResult = await completeActivationLink(activation)
-      destination = resolvePathAfterActivationAttempt(tier, null, activation, linkResult)
+      destination = resolvePathAfterActivationAttempt(tier, next, activation, linkResult)
       if (!linkResult.ok && linkResult.code !== 'consent_required') {
         setError(linkResult.error)
       }
@@ -98,7 +108,11 @@ export function SplashGateForm({
         password,
         options: {
           data: { display_name: displayName },
-          emailRedirectTo: buildAuthCallbackUrl(window.location.origin, '/connect', activation),
+          emailRedirectTo: buildAuthCallbackUrl(
+            window.location.origin,
+            next || DEFAULT_PATIENT_HOME,
+            activation
+          ),
         },
       })
 
@@ -114,7 +128,7 @@ export function SplashGateForm({
         return
       }
 
-      setMessage('Check your email to confirm, then sign in.')
+      setMessage('Check your email to confirm, then use Sign In above.')
       setLoading(null)
       return
     }

@@ -100,6 +100,13 @@ export function buildHomeChemistryPath(options?: MedsPathOptions): string {
   return qs ? `/connect?${qs}` : '/connect'
 }
 
+/** Join CTA — home gate owns auth; return to profile with plan params after. */
+export function buildLoginPathForMeds(options?: MedsPathOptions): string {
+  const landing = buildPatientLandingPath(options)
+  return `/?next=${encodeURIComponent(landing)}`
+}
+
+/** Unauthenticated chronotype deep-link → home gate, then back. */
 export function buildPersonalTimingPath(options?: MedsPathOptions): string {
   const params = new URLSearchParams()
   appendMedsPathParams(params, options)
@@ -107,12 +114,7 @@ export function buildPersonalTimingPath(options?: MedsPathOptions): string {
   const destination = qs
     ? `/patient/onboarding/chronotype?${qs}`
     : '/patient/onboarding/chronotype'
-  return `/login?next=${encodeURIComponent(destination)}`
-}
-
-export function buildLoginPathForMeds(options?: MedsPathOptions): string {
-  const next = encodeURIComponent(buildConsentOnboardingPath(options))
-  return `/login?next=${next}`
+  return `/?next=${encodeURIComponent(destination)}`
 }
 
 /** Same shape as patient landing — meds/times/wake flow through consent → meds → chronotype. */

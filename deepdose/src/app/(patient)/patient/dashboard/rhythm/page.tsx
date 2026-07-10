@@ -22,7 +22,7 @@ export default async function DashboardRhythmPage() {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    redirect('/login?next=/patient/dashboard/rhythm')
+    redirect('/?next=/patient/dashboard/rhythm')
   }
 
   const nextOnboardingStep = await resolveOnboardingStep(supabase, user.id)

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { PatientLandingWithDraft } from '@/components/deepdose/PatientLandingWithDraft'
-import { ProfileAccountStrip } from '@/components/deepdose/ProfileAccountStrip'
+import { ProfileAccountGear } from '@/components/deepdose/ProfileAccountGear'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { resolvePlanFromSearchParams } from '@/lib/medications/parse-plan-search-params'
 import { createClient } from '@/lib/supabase/server'
@@ -27,17 +27,10 @@ export default async function ProfilePage({ searchParams }: PageProps) {
   } = await supabase.auth.getUser()
 
   return (
-    <>
-      <PatientLandingWithDraft urlPlanContext={urlPlanContext} signupHrefFromUrl={signupHref} />
-      {user ? (
-        <div className="seco-landing seco-landing--maven seco-landing--sleep-wake-dash">
-          <div className="seco-landing__section-inner">
-            <div className="dios-glass-outer sw-dash__tile sw-dash__tile--summary">
-              <ProfileAccountStrip />
-            </div>
-          </div>
-        </div>
-      ) : null}
-    </>
+    <PatientLandingWithDraft
+      urlPlanContext={urlPlanContext}
+      signupHrefFromUrl={signupHref}
+      accountGear={user ? <ProfileAccountGear /> : null}
+    />
   )
 }

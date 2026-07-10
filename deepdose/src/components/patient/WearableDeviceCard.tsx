@@ -132,7 +132,7 @@ export function WearableDeviceRow({
                 </p>
               )}
               {(provider.id === 'oura' || provider.id === 'whoop') && (
-                <Link href="/patient/profile" className="dash-meds__inline-link text-sm">
+                <Link href="/account" className="dash-meds__inline-link text-sm">
                   Clinician sharing
                 </Link>
               )}

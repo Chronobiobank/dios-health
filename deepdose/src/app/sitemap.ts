@@ -25,6 +25,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/take-it-down`, lastModified, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${BASE}/report`, lastModified, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${BASE}/2257`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE}/login`, lastModified, changeFrequency: 'monthly', priority: 0.6 },
   ]
 }

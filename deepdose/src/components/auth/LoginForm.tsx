@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { createClient } from '@/lib/supabase/client'
-import { isStaffLoginPath, loginEyebrow, loginLede, loginTitle, resolvePatientPostLoginPath, resolvePostLoginPath } from '@/lib/auth/post-login-path'
+import { isStaffLoginPath, loginEyebrow, loginLede, loginTitle, DEFAULT_PATIENT_HOME, resolvePatientPostLoginPath, resolvePostLoginPath } from '@/lib/auth/post-login-path'
 import { completeActivationLink } from '@/lib/care/complete-activation-link'
 import {
   buildAuthCallbackUrl,
@@ -105,7 +105,7 @@ export default function LoginForm({ variant = 'page' }: LoginFormProps) {
         password,
         options: {
           data: { display_name: displayName || email.split('@')[0] },
-          emailRedirectTo: buildAuthCallbackUrl(window.location.origin, next, activation),
+          emailRedirectTo: buildAuthCallbackUrl(window.location.origin, next || DEFAULT_PATIENT_HOME, activation),
         },
       })
 

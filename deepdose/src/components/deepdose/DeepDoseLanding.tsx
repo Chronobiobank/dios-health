@@ -17,7 +17,7 @@ type DeepDoseLandingProps = {
 }
 
 export function DeepDoseLanding({
-  signupHref = '/login',
+  signupHref = '/',
   medContext,
 }: DeepDoseLandingProps) {
   const closeCta = { ...DEEPDOSE_LANDING_CLOSE.cta, href: signupHref }

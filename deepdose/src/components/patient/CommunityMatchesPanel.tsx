@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils/cn'
 type CommunityMatchesPanelProps = {
   /** discovery = Sniffies-lean connect; marketing = glass tile; app = member cards */
   variant?: 'marketing' | 'app' | 'discovery'
-  /** Soft gate: /chat when signed in, /login?next=/chat when guest */
+  /** Soft gate: /chat when signed in, /?next=/chat when guest */
   messageHref?: string
 }
 
@@ -108,7 +108,7 @@ function MatchCard({
 
 export function CommunityMatchesPanel({
   variant = 'app',
-  messageHref = '/login?next=/chat',
+  messageHref = '/?next=/chat',
 }: CommunityMatchesPanelProps) {
   const copy = MEMBER_DASHBOARD_COMMUNITY.matches
 

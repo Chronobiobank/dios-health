@@ -15,7 +15,7 @@ export default async function DashboardMedicationsPage() {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    redirect('/login?next=/patient/dashboard/medications')
+    redirect('/?next=/patient/dashboard/medications')
   }
 
   const nextOnboardingStep = await resolveOnboardingStep(supabase, user.id)

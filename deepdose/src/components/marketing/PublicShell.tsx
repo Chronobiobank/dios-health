@@ -15,7 +15,7 @@ export function PublicHeader() {
           <Link href="/mission" className="hidden text-sm text-ink-muted hover:text-ink sm:block">
             Mission
           </Link>
-          <Button href="/login" variant="primary" className="!px-5 !py-2 text-sm">
+          <Button href="/" variant="primary" className="!px-5 !py-2 text-sm">
             Sign in
           </Button>
         </nav>

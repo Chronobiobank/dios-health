@@ -35,7 +35,7 @@ export function resolvePathAfterActivationAttempt(
       error: 'activation_failed',
       reason: linkResult.error,
     })
-    return `/login?${params.toString()}`
+    return `/?${params.toString()}`
   }
 
   return resolvePostLoginPath(tier, next)

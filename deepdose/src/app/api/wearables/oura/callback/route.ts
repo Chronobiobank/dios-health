@@ -33,7 +33,7 @@ export async function GET(request: Request) {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.redirect(`${appUrl}/login`)
+    return NextResponse.redirect(`${appUrl}/`)
   }
 
   try {

@@ -5,7 +5,17 @@ import {
   tryActivationLinkForUser,
 } from '@/lib/care/resolve-activation-redirect'
 import { normalizeActivationCode } from '@/lib/care/pending-activation'
-import { resolvePatientPostLoginPath, resolvePostLoginPath } from '@/lib/auth/post-login-path'
+import {
+  consumerAuthPath,
+  resolvePatientPostLoginPath,
+  resolvePostLoginPath,
+} from '@/lib/auth/post-login-path'
+
+function homeAuthErrorUrl(origin: string, next: string | null, reason: string): string {
+  const base = consumerAuthPath(next)
+  const sep = base.includes('?') ? '&' : '?'
+  return `${origin}${base}${sep}error=auth_callback_failed&reason=${encodeURIComponent(reason)}`
+}
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = request.nextUrl
@@ -14,9 +24,7 @@ export async function GET(request: NextRequest) {
   const activation = searchParams.get('activation')
 
   if (!code) {
-    return NextResponse.redirect(
-      `${origin}/login?error=auth_callback_failed&reason=missing_code`
-    )
+    return NextResponse.redirect(homeAuthErrorUrl(origin, next, 'missing_code'))
   }
 
   let redirectPath = resolvePostLoginPath('patient', next)
@@ -45,10 +53,7 @@ export async function GET(request: NextRequest) {
   const { error } = await supabase.auth.exchangeCodeForSession(code)
 
   if (error) {
-    const reason = encodeURIComponent(error.message)
-    return NextResponse.redirect(
-      `${origin}/login?error=auth_callback_failed&reason=${reason}`
-    )
+    return NextResponse.redirect(homeAuthErrorUrl(origin, next, error.message))
   }
 
   const {

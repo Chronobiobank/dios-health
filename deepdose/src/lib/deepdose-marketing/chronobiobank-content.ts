@@ -50,7 +50,7 @@ export const CHRONOBIOBANK_LETTER_TILES = [
 
 export const CHRONOBIOBANK_MISSION_CTA = {
   label: 'Find your chemical match',
-  href: '/login',
+  href: '/',
 } as const
 
 export const CHRONOBIOBANK_TRUST = {
@@ -223,7 +223,7 @@ export const CHRONOBIOBANK_MISSION_JOIN = {
       cue: '#acd3de',
       title: 'Find your match',
       body: 'Add your medicines and rhythm. See people on a similar clock. Chat about what timing actually worked.',
-      cta: { label: 'Create profile', href: '/login' },
+      cta: { label: 'Create profile', href: '/' },
     },
     {
       id: 'researcher',
@@ -513,7 +513,7 @@ export const CHRONOBIOBANK_AUDIENCES = [
     title: 'Your clock stays yours',
     body:
       'Start free with phone and wearable data. Choose what to share. Tier A, B, or C , we route you to the path your device can support.',
-    cta: { label: 'Start free', href: '/login' },
+    cta: { label: 'Start free', href: '/' },
   },
   {
     id: 'researcher',

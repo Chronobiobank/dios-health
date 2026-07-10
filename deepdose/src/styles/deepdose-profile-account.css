@@ -1,0 +1,149 @@
+/* Profile + Account — consumer social IA (gear on Profile → /account). */
+
+.dd-profile__head,
+.dd-account__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  width: 100%;
+  min-width: 0;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
+  margin-bottom: var(--mkt-cta-stack-gap, 0.75rem);
+}
+
+.dd-profile__title,
+.dd-account__title {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dd-profile__gear {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -0.35rem -0.35rem -0.35rem 0;
+  border-radius: 999px;
+  color: rgb(255 255 255 / 0.88);
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.dd-profile__gear:hover {
+  color: #fff;
+  background: rgb(255 255 255 / 0.08);
+}
+
+.dd-profile__gear:focus-visible {
+  outline: 2px solid rgb(172 211 222 / 0.65);
+  outline-offset: 2px;
+}
+
+.dd-account {
+  color: #f2f2f2;
+  min-height: calc(100dvh - 5.5rem);
+}
+
+.dd-account.seco-marketing-page .seco-landing__section-inner.dd-account__inner {
+  --seco-page-max: var(--page-max-app, 48rem);
+  width: 100%;
+  max-width: var(--seco-page-max);
+  gap: var(--mkt-section-gap);
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.dd-account__back {
+  flex-shrink: 0;
+  font-family: var(--seco-font-ui);
+  font-size: var(--mkt-tile-body-size, 0.9375rem);
+  font-weight: 600;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.dd-account__identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.dd-account__name {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+  overflow-wrap: anywhere;
+}
+
+.dd-account__email {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.875rem;
+  color: rgb(242 242 242 / 0.58);
+  overflow-wrap: anywhere;
+}
+
+.dd-account__panel .dash-meds__form {
+  gap: var(--mkt-section-gap);
+}
+
+.dd-account__empty {
+  margin: 0;
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  color: rgb(242 242 242 / 0.58);
+}
+
+.dd-account__shortcut-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.dd-account__shortcut {
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+}
+
+.dd-account__shortcut:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.dd-account__signout {
+  display: flex;
+  justify-content: stretch;
+}
+
+.dd-account__signout-btn {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.06);
+  color: #fff;
+  font-family: var(--seco-font-ui);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dd-account__signout-btn:hover {
+  background: rgb(255 255 255 / 0.1);
+}
