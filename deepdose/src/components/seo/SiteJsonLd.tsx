@@ -12,7 +12,7 @@ export function SiteJsonLd() {
         name: DEEPDOSE_NAME,
         url: BASE,
         slogan: DEEPDOSE_TAGLINE,
-        description: 'Sleepmaxx and share real life — one Real a day.',
+        description: 'For dosers — log the dose, climb the SRI.',
       },
       {
         '@type': 'WebSite',

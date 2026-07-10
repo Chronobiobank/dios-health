@@ -1,12 +1,13 @@
 /**
- * Product spacing — OpenAI.com formula (4px grid, named roles only).
+ * Product design system — OpenAI.com grid + Realme flat visuals.
  *
- * Do not invent one-off rem gaps on product pages.
- * Use: --dd-inset, --dd-gap, --dd-stack (and tight/loose variants).
+ * Spacing: 4px scale, named roles only (--dd-inset / --dd-gap / --dd-stack).
+ * Visuals: charcoal product shell, flat cards, warning-yellow accent.
+ * Do not invent one-off rem gaps or raw hex in feature CSS — use these tokens.
  */
 
 .dd-product {
-  /* Scale aliases (from dios-tokens --space-*) */
+  /* ── Scale (from dios-tokens --space-*) ── */
   --dd-1: var(--space-1); /* 4px */
   --dd-2: var(--space-2); /* 8px */
   --dd-3: var(--space-3); /* 12px */
@@ -14,15 +15,58 @@
   --dd-6: var(--space-6); /* 24px */
   --dd-8: var(--space-8); /* 32px */
 
-  /* Named roles — OpenAI product layout */
-  --dd-inset: var(--dd-6); /* type ↔ tile edge: 24px */
-  --dd-inset-lg: var(--dd-8); /* hero tiles: 32px */
+  /* ── Named spacing roles (OpenAI layout) ── */
+  --dd-inset: var(--dd-6); /* type ↔ card edge: 24px */
+  --dd-inset-lg: var(--dd-8); /* hero: 32px */
   --dd-gap-tight: var(--dd-2); /* related lines: 8px */
-  --dd-gap: var(--dd-3); /* elements inside a tile: 12px */
-  --dd-gap-loose: var(--dd-4); /* groups inside a tile: 16px */
-  --dd-stack: var(--dd-6); /* tile ↔ tile: 24px */
+  --dd-gap: var(--dd-3); /* inside a card: 12px */
+  --dd-gap-loose: var(--dd-4); /* groups: 16px */
+  --dd-stack: var(--dd-6); /* card ↔ card: 24px */
   --dd-stack-loose: var(--dd-8); /* major blocks: 32px */
   --dd-page-y: var(--dd-6); /* page top rhythm */
+
+  /* ── Realme flat visuals (on the same grid) ── */
+  --dd-ink: rgb(255 255 255 / 0.92);
+  --dd-ink-soft: rgb(255 255 255 / 0.78);
+  --dd-ink-muted: rgb(255 255 255 / 0.55);
+  --dd-ink-faint: rgb(255 255 255 / 0.45);
+  --dd-ink-dim: rgb(255 255 255 / 0.4);
+  --dd-ink-inverse: #0b1220;
+
+  --dd-surface: rgb(255 255 255 / 0.04);
+  --dd-surface-quiet: rgb(255 255 255 / 0.03);
+  --dd-surface-hover: rgb(255 255 255 / 0.06);
+  --dd-surface-strong: rgb(255 255 255 / 0.08);
+
+  --dd-border: rgb(255 255 255 / 0.12);
+  --dd-border-strong: rgb(255 255 255 / 0.18);
+  --dd-border-focus: rgb(255 255 255 / 0.35);
+
+  --dd-solid: #fff;
+  --dd-accent: #f5e74a; /* safety yellow */
+  --dd-accent-soft: rgb(245 231 74 / 0.08);
+  --dd-cue-photonic: var(--dd-accent);
+  --dd-cue-metabolic: #acd3de;
+  --dd-cue-kinetic: #ff5a5a;
+  --dd-danger: var(--dd-cue-kinetic);
+
+  /* Radius — flat, snapped to 4px grid */
+  --dd-radius: var(--dd-2); /* 8px cards / controls */
+  --dd-radius-sm: var(--dd-1); /* 4px badges / media */
+  --dd-radius-pill: 999px;
+
+  /* Type — Inter only; fixed steps (no fluid on product) */
+  --dd-type-xs: 0.6875rem; /* 11px */
+  --dd-type-sm: 0.75rem; /* 12px */
+  --dd-type-md: 0.8125rem; /* 13px */
+  --dd-type-body: 0.875rem; /* 14px */
+  --dd-type-lg: 0.9375rem; /* 15px */
+  --dd-type-xl: 1.0625rem; /* 17px */
+
+  /* Controls */
+  --dd-control-h: 2.5rem; /* 40px */
+  --dd-control-h-lg: 3.5rem; /* 56px */
+  --dd-avatar: 2.25rem; /* 36px */
 }
 
 /* Page column rhythm */
@@ -52,15 +96,23 @@
   gap: var(--dd-gap-loose);
 }
 
-/* Quiet hover — no jump (OpenAI cards stay put) */
+/* Quiet hover — no jump */
 .dd-product .seco-spectrum-tile:hover {
   transform: none;
   box-shadow: none;
 }
 
-/* Stacks / groups inside product pages */
-.dd-product :is(.dd-profile__stack, .dd-account__panel, .dd-chat, .sw-dash__tiles, .dd-real__stack, .dd-real__feed) {
+/* Flat Realme cards share the same inset/gap roles */
+.dd-product :is(.dd-grid__card, .dd-bank__research, .dd-bank__clinical-link, .dd-bank__slot) {
+  box-sizing: border-box;
+}
+
+.dd-product :is(.dd-grid, .dd-grid__feed, .dd-bank, .dd-profile__stack) {
   gap: var(--dd-stack);
+}
+
+.dd-product :is(.dd-log, .dd-log__buttons) {
+  gap: var(--dd-gap);
 }
 
 .dd-product :is(.dd-profile__identity, .dd-profile__chemistry, .dd-connect-profile__copy) {
@@ -94,7 +146,6 @@
   gap: var(--dd-gap-tight);
 }
 
-/* Connect discovery tiles — photo can bleed; text bar keeps inset */
 .dd-product .dd-connect__grid {
   gap: var(--dd-gap);
 }
@@ -108,7 +159,6 @@
   gap: var(--dd-gap-loose);
 }
 
-/* Chat */
 .dd-product .dd-chat__messages {
   gap: var(--dd-2);
   padding-block: var(--dd-4);
@@ -129,7 +179,6 @@
   padding-block: var(--dd-3);
 }
 
-/* Account */
 .dd-product .dd-account__identity {
   gap: var(--dd-gap-tight);
 }
@@ -138,7 +187,6 @@
   gap: var(--dd-gap);
 }
 
-/* SRI / metrics — never Merriweather on product */
 .dd-product :is(
   .sri-score-ring,
   .sri-score-ring__value,
@@ -160,45 +208,45 @@
   letter-spacing: 0.08em;
 }
 
-/* ── Product icon actions (Share, Matches, …) ── */
+/* ── Product icon actions ── */
 .dd-icon-actions {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: var(--dd-2, 0.5rem);
+  gap: var(--dd-2);
   width: 100%;
   margin: 0;
-  padding: var(--dd-gap-tight, 0.5rem) 0 0;
+  padding: var(--dd-gap-tight) 0 0;
   border-top: 0;
 }
 
 .dd-profile__identity .dd-icon-actions {
-  padding-top: var(--dd-gap-tight, 0.5rem);
+  padding-top: var(--dd-gap-tight);
 }
 
 .dd-icon-action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: var(--dd-control-h);
+  height: var(--dd-control-h);
   margin: 0;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: var(--dd-radius);
   background: transparent;
-  color: rgb(255 255 255 / 0.72);
+  color: var(--dd-ink-muted);
   text-decoration: none;
   cursor: pointer;
   transition: color 0.15s ease, background 0.15s ease;
 }
 
 .dd-icon-action:hover {
-  color: rgb(255 255 255 / 0.95);
-  background: rgb(255 255 255 / 0.06);
+  color: var(--dd-ink);
+  background: var(--dd-surface-hover);
 }
 
 .dd-icon-action:focus-visible {
-  outline: 1px solid rgb(255 255 255 / 0.35);
+  outline: 1px solid var(--dd-border-focus);
   outline-offset: 2px;
 }
 

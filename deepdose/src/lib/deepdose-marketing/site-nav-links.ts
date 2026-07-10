@@ -12,22 +12,25 @@ export const DEEPDOSE_SPLASH_LINKS = DEEPDOSE_SITE_LINKS
 
 /** Footer essentials when mounted. */
 export const DEEPDOSE_FOOTER_LINKS = [
-  { label: 'Real', href: '/real' },
-  { label: 'Friends', href: '/connect' },
-  { label: 'Profile', href: '/profile' },
-  { label: 'Chat', href: '/chat' },
+  { label: 'Grid', href: '/grid' },
+  { label: 'Log', href: '/dose' },
+  { label: 'Bank', href: '/bank' },
+  { label: 'Me', href: '/profile' },
   { label: 'Sign in', href: '/' },
   { label: 'Terms', href: '/terms' },
 ] as const
 
 /** Product routes: bottom nav only, no marketing header. */
 export const DEEPDOSE_PRODUCT_PATHS = [
-  '/real',
-  '/connect',
-  '/chat',
+  '/grid',
+  '/dose',
+  '/bank',
   '/profile',
   '/account',
   '/dosage',
+  '/connect',
+  '/chat',
+  '/real',
 ] as const
 
 export function isDeepdoseProductPath(pathname: string): boolean {

@@ -1,0 +1,479 @@
+/**
+ * Realme flat layouts — Grid / Log / Bank / Me.
+ * All values come from .dd-product tokens in deepdose-product-space.css.
+ * Do not add raw hex / rem here.
+ */
+
+.app-bottom-nav__list--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* ── Grid ── */
+
+.dd-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-stack);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-grid__tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  width: 100%;
+  border: 1px solid var(--dd-border-strong);
+  border-radius: var(--dd-radius);
+  overflow: hidden;
+}
+
+.dd-grid__tab {
+  margin: 0;
+  padding: var(--dd-2) var(--dd-2);
+  border: 0;
+  background: transparent;
+  color: var(--dd-ink-faint);
+  font-size: var(--dd-type-body);
+  cursor: pointer;
+}
+
+.dd-grid__tab--on {
+  background: var(--dd-solid);
+  color: var(--dd-ink-inverse);
+}
+
+.dd-grid__feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-stack);
+}
+
+.dd-grid__empty {
+  margin: 0;
+  color: var(--dd-ink-faint);
+  font-size: var(--dd-type-body);
+}
+
+.dd-grid__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-gap);
+  width: 100%;
+  min-width: 0;
+  padding: var(--dd-gap-loose);
+  border: 1px solid var(--dd-border);
+  border-radius: var(--dd-radius);
+  background: var(--dd-surface);
+}
+
+.dd-grid__card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--dd-gap);
+  min-width: 0;
+}
+
+.dd-grid__avatar {
+  flex: 0 0 auto;
+  width: var(--dd-avatar);
+  height: var(--dd-avatar);
+  border-radius: var(--dd-radius-sm);
+  background: var(--dd-surface-strong);
+  background-size: cover;
+  background-position: center;
+}
+
+.dd-grid__meta {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.dd-grid__name {
+  margin: 0;
+  font-size: var(--dd-type-body);
+  color: var(--dd-ink);
+  overflow-wrap: anywhere;
+}
+
+.dd-grid__sub {
+  margin: 0;
+  font-size: var(--dd-type-sm);
+  color: var(--dd-ink-faint);
+}
+
+.dd-grid__tag {
+  font-weight: 500;
+}
+
+.dd-grid__sri {
+  flex: 0 0 auto;
+  padding: var(--dd-1) var(--dd-2);
+  border-radius: var(--dd-radius-sm);
+  background: var(--dd-accent);
+  color: var(--dd-ink-inverse);
+  font-size: var(--dd-type-xs);
+  letter-spacing: -0.01em;
+}
+
+.dd-grid__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--dd-radius-sm);
+  background: var(--dd-surface);
+}
+
+.dd-grid__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dd-grid__blur {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: rgb(11 18 32 / 0.35);
+}
+
+.dd-grid__unlock {
+  margin: 0;
+  padding: var(--dd-2) var(--dd-3);
+  border: 1px solid var(--dd-border-focus);
+  border-radius: var(--dd-radius-sm);
+  background: rgb(0 0 0 / 0.45);
+  color: var(--dd-solid);
+  font-size: var(--dd-type-md);
+}
+
+.dd-grid__card-foot {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.dd-grid__sync {
+  margin: 0;
+  padding: var(--dd-2) var(--dd-3);
+  border: 1px solid var(--dd-border-strong);
+  border-radius: var(--dd-radius-sm);
+  background: transparent;
+  color: var(--dd-ink);
+  font-size: var(--dd-type-md);
+  cursor: pointer;
+}
+
+.dd-grid__sync:hover {
+  background: var(--dd-surface-hover);
+}
+
+/* ── Log Dose ── */
+
+.dd-log {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-gap);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-log__hint {
+  margin: 0;
+  color: var(--dd-ink-muted);
+  font-size: var(--dd-type-body);
+}
+
+.dd-log__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-gap);
+}
+
+.dd-log__btn-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-1);
+}
+
+.dd-log__btn-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--dd-1);
+  min-width: 0;
+}
+
+.dd-log__btn-sub {
+  font-size: var(--dd-type-sm);
+  color: var(--dd-ink-faint);
+}
+
+.dd-log__stamp-photo {
+  align-self: flex-start;
+  margin: 0;
+  padding: var(--dd-1) 0;
+  border: 0;
+  background: transparent;
+  color: var(--dd-ink-muted);
+  font-size: var(--dd-type-md);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+.dd-log__stamp-photo:hover {
+  color: var(--dd-ink);
+}
+
+.dd-log__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--dd-control-h-lg);
+  margin: 0;
+  padding: var(--dd-gap-loose) var(--dd-4);
+  border: 2px solid var(--cue, var(--dd-accent));
+  border-radius: var(--dd-radius);
+  background: var(--dd-surface-quiet);
+  color: var(--dd-solid);
+  cursor: pointer;
+  text-align: left;
+}
+
+.dd-log__btn:hover {
+  background: var(--dd-surface-hover);
+}
+
+.dd-log__btn-hash {
+  font-size: var(--dd-type-xl);
+  letter-spacing: -0.02em;
+  color: var(--cue, var(--dd-accent));
+}
+
+.dd-log__btn-done {
+  font-size: var(--dd-type-sm);
+  color: var(--dd-ink-muted);
+}
+
+.dd-log__file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.dd-log__error {
+  margin: 0;
+  color: var(--dd-danger);
+  font-size: var(--dd-type-md);
+}
+
+.dd-log__stamp {
+  margin: var(--dd-2) 0 0;
+  color: var(--dd-ink-dim);
+  font-size: var(--dd-type-sm);
+}
+
+/* ── Metabolic bridge (Chemistry) ── */
+
+.dd-metabolic-bridge {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--dd-gap);
+  width: 100%;
+  margin-bottom: var(--dd-gap);
+  padding: var(--dd-3) var(--dd-gap-loose);
+  border: 1px solid color-mix(in srgb, var(--dd-cue-metabolic) 45%, transparent);
+  border-radius: var(--dd-radius);
+  background: color-mix(in srgb, var(--dd-cue-metabolic) 8%, transparent);
+}
+
+.dd-metabolic-bridge__copy {
+  margin: 0;
+  flex: 1 1 12rem;
+  font-size: var(--dd-type-body);
+  color: var(--dd-ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.dd-metabolic-bridge__cta {
+  flex: 0 0 auto;
+  padding: var(--dd-2) var(--dd-3);
+  border-radius: var(--dd-radius-sm);
+  background: var(--dd-solid);
+  color: var(--dd-ink-inverse);
+  font-size: var(--dd-type-md);
+  text-decoration: none;
+}
+
+/* ── Bank ── */
+
+.dd-bank {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-stack);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-bank__gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--dd-2);
+  padding: var(--dd-4) 0;
+}
+
+.dd-bank__gauge-label {
+  margin: 0;
+  font-size: var(--dd-type-md);
+  color: var(--dd-ink-muted);
+}
+
+.dd-bank__section-title {
+  margin: 0 0 var(--dd-2);
+  font-size: var(--dd-type-lg);
+  color: var(--dd-ink);
+}
+
+.dd-bank__timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--dd-2);
+}
+
+.dd-bank__slot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-1);
+  padding: var(--dd-3) var(--dd-2);
+  border: 1px solid var(--dd-border);
+  border-radius: var(--dd-radius);
+  background: var(--dd-surface-quiet);
+  text-align: center;
+}
+
+.dd-bank__slot--on {
+  border-color: var(--dd-accent);
+  background: var(--dd-accent-soft);
+}
+
+.dd-bank__slot-hash {
+  font-size: var(--dd-type-sm);
+}
+
+.dd-bank__slot-state {
+  font-size: var(--dd-type-xs);
+  color: var(--dd-ink-faint);
+}
+
+.dd-bank__log-link {
+  display: inline-block;
+  margin-top: var(--dd-3);
+  color: var(--dd-accent);
+  font-size: var(--dd-type-body);
+  text-decoration: none;
+}
+
+.dd-bank__research {
+  padding: var(--dd-4);
+  border: 1px solid var(--dd-border);
+  border-radius: var(--dd-radius);
+  background: var(--dd-surface-quiet);
+}
+
+.dd-bank__research-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--dd-3);
+}
+
+.dd-bank__research-copy {
+  margin: var(--dd-1) 0 0;
+  font-size: var(--dd-type-md);
+  color: var(--dd-ink-faint);
+}
+
+.dd-bank__toggle {
+  flex: 0 0 auto;
+  min-width: 3.25rem;
+  min-height: 2rem;
+  margin: 0;
+  padding: var(--dd-1) var(--dd-2);
+  border: 1px solid var(--dd-border-strong);
+  border-radius: var(--dd-radius-pill);
+  background: transparent;
+  color: var(--dd-ink-muted);
+  font-size: var(--dd-type-sm);
+  cursor: pointer;
+}
+
+.dd-bank__toggle--on {
+  border-color: var(--dd-accent);
+  background: var(--dd-accent);
+  color: var(--dd-ink-inverse);
+}
+
+.dd-bank__tokens {
+  margin: var(--dd-3) 0 0;
+  font-size: var(--dd-type-body);
+  color: var(--dd-accent);
+}
+
+.dd-bank__clinical {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-2);
+}
+
+.dd-bank__clinical-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-1);
+  padding: var(--dd-gap-loose);
+  border: 1px solid var(--dd-border);
+  border-radius: var(--dd-radius);
+  background: var(--dd-surface-quiet);
+  text-decoration: none;
+  color: inherit;
+}
+
+.dd-bank__clinical-link:hover {
+  background: var(--dd-surface-hover);
+}
+
+.dd-bank__clinical-title {
+  font-size: var(--dd-type-lg);
+  color: var(--dd-ink);
+}
+
+.dd-bank__clinical-meta {
+  font-size: var(--dd-type-sm);
+  color: var(--dd-ink-faint);
+}
+
+.dd-bank__chem {
+  color: var(--dd-ink-muted);
+  font-size: var(--dd-type-body);
+  text-decoration: none;
+}
+
+.dd-bank__chem:hover {
+  color: var(--dd-ink);
+}
+
+.dd-profile__me-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--dd-3) var(--dd-gap-loose);
+}

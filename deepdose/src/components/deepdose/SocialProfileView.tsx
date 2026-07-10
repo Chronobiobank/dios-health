@@ -7,10 +7,10 @@ import {
   DEEPDOSE_PATIENT_PLAN_PROFILE,
   SOCIAL_PROFILE,
 } from '@/lib/deepdose-marketing/landing-content'
-import { buildLandingRiskAnalysis } from '@/lib/patient/landing-risk-analysis'
+import { computeScheduleSri } from '@/lib/circadian/sri-engine'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
 import { usePatientPlanProfile } from '@/lib/patient/use-patient-plan-profile'
-import { usePatientRealPosts } from '@/lib/patient/use-patient-real-posts'
+import { usePatientDoses } from '@/lib/patient/use-patient-doses'
 import {
   IconMatches,
   IconShare,
@@ -55,21 +55,21 @@ function readFileAsDataUrl(file: File): Promise<string> {
 }
 
 export function SocialProfileView({
-  medCodes,
+  medCodes: _medCodes,
   medTimes = [],
   wake,
 }: SocialProfileViewProps) {
   const profile = usePatientPlanProfile(wake)
-  const { posts, ready: realsReady } = usePatientRealPosts()
+  const { doses, ready: dosesReady } = usePatientDoses()
   const bodyClock = useMemo(
     () => inferLandingBodyClock(profile.wake, medTimes),
     [profile.wake, medTimes]
   )
-  const riskAnalysis = useMemo(
-    () => buildLandingRiskAnalysis({ medCodes, medTimes, wake: profile.wake }),
-    [medCodes, medTimes, profile.wake]
+  const sri = useMemo(
+    () => computeScheduleSri(bodyClock.sleepOnsetLabel, bodyClock.wakeLabel).score,
+    [bodyClock.sleepOnsetLabel, bodyClock.wakeLabel]
   )
-  const sri = riskAnalysis.sriProxy
+  const selfDoses = doses.filter((d) => d.isSelf !== false)
   const copy = SOCIAL_PROFILE
   const fields = DEEPDOSE_PATIENT_PLAN_PROFILE
 
@@ -206,7 +206,7 @@ export function SocialProfileView({
         </div>
 
         <nav className="dd-icon-actions" aria-label="Profile actions">
-          <ProductIconAction href="/real/post" label={copy.share}>
+          <ProductIconAction href="/dose" label={copy.share}>
             <IconShare />
           </ProductIconAction>
           <ProductIconAction href="/connect" label={copy.matches}>
@@ -215,33 +215,44 @@ export function SocialProfileView({
         </nav>
       </div>
 
-      <section className="dd-profile__reals" aria-label="Your Reals">
-        <h2 className="dd-profile__reals-title">Your Reals</h2>
-        {realsReady && posts.length === 0 ? (
+      <section className="dd-profile__reals" aria-label="Dose archive">
+        <h2 className="dd-profile__reals-title">Doses</h2>
+        {dosesReady && selfDoses.length === 0 ? (
           <p className="dd-profile__reals-empty">
-            <Link href="/real/post">Post today’s Real</Link>
+            <Link href="/dose">Log today’s dose</Link>
           </p>
         ) : (
           <div className="dd-profile__reals-grid">
-            {posts.map((post) => (
+            {selfDoses.map((dose) => (
               <Link
-                key={post.id}
-                href="/real"
+                key={dose.id}
+                href="/grid"
                 className="dd-profile__reals-cell"
-                aria-label={`Real ${post.date}`}
+                aria-label={`Dose ${dose.date}`}
               >
                 {/* Local data-URL preview */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={post.photoUrl} alt="" className="dd-profile__reals-img" />
+                <img src={dose.mediaUrl} alt="" className="dd-profile__reals-img" />
               </Link>
             ))}
           </div>
         )}
       </section>
 
-      <Link href="/dosage" className="dd-profile__chem-link">
-        Chemistry
-      </Link>
+      <div className="dd-profile__me-links">
+        <Link href="/bank" className="dd-profile__chem-link">
+          Bank
+        </Link>
+        <Link href="/dosage?from=metabolic" className="dd-profile__chem-link">
+          Chemistry
+        </Link>
+        <Link href="/testkit" className="dd-profile__chem-link">
+          TipTraQ
+        </Link>
+        <Link href="/chat" className="dd-profile__chem-link">
+          Chat
+        </Link>
+      </div>
     </div>
   )
 }

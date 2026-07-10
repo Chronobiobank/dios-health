@@ -2,8 +2,8 @@
 
 export type UserTier = 'patient' | 'clinician' | 'enterprise'
 
-/** Consumer home after auth — daily Real feed. */
-export const DEFAULT_PATIENT_HOME = '/real'
+/** Consumer home after auth — chronotype Grid. */
+export const DEFAULT_PATIENT_HOME = '/grid'
 
 /** @deprecated Clinical activation still uses consent; consumers land on DEFAULT_PATIENT_HOME. */
 export const DEFAULT_PATIENT_PATH = '/patient/onboarding/consent'
@@ -34,7 +34,10 @@ export function isPatientDoseDashPath(next?: string | null): boolean {
     next.startsWith('/account') ||
     next.startsWith('/connect') ||
     next.startsWith('/chat') ||
-    next.startsWith('/real')
+    next.startsWith('/real') ||
+    next.startsWith('/grid') ||
+    next.startsWith('/dose') ||
+    next.startsWith('/bank')
   )
 }
 

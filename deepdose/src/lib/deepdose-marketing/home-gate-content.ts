@@ -15,7 +15,7 @@ export const DEEPDOSE_HOME_GATE = {
 
 export const SAFETY_PAGE = {
   title: 'Safety Policy',
-  lede: `${DEEPDOSE_NAME} is for adults sleepmaxxing and sharing real life. We do not tolerate harassment, exploitation, or illegal content.`,
+  lede: `${DEEPDOSE_NAME} is for adult dosers logging circadian doses. We do not tolerate harassment, exploitation, or illegal content.`,
   sections: [
     {
       heading: 'Age',
@@ -27,7 +27,7 @@ export const SAFETY_PAGE = {
     },
     {
       heading: 'Health boundary',
-      body: `${DEEPDOSE_NAME} helps you sleepmaxx and share today’s Real with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
+      body: `${DEEPDOSE_NAME} helps dosers log doses and climb SRI with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
     },
     {
       heading: 'Reporting',

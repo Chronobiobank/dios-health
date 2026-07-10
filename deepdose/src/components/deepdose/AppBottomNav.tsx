@@ -25,37 +25,30 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
   }
 
   switch (id) {
-    case 'real':
+    case 'grid':
       return (
         <svg {...common}>
-          <rect x="4" y="5" width="16" height="14" rx="2.5" />
-          <circle cx="9" cy="10" r="1.75" />
-          <path d="M4.5 16.5 9 13l3 2.5 3.5-4 4 5" />
+          <rect x="4" y="4" width="7" height="7" rx="1.25" />
+          <rect x="13" y="4" width="7" height="7" rx="1.25" />
+          <rect x="4" y="13" width="7" height="7" rx="1.25" />
+          <rect x="13" y="13" width="7" height="7" rx="1.25" />
         </svg>
       )
-    case 'friends':
-      return (
-        <svg {...common}>
-          <circle cx="9" cy="9" r="3" />
-          <circle cx="16" cy="10.5" r="2.5" />
-          <path d="M3.75 19c.85-2.35 2.55-3.5 5.25-3.5s4.4 1.15 5.25 3.5" />
-          <path d="M13.5 19c.45-1.45 1.5-2.2 3.1-2.2 1.4 0 2.4.65 2.95 1.85" />
-        </svg>
-      )
-    case 'post':
+    case 'dose':
       return (
         <svg {...common}>
           <circle cx="12" cy="12" r="8.25" />
           <circle cx="12" cy="12" r="4.25" />
         </svg>
       )
-    case 'chat':
+    case 'bank':
       return (
         <svg {...common}>
-          <path d="M4.5 6.75h15a1.25 1.25 0 0 1 1.25 1.25v7a1.25 1.25 0 0 1-1.25 1.25H11l-3.75 2.75v-2.75H4.5A1.25 1.25 0 0 1 3.25 15V8A1.25 1.25 0 0 1 4.5 6.75z" />
+          <circle cx="12" cy="12" r="8.25" />
+          <path d="M12 8v8M9.5 10.5h5M9.5 13.5h5" />
         </svg>
       )
-    case 'profile':
+    case 'me':
       return (
         <svg {...common}>
           <circle cx="12" cy="8" r="3.25" />
@@ -76,7 +69,7 @@ export function AppBottomNav() {
   return (
     <nav className="app-bottom-nav" aria-label="Primary">
       <div className="app-bottom-nav__bar">
-        <ul className="app-bottom-nav__list">
+        <ul className="app-bottom-nav__list app-bottom-nav__list--4">
           {APP_BOTTOM_NAV.map((item) => {
             const active = ready && isAppBottomNavActive(item.href, pathname)
             return (
@@ -84,14 +77,14 @@ export function AppBottomNav() {
                 key={item.id}
                 className={cn(
                   'app-bottom-nav__item',
-                  item.id === 'post' && 'app-bottom-nav__item--post'
+                  item.id === 'dose' && 'app-bottom-nav__item--post'
                 )}
               >
                 <Link
                   href={item.href}
                   className={cn(
                     'app-bottom-nav__link',
-                    item.id === 'post' && 'app-bottom-nav__link--post',
+                    item.id === 'dose' && 'app-bottom-nav__link--post',
                     active && 'app-bottom-nav__link--active'
                   )}
                   aria-current={active ? 'page' : undefined}
@@ -108,7 +101,6 @@ export function AppBottomNav() {
   )
 }
 
-/** Spacer so page content clears the fixed bottom nav. */
 export function AppBottomNavSpacer(): ReactNode {
   return <div className="app-bottom-nav__spacer" aria-hidden />
 }

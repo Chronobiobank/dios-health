@@ -1,27 +1,28 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 /**
- * Consumer north star: sleepmaxxing + share real life (daily Real).
+ * Consumer tribe: Dosers.
+ * Deepdose remains the company / clinical / Chronobiobank layer.
  * Prefer "non-conformists" only off-home. No em dashes.
  */
 export const DEEPDOSE_AUDIENCE = {
-  label: 'non-conformists',
+  label: 'dosers',
   who: 'People who don’t live on a 9-to-5 clock.',
-  why: 'Odd hours. Hard nights. Looking for people who get it.',
+  why: 'Odd hours. Hard nights. They log the dose.',
 } as const
 
 export const DEEPDOSE_VOICE = {
-  tagline: 'Sleepmaxx. Share real life.',
+  tagline: 'For dosers.',
   /** Home hero */
-  homeHeadlineWhite: 'Sleepmaxx.',
-  homeHeadlineAccent: 'Share real life.',
+  homeHeadlineWhite: 'For',
+  homeHeadlineAccent: 'dosers.',
   homeLede: '',
-  missionHeadlineWhite: 'One real night.',
-  missionHeadlineAccent: 'Shared.',
-  missionLede: `${DEEPDOSE_NAME} is where you sleepmaxx and post today’s Real — a photo plus your sleep score — with people on your clock.`,
-  patientSubtitle: 'Sleepmaxx. Post today’s Real. Find people on your clock.',
-  communitySupport: 'Friends on your clock who see your daily Real.',
-  closeSupport: 'Sleepmaxx together. One Real a day.',
+  missionHeadlineWhite: 'Log the dose.',
+  missionHeadlineAccent: 'Climb the SRI.',
+  missionLede: `${DEEPDOSE_NAME} is where dosers log Photonic, Metabolic, and Kinetic doses — and share them on the Grid.`,
+  patientSubtitle: 'Log a dose. Sync the Grid. Climb your SRI.',
+  communitySupport: 'Dosers on your clock who see today’s doses.',
+  closeSupport: 'Dosers log together. One dose at a time.',
   /** Footer under logo */
-  footerMission: 'Sleepmaxx and share real life — one Real a day.',
+  footerMission: 'For dosers — log the dose, climb the SRI.',
 } as const

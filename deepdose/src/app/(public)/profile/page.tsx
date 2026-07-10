@@ -7,8 +7,8 @@ import { resolvePlanFromSearchParams } from '@/lib/medications/parse-plan-search
 import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
-  title: `${DEEPDOSE_NAME} · Profile`,
-  description: 'Your Reals, sleep score, and friends on your clock.',
+  title: `${DEEPDOSE_NAME} · Me`,
+  description: 'Your doses, SRI, and doser profile.',
   alternates: { canonical: '/profile' },
 }
 

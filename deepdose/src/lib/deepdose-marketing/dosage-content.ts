@@ -3,7 +3,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 export const DOSAGE_PAGE_META = {
   title: `Chemistry · ${DEEPDOSE_NAME}`,
   description:
-    'Your rhythm and dosing tools — secondary to today’s Real.',
+    'Your rhythm and dosing tools — secondary to the Grid.',
 } as const
 
 export const DOSAGE_PAGE = {
@@ -13,34 +13,34 @@ export const DOSAGE_PAGE = {
 } as const
 
 export const SHARE_PAGE_META = {
-  title: `Post · ${DEEPDOSE_NAME}`,
-  description: 'Post today’s Real — a photo plus your sleep score.',
+  title: `Log · ${DEEPDOSE_NAME}`,
+  description: 'Log a Photonic, Metabolic, or Kinetic dose — photo plus SRI.',
 } as const
 
 export const SHARE_PAGE = {
-  eyebrow: 'Real',
-  titleBefore: 'One photo,',
+  eyebrow: 'Log',
+  titleBefore: 'One dose,',
   titleHighlight: 'today’s score',
-  support: 'Post today’s Real. Friends on your clock see the night you actually lived.',
-  pointsEyebrow: 'How Real works',
+  support: 'Log a dose. Dosers on your clock see the night you actually lived.',
+  pointsEyebrow: 'How doses work',
   points: [
-    'One Real per day — photo plus SRI',
-    'Friends see today’s beat',
-    'You stay in control of what you post',
+    'Photonic, Metabolic, or Kinetic — photo plus SRI',
+    'Dosers see today’s beat',
+    'You stay in control of what you stamp',
   ],
-  cta: { label: 'Post Real', href: '/real/post' },
+  cta: { label: 'Log dose', href: '/dose' },
 } as const
 
 export const CONNECT_PAGE_META = {
   title: `Friends · ${DEEPDOSE_NAME}`,
-  description: 'People on your clock who see your daily Real.',
+  description: 'Dosers on your clock who see today’s doses.',
 } as const
 
 export const CONNECT_PAGE = {
   eyebrow: 'Friends',
   titleBefore: 'On your',
   titleHighlight: 'clock',
-  support: 'People on your rhythm. See their Reals. Message when it feels right.',
+  support: 'Dosers on your rhythm. See their doses. Message when it feels right.',
   cta: { label: 'Open chat', href: '/chat' },
   secondary: { label: 'See my profile', href: '/profile' },
 } as const

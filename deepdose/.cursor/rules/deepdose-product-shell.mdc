@@ -1,87 +1,65 @@
 ---
-description: DeepDose product shell — OpenAI.com formula (chrome + type + spacing + less-is-more)
+description: DeepDose product shell — Realme flat UI + PMK circadian PWA
 alwaysApply: true
 ---
 
 # DeepDose product shell (set in stone)
 
-Product routes (`/real`, `/profile`, `/account`, `/connect`, `/chat`, `/dosage` and nested):
+Product routes (`/grid`, `/dose`, `/bank`, `/profile`, `/account`, `/dosage`, `/connect`, `/chat`):
 
-Copy the **OpenAI.com product formula** on **every** product page. Less is more.
+**North star:** dosers log Photonic / Metabolic / Kinetic doses, climb SRI, sync on the Grid.
 
-**North star:** sleepmaxxing + daily Real (photo + SRI). Chemistry/dosage is secondary.
+Consumer tribe = **Dosers**. Company / clinical layer = **Deepdose** (Chemistry, TipTraQ, Chronobiobank).
 
-## Copy (mandatory)
+## Bottom nav (4 tabs)
 
-- Every word must earn its place. No eyebrows, ledes, education blurbs, or labels that repeat what the UI already shows.
-- No duplicate page titles in the body (title lives in `AppTopBar` only).
-- No “Join” / “Open X” CTAs that duplicate bottom-nav destinations.
-- Dial / score / % speak for themselves — do not caption them with SRI / chemistry / index waffle.
-- Empty states: one short line + one action. No marketing paragraphs.
-
-## Spacing (mandatory)
-
-4px grid. Named roles only — never invent `0.35rem` gaps.
-
-| Token | Value | Use |
+| Tab | Route | Role |
 |---|---|---|
-| `--dd-inset` | 24px | Type ↔ tile edge |
-| `--dd-inset-lg` | 32px | Hero tiles |
-| `--dd-gap-tight` | 8px | Related lines |
-| `--dd-gap` | 12px | Elements inside a tile |
-| `--dd-stack` | 24px | Tile ↔ tile |
+| Grid | `/grid` | Chronotype feed (Larks / Owls) |
+| Log | `/dose` | #Photonic / #Metabolic / #Kinetic camera |
+| Bank | `/bank` | SRI gauge + PMK timeline + research opt-in |
+| Me | `/profile` | Identity, dose archive, wallet stubs |
 
-## Chrome & type
+Chat / Friends / Chemistry are secondary (linked from Me / Bank).
 
-| Layer | Formula |
+## Visual system
+
+**OpenAI grid is the source of truth.** Realme supplies flat feed/card *shapes*, not a second token set.
+
+| Layer | Tokens |
 |---|---|
-| Font | Inter only. Antialiased. **No Merriweather / display serif.** |
-| Weight | **400** (name may use **300**). Active nav **500** max. |
-| Title | `AppTopBar` — ~15px, weight 400. No spectrum. |
-| Icons | Lucide, stroke ≤1.5, 20×20. |
-| CTAs | Solid white or ghost. **No spectrum gradients.** |
-| Tiles | Quiet borders; wash ≤8%. No hover jump. |
+| Spacing | `--dd-inset`, `--dd-gap`, `--dd-stack` (4px scale) |
+| Ink / surface / border | `--dd-ink*`, `--dd-surface*`, `--dd-border*` |
+| Accent | `--dd-accent` (yellow), `--dd-cue-metabolic`, `--dd-cue-kinetic` |
+| Radius | `--dd-radius` (8px), `--dd-radius-sm` (4px) |
+| Type | `--dd-type-xs` … `--dd-type-xl` (Inter only) |
 
-## Bottom nav
+Defined in `deepdose-product-space.css`. Feature CSS (`deepdose-realme.css`) must use these — **no raw hex / rem litter.**
 
-Real · Friends · Post · Chat · Profile. Chemistry is **not** a tab — reach it from Profile.
+## Copy
 
-## Media / avatars
+- No waffle. Titles live in `AppTopBar` only.
+- Dose cards: SRI badge + Sync (not Likes). Premium: frosted blur + unlock stub.
+- Log Dose: photo only — **no captions** (except Metabolic → Chemistry).
 
-- No floating text pills on photos (“Add photo”, “Edit”, etc.).
-- Whole control is the image; `aria-label` carries the action.
-- Hover/focus: quiet overlay + icon only.
+## SRI
 
-## Real (BeReal formula)
+- Use `@/lib/circadian/sri-engine` (`computeScheduleSri` / matrix rolling). Functional from day 1.
+- Do not invent a second SRI formula in UI components.
 
-1. **Feed (`/real`):** cards = photo + SRI / Off / On + name + time.
-2. **Post (`/real/post`):** one photo + today’s metrics → Post. One Real per day (overwrite OK).
-3. Soft gate copy only if needed: “Post today’s Real to unlock the feed.”
+## Metabolic = medical
 
-## Profile header (Instagram formula)
-
-1. **Header row:** compact avatar left + three metrics right (SRI / Off / On).
-2. **Bio block:** name → location → journey, left-aligned under the header.
-3. **Actions:** icon row under bio (Post Real, Friends), inside the identity tile.
-4. **Content:** Your Reals grid; Chemistry is a quiet secondary link to `/dosage`.
-
-## Actions
-
-- Secondary functions use **`ProductIconAction`** — Lucide icons, `aria-label`, no visible text.
-- Icon row lives **inside** the card (`.dd-icon-actions`), never floating between tiles.
-- Do not invent orphan text links for Share / Friends / similar.
+- `#Metabolic` on Log Dose opens **Chemistry** (`/dosage?from=metabolic`) — meds & timing.
+- Optional “Stamp photo for Grid” stays on Log Dose; Chemistry shows a bridge CTA back to stamp.
+- TipTraQ testkit (`/testkit`) is linked from Bank Clinical and Me.
 
 ## Hard rules
 
-1. **Use `ProductAppShell` only** for page chrome.
-2. **Top:** `AppTopBar` — plain centered title, optional back / gear.
-3. **Content:** one `seco-landing__section-inner` (`--page-max-app`).
-4. **Bottom:** `AppBottomNav` — do not duplicate.
-5. **Do not invent chrome, fonts, weights, gaps, gradient buttons, or filler copy.**
-6. **Default post-auth landing:** `/real`.
+1. `ProductAppShell` + `AppTopBar` + `AppBottomNav` only.
+2. Default post-auth landing: `/grid`.
+3. Legacy `/real` → `/grid`, `/real/post` → `/dose`.
 
 ## Out of scope
 
-- Home splash `/`
-- Marketing/policy pages (`/mission`, `/science`, `/terms`, …)
-- Clinical/enterprise dashboards
+- Clinical / enterprise portals
+- Full adult payment + CDN DRM (follow-up)

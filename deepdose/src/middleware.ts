@@ -67,12 +67,12 @@ export async function middleware(request: NextRequest) {
 
   // Enterprise routes: enterprise tier only
   if (pathname.startsWith('/enterprise') && tier !== 'enterprise') {
-    return NextResponse.redirect(new URL('/real', request.url))
+    return NextResponse.redirect(new URL('/grid', request.url))
   }
 
   // Clinical routes: clinician or enterprise only
   if (pathname.startsWith('/clinical') && !['clinician', 'enterprise'].includes(tier)) {
-    return NextResponse.redirect(new URL('/real', request.url))
+    return NextResponse.redirect(new URL('/grid', request.url))
   }
 
   return supabaseResponse

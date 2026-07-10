@@ -16,7 +16,7 @@ export type MembershipTier = {
 export const MEMBERSHIP_PAGE_META = {
   title: `Membership · ${DEEPDOSE_NAME}`,
   description:
-    'Free to sleepmaxx and post today’s Real. TipTraQ when you want a deeper sleep read.',
+    'Free for dosers to log doses on the Grid. TipTraQ when you want a deeper sleep read.',
 } as const
 
 export const MEMBERSHIP_PAGE_INTRO = {
@@ -24,7 +24,7 @@ export const MEMBERSHIP_PAGE_INTRO = {
   titleWhite: 'Free forever.',
   titleAccent: 'Upgrade for more.',
   lede:
-    'Post today’s Real. See friends on your clock. TipTraQ when you want a stronger sleep read.',
+    'Log doses. Sync the Grid. TipTraQ when you want a stronger sleep read.',
 } as const
 
 /** USD for the global Manjam-first cohort. */
@@ -35,11 +35,11 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#acd3de',
     figure: '$0',
     cadence: 'Phone & wearable',
-    note: 'Sleepmaxx and share today’s Real.',
+    note: 'For dosers — log and sync on the Grid.',
     cta: { label: 'Start free', href: '/' },
     includes: [
-      'Daily Real — photo plus SRI',
-      'Friends on your clock',
+      'Daily PMK doses on the Grid',
+      'Dosers on your clock',
       'Optional research share only',
     ],
   },
@@ -49,12 +49,12 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#c9b6f2',
     figure: '$149',
     cadence: 'Three nights at home',
-    note: 'TipTraQ nights for a stronger SRI to share.',
+    note: 'TipTraQ nights for a stronger SRI to stamp.',
     cta: { label: 'Order Testkit', href: '/testkit' },
     includes: [
       'Reusable sensor for 3 nights',
       'Stronger sleep and rhythm read',
-      'Clearer score on your Real',
+      'Clearer score on your doses',
     ],
   },
   {
@@ -63,12 +63,12 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#f2b8a2',
     figure: '$99',
     cadence: 'Every three months',
-    note: 'Fresh TipTraQ nights so your Real stays honest.',
+    note: 'Fresh TipTraQ nights so your doses stay honest.',
     cta: { label: 'Order re-read', href: '/testkit' },
     includes: [
       'Same reusable TipTraQ sensor',
       'Updated sleep read each quarter',
-      'Catch drift before you post stale scores',
+      'Catch drift before you stamp stale scores',
     ],
   },
 ] as const

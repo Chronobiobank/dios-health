@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { redirect } from 'next/navigation'
 
 import { AuthedDosageHome } from '@/components/deepdose/AuthedDosageHome'
+import { MetabolicDosageBridge } from '@/components/deepdose/MetabolicDosageBridge'
 import { PatientDosageWithDraft } from '@/components/deepdose/PatientDosageWithDraft'
 import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
 import { DOSAGE_PAGE_META } from '@/lib/deepdose-marketing/dosage-content'
@@ -19,7 +21,14 @@ export const metadata: Metadata = {
 }
 
 type PageProps = {
-  searchParams: Promise<{ med?: string; meds?: string; times?: string; time?: string; wake?: string }>
+  searchParams: Promise<{
+    med?: string
+    meds?: string
+    times?: string
+    time?: string
+    wake?: string
+    from?: string
+  }>
 }
 
 export default async function DosagePage({ searchParams }: PageProps) {
@@ -31,6 +40,12 @@ export default async function DosagePage({ searchParams }: PageProps) {
     data: { user },
   } = await supabase.auth.getUser()
 
+  const bridge = (
+    <Suspense fallback={null}>
+      <MetabolicDosageBridge />
+    </Suspense>
+  )
+
   if (user) {
     const step = await resolveOnboardingStep(supabase, user.id)
     if (step !== 'complete') {
@@ -38,6 +53,7 @@ export default async function DosagePage({ searchParams }: PageProps) {
     }
     return (
       <ProductAppShell title="Chemistry" className="dd-dosage">
+        {bridge}
         <AuthedDosageHome userId={user.id} />
       </ProductAppShell>
     )
@@ -45,6 +61,7 @@ export default async function DosagePage({ searchParams }: PageProps) {
 
   return (
     <ProductAppShell title="Chemistry" className="dd-dosage">
+      {bridge}
       <PatientDosageWithDraft urlPlanContext={urlPlanContext} signupHrefFromUrl={signupHref} />
     </ProductAppShell>
   )

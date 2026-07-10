@@ -8,17 +8,17 @@ import {
 export const CHRONOBIOBANK_META = {
   title: `Mission · ${DEEPDOSE_NAME}`,
   description:
-    'Sleepmaxx and share real life — one Real a day with people on your clock.',
+    'For dosers — log Photonic, Metabolic, and Kinetic doses. Climb SRI with people on your clock.',
 } as const
 
 export const CHRONOBIOBANK_INTRO = {
   eyebrow: 'Mission',
-  titleWhite: 'Sleepmaxx.',
-  titleAccent: 'Share real life.',
+  titleWhite: 'For',
+  titleAccent: 'dosers.',
   lede:
-    `${DEEPDOSE_NAME} is where you sleepmaxx and post today’s Real — a photo plus your sleep score — with friends on your clock.`,
+    `${DEEPDOSE_NAME} is where dosers log the dose and climb the SRI — Photonic, Metabolic, Kinetic — on the Grid.`,
   quote:
-    'The age of highlight reels is ending. The age of one real night, shared, has begun.',
+    'The age of highlight reels is ending. The age of one real dose, logged, has begun.',
 } as const
 
 /**
@@ -49,8 +49,8 @@ export const CHRONOBIOBANK_LETTER_TILES = [
 ] as const
 
 export const CHRONOBIOBANK_MISSION_CTA = {
-  label: 'Post today’s Real',
-  href: '/real/post',
+  label: 'Log a dose',
+  href: '/dose',
 } as const
 
 export const CHRONOBIOBANK_TRUST = {

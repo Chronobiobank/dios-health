@@ -1,27 +1,20 @@
-/** Native-style bottom nav — five primary consumer destinations. */
+/** Native-style bottom nav — Realme 4-tab product shell. */
 
 export type AppBottomNavItem = {
-  id: 'real' | 'friends' | 'post' | 'chat' | 'profile'
+  id: 'grid' | 'dose' | 'bank' | 'me'
   label: string
   href: string
 }
 
 export const APP_BOTTOM_NAV: readonly AppBottomNavItem[] = [
-  { id: 'real', label: 'Real', href: '/real' },
-  { id: 'friends', label: 'Friends', href: '/connect' },
-  { id: 'post', label: 'Post', href: '/real/post' },
-  { id: 'chat', label: 'Chat', href: '/chat' },
-  { id: 'profile', label: 'Profile', href: '/profile' },
+  { id: 'grid', label: 'Grid', href: '/grid' },
+  { id: 'dose', label: 'Log', href: '/dose' },
+  { id: 'bank', label: 'Bank', href: '/bank' },
+  { id: 'me', label: 'Me', href: '/profile' },
 ] as const
 
 export function isAppBottomNavActive(href: string, pathname: string): boolean {
-  if (href === '/real/post') {
-    return pathname === '/real/post' || pathname.startsWith('/real/post/')
-  }
-  if (href === '/real') {
-    return pathname === '/real'
-  }
-  // Account is reached via Profile gear — keep Profile tab active
+  // Account is reached via Me gear — keep Me tab active
   if (href === '/profile' && (pathname === '/account' || pathname.startsWith('/account/'))) {
     return true
   }

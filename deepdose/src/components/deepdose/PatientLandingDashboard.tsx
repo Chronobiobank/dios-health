@@ -18,7 +18,7 @@ export function PatientLandingDashboard({
   accountGear,
 }: PatientLandingDashboardProps) {
   return (
-    <ProductAppShell title="Profile" trailing={accountGear} className="dd-profile">
+    <ProductAppShell title="Me" trailing={accountGear} className="dd-profile">
       <SocialProfileView
         medCodes={planContext.medCodes}
         medTimes={planContext.medTimes}

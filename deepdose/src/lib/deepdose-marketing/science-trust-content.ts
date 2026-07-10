@@ -5,7 +5,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 export const SCIENCE_TRUST_META = {
   title: `Science · ${DEEPDOSE_NAME}`,
   description:
-    'How DeepDose reads sleep and rhythm for today’s Real — clear limits, plain measurement, published timing science.',
+    'How DeepDose reads sleep and rhythm for dosers — clear limits, plain measurement, published timing science.',
 } as const
 
 export const SCIENCE_TRUST_INTRO = {
@@ -13,7 +13,7 @@ export const SCIENCE_TRUST_INTRO = {
   titleWhite: 'Sleep you can',
   titleAccent: 'measure.',
   lede:
-    'We help you read your night so you can post an honest Real. Here is what we measure, what we will not claim, and the published science behind timing.',
+    'We help you read your night so you can stamp an honest SRI. Here is what we measure, what we will not claim, and the published science behind timing.',
 } as const
 
 export const SCIENCE_TRUST_FEATURES = [
@@ -21,7 +21,7 @@ export const SCIENCE_TRUST_FEATURES = [
     id: 'limits',
     badge: 'Honesty',
     title: 'What we will not claim',
-    teaser: 'Sleepmaxxing support and timing tools. Not a doctor. Not a diagnosis.',
+    teaser: 'Dose logging and timing tools. Not a doctor. Not a diagnosis.',
     cue: '#6b7280',
     href: '/terms',
   },
@@ -37,7 +37,7 @@ export const SCIENCE_TRUST_FEATURES = [
     id: 'privacy',
     badge: 'Privacy',
     title: 'Your data stays with you',
-    teaser: 'You choose what goes on today’s Real.',
+    teaser: 'You choose what goes on the Grid.',
     cue: '#f2b8a2',
     href: '/mission',
   },
@@ -45,7 +45,7 @@ export const SCIENCE_TRUST_FEATURES = [
     id: 'evidence',
     badge: 'Evidence',
     title: 'Published studies',
-    teaser: 'Real trials on rhythm and timing behind clearer scores.',
+    teaser: 'Trials on rhythm and timing behind clearer scores.',
     cue: '#8b9cf8',
     href: '#evidence',
   },
