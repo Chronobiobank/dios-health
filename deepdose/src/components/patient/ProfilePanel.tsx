@@ -238,12 +238,6 @@ export function ProfilePanel({
           ))}
         </ul>
       </section>
-
-      <div className="dash-meds__actions">
-        <Button href="/profile" variant="secondary" className="dash-meds__cancel">
-          Back to profile
-        </Button>
-      </div>
     </div>
   )
 }

@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useEffect, useRef, useState, useTransition } from 'react'
 
 import { CHAT_MESSAGE_MAX_LENGTH } from '@/lib/chat/constants'
@@ -17,7 +16,7 @@ type ChatThreadProps = {
 export function ChatThread({
   conversationId,
   currentUserId,
-  peer,
+  peer: _peer,
   initialMessages,
 }: ChatThreadProps) {
   const [messages, setMessages] = useState(initialMessages)
@@ -119,15 +118,6 @@ export function ChatThread({
 
   return (
     <div className="dd-chat dd-chat__thread">
-      <header className="dd-chat__header">
-        <Link href="/chat" className="dd-chat__back" aria-label="Back to inbox">
-          ←
-        </Link>
-        <h1 className="seco-page__title dd-chat__title">
-          <span className="seco-landing__hero-spectrum">{peer.displayName}</span>
-        </h1>
-      </header>
-
       <div className="dd-chat__messages" ref={listRef} role="log" aria-live="polite">
         {messages.map((m) => {
           const mine = m.senderId === currentUserId

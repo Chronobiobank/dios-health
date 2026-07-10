@@ -19,11 +19,12 @@ export const metadata: Metadata = {
   applicationName: DEEPDOSE_NAME,
   keywords: [
     'Deepdose',
-    'chemical soul-matching',
-    'find your chemical match',
-    'chemistry matching',
+    'sleepmaxxing',
+    'sleep score',
+    'SRI',
+    'share real life',
     'body clock',
-    'share chemistry',
+    'daily Real',
   ],
   alternates: {
     canonical: '/',

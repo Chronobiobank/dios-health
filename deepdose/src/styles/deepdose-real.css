@@ -1,0 +1,341 @@
+/* Real feed + daily post composer */
+
+.dd-real__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-stack, 1.5rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-real__gate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--dd-gap, 0.75rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-real__gate-copy {
+  margin: 0;
+  flex: 1 1 12rem;
+  min-width: 0;
+  color: rgb(255 255 255 / 0.72);
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+
+.dd-real__gate-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.9rem;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #0b1220;
+  font-size: 0.8125rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dd-real__feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-stack, 1.5rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-real__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-gap, 0.75rem);
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  --cue: #acd3de;
+}
+
+.dd-real__card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--dd-gap, 0.75rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-real__avatar {
+  flex: 0 0 auto;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background-color: rgb(255 255 255 / 0.08);
+  background-size: cover;
+  background-position: center;
+}
+
+.dd-real__card-meta {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.dd-real__name {
+  margin: 0;
+  font-size: 0.875rem;
+  color: rgb(255 255 255 / 0.92);
+  overflow-wrap: anywhere;
+}
+
+.dd-real__time {
+  margin: 0;
+  font-size: 0.75rem;
+  color: rgb(255 255 255 / 0.45);
+}
+
+.dd-real__stats {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.dd-real__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.dd-real__stat-value {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: rgb(255 255 255 / 0.92);
+}
+
+.dd-real__stat-label {
+  font-size: 0.625rem;
+  line-height: 1.2;
+  color: rgb(255 255 255 / 0.45);
+}
+
+.dd-real__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--seco-radius-md, 0.875rem);
+  background: rgb(255 255 255 / 0.04);
+}
+
+/* Post composer */
+
+.dd-real-post {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-gap, 0.75rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-real-post__stage {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  border-radius: var(--seco-radius-md, 0.875rem);
+  background: rgb(255 255 255 / 0.06);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.dd-real-post__stage:focus-within {
+  outline: 1px solid rgb(255 255 255 / 0.35);
+  outline-offset: 3px;
+}
+
+.dd-real-post__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.dd-real-post__preview {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dd-real-post__placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: rgb(255 255 255 / 0.35);
+}
+
+.dd-real-post__hover {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgb(0 0 0 / 0.45);
+  color: rgb(255 255 255 / 0.92);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+.dd-real-post__stage:hover .dd-real-post__hover,
+.dd-real-post__stage:focus-within .dd-real-post__hover {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .dd-real-post__hover {
+    opacity: 1;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.5), transparent 55%);
+    align-items: end;
+    padding-bottom: 0.85rem;
+  }
+}
+
+.dd-real-post__metrics {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--dd-gap-tight, 0.5rem);
+  width: 100%;
+  min-width: 0;
+  padding: var(--dd-gap, 0.75rem) 0;
+}
+
+.dd-real-post__metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  min-width: 0;
+  text-align: center;
+}
+
+.dd-real-post__metric-value {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  color: rgb(255 255 255 / 0.95);
+}
+
+.dd-real-post__metric-label {
+  margin: 0;
+  font-size: 0.75rem;
+  color: rgb(255 255 255 / 0.48);
+}
+
+.dd-real-post__error {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: rgb(255 180 160 / 0.9);
+}
+
+.dd-real-post__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.75rem;
+  margin: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #0b1220;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+
+.dd-real-post__submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Profile Real grid */
+
+.dd-profile__reals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-gap, 0.75rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-profile__reals-title {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: rgb(255 255 255 / 0.92);
+}
+
+.dd-profile__reals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.35rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-profile__reals-cell {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.35rem;
+  overflow: hidden;
+  background: rgb(255 255 255 / 0.06);
+  text-decoration: none;
+}
+
+.dd-profile__reals-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dd-profile__reals-empty {
+  margin: 0;
+  font-size: 0.875rem;
+  color: rgb(255 255 255 / 0.48);
+}
+
+.dd-profile__reals-empty a {
+  color: rgb(255 255 255 / 0.88);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.dd-profile__chem-link {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgb(255 255 255 / 0.55);
+  font-size: 0.875rem;
+  text-align: left;
+  text-decoration: none;
+}
+
+.dd-profile__chem-link:hover {
+  color: rgb(255 255 255 / 0.88);
+}

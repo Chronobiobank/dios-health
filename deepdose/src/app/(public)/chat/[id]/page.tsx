@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 
 import { ChatThread } from '@/components/chat/ChatThread'
+import { AppTopBarBack } from '@/components/deepdose/AppTopBar'
+import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
 import { getThreadPeer, listMessages } from '@/lib/chat/queries'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { createClient } from '@/lib/supabase/server'
@@ -41,15 +43,17 @@ export default async function ChatThreadPage({ params }: PageProps) {
   }
 
   return (
-    <article className="seco-page seco-marketing-page dd-chat-shell">
-      <div className="seco-landing__section-inner dd-chat-shell__inner">
-        <ChatThread
-          conversationId={id}
-          currentUserId={user.id}
-          peer={peer}
-          initialMessages={messages}
-        />
-      </div>
-    </article>
+    <ProductAppShell
+      title={peer.displayName}
+      leading={<AppTopBarBack href="/chat" label="Back to messages" />}
+      className="dd-chat-shell"
+    >
+      <ChatThread
+        conversationId={id}
+        currentUserId={user.id}
+        peer={peer}
+        initialMessages={messages}
+      />
+    </ProductAppShell>
   )
 }

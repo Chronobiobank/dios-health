@@ -2,8 +2,8 @@
 
 export type UserTier = 'patient' | 'clinician' | 'enterprise'
 
-/** Consumer home after auth — SRI profile from phone / plan data. */
-export const DEFAULT_PATIENT_HOME = '/profile'
+/** Consumer home after auth — daily Real feed. */
+export const DEFAULT_PATIENT_HOME = '/real'
 
 /** @deprecated Clinical activation still uses consent; consumers land on DEFAULT_PATIENT_HOME. */
 export const DEFAULT_PATIENT_PATH = '/patient/onboarding/consent'
@@ -33,11 +33,12 @@ export function isPatientDoseDashPath(next?: string | null): boolean {
     next.startsWith('/profile') ||
     next.startsWith('/account') ||
     next.startsWith('/connect') ||
-    next.startsWith('/chat')
+    next.startsWith('/chat') ||
+    next.startsWith('/real')
   )
 }
 
-/** Sync redirect helper — honour `next`, else tier default (patients → /profile). */
+/** Sync redirect helper — honour `next`, else tier default (patients → /real). */
 export function resolvePostLoginPath(
   tier: UserTier | string | null | undefined,
   next?: string | null
@@ -57,7 +58,7 @@ export function resolvePostLoginPath(
 }
 
 /**
- * Patient post-auth destination: honour `next`, else `/profile` (SRI).
+ * Patient post-auth destination: honour `next`, else `/real`.
  * Clinical onboarding is only via explicit `next` (activation / patient dash).
  */
 export async function resolvePatientPostLoginPath(

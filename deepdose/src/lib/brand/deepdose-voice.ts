@@ -1,29 +1,27 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 /**
- * Home = chemistry match headline + face network.
- * Mission = Chemical Soul-Matching + how matching works.
+ * Consumer north star: sleepmaxxing + share real life (daily Real).
  * Prefer "non-conformists" only off-home. No em dashes.
  */
 export const DEEPDOSE_AUDIENCE = {
   label: 'non-conformists',
   who: 'People who don’t live on a 9-to-5 clock.',
-  why: 'Odd hours. Stacked chemistry. Hard to find people who get it.',
+  why: 'Odd hours. Hard nights. Looking for people who get it.',
 } as const
 
 export const DEEPDOSE_VOICE = {
-  tagline: 'Find your chemical match.',
+  tagline: 'Sleepmaxx. Share real life.',
   /** Home hero */
-  homeHeadlineWhite: 'Find your',
-  homeHeadlineAccent: 'chemical match',
+  homeHeadlineWhite: 'Sleepmaxx.',
+  homeHeadlineAccent: 'Share real life.',
   homeLede: '',
-  missionHeadlineWhite: 'Know. Share.',
-  missionHeadlineAccent: 'Connect.',
-  missionLede: `${DEEPDOSE_NAME} helps you understand your chemistry, share details you choose, and connect with people on a similar rhythm for connection, correction, and more.`,
-  patientSubtitle: 'Understand your chemistry. Share what fits. Connect and correct.',
-  communitySupport: 'Share details with people on a similar rhythm for connection and correction.',
-  closeSupport: 'Know your chemistry. Share details. Connect and correct together.',
+  missionHeadlineWhite: 'One real night.',
+  missionHeadlineAccent: 'Shared.',
+  missionLede: `${DEEPDOSE_NAME} is where you sleepmaxx and post today’s Real — a photo plus your sleep score — with people on your clock.`,
+  patientSubtitle: 'Sleepmaxx. Post today’s Real. Find people on your clock.',
+  communitySupport: 'Friends on your clock who see your daily Real.',
+  closeSupport: 'Sleepmaxx together. One Real a day.',
   /** Footer under logo */
-  footerMission:
-    'Understand your chemistry. Share what fits. Connect with people on your rhythm.',
+  footerMission: 'Sleepmaxx and share real life — one Real a day.',
 } as const

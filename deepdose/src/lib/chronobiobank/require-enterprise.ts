@@ -25,7 +25,7 @@ export async function requireEnterprise(nextPath: string): Promise<EnterpriseGua
 
   const context = await resolveEnterpriseContext(supabase, user.id)
   if (!context) {
-    redirect('/profile')
+    redirect('/real')
   }
 
   return { supabase, userId: user.id, context }

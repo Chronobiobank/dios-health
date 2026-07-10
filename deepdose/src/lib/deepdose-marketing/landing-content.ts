@@ -7,11 +7,11 @@ import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} · Find your chemical match.`,
-  description: `${DEEPDOSE_NAME}: find your chemical match. We match your chemistry, not steal your attention.`,
+  title: `${DEEPDOSE_NAME} · Sleepmaxx. Share real life.`,
+  description: `${DEEPDOSE_NAME}: sleepmaxx and share real life — one Real a day with your sleep score.`,
 } as const
 
-export const DEEPDOSE_CVP = 'Find your chemical match.' as const
+export const DEEPDOSE_CVP = 'Sleepmaxx. Share real life.' as const
 
 /** Home splash · message, face network, two doors. */
 export const DEEPDOSE_HOME_SPLASH = {
@@ -60,7 +60,7 @@ export const DEEPDOSE_MISSION = {
   eyebrow: 'Three moves',
   headlineWhite: DEEPDOSE_VOICE.missionHeadlineWhite,
   headlineAccent: DEEPDOSE_VOICE.missionHeadlineAccent,
-  headline: 'Know. Share. Connect.',
+  headline: 'Sleepmaxx. Share. Connect.',
   lede: DEEPDOSE_VOICE.missionLede,
 } as const
 
@@ -87,25 +87,25 @@ export const DEEPDOSE_LANDING_PLATFORM = {
   pillars: [
     {
       id: 'test',
-      label: 'Understand',
-      body: 'Read your chemistry and rhythm',
+      label: 'Sleepmaxx',
+      body: 'Read your night and SRI',
       icon: 'test' as const,
-      panelTitle: 'Your chemistry readout',
+      panelTitle: 'Your sleep readout',
       panelSeeAll: { label: 'Open Chemistry', href: '/dosage' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'We read sleep regularity and rhythm signals so you can see your chemistry clearly, not guess from a 9-to-5 template.',
+          title: 'We read sleep regularity so you can post an honest Real, not guess from a 9-to-5 template.',
           meta: 'Rhythm · Sleep regularity',
-          href: '/profile',
+          href: '/real',
         },
         {
-          title: 'Optional TipTraQ nights deepen the read when you want a stronger baseline to share.',
+          title: 'Optional TipTraQ nights deepen the read when you want a stronger SRI to share.',
           meta: 'Deeper read · TipTraQ',
           href: '/testkit',
         },
         {
-          title: 'Drift shows when your clock slips, so you know what to correct before you share it.',
+          title: 'Drift shows when your clock slips, so you know what to correct before you post.',
           meta: 'Alignment · Catch drift early',
           href: '/dosage',
         },
@@ -114,16 +114,16 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'plan',
       label: 'Share',
-      body: 'Details you choose to show',
+      body: 'Today’s Real — photo plus score',
       icon: 'plan' as const,
-      panelTitle: 'Share what fits',
-      panelSeeAll: { label: 'Review sharing', href: '/share' },
+      panelTitle: 'Post today’s Real',
+      panelSeeAll: { label: 'Post Real', href: '/real/post' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Share rhythm, chemistry notes, and what is working, only the details you turn on.',
+          title: 'One Real a day: a photo of real life plus your SRI, Off, and On.',
           meta: 'You choose · Opt in',
-          href: '/share',
+          href: '/real/post',
         },
         {
           title: 'Profile and Chemistry stay yours. Peers see what you publish for connection.',
@@ -144,26 +144,26 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     },
     {
       id: 'social',
-      label: 'Connect',
-      body: 'People on your chemistry',
+      label: 'Friends',
+      body: 'People on your clock',
       icon: 'social' as const,
-      panelTitle: 'Matches & messages',
-      panelSeeAll: { label: 'Open Connect', href: '/connect' },
+      panelTitle: 'Friends & messages',
+      panelSeeAll: { label: 'Open Friends', href: '/connect' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Match on rhythm and chemistry, not follower counts or endless scroll.',
-          meta: 'Soul-matching · Similar clocks',
+          title: 'Friends on your rhythm who see today’s Real — not follower counts or endless scroll.',
+          meta: 'Similar clocks · Daily Reals',
           href: '/connect',
         },
         {
-          title: 'Message privately when it feels right. Connection and correction, not an attention feed.',
+          title: 'Message privately when it feels right. Sleepmaxxing together, not an attention feed.',
           meta: 'Chat · Private DMs',
           href: '/chat',
         },
         {
           title: 'See people who have been where you are and share what finally settled their nights.',
-          meta: 'Peers · Real journeys',
+          meta: 'Peers · Real nights',
           href: '/connect',
         },
         {
@@ -380,10 +380,21 @@ export const DEEPDOSE_PATIENT_PLAN_PROFILE = {
   firstNamePlaceholder: 'First name',
   familyNamePlaceholder: 'Family name',
   locationPlaceholder: 'Your city or region',
+  journeyPlaceholder: 'Your rhythm journey',
   avatarEditLabel: 'Edit',
   avatarEmptyLabel: 'Add photo',
   baseline:
     'Free to join · understand your chemistry, share details you choose, connect with peers, and help research if you want to.',
+} as const
+
+/** Social /profile — identity + Chemistry tile (SRI). */
+export const SOCIAL_PROFILE = {
+  chemistryTitle: 'Sleep Regularity Index (SRI)',
+  sleepLabel: 'Lights off',
+  wakeLabel: 'Lights on',
+  share: 'Post Real',
+  matches: 'Friends',
+  join: 'Join Deepdose',
 } as const
 
 export const DEEPDOSE_PATIENT_PLAN_DEEPER = [

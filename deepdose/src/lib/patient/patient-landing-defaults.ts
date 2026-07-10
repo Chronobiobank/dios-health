@@ -3,13 +3,14 @@ import { verdictForMedCodes } from '@/lib/medications/polypharmacy-timing'
 
 import type { PlanContextFromDraft } from '@/lib/patient/plan-draft'
 
-/** Default demo patient when /profile has no URL params (Sean James, SEAN-001). */
+/** Default demo member when /profile has no saved plan profile. */
 export const PATIENT_LANDING_DEMO = {
-  patientId: 'SEAN-001',
-  firstName: 'Sean',
-  familyName: 'James',
+  patientId: 'DEMO-001',
+  firstName: 'Riley',
+  familyName: 'Costa',
   /** Location drives solar exposure / light timing context */
-  location: 'London, UK',
+  location: 'Manchester, UK',
+  journey: 'Working on steadier nights and better timing.',
   medCodes: ['metformin', 'ramipril', 'atorvastatin', 'sertraline'] as const,
   medTimes: ['07:30', '08:00', '20:00', '12:00'] as const,
   wake: '07:30',

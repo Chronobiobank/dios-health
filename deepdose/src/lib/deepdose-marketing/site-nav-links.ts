@@ -12,9 +12,9 @@ export const DEEPDOSE_SPLASH_LINKS = DEEPDOSE_SITE_LINKS
 
 /** Footer essentials when mounted. */
 export const DEEPDOSE_FOOTER_LINKS = [
-  { label: 'Connect', href: '/connect' },
+  { label: 'Real', href: '/real' },
+  { label: 'Friends', href: '/connect' },
   { label: 'Profile', href: '/profile' },
-  { label: 'Chemistry', href: '/dosage' },
   { label: 'Chat', href: '/chat' },
   { label: 'Sign in', href: '/' },
   { label: 'Terms', href: '/terms' },
@@ -22,6 +22,7 @@ export const DEEPDOSE_FOOTER_LINKS = [
 
 /** Product routes: bottom nav only, no marketing header. */
 export const DEEPDOSE_PRODUCT_PATHS = [
+  '/real',
   '/connect',
   '/chat',
   '/profile',

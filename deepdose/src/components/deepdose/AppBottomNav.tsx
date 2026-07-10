@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 
 import {
   APP_BOTTOM_NAV,
@@ -16,7 +16,7 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
     viewBox: '0 0 24 24',
     fill: 'none',
     stroke: 'currentColor',
-    strokeWidth: 1.6,
+    strokeWidth: 1.5,
     strokeLinecap: 'round' as const,
     strokeLinejoin: 'round' as const,
     'aria-hidden': true,
@@ -25,39 +25,41 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
   }
 
   switch (id) {
-    case 'home':
+    case 'real':
       return (
         <svg {...common}>
-          <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z" />
+          <rect x="4" y="5" width="16" height="14" rx="2.5" />
+          <circle cx="9" cy="10" r="1.75" />
+          <path d="M4.5 16.5 9 13l3 2.5 3.5-4 4 5" />
+        </svg>
+      )
+    case 'friends':
+      return (
+        <svg {...common}>
+          <circle cx="9" cy="9" r="3" />
+          <circle cx="16" cy="10.5" r="2.5" />
+          <path d="M3.75 19c.85-2.35 2.55-3.5 5.25-3.5s4.4 1.15 5.25 3.5" />
+          <path d="M13.5 19c.45-1.45 1.5-2.2 3.1-2.2 1.4 0 2.4.65 2.95 1.85" />
+        </svg>
+      )
+    case 'post':
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="8.25" />
+          <circle cx="12" cy="12" r="4.25" />
+        </svg>
+      )
+    case 'chat':
+      return (
+        <svg {...common}>
+          <path d="M4.5 6.75h15a1.25 1.25 0 0 1 1.25 1.25v7a1.25 1.25 0 0 1-1.25 1.25H11l-3.75 2.75v-2.75H4.5A1.25 1.25 0 0 1 3.25 15V8A1.25 1.25 0 0 1 4.5 6.75z" />
         </svg>
       )
     case 'profile':
       return (
         <svg {...common}>
           <circle cx="12" cy="8" r="3.25" />
-          <path d="M5.5 19.5c1.4-3.2 3.7-4.75 6.5-4.75s5.1 1.55 6.5 4.75" />
-        </svg>
-      )
-    case 'dosage':
-      return (
-        <svg {...common}>
-          <rect x="8.5" y="3.5" width="7" height="17" rx="3.5" />
-          <path d="M8.5 12h7" />
-        </svg>
-      )
-    case 'chat':
-      return (
-        <svg {...common}>
-          <path d="M5 6.5h14a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H11l-3.5 3v-3H5A1.5 1.5 0 0 1 3.5 15V8A1.5 1.5 0 0 1 5 6.5z" />
-        </svg>
-      )
-    case 'connect':
-      return (
-        <svg {...common}>
-          <path d="M8.5 14.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" />
-          <path d="M15.5 16.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-          <path d="M3.5 19.5c.9-2.4 2.6-3.6 5-3.6s4.1 1.2 5 3.6" />
-          <path d="M13.2 19.5c.5-1.5 1.6-2.3 3.3-2.3 1.5 0 2.6.7 3.2 2" />
+          <path d="M5.5 19.25c1.35-3.1 3.55-4.6 6.5-4.6s5.15 1.5 6.5 4.6" />
         </svg>
       )
   }
@@ -65,19 +67,31 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
 
 export function AppBottomNav() {
   const pathname = usePathname() ?? '/'
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    setReady(true)
+  }, [])
 
   return (
     <nav className="app-bottom-nav" aria-label="Primary">
       <div className="app-bottom-nav__bar">
         <ul className="app-bottom-nav__list">
           {APP_BOTTOM_NAV.map((item) => {
-            const active = isAppBottomNavActive(item.href, pathname)
+            const active = ready && isAppBottomNavActive(item.href, pathname)
             return (
-              <li key={item.id} className="app-bottom-nav__item">
+              <li
+                key={item.id}
+                className={cn(
+                  'app-bottom-nav__item',
+                  item.id === 'post' && 'app-bottom-nav__item--post'
+                )}
+              >
                 <Link
                   href={item.href}
                   className={cn(
                     'app-bottom-nav__link',
+                    item.id === 'post' && 'app-bottom-nav__link--post',
                     active && 'app-bottom-nav__link--active'
                   )}
                   aria-current={active ? 'page' : undefined}

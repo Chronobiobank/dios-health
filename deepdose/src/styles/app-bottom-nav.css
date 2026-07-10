@@ -1,6 +1,287 @@
 /**
- * Bottom nav — same frost chrome as .clinical-site-nav (full-bleed bar, no curved tile).
+ * Product chrome — OpenAI.com formula on dark shell.
+ * Fixed top + bottom heights so route changes do not jump.
+ * Type: Inter, weight 400, antialiased. Icons: 1.5 stroke, geometric.
  */
+
+:root {
+  --app-top-bar-h: 3.25rem;
+  --app-bottom-nav-h: 4.5rem;
+}
+
+/* ── Top bar ── */
+
+.app-top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: calc(var(--app-top-bar-h) + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  background: rgb(11 18 32 / 0.94);
+  backdrop-filter: saturate(1.2) blur(20px);
+  -webkit-backdrop-filter: saturate(1.2) blur(20px);
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.app-top-bar__inner {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 2.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--page-max-app, 48rem);
+  min-height: var(--app-top-bar-h);
+  margin-inline: auto;
+  padding: 0 var(--seco-page-pad, clamp(1.25rem, 4vw, 2rem));
+}
+
+.app-top-bar__title {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: rgb(255 255 255 / 0.88);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-top-bar__side {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.app-top-bar__side--start {
+  justify-content: flex-start;
+}
+
+.app-top-bar__side--end {
+  justify-content: flex-end;
+}
+
+.app-top-bar__slot {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.app-top-bar__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: rgb(255 255 255 / 0.72);
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 400;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.app-top-bar__icon-btn:hover {
+  color: rgb(255 255 255 / 0.95);
+  background: rgb(255 255 255 / 0.06);
+}
+
+.app-top-bar__icon-btn:focus-visible {
+  outline: 1px solid rgb(255 255 255 / 0.35);
+  outline-offset: 2px;
+}
+
+.app-top-bar__icon {
+  display: block;
+  flex-shrink: 0;
+  shape-rendering: geometricPrecision;
+}
+
+.app-top-bar__text-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0 0.1rem;
+  border: 0;
+  background: transparent;
+  color: rgb(255 255 255 / 0.72);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-top-bar__text-btn:hover {
+  color: rgb(255 255 255 / 0.95);
+}
+
+.app-top-bar__text-btn:focus-visible {
+  outline: 1px solid rgb(255 255 255 / 0.35);
+  outline-offset: 2px;
+}
+
+/* ── Product page body — OpenAI restraint ── */
+
+.dd-product {
+  color: rgb(255 255 255 / 0.92);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: -0.011em;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: calc(100dvh - var(--app-bottom-nav-h) - env(safe-area-inset-bottom, 0px));
+}
+
+.dd-product,
+.dd-product * {
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif) !important;
+}
+
+/* Kill Merriweather / display serif on product metrics (SRI ring, etc.) */
+.dd-product :is(
+  .sri-score-ring,
+  .sri-score-ring__value,
+  .sri-score-ring__label,
+  .sri-score-ring__readout,
+  .tabular-nums
+) {
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.02em;
+}
+
+/* Beat .deepdose-shell h1 { Merriweather } */
+.deepdose-shell .dd-product :is(h1, h2, h3, h4, h5, h6),
+.deepdose-shell .app-top-bar__title,
+.deepdose-shell .dd-product .app-top-bar__title {
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.dd-product.seco-marketing-page .seco-landing__section-inner.dd-product__inner {
+  --seco-page-max: var(--page-max-app, 48rem);
+  width: 100%;
+  max-width: var(--seco-page-max);
+  /* gap / padding-top come from deepdose-product-space.css */
+  padding-bottom: calc(var(--app-bottom-nav-h) + env(safe-area-inset-bottom, 0px));
+}
+
+/* Weight lock — light/regular; active nav label may use 500 */
+.dd-product * {
+  font-weight: 400 !important;
+}
+
+.dd-product :is(.dd-profile__name-input) {
+  font-weight: 300 !important;
+}
+
+.dd-product :is(.app-bottom-nav__link--active .app-bottom-nav__label) {
+  font-weight: 500 !important;
+}
+
+.dd-product .seco-landing__hero-spectrum {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: inherit;
+  font-weight: 400 !important;
+}
+
+/* Quiet tiles — no marketing wash / glow */
+.dd-product .seco-spectrum-tile {
+  --spectrum-tile-wash: 5%;
+  --spectrum-tile-wash-hover: 8%;
+  --spectrum-tile-border-mix: 22%;
+  box-shadow: none;
+  border-color: rgb(255 255 255 / 0.1);
+}
+
+.dd-product :is(
+  .seco-spectrum-tile__title,
+  .seco-spectrum-tile__cue,
+  .seco-spectrum-tile__flag,
+  .seco-spectrum-tile__avatar-initials,
+  .seco-spectrum-tile__title--display,
+  .seco-spectrum-tile__title--formula,
+  .dash-meds__page-title,
+  .seco-page__title
+) {
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.015em;
+}
+
+/* Kill spectrum CTA candy on product surfaces */
+.dd-product :is(
+  .dd-profile__action--primary,
+  .dd-profile__chemistry-cta,
+  .dd-connect__message,
+  .dd-chat__empty-cta,
+  .dd-chat__send,
+  .dd-real__gate-cta,
+  .dd-real-post__submit,
+  .sw-dash__cta-btn,
+  .seco-landing__btn--primary
+) {
+  background: #fff !important;
+  background-image: none !important;
+  color: #0b1220 !important;
+  animation: none !important;
+  font-weight: 400 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+.dd-product .dd-chat__bubble--mine {
+  background: #fff !important;
+  background-image: none !important;
+  color: #0b1220 !important;
+}
+
+.dd-product .dd-chat__bubble--theirs {
+  background: rgb(255 255 255 / 0.08) !important;
+}
+
+.dd-product :is(.seco-page__eyebrow, .sw-dash__tile-eyebrow) {
+  display: none !important;
+}
+
+.dd-product :is(.seco-planpreview__day, .dose-dash-head__title, .seco-planpreview__phase) {
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif) !important;
+  font-weight: 400 !important;
+}
+
+.dd-product .dose-dash-expand-icon {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: rgb(255 255 255 / 0.55) !important;
+}
+
+.dd-product .dd-profile__action:not(.dd-profile__action--primary) {
+  background: transparent !important;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  color: rgb(255 255 255 / 0.92) !important;
+  font-weight: 400 !important;
+}
 
 .app-bottom-nav {
   position: fixed;
@@ -13,10 +294,10 @@
   box-sizing: border-box;
   padding: 0;
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  background: var(--seco-chrome-frost-bg);
-  backdrop-filter: var(--seco-chrome-frost-blur);
-  -webkit-backdrop-filter: var(--seco-chrome-frost-blur);
-  border-top: 1px solid rgb(255 255 255 / 0.06);
+  background: rgb(11 18 32 / 0.94);
+  backdrop-filter: saturate(1.2) blur(20px);
+  -webkit-backdrop-filter: saturate(1.2) blur(20px);
+  border-top: 1px solid rgb(255 255 255 / 0.08);
   box-shadow: none;
   pointer-events: none;
 }
@@ -25,9 +306,9 @@
   pointer-events: auto;
   box-sizing: border-box;
   width: 100%;
-  max-width: var(--seco-content-max, var(--seco-page-max, 76rem));
+  max-width: var(--page-max-app, 48rem);
   margin-inline: auto;
-  padding: 0.35rem var(--seco-page-pad, clamp(1.25rem, 4vw, 2rem));
+  padding: 0.25rem var(--seco-page-pad, clamp(1.25rem, 4vw, 2rem)) 0.35rem;
   border-radius: 0;
   background: transparent;
   border: none;
@@ -37,7 +318,7 @@
 .app-bottom-nav__list {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 0.25rem;
+  gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -53,8 +334,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.2rem;
-  min-height: 3.25rem;
-  padding: 0.4rem 0.2rem;
+  min-height: 3rem;
+  padding: 0.35rem 0.15rem;
   border-radius: 0.5rem;
   border: none;
   background: transparent;
@@ -62,52 +343,65 @@
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   text-decoration: none;
-  color: rgb(255 255 255 / 0.55);
-  transition:
-    color 0.15s ease,
-    background 0.15s ease;
+  color: rgb(255 255 255 / 0.42);
+  transition: color 0.15s ease;
 }
 
 .app-bottom-nav__link:hover {
-  color: #fff;
-  background: rgb(255 255 255 / 0.08);
+  color: rgb(255 255 255 / 0.85);
+  background: transparent;
 }
 
 .app-bottom-nav__link--active {
-  color: #fff;
-  background: rgb(255 255 255 / 0.08);
+  color: rgb(255 255 255 / 0.95);
+  background: transparent;
+}
+
+.app-bottom-nav__link--post .app-bottom-nav__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.app-bottom-nav__link--post {
+  color: rgb(255 255 255 / 0.62);
 }
 
 .app-bottom-nav__icon {
   width: 1.25rem;
   height: 1.25rem;
   flex-shrink: 0;
+  shape-rendering: geometricPrecision;
 }
 
 .app-bottom-nav__label {
-  font-family: var(--seco-font-ui, system-ui, sans-serif);
-  font-size: clamp(0.75rem, 2.2vw, 0.875rem);
-  font-weight: 500;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.625rem;
+  font-weight: 400;
   letter-spacing: 0.01em;
-  line-height: 1.15;
+  line-height: 1.1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-bottom-nav__link--active .app-bottom-nav__label {
+  font-weight: 500;
 }
 
 .app-bottom-nav__spacer {
-  height: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+  height: calc(var(--app-bottom-nav-h, 4.5rem) + env(safe-area-inset-bottom, 0px));
   flex-shrink: 0;
 }
 
 .deepdose-shell.seco-shell--dark .app-bottom-nav__link {
-  color: rgb(255 255 255 / 0.55);
+  color: rgb(255 255 255 / 0.42);
 }
 
 .deepdose-shell.seco-shell--dark .app-bottom-nav__link:hover,
 .deepdose-shell.seco-shell--dark .app-bottom-nav__link--active {
-  color: #fff;
+  color: rgb(255 255 255 / 0.95);
 }
 
 html.splash-route .app-bottom-nav {

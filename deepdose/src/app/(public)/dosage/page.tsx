@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 
 import { AuthedDosageHome } from '@/components/deepdose/AuthedDosageHome'
 import { PatientDosageWithDraft } from '@/components/deepdose/PatientDosageWithDraft'
+import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
 import { DOSAGE_PAGE_META } from '@/lib/deepdose-marketing/dosage-content'
 import { resolvePlanFromSearchParams } from '@/lib/medications/parse-plan-search-params'
 import {
@@ -36,17 +37,15 @@ export default async function DosagePage({ searchParams }: PageProps) {
       redirect(onboardingPathForStep(step))
     }
     return (
-      <div className="seco-landing seco-landing--maven seco-landing--sleep-wake-dash">
-        <section className="seco-landing__hero seco-landing__hero--sleep-wake-dash">
-          <div className="seco-landing__section-inner seco-reveal seco-reveal--1">
-            <AuthedDosageHome userId={user.id} />
-          </div>
-        </section>
-      </div>
+      <ProductAppShell title="Chemistry" className="dd-dosage">
+        <AuthedDosageHome userId={user.id} />
+      </ProductAppShell>
     )
   }
 
   return (
-    <PatientDosageWithDraft urlPlanContext={urlPlanContext} signupHrefFromUrl={signupHref} />
+    <ProductAppShell title="Chemistry" className="dd-dosage">
+      <PatientDosageWithDraft urlPlanContext={urlPlanContext} signupHrefFromUrl={signupHref} />
+    </ProductAppShell>
   )
 }

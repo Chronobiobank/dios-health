@@ -8,8 +8,7 @@ import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
   title: `${DEEPDOSE_NAME} · Profile`,
-  description:
-    'Understand your chemistry and rhythm. Share what you choose so others can connect and compare notes.',
+  description: 'Your Reals, sleep score, and friends on your clock.',
   alternates: { canonical: '/profile' },
 }
 

@@ -8,17 +8,17 @@ import {
 export const CHRONOBIOBANK_META = {
   title: `Mission · ${DEEPDOSE_NAME}`,
   description:
-    'Understand your chemistry, share details you choose, and connect with people on a similar rhythm for connection, correction, and more.',
+    'Sleepmaxx and share real life — one Real a day with people on your clock.',
 } as const
 
 export const CHRONOBIOBANK_INTRO = {
   eyebrow: 'Mission',
-  titleWhite: 'Chemical',
-  titleAccent: 'soul-matching',
+  titleWhite: 'Sleepmaxx.',
+  titleAccent: 'Share real life.',
   lede:
-    `${DEEPDOSE_NAME} helps you understand your chemistry, share details you choose, and connect with people on a similar rhythm for connection, correction, and more.`,
+    `${DEEPDOSE_NAME} is where you sleepmaxx and post today’s Real — a photo plus your sleep score — with friends on your clock.`,
   quote:
-    'The age of matching by profiles is ending. The age of matching by chemistry has begun.',
+    'The age of highlight reels is ending. The age of one real night, shared, has begun.',
 } as const
 
 /**
@@ -34,12 +34,12 @@ export const CHRONOBIOBANK_LETTER_TILES = [
   {
     id: 'now',
     label: 'Now',
-    body: 'Now we go deeper with Chemical Soul-Matching here.',
+    body: 'Now we share the night we lived, score and photo.',
   },
   {
     id: 'how',
     label: 'How',
-    body: 'Built on sleep, energy and chemistry of belonging.',
+    body: 'Built on sleep, SRI, and one Real posted each day.',
   },
   {
     id: 'who',
@@ -49,8 +49,8 @@ export const CHRONOBIOBANK_LETTER_TILES = [
 ] as const
 
 export const CHRONOBIOBANK_MISSION_CTA = {
-  label: 'Find your chemical match',
-  href: '/',
+  label: 'Post today’s Real',
+  href: '/real/post',
 } as const
 
 export const CHRONOBIOBANK_TRUST = {

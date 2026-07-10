@@ -12,7 +12,6 @@ import {
   SYNC_LABEL,
 } from '@/lib/medications/poly-plan-meds'
 import { RISK_RANK } from '@/lib/medications/polypharmacy-timing'
-import { marketingCtaClass } from '@/lib/design/marketing-system'
 import { buildTakeTimeMap } from '@/lib/patient/plan-dose-preview'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
 import { buildSixDoseStrip } from '@/lib/patient/six-dose-strip'
@@ -56,21 +55,11 @@ export function PatientDosageDashboard({
 
   return (
     <div className="sw-dash">
-      <header className="sw-dash__chrome">
-        <Link href="/profile" className="sw-dash__text-link">
-          {copy.backToProfile}
-        </Link>
-      </header>
-
       <div className="sw-dash__tiles">
         <article
           className="dios-glass-outer sw-dash__tile sw-dash__tile--protocol"
-          aria-labelledby="dosage-protocol"
+          aria-label="Your dosage protocol"
         >
-          <h1 id="dosage-protocol" className="seco-page__eyebrow sw-dash__tile-eyebrow">
-            {copy.eyebrow}
-          </h1>
-
           <div className="sw-dash__dose-grid seco-patient-doses">
             <SpectrumTileGrid as="ul" cols={2} sm2 aria-label="Your dosage protocol">
               {doses.map((dose) => {
@@ -92,8 +81,7 @@ export function PatientDosageDashboard({
                     body={
                       isBiomedical && sortedMeds.length > 0 ? (
                         <div className="sw-dash__biomedical">
-                          <p className="sw-dash__biomedical-lead">{dose.note}</p>
-                          <ul className="sw-dash__biomedical-meds" aria-label="Medicines under Biomedical">
+                          <ul className="sw-dash__biomedical-meds" aria-label="Medicines">
                             {sortedMeds.map((med) => {
                               const sync = syncStateForRisk(med.meta.risk)
                               const takeTime = takeTimes[med.code]
@@ -113,28 +101,20 @@ export function PatientDosageDashboard({
                                   </div>
                                   <p className="dash-med-row__meta">
                                     {takeTime ? (
-                                      <>
-                                        You take at{' '}
-                                        <span className="font-mono tabular-nums">{takeTime}</span>
-                                        <span aria-hidden> · </span>
-                                      </>
-                                    ) : null}
-                                    {med.meta.timing}
-                                    <span aria-hidden> · </span>
-                                    {med.meta.window}
+                                      <span className="font-mono tabular-nums">{takeTime}</span>
+                                    ) : (
+                                      med.meta.timing
+                                    )}
                                   </p>
-                                  <p className="sw-dash__med-action">{med.meta.instruction}</p>
                                 </li>
                               )
                             })}
                           </ul>
                         </div>
-                      ) : (
-                        dose.note
-                      )
+                      ) : null
                     }
                     titleTag="h3"
-                    titleVariant="display"
+                    titleVariant="default"
                     icon={<DoseIcon id={zeitgeberId} />}
                     foot={
                       <div className="sw-dash__dose-foot">
@@ -158,8 +138,8 @@ export function PatientDosageDashboard({
         </article>
       </div>
 
-      <div className={marketingCtaClass('sw-dash__cta')}>
-        <Link href={signupHref} className="seco-landing__btn seco-landing__btn--primary sw-dash__cta-btn">
+      <div className="sw-dash__cta">
+        <Link href={signupHref} className="dd-profile__action dd-profile__action--primary sw-dash__cta-btn">
           {copy.cta}
         </Link>
       </div>

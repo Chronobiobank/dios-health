@@ -47,14 +47,7 @@ export function DoseDashStack({ model, medDetail }: DoseDashStackProps) {
     <div className="space-y-6">
       <section className="seco-app-card dose-dash-master seco-reveal seco-reveal--1 space-y-4 p-5 md:p-6">
         <div className="flex flex-wrap items-start justify-between gap-3">
-          <div className="dose-dash-head">
-            <p className="seco-page__eyebrow mb-1">Metabolic risk</p>
-            <h2 className="dose-dash-head__title">Your body-clock spectrum</h2>
-            <p className="mt-1 text-sm text-ink-muted">
-              Sleep breathing, clock drift, and metabolic rhythm — from your TipTraQ block and
-              chronotype.
-            </p>
-          </div>
+          <h2 className="dose-dash-head__title">Status</h2>
           <span className={TRIAGE_CLASS[model.triageLabel]}>{model.triageLabel}</span>
         </div>
 
@@ -77,23 +70,12 @@ export function DoseDashStack({ model, medDetail }: DoseDashStackProps) {
               />
             ))}
           </ul>
-
-          {model.tiptraqNights > 0 && (
-            <p className="mt-4 text-xs text-ink-faint">
-              {model.tiptraqComplete
-                ? `${model.tiptraqNights} TipTraQ nights on file · DLMO anchor ${model.dlmoLabel}`
-                : `${model.tiptraqNights}/3 nights recorded`}
-            </p>
-          )}
         </div>
       </section>
 
       {model.nextSteps.length > 0 && (
         <section className="seco-app-card dose-dash-master seco-reveal seco-reveal--2 space-y-4 p-5 md:p-6">
-          <div className="dose-dash-head">
-            <p className="seco-page__eyebrow mb-1">Your next steps</p>
-            <h2 className="dose-dash-head__title">Today&apos;s actions</h2>
-          </div>
+          <h2 className="dose-dash-head__title">Today</h2>
           <div className="dose-dash-inner">
             <ol className="space-y-3">
               {model.nextSteps.map((step, index) => (
@@ -117,31 +99,8 @@ export function DoseDashStack({ model, medDetail }: DoseDashStackProps) {
 
       <section className="seco-app-card dose-dash-master seco-reveal seco-reveal--3 space-y-4 p-5 md:p-6">
         <div className="dose-dash-head">
-          <p className="seco-page__eyebrow mb-1">Today&apos;s script</p>
-          <h2 className="dose-dash-head__title">Your dose cues</h2>
-          <p className="mt-1 text-sm text-ink-muted">
-            Body clock · <span className="font-mono text-ink">{model.dlmoLabel}</span>
-            {model.clockDriftMinutes != null && model.clockDriftMinutes > 0 && (
-              <span> · +{model.clockDriftMinutes}m drift</span>
-            )}
-          </p>
-          <p className="mt-1.5 text-xs text-ink-faint">
-            Body clock is your estimated melatonin onset — when your body starts winding down for
-            the night.
-            {model.clockDriftMinutes != null && model.clockDriftMinutes > 0 && (
-              <> Drift means you&apos;re settling {model.clockDriftMinutes} minutes later than your
-                target.</>
-            )}
-          </p>
-          {model.dlmoSource && (
-            <p className="dose-dash-source mt-2 inline-flex flex-wrap items-center gap-x-1.5 text-xs">
-              <span className="font-medium text-ink">{model.dlmoSource.label}</span>
-              <span className="text-ink-faint">· {model.dlmoSource.confidenceLabel} confidence</span>
-              {model.dlmoSource.bandMinutes != null && (
-                <span className="text-ink-faint">· ±{model.dlmoSource.bandMinutes} min</span>
-              )}
-            </p>
-          )}
+          <h2 className="dose-dash-head__title">Doses</h2>
+          <p className="mt-1 text-sm text-ink-muted font-mono tabular-nums">{model.dlmoLabel}</p>
           <BodyClockHelpPanel
             open={bodyClockHelpOpen}
             onToggle={() => setBodyClockHelpOpen((prev) => !prev)}

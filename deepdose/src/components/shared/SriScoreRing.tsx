@@ -56,11 +56,6 @@ export default function SriScoreRing({ score }: SriScoreRingProps) {
       </svg>
       <div className="sri-score-ring__readout">
         <p className="sri-score-ring__value tabular-nums">{clamped}</p>
-        <p className="sri-score-ring__label">
-          <span>Sleep</span>
-          <span>Regularity</span>
-          <span>Index</span>
-        </p>
       </div>
     </div>
   )

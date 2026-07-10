@@ -13,6 +13,7 @@
 @import "./deepdose-connect.css";
 @import "./deepdose-gate.css";
 @import "./deepdose-profile-account.css";
+@import "./deepdose-real.css";
 @import "./deepdose-legal.css";
 @import "./patient-sleep-wake-dash.css";
 @import "./deepdose-clinical-dash.css";
@@ -22,6 +23,8 @@
 @import "./deepdose-tile-containment.css";
 @import "./deepdose-oura-rhythm.css";
 @import "./deepdose-marketing-system.css";
+/* Last: product spacing + Inter lock must beat sleep-wake / marketing display serif */
+@import "./deepdose-product-space.css";
 
 /* Turbopack dev: entry must include a real rule after @imports (PostCSS runs before import inlining). */
 :root {

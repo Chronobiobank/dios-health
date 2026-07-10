@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
 
 import { AppBottomNav, AppBottomNavSpacer } from '@/components/deepdose/AppBottomNav'
 import { DeepDoseShell } from '@/components/deepdose/DeepDoseShell'
@@ -15,6 +16,13 @@ type PublicMarketingShellProps = {
 export function PublicMarketingShell({ children }: PublicMarketingShellProps) {
   const pathname = usePathname() ?? '/'
   const product = isDeepdoseProductPath(pathname)
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('product-route', product)
+    return () => {
+      document.documentElement.classList.remove('product-route')
+    }
+  }, [product])
 
   return (
     <DeepDoseShell variant="dark" nav={product ? null : undefined}>

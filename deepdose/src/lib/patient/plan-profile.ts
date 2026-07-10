@@ -8,6 +8,8 @@ export type PlanProfile = {
   avatarUrl?: string | null
   /** City / region for solar exposure context */
   location?: string
+  /** Short social bio / journey line */
+  journey?: string
   wake?: string | null
 }
 

@@ -19,10 +19,18 @@ Do **not** invent per-page layout CSS. Use `seco-marketing-page` + `seco-landing
 - Never stack lede + body that repeat the same idea.
 - Tile titles stay short; do not duplicate the title in a teaser line unless the teaser adds new information.
 
-## Page heads (all new app / policy pages)
+## Page heads
+
+### Product routes (`/real`, `/profile`, `/account`, `/connect`, `/chat`, `/dosage`)
+
+- Follow `.cursor/rules/deepdose-product-shell.mdc`.
+- Title lives in `AppTopBar` only — plain text, not spectrum.
+- Do **not** use `seco-page__title` + `seco-landing__hero-spectrum` on these surfaces.
+
+### Marketing / policy pages
 
 - **One line only.** Pattern: `seco-page__title` + single `seco-landing__hero-spectrum` span.
-- Examples: `Your matches`, `Your messages`, `Terms`, `Privacy`, `Report`.
+- Examples: `Terms`, `Privacy`, `Report`, `Mission`.
 - Do not split heads across white + spectrum lines on these surfaces.
 
 ## Page width & containment
@@ -32,13 +40,13 @@ Do **not** invent per-page layout CSS. Use `seco-marketing-page` + `seco-landing
 - **HARD RULE:** Heads and copy must **never** bleed outside tiles. Global CSS: `deepdose-tile-containment.css`. Tile shells use `overflow: hidden`; tile copy uses `max-width: 100%` + `overflow-wrap: anywhere`. Do **not** set `max-width: none` or `overflow: visible` on tile copy.
 - Do not set competing `max-width` on intro copy that fights the page grid unless measuring a single prose column inside the same inner.
 
-## Connect match tiles
+## Connect / Friends tiles
 
 - Discovery tiles show **only** name + Chat on one row (face above). No location on the tile.
-- Chemistry %, journey, location, and other detail live on `/connect/[id]` opened by clicking the face/name.
+- SRI, journey, location, and other detail live on `/connect/[id]` opened by clicking the face/name.
 
 ## Shared aesthetic
 
-- Spectrum hero titles: `seco-page__title` + `seco-landing__hero-spectrum` (single line on app/policy pages).
-- Section cards: `seco-spectrum-tile` via marketing tile grids — not Tailwind `text-sm` galley stacks, not bespoke `dd-*` type scales for marketing pages.
+- Product: `ProductAppShell` + restrained type (see product-shell rule).
+- Marketing: spectrum hero titles + spectrum tiles.
 - New pages extend the system; they do not fork a new visual language.

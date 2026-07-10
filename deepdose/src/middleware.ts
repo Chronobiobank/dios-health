@@ -51,7 +51,7 @@ export async function middleware(request: NextRequest) {
 
   const tier = profile?.tier ?? 'patient'
 
-  // Signed-in consumers: home gate is join-only — send them to SRI profile (or next)
+  // Signed-in consumers: home gate is join-only — send them to Real feed (or next)
   if (pathname === '/' && (tier === 'patient' || !profile?.tier)) {
     return NextResponse.redirect(
       new URL(resolvePostLoginPath(tier, nextParam), request.url)
@@ -67,12 +67,12 @@ export async function middleware(request: NextRequest) {
 
   // Enterprise routes: enterprise tier only
   if (pathname.startsWith('/enterprise') && tier !== 'enterprise') {
-    return NextResponse.redirect(new URL('/profile', request.url))
+    return NextResponse.redirect(new URL('/real', request.url))
   }
 
   // Clinical routes: clinician or enterprise only
   if (pathname.startsWith('/clinical') && !['clinician', 'enterprise'].includes(tier)) {
-    return NextResponse.redirect(new URL('/profile', request.url))
+    return NextResponse.redirect(new URL('/real', request.url))
   }
 
   return supabaseResponse

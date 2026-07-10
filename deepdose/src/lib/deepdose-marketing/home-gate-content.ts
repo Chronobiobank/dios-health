@@ -15,11 +15,11 @@ export const DEEPDOSE_HOME_GATE = {
 
 export const SAFETY_PAGE = {
   title: 'Safety Policy',
-  lede: `${DEEPDOSE_NAME} is for adults matching on chemistry and rhythm. We do not tolerate harassment, exploitation, or illegal content.`,
+  lede: `${DEEPDOSE_NAME} is for adults sleepmaxxing and sharing real life. We do not tolerate harassment, exploitation, or illegal content.`,
   sections: [
     {
       heading: 'Age',
-      body: 'You must be 18 or older to create an account or use Connect and Chat. If we learn someone is under 18, we remove the account.',
+      body: 'You must be 18 or older to create an account or use Friends and Chat. If we learn someone is under 18, we remove the account.',
     },
     {
       heading: 'Respect',
@@ -27,7 +27,7 @@ export const SAFETY_PAGE = {
     },
     {
       heading: 'Health boundary',
-      body: `${DEEPDOSE_NAME} helps you understand chemistry and connect with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
+      body: `${DEEPDOSE_NAME} helps you sleepmaxx and share today’s Real with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
     },
     {
       heading: 'Reporting',

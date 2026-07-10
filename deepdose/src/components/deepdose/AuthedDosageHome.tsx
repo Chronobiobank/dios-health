@@ -119,11 +119,6 @@ export async function AuthedDosageHome({ userId }: { userId: string }) {
 
   return (
     <div className="dash-meds space-y-8">
-      <header className="seco-landing__copy-stack dash-meds__page-head">
-        <p className="seco-page__eyebrow">Dosage</p>
-        <h1 className="seco-page__title dash-meds__page-title">Your protocol</h1>
-      </header>
-
       <DashSetupTile rows={setupRows} />
 
       {hasMeds && (

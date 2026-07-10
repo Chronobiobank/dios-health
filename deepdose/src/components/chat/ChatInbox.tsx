@@ -31,25 +31,11 @@ type ChatInboxProps = {
 export function ChatInbox({ items }: ChatInboxProps) {
   return (
     <div className="dd-chat">
-      <header className="dd-chat__header">
-        <div className="dd-chat__header-copy">
-          <h1 className="seco-page__title dd-chat__title">
-            <span className="seco-landing__hero-spectrum">Your messages</span>
-          </h1>
-        </div>
-        <Link href="/connect" className="dd-chat__header-cta">
-          Find matches
-        </Link>
-      </header>
-
       {items.length === 0 ? (
         <div className="dd-chat__empty">
           <p className="dd-chat__empty-title">No chats yet</p>
-          <p className="dd-chat__empty-body">
-            When you match on chemistry, message them here — lean, private, no feed.
-          </p>
           <Link href="/connect" className="dd-chat__empty-cta">
-            Open Connect
+            Find friends
           </Link>
         </div>
       ) : (
@@ -58,20 +44,13 @@ export function ChatInbox({ items }: ChatInboxProps) {
             <li key={item.conversationId}>
               <Link href={`/chat/${item.conversationId}`} className="dd-chat__row">
                 <span className="dd-chat__avatar" aria-hidden>
-                  {initials(item.peerDisplayName)}
+                  {initials(item.peer.displayName)}
                 </span>
                 <span className="dd-chat__row-main">
-                  <p className="dd-chat__row-name">{item.peerDisplayName}</p>
-                  <p className="dd-chat__row-preview">
-                    {item.lastMessageBody ?? 'Say hello'}
-                  </p>
+                  <p className="dd-chat__row-name">{item.peer.displayName}</p>
+                  <p className="dd-chat__row-preview">{item.lastMessageBody || '…'}</p>
                 </span>
-                <time
-                  className="dd-chat__row-time"
-                  dateTime={item.lastMessageAt ?? undefined}
-                >
-                  {formatInboxTime(item.lastMessageAt)}
-                </time>
+                <span className="dd-chat__row-time">{formatInboxTime(item.lastMessageAt)}</span>
               </Link>
             </li>
           ))}

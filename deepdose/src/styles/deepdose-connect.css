@@ -9,15 +9,16 @@
   --dd-connect-radius: var(--seco-radius-lg, 1.125rem);
 
   color: var(--dd-connect-text);
-  min-height: calc(100dvh - 5.5rem);
+  min-height: calc(100dvh - var(--app-bottom-nav-h) - env(safe-area-inset-bottom, 0px));
 }
 
-.dd-connect.seco-marketing-page .seco-landing__section-inner.dd-connect__inner {
+.dd-connect.seco-marketing-page .seco-landing__section-inner.dd-connect__inner,
+.dd-connect.seco-marketing-page .seco-landing__section-inner.dd-product__inner {
   --seco-page-max: var(--page-max-app, 48rem);
   width: 100%;
   max-width: var(--seco-page-max);
   gap: var(--mkt-section-gap);
-  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(var(--app-bottom-nav-h) + env(safe-area-inset-bottom, 0px));
 }
 
 .dd-connect__head {
@@ -44,7 +45,7 @@
   flex-shrink: 0;
   font-family: var(--seco-font-ui);
   font-size: var(--mkt-tile-body-size, 0.9375rem);
-  font-weight: 600;
+  font-weight: 500;
   color: #fff;
   text-decoration: underline;
   text-underline-offset: 0.18em;
@@ -114,15 +115,16 @@
   margin: 0;
   min-width: 0;
   flex: 1 1 auto;
-  font-family: var(--seco-font-ui);
-  font-size: var(--mkt-tile-title-size, 0.9375rem);
-  font-weight: 650;
-  letter-spacing: -0.01em;
-  color: #fff;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  color: rgb(255 255 255 / 0.92);
   text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
 }
 
 .dd-connect__name:hover {
@@ -130,12 +132,12 @@
 }
 
 .dd-connect__pct-value {
-  background: var(--seco-spectrum-hero);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  font-weight: 700;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  -webkit-text-fill-color: rgb(255 255 255 / 0.92);
+  color: rgb(255 255 255 / 0.92);
+  font-weight: 400;
 }
 
 .dd-connect__pct-label {
@@ -150,25 +152,24 @@
   justify-content: center;
   flex: 0 0 auto;
   min-height: 1.85rem;
-  padding: 0.3rem 0.7rem;
+  padding: 0.3rem 0.75rem;
   border: 0;
-  border-radius: var(--seco-radius-md, 0.875rem);
-  background: var(--seco-spectrum-hero);
-  background-size: 220% 100%;
-  background-position: 0% 50%;
-  color: var(--seco-navy, #0b1220);
-  font-family: var(--seco-font-ui);
+  border-radius: 999px;
+  background: #fff;
+  color: #0b1220;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   text-decoration: none;
   white-space: nowrap;
-  animation: seco-cta-flow 7s ease-in-out infinite;
+  animation: none;
 }
 
 .dd-connect__message:hover {
-  filter: brightness(1.05);
-  transform: translateY(-1px);
+  filter: none;
+  transform: none;
+  opacity: 0.92;
 }
 
 @media (prefers-reduced-motion: reduce) {
