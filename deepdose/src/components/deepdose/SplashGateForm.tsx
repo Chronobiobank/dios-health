@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
@@ -52,10 +52,37 @@ export function SplashGateForm({
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState<AuthIntent | null>(null)
+  const [authedHome, setAuthedHome] = useState<string | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(() =>
     callbackError ? callbackReason || 'Something went wrong. Try again.' : null
   )
+
+  useEffect(() => {
+    let cancelled = false
+    void (async () => {
+      const supabase = createClient()
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+      if (cancelled || !user) return
+
+      const { data: profile } = await supabase
+        .from('user_profiles')
+        .select('tier')
+        .eq('id', user.id)
+        .maybeSingle()
+      const tier = profile?.tier
+      const home =
+        tier === 'patient' || !tier
+          ? await resolvePatientPostLoginPath(supabase, user.id, next)
+          : resolvePostLoginPath(tier, next)
+      if (!cancelled) setAuthedHome(home)
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [next])
 
   async function redirectAfterAuth() {
     const supabase = createClient()
@@ -158,14 +185,20 @@ export function SplashGateForm({
           <Link href={aboutHref} className="dd-gate__chrome-link">
             {aboutLabel}
           </Link>
-          <button
-            type="button"
-            className="dd-gate__chrome-link"
-            disabled={busy}
-            onClick={() => void handleAuth('signin')}
-          >
-            {loading === 'signin' ? '…' : signInLabel}
-          </button>
+          {authedHome ? (
+            <Link href={authedHome} className="dd-gate__chrome-link">
+              Open Grid
+            </Link>
+          ) : (
+            <button
+              type="button"
+              className="dd-gate__chrome-link"
+              disabled={busy}
+              onClick={() => void handleAuth('signin')}
+            >
+              {loading === 'signin' ? '…' : signInLabel}
+            </button>
+          )}
         </nav>
       </header>
 
@@ -174,71 +207,75 @@ export function SplashGateForm({
         {orbit}
 
         <div className="dd-gate__form">
-          <label className="dd-gate__field">
-            <span className="dd-gate__field-icon" aria-hidden>
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                <path
-                  fillRule="evenodd"
-                  d="M1.5 6.75A2.25 2.25 0 0 1 3.75 4.5h16.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25H3.75a2.25 2.25 0 0 1-2.25-2.25V6.75Zm2.48.53a.75.75 0 0 0-.73 1.28l7.85 4.48a1.5 1.5 0 0 0 1.5 0l7.85-4.48a.75.75 0 1 0-.73-1.28L12 11.56 3.98 7.28Z"
-                  clipRule="evenodd"
+          {authedHome ? (
+            <Link href={authedHome} className="dd-gate__signup">
+              Open Grid
+            </Link>
+          ) : (
+            <>
+              <label className="dd-gate__field">
+                <span className="dd-gate__field-icon" aria-hidden>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path
+                      fillRule="evenodd"
+                      d="M1.5 6.75A2.25 2.25 0 0 1 3.75 4.5h16.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25H3.75a2.25 2.25 0 0 1-2.25-2.25V6.75Zm2.48.53a.75.75 0 0 0-.73 1.28l7.85 4.48a1.5 1.5 0 0 0 1.5 0l7.85-4.48a.75.75 0 1 0-.73-1.28L12 11.56 3.98 7.28Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+                <input
+                  className="dd-gate__input"
+                  type="email"
+                  name="email"
+                  required
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email"
+                  aria-label="Email"
                 />
-              </svg>
-            </span>
-            <input
-              className="dd-gate__input"
-              type="email"
-              name="email"
-              required
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-              aria-label="Email"
-            />
-          </label>
+              </label>
 
-          <label className="dd-gate__field">
-            <span className="dd-gate__field-icon" aria-hidden>
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                <path
-                  fillRule="evenodd"
-                  d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5z"
-                  clipRule="evenodd"
+              <label className="dd-gate__field">
+                <span className="dd-gate__field-icon" aria-hidden>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path
+                      fillRule="evenodd"
+                      d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+                <input
+                  className="dd-gate__input"
+                  type="password"
+                  name="password"
+                  required
+                  minLength={8}
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                  aria-label="Password"
                 />
-              </svg>
-            </span>
-            <input
-              className="dd-gate__input"
-              type="password"
-              name="password"
-              required
-              minLength={8}
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              aria-label="Password"
-            />
-          </label>
+              </label>
 
-          {error ? (
-            <p className="dd-gate__msg dd-gate__msg--error" role="alert">
-              {error}
-            </p>
-          ) : null}
-          {message ? (
-            <p className="dd-gate__msg" role="status">
-              {message}
-            </p>
-          ) : null}
+              {error ? (
+                <p className="dd-gate__msg dd-gate__msg--error" role="alert">
+                  {error}
+                </p>
+              ) : null}
+              {message ? (
+                <p className="dd-gate__msg" role="status">
+                  {message}
+                </p>
+              ) : null}
 
-          <button
-            type="submit"
-            className="dd-gate__signup"
-            disabled={busy}
-          >
-            {loading === 'signup' ? '…' : signUpLabel}
-          </button>
+              <button type="submit" className="dd-gate__signup" disabled={busy}>
+                {loading === 'signup' ? '…' : signUpLabel}
+              </button>
+            </>
+          )}
         </div>
       </div>
 

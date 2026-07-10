@@ -275,7 +275,7 @@
 .dd-product .dose-dash-expand-icon {
   background: none !important;
   -webkit-text-fill-color: currentColor !important;
-  color: rgb(255 255 255 / 0.55) !important;
+  color: rgb(255 255 255 / 0.72) !important;
 }
 
 .dd-product .dd-profile__action:not(.dd-profile__action--primary) {
@@ -345,12 +345,12 @@
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   text-decoration: none;
-  color: rgb(255 255 255 / 0.42);
+  color: rgb(255 255 255 / 0.72);
   transition: color 0.15s ease;
 }
 
 .app-bottom-nav__link:hover {
-  color: rgb(255 255 255 / 0.85);
+  color: rgb(255 255 255 / 0.9);
   background: transparent;
 }
 
@@ -365,7 +365,7 @@
 }
 
 .app-bottom-nav__link--post {
-  color: rgb(255 255 255 / 0.62);
+  color: rgb(255 255 255 / 0.78);
 }
 
 .app-bottom-nav__icon {
@@ -398,7 +398,7 @@
 }
 
 .deepdose-shell.seco-shell--dark .app-bottom-nav__link {
-  color: rgb(255 255 255 / 0.42);
+  color: rgb(255 255 255 / 0.72);
 }
 
 .deepdose-shell.seco-shell--dark .app-bottom-nav__link:hover,

@@ -51,13 +51,6 @@ export async function middleware(request: NextRequest) {
 
   const tier = profile?.tier ?? 'patient'
 
-  // Signed-in consumers: home gate is join-only — send them to Real feed (or next)
-  if (pathname === '/' && (tier === 'patient' || !profile?.tier)) {
-    return NextResponse.redirect(
-      new URL(resolvePostLoginPath(tier, nextParam), request.url)
-    )
-  }
-
   // Signed-in users should not see login — route by tier (or explicit next)
   if (pathname === '/login') {
     return NextResponse.redirect(

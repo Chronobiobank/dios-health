@@ -27,10 +27,11 @@
 
   /* ── Realme flat visuals (on the same grid) ── */
   --dd-ink: rgb(255 255 255 / 0.92);
-  --dd-ink-soft: rgb(255 255 255 / 0.78);
-  --dd-ink-muted: rgb(255 255 255 / 0.55);
-  --dd-ink-faint: rgb(255 255 255 / 0.45);
-  --dd-ink-dim: rgb(255 255 255 / 0.4);
+  --dd-ink-soft: rgb(255 255 255 / 0.82);
+  /* Unselected tabs / secondary controls — keep ≥ ~0.7 for dark BG legibility */
+  --dd-ink-muted: rgb(255 255 255 / 0.72);
+  --dd-ink-faint: rgb(255 255 255 / 0.7);
+  --dd-ink-dim: rgb(255 255 255 / 0.65);
   --dd-ink-inverse: #0b1220;
 
   --dd-surface: rgb(255 255 255 / 0.04);
