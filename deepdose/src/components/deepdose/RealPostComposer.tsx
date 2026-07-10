@@ -33,14 +33,14 @@ export function RealPostComposer() {
   const [error, setError] = useState<string | null>(null)
 
   const bodyClock = useMemo(
-    () => inferLandingBodyClock(profile.wake, planContext.medTimes),
+    () => inferLandingBodyClock(profile.wake, planContext.medTimes ?? []),
     [profile.wake, planContext.medTimes]
   )
   const riskAnalysis = useMemo(
     () =>
       buildLandingRiskAnalysis({
         medCodes: planContext.medCodes,
-        medTimes: planContext.medTimes,
+        medTimes: planContext.medTimes ?? [],
         wake: profile.wake,
       }),
     [planContext.medCodes, planContext.medTimes, profile.wake]
