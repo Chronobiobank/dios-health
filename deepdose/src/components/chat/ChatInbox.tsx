@@ -44,10 +44,10 @@ export function ChatInbox({ items }: ChatInboxProps) {
             <li key={item.conversationId}>
               <Link href={`/chat/${item.conversationId}`} className="dd-chat__row">
                 <span className="dd-chat__avatar" aria-hidden>
-                  {initials(item.peer.displayName)}
+                  {initials(item.peerDisplayName)}
                 </span>
                 <span className="dd-chat__row-main">
-                  <p className="dd-chat__row-name">{item.peer.displayName}</p>
+                  <p className="dd-chat__row-name">{item.peerDisplayName}</p>
                   <p className="dd-chat__row-preview">{item.lastMessageBody || '…'}</p>
                 </span>
                 <span className="dd-chat__row-time">{formatInboxTime(item.lastMessageAt)}</span>
