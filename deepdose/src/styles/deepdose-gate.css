@@ -258,6 +258,19 @@
     box-shadow 0.18s ease;
 }
 
+/* Chromium/Edge autofill paints a light UA background — keep designed glass. */
+.dd-gate__input:-webkit-autofill,
+.dd-gate__input:-webkit-autofill:hover,
+.dd-gate__input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  caret-color: #fff;
+  border-color: var(--dios-glass-outer-border, rgb(255 255 255 / 0.14));
+  box-shadow:
+    var(--dios-glass-outer-shadow, 0 8px 32px rgb(0 0 0 / 0.22)),
+    inset 0 0 0 1000px var(--dios-glass-outer-bg, rgb(255 255 255 / 0.07));
+  transition: background-color 99999s ease-in-out 0s;
+}
+
 .dd-gate__field:focus-within .dd-gate__field-icon {
   color: rgb(172 211 222 / 0.95);
 }
