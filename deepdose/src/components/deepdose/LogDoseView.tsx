@@ -104,7 +104,7 @@ export function LogDoseView() {
 
   return (
     <div className="dd-log">
-      <p className="dd-log__hint">Stamp a cluster. Get in Flow.</p>
+      <p className="dd-log__hint">Log a dose — photo plus sleep score.</p>
 
       <div className="dd-log__buttons">
         {DOSE_TAGS.map((tag) => {

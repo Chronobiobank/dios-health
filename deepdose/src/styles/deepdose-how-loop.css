@@ -19,11 +19,9 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: calc(
-    100dvh - var(--seco-nav-height, 4rem) - var(--app-bottom-nav-h, 4.5rem) -
-      env(safe-area-inset-bottom, 0px) - 1.5rem
-  );
+  min-height: auto;
   padding-block: clamp(0.75rem, 2vw, 1.25rem);
+  gap: 1rem;
 }
 
 .seco-how-page .seco-how-page__cta.seco-marketing-cta,
@@ -32,6 +30,33 @@
   justify-content: center;
   width: 100%;
   margin-inline: auto;
+}
+
+/* Under-orbit copy — shared seco-page__title / __lede; centered measure */
+.seco-how-page__why {
+  box-sizing: border-box;
+  width: min(100%, 36rem);
+  max-width: 62ch;
+  margin: 0.5rem auto 0;
+  text-align: center;
+}
+
+.seco-how-page__why .seco-page__title {
+  margin: 0;
+  text-align: center;
+}
+
+.seco-how-page__why .seco-page__lede {
+  margin-block: var(--mkt-hero-lede-gap);
+  margin-inline: auto;
+  max-width: 62ch;
+  text-align: center;
+}
+
+.seco-how-page__why .seco-chronobiobank__section-sub {
+  margin: 0 auto;
+  max-width: 62ch;
+  text-align: center;
 }
 
 .dd-how-loop-wrap {

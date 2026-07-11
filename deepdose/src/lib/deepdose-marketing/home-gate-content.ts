@@ -15,7 +15,7 @@ export const DEEPDOSE_HOME_GATE = {
 
 export const SAFETY_PAGE = {
   title: 'Safety Policy',
-  lede: `${DEEPDOSE_NAME} is for adult dosers logging circadian doses. We do not tolerate harassment, exploitation, or illegal content.`,
+  lede: `${DEEPDOSE_NAME} is for adults logging sleep and doses. We do not tolerate harassment, exploitation, or illegal content.`,
   sections: [
     {
       heading: 'Age',
@@ -27,7 +27,7 @@ export const SAFETY_PAGE = {
     },
     {
       heading: 'Health boundary',
-      body: `${DEEPDOSE_NAME} helps dosers log doses and raise their sleep score with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
+      body: `${DEEPDOSE_NAME} helps people log doses and raise their sleep score with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
     },
     {
       heading: 'Reporting',

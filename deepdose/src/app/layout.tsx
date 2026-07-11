@@ -21,11 +21,8 @@ export const metadata: Metadata = {
     'Deepdose',
     'Max your chemistry',
     'Medmaxxing',
-    'Get in Flow',
-    'Resetters',
-    'Hijackers',
-    'Crossers',
-    'Batteries',
+    'chronomatch',
+    'sleep score',
     'body clock',
   ],
   alternates: {

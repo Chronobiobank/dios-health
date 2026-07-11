@@ -1,4 +1,4 @@
-/** Chronobiobank , distributed intelligence, hybrid learning, licensing plane. */
+﻿/** Chronobiobank , distributed intelligence, hybrid learning, licensing plane. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {
@@ -8,17 +8,17 @@ import {
 export const CHRONOBIOBANK_META = {
   title: `Mission · ${DEEPDOSE_NAME}`,
   description:
-    'For dosers — Medmaxxing. Max your med stack. Get in Flow with people on your clock.',
+    'For people who do not live on a 9-to-5 clock. Score your nights. Plan what you take. Find people on your rhythm.',
 } as const
 
 export const CHRONOBIOBANK_INTRO = {
   eyebrow: 'Mission',
   titleWhite: 'For',
-  titleAccent: 'dosers.',
+  titleAccent: 'people off the clock.',
   lede:
-    `${DEEPDOSE_NAME} is home of Medmaxxing — stamp Resetters, Hijackers, Crossers, Batteries — and get in Flow on the Grid.`,
+    `${DEEPDOSE_NAME} is home of Medmaxxing. Score how you sleep. Plan your meds and supplements. Boost your chemistry. Find people whose rhythm fits yours.`,
   quote:
-    'The age of highlight reels is ending. The age of one real dose, logged, has begun.',
+    'The age of highlight reels is ending. The age of one real night, logged, has begun.',
 } as const
 
 /**

@@ -15,7 +15,7 @@ const ORBIT_SIZE = 40
 const DUST_COUNT = 56
 const ORBIT_RADIUS = 0.34
 
-/** Soft pastels — visible on white, non-conformer energy (not grey clinical). */
+/** Soft pastels — visible on white, off-clock energy (not grey clinical). */
 const PASTELS = [
   { r: 244, g: 163, b: 198 }, // blush
   { r: 186, g: 168, b: 230 }, // lilac

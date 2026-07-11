@@ -39,7 +39,7 @@ export const HOW_IT_WORKS_STEPS = [
     badge: '3',
     lead: 'Boost',
     rest: 'your chemistry',
-    teaser: 'Boost your chemistry — tune the stack until it actually hits.',
+    teaser: 'Boost your chemistry — tune what you take until it works for your clock.',
     cue: '#e8a54a',
     href: '/',
   },
@@ -55,6 +55,18 @@ export const HOW_IT_WORKS_STEPS = [
 ] as const
 
 export const HOW_IT_WORKS_CAPTION = 'Score. Plan. Boost. Find.' as const
+
+/**
+ * Short “why” under the orbit — shared title/lede system.
+ * Invite for the first ex-Manjam members. No street slang.
+ */
+export const HOW_IT_WORKS_WHY = {
+  title: 'Why Medmaxxing?',
+  lede:
+    'Old apps matched faces. We match nights. For people who do not live on a 9-to-5 clock — score how you sleep, plan what you take, boost your chemistry, find people whose rhythm fits yours.',
+  invite:
+    'First invite goes to early Manjam members — same hunger for real connection, now built around sleep, timing, and chemistry.',
+} as const
 
 export const HOW_IT_WORKS_CTA = {
   label: 'Start free',

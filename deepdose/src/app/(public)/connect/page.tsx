@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/connect' },
 }
 
-/** Dosers on your clock — Chat soft-gates login. */
+/** Friends on your clock — Chat soft-gates login. */
 export default async function ConnectPage() {
   const supabase = await createClient()
   const {

@@ -19,23 +19,22 @@ export const DEEPDOSE_REGISTRATION_LINE = DEEPDOSE_FOOTER_LEGAL
 
 export const DEEPDOSE_TAGLINE = 'Max your chemistry.' as const
 
-/** Consumer movement — stack sport under the CTA */
+/** Consumer movement — Medmaxxing */
 export const DEEPDOSE_MOVEMENT = 'Medmaxxing' as const
 
-/** Token economy — Flow is the hit (verb + in/out state). Not Sync, not likes. */
-export const DEEPDOSE_TOKEN_ECONOMY = 'Get in Flow.' as const
+/** Legacy token phrase — prefer plain “log a dose” on public surfaces. */
+export const DEEPDOSE_TOKEN_ECONOMY = 'Log a dose.' as const
 
 /** Homepage hero — compelling CTA (stack + meeting people) */
 export const DEEPDOSE_HOME_HEADLINE = 'Max your Chemistry' as const
 
-/** Dose = each stamped cluster on the stack — see lib/patient/dose-uploads.ts */
+/** Dose = each logged item on the Grid — see lib/patient/dose-uploads.ts */
 
 /**
  * Copy hierarchy:
- * Max your chemistry = splash CTA (med stack + meeting others).
- * Medmaxxing = the movement / how the stack sport works.
- * Get in Flow = the token economy (action + state the tribe recognizes).
- * Consumer tribe = Dosers (Grid / Log / Bank / Me).
+ * Max your chemistry = splash CTA (meds/supps + meeting others).
+ * Medmaxxing = the movement / how scoring and matching works.
+ * Public voice = plain English for people off the usual clock (ex-Manjam first).
  * Deepdose = company, Chemistry, TipTraQ, Chronobiobank.
  * Melatonin / DLMO = research / tech methodology only.
  */

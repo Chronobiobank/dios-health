@@ -95,7 +95,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Dosers log the night — light, meds, and movement — then raise their sleep score.',
+          title: 'People log the night — light, meds, and movement — then raise their sleep score.',
           meta: 'Rhythm · Sleep regularity',
           href: '/grid',
         },
@@ -114,14 +114,14 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'plan',
       label: 'Grid',
-      body: 'Dosers on your clock',
+      body: 'People on your clock',
       icon: 'plan' as const,
       panelTitle: 'The Grid',
       panelSeeAll: { label: 'Sign in', href: '/grid' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'One dose at a time: photo plus sleep score, stamped for Larks or Owls.',
+          title: 'One dose at a time: photo plus sleep score, for Larks or Owls.',
           meta: 'You choose · Opt in',
           href: '/dose',
         },
@@ -144,15 +144,15 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     },
     {
       id: 'social',
-      label: 'Dosers',
+      label: 'Friends',
       body: 'People on your clock',
       icon: 'social' as const,
-      panelTitle: 'Dosers & messages',
+      panelTitle: 'Friends & messages',
       panelSeeAll: { label: 'Open Friends', href: '/connect' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Dosers on your rhythm who see today’s doses — not follower counts or endless scroll.',
+          title: 'People on your rhythm who see today’s doses — not follower counts or endless scroll.',
           meta: 'Similar clocks · Daily doses',
           href: '/connect',
         },
@@ -393,8 +393,8 @@ export const SOCIAL_PROFILE = {
   sleepLabel: 'Lights off',
   wakeLabel: 'Lights on',
   share: 'Log dose',
-  matches: 'Dosers',
-  join: 'Join as a doser',
+  matches: 'Friends',
+  join: 'Join free',
 } as const
 
 export const DEEPDOSE_PATIENT_PLAN_DEEPER = [

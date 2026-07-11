@@ -11,10 +11,10 @@ export function MetabolicDosageBridge() {
   return (
     <div className="dd-metabolic-bridge">
       <p className="dd-metabolic-bridge__copy">
-        Set timing, then stamp a photo for the Grid.
+        Set timing, then log a photo for the Grid.
       </p>
       <Link href="/dose?tag=RESETTER" className="dd-metabolic-bridge__cta">
-        Stamp for Grid
+        Log for Grid
       </Link>
     </div>
   )

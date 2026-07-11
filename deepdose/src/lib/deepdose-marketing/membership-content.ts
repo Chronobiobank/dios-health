@@ -16,7 +16,7 @@ export type MembershipTier = {
 export const MEMBERSHIP_PAGE_META = {
   title: `Membership · ${DEEPDOSE_NAME}`,
   description:
-    'Free for dosers to log doses on the Grid. TipTraQ when you want a deeper sleep read.',
+    'Free to log doses on the Grid. TipTraQ when you want a deeper sleep read.',
 } as const
 
 export const MEMBERSHIP_PAGE_INTRO = {
@@ -24,7 +24,7 @@ export const MEMBERSHIP_PAGE_INTRO = {
   titleWhite: 'Free forever.',
   titleAccent: 'Upgrade for more.',
   lede:
-    'Max your med stack. Get in Flow. TipTraQ when you want a stronger sleep read.',
+    'Max your chemistry. TipTraQ when you want a stronger sleep read.',
 } as const
 
 /** USD for the global Manjam-first cohort. */
@@ -35,11 +35,11 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#acd3de',
     figure: '$0',
     cadence: 'Phone & wearable',
-    note: 'For dosers — log and sync on the Grid.',
+    note: 'Log and sync on the Grid.',
     cta: { label: 'Start free', href: '/' },
     includes: [
-      'Daily stack stamps on the Grid',
-      'Dosers on your clock',
+      'Daily doses on the Grid',
+      'People on your clock',
       'Optional research share only',
     ],
   },
@@ -49,7 +49,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#c9b6f2',
     figure: '$149',
     cadence: 'Three nights at home',
-    note: 'TipTraQ nights for a stronger sleep score to stamp.',
+    note: 'TipTraQ nights for a stronger sleep score.',
     cta: { label: 'Order Testkit', href: '/testkit' },
     includes: [
       'Reusable sensor for 3 nights',
@@ -68,7 +68,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     includes: [
       'Same reusable TipTraQ sensor',
       'Updated sleep read each quarter',
-      'Catch drift before you stamp stale scores',
+      'Catch drift before old scores go stale',
     ],
   },
 ] as const

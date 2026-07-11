@@ -1,31 +1,28 @@
-import { DEEPDOSE_NAME, DEEPDOSE_MOVEMENT, DEEPDOSE_TOKEN_ECONOMY } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 /**
- * Consumer tribe: Dosers.
- * Splash CTA: Max your chemistry — stack + meeting people.
- * Movement: Medmaxxing — tribal achievement on the med stack.
- * Token economy: Get in Flow — verb + in/out state.
- * Deepdose remains the company / clinical / Chronobiobank layer.
- * Prefer "non-conformists" only off-home. No em dashes.
+ * Audience: people off the usual clock (ex-Manjam first cohort).
+ * Plain English. No street slang. Product words (Medmaxxing, Chemistry) stay as brand.
+ * Prefer “people off the clock” over insider labels on public pages.
  */
 export const DEEPDOSE_AUDIENCE = {
-  label: 'dosers',
-  who: 'People who don’t live on a 9-to-5 clock.',
-  why: 'They max their chemistry — stack + people on their clock — and get in Flow.',
+  label: 'people off the clock',
+  who: 'People who do not live on a 9-to-5 clock — night workers, travelers, late sleepers, and anyone who refused a forced schedule.',
+  why: 'They want better nights and real connection with people on the same rhythm.',
 } as const
 
 export const DEEPDOSE_VOICE = {
   tagline: 'Max your chemistry.',
-  /** Home hero — CTA that includes Medmaxxing + meeting others */
+  /** Home hero */
   homeHeadlineWhite: 'Max your',
   homeHeadlineAccent: 'Chemistry',
   homeLede: '',
   missionHeadlineWhite: 'Max your',
   missionHeadlineAccent: 'Chemistry',
-  missionLede: `${DEEPDOSE_NAME}: max your chemistry — ${DEEPDOSE_MOVEMENT} the stack, meet your clock, ${DEEPDOSE_TOKEN_ECONOMY}`,
-  patientSubtitle: `Max your chemistry. ${DEEPDOSE_TOKEN_ECONOMY}`,
-  communitySupport: 'Dosers on your clock. Max your chemistry.',
-  closeSupport: 'Stamp it. If you didn’t stamp it, it didn’t count.',
+  missionLede: `${DEEPDOSE_NAME} is for people off the usual clock. Score your sleep. Plan what you take. Find your chronomatch.`,
+  patientSubtitle: 'Max your chemistry. Score your nights with people on your rhythm.',
+  communitySupport: 'People on your clock. Max your chemistry.',
+  closeSupport: 'Log it. If you did not log it, it did not count.',
   /** Footer under logo */
   footerMission: 'Max your chemistry.',
 } as const

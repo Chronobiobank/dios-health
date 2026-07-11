@@ -6,7 +6,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const metadata: Metadata = {
   title: `Grid · ${DEEPDOSE_NAME}`,
-  description: 'Dosers on your clock — Larks and Owls, sleep scores, Flow.',
+  description: 'People on your clock — Larks and Owls, sleep scores, doses.',
   alternates: { canonical: '/grid' },
 }
 
