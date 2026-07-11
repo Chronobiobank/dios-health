@@ -9,7 +9,7 @@
   --app-bottom-nav-h: 4.5rem;
 }
 
-/* Product routes: light canvas (splash/marketing stay dark) */
+/* Product routes: light canvas */
 body:has(.dd-product):not(:has(.seco-splash)) {
   background-color: #f7f7f5;
 }

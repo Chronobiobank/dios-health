@@ -69,8 +69,21 @@
   color: #fff;
 }
 
+.deepdose-shell.seco-shell--light {
+  background: #f7f7f5;
+  color: rgb(15 23 42 / 0.92);
+}
+
 body:has(.seco-shell--dark) {
   background-color: #060a12;
+}
+
+body:has(.seco-shell--light):not(:has(.seco-splash--oai)) {
+  background-color: #f7f7f5;
+}
+
+body:has(.seco-splash--oai) {
+  background-color: #fff;
 }
 
 .deepdose-shell .seco-display {

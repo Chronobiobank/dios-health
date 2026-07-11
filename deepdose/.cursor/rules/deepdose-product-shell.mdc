@@ -24,13 +24,14 @@ Consumer dose tags = **#Resetters / #Hijackers / #Crossers / #Batteries**.
 
 ## Visual / layout engine
 
-**OpenAI-inspired fluid grid is the source of truth** (`deepdose-openai-grid.css`):
+**OpenAI-inspired fluid grid is the source of truth** (`deepdose-openai-grid.css`) — **sitewide**:
 
-- One proportional column: `--oai-page-pad` + `--oai-page-max`
+- One proportional column: `--oai-page-pad` + `--oai-page-max` (app) / `--oai-page-max-wide` (marketing)
 - Auto-fit grids: `.dd-oai-auto-2|3|4` and 12-col `.dd-oai-grid`
 - Product shell wraps content in `dd-oai-container` + `dd-oai-stack` via `ProductAppShell`
+- Public + patient + clinical + enterprise use `DeepDoseShell variant="light"` (`seco-shell--light`)
 
-**Light Flow shell** on product routes (splash/marketing stay dark spectrum). Tokens in `deepdose-product-space.css` — no raw hex in feature CSS.
+**Light Flow shell everywhere** (splash, marketing, product). Tokens in `deepdose-product-space.css` — no raw hex in feature CSS. No dark ambient on public routes.
 
 | Layer | Tokens |
 |---|---|

@@ -12,7 +12,7 @@ type PublicMarketingShellProps = {
   children: ReactNode
 }
 
-/** Public routes: dark shell + bottom nav. Product tabs hide the marketing header. */
+/** Public routes: light OpenAI grid shell + bottom nav. Product tabs hide the marketing header. */
 export function PublicMarketingShell({ children }: PublicMarketingShellProps) {
   const pathname = usePathname() ?? '/'
   const product = isDeepdoseProductPath(pathname)
@@ -25,7 +25,7 @@ export function PublicMarketingShell({ children }: PublicMarketingShellProps) {
   }, [product])
 
   return (
-    <DeepDoseShell variant="dark" nav={product ? null : undefined}>
+    <DeepDoseShell variant="light" nav={product ? null : undefined}>
       {children}
       <AppBottomNavSpacer />
       <AppBottomNav />

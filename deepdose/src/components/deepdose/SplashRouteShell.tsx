@@ -12,7 +12,7 @@ type SplashRouteShellProps = {
   children: ReactNode
 }
 
-/** Home splash: dark shell, no chrome. Other public pages use bottom nav. */
+/** Home splash: light gate, no chrome. Other public pages use light shell + bottom nav. */
 export function SplashRouteShell({ children }: SplashRouteShellProps) {
   const pathname = usePathname()
   const isSplash = SPLASH_PATHS.has(pathname)
@@ -24,7 +24,7 @@ export function SplashRouteShell({ children }: SplashRouteShellProps) {
     }
   }, [isSplash])
 
-  // SplashFrame already owns the dark shell + nav — do not nest another layout
+  // SplashFrame already owns the light splash shell — do not nest another layout
   // (nested 100dvh shells are what create a home scrollbar).
   if (isSplash) {
     return <>{children}</>

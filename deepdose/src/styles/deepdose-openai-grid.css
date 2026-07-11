@@ -140,3 +140,159 @@
   padding-inline: var(--oai-page-pad);
   gap: var(--oai-stack);
 }
+
+/* ── Sitewide light shell: openai pad/max on every marketing page ── */
+
+.deepdose-shell.seco-shell--light .seco-marketing-page .seco-landing__section-inner,
+.deepdose-shell.seco-shell--light .dd-oai-shell .seco-landing__section-inner {
+  --seco-page-pad: var(--oai-page-pad);
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--oai-page-pad);
+  min-width: 0;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page:not(.dd-product) .seco-landing__section-inner {
+  --seco-page-max: var(--oai-page-max-wide);
+  max-width: var(--oai-page-max-wide);
+}
+
+.deepdose-shell.seco-shell--light .clinical-site-nav {
+  background: rgb(247 247 245 / 0.92);
+  backdrop-filter: saturate(1.2) blur(20px);
+  -webkit-backdrop-filter: saturate(1.2) blur(20px);
+  border-bottom: 1px solid rgb(15 23 42 / 0.08);
+}
+
+.deepdose-shell.seco-shell--light .clinical-site-nav__brand,
+.deepdose-shell.seco-shell--light .clinical-site-nav__context {
+  color: rgb(15 23 42 / 0.92);
+}
+
+.deepdose-shell.seco-shell--light .clinical-site-nav__link {
+  color: rgb(15 23 42 / 0.55);
+}
+
+.deepdose-shell.seco-shell--light .clinical-site-nav__link:hover {
+  color: rgb(15 23 42 / 0.92);
+}
+
+/* Marketing ink on light — replace dark-shell white type */
+.deepdose-shell.seco-shell--light .seco-page__eyebrow {
+  color: rgb(15 23 42 / 0.48);
+}
+
+.deepdose-shell.seco-shell--light .seco-page__title {
+  margin: 0;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: rgb(15 23 42 / 0.92);
+}
+
+.deepdose-shell.seco-shell--light .seco-page__title .seco-landing__hero-spectrum {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: inherit;
+}
+
+.deepdose-shell.seco-shell--light .seco-page__lede,
+.deepdose-shell.seco-shell--light .clinical-layout .seco-landing__hero-lede,
+.deepdose-shell.seco-shell--light .seco-page :is(
+  .seco-hometest__section-sub,
+  .seco-technology__section-sub,
+  .seco-research__section-sub,
+  .seco-chronobiobank__section-sub
+) {
+  color: rgb(15 23 42 / 0.62);
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page :is(
+  .seco-spectrum-tile__title,
+  .seco-spectrum-tile__title--display,
+  .seco-science-fold__title
+) {
+  color: rgb(15 23 42 / 0.92) !important;
+  white-space: normal;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page :is(
+  .seco-spectrum-tile__body,
+  .seco-spectrum-tile__lead,
+  .seco-science-fold__teaser,
+  .seco-evidence-theme-links__lede,
+  .seco-hometest__section-sub
+) {
+  color: rgb(15 23 42 / 0.62) !important;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page :is(
+  .seco-spectrum-tile__cue,
+  .seco-science-fold__badge
+) {
+  color: color-mix(in srgb, var(--cue, #3d8fa0) 72%, rgb(15 23 42 / 0.55)) !important;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-note,
+.deepdose-shell.seco-shell--light .seco-clinics__note,
+.deepdose-shell.seco-shell--light .seco-marketing-cta__note,
+.deepdose-shell.seco-shell--light .seco-clinics__access-note {
+  color: rgb(15 23 42 / 0.48);
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page .seco-spectrum-tile,
+.deepdose-shell.seco-shell--light .seco-marketing-page .seco-science-fold--grid-tile,
+.deepdose-shell.seco-shell--light .seco-marketing-page .seco-science-fold--linked {
+  --spectrum-tile-wash: 18%;
+  --spectrum-tile-wash-hover: 24%;
+  --spectrum-tile-border-mix: 28%;
+  --dios-glass-outer-bg: #fff;
+  --dios-glass-outer-border: rgb(15 23 42 / 0.1);
+  --dios-glass-outer-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+  --dios-glass-outer-blur: none;
+  border-color: rgb(15 23 42 / 0.1);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page .seco-spectrum-tile:hover,
+.deepdose-shell.seco-shell--light .seco-marketing-page .seco-science-fold--linked:hover {
+  transform: none;
+  border-color: rgb(15 23 42 / 0.16);
+  box-shadow: 0 4px 16px rgb(15 23 42 / 0.06);
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-cta .seco-landing__btn--primary,
+.deepdose-shell.seco-shell--light .seco-clinics__cta .seco-landing__btn--primary {
+  background: #0d0d0d;
+  color: #fff;
+  border: 0;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-cta .seco-landing__btn--primary:hover,
+.deepdose-shell.seco-shell--light .seco-clinics__cta .seco-landing__btn--primary:hover {
+  background: #1a1a1a;
+  transform: none;
+}
+
+/* App pages outside .dd-product still get light ink */
+.deepdose-shell.seco-shell--light .seco-app-page {
+  color: rgb(15 23 42 / 0.82);
+  background: transparent;
+}
+
+.deepdose-shell.seco-shell--light .seco-app-page .text-ink {
+  color: rgb(15 23 42 / 0.92);
+}
+
+.deepdose-shell.seco-shell--light .seco-app-page .text-ink-muted {
+  color: rgb(15 23 42 / 0.62);
+}
+
+.deepdose-shell.seco-shell--light .seco-app-page .text-ink-faint {
+  color: rgb(15 23 42 / 0.48);
+}

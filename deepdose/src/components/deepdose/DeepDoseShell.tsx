@@ -9,6 +9,7 @@ type DeepDoseShellProps = {
   nav?: ReactNode
 }
 
+/** Site shell — light OpenAI grid is default; dark kept for rare legacy surfaces. */
 export function DeepDoseShell({ children, variant = 'light', nav }: DeepDoseShellProps) {
   const isDark = variant === 'dark'
   const showDefaultNav = nav === undefined
@@ -19,7 +20,7 @@ export function DeepDoseShell({ children, variant = 'light', nav }: DeepDoseShel
       className={
         isDark
           ? 'clinical-layout deepdose-shell seco-shell--dark'
-          : 'clinical-layout deepdose-shell'
+          : 'clinical-layout deepdose-shell seco-shell--light'
       }
     >
       {isDark ? <DarkAmbientBackground /> : null}
