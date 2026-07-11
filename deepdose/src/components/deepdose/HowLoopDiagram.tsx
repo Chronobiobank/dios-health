@@ -36,6 +36,7 @@ export function HowLoopDiagram() {
 
     let width = 0
     let height = 0
+    let orbitR = ORBIT_RADIUS
 
     function resize() {
       if (!root || !canvas || !ctx) return
@@ -44,10 +45,9 @@ export function HowLoopDiagram() {
       if (side < 2) return
       // Pull radius in if nodes would clip the square stage.
       const maxR = 0.5 - (NODE_SIZE / 2 + 6) / side
-      const r = Math.min(ORBIT_RADIUS, Math.max(0.22, maxR))
+      orbitR = Math.min(ORBIT_RADIUS, Math.max(0.22, maxR))
       width = side
       height = side
-      root.dataset.orbitR = String(r)
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
       canvas.width = Math.max(1, Math.floor(width * dpr))
       canvas.height = Math.max(1, Math.floor(height * dpr))
@@ -56,26 +56,18 @@ export function HowLoopDiagram() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
 
-    function orbitRadius() {
-      if (!root) return ORBIT_RADIUS
-      const raw = root.dataset.orbitR
-      const parsed = raw ? Number(raw) : ORBIT_RADIUS
-      return Number.isFinite(parsed) ? parsed : ORBIT_RADIUS
-    }
-
     function orbitPos(index: number) {
       const angle = angles[index]!
-      const r = orbitRadius()
       return {
-        x: 0.5 + Math.cos(angle) * r,
-        y: 0.5 + Math.sin(angle) * r,
+        x: 0.5 + Math.cos(angle) * orbitR,
+        y: 0.5 + Math.sin(angle) * orbitR,
       }
     }
 
     function paintRing() {
       if (!ctx || width < 2) return
       ctx.clearRect(0, 0, width, height)
-      const r = Math.min(width, height) * orbitRadius()
+      const r = Math.min(width, height) * orbitR
       ctx.beginPath()
       ctx.arc(width * 0.5, height * 0.5, r, 0, Math.PI * 2)
       ctx.strokeStyle = 'rgba(15, 23, 42, 0.28)'
