@@ -1,8 +1,7 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
-/** Sniffies-style home gate · signup + one Terms link. */
+/** Home splash chrome · med baseline + Terms. Auth on /login. */
 export const DEEPDOSE_HOME_GATE = {
-  signUpLabel: 'Sign up to Deepdose',
   signInLabel: 'Sign in',
   reportLabel: 'Report',
   agreeLine: 'You must be 18+ y/o to enter and agree to our',

@@ -6,9 +6,11 @@ import type { ReactNode } from 'react'
 
 import {
   APP_BOTTOM_NAV,
+  APP_POST_FAB,
   isAppBottomNavActive,
   type AppBottomNavItem,
 } from '@/lib/deepdose-marketing/app-bottom-nav'
+import { isDeepdoseProductPath } from '@/lib/deepdose-marketing/site-nav-links'
 import { useIsClient } from '@/lib/react/use-is-client'
 import { cn } from '@/lib/utils/cn'
 
@@ -17,7 +19,7 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
     viewBox: '0 0 24 24',
     fill: 'none',
     stroke: 'currentColor',
-    strokeWidth: 1.5,
+    strokeWidth: 1.75,
     strokeLinecap: 'round' as const,
     strokeLinejoin: 'round' as const,
     'aria-hidden': true,
@@ -26,20 +28,11 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
   }
 
   switch (id) {
-    case 'grid':
+    case 'home':
       return (
         <svg {...common}>
-          <rect x="4" y="4" width="7" height="7" rx="1.25" />
-          <rect x="13" y="4" width="7" height="7" rx="1.25" />
-          <rect x="4" y="13" width="7" height="7" rx="1.25" />
-          <rect x="13" y="13" width="7" height="7" rx="1.25" />
-        </svg>
-      )
-    case 'dose':
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="12" r="8.25" />
-          <circle cx="12" cy="12" r="4.25" />
+          <path d="M4.5 10.5 12 4.75l7.5 5.75" />
+          <path d="M7 10v8.25h10V10" />
         </svg>
       )
     case 'friends':
@@ -54,43 +47,61 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
     case 'bank':
       return (
         <svg {...common}>
-          <circle cx="12" cy="12" r="8.25" />
-          <path d="M12 7.75v8.5M9.25 10.25h5.5M9.25 13.75h5.5" />
-        </svg>
-      )
-    case 'me':
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="8" r="3.75" />
-          <path d="M4.75 20c1.5-3.75 4-5.5 7.25-5.5s5.75 1.75 7.25 5.5" />
+          <path d="M5.5 18.5V10.75" />
+          <path d="M12 18.5V6.5" />
+          <path d="M18.5 18.5v-5.25" />
         </svg>
       )
   }
 }
 
+/** Black circle to the right of the pill — + icon + Post label (same stack as nav tabs). */
+export function AppPostFab() {
+  const pathname = usePathname() ?? '/'
+  const product = isDeepdoseProductPath(pathname)
+  const onLog = pathname === '/dose' || pathname.startsWith('/dose/')
+
+  if (!product || onLog) return null
+
+  return (
+    <Link href={APP_POST_FAB.href} className="app-post-fab" aria-label={APP_POST_FAB.label}>
+      <svg
+        className="app-bottom-nav__icon"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="M12 6.75v10.5M6.75 12h10.5" />
+      </svg>
+      <span className="app-bottom-nav__label">{APP_POST_FAB.label}</span>
+    </Link>
+  )
+}
+
 export function AppBottomNav() {
   const pathname = usePathname() ?? '/'
-  const ready = useIsClient()
+  // Pathname can disagree between SSR HTML and the first client pass — only
+  // mark active after mount so aria-current / active class stay hydration-safe.
+  const mounted = useIsClient()
 
   return (
     <nav className="app-bottom-nav" aria-label="Primary">
       <div className="app-bottom-nav__bar">
         <ul className="app-bottom-nav__list">
           {APP_BOTTOM_NAV.map((item) => {
-            const active = ready && isAppBottomNavActive(item.href, pathname)
+            const active = mounted && isAppBottomNavActive(item.href, pathname)
             return (
-              <li
-                key={item.id}
-                className={cn(
-                  'app-bottom-nav__item',
-                  item.id === 'dose' && 'app-bottom-nav__item--post'
-                )}
-              >
+              <li key={item.id} className="app-bottom-nav__item">
                 <Link
                   href={item.href}
                   className={cn(
                     'app-bottom-nav__link',
-                    item.id === 'dose' && 'app-bottom-nav__link--post',
                     active && 'app-bottom-nav__link--active'
                   )}
                   aria-current={active ? 'page' : undefined}

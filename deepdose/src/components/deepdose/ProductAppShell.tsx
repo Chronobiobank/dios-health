@@ -9,6 +9,11 @@ type ProductAppShellProps = {
   children: ReactNode
   /** Extra class on the article (e.g. dd-connect) */
   className?: string
+  /**
+   * `chrome` (default) — group switcher + chat/alerts/avatar
+   * `detail` — back/title layout for nested screens
+   */
+  chrome?: 'chrome' | 'detail'
 }
 
 /**
@@ -21,10 +26,18 @@ export function ProductAppShell({
   trailing,
   children,
   className,
+  chrome = 'chrome',
 }: ProductAppShellProps) {
+  const variant = leading ? 'detail' : chrome
+
   return (
     <article className={['seco-page seco-marketing-page dd-product', className].filter(Boolean).join(' ')}>
-      <AppTopBar title={title} leading={leading} trailing={trailing} />
+      <AppTopBar
+        title={title}
+        leading={leading}
+        trailing={trailing}
+        variant={variant}
+      />
       <div className="seco-landing__section-inner dd-product__inner dd-oai-container">
         <div className="dd-oai-stack">{children}</div>
       </div>

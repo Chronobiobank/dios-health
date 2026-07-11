@@ -13,14 +13,16 @@ Consumer tribe = **Dosers**. Movement = **Medmaxxing**. Token economy = **Get in
 
 Consumer dose tags = **#Resetters / #Hijackers / #Crossers / #Batteries**.
 
-## Bottom nav (4 tabs)
+## Bottom nav (3 tabs + post circle)
 
-| Tab | Route | Role |
+| Control | Route | Role |
 |---|---|---|
-| Grid | `/grid` | Chronotype feed (Larks / Owls) + Flow |
-| Log | `/dose` | Stamp a cluster (camera) |
-| Bank | `/bank` | Sleep score + today’s stack + Chemistry depth |
-| Me | `/profile` | Identity, archive |
+| Home | `/grid` | Chronotype feed (Larks / Owls) + Flow |
+| Friends | `/connect` | Discovery + Chat |
+| Bank | `/bank` | Sleep score + today’s stack |
+| **Post** (black circle, right of pill) | `/dose` | Stamp a cluster |
+
+Profile / Me via top-right avatar (`/profile`). Alerts bell can still deep-link Bank.
 
 ## Visual / layout engine
 

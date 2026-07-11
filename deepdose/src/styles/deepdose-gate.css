@@ -13,6 +13,7 @@
   --dd-gate-input-bg: #ffffff;
   --dd-gate-input-border: rgb(13 13 13 / 0.14);
   --dd-gate-shadow: 0 2px 8px rgb(0 0 0 / 0.06), 0 0 0 1px rgb(13 13 13 / 0.06);
+  --dd-gate-pill-h: 3rem;
 
   box-sizing: border-box;
   display: flex;
@@ -113,12 +114,13 @@
   flex-direction: column;
   align-items: stretch;
   box-sizing: border-box;
+  /* Shared column — head + med pills share the same left/right edges */
   width: min(100% - 2rem, 24rem);
   max-width: 24rem;
   margin-inline: auto;
   padding-inline: 0;
   padding-bottom: 0;
-  gap: 0.2rem;
+  gap: 0;
   flex: 1 1 auto;
   justify-content: center;
   min-height: 0;
@@ -128,15 +130,50 @@
 
 .dd-gate__headline {
   width: 100%;
-  text-align: center;
-  margin-bottom: 0;
+  /* Flush with med pill left edge */
+  text-align: left;
+  margin: 0;
+  /* Space above the med pills */
+  margin-bottom: clamp(2.75rem, 6vh, 3.75rem);
 }
 
 .dd-gate__headline .seco-landing__hero-head {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
+}
+
+.dd-gate
+  .dd-gate__headline
+  .seco-landing__hero-title.seco-landing__hero-title--single {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(2rem, 0.85rem + 5.5vw, 3.25rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #0d0d0d;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.dd-gate
+  .dd-gate__headline
+  .seco-landing__hero-title.seco-landing__hero-title--single
+  > .seco-landing__hero-line {
+  display: block;
+  width: 100%;
+  margin: 0;
+  text-align: left;
+  font-family: inherit;
+  font-weight: 400;
+  color: #0d0d0d;
+  -webkit-text-fill-color: #0d0d0d;
+  white-space: nowrap;
 }
 
 .dd-gate
@@ -184,51 +221,142 @@
   font-weight: 400;
 }
 
-.dd-gate__orbit {
-  width: min(100%, 20rem);
-  max-width: min(100%, 34vh);
-  flex: none;
-  align-self: center;
-  margin-inline: auto;
-  margin-block: 0;
-  filter: none;
-  opacity: 1;
-}
-
-.dd-gate__orbit .home-face-net {
+.dd-gate__baseline {
   width: 100%;
   max-width: none;
+  margin: 0;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
-.dd-gate__orbit .home-face-net__aura {
-  background: radial-gradient(
-    circle,
-    rgb(244 163 198 / 0.28) 0%,
-    rgb(186 168 230 / 0.12) 40%,
-    transparent 72%
-  );
+/* Same column as the head — med pills flush to the shared stack edges */
+.dd-gate__baseline .home-drug-search,
+.dd-gate__baseline .home-drug-search__med-stack,
+.dd-gate__baseline .home-drug-search__row,
+.dd-gate__baseline .med-search,
+.dd-gate__baseline .med-search__bar {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
-.dd-gate__orbit .home-face-net__aura--soft {
-  background: radial-gradient(
-    circle,
-    rgb(152 214 198 / 0.18) 0%,
-    rgb(255 198 158 / 0.08) 42%,
-    transparent 70%
-  );
+.dd-gate__baseline .home-drug-search {
+  gap: 0;
 }
 
-.dd-gate__orbit .home-face-net__aura--orbit {
-  background: radial-gradient(
-    circle,
-    rgb(186 168 230 / 0.22) 0%,
-    rgb(232 176 214 / 0.1) 40%,
-    transparent 70%
-  );
+.dd-gate__baseline .home-drug-search__med-stack {
+  gap: var(--space-3, 0.75rem);
+}
+
+/* Light gate overrides — med search was styled for dark splash video. */
+.dd-gate__baseline .home-drug-search__take {
+  border-left-color: rgb(13 13 13 / 0.12);
+}
+
+.dd-gate__baseline .home-drug-search__take-label {
+  color: rgb(13 13 13 / 0.45);
+}
+
+.dd-gate__baseline .home-drug-search__take-input .time-input-24__select,
+.dd-gate__baseline .home-drug-search__take-input select.dios-input {
+  background: rgb(13 13 13 / 0.04);
+  color: #0d0d0d;
+}
+
+.dd-gate__baseline .home-drug-search__take-input .time-input-24__select:focus {
+  background: rgb(13 13 13 / 0.06);
+  box-shadow: 0 0 0 2px rgb(13 13 13 / 0.12);
+}
+
+.dd-gate__baseline .home-drug-search__take-input .time-input-24__select option {
+  background: #fff;
+  color: #0d0d0d;
+}
+
+.dd-gate__baseline .home-drug-search__take-input .time-input-24__sep {
+  color: rgb(13 13 13 / 0.4);
+}
+
+.dd-gate__baseline .home-drug-search__expand-link {
+  color: rgb(13 13 13 / 0.55);
+}
+
+.dd-gate__baseline .home-drug-search__expand-link:hover {
+  color: #0d0d0d;
+}
+
+.dd-gate__baseline .home-drug-search__expand-link:focus-visible {
+  outline-color: rgb(13 13 13 / 0.55);
+}
+
+.dd-gate__baseline .home-drug-search__clear {
+  color: rgb(13 13 13 / 0.45);
+}
+
+.dd-gate__baseline .med-search--hero .med-search__bar {
+  border: 1px solid var(--dd-gate-input-border, rgb(13 13 13 / 0.14));
+  background: var(--dd-gate-input-bg, #fff);
+  box-shadow: none;
+}
+
+.dd-gate__baseline .home-drug-search__join {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  /* Space below the med pills (before Join) */
+  margin-top: clamp(2.75rem, 6vh, 3.75rem);
+}
+
+.dd-gate__baseline a.dd-gate__signup,
+.dd-gate__baseline .dd-gate__signup,
+.dd-gate__baseline .home-drug-search__join-btn {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  max-width: 50%;
+  height: var(--dd-gate-pill-h);
+  min-height: var(--dd-gate-pill-h);
+  margin: 0;
+  margin-left: auto;
+  padding: 0 1rem;
+  border: 0;
+  border-radius: 1.5rem;
+  background: #0d0d0d !important;
+  background-image: none !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-align: center;
+  text-decoration: none !important;
+  animation: none !important;
+  filter: none !important;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.dd-gate__baseline a.dd-gate__signup:hover,
+.dd-gate__baseline .home-drug-search__join-btn:hover:not(:disabled) {
+  background: #1a1a1a !important;
+  background-image: none !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  filter: none !important;
+  transform: none;
+}
+
+.dd-gate__baseline .home-drug-search__join-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .dd-gate__form {
-  --dd-gate-pill-h: 3rem;
   --dd-gate-stack-gap: 0.65rem;
   display: flex;
   flex-direction: column;
@@ -439,4 +567,52 @@ html.splash-route:has(.seco-splash--oai) body {
 .deepdose-shell.seco-shell--light.seco-splash--oai {
   background: #fff;
   min-height: 100dvh;
+}
+
+/* First-light video — keep canvas white-washed so dark gate type stays crisp */
+.seco-splash--video-light,
+.seco-splash--video-light.deepdose-shell.seco-shell--light.seco-splash--oai,
+body:has(.seco-splash--video-light),
+html.splash-route:has(.seco-splash--video-light),
+html.splash-route:has(.seco-splash--video-light) body {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.seco-splash--video-light .seco-splash__main,
+.seco-splash--video-light .seco-splash__page:has(.dd-gate),
+html.splash-route .seco-splash--video-light .seco-splash__main:has(.dd-gate) {
+  background: transparent !important;
+}
+
+.seco-splash--video-light .dd-gate {
+  background: transparent;
+}
+
+.seco-splash--video-light .seco-splash__video.is-ready {
+  opacity: 1;
+  /* Lift dark dawn footage into a soft light field under dark type */
+  filter: brightness(1.55) contrast(0.88) saturate(0.75);
+}
+
+.seco-splash--oai.seco-splash--video.seco-splash--video-light .seco-splash__scrim,
+.seco-splash--video-light .seco-splash__scrim {
+  background:
+    linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.55) 0%,
+      rgb(255 255 255 / 0.42) 48%,
+      rgb(255 255 255 / 0.62) 100%
+    ),
+    rgb(255 255 255 / 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seco-splash--video-light .seco-splash__video {
+    opacity: 0;
+  }
+
+  .seco-splash--video-light .seco-splash__scrim {
+    background: #fff;
+  }
 }

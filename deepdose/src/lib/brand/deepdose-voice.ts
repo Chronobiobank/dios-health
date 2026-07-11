@@ -13,9 +13,9 @@ export const DEEPDOSE_AUDIENCE = {
 
 export const DEEPDOSE_VOICE = {
   tagline: 'Max your chemistry.',
-  /** Home hero */
-  homeHeadlineWhite: 'Max your',
-  homeHeadlineAccent: 'Chemistry',
+  /** Home hero — one line */
+  homeHeadlineWhite: 'Max Your Meds',
+  homeHeadlineAccent: '',
   homeLede: '',
   missionHeadlineWhite: 'Max your',
   missionHeadlineAccent: 'Chemistry',

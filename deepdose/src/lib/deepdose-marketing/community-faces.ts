@@ -1,6 +1,6 @@
 /**
  * Community / home face set — real Unsplash portraits (not randomuser stock).
- * Bias: gender-expansive, androgynous, and racially diverse faces.
+ * Includes male faces for ManJam / Doser demos, plus gender-expansive community set.
  */
 
 export type CommunityFaceId =
@@ -11,6 +11,7 @@ export type CommunityFaceId =
   | 'rowan'
   | 'sol'
   | 'indie'
+  | 'leo'
 
 /** Unsplash photo ids — face-cropped for circular avatars. */
 const FACE_PHOTOS: Record<CommunityFaceId, string> = {
@@ -28,6 +29,8 @@ const FACE_PHOTOS: Record<CommunityFaceId, string> = {
   sol: '1544005313-94ddf0286df2',
   /** Latine / mixed, short hair, piercings energy */
   indie: '1529626455594-4ff0802cfb7e',
+  /** Male portrait — default for ManJam / chrome demo */
+  leo: '1507003211169-0a1dd7228f2d',
 }
 
 export const COMMUNITY_FACE_IDS = Object.keys(FACE_PHOTOS) as CommunityFaceId[]

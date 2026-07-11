@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
 import { CommunityMatchesPanel } from '@/components/patient/CommunityMatchesPanel'
@@ -20,19 +19,9 @@ export default async function ConnectPage() {
   } = await supabase.auth.getUser()
 
   const messageHref = user ? '/chat' : '/?next=/chat'
-  const inboxHref = user ? '/chat' : '/?next=/chat'
-  const inboxLabel = user ? 'Inbox' : 'Sign in'
 
   return (
-    <ProductAppShell
-      title="Friends"
-      trailing={
-        <Link href={inboxHref} className="app-top-bar__text-btn">
-          {inboxLabel}
-        </Link>
-      }
-      className="dd-connect"
-    >
+    <ProductAppShell title="Friends" className="dd-connect">
       <CommunityMatchesPanel variant="discovery" messageHref={messageHref} />
     </ProductAppShell>
   )

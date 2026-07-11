@@ -28,10 +28,13 @@ function resolveStoredProfile() {
   const familyName = useDemo ? PATIENT_LANDING_DEMO.familyName : storedFamily
   const location = stored.location?.trim() || PATIENT_LANDING_DEMO.location
   const journey = stored.journey?.trim() || PATIENT_LANDING_DEMO.journey
-  const avatarUrl = stored.avatarUrl ?? null
+  const avatarUrl = stored.avatarUrl?.trim() || PATIENT_LANDING_DEMO.avatarUrl
   const wake = stored.wake ?? null
   const needsPersist =
-    useDemo || !stored.location?.trim() || !stored.journey?.trim()
+    useDemo ||
+    !stored.location?.trim() ||
+    !stored.journey?.trim() ||
+    !stored.avatarUrl?.trim()
 
   return {
     firstName,
@@ -47,6 +50,7 @@ function resolveStoredProfile() {
       familyName,
       location,
       journey,
+      avatarUrl,
       displayName: undefined,
     } satisfies PlanProfile,
   }

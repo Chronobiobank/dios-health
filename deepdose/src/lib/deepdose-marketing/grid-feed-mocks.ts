@@ -12,32 +12,32 @@ import {
 
 /**
  * Phone-snapshot energy by Medmaxxing cluster.
- * Avoid plated food, hotel beds, and gym-studio lighting.
+ * Sleep · stack · timing — no pets, plated food, or gym-studio stock.
  */
 const SCENE_PHOTOS: Record<DoseTag, readonly string[]> = {
   RESETTER: [
-    '1541781774459-bb2af2f05b55', // rumpled bed · night lock-in
+    '1522771739844-6a9f6d5f14af', // bedroom · night lock-in
     '1514565131-fce0801e5785', // city dusk · owl nights
     '1522708323590-d24dbb6b0267', // apartment · window light
-    '1529156069898-49953e39b3ac', // friends on a ledge
+    '1505693416388-ac5ce068fe85', // quiet room · wind-down
   ],
   HIJACKER: [
+    '1584308666744-24d5c474f2ae', // pills · stack close-up
     '1486312338219-ce68d2c6f44d', // laptop hands · late focus
-    '1554118811-1e0d58224f24', // café floor · lived-in
-    '1453614512568-c4024d13c247', // café counter · working
-    '1522071820081-009f0129c71c', // people around a table
+    '1471864190281-a93a3070b6de', // tablets · AM dose
+    '1576602976047-174e57a47881', // bottles · chemistry stash
   ],
   CROSSER: [
-    '1476480862126-209bfaa8edc8', // stairs · shoe POV
-    '1429962714451-bb934ecdc4ec', // crowd · night out
-    '1541625602330-2277a4c46182', // coastal ride
-    '1551632811-561732d1e306', // trail hike · from behind
+    '1544367567-0f2fcb009e0b', // morning stretch · phase
+    '1518611012118-696072aa579a', // sunrise run · daylight
+    '1571019614242-c5c5dee9f50b', // gym floor · load
+    '1506126613408-eca07ce68773', // yoga mat · downshift
   ],
   BATTERY: [
-    '1512621776951-a57141f2eefd', // produce / fuel still
-    '1490645930847-3d94d77aee30', // kitchen counter
+    '1490645930847-3d94d77aee30', // kitchen counter · fuel
     '1546069901-ba9599a7e63c', // bowl · everyday fuel
-    '1505576399270-aec009ca2114', // fridge / home stash
+    '1505576399270-aec009ca2114', // fridge · home stash
+    '1495521821757-a1efb6729352', // coffee · wake cue
   ],
 }
 

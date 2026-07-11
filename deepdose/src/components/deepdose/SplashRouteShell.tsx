@@ -14,7 +14,7 @@ type SplashRouteShellProps = {
 
 /** Home splash: light gate, no chrome. Other public pages use light shell + bottom nav. */
 export function SplashRouteShell({ children }: SplashRouteShellProps) {
-  const pathname = usePathname()
+  const pathname = usePathname() ?? '/'
   const isSplash = SPLASH_PATHS.has(pathname)
 
   useEffect(() => {

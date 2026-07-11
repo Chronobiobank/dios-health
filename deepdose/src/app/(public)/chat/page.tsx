@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import { ChatInbox } from '@/components/chat/ChatInbox'
@@ -31,15 +30,7 @@ export default async function ChatInboxPage() {
   const alert = guide.error ?? error
 
   return (
-    <ProductAppShell
-      title="Messages"
-      trailing={
-        <Link href="/connect" className="app-top-bar__text-btn">
-          Friends
-        </Link>
-      }
-      className="dd-chat-shell"
-    >
+    <ProductAppShell title="Messages" className="dd-chat-shell">
       {alert ? (
         <p className="dd-chat__error" role="alert">
           {alert}

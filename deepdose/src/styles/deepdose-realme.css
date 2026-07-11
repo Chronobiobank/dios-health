@@ -117,8 +117,9 @@
   padding: var(--dd-1) var(--dd-2);
   border-radius: var(--dd-radius-sm);
   background: var(--dd-accent);
-  color: var(--dd-ink-inverse);
+  color: #0d0d0d;
   font-size: var(--dd-type-xs);
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 

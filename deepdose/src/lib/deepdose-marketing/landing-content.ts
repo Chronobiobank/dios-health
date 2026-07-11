@@ -13,7 +13,7 @@ export const DEEPDOSE_LANDING_META = {
 
 export const DEEPDOSE_CVP = 'Max your chemistry.' as const
 
-/** Home splash · message, face network, two doors. */
+/** Home splash · one-line head + med baseline. */
 export const DEEPDOSE_HOME_SPLASH = {
   headlineWhite: DEEPDOSE_VOICE.homeHeadlineWhite,
   headlineAccent: DEEPDOSE_VOICE.homeHeadlineAccent,
@@ -33,25 +33,15 @@ export const DEEPDOSE_HOME_ACTIONS = {
   create: { label: 'Enter', href: '/#enter' },
 } as const
 
-/** Default catalog codes for home med search (used when search is shown elsewhere). */
-export const DEEPDOSE_HOME_DEFAULT_MED_CODES = [
-  'metformin',
-  'ramipril',
-  'atorvastatin',
-  'sertraline',
-] as const
+/** Default catalog codes for home med search baseline (two rows). */
+export const DEEPDOSE_HOME_DEFAULT_MED_CODES = ['metformin', 'ramipril'] as const
 
-/** Med search copy · kept for HomeDrugSearch if reused off-home. */
+/** Med search copy · home splash baseline. */
 export const DEEPDOSE_HOME_POLY_SEARCH = {
-  checkCta: 'Find my chemistry',
+  checkCta: 'Join Deepdose',
   expandCta: '+ Add medication',
   expandCtaAnother: '+ Add medication',
-  medPlaceholders: [
-    'Search a medication',
-    'Add another',
-    'Third med',
-    'Fourth med',
-  ],
+  medPlaceholders: ['Find your med', 'Add another'],
   medPlaceholderExtra: 'Search another medication',
 } as const
 

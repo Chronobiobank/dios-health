@@ -9,19 +9,17 @@ import {
 } from '@/lib/deepdose-marketing/real-feed-mocks'
 import type { RealPost } from '@/lib/patient/real-posts'
 import { usePatientRealPosts } from '@/lib/patient/use-patient-real-posts'
-import { planProfileDisplayName, readPlanProfile } from '@/lib/patient/plan-profile'
+import { planProfileDisplayName } from '@/lib/patient/plan-profile'
+import { resolvePlanAvatarUrl } from '@/lib/patient/patient-landing-defaults'
 
 function formatPostedAt(iso: string): string {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return ''
-  return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
 }
 
-function RealCard({ post }: { post: RealPost }) {
-  const avatar =
-    post.isSelf
-      ? readPlanProfile().avatarUrl ?? null
-      : mockFriendAvatarUrl(post.displayName)
+function RealCard({ post, selfAvatar }: { post: RealPost; selfAvatar: string | null }) {
+  const avatar = post.isSelf ? selfAvatar : mockFriendAvatarUrl(post.displayName)
 
   return (
     <article className="dd-real__card seco-spectrum-tile">
@@ -60,6 +58,7 @@ function RealCard({ post }: { post: RealPost }) {
 export function RealFeedView() {
   const { ready, today, hasPostedToday } = usePatientRealPosts()
   const mocks = useMemo(() => buildMockFriendReals(), [])
+  const selfAvatar = resolvePlanAvatarUrl(null)
 
   const feed = useMemo(() => {
     const self = today
@@ -90,7 +89,7 @@ export function RealFeedView() {
 
       <div className="dd-real__feed">
         {feed.map((post) => (
-          <RealCard key={post.id} post={post} />
+          <RealCard key={post.id} post={post} selfAvatar={selfAvatar} />
         ))}
       </div>
     </div>

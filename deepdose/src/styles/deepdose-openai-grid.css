@@ -508,7 +508,7 @@
   color: rgb(15 23 42 / 0.72);
 }
 
-.deepdose-shell.seco-shell--light .seco-marketing-page a:not(.seco-landing__btn):not(.dd-connect__message) {
+.deepdose-shell.seco-shell--light .seco-marketing-page a:not(.seco-landing__btn):not(.dd-connect__message):not(.dd-gate__signup):not(.home-drug-search__join-btn) {
   -webkit-text-fill-color: unset;
 }
 

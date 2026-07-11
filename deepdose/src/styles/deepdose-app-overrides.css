@@ -6179,6 +6179,23 @@ html.splash-route *::-webkit-scrollbar {
     rgb(8 10 20 / 0.4);
 }
 
+/* Light OpenAI gate — brighten first-light + soft white wash for dark type */
+.seco-splash--oai.seco-splash--video.seco-splash--video-light .seco-splash__scrim {
+  background:
+    linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.55) 0%,
+      rgb(255 255 255 / 0.42) 48%,
+      rgb(255 255 255 / 0.62) 100%
+    ),
+    rgb(255 255 255 / 0.22);
+}
+
+.seco-splash--oai.seco-splash--video.seco-splash--video-light .seco-splash__video.is-ready {
+  opacity: 1;
+  filter: brightness(1.55) contrast(0.88) saturate(0.75);
+}
+
 .seco-splash__page {
   position: relative;
   z-index: 2;

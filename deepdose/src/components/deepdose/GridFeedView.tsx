@@ -1,37 +1,47 @@
 'use client'
 
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useEffect, useMemo, useState } from 'react'
 
 import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import {
   buildMockGridDoses,
   mockDoseAvatar,
 } from '@/lib/deepdose-marketing/grid-feed-mocks'
+import { parseAppGroupId, type AppGroupId } from '@/lib/deepdose-marketing/app-groups'
 import { sleepScoreBadge } from '@/lib/brand/sleep-score'
-import { DOSE_TAG_META, type Chronotype, type DoseUpload } from '@/lib/patient/dose-uploads'
+import { DOSE_TAG_META, type DoseUpload } from '@/lib/patient/dose-uploads'
 import { usePatientDoses } from '@/lib/patient/use-patient-doses'
-import { planProfileDisplayName, readPlanProfile } from '@/lib/patient/plan-profile'
+import { planProfileDisplayName } from '@/lib/patient/plan-profile'
+import { resolvePlanAvatarUrl } from '@/lib/patient/patient-landing-defaults'
 
 function formatTime(iso: string): string {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return ''
-  return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+}
+
+function readFeedFromLocation(): AppGroupId {
+  try {
+    return parseAppGroupId(new URLSearchParams(window.location.search).get('clock')) ?? 'lark'
+  } catch {
+    return 'lark'
+  }
 }
 
 function DoseCard({
   dose,
   syncCount,
   onSync,
+  selfAvatar,
 }: {
   dose: DoseUpload
   syncCount: number
   onSync: () => void
+  selfAvatar: string
 }) {
-  const avatar =
-    dose.isSelf
-      ? readPlanProfile().avatarUrl ?? null
-      : mockDoseAvatar(dose.displayName)
+  const avatar = dose.isSelf ? selfAvatar : mockDoseAvatar(dose.displayName)
   const tag = DOSE_TAG_META[dose.tag]
 
   return (
@@ -77,9 +87,15 @@ function DoseCard({
 }
 
 export function GridFeedView() {
+  const pathname = usePathname() ?? '/grid'
   const { ready, doses, syncs, sync } = usePatientDoses()
-  const [feed, setFeed] = useState<Chronotype>('lark')
+  const [feed, setFeed] = useState<AppGroupId>('lark')
   const mocks = useMemo(() => buildMockGridDoses(), [])
+  const selfAvatar = resolvePlanAvatarUrl(null)
+
+  useEffect(() => {
+    setFeed(readFeedFromLocation())
+  }, [pathname])
 
   const items = useMemo(() => {
     const self = doses
@@ -98,27 +114,6 @@ export function GridFeedView() {
 
   return (
     <div className="dd-grid">
-      <div className="dd-grid__tabs" role="tablist" aria-label="Sleep timing">
-        <button
-          type="button"
-          role="tab"
-          aria-selected={feed === 'lark'}
-          className={feed === 'lark' ? 'dd-grid__tab dd-grid__tab--on' : 'dd-grid__tab'}
-          onClick={() => setFeed('lark')}
-        >
-          Early birds
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={feed === 'owl'}
-          className={feed === 'owl' ? 'dd-grid__tab dd-grid__tab--on' : 'dd-grid__tab'}
-          onClick={() => setFeed('owl')}
-        >
-          Night owls
-        </button>
-      </div>
-
       <SleepScoreTipTraqLink compact className="dd-grid__tiptraq" />
 
       <div className="dd-grid__feed">
@@ -134,6 +129,7 @@ export function GridFeedView() {
             <DoseCard
               key={dose.id}
               dose={dose}
+              selfAvatar={selfAvatar}
               syncCount={syncs[dose.id] ?? dose.syncCount}
               onSync={() => sync(dose.id)}
             />

@@ -1,6 +1,5 @@
 'use client'
 
-import type { ReactNode } from 'react'
 import Link from 'next/link'
 
 import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
@@ -10,15 +9,13 @@ import type { PlanContextFromDraft } from '@/lib/patient/plan-draft'
 type PatientLandingDashboardProps = {
   planContext: PlanContextFromDraft
   signupHref?: string
-  accountGear?: ReactNode
 }
 
 export function PatientLandingDashboard({
   planContext,
-  accountGear,
 }: PatientLandingDashboardProps) {
   return (
-    <ProductAppShell title="Me" trailing={accountGear} className="dd-profile">
+    <ProductAppShell title="Me" className="dd-profile">
       <SocialProfileView
         medCodes={planContext.medCodes}
         medTimes={planContext.medTimes}

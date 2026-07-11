@@ -16,9 +16,9 @@ import { resolveHomePlanRows } from '@/lib/patient/home-plan-rows'
 import { savePlanDraft } from '@/lib/patient/plan-draft'
 import { TimeInput } from '@/components/ui/Form'
 
-const MAX_MEDS = 5
-const INITIAL_MEDS = 4
-const DEFAULT_TAKE_TIMES = ['07:30', '08:00', '20:00', '12:00', '22:00'] as const
+/** Home splash: two meds only. More meds after join on account. */
+const HOME_MED_ROWS = 2
+const DEFAULT_TAKE_TIMES = ['07:30', '08:00'] as const
 
 function medPlaceholder(index: number): string {
   return (
@@ -42,12 +42,9 @@ function emptyRows(count: number): MedRow[] {
 }
 
 export function HomeDrugSearch() {
-  const [rows, setRows] = useState<MedRow[]>(() => emptyRows(INITIAL_MEDS))
-  const [extraOpen, setExtraOpen] = useState(false)
+  const [rows, setRows] = useState<MedRow[]>(() => emptyRows(HOME_MED_ROWS))
   const [activeAc, setActiveAc] = useState<number | null>(null)
   const inputRefs = useRef<Array<HTMLInputElement | null>>([])
-
-  const visibleCount = extraOpen ? rows.length : INITIAL_MEDS
 
   const resolvedPlan = useMemo(
     () =>
@@ -56,10 +53,10 @@ export function HomeDrugSearch() {
           selectedCode: row.selected?.code ?? null,
           takeTime: row.takeTime,
         })),
-        visibleCount,
+        HOME_MED_ROWS,
         DEEPDOSE_HOME_DEFAULT_MED_CODES
       ),
-    [rows, visibleCount]
+    [rows]
   )
 
   function updateRow(index: number, patch: Partial<MedRow>) {
@@ -86,29 +83,6 @@ export function HomeDrugSearch() {
   function clearRow(index: number) {
     updateRow(index, { query: '', selected: null })
     inputRefs.current[index]?.focus()
-  }
-
-  function openExtraMeds() {
-    setExtraOpen(true)
-    if (rows.length < MAX_MEDS) {
-      setRows((prev) => [
-        ...prev,
-        {
-          query: '',
-          selected: null,
-          takeTime: DEFAULT_TAKE_TIMES[prev.length] ?? '08:00',
-        },
-      ])
-    }
-  }
-
-  function addFifthMed() {
-    if (rows.length < MAX_MEDS) {
-      setRows((prev) => [
-        ...prev,
-        { query: '', selected: null, takeTime: DEFAULT_TAKE_TIMES[prev.length] ?? '08:00' },
-      ])
-    }
   }
 
   function getResults(index: number) {
@@ -140,7 +114,6 @@ export function HomeDrugSearch() {
     const results = getResults(index)
     const showDropdown = activeAc === index && row.query.trim().length > 0 && !row.selected
     const placeholder = medPlaceholder(index)
-    const ariaLabel = placeholder
 
     return (
       <div
@@ -164,7 +137,7 @@ export function HomeDrugSearch() {
             autoCorrect="off"
             spellCheck={false}
             placeholder={placeholder}
-            aria-label={ariaLabel}
+            aria-label={placeholder}
             value={row.query}
             onChange={(event) => handleQueryChange(index, event.target.value)}
             onFocus={() => setActiveAc(index)}
@@ -211,11 +184,7 @@ export function HomeDrugSearch() {
               </li>
             ) : (
               results.map((med) => (
-                <li
-                  key={med.code}
-                  role="option"
-                  aria-selected={false}
-                >
+                <li key={med.code} role="option" aria-selected={false}>
                   <button
                     type="button"
                     className="med-search__option"
@@ -240,43 +209,23 @@ export function HomeDrugSearch() {
   return (
     <div className="home-drug-search home-drug-search--poly">
       <div className="home-drug-search__med-stack">
-        {rows.slice(0, visibleCount).map((row, index) => renderSearchRow(row, index))}
+        {rows.map((row, index) => renderSearchRow(row, index))}
       </div>
 
-      <div className="home-drug-search__expand-row">
-        {!extraOpen ? (
-          <button type="button" className="home-drug-search__expand-link" onClick={openExtraMeds}>
-            {DEEPDOSE_HOME_POLY_SEARCH.expandCta}
-          </button>
+      <div className="home-drug-search__join">
+        {canCheck ? (
+          <Link
+            href={checkHref}
+            onClick={handleFixTiming}
+            className="dd-gate__signup home-drug-search__join-btn"
+          >
+            {DEEPDOSE_HOME_POLY_SEARCH.checkCta}
+          </Link>
         ) : (
-          rows.length < MAX_MEDS && (
-            <button type="button" className="home-drug-search__expand-link" onClick={addFifthMed}>
-              {DEEPDOSE_HOME_POLY_SEARCH.expandCtaAnother}
-            </button>
-          )
+          <button type="button" disabled className="dd-gate__signup home-drug-search__join-btn">
+            {DEEPDOSE_HOME_POLY_SEARCH.checkCta}
+          </button>
         )}
-      </div>
-
-      <div className="home-drug-search__toolbar home-drug-search__toolbar--cta">
-        <div className="home-drug-search__toolbar-end">
-          {canCheck ? (
-            <Link
-              href={checkHref}
-              onClick={handleFixTiming}
-              className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta home-drug-search__toolbar-btn"
-            >
-              {DEEPDOSE_HOME_POLY_SEARCH.checkCta}
-            </Link>
-          ) : (
-            <button
-              type="button"
-              disabled
-              className="seco-landing__btn seco-landing__btn--primary home-drug-search__cta home-drug-search__toolbar-btn"
-            >
-              {DEEPDOSE_HOME_POLY_SEARCH.checkCta}
-            </button>
-          )}
-        </div>
       </div>
     </div>
   )

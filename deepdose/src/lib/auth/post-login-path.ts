@@ -13,14 +13,14 @@ function isSafeInternalPath(path: string | null | undefined): path is string {
 }
 
 /**
- * Consumer auth lives on the home gate (`/`), not `/login`.
+ * Consumer auth lives on `/login` (home is med baseline only).
  * Staff portals keep `/login?next=/clinical|enterprise…`.
  */
 export function consumerAuthPath(next?: string | null): string {
   if (isSafeInternalPath(next) && next !== '/') {
-    return `/?next=${encodeURIComponent(next)}`
+    return `/login?next=${encodeURIComponent(next)}`
   }
-  return '/'
+  return '/login'
 }
 
 /** Patient sign-up from home search or dose-dash onboarding. */

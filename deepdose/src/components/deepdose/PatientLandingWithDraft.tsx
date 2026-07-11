@@ -1,7 +1,5 @@
 'use client'
 
-import type { ReactNode } from 'react'
-
 import { PatientLandingDashboard } from '@/components/deepdose/PatientLandingDashboard'
 import { usePlanDraftContext } from '@/lib/patient/use-plan-draft-context'
 import type { PlanContextFromDraft } from '@/lib/patient/plan-draft'
@@ -9,13 +7,11 @@ import type { PlanContextFromDraft } from '@/lib/patient/plan-draft'
 type PatientLandingWithDraftProps = {
   urlPlanContext?: PlanContextFromDraft
   signupHrefFromUrl: string
-  accountGear?: ReactNode
 }
 
 export function PatientLandingWithDraft({
   urlPlanContext,
   signupHrefFromUrl,
-  accountGear,
 }: PatientLandingWithDraftProps) {
   const { ready, planContext, signupHref } = usePlanDraftContext({
     urlPlanContext,
@@ -28,7 +24,6 @@ export function PatientLandingWithDraft({
     <PatientLandingDashboard
       planContext={planContext}
       signupHref={signupHref}
-      accountGear={accountGear}
     />
   )
 }

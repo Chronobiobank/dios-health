@@ -7,14 +7,14 @@ import { todayRealDate, type RealPost } from '@/lib/patient/real-posts'
 const MOCK_OFF = ['22:40', '23:10', '00:15', '22:55', '23:30', '01:05'] as const
 const MOCK_ON = ['06:45', '07:10', '08:20', '07:00', '07:40', '09:15'] as const
 
-/** Candid stills — same pool energy as Grid mocks. */
+/** Candid stills — sleep / stack / timing (same energy as Grid mocks). */
 const MOCK_SCENE_PHOTOS = [
-  '1541781774459-bb2af2f05b55',
-  '1522708323590-d24dbb6b0267',
-  '1453614512568-c4024d13c247',
-  '1551632811-561732d1e306',
-  '1476224203421-9ac39bcb3327',
-  '1476480862126-209bfaa8edc8',
+  '1522771739844-6a9f6d5f14af', // bedroom
+  '1584308666744-24d5c474f2ae', // pills
+  '1522708323590-d24dbb6b0267', // apartment light
+  '1471864190281-a93a3070b6de', // tablets
+  '1544367567-0f2fcb009e0b', // morning stretch
+  '1576602976047-174e57a47881', // bottles
 ] as const
 
 function sceneUrl(photoId: string, size = 720): string {
