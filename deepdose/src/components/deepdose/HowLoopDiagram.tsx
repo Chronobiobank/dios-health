@@ -57,6 +57,7 @@ export function HowLoopDiagram() {
     }
 
     function orbitRadius() {
+      if (!root) return ORBIT_RADIUS
       const raw = root.dataset.orbitR
       const parsed = raw ? Number(raw) : ORBIT_RADIUS
       return Number.isFinite(parsed) ? parsed : ORBIT_RADIUS
