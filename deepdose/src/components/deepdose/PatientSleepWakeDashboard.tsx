@@ -14,7 +14,6 @@ import DiseaseRiskContinuum from '@/components/shared/DiseaseRiskContinuum'
 import SriHistorySpark from '@/components/shared/SriHistorySpark'
 import SriScoreRing from '@/components/shared/SriScoreRing'
 import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
-import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 
 type PatientSleepWakeDashboardProps = {
   medCodes: string[]
