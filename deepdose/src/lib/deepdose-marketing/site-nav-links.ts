@@ -1,23 +1,28 @@
-﻿/** Site navigation — lean Sniffies chrome. Product routes use bottom nav only. */
+﻿/** Site navigation — light OpenAI chrome. Product routes use bottom nav only. */
 
-/** Splash + marketing header (minimal). Product tabs live in APP_BOTTOM_NAV. */
+/** Marketing header. Product tabs live in APP_BOTTOM_NAV. */
 export const DEEPDOSE_SITE_LINKS = [
+  { label: 'Home', href: '/' },
   { label: 'How it works', href: '/how' },
   { label: 'Mission', href: '/mission' },
   { label: 'Science', href: '/science' },
-  { label: 'Sign in', href: '/' },
 ] as const
+
+export const DEEPDOSE_SITE_CTA = {
+  label: 'Sign up',
+  href: '/',
+} as const
 
 /** @deprecated Prefer DEEPDOSE_SITE_LINKS — kept for older imports. */
 export const DEEPDOSE_SPLASH_LINKS = DEEPDOSE_SITE_LINKS
 
 /** Footer essentials when mounted. */
 export const DEEPDOSE_FOOTER_LINKS = [
+  { label: 'Home', href: '/' },
   { label: 'Grid', href: '/grid' },
   { label: 'Log', href: '/dose' },
   { label: 'Bank', href: '/bank' },
   { label: 'Me', href: '/profile' },
-  { label: 'Sign in', href: '/' },
   { label: 'Terms', href: '/terms' },
 ] as const
 

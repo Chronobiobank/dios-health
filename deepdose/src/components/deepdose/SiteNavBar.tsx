@@ -51,48 +51,50 @@ export function SiteNavBar({
 
   return (
     <header className={cn('clinical-site-nav seco-nav', open && 'seco-nav--open')}>
-      <Link href={brandHref} className="clinical-site-nav__brand" aria-label={brandAriaLabel}>
-        <DeepdoseWordmark />
-      </Link>
+      <div className="seco-nav__inner">
+        <Link href={brandHref} className="clinical-site-nav__brand" aria-label={brandAriaLabel}>
+          <DeepdoseWordmark />
+        </Link>
 
-      <nav className="seco-nav__desktop" aria-label={navAriaLabel}>
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={cn('seco-nav__link', pathname === link.href && 'seco-nav__link--active')}
-          >
-            {link.label}
-          </Link>
-        ))}
+        <nav className="seco-nav__desktop" aria-label={navAriaLabel}>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn('seco-nav__link', pathname === link.href && 'seco-nav__link--active')}
+            >
+              {link.label}
+            </Link>
+          ))}
+          {cta ? (
+            <Link href={cta.href} className="seco-nav__cta">
+              {cta.label}
+            </Link>
+          ) : null}
+          {signOut ? <SignOutButton className="seco-nav__link" /> : null}
+        </nav>
+
         {cta ? (
-          <Link href={cta.href} className="seco-nav__cta">
+          <Link href={cta.href} className="seco-nav__cta seco-nav__cta--bar">
             {cta.label}
           </Link>
         ) : null}
-        {signOut ? <SignOutButton className="seco-nav__link" /> : null}
-      </nav>
 
-      {cta ? (
-        <Link href={cta.href} className="seco-nav__cta seco-nav__cta--bar">
-          {cta.label}
-        </Link>
-      ) : null}
-
-      <button
-        type="button"
-        className="seco-nav__toggle"
-        aria-expanded={open}
-        aria-controls="seco-nav-menu"
-        aria-label={open ? 'Close menu' : 'Open menu'}
-        onClick={() => setOpen((value) => !value)}
-      >
-        <span className="seco-nav__toggle-bars" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </span>
-      </button>
+        <button
+          type="button"
+          className="seco-nav__toggle"
+          aria-expanded={open}
+          aria-controls="seco-nav-menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span className="seco-nav__toggle-bars" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+        </button>
+      </div>
 
       <button
         type="button"
@@ -117,6 +119,11 @@ export function SiteNavBar({
             </Link>
           ))}
         </nav>
+        {cta ? (
+          <Link href={cta.href} className="seco-nav__panel-cta">
+            {cta.label}
+          </Link>
+        ) : null}
         {signOut ? <SignOutButton className="seco-nav__panel-cta" /> : null}
       </div>
     </header>

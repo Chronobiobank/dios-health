@@ -158,7 +158,8 @@
   max-width: var(--oai-page-max-wide);
 }
 
-.deepdose-shell.seco-shell--light .clinical-site-nav {
+.deepdose-shell.seco-shell--light .clinical-site-nav,
+.deepdose-shell.seco-shell--light .seco-nav {
   background: rgb(247 247 245 / 0.92);
   backdrop-filter: saturate(1.2) blur(20px);
   -webkit-backdrop-filter: saturate(1.2) blur(20px);
@@ -170,12 +171,97 @@
   color: rgb(15 23 42 / 0.92);
 }
 
+.deepdose-shell.seco-shell--light .clinical-site-nav__brand:hover {
+  color: rgb(15 23 42 / 0.72);
+}
+
 .deepdose-shell.seco-shell--light .clinical-site-nav__link {
   color: rgb(15 23 42 / 0.55);
 }
 
 .deepdose-shell.seco-shell--light .clinical-site-nav__link:hover {
   color: rgb(15 23 42 / 0.92);
+}
+
+/* Light OpenAI nav — dark ink, visible hamburger, solid Sign up */
+.deepdose-shell.seco-shell--light .seco-nav__link {
+  color: rgb(15 23 42 / 0.58);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__link:hover {
+  color: rgb(15 23 42 / 0.92);
+  background: rgb(15 23 42 / 0.05);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__link--active {
+  color: rgb(15 23 42 / 0.92);
+  background: rgb(15 23 42 / 0.06);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__cta,
+.deepdose-shell.seco-shell--light .seco-nav__panel-cta {
+  background: #0d0d0d;
+  background-image: none;
+  color: #fff;
+  animation: none;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__cta:hover,
+.deepdose-shell.seco-shell--light .seco-nav__panel-cta:hover {
+  background: #1a1a1a;
+  opacity: 1;
+  transform: none;
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__toggle {
+  border-color: rgb(15 23 42 / 0.14);
+  background: #fff;
+  color: rgb(15 23 42 / 0.88);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__toggle:hover {
+  background: rgb(15 23 42 / 0.04);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__toggle:focus-visible {
+  outline-color: rgb(15 23 42 / 0.35);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__toggle-bars > span {
+  background: rgb(15 23 42 / 0.88);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__backdrop {
+  background: rgb(15 23 42 / 0.28);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__panel {
+  background: #fff;
+  border-bottom-color: rgb(15 23 42 / 0.08);
+  box-shadow: 0 16px 40px rgb(15 23 42 / 0.1);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__panel-link {
+  border-bottom-color: rgb(15 23 42 / 0.08);
+  color: rgb(15 23 42 / 0.82);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-weight: 400;
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__panel-link:hover {
+  color: rgb(15 23 42 / 0.92);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav__panel-link--active {
+  color: rgb(15 23 42 / 0.92);
+  font-weight: 500;
 }
 
 /* Marketing ink on light — replace dark-shell white type */
