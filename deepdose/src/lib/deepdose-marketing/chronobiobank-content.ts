@@ -8,7 +8,7 @@ import {
 export const CHRONOBIOBANK_META = {
   title: `Mission · ${DEEPDOSE_NAME}`,
   description:
-    'For dosers — log Light, Meds, and Move. Raise your sleep score with people on your clock.',
+    'For dosers — Medmaxxing. Max your med stack. Get in Flow with people on your clock.',
 } as const
 
 export const CHRONOBIOBANK_INTRO = {
@@ -16,7 +16,7 @@ export const CHRONOBIOBANK_INTRO = {
   titleWhite: 'For',
   titleAccent: 'dosers.',
   lede:
-    `${DEEPDOSE_NAME} is where dosers log the dose and raise their sleep score — Light, Meds, Move — on the Grid.`,
+    `${DEEPDOSE_NAME} is home of Medmaxxing — stamp Resetters, Hijackers, Crossers, Batteries — and get in Flow on the Grid.`,
   quote:
     'The age of highlight reels is ending. The age of one real dose, logged, has begun.',
 } as const

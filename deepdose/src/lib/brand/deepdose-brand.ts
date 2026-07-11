@@ -17,15 +17,24 @@ export const DEEPDOSE_FOOTER_LEGAL =
 
 export const DEEPDOSE_REGISTRATION_LINE = DEEPDOSE_FOOTER_LEGAL
 
-export const DEEPDOSE_TAGLINE = 'For dosers.' as const
+export const DEEPDOSE_TAGLINE = 'Max your chemistry.' as const
 
-/** Homepage hero headline — distinct from site-wide tagline in metadata */
-export const DEEPDOSE_HOME_HEADLINE = 'For dosers.' as const
+/** Consumer movement — stack sport under the CTA */
+export const DEEPDOSE_MOVEMENT = 'Medmaxxing' as const
 
-/** Dose = each zeitgeber (light, meals, meds/supps, exercise, sleep) — see lib/chronobiology/zeitgebers.ts */
+/** Token economy — Flow is the hit (verb + in/out state). Not Sync, not likes. */
+export const DEEPDOSE_TOKEN_ECONOMY = 'Get in Flow.' as const
+
+/** Homepage hero — compelling CTA (stack + meeting people) */
+export const DEEPDOSE_HOME_HEADLINE = 'Max your chemistry.' as const
+
+/** Dose = each stamped cluster on the stack — see lib/patient/dose-uploads.ts */
 
 /**
  * Copy hierarchy:
+ * Max your chemistry = splash CTA (med stack + meeting others).
+ * Medmaxxing = the movement / how the stack sport works.
+ * Get in Flow = the token economy (action + state the tribe recognizes).
  * Consumer tribe = Dosers (Grid / Log / Bank / Me).
  * Deepdose = company, Chemistry, TipTraQ, Chronobiobank.
  * Melatonin / DLMO = research / tech methodology only.

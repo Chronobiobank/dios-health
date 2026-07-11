@@ -14,17 +14,17 @@ export const DOSAGE_PAGE = {
 
 export const SHARE_PAGE_META = {
   title: `Log · ${DEEPDOSE_NAME}`,
-  description: 'Log Light, Meds, or Move — photo plus sleep score.',
+  description: 'Stamp a cluster. Get in Flow — photo plus sleep score.',
 } as const
 
 export const SHARE_PAGE = {
   eyebrow: 'Log',
   titleBefore: 'One dose,',
   titleHighlight: 'today’s score',
-  support: 'Log a dose. Dosers on your clock see the night you actually lived.',
+  support: 'Stamp a cluster. Dosers on your clock see the night you actually lived.',
   pointsEyebrow: 'How doses work',
   points: [
-    'Light, Meds, or Move — photo plus sleep score',
+    'Resetters, Hijackers, Crossers, or Batteries — photo plus sleep score',
     'Dosers see today’s beat',
     'You stay in control of what you stamp',
   ],

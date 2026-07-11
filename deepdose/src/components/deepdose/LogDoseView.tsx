@@ -9,6 +9,7 @@ import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
 import {
   chronotypeFromWake,
   DOSE_TAG_META,
+  DOSE_TAGS,
   todayDoseDate,
   type DoseTag,
 } from '@/lib/patient/dose-uploads'
@@ -28,7 +29,10 @@ function readFileAsDataUrl(file: File): Promise<string> {
   })
 }
 
-const TAGS: DoseTag[] = ['PHOTONIC', 'METABOLIC', 'KINETIC']
+function parseDoseTag(value: string | null): DoseTag | null {
+  if (!value) return null
+  return (DOSE_TAGS as readonly string[]).includes(value) ? (value as DoseTag) : null
+}
 
 export function LogDoseView() {
   const router = useRouter()
@@ -57,20 +61,11 @@ export function LogDoseView() {
     requestAnimationFrame(() => inputRef.current?.click())
   }
 
-  function handleTag(tag: DoseTag) {
-    if (tag === 'METABOLIC') {
-      // High-value medical path: med timing / Chemistry first
-      router.push('/dosage?from=metabolic')
-      return
-    }
-    openCamera(tag)
-  }
-
-  // Return from Chemistry with ?tag=METABOLIC → stamp photo for the Grid
+  // Return from Chemistry with ?tag=RESETTER (etc.) → stamp photo for the Grid
   useEffect(() => {
-    const tag = searchParams.get('tag')
-    if (tag === 'METABOLIC' && dosesReady && profile.ready) {
-      openCamera('METABOLIC')
+    const tag = parseDoseTag(searchParams.get('tag'))
+    if (tag && dosesReady && profile.ready) {
+      openCamera(tag)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- one-shot from query
   }, [searchParams, dosesReady, profile.ready])
@@ -109,42 +104,26 @@ export function LogDoseView() {
 
   return (
     <div className="dd-log">
-      <p className="dd-log__hint">
-        Light & Move: photo only. Meds opens Chemistry (timing).
-      </p>
+      <p className="dd-log__hint">Stamp a cluster. Get in Flow.</p>
 
       <div className="dd-log__buttons">
-        {TAGS.map((tag) => {
+        {DOSE_TAGS.map((tag) => {
           const meta = DOSE_TAG_META[tag]
           const done = hasTagToday(tag)
-          const isMetabolic = tag === 'METABOLIC'
           return (
             <div key={tag} className="dd-log__btn-wrap">
               <button
                 type="button"
                 className="dd-log__btn"
                 style={{ '--cue': meta.cue } as CSSProperties}
-                onClick={() => handleTag(tag)}
+                onClick={() => openCamera(tag)}
               >
                 <span className="dd-log__btn-main">
                   <span className="dd-log__btn-hash">{meta.hash}</span>
                   <span className="dd-log__btn-sub">{meta.hint}</span>
                 </span>
-                {done ? (
-                  <span className="dd-log__btn-done">Logged</span>
-                ) : isMetabolic ? (
-                  <span className="dd-log__btn-done">Chemistry →</span>
-                ) : null}
+                {done ? <span className="dd-log__btn-done">Logged</span> : null}
               </button>
-              {isMetabolic ? (
-                <button
-                  type="button"
-                  className="dd-log__stamp-photo"
-                  onClick={() => openCamera('METABOLIC')}
-                >
-                  Stamp photo for Grid
-                </button>
-              ) : null}
             </div>
           )
         })}

@@ -10,10 +10,20 @@ import {
 const CENTER_ID = HOME_FACE_IDS[0]
 const ORBIT_IDS = HOME_FACE_IDS.slice(1)
 
-const CENTER_SIZE = 88
+const CENTER_SIZE = 72
 const ORBIT_SIZE = 40
 const DUST_COUNT = 56
 const ORBIT_RADIUS = 0.34
+
+/** Soft pastels — visible on white, non-conformer energy (not grey clinical). */
+const PASTELS = [
+  { r: 244, g: 163, b: 198 }, // blush
+  { r: 186, g: 168, b: 230 }, // lilac
+  { r: 152, g: 214, b: 198 }, // mint
+  { r: 255, g: 198, b: 158 }, // peach
+  { r: 168, g: 198, b: 235 }, // sky
+  { r: 232, g: 176, b: 214 }, // orchid
+] as const
 
 type Dust = {
   x: number
@@ -26,6 +36,7 @@ type Dust = {
   /** +1 toward center, -1 outward to an orbiter */
   dir: 1 | -1
   orbitIndex: number
+  pastel: (typeof PASTELS)[number]
 }
 
 function rand(min: number, max: number) {
@@ -48,6 +59,7 @@ function spawnDust(orbitCount: number): Dust {
     maxLife: rand(3.2, 6.5),
     dir,
     orbitIndex,
+    pastel: PASTELS[Math.floor(Math.random() * PASTELS.length)]!,
   }
 }
 
@@ -111,24 +123,25 @@ export function HomeFaceNetwork() {
       const ry = height * ORBIT_RADIUS * 0.92
       ctx.beginPath()
       ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2)
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)'
+      ctx.strokeStyle = 'rgba(186, 168, 230, 0.35)'
       ctx.lineWidth = 1
       ctx.stroke()
 
       for (const mote of dust) {
-        const alpha = Math.sin((mote.life / mote.maxLife) * Math.PI) * 0.8
+        const alpha = Math.sin((mote.life / mote.maxLife) * Math.PI) * 0.88
         if (alpha <= 0.02) continue
         const px = mote.x * width
         const py = mote.y * height
+        const { r, g, b } = mote.pastel
         const glow = ctx.createRadialGradient(px, py, 0, px, py, mote.r * 4.2)
-        glow.addColorStop(0, `rgba(255, 248, 240, ${alpha * 0.9})`)
-        glow.addColorStop(0.4, `rgba(255, 220, 190, ${alpha * 0.32})`)
-        glow.addColorStop(1, 'rgba(255, 255, 255, 0)')
+        glow.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.85})`)
+        glow.addColorStop(0.45, `rgba(${r}, ${g}, ${b}, ${alpha * 0.28})`)
+        glow.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`)
         ctx.fillStyle = glow
         ctx.beginPath()
         ctx.arc(px, py, mote.r * 4.2, 0, Math.PI * 2)
         ctx.fill()
-        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`
         ctx.beginPath()
         ctx.arc(px, py, mote.r, 0, Math.PI * 2)
         ctx.fill()

@@ -7,12 +7,10 @@ import SriScoreRing from '@/components/shared/SriScoreRing'
 import { SLEEP_SCORE } from '@/lib/brand/sleep-score'
 import { computeScheduleSri } from '@/lib/circadian/sri-engine'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
-import { DOSE_TAG_META, type DoseTag } from '@/lib/patient/dose-uploads'
+import { DOSE_TAG_META, DOSE_TAGS } from '@/lib/patient/dose-uploads'
 import { usePatientDoses } from '@/lib/patient/use-patient-doses'
 import { usePatientPlanProfile } from '@/lib/patient/use-patient-plan-profile'
 import { usePlanDraftContext } from '@/lib/patient/use-plan-draft-context'
-
-const TAGS: DoseTag[] = ['PHOTONIC', 'METABOLIC', 'KINETIC']
 
 export function BankDashboardView() {
   const { planContext, ready: draftReady } = usePlanDraftContext({
@@ -42,10 +40,10 @@ export function BankDashboardView() {
         <p className="dd-bank__gauge-hint">{SLEEP_SCORE.hint}</p>
       </div>
 
-      <section className="dd-bank__pillars" aria-label="Today’s PMK">
+      <section className="dd-bank__pillars" aria-label="Today’s stack">
         <h2 className="dd-bank__section-title">Today</h2>
         <div className="dd-bank__timeline">
-          {TAGS.map((tag) => {
+          {DOSE_TAGS.map((tag) => {
             const meta = DOSE_TAG_META[tag]
             const done = pillars?.[tag]
             return (
@@ -93,9 +91,9 @@ export function BankDashboardView() {
 
       <section className="dd-bank__clinical" aria-label="Clinical tools">
         <h2 className="dd-bank__section-title">Clinical</h2>
-        <Link href="/dosage?from=metabolic" className="dd-bank__clinical-link">
-          <span className="dd-bank__clinical-title">#Meds · Chemistry</span>
-          <span className="dd-bank__clinical-meta">Meds & dosing windows</span>
+        <Link href="/dosage" className="dd-bank__clinical-link">
+          <span className="dd-bank__clinical-title">Chemistry</span>
+          <span className="dd-bank__clinical-meta">Stack timing & dosing windows</span>
         </Link>
         <Link href="/testkit" className="dd-bank__clinical-link">
           <span className="dd-bank__clinical-title">TipTraQ testkit</span>

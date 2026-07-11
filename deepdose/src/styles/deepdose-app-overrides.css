@@ -6079,6 +6079,9 @@ html.splash-route body {
   max-height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
+  background: #fff;
+  background-color: #fff;
+  color: #0d0d0d;
 }
 
 html.splash-route {

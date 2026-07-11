@@ -1,8 +1,9 @@
 /**
- * Product design system — OpenAI.com grid + Realme flat visuals.
+ * Product design system — OpenAI-inspired fluid grid + light Flow shell.
  *
- * Spacing: 4px scale, named roles only (--dd-inset / --dd-gap / --dd-stack).
- * Visuals: charcoal product shell, flat cards, warning-yellow accent.
+ * Spacing: fluid clamp roles (--dd-inset / --dd-gap / --dd-stack) + --oai-* engine.
+ * Visuals: light athletic shell, flat cards, volt accent.
+ * Layout engine: deepdose-openai-grid.css
  * Do not invent one-off rem gaps or raw hex in feature CSS — use these tokens.
  */
 
@@ -15,62 +16,65 @@
   --dd-6: var(--space-6); /* 24px */
   --dd-8: var(--space-8); /* 32px */
 
-  /* ── Named spacing roles (OpenAI layout) ── */
-  --dd-inset: var(--dd-6); /* type ↔ card edge: 24px */
-  --dd-inset-lg: var(--dd-8); /* hero: 32px */
-  --dd-gap-tight: var(--dd-2); /* related lines: 8px */
-  --dd-gap: var(--dd-3); /* inside a card: 12px */
-  --dd-gap-loose: var(--dd-4); /* groups: 16px */
-  --dd-stack: var(--dd-6); /* card ↔ card: 24px */
-  --dd-stack-loose: var(--dd-8); /* major blocks: 32px */
-  --dd-page-y: var(--dd-6); /* page top rhythm */
+  /* ── Named spacing roles — fluid, match --oai-* ── */
+  --dd-inset: var(--oai-gap-loose, var(--dd-6));
+  --dd-inset-lg: var(--oai-stack, var(--dd-8));
+  --dd-gap-tight: var(--oai-gap-tight, var(--dd-2));
+  --dd-gap: var(--oai-gap, var(--dd-3));
+  --dd-gap-loose: var(--oai-gap-loose, var(--dd-4));
+  --dd-stack: var(--oai-stack, var(--dd-6));
+  --dd-stack-loose: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  --dd-page-y: var(--oai-gap, var(--dd-6));
 
-  /* ── Realme flat visuals (on the same grid) ── */
-  --dd-ink: rgb(255 255 255 / 0.92);
-  --dd-ink-soft: rgb(255 255 255 / 0.82);
-  /* Unselected tabs / secondary controls — keep ≥ ~0.7 for dark BG legibility */
-  --dd-ink-muted: rgb(255 255 255 / 0.72);
-  --dd-ink-faint: rgb(255 255 255 / 0.7);
-  --dd-ink-dim: rgb(255 255 255 / 0.65);
-  --dd-ink-inverse: #0b1220;
+  /* ── Light Flow shell ── */
+  --dd-ink: rgb(15 23 42 / 0.92);
+  --dd-ink-soft: rgb(15 23 42 / 0.78);
+  --dd-ink-muted: rgb(15 23 42 / 0.62);
+  --dd-ink-faint: rgb(15 23 42 / 0.55);
+  --dd-ink-dim: rgb(15 23 42 / 0.48);
+  --dd-ink-inverse: #f8f8f6;
 
-  --dd-surface: rgb(255 255 255 / 0.04);
-  --dd-surface-quiet: rgb(255 255 255 / 0.03);
-  --dd-surface-hover: rgb(255 255 255 / 0.06);
-  --dd-surface-strong: rgb(255 255 255 / 0.08);
+  --dd-surface: rgb(15 23 42 / 0.035);
+  --dd-surface-quiet: rgb(15 23 42 / 0.025);
+  --dd-surface-hover: rgb(15 23 42 / 0.055);
+  --dd-surface-strong: rgb(15 23 42 / 0.07);
 
-  --dd-border: rgb(255 255 255 / 0.12);
-  --dd-border-strong: rgb(255 255 255 / 0.18);
-  --dd-border-focus: rgb(255 255 255 / 0.35);
+  --dd-border: rgb(15 23 42 / 0.1);
+  --dd-border-strong: rgb(15 23 42 / 0.16);
+  --dd-border-focus: rgb(15 23 42 / 0.32);
 
-  --dd-solid: #fff;
-  --dd-accent: #f5e74a; /* safety yellow */
-  --dd-accent-soft: rgb(245 231 74 / 0.08);
-  --dd-cue-photonic: var(--dd-accent);
-  --dd-cue-metabolic: #acd3de;
-  --dd-cue-kinetic: #ff5a5a;
-  --dd-danger: var(--dd-cue-kinetic);
+  --dd-solid: #0f172a;
+  --dd-accent: #e8c41a;
+  --dd-accent-soft: rgb(232 196 26 / 0.12);
+  --dd-cue-resetter: var(--dd-accent);
+  --dd-cue-hijacker: #3d8fa0;
+  --dd-cue-crosser: #e04545;
+  --dd-cue-battery: #2f9e6e;
+  --dd-cue-photonic: var(--dd-cue-resetter);
+  --dd-cue-metabolic: var(--dd-cue-hijacker);
+  --dd-cue-kinetic: var(--dd-cue-crosser);
+  --dd-danger: var(--dd-cue-crosser);
 
-  /* Radius — flat, snapped to 4px grid */
-  --dd-radius: var(--dd-2); /* 8px cards / controls */
-  --dd-radius-sm: var(--dd-1); /* 4px badges / media */
+  --dd-radius: var(--oai-radius, var(--dd-2));
+  --dd-radius-sm: var(--dd-1);
   --dd-radius-pill: 999px;
 
-  /* Type — Inter only; fixed steps (no fluid on product) */
-  --dd-type-xs: 0.6875rem; /* 11px */
-  --dd-type-sm: 0.75rem; /* 12px */
-  --dd-type-md: 0.8125rem; /* 13px */
-  --dd-type-body: 0.875rem; /* 14px */
-  --dd-type-lg: 0.9375rem; /* 15px */
-  --dd-type-xl: 1.0625rem; /* 17px */
+  --dd-type-xs: clamp(0.625rem, 0.58rem + 0.2vw, 0.6875rem);
+  --dd-type-sm: clamp(0.6875rem, 0.65rem + 0.2vw, 0.75rem);
+  --dd-type-md: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
+  --dd-type-body: clamp(0.8125rem, 0.76rem + 0.3vw, 0.9375rem);
+  --dd-type-lg: clamp(0.875rem, 0.82rem + 0.3vw, 1rem);
+  --dd-type-xl: clamp(0.9375rem, 0.88rem + 0.35vw, 1.125rem);
 
-  /* Controls */
-  --dd-control-h: 2.5rem; /* 40px */
-  --dd-control-h-lg: 3.5rem; /* 56px */
-  --dd-avatar: 2.25rem; /* 36px */
+  --dd-control-h: 2.5rem;
+  --dd-control-h-lg: 3.5rem;
+  --dd-avatar: 2.25rem;
+
+  color: var(--dd-ink);
+  background: #f7f7f5;
 }
 
-/* Page column rhythm */
+/* Page column rhythm — pad/max from openai-grid engine */
 .dd-product.seco-marketing-page .seco-landing__section-inner.dd-product__inner {
   gap: var(--dd-stack);
   padding-top: var(--dd-page-y);
@@ -97,13 +101,11 @@
   gap: var(--dd-gap-loose);
 }
 
-/* Quiet hover — no jump */
 .dd-product .seco-spectrum-tile:hover {
   transform: none;
   box-shadow: none;
 }
 
-/* Flat Realme cards share the same inset/gap roles */
 .dd-product :is(.dd-grid__card, .dd-bank__research, .dd-bank__clinical-link, .dd-bank__slot) {
   box-sizing: border-box;
 }

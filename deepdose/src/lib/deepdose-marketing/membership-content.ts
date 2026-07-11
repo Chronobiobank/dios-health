@@ -24,7 +24,7 @@ export const MEMBERSHIP_PAGE_INTRO = {
   titleWhite: 'Free forever.',
   titleAccent: 'Upgrade for more.',
   lede:
-    'Log doses. Sync the Grid. TipTraQ when you want a stronger sleep read.',
+    'Max your med stack. Get in Flow. TipTraQ when you want a stronger sleep read.',
 } as const
 
 /** USD for the global Manjam-first cohort. */
@@ -38,7 +38,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     note: 'For dosers — log and sync on the Grid.',
     cta: { label: 'Start free', href: '/' },
     includes: [
-      'Daily PMK doses on the Grid',
+      'Daily stack stamps on the Grid',
       'Dosers on your clock',
       'Optional research share only',
     ],

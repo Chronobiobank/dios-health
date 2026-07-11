@@ -67,7 +67,7 @@ function DoseCard({
 
       <footer className="dd-grid__card-foot">
         <button type="button" className="dd-grid__sync" onClick={onSync}>
-          Sync · {syncCount}
+          Flow · {syncCount}
         </button>
       </footer>
     </article>

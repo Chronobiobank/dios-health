@@ -1,6 +1,13 @@
-/** Local PMK dose uploads — Light / Meds / Move (engine ids stay PHOTONIC / METABOLIC / KINETIC). */
+/** Local Medmaxxing dose uploads — four biologic clusters. */
 
-export type DoseTag = 'PHOTONIC' | 'METABOLIC' | 'KINETIC'
+export type DoseTag = 'RESETTER' | 'HIJACKER' | 'CROSSER' | 'BATTERY'
+
+export const DOSE_TAGS: readonly DoseTag[] = [
+  'RESETTER',
+  'HIJACKER',
+  'CROSSER',
+  'BATTERY',
+] as const
 
 export type Chronotype = 'lark' | 'owl'
 
@@ -27,29 +34,48 @@ export const DOSE_UPLOADS_STORAGE_KEY = 'deepdose-dose-uploads'
 export const BANK_OPT_IN_KEY = 'deepdose-bank-opt-in'
 export const DOSE_SYNCS_KEY = 'deepdose-dose-syncs'
 
-/** Consumer labels — plain language. Engine keys stay PHOTONIC / METABOLIC / KINETIC. */
+/** Consumer labels — Medmaxxing biologic clusters. */
 export const DOSE_TAG_META: Record<
   DoseTag,
-  { label: string; hash: string; cue: string; hint: string }
+  { label: string; hash: string; cue: string; hint: string; idea: string }
 > = {
-  PHOTONIC: {
-    label: 'Light',
-    hash: '#Light',
-    cue: 'var(--dd-cue-photonic)',
-    hint: 'Daylight, screens, blackout',
+  RESETTER: {
+    label: 'Resetters',
+    hash: '#Resetters',
+    cue: 'var(--dd-cue-resetter)',
+    hint: 'Brain → night',
+    idea: 'Tell your brain: drop everything, it’s bedtime now.',
   },
-  METABOLIC: {
-    label: 'Meds',
-    hash: '#Meds',
-    cue: 'var(--dd-cue-metabolic)',
-    hint: 'Meds & timing',
+  HIJACKER: {
+    label: 'Hijackers',
+    hash: '#Hijackers',
+    cue: 'var(--dd-cue-hijacker)',
+    hint: 'Organs → day',
+    idea: 'Tell your organs: wake up and work at 100%.',
   },
-  KINETIC: {
-    label: 'Move',
-    hash: '#Move',
-    cue: 'var(--dd-cue-kinetic)',
-    hint: 'Walk, train, get outside',
+  CROSSER: {
+    label: 'Crossers',
+    hash: '#Crossers',
+    cue: 'var(--dd-cue-crosser)',
+    hint: 'Volume on energy',
+    idea: 'Pull the volume knob up or down on your brain’s energy.',
   },
+  BATTERY: {
+    label: 'Batteries',
+    hash: '#Batteries',
+    cue: 'var(--dd-cue-battery)',
+    hint: 'Fuel the timers',
+    idea: 'Oil and fuel so the cellular timers run on time.',
+  },
+}
+
+function isDoseTag(value: unknown): value is DoseTag {
+  return (
+    value === 'RESETTER' ||
+    value === 'HIJACKER' ||
+    value === 'CROSSER' ||
+    value === 'BATTERY'
+  )
 }
 
 export function todayDoseDate(now = new Date()): string {
@@ -85,7 +111,7 @@ function isDoseUpload(value: unknown): value is DoseUpload {
   const d = value as DoseUpload
   return (
     typeof d.id === 'string' &&
-    (d.tag === 'PHOTONIC' || d.tag === 'METABOLIC' || d.tag === 'KINETIC') &&
+    isDoseTag(d.tag) &&
     typeof d.mediaUrl === 'string' &&
     typeof d.date === 'string' &&
     typeof d.timestamp === 'string' &&
@@ -123,9 +149,10 @@ export function dosesForDate(date: string): DoseUpload[] {
 export function todayPillars(date = todayDoseDate()): Record<DoseTag, boolean> {
   const today = dosesForDate(date)
   return {
-    PHOTONIC: today.some((d) => d.tag === 'PHOTONIC'),
-    METABOLIC: today.some((d) => d.tag === 'METABOLIC'),
-    KINETIC: today.some((d) => d.tag === 'KINETIC'),
+    RESETTER: today.some((d) => d.tag === 'RESETTER'),
+    HIJACKER: today.some((d) => d.tag === 'HIJACKER'),
+    CROSSER: today.some((d) => d.tag === 'CROSSER'),
+    BATTERY: today.some((d) => d.tag === 'BATTERY'),
   }
 }
 

@@ -1,10 +1,18 @@
-/* Home gate — chrome header, large orbit, tight form, Terms foot. */
+/**
+ * Home gate — OpenAI.com light system.
+ * White canvas, near-black type, Inter, soft inputs, solid black CTA.
+ * No spectrum gradients, no dark glass, no serif display.
+ */
 
 .dd-gate {
-  --dd-gate-text: #f2f2f2;
-  --dd-gate-muted: rgba(242, 242, 242, 0.55);
-  --dd-gate-line: rgba(255, 255, 255, 0.14);
-  --dd-gate-accent: #2a9d8f;
+  --dd-gate-text: #0d0d0d;
+  --dd-gate-muted: rgb(13 13 13 / 0.55);
+  --dd-gate-line: rgb(13 13 13 / 0.12);
+  --dd-gate-accent: #0d0d0d;
+  --dd-gate-surface: #ffffff;
+  --dd-gate-input-bg: #ffffff;
+  --dd-gate-input-border: rgb(13 13 13 / 0.14);
+  --dd-gate-shadow: 0 2px 8px rgb(0 0 0 / 0.06), 0 0 0 1px rgb(13 13 13 / 0.06);
 
   box-sizing: border-box;
   display: flex;
@@ -17,6 +25,7 @@
   padding: 0;
   color: var(--dd-gate-text);
   gap: 0;
+  background: var(--dd-gate-surface);
   container-type: inline-size;
   container-name: dd-gate;
 }
@@ -40,7 +49,7 @@
   box-sizing: border-box;
   width: 100%;
   min-height: var(--seco-nav-height, 4rem);
-  padding-inline: clamp(1rem, 4vw, 2rem);
+  padding-inline: var(--oai-page-pad, clamp(1rem, 4vw, 2rem));
 }
 
 .dd-gate__chrome-links {
@@ -56,16 +65,16 @@
   padding: 0.35rem 0;
   border: 0;
   background: none;
-  color: rgb(255 255 255 / 0.82);
-  font-size: 0.8125rem;
-  font-weight: 500;
+  color: rgb(13 13 13 / 0.72);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 400;
   text-decoration: none;
   cursor: pointer;
 }
 
 .dd-gate__chrome-link:hover:not(:disabled) {
-  color: #fff;
-  text-decoration: underline;
+  color: #0d0d0d;
 }
 
 .dd-gate__chrome-link:disabled {
@@ -73,7 +82,6 @@
   cursor: wait;
 }
 
-/* Match SiteNavBar wordmark size/position on every other page */
 .dd-gate .clinical-site-nav__brand {
   display: inline-flex;
   align-items: center;
@@ -81,7 +89,7 @@
   flex-shrink: 0;
   line-height: 1;
   text-decoration: none;
-  color: #fff;
+  color: #0d0d0d;
 }
 
 .dd-gate .clinical-site-nav__brand .deepdose-wordmark {
@@ -91,6 +99,7 @@
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
+  color: #0d0d0d;
 }
 
 @media (min-width: 900px) {
@@ -104,13 +113,12 @@
   flex-direction: column;
   align-items: stretch;
   box-sizing: border-box;
-  /* 20rem × 1.1 — wider pills so the 18+ line stays legible */
-  width: min(100% - 2rem, 22rem);
-  max-width: 22rem;
+  width: min(100% - 2rem, 24rem);
+  max-width: 24rem;
   margin-inline: auto;
   padding-inline: 0;
   padding-bottom: 0;
-  gap: 0.15rem;
+  gap: 0.2rem;
   flex: 1 1 auto;
   justify-content: center;
   min-height: 0;
@@ -121,12 +129,9 @@
 .dd-gate__headline {
   width: 100%;
   text-align: center;
-  margin-bottom: -0.35rem;
+  margin-bottom: 0;
 }
 
-/* Same centering pattern as .seco-splash__simple —
-   continuous spectrum from global .seco-landing__hero-spectrum.
-   Extra classes beat landing’s :is(...:has(...)) specificity. */
 .dd-gate__headline .seco-landing__hero-head {
   display: flex;
   flex-direction: column;
@@ -141,14 +146,12 @@
   width: auto;
   max-width: none;
   margin: 0 auto;
-  font-family: var(--seco-font-display);
-  /* Slightly larger than the reduced size — still under the orbit */
-  font-size: clamp(1.55rem, 0.45rem + 6.9vw, 2.95rem);
-  font-size: clamp(1.55rem, 11.6cqi, 2.95rem);
-  font-weight: 300;
-  letter-spacing: var(--seco-display-tracking-hero);
-  line-height: var(--text-display-leading-hero, 1.08);
-  color: #fff;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(1.75rem, 0.6rem + 5vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #0d0d0d;
 }
 
 .dd-gate
@@ -162,35 +165,30 @@
 }
 
 .dd-gate .dd-gate__headline .seco-landing__hero-line--white {
-  color: #fff;
+  color: #0d0d0d;
+  -webkit-text-fill-color: #0d0d0d;
 }
 
-/* Drift the spectrum across “chemical match” (same motion language as CTAs) */
+/* Accent line: solid black weight, not spectrum */
 .dd-gate .dd-gate__headline .seco-landing__hero-spectrum {
-  background: var(--seco-spectrum-hero);
-  background-size: 220% 100%;
-  background-position: 0% 50%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: seco-cta-flow 7s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dd-gate .dd-gate__headline .seco-landing__hero-spectrum {
-    animation: none;
-    background-position: 50% 50%;
-  }
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  -webkit-text-fill-color: #0d0d0d;
+  color: #0d0d0d;
+  animation: none;
+  font-weight: 600;
 }
 
 .dd-gate__orbit {
-  width: min(100%, 22rem);
-  max-width: min(100%, 42vh);
+  width: min(100%, 20rem);
+  max-width: min(100%, 34vh);
   flex: none;
   align-self: center;
   margin-inline: auto;
-  margin-block: -0.45rem -0.25rem;
+  margin-block: 0;
+  filter: none;
+  opacity: 1;
 }
 
 .dd-gate__orbit .home-face-net {
@@ -198,14 +196,41 @@
   max-width: none;
 }
 
+.dd-gate__orbit .home-face-net__aura {
+  background: radial-gradient(
+    circle,
+    rgb(244 163 198 / 0.28) 0%,
+    rgb(186 168 230 / 0.12) 40%,
+    transparent 72%
+  );
+}
+
+.dd-gate__orbit .home-face-net__aura--soft {
+  background: radial-gradient(
+    circle,
+    rgb(152 214 198 / 0.18) 0%,
+    rgb(255 198 158 / 0.08) 42%,
+    transparent 70%
+  );
+}
+
+.dd-gate__orbit .home-face-net__aura--orbit {
+  background: radial-gradient(
+    circle,
+    rgb(186 168 230 / 0.22) 0%,
+    rgb(232 176 214 / 0.1) 40%,
+    transparent 70%
+  );
+}
+
 .dd-gate__form {
-  --dd-gate-pill-h: 2.5rem;
-  --dd-gate-stack-gap: 0.5rem;
+  --dd-gate-pill-h: 3rem;
+  --dd-gate-stack-gap: 0.65rem;
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: var(--dd-gate-stack-gap);
-  margin-top: 0.1rem;
+  margin-top: 0.15rem;
 }
 
 .dd-gate__field {
@@ -224,7 +249,7 @@
   justify-content: center;
   width: 1.125rem;
   height: 1.125rem;
-  color: rgb(255 255 255 / 0.88);
+  color: rgb(13 13 13 / 0.45);
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -239,70 +264,66 @@
   height: var(--dd-gate-pill-h);
   margin: 0;
   padding: 0 1rem 0 2.65rem;
-  border: 1px solid var(--dios-glass-outer-border, rgb(255 255 255 / 0.14));
-  border-radius: 999px;
-  background: var(--dios-glass-outer-bg, rgb(255 255 255 / 0.07));
-  color: #fff;
-  font-family: var(--seco-font-ui);
-  font-size: 0.875rem;
-  font-weight: 450;
+  border: 1px solid var(--dd-gate-input-border);
+  border-radius: 1.5rem;
+  background: var(--dd-gate-input-bg);
+  color: #0d0d0d;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1;
   outline: none;
-  backdrop-filter: var(--dios-glass-outer-blur, blur(24px) saturate(1.75));
-  -webkit-backdrop-filter: var(--dios-glass-outer-blur, blur(24px) saturate(1.75));
-  box-shadow: var(--dios-glass-outer-shadow, 0 8px 32px rgb(0 0 0 / 0.22));
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: var(--dd-gate-shadow);
   transition:
-    border-color 0.18s ease,
-    background 0.18s ease,
-    box-shadow 0.18s ease;
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-/* Chromium/Edge autofill paints a light UA background — keep designed glass. */
 .dd-gate__input:-webkit-autofill,
 .dd-gate__input:-webkit-autofill:hover,
 .dd-gate__input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #fff;
-  caret-color: #fff;
-  border-color: var(--dios-glass-outer-border, rgb(255 255 255 / 0.14));
+  -webkit-text-fill-color: #0d0d0d;
+  caret-color: #0d0d0d;
+  border-color: var(--dd-gate-input-border);
   box-shadow:
-    var(--dios-glass-outer-shadow, 0 8px 32px rgb(0 0 0 / 0.22)),
-    inset 0 0 0 1000px var(--dios-glass-outer-bg, rgb(255 255 255 / 0.07));
+    var(--dd-gate-shadow),
+    inset 0 0 0 1000px #fff;
   transition: background-color 99999s ease-in-out 0s;
 }
 
 .dd-gate__field:focus-within .dd-gate__field-icon {
-  color: rgb(172 211 222 / 0.95);
+  color: rgb(13 13 13 / 0.72);
 }
 
 .dd-gate__input::placeholder {
-  color: rgb(255 255 255 / 0.38);
+  color: rgb(13 13 13 / 0.38);
   font-weight: 400;
 }
 
 .dd-gate__input:hover {
-  border-color: rgb(255 255 255 / 0.2);
-  background: rgb(255 255 255 / 0.09);
+  border-color: rgb(13 13 13 / 0.22);
 }
 
 .dd-gate__input:focus {
-  border-color: rgb(172 211 222 / 0.45);
-  background: rgb(255 255 255 / 0.09);
+  border-color: rgb(13 13 13 / 0.35);
   box-shadow:
-    0 8px 32px rgb(0 0 0 / 0.22),
-    0 0 0 1px rgb(172 211 222 / 0.18);
+    var(--dd-gate-shadow),
+    0 0 0 3px rgb(13 13 13 / 0.06);
 }
 
 .dd-gate__msg {
   margin: 0;
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   line-height: 1.35;
-  color: var(--dd-gate-accent);
+  color: rgb(13 13 13 / 0.65);
 }
 
 .dd-gate__msg--error {
-  color: #f07178;
+  color: #c43c3c;
 }
 
 .dd-gate__signup {
@@ -316,34 +337,30 @@
   margin: 0;
   padding: 0 1rem;
   border: 0;
-  border-radius: 999px;
-  background: var(--seco-spectrum-hero);
-  background-size: 220% 100%;
-  background-position: 0% 50%;
-  color: var(--seco-navy, #0b1220);
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
+  border-radius: 1.5rem;
+  background: #0d0d0d;
+  background-size: auto;
+  color: #fff;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   line-height: 1.1;
   cursor: pointer;
-  animation: seco-cta-flow 7s ease-in-out infinite;
+  animation: none;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .dd-gate__signup:hover:not(:disabled) {
-  filter: brightness(1.05);
-  transform: translateY(-1px);
+  background: #1a1a1a;
+  filter: none;
+  transform: none;
 }
 
 .dd-gate__signup:disabled {
-  opacity: 0.6;
+  opacity: 0.55;
   cursor: wait;
   animation: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dd-gate__signup {
-    animation: none;
-  }
 }
 
 .dd-gate__foot {
@@ -353,39 +370,37 @@
   flex: none;
   box-sizing: border-box;
   width: 100%;
-  /* Mirror .dd-gate__chrome so the 18+ line sits as far from the bottom
-     as the logo sits from the top */
   min-height: calc(var(--seco-nav-height, 4rem) + env(safe-area-inset-bottom, 0px));
-  padding-inline: clamp(1rem, 4vw, 2rem);
+  padding-inline: var(--oai-page-pad, clamp(1rem, 4vw, 2rem));
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .dd-gate__agree {
   flex: none;
   box-sizing: border-box;
-  width: min(100%, 22rem);
+  width: min(100%, 24rem);
   margin: 0;
   padding: 0;
   text-align: center;
   white-space: nowrap;
-  font-size: clamp(0.6rem, 0.3rem + 1.4vw, 0.8125rem);
-  font-size: clamp(0.6rem, 0.55rem + 0.9vw, 0.8125rem);
+  font-size: clamp(0.65rem, 0.55rem + 0.5vw, 0.8125rem);
   line-height: 1.35;
-  letter-spacing: -0.015em;
-  color: rgb(255 255 255 / 0.72);
+  letter-spacing: -0.01em;
+  color: rgb(13 13 13 / 0.55);
   overflow: hidden;
 }
 
 .dd-gate__agree a {
-  color: #fff;
-  font-weight: 600;
+  color: #0d0d0d;
+  font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 2px;
   white-space: nowrap;
 }
 
 .dd-gate__agree a:hover {
-  color: var(--seco-spectrum-cyan, #acd3de);
+  color: #0d0d0d;
+  opacity: 0.75;
 }
 
 .seco-splash__page:has(.dd-gate) {
@@ -395,12 +410,29 @@
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  background: #fff;
 }
 
 html.splash-route .seco-splash__main:has(.dd-gate) {
   overflow: hidden;
+  background: #fff;
 }
 
 html.splash-route .seco-splash__page:has(.dd-gate) {
   overflow-y: auto;
+}
+
+/* Light splash shell overrides dark body from legacy marketing */
+.seco-splash--oai,
+body:has(.seco-splash--oai),
+html.splash-route:has(.seco-splash--oai),
+html.splash-route:has(.seco-splash--oai) body {
+  background: #fff !important;
+  background-color: #fff !important;
+  color: #0d0d0d;
+}
+
+.deepdose-shell.seco-shell--light.seco-splash--oai {
+  background: #fff;
+  min-height: 100dvh;
 }

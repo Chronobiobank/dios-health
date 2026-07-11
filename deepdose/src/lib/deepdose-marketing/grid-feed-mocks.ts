@@ -3,36 +3,41 @@
 import { DEEPDOSE_COMMUNITY_MATCHES } from '@/lib/deepdose-marketing/community-content'
 import { communityFaceUrl } from '@/lib/deepdose-marketing/community-faces'
 import {
+  DOSE_TAGS,
   todayDoseDate,
   type Chronotype,
   type DoseTag,
   type DoseUpload,
 } from '@/lib/patient/dose-uploads'
 
-const TAGS: DoseTag[] = ['PHOTONIC', 'METABOLIC', 'KINETIC']
-
 /**
- * Phone-snapshot energy: lived-in rooms, cafés, trail / POV movement.
+ * Phone-snapshot energy by Medmaxxing cluster.
  * Avoid plated food, hotel beds, and gym-studio lighting.
  */
 const SCENE_PHOTOS: Record<DoseTag, readonly string[]> = {
-  PHOTONIC: [
-    '1541781774459-bb2af2f05b55', // rumpled bed · sleeping cat
-    '1529156069898-49953e39b3ac', // friends on a ledge · daylight
-    '1522708323590-d24dbb6b0267', // apartment · window light
+  RESETTER: [
+    '1541781774459-bb2af2f05b55', // rumpled bed · night lock-in
     '1514565131-fce0801e5785', // city dusk · owl nights
+    '1522708323590-d24dbb6b0267', // apartment · window light
+    '1529156069898-49953e39b3ac', // friends on a ledge
   ],
-  METABOLIC: [
+  HIJACKER: [
     '1486312338219-ce68d2c6f44d', // laptop hands · late focus
     '1554118811-1e0d58224f24', // café floor · lived-in
     '1453614512568-c4024d13c247', // café counter · working
     '1522071820081-009f0129c71c', // people around a table
   ],
-  KINETIC: [
+  CROSSER: [
     '1476480862126-209bfaa8edc8', // stairs · shoe POV
-    '1551632811-561732d1e306', // trail hike · from behind
-    '1541625602330-2277a4c46182', // coastal ride
     '1429962714451-bb934ecdc4ec', // crowd · night out
+    '1541625602330-2277a4c46182', // coastal ride
+    '1551632811-561732d1e306', // trail hike · from behind
+  ],
+  BATTERY: [
+    '1512621776951-a57141f2eefd', // produce / fuel still
+    '1490645930847-3d94d77aee30', // kitchen counter
+    '1546069901-ba9599a7e63c', // bowl · everyday fuel
+    '1505576399270-aec009ca2114', // fridge / home stash
   ],
 }
 
@@ -52,7 +57,7 @@ export function buildMockGridDoses(now = new Date()): DoseUpload[] {
     const posted = new Date(now)
     posted.setHours(6 + (index % 10), (index * 11) % 60, 0, 0)
     const chronotype: Chronotype = index % 2 === 0 ? 'lark' : 'owl'
-    const tag = TAGS[index % TAGS.length]!
+    const tag = DOSE_TAGS[index % DOSE_TAGS.length]!
     const isPremium = index === 2 || index === 5
     return {
       id: `mock-dose-${match.id}-${date}`,

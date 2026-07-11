@@ -1,71 +1,47 @@
 ---
-description: DeepDose product shell — Realme flat UI + PMK circadian PWA
+description: DeepDose product shell — OpenAI-inspired fluid grid + light Flow UX
 alwaysApply: true
 ---
 
-# DeepDose product shell (set in stone)
+# DeepDose product shell
 
 Product routes (`/grid`, `/dose`, `/bank`, `/profile`, `/account`, `/dosage`, `/connect`, `/chat`):
 
-**North star:** dosers log Light / Meds / Move, raise sleep score, sync on the Grid.
+**North star:** Medmaxxing — max the med stack, get in Flow. Sleep score on Bank. Grid is the tribe feed.
 
-Consumer tribe = **Dosers**. Company / clinical layer = **Deepdose** (Chemistry, TipTraQ, Chronobiobank).
+Consumer tribe = **Dosers**. Movement = **Medmaxxing**. Token economy = **Get in Flow**. Company = **Deepdose**.
 
-Consumer score language = **sleep score** (“how locked your nights are”). Do not lead UI with SRI — keep SRI for engine / clinical only.
-
-Consumer dose tags = **#Light / #Meds / #Move** (engine ids stay PHOTONIC / METABOLIC / KINETIC).
+Consumer dose tags = **#Resetters / #Hijackers / #Crossers / #Batteries**.
 
 ## Bottom nav (4 tabs)
 
 | Tab | Route | Role |
 |---|---|---|
-| Grid | `/grid` | Chronotype feed (Larks / Owls) |
-| Log | `/dose` | #Light / #Meds / #Move camera |
-| Bank | `/bank` | Sleep score gauge + PMK timeline + research opt-in |
-| Me | `/profile` | Identity, dose archive, wallet stubs |
+| Grid | `/grid` | Chronotype feed (Larks / Owls) + Flow |
+| Log | `/dose` | Stamp a cluster (camera) |
+| Bank | `/bank` | Sleep score + today’s stack + Chemistry depth |
+| Me | `/profile` | Identity, archive |
 
-Chat / Friends / Chemistry are secondary (linked from Me / Bank). How it works: `/how`.
+## Visual / layout engine
 
-## Visual system
+**OpenAI-inspired fluid grid is the source of truth** (`deepdose-openai-grid.css`):
 
-**OpenAI grid is the source of truth.** Realme supplies flat feed/card *shapes*, not a second token set.
+- One proportional column: `--oai-page-pad` + `--oai-page-max`
+- Auto-fit grids: `.dd-oai-auto-2|3|4` and 12-col `.dd-oai-grid`
+- Product shell wraps content in `dd-oai-container` + `dd-oai-stack` via `ProductAppShell`
+
+**Light Flow shell** on product routes (splash/marketing stay dark spectrum). Tokens in `deepdose-product-space.css` — no raw hex in feature CSS.
 
 | Layer | Tokens |
 |---|---|
-| Spacing | `--dd-inset`, `--dd-gap`, `--dd-stack` (4px scale) |
-| Ink / surface / border | `--dd-ink*`, `--dd-surface*`, `--dd-border*` |
-| Accent | `--dd-accent` (yellow), `--dd-cue-metabolic`, `--dd-cue-kinetic` |
-| Radius | `--dd-radius` (8px), `--dd-radius-sm` (4px) |
-| Type | `--dd-type-xs` … `--dd-type-xl` (Inter only) |
-
-Defined in `deepdose-product-space.css`. Feature CSS (`deepdose-realme.css`) must use these — **no raw hex / rem litter.**
+| Layout | `--oai-page-pad`, `--oai-gap*`, `--oai-min-*` |
+| Spacing | `--dd-inset`, `--dd-gap`, `--dd-stack` |
+| Ink / surface | `--dd-ink*`, `--dd-surface*`, `--dd-border*` |
+| Accent | `--dd-accent`, `--dd-cue-resetter|hijacker|crosser|battery` |
 
 ## Copy
 
 - No waffle. Titles live in `AppTopBar` only.
-- Dose cards: sleep score badge (`Score 84`) + Sync (not Likes). Premium: frosted blur + unlock stub.
-- Log Dose: photo only — **no captions** (except #Meds → Chemistry).
-- Consumer score = **sleep score** / “how locked your nights are”. Never lead with SRI in product chrome.
-- Dose tags in UI: **#Light / #Meds / #Move** — never Photonic / Metabolic / Kinetic in chrome.
-
-## Sleep score (engine: SRI)
-
-- Use `@/lib/circadian/sri-engine` (`computeScheduleSri` / matrix rolling). Functional from day 1.
-- UI labels from `@/lib/brand/sleep-score`. Do not invent a second formula in UI components.
-
-## Meds = medical
-
-- `#Meds` on Log Dose opens **Chemistry** (`/dosage?from=metabolic`) — meds & timing.
-- Optional “Stamp photo for Grid” stays on Log Dose; Chemistry shows a bridge CTA back to stamp.
-- TipTraQ testkit (`/testkit`) is linked from Bank Clinical and Me.
-
-## Hard rules
-
-1. `ProductAppShell` + `AppTopBar` + `AppBottomNav` only.
-2. Default post-auth landing: `/grid`.
-3. Legacy `/real` → `/grid`, `/real/post` → `/dose`.
-
-## Out of scope
-
-- Clinical / enterprise portals
-- Full adult payment + CDN DRM (follow-up)
+- Dose cards: sleep score badge + **Flow** (not Sync/likes).
+- Log: stamp photo only — no captions. Chemistry is Bank depth, not a Log gate.
+- Consumer score = **sleep score**. Never lead with SRI in product chrome.

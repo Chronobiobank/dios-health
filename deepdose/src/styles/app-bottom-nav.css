@@ -1,5 +1,5 @@
 /**
- * Product chrome — OpenAI.com formula on dark shell.
+ * Product chrome — OpenAI-inspired fluid column on light Flow shell.
  * Fixed top + bottom heights so route changes do not jump.
  * Type: Inter, weight 400, antialiased. Icons: 1.5 stroke, geometric.
  */
@@ -7,6 +7,11 @@
 :root {
   --app-top-bar-h: 3.25rem;
   --app-bottom-nav-h: 4.5rem;
+}
+
+/* Product routes: light canvas (splash/marketing stay dark) */
+body:has(.dd-product):not(:has(.seco-splash)) {
+  background-color: #f7f7f5;
 }
 
 /* ── Top bar ── */
@@ -19,10 +24,10 @@
   width: 100%;
   min-height: calc(var(--app-top-bar-h) + env(safe-area-inset-top, 0px));
   padding-top: env(safe-area-inset-top, 0px);
-  background: rgb(11 18 32 / 0.94);
+  background: rgb(247 247 245 / 0.92);
   backdrop-filter: saturate(1.2) blur(20px);
   -webkit-backdrop-filter: saturate(1.2) blur(20px);
-  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+  border-bottom: 1px solid rgb(15 23 42 / 0.08);
 }
 
 .app-top-bar__inner {
@@ -32,10 +37,10 @@
   gap: 0.5rem;
   box-sizing: border-box;
   width: 100%;
-  max-width: var(--page-max-app, 48rem);
+  max-width: var(--oai-page-max, var(--page-max-app, 48rem));
   min-height: var(--app-top-bar-h);
   margin-inline: auto;
-  padding: 0 var(--seco-page-pad, clamp(1.25rem, 4vw, 2rem));
+  padding: 0 var(--oai-page-pad, var(--seco-page-pad, clamp(1rem, 4vw, 2rem)));
 }
 
 .app-top-bar__title {
@@ -46,7 +51,7 @@
   font-weight: 400;
   letter-spacing: -0.015em;
   line-height: 1.2;
-  color: rgb(255 255 255 / 0.88);
+  color: rgb(15 23 42 / 0.88);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -84,7 +89,7 @@
   border: 0;
   border-radius: 0.5rem;
   background: transparent;
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(15 23 42 / 0.62);
   text-decoration: none;
   cursor: pointer;
   font-weight: 400;
@@ -92,12 +97,12 @@
 }
 
 .app-top-bar__icon-btn:hover {
-  color: rgb(255 255 255 / 0.95);
-  background: rgb(255 255 255 / 0.06);
+  color: rgb(15 23 42 / 0.92);
+  background: rgb(15 23 42 / 0.05);
 }
 
 .app-top-bar__icon-btn:focus-visible {
-  outline: 1px solid rgb(255 255 255 / 0.35);
+  outline: 1px solid rgb(15 23 42 / 0.28);
   outline-offset: 2px;
 }
 
@@ -115,7 +120,7 @@
   padding: 0 0.1rem;
   border: 0;
   background: transparent;
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(15 23 42 / 0.62);
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: 0.8125rem;
   font-weight: 400;
@@ -127,20 +132,20 @@
 }
 
 .app-top-bar__text-btn:hover {
-  color: rgb(255 255 255 / 0.95);
+  color: rgb(15 23 42 / 0.92);
 }
 
 .app-top-bar__text-btn:focus-visible {
-  outline: 1px solid rgb(255 255 255 / 0.35);
+  outline: 1px solid rgb(15 23 42 / 0.28);
   outline-offset: 2px;
 }
 
 /* ── Product page body — OpenAI restraint ── */
 
 .dd-product {
-  color: rgb(255 255 255 / 0.92);
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: 0.9375rem;
+  font-size: var(--dd-type-body, 0.9375rem);
   font-weight: 400;
   letter-spacing: -0.011em;
   line-height: 1.5;
@@ -275,13 +280,13 @@
 .dd-product .dose-dash-expand-icon {
   background: none !important;
   -webkit-text-fill-color: currentColor !important;
-  color: rgb(255 255 255 / 0.72) !important;
+  color: rgb(15 23 42 / 0.62) !important;
 }
 
 .dd-product .dd-profile__action:not(.dd-profile__action--primary) {
   background: transparent !important;
-  border: 1px solid rgb(255 255 255 / 0.18);
-  color: rgb(255 255 255 / 0.92) !important;
+  border: 1px solid rgb(15 23 42 / 0.16);
+  color: rgb(15 23 42 / 0.92) !important;
   font-weight: 400 !important;
 }
 
@@ -296,10 +301,10 @@
   box-sizing: border-box;
   padding: 0;
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  background: rgb(11 18 32 / 0.94);
+  background: rgb(247 247 245 / 0.94);
   backdrop-filter: saturate(1.2) blur(20px);
   -webkit-backdrop-filter: saturate(1.2) blur(20px);
-  border-top: 1px solid rgb(255 255 255 / 0.08);
+  border-top: 1px solid rgb(15 23 42 / 0.08);
   box-shadow: none;
   pointer-events: none;
 }
@@ -308,9 +313,9 @@
   pointer-events: auto;
   box-sizing: border-box;
   width: 100%;
-  max-width: var(--page-max-app, 48rem);
+  max-width: var(--oai-page-max, var(--page-max-app, 48rem));
   margin-inline: auto;
-  padding: 0.25rem var(--seco-page-pad, clamp(1.25rem, 4vw, 2rem)) 0.35rem;
+  padding: 0.25rem var(--oai-page-pad, var(--seco-page-pad, clamp(1rem, 4vw, 2rem))) 0.35rem;
   border-radius: 0;
   background: transparent;
   border: none;
@@ -345,17 +350,17 @@
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   text-decoration: none;
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(15 23 42 / 0.55);
   transition: color 0.15s ease;
 }
 
 .app-bottom-nav__link:hover {
-  color: rgb(255 255 255 / 0.9);
+  color: rgb(15 23 42 / 0.82);
   background: transparent;
 }
 
 .app-bottom-nav__link--active {
-  color: rgb(255 255 255 / 0.95);
+  color: rgb(15 23 42 / 0.95);
   background: transparent;
 }
 
@@ -365,7 +370,7 @@
 }
 
 .app-bottom-nav__link--post {
-  color: rgb(255 255 255 / 0.78);
+  color: rgb(15 23 42 / 0.7);
 }
 
 .app-bottom-nav__icon {
@@ -404,6 +409,25 @@
 .deepdose-shell.seco-shell--dark .app-bottom-nav__link:hover,
 .deepdose-shell.seco-shell--dark .app-bottom-nav__link--active {
   color: rgb(255 255 255 / 0.95);
+}
+
+/* Product Flow shell — light nav wins over dark marketing shell */
+.deepdose-shell.seco-shell--dark:has(.dd-product) .app-bottom-nav {
+  background: rgb(247 247 245 / 0.94);
+  border-top-color: rgb(15 23 42 / 0.08);
+}
+
+.deepdose-shell.seco-shell--dark:has(.dd-product) .app-bottom-nav__link {
+  color: rgb(15 23 42 / 0.55);
+}
+
+.deepdose-shell.seco-shell--dark:has(.dd-product) .app-bottom-nav__link:hover,
+.deepdose-shell.seco-shell--dark:has(.dd-product) .app-bottom-nav__link--active {
+  color: rgb(15 23 42 / 0.95);
+}
+
+.deepdose-shell.seco-shell--dark:has(.dd-product) .app-bottom-nav__link--post {
+  color: rgb(15 23 42 / 0.7);
 }
 
 html.splash-route .app-bottom-nav {

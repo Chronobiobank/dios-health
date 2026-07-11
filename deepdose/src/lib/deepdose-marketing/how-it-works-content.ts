@@ -1,39 +1,42 @@
-import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_NAME, DEEPDOSE_MOVEMENT, DEEPDOSE_TOKEN_ECONOMY } from '@/lib/brand/deepdose-brand'
 
-/** How it works — three steps anyone can get in seconds. */
+/** How it works — Medmaxxing · Get in Flow. */
 
 export const HOW_IT_WORKS_META = {
-  title: `How it works · ${DEEPDOSE_NAME}`,
-  description:
-    'Log Light, Meds, or Move. Get a sleep score. Sync with people on your clock.',
+  title: `${DEEPDOSE_MOVEMENT} · ${DEEPDOSE_NAME}`,
+  description: `${DEEPDOSE_MOVEMENT}. Max your med stack. ${DEEPDOSE_TOKEN_ECONOMY}`,
 } as const
 
 export const HOW_IT_WORKS_INTRO = {
-  title: 'How it works',
+  title: DEEPDOSE_MOVEMENT,
 } as const
 
+/**
+ * Token economy: Get in Flow (verb + in/out state).
+ * Max = the work · Score = the board · Flow = the hit.
+ */
 export const HOW_IT_WORKS_STEPS = [
   {
-    id: 'log',
+    id: 'max',
     badge: '1',
-    title: 'Log a dose',
-    teaser: 'Snap Light, Meds, or Move — daylight, pills, or a walk.',
+    title: 'Max',
+    teaser: 'Max your med stack — stamp Resetters, Hijackers, Crossers, or Batteries.',
     cue: '#f5e74a',
     href: '/dose',
   },
   {
     id: 'score',
     badge: '2',
-    title: 'Get your sleep score',
-    teaser: 'See how locked your nights are — out of 100.',
+    title: 'Score',
+    teaser: 'The board — nights lock when you stamp. Sleep score out of 100.',
     cue: '#acd3de',
     href: '/bank',
   },
   {
-    id: 'sync',
+    id: 'flow',
     badge: '3',
-    title: 'Sync the Grid',
-    teaser: 'Share with Larks and Owls on your clock.',
+    title: 'Flow',
+    teaser: 'Get in Flow — the tribe answers. You’re in or you’re out.',
     cue: '#ff5a5a',
     href: '/grid',
   },

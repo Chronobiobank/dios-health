@@ -1,17 +1,17 @@
 ﻿/** Deepdose marketing · public landing content. */
 
-import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_NAME, DEEPDOSE_MOVEMENT } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_VOICE } from '@/lib/brand/deepdose-voice'
 import { DEEPDOSE_RESEARCH_PAPERS } from '@/lib/deepdose-marketing/research-content'
 import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} · For dosers.`,
-  description: `${DEEPDOSE_NAME}: for dosers — log Light, Meds, and Move. Raise your sleep score.`,
+  title: `${DEEPDOSE_NAME} · Max your chemistry.`,
+  description: `${DEEPDOSE_NAME}: max your chemistry — Medmaxxing the stack, meet your clock, get in Flow.`,
 } as const
 
-export const DEEPDOSE_CVP = 'For dosers.' as const
+export const DEEPDOSE_CVP = 'Max your chemistry.' as const
 
 /** Home splash · message, face network, two doors. */
 export const DEEPDOSE_HOME_SPLASH = {
@@ -60,7 +60,7 @@ export const DEEPDOSE_MISSION = {
   eyebrow: 'Three moves',
   headlineWhite: DEEPDOSE_VOICE.missionHeadlineWhite,
   headlineAccent: DEEPDOSE_VOICE.missionHeadlineAccent,
-  headline: 'Log. Sync. Climb.',
+  headline: 'Max. Score. Flow.',
   lede: DEEPDOSE_VOICE.missionLede,
 } as const
 
@@ -88,7 +88,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'test',
       label: 'Log',
-      body: 'Light · Meds · Move',
+      body: 'Resetters · Hijackers · Crossers · Batteries',
       icon: 'test' as const,
       panelTitle: 'Your dose readout',
       panelSeeAll: { label: 'Open Chemistry', href: '/dosage' },

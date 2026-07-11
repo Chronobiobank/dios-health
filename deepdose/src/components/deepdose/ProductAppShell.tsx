@@ -12,7 +12,7 @@ type ProductAppShellProps = {
 }
 
 /**
- * Fixed product template: AppTopBar + content slot.
+ * Fixed product template: AppTopBar + OpenAI-inspired fluid column.
  * Bottom nav comes from PublicMarketingShell — do not duplicate.
  */
 export function ProductAppShell({
@@ -25,7 +25,9 @@ export function ProductAppShell({
   return (
     <article className={['seco-page seco-marketing-page dd-product', className].filter(Boolean).join(' ')}>
       <AppTopBar title={title} leading={leading} trailing={trailing} />
-      <div className="seco-landing__section-inner dd-product__inner">{children}</div>
+      <div className="seco-landing__section-inner dd-product__inner dd-oai-container">
+        <div className="dd-oai-stack">{children}</div>
+      </div>
     </article>
   )
 }

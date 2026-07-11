@@ -1,0 +1,142 @@
+/**
+ * DeepDose OpenAI-inspired layout engine.
+ *
+ * Not a copy of openai.com proprietary CSS — a proportional container + CSS Grid
+ * system in the same spirit: fluid padding, one max-width column, auto-fit
+ * grids that collapse cleanly from desktop → tablet → phone.
+ *
+ * Use on product routes via .dd-product / .dd-oai-*.
+ */
+
+:root {
+  /* Fluid page chrome — scales with viewport, not fixed rem breakpoints */
+  --oai-page-pad: clamp(1rem, 0.65rem + 2.2vw, 2rem);
+  --oai-page-max: 48rem; /* app column; marketing keeps --page-max-marketing */
+  --oai-page-max-wide: 64rem;
+  --oai-gap: clamp(0.75rem, 0.45rem + 1.1vw, 1.5rem);
+  --oai-gap-tight: clamp(0.5rem, 0.35rem + 0.6vw, 0.75rem);
+  --oai-gap-loose: clamp(1rem, 0.65rem + 1.4vw, 2rem);
+  --oai-stack: clamp(1.25rem, 0.85rem + 1.6vw, 2rem);
+  --oai-radius: 0.5rem;
+  /* Auto-fit floors — cards grow/shrink; columns drop when too narrow */
+  --oai-min-2: min(100%, 17rem);
+  --oai-min-3: min(100%, 13rem);
+  --oai-min-4: min(100%, 9.5rem);
+}
+
+/* ── Container: one proportional column ── */
+
+.dd-oai-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--oai-page-max);
+  margin-inline: auto;
+  padding-inline: var(--oai-page-pad);
+  min-width: 0;
+}
+
+.dd-oai-container--wide {
+  max-width: var(--oai-page-max-wide);
+}
+
+.dd-oai-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--oai-stack);
+  width: 100%;
+  min-width: 0;
+}
+
+/* ── 12-col grid (explicit spans when needed) ── */
+
+.dd-oai-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--oai-gap);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-oai-grid--tight {
+  gap: var(--oai-gap-tight);
+}
+
+.dd-oai-grid--loose {
+  gap: var(--oai-gap-loose);
+}
+
+.dd-oai-span-1 { grid-column: span 1; }
+.dd-oai-span-2 { grid-column: span 2; }
+.dd-oai-span-3 { grid-column: span 3; }
+.dd-oai-span-4 { grid-column: span 4; }
+.dd-oai-span-5 { grid-column: span 5; }
+.dd-oai-span-6 { grid-column: span 6; }
+.dd-oai-span-7 { grid-column: span 7; }
+.dd-oai-span-8 { grid-column: span 8; }
+.dd-oai-span-9 { grid-column: span 9; }
+.dd-oai-span-10 { grid-column: span 10; }
+.dd-oai-span-11 { grid-column: span 11; }
+.dd-oai-span-12 { grid-column: span 12; }
+
+/* ── Auto-fit grids — proportional across devices ── */
+
+.dd-oai-auto-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--oai-min-2), 1fr));
+  gap: var(--oai-gap);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-oai-auto-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--oai-min-3), 1fr));
+  gap: var(--oai-gap);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-oai-auto-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--oai-min-4), 1fr));
+  gap: var(--oai-gap-tight);
+  width: 100%;
+  min-width: 0;
+}
+
+/* Phone: force single column when auto-fit would squeeze too hard */
+@media (max-width: 360px) {
+  .dd-oai-auto-3,
+  .dd-oai-auto-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .dd-oai-span-sm-12 {
+    grid-column: span 12;
+  }
+
+  .dd-oai-span-sm-6 {
+    grid-column: span 6;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 960px) {
+  .dd-oai-span-md-6 {
+    grid-column: span 6;
+  }
+
+  .dd-oai-span-md-12 {
+    grid-column: span 12;
+  }
+}
+
+/* Align product inner with the same pad/max engine */
+.dd-product.seco-marketing-page .seco-landing__section-inner.dd-product__inner {
+  --seco-page-max: var(--oai-page-max);
+  --seco-page-pad: var(--oai-page-pad);
+  max-width: var(--oai-page-max);
+  padding-inline: var(--oai-page-pad);
+  gap: var(--oai-stack);
+}
