@@ -270,7 +270,7 @@
   cursor: not-allowed;
 }
 
-/* Profile Real grid */
+/* Profile dose grid — light product tokens */
 
 .dd-profile__reals {
   display: flex;
@@ -282,14 +282,14 @@
 
 .dd-profile__reals-title {
   margin: 0;
-  font-size: 0.9375rem;
-  color: rgb(255 255 255 / 0.92);
+  font-size: var(--dd-type-body, 0.9375rem);
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
 }
 
 .dd-profile__reals-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.35rem;
+  gap: var(--dd-gap-tight, 0.35rem);
   width: 100%;
   min-width: 0;
 }
@@ -298,9 +298,10 @@
   position: relative;
   display: block;
   aspect-ratio: 1 / 1;
-  border-radius: 0.35rem;
+  border-radius: var(--dd-radius, 0.35rem);
   overflow: hidden;
-  background: rgb(255 255 255 / 0.06);
+  background: var(--dd-surface-strong, rgb(15 23 42 / 0.07));
+  border: 1px solid var(--dd-border, rgb(15 23 42 / 0.1));
   text-decoration: none;
 }
 
@@ -313,29 +314,28 @@
 
 .dd-profile__reals-empty {
   margin: 0;
-  font-size: 0.875rem;
-  color: rgb(255 255 255 / 0.48);
+  font-size: var(--dd-type-body, 0.875rem);
+  color: var(--dd-ink-dim, rgb(15 23 42 / 0.48));
 }
 
 .dd-profile__reals-empty a {
-  color: rgb(255 255 255 / 0.88);
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
   text-decoration: underline;
   text-underline-offset: 0.18em;
 }
 
 .dd-profile__chem-link {
-  display: block;
-  width: 100%;
+  display: inline-flex;
   margin: 0;
   padding: 0;
   border: 0;
   background: transparent;
-  color: rgb(255 255 255 / 0.55);
-  font-size: 0.875rem;
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+  font-size: var(--dd-type-body, 0.875rem);
   text-align: left;
   text-decoration: none;
 }
 
 .dd-profile__chem-link:hover {
-  color: rgb(255 255 255 / 0.88);
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
 }

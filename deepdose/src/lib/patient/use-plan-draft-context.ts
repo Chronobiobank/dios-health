@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { buildLoginPathForMeds } from '@/lib/medications/home-to-onboarding'
 import { buildDemoPlanContext } from '@/lib/patient/patient-landing-defaults'
@@ -11,6 +11,7 @@ import {
   savePlanDraft,
   type PlanContextFromDraft,
 } from '@/lib/patient/plan-draft'
+import { useIsClient } from '@/lib/react/use-is-client'
 
 type UsePlanDraftContextArgs = {
   urlPlanContext?: PlanContextFromDraft
@@ -21,27 +22,24 @@ export function usePlanDraftContext({
   urlPlanContext,
   signupHrefFromUrl,
 }: UsePlanDraftContextArgs) {
-  const [draftPlan, setDraftPlan] = useState<PlanContextFromDraft | null>(null)
-  const [ready, setReady] = useState(false)
+  const isClient = useIsClient()
 
   useEffect(() => {
-    if (urlPlanContext) {
-      savePlanDraft({
-        medCodes: urlPlanContext.medCodes,
-        medTimes: urlPlanContext.medTimes ?? [],
-        wake: urlPlanContext.wake,
-      })
-      setReady(true)
-      return
-    }
-
-    const draft = readPlanDraft()
-    if (draft) {
-      setDraftPlan(buildPlanContextFromDraft(draft))
-    }
-    setReady(true)
+    if (!urlPlanContext) return
+    savePlanDraft({
+      medCodes: urlPlanContext.medCodes,
+      medTimes: urlPlanContext.medTimes ?? [],
+      wake: urlPlanContext.wake,
+    })
   }, [urlPlanContext])
 
+  const draftPlan = useMemo(() => {
+    if (urlPlanContext || !isClient) return null
+    const draft = readPlanDraft()
+    return draft ? buildPlanContextFromDraft(draft) : null
+  }, [urlPlanContext, isClient])
+
+  const ready = Boolean(urlPlanContext) || isClient
   const planContext = urlPlanContext ?? draftPlan ?? buildDemoPlanContext()
 
   const signupHref = planContext

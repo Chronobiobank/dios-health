@@ -1,14 +1,10 @@
 /**
- * Realme flat layouts — Grid / Log / Bank / Me.
+ * Realme flat layouts — Feed / Log / Friends / Score / Me.
  * All values come from .dd-product tokens in deepdose-product-space.css.
  * Do not add raw hex / rem here.
  */
 
-.app-bottom-nav__list--4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-/* ── Grid ── */
+/* ── Feed ── */
 
 .dd-grid {
   display: flex;
@@ -26,6 +22,10 @@
   border: 1px solid var(--dd-border-strong);
   border-radius: var(--dd-radius);
   overflow: hidden;
+}
+
+.dd-grid__tiptraq {
+  margin: 0;
 }
 
 .dd-grid__tab {
@@ -53,6 +53,12 @@
   margin: 0;
   color: var(--dd-ink-faint);
   font-size: var(--dd-type-body);
+}
+
+.dd-grid__empty a {
+  color: var(--dd-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
 }
 
 .dd-grid__card {
@@ -348,6 +354,60 @@
   font-size: var(--dd-type-sm);
   color: var(--dd-ink-muted);
   text-align: center;
+}
+
+.dd-score-tiptraq {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  margin-top: var(--dd-3);
+  max-width: 22rem;
+  text-decoration: none;
+  text-align: left;
+}
+
+.dd-score-tiptraq__label {
+  font-size: var(--dd-type-body);
+  font-weight: 500;
+  color: var(--dd-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.dd-score-tiptraq__hint {
+  font-size: var(--dd-type-sm);
+  color: var(--dd-ink-faint);
+  line-height: 1.35;
+}
+
+.dd-score-tiptraq--compact {
+  display: inline-flex;
+  margin-top: var(--dd-2);
+  font-size: var(--dd-type-md);
+  color: var(--dd-ink-muted);
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.dd-score-tiptraq--compact:hover,
+.dd-score-tiptraq:hover .dd-score-tiptraq__label {
+  color: var(--dd-ink);
+}
+
+.dd-bank__tiptraq {
+  align-self: center;
+  text-align: center;
+  align-items: center;
+}
+
+.dd-profile__tiptraq {
+  width: 100%;
+  margin-top: var(--dd-2);
+}
+
+.dd-log__tiptraq {
+  align-self: flex-start;
 }
 
 .dd-bank__section-title {

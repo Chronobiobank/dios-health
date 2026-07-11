@@ -16,6 +16,8 @@ import {
   IconShare,
   ProductIconAction,
 } from '@/components/deepdose/ProductIconAction'
+import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
+import { SLEEP_SCORE } from '@/lib/brand/sleep-score'
 
 type SocialProfileViewProps = {
   medCodes: string[]
@@ -55,7 +57,6 @@ function readFileAsDataUrl(file: File): Promise<string> {
 }
 
 export function SocialProfileView({
-  medCodes: _medCodes,
   medTimes = [],
   wake,
 }: SocialProfileViewProps) {
@@ -146,7 +147,7 @@ export function SocialProfileView({
           <div className="dd-profile__stats" role="group" aria-label="Profile metrics">
             <div className="dd-profile__stat">
               <p className="dd-profile__stat-value tabular-nums">{sri}</p>
-              <p className="dd-profile__stat-label">Sleep score</p>
+              <p className="dd-profile__stat-label">{SLEEP_SCORE.label}</p>
             </div>
             <div className="dd-profile__stat">
               <p className="dd-profile__stat-value tabular-nums">
@@ -162,6 +163,8 @@ export function SocialProfileView({
             </div>
           </div>
         </div>
+
+        <SleepScoreTipTraqLink className="dd-profile__tiptraq" />
 
         <div className="dd-profile__copy">
           <div className="dd-profile__name-row">
@@ -240,6 +243,9 @@ export function SocialProfileView({
       </section>
 
       <div className="dd-profile__me-links">
+        <Link href="/connect" className="dd-profile__chem-link">
+          Friends
+        </Link>
         <Link href="/bank" className="dd-profile__chem-link">
           Score
         </Link>
@@ -247,7 +253,7 @@ export function SocialProfileView({
           Chemistry
         </Link>
         <Link href="/testkit" className="dd-profile__chem-link">
-          TipTraQ
+          TipTraQ early-risk
         </Link>
         <Link href="/chat" className="dd-profile__chem-link">
           Chat

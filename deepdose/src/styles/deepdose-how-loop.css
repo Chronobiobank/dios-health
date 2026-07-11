@@ -11,8 +11,8 @@
 
 .seco-how-page .seco-how-page__inner {
   box-sizing: border-box;
-  width: min(100%, 36rem);
-  max-width: 36rem;
+  width: min(100%, 40rem);
+  max-width: 40rem;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
@@ -32,12 +32,11 @@
   margin-inline: auto;
 }
 
-/* Under-orbit copy — shared seco-page__title / __lede; centered measure */
+/* Under-orbit — title only; story lives in tiles */
 .seco-how-page__why {
   box-sizing: border-box;
   width: min(100%, 36rem);
-  max-width: 62ch;
-  margin: 0.5rem auto 0;
+  margin: 0.25rem auto 0;
   text-align: center;
 }
 
@@ -46,17 +45,59 @@
   text-align: center;
 }
 
-.seco-how-page__why .seco-page__lede {
-  margin-block: var(--mkt-hero-lede-gap);
-  margin-inline: auto;
-  max-width: 62ch;
-  text-align: center;
+/* Pain → what we do → why care */
+.seco-how-page__story {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  text-align: left;
 }
 
-.seco-how-page__why .seco-chronobiobank__section-sub {
-  margin: 0 auto;
-  max-width: 62ch;
-  text-align: center;
+@media (min-width: 640px) {
+  .seco-how-page__story {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+}
+
+.seco-how-page__story-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  margin: 0;
+  padding: 1rem 0.875rem;
+  border: 1px solid rgb(15 23 42 / 0.1);
+  border-radius: var(--seco-radius-lg, 0.75rem);
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+  box-sizing: border-box;
+}
+
+.seco-how-page__story-label {
+  margin: 0;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(15 23 42 / 0.48);
+}
+
+.seco-how-page__story-body {
+  margin: 0;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(0.9375rem, 0.88rem + 0.35vw, 1.0625rem);
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: rgb(15 23 42 / 0.88);
+  overflow-wrap: anywhere;
 }
 
 .dd-how-loop-wrap {

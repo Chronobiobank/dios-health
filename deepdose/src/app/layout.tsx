@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { siteFontVariableClasses } from '@/lib/fonts/site-fonts'
 import { SiteJsonLd } from '@/components/seo/SiteJsonLd'
 import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'

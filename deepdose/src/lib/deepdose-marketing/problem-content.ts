@@ -1,8 +1,8 @@
-﻿/** Legacy /problem → Mission. Keep href helpers for old links. */
+﻿/** Legacy /problem → Why Medmaxxing (/how). Keep href helpers for old links. */
 
-export const PROBLEM_PAGE_HREF = '/mission' as const
+export const PROBLEM_PAGE_HREF = '/how' as const
 
 export const PROBLEM_PAGE_HOME_LINK = {
-  label: 'Mission',
+  label: 'Why Medmaxxing?',
   href: PROBLEM_PAGE_HREF,
 } as const

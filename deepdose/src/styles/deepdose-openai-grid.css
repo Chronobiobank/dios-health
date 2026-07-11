@@ -422,3 +422,98 @@
 .deepdose-shell.seco-shell--light .seco-app-page .text-ink-faint {
   color: rgb(15 23 42 / 0.48);
 }
+
+/*
+ * Hard ink lock on light shell — never white type on #f7f7f5 / white tiles.
+ * Beats leftover dark-era marketing CSS (letter tiles, hero “white” lines, kit copy).
+ */
+.deepdose-shell.seco-shell--light .seco-landing__hero-line--white,
+.deepdose-shell.seco-shell--light .seco-landing__hero-line {
+  color: rgb(15 23 42 / 0.92) !important;
+  -webkit-text-fill-color: rgb(15 23 42 / 0.92) !important;
+  background: none !important;
+}
+
+.deepdose-shell.seco-shell--light .seco-chronobiobank__letter-tile {
+  border-color: rgb(15 23 42 / 0.1) !important;
+  background: #fff !important;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+}
+
+.deepdose-shell.seco-shell--light .seco-chronobiobank__letter-tile-label {
+  color: rgb(15 23 42 / 0.48) !important;
+}
+
+.deepdose-shell.seco-shell--light .seco-chronobiobank__letter-tile-body {
+  color: rgb(15 23 42 / 0.88) !important;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page :is(
+  .seco-hometest__kit-title,
+  .seco-hometest__kit-eyebrow,
+  .seco-hometest__kit-lede,
+  .seco-hometest__check-item,
+  .seco-pricing__lede,
+  .seco-technology__lede,
+  .seco-chronobiobank__lede,
+  .seco-science__lede,
+  .seco-page__lede,
+  .seco-chronobiobank__section-sub,
+  .seco-science-fold__teaser,
+  .seco-spectrum-tile__body,
+  .seco-spectrum-tile__lead,
+  .seco-spectrum-tile__title,
+  .seco-spectrum-tile__cue,
+  .seco-founder-quote__text,
+  .seco-founder-quote__name,
+  .seco-founder-quote__role,
+  .seco-founder-quote__grounding
+) {
+  -webkit-text-fill-color: unset;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page :is(
+  .seco-hometest__kit-title,
+  .seco-spectrum-tile__title,
+  .seco-founder-quote__name,
+  .seco-founder-quote__text
+) {
+  color: rgb(15 23 42 / 0.92) !important;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page :is(
+  .seco-hometest__kit-lede,
+  .seco-hometest__check-item,
+  .seco-pricing__lede,
+  .seco-technology__lede,
+  .seco-chronobiobank__lede,
+  .seco-science__lede,
+  .seco-page__lede,
+  .seco-founder-quote__role,
+  .seco-founder-quote__grounding
+) {
+  color: rgb(15 23 42 / 0.62) !important;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page :is(
+  .seco-hometest__kit-eyebrow,
+  .seco-chronobiobank__section-sub,
+  .seco-spectrum-tile__cue
+) {
+  color: rgb(15 23 42 / 0.48) !important;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page .seco-hometest__check {
+  color: rgb(15 23 42 / 0.72);
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page a:not(.seco-landing__btn):not(.dd-connect__message) {
+  -webkit-text-fill-color: unset;
+}
+
+/* Primary CTAs stay dark button + light label (intentional contrast) */
+.deepdose-shell.seco-shell--light .seco-landing__btn--primary {
+  color: #f8f8f6 !important;
+  -webkit-text-fill-color: #f8f8f6 !important;
+}

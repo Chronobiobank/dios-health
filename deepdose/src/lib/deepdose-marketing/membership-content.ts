@@ -20,9 +20,7 @@ export const MEMBERSHIP_PAGE_META = {
 } as const
 
 export const MEMBERSHIP_PAGE_INTRO = {
-  eyebrow: 'Membership',
-  titleWhite: 'Free forever.',
-  titleAccent: 'Upgrade for more.',
+  title: 'Free forever.',
   lede:
     'Max your chemistry. TipTraQ when you want a stronger sleep read.',
 } as const

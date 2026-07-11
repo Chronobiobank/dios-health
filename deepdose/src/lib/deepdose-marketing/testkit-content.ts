@@ -9,10 +9,8 @@ export const TESTKIT_META = {
 } as const
 
 export const TESTKIT_INTRO = {
-  eyebrow: 'Testkit',
-  titleWhite: 'Three nights.',
-  titleAccent: 'Clearer chemistry.',
-  lede: `Odd hours and stacked chemistry need a stronger read than a phone alone. Wear TipTraQ at home for three nights. ${DEEPDOSE_NAME} turns the nights into clearer rhythm details you can understand, share, and correct with people on a similar clock.`,
+  title: 'Three nights. Clearer chemistry.',
+  lede: `Odd hours need a stronger read than a phone alone. Wear TipTraQ at home for three nights. ${DEEPDOSE_NAME} turns those nights into clearer rhythm details you can understand, share, and correct with people on a similar clock.`,
 } as const
 
 export const TESTKIT_KIT = {

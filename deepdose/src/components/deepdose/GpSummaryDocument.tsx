@@ -1,11 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import Link from 'next/link'
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { LANDING_GP_HANDOFF_COPY } from '@/lib/deepdose-marketing/landing-content'
-import { readGpHandoffSnapshot, type GpHandoffSnapshot } from '@/lib/patient/gp-handoff-storage'
+import { readGpHandoffSnapshot } from '@/lib/patient/gp-handoff-storage'
+import { useIsClient } from '@/lib/react/use-is-client'
 
 function formatGeneratedAt(iso: string): string {
   return new Intl.DateTimeFormat('en-GB', {
@@ -15,13 +16,11 @@ function formatGeneratedAt(iso: string): string {
 }
 
 export function GpSummaryDocument() {
-  const [snapshot, setSnapshot] = useState<GpHandoffSnapshot | null>(null)
-  const [ready, setReady] = useState(false)
-
-  useEffect(() => {
-    setSnapshot(readGpHandoffSnapshot())
-    setReady(true)
-  }, [])
+  const ready = useIsClient()
+  const snapshot = useMemo(
+    () => (ready ? readGpHandoffSnapshot() : null),
+    [ready]
+  )
 
   if (!ready) return null
 

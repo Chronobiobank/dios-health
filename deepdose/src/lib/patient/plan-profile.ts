@@ -28,7 +28,8 @@ export function readPlanProfile(): PlanProfile {
 export function writePlanProfile(next: PlanProfile): void {
   if (typeof window === 'undefined') return
   try {
-    const { displayName: _legacy, ...rest } = next
+    const rest = { ...next }
+    delete rest.displayName
     localStorage.setItem(PLAN_PROFILE_STORAGE_KEY, JSON.stringify(rest))
   } catch {
     /* quota or private mode */

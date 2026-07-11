@@ -7,7 +7,6 @@ import assert from 'node:assert/strict'
 import { DEEPDOSE_HOME_DEFAULT_MED_CODES } from '../src/lib/deepdose-marketing/landing-content'
 import {
   buildConsentOnboardingPath,
-  buildLoginPathForMeds,
   buildPatientLandingPath,
   earliestTakeTime,
   parseMedsOnboardingParams,

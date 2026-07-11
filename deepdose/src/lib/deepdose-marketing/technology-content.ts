@@ -5,7 +5,6 @@ import { BODY_CLOCK_LAYERS, PROXY_DLMO_METHODOLOGY } from '@/lib/circadian/body-
 import { DLMO_PROXY_VERSION } from '@/lib/circadian/dlmo'
 import {
   CHRONOBIOBANK_SCIENCE_HREF,
-  TECHNOLOGY_DLMO_PROXY_HREF,
 } from '@/lib/deepdose-marketing/site-nav-links'
 
 export const TECHNOLOGY_HUB_CTA = {

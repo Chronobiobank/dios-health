@@ -53,11 +53,9 @@ export function LandingGpHandoffPanel({ analysis, medNames }: LandingGpHandoffPa
           </button>
         ) : null}
 
-        {analysis.suggestTipTraq ? (
-          <Link href="/testkit" className="sw-gp-handoff__secondary">
-            {LANDING_GP_HANDOFF_COPY.tiptraqCta}
-          </Link>
-        ) : null}
+        <Link href="/testkit" className="sw-gp-handoff__secondary">
+          {LANDING_GP_HANDOFF_COPY.tiptraqCta}
+        </Link>
 
         {!analysis.suggestGpReview ? (
           <button type="button" className="sw-gp-handoff__secondary" onClick={handleShareWithGp}>

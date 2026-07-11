@@ -1,14 +1,7 @@
-/* Connect — marketing hero type + rounded tile matrix of matches. */
+/* Friends / Connect — light product shell (--dd-* tokens). */
 
 .dd-connect {
-  --dd-connect-text: #f2f2f2;
-  --dd-connect-muted: rgb(242 242 242 / 0.58);
-  --dd-connect-faint: rgb(242 242 242 / 0.4);
-  --dd-connect-line: rgb(255 255 255 / 0.1);
-  --dd-connect-tile: rgb(255 255 255 / 0.05);
-  --dd-connect-radius: var(--seco-radius-lg, 1.125rem);
-
-  color: var(--dd-connect-text);
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
   min-height: calc(100dvh - var(--app-bottom-nav-h) - env(safe-area-inset-bottom, 0px));
 }
 
@@ -17,7 +10,7 @@
   --seco-page-max: var(--page-max-app, 48rem);
   width: 100%;
   max-width: var(--seco-page-max);
-  gap: var(--mkt-section-gap);
+  gap: var(--dd-stack, var(--mkt-section-gap));
   padding-bottom: calc(var(--app-bottom-nav-h) + env(safe-area-inset-bottom, 0px));
 }
 
@@ -25,9 +18,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem 1rem;
-  padding-bottom: 0.65rem;
-  border-bottom: 1px solid var(--dd-connect-line);
+  gap: var(--dd-gap, 0.5rem) var(--dd-gap-loose, 1rem);
+  padding-bottom: var(--dd-3, 0.65rem);
+  border-bottom: 1px solid var(--dd-border, rgb(15 23 42 / 0.1));
   width: 100%;
   min-width: 0;
 }
@@ -43,28 +36,46 @@
 
 .dd-connect__inbox-link {
   flex-shrink: 0;
-  font-family: var(--seco-font-ui);
-  font-size: var(--mkt-tile-body-size, 0.9375rem);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: var(--dd-type-body, 0.9375rem);
   font-weight: 500;
-  color: #fff;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
   text-decoration: underline;
   text-underline-offset: 0.18em;
 }
 
 .dd-connect__inbox-link:hover {
-  color: var(--seco-spectrum-cyan, #acd3de);
+  color: var(--dd-ink-soft, rgb(15 23 42 / 0.78));
+}
+
+.dd-connect__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-stack, 1rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-connect__lede {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: var(--dd-type-body, 0.9375rem);
+  font-weight: 300;
+  line-height: 1.45;
 }
 
 .dd-connect__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: var(--dd-gap, 0.75rem);
 }
 
 @media (min-width: 720px) {
   .dd-connect__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.9rem;
+    gap: var(--dd-gap-loose, 0.9rem);
   }
 }
 
@@ -73,9 +84,9 @@
   flex-direction: column;
   min-width: 0;
   max-width: 100%;
-  border-radius: var(--dd-connect-radius);
-  border: 1px solid var(--dd-connect-line);
-  background: var(--dd-connect-tile);
+  border-radius: var(--dd-radius, 0.5rem);
+  border: 1px solid var(--dd-border, rgb(15 23 42 / 0.1));
+  background: var(--dd-surface, rgb(15 23 42 / 0.035));
   overflow: hidden;
 }
 
@@ -94,7 +105,7 @@
   width: 100%;
   max-width: 100%;
   border-radius: 0;
-  background-color: rgb(255 255 255 / 0.06);
+  background-color: var(--dd-surface-strong, rgb(15 23 42 / 0.07));
   background-size: cover;
   background-position: center;
   border: 0;
@@ -104,10 +115,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: var(--dd-gap, 0.5rem);
   min-width: 0;
   max-width: 100%;
-  padding: 0.55rem 0.65rem 0.65rem;
+  padding: var(--dd-3, 0.55rem) var(--dd-4, 0.65rem) var(--dd-4, 0.65rem);
   overflow: hidden;
 }
 
@@ -116,10 +127,10 @@
   min-width: 0;
   flex: 1 1 auto;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: 0.875rem;
+  font-size: var(--dd-type-body, 0.875rem);
   font-weight: 400;
   letter-spacing: -0.015em;
-  color: rgb(255 255 255 / 0.92);
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
   text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -128,21 +139,21 @@
 }
 
 .dd-connect__name:hover {
-  color: var(--seco-spectrum-cyan, #acd3de);
+  color: var(--dd-ink-soft, rgb(15 23 42 / 0.78));
 }
 
 .dd-connect__pct-value {
   background: none;
   -webkit-background-clip: unset;
   background-clip: unset;
-  -webkit-text-fill-color: rgb(255 255 255 / 0.92);
-  color: rgb(255 255 255 / 0.92);
+  -webkit-text-fill-color: var(--dd-ink, rgb(15 23 42 / 0.92));
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
   font-weight: 400;
 }
 
 .dd-connect__pct-label {
-  color: var(--dd-connect-muted);
-  -webkit-text-fill-color: var(--dd-connect-muted);
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+  -webkit-text-fill-color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
 }
 
 .dd-connect__message {
@@ -154,11 +165,11 @@
   min-height: 1.85rem;
   padding: 0.3rem 0.75rem;
   border: 0;
-  border-radius: 999px;
-  background: #fff;
-  color: #0b1220;
+  border-radius: var(--dd-radius-pill, 999px);
+  background: var(--dd-solid, #0f172a);
+  color: var(--dd-ink-inverse, #f8f8f6);
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: 0.75rem;
+  font-size: var(--dd-type-sm, 0.75rem);
   font-weight: 400;
   letter-spacing: -0.01em;
   text-decoration: none;
@@ -178,30 +189,33 @@
   }
 }
 
-/* Full match profile — detail lives here, not on the grid tile */
+/* Full match profile */
 .dd-connect-profile__back {
   margin: 0;
-  font-size: var(--mkt-tile-body-size, 0.875rem);
+  font-size: var(--dd-type-body, 0.875rem);
 }
 
 .dd-connect-profile__back a {
-  color: rgb(255 255 255 / 0.7);
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
   text-decoration: underline;
   text-underline-offset: 0.18em;
 }
 
 .dd-connect-profile__back a:hover {
-  color: #fff;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
 }
 
 .dd-connect-profile__card {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: var(--dd-gap-loose, 0.85rem);
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  --cue: #acd3de;
+  --cue: #3d8fa0;
+  border: 1px solid var(--dd-border, rgb(15 23 42 / 0.1));
+  border-radius: var(--dd-radius, 0.5rem);
+  background: var(--dd-surface, rgb(15 23 42 / 0.035));
 }
 
 .dd-connect-profile__face {
@@ -209,8 +223,8 @@
   width: 100%;
   max-width: 100%;
   aspect-ratio: 4 / 5;
-  border-radius: var(--seco-radius-md, 0.875rem);
-  background-color: rgb(255 255 255 / 0.06);
+  border-radius: var(--dd-radius, 0.5rem);
+  background-color: var(--dd-surface-strong, rgb(15 23 42 / 0.07));
   background-size: cover;
   background-position: center;
 }
@@ -218,14 +232,18 @@
 .dd-connect-profile__copy {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: var(--dd-gap-tight, 0.35rem);
   min-width: 0;
   max-width: 100%;
 }
 
 .dd-connect-profile__name {
   display: block;
-  font-size: clamp(1.75rem, 1rem + 3vw, 2.75rem);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(1.5rem, 1rem + 2.2vw, 2.25rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -241,26 +259,26 @@
 }
 
 .dd-connect-profile__location {
-  font-size: var(--mkt-tile-body-size, 0.9375rem);
-  color: rgb(255 255 255 / 0.55);
+  font-size: var(--dd-type-body, 0.9375rem);
+  color: var(--dd-ink-dim, rgb(15 23 42 / 0.48));
 }
 
 .dd-connect-profile__pct {
-  font-size: var(--mkt-tile-body-size, 0.9375rem);
-  color: var(--dd-connect-muted);
+  font-size: var(--dd-type-body, 0.9375rem);
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
 }
 
 .dd-connect-profile__journey {
-  margin-top: 0.35rem;
-  font-family: var(--seco-font-ui);
-  font-size: var(--mkt-hero-lede-size, 1.0625rem);
+  margin-top: var(--dd-gap-tight, 0.35rem);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: var(--dd-type-lg, 1rem);
   font-weight: 300;
   line-height: 1.45;
-  color: rgb(255 255 255 / 0.78);
+  color: var(--dd-ink-soft, rgb(15 23 42 / 0.78));
 }
 
 .dd-connect-profile__message {
-  margin-top: 0.75rem;
+  margin-top: var(--dd-3, 0.75rem);
   width: auto;
   max-width: max-content;
   align-self: flex-start;

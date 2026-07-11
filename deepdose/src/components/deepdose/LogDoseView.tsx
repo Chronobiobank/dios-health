@@ -1,9 +1,9 @@
 'use client'
 
-import { useMemo, useRef, useState, type ChangeEvent, type CSSProperties } from 'react'
+import { useMemo, useRef, useState, useEffect, type ChangeEvent, type CSSProperties } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
 
+import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import { computeScheduleSri } from '@/lib/circadian/sri-engine'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
 import {
@@ -44,6 +44,7 @@ export function LogDoseView() {
   const { saveDose, hasTagToday, ready: dosesReady } = usePatientDoses()
   const [pendingTag, setPendingTag] = useState<DoseTag | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [handledQueryTag, setHandledQueryTag] = useState<DoseTag | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const bodyClock = useMemo(
@@ -55,20 +56,25 @@ export function LogDoseView() {
     [bodyClock.sleepOnsetLabel, bodyClock.wakeLabel]
   )
 
+  const queryTag = parseDoseTag(searchParams.get('tag'))
+  if (queryTag && dosesReady && profile.ready && handledQueryTag !== queryTag) {
+    setHandledQueryTag(queryTag)
+    setPendingTag(queryTag)
+    setError(null)
+  }
+
+  // Return from Chemistry with ?tag=RESETTER (etc.) → open file picker once tag is pending
+  useEffect(() => {
+    if (!handledQueryTag || pendingTag !== handledQueryTag) return
+    const id = requestAnimationFrame(() => inputRef.current?.click())
+    return () => cancelAnimationFrame(id)
+  }, [handledQueryTag, pendingTag])
+
   function openCamera(tag: DoseTag) {
     setPendingTag(tag)
     setError(null)
     requestAnimationFrame(() => inputRef.current?.click())
   }
-
-  // Return from Chemistry with ?tag=RESETTER (etc.) → log photo for the feed
-  useEffect(() => {
-    const tag = parseDoseTag(searchParams.get('tag'))
-    if (tag && dosesReady && profile.ready) {
-      openCamera(tag)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-shot from query
-  }, [searchParams, dosesReady, profile.ready])
 
   async function handlePick(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
@@ -145,6 +151,7 @@ export function LogDoseView() {
       <p className="dd-log__stamp tabular-nums">
         Sleep score {sri} · Off {bodyClock.sleepOnsetLabel} · On {bodyClock.wakeLabel}
       </p>
+      <SleepScoreTipTraqLink compact className="dd-log__tiptraq" />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { PATIENT_LANDING_DEMO } from '@/lib/patient/patient-landing-defaults'
 import {
@@ -9,6 +9,7 @@ import {
   writePlanProfile,
   type PlanProfile,
 } from '@/lib/patient/plan-profile'
+import { useIsClient } from '@/lib/react/use-is-client'
 
 function isFounderSampleName(first: string, family: string, legacy?: string): boolean {
   const full = `${first} ${family}`.trim().toLowerCase()
@@ -16,106 +17,165 @@ function isFounderSampleName(first: string, family: string, legacy?: string): bo
   return full === 'grant munro' || legacyFull === 'grant munro'
 }
 
+function resolveStoredProfile() {
+  const stored = readPlanProfile()
+  const storedFirst = stored.firstName?.trim() || stored.displayName?.trim() || ''
+  const storedFamily = stored.familyName?.trim() || ''
+  const useDemo =
+    !storedFirst || isFounderSampleName(storedFirst, storedFamily, stored.displayName)
+
+  const firstName = useDemo ? PATIENT_LANDING_DEMO.firstName : storedFirst
+  const familyName = useDemo ? PATIENT_LANDING_DEMO.familyName : storedFamily
+  const location = stored.location?.trim() || PATIENT_LANDING_DEMO.location
+  const journey = stored.journey?.trim() || PATIENT_LANDING_DEMO.journey
+  const avatarUrl = stored.avatarUrl ?? null
+  const wake = stored.wake ?? null
+  const needsPersist =
+    useDemo || !stored.location?.trim() || !stored.journey?.trim()
+
+  return {
+    firstName,
+    familyName,
+    location,
+    journey,
+    avatarUrl,
+    wake,
+    needsPersist,
+    persistPayload: {
+      ...stored,
+      firstName,
+      familyName,
+      location,
+      journey,
+      displayName: undefined,
+    } satisfies PlanProfile,
+  }
+}
+
 export function usePatientPlanProfile(initialWake: string | null) {
-  const [firstName, setFirstNameState] = useState('')
-  const [familyName, setFamilyNameState] = useState('')
-  const [avatarUrl, setAvatarUrlState] = useState<string | null>(null)
-  const [location, setLocationState] = useState('')
-  const [journey, setJourneyState] = useState('')
-  const [wakeOverride, setWakeOverrideState] = useState<string | null>(null)
-  const [ready, setReady] = useState(false)
+  const isClient = useIsClient()
+  const [epoch, setEpoch] = useState(0)
+  const didPersistDefaults = useRef(false)
+
+  const resolved = useMemo(() => {
+    if (!isClient) {
+      return {
+        firstName: '',
+        familyName: '',
+        location: '',
+        journey: '',
+        avatarUrl: null as string | null,
+        wake: null as string | null,
+      }
+    }
+    void epoch
+    const next = resolveStoredProfile()
+    return {
+      firstName: next.firstName,
+      familyName: next.familyName,
+      location: next.location,
+      journey: next.journey,
+      avatarUrl: next.avatarUrl,
+      wake: next.wake,
+      needsPersist: next.needsPersist,
+      persistPayload: next.persistPayload,
+    }
+  }, [isClient, epoch])
 
   useEffect(() => {
-    const stored = readPlanProfile()
-    const storedFirst = stored.firstName?.trim() || stored.displayName?.trim() || ''
-    const storedFamily = stored.familyName?.trim() || ''
-    const useDemo =
-      !storedFirst ||
-      isFounderSampleName(storedFirst, storedFamily, stored.displayName)
+    if (!isClient || didPersistDefaults.current) return
+    const next = resolveStoredProfile()
+    if (next.needsPersist) writePlanProfile(next.persistPayload)
+    didPersistDefaults.current = true
+  }, [isClient])
 
-    const nextFirst = useDemo ? PATIENT_LANDING_DEMO.firstName : storedFirst
-    const nextFamily = useDemo ? PATIENT_LANDING_DEMO.familyName : storedFamily
-    const nextLocation = stored.location?.trim() || PATIENT_LANDING_DEMO.location
-    const nextJourney = stored.journey?.trim() || PATIENT_LANDING_DEMO.journey
+  const bump = useCallback(() => setEpoch((n) => n + 1), [])
 
-    setFirstNameState(nextFirst)
-    setFamilyNameState(nextFamily)
-    if (stored.avatarUrl) setAvatarUrlState(stored.avatarUrl)
-    setLocationState(nextLocation)
-    setJourneyState(nextJourney)
-    if (stored.wake) setWakeOverrideState(stored.wake)
+  const setFirstName = useCallback(
+    (value: string) => {
+      writePlanProfile({ ...readPlanProfile(), firstName: value })
+      bump()
+    },
+    [bump]
+  )
 
-    if (useDemo || !stored.location?.trim() || !stored.journey?.trim()) {
-      writePlanProfile({
-        ...stored,
-        firstName: nextFirst,
-        familyName: nextFamily,
-        location: nextLocation,
-        journey: nextJourney,
-        displayName: undefined,
-      })
-    }
+  const setFamilyName = useCallback(
+    (value: string) => {
+      writePlanProfile({ ...readPlanProfile(), familyName: value })
+      bump()
+    },
+    [bump]
+  )
 
-    setReady(true)
-  }, [])
+  const setAvatarUrl = useCallback(
+    (value: string | null) => {
+      writePlanProfile({ ...readPlanProfile(), avatarUrl: value })
+      bump()
+    },
+    [bump]
+  )
+
+  const setLocation = useCallback(
+    (value: string) => {
+      writePlanProfile({ ...readPlanProfile(), location: value })
+      bump()
+    },
+    [bump]
+  )
+
+  const setJourney = useCallback(
+    (value: string) => {
+      writePlanProfile({ ...readPlanProfile(), journey: value })
+      bump()
+    },
+    [bump]
+  )
+
+  const setWake = useCallback(
+    (value: string | null) => {
+      writePlanProfile({ ...readPlanProfile(), wake: value })
+      bump()
+    },
+    [bump]
+  )
+
+  const effectiveWake = resolved.wake ?? initialWake
+  const fullName = planProfileDisplayName({
+    firstName: resolved.firstName,
+    familyName: resolved.familyName,
+  })
 
   const snapshot = useCallback(
     (): PlanProfile => ({
-      firstName,
-      familyName,
-      avatarUrl,
-      location,
-      journey,
-      wake: wakeOverride ?? initialWake,
+      firstName: resolved.firstName,
+      familyName: resolved.familyName,
+      avatarUrl: resolved.avatarUrl,
+      location: resolved.location,
+      journey: resolved.journey,
+      wake: effectiveWake,
     }),
-    [firstName, familyName, avatarUrl, location, journey, wakeOverride, initialWake]
+    [
+      resolved.firstName,
+      resolved.familyName,
+      resolved.avatarUrl,
+      resolved.location,
+      resolved.journey,
+      effectiveWake,
+    ]
   )
 
-  const setFirstName = useCallback((value: string) => {
-    setFirstNameState(value)
-    writePlanProfile({ ...readPlanProfile(), firstName: value })
-  }, [])
-
-  const setFamilyName = useCallback((value: string) => {
-    setFamilyNameState(value)
-    writePlanProfile({ ...readPlanProfile(), familyName: value })
-  }, [])
-
-  const setAvatarUrl = useCallback((value: string | null) => {
-    setAvatarUrlState(value)
-    writePlanProfile({ ...readPlanProfile(), avatarUrl: value })
-  }, [])
-
-  const setLocation = useCallback((value: string) => {
-    setLocationState(value)
-    writePlanProfile({ ...readPlanProfile(), location: value })
-  }, [])
-
-  const setJourney = useCallback((value: string) => {
-    setJourneyState(value)
-    writePlanProfile({ ...readPlanProfile(), journey: value })
-  }, [])
-
-  const setWake = useCallback((value: string | null) => {
-    setWakeOverrideState(value)
-    writePlanProfile({ ...readPlanProfile(), wake: value })
-  }, [])
-
-  const effectiveWake = wakeOverride ?? initialWake
-  const fullName = planProfileDisplayName({ firstName, familyName })
-
   return {
-    ready,
-    firstName,
+    ready: isClient,
+    firstName: resolved.firstName,
     setFirstName,
-    familyName,
+    familyName: resolved.familyName,
     setFamilyName,
     fullName,
-    avatarUrl,
+    avatarUrl: resolved.avatarUrl,
     setAvatarUrl,
-    location,
+    location: resolved.location,
     setLocation,
-    journey,
+    journey: resolved.journey,
     setJourney,
     wake: effectiveWake,
     setWake,

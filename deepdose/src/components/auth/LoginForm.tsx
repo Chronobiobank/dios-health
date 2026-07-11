@@ -13,6 +13,7 @@ import {
 } from '@/lib/care/pending-activation'
 import { resolvePathAfterActivationAttempt } from '@/lib/care/resolve-activation-path'
 import { planProfileDisplayName, readPlanProfile } from '@/lib/patient/plan-profile'
+import { useIsClient } from '@/lib/react/use-is-client'
 import { Button } from '@/components/ui/Button'
 import { Callout } from '@/components/ui/Form'
 import { Input, Label } from '@/components/ui/Input'
@@ -43,14 +44,17 @@ export default function LoginForm({ variant = 'page' }: LoginFormProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
+  const [displayNameSeeded, setDisplayNameSeeded] = useState(false)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
+  const isClient = useIsClient()
+  if (isClient && !displayNameSeeded) {
+    setDisplayNameSeeded(true)
     const fromPlan = planProfileDisplayName(readPlanProfile())
     if (fromPlan) setDisplayName(fromPlan)
-  }, [])
+  }
 
   useEffect(() => {
     if (activationParam) persistPendingActivation(activationParam)

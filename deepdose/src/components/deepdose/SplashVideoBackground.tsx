@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { usePrefersReducedMotion } from '@/lib/react/use-prefers-reduced-motion'
 import { cn } from '@/lib/utils/cn'
 
 const SPLASH_VIDEO_SRC = '/first-light.mp4'
@@ -9,7 +10,7 @@ const SPLASH_VIDEO_SRC = '/first-light.mp4'
 export function SplashVideoBackground() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [videoReady, setVideoReady] = useState(false)
-  const [reduceMotion, setReduceMotion] = useState(false)
+  const reduceMotion = usePrefersReducedMotion()
 
   const startPlayback = useCallback(() => {
     const el = videoRef.current
@@ -19,26 +20,22 @@ export function SplashVideoBackground() {
   }, [reduceMotion])
 
   useEffect(() => {
-    const prefersReduced =
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    setReduceMotion(prefersReduced)
-    if (prefersReduced) {
+    if (reduceMotion) {
       const el = videoRef.current
       if (el) {
         el.pause()
         el.currentTime = 0
-        setVideoReady(true)
       }
       return
     }
     startPlayback()
-  }, [startPlayback])
+  }, [reduceMotion, startPlayback])
 
   return (
     <div className="seco-splash__media" aria-hidden>
       <video
         ref={videoRef}
-        className={cn('seco-splash__video', videoReady && 'is-ready')}
+        className={cn('seco-splash__video', (videoReady || reduceMotion) && 'is-ready')}
         autoPlay={!reduceMotion}
         muted
         loop={!reduceMotion}

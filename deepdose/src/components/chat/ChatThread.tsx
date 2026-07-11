@@ -16,7 +16,6 @@ type ChatThreadProps = {
 export function ChatThread({
   conversationId,
   currentUserId,
-  peer: _peer,
   initialMessages,
 }: ChatThreadProps) {
   const [messages, setMessages] = useState(initialMessages)

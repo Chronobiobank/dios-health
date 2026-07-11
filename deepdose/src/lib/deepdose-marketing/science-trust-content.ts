@@ -9,9 +9,7 @@ export const SCIENCE_TRUST_META = {
 } as const
 
 export const SCIENCE_TRUST_INTRO = {
-  eyebrow: 'Science',
-  titleWhite: 'Sleep you can',
-  titleAccent: 'measure.',
+  title: 'Sleep you can measure.',
   lede:
     'We help you read your night so you can log an honest sleep score. Here is what we measure, what we will not claim, and the published science behind timing.',
 } as const
@@ -29,9 +27,9 @@ export const SCIENCE_TRUST_FEATURES = [
     id: 'measure',
     badge: 'Measure',
     title: 'How we read your night',
-    teaser: 'Phone first. Home sleep check when you want a deeper sleep score.',
+    teaser: 'Phone first. TipTraQ when you want a clinical early-risk read.',
     cue: '#acd3de',
-    href: '/technology',
+    href: '/testkit',
   },
   {
     id: 'privacy',
@@ -39,7 +37,7 @@ export const SCIENCE_TRUST_FEATURES = [
     title: 'Your data stays with you',
     teaser: 'You choose what other people see.',
     cue: '#f2b8a2',
-    href: '/mission',
+    href: '/how',
   },
   {
     id: 'evidence',
@@ -52,6 +50,6 @@ export const SCIENCE_TRUST_FEATURES = [
 ] as const
 
 export const SCIENCE_TRUST_CTA = {
-  label: 'See how the stack works',
+  label: 'See how timing works',
   href: '/technology',
 } as const

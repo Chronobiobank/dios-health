@@ -114,17 +114,20 @@ export function CommunityMatchesPanel({
 
   if (variant === 'discovery') {
     return (
-      <section className="dd-connect__grid" aria-label="Friends">
-        {DEEPDOSE_COMMUNITY_MATCHES.map((match, index) => (
-          <MatchCard
-            key={match.id}
-            match={match}
-            index={index}
-            variant="discovery"
-            messageHref={messageHref}
-          />
-        ))}
-      </section>
+      <div className="dd-connect__body">
+        <p className="dd-connect__lede">{copy.support}</p>
+        <section className="dd-connect__grid" aria-label="Friends">
+          {DEEPDOSE_COMMUNITY_MATCHES.map((match, index) => (
+            <MatchCard
+              key={match.id}
+              match={match}
+              index={index}
+              variant="discovery"
+              messageHref={messageHref}
+            />
+          ))}
+        </section>
+      </div>
     )
   }
 

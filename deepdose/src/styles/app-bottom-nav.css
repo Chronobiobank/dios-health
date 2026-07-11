@@ -235,7 +235,7 @@ body:has(.dd-product):not(:has(.seco-splash)) {
   letter-spacing: -0.015em;
 }
 
-/* Kill spectrum CTA candy on product surfaces */
+/* Kill spectrum CTA candy on product surfaces — flat solid controls */
 .dd-product :is(
   .dd-profile__action--primary,
   .dd-profile__chemistry-cta,
@@ -249,9 +249,9 @@ body:has(.dd-product):not(:has(.seco-splash)) {
   .sw-dash__cta-btn,
   .seco-landing__btn--primary
 ) {
-  background: #fff !important;
+  background: var(--dd-solid, #0f172a) !important;
   background-image: none !important;
-  color: #0b1220 !important;
+  color: var(--dd-ink-inverse, #f8f8f6) !important;
   animation: none !important;
   font-weight: 400 !important;
   filter: none !important;
@@ -259,13 +259,14 @@ body:has(.dd-product):not(:has(.seco-splash)) {
 }
 
 .dd-product .dd-chat__bubble--mine {
-  background: #fff !important;
+  background: var(--dd-solid, #0f172a) !important;
   background-image: none !important;
-  color: #0b1220 !important;
+  color: var(--dd-ink-inverse, #f8f8f6) !important;
 }
 
 .dd-product .dd-chat__bubble--theirs {
-  background: rgb(255 255 255 / 0.08) !important;
+  background: var(--dd-surface, rgb(15 23 42 / 0.035)) !important;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92)) !important;
 }
 
 .dd-product :is(.seco-page__eyebrow, .sw-dash__tile-eyebrow) {

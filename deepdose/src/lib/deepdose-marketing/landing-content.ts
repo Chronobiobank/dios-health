@@ -1,6 +1,6 @@
 ﻿/** Deepdose marketing · public landing content. */
 
-import { DEEPDOSE_NAME, DEEPDOSE_MOVEMENT } from '@/lib/brand/deepdose-brand'
+import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_VOICE } from '@/lib/brand/deepdose-voice'
 import { DEEPDOSE_RESEARCH_PAPERS } from '@/lib/deepdose-marketing/research-content'
 import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
@@ -29,7 +29,7 @@ export const DEEPDOSE_HOME_SPLASH_HERO = {
 
 /** @deprecated Home uses on-page signup gate; kept for older imports. */
 export const DEEPDOSE_HOME_ACTIONS = {
-  mission: { label: 'About us', href: '/mission' },
+  mission: { label: 'About us', href: '/how' },
   create: { label: 'Enter', href: '/#enter' },
 } as const
 
@@ -55,7 +55,7 @@ export const DEEPDOSE_HOME_POLY_SEARCH = {
   medPlaceholderExtra: 'Search another medication',
 } as const
 
-/** Site-wide mission · three moves (Manjam letter lives on /mission). */
+/** Site-wide mission · three moves (story lives on /how). */
 export const DEEPDOSE_MISSION = {
   eyebrow: 'Three moves',
   headlineWhite: DEEPDOSE_VOICE.missionHeadlineWhite,
@@ -138,7 +138,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
         {
           title: 'Optional anonymised research share, never by default, stop anytime.',
           meta: 'Research · Consent first',
-          href: '/mission',
+          href: '/how',
         },
       ],
     },
@@ -269,15 +269,15 @@ export const LANDING_GP_HANDOFF_COPY = {
   eyebrow: 'Your risk picture',
   shareCta: 'Take this to your GP',
   shareOptionalCta: 'Print a summary for your GP',
-  tiptraqCta: 'Ask your GP about a 3-night home sleep test →',
+  tiptraqCta: 'Get a TipTraQ early-risk read →',
   disclaimer:
-    'Decision support only, not a diagnosis. Your GP decides on tests, reviews, and any changes to your medicines.',
+    'Decision support only, not a diagnosis. TipTraQ nights deepen the clinical picture when you want more than a phone score.',
   summaryTitle: 'Summary for your GP',
   summaryMeta:
-    'Printable sleep–medicine risk summary for a medication review and GP-advised home sleep testing.',
+    'Printable sleep–medicine risk summary for a medication review and home sleep testing.',
   summaryEmpty: 'Run a risk check on your sleep–wake plan first, then share the summary with your GP.',
   summaryTipTraqBody:
-    'If nights feel broken or breathing may be involved, a GP-advised TipTraQ home sleep test (three nights) can confirm the picture before anyone changes your meds.',
+    'If nights feel broken or breathing may be involved, a TipTraQ home sleep test (three nights) can confirm the early-risk picture before anyone changes your meds.',
 } as const
 
 export const DEEPDOSE_PLAN_NEXT_STEPS = {
@@ -428,7 +428,7 @@ export const DEEPDOSE_PATIENT_PLAN_SHARING = {
     {
       title: 'Help research with anonymised outcomes (optional).',
       meta: 'Optional research · UK GDPR, no personal details shared',
-      href: '/mission',
+      href: '/how',
       showPeers: false,
     },
   ],

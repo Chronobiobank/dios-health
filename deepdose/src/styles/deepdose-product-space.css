@@ -153,6 +153,15 @@
   gap: var(--dd-gap);
 }
 
+.dd-product .dd-connect__lede {
+  margin: 0 0 var(--dd-stack, 0.75rem);
+  max-width: 36rem;
+  color: var(--dd-ink-faint, rgb(15 23 42 / 0.62));
+  font-size: var(--dd-type-body, 0.9375rem);
+  font-weight: 300;
+  line-height: 1.45;
+}
+
 .dd-product .dd-connect__tile-bar {
   padding: var(--dd-3) var(--dd-4) var(--dd-4);
   gap: var(--dd-2);

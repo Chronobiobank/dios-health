@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import {
   addDoseUpload,
@@ -15,23 +15,35 @@ import {
   type DoseTag,
   type DoseUpload,
 } from '@/lib/patient/dose-uploads'
+import { useIsClient } from '@/lib/react/use-is-client'
 
 export function usePatientDoses() {
-  const [doses, setDoses] = useState<DoseUpload[]>([])
-  const [syncs, setSyncs] = useState<Record<string, number>>({})
-  const [bankOptIn, setBankOptInState] = useState(false)
-  const [ready, setReady] = useState(false)
+  const isClient = useIsClient()
+  const [epoch, setEpoch] = useState(0)
 
   const refresh = useCallback(() => {
-    setDoses(readDoseUploads())
-    setSyncs(readSyncMap())
-    setBankOptInState(readBankOptIn())
+    setEpoch((n) => n + 1)
   }, [])
 
-  useEffect(() => {
-    refresh()
-    setReady(true)
-  }, [refresh])
+  const doses: DoseUpload[] = useMemo(() => {
+    if (!isClient) return []
+    void epoch
+    return readDoseUploads()
+  }, [isClient, epoch])
+
+  const syncs = useMemo(() => {
+    if (!isClient) return {} as Record<string, number>
+    void epoch
+    return readSyncMap()
+  }, [isClient, epoch])
+
+  const bankOptIn = useMemo(() => {
+    if (!isClient) return false
+    void epoch
+    return readBankOptIn()
+  }, [isClient, epoch])
+
+  const ready = isClient
 
   const saveDose = useCallback(
     (input: Parameters<typeof addDoseUpload>[0]) => {
@@ -45,16 +57,19 @@ export function usePatientDoses() {
   const sync = useCallback(
     (doseId: string) => {
       const n = bumpSync(doseId)
-      setSyncs(readSyncMap())
+      refresh()
       return n
     },
-    []
+    [refresh]
   )
 
-  const setBankOptIn = useCallback((on: boolean) => {
-    writeBankOptIn(on)
-    setBankOptInState(on)
-  }, [])
+  const setBankOptIn = useCallback(
+    (on: boolean) => {
+      writeBankOptIn(on)
+      refresh()
+    },
+    [refresh]
+  )
 
   const date = todayDoseDate()
   const pillars = ready ? todayPillars(date) : null

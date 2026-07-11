@@ -5,6 +5,7 @@ import type { CSSProperties } from 'react'
 
 import { AppTopBarBack } from '@/components/deepdose/AppTopBar'
 import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
+import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_COMMUNITY_MATCHES } from '@/lib/deepdose-marketing/community-content'
 import { communityFaceUrl } from '@/lib/deepdose-marketing/community-faces'
@@ -61,6 +62,7 @@ export default async function ConnectMatchProfilePage({ params }: PageProps) {
           <Link href={messageHref} className="dd-connect__message dd-connect-profile__message">
             Chat
           </Link>
+          <SleepScoreTipTraqLink compact className="dd-connect-profile__tiptraq" />
         </div>
       </div>
     </ProductAppShell>

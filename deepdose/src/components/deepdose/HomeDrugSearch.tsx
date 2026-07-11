@@ -211,7 +211,11 @@ export function HomeDrugSearch() {
               </li>
             ) : (
               results.map((med) => (
-                <li key={med.code} role="option">
+                <li
+                  key={med.code}
+                  role="option"
+                  aria-selected={false}
+                >
                   <button
                     type="button"
                     className="med-search__option"

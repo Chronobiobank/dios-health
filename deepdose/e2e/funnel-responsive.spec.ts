@@ -4,7 +4,7 @@
  * Local:  pnpm test:funnel
  * Live:   PLAYWRIGHT_BASE_URL=https://deepdose.org pnpm test:funnel
  */
-import { test, expect, type Locator, type Page } from '@playwright/test'
+import { test, expect, type Page } from '@playwright/test'
 
 const VIEWPORTS = [
   { label: 'mobile', width: 375, height: 812 },
@@ -36,37 +36,6 @@ async function assertNavForViewport(page: Page, width: number) {
     await expect(toggle, 'hamburger visible below 1024px').toBeVisible()
     await expect(desktop, 'inline nav hidden below 1024px').toBeHidden()
   }
-}
-
-/** Element text should not be truncated by -webkit-line-clamp. */
-async function assertNotLineClamped(locator: Locator) {
-  const clamped = await locator.evaluate((el) => {
-    const style = window.getComputedStyle(el)
-    const lineClamp = style.webkitLineClamp
-    if (lineClamp && lineClamp !== 'none' && lineClamp !== '0') {
-      return el.scrollHeight > el.clientHeight + 2
-    }
-    return false
-  })
-  expect(clamped, 'copy should not be line-clamped').toBe(false)
-}
-
-async function assertFullyRendered(locator: Locator) {
-  await expect(locator).toBeVisible()
-  const box = await locator.boundingBox()
-  expect(box?.height ?? 0).toBeGreaterThan(8)
-  const clipped = await locator.evaluate((el) => {
-    let node: Element | null = el
-    while (node) {
-      const style = window.getComputedStyle(node)
-      if (style.overflow === 'hidden' && el.scrollHeight > node.clientHeight + 2) {
-        return true
-      }
-      node = node.parentElement
-    }
-    return false
-  })
-  expect(clipped, 'copy should not be clipped by overflow:hidden ancestor').toBe(false)
 }
 
 for (const viewport of VIEWPORTS) {

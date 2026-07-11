@@ -35,10 +35,11 @@ export function SiteNavBar({
 }: SiteNavBarProps) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
-
-  useEffect(() => {
+  const [menuPath, setMenuPath] = useState(pathname)
+  if (pathname !== menuPath) {
+    setMenuPath(pathname)
     setOpen(false)
-  }, [pathname])
+  }
 
   useEffect(() => {
     if (!open) return

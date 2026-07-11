@@ -43,14 +43,8 @@ export default function TestkitPage() {
     <article className="seco-page seco-hometest seco-marketing-page">
       <div className="seco-landing__section-inner">
         <header className="seco-hometest__intro seco-reveal seco-reveal--1">
-          <p className="seco-page__eyebrow">{TESTKIT_INTRO.eyebrow}</p>
           <h1 className="seco-page__title seco-hometest__title">
-            <span className="seco-landing__hero-line seco-landing__hero-line--white">
-              {TESTKIT_INTRO.titleWhite}
-            </span>
-            <span className="seco-landing__hero-line seco-landing__hero-spectrum">
-              {TESTKIT_INTRO.titleAccent}
-            </span>
+            <span className="seco-landing__hero-spectrum">{TESTKIT_INTRO.title}</span>
           </h1>
           <p className="seco-page__lede seco-hometest__lede">{TESTKIT_INTRO.lede}</p>
         </header>

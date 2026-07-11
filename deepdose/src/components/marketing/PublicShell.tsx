@@ -12,8 +12,8 @@ export function PublicHeader() {
           <DeepdoseWordmark className="deepdose-wordmark--compact" />
         </Link>
         <nav className="flex items-center gap-4">
-          <Link href="/mission" className="hidden text-sm text-ink-muted hover:text-ink sm:block">
-            Mission
+          <Link href="/how" className="hidden text-sm text-ink-muted hover:text-ink sm:block">
+            Why Medmaxxing?
           </Link>
           <Button href="/" variant="primary" className="!px-5 !py-2 text-sm">
             Sign in

@@ -81,7 +81,6 @@ export function computeMedicationBti(
   const window = adjustTimingForPhase(timing, context.phaseOffsetMinutes)
   const now = options?.now ?? new Date()
   const current = localTimeHHMM(now)
-  const currentTiming = medication.current_timing?.slice(0, 5) ?? window.start
   const inWindow = isTimeInWindow(current, window.start, window.end)
   const status = deriveStatus(
     inWindow,

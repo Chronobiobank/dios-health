@@ -11,6 +11,7 @@ import {
   readPendingActivation,
 } from '@/lib/care/pending-activation'
 import { buildMedsOnboardingPath, medsPathOptionsFromParsed, parseMedsOnboardingParams } from '@/lib/medications/home-to-onboarding'
+import { useIsClient } from '@/lib/react/use-is-client'
 import { ProfileCollapsibleRow } from '@/components/patient/ProfileCollapsibleRow'
 import { Button } from '@/components/ui/Button'
 import { checkboxClass, FormError } from '@/components/ui/Form'
@@ -65,14 +66,16 @@ export default function ConsentPanel({
   const parsed = parseMedsOnboardingParams(searchParams)
   const medPathOptions = medsPathOptionsFromParsed(parsed)
   const activationParam = searchParams.get('activation')
-  const [hasActivation, setHasActivation] = useState(Boolean(activationParam))
+  const isClient = useIsClient()
+  const hasActivation = Boolean(
+    activationParam || (isClient && readPendingActivation())
+  )
   const [grants, setGrants] = useState(() => buildConsentState(purposes, initialConsents))
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (activationParam) persistPendingActivation(activationParam)
-    setHasActivation(Boolean(activationParam || readPendingActivation()))
   }, [activationParam])
 
   const requiredPurposes = purposes.filter((p) => p.is_required)

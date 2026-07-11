@@ -50,9 +50,7 @@ import {
   type PatientPlanFlowStep,
 } from '@/components/deepdose/PatientPlanNextSteps'
 
-const LANDING_TABS = DEEPDOSE_PATIENT_PLAN_TABS.landing
-
-type PlanTab = (typeof LANDING_TABS)[number]['id']
+type PlanTab = (typeof DEEPDOSE_PATIENT_PLAN_TABS.landing)[number]['id']
 
 function resolveSharingHref(href: string, signupHref?: string) {
   return href === '/' || href === '/login' ? (signupHref ?? href) : href
@@ -472,19 +470,16 @@ export function PatientTimingPlan({
     reviewCount,
   }
 
-  function PlanFooterCta({ className }: { className?: string }) {
-    if (variant === 'landing') {
-      return <PatientPlanNextStepsEntry onStart={() => setFlowStep(1)} />
-    }
-
-    return (
-      <div className={marketingCtaClass(className)}>
+  const planFooterCta =
+    variant === 'landing' ? (
+      <PatientPlanNextStepsEntry onStart={() => setFlowStep(1)} />
+    ) : (
+      <div className={marketingCtaClass()}>
         <Link href={chronoTestHref} className="seco-landing__btn seco-landing__btn--primary">
           {DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE.appCta.label}
         </Link>
       </div>
     )
-  }
 
   const profileHeader = (
     <PatientPlanProfileHeader
@@ -543,7 +538,7 @@ export function PatientTimingPlan({
           <ul className="patient-dash__share-list">
             {DEEPDOSE_PATIENT_PLAN_SHARING.items.map((item) => (
               <li key={item.href + item.title} className="patient-dash__share-row">
-                {item.href === '/mission' ? (
+                {item.href === '/how' ? (
                   <button
                     type="button"
                     className="patient-dash__share-toggle"
@@ -582,7 +577,7 @@ export function PatientTimingPlan({
         )}
 
         </div>
-        <PlanFooterCta />
+        {planFooterCta}
       </div>
     )
 
@@ -855,13 +850,13 @@ export function PatientTimingPlan({
 
                             <div className="dios-callout dios-callout--info">
                               <p>
-                                Improve your confidence —{' '}
+                                Want a clinical early-risk read —{' '}
                                 <Link href="/testkit" className="seco-hero-tabs__panel-link">
-                                  order your test kit
+                                  get TipTraQ
                                 </Link>
                               </p>
                               <p className="seco-plan-tile__sync-caption">
-                                L2 blood panel (65%) · L3 TipTraQ (90%)
+                                Three nights at home — sleep, breathing, and oxygen
                               </p>
                             </div>
                           </div>
@@ -1000,7 +995,7 @@ export function PatientTimingPlan({
                       <p className="seco-plan-tile__sync-caption">
                         You own your data. Researchers request access. You decide.
                       </p>
-                      <Link href="/mission" className="seco-hero-tabs__panel-link">
+                      <Link href="/how" className="seco-hero-tabs__panel-link">
                         Full data terms →
                       </Link>
                     </>
@@ -1013,7 +1008,7 @@ export function PatientTimingPlan({
         })}
       </div>
 
-      <PlanFooterCta />
+      {planFooterCta}
     </div>
   )
 }

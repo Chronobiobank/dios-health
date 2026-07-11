@@ -13,6 +13,7 @@ import { marketingCtaClass } from '@/lib/design/marketing-system'
 export const metadata: Metadata = {
   title: SCIENCE_TRUST_META.title,
   description: SCIENCE_TRUST_META.description,
+  alternates: { canonical: '/science' },
 }
 
 export default function SciencePage() {
@@ -20,14 +21,8 @@ export default function SciencePage() {
     <article className="seco-page seco-science seco-chronobiobank seco-mission seco-marketing-page">
       <div className="seco-landing__section-inner">
         <header className="seco-chronobiobank__intro seco-science__intro seco-reveal seco-reveal--1">
-          <p className="seco-page__eyebrow">{SCIENCE_TRUST_INTRO.eyebrow}</p>
           <h1 className="seco-page__title seco-science__title seco-chronobiobank__title">
-            <span className="seco-landing__hero-line seco-landing__hero-line--white">
-              {SCIENCE_TRUST_INTRO.titleWhite}
-            </span>
-            <span className="seco-landing__hero-line seco-landing__hero-spectrum">
-              {SCIENCE_TRUST_INTRO.titleAccent}
-            </span>
+            <span className="seco-landing__hero-spectrum">{SCIENCE_TRUST_INTRO.title}</span>
           </h1>
           <p className="seco-page__lede seco-chronobiobank__lede seco-science__lede">{SCIENCE_TRUST_INTRO.lede}</p>
         </header>

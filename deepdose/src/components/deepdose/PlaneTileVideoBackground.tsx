@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { usePrefersReducedMotion } from '@/lib/react/use-prefers-reduced-motion'
 import { cn } from '@/lib/utils/cn'
 
 type PlaneTileVideoBackgroundProps = {
@@ -12,7 +13,7 @@ type PlaneTileVideoBackgroundProps = {
 export function PlaneTileVideoBackground({ src }: PlaneTileVideoBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [videoReady, setVideoReady] = useState(false)
-  const [reduceMotion, setReduceMotion] = useState(false)
+  const reduceMotion = usePrefersReducedMotion()
 
   const startPlayback = useCallback(() => {
     const el = videoRef.current
@@ -22,19 +23,16 @@ export function PlaneTileVideoBackground({ src }: PlaneTileVideoBackgroundProps)
   }, [reduceMotion])
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    setReduceMotion(prefersReduced)
-    if (prefersReduced) {
+    if (reduceMotion) {
       const el = videoRef.current
       if (el) {
         el.pause()
         el.currentTime = 0
-        setVideoReady(true)
       }
       return
     }
     startPlayback()
-  }, [startPlayback])
+  }, [reduceMotion, startPlayback])
 
   return (
     <>
@@ -42,7 +40,7 @@ export function PlaneTileVideoBackground({ src }: PlaneTileVideoBackgroundProps)
         ref={videoRef}
         className={cn(
           'seco-chronobiobank__plane-visual__video',
-          videoReady && 'is-ready',
+          (videoReady || reduceMotion) && 'is-ready',
         )}
         autoPlay={!reduceMotion}
         muted

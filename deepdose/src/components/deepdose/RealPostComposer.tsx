@@ -3,6 +3,7 @@
 import { useMemo, useState, type ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import { buildLandingRiskAnalysis } from '@/lib/patient/landing-risk-analysis'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
 import { usePatientPlanProfile } from '@/lib/patient/use-patient-plan-profile'
@@ -139,6 +140,8 @@ export function RealPostComposer() {
           <p className="dd-real-post__metric-label">On</p>
         </div>
       </div>
+
+      <SleepScoreTipTraqLink compact className="dd-real-post__tiptraq" />
 
       {error ? <p className="dd-real-post__error">{error}</p> : null}
 

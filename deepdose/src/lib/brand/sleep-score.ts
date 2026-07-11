@@ -1,5 +1,5 @@
 /**
- * Consumer score language — sleepmaxxer vernacular.
+ * Consumer score language — plain English.
  * Engine / clinical code may still say SRI; UI should not lead with it.
  */
 export const SLEEP_SCORE = {
@@ -13,6 +13,10 @@ export const SLEEP_SCORE = {
   climb: 'Raise your sleep score.',
   climbShort: 'Raise your score',
   stamp: 'Logs your sleep score',
+  /** TipTraQ — clinical early-risk deepen from any score surface */
+  tiptraqHref: '/testkit',
+  tiptraqLabel: 'Get a TipTraQ early-risk read',
+  tiptraqHint: 'Three nights at home — sleep, breathing, and oxygen for a clearer clinical picture.',
   /** Optional clinical footnote — rare, not in product chrome */
   clinicalName: 'Sleep Regularity Index (SRI)',
 } as const

@@ -703,6 +703,12 @@
   margin-right: auto;
 }
 
+.sw-dash__tiptraq {
+  align-self: center;
+  align-items: center;
+  text-align: center;
+}
+
 .sw-dash__text-link--score {
   align-self: flex-end;
   margin-top: auto;

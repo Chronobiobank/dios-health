@@ -3,7 +3,9 @@
 import { useMemo } from 'react'
 import Link from 'next/link'
 
+import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import { DEEPDOSE_PLAN_NEXT_STEPS } from '@/lib/deepdose-marketing/landing-content'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
 import {
@@ -110,6 +112,8 @@ function ClockRevealPanel({ wake, medTimes }: PanelProps) {
           </ul>
         </div>
       </div>
+
+      <SleepScoreTipTraqLink />
 
       <p className="seco-planpreview__phase">{copy.note}</p>
     </div>

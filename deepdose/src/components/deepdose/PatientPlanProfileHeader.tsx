@@ -48,6 +48,8 @@ export function PatientPlanProfileHeader({
           onChange={handleAvatarPick}
         />
         {avatarUrl ? (
+          // Local data-URL preview
+          // eslint-disable-next-line @next/next/no-img-element
           <img src={avatarUrl} alt="" className={`${rootClass}__avatar-img`} />
         ) : (
           <span className={`${rootClass}__avatar-label`}>Upload pic</span>

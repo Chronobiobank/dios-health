@@ -3227,9 +3227,9 @@
   min-height: 100%;
   margin: 0;
   padding: 1rem 0.875rem;
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid rgb(15 23 42 / 0.1);
   border-radius: var(--seco-radius-lg);
-  background: rgb(255 255 255 / 0.04);
+  background: #fff;
   box-sizing: border-box;
 }
 
@@ -3242,23 +3242,23 @@
 
 .seco-chronobiobank__letter-tile-label {
   margin: 0;
-  font-family: var(--seco-font-ui);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 0.48);
+  color: rgb(15 23 42 / 0.48);
 }
 
 .seco-chronobiobank__letter-tile-body {
   margin: 0;
   flex: 1;
-  font-family: var(--seco-font-display);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: clamp(1rem, 2.8vw, 1.1875rem);
   font-weight: 300;
   line-height: 1.3;
   letter-spacing: -0.015em;
-  color: rgb(255 255 255 / 0.9);
+  color: rgb(15 23 42 / 0.88);
   text-wrap: balance;
 }
 

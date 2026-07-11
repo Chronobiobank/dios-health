@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { PatientMedicationsEditor } from '@/components/patient/PatientMedicationsEditor'
 import { OnboardingHeader } from '@/components/patient/OnboardingShell'
@@ -10,8 +10,8 @@ import {
   medsPathOptionsFromSeed,
   resolveOnboardingMedSeed,
   resolveOnboardingMedSeedFromUrl,
-  type OnboardingMedSeed,
 } from '@/lib/patient/plan-onboarding-hydration'
+import { useIsClient } from '@/lib/react/use-is-client'
 
 interface MedicationsOnboardingFormProps {
   phaseOffsetMinutes: number
@@ -22,13 +22,14 @@ export default function MedicationsOnboardingForm({
 }: MedicationsOnboardingFormProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [seed, setSeed] = useState<OnboardingMedSeed>(() =>
-    resolveOnboardingMedSeedFromUrl(searchParams)
+  const isClient = useIsClient()
+  const seed = useMemo(
+    () =>
+      isClient
+        ? resolveOnboardingMedSeed(searchParams)
+        : resolveOnboardingMedSeedFromUrl(searchParams),
+    [isClient, searchParams]
   )
-
-  useEffect(() => {
-    setSeed(resolveOnboardingMedSeed(searchParams))
-  }, [searchParams])
 
   const initialFromPlan = useMemo(
     () => buildOnboardingMedEditorState(seed, phaseOffsetMinutes),

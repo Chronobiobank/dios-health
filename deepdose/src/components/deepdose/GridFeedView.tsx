@@ -1,7 +1,9 @@
 'use client'
 
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
 
+import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import {
   buildMockGridDoses,
   mockDoseAvatar,
@@ -117,9 +119,16 @@ export function GridFeedView() {
         </button>
       </div>
 
+      <SleepScoreTipTraqLink compact className="dd-grid__tiptraq" />
+
       <div className="dd-grid__feed">
         {items.length === 0 ? (
-          <p className="dd-grid__empty">No doses here yet. Log one to start.</p>
+          <p className="dd-grid__empty">
+            No doses here yet.{' '}
+            <Link href="/dose">Log one</Link>
+            {' · '}
+            <Link href="/connect">Find friends</Link>
+          </p>
         ) : (
           items.map((dose) => (
             <DoseCard

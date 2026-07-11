@@ -1,5 +1,5 @@
 /**
- * Legal / policy — dense marketing system. No per-page galley layout.
+ * Legal / policy — light OpenAI shell. Shared marketing type, dense measure.
  */
 
 .seco-legal.seco-marketing-page .seco-landing__section-inner {
@@ -7,10 +7,12 @@
   padding-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
 }
 
-/* Dense display — same system, less air than marketing heroes */
 .seco-legal .seco-page__title {
-  font-size: clamp(2rem, 1.15rem + 3.5vw, 3.25rem);
-  line-height: 1.05;
+  font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: rgb(15 23 42 / 0.92);
 }
 
 .seco-legal__intro {
@@ -47,28 +49,28 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 0.42);
+  color: rgb(15 23 42 / 0.48);
 }
 
 .seco-legal__body {
-  font-family: var(--seco-font-ui);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: var(--mkt-hero-lede-size, var(--type-body-lg, 1.125rem));
   font-weight: 300;
   line-height: 1.45;
-  color: rgb(255 255 255 / 0.78);
+  color: rgb(15 23 42 / 0.62);
 }
 
 .seco-legal__body a,
 .seco-legal__footer a {
-  color: #fff;
-  font-weight: 600;
+  color: rgb(15 23 42 / 0.92);
+  font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 0.18em;
 }
 
 .seco-legal__body a:hover,
 .seco-legal__footer a:hover {
-  color: var(--seco-spectrum-cyan, #acd3de);
+  color: rgb(15 23 42 / 0.72);
 }
 
 .seco-legal__tiles {
@@ -127,7 +129,7 @@ a.seco-legal__link-tile .seco-spectrum-tile__title {
 }
 
 a.seco-legal__link-tile:hover .seco-spectrum-tile__title {
-  color: #fff;
+  color: rgb(15 23 42 / 0.92);
 }
 
 .seco-legal__footer {
@@ -139,50 +141,39 @@ a.seco-legal__link-tile:hover .seco-spectrum-tile__title {
   margin-top: 0;
   width: 100%;
   max-width: 100%;
-  font-family: var(--seco-font-ui);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: var(--mkt-tile-body-size, var(--type-body));
   font-weight: 300;
-  color: rgb(255 255 255 / 0.55);
+  color: rgb(15 23 42 / 0.55);
 }
 
 .seco-legal__footer-sep {
-  color: rgb(255 255 255 / 0.28);
+  color: rgb(15 23 42 / 0.28);
 }
 
 .seco-legal__contact {
   margin: 0;
   max-width: 100%;
   min-width: 0;
-  font-family: var(--seco-font-display);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: clamp(1.25rem, 0.95rem + 1.2vw, 1.75rem);
   font-weight: 300;
-  letter-spacing: var(--seco-display-tracking, -0.02em);
+  letter-spacing: -0.02em;
   line-height: 1.2;
   overflow-wrap: anywhere;
 }
 
 .seco-legal__contact a {
-  color: #fff;
-  text-decoration: none;
-  background: var(--seco-spectrum-hero);
-  background-size: 220% 100%;
-  background-position: 0% 50%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: seco-cta-flow 7s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .seco-legal__contact a {
-    animation: none;
-    background-position: 50% 50%;
-  }
+  color: rgb(15 23 42 / 0.92);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  background: none;
+  -webkit-text-fill-color: unset;
+  animation: none;
 }
 
 .seco-legal__contact a:hover {
-  -webkit-text-fill-color: #fff;
-  color: #fff;
+  color: rgb(15 23 42 / 0.72);
+  -webkit-text-fill-color: unset;
   background: none;
 }

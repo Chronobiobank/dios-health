@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import {
   getTodayReal,
@@ -9,20 +9,23 @@ import {
   upsertTodayReal,
   type RealPost,
 } from '@/lib/patient/real-posts'
+import { useIsClient } from '@/lib/react/use-is-client'
 
 export function usePatientRealPosts() {
-  const [posts, setPosts] = useState<RealPost[]>([])
-  const [ready, setReady] = useState(false)
+  const isClient = useIsClient()
+  const [epoch, setEpoch] = useState(0)
 
   const refresh = useCallback(() => {
-    setPosts(readRealPosts())
+    setEpoch((n) => n + 1)
   }, [])
 
-  useEffect(() => {
-    refresh()
-    setReady(true)
-  }, [refresh])
+  const posts: RealPost[] = useMemo(() => {
+    if (!isClient) return []
+    void epoch
+    return readRealPosts()
+  }, [isClient, epoch])
 
+  const ready = isClient
   const today = ready ? getTodayReal() : null
 
   const saveToday = useCallback(

@@ -205,7 +205,7 @@ function nextQuarterlyReviewFrom(iso) {
   return d.toISOString()
 }
 
-async function resetTipTraqForPatient(patientId, clinicianId) {
+async function resetTipTraqForPatient(patientId) {
   await admin.from('tiptraq_nights').delete().eq('patient_id', patientId)
   await admin.from('tiptraq_assessments').delete().eq('patient_id', patientId)
   await admin
@@ -367,7 +367,7 @@ async function main() {
     process.exit(1)
   }
 
-  await resetTipTraqForPatient(patientUser.id, clinicianUser.id)
+  await resetTipTraqForPatient(patientUser.id)
   pass(`Reset TipTraQ slate for ${TARGET_PATIENT_NAME}`)
 
   const { sb: clinicianSb, user: clinician } = await signIn(CLINICIAN.email, CLINICIAN.password)

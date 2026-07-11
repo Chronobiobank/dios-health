@@ -4,7 +4,6 @@
 export const DEEPDOSE_SITE_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Why Medmaxxing?', href: '/how' },
-  { label: 'Mission', href: '/mission' },
   { label: 'Science', href: '/science' },
 ] as const
 
@@ -21,6 +20,7 @@ export const DEEPDOSE_FOOTER_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Feed', href: '/grid' },
   { label: 'Log', href: '/dose' },
+  { label: 'Friends', href: '/connect' },
   { label: 'Score', href: '/bank' },
   { label: 'Me', href: '/profile' },
   { label: 'Terms', href: '/terms' },

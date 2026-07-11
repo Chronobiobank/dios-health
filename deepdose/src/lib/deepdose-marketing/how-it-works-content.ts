@@ -3,8 +3,8 @@ import { DEEPDOSE_NAME, DEEPDOSE_MOVEMENT } from '@/lib/brand/deepdose-brand'
 /** How it works — DeepDose UX: Score → Plan → Boost → Find. */
 
 export const HOW_IT_WORKS_META = {
-  title: `${DEEPDOSE_MOVEMENT} · ${DEEPDOSE_NAME}`,
-  description: `${DEEPDOSE_MOVEMENT}. Score your sleep routine, plan your meds/supps, boost your chemistry, find your chronomatch.`,
+  title: `Why Medmaxxing? · ${DEEPDOSE_NAME}`,
+  description: `${DEEPDOSE_MOVEMENT}. For people off the usual clock — score sleep, plan what you take, find people on your rhythm.`,
 } as const
 
 export const HOW_IT_WORKS_INTRO = {
@@ -48,7 +48,7 @@ export const HOW_IT_WORKS_STEPS = [
     badge: '4',
     lead: 'Find',
     rest: 'your chronomatch',
-    teaser: 'Find your chronomatch — people whose clock and stack line up with yours.',
+    teaser: 'Find your chronomatch — people whose clock and timing fit yours.',
     cue: '#e04545',
     href: '/grid',
   },
@@ -57,16 +57,30 @@ export const HOW_IT_WORKS_STEPS = [
 export const HOW_IT_WORKS_CAPTION = 'Score. Plan. Boost. Find.' as const
 
 /**
- * Short “why” under the orbit — shared title/lede system.
- * Invite for the first ex-Manjam members. No street slang.
+ * Why Medmaxxing — one title + three short story tiles.
+ * Flow: pain → what we do → why you should care.
  */
 export const HOW_IT_WORKS_WHY = {
   title: 'Why Medmaxxing?',
-  lede:
-    'Old apps matched faces. We match nights. For people who do not live on a 9-to-5 clock — score how you sleep, plan what you take, boost your chemistry, find people whose rhythm fits yours.',
-  invite:
-    'First invite goes to early Manjam members — same hunger for real connection, now built around sleep, timing, and chemistry.',
 } as const
+
+export const HOW_IT_WORKS_STORY = [
+  {
+    id: 'pain',
+    label: 'Pain',
+    body: 'Old apps matched faces. People off a 9-to-5 clock got left behind.',
+  },
+  {
+    id: 'solution',
+    label: 'What we do',
+    body: 'We match nights. Score sleep. Plan what you take. Find people on your rhythm.',
+  },
+  {
+    id: 'care',
+    label: 'Why care',
+    body: 'First invite goes to early Manjam members — real connection around sleep, timing, and chemistry.',
+  },
+] as const
 
 export const HOW_IT_WORKS_CTA = {
   label: 'Start free',

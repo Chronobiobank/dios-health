@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 import Link from 'next/link'
 
 import SriScoreRing from '@/components/shared/SriScoreRing'
+import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import { SLEEP_SCORE } from '@/lib/brand/sleep-score'
 import { computeScheduleSri } from '@/lib/circadian/sri-engine'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
@@ -38,6 +39,7 @@ export function BankDashboardView() {
         <SriScoreRing score={sriResult.score} />
         <p className="dd-bank__gauge-label">{SLEEP_SCORE.label}</p>
         <p className="dd-bank__gauge-hint">{SLEEP_SCORE.hint}</p>
+        <SleepScoreTipTraqLink className="dd-bank__tiptraq" />
       </div>
 
       <section className="dd-bank__pillars" aria-label="Today’s doses">
@@ -91,13 +93,13 @@ export function BankDashboardView() {
 
       <section className="dd-bank__clinical" aria-label="Your tools">
         <h2 className="dd-bank__section-title">Your tools</h2>
+        <Link href="/testkit" className="dd-bank__clinical-link">
+          <span className="dd-bank__clinical-title">TipTraQ early-risk read</span>
+          <span className="dd-bank__clinical-meta">{SLEEP_SCORE.tiptraqHint}</span>
+        </Link>
         <Link href="/dosage" className="dd-bank__clinical-link">
           <span className="dd-bank__clinical-title">Chemistry</span>
           <span className="dd-bank__clinical-meta">Timing for what you take</span>
-        </Link>
-        <Link href="/testkit" className="dd-bank__clinical-link">
-          <span className="dd-bank__clinical-title">TipTraQ testkit</span>
-          <span className="dd-bank__clinical-meta">Three nights at home</span>
         </Link>
       </section>
 

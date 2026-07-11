@@ -38,7 +38,6 @@ export function formatTipTraqQuarterlyFee(): string {
 }
 
 export function formatTipTraqStudyFeeRange(): string {
-  const { baselineGbp, quarterlyRereadGbp } = TIPTRAQ_STUDY_PRICING_UK
   return `${formatTipTraqBaselineFee()} baseline · ${formatTipTraqQuarterlyFee()} quarterly`
 }
 

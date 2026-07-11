@@ -46,20 +46,6 @@ const DEMO_MEDS = [
   },
 ] as const
 
-type SyncState = 'synced' | 'review' | 'conflict'
-
-const SYNC_DOT: Record<SyncState, string> = {
-  synced:   'seco-dashpreview__bca-state--high',
-  review:   'seco-dashpreview__bca-state--medium',
-  conflict: 'seco-dashpreview__bca-state--low',
-}
-
-const SYNC_LABEL: Record<SyncState, string> = {
-  synced:   'Synced',
-  review:   'Review',
-  conflict: 'Conflict',
-}
-
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export function HeroMedsPreview() {

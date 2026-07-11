@@ -1,4 +1,4 @@
-﻿/** Community matching and story feed · member dashboard (mock until matching API ships). */
+/** Community matching and story feed · member dashboard (mock until matching API ships). */
 
 import type { CommunityFaceId } from '@/lib/deepdose-marketing/community-faces'
 
@@ -23,12 +23,12 @@ export const MEMBER_DASHBOARD_COMMUNITY = {
     eyebrow: 'Friends',
     titleBefore: 'People on ',
     titleHighlight: 'your clock',
-    support: 'Friends who see your daily Real. Same rhythm, real nights.',
+    support: 'People whose sleep timing fits yours. See their doses. Message when it feels right.',
   },
   stories: {
     eyebrow: 'Stories',
     title: 'What others shared',
-    support: 'Real nights. Shared scores. Sleepmaxxing together.',
+    support: 'Real nights. Shared scores. Better sleep together.',
   },
 } as const
 
@@ -37,7 +37,7 @@ export const DEEPDOSE_COMMUNITY_MATCHES: readonly CommunityMatch[] = [
     id: 'match-1',
     name: 'Ash R.',
     location: 'Leeds',
-    journey: 'Late clock · posts Real every morning',
+    journey: 'Late clock · logs most mornings',
     chemistryPct: 94,
     face: 'ash',
   },
@@ -45,7 +45,7 @@ export const DEEPDOSE_COMMUNITY_MATCHES: readonly CommunityMatch[] = [
     id: 'match-2',
     name: 'Kai T.',
     location: 'Glasgow',
-    journey: 'Stacked nights · same Off window as you',
+    journey: 'Same lights-off window as you',
     chemistryPct: 91,
     face: 'kai',
   },
@@ -53,7 +53,7 @@ export const DEEPDOSE_COMMUNITY_MATCHES: readonly CommunityMatch[] = [
     id: 'match-3',
     name: 'River M.',
     location: 'Bristol',
-    journey: '120-day Real streak',
+    journey: 'Steady nights for months',
     chemistryPct: 88,
     face: 'river',
   },
@@ -61,7 +61,7 @@ export const DEEPDOSE_COMMUNITY_MATCHES: readonly CommunityMatch[] = [
     id: 'match-4',
     name: 'Sage L.',
     location: 'Manchester',
-    journey: 'Night-owl sleep score · swaps evening fixes',
+    journey: 'Night owl · shares evening tips',
     chemistryPct: 86,
     face: 'sage',
   },
@@ -69,7 +69,7 @@ export const DEEPDOSE_COMMUNITY_MATCHES: readonly CommunityMatch[] = [
     id: 'match-5',
     name: 'Rowan K.',
     location: 'London',
-    journey: 'Afternoon crash pattern · same On time',
+    journey: 'Afternoon dip · same wake time',
     chemistryPct: 84,
     face: 'rowan',
   },
@@ -77,7 +77,7 @@ export const DEEPDOSE_COMMUNITY_MATCHES: readonly CommunityMatch[] = [
     id: 'match-6',
     name: 'Sol A.',
     location: 'Cardiff',
-    journey: 'Same REM shape · wake-aligned Real',
+    journey: 'Wake-aligned nights · similar score',
     chemistryPct: 82,
     face: 'sol',
   },
