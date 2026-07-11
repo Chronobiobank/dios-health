@@ -1,4 +1,4 @@
-﻿/** Chronobiobank , distributed intelligence, hybrid learning, licensing plane. */
+/** Chronobiobank , distributed intelligence, hybrid learning, licensing plane. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {

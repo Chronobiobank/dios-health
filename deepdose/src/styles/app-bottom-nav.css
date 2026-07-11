@@ -364,11 +364,6 @@ body:has(.dd-product):not(:has(.seco-splash)) {
   background: transparent;
 }
 
-.app-bottom-nav__link--post .app-bottom-nav__icon {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
 .app-bottom-nav__link--post {
   color: rgb(15 23 42 / 0.7);
 }

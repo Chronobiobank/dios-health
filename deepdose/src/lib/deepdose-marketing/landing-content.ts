@@ -117,7 +117,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       body: 'Dosers on your clock',
       icon: 'plan' as const,
       panelTitle: 'The Grid',
-      panelSeeAll: { label: 'Open Grid', href: '/grid' },
+      panelSeeAll: { label: 'Sign in', href: '/grid' },
       panelLayout: 'grid' as const,
       panelItems: [
         {

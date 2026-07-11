@@ -3,7 +3,7 @@
 /** Marketing header. Product tabs live in APP_BOTTOM_NAV. */
 export const DEEPDOSE_SITE_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'How it works', href: '/how' },
+  { label: 'Why Medmaxxing?', href: '/how' },
   { label: 'Mission', href: '/mission' },
   { label: 'Science', href: '/science' },
 ] as const

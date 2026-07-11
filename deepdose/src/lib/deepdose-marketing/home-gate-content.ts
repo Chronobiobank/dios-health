@@ -3,11 +3,11 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 /** Sniffies-style home gate · signup + one Terms link. */
 export const DEEPDOSE_HOME_GATE = {
   signUpLabel: 'Sign up to Deepdose',
-  signInLabel: 'Sign In',
+  signInLabel: 'Sign in',
   reportLabel: 'Report',
   agreeLine: 'You must be 18+ y/o to enter and agree to our',
   links: {
-    about: { label: 'How it works', href: '/how' },
+    about: { label: 'Why Medmaxxing?', href: '/how' },
     terms: { label: 'Terms', href: '/terms' },
     report: { label: 'Report', href: '/report' },
   },

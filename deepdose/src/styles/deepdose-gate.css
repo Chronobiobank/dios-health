@@ -147,8 +147,8 @@
   max-width: none;
   margin: 0 auto;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: clamp(1.75rem, 0.6rem + 5vw, 2.75rem);
-  font-weight: 600;
+  font-size: clamp(2.25rem, 0.9rem + 6.5vw, 3.5rem);
+  font-weight: 300;
   letter-spacing: -0.03em;
   line-height: 1.1;
   color: #0d0d0d;
@@ -161,6 +161,7 @@
   margin-inline: auto;
   text-align: center;
   font-family: inherit;
+  font-weight: 300;
   white-space: nowrap;
 }
 
@@ -169,15 +170,18 @@
   -webkit-text-fill-color: #0d0d0d;
 }
 
-/* Accent line: solid black weight, not spectrum */
-.dd-gate .dd-gate__headline .seco-landing__hero-spectrum {
+/* End line — must beat the shared .hero-line { 300 } rule above */
+.dd-gate
+  .dd-gate__headline
+  .seco-landing__hero-title.seco-landing__hero-title--two-line
+  > .seco-landing__hero-line.seco-landing__hero-spectrum {
   background: none;
   -webkit-background-clip: unset;
   background-clip: unset;
   -webkit-text-fill-color: #0d0d0d;
   color: #0d0d0d;
   animation: none;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .dd-gate__orbit {

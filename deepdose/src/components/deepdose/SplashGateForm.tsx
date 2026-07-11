@@ -32,7 +32,7 @@ type SplashGateFormProps = {
 
 type AuthIntent = 'signup' | 'signin'
 
-/** Splash conversion: email + password + Sign up always. Sign In / Open Grid in chrome. */
+/** Splash conversion: email + password + Sign up always. Sign in in chrome. */
 export function SplashGateForm({
   aboutHref,
   aboutLabel,
@@ -187,7 +187,7 @@ export function SplashGateForm({
           </Link>
           {authedHome ? (
             <Link href={authedHome} className="dd-gate__chrome-link">
-              Open Grid
+              Sign in
             </Link>
           ) : (
             <button

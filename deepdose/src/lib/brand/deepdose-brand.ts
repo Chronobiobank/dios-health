@@ -26,7 +26,7 @@ export const DEEPDOSE_MOVEMENT = 'Medmaxxing' as const
 export const DEEPDOSE_TOKEN_ECONOMY = 'Get in Flow.' as const
 
 /** Homepage hero — compelling CTA (stack + meeting people) */
-export const DEEPDOSE_HOME_HEADLINE = 'Max your chemistry.' as const
+export const DEEPDOSE_HOME_HEADLINE = 'Max your Chemistry' as const
 
 /** Dose = each stamped cluster on the stack — see lib/patient/dose-uploads.ts */
 

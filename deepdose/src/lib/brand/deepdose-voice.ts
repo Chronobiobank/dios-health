@@ -18,10 +18,10 @@ export const DEEPDOSE_VOICE = {
   tagline: 'Max your chemistry.',
   /** Home hero — CTA that includes Medmaxxing + meeting others */
   homeHeadlineWhite: 'Max your',
-  homeHeadlineAccent: 'chemistry.',
+  homeHeadlineAccent: 'Chemistry',
   homeLede: '',
   missionHeadlineWhite: 'Max your',
-  missionHeadlineAccent: 'chemistry.',
+  missionHeadlineAccent: 'Chemistry',
   missionLede: `${DEEPDOSE_NAME}: max your chemistry — ${DEEPDOSE_MOVEMENT} the stack, meet your clock, ${DEEPDOSE_TOKEN_ECONOMY}`,
   patientSubtitle: `Max your chemistry. ${DEEPDOSE_TOKEN_ECONOMY}`,
   communitySupport: 'Dosers on your clock. Max your chemistry.',

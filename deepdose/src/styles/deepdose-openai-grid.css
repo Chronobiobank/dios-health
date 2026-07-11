@@ -158,6 +158,15 @@
   max-width: var(--oai-page-max-wide);
 }
 
+.deepdose-shell.seco-shell--light
+  .seco-marketing-page.seco-how-page:not(.dd-product)
+  .seco-landing__section-inner.seco-how-page__inner {
+  --seco-page-max: 36rem;
+  max-width: 36rem;
+  margin-inline: auto;
+  align-items: center;
+}
+
 .deepdose-shell.seco-shell--light .clinical-site-nav,
 .deepdose-shell.seco-shell--light .seco-nav {
   background: rgb(247 247 245 / 0.92);
@@ -273,10 +282,41 @@
   margin: 0;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.15;
   letter-spacing: -0.03em;
+  text-transform: none;
   color: rgb(15 23 42 / 0.92);
+}
+
+/* One gothic family on light — beat .deepdose-shell h1 Merriweather */
+.deepdose-shell.seco-shell--light :is(h1, h2, h3, h4, .seco-page__title, .dios-heading) {
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  text-transform: none;
+}
+
+/*
+ * Head weight hierarchy: open light, end-of-line heavier (regular).
+ * Mark the closing word/line with .seco-landing__hero-spectrum or .seco-head__end,
+ * or put it last in the title.
+ */
+.deepdose-shell.seco-shell--light :is(
+  .seco-landing__hero-title,
+  .seco-page__title,
+  h1
+) {
+  font-weight: 300;
+}
+
+.deepdose-shell.seco-shell--light :is(
+  .seco-landing__hero-spectrum,
+  .seco-head__end,
+  .seco-landing__hero-line:last-child,
+  .seco-page__title > :last-child
+) {
+  font-weight: 400;
 }
 
 .deepdose-shell.seco-shell--light .seco-page__title .seco-landing__hero-spectrum {

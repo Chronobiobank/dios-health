@@ -28,8 +28,9 @@
 @import "./deepdose-openai-grid.css";
 /* Last: product spacing + Inter lock must beat sleep-wake / marketing display serif */
 @import "./deepdose-product-space.css";
+@import "./deepdose-how-loop.css";
 
-/* Turbopack dev: entry must include a real rule after @imports (PostCSS runs before import inlining). */
+/* Turbopack: force refresh after how-loop CSS brace fix */
 :root {
   --deepdose-marketing-stack: 1;
 }
