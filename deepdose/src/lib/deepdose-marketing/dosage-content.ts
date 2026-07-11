@@ -3,7 +3,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 export const DOSAGE_PAGE_META = {
   title: `Chemistry · ${DEEPDOSE_NAME}`,
   description:
-    'Your rhythm and dosing tools — secondary to the Grid.',
+    'Your timing tools for what you take.',
 } as const
 
 export const DOSAGE_PAGE = {
@@ -24,7 +24,7 @@ export const SHARE_PAGE = {
   support: 'Log a dose. People on your clock see the night you actually lived.',
   pointsEyebrow: 'How doses work',
   points: [
-    'Resetters, Hijackers, Crossers, or Batteries — photo plus sleep score',
+    'Night, Day, Energy, or Fuel — photo plus sleep score',
     'People on your clock see today’s dose',
     'You stay in control of what you share',
   ],

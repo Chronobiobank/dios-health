@@ -28,7 +28,7 @@ export function BankDashboardView() {
     [bodyClock.sleepOnsetLabel, bodyClock.wakeLabel]
   )
 
-  const tokens = bankOptIn ? 12 + todaySelf.length * 3 : 0
+  const thanks = bankOptIn ? 12 + todaySelf.length * 3 : 0
 
   if (!draftReady || !ready || !profile.ready) return null
 
@@ -40,7 +40,7 @@ export function BankDashboardView() {
         <p className="dd-bank__gauge-hint">{SLEEP_SCORE.hint}</p>
       </div>
 
-      <section className="dd-bank__pillars" aria-label="Today’s stack">
+      <section className="dd-bank__pillars" aria-label="Today’s doses">
         <h2 className="dd-bank__section-title">Today</h2>
         <div className="dd-bank__timeline">
           {DOSE_TAGS.map((tag) => {
@@ -52,7 +52,7 @@ export function BankDashboardView() {
                 className={done ? 'dd-bank__slot dd-bank__slot--on' : 'dd-bank__slot'}
               >
                 <span className="dd-bank__slot-hash" style={{ color: meta.cue }}>
-                  {meta.hash}
+                  {meta.label}
                 </span>
                 <span className="dd-bank__slot-state">{done ? 'Done' : 'Open'}</span>
               </div>
@@ -67,9 +67,9 @@ export function BankDashboardView() {
       <section className="dd-bank__research">
         <div className="dd-bank__research-row">
           <div>
-            <p className="dd-bank__section-title">Research Engine</p>
+            <p className="dd-bank__section-title">Help research</p>
             <p className="dd-bank__research-copy">
-              Stream anonymized packets to Chronobiobank.
+              Share anonymous sleep data to help others. You can turn this off anytime.
             </p>
           </div>
           <button
@@ -85,19 +85,19 @@ export function BankDashboardView() {
           </button>
         </div>
         {bankOptIn ? (
-          <p className="dd-bank__tokens tabular-nums">Tokens · {tokens}</p>
+          <p className="dd-bank__tokens tabular-nums">Shared · {thanks}</p>
         ) : null}
       </section>
 
-      <section className="dd-bank__clinical" aria-label="Clinical tools">
-        <h2 className="dd-bank__section-title">Clinical</h2>
+      <section className="dd-bank__clinical" aria-label="Your tools">
+        <h2 className="dd-bank__section-title">Your tools</h2>
         <Link href="/dosage" className="dd-bank__clinical-link">
           <span className="dd-bank__clinical-title">Chemistry</span>
-          <span className="dd-bank__clinical-meta">Stack timing & dosing windows</span>
+          <span className="dd-bank__clinical-meta">Timing for what you take</span>
         </Link>
         <Link href="/testkit" className="dd-bank__clinical-link">
           <span className="dd-bank__clinical-title">TipTraQ testkit</span>
-          <span className="dd-bank__clinical-meta">3-night home sleep · apnea risk</span>
+          <span className="dd-bank__clinical-meta">Three nights at home</span>
         </Link>
       </section>
 

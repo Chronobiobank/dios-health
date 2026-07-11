@@ -61,7 +61,7 @@ export function LogDoseView() {
     requestAnimationFrame(() => inputRef.current?.click())
   }
 
-  // Return from Chemistry with ?tag=RESETTER (etc.) → stamp photo for the Grid
+  // Return from Chemistry with ?tag=RESETTER (etc.) → log photo for the feed
   useEffect(() => {
     const tag = parseDoseTag(searchParams.get('tag'))
     if (tag && dosesReady && profile.ready) {
@@ -119,7 +119,7 @@ export function LogDoseView() {
                 onClick={() => openCamera(tag)}
               >
                 <span className="dd-log__btn-main">
-                  <span className="dd-log__btn-hash">{meta.hash}</span>
+                  <span className="dd-log__btn-hash">{meta.label}</span>
                   <span className="dd-log__btn-sub">{meta.hint}</span>
                 </span>
                 {done ? <span className="dd-log__btn-done">Logged</span> : null}
@@ -143,7 +143,7 @@ export function LogDoseView() {
       {error ? <p className="dd-log__error">{error}</p> : null}
 
       <p className="dd-log__stamp tabular-nums">
-        Stamps sleep score {sri} · Off {bodyClock.sleepOnsetLabel} · On {bodyClock.wakeLabel}
+        Sleep score {sri} · Off {bodyClock.sleepOnsetLabel} · On {bodyClock.wakeLabel}
       </p>
     </div>
   )

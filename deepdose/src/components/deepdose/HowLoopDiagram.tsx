@@ -13,7 +13,7 @@ const NODE_SIZE = 104
 
 /**
  * How CVP — same stage + placement as HomeFaceNetwork.
- * Hub title in the center; Max / Score / Flow on the ring.
+ * Hub title in the center; Score / Plan / Boost / Find on the ring.
  */
 export function HowLoopDiagram() {
   const rootRef = useRef<HTMLDivElement>(null)

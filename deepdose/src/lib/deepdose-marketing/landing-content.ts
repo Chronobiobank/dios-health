@@ -8,7 +8,7 @@ import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
   title: `${DEEPDOSE_NAME} · Max your chemistry.`,
-  description: `${DEEPDOSE_NAME}: max your chemistry — Medmaxxing the stack, meet your clock, get in Flow.`,
+  description: `${DEEPDOSE_NAME}: max your chemistry — score your nights, plan what you take, find people on your clock.`,
 } as const
 
 export const DEEPDOSE_CVP = 'Max your chemistry.' as const
@@ -60,7 +60,7 @@ export const DEEPDOSE_MISSION = {
   eyebrow: 'Three moves',
   headlineWhite: DEEPDOSE_VOICE.missionHeadlineWhite,
   headlineAccent: DEEPDOSE_VOICE.missionHeadlineAccent,
-  headline: 'Max. Score. Flow.',
+  headline: 'Score. Plan. Boost. Find.',
   lede: DEEPDOSE_VOICE.missionLede,
 } as const
 
@@ -88,7 +88,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'test',
       label: 'Log',
-      body: 'Resetters · Hijackers · Crossers · Batteries',
+      body: 'Night · Day · Energy · Fuel',
       icon: 'test' as const,
       panelTitle: 'Your dose readout',
       panelSeeAll: { label: 'Open Chemistry', href: '/dosage' },
@@ -113,15 +113,15 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     },
     {
       id: 'plan',
-      label: 'Grid',
+      label: 'Feed',
       body: 'People on your clock',
       icon: 'plan' as const,
-      panelTitle: 'The Grid',
+      panelTitle: 'Your feed',
       panelSeeAll: { label: 'Sign in', href: '/grid' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'One dose at a time: photo plus sleep score, for Larks or Owls.',
+          title: 'One dose at a time: photo plus sleep score, for early birds or night owls.',
           meta: 'You choose · Opt in',
           href: '/dose',
         },

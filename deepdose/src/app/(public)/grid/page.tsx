@@ -5,14 +5,14 @@ import { GridFeedView } from '@/components/deepdose/GridFeedView'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const metadata: Metadata = {
-  title: `Grid · ${DEEPDOSE_NAME}`,
-  description: 'People on your clock — Larks and Owls, sleep scores, doses.',
+  title: `Feed · ${DEEPDOSE_NAME}`,
+  description: 'People on your clock — early birds and night owls, sleep scores, doses.',
   alternates: { canonical: '/grid' },
 }
 
 export default function GridPage() {
   return (
-    <ProductAppShell title="Grid" className="dd-grid-page">
+    <ProductAppShell title="Feed" className="dd-grid-page">
       <GridFeedView />
     </ProductAppShell>
   )

@@ -16,7 +16,7 @@ export type MembershipTier = {
 export const MEMBERSHIP_PAGE_META = {
   title: `Membership · ${DEEPDOSE_NAME}`,
   description:
-    'Free to log doses on the Grid. TipTraQ when you want a deeper sleep read.',
+    'Free to log doses. TipTraQ when you want a deeper sleep read.',
 } as const
 
 export const MEMBERSHIP_PAGE_INTRO = {
@@ -35,10 +35,10 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#acd3de',
     figure: '$0',
     cadence: 'Phone & wearable',
-    note: 'Log and sync on the Grid.',
+    note: 'Log doses and see people on your clock.',
     cta: { label: 'Start free', href: '/' },
     includes: [
-      'Daily doses on the Grid',
+      'Daily doses in your feed',
       'People on your clock',
       'Optional research share only',
     ],

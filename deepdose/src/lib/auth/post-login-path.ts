@@ -2,7 +2,7 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 
 export type UserTier = 'patient' | 'clinician' | 'enterprise'
 
-/** Consumer home after auth — chronotype Grid. */
+/** Consumer home after auth — dose feed. */
 export const DEFAULT_PATIENT_HOME = '/grid'
 
 /** @deprecated Clinical activation still uses consent; consumers land on DEFAULT_PATIENT_HOME. */

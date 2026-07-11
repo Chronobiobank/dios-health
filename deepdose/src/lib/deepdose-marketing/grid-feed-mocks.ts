@@ -1,4 +1,4 @@
-/** Seeded Grid doses for Larks / Owls — candid Unsplash stills (not studio stock). */
+/** Seeded feed doses for early birds / night owls — candid Unsplash stills. */
 
 import { DEEPDOSE_COMMUNITY_MATCHES } from '@/lib/deepdose-marketing/community-content'
 import { communityFaceUrl } from '@/lib/deepdose-marketing/community-faces'

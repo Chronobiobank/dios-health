@@ -19,9 +19,9 @@ export const DEEPDOSE_SPLASH_LINKS = DEEPDOSE_SITE_LINKS
 /** Footer essentials when mounted. */
 export const DEEPDOSE_FOOTER_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'Grid', href: '/grid' },
+  { label: 'Feed', href: '/grid' },
   { label: 'Log', href: '/dose' },
-  { label: 'Bank', href: '/bank' },
+  { label: 'Score', href: '/bank' },
   { label: 'Me', href: '/profile' },
   { label: 'Terms', href: '/terms' },
 ] as const

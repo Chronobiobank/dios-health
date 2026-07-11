@@ -37,7 +37,7 @@ export const SCIENCE_TRUST_FEATURES = [
     id: 'privacy',
     badge: 'Privacy',
     title: 'Your data stays with you',
-    teaser: 'You choose what goes on the Grid.',
+    teaser: 'You choose what other people see.',
     cue: '#f2b8a2',
     href: '/mission',
   },

@@ -7,7 +7,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const metadata: Metadata = {
   title: `Log Dose · ${DEEPDOSE_NAME}`,
-  description: 'Log Resetters, Hijackers, Crossers, or Batteries — photo plus sleep score.',
+  description: 'Log Night, Day, Energy, or Fuel — photo plus sleep score.',
   alternates: { canonical: '/dose' },
 }
 

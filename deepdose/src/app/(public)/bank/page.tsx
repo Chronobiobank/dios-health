@@ -5,14 +5,14 @@ import { BankDashboardView } from '@/components/deepdose/BankDashboardView'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const metadata: Metadata = {
-  title: `Bank · ${DEEPDOSE_NAME}`,
-  description: 'Sleep score, today’s stack, Chronobiobank opt-in.',
+  title: `Score · ${DEEPDOSE_NAME}`,
+  description: 'Your sleep score, today’s doses, and optional research share.',
   alternates: { canonical: '/bank' },
 }
 
 export default function BankPage() {
   return (
-    <ProductAppShell title="Bank" className="dd-bank-page">
+    <ProductAppShell title="Score" className="dd-bank-page">
       <BankDashboardView />
     </ProductAppShell>
   )

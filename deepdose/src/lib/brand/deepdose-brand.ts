@@ -28,7 +28,7 @@ export const DEEPDOSE_TOKEN_ECONOMY = 'Log a dose.' as const
 /** Homepage hero — compelling CTA (stack + meeting people) */
 export const DEEPDOSE_HOME_HEADLINE = 'Max your Chemistry' as const
 
-/** Dose = each logged item on the Grid — see lib/patient/dose-uploads.ts */
+/** Dose = each logged item in the feed — see lib/patient/dose-uploads.ts */
 
 /**
  * Copy hierarchy:

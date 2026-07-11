@@ -34,38 +34,38 @@ export const DOSE_UPLOADS_STORAGE_KEY = 'deepdose-dose-uploads'
 export const BANK_OPT_IN_KEY = 'deepdose-bank-opt-in'
 export const DOSE_SYNCS_KEY = 'deepdose-dose-syncs'
 
-/** Consumer labels — Medmaxxing biologic clusters. */
+/** Consumer labels — four dose types. Plain English in the UI. */
 export const DOSE_TAG_META: Record<
   DoseTag,
   { label: string; hash: string; cue: string; hint: string; idea: string }
 > = {
   RESETTER: {
-    label: 'Resetters',
-    hash: '#Resetters',
+    label: 'Night',
+    hash: '#Night',
     cue: 'var(--dd-cue-resetter)',
-    hint: 'Brain → night',
-    idea: 'Tell your brain: drop everything, it’s bedtime now.',
+    hint: 'Help you wind down for sleep',
+    idea: 'Help your brain wind down for bedtime.',
   },
   HIJACKER: {
-    label: 'Hijackers',
-    hash: '#Hijackers',
+    label: 'Day',
+    hash: '#Day',
     cue: 'var(--dd-cue-hijacker)',
-    hint: 'Organs → day',
-    idea: 'Tell your organs: wake up and work at 100%.',
+    hint: 'Help you wake and focus',
+    idea: 'Help your body wake up and work.',
   },
   CROSSER: {
-    label: 'Crossers',
-    hash: '#Crossers',
+    label: 'Energy',
+    hash: '#Energy',
     cue: 'var(--dd-cue-crosser)',
-    hint: 'Volume on energy',
-    idea: 'Pull the volume knob up or down on your brain’s energy.',
+    hint: 'Turn energy up or down',
+    idea: 'Turn your energy up or down when you need it.',
   },
   BATTERY: {
-    label: 'Batteries',
-    hash: '#Batteries',
+    label: 'Fuel',
+    hash: '#Fuel',
     cue: 'var(--dd-cue-battery)',
-    hint: 'Fuel the timers',
-    idea: 'Oil and fuel so the cellular timers run on time.',
+    hint: 'Keep your body clock fed',
+    idea: 'Fuel so your body clock stays on time.',
   },
 }
 

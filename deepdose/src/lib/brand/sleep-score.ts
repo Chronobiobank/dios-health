@@ -3,16 +3,16 @@
  * Engine / clinical code may still say SRI; UI should not lead with it.
  */
 export const SLEEP_SCORE = {
-  /** Primary label (Bank, Me, ring) */
+  /** Primary label (Score, Me, ring) */
   label: 'Sleep score',
   /** One-line meaning */
-  hint: 'How locked your nights are.',
-  /** Grid / peer badge prefix */
+  hint: 'How steady your nights are.',
+  /** Feed / peer badge prefix */
   badge: 'Score',
   /** Climb / CTA verbs */
   climb: 'Raise your sleep score.',
   climbShort: 'Raise your score',
-  stamp: 'Stamps your sleep score',
+  stamp: 'Logs your sleep score',
   /** Optional clinical footnote — rare, not in product chrome */
   clinicalName: 'Sleep Regularity Index (SRI)',
 } as const

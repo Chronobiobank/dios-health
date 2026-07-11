@@ -7,9 +7,9 @@ export type AppBottomNavItem = {
 }
 
 export const APP_BOTTOM_NAV: readonly AppBottomNavItem[] = [
-  { id: 'grid', label: 'Grid', href: '/grid' },
+  { id: 'grid', label: 'Feed', href: '/grid' },
   { id: 'dose', label: 'Log', href: '/dose' },
-  { id: 'bank', label: 'Bank', href: '/bank' },
+  { id: 'bank', label: 'Score', href: '/bank' },
   { id: 'me', label: 'Me', href: '/profile' },
 ] as const
 

@@ -44,7 +44,7 @@ function DoseCard({
           <p className="dd-grid__name">{dose.displayName}</p>
           <p className="dd-grid__sub">
             <span className="dd-grid__tag" style={{ color: tag.cue }}>
-              {tag.hash}
+              {tag.label}
             </span>
             <span aria-hidden> · </span>
             {formatTime(dose.timestamp)}
@@ -59,15 +59,15 @@ function DoseCard({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={dose.mediaUrl} alt="" className="dd-grid__photo" />
         {dose.isPremium ? (
-          <div className="dd-grid__blur" aria-label="Premium dose locked">
-            <p className="dd-grid__unlock">Unlock Dose: ${dose.unlockPrice.toFixed(2)}</p>
+          <div className="dd-grid__blur" aria-label="Dose photo hidden">
+            <p className="dd-grid__unlock">Photo shared with friends only</p>
           </div>
         ) : null}
       </div>
 
       <footer className="dd-grid__card-foot">
         <button type="button" className="dd-grid__sync" onClick={onSync}>
-          Flow · {syncCount}
+          Boost · {syncCount}
         </button>
       </footer>
     </article>
@@ -96,7 +96,7 @@ export function GridFeedView() {
 
   return (
     <div className="dd-grid">
-      <div className="dd-grid__tabs" role="tablist" aria-label="Chronotype">
+      <div className="dd-grid__tabs" role="tablist" aria-label="Sleep timing">
         <button
           type="button"
           role="tab"
@@ -104,7 +104,7 @@ export function GridFeedView() {
           className={feed === 'lark' ? 'dd-grid__tab dd-grid__tab--on' : 'dd-grid__tab'}
           onClick={() => setFeed('lark')}
         >
-          Larks
+          Early birds
         </button>
         <button
           type="button"
@@ -113,13 +113,13 @@ export function GridFeedView() {
           className={feed === 'owl' ? 'dd-grid__tab dd-grid__tab--on' : 'dd-grid__tab'}
           onClick={() => setFeed('owl')}
         >
-          Owls
+          Night owls
         </button>
       </div>
 
       <div className="dd-grid__feed">
         {items.length === 0 ? (
-          <p className="dd-grid__empty">No doses in this feed yet.</p>
+          <p className="dd-grid__empty">No doses here yet. Log one to start.</p>
         ) : (
           items.map((dose) => (
             <DoseCard

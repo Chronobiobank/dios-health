@@ -12,7 +12,7 @@ export function SiteJsonLd() {
         name: DEEPDOSE_NAME,
         url: BASE,
         slogan: DEEPDOSE_TAGLINE,
-        description: 'Max your chemistry — Medmaxxing the stack, meet your clock, get in Flow.',
+        description: 'Max your chemistry — score your nights, plan what you take, find people on your clock.',
       },
       {
         '@type': 'WebSite',

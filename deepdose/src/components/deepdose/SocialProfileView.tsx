@@ -241,7 +241,7 @@ export function SocialProfileView({
 
       <div className="dd-profile__me-links">
         <Link href="/bank" className="dd-profile__chem-link">
-          Bank
+          Score
         </Link>
         <Link href="/dosage?from=metabolic" className="dd-profile__chem-link">
           Chemistry

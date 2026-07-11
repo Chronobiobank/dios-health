@@ -2,8 +2,8 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 /**
  * Audience: people off the usual clock (ex-Manjam first cohort).
- * Plain English. No street slang. Product words (Medmaxxing, Chemistry) stay as brand.
- * Prefer “people off the clock” over insider labels on public pages.
+ * Plain English. No street slang. No insider product words (Grid, Bank, Flow, dosers).
+ * Prefer Feed / Score / Log / Me. Brand words (Medmaxxing, Chemistry) stay.
  */
 export const DEEPDOSE_AUDIENCE = {
   label: 'people off the clock',

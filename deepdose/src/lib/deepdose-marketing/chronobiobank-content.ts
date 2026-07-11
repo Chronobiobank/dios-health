@@ -39,7 +39,7 @@ export const CHRONOBIOBANK_LETTER_TILES = [
   {
     id: 'how',
     label: 'How',
-    body: 'Built on sleep score, locked nights, and doses on the Grid.',
+    body: 'Built on sleep score, locked nights, and doses you share.',
   },
   {
     id: 'who',
