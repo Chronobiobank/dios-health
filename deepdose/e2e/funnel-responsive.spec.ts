@@ -48,7 +48,7 @@ for (const viewport of VIEWPORTS) {
 
       await expect(page.getByRole('heading', { level: 1 })).toContainText(/Find your/i)
       await expect(page.getByRole('heading', { level: 1 })).toContainText(/chemical match/i)
-      await expect(page.getByRole('link', { name: /^About$/i })).toBeVisible()
+      await expect(page.getByRole('link', { name: /^About us$/i })).toBeVisible()
       await expect(page.getByRole('button', { name: /^Sign In$/i })).toBeVisible()
       await expect(page.getByRole('button', { name: /Sign up to Deepdose/i })).toBeVisible()
       await expect(page.getByPlaceholder('Email')).toBeVisible()
