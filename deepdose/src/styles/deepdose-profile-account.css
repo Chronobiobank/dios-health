@@ -1025,7 +1025,7 @@ a.dd-profile__chemistry:hover {
   margin: 0;
   font-size: var(--dd-type-body, 0.9375rem);
   line-height: 1.3;
-  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+  color: rgb(100 116 139);
 }
 
 .dd-profile-dash__tools {

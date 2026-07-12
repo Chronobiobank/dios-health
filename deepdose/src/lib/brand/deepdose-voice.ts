@@ -31,12 +31,11 @@ export const DEEPDOSE_VOICE = {
   /** Home hero — Max Your / Chemistry */
   homeHeadlineWhite: 'Max Your',
   homeHeadlineAccent: 'Chemistry',
-  homeLede:
-    'Real connections timed to your rhythm — sleep, energy and meds that work with your life.',
+  homeLede: 'Real connections timed to your rhythm.',
   /** Home CTA — single founder claim */
-  homePrimaryCta: { label: 'Claim Your Free Founder Access', href: '/founders' },
+  homePrimaryCta: { label: 'Claim Free Access', href: '/founders' },
   /** @deprecated Home uses a single primary CTA. */
-  homeSecondaryCta: { label: 'Claim Your Free Founder Access', href: '/founders' },
+  homeSecondaryCta: { label: 'Claim Free Access', href: '/founders' },
   missionHeadlineWhite: 'Make chemistry',
   missionHeadlineAccent: 'work',
   missionLede: 'Phenotypes match. Tribe keeps. Sync connects.',
