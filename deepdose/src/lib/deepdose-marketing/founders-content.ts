@@ -5,16 +5,16 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 export const FOUNDERS_PAGE_META = {
   title: `Founders · ${DEEPDOSE_NAME}`,
   description:
-    'Welcome back Manjam founders. Real connections rebuilt around your actual chemistry — claim free founder access.',
+    'Welcome back Manjam community members. Real connections rebuilt around your actual chemistry — claim free founder access.',
 } as const
 
 export const FOUNDERS_INTRO = {
-  title: 'Welcome Back Manjam Founders',
+  title: 'Welcome Back Manjam Community Members',
   lede: 'We took everything we loved about real connections — and rebuilt it around your actual chemistry. As a Founding Member you get:',
 } as const
 
 export const FOUNDERS_PRIMARY_CTA = {
-  label: 'Claim Your Free Founder Access',
+  label: 'Reconnect Now',
   href: '/founders/join',
 } as const
 
@@ -62,6 +62,5 @@ export const FOUNDERS_PERKS = {
 } as const
 
 export const FOUNDERS_CLOSE = {
-  title: 'Ready to connect with people who run on your clock?',
   cta: FOUNDERS_PRIMARY_CTA,
 } as const

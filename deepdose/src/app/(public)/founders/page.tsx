@@ -41,13 +41,7 @@ export default function FoundersPage() {
           ))}
         </ul>
 
-        <section
-          className="seco-how-page__founding seco-reveal seco-reveal--3"
-          aria-labelledby="founders-close-title"
-        >
-          <h2 id="founders-close-title" className="seco-page__title">
-            <span className="seco-landing__hero-spectrum">{FOUNDERS_CLOSE.title}</span>
-          </h2>
+        <section className="seco-how-page__founding seco-reveal seco-reveal--3">
           <div className={marketingCtaClass('seco-how-page__cta')}>
             <Link
               href={FOUNDERS_CLOSE.cta.href}
