@@ -1,4 +1,4 @@
-﻿/** Science & trust · lean scan page; detail lives on linked routes. */
+/** Science & trust · lean scan page; detail lives on linked routes. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
@@ -10,8 +10,7 @@ export const SCIENCE_TRUST_META = {
 
 export const SCIENCE_TRUST_INTRO = {
   title: 'Sleep you can measure.',
-  lede:
-    'We help you read your night so you can log an honest phenotype score. Here is what we measure, what we will not claim, and the published science behind timing.',
+  lede: 'Honest night reads for a clearer phenotype score.',
 } as const
 
 export const SCIENCE_TRUST_FEATURES = [
@@ -19,7 +18,7 @@ export const SCIENCE_TRUST_FEATURES = [
     id: 'limits',
     badge: 'Honesty',
     title: 'What we will not claim',
-    teaser: 'Dose logging and timing tools. Not a doctor. Not a diagnosis.',
+    teaser: 'Timing tools only — not a doctor, not a diagnosis.',
     cue: '#6b7280',
     href: '/terms',
   },
@@ -27,7 +26,7 @@ export const SCIENCE_TRUST_FEATURES = [
     id: 'measure',
     badge: 'Measure',
     title: 'How we read your night',
-    teaser: 'Phone first. TipTraQ when you want a clinical early-risk read.',
+    teaser: 'Phone first. Homekit when you want a deeper read.',
     cue: '#acd3de',
     href: '/testkit',
   },
@@ -35,7 +34,7 @@ export const SCIENCE_TRUST_FEATURES = [
     id: 'privacy',
     badge: 'Privacy',
     title: 'Your data stays with you',
-    teaser: 'You choose what other people see.',
+    teaser: 'You choose what peers see on your doses.',
     cue: '#f2b8a2',
     href: '/how',
   },
@@ -43,7 +42,7 @@ export const SCIENCE_TRUST_FEATURES = [
     id: 'evidence',
     badge: 'Evidence',
     title: 'Published studies',
-    teaser: 'Trials on rhythm and timing behind clearer scores.',
+    teaser: 'Rhythm trials behind clearer timing scores.',
     cue: '#8b9cf8',
     href: '#evidence',
   },

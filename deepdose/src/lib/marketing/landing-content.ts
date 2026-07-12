@@ -26,7 +26,7 @@ export const LANDING_FOOTER = {
     {
       title: 'Product',
       links: [
-        { label: 'How it works', href: '/how' },
+        { label: 'Make chemistry work', href: '/how' },
         { label: 'Patient onboarding', href: '/' },
         { label: 'Dosage', href: '/dosage' },
       ],

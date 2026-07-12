@@ -377,24 +377,36 @@
 .deepdose-shell.seco-shell--light .seco-marketing-page .seco-spectrum-tile,
 .deepdose-shell.seco-shell--light .seco-marketing-page .seco-science-fold--grid-tile,
 .deepdose-shell.seco-shell--light .seco-marketing-page .seco-science-fold--linked {
-  --spectrum-tile-wash: 18%;
-  --spectrum-tile-wash-hover: 24%;
+  --spectrum-tile-wash: 14%;
+  --spectrum-tile-wash-hover: 20%;
   --spectrum-tile-border-mix: 28%;
-  --dios-glass-outer-bg: #fff;
-  --dios-glass-outer-border: rgb(15 23 42 / 0.1);
-  --dios-glass-outer-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
-  --dios-glass-outer-blur: none;
-  border-color: rgb(15 23 42 / 0.1);
-  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  --dios-glass-outer-bg: linear-gradient(
+    152deg,
+    rgb(255 255 255 / 0.52) 0%,
+    rgb(255 255 255 / 0.34) 42%,
+    rgb(255 255 255 / 0.44) 100%
+  );
+  --dios-glass-outer-border: rgb(255 255 255 / 0.62);
+  --dios-glass-outer-shadow: 0 10px 32px rgb(15 23 42 / 0.08);
+  --dios-glass-outer-blur: blur(28px) saturate(1.55);
+  --dios-glass-outer-highlight: inset 0 1px 0 rgb(255 255 255 / 0.85);
+  border-color: var(--dios-glass-outer-border);
+  box-shadow: var(--dios-glass-outer-highlight), var(--dios-glass-outer-shadow);
+  backdrop-filter: var(--dios-glass-outer-blur);
+  -webkit-backdrop-filter: var(--dios-glass-outer-blur);
 }
 
 .deepdose-shell.seco-shell--light .seco-marketing-page .seco-spectrum-tile:hover,
 .deepdose-shell.seco-shell--light .seco-marketing-page .seco-science-fold--linked:hover {
   transform: none;
-  border-color: rgb(15 23 42 / 0.16);
-  box-shadow: 0 4px 16px rgb(15 23 42 / 0.06);
+  --dios-glass-outer-bg: linear-gradient(
+    152deg,
+    rgb(255 255 255 / 0.62) 0%,
+    rgb(255 255 255 / 0.42) 42%,
+    rgb(255 255 255 / 0.52) 100%
+  );
+  border-color: rgb(255 255 255 / 0.78);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.95), 0 14px 40px rgb(15 23 42 / 0.1);
 }
 
 .deepdose-shell.seco-shell--light .seco-marketing-cta .seco-landing__btn--primary,
@@ -440,9 +452,15 @@
 }
 
 .deepdose-shell.seco-shell--light .seco-chronobiobank__letter-tile {
-  border-color: rgb(15 23 42 / 0.1) !important;
-  background: #fff !important;
-  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+  border-color: rgb(255 255 255 / 0.62) !important;
+  background: linear-gradient(
+    152deg,
+    rgb(255 255 255 / 0.52) 0%,
+    rgb(255 255 255 / 0.34) 100%
+  ) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.85), 0 10px 32px rgb(15 23 42 / 0.08);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
 }
 
 .deepdose-shell.seco-shell--light .seco-chronobiobank__letter-tile-label {

@@ -3,21 +3,20 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const TESTKIT_META = {
-  title: `Testkit · ${DEEPDOSE_NAME}`,
+  title: `Homekit · ${DEEPDOSE_NAME}`,
   description:
-    'Three nights at home with TipTraQ. A deeper chemistry read so you can share clearer details and connect with confidence.',
+    'Three nights at home with Homekit. A deeper chemistry read so you can share clearer details and connect with confidence.',
 } as const
 
 export const TESTKIT_INTRO = {
   title: 'Three nights. Clearer chemistry.',
-  lede: `Odd hours need a stronger read than a phone alone. Wear TipTraQ at home for three nights. ${DEEPDOSE_NAME} turns those nights into clearer rhythm details you can understand, share, and correct with people on a similar clock.`,
+  lede: 'Homekit for a stronger phenotype read.',
 } as const
 
 export const TESTKIT_KIT = {
   eyebrow: 'The kit',
   title: 'One sensor. Three nights at home.',
-  lede:
-    'Soft finger sensor, charging case, and app. Built for real nights, not a clinic bed. Stronger details for your chemistry profile.',
+  lede: 'Finger sensor, case, and app — built for real nights.',
   includes: [
     'Reusable sensor and home setup',
     'Three nights of sleep and breathing data',
@@ -33,7 +32,7 @@ export const TESTKIT_STEPS = [
     label: 'Order',
     cue: '#acd3de',
     title: 'When you want a deeper read',
-    body: 'Order TipTraQ when phone estimates are not enough. No clinic overnight. No waiting list.',
+    body: 'Order Homekit when phone estimates are not enough. No clinic overnight. No waiting list.',
   },
   {
     id: 'wear',
@@ -62,6 +61,6 @@ export const TESTKIT_STEPS = [
 ] as const
 
 export const TESTKIT_CTA = {
-  primary: { label: 'How the kit works', href: '/tiptraq' },
-  secondary: { label: 'Know my risk', href: '/profile' },
+  primary: { label: 'How Homekit works', href: '/tiptraq' },
+  secondary: { label: 'See my profile', href: '/profile' },
 } as const

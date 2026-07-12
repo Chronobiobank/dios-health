@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 
+import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
 import {
   APP_FEED_GROUPS,
   APP_GROUP_DEFAULT,
@@ -45,7 +46,7 @@ export function AppGroupSwitcher() {
   const pathname = usePathname() ?? '/'
   const rootRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
-  // SSR + first client paint always Early Explorer — sync from URL/storage after mount.
+  // SSR + first client paint always Lion — sync from URL/storage after mount.
   const [activeId, setActiveId] = useState<AppGroupId>(APP_GROUP_DEFAULT)
 
   useEffect(() => {
@@ -87,6 +88,7 @@ export function AppGroupSwitcher() {
         aria-controls={MENU_ID}
         onClick={() => setOpen((v) => !v)}
       >
+        <PhenotypeIcon id={active.id} size="sm" />
         <span className="app-top-bar__group-label">{active.label}</span>
         <svg
           className="app-top-bar__group-caret"
@@ -119,6 +121,7 @@ export function AppGroupSwitcher() {
                 }
                 onClick={() => selectGroup(group.id)}
               >
+                <PhenotypeIcon id={group.id} size="sm" />
                 {group.label}
               </button>
             </li>

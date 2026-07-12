@@ -3,23 +3,22 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const TIPTRAQ_PAGE_META = {
-  title: `At-home sleep testing · ${DEEPDOSE_NAME}`,
+  title: `Homekit · ${DEEPDOSE_NAME}`,
   description:
-    'Wear TipTraQ at home for a deeper chemistry read — charge, set up, overnight wear, upload, and a clearer rhythm baseline to share.',
+    'Wear Homekit at home for a deeper chemistry read — charge, set up, overnight wear, upload, and a clearer rhythm baseline to share.',
 } as const
 
 export const TIPTRAQ_PAGE_INTRO = {
-  eyebrow: 'TipTraQ',
+  eyebrow: 'Homekit',
   titleWhite: 'At-home',
   titleAccent: 'deeper read',
-  lede:
-    'Charge the sensor, set up the app, and wear TipTraQ overnight , usually across three nights. Each morning you upload. You get a stronger rhythm baseline for chemistry you can understand and share.',
+  lede: 'Wear Homekit overnight. Upload. Share a clearer score.',
 } as const
 
-/** Which side holds the copy block. */
+/** Which side holds the media block. */
 export type TipTraqStepCopySide = 'left' | 'right'
 
-/** Vertical anchor for copy within the tile. */
+/** @deprecated Kept for older step data; light guide tiles ignore valign. */
 export type TipTraqStepCopyValign = 'top' | 'center' | 'bottom'
 
 export type TipTraqGuideStep = {
@@ -32,7 +31,7 @@ export type TipTraqGuideStep = {
   alt: string
   copySide?: TipTraqStepCopySide
   copyValign?: TipTraqStepCopyValign
-  /** CSS object-position for the full-bleed cover image */
+  /** CSS object-position for the cover image */
   imagePosition?: string
 }
 
@@ -42,76 +41,70 @@ export const TIPTRAQ_GUIDE_STEPS: readonly TipTraqGuideStep[] = [
     rank: 1,
     cue: '#acd3de',
     title: 'Charge the sensor',
-    body: 'Top up the case, then open the app.',
+    body: 'Top up the case overnight, then open the companion app.',
     image: '/tiptraq/tiptraq-v3-1.png',
-    alt: 'Open TipTraQ charging case with the soft fabric finger sensor, beside the companion app',
+    alt: 'Open Homekit charging case with the soft fabric finger sensor, beside the companion app',
     copySide: 'left',
-    copyValign: 'top',
-    imagePosition: '92% center',
+    imagePosition: 'center',
   },
   {
     id: 'app',
     rank: 2,
     cue: '#c9b6f2',
     title: 'Set up the app',
-    body: 'Activate your study and confirm your details.',
+    body: 'Activate your study and confirm the details once.',
     image: '/tiptraq/tiptraq-v3-2.png',
-    alt: 'TipTraQ app screen for setting up a new sleep study',
+    alt: 'Homekit app screen for setting up a new sleep study',
     copySide: 'left',
-    copyValign: 'bottom',
-    imagePosition: '82% center',
+    imagePosition: 'center',
   },
   {
     id: 'wear',
     rank: 3,
     cue: '#f2b8a2',
     title: 'Wear it overnight',
-    body: 'Wrap the sensor, start recording, sleep as usual.',
+    body: 'Wrap the sensor, start recording, and sleep as usual.',
     image: '/tiptraq/tiptraq-v3-3cut.png',
-    alt: 'A hand wearing the soft TipTraQ fabric sensor around the finger',
+    alt: 'A hand wearing the soft Homekit fabric sensor around the finger',
     copySide: 'right',
-    copyValign: 'center',
-    imagePosition: '32% center',
+    imagePosition: 'center',
   },
   {
     id: 'sync',
     rank: 4,
     cue: '#8b9cf8',
     title: 'Your nights sync',
-    body: 'End each morning to upload , usually three nights.',
+    body: 'End each morning to upload — usually across three nights.',
     image: '/tiptraq/tiptraq-v3-4c.png',
-    alt: 'TipTraQ sleep centre dashboard listing each night’s recording progress',
+    alt: 'Homekit sleep centre dashboard listing each night’s recording progress',
     copySide: 'left',
-    copyValign: 'bottom',
-    imagePosition: '78% center',
+    imagePosition: 'center',
   },
   {
     id: 'review',
     rank: 5,
     cue: '#acd3de',
     title: 'An expert reviews',
-    body: 'Every recording validated by a sleep professional.',
+    body: 'Every recording is validated by a sleep professional.',
     image: '/tiptraq/tiptraq-v3-5.png',
-    alt: 'TipTraQ recording view with SpO₂, pulse rate and sleep-stage traces',
-    copySide: 'left',
-    copyValign: 'bottom',
-    imagePosition: '88% center',
+    alt: 'Homekit recording view with SpO₂, pulse rate and sleep-stage traces',
+    copySide: 'right',
+    imagePosition: 'center',
   },
   {
     id: 'results',
     rank: 6,
     cue: '#c9b6f2',
     title: 'Your results',
-    body: 'TQ-AHI, oxygen, and sleep staging for your clinician.',
+    body: 'Clear oxygen, staging, and TQ-AHI for your phenotype.',
     image: '/tiptraq/tiptraq-v3-6b.png',
-    alt: 'A validated TipTraQ sleep report with TQ-AHI, SpO₂ and sleep-stage summary',
+    alt: 'A validated Homekit sleep report with TQ-AHI, SpO₂ and sleep-stage summary',
     copySide: 'left',
-    copyValign: 'bottom',
-    imagePosition: '90% center',
+    imagePosition: 'center',
   },
 ] as const
 
 export const TIPTRAQ_PAGE_CTA = {
-  label: 'Order your test',
+  label: 'Order Homekit',
   href: '/membership',
 } as const

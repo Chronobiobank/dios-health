@@ -34,14 +34,14 @@
   --dd-ink-dim: rgb(15 23 42 / 0.48);
   --dd-ink-inverse: #f8f8f6;
 
-  --dd-surface: rgb(15 23 42 / 0.035);
-  --dd-surface-quiet: rgb(15 23 42 / 0.025);
-  --dd-surface-hover: rgb(15 23 42 / 0.055);
-  --dd-surface-strong: rgb(15 23 42 / 0.07);
+  --dd-surface: rgb(255 255 255 / 0.42);
+  --dd-surface-quiet: rgb(255 255 255 / 0.28);
+  --dd-surface-hover: rgb(255 255 255 / 0.55);
+  --dd-surface-strong: rgb(255 255 255 / 0.52);
 
-  --dd-border: rgb(15 23 42 / 0.1);
-  --dd-border-strong: rgb(15 23 42 / 0.16);
-  --dd-border-focus: rgb(15 23 42 / 0.32);
+  --dd-border: rgb(255 255 255 / 0.58);
+  --dd-border-strong: rgb(255 255 255 / 0.72);
+  --dd-border-focus: rgb(15 23 42 / 0.28);
 
   --dd-solid: #0f172a;
   /* Accent is for rare solid fills (e.g. dark pills) — never paint body/UI copy with it. */
@@ -126,14 +126,45 @@
   gap: var(--dd-gap);
 }
 
-.dd-product :is(.seco-spectrum-tile--hero, .seco-spectrum-tile--detail) {
-  padding: var(--dd-inset-lg);
-  gap: var(--dd-gap-loose);
+/* Frosted relief over ambient — translucent surfaces, not opaque slabs */
+.dd-product :is(
+  .seco-spectrum-tile,
+  .dios-glass-outer,
+  .dios-glass-inner,
+  .dd-grid__card,
+  .dd-bank__slot,
+  .dd-bank__research,
+  .dd-bank__clinical-link,
+  .dd-account__identity,
+  .dd-account__shortcuts,
+  .dd-connect__tile,
+  .dd-connect-profile__card
+) {
+  background: linear-gradient(
+    152deg,
+    rgb(255 255 255 / 0.52) 0%,
+    rgb(255 255 255 / 0.34) 42%,
+    rgb(255 255 255 / 0.44) 100%
+  );
+  border-color: var(--dd-border);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.85), 0 10px 28px rgb(15 23 42 / 0.08);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+}
+
+.dd-product :is(.dd-grid__avatar, .dd-connect__tile-face, .dd-connect-profile__face, .dd-profile__face) {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.45), 0 6px 18px rgb(15 23 42 / 0.1);
+  border: 1.5px solid rgb(255 255 255 / 0.65);
 }
 
 .dd-product .seco-spectrum-tile:hover {
   transform: none;
-  box-shadow: none;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.95), 0 14px 36px rgb(15 23 42 / 0.1);
+}
+
+.dd-product :is(.seco-spectrum-tile--hero, .seco-spectrum-tile--detail) {
+  padding: var(--dd-inset-lg);
+  gap: var(--dd-gap-loose);
 }
 
 .dd-product :is(.dd-grid__card, .dd-bank__research, .dd-bank__clinical-link, .dd-bank__slot) {

@@ -1180,22 +1180,49 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: rgb(255 255 255 / 0.08);
+  background-color: rgb(255 255 255 / 0.28);
   background-size: cover;
   background-position: center;
-  border: 1px solid rgb(255 255 255 / 0.4);
+  border: 1.5px solid rgb(255 255 255 / 0.72);
   box-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.06),
-    0 0 1.5rem rgb(255 255 255 / 0.14),
-    0 0.4rem 1.4rem rgb(0 0 0 / 0.4);
+    inset 0 0 0 1px rgb(255 255 255 / 0.4),
+    0 0 0 5px rgb(255 255 255 / 0.22),
+    0 10px 28px rgb(15 23 42 / 0.14);
 }
 
 .home-face-net__node--orbit .home-face-net__face {
-  border-color: rgb(255 255 255 / 0.32);
+  border-color: rgb(255 255 255 / 0.62);
   box-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.05),
-    0 0 0.85rem rgb(255 255 255 / 0.1),
-    0 0.25rem 0.8rem rgb(0 0 0 / 0.35);
+    inset 0 0 0 1px rgb(255 255 255 / 0.35),
+    0 0 0 4px rgb(255 255 255 / 0.18),
+    0 6px 18px rgb(15 23 42 / 0.12);
+}
+
+.seco-shell--light .home-face-net__aura {
+  background: radial-gradient(
+    circle,
+    rgb(255 255 255 / 0.45) 0%,
+    rgb(255 198 158 / 0.18) 38%,
+    transparent 72%
+  );
+}
+
+.seco-shell--light .home-face-net__aura--soft {
+  background: radial-gradient(
+    circle,
+    rgb(186 168 230 / 0.22) 0%,
+    rgb(168 198 235 / 0.1) 42%,
+    transparent 70%
+  );
+}
+
+.seco-shell--light .home-face-net__aura--orbit {
+  background: radial-gradient(
+    circle,
+    rgb(152 214 198 / 0.28) 0%,
+    rgb(255 198 158 / 0.1) 40%,
+    transparent 70%
+  );
 }
 
 @keyframes home-face-net-attract {

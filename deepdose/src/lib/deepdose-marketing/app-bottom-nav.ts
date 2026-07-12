@@ -10,7 +10,7 @@ export type AppBottomNavItem = {
 export const APP_BOTTOM_NAV: readonly AppBottomNavItem[] = [
   { id: 'home', label: 'Home', href: '/grid' },
   { id: 'sync', label: 'Sync', href: '/connect' },
-  { id: 'score', label: 'Profile', href: '/bank' },
+  { id: 'score', label: 'Profile', href: '/profile' },
 ] as const
 
 /** Dose — floating black circle to the right of the pill. */
@@ -26,6 +26,10 @@ export function isAppBottomNavActive(href: string, pathname: string): boolean {
   }
   // Home owns the share feed
   if (href === '/grid' && (pathname === '/grid' || pathname.startsWith('/grid/'))) {
+    return true
+  }
+  // Profile owns legacy /bank
+  if (href === '/profile' && (pathname === '/bank' || pathname.startsWith('/bank/'))) {
     return true
   }
   return pathname === href || pathname.startsWith(`${href}/`)

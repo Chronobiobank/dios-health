@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 
-import { PatientLandingWithDraft } from '@/components/deepdose/PatientLandingWithDraft'
+import { ProfilePageClient } from '@/components/deepdose/ProfilePageClient'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { resolvePlanFromSearchParams } from '@/lib/medications/parse-plan-search-params'
 
 export const metadata: Metadata = {
-  title: `${DEEPDOSE_NAME} · Me`,
-  description: 'Your doses, chemical phenotype score, and profile.',
+  title: `Profile · ${DEEPDOSE_NAME}`,
+  description: 'Your chemical phenotype score, identity, doses, and Homekit tools.',
   alternates: { canonical: '/profile' },
 }
 
@@ -19,7 +19,7 @@ export default async function ProfilePage({ searchParams }: PageProps) {
   const { urlPlanContext, signupHref } = resolvePlanFromSearchParams(params)
 
   return (
-    <PatientLandingWithDraft
+    <ProfilePageClient
       urlPlanContext={urlPlanContext}
       signupHrefFromUrl={signupHref}
     />

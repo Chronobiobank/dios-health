@@ -1,4 +1,4 @@
-﻿/** Research & industry partnership · addiction healthcare, SSA, NIHR alignment. */
+/** Research & industry partnership · addiction healthcare, SSA, NIHR alignment. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import {
@@ -16,8 +16,7 @@ export const PARTNERS_PAGE_INTRO = {
   eyebrow: 'Research partners',
   titleWhite: 'Timing at',
   titleAccent: 'relapse risk',
-  lede:
-    `Circadian disruption is strongly linked to addiction relapse. ${DEEPDOSE_NAME} passively tracks phase state from the phone and wearables, then times medicines, light, and sleep to when the body is ready. Built for community treatment populations and academic study.`,
+  lede: 'Phase tracking for addiction care and recovery research.',
 } as const
 
 export const PARTNERS_ALIGNMENT_TILES = [

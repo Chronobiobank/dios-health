@@ -13,7 +13,7 @@ export function PublicHeader() {
         </Link>
         <nav className="flex items-center gap-4">
           <Link href="/how" className="hidden text-sm text-ink-muted hover:text-ink sm:block">
-            How it works
+            Make chemistry work
           </Link>
           <Button href="/" variant="primary" className="!px-5 !py-2 text-sm">
             Sign in

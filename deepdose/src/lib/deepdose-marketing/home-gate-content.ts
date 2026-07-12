@@ -14,7 +14,7 @@ export const DEEPDOSE_HOME_GATE = {
 
 export const SAFETY_PAGE = {
   title: 'Safety Policy',
-  lede: `${DEEPDOSE_NAME} is for adults logging sleep and doses. We do not tolerate harassment, exploitation, or illegal content.`,
+  lede: 'Adults only. No harassment, exploitation, or illegal content.',
   sections: [
     {
       heading: 'Age',
@@ -37,7 +37,7 @@ export const SAFETY_PAGE = {
 
 export const TAKE_IT_DOWN_PAGE = {
   title: 'Take It Down Act Policy',
-  lede: `${DEEPDOSE_NAME} complies with applicable U.S. requirements to remove nonconsensual intimate imagery and similar harmful intimate content when we are notified.`,
+  lede: 'We remove nonconsensual intimate imagery when notified.',
   sections: [
     {
       heading: 'What we remove',
@@ -55,22 +55,22 @@ export const TAKE_IT_DOWN_PAGE = {
 } as const
 
 export const REPORT_PAGE = {
-  title: 'Report',
-  lede: 'Flag a profile, message, or content for review.',
+  title: 'Report content',
+  lede: 'Flag a profile, message, or post for review.',
   email: 'safety@deepdose.org',
   body: 'Email the link, a short note, and whether this is a safety report or a removal request. Do not send passwords or medical records.',
 } as const
 
 /** Compact Terms copy — chemistry soul-matching network, not clinical CDS. */
 export const TERMS_PAGE = {
-  title: 'Terms',
-  lede: `By using ${DEEPDOSE_NAME} you agree to these terms. You must be 18+.`,
+  title: 'Terms of use',
+  lede: 'By using Deepdose you agree. You must be 18+.',
   body: `By using ${DEEPDOSE_NAME} you agree to these terms. You must be 18+. We are not a clinic or emergency care.`,
 } as const
 
 export const STATEMENT_2257_PAGE = {
   title: '18 U.S.C. § 2257 Statement',
-  lede: `${DEEPDOSE_NAME} does not produce sexually explicit content. User-generated profiles and messages are created by members who represent that they are 18 or older.`,
+  lede: 'Deepdose does not produce sexually explicit content.',
   sections: [
     {
       heading: 'Records',

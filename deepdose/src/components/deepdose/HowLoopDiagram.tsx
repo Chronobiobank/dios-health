@@ -14,6 +14,7 @@ const NODE_SIZE = 104
 /**
  * How CVP — same stage + placement as HomeFaceNetwork.
  * Hub title in the center; Screen / Score / Share / Sync on the ring.
+ * Center CVP: How Deepdose Works.
  */
 export function HowLoopDiagram() {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -67,12 +68,49 @@ export function HowLoopDiagram() {
     function paintRing() {
       if (!ctx || width < 2) return
       ctx.clearRect(0, 0, width, height)
+
+      const cx = width * 0.5
+      const cy = height * 0.5
       const r = Math.min(width, height) * orbitR
-      ctx.beginPath()
-      ctx.arc(width * 0.5, height * 0.5, r, 0, Math.PI * 2)
-      ctx.strokeStyle = 'rgba(15, 23, 42, 0.28)'
+      // Leave a clear gap so the stroke never runs behind glass disks
+      const halfNode = (NODE_SIZE / 2 + 10) / r
+      const arrowBack = 9
+      const arrowHalf = 5.5
+
+      ctx.strokeStyle = 'rgba(15, 23, 42, 0.32)'
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.38)'
       ctx.lineWidth = 1.5
-      ctx.stroke()
+      ctx.lineCap = 'round'
+
+      for (let i = 0; i < count; i += 1) {
+        const a0 = angles[i]!
+        const a1 = angles[(i + 1) % count]!
+        // Clockwise span (angles increase clockwise in our layout)
+        let start = a0 + halfNode
+        let end = a1 - halfNode
+        if (end <= start) end += Math.PI * 2
+
+        ctx.beginPath()
+        ctx.arc(cx, cy, r, start, end, false)
+        ctx.stroke()
+
+        // Arrowhead at the clockwise end of the arc
+        const tipX = cx + Math.cos(end) * r
+        const tipY = cy + Math.sin(end) * r
+        const tx = -Math.sin(end)
+        const ty = Math.cos(end)
+        const nx = -ty
+        const ny = tx
+        const baseX = tipX - tx * arrowBack
+        const baseY = tipY - ty * arrowBack
+
+        ctx.beginPath()
+        ctx.moveTo(tipX, tipY)
+        ctx.lineTo(baseX + nx * arrowHalf, baseY + ny * arrowHalf)
+        ctx.lineTo(baseX - nx * arrowHalf, baseY - ny * arrowHalf)
+        ctx.closePath()
+        ctx.fill()
+      }
     }
 
     function placeNodes() {
@@ -100,19 +138,19 @@ export function HowLoopDiagram() {
   }, [])
 
   return (
-    <figure className="dd-how-loop-wrap" aria-label="How Deepdose works">
+    <figure className="dd-how-loop-wrap" aria-label="How Deepdose Works">
       <div ref={rootRef} className="home-face-net dd-how-loop">
         <canvas ref={canvasRef} className="home-face-net__field" aria-hidden />
 
-        <h1 className="dd-how-loop__center" aria-label="Make chemistry work">
+        <h1 className="dd-how-loop__center" aria-label="How Deepdose Works">
           <span className="dd-how-loop__center-line" aria-hidden>
-            Make
+            How
           </span>
           <span className="dd-how-loop__center-line" aria-hidden>
-            chemistry
+            Deepdose
           </span>
           <span className="dd-how-loop__center-line" aria-hidden>
-            work
+            Works
           </span>
         </h1>
 

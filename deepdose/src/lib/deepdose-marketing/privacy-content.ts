@@ -4,7 +4,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 export const PRIVACY_PAGE = {
   title: 'Privacy Policy',
   updated: '10 July 2026',
-  lede: `This policy explains how ${DEEPDOSE_NAME} collects, uses, and protects your information. It is written for UK GDPR. Other countries’ rules may also apply.`,
+  lede: 'How Deepdose collects, uses, and protects your data.',
   contactEmail: 'privacy@deepdose.org',
   sections: [
     {

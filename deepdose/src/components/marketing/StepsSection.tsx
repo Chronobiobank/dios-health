@@ -44,7 +44,7 @@ export function StepsSection() {
           </div>
           <div className="lg:col-span-3">
             <div className="max-w-xl">
-              <Eyebrow>How it works</Eyebrow>
+              <Eyebrow>Make chemistry work</Eyebrow>
               <h2 className="mt-3 font-display text-3xl tracking-tight text-ink md:text-4xl">
                 Onboarding is easy
               </h2>

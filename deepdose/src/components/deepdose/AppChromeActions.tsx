@@ -46,7 +46,7 @@ export function AppChromeActions() {
       <Link href="/chat" className="app-top-bar__icon-btn" aria-label="Chat">
         <ChatIcon />
       </Link>
-      <Link href="/bank" className="app-top-bar__icon-btn" aria-label="Alerts">
+      <Link href="/profile" className="app-top-bar__icon-btn" aria-label="Alerts">
         <BellIcon />
       </Link>
       <Link href="/profile" className="app-top-bar__avatar-btn" aria-label="Profile">

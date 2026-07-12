@@ -6,7 +6,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const metadata: Metadata = {
   title: `Feed · ${DEEPDOSE_NAME}`,
-  description: 'Posts from each chemical phenotype — Night Creators, Early Explorers, and more.',
+  description: 'Posts from each tribe — Wolves, Lions, Bears, and Dolphins.',
   alternates: { canonical: '/grid' },
 }
 

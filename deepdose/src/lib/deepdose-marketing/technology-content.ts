@@ -1,4 +1,4 @@
-﻿/** Technology hub , four-layer stack for patients and clinicians. */
+/** Technology hub , four-layer stack for patients and clinicians. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { BODY_CLOCK_LAYERS, PROXY_DLMO_METHODOLOGY } from '@/lib/circadian/body-clock-measurement'
@@ -22,8 +22,7 @@ export const TECHNOLOGY_HUB_INTRO = {
   eyebrow: 'The Stack',
   titleWhite: 'Layers that',
   titleAccent: 'clarify chemistry.',
-  lede:
-    'Four layers. Each one makes your chemistry clearer to understand, share, and correct with people on a similar clock.',
+  lede: 'Phone, estimate, Homekit, dose cues — stacked.',
 } as const
 
 export type TechnologyHubLayer = {
@@ -73,7 +72,7 @@ export const TECHNOLOGY_LAYERS = [
     cue: '#f2b8a2',
     title: 'Home sleep check',
     icon: 'tiptraq-validate',
-    teaser: 'Three TipTraQ nights make the estimate clinic-ready.',
+    teaser: 'Three Homekit nights make the estimate clinic-ready.',
     highlights: [
       'Temperature, heart, oxygen',
       'Clinic-checked badge',
@@ -235,6 +234,6 @@ export const DLMO_PROXY_CLINICIAN_CTA = {
   links: [
     { label: 'Technology overview', href: '/technology' },
     { label: 'Clinician sign in', href: '/login?next=/clinical/dashboard' },
-    { label: 'TipTraQ Testkit', href: '/testkit' },
+    { label: 'Homekit', href: '/testkit' },
   ],
 } as const

@@ -4,6 +4,7 @@ import { useMemo, useRef, useState, useEffect, type ChangeEvent } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
+import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
 import { phenotypeFromWakeLabel } from '@/lib/brand/chemical-phenotypes'
 import { computeScheduleSri } from '@/lib/circadian/sri-engine'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
@@ -118,7 +119,7 @@ export function LogDoseView() {
 
   return (
     <div className="dd-log">
-      <p className="dd-log__hint">Post a photo into a phenotype feed.</p>
+      <p className="dd-log__hint">Post a photo into a tribe feed.</p>
 
       <div className="dd-log__buttons">
         {orderedTags.map((tag) => {
@@ -132,10 +133,11 @@ export function LogDoseView() {
                 className="dd-log__btn"
                 onClick={() => openCamera(tag)}
               >
+                <PhenotypeIcon id={tag} size="md" />
                 <span className="dd-log__btn-main">
                   <span className="dd-log__btn-hash">{meta.hash}</span>
                   <span className="dd-log__btn-sub">
-                    {isMine ? `Your group · ${meta.hint}` : meta.hint}
+                    {isMine ? `Your tribe · ${meta.hint}` : meta.hint}
                   </span>
                 </span>
                 {done ? <span className="dd-log__btn-done">Posted</span> : null}

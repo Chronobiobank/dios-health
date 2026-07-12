@@ -17,12 +17,12 @@ export type MembershipTier = {
 export const MEMBERSHIP_PAGE_META = {
   title: `Membership · ${DEEPDOSE_NAME}`,
   description:
-    'Free to log doses. TipTraQ when you want a deeper phenotype read.',
+    'Free to log doses. Homekit when you want a deeper phenotype read.',
 } as const
 
 export const MEMBERSHIP_PAGE_INTRO = {
   title: 'Free forever.',
-  lede: `${DEEPDOSE_VOICE.promise} TipTraQ when you want a stronger phenotype read.`,
+  lede: 'Homekit when you want a deeper read.',
 } as const
 
 export const MEMBERSHIP_FOUNDING = {
@@ -38,7 +38,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#acd3de',
     figure: '$0',
     cadence: 'Phone & wearable',
-    note: 'Log doses and sync with people on your chemistry.',
+    note: 'Log doses. Sync people on your chemistry.',
     cta: { label: 'Find Your Sync', href: '/connect' },
     includes: [
       'Daily doses in your feed',
@@ -48,12 +48,12 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
   },
   {
     id: 'testkit',
-    name: 'Testkit',
+    name: 'Homekit',
     cue: '#c9b6f2',
     figure: '$149',
     cadence: 'Three nights at home',
-    note: 'TipTraQ nights for a stronger phenotype score.',
-    cta: { label: 'Order Testkit', href: '/testkit' },
+    note: 'Homekit nights for a stronger score.',
+    cta: { label: 'Order Homekit', href: '/testkit' },
     includes: [
       'Reusable sensor for 3 nights',
       'Stronger chemical phenotype read',
@@ -66,10 +66,10 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cue: '#f2b8a2',
     figure: '$99',
     cadence: 'Every three months',
-    note: 'Fresh TipTraQ nights so your doses stay honest.',
+    note: 'Fresh Homekit nights keep doses honest.',
     cta: { label: 'Order re-read', href: '/testkit' },
     includes: [
-      'Same reusable TipTraQ sensor',
+      'Same reusable Homekit sensor',
       'Updated phenotype read each quarter',
       'Catch drift before old scores go stale',
     ],

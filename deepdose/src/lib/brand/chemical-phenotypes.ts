@@ -13,6 +13,8 @@ export type ChemicalPhenotype = {
   id: ChemicalPhenotypeId
   /** Social name shown in UI */
   label: string
+  /** Chronotype tribe animal (icon + cultural shorthand) */
+  animal: 'Wolf' | 'Lion' | 'Bear' | 'Dolphin'
   /** Peak energy window */
   peak: string
   /** One-line chemistry expression */
@@ -26,35 +28,39 @@ export type ChemicalPhenotype = {
 export const CHEMICAL_PHENOTYPES: readonly ChemicalPhenotype[] = [
   {
     id: 'night_creator',
-    label: 'Night Creator',
+    label: 'Wolf',
+    animal: 'Wolf',
     peak: 'Evening / night',
     expression: 'Creative and social after dark',
     cue: 'var(--dd-cue-resetter)',
-    hash: '#NightCreator',
+    hash: '#Wolf',
   },
   {
     id: 'early_explorer',
-    label: 'Early Explorer',
+    label: 'Lion',
+    animal: 'Lion',
     peak: 'Morning',
-    expression: 'Active and connected early',
+    expression: 'Active and connected at dawn',
     cue: 'var(--dd-cue-hijacker)',
-    hash: '#EarlyExplorer',
+    hash: '#Lion',
   },
   {
     id: 'twilight_transformer',
-    label: 'Twilight Transformer',
+    label: 'Bear',
+    animal: 'Bear',
     peak: 'Afternoon / evening',
-    expression: 'Flexible and adaptive',
+    expression: 'Flexible across late day hours',
     cue: 'var(--dd-cue-crosser)',
-    hash: '#TwilightTransformer',
+    hash: '#Bear',
   },
   {
     id: 'pulse_shifter',
-    label: 'Pulse Shifter',
+    label: 'Dolphin',
+    animal: 'Dolphin',
     peak: 'Variable',
-    expression: 'Non-standard schedules — shift work, travel, unconventional clocks',
+    expression: 'Shift work and travel clocks',
     cue: 'var(--dd-cue-battery)',
-    hash: '#PulseShifter',
+    hash: '#Dolphin',
   },
 ] as const
 

@@ -1,6 +1,5 @@
 import {
   DEEPDOSE_HOME_HEADLINE,
-  DEEPDOSE_NAME,
   DEEPDOSE_POSITIONING,
   DEEPDOSE_PROMISE,
   DEEPDOSE_TAGLINE,
@@ -32,14 +31,13 @@ export const DEEPDOSE_VOICE = {
   /** Home hero — Chemistry That / Connects */
   homeHeadlineWhite: 'Chemistry That',
   homeHeadlineAccent: 'Connects',
-  homeLede:
-    'Discover your chemical phenotype and find people who move through life like you.',
+  homeLede: 'Your phenotype. Your people.',
   /** Home CTAs */
   homePrimaryCta: { label: 'Find Your Sync', href: '/connect' },
   homeSecondaryCta: { label: 'Discover Your Phenotype', href: '/how#phenotype' },
   missionHeadlineWhite: 'Make chemistry',
   missionHeadlineAccent: 'work',
-  missionLede: `${DEEPDOSE_POSITIONING} Chemical phenotypes match you. The tribe keeps you. Sync with people in your window.`,
+  missionLede: 'Phenotypes match. Tribe keeps. Sync connects.',
   patientSubtitle: DEEPDOSE_POSITIONING,
   communitySupport: 'These are my people.',
   closeSupport: 'Find who is awake in your window.',
@@ -48,7 +46,7 @@ export const DEEPDOSE_VOICE = {
   /** Founding community */
   foundingMembers: {
     label: 'Founding Members',
-    lede: `Former Manjam members are invited as ${DEEPDOSE_NAME} Founding Members — from community, to chemistry, to connection.`,
+    lede: 'Manjam alumni join as Deepdose founders.',
   },
 } as const
 

@@ -7,7 +7,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const metadata: Metadata = {
   title: `Dose · ${DEEPDOSE_NAME}`,
-  description: 'Post a photo into a chemical phenotype feed — Night Creator, Early Explorer, Twilight Transformer, or Pulse Shifter.',
+  description: 'Post a photo into a tribe feed — Wolf, Lion, Bear, or Dolphin.',
   alternates: { canonical: '/dose' },
 }
 

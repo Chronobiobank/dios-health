@@ -425,13 +425,11 @@ body:has(.dd-product):not(:has(.seco-splash)) {
   font-weight: 400 !important;
 }
 
-/* Quiet tiles — no marketing wash / glow */
+/* Quiet tiles — soft glass wash over ambient */
 .dd-product .seco-spectrum-tile {
-  --spectrum-tile-wash: 5%;
-  --spectrum-tile-wash-hover: 8%;
+  --spectrum-tile-wash: 8%;
+  --spectrum-tile-wash-hover: 12%;
   --spectrum-tile-border-mix: 22%;
-  box-shadow: none;
-  border-color: rgb(255 255 255 / 0.1);
 }
 
 .dd-product :is(

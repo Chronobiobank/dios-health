@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { HowLoopDiagram } from '@/components/deepdose/HowLoopDiagram'
+import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
 import {
   HOW_IT_WORKS_CTA,
   HOW_IT_WORKS_FOUNDING,
@@ -34,13 +35,15 @@ export default function HowItWorksPage() {
           </h1>
         </header>
 
-        <ul className="seco-how-page__story seco-reveal seco-reveal--2" aria-label="Chemical phenotypes">
+        <ul className="seco-how-page__story seco-how-page__phenotypes seco-reveal seco-reveal--2" aria-label="Know Your Phenotype">
           {HOW_IT_WORKS_PHENOTYPES.items.map((tile) => (
             <li key={tile.id} className="seco-how-page__story-tile">
-              <p className="seco-how-page__story-label">{tile.label}</p>
-              <p className="seco-how-page__story-body">
-                Peak {tile.peak.toLowerCase()}. {tile.expression}.
-              </p>
+              <div className="seco-how-page__pheno-mark">
+                <p className="seco-how-page__story-label">{tile.label}</p>
+                <PhenotypeIcon id={tile.id} size="sm" className="seco-how-page__pheno-icon" />
+              </div>
+              <div className="seco-how-page__pheno-rule" aria-hidden />
+              <p className="seco-how-page__story-body seco-how-page__pheno-sub">{tile.body}</p>
             </li>
           ))}
         </ul>

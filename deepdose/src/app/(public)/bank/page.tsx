@@ -1,19 +1,6 @@
-import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
-import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
-import { BankDashboardView } from '@/components/deepdose/BankDashboardView'
-import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
-
-export const metadata: Metadata = {
-  title: `Profile · ${DEEPDOSE_NAME}`,
-  description: 'Your chemical phenotype score, today’s doses, and optional research share.',
-  alternates: { canonical: '/bank' },
-}
-
+/** Legacy Score hub — now unified at /profile. */
 export default function BankPage() {
-  return (
-    <ProductAppShell title="Profile" className="dd-bank-page">
-      <BankDashboardView />
-    </ProductAppShell>
-  )
+  redirect('/profile')
 }

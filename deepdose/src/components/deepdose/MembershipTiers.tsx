@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils/cn'
 
 function CheckIcon() {
   return (
-    <svg className="seco-hometest__check" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
+    <svg className="seco-homekit__check" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
       <path
         d="M5 10.5l3.2 3.2L15 7"
         fill="none"
@@ -49,9 +49,9 @@ export function MembershipTiers({ tiers }: { tiers: readonly MembershipTier[] })
             <span className="seco-spectrum-tile__figure">{tier.figure}</span>
             <span className="seco-spectrum-tile__cadence">{tier.cadence}</span>
             <p className="seco-spectrum-tile__body">{tier.note}</p>
-            <ul className="seco-hometest__checklist">
+            <ul className="seco-homekit__checklist">
               {tier.includes.map((item) => (
-                <li key={item} className="seco-hometest__check-item">
+                <li key={item} className="seco-homekit__check-item">
                   <CheckIcon />
                   <span>{item}</span>
                 </li>

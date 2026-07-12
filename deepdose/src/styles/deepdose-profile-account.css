@@ -516,3 +516,338 @@ a.dd-profile__chemistry:hover {
 .dd-account__signout-btn:hover {
   background: var(--dd-surface-hover, rgb(15 23 42 / 0.055));
 }
+
+/* ── Unified Profile dash — hierarchy + glass tiles ── */
+
+.dd-profile-page .dd-oai-stack {
+  gap: var(--dd-stack, 1rem);
+}
+
+.dd-profile-dash {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-stack, 1rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-profile-dash__hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-gap-loose, 1rem);
+}
+
+.dd-profile-dash__hero-top {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--dd-gap-loose, 1rem);
+  min-width: 0;
+}
+
+.dd-profile-dash__face {
+  position: relative;
+  flex: 0 0 auto;
+  width: 5.75rem;
+  height: 5.75rem;
+  border-radius: 999px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1.5px solid rgb(255 255 255 / 0.7);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.4), 0 8px 24px rgb(15 23 42 / 0.1);
+  background: rgb(255 255 255 / 0.35);
+}
+
+.dd-profile-dash__face-img,
+.dd-profile-dash__face .dd-profile__avatar-graphic {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dd-profile-dash__identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.dd-profile-dash__name {
+  margin: 0;
+  font-size: clamp(1.35rem, 1.1rem + 1.2vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+}
+
+.dd-profile-dash__name-edit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.dd-profile-dash__input {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  border-radius: 0.5rem;
+  background: rgb(255 255 255 / 0.45);
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+  font: inherit;
+  font-size: var(--dd-type-body, 0.9375rem);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dd-profile-dash__input--muted {
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+  font-size: var(--dd-type-md, 0.8125rem);
+}
+
+.dd-profile-dash__score {
+  display: flex;
+  align-items: center;
+  gap: var(--dd-gap-loose, 1rem);
+  min-width: 0;
+  padding-top: 0.25rem;
+  border-top: 1px solid rgb(15 23 42 / 0.08);
+}
+
+.dd-profile-dash__score-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.dd-profile-dash__score-label {
+  margin: 0;
+  font-size: var(--dd-type-sm, 0.75rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+}
+
+.dd-profile-dash__score-hint {
+  margin: 0;
+  font-size: var(--dd-type-body, 0.9375rem);
+  line-height: 1.4;
+  color: var(--dd-ink-soft, rgb(15 23 42 / 0.78));
+}
+
+.dd-profile-dash__clock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  font-size: var(--dd-type-md, 0.8125rem);
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+}
+
+.dd-profile-dash__clock strong {
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+  font-weight: 500;
+}
+
+.dd-profile-dash__homekit {
+  margin-top: 0.15rem;
+}
+
+.dd-profile-dash__tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dd-gap, 0.75rem);
+}
+
+.dd-profile-dash__tile-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.dd-profile-dash__h {
+  margin: 0;
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+}
+
+.dd-profile-dash__cta {
+  flex-shrink: 0;
+  font-size: var(--dd-type-md, 0.8125rem);
+  font-weight: 500;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.dd-profile-dash__slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+@media (min-width: 560px) {
+  .dd-profile-dash__slots {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.dd-profile-dash__slot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 0.6rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  background: rgb(255 255 255 / 0.28);
+  text-align: center;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.dd-profile-dash__slot--on {
+  background: rgb(255 255 255 / 0.5);
+  border-color: rgb(15 23 42 / 0.18);
+}
+
+.dd-profile-dash__slot-hash {
+  font-size: var(--dd-type-sm, 0.75rem);
+  font-weight: 500;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+}
+
+.dd-profile-dash__slot-state {
+  font-size: var(--dd-type-xs, 0.6875rem);
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+}
+
+.dd-profile-dash__empty {
+  margin: 0;
+  font-size: var(--dd-type-body, 0.9375rem);
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+}
+
+.dd-profile-dash__empty a {
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.dd-profile-dash__dose-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.dd-profile-dash__dose-cell {
+  aspect-ratio: 1;
+  border-radius: 0.65rem;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.5);
+  box-shadow: 0 4px 14px rgb(15 23 42 / 0.08);
+}
+
+.dd-profile-dash__dose-cell img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dd-profile-dash__tools {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.dd-profile-dash__tool {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  background: rgb(255 255 255 / 0.32);
+  text-decoration: none;
+  color: inherit;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.dd-profile-dash__tool:hover {
+  background: rgb(255 255 255 / 0.48);
+  border-color: rgb(255 255 255 / 0.75);
+}
+
+.dd-profile-dash__tool-title {
+  font-size: var(--dd-type-body, 0.9375rem);
+  font-weight: 500;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+}
+
+.dd-profile-dash__tool-meta {
+  font-size: var(--dd-type-md, 0.8125rem);
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+  line-height: 1.35;
+}
+
+.dd-profile-dash__research {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.dd-profile-dash__research-copy {
+  margin: 0.25rem 0 0;
+  font-size: var(--dd-type-md, 0.8125rem);
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+  line-height: 1.4;
+}
+
+.dd-profile-dash__toggle {
+  flex: 0 0 auto;
+  min-width: 3.25rem;
+  min-height: 2rem;
+  margin: 0;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid rgb(15 23 42 / 0.16);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.4);
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+  font: inherit;
+  font-size: var(--dd-type-sm, 0.75rem);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.dd-profile-dash__toggle--on {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #fff;
+}
+
+.dd-profile-dash__shared {
+  margin: 0;
+  font-size: var(--dd-type-md, 0.8125rem);
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+}
+
+@media (max-width: 420px) {
+  .dd-profile-dash__score {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

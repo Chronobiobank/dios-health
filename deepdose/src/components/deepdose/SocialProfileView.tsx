@@ -246,14 +246,14 @@ export function SocialProfileView({
         <Link href="/connect" className="dd-profile__chem-link">
           Friends
         </Link>
-        <Link href="/bank" className="dd-profile__chem-link">
-          Score
+        <Link href="/profile" className="dd-profile__chem-link">
+          Profile
         </Link>
         <Link href="/dosage?from=metabolic" className="dd-profile__chem-link">
           Chemistry
         </Link>
         <Link href="/testkit" className="dd-profile__chem-link">
-          TipTraQ early-risk
+          Homekit
         </Link>
         <Link href="/chat" className="dd-profile__chem-link">
           Chat

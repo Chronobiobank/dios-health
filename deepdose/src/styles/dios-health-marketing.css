@@ -29,6 +29,8 @@
 /* Last: product spacing + Inter lock must beat sleep-wake / marketing display serif */
 @import "./deepdose-product-space.css";
 @import "./deepdose-how-loop.css";
+@import "./deepdose-homekit.css";
+@import "./deepdose-phenotype-icons.css";
 
 /* Turbopack: force refresh after how-loop CSS brace fix */
 :root {

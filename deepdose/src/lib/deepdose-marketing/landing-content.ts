@@ -94,8 +94,8 @@ export const DEEPDOSE_LANDING_PLATFORM = {
           href: '/',
         },
         {
-          title: 'Optional TipTraQ nights deepen your chemical phenotype when you want a stronger read.',
-          meta: 'Deeper read · TipTraQ',
+          title: 'Optional Homekit nights deepen your phenotype when you want a stronger read.',
+          meta: 'Deeper read · Homekit',
           href: '/testkit',
         },
         {
@@ -111,23 +111,23 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       body: 'Phenotype profile',
       icon: 'plan' as const,
       panelTitle: 'Your score',
-      panelSeeAll: { label: 'Open Profile', href: '/bank' },
+      panelSeeAll: { label: 'Open Profile', href: '/profile' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
           title: 'Score is your chemical phenotype profile — stability, energy pattern, social window — not a diagnosis.',
           meta: 'Profile · Phenotype',
-          href: '/bank',
+          href: '/profile',
         },
         {
           title: 'Watch gains on calendar tiles as nights lock in — ownership over building your chemistry.',
           meta: 'Progression · Calendar',
-          href: '/bank',
+          href: '/profile',
         },
         {
           title: 'The score matters for what it unlocks: trust, tribe weight, and windows others can read.',
           meta: 'Unlocks · Not vanity',
-          href: '/bank',
+          href: '/profile',
         },
       ],
     },
@@ -146,7 +146,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
           href: '/dose',
         },
         {
-          title: 'Four phenotype feeds — Night Creator, Early Explorer, Twilight Transformer, Pulse Shifter.',
+          title: 'Four phenotypes — Wolf, Lion, Bear, Dolphin.',
           meta: 'Phenotype · Expression',
           href: '/grid',
         },
@@ -248,15 +248,15 @@ export const LANDING_GP_HANDOFF_COPY = {
   eyebrow: 'Your chemistry picture',
   shareCta: 'Take this to your GP',
   shareOptionalCta: 'Print a summary for your GP',
-  tiptraqCta: 'Get a TipTraQ deeper phenotype read →',
+  tiptraqCta: 'Get a Homekit read →',
   disclaimer:
-    'Decision support only, not a diagnosis. TipTraQ nights deepen your chemical phenotype when you want more than a phone score.',
+    'Decision support only, not a diagnosis. Homekit nights deepen your phenotype when you want more than a phone score.',
   summaryTitle: 'Summary for your GP',
   summaryMeta:
     'Printable sleep–medicine summary for a medication review and home sleep testing.',
   summaryEmpty: 'Run a chemistry check on your sleep–wake plan first, then share the summary with your GP.',
   summaryTipTraqBody:
-    'If nights feel broken or breathing may be involved, a TipTraQ home sleep test (three nights) can deepen your phenotype read before anyone changes your meds.',
+    'If nights feel broken or breathing may be involved, a Homekit (three nights) can deepen your phenotype read before anyone changes your meds.',
 } as const
 
 export const DEEPDOSE_PLAN_NEXT_STEPS = {
@@ -288,7 +288,7 @@ export const DEEPDOSE_PLAN_NEXT_STEPS = {
     eyebrow: 'Step 3 of 3',
     headline: 'Share details. Sync and connect.',
     support:
-      'Understand your chemical phenotype, share what you choose, and find people on compatible chemistry. Stay free, or deepen the read with TipTraQ.',
+      'Understand your chemical phenotype, share what you choose, and find people on compatible chemistry. Stay free, or deepen the read with Homekit.',
     commons: {
       title: 'Commons',
       figure: 'Free',
@@ -304,7 +304,7 @@ export const DEEPDOSE_PLAN_NEXT_STEPS = {
       title: 'Deeper read',
       figure: 'From Testkit',
       points: [
-        'TipTraQ home sleep test, three nights',
+        'Homekit, three nights',
         'Stronger phenotype baseline to share',
         'Verified sleep badge when you want it',
         'Quarterly re-reads catch drift early',
@@ -328,7 +328,7 @@ export const DEEPDOSE_PATIENT_PLAN_PERSONAL_BRIDGE = {
     { label: 'Checked your medicines', status: 'done' as const },
     { label: 'Saw how they line up today', status: 'done' as const },
     { label: 'Three-minute body clock test', status: 'current' as const },
-    { label: 'TipTraQ home test (optional)', status: 'upcoming' as const },
+    { label: 'Homekit (optional)', status: 'upcoming' as const },
   ],
 } as const
 
@@ -379,7 +379,7 @@ export const SOCIAL_PROFILE = {
 export const DEEPDOSE_PATIENT_PLAN_DEEPER = [
   {
     title: 'Body clock test · refine your anchor with a three-night home sleep test.',
-    meta: 'Optional · TipTraQ · Clinical validation',
+    meta: 'Optional · Homekit · Clinical validation',
     href: '/testkit',
   },
   {

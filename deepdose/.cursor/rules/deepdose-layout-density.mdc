@@ -21,7 +21,7 @@ Do **not** invent per-page layout CSS. Use `seco-marketing-page` + `seco-landing
 
 ## Page heads
 
-### Product routes (`/grid`, `/dose`, `/bank`, `/profile`, `/account`, `/connect`, `/chat`, `/dosage`)
+### Product routes (`/grid`, `/dose`, `/profile`, `/account`, `/connect`, `/chat`, `/dosage`)
 
 - Follow `.cursor/rules/deepdose-product-shell.mdc`.
 - Title lives in `AppTopBar` only — plain text, not spectrum.

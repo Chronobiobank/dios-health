@@ -97,6 +97,11 @@ const nextConfig: NextConfig = {
         destination: '/dosage',
         permanent: true,
       },
+      {
+        source: '/bank',
+        destination: '/profile',
+        permanent: true,
+      },
     ]
   },
   images: {

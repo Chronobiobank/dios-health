@@ -3,18 +3,17 @@ import {
   DEEPDOSE_LOOP_CAPTION,
   DEEPDOSE_PROMISE,
 } from '@/lib/brand/deepdose-brand'
-import { CHEMICAL_PHENOTYPES } from '@/lib/brand/chemical-phenotypes'
 import { DEEPDOSE_VOICE } from '@/lib/brand/deepdose-voice'
 
-/** How it works — Screen → Score → Share → Sync. */
+/** Make chemistry work — Screen → Score → Share → Sync. */
 
 export const HOW_IT_WORKS_META = {
-  title: `How it works · ${DEEPDOSE_NAME}`,
+  title: `Make chemistry work · ${DEEPDOSE_NAME}`,
   description: DEEPDOSE_VOICE.homeLede,
 } as const
 
 export const HOW_IT_WORKS_INTRO = {
-  title: 'How it works',
+  title: 'Make chemistry work',
 } as const
 
 /**
@@ -29,7 +28,7 @@ export const HOW_IT_WORKS_STEPS = [
     lead: 'Screen',
     rest: 'your phenotype',
     teaser:
-      'Screen is plumbing — passive phone sensors calculate your chemical phenotype so matching works without you opening an app for sensors.',
+      'Screen is plumbing — passive phone sensors calculate your phenotype so matching works without you opening an app for sensors.',
     cue: '#0f172a',
     href: '/',
   },
@@ -41,7 +40,7 @@ export const HOW_IT_WORKS_STEPS = [
     teaser:
       'Score is your chemical phenotype profile — circadian stability, energy pattern, social window — ownership, not a diagnosis.',
     cue: '#0f172a',
-    href: '/bank',
+    href: '/profile',
   },
   {
     id: 'share',
@@ -49,7 +48,7 @@ export const HOW_IT_WORKS_STEPS = [
     lead: 'Share',
     rest: 'your doses',
     teaser:
-      'Dose into a phenotype feed — Night Creator, Early Explorer, Twilight Transformer, or Pulse Shifter — peers who live your chemistry.',
+      'Dose into a phenotype feed — Wolf, Lion, Bear, or Dolphin — peers who live your chemistry.',
     cue: '#0f172a',
     href: '/dose',
   },
@@ -57,7 +56,7 @@ export const HOW_IT_WORKS_STEPS = [
     id: 'sync',
     badge: '4',
     lead: 'Sync',
-    rest: 'your people',
+    rest: 'with others',
     teaser:
       'Sync is why you return — who is online in your biological window, and the moment you think: these are my people.',
     cue: '#0f172a',
@@ -68,14 +67,31 @@ export const HOW_IT_WORKS_STEPS = [
 export const HOW_IT_WORKS_CAPTION = DEEPDOSE_LOOP_CAPTION
 
 export const HOW_IT_WORKS_PHENOTYPES = {
-  title: 'Chemical phenotypes',
+  title: 'Know Your Phenotype',
   lede: DEEPDOSE_PROMISE,
-  items: CHEMICAL_PHENOTYPES.map((p) => ({
-    id: p.id,
-    label: p.label,
-    peak: p.peak,
-    expression: p.expression,
-  })),
+  /** Two-line bodies — keep character counts aligned so tiles look uniform. */
+  items: [
+    {
+      id: 'night_creator' as const,
+      label: 'Wolf',
+      body: 'Peak energy in the evening and night. Creative and social after dark.',
+    },
+    {
+      id: 'early_explorer' as const,
+      label: 'Lion',
+      body: 'Peak energy in the early morning. Active and connected at first light.',
+    },
+    {
+      id: 'twilight_transformer' as const,
+      label: 'Bear',
+      body: 'Peak energy from afternoon into evening. Flexible as the day shifts.',
+    },
+    {
+      id: 'pulse_shifter' as const,
+      label: 'Dolphin',
+      body: 'Peak energy on irregular schedules. Built for shift work and travel.',
+    },
+  ],
 } as const
 
 export const HOW_IT_WORKS_FOUNDING = {
@@ -94,18 +110,19 @@ export const HOW_IT_WORKS_WHY = {
 export const HOW_IT_WORKS_STORY = [
   {
     id: 'pain',
-    label: 'Pain',
-    body: 'Generic social apps match faces and leave off-schedule lives behind. Health apps show scores and leave you alone.',
+    label: 'The clock',
+    /** Keep bodies 68 chars so the three tiles read even. */
+    body: 'Face apps ignore odd clocks. Score apps leave you alone every night.',
   },
   {
     id: 'solution',
-    label: 'What we do',
-    body: 'Chemical phenotypes power the graph. Sync finds who is awake in your window. Share and Score give the tribe glue and status.',
+    label: 'The graph',
+    body: 'Match by phenotype on your clock. Sync shows who is awake with you.',
   },
   {
     id: 'care',
-    label: 'Why care',
-    body: 'Attraction, recognition, belonging — the moment you think “these are my people” is the retention engine.',
+    label: 'The tribe',
+    body: 'Recognition and belonging — so you know these are finally my people.',
   },
 ] as const
 
