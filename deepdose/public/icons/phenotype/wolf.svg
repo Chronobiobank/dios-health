@@ -1,26 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- Wolf — sized/centred to match lion/bear optical mass -->
+  <!-- Wolf — pure white line art on black disc -->
   <g
-    stroke="#475569"
-    stroke-width="2"
+    stroke="#fff"
+    stroke-width="2.75"
+    stroke-opacity="1"
     stroke-linecap="round"
     stroke-linejoin="round"
     fill="none"
   >
-    <!-- Ears -->
     <path d="M18 26 12 8l14 10" />
     <path d="M46 26 52 8 38 18" />
-    <!-- Head / jaw -->
     <path d="M14 28c1.5 12 8 22 18 26 10-4 16.5-14 18-26" />
-    <!-- Cheek line -->
     <path d="M20 38c3 5 7.5 8 12 8s9-3 12-8" />
-    <!-- Snout -->
     <path d="M32 34v5" />
     <path d="M28 41c1.5 1.4 2.8 2 4 2s2.5-.6 4-2" />
-    <!-- Inner ear marks -->
-    <path d="M20 22l-2.5-7" opacity="0.45" />
-    <path d="M44 22l2.5-7" opacity="0.45" />
+    <path d="M20 22l-2.5-7" />
+    <path d="M44 22l2.5-7" />
   </g>
-  <circle cx="24" cy="31" r="2" fill="#475569" />
-  <circle cx="40" cy="31" r="2" fill="#475569" />
+  <circle cx="24" cy="31" r="2.15" fill="#fff" fill-opacity="1" />
+  <circle cx="40" cy="31" r="2.15" fill="#fff" fill-opacity="1" />
 </svg>

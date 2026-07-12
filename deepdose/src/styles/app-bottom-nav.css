@@ -539,7 +539,8 @@ body:has(.dd-product):not(:has(.seco-splash)) {
   max-width: 100%;
   height: var(--app-dock-h);
   margin-inline: auto;
-  padding: 0.15rem 0.35rem;
+  /* Extra inline pad so Home (left) and Sync (right) breathe at the pill edges */
+  padding: 0.15rem 0.7rem;
   border-radius: 999px;
   isolation: isolate;
   background: linear-gradient(
@@ -584,8 +585,8 @@ body:has(.dd-product):not(:has(.seco-splash)) {
   gap: 0.08rem;
   box-sizing: border-box;
   height: 100%;
-  min-width: clamp(2.6rem, 11vw, 3.15rem);
-  padding: 0 clamp(0.3rem, 1.6vw, 0.5rem);
+  min-width: clamp(2.85rem, 12vw, 3.35rem);
+  padding: 0 clamp(0.4rem, 2vw, 0.65rem);
   border-radius: 999px;
   border: none;
   background: transparent;

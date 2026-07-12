@@ -428,6 +428,19 @@
   transform: none;
 }
 
+/* Ghost CTA — black ink + border so it reads on pastel ambient */
+.deepdose-shell.seco-shell--light .seco-landing__btn--ghost {
+  border: 1.5px solid #0d0d0d;
+  color: #0d0d0d;
+  background: transparent;
+}
+
+.deepdose-shell.seco-shell--light .seco-landing__btn--ghost:hover {
+  border-color: #0d0d0d;
+  background: rgb(13 13 13 / 0.06);
+  color: #0d0d0d;
+}
+
 /* App pages outside .dd-product still get light ink */
 .deepdose-shell.seco-shell--light .seco-app-page {
   color: rgb(15 23 42 / 0.82);

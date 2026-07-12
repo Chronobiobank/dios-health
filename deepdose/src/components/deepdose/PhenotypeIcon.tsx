@@ -16,8 +16,7 @@ const PHENOTYPE_SVG: Record<ChemicalPhenotypeId, string> = {
 }
 
 /**
- * Chronotype animals in glassmorphic boxes.
- * Glyphs: SVG files in /public/icons/phenotype/.
+ * Chronotype animals — black disc, white line art (SVG in /public/icons/phenotype/).
  */
 export function PhenotypeIcon({ id, size = 'md', className }: PhenotypeIconProps) {
   return (
