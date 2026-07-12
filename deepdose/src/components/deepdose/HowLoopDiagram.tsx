@@ -29,6 +29,7 @@ export function HowLoopDiagram() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    const onScene = Boolean(root.closest('.seco-marketing-scene-tile'))
     const count = HOW_IT_WORKS_STEPS.length
     // Equal spacing; first step (sleep score) at top, then clockwise.
     const angles = HOW_IT_WORKS_STEPS.map(
@@ -77,7 +78,6 @@ export function HowLoopDiagram() {
       const arrowBack = 9
       const arrowHalf = 5.5
 
-      const onScene = Boolean(root.closest('.seco-marketing-scene-tile'))
       ctx.strokeStyle = onScene ? 'rgba(255, 255, 255, 0.78)' : 'rgba(15, 23, 42, 0.32)'
       ctx.fillStyle = onScene ? 'rgba(255, 255, 255, 0.88)' : 'rgba(15, 23, 42, 0.38)'
       ctx.lineWidth = onScene ? 1.75 : 1.5
