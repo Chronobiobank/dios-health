@@ -62,7 +62,7 @@
   color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: var(--dd-type-body, 0.9375rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.45;
 }
 
@@ -135,7 +135,7 @@
   flex: 1 1 auto;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: var(--dd-type-body, 0.875rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.015em;
   color: var(--dd-ink, rgb(15 23 42 / 0.92));
   text-decoration: none;
@@ -155,7 +155,7 @@
   background-clip: unset;
   -webkit-text-fill-color: var(--dd-ink, rgb(15 23 42 / 0.92));
   color: var(--dd-ink, rgb(15 23 42 / 0.92));
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .dd-connect__pct-label {
@@ -177,7 +177,7 @@
   color: var(--dd-ink-inverse, #f8f8f6);
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: var(--dd-type-sm, 0.75rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.01em;
   text-decoration: none;
   white-space: nowrap;
@@ -248,7 +248,7 @@
   display: block;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: clamp(1.5rem, 1rem + 2.2vw, 2.25rem);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.03em;
   color: var(--dd-ink, rgb(15 23 42 / 0.92));
   white-space: nowrap;
@@ -279,7 +279,7 @@
   margin-top: var(--dd-gap-tight, 0.35rem);
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: var(--dd-type-lg, 1rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.45;
   color: var(--dd-ink-soft, rgb(15 23 42 / 0.78));
 }

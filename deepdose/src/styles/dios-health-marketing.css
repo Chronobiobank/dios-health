@@ -31,6 +31,8 @@
 @import "./deepdose-how-loop.css";
 @import "./deepdose-homekit.css";
 @import "./deepdose-phenotype-icons.css";
+/* Locked last: light→regular, regular→medium */
+@import "./deepdose-type-weights.css";
 
 /* Turbopack: force refresh after how-loop CSS brace fix */
 :root {

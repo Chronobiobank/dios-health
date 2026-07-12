@@ -12,6 +12,7 @@ export function AmbientBackground({ tone = 'light' }: AmbientBackgroundProps) {
       className={cn('deepdose-ambient', tone === 'light' && 'deepdose-ambient--light')}
       aria-hidden
     >
+      <div className="deepdose-ambient__flow" />
       <div className="deepdose-ambient__orb deepdose-ambient__orb--navy" />
       <div className="deepdose-ambient__orb deepdose-ambient__orb--sunset" />
       <div className="deepdose-ambient__orb deepdose-ambient__orb--twilight" />

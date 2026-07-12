@@ -31,6 +31,8 @@ Retention order (why they return): **Sync → Share → Score → Screen**.
 
 Company = **Deepdose**. Matching speaks in **phenotypes** (Wolf, Lion, Bear, Dolphin) — chemical phenotype IDs stay internal. Section head on /how: **Know Your Phenotype**. No Medmaxxing / Dosers / Get in Flow in product copy. Consumer at-home nights = **Homekit** (TipTraQ hardware).
 
+**Type weights (locked):** former light → `400`, former regular → `500`. See `deepdose-type-weights.css`. Do not reintroduce `font-weight: 300` for UI copy.
+
 ## Bottom nav (Home · Post · Sync)
 
 | Control | Route | Role |

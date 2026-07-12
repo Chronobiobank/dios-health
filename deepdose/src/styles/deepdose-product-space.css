@@ -219,7 +219,7 @@
   max-width: 36rem;
   color: var(--dd-ink-faint, rgb(15 23 42 / 0.62));
   font-size: var(--dd-type-body, 0.9375rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.45;
 }
 
@@ -288,14 +288,14 @@
 
 .dd-product .sri-score-ring__value {
   font-size: clamp(2.75rem, 10vw, 3.5rem);
-  font-weight: 300 !important;
+  font-weight: 400 !important;
   letter-spacing: -0.03em;
   color: var(--dd-solid, #0f172a) !important;
   text-shadow: none;
 }
 
 .dd-product .sri-score-ring__label {
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   letter-spacing: 0.08em;
   color: var(--dd-ink-muted, rgb(15 23 42 / 0.62)) !important;
 }

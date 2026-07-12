@@ -174,7 +174,7 @@ body:has([data-clinical-layout].seco-shell--dark) {
   max-width: 20ch;
   font-family: var(--seco-font-display, var(--font-merriweather), Georgia, serif);
   font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: var(--text-display-leading);
   letter-spacing: var(--seco-display-tracking);
   color: var(--seco-ink, #111213);
@@ -185,7 +185,7 @@ body:has([data-clinical-layout].seco-shell--dark) {
   max-width: var(--seco-copy-measure, 52ch);
   font-family: var(--seco-font-ui);
   font-size: var(--text-body-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: var(--text-body-leading);
   color: var(--seco-muted, rgb(17 18 19 / 0.62));
 }

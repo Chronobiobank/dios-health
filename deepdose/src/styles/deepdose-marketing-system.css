@@ -19,7 +19,7 @@
   margin: 0;
   font-family: var(--seco-font-display);
   font-size: var(--mkt-hero-title-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: var(--text-display-leading-hero);
   letter-spacing: var(--seco-display-tracking-hero);
   color: #fff;
@@ -35,7 +35,7 @@
   max-width: 56ch;
   font-family: var(--seco-font-ui);
   font-size: var(--mkt-hero-lede-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.72);
 }
@@ -72,7 +72,7 @@
 .deepdose-shell.seco-shell--dark .seco-page :is(.seco-hometest__section-sub, .seco-technology__section-sub, .seco-research__section-sub, .seco-chronobiobank__section-sub) {
   font-family: var(--seco-font-ui);
   font-size: var(--mkt-tile-body-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.72);
 }
@@ -129,7 +129,7 @@
 .seco-clinics__grid--tiles .seco-spectrum-tile__title--display {
   font-family: var(--seco-font-display);
   font-size: var(--mkt-tile-title-size);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.02em;
   color: rgb(255 255 255 / 0.96);
@@ -149,7 +149,7 @@
 .seco-clinics__grid--tiles .seco-spectrum-tile--stat .seco-spectrum-tile__title {
   white-space: normal;
   font-size: clamp(1.875rem, 4.4vw, 2.75rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.02;
   letter-spacing: var(--seco-display-tracking);
 }
@@ -160,7 +160,7 @@
   max-width: var(--mkt-tile-body-measure);
   font-family: var(--seco-font-ui);
   font-size: var(--mkt-tile-body-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.72);
   min-height: calc(2 * 1.5 * var(--mkt-tile-body-size));
@@ -173,7 +173,7 @@
   max-width: var(--mkt-tile-body-measure);
   font-family: var(--seco-font-ui);
   font-size: var(--mkt-tile-body-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.72);
 }
@@ -185,7 +185,7 @@
   max-width: 44ch;
   font-family: var(--seco-font-ui);
   font-size: 0.875rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.45;
   color: rgb(255 255 255 / 0.45);
 }
@@ -216,7 +216,7 @@
   max-width: 42ch;
   font-family: var(--seco-font-ui);
   font-size: 0.875rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.52);
 }
@@ -305,7 +305,7 @@
 .seco-marketing-page .seco-marketing-tiles .seco-spectrum-tile__title--display {
   font-family: var(--seco-font-display);
   font-size: var(--mkt-tile-title-size);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.02em;
   color: rgb(255 255 255 / 0.96);
@@ -317,7 +317,7 @@
   max-width: var(--mkt-tile-body-measure);
   font-family: var(--seco-font-ui);
   font-size: var(--mkt-tile-body-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.72);
   min-height: calc(2 * 1.5 * var(--mkt-tile-body-size));
@@ -349,7 +349,7 @@
 .seco-marketing-page .seco-science-fold--grid-tile .seco-science-fold__title {
   font-family: var(--seco-font-display);
   font-size: var(--mkt-tile-title-size);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.02em;
   color: rgb(255 255 255 / 0.96);
@@ -359,7 +359,7 @@
 .seco-marketing-page .seco-science-fold--grid-tile .seco-science-fold__teaser {
   font-family: var(--seco-font-ui);
   font-size: var(--mkt-tile-body-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
   color: rgb(255 255 255 / 0.72);
 }
@@ -454,7 +454,7 @@
 
 .seco-marketing-page .seco-science-fold--grid-tile.seco-science-fold--grid-static .seco-science-fold__title {
   font-family: var(--seco-font-display);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   color: rgb(255 255 255 / 0.96);
   white-space: nowrap;
@@ -537,7 +537,7 @@
   max-width: 100%;
   font-family: var(--seco-font-display);
   font-size: var(--mkt-wide-tile-title-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.08;
   letter-spacing: clamp(-0.04em, -0.12cqi, -0.02em);
   color: #fff;
@@ -550,7 +550,7 @@
   max-width: var(--mkt-wide-tile-body-measure);
   font-family: var(--seco-font-ui);
   font-size: var(--mkt-wide-tile-body-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.48;
   color: rgb(255 255 255 / 0.8);
 }
@@ -797,7 +797,7 @@
   margin: 0;
   font-family: var(--seco-font-ui);
   font-size: var(--mkt-wide-tile-body-size);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.48;
   color: rgb(255 255 255 / 0.8);
 }
@@ -959,7 +959,7 @@
   margin: 0;
   font-family: var(--seco-font-display);
   font-size: clamp(1.25rem, 4.25cqi, 1.75rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: #fff;
@@ -970,7 +970,7 @@
   max-width: 26ch;
   font-family: var(--seco-font-ui);
   font-size: clamp(0.9375rem, 2cqi, 1.0625rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.42;
   color: rgb(255 255 255 / 0.82);
 }

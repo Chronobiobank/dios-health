@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { HowLoopDiagram } from '@/components/deepdose/HowLoopDiagram'
 import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
 import {
-  HOW_IT_WORKS_CTA,
+  HOW_IT_WORKS_CTAS,
   HOW_IT_WORKS_FOUNDING,
   HOW_IT_WORKS_META,
   HOW_IT_WORKS_PHENOTYPES,
@@ -54,11 +54,14 @@ export default function HowItWorksPage() {
           </h2>
         </header>
 
-        <ul className="seco-how-page__story seco-reveal seco-reveal--3" aria-label="Why Deepdose">
+        <ul className="seco-how-page__story seco-how-page__why-tiles seco-reveal seco-reveal--3" aria-label="Why Deepdose">
           {HOW_IT_WORKS_STORY.map((tile) => (
-            <li key={tile.id} className="seco-how-page__story-tile">
-              <p className="seco-how-page__story-label">{tile.label}</p>
-              <p className="seco-how-page__story-body">{tile.body}</p>
+            <li key={tile.id}>
+              <Link href={tile.href} className="seco-how-page__story-tile seco-how-page__story-tile--link">
+                <p className="seco-how-page__story-label">{tile.label}</p>
+                <p className="seco-how-page__story-body">{tile.body}</p>
+                <span className="seco-how-page__story-cta">{tile.cta} →</span>
+              </Link>
             </li>
           ))}
         </ul>
@@ -78,9 +81,19 @@ export default function HowItWorksPage() {
             'seco-science__cta seco-chronobiobank__cta seco-how-page__cta seco-reveal seco-reveal--4'
           )}
         >
-          <Link href={HOW_IT_WORKS_CTA.href} className="seco-landing__btn seco-landing__btn--primary">
-            {HOW_IT_WORKS_CTA.label} →
-          </Link>
+          {HOW_IT_WORKS_CTAS.map((cta, i) => (
+            <Link
+              key={cta.href + cta.label}
+              href={cta.href}
+              className={
+                i === 0
+                  ? 'seco-landing__btn seco-landing__btn--primary'
+                  : 'seco-landing__btn seco-landing__btn--ghost'
+              }
+            >
+              {cta.label} →
+            </Link>
+          ))}
         </div>
       </div>
     </article>

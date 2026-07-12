@@ -100,9 +100,10 @@ export const HOW_IT_WORKS_FOUNDING = {
 } as const
 
 /**
- * Why this exists — exclusive / innovative / world-first.
- * Speak to chrono-atypical tribes (Manjam nights, shift clocks, late peaks).
- * Keep bodies ~67–68 chars so the three tiles read even.
+ * Why this exists — everyday words, no product jargon in titles.
+ * Speak to chrono-atypical tribes (late nights, shift clocks, odd hours).
+ * Each tile links to its conversion surface (connect or Homekit).
+ * Labels = 11 chars; bodies = 66 chars so the three tiles read even.
  */
 export const HOW_IT_WORKS_WHY = {
   title: 'Why Deepdose?',
@@ -111,22 +112,31 @@ export const HOW_IT_WORKS_WHY = {
 export const HOW_IT_WORKS_STORY = [
   {
     id: 'pain',
-    label: 'Exclusive',
-    body: 'Manjam nights and shift clocks — not another 9-to-5 dating face app.',
+    label: 'Your people',
+    body: 'Late nights and shift clocks — not another 9-to-5 dating face app.',
+    href: '/connect',
+    cta: 'Find your people',
   },
   {
     id: 'solution',
-    label: 'Only Sync',
-    body: 'Sync finds who’s awake with you. Chemistry matching — nowhere else.',
+    label: "Who's awake",
+    body: "See who's awake when you are — real chemistry match, nowhere else.",
+    href: '/connect',
+    cta: "See who's up",
   },
   {
     id: 'care',
-    label: 'Homekit',
-    body: 'World-first: prove phenotype at home and screen early apnea risk.',
+    label: 'Home nights',
+    body: 'Three nights at home — prove your clock and catch early apnea risk.',
+    href: '/testkit',
+    cta: 'Get a Homekit',
   },
 ] as const
 
-export const HOW_IT_WORKS_CTA = {
-  label: 'Find Your Sync',
-  href: '/connect',
-} as const
+/** Dual conversion — members + sleep-test seekers. */
+export const HOW_IT_WORKS_CTAS = [
+  { label: 'Find Your Sync', href: '/connect' },
+  { label: 'Get a Homekit', href: '/testkit' },
+] as const
+
+export const HOW_IT_WORKS_CTA = HOW_IT_WORKS_CTAS[0]

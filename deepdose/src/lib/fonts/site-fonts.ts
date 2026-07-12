@@ -7,7 +7,8 @@ export const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-  weight: ['300', '400', '500', '600'],
+  // Ladder: former light→400, former regular→500 (see deepdose-type-weights.css)
+  weight: ['400', '500', '600', '700'],
 })
 
 /** DM Mono — lab values, timestamps, identifiers, data labels */

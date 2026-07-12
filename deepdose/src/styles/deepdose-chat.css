@@ -55,7 +55,7 @@
   margin: 0;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: var(--dd-type-xl, 1.0625rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.15;
   color: var(--dd-ink, rgb(15 23 42 / 0.92));
@@ -199,7 +199,7 @@
   background: var(--dd-solid, #0f172a);
   color: var(--dd-ink-inverse, #f8f8f6);
   font-size: var(--dd-type-body, 0.875rem);
-  font-weight: 400;
+  font-weight: 500;
   text-decoration: none;
   animation: none;
 }

@@ -9,7 +9,7 @@
 
 .seco-legal .seco-page__title {
   font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 1.15;
   color: rgb(15 23 42 / 0.92);
@@ -55,7 +55,7 @@
 .seco-legal__body {
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: var(--mkt-hero-lede-size, var(--type-body-lg, 1.125rem));
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.45;
   color: rgb(15 23 42 / 0.62);
 }
@@ -143,7 +143,7 @@ a.seco-legal__link-tile:hover .seco-spectrum-tile__title {
   max-width: 100%;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: var(--mkt-tile-body-size, var(--type-body));
-  font-weight: 300;
+  font-weight: 400;
   color: rgb(15 23 42 / 0.55);
 }
 
@@ -157,7 +157,7 @@ a.seco-legal__link-tile:hover .seco-spectrum-tile__title {
   min-width: 0;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: clamp(1.25rem, 0.95rem + 1.2vw, 1.75rem);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.2;
   overflow-wrap: anywhere;

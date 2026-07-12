@@ -69,7 +69,7 @@
   color: rgb(13 13 13 / 0.72);
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: 0.875rem;
-  font-weight: 400;
+  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
 }
@@ -162,7 +162,7 @@
   margin: 0;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: clamp(2rem, 0.85rem + 5.5vw, 3.25rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1.1;
   color: #0d0d0d;
@@ -179,7 +179,7 @@
   margin: 0;
   text-align: left;
   font-family: inherit;
-  font-weight: 400;
+  font-weight: 500;
   color: #0d0d0d;
   -webkit-text-fill-color: #0d0d0d;
   white-space: nowrap;
@@ -194,7 +194,7 @@
   margin: 0 auto;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: clamp(2.25rem, 0.9rem + 6.5vw, 3.5rem);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 1.1;
   color: #0d0d0d;
@@ -207,7 +207,7 @@
   margin-inline: auto;
   text-align: center;
   font-family: inherit;
-  font-weight: 300;
+  font-weight: 400;
   white-space: nowrap;
 }
 
@@ -227,7 +227,7 @@
   -webkit-text-fill-color: #0d0d0d;
   color: #0d0d0d;
   animation: none;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .dd-gate__lede {
@@ -237,7 +237,7 @@
   padding: 0 0.25rem;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: clamp(0.95rem, 0.88rem + 0.35vw, 1.0625rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.45;
   color: rgba(13, 13, 13, 0.72);
@@ -489,7 +489,7 @@
   color: #0d0d0d;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: 0.9375rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1;
   outline: none;
@@ -519,7 +519,7 @@
 
 .dd-gate__input::placeholder {
   color: rgb(13 13 13 / 0.38);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .dd-gate__input:hover {

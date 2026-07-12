@@ -53,7 +53,8 @@
 /* How page — title over icon | vertical rule | sub left of rule */
 .seco-how-page__phenotypes .seco-how-page__story-tile {
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
+  /* Fixed mark column so icon centres share one vertical line across tiles */
+  grid-template-columns: 4.5rem auto minmax(0, 1fr);
   align-items: center;
   align-content: start;
   column-gap: 0;
@@ -65,13 +66,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
-  min-width: 3.5rem;
+  width: 100%;
+  min-width: 0;
   padding-inline-end: 0.75rem;
+  box-sizing: border-box;
 }
 
 .seco-how-page__pheno-mark .seco-how-page__story-label {
   margin: 0;
+  width: 100%;
   text-align: center;
   letter-spacing: 0.08em;
 }
@@ -99,9 +104,12 @@
 }
 
 @media (max-width: 379px) {
+  .seco-how-page__phenotypes .seco-how-page__story-tile {
+    grid-template-columns: 4rem auto minmax(0, 1fr);
+  }
+
   .seco-how-page__pheno-mark {
-    min-width: 3rem;
-    padding-inline-end: 0.6rem;
+    padding-inline-end: 0.55rem;
   }
 
   .seco-how-page__pheno-icon.dd-pheno-icon {

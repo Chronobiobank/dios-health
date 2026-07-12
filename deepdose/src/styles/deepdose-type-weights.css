@@ -1,0 +1,24 @@
+/**
+ * Deepdose type weight ladder — locked globally.
+ *
+ * Former light (300)  → regular (400)
+ * Former regular (400) → medium (500)
+ *
+ * Do not reintroduce font-weight: 300 for UI copy.
+ * Prefer tokens below over raw numbers in new CSS.
+ */
+
+:root {
+  --dd-fw-light: 400; /* was Inter Light */
+  --dd-fw-regular: 500; /* was Inter Regular */
+  --dd-fw-medium: 500;
+  --dd-fw-semibold: 600;
+  --dd-fw-bold: 700;
+}
+
+html,
+body,
+.deepdose-shell,
+.dd-product {
+  font-weight: var(--dd-fw-regular);
+}

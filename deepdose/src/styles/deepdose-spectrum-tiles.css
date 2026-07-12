@@ -223,7 +223,7 @@
 
 .seco-spectrum-tile__title--display {
   font-family: var(--seco-font-display);
-  font-weight: 400;
+  font-weight: 500;
   font-size: clamp(1.0625rem, 2.2vw, 1.1875rem);
   letter-spacing: -0.02em;
 }
@@ -258,7 +258,7 @@
   justify-self: end;
   font-family: var(--seco-font-display);
   font-size: clamp(3rem, 5vw, 4.25rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   letter-spacing: -0.04em;
   color: color-mix(in srgb, var(--cue) 22%, transparent);
@@ -270,7 +270,7 @@
 .seco-spectrum-tile--stat .seco-spectrum-tile__title {
   font-family: var(--seco-font-display);
   font-size: clamp(1.875rem, 4.4vw, 2.75rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.02;
   letter-spacing: var(--seco-display-tracking);
   max-width: 100%;
@@ -366,7 +366,7 @@ button.seco-spectrum-tile {
   margin-top: 0.25rem;
   font-family: var(--seco-font-display);
   font-size: clamp(2.25rem, 5vw, 2.75rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.05;
   letter-spacing: var(--seco-display-tracking-figure);
   color: #fff;
