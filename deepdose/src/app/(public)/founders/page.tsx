@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   alternates: { canonical: '/founders' },
 }
 
-/** /founders — Manjam cohort: welcome, perks, claim access. */
+/** /founders — Manjam cohort: one-screen welcome + perks + CTA. */
 export default function FoundersPage() {
   return (
-    <article className="seco-page seco-mission seco-marketing-page seco-how-page">
-      <div className="seco-landing__section-inner seco-how-page__inner">
+    <article className="seco-page seco-mission seco-marketing-page seco-how-page dd-founders">
+      <div className="seco-landing__section-inner seco-how-page__inner dd-founders__inner">
         <header className="seco-how-page__why seco-reveal seco-reveal--1" aria-labelledby="founders-title">
           <h1 id="founders-title" className="seco-page__title">
             <span className="seco-landing__hero-spectrum">{FOUNDERS_INTRO.title}</span>
@@ -35,11 +35,10 @@ export default function FoundersPage() {
           {FOUNDERS_PERKS.items.map((perk) => (
             <li
               key={perk.id}
-              className="seco-spectrum-tile"
+              className="seco-spectrum-tile seco-spectrum-tile--compact"
               style={{ '--cue': perk.cue } as CSSProperties}
             >
               <p className="seco-spectrum-tile__title">{perk.title}</p>
-              <p className="seco-spectrum-tile__body">{perk.body}</p>
             </li>
           ))}
         </ul>
