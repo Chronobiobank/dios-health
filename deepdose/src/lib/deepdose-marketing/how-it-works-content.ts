@@ -69,27 +69,27 @@ export const HOW_IT_WORKS_CAPTION = DEEPDOSE_LOOP_CAPTION
 export const HOW_IT_WORKS_PHENOTYPES = {
   title: 'Know Your Phenotype',
   lede: DEEPDOSE_PROMISE,
-  /** Two-line bodies — keep character counts aligned so tiles look uniform. */
+  /** Two-line bodies — keep at 55–56 chars so tiles never ellipsize. */
   items: [
     {
       id: 'night_creator' as const,
       label: 'Wolf',
-      body: 'Peak energy in the evening and night. Creative and social after dark.',
+      body: 'Peaks evenings and nights. Creative, social after dark.',
     },
     {
       id: 'early_explorer' as const,
       label: 'Lion',
-      body: 'Peak energy in the early morning. Active and connected at first light.',
+      body: 'Peaks early in the morning. Active and connected at dawn.',
     },
     {
       id: 'twilight_transformer' as const,
       label: 'Bear',
-      body: 'Peak energy from afternoon into evening. Flexible as the day shifts.',
+      body: 'Peaks afternoon to evenings. Flexible as the day shifts.',
     },
     {
       id: 'pulse_shifter' as const,
       label: 'Dolphin',
-      body: 'Peak energy on irregular schedules. Built for shift work and travel.',
+      body: 'Peaks on irregular clocks. Built for shift work, travel.',
     },
   ],
 } as const
