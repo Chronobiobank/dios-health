@@ -25,6 +25,7 @@ export default function FoundersPage() {
           <h1 id="founders-title" className="seco-page__title">
             <span className="seco-landing__hero-spectrum">{FOUNDERS_INTRO.title}</span>
           </h1>
+          <p className="seco-page__lede">{FOUNDERS_INTRO.lede}</p>
         </header>
 
         <ul
