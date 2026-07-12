@@ -16,7 +16,7 @@ export const CHRONOBIOBANK_INTRO = {
   titleWhite: 'For',
   titleAccent: 'people off the clock.',
   lede:
-    `${DEEPDOSE_NAME} is home of Medmaxxing. Score how you sleep. Plan your meds and supplements. Boost your chemistry. Find people whose rhythm fits yours.`,
+    `${DEEPDOSE_NAME} is the first social network designed around circadian chemistry and human connection.`,
   quote:
     'The age of highlight reels is ending. The age of one real night, logged, has begun.',
 } as const
@@ -39,7 +39,7 @@ export const CHRONOBIOBANK_LETTER_TILES = [
   {
     id: 'how',
     label: 'How',
-    body: 'Built on sleep score, locked nights, and doses you share.',
+    body: 'Built on phenotype score, locked nights, and doses you share.',
   },
   {
     id: 'who',

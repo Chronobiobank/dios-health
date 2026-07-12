@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/connect' },
 }
 
-/** Friends on your clock — Chat soft-gates login. */
+/** Sync — who is online in your biological window. Chat soft-gates login. */
 export default async function ConnectPage() {
   const supabase = await createClient()
   const {
@@ -21,7 +21,7 @@ export default async function ConnectPage() {
   const messageHref = user ? '/chat' : '/?next=/chat'
 
   return (
-    <ProductAppShell title="Friends" className="dd-connect">
+    <ProductAppShell title="Sync" className="dd-connect">
       <CommunityMatchesPanel variant="discovery" messageHref={messageHref} />
     </ProductAppShell>
   )

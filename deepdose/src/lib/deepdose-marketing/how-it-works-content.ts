@@ -1,88 +1,115 @@
-import { DEEPDOSE_NAME, DEEPDOSE_MOVEMENT } from '@/lib/brand/deepdose-brand'
+import {
+  DEEPDOSE_NAME,
+  DEEPDOSE_LOOP_CAPTION,
+  DEEPDOSE_PROMISE,
+} from '@/lib/brand/deepdose-brand'
+import { CHEMICAL_PHENOTYPES } from '@/lib/brand/chemical-phenotypes'
+import { DEEPDOSE_VOICE } from '@/lib/brand/deepdose-voice'
 
-/** How it works — DeepDose UX: Score → Plan → Boost → Find. */
+/** How it works — Screen → Score → Share → Sync. */
 
 export const HOW_IT_WORKS_META = {
-  title: `Why Medmaxxing? · ${DEEPDOSE_NAME}`,
-  description: `${DEEPDOSE_MOVEMENT}. For people off the usual clock — score sleep, plan what you take, find people on your rhythm.`,
+  title: `How it works · ${DEEPDOSE_NAME}`,
+  description: DEEPDOSE_VOICE.homeLede,
 } as const
 
 export const HOW_IT_WORKS_INTRO = {
-  title: DEEPDOSE_MOVEMENT,
+  title: 'How it works',
 } as const
 
 /**
- * DeepDose UX loop — Score → Plan → Boost → Find.
+ * Consumer loop — Screen → Score → Share → Sync (build order).
+ * Retention weight: Sync > Share > Score > Screen.
  * `lead` is the verb that pops black; `rest` stays grey.
  */
 export const HOW_IT_WORKS_STEPS = [
   {
-    id: 'score',
+    id: 'screen',
     badge: '1',
-    lead: 'Score',
-    rest: 'your sleep routine',
-    teaser: 'Score your sleep routine — each night locks a sleep score out of 100.',
-    cue: '#3d8fa0',
-    href: '/bank',
-  },
-  {
-    id: 'plan',
-    badge: '2',
-    lead: 'Plan',
-    rest: 'your meds/supps',
-    teaser: 'Plan your meds/supps — time what you take so it fits your clock.',
-    cue: '#e8c41a',
-    href: '/dose',
-  },
-  {
-    id: 'chemistry',
-    badge: '3',
-    lead: 'Boost',
-    rest: 'your chemistry',
-    teaser: 'Boost your chemistry — tune what you take until it works for your clock.',
-    cue: '#e8a54a',
+    lead: 'Screen',
+    rest: 'your phenotype',
+    teaser:
+      'Screen is plumbing — passive phone sensors calculate your chemical phenotype so matching works without you opening an app for sensors.',
+    cue: '#0f172a',
     href: '/',
   },
   {
-    id: 'match',
+    id: 'score',
+    badge: '2',
+    lead: 'Score',
+    rest: 'your chemistry',
+    teaser:
+      'Score is your chemical phenotype profile — circadian stability, energy pattern, social window — ownership, not a diagnosis.',
+    cue: '#0f172a',
+    href: '/bank',
+  },
+  {
+    id: 'share',
+    badge: '3',
+    lead: 'Share',
+    rest: 'your doses',
+    teaser:
+      'Dose into a phenotype feed — Night Creator, Early Explorer, Twilight Transformer, or Pulse Shifter — peers who live your chemistry.',
+    cue: '#0f172a',
+    href: '/dose',
+  },
+  {
+    id: 'sync',
     badge: '4',
-    lead: 'Find',
-    rest: 'your chronomatch',
-    teaser: 'Find your chronomatch — people whose clock and timing fit yours.',
-    cue: '#e04545',
-    href: '/grid',
+    lead: 'Sync',
+    rest: 'your people',
+    teaser:
+      'Sync is why you return — who is online in your biological window, and the moment you think: these are my people.',
+    cue: '#0f172a',
+    href: '/connect',
   },
 ] as const
 
-export const HOW_IT_WORKS_CAPTION = 'Score. Plan. Boost. Find.' as const
+export const HOW_IT_WORKS_CAPTION = DEEPDOSE_LOOP_CAPTION
+
+export const HOW_IT_WORKS_PHENOTYPES = {
+  title: 'Chemical phenotypes',
+  lede: DEEPDOSE_PROMISE,
+  items: CHEMICAL_PHENOTYPES.map((p) => ({
+    id: p.id,
+    label: p.label,
+    peak: p.peak,
+    expression: p.expression,
+  })),
+} as const
+
+export const HOW_IT_WORKS_FOUNDING = {
+  title: DEEPDOSE_VOICE.foundingMembers.label,
+  body: DEEPDOSE_VOICE.foundingMembers.lede,
+} as const
 
 /**
- * Why Medmaxxing — one title + three short story tiles.
+ * Why this exists — one title + three short story tiles.
  * Flow: pain → what we do → why you should care.
  */
 export const HOW_IT_WORKS_WHY = {
-  title: 'Why Medmaxxing?',
+  title: 'Why Deepdose?',
 } as const
 
 export const HOW_IT_WORKS_STORY = [
   {
     id: 'pain',
     label: 'Pain',
-    body: 'Old apps matched faces. People off a 9-to-5 clock got left behind.',
+    body: 'Generic social apps match faces and leave off-schedule lives behind. Health apps show scores and leave you alone.',
   },
   {
     id: 'solution',
     label: 'What we do',
-    body: 'We match nights. Score sleep. Plan what you take. Find people on your rhythm.',
+    body: 'Chemical phenotypes power the graph. Sync finds who is awake in your window. Share and Score give the tribe glue and status.',
   },
   {
     id: 'care',
     label: 'Why care',
-    body: 'First invite goes to early Manjam members — real connection around sleep, timing, and chemistry.',
+    body: 'Attraction, recognition, belonging — the moment you think “these are my people” is the retention engine.',
   },
 ] as const
 
 export const HOW_IT_WORKS_CTA = {
-  label: 'Start free',
-  href: '/',
+  label: 'Find Your Sync',
+  href: '/connect',
 } as const

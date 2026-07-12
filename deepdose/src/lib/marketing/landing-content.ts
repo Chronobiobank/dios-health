@@ -26,7 +26,7 @@ export const LANDING_FOOTER = {
     {
       title: 'Product',
       links: [
-        { label: 'Why Medmaxxing?', href: '/how' },
+        { label: 'How it works', href: '/how' },
         { label: 'Patient onboarding', href: '/' },
         { label: 'Dosage', href: '/dosage' },
       ],

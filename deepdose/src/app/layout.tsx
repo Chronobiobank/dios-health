@@ -1,7 +1,11 @@
 import type { Metadata } from 'next'
 import { siteFontVariableClasses } from '@/lib/fonts/site-fonts'
 import { SiteJsonLd } from '@/components/seo/SiteJsonLd'
-import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
+import {
+  DEEPDOSE_HOME_HEADLINE,
+  DEEPDOSE_NAME,
+  DEEPDOSE_PROMISE,
+} from '@/lib/brand/deepdose-brand'
 import '@/styles/dios-wordmark.css'
 import '@/styles/dios-tokens.css'
 import '@/styles/dios-components.css'
@@ -12,17 +16,19 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.unmed.net'
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
+    default: `${DEEPDOSE_NAME} · ${DEEPDOSE_HOME_HEADLINE}`,
     template: `%s · ${DEEPDOSE_NAME}`,
   },
-  description: DEEPDOSE_TAGLINE,
+  description: DEEPDOSE_PROMISE,
   applicationName: DEEPDOSE_NAME,
   keywords: [
     'Deepdose',
-    'Max your chemistry',
-    'Medmaxxing',
-    'chronomatch',
-    'sleep score',
+    'Chemistry That Connects',
+    'chemical phenotype',
+    'circadian chemistry',
+    'social network',
+    'SRI',
+    'chronotype',
     'body clock',
   ],
   alternates: {
@@ -33,13 +39,13 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     url: APP_URL,
     siteName: DEEPDOSE_NAME,
-    title: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
-    description: DEEPDOSE_TAGLINE,
+    title: `${DEEPDOSE_NAME} · ${DEEPDOSE_HOME_HEADLINE}`,
+    description: DEEPDOSE_PROMISE,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${DEEPDOSE_NAME} · ${DEEPDOSE_TAGLINE}`,
-    description: DEEPDOSE_TAGLINE,
+    title: `${DEEPDOSE_NAME} · ${DEEPDOSE_HOME_HEADLINE}`,
+    description: DEEPDOSE_PROMISE,
   },
   robots: {
     index: true,

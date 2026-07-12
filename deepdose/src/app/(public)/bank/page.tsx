@@ -6,7 +6,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const metadata: Metadata = {
   title: `Score · ${DEEPDOSE_NAME}`,
-  description: 'Your sleep score, today’s doses, and optional research share.',
+  description: 'Your chemical phenotype score, today’s doses, and optional research share.',
   alternates: { canonical: '/bank' },
 }
 

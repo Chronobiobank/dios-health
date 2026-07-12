@@ -17,24 +17,62 @@ export const DEEPDOSE_FOOTER_LEGAL =
 
 export const DEEPDOSE_REGISTRATION_LINE = DEEPDOSE_FOOTER_LEGAL
 
-export const DEEPDOSE_TAGLINE = 'Max your chemistry.' as const
+/** Homepage hero */
+export const DEEPDOSE_HOME_HEADLINE = 'Chemistry That Connects' as const
 
-/** Consumer movement — Medmaxxing */
-export const DEEPDOSE_MOVEMENT = 'Medmaxxing' as const
+/** Core user promise — phenotype discovery + tribe. */
+export const DEEPDOSE_PROMISE =
+  'Discover your chemical phenotype. Find your people.' as const
 
-/** Legacy token phrase — prefer plain “log a dose” on public surfaces. */
-export const DEEPDOSE_TOKEN_ECONOMY = 'Log a dose.' as const
+/**
+ * Short CVP / loop imperative — used on /how and loop chrome.
+ * Homepage hero uses DEEPDOSE_HOME_HEADLINE instead.
+ */
+export const DEEPDOSE_TAGLINE = 'Make chemistry work.' as const
 
-/** Homepage hero — compelling CTA (stack + meeting people) */
-export const DEEPDOSE_HOME_HEADLINE = 'Max your Chemistry' as const
+/** Category + differentiation — primary positioning statement. */
+export const DEEPDOSE_POSITIONING =
+  'Deepdose is the first social network designed around chemical phenotypes and human connection.' as const
 
-/** Dose = each logged item in the feed — see lib/patient/dose-uploads.ts */
+/**
+ * Product loop (onboarding / infrastructure order).
+ * Screen → Score → Share → Sync.
+ */
+export const DEEPDOSE_LOOP_CAPTION = 'Screen. Score. Share. Sync.' as const
+
+/**
+ * Retention hierarchy (why people return) — opposite of loop order for stickiness.
+ * Sync → Share → Score → Screen.
+ * Chemistry matches people; community retains them; score is status; screen is plumbing.
+ */
+export const DEEPDOSE_RETENTION_ORDER = 'Sync. Share. Score. Screen.' as const
+
+/** Core product question — social graph, not health dashboard. */
+export const DEEPDOSE_VALUE_PROP =
+  'Who is online in my biological window right now?' as const
+
+/**
+ * North-star metric — tribe formation, not score views.
+ * Prefer meaningful synchronisations / same-window matches over DAU on Score.
+ */
+export const DEEPDOSE_NORTH_STAR =
+  'Meaningful Syncs Created — people who discover someone who matches their chemical phenotype and form a real connection.' as const
+
+/** @deprecated Retired movement name — do not use in new copy. Prefer DEEPDOSE_TAGLINE / loop. */
+export const DEEPDOSE_MOVEMENT = 'Make chemistry work' as const
+
+/** Share CTA — stamp a chemical dose. */
+export const DEEPDOSE_TOKEN_ECONOMY = 'Share a dose.' as const
 
 /**
  * Copy hierarchy:
- * Max your chemistry = splash CTA (meds/supps + meeting others).
- * Medmaxxing = the movement / how scoring and matching works.
- * Public voice = plain English for people off the usual clock (ex-Manjam first).
+ * Positioning = first social network for chemical phenotypes + connection.
+ * Thesis = social network powered by body-clock chemistry (not a health app with social bolted on).
+ * Chemistry That Connects = homepage hero.
+ * Discover your chemical phenotype. Find your people. = core promise.
+ * Make chemistry work = short CVP / loop imperative.
+ * Screen · Score · Share · Sync = product loop (build order).
+ * Sync · Share · Score · Screen = retention order (why they return).
  * Deepdose = company, Chemistry, TipTraQ, Chronobiobank.
  * Melatonin / DLMO = research / tech methodology only.
  */

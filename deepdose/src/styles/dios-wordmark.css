@@ -53,7 +53,7 @@
 }
 
 .seco-logo-glyph__arm--a {
-  animation: seco-logo-glyph-spin-a 11.3s linear infinite;
+  animation: seco-logo-glyph-spin-a 4.2s linear infinite;
 }
 
 .seco-logo-glyph__arm-mount {
@@ -61,7 +61,7 @@
 }
 
 .seco-logo-glyph__arm--b {
-  animation: seco-logo-glyph-spin-b 16.7s linear infinite;
+  animation: seco-logo-glyph-spin-b 6.1s linear infinite;
 }
 
 @keyframes seco-logo-glyph-spin-a {

@@ -11,7 +11,7 @@ export const SCIENCE_TRUST_META = {
 export const SCIENCE_TRUST_INTRO = {
   title: 'Sleep you can measure.',
   lede:
-    'We help you read your night so you can log an honest sleep score. Here is what we measure, what we will not claim, and the published science behind timing.',
+    'We help you read your night so you can log an honest phenotype score. Here is what we measure, what we will not claim, and the published science behind timing.',
 } as const
 
 export const SCIENCE_TRUST_FEATURES = [

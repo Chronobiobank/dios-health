@@ -4849,6 +4849,22 @@
   max-width: 60ch;
 }
 
+.seco-pricing__founding {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mkt-cta-stack-gap, 0.65rem);
+  margin-top: var(--mkt-section-gap, 1.5rem);
+  max-width: 60ch;
+}
+
+.seco-pricing__founding .seco-page__title {
+  margin: 0;
+}
+
+.seco-pricing__founding .seco-page__lede {
+  margin: 0;
+}
+
 .seco-pricing.seco-marketing-page .seco-body-clock-compare {
   margin-top: 0;
 }

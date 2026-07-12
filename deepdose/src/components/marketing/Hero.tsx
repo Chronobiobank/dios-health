@@ -19,7 +19,7 @@ export function Hero() {
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Button href="/">Start onboarding</Button>
             <Button href="/how" variant="secondary">
-              Why Medmaxxing?
+              Why Deepdose?
             </Button>
           </div>
           <p className="mt-8 text-xs text-ink-faint">

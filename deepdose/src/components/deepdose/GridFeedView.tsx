@@ -9,7 +9,11 @@ import {
   buildMockGridDoses,
   mockDoseAvatar,
 } from '@/lib/deepdose-marketing/grid-feed-mocks'
-import { parseAppGroupId, type AppGroupId } from '@/lib/deepdose-marketing/app-groups'
+import {
+  APP_GROUP_DEFAULT,
+  parseAppGroupId,
+  type AppGroupId,
+} from '@/lib/deepdose-marketing/app-groups'
 import { sleepScoreBadge } from '@/lib/brand/sleep-score'
 import { DOSE_TAG_META, type DoseUpload } from '@/lib/patient/dose-uploads'
 import { usePatientDoses } from '@/lib/patient/use-patient-doses'
@@ -24,20 +28,25 @@ function formatTime(iso: string): string {
 
 function readFeedFromLocation(): AppGroupId {
   try {
-    return parseAppGroupId(new URLSearchParams(window.location.search).get('clock')) ?? 'lark'
+    return (
+      parseAppGroupId(new URLSearchParams(window.location.search).get('clock')) ??
+      APP_GROUP_DEFAULT
+    )
   } catch {
-    return 'lark'
+    return APP_GROUP_DEFAULT
   }
 }
 
 function DoseCard({
   dose,
   syncCount,
+  synced,
   onSync,
   selfAvatar,
 }: {
   dose: DoseUpload
   syncCount: number
+  synced: boolean
   onSync: () => void
   selfAvatar: string
 }) {
@@ -55,14 +64,12 @@ function DoseCard({
         <div className="dd-grid__meta">
           <p className="dd-grid__name">{dose.displayName}</p>
           <p className="dd-grid__sub">
-            <span className="dd-grid__tag" style={{ color: tag.cue }}>
-              {tag.label}
-            </span>
+            <span className="dd-grid__tag">{tag.hash}</span>
             <span aria-hidden> · </span>
             {formatTime(dose.timestamp)}
           </p>
         </div>
-        <span className="dd-grid__sri tabular-nums" title="Sleep score — how locked your nights are">
+        <span className="dd-grid__sri tabular-nums" title="Phenotype score">
           {sleepScoreBadge(dose.sri)}
         </span>
       </header>
@@ -78,8 +85,14 @@ function DoseCard({
       </div>
 
       <footer className="dd-grid__card-foot">
-        <button type="button" className="dd-grid__sync" onClick={onSync}>
-          Boost · {syncCount}
+        <button
+          type="button"
+          className={synced ? 'dd-grid__sync dd-grid__sync--on' : 'dd-grid__sync'}
+          onClick={onSync}
+          aria-pressed={synced}
+          disabled={synced}
+        >
+          {synced ? `Synced · ${syncCount}` : `Sync · ${syncCount}`}
         </button>
       </footer>
     </article>
@@ -88,8 +101,8 @@ function DoseCard({
 
 export function GridFeedView() {
   const pathname = usePathname() ?? '/grid'
-  const { ready, doses, syncs, sync } = usePatientDoses()
-  const [feed, setFeed] = useState<AppGroupId>('lark')
+  const { ready, doses, syncs, syncedByMe, sync } = usePatientDoses()
+  const [feed, setFeed] = useState<AppGroupId>(APP_GROUP_DEFAULT)
   const mocks = useMemo(() => buildMockGridDoses(), [])
   const selfAvatar = resolvePlanAvatarUrl(null)
 
@@ -106,7 +119,7 @@ export function GridFeedView() {
         isSelf: true as const,
       }))
     return [...self, ...mocks]
-      .filter((d) => d.chronotype === feed)
+      .filter((d) => d.tag === feed)
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
   }, [doses, mocks, feed])
 
@@ -119,8 +132,8 @@ export function GridFeedView() {
       <div className="dd-grid__feed">
         {items.length === 0 ? (
           <p className="dd-grid__empty">
-            No doses here yet.{' '}
-            <Link href="/dose">Log one</Link>
+            No posts here yet.{' '}
+            <Link href={`/dose?tag=${feed}`}>Post one</Link>
             {' · '}
             <Link href="/connect">Find friends</Link>
           </p>
@@ -131,6 +144,7 @@ export function GridFeedView() {
               dose={dose}
               selfAvatar={selfAvatar}
               syncCount={syncs[dose.id] ?? dose.syncCount}
+              synced={syncedByMe.has(dose.id)}
               onSync={() => sync(dose.id)}
             />
           ))

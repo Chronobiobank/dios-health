@@ -7,50 +7,54 @@ import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} · Max your chemistry.`,
-  description: `${DEEPDOSE_NAME}: max your chemistry — score your nights, plan what you take, find people on your clock.`,
+  title: `${DEEPDOSE_NAME} · Chemistry That Connects.`,
+  description: DEEPDOSE_VOICE.homeLede,
 } as const
 
-export const DEEPDOSE_CVP = 'Max your chemistry.' as const
+export const DEEPDOSE_CVP = DEEPDOSE_VOICE.tagline
 
-/** Home splash · one-line head + med baseline. */
+export const DEEPDOSE_POSITIONING_LINE = DEEPDOSE_VOICE.positioning
+
+/** Home splash · Chemistry That Connects + phenotype promise. */
 export const DEEPDOSE_HOME_SPLASH = {
   headlineWhite: DEEPDOSE_VOICE.homeHeadlineWhite,
   headlineAccent: DEEPDOSE_VOICE.homeHeadlineAccent,
   lede: DEEPDOSE_VOICE.homeLede,
+  primaryCta: DEEPDOSE_VOICE.homePrimaryCta,
+  secondaryCta: DEEPDOSE_VOICE.homeSecondaryCta,
 } as const
 
 export const DEEPDOSE_HOME_SPLASH_HERO = {
   eyebrow: '',
   headlineWhite: DEEPDOSE_HOME_SPLASH.headlineWhite,
   headlineAccent: DEEPDOSE_HOME_SPLASH.headlineAccent,
-  ...(DEEPDOSE_HOME_SPLASH.lede ? { support: DEEPDOSE_HOME_SPLASH.lede } : {}),
+  support: DEEPDOSE_HOME_SPLASH.lede,
 } as const
 
-/** @deprecated Home uses on-page signup gate; kept for older imports. */
+/** @deprecated Home uses dual CTAs; kept for older imports. */
 export const DEEPDOSE_HOME_ACTIONS = {
   mission: { label: 'About us', href: '/how' },
-  create: { label: 'Enter', href: '/#enter' },
+  create: { label: DEEPDOSE_VOICE.homePrimaryCta.label, href: DEEPDOSE_VOICE.homePrimaryCta.href },
 } as const
 
 /** Default catalog codes for home med search baseline (two rows). */
 export const DEEPDOSE_HOME_DEFAULT_MED_CODES = ['metformin', 'ramipril'] as const
 
-/** Med search copy · home splash baseline. */
+/** Med search copy · post-join / account flows (no longer homepage hero). */
 export const DEEPDOSE_HOME_POLY_SEARCH = {
-  checkCta: 'Join Deepdose',
+  checkCta: 'Find Your Sync',
   expandCta: '+ Add medication',
   expandCtaAnother: '+ Add medication',
   medPlaceholders: ['Find your med', 'Add another'],
   medPlaceholderExtra: 'Search another medication',
 } as const
 
-/** Site-wide mission · three moves (story lives on /how). */
+/** Site-wide mission · four stages (story lives on /how). */
 export const DEEPDOSE_MISSION = {
-  eyebrow: 'Three moves',
+  eyebrow: 'Four stages',
   headlineWhite: DEEPDOSE_VOICE.missionHeadlineWhite,
   headlineAccent: DEEPDOSE_VOICE.missionHeadlineAccent,
-  headline: 'Score. Plan. Boost. Find.',
+  headline: 'Screen. Score. Share. Sync.',
   lede: DEEPDOSE_VOICE.missionLede,
 } as const
 
@@ -76,121 +80,106 @@ export const DEEPDOSE_LANDING_EVIDENCE = {
 export const DEEPDOSE_LANDING_PLATFORM = {
   pillars: [
     {
-      id: 'test',
-      label: 'Log',
-      body: 'Night · Day · Energy · Fuel',
+      id: 'screen',
+      label: 'Screen',
+      body: 'Infrastructure · passive SRI',
       icon: 'test' as const,
-      panelTitle: 'Your dose readout',
-      panelSeeAll: { label: 'Open Chemistry', href: '/dosage' },
+      panelTitle: 'Your nights',
+      panelSeeAll: { label: 'Find Your Sync', href: '/connect' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'People log the night — light, meds, and movement — then raise their sleep score.',
-          meta: 'Rhythm · Sleep regularity',
-          href: '/grid',
+          title: 'Sensors run in the background so phenotype matching works — you do not open the app for accelerometer updates.',
+          meta: 'Screen · Plumbing',
+          href: '/',
         },
         {
-          title: 'Optional TipTraQ nights deepen the read when you want a stronger sleep score.',
+          title: 'Optional TipTraQ nights deepen your chemical phenotype when you want a stronger read.',
           meta: 'Deeper read · TipTraQ',
           href: '/testkit',
         },
         {
-          title: 'Drift shows when your clock slips, so you know what to correct before you log.',
-          meta: 'Alignment · Catch drift early',
-          href: '/dosage',
-        },
-      ],
-    },
-    {
-      id: 'plan',
-      label: 'Feed',
-      body: 'People on your clock',
-      icon: 'plan' as const,
-      panelTitle: 'Your feed',
-      panelSeeAll: { label: 'Sign in', href: '/grid' },
-      panelLayout: 'grid' as const,
-      panelItems: [
-        {
-          title: 'One dose at a time: photo plus sleep score, for early birds or night owls.',
-          meta: 'You choose · Opt in',
-          href: '/dose',
-        },
-        {
-          title: 'Profile and Chemistry stay yours. Peers see what you publish for connection.',
-          meta: 'Control · Private by default',
-          href: '/profile',
-        },
-        {
-          title: 'Correct together: compare notes when nights drift and update what you share.',
-          meta: 'Correction · Shared learning',
-          href: '/connect',
-        },
-        {
-          title: 'Optional anonymised research share, never by default, stop anytime.',
-          meta: 'Research · Consent first',
+          title: 'Screen removes friction. Retention comes from Sync, Share, and Score.',
+          meta: 'Onboarding · Not the habit',
           href: '/how',
         },
       ],
     },
     {
-      id: 'social',
-      label: 'Friends',
-      body: 'People on your clock',
-      icon: 'social' as const,
-      panelTitle: 'Friends & messages',
-      panelSeeAll: { label: 'Open Friends', href: '/connect' },
+      id: 'score',
+      label: 'Score',
+      body: 'Phenotype profile',
+      icon: 'plan' as const,
+      panelTitle: 'Your score',
+      panelSeeAll: { label: 'Open Score', href: '/bank' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'People on your rhythm who see today’s doses — not follower counts or endless scroll.',
-          meta: 'Similar clocks · Daily doses',
-          href: '/connect',
+          title: 'Score is your chemical phenotype profile — stability, energy pattern, social window — not a diagnosis.',
+          meta: 'Score · Phenotype',
+          href: '/bank',
         },
         {
-          title: 'Message privately when it feels right. Dose together, not an attention feed.',
-          meta: 'Chat · Private DMs',
-          href: '/chat',
+          title: 'Watch gains on calendar tiles as nights lock in — ownership over building your chemistry.',
+          meta: 'Progression · Calendar',
+          href: '/bank',
         },
         {
-          title: 'See people who have been where you are and share what finally settled their nights.',
-          meta: 'Peers · Real doses',
-          href: '/connect',
-        },
-        {
-          title: 'Privacy-first: consent-based, UK GDPR, nothing shared without you.',
-          meta: 'Trust · You stay in control',
-          href: '/privacy',
+          title: 'The score matters for what it unlocks: trust, tribe weight, and windows others can read.',
+          meta: 'Unlocks · Not vanity',
+          href: '/bank',
         },
       ],
     },
     {
-      id: 'meds',
-      label: 'Chemistry',
-      body: 'Timing that shapes your match',
+      id: 'share',
+      label: 'Share',
+      body: 'Express your chemistry',
       icon: 'meds' as const,
-      panelTitle: 'Why timing is chemistry',
-      panelSeeAll: { label: 'See the science', href: '/science' },
+      panelTitle: 'Your feed',
+      panelSeeAll: { label: 'Open Home', href: '/grid' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Stacked chemistry and odd hours change how the same routine lands. Understanding that is how matching starts.',
-          meta: 'Stacked chemistry · Real doses',
-          href: '/dosage',
+          title: 'Dose here because only people in your phenotype group understand what the night feels like.',
+          meta: 'Dose · Why here',
+          href: '/dose',
         },
         {
-          title: 'Published trials show when medicines land better against the body clock, the same science behind clearer chemistry reads.',
-          meta: 'Evidence · Timing trials',
-          href: '/science',
+          title: 'Four phenotype feeds — Night Creator, Early Explorer, Twilight Transformer, Pulse Shifter.',
+          meta: 'Phenotype · Expression',
+          href: '/grid',
         },
         {
-          title: 'Share timing details with peers who get it, then correct together when drift shows up.',
-          meta: 'Share · Connect · Correct',
+          title: 'Profile and chemistry stay yours. Peers see what you publish.',
+          meta: 'Control · Private by default',
+          href: '/profile',
+        },
+      ],
+    },
+    {
+      id: 'sync',
+      label: 'Sync',
+      body: 'Find your people',
+      icon: 'social' as const,
+      panelTitle: 'Your matches',
+      panelSeeAll: { label: 'Open Sync', href: '/connect' },
+      panelLayout: 'grid' as const,
+      panelItems: [
+        {
+          title: 'Who is online in your biological window right now — compatible chemical phenotypes.',
+          meta: 'Sync · Value prop',
           href: '/connect',
         },
         {
-          title: 'Start free: understand your chemistry, share what fits, message when ready.',
-          meta: 'Free · No attention feed',
-          href: '/',
+          title: 'The moment you think “these are my people” is the retention engine.',
+          meta: 'Tribe · Recognition',
+          href: '/connect',
+        },
+        {
+          title: 'Chat when the match fits. No forced 9-to-5 energy.',
+          meta: 'Chat · On your clock',
+          href: '/chat',
         },
       ],
     },
@@ -220,93 +209,93 @@ export function patientPlanHeroSupport(medCount: number, verdict: string): strin
   return `${intro} ${verdict}`
 }
 
-/** Profile · Levels-style modular sleep-score tiles (protocols live on /dosage). */
+/** Profile · chemical phenotype score tiles (protocols live on /dosage). */
 export const PATIENT_SLEEP_WAKE_DASH = {
-  title: 'Sleep matters.',
-  diagnosticEyebrow: 'Your Risk Profile',
+  title: 'Your chemistry.',
+  diagnosticEyebrow: 'Your phenotype profile',
   subtitleBefore: 'We use AI and your phone data to calculate your ',
-  subtitleHighlight: 'sleep score',
+  subtitleHighlight: 'chemical phenotype score',
   subtitleAfter:
-    '. It shows how locked your nights are, and which daily changes can raise your score and lower your risk of chronic disease and early death.',
+    '. It shows how locked your nights are, and which daily changes can strengthen your chemistry.',
   scienceLink: 'Read the science',
   scienceHref: '/science',
   dosageLink: 'See the dosage',
   scoreTile: 'Your score',
   historyTile: 'History',
-  sleepMattersTile: 'Sleep matters',
+  sleepMattersTile: 'Your chemistry',
   sleepLabel: 'Lights off',
   wakeLabel: 'Lights on',
   sleepHint: '',
   wakeHint: '',
-  riskTile: 'Disease risk',
+  riskTile: 'Lifestyle alignment',
   riskHint:
-    'Lower sleep score, higher disease risk. Your phone score is a proxy from population studies (including UK Biobank-style evidence). It is not a personal diagnosis.',
+    'Your phone score reflects how steady your chemical phenotype is. It is a personal rhythm profile — not a medical diagnosis.',
   dosageCta: 'Open dosage protocol',
   cta: 'Save my plan',
 } as const
 
-/** Six-dose protocol — expands from sleep-score read into what to do. */
+/** Six-dose protocol — expands from phenotype score into what to do. */
 export const PATIENT_SIX_DOSE_PROTOCOL = {
   eyebrow: 'Your protocol',
-  title: 'Six doses to raise your sleep score',
+  title: 'Six doses to strengthen your chemistry',
   support:
     'Sunlight, nutrient, biomedical, physiological, neurological, and blackout. Hold them and your nights line up.',
-  education: 'Lined-up nights raise your sleep score. Higher score, lower disease risk.',
+  education: 'Lined-up nights raise your score. Stronger score, clearer chemical phenotype.',
 } as const
 
-/** Consumer → GP handoff after public risk analysis. */
+/** Consumer → GP handoff after public analysis (optional clinical deepen). */
 export const LANDING_GP_HANDOFF_COPY = {
-  eyebrow: 'Your risk picture',
+  eyebrow: 'Your chemistry picture',
   shareCta: 'Take this to your GP',
   shareOptionalCta: 'Print a summary for your GP',
-  tiptraqCta: 'Get a TipTraQ early-risk read →',
+  tiptraqCta: 'Get a TipTraQ deeper phenotype read →',
   disclaimer:
-    'Decision support only, not a diagnosis. TipTraQ nights deepen the clinical picture when you want more than a phone score.',
+    'Decision support only, not a diagnosis. TipTraQ nights deepen your chemical phenotype when you want more than a phone score.',
   summaryTitle: 'Summary for your GP',
   summaryMeta:
-    'Printable sleep–medicine risk summary for a medication review and home sleep testing.',
-  summaryEmpty: 'Run a risk check on your sleep–wake plan first, then share the summary with your GP.',
+    'Printable sleep–medicine summary for a medication review and home sleep testing.',
+  summaryEmpty: 'Run a chemistry check on your sleep–wake plan first, then share the summary with your GP.',
   summaryTipTraqBody:
-    'If nights feel broken or breathing may be involved, a TipTraQ home sleep test (three nights) can confirm the early-risk picture before anyone changes your meds.',
+    'If nights feel broken or breathing may be involved, a TipTraQ home sleep test (three nights) can deepen your phenotype read before anyone changes your meds.',
 } as const
 
 export const DEEPDOSE_PLAN_NEXT_STEPS = {
   entryCta: 'Save my plan →',
   continueCta: 'Continue →',
   backCta: 'Back',
-  steps: ['Sleep score', 'Six doses', `Join ${DEEPDOSE_NAME}`] as const,
+  steps: ['Screen', 'Share', `Join ${DEEPDOSE_NAME}`] as const,
   clock: {
     eyebrow: 'Step 1 of 3',
-    headline: 'Here’s your sleep score',
+    headline: 'Here’s your SRI screen',
     support:
-      'Your sleep score from how locked your nights are and when you take your medicines. Wearables refine past, current, and future nights.',
+      'Your SRI from how locked your nights are and when you take your medicines. Phone sensors keep screening from signup.',
     stats: {
-      sri: 'Sleep score',
+      sri: 'SRI',
       wake: 'Typical wake',
       sleep: 'Sleep target',
-      chronotype: 'Rhythm hint',
+      chronotype: 'Chemical phenotype',
     },
-    note: 'A first read from what you told us. Phone and wearable data sharpen it later.',
+    note: 'A first phenotype screen from what you told us. Phone and wearable data sharpen it later.',
   },
   doses: {
     eyebrow: 'Step 2 of 3',
     headline: 'Here are your six doses',
     support:
-      'Sunlight, food, movement, focus, connection, and blackout. Hold them to raise your sleep score and give your meds a fairer chance.',
-    education: `${DEEPDOSE_NAME} times six daily cues to your rhythm. More locked nights, stronger doses.`,
+      'Sunlight, food, movement, focus, connection, and blackout. Hold them to raise your SRI and give chemistry a fairer chance.',
+    education: `${DEEPDOSE_NAME} times six daily cues to your chemical phenotype. More locked nights, chemistry that works.`,
   },
   join: {
     eyebrow: 'Step 3 of 3',
-    headline: 'Share details. Connect and correct.',
+    headline: 'Share details. Sync and connect.',
     support:
-      'Understand your chemistry, share what you choose, and find people on a similar rhythm. Stay free, or deepen the read with TipTraQ.',
+      'Understand your chemical phenotype, share what you choose, and find people on compatible chemistry. Stay free, or deepen the read with TipTraQ.',
     commons: {
       title: 'Commons',
       figure: 'Free',
       points: [
-        'Understand and save your chemistry profile',
+        'Understand and save your chemical phenotype',
         'Share details you choose for connection',
-        'Match and message people on a similar rhythm',
+        'Match and message people on compatible chemistry',
         'Help research only if you opt in',
       ],
       cta: { label: 'Join Commons free', href: '/' },
@@ -316,7 +305,7 @@ export const DEEPDOSE_PLAN_NEXT_STEPS = {
       figure: 'From Testkit',
       points: [
         'TipTraQ home sleep test, three nights',
-        'Stronger chemistry baseline to share',
+        'Stronger phenotype baseline to share',
         'Verified sleep badge when you want it',
         'Quarterly re-reads catch drift early',
       ],
@@ -370,21 +359,21 @@ export const DEEPDOSE_PATIENT_PLAN_PROFILE = {
   firstNamePlaceholder: 'First name',
   familyNamePlaceholder: 'Family name',
   locationPlaceholder: 'Your city or region',
-  journeyPlaceholder: 'Your rhythm journey',
+  journeyPlaceholder: 'Your chemistry journey',
   avatarEditLabel: 'Edit',
   avatarEmptyLabel: 'Add photo',
   baseline:
-    'Free to join · understand your chemistry, share details you choose, connect with peers, and help research if you want to.',
+    'Free to join · understand your chemical phenotype, share details you choose, sync with peers, and help research if you want to.',
 } as const
 
 /** Social /profile — identity + Chemistry tile (SRI). */
 export const SOCIAL_PROFILE = {
-  chemistryTitle: 'Sleep score',
+  chemistryTitle: 'Phenotype score',
   sleepLabel: 'Lights off',
   wakeLabel: 'Lights on',
   share: 'Log dose',
   matches: 'Friends',
-  join: 'Join free',
+  join: 'Find Your Sync',
 } as const
 
 export const DEEPDOSE_PATIENT_PLAN_DEEPER = [
@@ -410,8 +399,8 @@ export const DEEPDOSE_PATIENT_PLAN_SHARING = {
       showPeers: false,
     },
     {
-      title: 'Connect with people on a similar rhythm for connection and correction.',
-      meta: 'Connect · opt in · you control what others see',
+      title: 'Sync with people on a compatible chemical phenotype.',
+      meta: 'Sync · opt in · you control what others see',
       href: '/connect',
       showPeers: true,
     },

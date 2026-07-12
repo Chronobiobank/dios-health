@@ -1,6 +1,11 @@
 import { earliestTakeTime } from '@/lib/medications/home-to-onboarding'
 import { buildSixDoseStrip, type SixDoseStripItem } from '@/lib/patient/six-dose-strip'
 import { timeToMinutes } from '@/lib/utils/time'
+import {
+  phenotypeFromWakeMinutes,
+  phenotypeHintLine,
+  type ChemicalPhenotype,
+} from '@/lib/brand/chemical-phenotypes'
 
 const TYPICAL_SLEEP_HOURS = 8
 const WIND_DOWN_MINUTES = 90
@@ -19,14 +24,11 @@ export type LandingBodyClockProfile = {
   wakeLabel: string
   sleepOnsetLabel: string
   sleepTargetLabel: string
+  /** @deprecated Prefer phenotypeHint / phenotype */
   chronotypeHint: string
+  phenotype: ChemicalPhenotype
+  phenotypeHint: string
   profileLine: string
-}
-
-function chronotypeFromWake(wakeMinutes: number): string {
-  if (wakeMinutes < 6 * 60 + 45) return 'Earlier bird — your day starts before most.'
-  if (wakeMinutes >= 8 * 60 + 15) return 'Night owl lean — your clock runs later than average.'
-  return 'Middle rhythm — wake and wind-down sit close to the population norm.'
 }
 
 /** Body-clock anchor from wake + medicine times only — no wearable sync yet. */
@@ -57,10 +59,13 @@ export function inferLandingBodyClock(
     .map((t) => timeToMinutes(t.trim().slice(0, 5)))
     .filter((m) => m >= wakeMin - 60 && m <= wakeMin + 180)
 
+  const phenotype = phenotypeFromWakeMinutes(wakeMin)
+  const phenotypeHint = phenotypeHintLine(phenotype)
+
   const profileLine =
     morningTimes.length > 0
-      ? `Your morning medicines cluster around ${minutesToClock(Math.min(...morningTimes))} — we've anchored your clock from that pattern and your wake time.`
-      : `We've anchored your clock from your ${wakeClock} wake time and medicine schedule.`
+      ? `Your morning medicines cluster around ${minutesToClock(Math.min(...morningTimes))} — we've anchored your chemical phenotype from that pattern and your wake time.`
+      : `We've anchored your chemical phenotype from your ${wakeClock} wake time and medicine schedule.`
 
   return {
     dlmoEstimateHours,
@@ -68,7 +73,9 @@ export function inferLandingBodyClock(
     wakeLabel: wakeClock,
     sleepOnsetLabel: minutesToClock(sleepOnsetMin),
     sleepTargetLabel: minutesToClock(sleepTargetMin),
-    chronotypeHint: chronotypeFromWake(wakeMin),
+    chronotypeHint: phenotypeHint,
+    phenotype,
+    phenotypeHint,
     profileLine,
   }
 }

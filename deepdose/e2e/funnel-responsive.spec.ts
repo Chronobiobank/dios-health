@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Responsive funnel checklist — public marketing pages at mobile / tablet / desktop.
  *
  * Local:  pnpm test:funnel
@@ -30,8 +30,8 @@ async function assertNavForViewport(page: Page, width: number) {
   const desktop = page.locator('.seco-nav__desktop')
 
   if (width >= DESKTOP_NAV_MIN) {
-    await expect(desktop, 'desktop inline nav at ≥1024px').toBeVisible()
-    await expect(toggle, 'hamburger hidden at ≥1024px').toBeHidden()
+    await expect(desktop, 'desktop inline nav at >=1024px').toBeVisible()
+    await expect(toggle, 'hamburger hidden at >=1024px').toBeHidden()
   } else {
     await expect(toggle, 'hamburger visible below 1024px').toBeVisible()
     await expect(desktop, 'inline nav hidden below 1024px').toBeHidden()
@@ -46,12 +46,15 @@ for (const viewport of VIEWPORTS) {
       await page.goto('/')
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Max Your Meds/i)
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Chemistry That\s*Connects/i)
+      await expect(
+        page.getByText(/Discover your chemical phenotype and find people who move through life like you/i)
+      ).toBeVisible()
       await expect(page.getByRole('link', { name: /^About us$/i })).toBeVisible()
       await expect(page.getByRole('link', { name: /^Sign in$/i })).toBeVisible()
-      await expect(page.locator('#home-med-search')).toBeVisible()
-      await expect(page.getByRole('link', { name: /Join Deepdose/i })).toBeVisible()
-      await expect(page.getByText(/You must be 18\+ y\/o to enter and agree to our/i })).toBeVisible()
+      await expect(page.getByRole('link', { name: /Find Your Sync/i })).toBeVisible()
+      await expect(page.getByRole('link', { name: /Discover Your Phenotype/i })).toBeVisible()
+      await expect(page.getByText('You must be 18+ y/o to enter and agree to our')).toBeVisible()
       await expect(page.getByRole('link', { name: /^Terms$/i })).toBeVisible()
       await expect(page.getByRole('link', { name: /^Report$/i })).toBeVisible()
     })
@@ -95,10 +98,8 @@ for (const viewport of VIEWPORTS) {
       await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toContainText(/Find your/i)
-      await expect(page.getByRole('heading', { level: 1 })).toContainText(/chemistry/i)
-      await expect(page.getByRole('link', { name: /Message/i }).first()).toBeVisible()
-      await expect(page.getByText(/Browse free\. Sign in to message/i)).toBeVisible()
+      await expect(page.getByRole('heading', { level: 1 })).toContainText(/Sync/i)
+      await expect(page.getByRole('link', { name: /Message|Chat/i }).first()).toBeVisible()
     })
 
     test('clinician landing', async ({ page }) => {

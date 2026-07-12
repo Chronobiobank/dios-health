@@ -6,9 +6,11 @@ import {
   addDoseUpload,
   bumpSync,
   dosesForDate,
+  hasSyncedDose,
   readBankOptIn,
   readDoseUploads,
   readSyncMap,
+  readSyncedByMe,
   todayDoseDate,
   todayPillars,
   writeBankOptIn,
@@ -35,6 +37,12 @@ export function usePatientDoses() {
     if (!isClient) return {} as Record<string, number>
     void epoch
     return readSyncMap()
+  }, [isClient, epoch])
+
+  const syncedByMe = useMemo(() => {
+    if (!isClient) return new Set<string>()
+    void epoch
+    return readSyncedByMe()
   }, [isClient, epoch])
 
   const bankOptIn = useMemo(() => {
@@ -82,11 +90,14 @@ export function usePatientDoses() {
     pillars,
     todayDate: date,
     syncs,
+    syncedByMe,
     sync,
     saveDose,
     bankOptIn,
     setBankOptIn,
     refresh,
     hasTagToday: (tag: DoseTag) => Boolean(pillars?.[tag]),
+    hasSynced: (doseId: string) =>
+      syncedByMe.has(doseId) || (isClient ? hasSyncedDose(doseId) : false),
   }
 }

@@ -499,7 +499,7 @@ function HeroPanelCard({
 
 export function DeepDoseHeroTabs() {
   const pillars = DEEPDOSE_LANDING_PLATFORM.pillars
-  const [activeId, setActiveId] = useState<HeroPillar['id']>('test')
+  const [activeId, setActiveId] = useState<HeroPillar['id']>('screen')
 
   const activePillar = pillars.find((pillar) => pillar.id === activeId) ?? pillars[0]
   const panelLayout =
@@ -548,9 +548,9 @@ export function DeepDoseHeroTabs() {
         className="seco-hero-tabs__panel"
       >
         <div key={activePillar.id} className="seco-hero-tabs__panel-inner">
-          {activePillar.id === 'test' ? (
+          {activePillar.id === 'screen' ? (
             <HeroDashPreview />
-          ) : activePillar.id === 'plan' ? (
+          ) : activePillar.id === 'score' ? (
             <HeroPlanPreview />
           ) : (
             <div
@@ -561,7 +561,7 @@ export function DeepDoseHeroTabs() {
             >
               {activePillar.panelItems.map((item, index) => {
                 const media =
-                  activePillar.id === 'social' ? <HeroPanelAvatars index={index} /> : null
+                  activePillar.id === 'sync' ? <HeroPanelAvatars index={index} /> : null
 
                 return (
                   <HeroPanelCard

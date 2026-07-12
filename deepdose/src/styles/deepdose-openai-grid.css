@@ -359,7 +359,12 @@
   .seco-spectrum-tile__cue,
   .seco-science-fold__badge
 ) {
-  color: color-mix(in srgb, var(--cue, #3d8fa0) 72%, rgb(15 23 42 / 0.55)) !important;
+  color: rgb(15 23 42 / 0.55) !important;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page .seco-spectrum-tile__icon {
+  color: rgb(15 23 42 / 0.72) !important;
+  background: rgb(15 23 42 / 0.06) !important;
 }
 
 .deepdose-shell.seco-shell--light .seco-marketing-note,

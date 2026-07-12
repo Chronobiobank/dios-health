@@ -44,16 +44,17 @@
   --dd-border-focus: rgb(15 23 42 / 0.32);
 
   --dd-solid: #0f172a;
-  --dd-accent: #e8c41a;
-  --dd-accent-soft: rgb(232 196 26 / 0.12);
-  --dd-cue-resetter: var(--dd-accent);
-  --dd-cue-hijacker: #3d8fa0;
-  --dd-cue-crosser: #e04545;
-  --dd-cue-battery: #2f9e6e;
+  /* Accent is for rare solid fills (e.g. dark pills) — never paint body/UI copy with it. */
+  --dd-accent: #0f172a;
+  --dd-accent-soft: rgb(15 23 42 / 0.08);
+  --dd-cue-resetter: rgb(15 23 42 / 0.35);
+  --dd-cue-hijacker: rgb(15 23 42 / 0.35);
+  --dd-cue-crosser: rgb(15 23 42 / 0.35);
+  --dd-cue-battery: rgb(15 23 42 / 0.35);
   --dd-cue-photonic: var(--dd-cue-resetter);
   --dd-cue-metabolic: var(--dd-cue-hijacker);
   --dd-cue-kinetic: var(--dd-cue-crosser);
-  --dd-danger: var(--dd-cue-crosser);
+  --dd-danger: rgb(15 23 42 / 0.72);
 
   --dd-radius: var(--oai-radius, var(--dd-2));
   --dd-radius-sm: var(--dd-1);
@@ -72,6 +73,35 @@
 
   color: var(--dd-ink);
   background: #f7f7f5;
+}
+
+/*
+ * OpenAI text rule — product copy is black / grey / white only.
+ * Never paint labels, hashtags, links, or body with accent or cue colors.
+ * Color may appear on borders, fills, and media — not on readable text.
+ */
+.dd-product :is(
+  .dd-log__btn-hash,
+  .dd-grid__tag,
+  .dd-bank__slot-hash,
+  .dd-bank__log-link,
+  .dd-bank__tokens,
+  .dd-log__btn-sub,
+  .dd-log__hint,
+  .dd-grid__name,
+  .dd-grid__sub,
+  .dd-connect__name
+) {
+  color: var(--dd-ink);
+}
+
+.dd-product :is(.dd-log__btn-sub, .dd-log__hint, .dd-grid__sub, .dd-bank__tokens, .dd-grid__tag) {
+  color: var(--dd-ink-muted);
+}
+
+.dd-product .dd-grid__sri {
+  background: var(--dd-solid);
+  color: #fff;
 }
 
 /* Page column rhythm — pad/max from openai-grid engine */

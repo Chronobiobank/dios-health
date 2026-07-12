@@ -35,7 +35,7 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
           <path d="M7 10v8.25h10V10" />
         </svg>
       )
-    case 'friends':
+    case 'sync':
       return (
         <svg {...common}>
           <circle cx="9" cy="8.5" r="3.25" />
@@ -44,7 +44,7 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
           <path d="M13.5 14.75c1.35-.55 2.85-.35 4.1.85 1 .95 1.55 2.35 1.65 3.65" />
         </svg>
       )
-    case 'bank':
+    case 'score':
       return (
         <svg {...common}>
           <path d="M5.5 18.5V10.75" />

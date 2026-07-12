@@ -6,14 +6,14 @@ import { LogDoseView } from '@/components/deepdose/LogDoseView'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const metadata: Metadata = {
-  title: `Log Dose · ${DEEPDOSE_NAME}`,
-  description: 'Log Night, Day, Energy, or Fuel — photo plus sleep score.',
+  title: `Dose · ${DEEPDOSE_NAME}`,
+  description: 'Post a photo into a chemical phenotype feed — Night Creator, Early Explorer, Twilight Transformer, or Pulse Shifter.',
   alternates: { canonical: '/dose' },
 }
 
 export default function DosePage() {
   return (
-    <ProductAppShell title="Log" className="dd-log-page">
+    <ProductAppShell title="Dose" className="dd-log-page">
       <Suspense fallback={null}>
         <LogDoseView />
       </Suspense>

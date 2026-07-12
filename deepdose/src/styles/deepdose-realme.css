@@ -110,14 +110,15 @@
 
 .dd-grid__tag {
   font-weight: 500;
+  color: var(--dd-ink-muted);
 }
 
 .dd-grid__sri {
   flex: 0 0 auto;
   padding: var(--dd-1) var(--dd-2);
   border-radius: var(--dd-radius-sm);
-  background: var(--dd-accent);
-  color: #0d0d0d;
+  background: var(--dd-solid);
+  color: #fff;
   font-size: var(--dd-type-xs);
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -177,8 +178,16 @@
   cursor: pointer;
 }
 
-.dd-grid__sync:hover {
+.dd-grid__sync:hover:not(:disabled) {
   background: var(--dd-surface-hover);
+}
+
+.dd-grid__sync--on,
+.dd-grid__sync:disabled {
+  border-color: var(--dd-border-focus);
+  background: var(--dd-surface-strong);
+  color: var(--dd-solid);
+  cursor: default;
 }
 
 /* ── Log Dose ── */
@@ -249,7 +258,7 @@
   min-height: var(--dd-control-h-lg);
   margin: 0;
   padding: var(--dd-gap-loose) var(--dd-4);
-  border: 2px solid var(--cue, var(--dd-accent));
+  border: 1.5px solid var(--dd-border-strong);
   border-radius: var(--dd-radius);
   background: var(--dd-surface-quiet);
   color: var(--dd-solid);
@@ -259,12 +268,13 @@
 
 .dd-log__btn:hover {
   background: var(--dd-surface-hover);
+  border-color: var(--dd-border-focus);
 }
 
 .dd-log__btn-hash {
   font-size: var(--dd-type-xl);
   letter-spacing: -0.02em;
-  color: var(--cue, var(--dd-accent));
+  color: var(--dd-solid);
 }
 
 .dd-log__btn-done {
@@ -437,12 +447,13 @@
 }
 
 .dd-bank__slot--on {
-  border-color: var(--dd-accent);
-  background: var(--dd-accent-soft);
+  border-color: var(--dd-border-focus);
+  background: var(--dd-surface-strong);
 }
 
 .dd-bank__slot-hash {
   font-size: var(--dd-type-sm);
+  color: var(--dd-solid);
 }
 
 .dd-bank__slot-state {
@@ -453,9 +464,10 @@
 .dd-bank__log-link {
   display: inline-block;
   margin-top: var(--dd-3);
-  color: var(--dd-accent);
+  color: var(--dd-solid);
   font-size: var(--dd-type-body);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .dd-bank__research {
@@ -493,15 +505,15 @@
 }
 
 .dd-bank__toggle--on {
-  border-color: var(--dd-accent);
-  background: var(--dd-accent);
-  color: var(--dd-ink-inverse);
+  border-color: var(--dd-solid);
+  background: var(--dd-solid);
+  color: #fff;
 }
 
 .dd-bank__tokens {
   margin: var(--dd-3) 0 0;
   font-size: var(--dd-type-body);
-  color: var(--dd-accent);
+  color: var(--dd-ink-muted);
 }
 
 .dd-bank__clinical {

@@ -16,7 +16,7 @@ type SplashGateFormProps = {
   signInLabel: string
   brand: ReactNode
   headline: ReactNode
-  /** Med baseline entry (HomeDrugSearch). */
+  /** Primary actions under the hero (CTAs or legacy med baseline). */
   baseline?: ReactNode
   footer: ReactNode
 }

@@ -13,7 +13,7 @@ const NODE_SIZE = 104
 
 /**
  * How CVP — same stage + placement as HomeFaceNetwork.
- * Hub title in the center; Score / Plan / Boost / Find on the ring.
+ * Hub title in the center; Screen / Score / Share / Sync on the ring.
  */
 export function HowLoopDiagram() {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -100,16 +100,19 @@ export function HowLoopDiagram() {
   }, [])
 
   return (
-    <figure className="dd-how-loop-wrap" aria-label="How Medmaxxing works">
+    <figure className="dd-how-loop-wrap" aria-label="How Deepdose works">
       <div ref={rootRef} className="home-face-net dd-how-loop">
         <canvas ref={canvasRef} className="home-face-net__field" aria-hidden />
 
-        <h1 className="dd-how-loop__center" aria-label="Medmaxxing">
+        <h1 className="dd-how-loop__center" aria-label="Make chemistry work">
           <span className="dd-how-loop__center-line" aria-hidden>
-            Med
+            Make
           </span>
           <span className="dd-how-loop__center-line" aria-hidden>
-            maxxing
+            chemistry
+          </span>
+          <span className="dd-how-loop__center-line" aria-hidden>
+            work
           </span>
         </h1>
 

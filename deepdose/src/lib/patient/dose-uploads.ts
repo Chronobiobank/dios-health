@@ -1,18 +1,21 @@
-/** Local Medmaxxing dose uploads — four biologic clusters. */
+/** Local dose uploads — posts into a chemical phenotype group. */
 
-export type DoseTag = 'RESETTER' | 'HIJACKER' | 'CROSSER' | 'BATTERY'
+import {
+  CHEMICAL_PHENOTYPE_BY_ID,
+  CHEMICAL_PHENOTYPE_IDS,
+  isChemicalPhenotypeId,
+  phenotypeFromWakeLabel,
+  type ChemicalPhenotypeId,
+} from '@/lib/brand/chemical-phenotypes'
 
-export const DOSE_TAGS: readonly DoseTag[] = [
-  'RESETTER',
-  'HIJACKER',
-  'CROSSER',
-  'BATTERY',
-] as const
+/** Dose tag = phenotype group the post belongs to. */
+export type DoseTag = ChemicalPhenotypeId
 
-export type Chronotype = 'lark' | 'owl'
+export const DOSE_TAGS: readonly DoseTag[] = CHEMICAL_PHENOTYPE_IDS
 
 export type DoseUpload = {
   id: string
+  /** Phenotype group this post belongs to */
   tag: DoseTag
   mediaUrl: string
   /** Local calendar day YYYY-MM-DD */
@@ -20,7 +23,6 @@ export type DoseUpload = {
   timestamp: string
   displayName: string
   sri: number
-  chronotype: Chronotype
   isPremium: boolean
   unlockPrice: number
   syncCount: number
@@ -33,49 +35,46 @@ export type DoseUpload = {
 export const DOSE_UPLOADS_STORAGE_KEY = 'deepdose-dose-uploads'
 export const BANK_OPT_IN_KEY = 'deepdose-bank-opt-in'
 export const DOSE_SYNCS_KEY = 'deepdose-dose-syncs'
+/** Dose ids the current member has synced (Strava-style once). */
+export const DOSE_SYNCED_BY_ME_KEY = 'deepdose-dose-synced-by-me'
 
-/** Consumer labels — four dose types. Plain English in the UI. */
+/** Consumer labels — one button / card per phenotype group. */
 export const DOSE_TAG_META: Record<
   DoseTag,
   { label: string; hash: string; cue: string; hint: string; idea: string }
 > = {
-  RESETTER: {
-    label: 'Night',
-    hash: '#Night',
-    cue: 'var(--dd-cue-resetter)',
-    hint: 'Help you wind down for sleep',
-    idea: 'Help your brain wind down for bedtime.',
+  night_creator: {
+    label: CHEMICAL_PHENOTYPE_BY_ID.night_creator.label,
+    hash: CHEMICAL_PHENOTYPE_BY_ID.night_creator.hash,
+    cue: CHEMICAL_PHENOTYPE_BY_ID.night_creator.cue,
+    hint: CHEMICAL_PHENOTYPE_BY_ID.night_creator.expression,
+    idea: `Post into the ${CHEMICAL_PHENOTYPE_BY_ID.night_creator.label} feed.`,
   },
-  HIJACKER: {
-    label: 'Day',
-    hash: '#Day',
-    cue: 'var(--dd-cue-hijacker)',
-    hint: 'Help you wake and focus',
-    idea: 'Help your body wake up and work.',
+  early_explorer: {
+    label: CHEMICAL_PHENOTYPE_BY_ID.early_explorer.label,
+    hash: CHEMICAL_PHENOTYPE_BY_ID.early_explorer.hash,
+    cue: CHEMICAL_PHENOTYPE_BY_ID.early_explorer.cue,
+    hint: CHEMICAL_PHENOTYPE_BY_ID.early_explorer.expression,
+    idea: `Post into the ${CHEMICAL_PHENOTYPE_BY_ID.early_explorer.label} feed.`,
   },
-  CROSSER: {
-    label: 'Energy',
-    hash: '#Energy',
-    cue: 'var(--dd-cue-crosser)',
-    hint: 'Turn energy up or down',
-    idea: 'Turn your energy up or down when you need it.',
+  twilight_transformer: {
+    label: CHEMICAL_PHENOTYPE_BY_ID.twilight_transformer.label,
+    hash: CHEMICAL_PHENOTYPE_BY_ID.twilight_transformer.hash,
+    cue: CHEMICAL_PHENOTYPE_BY_ID.twilight_transformer.cue,
+    hint: CHEMICAL_PHENOTYPE_BY_ID.twilight_transformer.expression,
+    idea: `Post into the ${CHEMICAL_PHENOTYPE_BY_ID.twilight_transformer.label} feed.`,
   },
-  BATTERY: {
-    label: 'Fuel',
-    hash: '#Fuel',
-    cue: 'var(--dd-cue-battery)',
-    hint: 'Keep your body clock fed',
-    idea: 'Fuel so your body clock stays on time.',
+  pulse_shifter: {
+    label: CHEMICAL_PHENOTYPE_BY_ID.pulse_shifter.label,
+    hash: CHEMICAL_PHENOTYPE_BY_ID.pulse_shifter.hash,
+    cue: CHEMICAL_PHENOTYPE_BY_ID.pulse_shifter.cue,
+    hint: CHEMICAL_PHENOTYPE_BY_ID.pulse_shifter.expression,
+    idea: `Post into the ${CHEMICAL_PHENOTYPE_BY_ID.pulse_shifter.label} feed.`,
   },
 }
 
 function isDoseTag(value: unknown): value is DoseTag {
-  return (
-    value === 'RESETTER' ||
-    value === 'HIJACKER' ||
-    value === 'CROSSER' ||
-    value === 'BATTERY'
-  )
+  return isChemicalPhenotypeId(value)
 }
 
 export function todayDoseDate(now = new Date()): string {
@@ -85,12 +84,9 @@ export function todayDoseDate(now = new Date()): string {
   return `${y}-${m}-${d}`
 }
 
-export function chronotypeFromWake(wakeLabel: string | null | undefined): Chronotype {
-  if (!wakeLabel) return 'owl'
-  const m = wakeLabel.trim().match(/^(\d{1,2}):/)
-  if (!m) return 'owl'
-  const h = Number(m[1])
-  return h >= 5 && h < 9 ? 'lark' : 'owl'
+/** @deprecated Prefer phenotypeFromWakeLabel — kept for older imports. */
+export function chronotypeFromWake(wakeLabel: string | null | undefined): DoseTag {
+  return phenotypeFromWakeLabel(wakeLabel).id
 }
 
 export function readDoseUploads(): DoseUpload[] {
@@ -149,10 +145,10 @@ export function dosesForDate(date: string): DoseUpload[] {
 export function todayPillars(date = todayDoseDate()): Record<DoseTag, boolean> {
   const today = dosesForDate(date)
   return {
-    RESETTER: today.some((d) => d.tag === 'RESETTER'),
-    HIJACKER: today.some((d) => d.tag === 'HIJACKER'),
-    CROSSER: today.some((d) => d.tag === 'CROSSER'),
-    BATTERY: today.some((d) => d.tag === 'BATTERY'),
+    night_creator: today.some((d) => d.tag === 'night_creator'),
+    early_explorer: today.some((d) => d.tag === 'early_explorer'),
+    twilight_transformer: today.some((d) => d.tag === 'twilight_transformer'),
+    pulse_shifter: today.some((d) => d.tag === 'pulse_shifter'),
   }
 }
 
@@ -176,8 +172,35 @@ export function readSyncMap(): Record<string, number> {
   }
 }
 
+export function readSyncedByMe(): Set<string> {
+  if (typeof window === 'undefined') return new Set()
+  try {
+    const raw = localStorage.getItem(DOSE_SYNCED_BY_ME_KEY)
+    const parsed = raw ? (JSON.parse(raw) as unknown) : []
+    return new Set(Array.isArray(parsed) ? parsed.filter((id) => typeof id === 'string') : [])
+  } catch {
+    return new Set()
+  }
+}
+
+function writeSyncedByMe(ids: Set<string>): void {
+  if (typeof window === 'undefined') return
+  try {
+    localStorage.setItem(DOSE_SYNCED_BY_ME_KEY, JSON.stringify([...ids]))
+  } catch {
+    /* ignore */
+  }
+}
+
+/** Sync a dose once — chemistry recognition, not attention farming. */
 export function bumpSync(doseId: string): number {
+  const mine = readSyncedByMe()
   const map = readSyncMap()
+  if (mine.has(doseId)) {
+    return map[doseId] ?? 0
+  }
+  mine.add(doseId)
+  writeSyncedByMe(mine)
   map[doseId] = (map[doseId] ?? 0) + 1
   try {
     localStorage.setItem(DOSE_SYNCS_KEY, JSON.stringify(map))
@@ -185,4 +208,8 @@ export function bumpSync(doseId: string): number {
     /* ignore */
   }
   return map[doseId]
+}
+
+export function hasSyncedDose(doseId: string): boolean {
+  return readSyncedByMe().has(doseId)
 }

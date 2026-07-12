@@ -2,8 +2,7 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const DOSAGE_PAGE_META = {
   title: `Chemistry · ${DEEPDOSE_NAME}`,
-  description:
-    'Your timing tools for what you take.',
+  description: 'Your timing tools for what you take.',
 } as const
 
 export const DOSAGE_PAGE = {
@@ -13,34 +12,35 @@ export const DOSAGE_PAGE = {
 } as const
 
 export const SHARE_PAGE_META = {
-  title: `Log · ${DEEPDOSE_NAME}`,
-  description: 'Log a dose — photo plus sleep score.',
+  title: `Dose · ${DEEPDOSE_NAME}`,
+  description: 'Post a photo into your chemical phenotype feed.',
 } as const
 
 export const SHARE_PAGE = {
-  eyebrow: 'Log',
-  titleBefore: 'One dose,',
-  titleHighlight: 'today’s score',
-  support: 'Log a dose. People on your clock see the night you actually lived.',
-  pointsEyebrow: 'How doses work',
+  eyebrow: 'Dose',
+  titleBefore: 'One post,',
+  titleHighlight: 'your phenotype',
+  support: 'Post into a phenotype feed. People on that chemistry see the night you actually lived.',
+  pointsEyebrow: 'How posts work',
   points: [
-    'Night, Day, Energy, or Fuel — photo plus sleep score',
-    'People on your clock see today’s dose',
+    'Night Creator, Early Explorer, Twilight Transformer, or Pulse Shifter',
+    'People in that phenotype group see today’s post',
     'You stay in control of what you share',
   ],
-  cta: { label: 'Log dose', href: '/dose' },
+  cta: { label: 'Post dose', href: '/dose' },
 } as const
 
 export const CONNECT_PAGE_META = {
-  title: `Friends · ${DEEPDOSE_NAME}`,
-  description: 'People on your clock who see today’s doses.',
+  title: `Sync · ${DEEPDOSE_NAME}`,
+  description:
+    'Who is online in your biological window — people with compatible chemical phenotypes.',
 } as const
 
 export const CONNECT_PAGE = {
-  eyebrow: 'Friends',
+  eyebrow: 'Sync',
   titleBefore: 'On your',
-  titleHighlight: 'clock',
-  support: 'People on your rhythm. See their doses. Message when it feels right.',
+  titleHighlight: 'phenotype',
+  support: 'People on your chemistry. See their doses. Message when it feels right.',
   cta: { label: 'Open chat', href: '/chat' },
   secondary: { label: 'See my profile', href: '/profile' },
 } as const

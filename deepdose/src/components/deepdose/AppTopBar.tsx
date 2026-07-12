@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
+import { DeepDoseLogoGlyph } from '@/components/brand/DeepDoseLogoGlyph'
 import { AppChromeActions } from '@/components/deepdose/AppChromeActions'
 import { AppGroupSwitcher } from '@/components/deepdose/AppGroupSwitcher'
+import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 type AppTopBarProps = {
   title: string
@@ -11,15 +13,24 @@ type AppTopBarProps = {
   /** Right control — e.g. settings. Merged or used in detail mode. */
   trailing?: ReactNode
   /**
-   * `chrome` — Nextdoor-style: group dropdown · chat/alerts/avatar
+   * `chrome` — home mark · group dropdown · chat/alerts/avatar
    * `detail` — back · title · trailing (nested screens)
    */
   variant?: 'chrome' | 'detail'
 }
 
+/** Perfect-circle ʘ mark → splash `/` — same diameter as profile avatar. */
+export function AppHomeMark() {
+  return (
+    <Link href="/" className="app-top-bar__home" aria-label={`${DEEPDOSE_NAME} home`}>
+      <DeepDoseLogoGlyph className="app-top-bar__home-glyph" />
+    </Link>
+  )
+}
+
 /**
  * Product top bar.
- * Chrome mode mirrors neighborhood apps: community switcher left, utilities + face right.
+ * Chrome mode: home mark left, phenotype switcher, utilities + face right.
  */
 export function AppTopBar({
   title,
@@ -33,6 +44,7 @@ export function AppTopBar({
         <h1 className="app-top-bar__title app-top-bar__title--sr">{title}</h1>
         <div className="app-top-bar__inner app-top-bar__inner--chrome">
           <div className="app-top-bar__side app-top-bar__side--start">
+            <AppHomeMark />
             <AppGroupSwitcher />
           </div>
           <div className="app-top-bar__side app-top-bar__side--end">
@@ -47,7 +59,7 @@ export function AppTopBar({
     <header className="app-top-bar">
       <div className="app-top-bar__inner">
         <div className="app-top-bar__side app-top-bar__side--start">
-          {leading ?? <span className="app-top-bar__slot" aria-hidden />}
+          {leading ?? <AppHomeMark />}
         </div>
         <h1 className="app-top-bar__title">{title}</h1>
         <div className="app-top-bar__side app-top-bar__side--end">

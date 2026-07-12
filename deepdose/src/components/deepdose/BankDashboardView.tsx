@@ -42,7 +42,7 @@ export function BankDashboardView() {
         <SleepScoreTipTraqLink className="dd-bank__tiptraq" />
       </div>
 
-      <section className="dd-bank__pillars" aria-label="Today’s doses">
+      <section className="dd-bank__pillars" aria-label="Today’s phenotype posts">
         <h2 className="dd-bank__section-title">Today</h2>
         <div className="dd-bank__timeline">
           {DOSE_TAGS.map((tag) => {
@@ -53,16 +53,14 @@ export function BankDashboardView() {
                 key={tag}
                 className={done ? 'dd-bank__slot dd-bank__slot--on' : 'dd-bank__slot'}
               >
-                <span className="dd-bank__slot-hash" style={{ color: meta.cue }}>
-                  {meta.label}
-                </span>
+                <span className="dd-bank__slot-hash">{meta.hash}</span>
                 <span className="dd-bank__slot-state">{done ? 'Done' : 'Open'}</span>
               </div>
             )
           })}
         </div>
         <Link href="/dose" className="dd-bank__log-link">
-          Log dose
+          Post dose
         </Link>
       </section>
 

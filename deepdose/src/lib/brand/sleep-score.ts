@@ -1,23 +1,23 @@
 /**
- * Consumer score language — plain English.
- * Engine / clinical code may still say SRI; UI should not lead with it.
+ * Consumer score language — chemical phenotype profile, not a diagnosis.
+ * Screen calculates daily SRI; Score shows phenotype gains; chrome badges stay short as “Score”.
  */
 export const SLEEP_SCORE = {
-  /** Primary label (Score, Me, ring) */
-  label: 'Sleep score',
+  /** Primary label (Score chrome, ring) */
+  label: 'SRI',
   /** One-line meaning */
-  hint: 'How steady your nights are.',
+  hint: 'How steady your chemical phenotype is — circadian stability across nights.',
   /** Feed / peer badge prefix */
   badge: 'Score',
   /** Climb / CTA verbs */
-  climb: 'Raise your sleep score.',
+  climb: 'Strengthen your phenotype.',
   climbShort: 'Raise your score',
-  stamp: 'Logs your sleep score',
-  /** TipTraQ — clinical early-risk deepen from any score surface */
+  stamp: 'Shares toward your phenotype score',
+  /** TipTraQ — deeper phenotype read from any score surface */
   tiptraqHref: '/testkit',
-  tiptraqLabel: 'Get a TipTraQ early-risk read',
-  tiptraqHint: 'Three nights at home — sleep, breathing, and oxygen for a clearer clinical picture.',
-  /** Optional clinical footnote — rare, not in product chrome */
+  tiptraqLabel: 'Get a TipTraQ deeper phenotype read',
+  tiptraqHint: 'Three nights at home — a clearer chemical phenotype baseline.',
+  /** Full clinical name (research / methodology surfaces) */
   clinicalName: 'Sleep Regularity Index (SRI)',
 } as const
 

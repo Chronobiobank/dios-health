@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { MembershipTiers } from '@/components/deepdose/MembershipTiers'
 import {
+  MEMBERSHIP_FOUNDING,
   MEMBERSHIP_PAGE_INTRO,
   MEMBERSHIP_PAGE_META,
   MEMBERSHIP_TIERS,
@@ -26,6 +27,16 @@ export default function MembershipPage() {
 
         <section className="seco-pricing__tiers seco-reveal seco-reveal--2" aria-label="Membership options">
           <MembershipTiers tiers={MEMBERSHIP_TIERS} />
+        </section>
+
+        <section
+          className="seco-pricing__founding seco-reveal seco-reveal--3"
+          aria-labelledby="membership-founding-title"
+        >
+          <h2 id="membership-founding-title" className="seco-page__title">
+            <span className="seco-landing__hero-spectrum">{MEMBERSHIP_FOUNDING.title}</span>
+          </h2>
+          <p className="seco-page__lede">{MEMBERSHIP_FOUNDING.body}</p>
         </section>
       </div>
     </article>

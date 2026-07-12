@@ -98,6 +98,42 @@ body:has(.dd-product):not(:has(.seco-splash)) {
 
 .app-top-bar__side--start {
   justify-content: flex-start;
+  gap: 0.35rem;
+}
+
+.app-top-bar__home {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--app-chrome-hit);
+  height: var(--app-chrome-hit);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgb(15 23 42 / 0.92);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.app-top-bar__home:hover {
+  background: rgb(15 23 42 / 0.05);
+}
+
+.app-top-bar__home:focus-visible {
+  outline: 2px solid rgb(15 23 42 / 0.35);
+  outline-offset: 2px;
+}
+
+/* CSS circle mark — same diameter as profile avatar (not Unicode ʘ). */
+.app-top-bar__home-glyph.seco-logo-glyph {
+  width: var(--app-chrome-avatar);
+  height: var(--app-chrome-avatar);
+  font-size: var(--app-chrome-avatar);
+  color: rgb(15 23 42 / 0.88);
 }
 
 .app-top-bar__side--end {

@@ -1,4 +1,9 @@
-import { DEEPDOSE_NAME, DEEPDOSE_TAGLINE } from '@/lib/brand/deepdose-brand'
+import {
+  DEEPDOSE_HOME_HEADLINE,
+  DEEPDOSE_NAME,
+  DEEPDOSE_POSITIONING,
+  DEEPDOSE_PROMISE,
+} from '@/lib/brand/deepdose-brand'
 
 const BASE = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.unmed.net'
 
@@ -11,15 +16,15 @@ export function SiteJsonLd() {
         '@id': `${BASE}/#organization`,
         name: DEEPDOSE_NAME,
         url: BASE,
-        slogan: DEEPDOSE_TAGLINE,
-        description: 'Max your chemistry — score your nights, plan what you take, find people on your clock.',
+        slogan: DEEPDOSE_HOME_HEADLINE,
+        description: DEEPDOSE_PROMISE,
       },
       {
         '@type': 'WebSite',
         '@id': `${BASE}/#website`,
         url: BASE,
         name: DEEPDOSE_NAME,
-        description: DEEPDOSE_TAGLINE,
+        description: DEEPDOSE_POSITIONING,
         publisher: { '@id': `${BASE}/#organization` },
         inLanguage: 'en-GB',
       },

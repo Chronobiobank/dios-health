@@ -1,6 +1,12 @@
-/** Product top-bar “neighborhood” groups — chronotype feeds (Nextdoor-style switcher). */
+/** Product top-bar feed groups — one group per chemical phenotype. */
 
-export type AppGroupId = 'lark' | 'owl'
+import {
+  CHEMICAL_PHENOTYPES,
+  isChemicalPhenotypeId,
+  type ChemicalPhenotypeId,
+} from '@/lib/brand/chemical-phenotypes'
+
+export type AppGroupId = ChemicalPhenotypeId
 
 export type AppGroup = {
   id: AppGroupId
@@ -8,18 +14,27 @@ export type AppGroup = {
   href: string
 }
 
-export const APP_FEED_GROUPS: readonly AppGroup[] = [
-  { id: 'lark', label: 'Early birds', href: '/grid?clock=lark' },
-  { id: 'owl', label: 'Night owls', href: '/grid?clock=owl' },
-] as const
+export const APP_FEED_GROUPS: readonly AppGroup[] = CHEMICAL_PHENOTYPES.map((p) => ({
+  id: p.id,
+  label: p.label,
+  href: `/grid?clock=${p.id}`,
+}))
 
 export const APP_GROUP_STORAGE_KEY = 'deepdose_feed_group'
+export const APP_GROUP_DEFAULT: AppGroupId = 'early_explorer'
+
+/** Map legacy lark/owl storage + URLs onto phenotypes. */
+const LEGACY_CLOCK: Record<string, AppGroupId> = {
+  lark: 'early_explorer',
+  owl: 'night_creator',
+}
 
 export function parseAppGroupId(value: string | null | undefined): AppGroupId | null {
-  if (value === 'lark' || value === 'owl') return value
-  return null
+  if (!value) return null
+  if (isChemicalPhenotypeId(value)) return value
+  return LEGACY_CLOCK[value] ?? null
 }
 
 export function resolveAppGroup(id: AppGroupId | null | undefined): AppGroup {
-  return APP_FEED_GROUPS.find((g) => g.id === id) ?? APP_FEED_GROUPS[0]
+  return APP_FEED_GROUPS.find((g) => g.id === id) ?? APP_FEED_GROUPS[0]!
 }

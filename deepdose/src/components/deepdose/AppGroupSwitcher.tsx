@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import {
   APP_FEED_GROUPS,
+  APP_GROUP_DEFAULT,
   APP_GROUP_STORAGE_KEY,
   parseAppGroupId,
   resolveAppGroup,
@@ -16,9 +17,9 @@ const MENU_ID = 'app-top-bar-group-menu'
 
 function readStoredGroup(): AppGroupId {
   try {
-    return parseAppGroupId(localStorage.getItem(APP_GROUP_STORAGE_KEY)) ?? 'lark'
+    return parseAppGroupId(localStorage.getItem(APP_GROUP_STORAGE_KEY)) ?? APP_GROUP_DEFAULT
   } catch {
-    return 'lark'
+    return APP_GROUP_DEFAULT
   }
 }
 
@@ -38,14 +39,14 @@ function readClockFromLocation(): AppGroupId | null {
   }
 }
 
-/** Nextdoor-style left control: open a chronotype group list. */
+/** Nextdoor-style left control: open a phenotype feed group. */
 export function AppGroupSwitcher() {
   const router = useRouter()
   const pathname = usePathname() ?? '/'
   const rootRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
-  // SSR + first client paint always "Early birds" — sync from URL/storage after mount.
-  const [activeId, setActiveId] = useState<AppGroupId>('lark')
+  // SSR + first client paint always Early Explorer — sync from URL/storage after mount.
+  const [activeId, setActiveId] = useState<AppGroupId>(APP_GROUP_DEFAULT)
 
   useEffect(() => {
     setActiveId(readClockFromLocation() ?? readStoredGroup())
@@ -129,7 +130,7 @@ export function AppGroupSwitcher() {
               className="app-top-bar__group-option"
               onClick={() => setOpen(false)}
             >
-              Friends
+              Sync
             </Link>
           </li>
         </ul>
