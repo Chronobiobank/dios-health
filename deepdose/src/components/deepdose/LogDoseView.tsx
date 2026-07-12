@@ -1,10 +1,12 @@
 'use client'
 
 import { useMemo, useRef, useState, useEffect, type ChangeEvent } from 'react'
+import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import { phenotypeFromWakeLabel } from '@/lib/brand/chemical-phenotypes'
+import { DOSE_SHARE } from '@/lib/deepdose-marketing/dose-share-content'
 import { computeScheduleSri } from '@/lib/circadian/sri-engine'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
 import {
@@ -67,7 +69,7 @@ export function LogDoseView() {
     setError(null)
   }
 
-  // Deep-link ?tag=night_creator → open file picker once tag is pending
+  // Deep-link ?tag= → open camera once tag is pending
   useEffect(() => {
     if (!handledQueryTag || pendingTag !== handledQueryTag) return
     const id = requestAnimationFrame(() => inputRef.current?.click())
@@ -118,7 +120,10 @@ export function LogDoseView() {
 
   return (
     <div className="dd-log">
-      <p className="dd-log__hint">Post a photo into a tribe feed.</p>
+      <div className="dd-log__intro">
+        <p className="dd-log__hint">{DOSE_SHARE.hint}</p>
+        <p className="dd-log__support">{DOSE_SHARE.support}</p>
+      </div>
 
       <div className="dd-log__buttons">
         {orderedTags.map((tag) => {
@@ -129,16 +134,18 @@ export function LogDoseView() {
             <div key={tag} className="dd-log__btn-wrap">
               <button
                 type="button"
-                className="dd-log__btn"
+                className={isMine ? 'dd-log__btn dd-log__btn--primary' : 'dd-log__btn'}
                 onClick={() => openCamera(tag)}
               >
                 <span className="dd-log__btn-main">
                   <span className="dd-log__btn-hash">{meta.hash}</span>
                   <span className="dd-log__btn-sub">
-                    {isMine ? `Your tribe · ${meta.hint}` : meta.hint}
+                    {isMine ? DOSE_SHARE.yourTribe : DOSE_SHARE.otherTribe}
                   </span>
                 </span>
-                {done ? <span className="dd-log__btn-done">Posted</span> : null}
+                {done ? (
+                  <span className="dd-log__btn-done">{DOSE_SHARE.posted}</span>
+                ) : null}
               </button>
             </div>
           )
@@ -149,7 +156,7 @@ export function LogDoseView() {
         ref={inputRef}
         type="file"
         accept="image/*"
-        capture="environment"
+        capture="user"
         className="dd-log__file"
         onChange={handlePick}
         aria-hidden
@@ -162,6 +169,16 @@ export function LogDoseView() {
         Score {sri} · Off {bodyClock.sleepOnsetLabel} · On {bodyClock.wakeLabel}
       </p>
       <SleepScoreTipTraqLink compact className="dd-log__tiptraq" />
+
+      <aside className="dd-log__premium" aria-label={DOSE_SHARE.premium.label}>
+        <div className="dd-log__premium-copy">
+          <p className="dd-log__premium-label">{DOSE_SHARE.premium.label}</p>
+          <p className="dd-log__premium-body">{DOSE_SHARE.premium.body}</p>
+        </div>
+        <Link href={DOSE_SHARE.premium.href} className="dd-log__premium-cta">
+          {DOSE_SHARE.premium.cta}
+        </Link>
+      </aside>
     </div>
   )
 }

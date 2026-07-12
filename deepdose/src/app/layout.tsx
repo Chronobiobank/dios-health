@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   applicationName: DEEPDOSE_NAME,
   keywords: [
     'Deepdose',
-    'Chemistry That Connects',
+    'Max Your Chemistry',
     'chemical phenotype',
     'circadian chemistry',
     'social network',

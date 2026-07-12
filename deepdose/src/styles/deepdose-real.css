@@ -313,15 +313,39 @@
 }
 
 .dd-profile__reals-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
   margin: 0;
-  font-size: var(--dd-type-body, 0.875rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-profile__reals-empty-title {
+  margin: 0;
+  font-size: var(--dd-type-body, 0.9375rem);
+  font-weight: 500;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+}
+
+.dd-profile__reals-empty-body {
+  margin: 0;
+  font-size: var(--dd-type-md, 0.8125rem);
+  line-height: 1.4;
   color: var(--dd-ink-dim, rgb(15 23 42 / 0.48));
 }
 
-.dd-profile__reals-empty a {
-  color: var(--dd-ink, rgb(15 23 42 / 0.92));
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+.dd-profile__reals-empty-cta {
+  display: inline-flex;
+  margin-top: 0.15rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--dd-radius-pill, 999px);
+  background: var(--dd-solid, #0f172a);
+  color: var(--dd-ink-inverse, #f8f8f6);
+  font-size: var(--dd-type-sm, 0.75rem);
+  font-weight: 500;
+  text-decoration: none;
 }
 
 .dd-profile__chem-link {

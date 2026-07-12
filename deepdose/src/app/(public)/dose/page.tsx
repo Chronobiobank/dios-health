@@ -3,11 +3,11 @@ import { Suspense } from 'react'
 
 import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
 import { LogDoseView } from '@/components/deepdose/LogDoseView'
-import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { DOSE_SHARE_META } from '@/lib/deepdose-marketing/dose-share-content'
 
 export const metadata: Metadata = {
-  title: `Dose · ${DEEPDOSE_NAME}`,
-  description: 'Post a photo into a tribe feed — Wolf, Lion, Bear, or Dolphin.',
+  title: DOSE_SHARE_META.title,
+  description: DOSE_SHARE_META.description,
   alternates: { canonical: '/dose' },
 }
 

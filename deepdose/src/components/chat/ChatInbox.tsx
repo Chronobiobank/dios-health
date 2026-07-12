@@ -34,7 +34,7 @@ export function ChatInbox({ items }: ChatInboxProps) {
       {items.length === 0 ? (
         <div className="dd-chat__empty">
           <p className="dd-chat__empty-title">No chats yet</p>
-          <Link href="/connect" className="dd-chat__empty-cta">
+          <Link href="/matches" className="dd-chat__empty-cta">
             Find friends
           </Link>
         </div>

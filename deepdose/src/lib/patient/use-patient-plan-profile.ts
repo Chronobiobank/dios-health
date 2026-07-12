@@ -14,7 +14,16 @@ import { useIsClient } from '@/lib/react/use-is-client'
 function isFounderSampleName(first: string, family: string, legacy?: string): boolean {
   const full = `${first} ${family}`.trim().toLowerCase()
   const legacyFull = (legacy ?? '').trim().toLowerCase()
-  return full === 'grant munro' || legacyFull === 'grant munro'
+  return (
+    full === 'grant munro' ||
+    full === 'leo costa' ||
+    full === 'riley costa' ||
+    full === 'theo davidson' ||
+    legacyFull === 'grant munro' ||
+    legacyFull === 'leo costa' ||
+    legacyFull === 'riley costa' ||
+    legacyFull === 'theo davidson'
+  )
 }
 
 function resolveStoredProfile() {
@@ -28,13 +37,19 @@ function resolveStoredProfile() {
   const familyName = useDemo ? PATIENT_LANDING_DEMO.familyName : storedFamily
   const location = stored.location?.trim() || PATIENT_LANDING_DEMO.location
   const journey = stored.journey?.trim() || PATIENT_LANDING_DEMO.journey
-  const avatarUrl = stored.avatarUrl?.trim() || PATIENT_LANDING_DEMO.avatarUrl
+  const storedAvatar = stored.avatarUrl?.trim() || ''
+  const isUserUpload = storedAvatar.startsWith('data:')
+  const avatarUrl =
+    useDemo && !isUserUpload
+      ? PATIENT_LANDING_DEMO.avatarUrl
+      : storedAvatar || PATIENT_LANDING_DEMO.avatarUrl
   const wake = stored.wake ?? null
   const needsPersist =
     useDemo ||
     !stored.location?.trim() ||
     !stored.journey?.trim() ||
-    !stored.avatarUrl?.trim()
+    !stored.avatarUrl?.trim() ||
+    (useDemo && !isUserUpload && storedAvatar !== PATIENT_LANDING_DEMO.avatarUrl)
 
   return {
     firstName,

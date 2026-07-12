@@ -34,6 +34,7 @@ export const DEEPDOSE_PRODUCT_PATHS = [
   '/account',
   '/dosage',
   '/connect',
+  '/matches',
   '/chat',
   '/real',
 ] as const

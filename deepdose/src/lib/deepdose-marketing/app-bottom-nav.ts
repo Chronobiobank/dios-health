@@ -20,8 +20,14 @@ export const APP_POST_FAB = {
 } as const
 
 export function isAppBottomNavActive(href: string, pathname: string): boolean {
-  // Chat lives under Sync
-  if (href === '/connect' && (pathname === '/chat' || pathname.startsWith('/chat/'))) {
+  // Chat + matches live under Sync
+  if (
+    href === '/connect' &&
+    (pathname === '/chat' ||
+      pathname.startsWith('/chat/') ||
+      pathname === '/matches' ||
+      pathname.startsWith('/matches/'))
+  ) {
     return true
   }
   // Home owns the share feed

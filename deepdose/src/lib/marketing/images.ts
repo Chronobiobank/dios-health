@@ -28,7 +28,7 @@ export const marketingImages = {
     alt: 'Person checking their phone in bed at night — health data stays on the device',
   },
   badSleep: {
-    src: 'https://images.unsplash.com/photo-1515895307159-f601dfc48b92?auto=format&fit=crop&w=1800&q=85',
+    src: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1800&q=85',
     alt: 'Restless night — disrupted sleep and circadian drift',
   },
   threeNights: {

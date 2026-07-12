@@ -611,19 +611,31 @@ a.dd-profile__chemistry:hover {
 
 .dd-profile-dash__score {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--dd-gap-loose, 1rem);
+  justify-content: flex-start;
+  gap: var(--dd-gap, 0.75rem);
+  width: 100%;
   min-width: 0;
-  padding-top: 0.25rem;
-  border-top: 1px solid rgb(15 23 42 / 0.08);
+  text-align: center;
+}
+
+.dd-profile-dash__score .sri-score-ring {
+  flex: 0 0 auto;
+  width: min(18.5rem, 100%);
+  max-width: 100%;
+  margin: 0.25rem auto 0;
+  align-self: center;
 }
 
 .dd-profile-dash__score-copy {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.35rem;
+  width: 100%;
+  max-width: 22rem;
   min-width: 0;
-  flex: 1 1 auto;
 }
 
 .dd-profile-dash__score-label {
@@ -659,6 +671,95 @@ a.dd-profile__chemistry:hover {
   margin-top: 0.15rem;
 }
 
+.dd-profile-dash__window {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--oai-gap, var(--dd-gap));
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-profile-dash__window .seco-spectrum-tile {
+  min-height: 0;
+}
+
+.dd-profile-dash__window .seco-spectrum-tile__title {
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.5rem, 4.5vw, 1.85rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.dd-profile-dash__window-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.dd-profile-dash__window-label .seco-spectrum-tile__body {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--dd-type-sm, 0.75rem);
+}
+
+.dd-profile-dash__window-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+}
+
+.dd-profile-dash__window-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dd-profile-dash__alert {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: min(28rem, 100%);
+  min-width: 0;
+  margin-inline: auto;
+  text-decoration: none;
+  color: inherit;
+  text-align: left;
+}
+
+.dd-profile-dash__alert .seco-spectrum-tile__title {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.dd-profile-dash__alert .seco-spectrum-tile__body {
+  margin: 0;
+  max-width: 100%;
+}
+
+.dd-profile-dash__alert-pill {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--dd-radius-pill, 999px);
+  background: var(--dd-solid, #0f172a);
+  color: var(--dd-ink-inverse, #f8f8f6);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: var(--dd-type-sm, 0.75rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+}
+
 .dd-profile-dash__tile {
   display: flex;
   flex-direction: column;
@@ -687,6 +788,61 @@ a.dd-profile__chemistry:hover {
   color: var(--dd-ink, rgb(15 23 42 / 0.92));
   text-decoration: underline;
   text-underline-offset: 0.15em;
+}
+
+.dd-profile-dash__meta {
+  flex-shrink: 0;
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.35rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+}
+
+.sri-month {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.sri-month__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.sri-month__grid {
+  stroke: rgb(15 23 42 / 0.08);
+  stroke-width: 1;
+}
+
+.sri-month__area {
+  pointer-events: none;
+}
+
+.sri-month__line {
+  vector-effect: non-scaling-stroke;
+}
+
+.sri-month__now {
+  fill: var(--dd-solid, #0f172a);
+}
+
+.sri-month__axis {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-inline: 0.15rem;
+}
+
+.sri-month__tick {
+  font-size: var(--dd-type-xs, 0.6875rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
 }
 
 .dd-profile-dash__slots {
@@ -743,18 +899,63 @@ a.dd-profile__chemistry:hover {
   text-underline-offset: 0.15em;
 }
 
+.dd-profile-dash__dose-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-profile-dash__dose-empty-title {
+  margin: 0;
+  font-size: clamp(1.05rem, 0.95rem + 0.45vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+}
+
+.dd-profile-dash__dose-empty-body {
+  margin: 0;
+  max-width: 28rem;
+  font-size: var(--dd-type-body, 0.9375rem);
+  line-height: 1.4;
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+}
+
+.dd-profile-dash__dose-empty-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.25rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--dd-radius-pill, 999px);
+  background: var(--dd-solid, #0f172a);
+  color: var(--dd-ink-inverse, #f8f8f6);
+  font-size: var(--dd-type-sm, 0.75rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+}
+
 .dd-profile-dash__dose-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.45rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .dd-profile-dash__dose-cell {
+  position: relative;
   aspect-ratio: 1;
   border-radius: 0.65rem;
   overflow: hidden;
   border: 1px solid rgb(255 255 255 / 0.5);
   box-shadow: 0 4px 14px rgb(15 23 42 / 0.08);
+  background: rgb(15 23 42 / 0.06);
 }
 
 .dd-profile-dash__dose-cell img {
@@ -762,6 +963,69 @@ a.dd-profile__chemistry:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.dd-profile-dash__dose-premium {
+  position: absolute;
+  right: 0.35rem;
+  bottom: 0.35rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--dd-radius-pill, 999px);
+  background: rgb(15 23 42 / 0.82);
+  color: #f8f8f6;
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.dd-profile-dash__pheno {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--dd-gap-loose, 1rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.dd-profile-dash__pheno .dd-pheno-icon {
+  flex: 0 0 auto;
+}
+
+.dd-profile-dash__pheno-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  min-width: 0;
+  flex: 1 1 auto;
+  padding-left: var(--dd-gap-loose, 1rem);
+  border-left: 1px solid var(--dd-solid, #0f172a);
+}
+
+.dd-profile-dash__pheno-name {
+  margin: 0 0 0.28rem;
+  font-size: clamp(0.95rem, 0.88rem + 0.35vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+}
+
+.dd-profile-dash__pheno-peak {
+  margin: 0;
+  font-size: var(--dd-type-sm, 0.75rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+}
+
+.dd-profile-dash__pheno-body {
+  margin: 0;
+  font-size: var(--dd-type-body, 0.9375rem);
+  line-height: 1.3;
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
 }
 
 .dd-profile-dash__tools {
@@ -845,9 +1109,9 @@ a.dd-profile__chemistry:hover {
 }
 
 @media (max-width: 420px) {
-  .dd-profile-dash__score {
-    flex-direction: column;
-    align-items: flex-start;
+  .dd-profile-dash__face {
+    width: 5rem;
+    height: 5rem;
   }
 }
 

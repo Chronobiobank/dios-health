@@ -7,7 +7,7 @@ import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} · Chemistry That Connects.`,
+  title: `${DEEPDOSE_NAME} · Max Your Chemistry.`,
   description: DEEPDOSE_VOICE.homeLede,
 } as const
 
@@ -15,7 +15,7 @@ export const DEEPDOSE_CVP = DEEPDOSE_VOICE.tagline
 
 export const DEEPDOSE_POSITIONING_LINE = DEEPDOSE_VOICE.positioning
 
-/** Home splash · Chemistry That Connects + phenotype promise. */
+/** Home splash · Max Your Chemistry + founder claim. */
 export const DEEPDOSE_HOME_SPLASH = {
   headlineWhite: DEEPDOSE_VOICE.homeHeadlineWhite,
   headlineAccent: DEEPDOSE_VOICE.homeHeadlineAccent,
@@ -31,7 +31,7 @@ export const DEEPDOSE_HOME_SPLASH_HERO = {
   support: DEEPDOSE_HOME_SPLASH.lede,
 } as const
 
-/** @deprecated Home uses dual CTAs; kept for older imports. */
+/** @deprecated Home uses a single primary CTA; kept for older imports. */
 export const DEEPDOSE_HOME_ACTIONS = {
   mission: { label: 'About us', href: '/how' },
   create: { label: DEEPDOSE_VOICE.homePrimaryCta.label, href: DEEPDOSE_VOICE.homePrimaryCta.href },
@@ -371,7 +371,7 @@ export const SOCIAL_PROFILE = {
   chemistryTitle: 'Phenotype score',
   sleepLabel: 'Lights off',
   wakeLabel: 'Lights on',
-  share: 'Log dose',
+  share: 'Post your dose',
   matches: 'Friends',
   join: 'Find Your Sync',
 } as const

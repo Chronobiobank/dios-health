@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 import { MembershipTiers } from '@/components/deepdose/MembershipTiers'
 import {
@@ -37,6 +38,14 @@ export default function MembershipPage() {
             <span className="seco-landing__hero-spectrum">{MEMBERSHIP_FOUNDING.title}</span>
           </h2>
           <p className="seco-page__lede">{MEMBERSHIP_FOUNDING.body}</p>
+          <div className="seco-marketing-cta">
+            <Link
+              href={MEMBERSHIP_FOUNDING.cta.href}
+              className="seco-landing__btn seco-landing__btn--ghost"
+            >
+              {MEMBERSHIP_FOUNDING.cta.label}
+            </Link>
+          </div>
         </section>
       </div>
     </article>

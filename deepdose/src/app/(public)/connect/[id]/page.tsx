@@ -41,7 +41,7 @@ export default async function ConnectMatchProfilePage({ params }: PageProps) {
   return (
     <ProductAppShell
       title={match.name}
-      leading={<AppTopBarBack href="/connect" label="Back to friends" />}
+      leading={<AppTopBarBack href="/matches" label="Back to matches" />}
       className="dd-connect dd-connect-profile"
     >
       <div

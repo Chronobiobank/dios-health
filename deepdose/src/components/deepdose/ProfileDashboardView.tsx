@@ -4,14 +4,18 @@ import { useMemo, type ChangeEvent, type CSSProperties } from 'react'
 import Link from 'next/link'
 
 import SriScoreRing from '@/components/shared/SriScoreRing'
-import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
+import SriMonthLineChart from '@/components/shared/SriMonthLineChart'
+import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
 import {
   DEEPDOSE_PATIENT_PLAN_PROFILE,
 } from '@/lib/deepdose-marketing/landing-content'
+import { HOMEKIT_RISK_TILE } from '@/lib/deepdose-marketing/homekit-risk-content'
+import { DOSE_ARCHIVE } from '@/lib/deepdose-marketing/dose-share-content'
+import { buildDemoSelfDoses } from '@/lib/deepdose-marketing/grid-feed-mocks'
+import { phenotypeFromWakeLabel, tribeLocalHash } from '@/lib/brand/chemical-phenotypes'
 import { SLEEP_SCORE } from '@/lib/brand/sleep-score'
-import { computeScheduleSri } from '@/lib/circadian/sri-engine'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
-import { DOSE_TAG_META, DOSE_TAGS } from '@/lib/patient/dose-uploads'
+import { PATIENT_LANDING_DEMO } from '@/lib/patient/patient-landing-defaults'
 import { usePatientDoses } from '@/lib/patient/use-patient-doses'
 import { usePatientPlanProfile } from '@/lib/patient/use-patient-plan-profile'
 import { usePlanDraftContext } from '@/lib/patient/use-plan-draft-context'
@@ -30,6 +34,32 @@ function ProfileAvatarGraphic() {
       <path
         d="M12 56c2.8-12.5 12-19 20-19s17.2 6.5 20 19"
         fill="rgb(15 23 42 / 0.14)"
+      />
+    </svg>
+  )
+}
+
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden focusable="false">
+      <path
+        d="M15.5 3.5a7.5 7.5 0 1 0 5 12.8A8.5 8.5 0 1 1 15.5 3.5z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden focusable="false">
+      <circle cx="12" cy="12" r="4" fill="currentColor" />
+      <path
+        d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
       />
     </svg>
   )
@@ -60,22 +90,35 @@ export function ProfileDashboardView({
     signupHrefFromUrl,
   })
   const profile = usePatientPlanProfile(planContext.wake)
-  const { pillars, bankOptIn, setBankOptIn, todaySelf, doses, ready } = usePatientDoses()
+  const { bankOptIn, setBankOptIn, todaySelf, doses, ready } = usePatientDoses()
   const fields = DEEPDOSE_PATIENT_PLAN_PROFILE
 
   const bodyClock = useMemo(
     () => inferLandingBodyClock(profile.wake, planContext.medTimes ?? []),
     [profile.wake, planContext.medTimes]
   )
-  const sriResult = useMemo(
-    () => computeScheduleSri(bodyClock.sleepOnsetLabel, bodyClock.wakeLabel),
-    [bodyClock.sleepOnsetLabel, bodyClock.wakeLabel]
-  )
+  /** Phone-screen seed until real nights land — mid band so Homekit risk tile shows. */
+  const sriScore = PATIENT_LANDING_DEMO.sri
 
-  const selfDoses = doses.filter((d) => d.isSelf !== false)
   const thanks = bankOptIn ? 12 + todaySelf.length * 3 : 0
   const displayName =
     [profile.firstName, profile.familyName].filter(Boolean).join(' ').trim() || 'You'
+  const doseGrid = useMemo(() => {
+    const own = doses.filter((d) => d.isSelf !== false)
+    if (own.length > 0) return { items: own.slice(0, 9), isSample: false as const }
+    return {
+      items: buildDemoSelfDoses(displayName, sriScore),
+      isSample: true as const,
+    }
+  }, [doses, displayName, sriScore])
+  const myPhenotype = useMemo(
+    () => phenotypeFromWakeLabel(bodyClock.wakeLabel),
+    [bodyClock.wakeLabel]
+  )
+  const tribeHash = useMemo(
+    () => tribeLocalHash(profile.location, myPhenotype),
+    [profile.location, myPhenotype]
+  )
 
   async function handleAvatarPick(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
@@ -97,11 +140,11 @@ export function ProfileDashboardView({
 
   return (
     <div className="dd-profile-dash">
-      {/* Hero — who you are + score */}
+      {/* Identity — who you are */}
       <section
         className="dd-profile-dash__hero seco-spectrum-tile seco-spectrum-tile--hero"
         style={{ '--cue': '#acd3de' } as CSSProperties}
-        aria-label="Identity and score"
+        aria-label="Identity"
       >
         <div className="dd-profile-dash__hero-top">
           <label
@@ -160,93 +203,130 @@ export function ProfileDashboardView({
             />
           </div>
         </div>
-
-        <div className="dd-profile-dash__score">
-          <SriScoreRing score={sriResult.score} />
-          <div className="dd-profile-dash__score-copy">
-            <p className="dd-profile-dash__score-label">{SLEEP_SCORE.label}</p>
-            <p className="dd-profile-dash__score-hint">{SLEEP_SCORE.hint}</p>
-            <div className="dd-profile-dash__clock" aria-label="Sleep window">
-              <span>
-                <strong className="tabular-nums">{bodyClock.sleepOnsetLabel}</strong>
-                <span> Off</span>
-              </span>
-              <span aria-hidden>·</span>
-              <span>
-                <strong className="tabular-nums">{bodyClock.wakeLabel}</strong>
-                <span> On</span>
-              </span>
-            </div>
-            <SleepScoreTipTraqLink className="dd-profile-dash__homekit" />
-          </div>
-        </div>
       </section>
 
-      {/* Today — phenotype posts */}
-      <section
-        className="dd-profile-dash__tile seco-spectrum-tile"
-        style={{ '--cue': '#c9b6f2' } as CSSProperties}
-        aria-label="Today’s phenotype posts"
-      >
-        <div className="dd-profile-dash__tile-head">
-          <h2 className="dd-profile-dash__h">Today</h2>
-          <Link href="/dose" className="dd-profile-dash__cta">
-            Post dose
-          </Link>
-        </div>
-        <div className="dd-profile-dash__slots">
-          {DOSE_TAGS.map((tag) => {
-            const meta = DOSE_TAG_META[tag]
-            const done = pillars?.[tag]
-            return (
-              <div
-                key={tag}
-                className={
-                  done
-                    ? 'dd-profile-dash__slot dd-profile-dash__slot--on'
-                    : 'dd-profile-dash__slot'
-                }
-              >
-                <span className="dd-profile-dash__slot-hash">{meta.hash}</span>
-                <span className="dd-profile-dash__slot-state">{done ? 'Done' : 'Open'}</span>
-              </div>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Doses archive */}
+      {/* Doses first — presence grid leads; score drills down below */}
       <section
         className="dd-profile-dash__tile seco-spectrum-tile"
         style={{ '--cue': '#f2b8a2' } as CSSProperties}
-        aria-label="Dose archive"
+        aria-label={DOSE_ARCHIVE.title}
       >
         <div className="dd-profile-dash__tile-head">
-          <h2 className="dd-profile-dash__h">Doses</h2>
-          <Link href="/grid" className="dd-profile-dash__cta">
-            Feed
+          <h2 className="dd-profile-dash__h">{DOSE_ARCHIVE.title}</h2>
+          <Link href={DOSE_ARCHIVE.ctaHref} className="dd-profile-dash__cta">
+            {DOSE_ARCHIVE.cta}
           </Link>
         </div>
-        {selfDoses.length === 0 ? (
-          <p className="dd-profile-dash__empty">
-            <Link href="/dose">Log today’s dose</Link>
-          </p>
-        ) : (
-          <div className="dd-profile-dash__dose-grid">
-            {selfDoses.slice(0, 9).map((dose) => (
-              <Link
-                key={dose.id}
-                href="/grid"
-                className="dd-profile-dash__dose-cell"
-                aria-label={`Dose ${dose.date}`}
-              >
-                {/* Local data-URL preview */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={dose.mediaUrl} alt="" />
-              </Link>
-            ))}
+        <div className="dd-profile-dash__dose-grid" role="list">
+          {doseGrid.items.map((dose) => (
+            <Link
+              key={dose.id}
+              href={doseGrid.isSample ? DOSE_ARCHIVE.ctaHref : DOSE_ARCHIVE.feedHref}
+              className="dd-profile-dash__dose-cell"
+              role="listitem"
+              aria-label={
+                doseGrid.isSample
+                  ? DOSE_ARCHIVE.emptyCta
+                  : `Dose from ${dose.date}`
+              }
+            >
+              {/* Local data-URL or seeded Unsplash preview */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={dose.mediaUrl} alt="" />
+              {dose.isPremium ? (
+                <span className="dd-profile-dash__dose-premium">Adult</span>
+              ) : null}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* My tribe — phenotype identity under doses */}
+      <section
+        className="dd-profile-dash__tile seco-spectrum-tile"
+        style={{ '--cue': myPhenotype.cue } as CSSProperties}
+        aria-label="My tribe"
+      >
+        <div className="dd-profile-dash__tile-head">
+          <h2 className="dd-profile-dash__h">My tribe</h2>
+          <Link href={`/grid?clock=${myPhenotype.id}`} className="dd-profile-dash__cta">
+            Tribe feed
+          </Link>
+        </div>
+        <div className="dd-profile-dash__pheno">
+          <PhenotypeIcon id={myPhenotype.id} size="lg" />
+          <div className="dd-profile-dash__pheno-copy">
+            <p className="dd-profile-dash__pheno-name">{tribeHash}</p>
+            <p className="dd-profile-dash__pheno-peak">Peak · {myPhenotype.peak}</p>
+            <p className="dd-profile-dash__pheno-body">{myPhenotype.expression}</p>
           </div>
-        )}
+        </div>
+      </section>
+
+      {/* Score — phenotype dial, risk, sleep / wake */}
+      <section
+        className="dd-profile-dash__tile seco-spectrum-tile seco-spectrum-tile--hero"
+        style={{ '--cue': '#acd3de' } as CSSProperties}
+        aria-label="Phenotype score"
+      >
+        <div className="dd-profile-dash__score">
+          <SriScoreRing score={sriScore} />
+          {sriScore < 75 ? (
+            <Link
+              href={HOMEKIT_RISK_TILE.href}
+              className="seco-spectrum-tile seco-spectrum-tile--hero dd-profile-dash__alert"
+              style={{ '--cue': '#f2b8a2' } as CSSProperties}
+            >
+              <p className="seco-spectrum-tile__title">{HOMEKIT_RISK_TILE.title}</p>
+              <p className="seco-spectrum-tile__body">{HOMEKIT_RISK_TILE.body}</p>
+              <span className="dd-profile-dash__alert-pill">{HOMEKIT_RISK_TILE.cta}</span>
+            </Link>
+          ) : null}
+        </div>
+
+        <div className="dd-profile-dash__window" aria-label="Sleep and wake">
+          <article
+            className="seco-spectrum-tile seco-spectrum-tile--compact"
+            style={{ '--cue': '#8b9cf8' } as CSSProperties}
+          >
+            <p className="seco-spectrum-tile__title tabular-nums">
+              {bodyClock.sleepOnsetLabel}
+            </p>
+            <div className="dd-profile-dash__window-label">
+              <span className="dd-profile-dash__window-icon" aria-hidden>
+                <MoonIcon />
+              </span>
+              <p className="seco-spectrum-tile__body">Sleep</p>
+            </div>
+          </article>
+          <article
+            className="seco-spectrum-tile seco-spectrum-tile--compact"
+            style={{ '--cue': '#98d6c6' } as CSSProperties}
+          >
+            <p className="seco-spectrum-tile__title tabular-nums">
+              {bodyClock.wakeLabel}
+            </p>
+            <div className="dd-profile-dash__window-label">
+              <span className="dd-profile-dash__window-icon" aria-hidden>
+                <SunIcon />
+              </span>
+              <p className="seco-spectrum-tile__body">Wake</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* Today — last month SRI */}
+      <section
+        className="dd-profile-dash__tile seco-spectrum-tile"
+        style={{ '--cue': '#c9b6f2' } as CSSProperties}
+        aria-label="Last month Sleep Regularity Index"
+      >
+        <div className="dd-profile-dash__tile-head">
+          <h2 className="dd-profile-dash__h">Today</h2>
+          <span className="dd-profile-dash__meta tabular-nums">{sriScore}</span>
+        </div>
+        <SriMonthLineChart score={sriScore} />
       </section>
 
       {/* Tools */}
@@ -257,7 +337,7 @@ export function ProfileDashboardView({
       >
         <h2 className="dd-profile-dash__h">Tools</h2>
         <div className="dd-profile-dash__tools">
-          <Link href="/testkit" className="dd-profile-dash__tool">
+          <Link href="/homekit" className="dd-profile-dash__tool">
             <span className="dd-profile-dash__tool-title">Homekit</span>
             <span className="dd-profile-dash__tool-meta">{SLEEP_SCORE.tiptraqHint}</span>
           </Link>

@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 
+import { ConnectHubTiles } from '@/components/deepdose/ConnectHubTiles'
 import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
-import { CommunityMatchesPanel } from '@/components/patient/CommunityMatchesPanel'
 import { CONNECT_PAGE_META } from '@/lib/deepdose-marketing/dosage-content'
-import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
   title: CONNECT_PAGE_META.title,
@@ -11,16 +10,11 @@ export const metadata: Metadata = {
   alternates: { canonical: '/connect' },
 }
 
-/** Sync — who is online in your biological window. Chat soft-gates login. */
-export default async function ConnectPage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
+/** Sync — hub: find people awake, or start a conversation. */
+export default function ConnectPage() {
   return (
     <ProductAppShell title="Sync" className="dd-connect">
-      <CommunityMatchesPanel variant="discovery" signedIn={Boolean(user)} />
+      <ConnectHubTiles />
     </ProductAppShell>
   )
 }

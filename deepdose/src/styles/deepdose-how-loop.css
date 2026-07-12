@@ -114,6 +114,17 @@ a.seco-how-page__story-tile--link:focus-visible {
   display: flex;
 }
 
+/* Founders perks — 2×2 (override default 3-up story grid) */
+.seco-how-page__perks.seco-how-page__story {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .seco-how-page__perks.seco-how-page__story {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .seco-how-page__story-cta {
   align-self: flex-end;
   display: inline-flex;

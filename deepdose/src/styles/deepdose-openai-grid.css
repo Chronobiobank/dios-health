@@ -179,6 +179,91 @@
   -webkit-backdrop-filter: blur(28px) saturate(1.5);
   border-bottom: 1px solid rgb(255 255 255 / 0.55);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.65);
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    backdrop-filter 0.22s ease;
+}
+
+/* Scrolled — solid black overlay; white brand, CTA, hamburger */
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled {
+  background: #0d0d0d;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: rgb(255 255 255 / 0.12);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 0.28);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .clinical-site-nav__brand,
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .clinical-site-nav__brand .deepdose-wordmark {
+  color: #fff;
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .clinical-site-nav__brand:hover {
+  color: rgb(255 255 255 / 0.78);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__link {
+  color: rgb(255 255 255 / 0.72);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__link:hover {
+  color: #fff;
+  background: rgb(255 255 255 / 0.08);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__link--active {
+  color: #fff;
+  background: rgb(255 255 255 / 0.1);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__cta,
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__panel-cta {
+  background: #fff;
+  background-image: none;
+  color: #0d0d0d;
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__cta:hover,
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__panel-cta:hover {
+  background: rgb(255 255 255 / 0.9);
+  color: #0d0d0d;
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__toggle {
+  border-color: rgb(255 255 255 / 0.28);
+  background: transparent;
+  color: #fff;
+  box-shadow: none;
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__toggle:hover {
+  background: rgb(255 255 255 / 0.08);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__toggle:focus-visible {
+  outline-color: rgb(255 255 255 / 0.45);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__toggle-bars > span {
+  background: #fff;
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__panel {
+  background: #0d0d0d;
+  border-bottom-color: rgb(255 255 255 / 0.12);
+  box-shadow: 0 16px 40px rgb(0 0 0 / 0.35);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__panel-link {
+  border-bottom-color: rgb(255 255 255 / 0.1);
+  color: rgb(255 255 255 / 0.88);
+}
+
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__panel-link:hover,
+.deepdose-shell.seco-shell--light .seco-nav.seco-nav--scrolled .seco-nav__panel-link--active {
+  color: #fff;
 }
 
 .deepdose-shell.seco-shell--light .clinical-site-nav__brand,

@@ -142,9 +142,9 @@ export const HOW_IT_WORKS_STORY = [
   },
 ] as const
 
-/** Manjam cohort — clear sign-in into Deepdose. */
+/** Manjam cohort — land on founders pitch. */
 export const HOW_IT_WORKS_CTAS = [
-  { label: 'Manjam member sign in', href: '/login' },
+  { label: 'Manjam member sign in', href: '/founders' },
 ] as const
 
 export const HOW_IT_WORKS_CTA = HOW_IT_WORKS_CTAS[0]

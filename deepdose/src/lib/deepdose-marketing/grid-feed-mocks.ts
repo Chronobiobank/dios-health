@@ -2,7 +2,10 @@
 
 import { CHEMICAL_PHENOTYPE_IDS, type ChemicalPhenotypeId } from '@/lib/brand/chemical-phenotypes'
 import { DEEPDOSE_COMMUNITY_MATCHES } from '@/lib/deepdose-marketing/community-content'
-import { communityFaceUrl } from '@/lib/deepdose-marketing/community-faces'
+import {
+  communityFaceUrl,
+  theoPresenceUrl,
+} from '@/lib/deepdose-marketing/community-faces'
 import {
   DOSE_TAGS,
   todayDoseDate,
@@ -36,7 +39,7 @@ const SCENE_PHOTOS: Record<DoseTag, readonly string[]> = {
   pulse_shifter: [
     '1584308666744-24d5c474f2ae',
     '1576602976047-174e57a47881',
-    '1490645930847-3d94d77aee30',
+    '1517836357463-d25dfeac3438',
     '1546069901-ba9599a7e63c',
   ],
 }
@@ -77,4 +80,34 @@ export function mockDoseAvatar(displayName: string): string | null {
   const match = DEEPDOSE_COMMUNITY_MATCHES.find((m) => m.name === displayName)
   if (!match) return null
   return communityFaceUrl(match.face, 96)
+}
+
+/**
+ * Profile Doses tile — 3×3 headless body close-ups only (no faces).
+ */
+export function buildDemoSelfDoses(
+  displayName: string,
+  sri: number,
+  now = new Date()
+): DoseUpload[] {
+  const date = todayDoseDate(now)
+  return Array.from({ length: 9 }, (_, index) => {
+    const posted = new Date(now)
+    posted.setDate(posted.getDate() - (8 - index))
+    posted.setHours(20 - (index % 5), (index * 7) % 60, 0, 0)
+    const tag: DoseTag = DOSE_TAGS[index % DOSE_TAGS.length]!
+    return {
+      id: `demo-self-dose-${index}-${date}`,
+      tag,
+      mediaUrl: theoPresenceUrl(index),
+      date: todayDoseDate(posted),
+      timestamp: posted.toISOString(),
+      displayName,
+      sri,
+      isPremium: index === 7,
+      unlockPrice: index === 7 ? 4.99 : 0,
+      syncCount: 2 + (index % 6),
+      isSelf: true,
+    }
+  })
 }

@@ -28,13 +28,15 @@ export const DEEPDOSE_VOICE = {
   positioning: DEEPDOSE_POSITIONING,
   /** Social-graph value prop */
   valueProp: DEEPDOSE_VALUE_PROP,
-  /** Home hero — Chemistry That / Connects */
-  homeHeadlineWhite: 'Chemistry That',
-  homeHeadlineAccent: 'Connects',
-  homeLede: 'Your phenotype. Your people.',
-  /** Home CTAs */
-  homePrimaryCta: { label: 'Find Your Sync', href: '/connect' },
-  homeSecondaryCta: { label: 'Discover Your Phenotype', href: '/how#phenotype' },
+  /** Home hero — Max Your / Chemistry */
+  homeHeadlineWhite: 'Max Your',
+  homeHeadlineAccent: 'Chemistry',
+  homeLede:
+    'Real connections timed to your rhythm — sleep, energy and meds that work with your life.',
+  /** Home CTA — single founder claim */
+  homePrimaryCta: { label: 'Claim Your Free Founder Access', href: '/founders' },
+  /** @deprecated Home uses a single primary CTA. */
+  homeSecondaryCta: { label: 'Claim Your Free Founder Access', href: '/founders' },
   missionHeadlineWhite: 'Make chemistry',
   missionHeadlineAccent: 'work',
   missionLede: 'Phenotypes match. Tribe keeps. Sync connects.',

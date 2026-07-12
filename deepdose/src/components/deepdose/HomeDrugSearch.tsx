@@ -1,13 +1,18 @@
 'use client'
 
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import {
   buildMedicationRecommendation,
   searchMedicationCatalog,
   type MedicationRecommendation,
 } from '@/lib/medications/catalog'
-import { buildHomeChemistryPath, earliestTakeTime } from '@/lib/medications/home-to-onboarding'
+import {
+  buildHomeChemistryPath,
+  buildPatientLandingPath,
+  earliestTakeTime,
+} from '@/lib/medications/home-to-onboarding'
+
 import {
   DEEPDOSE_HOME_DEFAULT_MED_CODES,
   DEEPDOSE_HOME_POLY_SEARCH,
@@ -41,7 +46,24 @@ function emptyRows(count: number): MedRow[] {
   }))
 }
 
-export function HomeDrugSearch() {
+type HomeDrugSearchProps = {
+  /** Hide the standalone CTA (auth form owns submit). */
+  showCta?: boolean
+  /** Where the CTA navigates when shown. */
+  destination?: 'connect' | 'profile'
+  /** Fires whenever resolved med codes/times change. */
+  onPlanChange?: (plan: {
+    medCodes: string[]
+    medTimes: string[]
+    wake: string | null
+  }) => void
+}
+
+export function HomeDrugSearch({
+  showCta = true,
+  destination = 'connect',
+  onPlanChange,
+}: HomeDrugSearchProps = {}) {
   const [rows, setRows] = useState<MedRow[]>(() => emptyRows(HOME_MED_ROWS))
   const [activeAc, setActiveAc] = useState<number | null>(null)
   const inputRefs = useRef<Array<HTMLInputElement | null>>([])
@@ -58,6 +80,19 @@ export function HomeDrugSearch() {
       ),
     [rows]
   )
+
+  const planSnapshot = useMemo(() => {
+    const { medCodes, medTimes } = resolvedPlan
+    return {
+      medCodes,
+      medTimes,
+      wake: earliestTakeTime(medTimes),
+    }
+  }, [resolvedPlan])
+
+  useEffect(() => {
+    onPlanChange?.(planSnapshot)
+  }, [onPlanChange, planSnapshot])
 
   function updateRow(index: number, patch: Partial<MedRow>) {
     setRows((prev) => prev.map((row, idx) => (idx === index ? { ...row, ...patch } : row)))
@@ -94,20 +129,16 @@ export function HomeDrugSearch() {
   }
 
   const checkHref = useMemo(() => {
-    const { medCodes, medTimes } = resolvedPlan
-    const wake = earliestTakeTime(medTimes) ?? undefined
-    return buildHomeChemistryPath({ medCodes, medTimes, wake })
-  }, [resolvedPlan])
+    const { medCodes, medTimes, wake } = planSnapshot
+    return destination === 'profile'
+      ? buildPatientLandingPath({ medCodes, medTimes, wake: wake ?? undefined })
+      : buildHomeChemistryPath({ medCodes, medTimes, wake: wake ?? undefined })
+  }, [destination, planSnapshot])
 
   const canCheck = resolvedPlan.medCodes.length >= 1
 
   function handleFixTiming() {
-    const { medCodes, medTimes } = resolvedPlan
-    savePlanDraft({
-      medCodes,
-      medTimes,
-      wake: earliestTakeTime(medTimes),
-    })
+    savePlanDraft(planSnapshot)
   }
 
   function renderSearchRow(row: MedRow, index: number) {
@@ -212,21 +243,23 @@ export function HomeDrugSearch() {
         {rows.map((row, index) => renderSearchRow(row, index))}
       </div>
 
-      <div className="home-drug-search__join">
-        {canCheck ? (
-          <Link
-            href={checkHref}
-            onClick={handleFixTiming}
-            className="dd-gate__signup home-drug-search__join-btn"
-          >
-            {DEEPDOSE_HOME_POLY_SEARCH.checkCta}
-          </Link>
-        ) : (
-          <button type="button" disabled className="dd-gate__signup home-drug-search__join-btn">
-            {DEEPDOSE_HOME_POLY_SEARCH.checkCta}
-          </button>
-        )}
-      </div>
+      {showCta ? (
+        <div className="home-drug-search__join">
+          {canCheck ? (
+            <Link
+              href={checkHref}
+              onClick={handleFixTiming}
+              className="dd-gate__signup home-drug-search__join-btn"
+            >
+              {DEEPDOSE_HOME_POLY_SEARCH.checkCta}
+            </Link>
+          ) : (
+            <button type="button" disabled className="dd-gate__signup home-drug-search__join-btn">
+              {DEEPDOSE_HOME_POLY_SEARCH.checkCta}
+            </button>
+          )}
+        </div>
+      ) : null}
     </div>
   )
 }

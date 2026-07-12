@@ -10,7 +10,7 @@ Product routes (`/grid`, `/dose`, `/profile`, `/account`, `/dosage`, `/connect`,
 **Thesis:** A social network powered by circadian chemistry — not a chronotherapy app with social bolted on.
 Chemistry = matching engine. Community = retention. Score = status economy. Feed = habit loop.
 
-**North star (product):** Chemistry That Connects / Make chemistry work.
+**North star (product):** Max Your Chemistry / Make chemistry work.
 **North star (metric):** Meaningful Syncs Created — people who match on chemical phenotype and form a real connection — not DAU on Score.
 
 **Sync economy (engagement):**
@@ -68,7 +68,7 @@ Profile via top-bar avatar (`/profile`). Legacy `/bank` redirects here. No float
 - Positioning: first social network for chemical phenotypes + human connection.
 - Promise: **Discover your chemical phenotype. Find your people.**
 - Value prop: **Who is online in my biological window right now?** — not “what is my score today?”
-- Homepage hero: **Chemistry That Connects.** Loop CVP: **Make chemistry work.** Loop: **Screen. Score. Share. Sync.**
+- Homepage hero: **Max Your Chemistry.** Loop CVP: **Make chemistry work.** Loop: **Screen. Score. Share. Sync.**
 - Dose cards: phenotype hashtag + score badge + Sync / Synced count.
 - Dose: stamp photo into a phenotype feed — no captions.
 - Consumer metric = **SRI** as phenotype stability (screened from signup; scored as chemical reputation). Badge chrome may still say Score.

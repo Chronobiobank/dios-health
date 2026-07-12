@@ -64,12 +64,12 @@ body:has(.dd-product):not(:has(.seco-splash)) {
 
 .deepdose-ambient--light .deepdose-ambient__flow {
   background:
-    radial-gradient(ellipse 52% 44% at 16% 18%, rgb(236 210 188 / 0.42) 0%, transparent 58%),
-    radial-gradient(ellipse 46% 50% at 86% 24%, rgb(210 198 226 / 0.4) 0%, transparent 56%),
-    radial-gradient(ellipse 54% 46% at 46% 82%, rgb(198 220 212 / 0.36) 0%, transparent 58%),
-    radial-gradient(ellipse 42% 42% at 74% 64%, rgb(228 206 214 / 0.34) 0%, transparent 55%),
-    radial-gradient(ellipse 38% 38% at 28% 62%, rgb(204 216 230 / 0.3) 0%, transparent 52%);
-  opacity: 0.55;
+    radial-gradient(ellipse 52% 44% at 16% 18%, rgb(236 210 188 / 0.52) 0%, transparent 58%),
+    radial-gradient(ellipse 46% 50% at 86% 24%, rgb(210 198 226 / 0.5) 0%, transparent 56%),
+    radial-gradient(ellipse 54% 46% at 46% 82%, rgb(198 220 212 / 0.46) 0%, transparent 58%),
+    radial-gradient(ellipse 42% 42% at 74% 64%, rgb(228 206 214 / 0.44) 0%, transparent 55%),
+    radial-gradient(ellipse 38% 38% at 28% 62%, rgb(204 216 230 / 0.4) 0%, transparent 52%);
+  opacity: 0.72;
   mix-blend-mode: multiply;
 }
 
@@ -167,42 +167,42 @@ body:has(.dd-product):not(:has(.seco-splash)) {
 .deepdose-ambient--light .deepdose-ambient__orb--navy {
   background: radial-gradient(
     circle at 38% 42%,
-    rgb(236 210 188 / 0.48) 0%,
-    rgb(228 206 214 / 0.26) 40%,
+    rgb(236 210 188 / 0.56) 0%,
+    rgb(228 206 214 / 0.32) 40%,
     transparent 70%
   );
-  opacity: 0.72;
+  opacity: 0.84;
 }
 
 .deepdose-ambient--light .deepdose-ambient__orb--sunset {
   background: radial-gradient(
     circle at 55% 45%,
-    rgb(210 198 226 / 0.44) 0%,
-    rgb(224 208 220 / 0.26) 36%,
-    rgb(204 216 230 / 0.14) 58%,
+    rgb(210 198 226 / 0.54) 0%,
+    rgb(224 208 220 / 0.32) 36%,
+    rgb(204 216 230 / 0.18) 58%,
     transparent 74%
   );
-  opacity: 0.72;
+  opacity: 0.84;
 }
 
 .deepdose-ambient--light .deepdose-ambient__orb--twilight {
   background: radial-gradient(
     circle at 50% 50%,
-    rgb(204 216 230 / 0.42) 0%,
-    rgb(210 198 226 / 0.22) 45%,
+    rgb(204 216 230 / 0.52) 0%,
+    rgb(210 198 226 / 0.28) 45%,
     transparent 72%
   );
-  opacity: 0.68;
+  opacity: 0.8;
 }
 
 .deepdose-ambient--light .deepdose-ambient__orb--ember {
   background: radial-gradient(
     circle at 50% 50%,
-    rgb(198 220 212 / 0.4) 0%,
-    rgb(236 210 188 / 0.2) 48%,
+    rgb(198 220 212 / 0.5) 0%,
+    rgb(236 210 188 / 0.26) 48%,
     transparent 70%
   );
-  opacity: 0.68;
+  opacity: 0.8;
 }
 
 .deepdose-ambient--light .deepdose-ambient__veil {
@@ -212,8 +212,8 @@ body:has(.dd-product):not(:has(.seco-splash)) {
       180deg,
       transparent 0%,
       transparent 12%,
-      transparent 78%,
-      rgb(247 247 245 / 0.28) 100%
+      transparent 82%,
+      rgb(247 247 245 / 0.18) 100%
     );
   opacity: 1;
 }

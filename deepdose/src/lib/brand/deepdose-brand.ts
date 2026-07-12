@@ -18,7 +18,7 @@ export const DEEPDOSE_FOOTER_LEGAL =
 export const DEEPDOSE_REGISTRATION_LINE = DEEPDOSE_FOOTER_LEGAL
 
 /** Homepage hero */
-export const DEEPDOSE_HOME_HEADLINE = 'Chemistry That Connects' as const
+export const DEEPDOSE_HOME_HEADLINE = 'Max Your Chemistry' as const
 
 /** Core user promise — phenotype discovery + tribe. */
 export const DEEPDOSE_PROMISE =
@@ -68,7 +68,7 @@ export const DEEPDOSE_TOKEN_ECONOMY = 'Share a dose.' as const
  * Copy hierarchy:
  * Positioning = first social network for chemical phenotypes + connection.
  * Thesis = social network powered by body-clock chemistry (not a health app with social bolted on).
- * Chemistry That Connects = homepage hero.
+ * Max Your Chemistry = homepage hero.
  * Discover your chemical phenotype. Find your people. = core promise.
  * Make chemistry work = short CVP / loop imperative.
  * Screen · Score · Share · Sync = product loop (build order).

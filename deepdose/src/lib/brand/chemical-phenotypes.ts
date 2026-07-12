@@ -33,7 +33,7 @@ export const CHEMICAL_PHENOTYPES: readonly ChemicalPhenotype[] = [
     peak: 'Evening / night',
     expression: 'Creative and social after dark',
     cue: 'var(--dd-cue-resetter)',
-    hash: '#Wolf',
+    hash: '#WolfPhenotype',
   },
   {
     id: 'early_explorer',
@@ -42,7 +42,7 @@ export const CHEMICAL_PHENOTYPES: readonly ChemicalPhenotype[] = [
     peak: 'Morning',
     expression: 'Active and connected at dawn',
     cue: 'var(--dd-cue-hijacker)',
-    hash: '#Lion',
+    hash: '#LionPhenotype',
   },
   {
     id: 'twilight_transformer',
@@ -51,7 +51,7 @@ export const CHEMICAL_PHENOTYPES: readonly ChemicalPhenotype[] = [
     peak: 'Afternoon / evening',
     expression: 'Flexible across late day hours',
     cue: 'var(--dd-cue-crosser)',
-    hash: '#Bear',
+    hash: '#BearPhenotype',
   },
   {
     id: 'pulse_shifter',
@@ -60,7 +60,7 @@ export const CHEMICAL_PHENOTYPES: readonly ChemicalPhenotype[] = [
     peak: 'Variable',
     expression: 'Shift work and travel clocks',
     cue: 'var(--dd-cue-battery)',
-    hash: '#Dolphin',
+    hash: '#DolphinPhenotype',
   },
 ] as const
 
@@ -107,4 +107,30 @@ export function phenotypeHintLine(phenotype: ChemicalPhenotype): string {
 /** Sync overlap copy — chemistry, not vibes. */
 export function phenotypeOverlapLine(name: string, pct: number): string {
   return `You and ${name} share a ${pct}% phenotype overlap.`
+}
+
+const TRIBE_ANIMAL_PLURAL: Record<ChemicalPhenotype['animal'], string> = {
+  Wolf: 'Wolves',
+  Lion: 'Lions',
+  Bear: 'Bears',
+  Dolphin: 'Dolphins',
+}
+
+/** City token from a freeform location ("London, UK" → London). */
+export function cityFromLocation(location: string | null | undefined): string {
+  const raw = location?.trim() ?? ''
+  if (!raw) return ''
+  const city = raw.split(',')[0]?.trim() ?? ''
+  return city.replace(/[^A-Za-z0-9]/g, '')
+}
+
+/** Localised tribe tag — e.g. London + Bear → #LondonBears */
+export function tribeLocalHash(
+  location: string | null | undefined,
+  phenotype: ChemicalPhenotype
+): string {
+  const city = cityFromLocation(location)
+  const pack = TRIBE_ANIMAL_PLURAL[phenotype.animal]
+  if (!city) return `#${pack}`
+  return `#${city}${pack}`
 }

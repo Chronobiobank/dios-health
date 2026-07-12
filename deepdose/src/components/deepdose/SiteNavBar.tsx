@@ -35,6 +35,7 @@ export function SiteNavBar({
 }: SiteNavBarProps) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const [menuPath, setMenuPath] = useState(pathname)
   if (pathname !== menuPath) {
     setMenuPath(pathname)
@@ -50,8 +51,23 @@ export function SiteNavBar({
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <header className={cn('clinical-site-nav seco-nav', open && 'seco-nav--open')}>
+    <header
+      className={cn(
+        'clinical-site-nav seco-nav',
+        open && 'seco-nav--open',
+        scrolled && 'seco-nav--scrolled'
+      )}
+    >
       <div className="seco-nav__inner">
         <Link href={brandHref} className="clinical-site-nav__brand" aria-label={brandAriaLabel}>
           <DeepdoseWordmark />

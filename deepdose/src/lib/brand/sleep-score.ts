@@ -15,7 +15,7 @@ export const SLEEP_SCORE = {
   climbShort: 'Raise your score',
   stamp: 'Shares toward your phenotype score',
   /** Homekit — TipTraQ at-home nights, consumer label */
-  tiptraqHref: '/testkit',
+  tiptraqHref: '/homekit',
   tiptraqLabel: 'Get a Homekit read',
   tiptraqHint: 'Three nights at home. Clearer phenotype baseline.',
   /** Full clinical name (research / methodology surfaces) */

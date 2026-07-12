@@ -27,6 +27,7 @@ export const MEMBERSHIP_PAGE_INTRO = {
 export const MEMBERSHIP_FOUNDING = {
   title: DEEPDOSE_VOICE.foundingMembers.label,
   body: DEEPDOSE_VOICE.foundingMembers.lede,
+  cta: { label: 'Welcome Manjam founders', href: '/founders' },
 } as const
 
 /** USD for the global Manjam founding cohort. */

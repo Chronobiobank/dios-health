@@ -23,9 +23,17 @@ type Mode = 'signin' | 'signup'
 type LoginFormProps = {
   /** Splash home gate: compact signup-first, no page chrome title. */
   variant?: 'page' | 'splash'
+  /** Hide display name (email + password only). */
+  hideDisplayName?: boolean
+  /** Override primary submit label when not loading. */
+  submitLabel?: string
 }
 
-export default function LoginForm({ variant = 'page' }: LoginFormProps) {
+export default function LoginForm({
+  variant = 'page',
+  hideDisplayName = false,
+  submitLabel: submitLabelProp,
+}: LoginFormProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const next = searchParams.get('next')
@@ -144,11 +152,13 @@ export default function LoginForm({ variant = 'page' }: LoginFormProps) {
 
   const submitLabel = loading
     ? 'Please wait…'
-    : isSplash
-      ? 'Enter'
-      : effectiveMode === 'signin'
-        ? 'Sign in'
-        : 'Create account'
+    : submitLabelProp
+      ? submitLabelProp
+      : isSplash
+        ? 'Enter'
+        : effectiveMode === 'signin'
+          ? 'Sign in'
+          : 'Create account'
 
   return (
     <div className={isSplash ? 'seco-auth-form seco-auth-form--splash' : 'seco-auth-form'}>
@@ -165,7 +175,7 @@ export default function LoginForm({ variant = 'page' }: LoginFormProps) {
       ) : null}
 
       <form onSubmit={handleSubmit} className="seco-auth-form__fields space-y-3">
-        {effectiveMode === 'signup' && (
+        {effectiveMode === 'signup' && !hideDisplayName && !isSplash ? (
           <div className="space-y-1.5">
             <Label htmlFor="displayName">Display name</Label>
             <Input
@@ -176,7 +186,7 @@ export default function LoginForm({ variant = 'page' }: LoginFormProps) {
               placeholder="How we address you"
             />
           </div>
-        )}
+        ) : null}
 
         <div className="space-y-1.5">
           <Label htmlFor="email">Email</Label>

@@ -7,8 +7,10 @@ import {
   DEEPDOSE_PATIENT_PLAN_PROFILE,
   SOCIAL_PROFILE,
 } from '@/lib/deepdose-marketing/landing-content'
+import { DOSE_ARCHIVE } from '@/lib/deepdose-marketing/dose-share-content'
 import { computeScheduleSri } from '@/lib/circadian/sri-engine'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
+import { PATIENT_LANDING_DEMO } from '@/lib/patient/patient-landing-defaults'
 import { usePatientPlanProfile } from '@/lib/patient/use-patient-plan-profile'
 import { usePatientDoses } from '@/lib/patient/use-patient-doses'
 import {
@@ -66,10 +68,12 @@ export function SocialProfileView({
     () => inferLandingBodyClock(profile.wake, medTimes),
     [profile.wake, medTimes]
   )
-  const sri = useMemo(
-    () => computeScheduleSri(bodyClock.sleepOnsetLabel, bodyClock.wakeLabel).score,
-    [bodyClock.sleepOnsetLabel, bodyClock.wakeLabel]
-  )
+  const sri = useMemo(() => {
+    const computed = computeScheduleSri(bodyClock.sleepOnsetLabel, bodyClock.wakeLabel).score
+    const isDemoMember =
+      profile.firstName.trim().toLowerCase() === PATIENT_LANDING_DEMO.firstName.toLowerCase()
+    return isDemoMember ? PATIENT_LANDING_DEMO.sri : computed
+  }, [bodyClock.sleepOnsetLabel, bodyClock.wakeLabel, profile.firstName])
   const selfDoses = doses.filter((d) => d.isSelf !== false)
   const copy = SOCIAL_PROFILE
   const fields = DEEPDOSE_PATIENT_PLAN_PROFILE
@@ -218,18 +222,22 @@ export function SocialProfileView({
         </nav>
       </div>
 
-      <section className="dd-profile__reals" aria-label="Dose archive">
-        <h2 className="dd-profile__reals-title">Doses</h2>
+      <section className="dd-profile__reals" aria-label={DOSE_ARCHIVE.title}>
+        <h2 className="dd-profile__reals-title">{DOSE_ARCHIVE.title}</h2>
         {dosesReady && selfDoses.length === 0 ? (
-          <p className="dd-profile__reals-empty">
-            <Link href="/dose">Log today’s dose</Link>
-          </p>
+          <div className="dd-profile__reals-empty">
+            <p className="dd-profile__reals-empty-title">{DOSE_ARCHIVE.emptyTitle}</p>
+            <p className="dd-profile__reals-empty-body">{DOSE_ARCHIVE.emptyBody}</p>
+            <Link href={DOSE_ARCHIVE.ctaHref} className="dd-profile__reals-empty-cta">
+              {DOSE_ARCHIVE.emptyCta}
+            </Link>
+          </div>
         ) : (
           <div className="dd-profile__reals-grid">
             {selfDoses.map((dose) => (
               <Link
                 key={dose.id}
-                href="/grid"
+                href={DOSE_ARCHIVE.feedHref}
                 className="dd-profile__reals-cell"
                 aria-label={`Dose ${dose.date}`}
               >

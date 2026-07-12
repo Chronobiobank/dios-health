@@ -14,7 +14,7 @@ import {
   DEEPDOSE_HOME_SPLASH_HERO,
 } from '@/lib/deepdose-marketing/landing-content'
 
-/** Logo · orbit · Chemistry That Connects · phenotype CTA · Terms. */
+/** Logo · orbit · Max Your Chemistry · founder CTA · Terms. */
 export function DeepDoseSplashHome() {
   const gate = DEEPDOSE_HOME_GATE
   const { links } = gate
@@ -44,10 +44,10 @@ export function DeepDoseSplashHome() {
             baseline={
               <div className="dd-gate__ctas">
                 <Link
-                  href={DEEPDOSE_HOME_SPLASH.secondaryCta.href}
+                  href={DEEPDOSE_HOME_SPLASH.primaryCta.href}
                   className="dd-gate__cta dd-gate__cta--primary"
                 >
-                  {DEEPDOSE_HOME_SPLASH.secondaryCta.label}
+                  {DEEPDOSE_HOME_SPLASH.primaryCta.label}
                 </Link>
               </div>
             }

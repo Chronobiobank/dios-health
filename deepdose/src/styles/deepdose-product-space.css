@@ -95,7 +95,7 @@
   color: var(--dd-ink);
 }
 
-.dd-product :is(.dd-log__btn-sub, .dd-log__hint, .dd-grid__sub, .dd-bank__tokens, .dd-grid__tag) {
+.dd-product :is(.dd-log__btn-sub, .dd-log__hint, .dd-log__support, .dd-grid__sub, .dd-bank__tokens, .dd-grid__tag) {
   color: var(--dd-ink-muted);
 }
 
@@ -269,34 +269,45 @@
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif) !important;
 }
 
-/* Light shell — dark dashboard ring uses white numeral; product must use ink. */
+/* Light shell — keep gradient stroke; numeral stays ink. */
 .dd-product .sri-score-ring {
-  filter: none;
+  filter: drop-shadow(0 10px 24px rgb(15 23 42 / 0.12));
+  width: min(18.5rem, 100%);
+  max-width: 100%;
+  margin-inline: auto;
+  align-self: center;
 }
 
 .dd-product .sri-score-ring__track {
-  stroke: rgb(15 23 42 / 0.12);
+  stroke: rgb(15 23 42 / 0.1);
 }
 
 .dd-product .sri-score-ring__progress,
 .dd-product .sri-score-ring[data-tone='good'] .sri-score-ring__progress,
 .dd-product .sri-score-ring[data-tone='mid'] .sri-score-ring__progress,
 .dd-product .sri-score-ring[data-tone='low'] .sri-score-ring__progress {
-  stroke: var(--dd-solid, #0f172a);
+  /* Gradient lives on the SVG stroke — do not flatten to solid ink */
   filter: none;
 }
 
 .dd-product .sri-score-ring__value {
-  font-size: clamp(2.75rem, 10vw, 3.5rem);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif) !important;
+  font-size: clamp(4.75rem, 18vw, 6.25rem);
   font-weight: 400 !important;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.055em;
+  line-height: 0.88;
   color: var(--dd-solid, #0f172a) !important;
   text-shadow: none;
 }
 
 .dd-product .sri-score-ring__label {
+  max-width: 9.5rem;
+  margin: 0;
+  font-size: 0.75rem;
   font-weight: 500 !important;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+  text-transform: uppercase;
   color: var(--dd-ink-muted, rgb(15 23 42 / 0.62)) !important;
 }
 

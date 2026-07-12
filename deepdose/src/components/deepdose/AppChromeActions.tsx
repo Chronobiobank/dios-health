@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 
+import { useSupabaseUser } from '@/lib/auth/use-supabase-user'
 import { resolvePlanAvatarUrl } from '@/lib/patient/patient-landing-defaults'
 
 function ChatIcon() {
@@ -36,10 +37,13 @@ function BellIcon() {
   )
 }
 
-/** Nextdoor-style trailing chrome: chat · alerts · face (settings via profile). */
+/** Nextdoor-style trailing chrome: chat · alerts · face — members only. */
 export function AppChromeActions() {
+  const { user, ready } = useSupabaseUser()
   // Stable SSR/client markup — avoid localStorage reads during render (hydration).
   const avatarUrl = resolvePlanAvatarUrl(null)
+
+  if (!ready || !user) return null
 
   return (
     <div className="app-top-bar__actions">

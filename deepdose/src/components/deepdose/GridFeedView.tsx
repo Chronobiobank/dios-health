@@ -15,6 +15,7 @@ import {
   type AppGroupId,
 } from '@/lib/deepdose-marketing/app-groups'
 import { sleepScoreBadge } from '@/lib/brand/sleep-score'
+import { DOSE_FEED_EMPTY } from '@/lib/deepdose-marketing/dose-share-content'
 import { DOSE_TAG_META, type DoseUpload } from '@/lib/patient/dose-uploads'
 import { usePatientDoses } from '@/lib/patient/use-patient-doses'
 import { planProfileDisplayName } from '@/lib/patient/plan-profile'
@@ -132,10 +133,10 @@ export function GridFeedView() {
       <div className="dd-grid__feed">
         {items.length === 0 ? (
           <p className="dd-grid__empty">
-            No posts here yet.{' '}
-            <Link href={`/dose?tag=${feed}`}>Post one</Link>
+            {DOSE_FEED_EMPTY.before}{' '}
+            <Link href={`/dose?tag=${feed}`}>{DOSE_FEED_EMPTY.post}</Link>
             {' · '}
-            <Link href="/connect">Find friends</Link>
+            <Link href="/matches">{DOSE_FEED_EMPTY.sync}</Link>
           </p>
         ) : (
           items.map((dose) => (

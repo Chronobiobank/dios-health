@@ -33,6 +33,8 @@ export function isPatientDoseDashPath(next?: string | null): boolean {
     next.startsWith('/profile') ||
     next.startsWith('/account') ||
     next.startsWith('/connect') ||
+    next.startsWith('/founders') ||
+    next.startsWith('/matches') ||
     next.startsWith('/chat') ||
     next.startsWith('/real') ||
     next.startsWith('/grid') ||

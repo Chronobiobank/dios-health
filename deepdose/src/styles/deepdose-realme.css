@@ -206,6 +206,20 @@
   font-size: var(--dd-type-body);
 }
 
+.dd-log__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.dd-log__support {
+  margin: 0;
+  color: var(--dd-ink-faint, rgb(15 23 42 / 0.5));
+  font-size: var(--dd-type-md, 0.8125rem);
+  line-height: 1.4;
+}
+
 .dd-log__buttons {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--oai-min-2, min(100%, 17rem)), 1fr));
@@ -300,6 +314,60 @@
   margin: var(--dd-2) 0 0;
   color: var(--dd-ink-dim);
   font-size: var(--dd-type-sm);
+}
+
+.dd-log__btn--primary {
+  border-color: var(--dd-solid, #0f172a);
+  background: var(--dd-surface, #fff);
+}
+
+.dd-log__premium {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--dd-gap);
+  width: 100%;
+  min-width: 0;
+  margin-top: var(--dd-1);
+  padding: var(--dd-3) var(--dd-gap-loose);
+  border: 1px solid var(--dd-border, rgb(15 23 42 / 0.1));
+  border-radius: var(--dd-radius);
+  background: var(--dd-surface-quiet, rgb(15 23 42 / 0.03));
+}
+
+.dd-log__premium-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.dd-log__premium-label {
+  margin: 0;
+  font-size: var(--dd-type-sm, 0.75rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62));
+}
+
+.dd-log__premium-body {
+  margin: 0;
+  font-size: var(--dd-type-md, 0.8125rem);
+  line-height: 1.4;
+  color: var(--dd-ink-soft, rgb(15 23 42 / 0.78));
+}
+
+.dd-log__premium-cta {
+  flex: 0 0 auto;
+  align-self: center;
+  font-size: var(--dd-type-sm, 0.75rem);
+  font-weight: 500;
+  color: var(--dd-ink, rgb(15 23 42 / 0.92));
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  white-space: nowrap;
 }
 
 /* ── Metabolic bridge (Chemistry) ── */

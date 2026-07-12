@@ -7,13 +7,15 @@ import type { PlanContextFromDraft } from '@/lib/patient/plan-draft'
 /** Default demo member when /profile has no saved plan profile. */
 export const PATIENT_LANDING_DEMO = {
   patientId: 'DEMO-001',
-  firstName: 'Leo',
-  familyName: 'Costa',
+  firstName: 'Theo',
+  familyName: 'Davidson',
+  /** Phone-only SRI — mid band so Homekit risk tile shows (< 75). */
+  sri: 64,
   /** Location drives solar exposure / light timing context */
-  location: 'Manchester, UK',
+  location: 'London, UK',
   journey: 'Working on steadier nights and better timing.',
   /** Male default face for ManJam invites until the member uploads their own. */
-  avatarUrl: communityFaceUrl('leo', 128),
+  avatarUrl: communityFaceUrl('theo', 128),
   medCodes: ['metformin', 'ramipril', 'atorvastatin', 'sertraline'] as const,
   medTimes: ['07:30', '08:00', '20:00', '12:00'] as const,
   wake: '07:30',
