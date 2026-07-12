@@ -13,15 +13,15 @@ export const HOW_IT_WORKS_META = {
 } as const
 
 export const HOW_IT_WORKS_INTRO = {
-  title: 'Make chemistry work',
+  title: 'How Deepdose Works',
 } as const
 
-/** Scene tile behind the How loop — color torso video. */
+/** Scene tile behind the How loop — moody torso video. */
 export const HOW_IT_WORKS_SCENE = {
   image: {
     type: 'video' as const,
-    src: '/color-torso.mp4',
-    alt: 'Color torso in soft light — chemistry that connects',
+    src: '/moody-torso.mp4',
+    alt: 'Moody torso in soft light — chemistry that connects',
     playbackRate: 0.35,
   },
   objectPosition: 'center 28%',

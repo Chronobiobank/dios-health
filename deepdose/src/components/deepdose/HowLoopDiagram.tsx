@@ -13,8 +13,7 @@ const NODE_SIZE = 104
 
 /**
  * How CVP — same stage + placement as HomeFaceNetwork.
- * Hub title in the center; Screen / Score / Share / Sync on the ring.
- * Center CVP: How Deepdose Works.
+ * Screen / Score / Share / Sync on the ring.
  */
 export function HowLoopDiagram() {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -142,18 +141,6 @@ export function HowLoopDiagram() {
     <figure className="dd-how-loop-wrap" aria-label="How Deepdose Works">
       <div ref={rootRef} className="home-face-net dd-how-loop">
         <canvas ref={canvasRef} className="home-face-net__field" aria-hidden />
-
-        <h1 className="dd-how-loop__center" aria-label="How Deepdose Works">
-          <span className="dd-how-loop__center-line" aria-hidden>
-            How
-          </span>
-          <span className="dd-how-loop__center-line" aria-hidden>
-            Deepdose
-          </span>
-          <span className="dd-how-loop__center-line" aria-hidden>
-            Works
-          </span>
-        </h1>
 
         {HOW_IT_WORKS_STEPS.map((step, index) => (
           <Link

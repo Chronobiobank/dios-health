@@ -7,6 +7,7 @@ import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
 import {
   HOW_IT_WORKS_CTAS,
   HOW_IT_WORKS_FOUNDING,
+  HOW_IT_WORKS_INTRO,
   HOW_IT_WORKS_META,
   HOW_IT_WORKS_PHENOTYPES,
   HOW_IT_WORKS_SCENE,
@@ -25,6 +26,15 @@ export default function HowItWorksPage() {
   return (
     <article className="seco-page seco-science seco-chronobiobank seco-mission seco-marketing-page seco-how-page">
       <div className="seco-landing__section-inner seco-how-page__inner">
+        <header
+          className="seco-how-page__why seco-reveal seco-reveal--1"
+          aria-labelledby="how-loop-title"
+        >
+          <h1 id="how-loop-title" className="seco-page__title">
+            <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_INTRO.title}</span>
+          </h1>
+        </header>
+
         <MarketingSceneTile
           image={HOW_IT_WORKS_SCENE.image}
           objectPosition={HOW_IT_WORKS_SCENE.objectPosition}
@@ -38,9 +48,9 @@ export default function HowItWorksPage() {
           className="seco-how-page__why seco-reveal seco-reveal--2"
           aria-labelledby="how-phenotype-title"
         >
-          <h1 id="how-phenotype-title" className="seco-page__title">
+          <h2 id="how-phenotype-title" className="seco-page__title">
             <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_PHENOTYPES.title}</span>
-          </h1>
+          </h2>
         </header>
 
         <ul className="seco-how-page__story seco-how-page__phenotypes seco-reveal seco-reveal--2" aria-label="Know Your Phenotype">
