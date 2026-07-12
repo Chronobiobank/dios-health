@@ -6,11 +6,9 @@ import type { ReactNode } from 'react'
 
 import {
   APP_BOTTOM_NAV,
-  APP_POST_FAB,
   isAppBottomNavActive,
   type AppBottomNavItem,
 } from '@/lib/deepdose-marketing/app-bottom-nav'
-import { isDeepdoseProductPath } from '@/lib/deepdose-marketing/site-nav-links'
 import { useIsClient } from '@/lib/react/use-is-client'
 import { cn } from '@/lib/utils/cn'
 
@@ -35,6 +33,13 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
           <path d="M7 10v8.25h10V10" />
         </svg>
       )
+    case 'post':
+      return (
+        <svg {...common}>
+          <path d="M4.75 8.5A2.25 2.25 0 0 1 7 6.25h2.1l1.15-1.5h3.5L14.9 6.25H17A2.25 2.25 0 0 1 19.25 8.5v9A2.25 2.25 0 0 1 17 19.75H7A2.25 2.25 0 0 1 4.75 17.5v-9Z" />
+          <circle cx="12" cy="13" r="3.25" />
+        </svg>
+      )
     case 'sync':
       return (
         <svg {...common}>
@@ -44,49 +49,12 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
           <path d="M13.5 14.75c1.35-.55 2.85-.35 4.1.85 1 .95 1.55 2.35 1.65 3.65" />
         </svg>
       )
-    case 'score':
-      return (
-        <svg {...common}>
-          <path d="M5.5 18.5V10.75" />
-          <path d="M12 18.5V6.5" />
-          <path d="M18.5 18.5v-5.25" />
-        </svg>
-      )
   }
-}
-
-/** Black circle to the right of the pill — + icon + Post label (same stack as nav tabs). */
-export function AppPostFab() {
-  const pathname = usePathname() ?? '/'
-  const product = isDeepdoseProductPath(pathname)
-  const onLog = pathname === '/dose' || pathname.startsWith('/dose/')
-
-  if (!product || onLog) return null
-
-  return (
-    <Link href={APP_POST_FAB.href} className="app-post-fab" aria-label={APP_POST_FAB.label}>
-      <svg
-        className="app-bottom-nav__icon"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden
-      >
-        <path d="M12 6.75v10.5M6.75 12h10.5" />
-      </svg>
-      <span className="app-bottom-nav__label">{APP_POST_FAB.label}</span>
-    </Link>
-  )
 }
 
 export function AppBottomNav() {
   const pathname = usePathname() ?? '/'
-  // Pathname can disagree between SSR HTML and the first client pass — only
+  // Pathname can disagree between SSR HTML and the first client pass —
   // mark active after mount so aria-current / active class stay hydration-safe.
   const mounted = useIsClient()
 
@@ -102,6 +70,7 @@ export function AppBottomNav() {
                   href={item.href}
                   className={cn(
                     'app-bottom-nav__link',
+                    item.id === 'post' && 'app-bottom-nav__link--post',
                     active && 'app-bottom-nav__link--active'
                   )}
                   aria-current={active ? 'page' : undefined}
@@ -120,4 +89,9 @@ export function AppBottomNav() {
 
 export function AppBottomNavSpacer(): ReactNode {
   return <div className="app-bottom-nav__spacer" aria-hidden />
+}
+
+/** @deprecated Post is in the bottom nav pill — no floating FAB. */
+export function AppPostFab(): null {
+  return null
 }

@@ -100,8 +100,9 @@ export const HOW_IT_WORKS_FOUNDING = {
 } as const
 
 /**
- * Why this exists — one title + three short story tiles.
- * Flow: pain → what we do → why you should care.
+ * Why this exists — exclusive / innovative / world-first.
+ * Speak to chrono-atypical tribes (Manjam nights, shift clocks, late peaks).
+ * Keep bodies ~67–68 chars so the three tiles read even.
  */
 export const HOW_IT_WORKS_WHY = {
   title: 'Why Deepdose?',
@@ -110,19 +111,18 @@ export const HOW_IT_WORKS_WHY = {
 export const HOW_IT_WORKS_STORY = [
   {
     id: 'pain',
-    label: 'The clock',
-    /** Keep bodies 68 chars so the three tiles read even. */
-    body: 'Face apps ignore odd clocks. Score apps leave you alone every night.',
+    label: 'Exclusive',
+    body: 'Manjam nights and shift clocks — not another 9-to-5 dating face app.',
   },
   {
     id: 'solution',
-    label: 'The graph',
-    body: 'Match by phenotype on your clock. Sync shows who is awake with you.',
+    label: 'Only Sync',
+    body: 'Sync finds who’s awake with you. Chemistry matching — nowhere else.',
   },
   {
     id: 'care',
-    label: 'The tribe',
-    body: 'Recognition and belonging — so you know these are finally my people.',
+    label: 'Homekit',
+    body: 'World-first: prove phenotype at home and screen early apnea risk.',
   },
 ] as const
 

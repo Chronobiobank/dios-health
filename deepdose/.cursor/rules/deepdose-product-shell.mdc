@@ -31,16 +31,15 @@ Retention order (why they return): **Sync → Share → Score → Screen**.
 
 Company = **Deepdose**. Matching speaks in **phenotypes** (Wolf, Lion, Bear, Dolphin) — chemical phenotype IDs stay internal. Section head on /how: **Know Your Phenotype**. No Medmaxxing / Dosers / Get in Flow in product copy. Consumer at-home nights = **Homekit** (TipTraQ hardware).
 
-## Bottom nav (3 tabs + Dose circle)
+## Bottom nav (Home · Post · Sync)
 
 | Control | Route | Role |
 |---|---|---|
 | Home | `/grid` | Phenotype feed (share surface) |
+| Post | `/dose` | Share a dose |
 | Sync | `/connect` | Discovery + Chat — lead with tribe, not score |
-| Profile | `/profile` | Identity + SRI + doses + Homekit tools |
-| **Dose** (black circle) | `/dose` | Share a dose |
 
-Profile via bottom nav **and** top-right avatar (`/profile`). Legacy `/bank` redirects here.
+Profile via top-bar avatar (`/profile`). Legacy `/bank` redirects here. No floating Dose FAB.
 
 ## Visual / layout engine
 

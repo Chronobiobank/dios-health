@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
-import { AppBottomNav, AppBottomNavSpacer, AppPostFab } from '@/components/deepdose/AppBottomNav'
+import { AppBottomNav, AppBottomNavSpacer } from '@/components/deepdose/AppBottomNav'
 import { DeepDoseShell } from '@/components/deepdose/DeepDoseShell'
 import { isDeepdoseProductPath } from '@/lib/deepdose-marketing/site-nav-links'
 
@@ -29,7 +29,6 @@ export function PublicMarketingShell({ children }: PublicMarketingShellProps) {
       {children}
       <AppBottomNavSpacer />
       <AppBottomNav />
-      <AppPostFab />
     </DeepDoseShell>
   )
 }

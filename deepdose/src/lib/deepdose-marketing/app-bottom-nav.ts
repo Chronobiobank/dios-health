@@ -1,22 +1,22 @@
-/** Native-style bottom nav — Home · Sync · Profile + Dose FAB. */
+/** Native-style bottom nav — Home · Post · Sync. Profile via top-bar avatar. */
 
 export type AppBottomNavItem = {
-  id: 'home' | 'sync' | 'score'
+  id: 'home' | 'post' | 'sync'
   label: string
   href: string
 }
 
-/** Home · Sync · Profile — Dose is the floating black circle (Share). */
+/** Home · Post · Sync — Profile is top-bar avatar only. */
 export const APP_BOTTOM_NAV: readonly AppBottomNavItem[] = [
   { id: 'home', label: 'Home', href: '/grid' },
+  { id: 'post', label: 'Post', href: '/dose' },
   { id: 'sync', label: 'Sync', href: '/connect' },
-  { id: 'score', label: 'Profile', href: '/profile' },
 ] as const
 
-/** Dose — floating black circle to the right of the pill. */
+/** @deprecated Post lives in APP_BOTTOM_NAV — kept for older imports. */
 export const APP_POST_FAB = {
   href: '/dose',
-  label: 'Dose',
+  label: 'Post',
 } as const
 
 export function isAppBottomNavActive(href: string, pathname: string): boolean {
@@ -28,8 +28,8 @@ export function isAppBottomNavActive(href: string, pathname: string): boolean {
   if (href === '/grid' && (pathname === '/grid' || pathname.startsWith('/grid/'))) {
     return true
   }
-  // Profile owns legacy /bank
-  if (href === '/profile' && (pathname === '/bank' || pathname.startsWith('/bank/'))) {
+  // Post owns dose stamp
+  if (href === '/dose' && (pathname === '/dose' || pathname.startsWith('/dose/'))) {
     return true
   }
   return pathname === href || pathname.startsWith(`${href}/`)
