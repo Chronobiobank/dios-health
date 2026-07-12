@@ -23,7 +23,7 @@ Chemistry = matching engine. Community = retention. Score = status economy. Feed
 |---|---|---|
 | **Sync** | Who is online in my biological window? (`/connect`) | Strongest — tribe (“these are my people”) |
 | **Share** | Feed only peers on your chemical phenotype (`/dose` → `/grid`) | Strong — expression |
-| **Score** | Chemical phenotype profile / progression (`/bank`) | Medium — sticky when it unlocks status |
+| **Score** | Chemical phenotype profile / progression (`/bank` · Profile tab) | Medium — sticky when it unlocks status |
 | **Screen** | Passive phenotype screen from signup | Weakest — onboarding infrastructure |
 
 Product loop (build order): **Screen → Score → Share → Sync**.
@@ -37,10 +37,10 @@ Company = **Deepdose**. Matching speaks in **chemical phenotypes** (Night Creato
 |---|---|---|
 | Home | `/grid` | Phenotype feed (share surface) |
 | Sync | `/connect` | Discovery + Chat — lead with tribe, not score |
-| Score | `/bank` | Phenotype score / chemical reputation |
+| Profile | `/bank` | Phenotype score hub / chemical reputation |
 | **Dose** (black circle) | `/dose` | Share a dose |
 
-Profile via top-right avatar (`/profile`).
+Profile via bottom nav `/bank`. Top-right avatar → `/profile` (identity / Me) for this pass.
 
 ## Visual / layout engine
 

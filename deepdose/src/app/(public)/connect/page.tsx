@@ -18,11 +18,9 @@ export default async function ConnectPage() {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const messageHref = user ? '/chat' : '/?next=/chat'
-
   return (
     <ProductAppShell title="Sync" className="dd-connect">
-      <CommunityMatchesPanel variant="discovery" messageHref={messageHref} />
+      <CommunityMatchesPanel variant="discovery" signedIn={Boolean(user)} />
     </ProductAppShell>
   )
 }

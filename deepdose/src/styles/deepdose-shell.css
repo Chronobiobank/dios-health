@@ -70,7 +70,7 @@
 }
 
 .deepdose-shell.seco-shell--light {
-  background: #f7f7f5;
+  background: transparent;
   color: rgb(15 23 42 / 0.92);
 }
 
@@ -83,7 +83,7 @@ body:has(.seco-shell--light):not(:has(.seco-splash--oai)) {
 }
 
 body:has(.seco-splash--oai) {
-  background-color: #fff;
+  background-color: #f7f7f5;
 }
 
 .deepdose-shell .seco-display {

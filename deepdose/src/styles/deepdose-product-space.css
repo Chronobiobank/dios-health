@@ -72,7 +72,7 @@
   --dd-avatar: 2.25rem;
 
   color: var(--dd-ink);
-  background: #f7f7f5;
+  background: transparent;
 }
 
 /*
@@ -238,16 +238,35 @@
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif) !important;
 }
 
+/* Light shell — dark dashboard ring uses white numeral; product must use ink. */
+.dd-product .sri-score-ring {
+  filter: none;
+}
+
+.dd-product .sri-score-ring__track {
+  stroke: rgb(15 23 42 / 0.12);
+}
+
+.dd-product .sri-score-ring__progress,
+.dd-product .sri-score-ring[data-tone='good'] .sri-score-ring__progress,
+.dd-product .sri-score-ring[data-tone='mid'] .sri-score-ring__progress,
+.dd-product .sri-score-ring[data-tone='low'] .sri-score-ring__progress {
+  stroke: var(--dd-solid, #0f172a);
+  filter: none;
+}
+
 .dd-product .sri-score-ring__value {
   font-size: clamp(2.75rem, 10vw, 3.5rem);
   font-weight: 300 !important;
   letter-spacing: -0.03em;
+  color: var(--dd-solid, #0f172a) !important;
   text-shadow: none;
 }
 
 .dd-product .sri-score-ring__label {
   font-weight: 400 !important;
   letter-spacing: 0.08em;
+  color: var(--dd-ink-muted, rgb(15 23 42 / 0.62)) !important;
 }
 
 /* ── Product icon actions ── */

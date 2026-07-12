@@ -1,4 +1,4 @@
-/** Native-style bottom nav — Screen/Score/Share/Sync chrome. */
+/** Native-style bottom nav — Home · Sync · Profile + Dose FAB. */
 
 export type AppBottomNavItem = {
   id: 'home' | 'sync' | 'score'
@@ -6,11 +6,11 @@ export type AppBottomNavItem = {
   href: string
 }
 
-/** Home · Sync · Score — Dose is the floating black circle (Share). */
+/** Home · Sync · Profile — Dose is the floating black circle (Share). */
 export const APP_BOTTOM_NAV: readonly AppBottomNavItem[] = [
   { id: 'home', label: 'Home', href: '/grid' },
   { id: 'sync', label: 'Sync', href: '/connect' },
-  { id: 'score', label: 'Score', href: '/bank' },
+  { id: 'score', label: 'Profile', href: '/bank' },
 ] as const
 
 /** Dose — floating black circle to the right of the pill. */

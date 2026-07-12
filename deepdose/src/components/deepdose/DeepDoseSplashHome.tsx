@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import { DeepdoseWordmark } from '@/components/brand/DeepdoseWordmark'
 import { DeepDoseHeroHeadline } from '@/components/deepdose/DeepDoseHeroHeadline'
+import { HomeFaceNetwork } from '@/components/deepdose/HomeFaceNetwork'
 import { SplashFrame } from '@/components/deepdose/SplashFrame'
 import { SplashGateForm } from '@/components/deepdose/SplashGateForm'
 import { DEEPDOSE_HOME_GATE } from '@/lib/deepdose-marketing/home-gate-content'
@@ -13,13 +14,13 @@ import {
   DEEPDOSE_HOME_SPLASH_HERO,
 } from '@/lib/deepdose-marketing/landing-content'
 
-/** Logo · About · Chemistry That Connects · dual CTAs · Terms. Auth on /login. */
+/** Logo · orbit · Chemistry That Connects · phenotype CTA · Terms. */
 export function DeepDoseSplashHome() {
   const gate = DEEPDOSE_HOME_GATE
   const { links } = gate
 
   return (
-    <SplashFrame showNav={false} videoBackground>
+    <SplashFrame showNav={false}>
       <div className="dd-gate">
         <Suspense fallback={null}>
           <SplashGateForm
@@ -33,6 +34,7 @@ export function DeepDoseSplashHome() {
             }
             headline={
               <div className="dd-gate__headline">
+                <HomeFaceNetwork />
                 <DeepDoseHeroHeadline hero={DEEPDOSE_HOME_SPLASH_HERO} />
                 {DEEPDOSE_HOME_SPLASH.lede ? (
                   <p className="dd-gate__lede">{DEEPDOSE_HOME_SPLASH.lede}</p>
@@ -42,14 +44,8 @@ export function DeepDoseSplashHome() {
             baseline={
               <div className="dd-gate__ctas">
                 <Link
-                  href={DEEPDOSE_HOME_SPLASH.primaryCta.href}
-                  className="dd-gate__signup dd-gate__cta dd-gate__cta--primary"
-                >
-                  {DEEPDOSE_HOME_SPLASH.primaryCta.label}
-                </Link>
-                <Link
                   href={DEEPDOSE_HOME_SPLASH.secondaryCta.href}
-                  className="dd-gate__cta dd-gate__cta--secondary"
+                  className="dd-gate__cta dd-gate__cta--primary"
                 >
                   {DEEPDOSE_HOME_SPLASH.secondaryCta.label}
                 </Link>

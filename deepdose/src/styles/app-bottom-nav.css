@@ -18,7 +18,7 @@
   --app-bottom-nav-h: calc(var(--app-dock-h) + (var(--app-bottom-nav-inset) * 2));
 }
 
-/* Product routes: light canvas */
+/* Product routes: ambient canvas shows through */
 body:has(.dd-product):not(:has(.seco-splash)) {
   background-color: #f7f7f5;
 }

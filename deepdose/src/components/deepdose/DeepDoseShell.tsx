@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { DarkAmbientBackground } from '@/components/deepdose/DarkAmbientBackground'
+import { AmbientBackground } from '@/components/deepdose/AmbientBackground'
 import { DeepDoseSiteNav } from '@/components/deepdose/DeepDoseSiteNav'
 
 type DeepDoseShellProps = {
@@ -9,7 +9,7 @@ type DeepDoseShellProps = {
   nav?: ReactNode
 }
 
-/** Site shell — light OpenAI grid is default; dark kept for rare legacy surfaces. */
+/** Site shell — light OpenAI grid is default; ambient orbs on every surface. */
 export function DeepDoseShell({ children, variant = 'light', nav }: DeepDoseShellProps) {
   const isDark = variant === 'dark'
   const showDefaultNav = nav === undefined
@@ -23,7 +23,7 @@ export function DeepDoseShell({ children, variant = 'light', nav }: DeepDoseShel
           : 'clinical-layout deepdose-shell seco-shell--light'
       }
     >
-      {isDark ? <DarkAmbientBackground /> : null}
+      <AmbientBackground tone={isDark ? 'dark' : 'light'} />
       {showDefaultNav ? <DeepDoseSiteNav /> : nav}
       <div className="clinical-site-nav__main flex min-h-0 flex-1 flex-col">{children}</div>
     </div>

@@ -7,6 +7,7 @@ import { AppTopBarBack } from '@/components/deepdose/AppTopBar'
 import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
 import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
+import { connectChatHref } from '@/lib/chat/connect-demo-peers'
 import { DEEPDOSE_COMMUNITY_MATCHES } from '@/lib/deepdose-marketing/community-content'
 import { communityFaceUrl } from '@/lib/deepdose-marketing/community-faces'
 import { createClient } from '@/lib/supabase/server'
@@ -35,7 +36,7 @@ export default async function ConnectMatchProfilePage({ params }: PageProps) {
   const {
     data: { user },
   } = await supabase.auth.getUser()
-  const messageHref = user ? '/chat' : '/?next=/chat'
+  const messageHref = connectChatHref(match.id, Boolean(user))
 
   return (
     <ProductAppShell

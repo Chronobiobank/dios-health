@@ -1,6 +1,6 @@
 /**
- * Dark-shell ambient canvas — slow navy / sunset drift behind glass tiles.
- * Scoped to .deepdose-shell.seco-shell--dark only.
+ * Ambient canvas — soft blurred orbs drifting behind every page.
+ * Light (pastel) is default; dark navy/sunset kept for rare legacy shells.
  */
 
 .deepdose-shell.seco-shell--dark {
@@ -10,12 +10,27 @@
   background: transparent;
 }
 
+.deepdose-shell.seco-shell--light {
+  position: relative;
+  background: transparent;
+}
+
 body:has(.deepdose-shell.seco-shell--dark),
 body:has([data-clinical-layout].seco-shell--dark) {
   background-color: #060a12;
 }
 
-[data-clinical-layout].seco-shell--dark {
+body:has(.deepdose-shell.seco-shell--light),
+body:has([data-clinical-layout].seco-shell--light),
+body:has(.seco-splash--ambient),
+html.splash-route:has(.seco-splash--ambient),
+html.splash-route:has(.seco-splash--ambient) body,
+body:has(.dd-product):not(:has(.seco-splash)) {
+  background-color: #f7f7f5;
+}
+
+[data-clinical-layout].seco-shell--dark,
+[data-clinical-layout].seco-shell--light {
   background-color: transparent;
 }
 
@@ -27,6 +42,10 @@ body:has([data-clinical-layout].seco-shell--dark) {
   pointer-events: none;
   overflow: hidden;
   background: #060a12;
+}
+
+.deepdose-ambient--light {
+  background: #f7f7f5;
 }
 
 .deepdose-ambient__orb {
@@ -115,6 +134,60 @@ body:has([data-clinical-layout].seco-shell--dark) {
   opacity: 0.85;
 }
 
+/* Soft pastel orbs — blush / lilac / sky / mint on cream */
+.deepdose-ambient--light .deepdose-ambient__orb--navy {
+  background: radial-gradient(
+    circle at 38% 42%,
+    rgb(255 198 158 / 0.62) 0%,
+    rgb(244 163 198 / 0.32) 40%,
+    transparent 70%
+  );
+  opacity: 0.9;
+}
+
+.deepdose-ambient--light .deepdose-ambient__orb--sunset {
+  background: radial-gradient(
+    circle at 55% 45%,
+    rgb(186 168 230 / 0.58) 0%,
+    rgb(232 176 214 / 0.34) 36%,
+    rgb(168 198 235 / 0.16) 58%,
+    transparent 74%
+  );
+  opacity: 0.95;
+}
+
+.deepdose-ambient--light .deepdose-ambient__orb--twilight {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgb(168 198 235 / 0.55) 0%,
+    rgb(186 168 230 / 0.28) 45%,
+    transparent 72%
+  );
+  opacity: 0.88;
+}
+
+.deepdose-ambient--light .deepdose-ambient__orb--ember {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgb(152 214 198 / 0.5) 0%,
+    rgb(255 198 158 / 0.22) 48%,
+    transparent 70%
+  );
+  opacity: 0.85;
+}
+
+.deepdose-ambient--light .deepdose-ambient__veil {
+  background:
+    linear-gradient(
+      180deg,
+      rgb(247 247 245 / 0.35) 0%,
+      transparent 24%,
+      transparent 76%,
+      rgb(247 247 245 / 0.4) 100%
+    );
+  opacity: 1;
+}
+
 @keyframes deepdose-ambient-drift {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -140,10 +213,14 @@ body:has([data-clinical-layout].seco-shell--dark) {
 }
 
 /* ── Content stack above ambient ── */
-.deepdose-shell.seco-shell--dark .clinical-site-nav {
+.deepdose-shell.seco-shell--dark .clinical-site-nav,
+.deepdose-shell.seco-shell--light .clinical-site-nav {
   position: sticky;
   top: 0;
   z-index: 50;
+}
+
+.deepdose-shell.seco-shell--dark .clinical-site-nav {
   background: var(--seco-chrome-frost-bg);
   backdrop-filter: var(--seco-chrome-frost-blur);
   -webkit-backdrop-filter: var(--seco-chrome-frost-blur);
@@ -151,7 +228,8 @@ body:has([data-clinical-layout].seco-shell--dark) {
   box-shadow: none;
 }
 
-.deepdose-shell.seco-shell--dark .clinical-site-nav__main {
+.deepdose-shell.seco-shell--dark .clinical-site-nav__main,
+.deepdose-shell.seco-shell--light .clinical-site-nav__main {
   position: relative;
   z-index: 1;
   background: transparent;
@@ -240,7 +318,13 @@ body:has([data-clinical-layout].seco-shell--dark) {
 
 /* Let the ambient canvas show through page areas */
 .deepdose-shell.seco-shell--dark .seco-page,
-.deepdose-shell.seco-shell--dark .seco-app-page {
+.deepdose-shell.seco-shell--dark .seco-app-page,
+.deepdose-shell.seco-shell--light .seco-page,
+.deepdose-shell.seco-shell--light .seco-app-page,
+.deepdose-shell.seco-shell--light .dd-product,
+.seco-splash--ambient .seco-splash__page,
+.seco-splash--ambient .seco-splash__main,
+.seco-splash--ambient .dd-gate {
   background: transparent;
   background-image: none;
 }
@@ -315,7 +399,27 @@ body:has([data-clinical-layout].seco-shell--dark) {
 .deepdose-shell.seco-shell--dark .seco-mission,
 .deepdose-shell.seco-shell--dark .seco-chronobiobank,
 .deepdose-shell.seco-shell--dark .seco-splash,
-.deepdose-shell.seco-shell--dark .seco-splash__page {
+.deepdose-shell.seco-shell--dark .seco-splash__page,
+.deepdose-shell.seco-shell--light,
+.deepdose-shell.seco-shell--light .clinical-layout,
+.deepdose-shell.seco-shell--light .clinical-site-nav__main,
+.deepdose-shell.seco-shell--light .seco-landing,
+.deepdose-shell.seco-shell--light .seco-landing--maven,
+.deepdose-shell.seco-shell--light .seco-landing__hero,
+.deepdose-shell.seco-shell--light .seco-landing__light,
+.deepdose-shell.seco-shell--light .seco-landing__light--canvas,
+.deepdose-shell.seco-shell--light .seco-landing__close-navy,
+.deepdose-shell.seco-shell--light .seco-evidence-band,
+.deepdose-shell.seco-shell--light .seco-page,
+.deepdose-shell.seco-shell--light .seco-app-page,
+.deepdose-shell.seco-shell--light .seco-mission,
+.deepdose-shell.seco-shell--light .seco-chronobiobank,
+.deepdose-shell.seco-shell--light .seco-splash,
+.deepdose-shell.seco-shell--light .seco-splash__page,
+.deepdose-shell.seco-shell--light .dd-product,
+.seco-splash--ambient,
+.seco-splash--ambient .seco-splash__main,
+.seco-splash--ambient .seco-splash__page {
   background: transparent;
   background-image: none;
 }

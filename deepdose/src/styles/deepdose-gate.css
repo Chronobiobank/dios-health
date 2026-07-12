@@ -1,7 +1,7 @@
 /**
- * Home gate — OpenAI.com light system.
- * White canvas, near-black type, Inter, soft inputs, solid black CTA.
- * No spectrum gradients, no dark glass, no serif display.
+ * Home gate — OpenAI.com light system over ambient pastel orbs.
+ * Near-black type, Inter, soft inputs, solid black CTA.
+ * Gate surface is transparent so the orb canvas shows through.
  */
 
 .dd-gate {
@@ -26,7 +26,7 @@
   padding: 0;
   color: var(--dd-gate-text);
   gap: 0;
-  background: var(--dd-gate-surface);
+  background: transparent;
   container-type: inline-size;
   container-name: dd-gate;
 }
@@ -130,11 +130,20 @@
 
 .dd-gate__headline {
   width: 100%;
-  /* Flush with med pill left edge */
-  text-align: left;
+  text-align: center;
   margin: 0;
-  /* Space above the med pills */
-  margin-bottom: clamp(2.75rem, 6vh, 3.75rem);
+  margin-bottom: clamp(1.75rem, 4vh, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2.5vh, 1.5rem);
+}
+
+.dd-gate__headline .home-face-net {
+  width: min(100%, 15rem);
+  max-width: min(100%, 34vh);
+  margin-inline: auto;
+  flex: none;
 }
 
 .dd-gate__headline .seco-landing__hero-head {
@@ -224,7 +233,7 @@
 .dd-gate__lede {
   width: 100%;
   max-width: 28rem;
-  margin: 0.85rem auto 0;
+  margin: 0 auto;
   padding: 0 0.25rem;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: clamp(0.95rem, 0.88rem + 0.35vw, 1.0625rem);
@@ -249,10 +258,12 @@
 .dd-gate__baseline .dd-gate__cta,
 .dd-gate__ctas .dd-gate__cta {
   box-sizing: border-box;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: var(--dd-gate-pill-h);
   min-height: var(--dd-gate-pill-h);
   margin: 0;
@@ -266,12 +277,13 @@
   text-align: center;
   text-decoration: none !important;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
+/* Keep both pills the same outer size (secondary has a border). */
 .dd-gate__baseline .dd-gate__cta--primary,
 .dd-gate__ctas .dd-gate__cta--primary {
-  border: 0;
+  border: 1.5px solid #0d0d0d;
   background: #0d0d0d !important;
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
@@ -617,34 +629,58 @@
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  background: #fff;
+  background: transparent;
 }
 
 html.splash-route .seco-splash__main:has(.dd-gate) {
   overflow: hidden;
-  background: #fff;
+  background: transparent;
 }
 
 html.splash-route .seco-splash__page:has(.dd-gate) {
   overflow-y: auto;
 }
 
-/* Light splash shell overrides dark body from legacy marketing */
+/* Light splash shell — cream under ambient (orbs paint the motion) */
 .seco-splash--oai,
 body:has(.seco-splash--oai),
 html.splash-route:has(.seco-splash--oai),
 html.splash-route:has(.seco-splash--oai) body {
-  background: #fff !important;
-  background-color: #fff !important;
+  background: #f7f7f5 !important;
+  background-color: #f7f7f5 !important;
   color: #0d0d0d;
 }
 
 .deepdose-shell.seco-shell--light.seco-splash--oai {
-  background: #fff;
+  background: transparent;
   min-height: 100dvh;
 }
 
-/* First-light video — keep canvas white-washed so dark gate type stays crisp */
+/* Ambient splash — pages transparent; cream lives on the orb layer */
+.seco-splash--ambient,
+.seco-splash--ambient.deepdose-shell.seco-shell--light.seco-splash--oai {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body:has(.seco-splash--ambient),
+html.splash-route:has(.seco-splash--ambient),
+html.splash-route:has(.seco-splash--ambient) body {
+  background: #f7f7f5 !important;
+  background-color: #f7f7f5 !important;
+}
+
+.seco-splash--ambient .seco-splash__main,
+.seco-splash--ambient .seco-splash__page:has(.dd-gate),
+html.splash-route .seco-splash--ambient .seco-splash__main:has(.dd-gate) {
+  background: transparent !important;
+}
+
+.seco-splash--ambient .dd-gate {
+  background: transparent;
+}
+
+/* First-light video (legacy) — keep canvas white-washed so dark gate type stays crisp */
 .seco-splash--video-light,
 .seco-splash--video-light.deepdose-shell.seco-shell--light.seco-splash--oai,
 body:has(.seco-splash--video-light),

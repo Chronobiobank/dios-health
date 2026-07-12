@@ -6,13 +6,14 @@ import {
   type CommunityMatch,
 } from '@/lib/deepdose-marketing/community-content'
 import { communityFaceUrl } from '@/lib/deepdose-marketing/community-faces'
+import { connectChatHref } from '@/lib/chat/connect-demo-peers'
 import { cn } from '@/lib/utils/cn'
 
 type CommunityMatchesPanelProps = {
   /** discovery = Sniffies-lean connect; marketing = glass tile; app = member cards */
   variant?: 'marketing' | 'app' | 'discovery'
-  /** Soft gate: /chat when signed in, /?next=/chat when guest */
-  messageHref?: string
+  /** When true, Chat opens/creates a real DM; guests soft-gate via /?next=… */
+  signedIn?: boolean
 }
 
 function profileHref(matchId: string): string {
@@ -23,13 +24,15 @@ function MatchCard({
   match,
   index,
   variant,
-  messageHref,
+  signedIn,
 }: {
   match: CommunityMatch
   index: number
   variant: 'marketing' | 'app' | 'discovery'
-  messageHref: string
+  signedIn: boolean
 }) {
+  const messageHref = connectChatHref(match.id, signedIn)
+
   if (variant === 'discovery') {
     return (
       <article className="dd-connect__tile">
@@ -108,7 +111,7 @@ function MatchCard({
 
 export function CommunityMatchesPanel({
   variant = 'app',
-  messageHref = '/?next=/chat',
+  signedIn = false,
 }: CommunityMatchesPanelProps) {
   const copy = MEMBER_DASHBOARD_COMMUNITY.matches
 
@@ -123,7 +126,7 @@ export function CommunityMatchesPanel({
               match={match}
               index={index}
               variant="discovery"
-              messageHref={messageHref}
+              signedIn={signedIn}
             />
           ))}
         </section>
@@ -144,7 +147,7 @@ export function CommunityMatchesPanel({
               match={match}
               index={index}
               variant="marketing"
-              messageHref={messageHref}
+              signedIn={signedIn}
             />
           ))}
         </div>
@@ -170,7 +173,7 @@ export function CommunityMatchesPanel({
             match={match}
             index={index}
             variant="app"
-            messageHref={messageHref}
+            signedIn={signedIn}
           />
         ))}
       </div>

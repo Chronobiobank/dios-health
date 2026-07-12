@@ -31,7 +31,7 @@ export default function SriScoreRing({ score }: SriScoreRingProps) {
         viewBox={`0 0 ${SIZE} ${SIZE}`}
         className="sri-score-ring__svg"
         role="img"
-        aria-label={`Sleep score ${clamped} out of 100`}
+        aria-label={`Phenotype score ${clamped} out of 100`}
       >
         <circle
           cx={CX}

@@ -21,7 +21,7 @@ export const DEEPDOSE_FOOTER_LINKS = [
   { label: 'Share', href: '/grid' },
   { label: 'Dose', href: '/dose' },
   { label: 'Sync', href: '/connect' },
-  { label: 'Score', href: '/bank' },
+  { label: 'Profile', href: '/bank' },
   { label: 'Me', href: '/profile' },
   { label: 'Terms', href: '/terms' },
 ] as const

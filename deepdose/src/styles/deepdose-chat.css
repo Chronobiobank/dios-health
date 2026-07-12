@@ -258,7 +258,7 @@
   border-top: 1px solid var(--dd-border, rgb(15 23 42 / 0.1));
   position: sticky;
   bottom: 0;
-  background: linear-gradient(180deg, transparent, #f7f7f5 28%);
+  background: linear-gradient(180deg, transparent, rgb(247 247 245 / 0.88) 28%);
 }
 
 .dd-chat__input {

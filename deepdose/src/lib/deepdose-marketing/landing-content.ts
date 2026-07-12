@@ -111,12 +111,12 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       body: 'Phenotype profile',
       icon: 'plan' as const,
       panelTitle: 'Your score',
-      panelSeeAll: { label: 'Open Score', href: '/bank' },
+      panelSeeAll: { label: 'Open Profile', href: '/bank' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
           title: 'Score is your chemical phenotype profile — stability, energy pattern, social window — not a diagnosis.',
-          meta: 'Score · Phenotype',
+          meta: 'Profile · Phenotype',
           href: '/bank',
         },
         {
