@@ -26,6 +26,20 @@
   z-index: 0;
 }
 
+.seco-marketing-scene-tile__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  filter: grayscale(1);
+  transition: opacity 0.45s ease;
+}
+
+.seco-marketing-scene-tile__video.is-ready {
+  opacity: 1;
+}
+
 .seco-marketing-scene-tile__scrim {
   position: absolute;
   inset: 0;

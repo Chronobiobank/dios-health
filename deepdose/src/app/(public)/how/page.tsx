@@ -28,6 +28,7 @@ export default function HowItWorksPage() {
         <MarketingSceneTile
           image={HOW_IT_WORKS_SCENE.image}
           objectPosition={HOW_IT_WORKS_SCENE.objectPosition}
+          scrim={false}
         >
           <HowLoopDiagram />
         </MarketingSceneTile>
@@ -81,27 +82,18 @@ export default function HowItWorksPage() {
             <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_FOUNDING.title}</span>
           </h2>
           <p className="seco-page__lede">{HOW_IT_WORKS_FOUNDING.body}</p>
+          <div className={marketingCtaClass('seco-how-page__cta')}>
+            {HOW_IT_WORKS_CTAS.map((cta) => (
+              <Link
+                key={cta.href + cta.label}
+                href={cta.href}
+                className="seco-landing__btn seco-landing__btn--ghost"
+              >
+                {cta.label}
+              </Link>
+            ))}
+          </div>
         </section>
-
-        <div
-          className={marketingCtaClass(
-            'seco-science__cta seco-chronobiobank__cta seco-how-page__cta seco-reveal seco-reveal--4'
-          )}
-        >
-          {HOW_IT_WORKS_CTAS.map((cta, i) => (
-            <Link
-              key={cta.href + cta.label}
-              href={cta.href}
-              className={
-                i === 0
-                  ? 'seco-landing__btn seco-landing__btn--primary'
-                  : 'seco-landing__btn seco-landing__btn--ghost'
-              }
-            >
-              {cta.label} →
-            </Link>
-          ))}
-        </div>
       </div>
     </article>
   )

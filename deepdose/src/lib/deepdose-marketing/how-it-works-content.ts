@@ -16,11 +16,13 @@ export const HOW_IT_WORKS_INTRO = {
   title: 'Make chemistry work',
 } as const
 
-/** Scene tile behind the How loop — local male torso still. */
+/** Scene tile behind the How loop — color torso video. */
 export const HOW_IT_WORKS_SCENE = {
   image: {
-    src: '/male-torso.webp',
-    alt: 'Male torso in soft light — chemistry that connects',
+    type: 'video' as const,
+    src: '/color-torso.mp4',
+    alt: 'Color torso in soft light — chemistry that connects',
+    playbackRate: 0.35,
   },
   objectPosition: 'center 28%',
 } as const
@@ -141,10 +143,9 @@ export const HOW_IT_WORKS_STORY = [
   },
 ] as const
 
-/** Dual conversion — members + sleep-test seekers. */
+/** Manjam cohort — clear sign-in into Deepdose. */
 export const HOW_IT_WORKS_CTAS = [
-  { label: 'Find Your Sync', href: '/connect' },
-  { label: 'Get a Homekit', href: '/testkit' },
+  { label: 'Manjam member sign in', href: '/login' },
 ] as const
 
 export const HOW_IT_WORKS_CTA = HOW_IT_WORKS_CTAS[0]
