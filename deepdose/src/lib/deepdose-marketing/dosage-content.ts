@@ -44,33 +44,27 @@ export const MATCHES_PAGE_META = {
 } as const
 
 export const CONNECT_PAGE = {
-  eyebrow: 'Sync',
-  titleBefore: 'On your',
-  titleHighlight: 'tribe',
-  support: 'People on your chemistry. See their doses. Message when it feels right.',
-  cta: { label: 'Open chat', href: '/chat' },
-  secondary: { label: 'See my profile', href: '/profile' },
+  /** Guest page head — hidden when member AppTopBar owns “Sync”. */
+  title: 'Deepdose in Action',
   /**
-   * Hub actions — bodies = 33 chars so the three tiles read even.
+   * Guest hub — how + join only (matches unlock after signup).
+   * Titles = 12 chars (1 line). Bodies = two lines × 14 chars — even wrap.
+   * CTAs = 7 chars.
    */
   hub: [
     {
       id: 'how',
-      title: 'See how Deepdose works',
-      body: 'Phenotype to tribe in four steps.',
+      title: 'How it works',
+      body: ['Your phenotype', 'in four steps.'] as const,
       href: '/how',
-    },
-    {
-      id: 'awake',
-      title: 'Find people awake now',
-      body: 'See who is online in your window.',
-      href: '/matches',
+      cta: 'See how',
     },
     {
       id: 'join',
-      title: 'Claim free membership',
-      body: 'Two meds, then open your profile.',
+      title: 'Free to join',
+      body: ['Screen yourself', 'in a few secs.'] as const,
       href: '/founders/join',
+      cta: 'Sign up',
     },
   ],
 } as const

@@ -43,12 +43,11 @@ export const DEEPDOSE_HOME_DEFAULT_MED_CODES = ['metformin', 'ramipril'] as cons
 /** Med search copy · post-join / account flows (no longer homepage hero). */
 export const DEEPDOSE_HOME_POLY_SEARCH = {
   checkCta: 'Find Your Sync',
-  expandCta: '+ Add medication',
-  expandCtaAnother: '+ Add medication',
-  medPlaceholders: ['Find your med', 'Add another'],
+  expandCta: '+ add another med/supp',
+  expandCtaAnother: '+ add another med/supp',
+  medPlaceholders: ['1st med/supp', '2nd med/supp'],
   medPlaceholderExtra: 'Search another medication',
 } as const
-
 /** Site-wide mission · four stages (story lives on /how). */
 export const DEEPDOSE_MISSION = {
   eyebrow: 'Four stages',

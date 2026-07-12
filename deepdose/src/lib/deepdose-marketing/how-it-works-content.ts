@@ -144,7 +144,7 @@ export const HOW_IT_WORKS_STORY = [
 
 /** Manjam cohort — land on founders pitch. */
 export const HOW_IT_WORKS_CTAS = [
-  { label: 'Manjam member sign in', href: '/founders' },
+  { label: 'Deepdose in Action', href: '/connect' },
 ] as const
 
 export const HOW_IT_WORKS_CTA = HOW_IT_WORKS_CTAS[0]

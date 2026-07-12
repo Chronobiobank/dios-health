@@ -14,49 +14,50 @@ export const FOUNDERS_INTRO = {
 } as const
 
 export const FOUNDERS_PRIMARY_CTA = {
-  label: 'Reconnect Now',
-  href: '/founders/join',
+  label: 'Deepdose in Action',
+  href: '/connect',
 } as const
 
 export const FOUNDERS_JOIN_META = {
   title: `Join · Founders · ${DEEPDOSE_NAME}`,
   description:
-    'Claim free lifetime founder access — email, password, and two meds to baseline your profile.',
+    'Enter your meds, create a free account, and open your phenotype profile.',
 } as const
 
 export const FOUNDERS_JOIN = {
-  title: 'Claim free lifetime access',
-  lede: 'Two meds set your chemistry baseline. Then your profile.',
-  medsLabel: 'Your baseline',
-  authLabel: 'Create your account',
-  submitLabel: 'Claim free lifetime access',
+  medTitle: 'Let our AI map your phenotype in seconds',
+  submitLabel: 'Create free account',
 } as const
 
 /**
- * Founder perks — 2×2 tiles.
- * Titles = 15 chars; bodies = 60 chars so the four tiles read even.
+ * Founder perks — 2×2 spectrum tiles.
+ * Short stake titles + one informative body; cue = border/wash only.
  */
 export const FOUNDERS_PERKS = {
   items: [
     {
       id: 'lifetime',
-      title: 'Lifetime access',
-      body: 'Core features stay free for life — no paywall on the basics.',
+      title: 'Free for life',
+      body: 'Core features stay free — no paywall on the basics.',
+      cue: '#acd3de',
     },
     {
       id: 'priority',
-      title: 'Priority access',
+      title: 'First in line',
       body: 'New product drops hit founders first — before the open list.',
+      cue: '#c9b6f2',
     },
     {
       id: 'homekit',
-      title: 'Homekit pricing',
+      title: 'Founder Homekit',
       body: 'Founder rates on your first Homekit and every re-read after.',
+      cue: '#f2b8a2',
     },
     {
       id: 'channel',
-      title: 'Founder channel',
-      body: 'Private founder chat — early say on what we build next here.',
+      title: 'Private channel',
+      body: 'Private founder chat — early say on what we build next.',
+      cue: '#8b9cf8',
     },
   ],
 } as const

@@ -1,0 +1,72 @@
+/**
+ * /founders/join — layout only. Tile/pill gaps come from:
+ * - .seco-spectrum-tiles (between tiles)
+ * - .seco-spectrum-tile__body (title → content)
+ * - .home-drug-search__med-stack / .dd-gate__baseline (med pills)
+ * - .dd-gate__form (auth pills)
+ */
+
+.dd-join.seco-how-page .seco-how-page__inner {
+  justify-content: flex-start;
+  padding-top: 0;
+}
+
+.dd-join__stack {
+  width: 100%;
+  max-width: 36rem;
+  margin-inline: auto;
+  grid-template-columns: 1fr;
+}
+
+.dd-join__stack.dd-gate {
+  --dd-gate-pill-h: 3rem;
+  --dd-gate-input-bg: #fff;
+  --dd-gate-input-border: rgb(13 13 13 / 0.14);
+  --dd-gate-shadow: 0 1px 2px rgb(13 13 13 / 0.04);
+  max-width: 36rem;
+  min-height: 0;
+}
+
+.dd-join__meds,
+.dd-join__auth {
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+}
+
+.deepdose-shell.seco-shell--light .dd-join__meds h2.seco-spectrum-tile__title,
+.dd-join__meds h2.seco-spectrum-tile__title {
+  text-align: center;
+  font-weight: var(--dd-fw-semibold, 600);
+  color: rgb(15 23 42 / 0.92);
+}
+
+.dd-join__meds.dd-gate__baseline {
+  margin: 0;
+  max-width: none;
+}
+
+.dd-join__meds .seco-spectrum-tile__body {
+  flex: none;
+  max-width: none;
+  color: inherit;
+}
+
+.dd-join__auth .dd-gate__input,
+.dd-join__auth .dd-gate__input::placeholder,
+.dd-join__auth .dd-gate__field-icon {
+  color: rgb(15 23 42 / 0.55);
+  -webkit-text-fill-color: rgb(15 23 42 / 0.55);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+.dd-join__auth .dd-gate__input {
+  background: #fff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.dd-join .dd-gate__signup {
+  width: 100%;
+}

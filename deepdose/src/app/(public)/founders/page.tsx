@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -32,11 +33,13 @@ export default function FoundersPage() {
           aria-label="Founder perks"
         >
           {FOUNDERS_PERKS.items.map((perk) => (
-            <li key={perk.id}>
-              <div className="seco-how-page__story-tile">
-                <p className="seco-how-page__story-label">{perk.title}</p>
-                <p className="seco-how-page__story-body">{perk.body}</p>
-              </div>
+            <li
+              key={perk.id}
+              className="seco-spectrum-tile"
+              style={{ '--cue': perk.cue } as CSSProperties}
+            >
+              <p className="seco-spectrum-tile__title">{perk.title}</p>
+              <p className="seco-spectrum-tile__body">{perk.body}</p>
             </li>
           ))}
         </ul>

@@ -45,6 +45,10 @@
   text-align: center;
 }
 
+.seco-how-page__why .seco-page__title + .seco-page__lede {
+  margin-top: 1.15rem;
+}
+
 /* Pain → what we do → why care */
 .seco-how-page__story {
   box-sizing: border-box;
@@ -114,7 +118,7 @@ a.seco-how-page__story-tile--link:focus-visible {
   display: flex;
 }
 
-/* Founders perks — 2×2 (override default 3-up story grid) */
+/* Founders perks — 2×2 spectrum tiles (override default 3-up story grid) */
 .seco-how-page__perks.seco-how-page__story {
   grid-template-columns: 1fr;
 }
@@ -123,6 +127,23 @@ a.seco-how-page__story-tile--link:focus-visible {
   .seco-how-page__perks.seco-how-page__story {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+.seco-how-page__perks > .seco-spectrum-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.seco-how-page__perks .seco-spectrum-tile__title,
+.seco-how-page__perks .seco-spectrum-tile__body {
+  margin: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .seco-how-page__story-cta {

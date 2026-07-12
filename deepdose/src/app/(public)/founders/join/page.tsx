@@ -9,14 +9,12 @@ export const metadata: Metadata = {
   alternates: { canonical: '/founders/join' },
 }
 
-/** Manjam founders — email, password, two meds → profile. */
+/** Manjam founders — med baseline + email/password → profile. */
 export default function FoundersJoinPage() {
   return (
-    <article className="seco-page seco-marketing-page seco-auth-page">
-      <div className="seco-landing__section-inner seco-auth-page__inner">
-        <div className="seco-app-card seco-auth-card p-5 md:p-6">
-          <FounderJoinForm />
-        </div>
+    <article className="seco-page seco-mission seco-marketing-page seco-how-page dd-join">
+      <div className="seco-landing__section-inner seco-how-page__inner">
+        <FounderJoinForm />
       </div>
     </article>
   )

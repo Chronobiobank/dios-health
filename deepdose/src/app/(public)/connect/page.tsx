@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { ConnectHubTiles } from '@/components/deepdose/ConnectHubTiles'
 import { ProductAppShell } from '@/components/deepdose/ProductAppShell'
+import { ScrollToTopOnMount } from '@/components/deepdose/ScrollToTopOnMount'
 import { CONNECT_PAGE_META } from '@/lib/deepdose-marketing/dosage-content'
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function ConnectPage() {
   return (
     <ProductAppShell title="Sync" className="dd-connect">
+      <ScrollToTopOnMount />
       <ConnectHubTiles />
     </ProductAppShell>
   )

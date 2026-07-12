@@ -309,6 +309,8 @@
 }
 
 .dd-gate__baseline {
+  --dd-pill-ink: rgb(15 23 42 / 0.55);
+  --dd-pill-type: 0.8125rem;
   width: 100%;
   max-width: none;
   margin: 0;
@@ -336,55 +338,82 @@
   gap: var(--space-3, 0.75rem);
 }
 
-/* Light gate overrides — med search was styled for dark splash video. */
+/* Light gate — one grey for all pill text */
 .dd-gate__baseline .home-drug-search__take {
-  border-left-color: rgb(13 13 13 / 0.12);
+  border-left-color: rgb(15 23 42 / 0.12);
 }
 
-.dd-gate__baseline .home-drug-search__take-label {
-  color: rgb(13 13 13 / 0.45);
+.dd-gate__baseline .home-drug-search__anchor-name,
+.dd-gate__baseline .home-drug-search__take-label,
+.dd-gate__baseline .home-drug-search__clear,
+.dd-gate__baseline .home-drug-search__expand-link,
+.dd-gate__baseline .med-search__icon,
+.dd-gate__baseline .med-search__input,
+.dd-gate__baseline .med-search__input::placeholder,
+.dd-gate__baseline .home-drug-search__take-input .time-input-24__select,
+.dd-gate__baseline .home-drug-search__take-input select.dios-input,
+.dd-gate__baseline .home-drug-search__take-input .time-input-24__sep {
+  color: var(--dd-pill-ink);
+  -webkit-text-fill-color: var(--dd-pill-ink);
+  font-size: var(--dd-pill-type);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: none;
 }
 
 .dd-gate__baseline .home-drug-search__take-input .time-input-24__select,
 .dd-gate__baseline .home-drug-search__take-input select.dios-input {
-  background: rgb(13 13 13 / 0.04);
-  color: #0d0d0d;
+  background: rgb(15 23 42 / 0.04);
 }
 
 .dd-gate__baseline .home-drug-search__take-input .time-input-24__select:focus {
-  background: rgb(13 13 13 / 0.06);
-  box-shadow: 0 0 0 2px rgb(13 13 13 / 0.12);
+  background: rgb(15 23 42 / 0.06);
+  box-shadow: 0 0 0 2px rgb(15 23 42 / 0.12);
 }
 
 .dd-gate__baseline .home-drug-search__take-input .time-input-24__select option {
   background: #fff;
-  color: #0d0d0d;
-}
-
-.dd-gate__baseline .home-drug-search__take-input .time-input-24__sep {
-  color: rgb(13 13 13 / 0.4);
-}
-
-.dd-gate__baseline .home-drug-search__expand-link {
-  color: rgb(13 13 13 / 0.55);
+  color: rgb(15 23 42 / 0.92);
+  -webkit-text-fill-color: rgb(15 23 42 / 0.92);
 }
 
 .dd-gate__baseline .home-drug-search__expand-link:hover {
-  color: #0d0d0d;
+  color: rgb(15 23 42 / 0.72);
+  -webkit-text-fill-color: rgb(15 23 42 / 0.72);
 }
 
 .dd-gate__baseline .home-drug-search__expand-link:focus-visible {
-  outline-color: rgb(13 13 13 / 0.55);
-}
-
-.dd-gate__baseline .home-drug-search__clear {
-  color: rgb(13 13 13 / 0.45);
+  outline-color: var(--dd-pill-ink);
 }
 
 .dd-gate__baseline .med-search--hero .med-search__bar {
   border: 1px solid var(--dd-gate-input-border, rgb(13 13 13 / 0.14));
   background: var(--dd-gate-input-bg, #fff);
   box-shadow: none;
+  gap: 0.35rem;
+  padding-inline: 0.7rem 0.65rem;
+}
+
+.dd-gate__baseline .med-search__icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.dd-gate__baseline .med-search__icon svg {
+  display: block;
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.dd-gate__baseline .home-drug-search__take {
+  gap: 0.35rem;
+  margin-left: 0;
+  padding-left: 0.5rem;
+}
+
+.dd-gate__baseline .home-drug-search__take-input .time-input-24__select,
+.dd-gate__baseline .home-drug-search__take-input select.dios-input {
+  min-width: 2.1rem;
 }
 
 .dd-gate__baseline .home-drug-search__join {

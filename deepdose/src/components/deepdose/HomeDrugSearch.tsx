@@ -21,9 +21,12 @@ import { resolveHomePlanRows } from '@/lib/patient/home-plan-rows'
 import { savePlanDraft } from '@/lib/patient/plan-draft'
 import { TimeInput } from '@/components/ui/Form'
 
-/** Home splash: two meds only. More meds after join on account. */
+/** Start with two meds; users can add more via expand link. */
 const HOME_MED_ROWS = 2
+const HOME_MED_ROWS_MAX = 8
 const DEFAULT_TAKE_TIMES = ['07:30', '08:00'] as const
+const DEFAULT_WAKE = '07:30'
+const DEFAULT_SLEEP = '23:30'
 
 function medPlaceholder(index: number): string {
   return (
@@ -65,6 +68,8 @@ export function HomeDrugSearch({
   onPlanChange,
 }: HomeDrugSearchProps = {}) {
   const [rows, setRows] = useState<MedRow[]>(() => emptyRows(HOME_MED_ROWS))
+  const [wakeTime, setWakeTime] = useState(DEFAULT_WAKE)
+  const [sleepTime, setSleepTime] = useState(DEFAULT_SLEEP)
   const [activeAc, setActiveAc] = useState<number | null>(null)
   const inputRefs = useRef<Array<HTMLInputElement | null>>([])
 
@@ -75,20 +80,36 @@ export function HomeDrugSearch({
           selectedCode: row.selected?.code ?? null,
           takeTime: row.takeTime,
         })),
-        HOME_MED_ROWS,
+        rows.length,
         DEEPDOSE_HOME_DEFAULT_MED_CODES
       ),
     [rows]
   )
+
+  function addMedRow() {
+    if (rows.length >= HOME_MED_ROWS_MAX) return
+    const nextIndex = rows.length
+    setRows((prev) => [
+      ...prev,
+      {
+        query: '',
+        selected: null,
+        takeTime: DEFAULT_TAKE_TIMES[nextIndex] ?? '08:00',
+      },
+    ])
+    requestAnimationFrame(() => {
+      inputRefs.current[nextIndex]?.focus()
+    })
+  }
 
   const planSnapshot = useMemo(() => {
     const { medCodes, medTimes } = resolvedPlan
     return {
       medCodes,
       medTimes,
-      wake: earliestTakeTime(medTimes),
+      wake: wakeTime || earliestTakeTime(medTimes),
     }
-  }, [resolvedPlan])
+  }, [resolvedPlan, wakeTime])
 
   useEffect(() => {
     onPlanChange?.(planSnapshot)
@@ -139,6 +160,29 @@ export function HomeDrugSearch({
 
   function handleFixTiming() {
     savePlanDraft(planSnapshot)
+  }
+
+  function renderAnchorRow(
+    label: 'When you wake' | 'When you sleep',
+    value: string,
+    onChange: (next: string) => void
+  ) {
+    return (
+      <div className="med-search med-search--hero home-drug-search__row home-drug-search__anchor">
+        <div className="med-search__bar home-drug-search__bar">
+          <span className="home-drug-search__anchor-name">{label}</span>
+          <div className="home-drug-search__take">
+            <span className="home-drug-search__take-label">Take</span>
+            <TimeInput
+              value={value}
+              onChange={(event) => onChange(event.target.value)}
+              className="home-drug-search__take-input"
+              aria-label={label}
+            />
+          </div>
+        </div>
+      </div>
+    )
   }
 
   function renderSearchRow(row: MedRow, index: number) {
@@ -237,11 +281,29 @@ export function HomeDrugSearch({
     )
   }
 
+  const canAddMed = rows.length < HOME_MED_ROWS_MAX
+
   return (
     <div className="home-drug-search home-drug-search--poly">
       <div className="home-drug-search__med-stack">
+        {renderAnchorRow('When you wake', wakeTime, setWakeTime)}
+        {renderAnchorRow('When you sleep', sleepTime, setSleepTime)}
         {rows.map((row, index) => renderSearchRow(row, index))}
       </div>
+
+      {canAddMed ? (
+        <div className="home-drug-search__expand-row">
+          <button
+            type="button"
+            className="home-drug-search__expand-link"
+            onClick={addMedRow}
+          >
+            {rows.length > HOME_MED_ROWS
+              ? DEEPDOSE_HOME_POLY_SEARCH.expandCtaAnother
+              : DEEPDOSE_HOME_POLY_SEARCH.expandCta}
+          </button>
+        </div>
+      ) : null}
 
       {showCta ? (
         <div className="home-drug-search__join">
