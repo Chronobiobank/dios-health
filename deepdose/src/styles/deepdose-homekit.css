@@ -1,11 +1,11 @@
 /**
- * Homekit (/testkit, /tiptraq) + membership (/membership)
- * Light glass system — kills legacy navy / white-on-dark marketing rules.
+ * Homekit (/testkit, /tiptraq) + membership (/membership · /pricing)
+ * Light glass system — OpenAI pad/stack; black/grey/white ink only.
  */
 
 .seco-homekit.seco-marketing-page .seco-landing__section-inner,
 .seco-pricing.seco-marketing-page .seco-landing__section-inner {
-  gap: var(--mkt-section-gap, 1.5rem);
+  gap: var(--oai-stack, var(--mkt-section-gap, 1.5rem));
 }
 
 .seco-homekit__intro,
@@ -13,7 +13,8 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 40rem;
+  max-width: none;
+  width: 100%;
 }
 
 .seco-homekit__intro .seco-page__title,
@@ -23,8 +24,7 @@
   margin: 0;
 }
 
-.seco-homekit__intro .seco-page__lede,
-.seco-pricing__intro .seco-page__lede {
+.seco-homekit__intro .seco-page__lede {
   margin-block: var(--mkt-hero-lede-gap, 0.75rem) 0;
   color: rgb(15 23 42 / 0.62);
 }
@@ -321,13 +321,20 @@
   margin-top: 0.25rem;
 }
 
-/* ── Membership / pricing ── */
+/* ── Membership / pricing — OpenAI stack + spectrum tiles ── */
+.seco-pricing__tiers {
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+}
+
 .seco-pricing__founding {
   display: flex;
   flex-direction: column;
   gap: var(--mkt-cta-stack-gap, 0.65rem);
-  margin-top: 0.25rem;
-  max-width: 40rem;
+  margin-top: 0;
+  max-width: none;
+  width: 100%;
 }
 
 .seco-pricing__founding .seco-page__title,
@@ -337,11 +344,20 @@
 
 .seco-pricing__founding .seco-page__lede {
   color: rgb(15 23 42 / 0.62);
+  max-width: 40rem;
 }
 
 .seco-pricing__grid {
   margin: 0;
+  width: 100%;
   align-items: stretch;
+}
+
+/* Prefer OpenAI auto-fit when present; keep spectrum-tiles--3 as fallback */
+.seco-pricing__grid.dd-oai-auto-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--oai-min-3, 14rem)), 1fr));
+  gap: var(--oai-gap, clamp(0.875rem, 2.5vw, 1.125rem));
 }
 
 .seco-pricing__grid .seco-spectrum-tile {
@@ -355,14 +371,20 @@
 
 .seco-pricing__grid .seco-spectrum-tile__figure {
   margin-top: 0;
-  font-size: var(--type-display-sm, clamp(2rem, 4vw, 2.5rem));
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.5rem);
+  font-weight: 500;
   line-height: 1;
+  letter-spacing: -0.03em;
   color: rgb(15 23 42 / 0.92);
 }
 
 .seco-pricing__grid .seco-spectrum-tile__cadence {
   margin-top: 0.35rem;
   margin-bottom: var(--mkt-tile-head-gap, 0.65rem);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
   color: rgb(15 23 42 / 0.55);
 }
 
@@ -373,18 +395,40 @@
 
 .seco-pricing__grid .seco-spectrum-tile__body {
   margin: 0;
+  max-width: 100%;
   min-height: calc(1.4em * 2);
   flex: 0 0 auto;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-weight: 500;
+  overflow-wrap: anywhere;
 }
 
-.seco-pricing__grid .seco-homekit__checklist,
-.seco-pricing__grid .seco-hometest__checklist {
-  margin-top: var(--mkt-tile-head-gap, 0.65rem);
+.seco-pricing__checklist {
+  list-style: none;
+  margin: var(--mkt-tile-head-gap, 0.65rem) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
   flex: 1;
 }
 
-.seco-pricing__grid .seco-hometest__check-item,
-.seco-pricing__grid .seco-homekit__check-item {
+.seco-pricing__check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgb(15 23 42 / 0.72);
+  overflow-wrap: anywhere;
+}
+
+.seco-pricing__check {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
   color: rgb(15 23 42 / 0.72);
 }
 

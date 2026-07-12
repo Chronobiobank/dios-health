@@ -16,6 +16,15 @@ export const HOW_IT_WORKS_INTRO = {
   title: 'Make chemistry work',
 } as const
 
+/** Scene tile behind the How loop — local male torso still. */
+export const HOW_IT_WORKS_SCENE = {
+  image: {
+    src: '/male-torso.webp',
+    alt: 'Male torso in soft light — chemistry that connects',
+  },
+  objectPosition: 'center 28%',
+} as const
+
 /**
  * Consumer loop — Screen → Score → Share → Sync (build order).
  * Retention weight: Sync > Share > Score > Screen.
@@ -26,7 +35,7 @@ export const HOW_IT_WORKS_STEPS = [
     id: 'screen',
     badge: '1',
     lead: 'Screen',
-    rest: 'your phenotype',
+    rest: 'your base',
     teaser:
       'Screen is plumbing — passive phone sensors calculate your phenotype so matching works without you opening an app for sensors.',
     cue: '#0f172a',
@@ -36,7 +45,7 @@ export const HOW_IT_WORKS_STEPS = [
     id: 'score',
     badge: '2',
     lead: 'Score',
-    rest: 'your chemistry',
+    rest: 'your type',
     teaser:
       'Score is your chemical phenotype profile — circadian stability, energy pattern, social window — ownership, not a diagnosis.',
     cue: '#0f172a',
@@ -46,7 +55,7 @@ export const HOW_IT_WORKS_STEPS = [
     id: 'share',
     badge: '3',
     lead: 'Share',
-    rest: 'your doses',
+    rest: 'your dose',
     teaser:
       'Dose into a phenotype feed — Wolf, Lion, Bear, or Dolphin — peers who live your chemistry.',
     cue: '#0f172a',
@@ -101,8 +110,7 @@ export const HOW_IT_WORKS_FOUNDING = {
 
 /**
  * Why this exists — everyday words, no product jargon in titles.
- * Speak to chrono-atypical tribes (late nights, shift clocks, odd hours).
- * Each tile links to its conversion surface (connect or Homekit).
+ * Loop beat order: Score → Sync → Homekit.
  * Labels = 11 chars; bodies = 66 chars so the three tiles read even.
  */
 export const HOW_IT_WORKS_WHY = {
@@ -111,11 +119,11 @@ export const HOW_IT_WORKS_WHY = {
 
 export const HOW_IT_WORKS_STORY = [
   {
-    id: 'pain',
-    label: 'Your people',
-    body: 'Late nights and shift clocks — not another 9-to-5 dating face app.',
-    href: '/connect',
-    cta: 'Find your people',
+    id: 'score',
+    label: 'Score yours',
+    body: 'Score your type from signup — your chemical reputation, not a quiz.',
+    href: '/profile',
+    cta: 'Score your type',
   },
   {
     id: 'solution',

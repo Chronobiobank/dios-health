@@ -554,8 +554,17 @@
   -webkit-text-fill-color: unset;
 }
 
-/* Primary CTAs stay dark button + light label (intentional contrast) */
+/* Primary CTAs — OpenAI solid black + light label (no spectrum wash) */
 .deepdose-shell.seco-shell--light .seco-landing__btn--primary {
+  background: #0d0d0d !important;
+  background-image: none !important;
   color: #f8f8f6 !important;
   -webkit-text-fill-color: #f8f8f6 !important;
+  animation: none !important;
+  border: 0;
+}
+
+.deepdose-shell.seco-shell--light .seco-landing__btn--primary:hover {
+  background: #1a1a1a !important;
+  transform: none;
 }

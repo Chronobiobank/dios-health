@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils/cn'
 
 function CheckIcon() {
   return (
-    <svg className="seco-homekit__check" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+    <svg className="seco-pricing__check" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
       <path
         d="M5 10.5l3.2 3.2L15 7"
         fill="none"
@@ -23,14 +23,14 @@ function CheckIcon() {
 }
 
 /**
- * Membership cards — global spectrum figure / cadence / body hierarchy
- * so price, meta, note, and bullets read as separate layers.
+ * Membership cards — OpenAI fluid 3-col + spectrum glass tiles.
+ * Price / cadence / note / bullets as separate layers; black ink only.
  */
 export function MembershipTiers({ tiers }: { tiers: readonly MembershipTier[] }) {
   return (
     <SpectrumTileGrid
       cols={3}
-      className={marketingTilesClass('seco-pricing__grid')}
+      className={marketingTilesClass('seco-pricing__grid', 'dd-oai-auto-3')}
       as="ul"
       aria-label="Membership options"
     >
@@ -49,9 +49,9 @@ export function MembershipTiers({ tiers }: { tiers: readonly MembershipTier[] })
             <span className="seco-spectrum-tile__figure">{tier.figure}</span>
             <span className="seco-spectrum-tile__cadence">{tier.cadence}</span>
             <p className="seco-spectrum-tile__body">{tier.note}</p>
-            <ul className="seco-homekit__checklist">
+            <ul className="seco-pricing__checklist">
               {tier.includes.map((item) => (
-                <li key={item} className="seco-homekit__check-item">
+                <li key={item} className="seco-pricing__check-item">
                   <CheckIcon />
                   <span>{item}</span>
                 </li>

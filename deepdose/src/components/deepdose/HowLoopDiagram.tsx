@@ -77,9 +77,10 @@ export function HowLoopDiagram() {
       const arrowBack = 9
       const arrowHalf = 5.5
 
-      ctx.strokeStyle = 'rgba(15, 23, 42, 0.32)'
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.38)'
-      ctx.lineWidth = 1.5
+      const onScene = Boolean(root.closest('.seco-marketing-scene-tile'))
+      ctx.strokeStyle = onScene ? 'rgba(255, 255, 255, 0.78)' : 'rgba(15, 23, 42, 0.32)'
+      ctx.fillStyle = onScene ? 'rgba(255, 255, 255, 0.88)' : 'rgba(15, 23, 42, 0.38)'
+      ctx.lineWidth = onScene ? 1.75 : 1.5
       ctx.lineCap = 'round'
 
       for (let i = 0; i < count; i += 1) {
@@ -167,7 +168,7 @@ export function HowLoopDiagram() {
             aria-label={`${step.lead} ${step.rest}`}
           >
             <span className="dd-how-loop__copy">
-              <span className="dd-how-loop__lead">{step.lead}</span>{' '}
+              <span className="dd-how-loop__lead">{step.lead}</span>
               <span className="dd-how-loop__rest">{step.rest}</span>
             </span>
           </Link>

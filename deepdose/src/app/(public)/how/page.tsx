@@ -2,12 +2,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { HowLoopDiagram } from '@/components/deepdose/HowLoopDiagram'
+import { MarketingSceneTile } from '@/components/deepdose/MarketingSceneTile'
 import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
 import {
   HOW_IT_WORKS_CTAS,
   HOW_IT_WORKS_FOUNDING,
   HOW_IT_WORKS_META,
   HOW_IT_WORKS_PHENOTYPES,
+  HOW_IT_WORKS_SCENE,
   HOW_IT_WORKS_STORY,
   HOW_IT_WORKS_WHY,
 } from '@/lib/deepdose-marketing/how-it-works-content'
@@ -23,7 +25,12 @@ export default function HowItWorksPage() {
   return (
     <article className="seco-page seco-science seco-chronobiobank seco-mission seco-marketing-page seco-how-page">
       <div className="seco-landing__section-inner seco-how-page__inner">
-        <HowLoopDiagram />
+        <MarketingSceneTile
+          image={HOW_IT_WORKS_SCENE.image}
+          objectPosition={HOW_IT_WORKS_SCENE.objectPosition}
+        >
+          <HowLoopDiagram />
+        </MarketingSceneTile>
 
         <header
           id="phenotype"

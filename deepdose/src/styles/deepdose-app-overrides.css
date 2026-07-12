@@ -4844,32 +4844,8 @@
   margin-top: 0;
 }
 
-/* ── Pricing page ── */
-.seco-pricing__intro {
-  max-width: 60ch;
-}
-
-.seco-pricing__founding {
-  display: flex;
-  flex-direction: column;
-  gap: var(--mkt-cta-stack-gap, 0.65rem);
-  margin-top: var(--mkt-section-gap, 1.5rem);
-  max-width: 60ch;
-}
-
-.seco-pricing__founding .seco-page__title {
-  margin: 0;
-}
-
-.seco-pricing__founding .seco-page__lede {
-  margin: 0;
-}
-
+/* ── Pricing page — rhythm only; tile ink/layout live in deepdose-homekit.css ── */
 .seco-pricing.seco-marketing-page .seco-body-clock-compare {
-  margin-top: 0;
-}
-
-.seco-pricing__tiers {
   margin-top: 0;
 }
 
@@ -5275,53 +5251,8 @@
   color: var(--ink-muted);
 }
 
-.seco-pricing__grid {
-  margin: 0;
-}
+/* Pricing grid layout — see deepdose-homekit.css (OpenAI + light ink). */
 
-/* Membership: global figure / cadence / body layers with marketing gaps */
-.seco-pricing__grid .seco-spectrum-tile {
-  gap: 0;
-}
-
-.seco-pricing__grid .seco-spectrum-tile__head {
-  margin-bottom: var(--mkt-tile-head-gap);
-}
-
-.seco-pricing__grid .seco-spectrum-tile__figure {
-  margin-top: 0;
-  font-size: var(--type-display-sm);
-  line-height: 1;
-}
-
-.seco-pricing__grid .seco-spectrum-tile__cadence {
-  margin-top: 0.35rem;
-  margin-bottom: var(--mkt-tile-head-gap);
-}
-
-.seco-pricing__grid .seco-spectrum-tile__body {
-  margin-top: 0;
-  margin-bottom: 0;
-  min-height: 0;
-  flex: 0 0 auto;
-  max-width: var(--mkt-tile-body-measure);
-  font-size: var(--mkt-tile-body-size);
-  color: rgb(255 255 255 / 0.78);
-}
-
-.seco-pricing__grid .seco-hometest__checklist {
-  margin-top: var(--mkt-tile-head-gap);
-  flex: 1;
-}
-
-.seco-pricing__grid .seco-spectrum-tile__foot {
-  margin-top: var(--mkt-cta-stack-gap);
-}
-
-.seco-pricing__grid .seco-spectrum-tile__foot .seco-landing__btn {
-  width: 100%;
-  justify-content: center;
-}
 
 
 /* ── About page ── */

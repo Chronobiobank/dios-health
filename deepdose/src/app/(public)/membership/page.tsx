@@ -14,15 +14,15 @@ export const metadata: Metadata = {
   alternates: { canonical: '/membership' },
 }
 
+/** /membership (and /pricing redirect) — OpenAI grid + spectrum tiles, one-line head. */
 export default function MembershipPage() {
   return (
-    <article className="seco-page seco-pricing seco-homekit seco-marketing-page">
-      <div className="seco-landing__section-inner">
-        <header className="seco-pricing__intro seco-homekit__intro seco-reveal seco-reveal--1">
+    <article className="seco-page seco-pricing seco-marketing-page">
+      <div className="seco-landing__section-inner dd-oai-stack">
+        <header className="seco-pricing__intro seco-reveal seco-reveal--1">
           <h1 className="seco-page__title">
             <span className="seco-landing__hero-spectrum">{MEMBERSHIP_PAGE_INTRO.title}</span>
           </h1>
-          <p className="seco-page__lede">{MEMBERSHIP_PAGE_INTRO.lede}</p>
         </header>
 
         <section className="seco-pricing__tiers seco-reveal seco-reveal--2" aria-label="Membership options">

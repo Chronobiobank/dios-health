@@ -22,7 +22,6 @@ export const MEMBERSHIP_PAGE_META = {
 
 export const MEMBERSHIP_PAGE_INTRO = {
   title: 'Free forever.',
-  lede: 'Homekit when you want a deeper read.',
 } as const
 
 export const MEMBERSHIP_FOUNDING = {
@@ -35,7 +34,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
   {
     id: 'free',
     name: 'Free',
-    cue: '#acd3de',
+    cue: '#0f172a',
     figure: '$0',
     cadence: 'Phone & wearable',
     note: 'Log doses. Sync people on your chemistry.',
@@ -49,7 +48,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
   {
     id: 'testkit',
     name: 'Homekit',
-    cue: '#c9b6f2',
+    cue: '#0f172a',
     figure: '$149',
     cadence: 'Three nights at home',
     note: 'Homekit nights for a stronger score.',
@@ -63,7 +62,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
   {
     id: 'reread',
     name: 'Re-read',
-    cue: '#f2b8a2',
+    cue: '#0f172a',
     figure: '$99',
     cadence: 'Every three months',
     note: 'Fresh Homekit nights keep doses honest.',

@@ -9,6 +9,9 @@ export const MARKETING_CTA_CLASS = 'seco-marketing-cta'
 /** Full-width / hero-scale marketing tile (photo or feature band) */
 export const MARKETING_WIDE_TILE_CLASS = 'seco-marketing-wide-tile'
 
+/** Photo scene tile — atmospheric background + centered stage (diagrams, etc.) */
+export const MARKETING_SCENE_TILE_CLASS = 'seco-marketing-scene-tile'
+
 /** Gradient spectrum numbered bullet (tiptraq steps, mission plane beats, etc.) */
 export const MARKETING_NUM_CLASS = 'seco-marketing-num'
 
