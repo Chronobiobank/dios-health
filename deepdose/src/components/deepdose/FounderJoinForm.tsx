@@ -169,6 +169,8 @@ export function FounderJoinForm() {
           </button>
         </form>
       </section>
+
+      <p className="dd-join__foot">{FOUNDERS_JOIN.foot}</p>
     </div>
   )
 }

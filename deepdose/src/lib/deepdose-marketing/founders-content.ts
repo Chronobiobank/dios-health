@@ -5,12 +5,11 @@ import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 export const FOUNDERS_PAGE_META = {
   title: `Founders · ${DEEPDOSE_NAME}`,
   description:
-    'Hey, Manjam member. Join Deepdose — a new kind of social network focused on human chemistry.',
+    'Hey, Manjam member. Founding access — free for life, first in line, founder Homekit, private channel.',
 } as const
 
 export const FOUNDERS_INTRO = {
   title: 'Hey, Manjam member!',
-  lede: 'Join Deepdose — a new kind of social network focused on human chemistry.',
 } as const
 
 export const FOUNDERS_PRIMARY_CTA = {
@@ -27,10 +26,11 @@ export const FOUNDERS_JOIN_META = {
 export const FOUNDERS_JOIN = {
   medTitle: 'Let our AI map your phenotype in seconds',
   submitLabel: 'Create free account',
+  foot: 'Join Deepdose and become part of a new kind of social network focused on human chemistry.',
 } as const
 
 /**
- * Founder perks — 2×2 spectrum tiles. Titles only; vanity stake lives in the welcome lede.
+ * Founder perks — 2×2 spectrum tiles. Titles only.
  */
 export const FOUNDERS_PERKS = {
   items: [
