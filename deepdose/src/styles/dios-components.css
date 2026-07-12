@@ -1183,19 +1183,13 @@
   background-color: rgb(255 255 255 / 0.28);
   background-size: cover;
   background-position: center;
-  border: 1.5px solid rgb(255 255 255 / 0.72);
-  box-shadow:
-    inset 0 0 0 1px rgb(255 255 255 / 0.4),
-    0 0 0 5px rgb(255 255 255 / 0.22),
-    0 10px 28px rgb(15 23 42 / 0.14);
+  border: none;
+  box-shadow: 0 10px 28px rgb(15 23 42 / 0.14);
 }
 
 .home-face-net__node--orbit .home-face-net__face {
-  border-color: rgb(255 255 255 / 0.62);
-  box-shadow:
-    inset 0 0 0 1px rgb(255 255 255 / 0.35),
-    0 0 0 4px rgb(255 255 255 / 0.18),
-    0 6px 18px rgb(15 23 42 / 0.12);
+  border: none;
+  box-shadow: 0 6px 18px rgb(15 23 42 / 0.12);
 }
 
 .seco-shell--light .home-face-net__aura {

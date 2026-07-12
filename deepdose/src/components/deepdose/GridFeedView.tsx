@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 
 import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
-import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
 import {
   buildMockGridDoses,
   mockDoseAvatar,
@@ -65,10 +64,7 @@ function DoseCard({
         <div className="dd-grid__meta">
           <p className="dd-grid__name">{dose.displayName}</p>
           <p className="dd-grid__sub">
-            <span className="dd-grid__tag-wrap">
-              <PhenotypeIcon id={dose.tag} size="sm" />
-              <span className="dd-grid__tag">{tag.hash}</span>
-            </span>
+            <span className="dd-grid__tag">{tag.hash}</span>
             <span aria-hidden> · </span>
             {formatTime(dose.timestamp)}
           </p>

@@ -21,7 +21,7 @@
   text-align: center;
   min-height: auto;
   padding-block: clamp(0.75rem, 2vw, 1.25rem);
-  gap: 1rem;
+  gap: var(--mkt-section-gap);
 }
 
 .seco-how-page .seco-how-page__cta.seco-marketing-cta,
@@ -32,11 +32,11 @@
   margin-inline: auto;
 }
 
-/* Under-orbit — title only; story lives in tiles */
+/* Under-orbit — title only; story lives in tiles. Section break from marketing-system. */
 .seco-how-page__why {
   box-sizing: border-box;
   width: min(100%, 36rem);
-  margin: 0.25rem auto 0;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -49,7 +49,7 @@
 .seco-how-page__story {
   box-sizing: border-box;
   list-style: none;
-  margin: 0.25rem 0 0;
+  margin: 0;
   padding: 0;
   width: 100%;
   display: grid;
@@ -190,7 +190,7 @@ a.seco-how-page__story-tile--link:hover .seco-how-page__story-cta {
   flex-direction: column;
   align-items: center;
   gap: 0.35rem;
-  margin-top: var(--mkt-section-gap, 1.5rem);
+  margin-top: 0; /* section break from marketing-system :not(:first-child) */
 }
 
 .seco-how-page__founding .seco-page__title {

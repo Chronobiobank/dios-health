@@ -4,7 +4,6 @@ import { useMemo, type ChangeEvent, type CSSProperties } from 'react'
 import Link from 'next/link'
 
 import SriScoreRing from '@/components/shared/SriScoreRing'
-import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
 import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
 import {
   DEEPDOSE_PATIENT_PLAN_PROFILE,
@@ -208,7 +207,6 @@ export function ProfileDashboardView({
                     : 'dd-profile-dash__slot'
                 }
               >
-                <PhenotypeIcon id={tag} size="sm" />
                 <span className="dd-profile-dash__slot-hash">{meta.hash}</span>
                 <span className="dd-profile-dash__slot-state">{done ? 'Done' : 'Open'}</span>
               </div>

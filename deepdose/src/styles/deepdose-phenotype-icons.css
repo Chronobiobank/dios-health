@@ -119,19 +119,7 @@
   }
 }
 
-/* Dose picker — compact circle; keep sub copy to two lines */
-.dd-log__btn {
-  gap: var(--dd-gap, 0.75rem);
-  align-items: center;
-}
-
-.dd-log__btn .dd-pheno-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  align-self: center;
-  flex-shrink: 0;
-}
-
+/* Dose picker — text only; phenotype icons live on /how */
 .dd-log__btn-main {
   justify-content: center;
   min-width: 0;
@@ -146,36 +134,9 @@
   overflow: hidden;
 }
 
-/* Profile Today — icon above, text under */
-.dd-profile-dash__slot {
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.dd-profile-dash__slot .dd-pheno-icon {
-  margin-inline: auto;
-}
-
 .dd-grid__sub {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   flex-wrap: wrap;
-}
-
-.dd-grid__tag-wrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  min-width: 0;
-}
-
-.app-top-bar__group-btn {
-  gap: 0.4rem;
-}
-
-.app-top-bar__group-option {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
 }

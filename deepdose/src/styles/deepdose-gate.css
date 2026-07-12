@@ -248,7 +248,7 @@
 .dd-gate__ctas {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   gap: 0.75rem;
   width: 100%;
   max-width: 22rem;
@@ -261,13 +261,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: fit-content;
   max-width: 100%;
   min-width: 0;
   height: var(--dd-gate-pill-h);
   min-height: var(--dd-gate-pill-h);
   margin: 0;
-  padding: 0 1.25rem;
+  padding: 0 1.35rem;
   border-radius: 1.5rem;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: 0.9375rem;

@@ -4,7 +4,6 @@ import { useMemo, useRef, useState, useEffect, type ChangeEvent } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { SleepScoreTipTraqLink } from '@/components/deepdose/SleepScoreTipTraqLink'
-import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
 import { phenotypeFromWakeLabel } from '@/lib/brand/chemical-phenotypes'
 import { computeScheduleSri } from '@/lib/circadian/sri-engine'
 import { inferLandingBodyClock } from '@/lib/patient/infer-landing-body-clock'
@@ -133,7 +132,6 @@ export function LogDoseView() {
                 className="dd-log__btn"
                 onClick={() => openCamera(tag)}
               >
-                <PhenotypeIcon id={tag} size="md" />
                 <span className="dd-log__btn-main">
                   <span className="dd-log__btn-hash">{meta.hash}</span>
                   <span className="dd-log__btn-sub">

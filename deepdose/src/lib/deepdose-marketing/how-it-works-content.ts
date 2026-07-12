@@ -1,5 +1,4 @@
 import {
-  DEEPDOSE_NAME,
   DEEPDOSE_LOOP_CAPTION,
   DEEPDOSE_PROMISE,
 } from '@/lib/brand/deepdose-brand'
@@ -8,7 +7,7 @@ import { DEEPDOSE_VOICE } from '@/lib/brand/deepdose-voice'
 /** Make chemistry work — Screen → Score → Share → Sync. */
 
 export const HOW_IT_WORKS_META = {
-  title: `Make chemistry work · ${DEEPDOSE_NAME}`,
+  title: 'How',
   description: DEEPDOSE_VOICE.homeLede,
 } as const
 

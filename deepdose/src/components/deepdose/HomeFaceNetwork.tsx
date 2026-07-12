@@ -103,12 +103,12 @@ export function HomeFaceNetwork() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
 
-    function orbitPos(index: number, t: number) {
-      const angle = angles[index] + spin + Math.sin(t * 0.35 + index) * 0.04
-      const radius = ORBIT_RADIUS + Math.sin(t * 0.55 + index * 1.3) * 0.018
+    function orbitPos(index: number) {
+      // Fixed circular orbit — equal centre→edge gap for every face.
+      const angle = angles[index] + spin
       return {
-        x: 0.5 + Math.cos(angle) * radius,
-        y: 0.5 + Math.sin(angle) * radius * 0.92,
+        x: 0.5 + Math.cos(angle) * ORBIT_RADIUS,
+        y: 0.5 + Math.sin(angle) * ORBIT_RADIUS,
         angle,
       }
     }
@@ -116,13 +116,12 @@ export function HomeFaceNetwork() {
     function paintDust() {
       ctx.clearRect(0, 0, width, height)
 
-      // Soft orbital ring
+      // Soft orbital ring (true circle on the square stage)
       const cx = width * 0.5
       const cy = height * 0.5
-      const rx = width * ORBIT_RADIUS
-      const ry = height * ORBIT_RADIUS * 0.92
+      const ringR = Math.min(width, height) * ORBIT_RADIUS
       ctx.beginPath()
-      ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2)
+      ctx.arc(cx, cy, ringR, 0, Math.PI * 2)
       ctx.strokeStyle = 'rgba(186, 168, 230, 0.35)'
       ctx.lineWidth = 1
       ctx.stroke()
@@ -148,32 +147,27 @@ export function HomeFaceNetwork() {
       }
     }
 
-    function placeFaces(t: number) {
+    function placeFaces() {
       const center = centerRef.current
       if (center) {
-        const pulse = 1 + Math.sin(t * 1.1) * 0.035
-        const size = CENTER_SIZE * pulse
-        center.style.width = `${size}px`
-        center.style.height = `${size}px`
-        center.style.transform = `translate(${width * 0.5 - size / 2}px, ${height * 0.5 - size / 2}px)`
+        center.style.width = `${CENTER_SIZE}px`
+        center.style.height = `${CENTER_SIZE}px`
+        center.style.transform = `translate(${width * 0.5 - CENTER_SIZE / 2}px, ${height * 0.5 - CENTER_SIZE / 2}px)`
       }
 
       for (let i = 0; i < orbitCount; i += 1) {
         const el = orbitRefs.current[i]
         if (!el) continue
-        const pos = orbitPos(i, t)
-        const pulse = 1 + Math.sin(t * 1.4 + i) * 0.05
-        const size = ORBIT_SIZE * pulse
-        el.style.width = `${size}px`
-        el.style.height = `${size}px`
-        el.style.transform = `translate(${pos.x * width - size / 2}px, ${pos.y * height - size / 2}px)`
+        const pos = orbitPos(i)
+        el.style.width = `${ORBIT_SIZE}px`
+        el.style.height = `${ORBIT_SIZE}px`
+        el.style.transform = `translate(${pos.x * width - ORBIT_SIZE / 2}px, ${pos.y * height - ORBIT_SIZE / 2}px)`
       }
     }
 
     function step(now: number) {
       const dt = Math.min(0.05, (now - last) / 1000)
       last = now
-      const t = now / 1000
 
       if (!reduceMotion) {
         spin += dt * 0.22
@@ -186,7 +180,7 @@ export function HomeFaceNetwork() {
             continue
           }
 
-          const orbit = orbitPos(mote.orbitIndex, t)
+          const orbit = orbitPos(mote.orbitIndex)
           const targetX = mote.dir === 1 ? 0.5 : orbit.x
           const targetY = mote.dir === 1 ? 0.5 : orbit.y
           const dx = targetX - mote.x
@@ -216,13 +210,13 @@ export function HomeFaceNetwork() {
         }
       }
 
-      placeFaces(t)
+      placeFaces()
       paintDust()
       frame = requestAnimationFrame(step)
     }
 
     resize()
-    placeFaces(0)
+    placeFaces()
     paintDust()
     const ro = new ResizeObserver(resize)
     ro.observe(root)

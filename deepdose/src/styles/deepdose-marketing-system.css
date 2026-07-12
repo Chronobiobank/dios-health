@@ -253,6 +253,20 @@
   overflow-x: clip;
 }
 
+/*
+ * Section break — slightly more space above a head that starts a new section.
+ * Keep head → content tight via the stack gap; widen only content → next head.
+ */
+.seco-marketing-page .seco-landing__section-inner
+  > :is(
+    header,
+    section:has(> .seco-page__title),
+    section:has(> h1),
+    section:has(> h2)
+  ):not(:first-child) {
+  margin-top: var(--mkt-section-break-extra);
+}
+
 /* Contain tiles + copy inside the page measure — no bleed */
 .seco-marketing-page .seco-marketing-tiles,
 .seco-marketing-page .seco-spectrum-tile,
