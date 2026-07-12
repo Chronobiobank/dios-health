@@ -79,7 +79,7 @@ export const HOW_IT_WORKS_PHENOTYPES = {
     {
       id: 'early_explorer' as const,
       label: 'Lion',
-      body: 'Peaks early mornings. Active and connected at first dawn.',
+      body: 'Peaks early morning. Active and connected at first dawn.',
     },
     {
       id: 'twilight_transformer' as const,
