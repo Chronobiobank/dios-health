@@ -18,7 +18,7 @@ type SplashGateFormProps = {
   headline: ReactNode
   /** Primary actions under the hero (CTAs or legacy med baseline). */
   baseline?: ReactNode
-  footer: ReactNode
+  footer?: ReactNode
 }
 
 /** Splash: chrome + headline + med baseline. Auth lives on /login. */
