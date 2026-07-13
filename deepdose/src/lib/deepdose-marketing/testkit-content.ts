@@ -10,7 +10,7 @@ export const TESTKIT_META = {
 
 export const TESTKIT_INTRO = {
   title: 'Three nights. Clearer chemistry.',
-  lede: 'Homekit for a stronger phenotype read.',
+  lede: 'Homekit for a stronger chronotype read.',
 } as const
 
 export const TESTKIT_KIT = {

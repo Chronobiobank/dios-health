@@ -39,7 +39,7 @@ export const DOSE_ARCHIVE = {
   feedHref: '/grid',
 } as const
 
-/** Phenotype feed empty */
+/** chronotype feed empty */
 export const DOSE_FEED_EMPTY = {
   before: 'No presence here yet.',
   post: 'Post your dose',

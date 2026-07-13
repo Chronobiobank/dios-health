@@ -64,8 +64,8 @@ export function inferLandingBodyClock(
 
   const profileLine =
     morningTimes.length > 0
-      ? `Your morning medicines cluster around ${minutesToClock(Math.min(...morningTimes))} — we've anchored your chemical phenotype from that pattern and your wake time.`
-      : `We've anchored your chemical phenotype from your ${wakeClock} wake time and medicine schedule.`
+      ? `Your morning medicines cluster around ${minutesToClock(Math.min(...morningTimes))} — we've anchored your chemical chronotype from that pattern and your wake time.`
+      : `We've anchored your chemical chronotype from your ${wakeClock} wake time and medicine schedule.`
 
   return {
     dlmoEstimateHours,

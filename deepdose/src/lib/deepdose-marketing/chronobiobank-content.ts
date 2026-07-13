@@ -39,7 +39,7 @@ export const CHRONOBIOBANK_LETTER_TILES = [
   {
     id: 'how',
     label: 'How',
-    body: 'Built on phenotype score, locked nights, and doses you share.',
+    body: 'Built on chronotype score, locked nights, and doses you share.',
   },
   {
     id: 'who',

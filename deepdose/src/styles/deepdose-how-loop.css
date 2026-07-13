@@ -32,6 +32,13 @@
   margin-inline: auto;
 }
 
+.seco-how-page .seco-how-page__cta.seco-marketing-cta--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+}
+
 /* Under-orbit — title only; story lives in tiles. Section break from marketing-system. */
 .seco-how-page__why {
   box-sizing: border-box;
@@ -426,4 +433,119 @@ a.seco-how-page__story-tile--link:hover .seco-how-page__story-cta {
 .seco-marketing-scene-tile .dd-how-loop__rest {
   color: rgb(255 255 255 / 0.78);
   text-shadow: 0 1px 6px rgb(0 0 0 / 0.3);
+}
+
+/* Why Clocks Matter — licensed CC-BY SRI figures (stacked) */
+.seco-how-brain {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.85rem;
+  padding: 0.75rem;
+  border-radius: var(--seco-radius-lg, 0.75rem);
+  border: 1px solid rgb(255 255 255 / 0.45);
+  background: rgb(255 255 255 / 0.14);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.28),
+    0 12px 32px rgb(15 23 42 / 0.08);
+  backdrop-filter: blur(18px) saturate(1.45);
+  -webkit-backdrop-filter: blur(18px) saturate(1.45);
+}
+
+.seco-how-brain__frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: calc(var(--seco-radius-lg, 0.75rem) - 0.15rem);
+  border: 1px solid rgb(255 255 255 / 0.55);
+  background: rgb(255 255 255 / 0.92);
+}
+
+.seco-how-brain__frame--figure {
+  aspect-ratio: auto;
+  min-height: 14rem;
+}
+
+.seco-how-brain__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.seco-how-brain__img--contain {
+  object-fit: contain;
+  position: relative !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.seco-how-brain__pill {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--dd-radius-pill, 999px);
+  border: 1px solid rgb(255 255 255 / 0.4);
+  background: rgb(255 255 255 / 0.94);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.95),
+    0 8px 24px rgb(0 0 0 / 0.22);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(0.8125rem, 2.2vw, 0.9375rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #0d0d0d;
+  text-align: center;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.seco-how-brain__lede {
+  margin: 0;
+  padding: 0.15rem 0.5rem;
+  max-width: 36ch;
+  margin-inline: auto;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(0.875rem, 0.82rem + 0.3vw, 0.975rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #0d0d0d !important;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.seco-how-brain__credit {
+  margin: 0;
+  padding: 0 0.35rem 0.1rem;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: rgb(15 23 42 / 0.55);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.seco-how-brain__credit-link {
+  color: rgb(15 23 42 / 0.72);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.seco-how-brain__credit-link:hover {
+  color: #0d0d0d;
 }

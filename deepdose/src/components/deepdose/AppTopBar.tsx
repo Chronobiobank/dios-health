@@ -30,7 +30,7 @@ export function AppHomeMark() {
 
 /**
  * Product top bar.
- * Chrome mode: home mark left, phenotype switcher, utilities + face right.
+ * Chrome mode: home mark left, chronotype switcher, utilities + face right.
  */
 export function AppTopBar({
   title,

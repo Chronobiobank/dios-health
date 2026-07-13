@@ -17,7 +17,7 @@ export type MembershipTier = {
 export const MEMBERSHIP_PAGE_META = {
   title: `Membership · ${DEEPDOSE_NAME}`,
   description:
-    'Free to log doses. Homekit when you want a deeper phenotype read.',
+    'Free to log doses. Homekit when you want a deeper chronotype read.',
 } as const
 
 export const MEMBERSHIP_PAGE_INTRO = {
@@ -42,7 +42,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cta: { label: 'Find Your Sync', href: '/connect' },
     includes: [
       'Daily doses in your feed',
-      'People on your chemical phenotype',
+      'People on your chemical chronotype',
       'Optional research share only',
     ],
   },
@@ -56,7 +56,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cta: { label: 'Order Homekit', href: '/testkit' },
     includes: [
       'Reusable sensor for 3 nights',
-      'Stronger chemical phenotype read',
+      'Stronger chemical chronotype read',
       'Clearer score on your doses',
     ],
   },
@@ -70,7 +70,7 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     cta: { label: 'Order re-read', href: '/testkit' },
     includes: [
       'Same reusable Homekit sensor',
-      'Updated phenotype read each quarter',
+      'Updated chronotype read each quarter',
       'Catch drift before old scores go stale',
     ],
   },

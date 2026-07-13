@@ -1,5 +1,5 @@
 /**
- * Chemical phenotypes — observable body-clock chemistry classes.
+ * Chemical chronotypes — observable body-clock chemistry classes.
  * Feed groups, dose posts, and Sync all use this same taxonomy.
  */
 
@@ -33,7 +33,7 @@ export const CHEMICAL_PHENOTYPES: readonly ChemicalPhenotype[] = [
     peak: 'Evening / night',
     expression: 'Creative and social after dark',
     cue: 'var(--dd-cue-resetter)',
-    hash: '#WolfPhenotype',
+    hash: '#WolfChronotype',
   },
   {
     id: 'early_explorer',
@@ -42,7 +42,7 @@ export const CHEMICAL_PHENOTYPES: readonly ChemicalPhenotype[] = [
     peak: 'Morning',
     expression: 'Active and connected at dawn',
     cue: 'var(--dd-cue-hijacker)',
-    hash: '#LionPhenotype',
+    hash: '#LionChronotype',
   },
   {
     id: 'twilight_transformer',
@@ -51,7 +51,7 @@ export const CHEMICAL_PHENOTYPES: readonly ChemicalPhenotype[] = [
     peak: 'Afternoon / evening',
     expression: 'Flexible across late day hours',
     cue: 'var(--dd-cue-crosser)',
-    hash: '#BearPhenotype',
+    hash: '#BearChronotype',
   },
   {
     id: 'pulse_shifter',
@@ -60,7 +60,7 @@ export const CHEMICAL_PHENOTYPES: readonly ChemicalPhenotype[] = [
     peak: 'Variable',
     expression: 'Shift work and travel clocks',
     cue: 'var(--dd-cue-battery)',
-    hash: '#DolphinPhenotype',
+    hash: '#DolphinChronotype',
   },
 ] as const
 
@@ -81,7 +81,7 @@ export function isChemicalPhenotypeId(value: unknown): value is ChemicalPhenotyp
   )
 }
 
-/** Rough phenotype from typical wake minutes (local clock). */
+/** Rough chronotype from typical wake minutes (local clock). */
 export function phenotypeFromWakeMinutes(wakeMinutes: number): ChemicalPhenotype {
   const normalized = ((wakeMinutes % 1440) + 1440) % 1440
   if (normalized < 5 * 60 || normalized >= 10 * 60) {
@@ -106,7 +106,7 @@ export function phenotypeHintLine(phenotype: ChemicalPhenotype): string {
 
 /** Sync overlap copy — chemistry, not vibes. */
 export function phenotypeOverlapLine(name: string, pct: number): string {
-  return `You and ${name} share a ${pct}% phenotype overlap.`
+  return `You and ${name} share a ${pct}% chronotype overlap.`
 }
 
 const TRIBE_ANIMAL_PLURAL: Record<ChemicalPhenotype['animal'], string> = {

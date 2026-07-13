@@ -14,7 +14,7 @@ export function CtaBanner() {
           Your biology. Your data. Your timing.
         </h2>
         <p className="mx-auto mt-4 max-w-lg text-white/80">
-          Discover your chemical phenotype and find people who move through life like you.
+          Discover your chemical chronotype and find people who move through life like you.
         </p>
         <div className="mt-8">
           <Link href="/" className="seco-landing__btn seco-landing__btn--primary">

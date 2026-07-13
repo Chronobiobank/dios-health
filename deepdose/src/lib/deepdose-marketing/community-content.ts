@@ -23,7 +23,7 @@ export const MEMBER_DASHBOARD_COMMUNITY = {
     eyebrow: 'Friends',
     titleBefore: 'People on ',
     titleHighlight: 'your chemistry',
-    support: 'People on your chemical phenotype.',
+    support: 'People on your chemical chronotype.',
   },
   stories: {
     eyebrow: 'Stories',
@@ -77,7 +77,7 @@ export const DEEPDOSE_COMMUNITY_MATCHES: readonly CommunityMatch[] = [
     id: 'match-6',
     name: 'Sol A.',
     location: 'Cardiff',
-    journey: 'Dolphin · similar phenotype score',
+    journey: 'Dolphin · similar chronotype score',
     chemistryPct: 82,
     face: 'sol',
   },

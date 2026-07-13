@@ -10,7 +10,7 @@ type FounderQuoteTileProps = {
   className?: string
 }
 
-/** Full-width founder quote — dark glassmorphic tile, pull-quote typography. */
+/** Full-width founder quote — translucent glass tile, pull-quote typography. */
 export function FounderQuoteTile({
   quote,
   grounding,

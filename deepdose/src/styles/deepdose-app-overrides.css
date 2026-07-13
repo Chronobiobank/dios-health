@@ -3432,13 +3432,11 @@
 }
 
 .seco-founder-quote--light {
-  border: 1px solid rgb(255 255 255 / 0.22);
-  background: rgb(0 0 0 / 0.42);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.18),
-    0 12px 36px rgb(0 0 0 / 0.12);
-  backdrop-filter: blur(32px) saturate(1.65);
-  -webkit-backdrop-filter: blur(32px) saturate(1.65);
+  border: 1px solid rgb(255 255 255 / 0.55);
+  background: transparent;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35);
+  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
   padding: clamp(1.25rem, 3.5vw, 2rem);
 }
 
@@ -3470,11 +3468,13 @@
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0.01em;
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(15 23 42 / 0.62);
 }
 
 .seco-founder-quote__pull {
   position: relative;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0 0 0 clamp(1.35rem, 3vw, 1.75rem);
 }
@@ -3488,7 +3488,7 @@
   font-size: clamp(2.75rem, 6.5vw, 3.75rem);
   font-weight: 400;
   line-height: 1;
-  color: rgb(255 255 255 / 0.35);
+  color: rgb(15 23 42 / 0.28);
   pointer-events: none;
 }
 
@@ -3502,7 +3502,7 @@
   font-style: italic;
   line-height: 1.42;
   letter-spacing: -0.012em;
-  color: rgb(255 255 255 / 0.96);
+  color: var(--seco-light-quote-ink);
   text-shadow: none;
 }
 
@@ -3513,15 +3513,18 @@
   font-weight: 400;
   line-height: 1.42;
   letter-spacing: -0.02em;
-  color: rgb(255 255 255 / 0.96);
+  color: var(--seco-light-quote-ink);
 }
 
 .seco-founder-quote--light .seco-founder-quote__attrib {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  align-self: flex-end;
   gap: 0;
-  margin: clamp(1rem, 2.5vw, 1.375rem) 0 0;
+  width: max-content;
+  max-width: min(100%, 28ch);
+  margin: clamp(1rem, 2.5vw, 1.375rem) 0 0 auto;
   padding: 0;
   border-top: none;
   text-align: left;
@@ -3543,26 +3546,26 @@
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1.15;
-  color: rgb(255 255 255 / 0.92);
+  color: var(--seco-light-quote-ink);
 }
 
 .seco-founder-quote__name {
   font-family: var(--seco-font-ui);
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--seco-light-quote-ink);
 }
 
 .seco-founder-quote--light .seco-founder-quote__role {
   font-size: 0.8125rem;
   line-height: 1.15;
-  color: rgb(255 255 255 / 0.62);
+  color: rgb(15 23 42 / 0.62);
 }
 
 .seco-founder-quote__role {
   font-size: 0.8125rem;
   line-height: 1.4;
-  color: rgb(255 255 255 / 0.55);
+  color: rgb(15 23 42 / 0.62);
 }
 
 .seco-chronobiobank__title {

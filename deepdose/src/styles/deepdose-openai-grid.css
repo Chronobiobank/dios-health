@@ -617,19 +617,19 @@
   color: rgb(15 23 42 / 0.62) !important;
 }
 
-/* Dark glass quote — ambient shows through; light ink */
+/* Quote tile — black ink on clear frost */
 .deepdose-shell.seco-shell--light .seco-marketing-page :is(
   .seco-founder-quote__text,
   .seco-founder-quote__name
 ) {
-  color: rgb(255 255 255 / 0.96) !important;
+  color: var(--seco-light-quote-ink) !important;
 }
 
 .deepdose-shell.seco-shell--light .seco-marketing-page :is(
   .seco-founder-quote__role,
   .seco-founder-quote__grounding
 ) {
-  color: rgb(255 255 255 / 0.68) !important;
+  color: rgb(15 23 42 / 0.62) !important;
 }
 
 .deepdose-shell.seco-shell--light .seco-marketing-page :is(

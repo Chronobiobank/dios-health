@@ -1,4 +1,4 @@
-/** Seeded feed doses — one post stream per chemical phenotype. */
+/** Seeded feed doses — one post stream per chemical chronotype. */
 
 import { CHEMICAL_PHENOTYPE_IDS, type ChemicalPhenotypeId } from '@/lib/brand/chemical-phenotypes'
 import { DEEPDOSE_COMMUNITY_MATCHES } from '@/lib/deepdose-marketing/community-content'
@@ -14,7 +14,7 @@ import {
 } from '@/lib/patient/dose-uploads'
 
 /**
- * Phone-snapshot energy by phenotype group.
+ * Phone-snapshot energy by chronotype group.
  * Night · morning · twilight · shift — candid stills, not catalog stock.
  */
 const SCENE_PHOTOS: Record<DoseTag, readonly string[]> = {

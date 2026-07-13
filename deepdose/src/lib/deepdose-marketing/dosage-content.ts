@@ -55,7 +55,7 @@ export const CONNECT_PAGE = {
     {
       id: 'how',
       title: 'How it works',
-      body: ['Your phenotype', 'in four steps.'] as const,
+      body: ['Your chronotype', 'in four steps.'] as const,
       href: '/how',
       cta: 'See how',
     },

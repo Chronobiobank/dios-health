@@ -11,10 +11,10 @@ Product routes (`/grid`, `/dose`, `/profile`, `/account`, `/dosage`, `/connect`,
 Chemistry = matching engine. Community = retention. Score = status economy. Feed = habit loop.
 
 **North star (product):** Max Your Chemistry / Make chemistry work.
-**North star (metric):** Meaningful Syncs Created — people who match on chemical phenotype and form a real connection — not DAU on Score.
+**North star (metric):** Meaningful Syncs Created — people who match on chemical chronotype and form a real connection — not DAU on Score.
 
 **Sync economy (engagement):**
-- **Score** = your chemistry is getting steadier (SRI / phenotype profile). Earns the right to be seen.
+- **Score** = your chemistry is getting steadier (SRI / chronotype profile). Earns the right to be seen.
 - **Synced** = another person in your chemical window recognized you — on a dose, or as a match. Not a vanity like; not auto-minted by posting or SRI alone.
 - Loop: Post dose → peers Sync → Connect when overlap is strong → Score supports matchability.
 - Never farm attention: no free Synced for posting alone; no Synced from outside your chemistry.
@@ -22,14 +22,14 @@ Chemistry = matching engine. Community = retention. Score = status economy. Feed
 | Stage | Product job | Retention weight |
 |---|---|---|
 | **Sync** | Who is online in my biological window? (`/connect`) | Strongest — tribe (“these are my people”) |
-| **Share** | Feed only peers on your chemical phenotype (`/dose` → `/grid`) | Strong — expression |
-| **Score** | Chemical phenotype profile / progression (`/profile`) | Medium — sticky when it unlocks status |
-| **Screen** | Passive phenotype screen from signup | Weakest — onboarding infrastructure |
+| **Share** | Feed only peers on your chemical chronotype (`/dose` → `/grid`) | Strong — expression |
+| **Score** | Chemical chronotype profile / progression (`/profile`) | Medium — sticky when it unlocks status |
+| **Screen** | Passive chronotype screen from signup | Weakest — onboarding infrastructure |
 
 Product loop (build order): **Screen → Score → Share → Sync**.
 Retention order (why they return): **Sync → Share → Score → Screen**.
 
-Company = **Deepdose**. Matching speaks in **phenotypes** (Wolf, Lion, Bear, Dolphin) — chemical phenotype IDs stay internal. Section head on /how: **Know Your Phenotype**. No Medmaxxing / Dosers / Get in Flow in product copy. Consumer at-home nights = **Homekit** (TipTraQ hardware).
+Company = **Deepdose**. Matching speaks in **chronotypes** (Wolf, Lion, Bear, Dolphin) — chemical chronotype IDs stay internal. Section head on /how: **Know Your Chronotype**. No Medmaxxing / Dosers / Get in Flow in product copy. Consumer at-home nights = **Homekit** (TipTraQ hardware).
 
 **Type weights (locked):** former light → `400`, former regular → `500`. See `deepdose-type-weights.css`. Do not reintroduce `font-weight: 300` for UI copy.
 
@@ -37,7 +37,7 @@ Company = **Deepdose**. Matching speaks in **phenotypes** (Wolf, Lion, Bear, Dol
 
 | Control | Route | Role |
 |---|---|---|
-| Home | `/grid` | Phenotype feed (share surface) |
+| Home | `/grid` | Chronotype feed (share surface) |
 | Post | `/dose` | Share a dose |
 | Sync | `/connect` | Discovery + Chat — lead with tribe, not score |
 
@@ -65,10 +65,10 @@ Profile via top-bar avatar (`/profile`). Legacy `/bank` redirects here. No float
 
 - No waffle. Titles live in `AppTopBar` only.
 - **Text color (OpenAI rule):** black, grey, or white on dark — never yellow/teal/spectrum on readable text.
-- Positioning: first social network for chemical phenotypes + human connection.
-- Promise: **Discover your chemical phenotype. Find your people.**
+- Positioning: first social network for chemical chronotypes + human connection.
+- Promise: **Discover your chemical chronotype. Find your people.**
 - Value prop: **Who is online in my biological window right now?** — not “what is my score today?”
 - Homepage hero: **Max Your Chemistry.** Loop CVP: **Make chemistry work.** Loop: **Screen. Score. Share. Sync.**
-- Dose cards: phenotype hashtag + score badge + Sync / Synced count.
-- Dose: stamp photo into a phenotype feed — no captions.
-- Consumer metric = **SRI** as phenotype stability (screened from signup; scored as chemical reputation). Badge chrome may still say Score.
+- Dose cards: chronotype hashtag + score badge + Sync / Synced count.
+- Dose: stamp photo into a chronotype feed — no captions.
+- Consumer metric = **SRI** as chronotype stability (screened from signup; scored as chemical reputation). Badge chrome may still say Score.

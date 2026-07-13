@@ -6,7 +6,7 @@ import { resolvePlanFromSearchParams } from '@/lib/medications/parse-plan-search
 
 export const metadata: Metadata = {
   title: `Profile · ${DEEPDOSE_NAME}`,
-  description: 'Your chemical phenotype score, identity, doses, and Homekit tools.',
+  description: 'Your chemical chronotype score, identity, doses, and Homekit tools.',
   alternates: { canonical: '/profile' },
 }
 

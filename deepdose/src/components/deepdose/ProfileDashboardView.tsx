@@ -267,7 +267,7 @@ export function ProfileDashboardView({
       <section
         className="dd-profile-dash__tile seco-spectrum-tile seco-spectrum-tile--hero"
         style={{ '--cue': '#acd3de' } as CSSProperties}
-        aria-label="Phenotype score"
+        aria-label="Chronotype score"
       >
         <div className="dd-profile-dash__score">
           <SriScoreRing score={sriScore} />
@@ -347,7 +347,7 @@ export function ProfileDashboardView({
           </Link>
           <Link href="/connect" className="dd-profile-dash__tool">
             <span className="dd-profile-dash__tool-title">Sync</span>
-            <span className="dd-profile-dash__tool-meta">People on your phenotype</span>
+            <span className="dd-profile-dash__tool-meta">People on your chronotype</span>
           </Link>
           <Link href="/account" className="dd-profile-dash__tool">
             <span className="dd-profile-dash__tool-title">Account</span>

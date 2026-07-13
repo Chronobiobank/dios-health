@@ -1,4 +1,4 @@
-/** Product top-bar feed groups — one group per chemical phenotype. */
+/** Product top-bar feed groups — one group per chemical chronotype. */
 
 import {
   CHEMICAL_PHENOTYPES,
@@ -23,7 +23,7 @@ export const APP_FEED_GROUPS: readonly AppGroup[] = CHEMICAL_PHENOTYPES.map((p) 
 export const APP_GROUP_STORAGE_KEY = 'deepdose_feed_group'
 export const APP_GROUP_DEFAULT: AppGroupId = 'early_explorer'
 
-/** Map legacy lark/owl storage + URLs onto phenotypes. */
+/** Map legacy lark/owl storage + URLs onto chronotypes. */
 const LEGACY_CLOCK: Record<string, AppGroupId> = {
   lark: 'early_explorer',
   owl: 'night_creator',

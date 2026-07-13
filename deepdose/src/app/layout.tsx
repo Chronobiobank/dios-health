@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   keywords: [
     'Deepdose',
     'Max Your Chemistry',
-    'chemical phenotype',
+    'chemical chronotype',
     'circadian chemistry',
     'social network',
     'SRI',

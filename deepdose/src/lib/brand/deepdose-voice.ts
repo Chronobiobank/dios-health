@@ -8,7 +8,7 @@ import {
 
 /**
  * Audience: people off the usual clock (ManJam founding cohort).
- * Positioning: first social network for chemical phenotypes + human connection.
+ * Positioning: first social network for chemical chronotypes + human connection.
  * Thesis: social network powered by chronochemistry — not a chronotherapy app with social bolted on.
  * Loop (build): Screen → Score → Share → Sync.
  * Retention: Sync → Share → Score → Screen.
@@ -16,7 +16,7 @@ import {
 export const DEEPDOSE_AUDIENCE = {
   label: 'people off the clock',
   who: 'People who do not live on a 9-to-5 clock — night workers, travelers, late sleepers, and anyone who refused a forced schedule.',
-  why: 'They want people on the same chemical phenotype — attraction, recognition, belonging.',
+  why: 'They want people on the same chemical chronotype — attraction, recognition, belonging.',
 } as const
 
 export const DEEPDOSE_VOICE = {
@@ -32,14 +32,14 @@ export const DEEPDOSE_VOICE = {
   homeHeadlineWhite: 'Max Your',
   homeHeadlineAccent: 'Chemistry',
   homeLede:
-    'Deepdose is the first social network that knows your body clock better than you do and matches it with others in sync.',
+    'The first social network that reads your circadian rhythm and connects you with perfectly synced matches.',
   /** Home CTA — single founder claim */
   homePrimaryCta: { label: 'Claim Free Access', href: '/founders' },
   /** @deprecated Home uses a single primary CTA. */
   homeSecondaryCta: { label: 'Claim Free Access', href: '/founders' },
   missionHeadlineWhite: 'Make chemistry',
   missionHeadlineAccent: 'work',
-  missionLede: 'Phenotypes match. Tribe keeps. Sync connects.',
+  missionLede: 'Chronotypes match. Tribe keeps. Sync connects.',
   patientSubtitle: DEEPDOSE_POSITIONING,
   communitySupport: 'These are my people.',
   closeSupport: 'Find who is awake in your window.',

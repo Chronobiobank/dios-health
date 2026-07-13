@@ -9,6 +9,7 @@ import {
   isAppBottomNavActive,
   type AppBottomNavItem,
 } from '@/lib/deepdose-marketing/app-bottom-nav'
+import { useSupabaseUser } from '@/lib/auth/use-supabase-user'
 import { useIsClient } from '@/lib/react/use-is-client'
 import { cn } from '@/lib/utils/cn'
 
@@ -52,11 +53,15 @@ function NavIcon({ id }: { id: AppBottomNavItem['id'] }) {
   }
 }
 
+/** Product bottom nav — logged-in members only. */
 export function AppBottomNav() {
   const pathname = usePathname() ?? '/'
+  const { user, ready } = useSupabaseUser()
   // Pathname can disagree between SSR HTML and the first client pass —
   // mark active after mount so aria-current / active class stay hydration-safe.
   const mounted = useIsClient()
+
+  if (!ready || !user) return null
 
   return (
     <nav className="app-bottom-nav" aria-label="Primary">
@@ -88,6 +93,8 @@ export function AppBottomNav() {
 }
 
 export function AppBottomNavSpacer(): ReactNode {
+  const { user, ready } = useSupabaseUser()
+  if (!ready || !user) return null
   return <div className="app-bottom-nav__spacer" aria-hidden />
 }
 

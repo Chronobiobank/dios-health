@@ -1,4 +1,4 @@
-﻿/** Deepdose marketing · public landing content. */
+/** Deepdose marketing · public landing content. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_VOICE } from '@/lib/brand/deepdose-voice'
@@ -88,12 +88,12 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Sensors run in the background so phenotype matching works — you do not open the app for accelerometer updates.',
+          title: 'Sensors run in the background so chronotype matching works — you do not open the app for accelerometer updates.',
           meta: 'Screen · Plumbing',
           href: '/',
         },
         {
-          title: 'Optional Homekit nights deepen your phenotype when you want a stronger read.',
+          title: 'Optional Homekit nights deepen your chronotype when you want a stronger read.',
           meta: 'Deeper read · Homekit',
           href: '/testkit',
         },
@@ -107,15 +107,15 @@ export const DEEPDOSE_LANDING_PLATFORM = {
     {
       id: 'score',
       label: 'Score',
-      body: 'Phenotype profile',
+      body: 'chronotype profile',
       icon: 'plan' as const,
       panelTitle: 'Your score',
       panelSeeAll: { label: 'Open Profile', href: '/profile' },
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Score is your chemical phenotype profile — stability, energy pattern, social window — not a diagnosis.',
-          meta: 'Profile · Phenotype',
+          title: 'Score is your chemical chronotype profile — stability, energy pattern, social window — not a diagnosis.',
+          meta: 'Profile · chronotype',
           href: '/profile',
         },
         {
@@ -140,13 +140,13 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Dose here because only people in your phenotype group understand what the night feels like.',
+          title: 'Dose here because only people in your chronotype group understand what the night feels like.',
           meta: 'Dose · Why here',
           href: '/dose',
         },
         {
-          title: 'Four phenotypes — Wolf, Lion, Bear, Dolphin.',
-          meta: 'Phenotype · Expression',
+          title: 'Four chronotypes — Wolf, Lion, Bear, Dolphin.',
+          meta: 'chronotype · Expression',
           href: '/grid',
         },
         {
@@ -166,7 +166,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
       panelLayout: 'grid' as const,
       panelItems: [
         {
-          title: 'Who is online in your biological window right now — compatible chemical phenotypes.',
+          title: 'Who is online in your biological window right now — compatible chemical chronotypes.',
           meta: 'Sync · Value prop',
           href: '/connect',
         },
@@ -208,12 +208,12 @@ export function patientPlanHeroSupport(medCount: number, verdict: string): strin
   return `${intro} ${verdict}`
 }
 
-/** Profile · chemical phenotype score tiles (protocols live on /dosage). */
+/** Profile · chemical chronotype score tiles (protocols live on /dosage). */
 export const PATIENT_SLEEP_WAKE_DASH = {
   title: 'Your chemistry.',
-  diagnosticEyebrow: 'Your phenotype profile',
+  diagnosticEyebrow: 'Your chronotype profile',
   subtitleBefore: 'We use AI and your phone data to calculate your ',
-  subtitleHighlight: 'chemical phenotype score',
+  subtitleHighlight: 'chemical chronotype score',
   subtitleAfter:
     '. It shows how locked your nights are, and which daily changes can strengthen your chemistry.',
   scienceLink: 'Read the science',
@@ -228,18 +228,18 @@ export const PATIENT_SLEEP_WAKE_DASH = {
   wakeHint: '',
   riskTile: 'Lifestyle alignment',
   riskHint:
-    'Your phone score reflects how steady your chemical phenotype is. It is a personal rhythm profile — not a medical diagnosis.',
+    'Your phone score reflects how steady your chemical chronotype is. It is a personal rhythm profile — not a medical diagnosis.',
   dosageCta: 'Open dosage protocol',
   cta: 'Save my plan',
 } as const
 
-/** Six-dose protocol — expands from phenotype score into what to do. */
+/** Six-dose protocol — expands from chronotype score into what to do. */
 export const PATIENT_SIX_DOSE_PROTOCOL = {
   eyebrow: 'Your protocol',
   title: 'Six doses to strengthen your chemistry',
   support:
     'Sunlight, nutrient, biomedical, physiological, neurological, and blackout. Hold them and your nights line up.',
-  education: 'Lined-up nights raise your score. Stronger score, clearer chemical phenotype.',
+  education: 'Lined-up nights raise your score. Stronger score, clearer chemical chronotype.',
 } as const
 
 /** Consumer → GP handoff after public analysis (optional clinical deepen). */
@@ -249,13 +249,13 @@ export const LANDING_GP_HANDOFF_COPY = {
   shareOptionalCta: 'Print a summary for your GP',
   tiptraqCta: 'Get a Homekit read →',
   disclaimer:
-    'Decision support only, not a diagnosis. Homekit nights deepen your phenotype when you want more than a phone score.',
+    'Decision support only, not a diagnosis. Homekit nights deepen your chronotype when you want more than a phone score.',
   summaryTitle: 'Summary for your GP',
   summaryMeta:
     'Printable sleep–medicine summary for a medication review and home sleep testing.',
   summaryEmpty: 'Run a chemistry check on your sleep–wake plan first, then share the summary with your GP.',
   summaryTipTraqBody:
-    'If nights feel broken or breathing may be involved, a Homekit (three nights) can deepen your phenotype read before anyone changes your meds.',
+    'If nights feel broken or breathing may be involved, a Homekit (three nights) can deepen your chronotype read before anyone changes your meds.',
 } as const
 
 export const DEEPDOSE_PLAN_NEXT_STEPS = {
@@ -272,27 +272,27 @@ export const DEEPDOSE_PLAN_NEXT_STEPS = {
       sri: 'SRI',
       wake: 'Typical wake',
       sleep: 'Sleep target',
-      chronotype: 'Chemical phenotype',
+      chronotype: 'chemical chronotype',
     },
-    note: 'A first phenotype screen from what you told us. Phone and wearable data sharpen it later.',
+    note: 'A first chronotype screen from what you told us. Phone and wearable data sharpen it later.',
   },
   doses: {
     eyebrow: 'Step 2 of 3',
     headline: 'Here are your six doses',
     support:
       'Sunlight, food, movement, focus, connection, and blackout. Hold them to raise your SRI and give chemistry a fairer chance.',
-    education: `${DEEPDOSE_NAME} times six daily cues to your chemical phenotype. More locked nights, chemistry that works.`,
+    education: `${DEEPDOSE_NAME} times six daily cues to your chemical chronotype. More locked nights, chemistry that works.`,
   },
   join: {
     eyebrow: 'Step 3 of 3',
     headline: 'Share details. Sync and connect.',
     support:
-      'Understand your chemical phenotype, share what you choose, and find people on compatible chemistry. Stay free, or deepen the read with Homekit.',
+      'Understand your chemical chronotype, share what you choose, and find people on compatible chemistry. Stay free, or deepen the read with Homekit.',
     commons: {
       title: 'Commons',
       figure: 'Free',
       points: [
-        'Understand and save your chemical phenotype',
+        'Understand and save your chemical chronotype',
         'Share details you choose for connection',
         'Match and message people on compatible chemistry',
         'Help research only if you opt in',
@@ -304,7 +304,7 @@ export const DEEPDOSE_PLAN_NEXT_STEPS = {
       figure: 'From Testkit',
       points: [
         'Homekit, three nights',
-        'Stronger phenotype baseline to share',
+        'Stronger chronotype baseline to share',
         'Verified sleep badge when you want it',
         'Quarterly re-reads catch drift early',
       ],
@@ -362,12 +362,12 @@ export const DEEPDOSE_PATIENT_PLAN_PROFILE = {
   avatarEditLabel: 'Edit',
   avatarEmptyLabel: 'Add photo',
   baseline:
-    'Free to join · understand your chemical phenotype, share details you choose, sync with peers, and help research if you want to.',
+    'Free to join · understand your chemical chronotype, share details you choose, sync with peers, and help research if you want to.',
 } as const
 
 /** Social /profile — identity + Chemistry tile (SRI). */
 export const SOCIAL_PROFILE = {
-  chemistryTitle: 'Phenotype score',
+  chemistryTitle: 'chronotype score',
   sleepLabel: 'Lights off',
   wakeLabel: 'Lights on',
   share: 'Post your dose',
@@ -398,7 +398,7 @@ export const DEEPDOSE_PATIENT_PLAN_SHARING = {
       showPeers: false,
     },
     {
-      title: 'Sync with people on a compatible chemical phenotype.',
+      title: 'Sync with people on a compatible chemical chronotype.',
       meta: 'Sync · opt in · you control what others see',
       href: '/connect',
       showPeers: true,

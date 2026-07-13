@@ -1,4 +1,4 @@
-﻿/** Site navigation — light OpenAI chrome. Product routes use bottom nav only. */
+/** Site navigation — light OpenAI chrome. Product routes use bottom nav only. */
 
 /** Marketing header. Product tabs live in APP_BOTTOM_NAV. */
 export const DEEPDOSE_SITE_LINKS = [

@@ -38,7 +38,7 @@ export const HOW_IT_WORKS_STEPS = [
     lead: 'Screen',
     rest: 'your clock',
     teaser:
-      'Screen is plumbing — passive phone sensors calculate your phenotype so matching works without you opening an app for sensors.',
+      'Screen is plumbing — passive phone sensors calculate your chronotype so matching works without you opening an app for sensors.',
     cue: '#0f172a',
     href: '/',
   },
@@ -48,7 +48,7 @@ export const HOW_IT_WORKS_STEPS = [
     lead: 'Score',
     rest: 'your type',
     teaser:
-      'Score is your chemical phenotype profile — circadian stability, energy pattern, social window — ownership, not a diagnosis.',
+      'Score is your chemical chronotype profile — circadian stability, energy pattern, social window — ownership, not a diagnosis.',
     cue: '#0f172a',
     href: '/profile',
   },
@@ -58,7 +58,7 @@ export const HOW_IT_WORKS_STEPS = [
     lead: 'Share',
     rest: 'your dose',
     teaser:
-      'Dose into a phenotype feed — Wolf, Lion, Bear, or Dolphin — peers who live your chemistry.',
+      'Dose into a chronotype feed — Wolf, Lion, Bear, or Dolphin — peers who live your chemistry.',
     cue: '#0f172a',
     href: '/dose',
   },
@@ -77,7 +77,7 @@ export const HOW_IT_WORKS_STEPS = [
 export const HOW_IT_WORKS_CAPTION = DEEPDOSE_LOOP_CAPTION
 
 export const HOW_IT_WORKS_PHENOTYPES = {
-  title: 'Know Your Phenotype',
+  title: 'Know Your Chronotype',
   lede: DEEPDOSE_PROMISE,
   /** Two-line bodies — ~48–50 chars so larger type never wraps to three or ellipsizes. */
   items: [
@@ -110,37 +110,38 @@ export const HOW_IT_WORKS_FOUNDING = {
 } as const
 
 /**
- * Why this exists — everyday words, no product jargon in titles.
- * Loop beat order: Score → Sync → Homekit.
- * Labels = 11 chars; bodies = 66 chars so the three tiles read even.
+ * Why clocks matter — social jet lag story (illustrative pair).
+ * Research: Risner, Katz & Stamoulis, SLEEP (2025) — ABCD cohort SJL × brain structure/networks.
  */
 export const HOW_IT_WORKS_WHY = {
-  title: 'Why Deepdose?',
+  title: 'Why Clocks Matter',
+  brain: {
+    scans: [
+      {
+        id: 'aligned',
+        label: 'ALIGNED',
+        src: '/research/sjl-aligned-clock.png',
+        alt: 'Illustrative brain scan: aligned weekday–weekend sleep timing',
+      },
+      {
+        id: 'social-jetlag',
+        label: 'SOCIAL JET LAG',
+        src: '/research/sjl-social-jetlag.png',
+        alt: 'Illustrative brain scan: social jet lag — misaligned weekday vs weekend clock',
+      },
+    ],
+    lede: 'When your body clock drifts between weekdays and weekends — social jet lag — emotion and focus networks quiet down',
+    credit: {
+      text: 'Illustrative pair. Research:',
+      hrefs: [
+        {
+          label: 'Risner et al., SLEEP (2025)',
+          href: 'https://doi.org/10.1093/sleep/zsaf392',
+        },
+      ],
+    },
+  },
 } as const
-
-export const HOW_IT_WORKS_STORY = [
-  {
-    id: 'score',
-    label: 'Score yours',
-    body: 'Score your type from signup — your chemical reputation, not a quiz.',
-    href: '/profile',
-    cta: 'Score your type',
-  },
-  {
-    id: 'solution',
-    label: "Who's awake",
-    body: "See who's awake when you are — real chemistry match, nowhere else.",
-    href: '/connect',
-    cta: "See who's up",
-  },
-  {
-    id: 'care',
-    label: 'Home nights',
-    body: 'Three nights at home — prove your clock and catch early apnea risk.',
-    href: '/testkit',
-    cta: 'Get a Homekit',
-  },
-] as const
 
 /** Manjam cohort — land on founders pitch. */
 export const HOW_IT_WORKS_CTAS = [

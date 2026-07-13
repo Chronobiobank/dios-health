@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: `Share · ${DEEPDOSE_NAME}`,
-  description: 'Log a dose — photo plus phenotype score.',
+  description: 'Log a dose — photo plus chronotype score.',
   alternates: { canonical: '/share' },
 }
 

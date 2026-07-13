@@ -1,11 +1,11 @@
-ï»¿/** TipTraQ setup guide , six photo step tiles. */
+/** TipTraQ setup guide , six photo step tiles. */
 
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const TIPTRAQ_PAGE_META = {
-  title: `Homekit Â· ${DEEPDOSE_NAME}`,
+  title: `Homekit · ${DEEPDOSE_NAME}`,
   description:
-    'Wear Homekit at home for a deeper chemistry read â€” charge, set up, overnight wear, upload, and a clearer rhythm baseline to share.',
+    'Wear Homekit at home for a deeper chemistry read — charge, set up, overnight wear, upload, and a clearer rhythm baseline to share.',
 } as const
 
 export const TIPTRAQ_PAGE_INTRO = {
@@ -74,9 +74,9 @@ export const TIPTRAQ_GUIDE_STEPS: readonly TipTraqGuideStep[] = [
     rank: 4,
     cue: '#8b9cf8',
     title: 'Your nights sync',
-    body: 'End each morning to upload â€” usually across three nights.',
+    body: 'End each morning to upload — usually across three nights.',
     image: '/tiptraq/tiptraq-v3-4c.png',
-    alt: 'Homekit sleep centre dashboard listing each nightâ€™s recording progress',
+    alt: 'Homekit sleep centre dashboard listing each night’s recording progress',
     copySide: 'left',
     imagePosition: 'center',
   },
@@ -87,7 +87,7 @@ export const TIPTRAQ_GUIDE_STEPS: readonly TipTraqGuideStep[] = [
     title: 'An expert reviews',
     body: 'Every recording is validated by a sleep professional.',
     image: '/tiptraq/tiptraq-v3-5.png',
-    alt: 'Homekit recording view with SpOâ‚‚, pulse rate and sleep-stage traces',
+    alt: 'Homekit recording view with SpO2, pulse rate and sleep-stage traces',
     copySide: 'right',
     imagePosition: 'center',
   },
@@ -96,9 +96,9 @@ export const TIPTRAQ_GUIDE_STEPS: readonly TipTraqGuideStep[] = [
     rank: 6,
     cue: '#c9b6f2',
     title: 'Your results',
-    body: 'Clear oxygen, staging, and TQ-AHI for your phenotype.',
+    body: 'Clear oxygen, staging, and TQ-AHI for your chronotype.',
     image: '/tiptraq/tiptraq-v3-6b.png',
-    alt: 'A validated Homekit sleep report with TQ-AHI, SpOâ‚‚ and sleep-stage summary',
+    alt: 'A validated Homekit sleep report with TQ-AHI, SpO2 and sleep-stage summary',
     copySide: 'left',
     imagePosition: 'center',
   },

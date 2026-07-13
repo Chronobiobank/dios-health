@@ -70,7 +70,7 @@ function DoseCard({
             {formatTime(dose.timestamp)}
           </p>
         </div>
-        <span className="dd-grid__sri tabular-nums" title="Phenotype score">
+        <span className="dd-grid__sri tabular-nums" title="chronotype score">
           {sleepScoreBadge(dose.sri)}
         </span>
       </header>

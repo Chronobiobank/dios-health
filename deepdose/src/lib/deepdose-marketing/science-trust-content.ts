@@ -10,7 +10,7 @@ export const SCIENCE_TRUST_META = {
 
 export const SCIENCE_TRUST_INTRO = {
   title: 'Sleep you can measure.',
-  lede: 'Honest night reads for a clearer phenotype score.',
+  lede: 'Honest night reads for a clearer chronotype score.',
 } as const
 
 export const SCIENCE_TRUST_FEATURES = [

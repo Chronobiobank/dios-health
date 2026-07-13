@@ -78,7 +78,7 @@ export const MEDICATION_TIMINGS: Record<MedicationCode, MedicationTiming> = {
     populationWindowStart: '20:00',
     populationWindowEnd: '22:00',
     evidenceGrade: 'B',
-    rationale: 'Long half-life reduces timing sensitivity but evening dosing supports nocturnal BP control and non-dipper phenotype management.',
+    rationale: 'Long half-life reduces timing sensitivity but evening dosing supports nocturnal BP control and non-dipper chronotype management.',
     keyTrial: 'Hermida et al., Chronobiol Int 2007',
     phaseOffsetSensitive: false,
   },

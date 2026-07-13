@@ -950,7 +950,7 @@ export function PatientTimingPlan({
                       <ul className="seco-plan-tile-stack">
                         {[
                           {
-                            title: 'Anonymous circadian phenotype data',
+                            title: 'Anonymous circadian chronotype data',
                             meta: 'Shared with research (optional)',
                             on: phenotypeOn,
                             toggle: () => setPhenotypeOn((v) => !v),

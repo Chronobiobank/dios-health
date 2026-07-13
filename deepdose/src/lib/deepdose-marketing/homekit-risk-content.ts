@@ -6,19 +6,19 @@ import { SLEEP_SCORE } from '@/lib/brand/sleep-score'
 export const HOMEKIT_RISK_META = {
   title: `Homekit · ${DEEPDOSE_NAME}`,
   description:
-    'Your score flags high phenotype irregularity. Three nights at home with Homekit for a clearer rhythm baseline.',
+    'Your score flags high chronotype irregularity. Three nights at home with Homekit for a clearer rhythm baseline.',
 } as const
 
 export const HOMEKIT_RISK_INTRO = {
-  title: 'High phenotype irregularity',
-  lede: 'Your Sleep Regularity Index shows nights that swing off your phenotype rhythm. Homekit reads oxygen and breathing across three nights at home.',
+  title: 'High chronotype irregularity',
+  lede: 'Your Sleep Regularity Index shows nights that swing off your chronotype rhythm. Homekit reads oxygen and breathing across three nights at home.',
 } as const
 
 export const HOMEKIT_RISK_POINTS = [
   {
     id: 'flag',
     title: 'Why this flagged',
-    body: 'A mid or low SRI often means irregular nights relative to your chemical phenotype. Phone screening is a first pass — not a diagnosis.',
+    body: 'A mid or low SRI often means irregular nights relative to your chemical chronotype. Phone screening is a first pass — not a diagnosis.',
   },
   {
     id: 'nights',
@@ -37,10 +37,10 @@ export const HOMEKIT_RISK_CTA = {
   secondary: { label: 'How Homekit works', href: '/tiptraq' },
 } as const
 
-/** Profile diagnostic tile — phenotype irregularity + Homekit CTA pill. */
+/** Profile diagnostic tile — chronotype irregularity + Homekit CTA pill. */
 export const HOMEKIT_RISK_TILE = {
-  title: 'High phenotype irregularity',
-  body: 'Our 3-night sleep test reads oxygen and breathing at home — a clearer check on nights that drift off your phenotype rhythm.',
+  title: 'High chronotype irregularity',
+  body: 'Our 3-night sleep test reads oxygen and breathing at home — a clearer check on nights that drift off your chronotype rhythm.',
   cta: 'Get clinical test',
   href: '/homekit',
 } as const

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { HowLoopDiagram } from '@/components/deepdose/HowLoopDiagram'
 import { MarketingSceneTile } from '@/components/deepdose/MarketingSceneTile'
 import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
+import { WhyClocksBrainTile } from '@/components/deepdose/WhyClocksBrainTile'
 import {
   HOW_IT_WORKS_CTAS,
   HOW_IT_WORKS_FOUNDING,
@@ -11,7 +12,6 @@ import {
   HOW_IT_WORKS_META,
   HOW_IT_WORKS_PHENOTYPES,
   HOW_IT_WORKS_SCENE,
-  HOW_IT_WORKS_STORY,
   HOW_IT_WORKS_WHY,
 } from '@/lib/deepdose-marketing/how-it-works-content'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
@@ -26,13 +26,21 @@ export default function HowItWorksPage() {
   return (
     <article className="seco-page seco-science seco-chronobiobank seco-mission seco-marketing-page seco-how-page">
       <div className="seco-landing__section-inner seco-how-page__inner">
+        <header className="seco-how-page__why seco-reveal seco-reveal--1" aria-labelledby="how-why-title">
+          <h1 id="how-why-title" className="seco-page__title">
+            <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_WHY.title}</span>
+          </h1>
+        </header>
+
+        <WhyClocksBrainTile className="seco-reveal seco-reveal--1" />
+
         <header
-          className="seco-how-page__why seco-reveal seco-reveal--1"
+          className="seco-how-page__why seco-reveal seco-reveal--2"
           aria-labelledby="how-loop-title"
         >
-          <h1 id="how-loop-title" className="seco-page__title">
+          <h2 id="how-loop-title" className="seco-page__title">
             <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_INTRO.title}</span>
-          </h1>
+          </h2>
         </header>
 
         <MarketingSceneTile
@@ -44,16 +52,16 @@ export default function HowItWorksPage() {
         </MarketingSceneTile>
 
         <header
-          id="phenotype"
-          className="seco-how-page__why seco-reveal seco-reveal--2"
-          aria-labelledby="how-phenotype-title"
+          id="chronotype"
+          className="seco-how-page__why seco-reveal seco-reveal--3"
+          aria-labelledby="how-chronotype-title"
         >
-          <h2 id="how-phenotype-title" className="seco-page__title">
+          <h2 id="how-chronotype-title" className="seco-page__title">
             <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_PHENOTYPES.title}</span>
           </h2>
         </header>
 
-        <ul className="seco-how-page__story seco-how-page__phenotypes seco-reveal seco-reveal--2" aria-label="Know Your Phenotype">
+        <ul className="seco-how-page__story seco-how-page__phenotypes seco-reveal seco-reveal--3" aria-label="Know Your Chronotype">
           {HOW_IT_WORKS_PHENOTYPES.items.map((tile) => (
             <li key={tile.id} className="seco-how-page__story-tile">
               <div className="seco-how-page__pheno-mark">
@@ -62,24 +70,6 @@ export default function HowItWorksPage() {
               </div>
               <div className="seco-how-page__pheno-rule" aria-hidden />
               <p className="seco-how-page__story-body seco-how-page__pheno-sub">{tile.body}</p>
-            </li>
-          ))}
-        </ul>
-
-        <header className="seco-how-page__why seco-reveal seco-reveal--3" aria-labelledby="how-why-title">
-          <h2 id="how-why-title" className="seco-page__title">
-            <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_WHY.title}</span>
-          </h2>
-        </header>
-
-        <ul className="seco-how-page__story seco-how-page__why-tiles seco-reveal seco-reveal--3" aria-label="Why Deepdose">
-          {HOW_IT_WORKS_STORY.map((tile) => (
-            <li key={tile.id}>
-              <Link href={tile.href} className="seco-how-page__story-tile seco-how-page__story-tile--link">
-                <p className="seco-how-page__story-label">{tile.label}</p>
-                <p className="seco-how-page__story-body">{tile.body}</p>
-                <span className="seco-how-page__story-cta">{tile.cta} →</span>
-              </Link>
             </li>
           ))}
         </ul>

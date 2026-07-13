@@ -26,7 +26,7 @@ export const SAFETY_PAGE = {
     },
     {
       heading: 'Health boundary',
-      body: `${DEEPDOSE_NAME} helps people discover their chemical phenotype, score their chemistry, share doses, and sync with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
+      body: `${DEEPDOSE_NAME} helps people discover their chemical chronotype, score their chemistry, share doses, and sync with peers. It is not emergency care or a clinic. If you are in crisis, contact local emergency services or a trusted clinician.`,
     },
     {
       heading: 'Reporting',

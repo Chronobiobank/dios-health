@@ -1,4 +1,4 @@
-/** Local dose uploads — posts into a chemical phenotype group. */
+/** Local dose uploads — posts into a chemical chronotype group. */
 
 import {
   CHEMICAL_PHENOTYPE_BY_ID,
@@ -8,14 +8,14 @@ import {
   type ChemicalPhenotypeId,
 } from '@/lib/brand/chemical-phenotypes'
 
-/** Dose tag = phenotype group the post belongs to. */
+/** Dose tag = chronotype group the post belongs to. */
 export type DoseTag = ChemicalPhenotypeId
 
 export const DOSE_TAGS: readonly DoseTag[] = CHEMICAL_PHENOTYPE_IDS
 
 export type DoseUpload = {
   id: string
-  /** Phenotype group this post belongs to */
+  /** Chronotype group this post belongs to */
   tag: DoseTag
   mediaUrl: string
   /** Local calendar day YYYY-MM-DD */
@@ -38,7 +38,7 @@ export const DOSE_SYNCS_KEY = 'deepdose-dose-syncs'
 /** Dose ids the current member has synced (Strava-style once). */
 export const DOSE_SYNCED_BY_ME_KEY = 'deepdose-dose-synced-by-me'
 
-/** Consumer labels — one button / card per phenotype group. */
+/** Consumer labels — one button / card per chronotype group. */
 export const DOSE_TAG_META: Record<
   DoseTag,
   { label: string; hash: string; cue: string; hint: string; idea: string }

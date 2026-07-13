@@ -39,7 +39,7 @@ function readClockFromLocation(): AppGroupId | null {
   }
 }
 
-/** Nextdoor-style left control: open a phenotype feed group. */
+/** Nextdoor-style left control: open a chronotype feed group. */
 export function AppGroupSwitcher() {
   const router = useRouter()
   const pathname = usePathname() ?? '/'

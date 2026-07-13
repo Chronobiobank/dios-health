@@ -5,15 +5,16 @@ import { FounderQuoteTile } from '@/components/deepdose/FounderQuoteTile'
 import { HowLoopDiagram } from '@/components/deepdose/HowLoopDiagram'
 import { MarketingSceneTile } from '@/components/deepdose/MarketingSceneTile'
 import { PhenotypeIcon } from '@/components/deepdose/PhenotypeIcon'
+import { WhyClocksBrainTile } from '@/components/deepdose/WhyClocksBrainTile'
 import {
-  FOUNDERS_CTA,
+  FOUNDERS_CTAS,
   FOUNDERS_INTRO,
   FOUNDERS_PAGE_META,
 } from '@/lib/deepdose-marketing/founders-content'
 import {
+  HOW_IT_WORKS_INTRO,
   HOW_IT_WORKS_PHENOTYPES,
   HOW_IT_WORKS_SCENE,
-  HOW_IT_WORKS_STORY,
   HOW_IT_WORKS_WHY,
 } from '@/lib/deepdose-marketing/how-it-works-content'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/founders' },
 }
 
-/** /founders — Manjam invite + How content + claim account. */
+/** /founders — Manjam invite + Why clocks + How + claim account. */
 export default function FoundersPage() {
   return (
     <article className="seco-page seco-science seco-chronobiobank seco-mission seco-marketing-page seco-how-page">
@@ -42,6 +43,20 @@ export default function FoundersPage() {
           className="seco-reveal seco-reveal--1"
         />
 
+        <header className="seco-how-page__why seco-reveal seco-reveal--2" aria-labelledby="founders-why-title">
+          <h2 id="founders-why-title" className="seco-page__title">
+            <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_WHY.title}</span>
+          </h2>
+        </header>
+
+        <WhyClocksBrainTile className="seco-reveal seco-reveal--2" />
+
+        <header className="seco-how-page__why seco-reveal seco-reveal--3" aria-labelledby="founders-how-title">
+          <h2 id="founders-how-title" className="seco-page__title">
+            <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_INTRO.title}</span>
+          </h2>
+        </header>
+
         <MarketingSceneTile
           image={HOW_IT_WORKS_SCENE.image}
           objectPosition={HOW_IT_WORKS_SCENE.objectPosition}
@@ -51,18 +66,18 @@ export default function FoundersPage() {
         </MarketingSceneTile>
 
         <header
-          id="phenotype"
-          className="seco-how-page__why seco-reveal seco-reveal--2"
-          aria-labelledby="founders-phenotype-title"
+          id="chronotype"
+          className="seco-how-page__why seco-reveal seco-reveal--3"
+          aria-labelledby="founders-chronotype-title"
         >
-          <h2 id="founders-phenotype-title" className="seco-page__title">
+          <h2 id="founders-chronotype-title" className="seco-page__title">
             <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_PHENOTYPES.title}</span>
           </h2>
         </header>
 
         <ul
-          className="seco-how-page__story seco-how-page__phenotypes seco-reveal seco-reveal--2"
-          aria-label="Know Your Phenotype"
+          className="seco-how-page__story seco-how-page__phenotypes seco-reveal seco-reveal--3"
+          aria-label="Know Your Chronotype"
         >
           {HOW_IT_WORKS_PHENOTYPES.items.map((tile) => (
             <li key={tile.id} className="seco-how-page__story-tile">
@@ -76,25 +91,19 @@ export default function FoundersPage() {
           ))}
         </ul>
 
-        <header className="seco-how-page__why seco-reveal seco-reveal--3" aria-labelledby="founders-why-title">
-          <h2 id="founders-why-title" className="seco-page__title">
-            <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_WHY.title}</span>
-          </h2>
-        </header>
-
-        <ul className="seco-how-page__story seco-how-page__why-tiles seco-reveal seco-reveal--3" aria-label="Why Deepdose">
-          {HOW_IT_WORKS_STORY.map((tile) => (
-            <li key={tile.id} className="seco-how-page__story-tile">
-              <p className="seco-how-page__story-label">{tile.label}</p>
-              <p className="seco-how-page__story-body">{tile.body}</p>
-            </li>
-          ))}
-        </ul>
-
         <section className="seco-how-page__founding seco-reveal seco-reveal--4">
-          <div className={marketingCtaClass('seco-how-page__cta')}>
-            <Link href={FOUNDERS_CTA.href} className="seco-landing__btn seco-landing__btn--ghost">
-              {FOUNDERS_CTA.label}
+          <div className={marketingCtaClass('seco-how-page__cta', 'seco-marketing-cta--row')}>
+            <Link
+              href={FOUNDERS_CTAS[0].href}
+              className="seco-landing__btn seco-landing__btn--ghost"
+            >
+              {FOUNDERS_CTAS[0].label}
+            </Link>
+            <Link
+              href={FOUNDERS_CTAS[1].href}
+              className="seco-landing__btn seco-landing__btn--primary"
+            >
+              {FOUNDERS_CTAS[1].label}
             </Link>
           </div>
         </section>
