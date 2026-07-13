@@ -9,8 +9,7 @@ export const TESTKIT_META = {
 } as const
 
 export const TESTKIT_INTRO = {
-  title: 'Three nights. Clearer chemistry.',
-  lede: 'Homekit for a stronger chronotype read.',
+  title: 'Know your sleep apnea risk in 3 days.',
 } as const
 
 export const TESTKIT_KIT = {

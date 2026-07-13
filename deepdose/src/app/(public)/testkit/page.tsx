@@ -42,7 +42,6 @@ export default function TestkitPage() {
           <h1 className="seco-page__title">
             <span className="seco-landing__hero-spectrum">{TESTKIT_INTRO.title}</span>
           </h1>
-          <p className="seco-page__lede">{TESTKIT_INTRO.lede}</p>
         </header>
 
         <section className="seco-homekit__kit seco-reveal seco-reveal--2" aria-labelledby="homekit-kit-title">
