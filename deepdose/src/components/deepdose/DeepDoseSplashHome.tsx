@@ -17,15 +17,12 @@ import {
 /** Logo · orbit · Max Your Chemistry · founder CTA. */
 export function DeepDoseSplashHome() {
   const gate = DEEPDOSE_HOME_GATE
-  const { links } = gate
 
   return (
     <SplashFrame showNav={false}>
       <div className="dd-gate">
         <Suspense fallback={null}>
           <SplashGateForm
-            aboutHref={links.about.href}
-            aboutLabel={links.about.label}
             signInLabel={gate.signInLabel}
             brand={
               <Link href="/" className="clinical-site-nav__brand" aria-label="Deepdose home">

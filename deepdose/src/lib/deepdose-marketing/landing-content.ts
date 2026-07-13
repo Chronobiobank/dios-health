@@ -188,7 +188,7 @@ export const DEEPDOSE_LANDING_PLATFORM = {
 export const DEEPDOSE_LANDING_CLOSE = {
   headline: 'Start free',
   support: DEEPDOSE_VOICE.closeSupport,
-  cta: { label: 'Sign up for free', href: '/' },
+  cta: { label: 'Sign up for free', href: '/founders/join' },
 } as const
 
 export const DEEPDOSE_PATIENT_PLAN_HERO = {

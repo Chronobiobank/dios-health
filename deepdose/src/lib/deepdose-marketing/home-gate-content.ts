@@ -6,7 +6,6 @@ export const DEEPDOSE_HOME_GATE = {
   reportLabel: 'Report',
   agreeLine: 'You must be 18+ y/o to enter and agree to our',
   links: {
-    about: { label: 'About us', href: '/how' },
     terms: { label: 'Terms', href: '/terms' },
     report: { label: 'Report', href: '/report' },
   },

@@ -11,8 +11,6 @@ import {
 } from '@/lib/auth/post-login-path'
 
 type SplashGateFormProps = {
-  aboutHref: string
-  aboutLabel: string
   signInLabel: string
   brand: ReactNode
   headline: ReactNode
@@ -23,8 +21,6 @@ type SplashGateFormProps = {
 
 /** Splash: chrome + headline + med baseline. Auth lives on /login. */
 export function SplashGateForm({
-  aboutHref,
-  aboutLabel,
   signInLabel,
   brand,
   headline,
@@ -68,9 +64,6 @@ export function SplashGateForm({
       <header className="dd-gate__chrome">
         {brand}
         <nav className="dd-gate__chrome-links" aria-label="Account">
-          <Link href={aboutHref} className="dd-gate__chrome-link">
-            {aboutLabel}
-          </Link>
           <Link href={authedHome ?? signInHref} className="dd-gate__chrome-link">
             {signInLabel}
           </Link>

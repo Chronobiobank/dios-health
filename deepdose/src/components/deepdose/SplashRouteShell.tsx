@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
 import { PublicMarketingShell } from '@/components/deepdose/PublicMarketingShell'
+import { ScrollToTopOnMount } from '@/components/deepdose/ScrollToTopOnMount'
 
 const SPLASH_PATHS = new Set(['/'])
 
@@ -27,8 +28,18 @@ export function SplashRouteShell({ children }: SplashRouteShellProps) {
   // SplashFrame already owns the light splash shell — do not nest another layout
   // (nested 100dvh shells are what create a home scrollbar).
   if (isSplash) {
-    return <>{children}</>
+    return (
+      <>
+        <ScrollToTopOnMount />
+        {children}
+      </>
+    )
   }
 
-  return <PublicMarketingShell>{children}</PublicMarketingShell>
+  return (
+    <PublicMarketingShell>
+      <ScrollToTopOnMount />
+      {children}
+    </PublicMarketingShell>
+  )
 }

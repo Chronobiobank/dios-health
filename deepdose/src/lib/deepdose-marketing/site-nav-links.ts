@@ -9,7 +9,7 @@ export const DEEPDOSE_SITE_LINKS = [
 
 export const DEEPDOSE_SITE_CTA = {
   label: 'Sign up',
-  href: '/',
+  href: '/founders/join',
 } as const
 
 /** @deprecated Prefer DEEPDOSE_SITE_LINKS — kept for older imports. */

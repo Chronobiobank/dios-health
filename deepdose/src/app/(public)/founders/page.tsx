@@ -96,6 +96,7 @@ export default function FoundersPage() {
             <Link
               href={FOUNDERS_CTAS[0].href}
               className="seco-landing__btn seco-landing__btn--ghost"
+              scroll
             >
               {FOUNDERS_CTAS[0].label}
             </Link>

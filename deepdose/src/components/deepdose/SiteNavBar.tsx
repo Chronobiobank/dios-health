@@ -83,16 +83,16 @@ export function SiteNavBar({
               {link.label}
             </Link>
           ))}
-          {cta ? (
-            <Link href={cta.href} className="seco-nav__cta">
-              {cta.label}
-            </Link>
-          ) : null}
+        {cta ? (
+          <Link href={cta.href} className="seco-nav__cta" scroll>
+            {cta.label}
+          </Link>
+        ) : null}
           {signOut ? <SignOutButton className="seco-nav__link" /> : null}
         </nav>
 
         {cta ? (
-          <Link href={cta.href} className="seco-nav__cta seco-nav__cta--bar">
+          <Link href={cta.href} className="seco-nav__cta seco-nav__cta--bar" scroll>
             {cta.label}
           </Link>
         ) : null}
@@ -137,7 +137,7 @@ export function SiteNavBar({
           ))}
         </nav>
         {cta ? (
-          <Link href={cta.href} className="seco-nav__panel-cta">
+          <Link href={cta.href} className="seco-nav__panel-cta" scroll>
             {cta.label}
           </Link>
         ) : null}
