@@ -205,23 +205,9 @@ a.seco-how-page__story-tile--link:hover .seco-how-page__story-cta {
   overflow-wrap: anywhere;
 }
 
-/* Phenotype row — equal tile height; larger two-line subs */
+/* Phenotype row — spectrum cards own layout in deepdose-phenotype-icons.css */
 .seco-how-page__phenotypes {
   align-items: stretch;
-}
-
-.seco-how-page__phenotypes .seco-how-page__story-tile {
-  min-height: 100%;
-}
-
-.seco-how-page__phenotypes .seco-how-page__pheno-sub {
-  font-size: clamp(1.0625rem, 1rem + 0.45vw, 1.1875rem);
-  font-weight: 500;
-  line-height: 1.35;
-  letter-spacing: -0.018em;
-  min-height: calc(1.35em * 2);
-  max-height: none;
-  overflow: visible;
 }
 
 .seco-how-page__founding {

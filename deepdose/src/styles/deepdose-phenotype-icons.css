@@ -1,5 +1,5 @@
 /**
- * Phenotype icons — soft spectrum discs + black SF-style line art.
+ * Phenotype icons — soft cue/spectrum discs + black SF-style line art.
  */
 
 .dd-pheno-icon {
@@ -60,76 +60,108 @@
   height: 64%;
 }
 
-/* How page — title over icon | vertical rule | sub left of rule */
-.seco-how-page__phenotypes .seco-how-page__story-tile {
-  display: grid;
-  /* Fixed mark column so icon centres share one vertical line across tiles */
-  grid-template-columns: 4.5rem auto minmax(0, 1fr);
-  align-items: center;
-  align-content: start;
-  column-gap: 0;
-  row-gap: 0;
+/* Chronotype spectrum cards — icon | rule | name + peak */
+.seco-how-page__phenotypes.seco-spectrum-tiles {
+  width: 100%;
+  align-items: stretch;
+}
+
+.seco-how-page__pheno-tile.seco-spectrum-tile {
+  --spectrum-tile-wash: 22%;
+  --spectrum-tile-wash-hover: 30%;
+  --spectrum-tile-border-mix: 48%;
+  align-items: stretch;
+  gap: 0.65rem;
+  padding: 0.95rem 0.95rem 1rem;
   text-align: left;
+  border-color: color-mix(in srgb, var(--cue) 28%, rgb(255 255 255 / 0.7));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 10px 28px rgb(15 23 42 / 0.08);
 }
 
-.seco-how-page__pheno-mark {
-  display: flex;
-  flex-direction: column;
+.seco-how-page__pheno-tile.seco-spectrum-tile:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--cue) var(--spectrum-tile-border-mix), rgb(255 255 255 / 0.55));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.95),
+    0 14px 34px color-mix(in srgb, var(--cue) 18%, rgb(15 23 42 / 0.12));
+}
+
+.seco-how-page__pheno-row {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
   align-items: center;
-  justify-content: center;
-  gap: 0.15rem;
-  width: 100%;
+  column-gap: 0;
   min-width: 0;
-  padding-inline-end: 0.75rem;
-  box-sizing: border-box;
 }
 
-.seco-how-page__pheno-mark .seco-how-page__story-label {
+.seco-how-page__pheno-tile .seco-how-page__pheno-icon.dd-pheno-icon {
+  width: 2.75rem;
+  height: 2.75rem;
   margin: 0;
-  width: 100%;
-  text-align: center;
-  letter-spacing: 0.08em;
-}
-
-.seco-how-page__pheno-icon.dd-pheno-icon {
-  margin: 0;
-  width: 2.5rem;
-  height: 2.5rem;
   flex-shrink: 0;
+  border-color: color-mix(in srgb, var(--cue) 42%, rgb(255 255 255 / 0.65));
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--cue) 38%, white) 0%,
+      color-mix(in srgb, var(--cue) 16%, white) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 6px 18px color-mix(in srgb, var(--cue) 22%, transparent);
 }
 
 .seco-how-page__pheno-rule {
   align-self: stretch;
   width: 1px;
   margin-block: 0.15rem;
-  background: rgb(15 23 42 / 0.14);
+  margin-inline: 0.75rem;
+  background: color-mix(in srgb, var(--cue) 28%, rgb(15 23 42 / 0.14));
 }
 
-.seco-how-page__pheno-sub {
-  margin: 0;
-  padding-inline-start: 0.85rem;
+.seco-how-page__pheno-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.2rem;
+  min-width: 0;
   text-align: left;
-  overflow-wrap: normal;
-  word-break: normal;
 }
 
-@media (max-width: 379px) {
-  .seco-how-page__phenotypes .seco-how-page__story-tile {
-    grid-template-columns: 4rem auto minmax(0, 1fr);
-  }
+.seco-how-page__pheno-name {
+  margin: 0;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(1.05rem, 0.95rem + 0.45vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: #0d0d0d;
+}
 
-  .seco-how-page__pheno-mark {
-    padding-inline-end: 0.55rem;
-  }
+.seco-how-page__pheno-peak {
+  margin: 0;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: rgb(15 23 42 / 0.48);
+}
 
-  .seco-how-page__pheno-icon.dd-pheno-icon {
-    width: 2.25rem;
-    height: 2.25rem;
-  }
-
-  .seco-how-page__pheno-sub {
-    padding-inline-start: 0.7rem;
-  }
+.seco-how-page__pheno-body {
+  margin: 0;
+  max-width: none;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(0.8125rem, 0.78rem + 0.2vw, 0.9rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: rgb(15 23 42 / 0.72);
+  overflow-wrap: anywhere;
 }
 
 /* Dose picker — text only; phenotype icons live on /how */
