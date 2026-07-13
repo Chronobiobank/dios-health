@@ -36,7 +36,7 @@ export const HOW_IT_WORKS_STEPS = [
     id: 'screen',
     badge: '1',
     lead: 'Screen',
-    rest: 'your base',
+    rest: 'your clock',
     teaser:
       'Screen is plumbing — passive phone sensors calculate your phenotype so matching works without you opening an app for sensors.',
     cue: '#0f172a',
@@ -144,7 +144,7 @@ export const HOW_IT_WORKS_STORY = [
 
 /** Manjam cohort — land on founders pitch. */
 export const HOW_IT_WORKS_CTAS = [
-  { label: 'Deepdose in Action', href: '/connect' },
+  { label: 'Deepdose in Action', href: '/founders' },
 ] as const
 
 export const HOW_IT_WORKS_CTA = HOW_IT_WORKS_CTAS[0]

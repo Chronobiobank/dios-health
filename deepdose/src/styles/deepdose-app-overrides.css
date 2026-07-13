@@ -3422,17 +3422,23 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  width: 100%;
   min-height: 0;
   margin: 0;
   padding: 0;
   overflow: hidden;
   border-radius: var(--seco-radius-lg);
+  text-align: left;
 }
 
 .seco-founder-quote--light {
-  border: 1px solid var(--seco-light-glass-border);
-  background: var(--seco-light-glass-bg);
-  box-shadow: var(--seco-light-glass-shadow);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  background: rgb(0 0 0 / 0.42);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
+    0 12px 36px rgb(0 0 0 / 0.12);
+  backdrop-filter: blur(32px) saturate(1.65);
+  -webkit-backdrop-filter: blur(32px) saturate(1.65);
   padding: clamp(1.25rem, 3.5vw, 2rem);
 }
 
@@ -3464,7 +3470,7 @@
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0.01em;
-  color: var(--seco-light-quote-ink-accent);
+  color: rgb(255 255 255 / 0.72);
 }
 
 .seco-founder-quote__pull {
@@ -3482,7 +3488,7 @@
   font-size: clamp(2.75rem, 6.5vw, 3.75rem);
   font-weight: 400;
   line-height: 1;
-  color: color-mix(in srgb, var(--seco-light-quote-ink-accent) 38%, transparent);
+  color: rgb(255 255 255 / 0.35);
   pointer-events: none;
 }
 
@@ -3496,8 +3502,8 @@
   font-style: italic;
   line-height: 1.42;
   letter-spacing: -0.012em;
-  color: var(--seco-light-quote-ink);
-  text-shadow: 0 1px 0 rgb(255 255 255 / 0.35);
+  color: rgb(255 255 255 / 0.96);
+  text-shadow: none;
 }
 
 .seco-founder-quote__text {
@@ -3513,12 +3519,12 @@
 .seco-founder-quote--light .seco-founder-quote__attrib {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 0;
   margin: clamp(1rem, 2.5vw, 1.375rem) 0 0;
   padding: 0;
   border-top: none;
-  text-align: right;
+  text-align: left;
 }
 
 .seco-founder-quote__attrib {
@@ -3537,7 +3543,7 @@
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1.15;
-  color: var(--seco-light-quote-ink);
+  color: rgb(255 255 255 / 0.92);
 }
 
 .seco-founder-quote__name {
@@ -3550,7 +3556,7 @@
 .seco-founder-quote--light .seco-founder-quote__role {
   font-size: 0.8125rem;
   line-height: 1.15;
-  color: rgb(11 18 32 / 0.62);
+  color: rgb(255 255 255 / 0.62);
 }
 
 .seco-founder-quote__role {

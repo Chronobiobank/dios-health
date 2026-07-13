@@ -31,7 +31,8 @@ export const DEEPDOSE_VOICE = {
   /** Home hero — Max Your / Chemistry */
   homeHeadlineWhite: 'Max Your',
   homeHeadlineAccent: 'Chemistry',
-  homeLede: 'Real connections timed to your rhythm.',
+  homeLede:
+    'Deepdose is the first social network that knows your body clock better than you do and matches it with others in sync.',
   /** Home CTA — single founder claim */
   homePrimaryCta: { label: 'Claim Free Access', href: '/founders' },
   /** @deprecated Home uses a single primary CTA. */

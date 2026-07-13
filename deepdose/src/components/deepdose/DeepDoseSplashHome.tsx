@@ -14,7 +14,7 @@ import {
   DEEPDOSE_HOME_SPLASH_HERO,
 } from '@/lib/deepdose-marketing/landing-content'
 
-/** Logo · orbit · Max Your Chemistry · founder CTA · Terms. */
+/** Logo · orbit · Max Your Chemistry · founder CTA. */
 export function DeepDoseSplashHome() {
   const gate = DEEPDOSE_HOME_GATE
   const { links } = gate
@@ -50,14 +50,6 @@ export function DeepDoseSplashHome() {
                   {DEEPDOSE_HOME_SPLASH.primaryCta.label}
                 </Link>
               </div>
-            }
-            footer={
-              <p className="dd-gate__agree">
-                {gate.agreeLine}{' '}
-                <Link href={links.terms.href}>{links.terms.label}</Link>
-                <span aria-hidden> · </span>
-                <Link href={links.report.href}>{links.report.label}</Link>
-              </p>
             }
           />
         </Suspense>

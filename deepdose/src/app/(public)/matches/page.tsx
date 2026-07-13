@@ -22,7 +22,7 @@ export default async function MatchesPage() {
   return (
     <ProductAppShell
       title="Matches"
-      leading={<AppTopBarBack href="/connect" label="Back to Sync" />}
+      leading={<AppTopBarBack href="/grid" label="Back" />}
       className="dd-connect"
     >
       <CommunityMatchesPanel variant="discovery" signedIn={Boolean(user)} />

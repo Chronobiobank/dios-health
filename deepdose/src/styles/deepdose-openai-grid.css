@@ -593,20 +593,14 @@
   .seco-spectrum-tile__body,
   .seco-spectrum-tile__lead,
   .seco-spectrum-tile__title,
-  .seco-spectrum-tile__cue,
-  .seco-founder-quote__text,
-  .seco-founder-quote__name,
-  .seco-founder-quote__role,
-  .seco-founder-quote__grounding
+  .seco-spectrum-tile__cue
 ) {
   -webkit-text-fill-color: unset;
 }
 
 .deepdose-shell.seco-shell--light .seco-marketing-page :is(
   .seco-hometest__kit-title,
-  .seco-spectrum-tile__title,
-  .seco-founder-quote__name,
-  .seco-founder-quote__text
+  .seco-spectrum-tile__title
 ) {
   color: rgb(15 23 42 / 0.92) !important;
 }
@@ -618,11 +612,24 @@
   .seco-technology__lede,
   .seco-chronobiobank__lede,
   .seco-science__lede,
-  .seco-page__lede,
+  .seco-page__lede
+) {
+  color: rgb(15 23 42 / 0.62) !important;
+}
+
+/* Dark glass quote — ambient shows through; light ink */
+.deepdose-shell.seco-shell--light .seco-marketing-page :is(
+  .seco-founder-quote__text,
+  .seco-founder-quote__name
+) {
+  color: rgb(255 255 255 / 0.96) !important;
+}
+
+.deepdose-shell.seco-shell--light .seco-marketing-page :is(
   .seco-founder-quote__role,
   .seco-founder-quote__grounding
 ) {
-  color: rgb(15 23 42 / 0.62) !important;
+  color: rgb(255 255 255 / 0.68) !important;
 }
 
 .deepdose-shell.seco-shell--light .seco-marketing-page :is(
