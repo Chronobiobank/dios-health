@@ -1,6 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
-import { consumerAuthPath, isStaffLoginPath, resolvePostLoginPath } from '@/lib/auth/post-login-path'
+import { consumerAuthPath, resolvePostLoginPath } from '@/lib/auth/post-login-path'
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
@@ -35,10 +35,6 @@ export async function middleware(request: NextRequest) {
       const loginUrl = new URL('/login', request.url)
       loginUrl.searchParams.set('next', pathname)
       return NextResponse.redirect(loginUrl)
-    }
-    // Consumer /login is retired — home gate owns join / sign-in
-    if (pathname === '/login' && !isStaffLoginPath(nextParam)) {
-      return NextResponse.redirect(new URL(consumerAuthPath(nextParam), request.url))
     }
     return supabaseResponse
   }

@@ -1,18 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <g
-    stroke="#fff"
-    stroke-width="2.75"
-    stroke-opacity="1"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    fill="none"
-  >
-    <path d="M8 38c5-3 10-10 14-16 4.5-7 12-12 20.5-12.5 6-.4 11 2 14.5 6" />
-    <path d="M42.5 12c2.5-3.5 6-5.5 10-6.5-.5 4-2 7.5-4.5 10.5" />
-    <path d="M56.5 17.5c4 3.5 6.5 8 7 13-5.5-.5-10.5-2.5-14.5-5.5" />
-    <path d="M22 23c-3.5 5.5-8.5 10.5-14.5 13 4.5 3 10.5 3.5 15.5 1.5" />
-    <path d="M30 38c1.5 5.5 1 11-1.5 16 5.5-1.5 10-5 12.5-9.5" />
-    <path d="M48 28c2 1.2 4.5 1.5 7 .8" />
+  <!-- Dolphin — SF-style black line art -->
+  <g stroke="#0d0d0d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M12 39c4.5-2.6 9-9 12.5-14.5C28.5 18 35 13.5 42.5 13c5-.3 9.2 1.8 12.2 5" />
+    <path d="M41.5 14c2-2.8 5-4.5 8.5-5.3-.4 3.3-1.7 6.2-3.8 8.8" />
+    <path d="M52.8 18.2c3.3 2.9 5.4 6.7 5.8 10.8-4.6-.4-8.7-2.1-12-4.6" />
+    <path d="M24 24.5c-3 4.6-7.2 8.8-12.2 11 3.8 2.5 8.8 2.9 13 1.2" />
+    <path d="M31 38.5c1.2 4.6.8 9.2-1.3 13.5 4.6-1.3 8.4-4.2 10.5-8" />
+    <path d="M46.5 28.5c1.7 1 3.8 1.2 5.8.6" />
   </g>
-  <circle cx="46" cy="22" r="2" fill="#fff" fill-opacity="1" />
+  <circle cx="45.5" cy="22.5" r="1.55" fill="#0d0d0d" />
 </svg>

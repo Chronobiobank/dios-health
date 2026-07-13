@@ -6,7 +6,7 @@ type LoginPageProps = {
   searchParams: Promise<{ next?: string }>
 }
 
-/** Staff portals only — consumer join/sign-in is the home gate (`/`). */
+/** Consumer + staff auth. Staff portals pass `?next=/clinical|enterprise…`. */
 export default async function LoginPage({ searchParams }: LoginPageProps) {
   await searchParams
 

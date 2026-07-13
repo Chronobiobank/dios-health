@@ -1,18 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <g
-    stroke="#fff"
-    stroke-width="2.75"
-    stroke-opacity="1"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    fill="none"
-  >
-    <circle cx="32" cy="32" r="22" />
-    <circle cx="32" cy="33" r="12.5" />
-    <path d="M32 8v4M32 52v4M8 32h4M52 32h4M14.5 14.5l2.8 2.8M46.7 46.7l2.8 2.8M49.5 14.5l-2.8 2.8M17.3 46.7l-2.8 2.8" />
-    <path d="M29.5 37.5c1.2 1.4 2.7 2.1 4.5 2.1s3.3-.7 4.5-2.1" />
-    <path d="M32 27.5v2.5" />
+  <!-- Lion — SF-style black line art -->
+  <g stroke="#0d0d0d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="32" cy="32" r="18.5" />
+    <circle cx="32" cy="33" r="10.5" />
+    <path d="M32 11.5v3.2M32 49.3v3.2M11.5 32h3.2M49.3 32h3.2" />
+    <path d="M17.2 17.2l2.3 2.3M44.5 44.5l2.3 2.3M46.8 17.2l-2.3 2.3M19.5 44.5l-2.3 2.3" />
+    <path d="M28.5 37.2c1 1.2 2.3 1.8 3.5 1.8s2.5-.6 3.5-1.8" />
+    <path d="M32 27.5v2.2" />
   </g>
-  <circle cx="27" cy="31" r="2" fill="#fff" fill-opacity="1" />
-  <circle cx="37" cy="31" r="2" fill="#fff" fill-opacity="1" />
+  <circle cx="27.5" cy="31.5" r="1.55" fill="#0d0d0d" />
+  <circle cx="36.5" cy="31.5" r="1.55" fill="#0d0d0d" />
 </svg>

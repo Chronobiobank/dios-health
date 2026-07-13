@@ -1,5 +1,5 @@
 /**
- * Phenotype icons — black discs + white line art.
+ * Phenotype icons — soft spectrum discs + black SF-style line art.
  */
 
 .dd-pheno-icon {
@@ -8,13 +8,19 @@
   flex-shrink: 0;
   aspect-ratio: 1;
   border-radius: 50%;
-  color: #fff;
-  border: 1px solid rgb(13 13 13 / 0.92);
-  background: #0d0d0d;
+  color: #0d0d0d;
+  border: 0.5px solid rgb(15 23 42 / 0.1);
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--seco-spectrum-cyan, #7dd3e8) 26%, white) 0%,
+      color-mix(in srgb, var(--seco-spectrum-mid, #a78bfa) 18%, white) 52%,
+      color-mix(in srgb, var(--seco-spectrum-lilac, #e879f9) 22%, white) 100%
+    );
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.12),
-    0 1px 2px rgb(15 23 42 / 0.08),
-    0 8px 22px rgb(15 23 42 / 0.12);
+    inset 0 1px 0 rgb(255 255 255 / 0.85),
+    0 0.5px 1px rgb(15 23 42 / 0.06),
+    0 4px 14px rgb(15 23 42 / 0.08);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   overflow: hidden;
@@ -22,19 +28,21 @@
 
 .dd-pheno-icon__glyph {
   display: block;
-  width: 66%;
-  height: 66%;
-  object-fit: contain;
+  width: 62%;
+  height: 62%;
   pointer-events: none;
   user-select: none;
-  /* Force crisp white ink even if a parent tints images */
-  filter: brightness(0) invert(1);
+  overflow: visible;
 }
-
 
 .dd-pheno-icon--sm {
   width: 1.75rem;
   height: 1.75rem;
+}
+
+.dd-pheno-icon--sm .dd-pheno-icon__glyph {
+  width: 58%;
+  height: 58%;
 }
 
 .dd-pheno-icon--md {
@@ -45,6 +53,11 @@
 .dd-pheno-icon--lg {
   width: 3.25rem;
   height: 3.25rem;
+}
+
+.dd-pheno-icon--lg .dd-pheno-icon__glyph {
+  width: 64%;
+  height: 64%;
 }
 
 /* How page — title over icon | vertical rule | sub left of rule */

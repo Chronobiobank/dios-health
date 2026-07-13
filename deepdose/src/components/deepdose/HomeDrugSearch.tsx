@@ -172,7 +172,6 @@ export function HomeDrugSearch({
         <div className="med-search__bar home-drug-search__bar">
           <span className="home-drug-search__anchor-name">{label}</span>
           <div className="home-drug-search__take">
-            <span className="home-drug-search__take-label">Take</span>
             <TimeInput
               value={value}
               onChange={(event) => onChange(event.target.value)}
@@ -236,12 +235,11 @@ export function HomeDrugSearch({
             </button>
           ) : null}
           <div className="home-drug-search__take">
-            <span className="home-drug-search__take-label">Take</span>
             <TimeInput
               value={row.takeTime}
               onChange={(event) => updateRow(index, { takeTime: event.target.value })}
               className="home-drug-search__take-input"
-              aria-label={`Take time for ${placeholder}`}
+              aria-label={`Time for ${placeholder}`}
             />
           </div>
         </div>

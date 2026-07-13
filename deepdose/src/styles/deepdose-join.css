@@ -19,7 +19,8 @@
 }
 
 .dd-join__stack.dd-gate {
-  --dd-gate-pill-h: 3rem;
+  --dd-gate-pill-h: 3.5rem;
+  --dd-pill-type: 1.125rem;
   --dd-gate-input-bg: #fff;
   --dd-gate-input-border: rgb(13 13 13 / 0.14);
   --dd-gate-shadow: 0 1px 2px rgb(13 13 13 / 0.04);
@@ -57,7 +58,7 @@
 .dd-join__auth .dd-gate__field-icon {
   color: rgb(15 23 42 / 0.55);
   -webkit-text-fill-color: rgb(15 23 42 / 0.55);
-  font-size: 0.8125rem;
+  font-size: 1.125rem;
   font-weight: 400;
 }
 
@@ -67,6 +68,15 @@
   -webkit-backdrop-filter: none;
 }
 
+.dd-join__meds .home-drug-search__anchor-name,
+.dd-join__meds .home-drug-search__med-stack .med-search--hero .med-search__input,
+.dd-join__meds .home-drug-search__take-input .time-input-24__select,
+.dd-join__meds .home-drug-search__take-input select.dios-input,
+.dd-join__meds .home-drug-search__take-input .time-input-24__sep {
+  font-size: 1.125rem;
+}
+
 .dd-join .dd-gate__signup {
   width: 100%;
+  font-size: 1.125rem;
 }

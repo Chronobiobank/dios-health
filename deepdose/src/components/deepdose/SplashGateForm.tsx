@@ -64,7 +64,7 @@ export function SplashGateForm({
       <header className="dd-gate__chrome">
         {brand}
         <nav className="dd-gate__chrome-links" aria-label="Account">
-          <Link href={authedHome ?? signInHref} className="dd-gate__chrome-link">
+          <Link href={authedHome ?? signInHref} className="dd-gate__chrome-link" scroll>
             {signInLabel}
           </Link>
         </nav>

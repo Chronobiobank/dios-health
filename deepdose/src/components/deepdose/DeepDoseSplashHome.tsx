@@ -21,7 +21,22 @@ export function DeepDoseSplashHome() {
   return (
     <SplashFrame showNav={false}>
       <div className="dd-gate">
-        <Suspense fallback={null}>
+        <Suspense
+          fallback={
+            <div className="dd-gate__shell">
+              <header className="dd-gate__chrome">
+                <Link href="/" className="clinical-site-nav__brand" aria-label="Deepdose home">
+                  <DeepdoseWordmark />
+                </Link>
+                <nav className="dd-gate__chrome-links" aria-label="Account">
+                  <Link href="/login" className="dd-gate__chrome-link">
+                    {gate.signInLabel}
+                  </Link>
+                </nav>
+              </header>
+            </div>
+          }
+        >
           <SplashGateForm
             signInLabel={gate.signInLabel}
             brand={

@@ -1,22 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- Wolf — pure white line art on black disc -->
-  <g
-    stroke="#fff"
-    stroke-width="2.75"
-    stroke-opacity="1"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    fill="none"
-  >
-    <path d="M18 26 12 8l14 10" />
-    <path d="M46 26 52 8 38 18" />
-    <path d="M14 28c1.5 12 8 22 18 26 10-4 16.5-14 18-26" />
-    <path d="M20 38c3 5 7.5 8 12 8s9-3 12-8" />
-    <path d="M32 34v5" />
-    <path d="M28 41c1.5 1.4 2.8 2 4 2s2.5-.6 4-2" />
-    <path d="M20 22l-2.5-7" />
-    <path d="M44 22l2.5-7" />
+  <!-- Wolf — SF-style black line art -->
+  <g stroke="#0d0d0d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M20 27 14 12l12 8" />
+    <path d="M44 27 50 12 38 20" />
+    <path d="M16 29c1.2 11 7.2 20 16 23.5C40.8 49 46.8 40 48 29" />
+    <path d="M22 39c2.6 4.2 6.4 6.5 10 6.5s7.4-2.3 10-6.5" />
+    <path d="M32 33.5v4.5" />
+    <path d="M28.5 41c1.2 1.1 2.3 1.6 3.5 1.6s2.3-.5 3.5-1.6" />
   </g>
-  <circle cx="24" cy="31" r="2.15" fill="#fff" fill-opacity="1" />
-  <circle cx="40" cy="31" r="2.15" fill="#fff" fill-opacity="1" />
+  <circle cx="25" cy="31.5" r="1.65" fill="#0d0d0d" />
+  <circle cx="39" cy="31.5" r="1.65" fill="#0d0d0d" />
 </svg>
