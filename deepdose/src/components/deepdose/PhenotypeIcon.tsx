@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react'
+
 import type { ChemicalPhenotypeId } from '@/lib/brand/chemical-phenotypes'
 
 export type PhenotypeIconSize = 'sm' | 'md' | 'lg'
@@ -85,7 +87,7 @@ function DolphinGlyph() {
   )
 }
 
-const GLYPHS: Record<ChemicalPhenotypeId, () => JSX.Element> = {
+const GLYPHS: Record<ChemicalPhenotypeId, () => ReactElement> = {
   night_creator: WolfGlyph,
   early_explorer: LionGlyph,
   twilight_transformer: BearGlyph,
