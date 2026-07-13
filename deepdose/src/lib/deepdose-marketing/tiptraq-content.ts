@@ -3,9 +3,9 @@
 import { DEEPDOSE_NAME } from '@/lib/brand/deepdose-brand'
 
 export const TIPTRAQ_PAGE_META = {
-  title: `Homekit · ${DEEPDOSE_NAME}`,
+  title: `Homekit Â· ${DEEPDOSE_NAME}`,
   description:
-    'Wear Homekit at home for a deeper chemistry read — charge, set up, overnight wear, upload, and a clearer rhythm baseline to share.',
+    'Wear Homekit at home for a deeper chemistry read â€” charge, set up, overnight wear, upload, and a clearer rhythm baseline to share.',
 } as const
 
 export const TIPTRAQ_PAGE_INTRO = {
@@ -74,9 +74,9 @@ export const TIPTRAQ_GUIDE_STEPS: readonly TipTraqGuideStep[] = [
     rank: 4,
     cue: '#8b9cf8',
     title: 'Your nights sync',
-    body: 'End each morning to upload — usually across three nights.',
+    body: 'End each morning to upload â€” usually across three nights.',
     image: '/tiptraq/tiptraq-v3-4c.png',
-    alt: 'Homekit sleep centre dashboard listing each night’s recording progress',
+    alt: "Homekit sleep centre dashboard listing each night's recording progress",
     copySide: 'left',
     imagePosition: 'center',
   },

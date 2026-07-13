@@ -1,5 +1,5 @@
 /**
- * Responsive funnel checklist — public marketing pages at mobile / tablet / desktop.
+ * Responsive funnel checklist â€” public marketing pages at mobile / tablet / desktop.
  *
  * Local:  pnpm test:funnel
  * Live:   PLAYWRIGHT_BASE_URL=https://deepdose.org pnpm test:funnel
@@ -39,7 +39,7 @@ async function assertNavForViewport(page: Page, width: number) {
 }
 
 for (const viewport of VIEWPORTS) {
-  test.describe(`Funnel · ${viewport.label} (${viewport.width}px)`, () => {
+  test.describe(`Funnel Â· ${viewport.label} (${viewport.width}px)`, () => {
     test.use({ viewport: { width: viewport.width, height: viewport.height } })
 
     test('home /', async ({ page }) => {
@@ -64,10 +64,10 @@ for (const viewport of VIEWPORTS) {
       await assertNavForViewport(page, viewport.width)
       await assertNoHorizontalOverflow(page)
 
-      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Your sleep–wake plan')
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Your sleepâ€“wake plan')
       await expect(page.getByText('Sleep')).toBeVisible()
       await expect(page.getByText('Wake')).toBeVisible()
-      await expect(page.getByText(/Sleep–wake regularity/i)).toBeVisible()
+      await expect(page.getByText(/Sleepâ€“wake regularity/i)).toBeVisible()
       await expect(page.getByText('Medicines & timing')).toBeVisible()
       await expect(page.getByRole('link', { name: 'Save my plan' })).toBeVisible()
       await expect(page.getByText(/Body clock/i)).toHaveCount(0)
