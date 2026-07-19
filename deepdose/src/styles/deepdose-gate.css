@@ -5,14 +5,14 @@
  */
 
 .dd-gate {
-  --dd-gate-text: #0d0d0d;
-  --dd-gate-muted: rgb(13 13 13 / 0.55);
-  --dd-gate-line: rgb(13 13 13 / 0.12);
-  --dd-gate-accent: #0d0d0d;
-  --dd-gate-surface: #ffffff;
-  --dd-gate-input-bg: #ffffff;
-  --dd-gate-input-border: rgb(13 13 13 / 0.14);
-  --dd-gate-shadow: 0 2px 8px rgb(0 0 0 / 0.06), 0 0 0 1px rgb(13 13 13 / 0.06);
+  --dd-gate-text: var(--brand-ink);
+  --dd-gate-muted: var(--brand-ink-muted);
+  --dd-gate-line: var(--brand-border-strong);
+  --dd-gate-accent: var(--brand-solid);
+  --dd-gate-surface: var(--brand-surface);
+  --dd-gate-input-bg: var(--brand-surface);
+  --dd-gate-input-border: var(--brand-border-strong);
+  --dd-gate-shadow: 0 2px 8px rgb(0 0 0 / 0.06), 0 0 0 1px var(--brand-border);
   --dd-gate-pill-h: 3rem;
 
   box-sizing: border-box;
@@ -55,6 +55,88 @@
   padding-inline: var(--oai-page-pad, clamp(1rem, 4vw, 2rem));
 }
 
+/* Fashion splash — logo + spaced location top-centre; Sign in top-right */
+.dd-gate--fashion .dd-gate__shell {
+  min-height: 100%;
+}
+
+.dd-gate--fashion .dd-gate__chrome {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  justify-items: center;
+  min-height: auto;
+  padding-top: clamp(1.1rem, 3.5vh, 1.75rem);
+  padding-bottom: 0.5rem;
+}
+
+.dd-gate--fashion .dd-gate__brand-lockup {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  color: var(--brand-ink, #0d0d0d);
+}
+
+.dd-gate--fashion .dd-gate__brand-lockup .deepdose-wordmark {
+  font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+  letter-spacing: 0.14em;
+}
+
+.dd-gate--fashion .dd-gate__location {
+  display: block;
+  margin: 0;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  line-height: 1;
+  text-indent: 0.42em; /* optical centre with tracking */
+  text-transform: uppercase;
+  color: var(--brand-ink-muted, rgb(13 13 13 / 0.55));
+  white-space: nowrap;
+}
+
+.dd-gate--fashion .dd-gate__chrome-links {
+  grid-column: 3;
+  justify-self: end;
+  align-self: start;
+  margin-left: 0;
+}
+
+.dd-gate--fashion .dd-gate__main {
+  width: min(100% - 2rem, 28rem);
+  max-width: 28rem;
+  justify-content: center;
+  padding-bottom: 0;
+}
+
+.dd-gate--fashion .dd-gate__headline {
+  margin-bottom: 0;
+  gap: clamp(1.25rem, 3vh, 1.75rem);
+}
+
+.dd-gate--fashion .dd-gate__center-title {
+  margin: 0;
+  max-width: 16ch;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: clamp(1.65rem, 1.1rem + 2.4vw, 2.35rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--brand-ink, #0d0d0d);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.dd-gate--fashion .dd-gate__baseline {
+  margin-top: auto;
+  padding-top: clamp(1.5rem, 4vh, 2.5rem);
+  padding-bottom: clamp(1.75rem, 5vh, 2.75rem);
+}
+
 .dd-gate__chrome-links {
   display: flex;
   align-items: center;
@@ -85,7 +167,8 @@
   cursor: wait;
 }
 
-.dd-gate .clinical-site-nav__brand {
+.dd-gate .clinical-site-nav__brand,
+.dd-gate .dd-gate__brand-lockup {
   display: inline-flex;
   align-items: center;
   align-self: center;
@@ -93,6 +176,12 @@
   line-height: 1;
   text-decoration: none;
   color: #0d0d0d;
+}
+
+.dd-gate--fashion .dd-gate__brand-lockup {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 }
 
 .dd-gate .clinical-site-nav__brand .deepdose-wordmark {
@@ -155,21 +244,25 @@
   width: 100%;
 }
 
+/* Original splash marketing hero scale — same as .seco-splash__hero-marketing */
 .dd-gate
   .dd-gate__headline
   .seco-landing__hero-title.seco-landing__hero-title--single {
-  display: block;
-  width: 100%;
-  max-width: none;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+  width: min(100%, 18ch);
+  max-width: min(100%, 18ch);
+  margin: 0 auto;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: clamp(2rem, 0.85rem + 5.5vw, 3.25rem);
+  font-size: clamp(1.875rem, 0.55rem + 7.2vw, 5.5rem);
   font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  letter-spacing: var(--seco-display-tracking-hero, -0.04em);
+  line-height: 1.04;
   color: #0d0d0d;
-  text-align: left;
-  white-space: nowrap;
+  text-align: center;
+  white-space: normal;
 }
 
 .dd-gate
@@ -177,10 +270,12 @@
   .seco-landing__hero-title.seco-landing__hero-title--single
   > .seco-landing__hero-line {
   display: block;
-  width: 100%;
-  margin: 0;
-  text-align: left;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
   font-family: inherit;
+  font-size: inherit;
   font-weight: 500;
   color: #0d0d0d;
   -webkit-text-fill-color: #0d0d0d;
@@ -308,6 +403,32 @@
 .dd-gate__ctas .dd-gate__cta--secondary:hover {
   border-color: rgba(13, 13, 13, 0.45);
   background: rgba(13, 13, 13, 0.04) !important;
+}
+
+/* Text link under primary CTA — not a button */
+.dd-gate__ctas .dd-gate__text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--brand-ink, #0d0d0d);
+  -webkit-text-fill-color: var(--brand-ink, #0d0d0d);
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.dd-gate__ctas .dd-gate__text-link:hover,
+.dd-gate__ctas .dd-gate__text-link:focus-visible {
+  opacity: 0.7;
 }
 
 .dd-gate__baseline {

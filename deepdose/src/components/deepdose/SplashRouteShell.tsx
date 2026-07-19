@@ -7,16 +7,20 @@ import { useEffect } from 'react'
 import { PublicMarketingShell } from '@/components/deepdose/PublicMarketingShell'
 import { ScrollToTopOnMount } from '@/components/deepdose/ScrollToTopOnMount'
 
-const SPLASH_PATHS = new Set(['/'])
+/** Orbit match gate — light splash, no marketing chrome. */
+const SPLASH_PATHS = new Set(['/match'])
+/** Sleep Lab home — full-bleed chamber, owns its own chrome. */
+const CHROMELESS_PATHS = new Set(['/'])
 
 type SplashRouteShellProps = {
   children: ReactNode
 }
 
-/** Home splash: light gate, no chrome. Other public pages use light shell + bottom nav. */
+/** Chromeless home / match splash; other public pages use light shell + bottom nav. */
 export function SplashRouteShell({ children }: SplashRouteShellProps) {
   const pathname = usePathname() ?? '/'
   const isSplash = SPLASH_PATHS.has(pathname)
+  const isChromeless = CHROMELESS_PATHS.has(pathname)
 
   useEffect(() => {
     document.documentElement.classList.toggle('splash-route', isSplash)
@@ -25,9 +29,8 @@ export function SplashRouteShell({ children }: SplashRouteShellProps) {
     }
   }, [isSplash])
 
-  // SplashFrame already owns the light splash shell — do not nest another layout
-  // (nested 100dvh shells are what create a home scrollbar).
-  if (isSplash) {
+  // SplashFrame / Sleep Lab own their shells — do not nest PublicMarketingShell.
+  if (isSplash || isChromeless) {
     return (
       <>
         <ScrollToTopOnMount />

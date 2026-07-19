@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Sleep Lab is the home page
+      {
+        source: '/sleeplab',
+        destination: '/',
+        permanent: true,
+      },
       // Legacy marketing / aliases → lean consumer IA
       {
         source: '/chronobiobank',

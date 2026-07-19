@@ -1,14 +1,19 @@
 import type { Metadata } from 'next'
 
-import { DeepDoseSplashHome } from '@/components/deepdose/DeepDoseSplashHome'
-import { DEEPDOSE_LANDING_META } from '@/lib/deepdose-marketing/landing-content'
+import { FloatingSleepLabPage } from '@/components/deepdose/FloatingSleepLabPage'
+import { SLEEPLAB_META } from '@/lib/deepdose-marketing/sleeplab-content'
 
 export const metadata: Metadata = {
-  title: DEEPDOSE_LANDING_META.title,
-  description: DEEPDOSE_LANDING_META.description,
+  title: SLEEPLAB_META.title,
+  description: SLEEPLAB_META.description,
   alternates: { canonical: '/' },
+  openGraph: {
+    title: SLEEPLAB_META.title,
+    description: SLEEPLAB_META.description,
+  },
 }
 
+/** Home — Floating Sleep Lab (media chamber). */
 export default function HomePage() {
-  return <DeepDoseSplashHome />
+  return <FloatingSleepLabPage />
 }

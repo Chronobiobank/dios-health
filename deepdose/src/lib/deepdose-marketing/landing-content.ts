@@ -7,34 +7,44 @@ import { EVIDENCE_HREF } from '@/lib/deepdose-marketing/site-nav-links'
 import type { LandingHeroContent } from '@/lib/deepdose-marketing/landing-hero'
 
 export const DEEPDOSE_LANDING_META = {
-  title: `${DEEPDOSE_NAME} · Max Your Chemistry.`,
+  title: `${DEEPDOSE_NAME} · Floating Sleep Lab`,
   description: DEEPDOSE_VOICE.homeLede,
+} as const
+
+export const DEEPDOSE_MATCH_META = {
+  title: `Find Your Match · ${DEEPDOSE_NAME}`,
+  description: DEEPDOSE_VOICE.promise,
 } as const
 
 export const DEEPDOSE_CVP = DEEPDOSE_VOICE.tagline
 
 export const DEEPDOSE_POSITIONING_LINE = DEEPDOSE_VOICE.positioning
 
-/** Home splash · Max Your Chemistry + founder claim. */
-export const DEEPDOSE_HOME_SPLASH = {
-  headlineWhite: DEEPDOSE_VOICE.homeHeadlineWhite,
-  headlineAccent: DEEPDOSE_VOICE.homeHeadlineAccent,
-  lede: DEEPDOSE_VOICE.homeLede,
-  primaryCta: DEEPDOSE_VOICE.homePrimaryCta,
-  secondaryCta: DEEPDOSE_VOICE.homeSecondaryCta,
+/** /match orbit splash — top nav · head · sub · Claim Free Access. */
+export const DEEPDOSE_MATCH_SPLASH = {
+  headline: DEEPDOSE_VOICE.matchHeadline,
+  lede: DEEPDOSE_VOICE.matchLede,
+  primaryCta: DEEPDOSE_VOICE.matchPrimaryCta,
 } as const
 
+/** @deprecated Prefer DEEPDOSE_MATCH_SPLASH. */
+export const DEEPDOSE_HOME_SPLASH = DEEPDOSE_MATCH_SPLASH
+
+/** @deprecated Prefer DEEPDOSE_MATCH_SPLASH fields. */
 export const DEEPDOSE_HOME_SPLASH_HERO = {
   eyebrow: '',
-  headlineWhite: DEEPDOSE_HOME_SPLASH.headlineWhite,
-  headlineAccent: DEEPDOSE_HOME_SPLASH.headlineAccent,
-  support: DEEPDOSE_HOME_SPLASH.lede,
+  headlineWhite: DEEPDOSE_MATCH_SPLASH.headline,
+  headlineAccent: '',
+  support: DEEPDOSE_MATCH_SPLASH.lede,
 } as const
 
-/** @deprecated Home uses a single primary CTA; kept for older imports. */
+/** @deprecated Prefer DEEPDOSE_MATCH_SPLASH CTAs; kept for older imports. */
 export const DEEPDOSE_HOME_ACTIONS = {
   mission: { label: 'About us', href: '/how' },
-  create: { label: DEEPDOSE_VOICE.homePrimaryCta.label, href: DEEPDOSE_VOICE.homePrimaryCta.href },
+  create: {
+    label: DEEPDOSE_VOICE.matchPrimaryCta.label,
+    href: DEEPDOSE_VOICE.matchPrimaryCta.href,
+  },
 } as const
 
 /** Default catalog codes for home med search baseline (two rows). */

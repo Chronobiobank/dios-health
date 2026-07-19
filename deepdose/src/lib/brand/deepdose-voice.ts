@@ -5,6 +5,7 @@ import {
   DEEPDOSE_TAGLINE,
   DEEPDOSE_VALUE_PROP,
 } from '@/lib/brand/deepdose-brand'
+import { SLEEPLAB_BOOK_HREF } from '@/lib/deepdose-marketing/sleeplab-content'
 
 /**
  * Audience: people off the usual clock (ManJam founding cohort).
@@ -28,14 +29,17 @@ export const DEEPDOSE_VOICE = {
   positioning: DEEPDOSE_POSITIONING,
   /** Social-graph value prop */
   valueProp: DEEPDOSE_VALUE_PROP,
-  /** Home hero — Max Your / Chemistry */
-  homeHeadlineWhite: 'Max Your',
-  homeHeadlineAccent: 'Chemistry',
-  homeLede: 'The social network that reads your body clock and finds synced matches.',
-  /** Home CTA — single founder claim */
-  homePrimaryCta: { label: 'Claim Free Access', href: '/founders' },
-  /** @deprecated Home uses a single primary CTA. */
-  homeSecondaryCta: { label: 'Claim Free Access', href: '/founders' },
+  /** Home is Sleep Lab — meta lede */
+  homeLede: "London's 1st Floating Sleep Lab. Book Your Float. Find Your Match.",
+  /** Home primary — Airbnb */
+  homePrimaryCta: { label: 'Book Your Float', href: SLEEPLAB_BOOK_HREF },
+  /** Home secondary — orbit match splash */
+  homeSecondaryCta: { label: 'Find Your Match', href: '/match' },
+  /** /match orbit splash — same composition as the old home gate */
+  matchHeadline: 'Max Your Chemistry',
+  matchLede:
+    'The social network that reads your body clock and finds synced matches.',
+  matchPrimaryCta: { label: 'Claim Free Access', href: '/founders/join' },
   missionHeadlineWhite: 'Make chemistry',
   missionHeadlineAccent: 'work',
   missionLede: 'Chronotypes match. Tribe keeps. Sync connects.',

@@ -5,7 +5,7 @@ type DeepdoseWordmarkProps = {
   className?: string
 }
 
-/** DEEPDOSE — Montserrat Medium, all caps; O as ʘ (U+0298). */
+/** DEEPDOSE — Montserrat Medium, all caps; O as ʘ (U+0298), same weight as letters. */
 export function DeepdoseWordmark({ className }: DeepdoseWordmarkProps) {
   return (
     <span className={cn('deepdose-wordmark', className)} aria-label={DEEPDOSE_NAME}>
