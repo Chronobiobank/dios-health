@@ -76,7 +76,7 @@ body:has(.dark-sleeplab) {
   }
 }
 
-/* ── Offers ticker — fixed black tape ── */
+/* ── Offers ticker — slow luxury marquee ── */
 
 .dark-sleeplab__ticker {
   position: fixed;
@@ -89,8 +89,23 @@ body:has(.dark-sleeplab) {
   height: var(--sleeplab-ticker-h, 2.75rem);
   overflow: hidden;
   background: #000;
-  border-bottom: 1px solid rgb(255 255 255 / 0.1);
-  color: #fff;
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+  color: rgb(255 255 255 / 0.88);
+  /* Soft dissolve at the edges — no hard clip */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
 }
 
 .dark-sleeplab__ticker-track {
@@ -98,44 +113,61 @@ body:has(.dark-sleeplab) {
   width: max-content;
   align-items: center;
   gap: 0;
-  animation: sleeplab-ticker 28s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  animation: sleeplab-ticker 72s linear infinite;
+}
+
+.dark-sleeplab__ticker:hover .dark-sleeplab__ticker-track {
+  animation-play-state: paused;
 }
 
 .dark-sleeplab__ticker-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.85rem;
-  padding-inline: 0.85rem;
+  gap: 0.65rem;
+  padding-inline: 0.7rem;
   white-space: nowrap;
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(0.8125rem, 1.5vw, 0.9375rem);
+  font-size: clamp(0.6875rem, 1.1vw, 0.75rem);
   font-weight: var(--dd-fw-medium, 500);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
   text-transform: uppercase;
   line-height: 1;
+  color: rgb(255 255 255 / 0.82);
 }
 
 .dark-sleeplab__ticker-sep {
-  color: rgb(255 255 255 / 0.35);
+  letter-spacing: 0;
+  text-indent: 0;
+  color: rgb(255 255 255 / 0.22);
+  font-size: 0.65em;
 }
 
 @keyframes sleeplab-ticker {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .dark-sleeplab__ticker {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
   .dark-sleeplab__ticker-track {
     animation: none;
     width: 100%;
     justify-content: center;
   }
 
-  .dark-sleeplab__ticker-item:nth-child(n + 3) {
+  .dark-sleeplab__ticker-item:nth-child(n + 4) {
     display: none;
   }
 }
@@ -173,10 +205,11 @@ body:has(.dark-sleeplab) {
   transform-origin: center center;
 }
 
-/* Brand — Equinox Sleep Lab clone: solitary rest, cool midnight grade */
+/* Brand — couple in bed, cool midnight grade; 1.3 × 1.25 ≈ 1.625 vs cover */
 .dark-sleeplab__scene--brand .dark-sleeplab__media {
   object-fit: cover;
-  object-position: center 32%;
+  object-position: center center;
+  transform: scale(1.625);
   transform-origin: center center;
   will-change: transform;
   filter: brightness(0.78) saturate(0.55) contrast(1.12) hue-rotate(-12deg);
@@ -217,17 +250,17 @@ body:has(.dark-sleeplab) {
 
 @keyframes sleeplab-luxury-drift {
   0% {
-    transform: scale(1.1) translate3d(0, 0, 0);
+    transform: scale(1.625) translate3d(0, 0, 0);
   }
   100% {
-    transform: scale(1.18) translate3d(0, -1.25%, 0);
+    transform: scale(1.72) translate3d(0, -1.25%, 0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .dark-sleeplab__scene--brand .dark-sleeplab__media {
     animation: none;
-    transform: scale(1.08);
+    transform: scale(1.625);
   }
 }
 
@@ -282,7 +315,7 @@ body:has(.dark-sleeplab) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   box-sizing: border-box;
   height: 100%;
   min-height: 100%;
@@ -303,6 +336,7 @@ body:has(.dark-sleeplab) {
   justify-content: center;
   gap: 0.85rem;
   width: 100%;
+  margin-top: auto;
   text-align: center;
 }
 
@@ -312,7 +346,9 @@ body:has(.dark-sleeplab) {
   align-items: center;
   gap: 0.75rem;
   flex: 0 0 auto;
-  padding-bottom: 0.35rem;
+  margin-top: 1.15rem;
+  margin-bottom: auto;
+  padding-bottom: 0;
 }
 
 .dark-sleeplab__wordmark,
@@ -347,7 +383,7 @@ body:has(.dark-sleeplab) {
   width: max-content;
   max-width: 100%;
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(1.25rem, 0.9rem + 2.2vw, 1.75rem);
+  font-size: clamp(0.9375rem, 0.675rem + 1.65vw, 1.3125rem);
   font-weight: var(--dd-fw-light, 400);
   letter-spacing: -0.02em;
   line-height: 1.2;

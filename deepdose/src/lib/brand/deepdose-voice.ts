@@ -30,9 +30,9 @@ export const DEEPDOSE_VOICE = {
   /** Social-graph value prop */
   valueProp: DEEPDOSE_VALUE_PROP,
   /** Home is Sleep Lab — meta lede */
-  homeLede: "London's 1st Floating Sleep Lab. Book Your Float. Find Your Match.",
+  homeLede: "London's 1st Floating Sleep Lab. Book Private Room. Find Your Match.",
   /** Home primary — Airbnb */
-  homePrimaryCta: { label: 'Book Your Float', href: SLEEPLAB_BOOK_HREF },
+  homePrimaryCta: { label: 'Book Private Room', href: SLEEPLAB_BOOK_HREF },
   /** Home secondary — orbit match splash */
   homeSecondaryCta: { label: 'Find Your Match', href: '/match' },
   /** /match orbit splash — same composition as the old home gate */

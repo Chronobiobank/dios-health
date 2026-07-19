@@ -142,8 +142,9 @@ function PlaceLine({
 }
 
 function OffersTicker() {
-  const sequence = Array.from({ length: 8 }, () => [...SLEEPLAB_COMMERCIAL.offers]).flat()
-  const track = [...sequence, ...sequence]
+  /** One half of the loop — duplicated so -50% translate is seamless */
+  const half = Array.from({ length: 5 }, () => [...SLEEPLAB_COMMERCIAL.offers]).flat()
+  const track = [...half, ...half]
 
   return (
     <div className="dark-sleeplab__ticker" aria-label={SLEEPLAB_COMMERCIAL.line}>
@@ -151,7 +152,9 @@ function OffersTicker() {
         {track.map((offer, i) => (
           <span key={`${offer}-${i}`} className="dark-sleeplab__ticker-item">
             <span className="dark-sleeplab__ticker-offer">{offer}</span>
-            <span className="dark-sleeplab__ticker-sep">·</span>
+            <span className="dark-sleeplab__ticker-sep" aria-hidden>
+              ·
+            </span>
           </span>
         ))}
       </div>
@@ -186,7 +189,6 @@ export function FloatingSleepLabPage() {
                   </div>
                   <div className="dark-sleeplab__brand-foot">
                     <BookFloatLink />
-                    <PlaceLine />
                   </div>
                 </div>
               </section>

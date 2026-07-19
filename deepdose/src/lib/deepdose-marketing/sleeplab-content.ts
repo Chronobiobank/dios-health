@@ -10,12 +10,12 @@ export const SLEEPLAB_META = {
 export const SLEEPLAB_BOOK_HREF = 'https://www.airbnb.co.uk/' as const
 
 export const SLEEPLAB_COMMERCIAL = {
-  offers: ['2-night reset', '7-day detox'] as const,
+  offers: ['2-night reset', '7-day detox', 'Paddington London'] as const,
   place: 'Paddington, London.',
   /** Final CTA footer — replaces place on the last screen */
   ctaLine: "London's 1st Floating Recovery Space",
   /** Compact single line for tight surfaces */
-  line: '2-night reset · 7-day detox',
+  line: '2-night reset · 7-day detox · Paddington London',
 } as const
 
 /** Subhead under the brand title. */
@@ -52,8 +52,8 @@ export const SLEEPLAB_SCENES = [
     outcome: SLEEPLAB_OUTCOME,
     media: {
       type: 'video' as const,
-      src: '/sleeplab/slow-wake.mp4',
-      alt: 'Luxury recovery rest — Sleep Lab',
+      src: '/couple-in-bed.mp4',
+      alt: 'Couple resting — Sleep Lab',
       playbackRate: 0.4,
     },
   },
@@ -123,7 +123,7 @@ export const SLEEPLAB_SCENES = [
 
 export const SLEEPLAB_CTAS = [
   {
-    label: 'Book Your Float',
+    label: 'Book Private Room',
     href: SLEEPLAB_BOOK_HREF,
     external: true,
   },
