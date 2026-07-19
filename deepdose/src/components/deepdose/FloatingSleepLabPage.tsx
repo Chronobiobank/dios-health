@@ -204,7 +204,11 @@ export function FloatingSleepLabPage() {
               >
                 <SceneMedia
                   media={scene.media}
-                  objectPosition={'objectPosition' in scene ? scene.objectPosition : undefined}
+                  objectPosition={
+                    'objectPosition' in scene && typeof scene.objectPosition === 'string'
+                      ? scene.objectPosition
+                      : undefined
+                  }
                 />
                 <div
                   className={cn(
