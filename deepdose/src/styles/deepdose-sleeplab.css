@@ -7,8 +7,36 @@
   --canvas: var(--brand-chamber);
   --seco-navy: var(--brand-chamber);
   --sleeplab-ticker-h: 2.75rem;
+  /* Stable viewport unit first (mobile chrome), then dynamic when supported */
+  --sleeplab-screen: 100vh;
   background: var(--brand-chamber);
   color: rgb(255 255 255 / 0.88);
+  display: flex;
+  flex-direction: column;
+  height: var(--sleeplab-screen);
+  min-height: var(--sleeplab-screen);
+  max-height: var(--sleeplab-screen);
+  overflow: hidden;
+}
+
+@supports (height: 100svh) {
+  .deepdose-shell.seco-shell--dark.dark-sleeplab {
+    --sleeplab-screen: 100svh;
+  }
+}
+
+@supports (height: 100dvh) {
+  .deepdose-shell.seco-shell--dark.dark-sleeplab {
+    --sleeplab-screen: 100dvh;
+  }
+}
+
+/* Lock document scroll so only the snap port moves */
+html:has(.dark-sleeplab),
+body:has(.dark-sleeplab) {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 .deepdose-shell.seco-shell--dark.dark-sleeplab .deepdose-ambient {
@@ -17,13 +45,30 @@
 
 .deepdose-shell.seco-shell--dark.dark-sleeplab .clinical-site-nav__main {
   padding: 0;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
+/* Snap scrollport — one screen per scene on every device */
 .dark-sleeplab__page {
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
   background: var(--brand-chamber);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dark-sleeplab__page {
+    scroll-behavior: auto;
+  }
 }
 
 /* ── Offers ticker — fixed black tape ── */
@@ -90,14 +135,19 @@
   }
 }
 
-/* ── Full-bleed scene ── */
+/* ── Full-bleed scene — exact viewport, hard snap ── */
 
 .dark-sleeplab__scene {
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  flex: 0 0 var(--sleeplab-screen);
   width: 100%;
-  min-height: 100dvh;
+  height: var(--sleeplab-screen);
+  min-height: var(--sleeplab-screen);
+  max-height: var(--sleeplab-screen);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   background: var(--brand-chamber);
 }
 
@@ -229,7 +279,8 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  min-height: 100dvh;
+  height: 100%;
+  min-height: 100%;
   padding: clamp(1.75rem, 5vw, 3rem) 1.5rem;
   padding-top: calc(var(--sleeplab-ticker-h) + 1.25rem);
   text-align: center;
@@ -326,7 +377,8 @@
   justify-content: flex-end;
   gap: 0.7rem;
   box-sizing: border-box;
-  min-height: 100dvh;
+  height: 100%;
+  min-height: 100%;
   width: min(100%, 32rem);
   padding: clamp(1.5rem, 5vw, 3.5rem);
   padding-top: calc(var(--sleeplab-ticker-h) + 1rem);
@@ -360,7 +412,6 @@
 /* ── 5. Includes — clarity beat between film and book ── */
 
 .dark-sleeplab__scene--includes {
-  min-height: 100dvh;
   background: var(--brand-chamber);
 }
 
@@ -373,7 +424,8 @@
   justify-content: center;
   gap: 1.25rem;
   box-sizing: border-box;
-  min-height: 100dvh;
+  height: 100%;
+  min-height: 100%;
   width: min(100%, 28rem);
   margin-inline: auto;
   padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2.5rem);
@@ -436,7 +488,8 @@
   justify-content: center;
   gap: 0.85rem;
   box-sizing: border-box;
-  min-height: 100dvh;
+  height: 100%;
+  min-height: 100%;
   padding: clamp(1.75rem, 5vw, 3rem) 2rem;
   padding-top: calc(var(--sleeplab-ticker-h) + 1.5rem);
   padding-bottom: clamp(2.5rem, 8vw, 4rem);
