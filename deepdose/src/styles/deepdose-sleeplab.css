@@ -205,15 +205,15 @@ body:has(.dark-sleeplab) {
   transform-origin: center center;
 }
 
-/* Brand — sleeping male, cool midnight grade; 1.3 × 1.25 ≈ 1.625 vs cover */
+/* Brand — sleep massage hero; drop frame so the head sits nearer centre */
 .dark-sleeplab__scene--brand .dark-sleeplab__media {
   object-fit: cover;
-  object-position: center 32%;
-  transform: scale(1.625);
+  object-position: center 28%;
+  transform: scale(1.625) translate3d(0, 12%, 0);
   transform-origin: center center;
   will-change: transform;
-  filter: brightness(0.78) saturate(0.55) contrast(1.12) hue-rotate(-12deg);
-  animation: sleeplab-luxury-drift 32s ease-in-out infinite alternate;
+  filter: brightness(0.92) saturate(0.85) contrast(1.18);
+  animation: sleeplab-luxury-drift 28s ease-in-out infinite alternate;
 }
 
 .dark-sleeplab__grade {
@@ -221,19 +221,13 @@ body:has(.dark-sleeplab) {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  /* Cool charcoal-blue chamber wash — Equinox midnight, not warm sunset */
+  /* Thin cool wash — video stays the hero */
   background:
     linear-gradient(
       180deg,
-      rgb(4 10 24 / 0.5) 0%,
-      rgb(8 18 40 / 0.18) 40%,
-      rgb(6 14 32 / 0.3) 70%,
-      rgb(2 6 16 / 0.62) 100%
-    ),
-    radial-gradient(
-      ellipse 70% 50% at 50% 38%,
-      rgb(30 50 90 / 0.12) 0%,
-      rgb(2 6 16 / 0.4) 100%
+      rgb(4 10 24 / 0.28) 0%,
+      transparent 42%,
+      rgb(2 6 16 / 0.35) 100%
     );
 }
 
@@ -241,27 +235,45 @@ body:has(.dark-sleeplab) {
   background:
     linear-gradient(
       180deg,
-      rgb(0 0 0 / 0.35) 0%,
-      transparent 38%,
+      rgb(0 0 0 / 0.22) 0%,
+      transparent 40%,
       transparent 58%,
-      rgb(0 0 0 / 0.55) 100%
+      rgb(0 0 0 / 0.48) 100%
     );
 }
 
 @keyframes sleeplab-luxury-drift {
   0% {
-    transform: scale(1.625) translate3d(0, 0, 0);
+    transform: scale(1.625) translate3d(0, 12%, 0);
   }
   100% {
-    transform: scale(1.72) translate3d(0, -1.25%, 0);
+    transform: scale(1.72) translate3d(0, 10%, 0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .dark-sleeplab__scene--brand .dark-sleeplab__media {
     animation: none;
-    transform: scale(1.625);
+    transform: scale(1.625) translate3d(0, 12%, 0);
   }
+}
+
+/* Day II — DeepDose bedroom, moody luxury tint */
+.dark-sleeplab__scene--day-ii .dark-sleeplab__media--img {
+  object-position: center 42%;
+  filter: brightness(0.62) saturate(0.45) contrast(1.18) hue-rotate(-8deg);
+}
+
+.dark-sleeplab__scene--day-ii .dark-sleeplab__scrim:not(.dark-sleeplab__scrim--day-i) {
+  background:
+    linear-gradient(
+      180deg,
+      rgb(4 10 24 / 0.45) 0%,
+      rgb(0 0 0 / 0.2) 40%,
+      rgb(2 6 16 / 0.55) 70%,
+      rgb(0 0 0 / 0.82) 100%
+    ),
+    rgb(8 14 28 / 0.18);
 }
 
 /* Day III — nudge crop so the eye sits nearer the optical centre */
@@ -405,6 +417,18 @@ body:has(.dark-sleeplab) {
   text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
 }
 
+.dark-sleeplab__place--cta-lead {
+  max-width: 22ch;
+  margin-bottom: 1.25rem;
+  font-size: clamp(1.375rem, 3.8vw, 2rem);
+  font-weight: var(--dd-fw-medium, 500);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: #fff;
+  text-wrap: balance;
+  text-shadow: 0 2px 18px rgb(0 0 0 / 0.5);
+}
+
 .dark-sleeplab__includes .dark-sleeplab__place {
   text-align: left;
 }
@@ -465,24 +489,26 @@ body:has(.dark-sleeplab) {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 1.25rem;
+  gap: 1rem;
   box-sizing: border-box;
   height: 100%;
   min-height: 100%;
-  width: min(100%, 28rem);
+  width: min(100%, 32rem);
   margin-inline: auto;
-  padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2.5rem);
-  padding-top: calc(var(--sleeplab-ticker-h) + 1.5rem);
+  padding: clamp(1.75rem, 5vw, 3rem) clamp(1.5rem, 5vw, 2.5rem);
+  padding-top: calc(var(--sleeplab-ticker-h) + 1.25rem);
+  overflow-y: auto;
 }
 
 .dark-sleeplab__includes-label {
-  margin: 0;
+  margin: 0 0 0.25rem;
   font-family: var(--font-inter, system-ui, sans-serif);
   font-size: clamp(0.875rem, 1.6vw, 1rem);
   font-weight: var(--dd-fw-medium, 500);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #fff;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.55);
 }
 
 .dark-sleeplab__includes-list {
@@ -491,18 +517,37 @@ body:has(.dark-sleeplab) {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.95rem;
   width: 100%;
 }
 
 .dark-sleeplab__includes-list li {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+
+.dark-sleeplab__includes-title {
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(1.0625rem, 2.4vw, 1.25rem);
+  font-size: clamp(1.0625rem, 2.2vw, 1.1875rem);
   font-weight: var(--dd-fw-medium, 500);
   letter-spacing: -0.02em;
-  line-height: 1.25;
+  line-height: 1.2;
   color: #fff;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
+}
+
+.dark-sleeplab__includes-body {
+  max-width: 34ch;
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: clamp(0.875rem, 1.7vw, 0.975rem);
+  font-weight: var(--dd-fw-light, 400);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: rgb(255 255 255 / 0.78);
+  text-shadow: 0 1px 10px rgb(0 0 0 / 0.45);
 }
 
 .dark-sleeplab__authority {
@@ -526,13 +571,29 @@ body:has(.dark-sleeplab) {
   background: var(--brand-chamber);
 }
 
+.dark-sleeplab__scene--inspired .dark-sleeplab__media--img {
+  object-fit: cover;
+  filter: brightness(0.72) saturate(0.8) contrast(1.08);
+}
+
+.dark-sleeplab__scrim--inspired {
+  background:
+    linear-gradient(
+      180deg,
+      rgb(0 0 0 / 0.55) 0%,
+      rgb(0 0 0 / 0.35) 42%,
+      rgb(0 0 0 / 0.72) 100%
+    ),
+    rgb(0 0 0 / 0.18);
+}
+
 .dark-sleeplab__inspired {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 0.65rem;
   box-sizing: border-box;
   height: 100%;
@@ -541,6 +602,7 @@ body:has(.dark-sleeplab) {
   margin-inline: auto;
   padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2.5rem);
   padding-top: calc(var(--sleeplab-ticker-h) + 1.5rem);
+  padding-bottom: clamp(2.75rem, 9vw, 5rem);
 }
 
 .dark-sleeplab__inspired-label {
@@ -550,7 +612,8 @@ body:has(.dark-sleeplab) {
   font-weight: var(--dd-fw-medium, 500);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 0.62);
+  color: rgb(255 255 255 / 0.72);
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.55);
 }
 
 .dark-sleeplab__inspired-name {
@@ -562,6 +625,7 @@ body:has(.dark-sleeplab) {
   line-height: 1.1;
   color: #fff;
   text-wrap: balance;
+  text-shadow: 0 2px 18px rgb(0 0 0 / 0.5);
 }
 
 .dark-sleeplab__inspired-role {
@@ -571,7 +635,8 @@ body:has(.dark-sleeplab) {
   font-weight: var(--dd-fw-medium, 500);
   letter-spacing: -0.01em;
   line-height: 1.3;
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(255 255 255 / 0.78);
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
 }
 
 .dark-sleeplab__inspired-body {
@@ -582,26 +647,9 @@ body:has(.dark-sleeplab) {
   font-weight: var(--dd-fw-light, 400);
   letter-spacing: -0.02em;
   line-height: 1.35;
-  color: rgb(255 255 255 / 0.88);
+  color: rgb(255 255 255 / 0.9);
   text-wrap: balance;
-}
-
-.dark-sleeplab__inspired-link {
-  margin-top: 0.75rem;
-  font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(0.875rem, 1.6vw, 1rem);
-  font-weight: var(--dd-fw-medium, 500);
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
-  text-decoration-color: rgb(255 255 255 / 0.35);
-}
-
-.dark-sleeplab__inspired-link:hover {
-  text-decoration-color: rgb(255 255 255 / 0.75);
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
 }
 
 /* ── CTA stage ── */

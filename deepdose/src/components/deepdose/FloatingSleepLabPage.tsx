@@ -225,6 +225,7 @@ export function FloatingSleepLabPage() {
                 className={cn(
                   'dark-sleeplab__scene dark-sleeplab__scene--benefit',
                   scene.id === 'diagnose' && 'dark-sleeplab__scene--media-zoom',
+                  scene.id === 'optimise' && 'dark-sleeplab__scene--day-ii',
                   scene.id === 'perform' && 'dark-sleeplab__scene--day-iii',
                 )}
                 aria-labelledby={`sleeplab-${scene.id}`}
@@ -267,10 +268,12 @@ export function FloatingSleepLabPage() {
                   </h2>
                   <ul className="dark-sleeplab__includes-list">
                     {scene.items.map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={item.title}>
+                        <span className="dark-sleeplab__includes-title">{item.title}</span>
+                        <span className="dark-sleeplab__includes-body">{item.body}</span>
+                      </li>
                     ))}
                   </ul>
-                  <BookFloatLink className="dark-sleeplab__includes-cta" />
                 </div>
               </section>
             )
@@ -283,6 +286,8 @@ export function FloatingSleepLabPage() {
                 className="dark-sleeplab__scene dark-sleeplab__scene--inspired"
                 aria-labelledby={`sleeplab-${scene.id}`}
               >
+                <SceneMedia media={scene.media} objectPosition="center 22%" />
+                <div className="dark-sleeplab__scrim dark-sleeplab__scrim--inspired" aria-hidden />
                 <div className="dark-sleeplab__inspired">
                   <p className="dark-sleeplab__inspired-label">{scene.label}</p>
                   <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__inspired-name">
@@ -290,14 +295,6 @@ export function FloatingSleepLabPage() {
                   </h2>
                   <p className="dark-sleeplab__inspired-role">{scene.role}</p>
                   <p className="dark-sleeplab__inspired-body">{scene.body}</p>
-                  <a
-                    href={scene.href}
-                    className="dark-sleeplab__inspired-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {scene.linkLabel}
-                  </a>
                 </div>
               </section>
             )
@@ -312,6 +309,9 @@ export function FloatingSleepLabPage() {
               <SceneMedia media={scene.media} />
               <div className="dark-sleeplab__scrim dark-sleeplab__scrim--centre" aria-hidden />
               <div className="dark-sleeplab__cta-stage">
+                <PlaceLine onMedia className="dark-sleeplab__place--cta-lead">
+                  {SLEEPLAB_COMMERCIAL.ctaLine}
+                </PlaceLine>
                 <div className="dark-sleeplab__cta-actions">
                   <BookFloatLink />
                   <Link
@@ -321,7 +321,6 @@ export function FloatingSleepLabPage() {
                     {SLEEPLAB_CTAS[1].label}
                   </Link>
                 </div>
-                <PlaceLine onMedia>{SLEEPLAB_COMMERCIAL.ctaLine}</PlaceLine>
               </div>
             </section>
           )

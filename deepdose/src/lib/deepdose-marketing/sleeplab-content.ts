@@ -13,7 +13,7 @@ export const SLEEPLAB_COMMERCIAL = {
   offers: ['2-night reset', '7-day detox', 'Paddington London'] as const,
   place: 'Paddington, London.',
   /** Final CTA footer — replaces place on the last screen */
-  ctaLine: "London's 1st Floating Recovery Space",
+  ctaLine: "Experience London's 1st Floating Recovery Space",
   /** Compact single line for tight surfaces */
   line: '2-night reset · 7-day detox · Paddington London',
 } as const
@@ -21,12 +21,28 @@ export const SLEEPLAB_COMMERCIAL = {
 /** Subhead under the brand title. */
 export const SLEEPLAB_OUTCOME = 'Rest Deeper, Work Smarter.' as const
 
+/** Equinox-style feature outline. Bodies matched ~72 chars, two lines max, no em dashes. */
 export const SLEEPLAB_INCLUDES = [
-  'Metabolic health screen',
-  'Overnight sleep sensing',
-  'Dark, quiet, climate-sealed room',
-  'Wake with your body clock',
-  'Chemistry score unlock',
+  {
+    title: 'Homekit Sensing',
+    body: 'Tracks sleep, heart rate and breath so your recovery session is data-led.',
+  },
+  {
+    title: 'Climate Seal',
+    body: 'Blackout, climate and acoustic seal keep chamber dark, quiet, and steady.',
+  },
+  {
+    title: 'Metabolic Screen',
+    body: 'Clinical metabolic risk analysis on arrival sets your recovery baseline.',
+  },
+  {
+    title: 'Circadian Wake',
+    body: 'No jarring alarms. Wake timed to your clock with gradual light mornings.',
+  },
+  {
+    title: 'Morning Score',
+    body: 'Wake to your chemistry score unlock, a clear read on how the night went.',
+  },
 ] as const
 
 /** Equinox-style science beat — inspired by, not a claimed collaboration. */
@@ -34,9 +50,7 @@ export const SLEEPLAB_INSPIRED = {
   label: 'Inspired by',
   name: 'Dr Stasha Gominak',
   role: 'Neurologist · RightSleep',
-  body: 'Sleep as neurological repair. Vitamin D. B vitamins. The science behind the chamber.',
-  href: 'https://drgominak.com/',
-  linkLabel: 'drgominak.com',
+  body: 'Sleep as neurological repair.',
 } as const
 
 /**
@@ -52,9 +66,9 @@ export const SLEEPLAB_SCENES = [
     outcome: SLEEPLAB_OUTCOME,
     media: {
       type: 'video' as const,
-      src: '/sleeplab/slow-wake.mp4',
-      alt: 'Luxury recovery rest — Sleep Lab',
-      playbackRate: 0.4,
+      src: '/sleep-massage.mp4',
+      alt: 'Sleep massage — Sleep Lab recovery',
+      playbackRate: 0.45,
     },
   },
   {
@@ -75,10 +89,9 @@ export const SLEEPLAB_SCENES = [
     label: 'Day II',
     body: 'Blackout. Climate. Acoustic seal.',
     media: {
-      type: 'video' as const,
-      src: '/moody-torso.mp4',
-      alt: 'Male body in motion — Day II',
-      playbackRate: 0.3,
+      type: 'image' as const,
+      src: '/deepdose-bedroom.jpg',
+      alt: 'DeepDose bedroom chamber — Day II',
     },
   },
   {
@@ -96,7 +109,7 @@ export const SLEEPLAB_SCENES = [
   {
     id: 'includes',
     kind: 'includes' as const,
-    label: 'Includes',
+    label: 'Core Experience',
     items: SLEEPLAB_INCLUDES,
   },
   {
@@ -106,8 +119,11 @@ export const SLEEPLAB_SCENES = [
     name: SLEEPLAB_INSPIRED.name,
     role: SLEEPLAB_INSPIRED.role,
     body: SLEEPLAB_INSPIRED.body,
-    href: SLEEPLAB_INSPIRED.href,
-    linkLabel: SLEEPLAB_INSPIRED.linkLabel,
+    media: {
+      type: 'image' as const,
+      src: '/sleeplab/stasha-gominak.jpg',
+      alt: 'Dr Stasha Gominak',
+    },
   },
   {
     id: 'cta',
