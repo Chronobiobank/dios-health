@@ -12,6 +12,8 @@ export const SLEEPLAB_BOOK_HREF = 'https://www.airbnb.co.uk/' as const
 export const SLEEPLAB_COMMERCIAL = {
   offers: ['2-night reset', '7-day detox'] as const,
   place: 'Paddington, London.',
+  /** Final CTA footer — replaces place on the last screen */
+  ctaLine: "London's 1st Floating Recovery Space",
   /** Compact single line for tight surfaces */
   line: '2-night reset · 7-day detox',
 } as const
@@ -19,16 +21,12 @@ export const SLEEPLAB_COMMERCIAL = {
 /** Subhead under the brand title. */
 export const SLEEPLAB_OUTCOME = 'Rest Deeper, Work Smarter.' as const
 
-/** One authority line — science trust without a bio. */
-export const SLEEPLAB_AUTHORITY = 'Homekit sensing · metabolic screen · circadian seal' as const
-
 export const SLEEPLAB_INCLUDES = [
-  'Clinical-grade metabolic risk analysis',
-  'Homekit overnight sensing',
-  'Blackout · climate · acoustic seal',
-  'Circadian-aligned wake',
-  'Private Paddington chamber',
-  'Phenotype score unlock',
+  'Metabolic health screen',
+  'Overnight sleep sensing',
+  'Dark, quiet, climate-sealed room',
+  'Wake with your body clock',
+  'Chemistry score unlock',
 ] as const
 
 /** Equinox-style science beat — inspired by, not a claimed collaboration. */
@@ -100,7 +98,6 @@ export const SLEEPLAB_SCENES = [
     kind: 'includes' as const,
     label: 'Includes',
     items: SLEEPLAB_INCLUDES,
-    authority: SLEEPLAB_AUTHORITY,
   },
   {
     id: 'inspired',

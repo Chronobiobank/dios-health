@@ -122,9 +122,11 @@ function BookFloatLink({ className }: { className?: string }) {
 function PlaceLine({
   className,
   onMedia = false,
+  children = SLEEPLAB_COMMERCIAL.place,
 }: {
   className?: string
   onMedia?: boolean
+  children?: string
 }) {
   return (
     <p
@@ -134,7 +136,7 @@ function PlaceLine({
         className,
       )}
     >
-      {SLEEPLAB_COMMERCIAL.place}
+      {children}
     </p>
   )
 }
@@ -243,9 +245,7 @@ export function FloatingSleepLabPage() {
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
-                  <p className="dark-sleeplab__authority">{scene.authority}</p>
                   <BookFloatLink className="dark-sleeplab__includes-cta" />
-                  <PlaceLine />
                 </div>
               </section>
             )
@@ -296,7 +296,7 @@ export function FloatingSleepLabPage() {
                     {SLEEPLAB_CTAS[1].label}
                   </Link>
                 </div>
-                <PlaceLine onMedia />
+                <PlaceLine onMedia>{SLEEPLAB_COMMERCIAL.ctaLine}</PlaceLine>
               </div>
             </section>
           )
