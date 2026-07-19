@@ -31,9 +31,19 @@ export const SLEEPLAB_INCLUDES = [
   'Phenotype score unlock',
 ] as const
 
+/** Equinox-style science beat — inspired by, not a claimed collaboration. */
+export const SLEEPLAB_INSPIRED = {
+  label: 'Inspired by',
+  name: 'Dr Stasha Gominak',
+  role: 'Neurologist · RightSleep',
+  body: 'Sleep as neurological repair. Vitamin D. B vitamins. The science behind the chamber.',
+  href: 'https://drgominak.com/',
+  linkLabel: 'drgominak.com',
+} as const
+
 /**
- * Six experiential screens —
- * brand · Day I–III · includes · CTA.
+ * Experiential screens —
+ * brand · Day I–III · includes · inspired · CTA.
  */
 export const SLEEPLAB_SCENES = [
   {
@@ -91,6 +101,16 @@ export const SLEEPLAB_SCENES = [
     label: 'Includes',
     items: SLEEPLAB_INCLUDES,
     authority: SLEEPLAB_AUTHORITY,
+  },
+  {
+    id: 'inspired',
+    kind: 'inspired' as const,
+    label: SLEEPLAB_INSPIRED.label,
+    name: SLEEPLAB_INSPIRED.name,
+    role: SLEEPLAB_INSPIRED.role,
+    body: SLEEPLAB_INSPIRED.body,
+    href: SLEEPLAB_INSPIRED.href,
+    linkLabel: SLEEPLAB_INSPIRED.linkLabel,
   },
   {
     id: 'cta',

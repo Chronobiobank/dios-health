@@ -1,6 +1,6 @@
 /**
- * Floating Sleep Lab — six experiential screens.
- * Brand · Day I–III · Includes · CTA.
+ * Floating Sleep Lab — experiential screens.
+ * Brand · Day I–III · Includes · Inspired · CTA.
  */
 
 .deepdose-shell.seco-shell--dark.dark-sleeplab {
@@ -48,6 +48,11 @@ body:has(.dark-sleeplab) {
   height: 100%;
   min-height: 0;
   overflow: hidden;
+}
+
+/* Beat shell Merriweather on h1–h4 — Sleep Lab is Inter / UI sans only */
+.deepdose-shell.seco-shell--dark.dark-sleeplab :is(h1, h2, h3, h4) {
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
 }
 
 /* Snap scrollport — one screen per scene on every device */
@@ -295,7 +300,10 @@ body:has(.dark-sleeplab) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.85rem;
+  width: 100%;
+  text-align: center;
 }
 
 .dark-sleeplab__brand-foot {
@@ -319,7 +327,7 @@ body:has(.dark-sleeplab) {
 }
 
 .dark-sleeplab__brand-headline {
-  margin: 0;
+  margin: 0 auto;
   font-family: var(--font-inter, system-ui, sans-serif);
   letter-spacing: -0.04em;
   line-height: 1.05;
@@ -329,21 +337,23 @@ body:has(.dark-sleeplab) {
 }
 
 .deepdose-shell.seco-shell--dark.dark-sleeplab h1.dark-sleeplab__brand-headline {
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
   font-size: clamp(2.75rem, 1.6rem + 7vw, 5rem);
   font-weight: var(--dd-fw-medium, 500);
 }
 
 .dark-sleeplab__outcome {
-  margin: 0;
-  max-width: 28ch;
+  margin: 0 auto;
+  width: max-content;
+  max-width: 100%;
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+  font-size: clamp(1.25rem, 0.9rem + 2.2vw, 1.75rem);
   font-weight: var(--dd-fw-light, 400);
-  letter-spacing: -0.015em;
-  line-height: 1.35;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   color: rgb(255 255 255 / 0.78);
-  text-wrap: balance;
   text-align: center;
+  white-space: nowrap;
   text-shadow: 0 1px 14px rgb(0 0 0 / 0.45);
 }
 
@@ -477,7 +487,91 @@ body:has(.dark-sleeplab) {
   margin-top: 0.35rem;
 }
 
-/* ── 6. CTA stage ── */
+/* ── Inspired by — science authority beat ── */
+
+.dark-sleeplab__scene--inspired {
+  background: var(--brand-chamber);
+}
+
+.dark-sleeplab__inspired {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.65rem;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 100%;
+  width: min(100%, 28rem);
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2.5rem);
+  padding-top: calc(var(--sleeplab-ticker-h) + 1.5rem);
+}
+
+.dark-sleeplab__inspired-label {
+  margin: 0;
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: clamp(0.875rem, 1.6vw, 1rem);
+  font-weight: var(--dd-fw-medium, 500);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.62);
+}
+
+.dark-sleeplab__inspired-name {
+  margin: 0;
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  font-weight: var(--dd-fw-medium, 500);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.dark-sleeplab__inspired-role {
+  margin: 0;
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: clamp(0.875rem, 1.6vw, 1rem);
+  font-weight: var(--dd-fw-medium, 500);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: rgb(255 255 255 / 0.72);
+}
+
+.dark-sleeplab__inspired-body {
+  margin: 0.35rem 0 0;
+  max-width: 28ch;
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: clamp(1.0625rem, 2.4vw, 1.25rem);
+  font-weight: var(--dd-fw-light, 400);
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  color: rgb(255 255 255 / 0.88);
+  text-wrap: balance;
+}
+
+.dark-sleeplab__inspired-link {
+  margin-top: 0.75rem;
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: clamp(0.875rem, 1.6vw, 1rem);
+  font-weight: var(--dd-fw-medium, 500);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgb(255 255 255 / 0.35);
+}
+
+.dark-sleeplab__inspired-link:hover {
+  text-decoration-color: rgb(255 255 255 / 0.75);
+}
+
+/* ── CTA stage ── */
 
 .dark-sleeplab__cta-stage {
   position: relative;

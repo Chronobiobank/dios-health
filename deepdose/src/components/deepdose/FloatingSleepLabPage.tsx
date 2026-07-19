@@ -157,7 +157,7 @@ function OffersTicker() {
   )
 }
 
-/** Brand · Day I–III · Includes · CTA. */
+/** Brand · Day I–III · Includes · Inspired · CTA. */
 export function FloatingSleepLabPage() {
   return (
     <DeepDoseShell variant="dark" className="dark-sleeplab" nav={null}>
@@ -246,6 +246,33 @@ export function FloatingSleepLabPage() {
                   <p className="dark-sleeplab__authority">{scene.authority}</p>
                   <BookFloatLink className="dark-sleeplab__includes-cta" />
                   <PlaceLine />
+                </div>
+              </section>
+            )
+          }
+
+          if (scene.kind === 'inspired') {
+            return (
+              <section
+                key={scene.id}
+                className="dark-sleeplab__scene dark-sleeplab__scene--inspired"
+                aria-labelledby={`sleeplab-${scene.id}`}
+              >
+                <div className="dark-sleeplab__inspired">
+                  <p className="dark-sleeplab__inspired-label">{scene.label}</p>
+                  <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__inspired-name">
+                    {scene.name}
+                  </h2>
+                  <p className="dark-sleeplab__inspired-role">{scene.role}</p>
+                  <p className="dark-sleeplab__inspired-body">{scene.body}</p>
+                  <a
+                    href={scene.href}
+                    className="dark-sleeplab__inspired-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {scene.linkLabel}
+                  </a>
                 </div>
               </section>
             )
