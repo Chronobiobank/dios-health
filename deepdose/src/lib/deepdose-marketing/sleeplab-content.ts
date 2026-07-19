@@ -12,13 +12,15 @@ export const SLEEPLAB_BOOK_HREF = 'https://www.airbnb.co.uk/' as const
 export const SLEEPLAB_COMMERCIAL = {
   offers: ['2-night reset', '7-day detox', 'Paddington London'] as const,
   place: 'Paddington, London.',
+  /** Standalone statement screen after brand */
+  statement: "Experience London's 1st Floating Sleep Lab",
   /** Final CTA footer — replaces place on the last screen */
-  ctaLine: "Experience London's 1st Floating Recovery Space",
+  ctaLine: 'Reclaim Lost Time',
   /** Compact single line for tight surfaces */
   line: '2-night reset · 7-day detox · Paddington London',
 } as const
 
-/** Subhead under the brand title. */
+/** Brand centre line under the wordmark. */
 export const SLEEPLAB_OUTCOME = 'Rest Deeper, Work Smarter.' as const
 
 /** Equinox-style feature outline. Bodies matched ~72 chars, two lines max, no em dashes. */
@@ -47,22 +49,20 @@ export const SLEEPLAB_INCLUDES = [
 
 /** Equinox-style science beat — inspired by, not a claimed collaboration. */
 export const SLEEPLAB_INSPIRED = {
-  label: 'Inspired by',
-  name: 'Dr Stasha Gominak',
-  role: 'Neurologist · RightSleep',
+  label: 'PROTOCOL',
+  name: 'Dr Stasha Gominak, RightSleep neurologist',
   body: 'Sleep as neurological repair.',
 } as const
 
 /**
  * Experiential screens —
- * brand · Day I–III · includes · inspired · CTA.
+ * brand · statement · Day I–III · includes · inspired · CTA.
  */
 export const SLEEPLAB_SCENES = [
   {
     id: 'brand',
     kind: 'brand' as const,
     wordmark: DEEPDOSE_WORDMARK,
-    headline: 'Sleep Lab',
     outcome: SLEEPLAB_OUTCOME,
     media: {
       type: 'video' as const,
@@ -72,9 +72,19 @@ export const SLEEPLAB_SCENES = [
     },
   },
   {
+    id: 'statement',
+    kind: 'statement' as const,
+    body: SLEEPLAB_COMMERCIAL.statement,
+    media: {
+      type: 'image' as const,
+      src: '/sunset-little-venice.webp',
+      alt: "Sunset over Little Venice — London's 1st Floating Sleep Lab",
+    },
+  },
+  {
     id: 'diagnose',
     kind: 'benefit' as const,
-    label: 'Day I',
+    label: 'DIAGNOSTIC',
     body: 'Clinical-grade metabolic risk analysis',
     media: {
       type: 'video' as const,
@@ -86,7 +96,7 @@ export const SLEEPLAB_SCENES = [
   {
     id: 'optimise',
     kind: 'benefit' as const,
-    label: 'Day II',
+    label: 'SOMNOLOGIC',
     body: 'Blackout. Climate. Acoustic seal.',
     media: {
       type: 'image' as const,
@@ -97,7 +107,7 @@ export const SLEEPLAB_SCENES = [
   {
     id: 'perform',
     kind: 'benefit' as const,
-    label: 'Day III',
+    label: 'NEUROLOGIC',
     body: 'Wake restored. Ready for the city.',
     media: {
       type: 'video' as const,
@@ -109,7 +119,7 @@ export const SLEEPLAB_SCENES = [
   {
     id: 'includes',
     kind: 'includes' as const,
-    label: 'Core Experience',
+    label: 'Features',
     items: SLEEPLAB_INCLUDES,
   },
   {
@@ -117,7 +127,6 @@ export const SLEEPLAB_SCENES = [
     kind: 'inspired' as const,
     label: SLEEPLAB_INSPIRED.label,
     name: SLEEPLAB_INSPIRED.name,
-    role: SLEEPLAB_INSPIRED.role,
     body: SLEEPLAB_INSPIRED.body,
     media: {
       type: 'image' as const,
@@ -130,18 +139,12 @@ export const SLEEPLAB_SCENES = [
     kind: 'cta' as const,
     media: {
       type: 'video' as const,
-      src: '/full-spectrum.mp4',
-      alt: 'Full spectrum — book the Sleep Lab',
+      src: '/couple-in-bed.mp4',
+      alt: 'Couple at rest — book the Sleep Lab',
       playbackRate: 0.35,
     },
   },
 ] as const
-
-/** Brand foot — advance into the proposition, not book yet */
-export const SLEEPLAB_CONTINUE = {
-  label: 'Optimise Your Sleep',
-  href: '#sleeplab-scene-diagnose',
-} as const
 
 export const SLEEPLAB_CTAS = [
   {

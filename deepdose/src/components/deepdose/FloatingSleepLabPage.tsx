@@ -2,13 +2,12 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { DeepdoseWordmark } from '@/components/brand/DeepdoseWordmark'
 import { DeepDoseShell } from '@/components/deepdose/DeepDoseShell'
 import {
   SLEEPLAB_COMMERCIAL,
-  SLEEPLAB_CONTINUE,
   SLEEPLAB_CTAS,
   SLEEPLAB_SCENES,
 } from '@/lib/deepdose-marketing/sleeplab-content'
@@ -120,27 +119,6 @@ function BookFloatLink({ className }: { className?: string }) {
   )
 }
 
-/** Brand only — snap to Day I so the proposition lands before booking */
-function ContinuePropositionLink({ className }: { className?: string }) {
-  const onClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    const id = SLEEPLAB_CONTINUE.href.replace(/^#/, '')
-    const target = document.getElementById(id)
-    if (!target) return
-    event.preventDefault()
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
-  return (
-    <a
-      href={SLEEPLAB_CONTINUE.href}
-      className={cn('dark-sleeplab__cta dark-sleeplab__cta--solid', className)}
-      onClick={onClick}
-    >
-      {SLEEPLAB_CONTINUE.label}
-    </a>
-  )
-}
-
 function PlaceLine({
   className,
   onMedia = false,
@@ -184,7 +162,7 @@ function OffersTicker() {
   )
 }
 
-/** Brand · Day I–III · Includes · Inspired · CTA. */
+/** Brand · Statement · Day I–III · Includes · Inspired · CTA. */
 export function FloatingSleepLabPage() {
   return (
     <DeepDoseShell variant="dark" className="dark-sleeplab" nav={null}>
@@ -196,22 +174,34 @@ export function FloatingSleepLabPage() {
               <section
                 key={scene.id}
                 className="dark-sleeplab__scene dark-sleeplab__scene--brand"
-                aria-label={scene.headline}
+                aria-labelledby="sleeplab-brand-outcome"
               >
                 <SceneMedia media={scene.media} priority={index === 0} />
                 <div className="dark-sleeplab__grade" aria-hidden />
                 <div className="dark-sleeplab__scrim dark-sleeplab__scrim--luxury" aria-hidden />
                 <div className="dark-sleeplab__brand">
-                  <div className="dark-sleeplab__brand-top">
-                    <DeepdoseWordmark className="dark-sleeplab__wordmark" />
-                  </div>
-                  <div className="dark-sleeplab__brand-centre">
-                    <h1 className="dark-sleeplab__brand-headline">{scene.headline}</h1>
-                    <p className="dark-sleeplab__outcome">{scene.outcome}</p>
-                  </div>
-                  <div className="dark-sleeplab__brand-foot">
-                    <ContinuePropositionLink />
-                  </div>
+                  <DeepdoseWordmark className="dark-sleeplab__wordmark" />
+                  <h1 id="sleeplab-brand-outcome" className="dark-sleeplab__outcome">
+                    {scene.outcome}
+                  </h1>
+                </div>
+              </section>
+            )
+          }
+
+          if (scene.kind === 'statement') {
+            return (
+              <section
+                key={scene.id}
+                className="dark-sleeplab__scene dark-sleeplab__scene--statement"
+                aria-labelledby={`sleeplab-${scene.id}`}
+              >
+                <SceneMedia media={scene.media} />
+                <div className="dark-sleeplab__scrim dark-sleeplab__scrim--statement" aria-hidden />
+                <div className="dark-sleeplab__statement">
+                  <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__statement-body">
+                    {scene.body}
+                  </h2>
                 </div>
               </section>
             )
@@ -246,7 +236,7 @@ export function FloatingSleepLabPage() {
                   aria-hidden
                 />
                 <div className="dark-sleeplab__benefit">
-                  <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__benefit-label">
+                  <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__eyebrow">
                     {scene.label}
                   </h2>
                   <p className="dark-sleeplab__benefit-body">{scene.body}</p>
@@ -263,7 +253,7 @@ export function FloatingSleepLabPage() {
                 aria-labelledby={`sleeplab-${scene.id}`}
               >
                 <div className="dark-sleeplab__includes">
-                  <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__includes-label">
+                  <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__eyebrow">
                     {scene.label}
                   </h2>
                   <ul className="dark-sleeplab__includes-list">
@@ -289,11 +279,10 @@ export function FloatingSleepLabPage() {
                 <SceneMedia media={scene.media} objectPosition="center 22%" />
                 <div className="dark-sleeplab__scrim dark-sleeplab__scrim--inspired" aria-hidden />
                 <div className="dark-sleeplab__inspired">
-                  <p className="dark-sleeplab__inspired-label">{scene.label}</p>
+                  <p className="dark-sleeplab__eyebrow">{scene.label}</p>
                   <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__inspired-name">
                     {scene.name}
                   </h2>
-                  <p className="dark-sleeplab__inspired-role">{scene.role}</p>
                   <p className="dark-sleeplab__inspired-body">{scene.body}</p>
                 </div>
               </section>
