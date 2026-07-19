@@ -52,8 +52,8 @@ export const SLEEPLAB_SCENES = [
     outcome: SLEEPLAB_OUTCOME,
     media: {
       type: 'video' as const,
-      src: '/couple-in-bed.mp4',
-      alt: 'Couple resting — Sleep Lab',
+      src: '/sleeplab/slow-wake.mp4',
+      alt: 'Luxury recovery rest — Sleep Lab',
       playbackRate: 0.4,
     },
   },
