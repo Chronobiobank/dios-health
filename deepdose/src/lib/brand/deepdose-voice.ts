@@ -5,8 +5,6 @@ import {
   DEEPDOSE_TAGLINE,
   DEEPDOSE_VALUE_PROP,
 } from '@/lib/brand/deepdose-brand'
-import { SLEEPLAB_BOOK_HREF } from '@/lib/deepdose-marketing/sleeplab-content'
-
 /**
  * Audience: people off the usual clock (ManJam founding cohort).
  * Positioning: first social network for chemical chronotypes + human connection.
@@ -30,9 +28,9 @@ export const DEEPDOSE_VOICE = {
   /** Social-graph value prop */
   valueProp: DEEPDOSE_VALUE_PROP,
   /** Home is Sleep Lab — meta lede */
-  homeLede: "London's 1st Floating Sleep Lab. Book Private Room. Find Your Match.",
-  /** Home primary — Airbnb */
-  homePrimaryCta: { label: 'Book Private Room', href: SLEEPLAB_BOOK_HREF },
+  homeLede: "London's 1st Floating Sleep Lab. Optimise Your Sleep. Find Your Match.",
+  /** Home primary — advance into Sleep Lab proposition */
+  homePrimaryCta: { label: 'Optimise Your Sleep', href: '#sleeplab-scene-diagnose' },
   /** Home secondary — orbit match splash */
   homeSecondaryCta: { label: 'Find Your Match', href: '/match' },
   /** /match orbit splash — same composition as the old home gate */

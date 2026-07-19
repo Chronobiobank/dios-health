@@ -121,6 +121,12 @@ export const SLEEPLAB_SCENES = [
   },
 ] as const
 
+/** Brand foot — advance into the proposition, not book yet */
+export const SLEEPLAB_CONTINUE = {
+  label: 'Optimise Your Sleep',
+  href: '#sleeplab-scene-diagnose',
+} as const
+
 export const SLEEPLAB_CTAS = [
   {
     label: 'Book Private Room',

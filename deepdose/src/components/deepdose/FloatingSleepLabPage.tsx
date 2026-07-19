@@ -2,12 +2,13 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
 
 import { DeepdoseWordmark } from '@/components/brand/DeepdoseWordmark'
 import { DeepDoseShell } from '@/components/deepdose/DeepDoseShell'
 import {
   SLEEPLAB_COMMERCIAL,
+  SLEEPLAB_CONTINUE,
   SLEEPLAB_CTAS,
   SLEEPLAB_SCENES,
 } from '@/lib/deepdose-marketing/sleeplab-content'
@@ -119,6 +120,27 @@ function BookFloatLink({ className }: { className?: string }) {
   )
 }
 
+/** Brand only — snap to Day I so the proposition lands before booking */
+function ContinuePropositionLink({ className }: { className?: string }) {
+  const onClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    const id = SLEEPLAB_CONTINUE.href.replace(/^#/, '')
+    const target = document.getElementById(id)
+    if (!target) return
+    event.preventDefault()
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  return (
+    <a
+      href={SLEEPLAB_CONTINUE.href}
+      className={cn('dark-sleeplab__cta dark-sleeplab__cta--solid', className)}
+      onClick={onClick}
+    >
+      {SLEEPLAB_CONTINUE.label}
+    </a>
+  )
+}
+
 function PlaceLine({
   className,
   onMedia = false,
@@ -188,7 +210,7 @@ export function FloatingSleepLabPage() {
                     <p className="dark-sleeplab__outcome">{scene.outcome}</p>
                   </div>
                   <div className="dark-sleeplab__brand-foot">
-                    <BookFloatLink />
+                    <ContinuePropositionLink />
                   </div>
                 </div>
               </section>
@@ -199,6 +221,7 @@ export function FloatingSleepLabPage() {
             return (
               <section
                 key={scene.id}
+                id={`sleeplab-scene-${scene.id}`}
                 className={cn(
                   'dark-sleeplab__scene dark-sleeplab__scene--benefit',
                   scene.id === 'diagnose' && 'dark-sleeplab__scene--media-zoom',
