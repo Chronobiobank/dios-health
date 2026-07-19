@@ -44,6 +44,12 @@ gsc-*.json
 # vercel
 .vercel
 
+# Source masters / scratch (compressed web copies live in public/)
+_local_media/
+.preview/
+.tmp-grid-thumbs/
+preview-screenshots/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

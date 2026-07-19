@@ -1,0 +1,12 @@
+# Source masters kept outside the deploy bundle
+_local_media/
+
+# Local tooling / scratch
+.preview/
+.tmp-grid-thumbs/
+preview-screenshots/
+advisors-latest.json
+advisors-raw.txt
+build-exit.txt
+build-output.txt
+sec.json
