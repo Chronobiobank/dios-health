@@ -77,10 +77,12 @@ function SceneMedia({
   media,
   objectPosition,
   priority,
+  quality = 85,
 }: {
   media: Extract<(typeof SLEEPLAB_SCENES)[number], { media: unknown }>['media']
   objectPosition?: string
   priority?: boolean
+  quality?: number
 }) {
   if (media.type === 'video') {
     return (
@@ -100,6 +102,7 @@ function SceneMedia({
       alt={media.alt}
       fill
       sizes="100vw"
+      quality={quality}
       priority={priority}
       className="dark-sleeplab__media dark-sleeplab__media--img"
       style={{ objectPosition: objectPosition ?? 'center center' }}
@@ -250,7 +253,11 @@ export function FloatingSleepLabPage() {
                 className="dark-sleeplab__scene dark-sleeplab__scene--inspired"
                 aria-labelledby={`sleeplab-${scene.id}`}
               >
-                <SceneMedia media={scene.media} objectPosition="center 22%" />
+                <SceneMedia
+                  media={scene.media}
+                  objectPosition="center 22%"
+                  quality={95}
+                />
                 <div className="dark-sleeplab__scrim dark-sleeplab__scrim--inspired" aria-hidden />
                 <div className="dark-sleeplab__inspired">
                   <p className="dark-sleeplab__eyebrow">{scene.label}</p>
@@ -283,7 +290,9 @@ export function FloatingSleepLabPage() {
                       rel="noopener noreferrer"
                     >
                       <span className="dark-sleeplab__offer-line">{offer.lines[0]}</span>
-                      <span className="dark-sleeplab__offer-line">{offer.lines[1]}</span>
+                      <span className="dark-sleeplab__offer-line dark-sleeplab__offer-line--strong">
+                        {offer.lines[1]}
+                      </span>
                     </a>
                   ))}
                 </div>

@@ -3,21 +3,21 @@ import { DEEPDOSE_NAME, DEEPDOSE_WORDMARK } from '@/lib/brand/deepdose-brand'
 export const SLEEPLAB_META = {
   title: `${DEEPDOSE_NAME} · Floating Sleep Lab`,
   description:
-    "London's private Floating Sleep Lab in Paddington. 2-night Recovery · 7-day Protocol.",
+    "London's private Floating Sleep Lab in Paddington. 2-day Recovery · 7-day Protocol.",
 } as const
 
 /** Live listing — swap for the Deepdose Paddington Airbnb URL when ready. */
 export const SLEEPLAB_BOOK_HREF = 'https://www.airbnb.co.uk/' as const
 
 export const SLEEPLAB_COMMERCIAL = {
-  offers: ['2-night Recovery', '7-day Protocol', 'Paddington London'] as const,
+  offers: ['2-day Recovery', '7-day Protocol', 'Paddington London'] as const,
   place: 'Paddington, London.',
   /** Standalone statement screen after brand */
   statement: 'Floating Sleep Lab',
   statementLead: 'Floating',
   statementRest: 'Sleep Lab',
   /** Compact single line for tight surfaces */
-  line: '2-night Recovery · 7-day Protocol · Paddington London',
+  line: '2-day Recovery · 7-day Protocol · Paddington London',
 } as const
 
 /** Brand centre line under the wordmark. */
@@ -158,13 +158,13 @@ export const SLEEPLAB_SCENES = [
 /** Final stay options — both book via Airbnb until dedicated listings exist. */
 export const SLEEPLAB_STAY_OFFERS = [
   {
-    label: '2-night Recovery',
-    lines: ['2-night', 'Recovery'] as const,
+    label: '2-Day Recovery',
+    lines: ['2-Day', 'Recovery'] as const,
     href: SLEEPLAB_BOOK_HREF,
   },
   {
-    label: '7-day Protocol',
-    lines: ['7-day', 'Protocol'] as const,
+    label: '7-Day Protocol',
+    lines: ['7-Day', 'Protocol'] as const,
     href: SLEEPLAB_BOOK_HREF,
   },
 ] as const
