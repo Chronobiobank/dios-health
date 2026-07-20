@@ -73,9 +73,9 @@ export const SLEEPLAB_SCENES = [
     outcome: SLEEPLAB_OUTCOME,
     media: {
       type: 'video' as const,
-      src: '/sleep-massage.mp4',
-      alt: 'Sleep massage — Sleep Lab recovery',
-      playbackRate: 0.45,
+      src: '/couple-in-bed.mp4',
+      alt: 'Couple at rest — Sleep Lab recovery',
+      playbackRate: 0.35,
     },
   },
   {
@@ -148,9 +148,9 @@ export const SLEEPLAB_SCENES = [
     kind: 'cta' as const,
     media: {
       type: 'video' as const,
-      src: '/couple-in-bed.mp4',
-      alt: 'Couple at rest — book the Sleep Lab',
-      playbackRate: 0.35,
+      src: '/sleep-massage.mp4',
+      alt: 'Sleep massage — book the Sleep Lab',
+      playbackRate: 0.45,
     },
   },
 ] as const
