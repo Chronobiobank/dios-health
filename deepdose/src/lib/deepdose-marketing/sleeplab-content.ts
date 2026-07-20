@@ -56,9 +56,9 @@ export type SleepLabFeatureIconId = (typeof SLEEPLAB_INCLUDES)[number]['icon']
 
 /** Equinox-style science beat — inspired by, not a claimed collaboration. */
 export const SLEEPLAB_INSPIRED = {
-  label: 'PROTOCOL',
+  label: 'FOUNDATION',
   name: 'Dr Stasha Gominak, RightSleep neurologist',
-  body: 'Sleep as neurological repair.',
+  body: 'Gut health as the switch that activates recovery pathways.',
 } as const
 
 /**
