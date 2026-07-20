@@ -34,8 +34,13 @@ export function PublicMarketingShell({ children }: PublicMarketingShellProps) {
   return (
     <DeepDoseShell variant="light" nav={memberProduct ? null : undefined}>
       {children}
-      <AppBottomNavSpacer />
-      <AppBottomNav />
+      {/* Black dock — signed-in product routes only; never on public/marketing */}
+      {memberProduct ? (
+        <>
+          <AppBottomNavSpacer />
+          <AppBottomNav />
+        </>
+      ) : null}
     </DeepDoseShell>
   )
 }

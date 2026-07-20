@@ -470,6 +470,7 @@
 .dd-gate__baseline .home-drug-search__take-label,
 .dd-gate__baseline .home-drug-search__clear,
 .dd-gate__baseline .home-drug-search__expand-link,
+.dd-gate__baseline .home-drug-search__time-caption,
 .dd-gate__baseline .med-search__icon,
 .dd-gate__baseline .med-search__input,
 .dd-gate__baseline .med-search__input::placeholder,
@@ -481,6 +482,7 @@
   font-size: var(--dd-pill-type);
   font-weight: 400;
   letter-spacing: -0.01em;
+  line-height: 1.2;
   text-transform: none;
 }
 
@@ -533,6 +535,11 @@
   margin-left: 0;
   padding-left: 0.5rem;
 }
+
+.dd-gate__baseline .home-drug-search__time-slot + .home-drug-search__time-slot {
+  border-left-color: rgb(15 23 42 / 0.12);
+}
+
 
 .dd-gate__baseline .home-drug-search__take-input .time-input-24__select,
 .dd-gate__baseline .home-drug-search__take-input select.dios-input {
@@ -640,8 +647,9 @@
   background: var(--dd-gate-input-bg);
   color: #0d0d0d;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: 0.9375rem;
-  font-weight: 500;
+  /* Match med-pill type above (--dd-pill-type) */
+  font-size: var(--dd-pill-type, 0.8125rem);
+  font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1;
   outline: none;
@@ -671,7 +679,8 @@
 
 .dd-gate__input::placeholder {
   color: rgb(13 13 13 / 0.38);
-  font-weight: 500;
+  font-size: inherit;
+  font-weight: 400;
 }
 
 .dd-gate__input:hover {

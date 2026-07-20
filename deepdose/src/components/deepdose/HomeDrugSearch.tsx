@@ -162,22 +162,29 @@ export function HomeDrugSearch({
     savePlanDraft(planSnapshot)
   }
 
-  function renderAnchorRow(
-    label: 'When you wake' | 'When you sleep',
-    value: string,
-    onChange: (next: string) => void
-  ) {
+  function renderSleepWakeRow() {
     return (
       <div className="med-search med-search--hero home-drug-search__row home-drug-search__anchor">
-        <div className="med-search__bar home-drug-search__bar">
-          <span className="home-drug-search__anchor-name">{label}</span>
-          <div className="home-drug-search__take">
-            <TimeInput
-              value={value}
-              onChange={(event) => onChange(event.target.value)}
-              className="home-drug-search__take-input"
-              aria-label={label}
-            />
+        <div className="med-search__bar home-drug-search__bar home-drug-search__bar--times-only">
+          <div className="home-drug-search__take home-drug-search__take--pair">
+            <label className="home-drug-search__time-slot">
+              <TimeInput
+                value={sleepTime}
+                onChange={(event) => setSleepTime(event.target.value)}
+                className="home-drug-search__take-input"
+                aria-label="Your sleep time"
+              />
+              <span className="home-drug-search__time-caption">Your sleep time</span>
+            </label>
+            <label className="home-drug-search__time-slot">
+              <TimeInput
+                value={wakeTime}
+                onChange={(event) => setWakeTime(event.target.value)}
+                className="home-drug-search__take-input"
+                aria-label="Your wake time"
+              />
+              <span className="home-drug-search__time-caption">Your wake time</span>
+            </label>
           </div>
         </div>
       </div>
@@ -284,9 +291,8 @@ export function HomeDrugSearch({
   return (
     <div className="home-drug-search home-drug-search--poly">
       <div className="home-drug-search__med-stack">
-        {renderAnchorRow('When you wake', wakeTime, setWakeTime)}
-        {renderAnchorRow('When you sleep', sleepTime, setSleepTime)}
         {rows.map((row, index) => renderSearchRow(row, index))}
+        {renderSleepWakeRow()}
       </div>
 
       {canAddMed ? (

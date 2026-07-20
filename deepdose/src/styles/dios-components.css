@@ -451,6 +451,46 @@
   border-left: 1px solid rgb(255 255 255 / 0.14);
 }
 
+/* Sleep + wake times share one anchor pill — no left label */
+.home-drug-search__bar--times-only {
+  justify-content: center;
+}
+
+.home-drug-search__bar--times-only .home-drug-search__take--pair {
+  margin-left: 0;
+  padding-left: 0;
+  border-left: none;
+}
+
+.home-drug-search__take--pair {
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+.home-drug-search__time-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.home-drug-search__time-slot + .home-drug-search__time-slot {
+  padding-left: 0.55rem;
+  border-left: 1px solid rgb(15 23 42 / 0.12);
+}
+
+.home-drug-search__time-caption {
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: inherit;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: rgb(15 23 42 / 0.45);
+  white-space: nowrap;
+  text-align: center;
+}
+
 .home-drug-search__take-label {
   font-size: var(--type-micro);
   font-weight: 600;

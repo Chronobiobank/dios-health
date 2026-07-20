@@ -11,8 +11,9 @@
 @import "./app-bottom-nav.css";
 @import "./deepdose-chat.css";
 @import "./deepdose-connect.css";
-@import "./deepdose-join.css";
 @import "./deepdose-gate.css";
+/* After gate so founders join type lock beats base .dd-gate__input */
+@import "./deepdose-join.css";
 @import "./deepdose-profile-account.css";
 @import "./deepdose-real.css";
 @import "./deepdose-realme.css";

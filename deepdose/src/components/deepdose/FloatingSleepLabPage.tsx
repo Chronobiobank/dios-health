@@ -6,10 +6,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { DeepdoseWordmark } from '@/components/brand/DeepdoseWordmark'
 import { DeepDoseShell } from '@/components/deepdose/DeepDoseShell'
+import { SleepLabFeatureIcon } from '@/components/deepdose/SleepLabFeatureIcon'
 import {
   SLEEPLAB_COMMERCIAL,
-  SLEEPLAB_CTAS,
+  SLEEPLAB_NETWORK_CTA,
   SLEEPLAB_SCENES,
+  SLEEPLAB_STAY_OFFERS,
 } from '@/lib/deepdose-marketing/sleeplab-content'
 import { usePrefersReducedMotion } from '@/lib/react/use-prefers-reduced-motion'
 import { cn } from '@/lib/utils/cn'
@@ -105,42 +107,6 @@ function SceneMedia({
   )
 }
 
-function BookFloatLink({ className }: { className?: string }) {
-  const book = SLEEPLAB_CTAS[0]
-  return (
-    <a
-      href={book.href}
-      className={cn('dark-sleeplab__cta dark-sleeplab__cta--solid', className)}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {book.label}
-    </a>
-  )
-}
-
-function PlaceLine({
-  className,
-  onMedia = false,
-  children = SLEEPLAB_COMMERCIAL.place,
-}: {
-  className?: string
-  onMedia?: boolean
-  children?: string
-}) {
-  return (
-    <p
-      className={cn(
-        'dark-sleeplab__place',
-        onMedia && 'dark-sleeplab__place--on-media',
-        className,
-      )}
-    >
-      {children}
-    </p>
-  )
-}
-
 function OffersTicker() {
   /** One half of the loop — duplicated so -50% translate is seamless */
   const half = Array.from({ length: 5 }, () => [...SLEEPLAB_COMMERCIAL.offers]).flat()
@@ -199,8 +165,13 @@ export function FloatingSleepLabPage() {
                 <SceneMedia media={scene.media} />
                 <div className="dark-sleeplab__scrim dark-sleeplab__scrim--statement" aria-hidden />
                 <div className="dark-sleeplab__statement">
-                  <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__statement-body">
-                    {scene.body}
+                  <h2
+                    id={`sleeplab-${scene.id}`}
+                    className="dark-sleeplab__statement-body"
+                    aria-label={scene.body}
+                  >
+                    <span className="dark-sleeplab__statement-lead">{scene.lead}</span>{' '}
+                    <span className="dark-sleeplab__statement-rest">{scene.rest}</span>
                   </h2>
                 </div>
               </section>
@@ -259,7 +230,10 @@ export function FloatingSleepLabPage() {
                   <ul className="dark-sleeplab__includes-list">
                     {scene.items.map((item) => (
                       <li key={item.title}>
-                        <span className="dark-sleeplab__includes-title">{item.title}</span>
+                        <div className="dark-sleeplab__includes-head">
+                          <SleepLabFeatureIcon name={item.icon} />
+                          <span className="dark-sleeplab__includes-title">{item.title}</span>
+                        </div>
                         <span className="dark-sleeplab__includes-body">{item.body}</span>
                       </li>
                     ))}
@@ -298,18 +272,24 @@ export function FloatingSleepLabPage() {
               <SceneMedia media={scene.media} />
               <div className="dark-sleeplab__scrim dark-sleeplab__scrim--centre" aria-hidden />
               <div className="dark-sleeplab__cta-stage">
-                <PlaceLine onMedia className="dark-sleeplab__place--cta-lead">
-                  {SLEEPLAB_COMMERCIAL.ctaLine}
-                </PlaceLine>
-                <div className="dark-sleeplab__cta-actions">
-                  <BookFloatLink />
-                  <Link
-                    href={SLEEPLAB_CTAS[1].href}
-                    className="dark-sleeplab__cta dark-sleeplab__cta--ghost"
-                  >
-                    {SLEEPLAB_CTAS[1].label}
-                  </Link>
+                <div className="dark-sleeplab__offer-row">
+                  {SLEEPLAB_STAY_OFFERS.map((offer) => (
+                    <a
+                      key={offer.label}
+                      href={offer.href}
+                      className="dark-sleeplab__offer"
+                      aria-label={offer.label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="dark-sleeplab__offer-line">{offer.lines[0]}</span>
+                      <span className="dark-sleeplab__offer-line">{offer.lines[1]}</span>
+                    </a>
+                  ))}
                 </div>
+                <Link href={SLEEPLAB_NETWORK_CTA.href} className="dark-sleeplab__cta dark-sleeplab__cta--ghost">
+                  {SLEEPLAB_NETWORK_CTA.label}
+                </Link>
               </div>
             </section>
           )

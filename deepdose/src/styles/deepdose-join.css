@@ -6,6 +6,17 @@
  * - .dd-gate__form (auth pills)
  */
 
+.dd-join {
+  --dd-gate-pill-h: 3.5rem;
+  /* White-pill type sits under the Create free account label */
+  --dd-pill-type: 0.9375rem;
+  --dd-join-cta-type: 1.125rem;
+  --dd-pill-ink: rgb(15 23 42 / 0.55);
+  --dd-gate-input-bg: #fff;
+  --dd-gate-input-border: rgb(13 13 13 / 0.14);
+  --dd-gate-shadow: 0 1px 2px rgb(13 13 13 / 0.04);
+}
+
 .dd-join.seco-how-page .seco-how-page__inner {
   justify-content: flex-start;
   padding-top: 0;
@@ -19,11 +30,6 @@
 }
 
 .dd-join__stack.dd-gate {
-  --dd-gate-pill-h: 3.5rem;
-  --dd-pill-type: 1.125rem;
-  --dd-gate-input-bg: #fff;
-  --dd-gate-input-border: rgb(13 13 13 / 0.14);
-  --dd-gate-shadow: 0 1px 2px rgb(13 13 13 / 0.04);
   max-width: 36rem;
   min-height: 0;
 }
@@ -53,30 +59,77 @@
   color: inherit;
 }
 
-.dd-join__auth .dd-gate__input,
-.dd-join__auth .dd-gate__input::placeholder,
-.dd-join__auth .dd-gate__field-icon {
-  color: rgb(15 23 42 / 0.55);
-  -webkit-text-fill-color: rgb(15 23 42 / 0.55);
-  font-size: 1.125rem;
+/* White pills — one size, always under the CTA label */
+.dd-join .home-drug-search__anchor-name,
+.dd-join .home-drug-search__clear,
+.dd-join .home-drug-search__expand-link,
+.dd-join .home-drug-search__time-caption,
+.dd-join .home-drug-search__med-stack .med-search--hero .med-search__input,
+.dd-join .home-drug-search__med-stack .med-search--hero .med-search__input::placeholder,
+.dd-join .home-drug-search__take-input .time-input-24__select,
+.dd-join .home-drug-search__take-input select.dios-input,
+.dd-join .home-drug-search__take-input .time-input-24__sep,
+.dd-join .dd-gate__input,
+.dd-join .dd-gate__input::placeholder,
+.dd-join .dd-gate__field-icon {
+  font-size: var(--dd-pill-type) !important;
   font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--dd-pill-ink);
+  -webkit-text-fill-color: var(--dd-pill-ink);
 }
 
-.dd-join__auth .dd-gate__input {
+.dd-join .dd-gate__input,
+.dd-join .dd-gate__input:-webkit-autofill,
+.dd-join .dd-gate__input:-webkit-autofill:hover,
+.dd-join .dd-gate__input:-webkit-autofill:focus {
   background: #fff;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-}
-
-.dd-join__meds .home-drug-search__anchor-name,
-.dd-join__meds .home-drug-search__med-stack .med-search--hero .med-search__input,
-.dd-join__meds .home-drug-search__take-input .time-input-24__select,
-.dd-join__meds .home-drug-search__take-input select.dios-input,
-.dd-join__meds .home-drug-search__take-input .time-input-24__sep {
-  font-size: 1.125rem;
+  -webkit-text-fill-color: var(--dd-pill-ink);
+  caret-color: var(--dd-pill-ink);
+  font-size: var(--dd-pill-type) !important;
 }
 
 .dd-join .dd-gate__signup {
+  font-size: var(--dd-join-cta-type) !important;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.dd-join__meds .home-drug-search__anchor .home-drug-search__bar {
+  align-items: center;
+  justify-content: center;
+  min-height: calc(var(--dd-gate-pill-h) + 1.35rem);
+  padding-block: 0.45rem;
+  padding-inline: 1.25rem;
+}
+
+/* Sleep / wake — equal columns, equal gap either side of the rule */
+.dd-join .home-drug-search__take--pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  justify-items: center;
+  gap: 0;
+  width: min(100%, 22rem);
+  margin-inline: auto;
+}
+
+.dd-join .home-drug-search__time-slot {
   width: 100%;
-  font-size: 1.125rem;
+  align-items: center;
+  padding-inline: 0.85rem;
+  box-sizing: border-box;
+}
+
+.dd-join .home-drug-search__time-slot + .home-drug-search__time-slot {
+  padding-left: 0.85rem;
+  border-left: 1px solid rgb(15 23 42 / 0.12);
+}
+
+.dd-join__meds .home-drug-search__take-input .time-input-24__select,
+.dd-join__meds .home-drug-search__take-input select.dios-input {
+  min-width: 2.5rem;
 }
