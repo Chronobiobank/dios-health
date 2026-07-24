@@ -72,13 +72,17 @@ function ChamberVideo({
   )
 }
 
+type SceneMediaSource =
+  | { type: 'image'; src: string; alt: string }
+  | { type: 'video'; src: string; alt: string; playbackRate?: number }
+
 function SceneMedia({
   media,
   objectPosition,
   priority,
   quality = 85,
 }: {
-  media: Extract<(typeof SLEEPLAB_SCENES)[number], { media: unknown }>['media']
+  media: SceneMediaSource
   objectPosition?: string
   priority?: boolean
   quality?: number
