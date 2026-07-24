@@ -558,10 +558,11 @@ body:has(.dark-sleeplab) {
   line-height: 1.2;
   color: #fff;
   text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
+  white-space: nowrap;
 }
 
 .dark-sleeplab__includes-body {
-  max-width: 34ch;
+  max-width: none;
   margin-inline-start: calc(1.25rem + 0.7rem);
   font-family: var(--font-inter, system-ui, sans-serif);
   font-size: clamp(0.875rem, 1.7vw, 0.975rem);
@@ -570,6 +571,25 @@ body:has(.dark-sleeplab) {
   line-height: 1.35;
   color: rgb(255 255 255 / 0.78);
   text-shadow: 0 1px 10px rgb(0 0 0 / 0.45);
+  white-space: nowrap;
+}
+
+.dark-sleeplab__includes > .dark-sleeplab__benefit-body + .dark-sleeplab__includes-title {
+  margin-top: -0.55rem;
+  margin-bottom: 0.15rem;
+  font-weight: var(--dd-fw-light, 400);
+  color: rgb(255 255 255 / 0.55);
+  text-shadow: none;
+}
+
+.dark-sleeplab__includes > .dark-sleeplab__benefit-body + .dark-sleeplab__includes-title::after {
+  content: '——';
+  display: block;
+  margin-top: 0.85rem;
+  margin-bottom: 0.15rem;
+  color: rgb(255 255 255 / 0.35);
+  letter-spacing: 0.08em;
+  font-weight: var(--dd-fw-light, 400);
 }
 
 .dark-sleeplab__authority {

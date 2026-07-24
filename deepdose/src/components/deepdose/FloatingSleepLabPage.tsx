@@ -182,10 +182,19 @@ export function FloatingSleepLabPage() {
                 className="dark-sleeplab__scene dark-sleeplab__scene--includes"
                 aria-labelledby={`sleeplab-${scene.id}`}
               >
+                {'media' in scene && scene.media ? (
+                  <>
+                    <SceneMedia media={scene.media} />
+                    <div className="dark-sleeplab__scrim dark-sleeplab__scrim--centre" aria-hidden />
+                  </>
+                ) : null}
                 <div className="dark-sleeplab__includes">
-                  <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__eyebrow">
+                  <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__benefit-body">
                     {scene.label}
                   </h2>
+                  {'sub' in scene && scene.sub ? (
+                    <p className="dark-sleeplab__includes-title">{scene.sub}</p>
+                  ) : null}
                   <ul className="dark-sleeplab__includes-list">
                     {scene.items.map((item) => (
                       <li key={item.title}>

@@ -23,21 +23,22 @@ export const SLEEPLAB_BRAND = {
 /** How — reuse Features list shell. */
 export const SLEEPLAB_HOW = {
   label: 'Cities kill your sleep',
+  sub: 'We built a way out.',
   items: [
     {
       icon: 'sensing' as const,
       title: 'Learn on the water',
-      body: 'Daytime workshops. Science-backed sleep tricks.',
+      body: 'Daytime workshops. Easy sleep science.',
     },
     {
       icon: 'wake' as const,
-      title: 'Track at home',
-      body: 'A wearable maps sleep in your own bed.',
+      title: 'Track sleep at home',
+      body: 'A wearable maps your sleep each night.',
     },
     {
       icon: 'score' as const,
-      title: "Map London's rest",
-      body: 'See how your neighbourhood sleeps.',
+      title: 'Find others in sync',
+      body: 'Meet peers synced to your body clock.',
     },
   ],
 } as const
@@ -71,7 +72,14 @@ export const SLEEPLAB_SCENES = [
     id: 'how',
     kind: 'includes' as const,
     label: SLEEPLAB_HOW.label,
+    sub: SLEEPLAB_HOW.sub,
     items: SLEEPLAB_HOW.items,
+    media: {
+      type: 'video' as const,
+      src: '/couple-in-bed.mp4',
+      alt: 'Couple at rest — sleep recovery',
+      playbackRate: 0.35,
+    },
   },
   {
     id: 'inspired',
