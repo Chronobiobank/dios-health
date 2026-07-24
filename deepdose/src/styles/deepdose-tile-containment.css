@@ -13,6 +13,8 @@
 }
 
 .seco-spectrum-tile,
+.seco-science-fold--grid-tile,
+.seco-technology__layer-tile,
 .dd-connect__tile,
 .dios-glass-outer,
 .dios-glass-inner,
@@ -78,7 +80,16 @@
 .seco-spectrum-tile__title,
 .seco-spectrum-tile__body,
 .seco-spectrum-tile__lead,
-.seco-spectrum-tile__cue {
+.seco-spectrum-tile__cue,
+.seco-science-fold__title,
+.seco-science-fold__teaser,
+.seco-science-fold__badge,
+.seco-science-evidence__title,
+.seco-science-evidence__meta,
+.seco-technology__layer-tile__title,
+.seco-technology__layer-tile__teaser,
+.seco-technology__layer-tile__cue,
+.seco-technology__layer-tile__highlights li {
   max-width: 100%;
   min-width: 0;
   overflow-wrap: anywhere;

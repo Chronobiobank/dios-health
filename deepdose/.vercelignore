@@ -1,3 +1,7 @@
+# Build / deps (never upload)
+.next/
+node_modules/
+
 # Source masters kept outside the deploy bundle
 _local_media/
 

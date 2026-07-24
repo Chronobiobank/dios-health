@@ -362,12 +362,16 @@
 
 .seco-marketing-page .seco-science-fold--grid-tile .seco-science-fold__title {
   font-family: var(--seco-font-display);
-  font-size: var(--mkt-tile-title-size);
+  font-size: var(--type-body-lg);
   font-weight: 500;
-  line-height: 1.08;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   color: rgb(255 255 255 / 0.96);
-  white-space: nowrap;
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .seco-marketing-page .seco-science-fold--grid-tile .seco-science-fold__teaser {
@@ -456,9 +460,14 @@
 .seco-mission .seco-science-fold--grid-static .seco-science-fold__head--mission .seco-science-fold__title {
   grid-column: 2;
   grid-row: 2;
-  min-height: calc(1.08 * var(--mkt-tile-title-size));
-  font-size: var(--mkt-tile-title-size);
-  line-height: 1.08;
+  min-height: 0;
+  font-size: var(--type-body-lg);
+  line-height: 1.2;
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .seco-mission .seco-science-fold--grid-static .seco-science-fold__head--mission .seco-science-fold__teaser {
@@ -471,7 +480,11 @@
   font-weight: 500;
   letter-spacing: -0.02em;
   color: rgb(255 255 255 / 0.96);
-  white-space: nowrap;
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .seco-marketing-page .seco-science-fold--grid-tile.seco-science-fold--grid-static .seco-science-fold__teaser {

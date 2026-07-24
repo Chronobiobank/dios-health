@@ -7,7 +7,6 @@ import { MarketingSceneTile } from '@/components/deepdose/MarketingSceneTile'
 import { WhyClocksBrainTile } from '@/components/deepdose/WhyClocksBrainTile'
 import {
   HOW_IT_WORKS_CTAS,
-  HOW_IT_WORKS_FOUNDING,
   HOW_IT_WORKS_INTRO,
   HOW_IT_WORKS_META,
   HOW_IT_WORKS_PHENOTYPES,
@@ -63,26 +62,19 @@ export default function HowItWorksPage() {
 
         <ChronotypeTiles className="seco-reveal seco-reveal--3" />
 
-        <section
-          className="seco-how-page__founding seco-reveal seco-reveal--4"
-          aria-labelledby="how-founding-title"
-        >
-          <h2 id="how-founding-title" className="seco-page__title">
-            <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_FOUNDING.title}</span>
-          </h2>
-          <p className="seco-page__lede">{HOW_IT_WORKS_FOUNDING.body}</p>
-          <div className={marketingCtaClass('seco-how-page__cta')}>
+        <div className="seco-how-page__founding seco-reveal seco-reveal--4">
+          <div className={marketingCtaClass('seco-how-page__cta', 'seco-marketing-cta--row')}>
             {HOW_IT_WORKS_CTAS.map((cta) => (
               <Link
                 key={cta.href + cta.label}
                 href={cta.href}
-                className="seco-landing__btn seco-landing__btn--ghost"
+                className={`seco-landing__btn seco-landing__btn--${cta.variant}`}
               >
                 {cta.label}
               </Link>
             ))}
           </div>
-        </section>
+        </div>
       </div>
     </article>
   )

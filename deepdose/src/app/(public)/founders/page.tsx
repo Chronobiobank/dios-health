@@ -30,23 +30,17 @@ export default function FoundersPage() {
   return (
     <article className="seco-page seco-science seco-chronobiobank seco-mission seco-marketing-page seco-how-page">
       <div className="seco-landing__section-inner seco-how-page__inner">
-        <header className="seco-how-page__why seco-reveal seco-reveal--1" aria-labelledby="founders-title">
-          <h1 id="founders-title" className="seco-page__title">
-            <span className="seco-landing__hero-spectrum">{FOUNDERS_INTRO.title}</span>
-          </h1>
-        </header>
-
         <FounderQuoteTile
           quote={FOUNDERS_INTRO.quote}
           name={FOUNDERS_INTRO.quoteName}
-          role={FOUNDERS_INTRO.quoteRole || undefined}
+          role={FOUNDERS_INTRO.quoteRole}
           className="seco-reveal seco-reveal--1"
         />
 
-        <header className="seco-how-page__why seco-reveal seco-reveal--2" aria-labelledby="founders-why-title">
-          <h2 id="founders-why-title" className="seco-page__title">
+        <header className="seco-how-page__why seco-reveal seco-reveal--1" aria-labelledby="founders-why-title">
+          <h1 id="founders-why-title" className="seco-page__title">
             <span className="seco-landing__hero-spectrum">{HOW_IT_WORKS_WHY.title}</span>
-          </h2>
+          </h1>
         </header>
 
         <WhyClocksBrainTile className="seco-reveal seco-reveal--2" />

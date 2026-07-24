@@ -9,11 +9,10 @@ export const FOUNDERS_PAGE_META = {
 } as const
 
 export const FOUNDERS_INTRO = {
-  title: 'Welcome back member!',
   quote:
     'We invite you to Deepdose: the next chapter from the Manjam team. A social network for non-conformers built around your body clock and real compatibility',
   quoteName: 'Manjam team',
-  quoteRole: '',
+  quoteRole: 'Founders',
 } as const
 
 /** Manjam invite land — single ask. Boat / shift path joins from home. */

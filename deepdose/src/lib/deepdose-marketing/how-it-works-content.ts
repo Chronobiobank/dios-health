@@ -104,11 +104,6 @@ export const HOW_IT_WORKS_PHENOTYPES = {
   ],
 } as const
 
-export const HOW_IT_WORKS_FOUNDING = {
-  title: DEEPDOSE_VOICE.foundingMembers.label,
-  body: DEEPDOSE_VOICE.foundingMembers.lede,
-} as const
-
 /**
  * Why clocks matter — social jet lag story (illustrative pair).
  * Research: Risner, Katz & Stamoulis, SLEEP (2025) — ABCD cohort SJL × brain structure/networks.
@@ -130,7 +125,7 @@ export const HOW_IT_WORKS_WHY = {
         alt: 'Illustrative brain scan: social jet lag — misaligned weekday vs weekend clock',
       },
     ],
-    lede: 'When your body clock drifts between weekdays and weekends — social jet lag — emotion and focus networks quiet down',
+    lede: 'Early all week. Sleep in on the weekend. Your body clock never settles — that’s social jet lag. Mood and focus take the hit.',
     credit: {
       text: 'Illustrative pair. Research:',
       hrefs: [
@@ -143,9 +138,10 @@ export const HOW_IT_WORKS_WHY = {
   },
 } as const
 
-/** Manjam cohort — land on founders pitch. */
+/** Auth pair — existing members log in; new members sign up. */
 export const HOW_IT_WORKS_CTAS = [
-  { label: 'Deepdose in Action', href: '/founders' },
+  { label: 'Log in', href: '/login', variant: 'ghost' as const },
+  { label: 'Sign up', href: '/founders/join', variant: 'primary' as const },
 ] as const
 
-export const HOW_IT_WORKS_CTA = HOW_IT_WORKS_CTAS[0]
+export const HOW_IT_WORKS_CTA = HOW_IT_WORKS_CTAS[1]
