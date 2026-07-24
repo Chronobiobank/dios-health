@@ -7,9 +7,9 @@ export const SLEEPLAB_META = {
 } as const
 
 export const SLEEPLAB_COMMERCIAL = {
-  offers: ['Learn on the water', 'Track at home', 'Ice Wharf London'] as const,
-  place: 'Ice Wharf, London',
-  line: 'Learn on the water · Track at home · Ice Wharf London',
+  offers: ['Learn on the water', 'Track at home', "Regent's Canal"] as const,
+  place: "Regent's Canal, London",
+  line: "Learn on the water · Track at home · Regent's Canal",
 } as const
 
 /** Brand — who + one ask. */
