@@ -5,7 +5,6 @@ import { ScienceEvidenceSection } from '@/components/deepdose/ScienceEvidenceSec
 import { ScienceTrustFeatures } from '@/components/deepdose/ScienceTrustFeatures'
 import {
   SCIENCE_TRUST_CTA,
-  SCIENCE_TRUST_INTRO,
   SCIENCE_TRUST_META,
 } from '@/lib/deepdose-marketing/science-trust-content'
 import { marketingCtaClass } from '@/lib/design/marketing-system'
@@ -20,20 +19,15 @@ export default function SciencePage() {
   return (
     <article className="seco-page seco-science seco-chronobiobank seco-mission seco-marketing-page">
       <div className="seco-landing__section-inner">
-        <header className="seco-chronobiobank__intro seco-science__intro seco-reveal seco-reveal--1">
-          <h1 className="seco-page__title seco-science__title seco-chronobiobank__title">
-            <span className="seco-landing__hero-spectrum">{SCIENCE_TRUST_INTRO.title}</span>
-          </h1>
-          <p className="seco-page__lede seco-chronobiobank__lede seco-science__lede">{SCIENCE_TRUST_INTRO.lede}</p>
-        </header>
+        <h1 className="sr-only">Science</h1>
 
         <div className="seco-chronobiobank__mission-stack">
-          <ScienceTrustFeatures className="seco-chronobiobank__folds seco-reveal seco-reveal--2" />
+          <ScienceTrustFeatures className="seco-chronobiobank__folds seco-reveal seco-reveal--1" />
         </div>
 
-        <ScienceEvidenceSection className="seco-reveal seco-reveal--3" />
+        <ScienceEvidenceSection className="seco-reveal seco-reveal--2" />
 
-        <div className={marketingCtaClass('seco-science__cta seco-reveal seco-reveal--4')}>
+        <div className={marketingCtaClass('seco-science__cta seco-reveal seco-reveal--3')}>
           <Link href={SCIENCE_TRUST_CTA.href} className="seco-landing__btn seco-landing__btn--primary">
             {SCIENCE_TRUST_CTA.label} →
           </Link>

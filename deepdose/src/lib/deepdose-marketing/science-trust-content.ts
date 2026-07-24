@@ -8,11 +8,6 @@ export const SCIENCE_TRUST_META = {
     'How DeepDose reads sleep and rhythm — clear limits, plain measurement, published timing science.',
 } as const
 
-export const SCIENCE_TRUST_INTRO = {
-  title: 'Sleep you can measure.',
-  lede: 'Honest night reads for a clearer chronotype score.',
-} as const
-
 export const SCIENCE_TRUST_FEATURES = [
   {
     id: 'limits',
