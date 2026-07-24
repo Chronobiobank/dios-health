@@ -1,6 +1,6 @@
 import type { SleepLabFeatureIconId } from '@/lib/deepdose-marketing/sleeplab-content'
 
-/** Hairline luxury glyphs for Sleep Lab Features — stroke only, no fill chrome. */
+/** Hairline glyphs for Sleep Lab list rows — stroke only. */
 export function SleepLabFeatureIcon({ name }: { name: SleepLabFeatureIconId }) {
   return (
     <svg
@@ -19,51 +19,6 @@ export function SleepLabFeatureIcon({ name }: { name: SleepLabFeatureIconId }) {
             stroke="currentColor"
             strokeWidth="1.15"
             strokeLinecap="round"
-          />
-        </>
-      ) : null}
-      {name === 'seal' ? (
-        <>
-          <rect
-            x="5.5"
-            y="7"
-            width="13"
-            height="11"
-            rx="2.25"
-            stroke="currentColor"
-            strokeWidth="1.15"
-          />
-          <path
-            d="M9 7V5.75A3 3 0 0 1 12 2.75a3 3 0 0 1 3 3V7"
-            stroke="currentColor"
-            strokeWidth="1.15"
-            strokeLinecap="round"
-          />
-          <path
-            d="M9.5 13.25h5"
-            stroke="currentColor"
-            strokeWidth="1.15"
-            strokeLinecap="round"
-          />
-        </>
-      ) : null}
-      {name === 'screen' ? (
-        <>
-          <rect
-            x="4.75"
-            y="5.5"
-            width="14.5"
-            height="10.5"
-            rx="1.75"
-            stroke="currentColor"
-            strokeWidth="1.15"
-          />
-          <path
-            d="M8 18.5h8M9.5 12.25l1.75-2.25 2 2.5L15.5 9.5"
-            stroke="currentColor"
-            strokeWidth="1.15"
-            strokeLinecap="round"
-            strokeLinejoin="round"
           />
         </>
       ) : null}

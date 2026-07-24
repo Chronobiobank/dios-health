@@ -11,7 +11,6 @@ import {
   SLEEPLAB_COMMERCIAL,
   SLEEPLAB_NETWORK_CTA,
   SLEEPLAB_SCENES,
-  SLEEPLAB_STAY_OFFERS,
 } from '@/lib/deepdose-marketing/sleeplab-content'
 import { usePrefersReducedMotion } from '@/lib/react/use-prefers-reduced-motion'
 import { cn } from '@/lib/utils/cn'
@@ -111,7 +110,6 @@ function SceneMedia({
 }
 
 function OffersTicker() {
-  /** One half of the loop — duplicated so -50% translate is seamless */
   const half = Array.from({ length: 5 }, () => [...SLEEPLAB_COMMERCIAL.offers]).flat()
   const track = [...half, ...half]
 
@@ -131,7 +129,7 @@ function OffersTicker() {
   )
 }
 
-/** Brand · Statement · Day I–III · Includes · Inspired · CTA. */
+/** Brand · How · Science · Join — existing sleeplab shells only. */
 export function FloatingSleepLabPage() {
   return (
     <DeepDoseShell variant="dark" className="dark-sleeplab" nav={null}>
@@ -143,77 +141,22 @@ export function FloatingSleepLabPage() {
               <section
                 key={scene.id}
                 className="dark-sleeplab__scene dark-sleeplab__scene--brand"
-                aria-labelledby="sleeplab-brand-outcome"
+                aria-labelledby="sleeplab-brand-sub"
               >
-                <SceneMedia media={scene.media} priority={index === 0} />
+                <SceneMedia media={scene.media} objectPosition="center 35%" priority={index === 0} />
                 <div className="dark-sleeplab__grade" aria-hidden />
                 <div className="dark-sleeplab__scrim dark-sleeplab__scrim--luxury" aria-hidden />
                 <div className="dark-sleeplab__brand">
                   <DeepdoseWordmark className="dark-sleeplab__wordmark" />
-                  <h1 id="sleeplab-brand-outcome" className="dark-sleeplab__outcome">
-                    {scene.outcome}
+                  <h1 id="sleeplab-brand-sub" className="dark-sleeplab__outcome">
+                    {scene.sub}
                   </h1>
-                </div>
-              </section>
-            )
-          }
-
-          if (scene.kind === 'statement') {
-            return (
-              <section
-                key={scene.id}
-                className="dark-sleeplab__scene dark-sleeplab__scene--statement"
-                aria-labelledby={`sleeplab-${scene.id}`}
-              >
-                <SceneMedia media={scene.media} />
-                <div className="dark-sleeplab__scrim dark-sleeplab__scrim--statement" aria-hidden />
-                <div className="dark-sleeplab__statement">
-                  <h2
-                    id={`sleeplab-${scene.id}`}
-                    className="dark-sleeplab__statement-body"
-                    aria-label={scene.body}
-                  >
-                    <span className="dark-sleeplab__statement-lead">{scene.lead}</span>{' '}
-                    <span className="dark-sleeplab__statement-rest">{scene.rest}</span>
-                  </h2>
-                </div>
-              </section>
-            )
-          }
-
-          if (scene.kind === 'benefit') {
-            return (
-              <section
-                key={scene.id}
-                id={`sleeplab-scene-${scene.id}`}
-                className={cn(
-                  'dark-sleeplab__scene dark-sleeplab__scene--benefit',
-                  scene.id === 'diagnose' && 'dark-sleeplab__scene--media-zoom',
-                  scene.id === 'optimise' && 'dark-sleeplab__scene--day-ii',
-                  scene.id === 'perform' && 'dark-sleeplab__scene--day-iii',
-                )}
-                aria-labelledby={`sleeplab-${scene.id}`}
-              >
-                <SceneMedia
-                  media={scene.media}
-                  objectPosition={
-                    'objectPosition' in scene && typeof scene.objectPosition === 'string'
-                      ? scene.objectPosition
-                      : undefined
-                  }
-                />
-                <div
-                  className={cn(
-                    'dark-sleeplab__scrim',
-                    scene.id === 'diagnose' && 'dark-sleeplab__scrim--day-i',
-                  )}
-                  aria-hidden
-                />
-                <div className="dark-sleeplab__benefit">
-                  <h2 id={`sleeplab-${scene.id}`} className="dark-sleeplab__eyebrow">
-                    {scene.label}
-                  </h2>
-                  <p className="dark-sleeplab__benefit-body">{scene.body}</p>
+                  <Link href={scene.primary.href} className="dark-sleeplab__cta dark-sleeplab__cta--solid">
+                    {scene.primary.label}
+                  </Link>
+                  <a href={scene.secondary.href} className="dark-sleeplab__cta dark-sleeplab__cta--ghost">
+                    {scene.secondary.label}
+                  </a>
                 </div>
               </section>
             )
@@ -223,6 +166,7 @@ export function FloatingSleepLabPage() {
             return (
               <section
                 key={scene.id}
+                id={`sleeplab-scene-${scene.id}`}
                 className="dark-sleeplab__scene dark-sleeplab__scene--includes"
                 aria-labelledby={`sleeplab-${scene.id}`}
               >
@@ -253,11 +197,7 @@ export function FloatingSleepLabPage() {
                 className="dark-sleeplab__scene dark-sleeplab__scene--inspired"
                 aria-labelledby={`sleeplab-${scene.id}`}
               >
-                <SceneMedia
-                  media={scene.media}
-                  objectPosition="center 22%"
-                  quality={95}
-                />
+                <SceneMedia media={scene.media} objectPosition="center 22%" quality={95} />
                 <div className="dark-sleeplab__scrim dark-sleeplab__scrim--inspired" aria-hidden />
                 <div className="dark-sleeplab__inspired">
                   <p className="dark-sleeplab__eyebrow">{scene.label}</p>
@@ -273,30 +213,16 @@ export function FloatingSleepLabPage() {
           return (
             <section
               key={scene.id}
-              className="dark-sleeplab__scene dark-sleeplab__scene--cta dark-sleeplab__scene--media-zoom"
-              aria-label="Book the Sleep Lab"
+              className="dark-sleeplab__scene dark-sleeplab__scene--cta"
+              aria-label={SLEEPLAB_NETWORK_CTA.label}
             >
               <SceneMedia media={scene.media} />
               <div className="dark-sleeplab__scrim dark-sleeplab__scrim--centre" aria-hidden />
               <div className="dark-sleeplab__cta-stage">
-                <div className="dark-sleeplab__offer-row">
-                  {SLEEPLAB_STAY_OFFERS.map((offer) => (
-                    <a
-                      key={offer.label}
-                      href={offer.href}
-                      className="dark-sleeplab__offer"
-                      aria-label={offer.label}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="dark-sleeplab__offer-line">{offer.lines[0]}</span>
-                      <span className="dark-sleeplab__offer-line dark-sleeplab__offer-line--strong">
-                        {offer.lines[1]}
-                      </span>
-                    </a>
-                  ))}
-                </div>
-                <Link href={SLEEPLAB_NETWORK_CTA.href} className="dark-sleeplab__cta dark-sleeplab__cta--ghost">
+                <Link
+                  href={SLEEPLAB_NETWORK_CTA.href}
+                  className="dark-sleeplab__cta dark-sleeplab__cta--solid"
+                >
                   {SLEEPLAB_NETWORK_CTA.label}
                 </Link>
               </div>

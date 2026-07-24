@@ -78,19 +78,12 @@ export default function FoundersPage() {
         <ChronotypeTiles className="seco-reveal seco-reveal--3" />
 
         <section className="seco-how-page__founding seco-reveal seco-reveal--4">
-          <div className={marketingCtaClass('seco-how-page__cta', 'seco-marketing-cta--row')}>
+          <div className={marketingCtaClass('seco-how-page__cta')}>
             <Link
               href={FOUNDERS_CTAS[0].href}
-              className="seco-landing__btn seco-landing__btn--ghost"
-              scroll
-            >
-              {FOUNDERS_CTAS[0].label}
-            </Link>
-            <Link
-              href={FOUNDERS_CTAS[1].href}
               className="seco-landing__btn seco-landing__btn--primary"
             >
-              {FOUNDERS_CTAS[1].label}
+              {FOUNDERS_CTAS[0].label}
             </Link>
           </div>
         </section>

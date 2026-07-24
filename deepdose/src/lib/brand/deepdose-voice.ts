@@ -28,9 +28,9 @@ export const DEEPDOSE_VOICE = {
   /** Social-graph value prop */
   valueProp: DEEPDOSE_VALUE_PROP,
   /** Home is Sleep Lab — meta lede */
-  homeLede: "London's 1st Floating Sleep Lab. Optimise Your Sleep. Find Your Match.",
-  /** Home primary — advance into Sleep Lab proposition */
-  homePrimaryCta: { label: 'Optimise Your Sleep', href: '#sleeplab-scene-diagnose' },
+  homeLede: "London's first Floating Sleep Lab. Join the Network.",
+  /** Home primary — join from boat path */
+  homePrimaryCta: { label: 'Join the Network', href: '/founders/join?from=boat' },
   /** Home secondary — orbit match splash */
   homeSecondaryCta: { label: 'Find Your Match', href: '/match' },
   /** /match orbit splash — same composition as the old home gate */

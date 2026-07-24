@@ -16,9 +16,9 @@ export const FOUNDERS_INTRO = {
   quoteRole: '',
 } as const
 
+/** Manjam invite land — single ask. Boat / shift path joins from home. */
 export const FOUNDERS_CTAS = [
-  { label: 'Sign Up', href: '/founders/join' },
-  { label: 'Order Sleep Test', href: '/testkit' },
+  { label: 'Join as a founder', href: '/founders/join?from=manjam' },
 ] as const
 
 /** @deprecated Prefer FOUNDERS_CTAS[0] */
