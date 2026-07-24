@@ -7,15 +7,16 @@ export const SLEEPLAB_META = {
 } as const
 
 export const SLEEPLAB_COMMERCIAL = {
-  offers: ['Learn on the water', 'Track at home', 'Battlebridge Basin'] as const,
-  place: 'Battlebridge Basin, London.',
-  line: 'Learn on the water · Track at home · Battlebridge Basin',
+  offers: ['Learn on the water', 'Track at home', 'Ice Wharf London'] as const,
+  place: 'Ice Wharf, London',
+  line: 'Learn on the water · Track at home · Ice Wharf London',
 } as const
 
 /** Brand — who + one ask. */
 export const SLEEPLAB_BRAND = {
-  sub: "London's first Floating Sleep Lab.",
-  primary: { label: 'Join the Network', href: '/founders/join?from=boat' },
+  headLines: ["London's first", 'Floating Sleep Lab'] as const,
+  place: SLEEPLAB_COMMERCIAL.place,
+  primary: { label: 'Join us', href: '/founders/join?from=boat' },
   secondary: { label: 'See how', href: '#sleeplab-scene-how' },
 } as const
 
@@ -56,7 +57,8 @@ export const SLEEPLAB_SCENES = [
     id: 'brand',
     kind: 'brand' as const,
     wordmark: DEEPDOSE_WORDMARK,
-    sub: SLEEPLAB_BRAND.sub,
+    headLines: SLEEPLAB_BRAND.headLines,
+    place: SLEEPLAB_BRAND.place,
     primary: SLEEPLAB_BRAND.primary,
     secondary: SLEEPLAB_BRAND.secondary,
     media: {

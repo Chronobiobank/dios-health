@@ -141,22 +141,30 @@ export function FloatingSleepLabPage() {
               <section
                 key={scene.id}
                 className="dark-sleeplab__scene dark-sleeplab__scene--brand"
-                aria-labelledby="sleeplab-brand-sub"
+                aria-labelledby="sleeplab-brand-head"
               >
-                <SceneMedia media={scene.media} objectPosition="center 35%" priority={index === 0} />
+                <SceneMedia media={scene.media} objectPosition="center top" priority={index === 0} />
                 <div className="dark-sleeplab__grade" aria-hidden />
                 <div className="dark-sleeplab__scrim dark-sleeplab__scrim--luxury" aria-hidden />
                 <div className="dark-sleeplab__brand">
                   <DeepdoseWordmark className="dark-sleeplab__wordmark" />
-                  <h1 id="sleeplab-brand-sub" className="dark-sleeplab__outcome">
-                    {scene.sub}
+                  <h1
+                    id="sleeplab-brand-head"
+                    className="dark-sleeplab__statement-body"
+                    aria-label={`${scene.headLines[0]} ${scene.headLines[1]}`}
+                  >
+                    <span className="dark-sleeplab__statement-lead">{scene.headLines[0]}</span>
+                    <span className="dark-sleeplab__statement-rest">{scene.headLines[1]}</span>
                   </h1>
-                  <Link href={scene.primary.href} className="dark-sleeplab__cta dark-sleeplab__cta--solid">
-                    {scene.primary.label}
-                  </Link>
-                  <a href={scene.secondary.href} className="dark-sleeplab__cta dark-sleeplab__cta--ghost">
-                    {scene.secondary.label}
-                  </a>
+                  <div className="dark-sleeplab__cta-stage">
+                    <Link href={scene.primary.href} className="dark-sleeplab__cta dark-sleeplab__cta--solid">
+                      {scene.primary.label}
+                    </Link>
+                    <a href={scene.secondary.href} className="dark-sleeplab__cta dark-sleeplab__cta--ghost">
+                      {scene.secondary.label}
+                    </a>
+                  </div>
+                  <p className="dark-sleeplab__authority">{scene.place}</p>
                 </div>
               </section>
             )
