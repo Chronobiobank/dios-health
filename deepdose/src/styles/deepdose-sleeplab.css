@@ -6,7 +6,26 @@
 .deepdose-shell.seco-shell--dark.dark-sleeplab {
   --canvas: var(--brand-chamber);
   --seco-navy: var(--brand-chamber);
-  --sleeplab-ticker-h: 2.75rem;
+  /* Bridge to OpenAI grid + type SoT — no parallel layout system */
+  --sleeplab-pad-inline: calc(
+    var(--oai-page-pad, 1rem) + max(env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px))
+  );
+  --sleeplab-pad-block: var(--oai-stack, 1.25rem);
+  --sleeplab-gap: var(--oai-gap, 0.75rem);
+  --sleeplab-gap-tight: var(--oai-gap-tight, 0.5rem);
+  --sleeplab-type-hero: var(--type-display-hero, clamp(2.5rem, 8vw, 4.5rem));
+  --sleeplab-type-title: var(--type-title, clamp(1.5rem, 4vw, 2.2rem));
+  --sleeplab-type-body: var(--type-body, 1rem);
+  --sleeplab-type-body-lg: var(--type-body-lg, 1.2rem);
+  --sleeplab-type-caption: var(--type-caption, 0.875rem);
+  --sleeplab-type-micro: var(--type-micro, 0.72rem);
+  --sleeplab-cta-h: clamp(2.5rem, 6vh, 3.15rem);
+  --sleeplab-ticker-h: clamp(2.25rem, 5vh, 2.75rem);
+  --sleeplab-card-min-h: clamp(4.5rem, 12vh, 6rem);
+  --sleeplab-measure: min(100%, var(--oai-page-max, 48rem));
+  --sleeplab-measure-narrow: min(100%, 28rem);
+  --sleeplab-media-zoom: 1.3;
+  --sleeplab-media-brand-scale: 1.2;
   /* Stable viewport unit first (mobile chrome), then dynamic when supported */
   --sleeplab-screen: 100vh;
   background: var(--brand-chamber);
@@ -80,13 +99,14 @@ body:has(.dark-sleeplab) {
 
 .dark-sleeplab__ticker {
   position: fixed;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   left: 0;
   right: 0;
   z-index: 60;
   display: flex;
   align-items: center;
-  height: var(--sleeplab-ticker-h, 2.75rem);
+  height: var(--sleeplab-ticker-h);
+  padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
   overflow: hidden;
   background: #000;
   border-bottom: 1px solid rgb(255 255 255 / 0.08);
@@ -126,11 +146,11 @@ body:has(.dark-sleeplab) {
 .dark-sleeplab__ticker-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: var(--sleeplab-gap-tight);
   padding-inline: 0.7rem;
   white-space: nowrap;
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(0.6875rem, 1.1vw, 0.75rem);
+  font-size: var(--sleeplab-type-micro);
   font-weight: var(--dd-fw-light, 400);
   letter-spacing: 0.12em;
   text-indent: 0.12em;
@@ -199,9 +219,9 @@ body:has(.dark-sleeplab) {
   opacity: 1;
 }
 
-/* Day I + CTA — video frame +30% */
+/* Day I + CTA — video frame zoom (tokenised for short viewports) */
 .dark-sleeplab__scene--media-zoom .dark-sleeplab__media {
-  transform: scale(1.3);
+  transform: scale(var(--sleeplab-media-zoom));
   transform-origin: center center;
 }
 
@@ -209,7 +229,7 @@ body:has(.dark-sleeplab) {
 .dark-sleeplab__scene--brand .dark-sleeplab__media {
   object-fit: cover;
   object-position: center top;
-  transform: scale(1.2) translateY(0%);
+  transform: scale(var(--sleeplab-media-brand-scale)) translateY(0%);
   transform-origin: center top;
   filter: brightness(0.92) saturate(0.85) contrast(1.18);
 }
@@ -300,61 +320,78 @@ body:has(.dark-sleeplab) {
     linear-gradient(180deg, rgb(0 0 0 / 0.35) 0%, transparent 35%, transparent 65%, rgb(0 0 0 / 0.45) 100%);
 }
 
-/* ── 1. Brand — wordmark top · head in top third · CTAs + place at floor ── */
+/* ── 1. Brand — fluid grid: wordmark · head · CTAs · place ── */
 
 .dark-sleeplab__brand {
   position: relative;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    'wordmark'
+    'head'
+    'actions'
+    'place';
+  align-content: stretch;
+  justify-items: stretch;
+  gap: var(--sleeplab-gap-tight);
   box-sizing: border-box;
   height: 100%;
   min-height: 100%;
-  padding: clamp(1.75rem, 5vw, 3rem) 1.5rem;
-  padding-top: calc(var(--sleeplab-ticker-h) + 1.25rem);
-  padding-bottom: clamp(2.5rem, 8vw, 4rem);
+  padding:
+    calc(var(--sleeplab-ticker-h) + env(safe-area-inset-top, 0px) + var(--sleeplab-pad-block))
+    var(--sleeplab-pad-inline)
+    max(var(--sleeplab-pad-block), env(safe-area-inset-bottom, 0px));
   text-align: center;
 }
 
-/* Lower in the top third, flush left with brand pad */
 .deepdose-shell.seco-shell--dark.dark-sleeplab .dark-sleeplab__brand > :is(h1, h2).dark-sleeplab__statement-body {
-  position: absolute;
-  top: 30%;
-  left: 1.5rem;
+  grid-area: head;
+  position: relative;
+  top: auto;
+  left: auto;
   right: auto;
+  align-self: center;
+  justify-self: start;
   margin: 0;
+  max-width: min(100%, 16ch);
   transform: none;
   text-align: left;
+  font-size: var(--sleeplab-type-title);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
 }
 
 .dark-sleeplab__brand > .dark-sleeplab__cta-stage {
+  grid-area: actions;
   flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 0.65rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--sleeplab-gap-tight);
   height: auto;
   min-height: 0;
-  margin-top: auto;
+  margin: 0;
   padding: 0;
   width: auto;
-  align-self: flex-end;
+  justify-self: end;
 }
 
 .dark-sleeplab__brand > .dark-sleeplab__authority {
-  align-self: flex-end;
-  margin-top: 0.5rem;
-  margin-bottom: 0;
+  grid-area: place;
+  justify-self: end;
+  align-self: end;
+  margin: 0;
   text-align: right;
 }
 
-/* Brand mark — half scale, top left */
+/* Brand mark — top left */
 .dark-sleeplab__wordmark,
 .dark-sleeplab__brand .deepdose-wordmark {
+  grid-area: wordmark;
   display: block;
-  align-self: flex-start;
-  font-size: clamp(1.16875rem, 0.57375rem + 2.55vw, 1.80625rem);
+  justify-self: start;
+  font-size: var(--sleeplab-type-body-lg);
   font-weight: 500;
   letter-spacing: 0.18em;
   text-indent: 0;
@@ -400,15 +437,17 @@ body:has(.dark-sleeplab) {
   height: 100%;
   min-height: 100%;
   width: 100%;
-  padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2.5rem);
-  padding-top: calc(var(--sleeplab-ticker-h) + 1.5rem);
+  padding:
+    calc(var(--sleeplab-ticker-h) + env(safe-area-inset-top, 0px) + var(--sleeplab-pad-block))
+    var(--sleeplab-pad-inline)
+    max(var(--sleeplab-pad-block), env(safe-area-inset-bottom, 0px));
 }
 
 .deepdose-shell.seco-shell--dark.dark-sleeplab :is(h1, h2).dark-sleeplab__statement-body {
   margin: 0;
   max-width: 100%;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-size: var(--sleeplab-type-hero);
   font-weight: var(--dd-fw-medium, 500);
   letter-spacing: -0.04em;
   line-height: 1.08;
@@ -420,7 +459,8 @@ body:has(.dark-sleeplab) {
 .dark-sleeplab__statement-lead,
 .dark-sleeplab__statement-rest {
   display: block;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .dark-sleeplab__statement-lead {
@@ -436,13 +476,13 @@ body:has(.dark-sleeplab) {
   width: max-content;
   max-width: 100%;
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: clamp(0.903125rem, 0.6375rem + 1.53vw, 1.275rem);
+  font-size: var(--sleeplab-type-body-lg);
   font-weight: var(--dd-fw-light, 400);
   letter-spacing: -0.025em;
   line-height: 1.2;
   color: rgb(255 255 255 / 0.52);
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
   text-shadow: 0 1px 16px rgb(0 0 0 / 0.35);
 }
 
@@ -455,14 +495,15 @@ body:has(.dark-sleeplab) {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
-  gap: 0.7rem;
+  gap: var(--sleeplab-gap);
   box-sizing: border-box;
   height: 100%;
   min-height: 100%;
-  width: min(100%, 32rem);
-  padding: clamp(1.5rem, 5vw, 3.5rem);
-  padding-top: calc(var(--sleeplab-ticker-h) + 1rem);
-  padding-bottom: clamp(2.75rem, 9vw, 5rem);
+  width: var(--sleeplab-measure);
+  padding:
+    calc(var(--sleeplab-ticker-h) + env(safe-area-inset-top, 0px) + var(--sleeplab-pad-block))
+    var(--sleeplab-pad-inline)
+    max(var(--sleeplab-pad-block), env(safe-area-inset-bottom, 0px));
 }
 
 /*
@@ -470,9 +511,9 @@ body:has(.dark-sleeplab) {
  * High specificity so shell h2 display rules cannot diverge Day / Core / Protocol.
  */
 .deepdose-shell.seco-shell--dark.dark-sleeplab .dark-sleeplab__eyebrow {
-  margin: 0 0 0.95rem;
+  margin: 0 0 var(--sleeplab-gap);
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: clamp(0.6875rem, 1.1vw, 0.75rem);
+  font-size: var(--sleeplab-type-micro);
   font-weight: var(--dd-fw-light, 400);
   letter-spacing: 0.32em;
   text-indent: 0.32em;
@@ -486,7 +527,7 @@ body:has(.dark-sleeplab) {
   margin: 0;
   max-width: 18ch;
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(1.75rem, 4.8vw, 2.75rem);
+  font-size: var(--sleeplab-type-title);
   font-weight: var(--dd-fw-medium, 500);
   letter-spacing: -0.035em;
   line-height: 1.15;
@@ -508,14 +549,16 @@ body:has(.dark-sleeplab) {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--sleeplab-gap);
   box-sizing: border-box;
   height: 100%;
   min-height: 100%;
-  width: min(100%, 32rem);
+  width: var(--sleeplab-measure);
   margin-inline: auto;
-  padding: clamp(1.75rem, 5vw, 3rem) clamp(1.5rem, 5vw, 2.5rem);
-  padding-top: calc(var(--sleeplab-ticker-h) + 1.25rem);
+  padding:
+    calc(var(--sleeplab-ticker-h) + env(safe-area-inset-top, 0px) + var(--sleeplab-pad-block))
+    var(--sleeplab-pad-inline)
+    max(var(--sleeplab-pad-block), env(safe-area-inset-bottom, 0px));
   overflow-y: auto;
 }
 
@@ -525,7 +568,7 @@ body:has(.dark-sleeplab) {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.95rem;
+  gap: var(--sleeplab-gap);
   width: 100%;
 }
 
@@ -535,12 +578,16 @@ body:has(.dark-sleeplab) {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.35rem;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .dark-sleeplab__includes-head {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: var(--sleeplab-gap-tight);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .dark-sleeplab__includes-icon {
@@ -552,26 +599,29 @@ body:has(.dark-sleeplab) {
 
 .dark-sleeplab__includes-title {
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(1.0625rem, 2.2vw, 1.1875rem);
+  font-size: var(--sleeplab-type-body-lg);
   font-weight: var(--dd-fw-medium, 500);
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: #fff;
   text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .dark-sleeplab__includes-body {
-  max-width: none;
-  margin-inline-start: calc(1.25rem + 0.7rem);
+  max-width: 100%;
+  margin-inline-start: calc(1.25rem + var(--sleeplab-gap-tight));
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(0.875rem, 1.7vw, 0.975rem);
+  font-size: var(--sleeplab-type-caption);
   font-weight: var(--dd-fw-light, 400);
   letter-spacing: -0.01em;
   line-height: 1.35;
   color: rgb(255 255 255 / 0.78);
   text-shadow: 0 1px 10px rgb(0 0 0 / 0.45);
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .dark-sleeplab__includes > .dark-sleeplab__benefit-body + .dark-sleeplab__includes-title {
@@ -596,7 +646,7 @@ body:has(.dark-sleeplab) {
   margin: 0.35rem 0 0;
   max-width: 28ch;
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(0.8125rem, 1.6vw, 0.875rem);
+  font-size: var(--sleeplab-type-caption);
   font-weight: var(--dd-fw-light, 400);
   letter-spacing: -0.01em;
   line-height: 1.35;
@@ -637,21 +687,22 @@ body:has(.dark-sleeplab) {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
-  gap: 0.65rem;
+  gap: var(--sleeplab-gap-tight);
   box-sizing: border-box;
   height: 100%;
   min-height: 100%;
-  width: min(100%, 28rem);
+  width: var(--sleeplab-measure-narrow);
   margin-inline: auto;
-  padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2.5rem);
-  padding-top: calc(var(--sleeplab-ticker-h) + 1.5rem);
-  padding-bottom: clamp(2.75rem, 9vw, 5rem);
+  padding:
+    calc(var(--sleeplab-ticker-h) + env(safe-area-inset-top, 0px) + var(--sleeplab-pad-block))
+    var(--sleeplab-pad-inline)
+    max(var(--sleeplab-pad-block), env(safe-area-inset-bottom, 0px));
 }
 
 .dark-sleeplab__inspired-name {
   margin: 0;
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  font-size: var(--sleeplab-type-title);
   font-weight: var(--dd-fw-medium, 500);
   letter-spacing: -0.035em;
   line-height: 1.1;
@@ -664,7 +715,7 @@ body:has(.dark-sleeplab) {
   margin: 0.35rem 0 0;
   max-width: 28ch;
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: clamp(1.0625rem, 2.4vw, 1.25rem);
+  font-size: var(--sleeplab-type-body-lg);
   font-weight: var(--dd-fw-light, 400);
   letter-spacing: -0.02em;
   line-height: 1.35;
@@ -682,21 +733,22 @@ body:has(.dark-sleeplab) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.35rem;
+  gap: var(--sleeplab-gap);
   box-sizing: border-box;
   height: 100%;
   min-height: 100%;
   width: 100%;
-  padding: clamp(1.75rem, 5vw, 3rem) 1.5rem;
-  padding-top: calc(var(--sleeplab-ticker-h) + 1.5rem);
-  padding-bottom: clamp(2.5rem, 8vw, 4rem);
+  padding:
+    calc(var(--sleeplab-ticker-h) + env(safe-area-inset-top, 0px) + var(--sleeplab-pad-block))
+    var(--sleeplab-pad-inline)
+    max(var(--sleeplab-pad-block), env(safe-area-inset-bottom, 0px));
 }
 
 .dark-sleeplab__offer-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.85rem;
-  width: min(100%, 28rem);
+  gap: var(--sleeplab-gap);
+  width: var(--sleeplab-measure-narrow);
 }
 
 .dark-sleeplab__offer {
@@ -706,9 +758,9 @@ body:has(.dark-sleeplab) {
   align-items: stretch;
   justify-content: center;
   gap: 0.15rem;
-  min-height: 6rem;
+  min-height: var(--sleeplab-card-min-h);
   width: 100%;
-  padding: 1.1rem 0.75rem;
+  padding: var(--sleeplab-gap-tight) var(--sleeplab-gap-tight);
   border-radius: 1.5rem;
   border: 1px solid rgb(255 255 255 / 0.38);
   background:
@@ -720,7 +772,7 @@ body:has(.dark-sleeplab) {
   -webkit-backdrop-filter: blur(16px) saturate(1.05);
   color: rgb(255 255 255 / 0.94);
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: clamp(1.0625rem, 3.6vw, 1.3125rem);
+  font-size: var(--sleeplab-type-body-lg);
   font-weight: var(--dd-fw-light, 400);
   letter-spacing: -0.02em;
   text-transform: none;
@@ -737,7 +789,8 @@ body:has(.dark-sleeplab) {
 .dark-sleeplab__offer-line {
   display: block;
   width: 100%;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .dark-sleeplab__offer-line--strong {
@@ -768,20 +821,22 @@ body:has(.dark-sleeplab) {
   justify-content: center;
   width: fit-content;
   max-width: 100%;
-  min-height: 3.15rem;
-  height: 3.15rem;
-  padding: 0 1.65rem;
+  min-height: var(--sleeplab-cta-h);
+  height: var(--sleeplab-cta-h);
+  padding: 0 clamp(1.1rem, 3vw, 1.65rem);
   border-radius: 999px;
   border: 1px solid rgb(255 255 255 / 0.42);
   background: transparent;
   color: rgb(255 255 255 / 0.88);
   font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
-  font-size: 0.9375rem;
+  font-size: var(--sleeplab-type-body);
   font-weight: var(--dd-fw-light, 400);
   letter-spacing: -0.01em;
   text-transform: none;
   line-height: 1.1;
   text-decoration: none;
+  white-space: normal;
+  text-align: center;
   cursor: pointer;
   transition:
     background 0.22s ease,
@@ -817,4 +872,58 @@ body:has(.dark-sleeplab) {
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.2),
     0 10px 28px rgb(0 0 0 / 0.25);
+}
+
+/*
+ * Short viewport densify — landscape phones + any short height.
+ * Keep snap chamber; shrink chrome/type/gaps so beats still fit one screen.
+ */
+@media (max-height: 500px), (orientation: landscape) and (max-width: 960px) {
+  .deepdose-shell.seco-shell--dark.dark-sleeplab {
+    --sleeplab-ticker-h: clamp(1.75rem, 8vh, 2.25rem);
+    --sleeplab-cta-h: clamp(2.25rem, 10vh, 2.65rem);
+    --sleeplab-card-min-h: clamp(3.25rem, 18vh, 4.5rem);
+    --sleeplab-pad-block: var(--oai-gap-tight, 0.5rem);
+    --sleeplab-gap: var(--oai-gap-tight, 0.5rem);
+    --sleeplab-gap-tight: 0.35rem;
+    --sleeplab-type-hero: var(--type-heading, clamp(1.75rem, 6vh, 2.25rem));
+    --sleeplab-type-title: var(--type-body-lg, 1.2rem);
+    --sleeplab-type-body-lg: var(--type-body, 1rem);
+    --sleeplab-media-zoom: 1.05;
+    --sleeplab-media-brand-scale: 1.05;
+  }
+
+  .dark-sleeplab__brand {
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    gap: var(--sleeplab-gap-tight);
+  }
+
+  .deepdose-shell.seco-shell--dark.dark-sleeplab .dark-sleeplab__brand > :is(h1, h2).dark-sleeplab__statement-body {
+    align-self: start;
+    max-width: min(100%, 22ch);
+    font-size: var(--sleeplab-type-title);
+  }
+
+  .dark-sleeplab__brand > .dark-sleeplab__cta-stage {
+    flex-wrap: wrap;
+    gap: var(--sleeplab-gap-tight);
+  }
+
+  .dark-sleeplab__includes {
+    justify-content: flex-start;
+    gap: var(--sleeplab-gap-tight);
+  }
+
+  .dark-sleeplab__includes-list {
+    gap: var(--sleeplab-gap-tight);
+  }
+
+  .dark-sleeplab__inspired {
+    gap: 0.35rem;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  .dark-sleeplab__offer-row {
+    gap: var(--sleeplab-gap-tight);
+  }
 }
