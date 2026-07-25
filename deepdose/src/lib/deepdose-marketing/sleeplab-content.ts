@@ -8,14 +8,12 @@ export const SLEEPLAB_META = {
 
 export const SLEEPLAB_COMMERCIAL = {
   offers: ['Learn on the water', 'Track at home', "Regent's Canal"] as const,
-  place: "Regent's Canal, London",
   line: "Learn on the water · Track at home · Regent's Canal",
 } as const
 
 /** Brand — who + one ask. */
 export const SLEEPLAB_BRAND = {
   headLines: ["London's first", 'Floating Sleep Lab'] as const,
-  place: SLEEPLAB_COMMERCIAL.place,
   primary: { label: 'Join us', href: '/founders/join?from=boat' },
   secondary: { label: 'See how', href: '#sleeplab-scene-how' },
 } as const
@@ -59,7 +57,6 @@ export const SLEEPLAB_SCENES = [
     kind: 'brand' as const,
     wordmark: DEEPDOSE_WORDMARK,
     headLines: SLEEPLAB_BRAND.headLines,
-    place: SLEEPLAB_BRAND.place,
     primary: SLEEPLAB_BRAND.primary,
     secondary: SLEEPLAB_BRAND.secondary,
     media: {
