@@ -61,8 +61,11 @@ function ChamberVideo({
       muted
       loop={!reduceMotion}
       playsInline
+      controls={false}
+      disablePictureInPicture
       preload="auto"
       aria-label={alt}
+      tabIndex={-1}
       onLoadedData={start}
       onCanPlay={start}
       onPlaying={reveal}
@@ -147,7 +150,7 @@ export function FloatingSleepLabPage() {
                 className="dark-sleeplab__scene dark-sleeplab__scene--brand"
                 aria-labelledby="sleeplab-brand-head"
               >
-                <SceneMedia media={scene.media} objectPosition="center top" priority={index === 0} />
+                <SceneMedia media={scene.media} objectPosition="center center" priority={index === 0} />
                 <div className="dark-sleeplab__grade" aria-hidden />
                 <div className="dark-sleeplab__scrim dark-sleeplab__scrim--luxury" aria-hidden />
                 <div className="dark-sleeplab__brand">
@@ -192,7 +195,7 @@ export function FloatingSleepLabPage() {
               >
                 {'media' in scene && scene.media ? (
                   <>
-                    <SceneMedia media={scene.media} />
+                    <SceneMedia media={scene.media} objectPosition="center 20%" />
                     <div className="dark-sleeplab__scrim dark-sleeplab__scrim--centre" aria-hidden />
                   </>
                 ) : null}

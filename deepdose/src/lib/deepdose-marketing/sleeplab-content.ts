@@ -62,9 +62,10 @@ export const SLEEPLAB_SCENES = [
     primary: SLEEPLAB_BRAND.primary,
     secondary: SLEEPLAB_BRAND.secondary,
     media: {
-      type: 'image' as const,
-      src: '/glowing-cabin.jpg',
-      alt: 'Canal boat — Floating Sleep Lab',
+      type: 'video' as const,
+      src: '/water-at-night.mp4',
+      alt: 'Water at night — Floating Sleep Lab',
+      playbackRate: 0.35,
     },
   },
   {
@@ -74,10 +75,9 @@ export const SLEEPLAB_SCENES = [
     sub: SLEEPLAB_HOW.sub,
     items: SLEEPLAB_HOW.items,
     media: {
-      type: 'video' as const,
-      src: '/couple-in-bed.mp4',
-      alt: 'Couple at rest — sleep recovery',
-      playbackRate: 0.35,
+      type: 'image' as const,
+      src: '/glowing-cabin.jpg',
+      alt: 'Canal boat at night — Floating Sleep Lab',
     },
   },
   {
@@ -96,9 +96,10 @@ export const SLEEPLAB_SCENES = [
     id: 'cta',
     kind: 'cta' as const,
     media: {
-      type: 'image' as const,
-      src: '/deepdose-bedroom.jpg',
+      type: 'video' as const,
+      src: '/couple-in-bed.mp4',
       alt: "Join London's first Circadian Club Circuit",
+      playbackRate: 0.35,
     },
   },
 ] as const
