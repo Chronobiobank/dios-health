@@ -38,40 +38,55 @@ function ChamberVideo({
   const start = useCallback(() => {
     const el = videoRef.current
     if (!el) return
-    if (el.readyState >= 2) reveal()
+    el.defaultMuted = true
+    el.muted = true
+    el.setAttribute('muted', '')
+    el.playsInline = true
+    el.setAttribute('playsinline', '')
+    el.setAttribute('webkit-playsinline', '')
     if (reduceMotion) {
       el.pause()
       reveal()
       return
     }
-    el.muted = true
     el.playbackRate = playbackRate
-    void el.play().then(reveal).catch(reveal)
+    const attempt = () => {
+      void el.play().then(reveal).catch(() => {
+        /* Keep opacity 0 — never flash iOS play chrome */
+      })
+    }
+    if (el.readyState >= 2) attempt()
+    else el.addEventListener('loadeddata', attempt, { once: true })
   }, [playbackRate, reduceMotion, reveal])
 
   useEffect(() => {
     start()
-  }, [start])
+  }, [start, src])
 
   return (
-    <video
-      ref={videoRef}
-      className={cn(className, (ready || reduceMotion) && 'is-ready')}
-      autoPlay={!reduceMotion}
-      muted
-      loop={!reduceMotion}
-      playsInline
-      controls={false}
-      disablePictureInPicture
-      preload="auto"
-      aria-label={alt}
-      tabIndex={-1}
-      onLoadedData={start}
-      onCanPlay={start}
-      onPlaying={reveal}
-    >
-      <source src={src} type="video/mp4" />
-    </video>
+    <div className="dark-sleeplab__media-shell" aria-hidden>
+      <video
+        ref={videoRef}
+        className={cn('dark-sleeplab__media', className, ready && 'is-ready')}
+        src={src}
+        autoPlay={!reduceMotion}
+        muted
+        loop={!reduceMotion}
+        playsInline
+        controls={false}
+        controlsList="nodownload nofullscreen noremoteplayback"
+        disablePictureInPicture
+        disableRemotePlayback
+        preload="auto"
+        aria-label={alt}
+        tabIndex={-1}
+        onLoadedData={start}
+        onCanPlay={start}
+        onPlaying={reveal}
+      />
+      {/* Caps iOS native play overlay above the video layer */}
+      <div className="dark-sleeplab__media-cap" aria-hidden />
+    </div>
   )
 }
 
@@ -96,7 +111,6 @@ function SceneMedia({
         src={media.src}
         alt={media.alt}
         playbackRate={media.playbackRate}
-        className="dark-sleeplab__media"
         priority={priority}
       />
     )

@@ -63,8 +63,8 @@ export const SLEEPLAB_SCENES = [
     secondary: SLEEPLAB_BRAND.secondary,
     media: {
       type: 'video' as const,
-      src: '/water-at-night.mp4',
-      alt: 'Water at night — Floating Sleep Lab',
+      src: '/couple-in-bed.mp4',
+      alt: 'Couple at rest — Floating Sleep Lab',
       playbackRate: 0.35,
     },
   },
