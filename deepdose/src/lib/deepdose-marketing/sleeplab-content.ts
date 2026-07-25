@@ -13,7 +13,8 @@ export const SLEEPLAB_COMMERCIAL = {
 
 /** Brand — who + one ask. */
 export const SLEEPLAB_BRAND = {
-  headLines: ["London's first", 'Floating Sleep Lab'] as const,
+  headLines: ['Floating Sleep Lab'] as const,
+  sub: 'Optimise your circadian chemistry for energy and performance gains that last.',
   primary: { label: 'Join us', href: '/founders/join?from=boat' },
   secondary: { label: 'See how', href: '#sleeplab-scene-how' },
 } as const
@@ -57,6 +58,7 @@ export const SLEEPLAB_SCENES = [
     kind: 'brand' as const,
     wordmark: DEEPDOSE_WORDMARK,
     headLines: SLEEPLAB_BRAND.headLines,
+    sub: SLEEPLAB_BRAND.sub,
     primary: SLEEPLAB_BRAND.primary,
     secondary: SLEEPLAB_BRAND.secondary,
     media: {
@@ -96,12 +98,13 @@ export const SLEEPLAB_SCENES = [
     media: {
       type: 'image' as const,
       src: '/deepdose-bedroom.jpg',
-      alt: 'Join the Deepdose Network',
+      alt: "Join London's first Circadian Club Circuit",
     },
   },
 ] as const
 
 export const SLEEPLAB_NETWORK_CTA = {
-  label: 'Join the Network',
+  head: "Join London's first Circadian Club Circuit",
+  label: 'Apply for Membership',
   href: '/founders/join?from=boat',
 } as const

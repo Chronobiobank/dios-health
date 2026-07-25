@@ -34,7 +34,7 @@ export const HOMEKIT_RISK_POINTS = [
 
 export const HOMEKIT_RISK_CTA = {
   primary: { label: 'Order Homekit', href: '/testkit' },
-  secondary: { label: 'How Homekit works', href: '/tiptraq' },
+  secondary: { label: 'Pricing', href: '/membership' },
 } as const
 
 /** Profile diagnostic tile — chronotype irregularity + Homekit CTA pill. */

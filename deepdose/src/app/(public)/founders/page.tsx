@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/founders' },
 }
 
-/** /founders — Manjam invite + Why clocks + How + claim account. */
+/** /founders — Manjam invite + Why body clocks + How + claim account. */
 export default function FoundersPage() {
   return (
     <article className="seco-page seco-science seco-chronobiobank seco-mission seco-marketing-page seco-how-page">

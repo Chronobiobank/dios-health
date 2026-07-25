@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 
-/** Mission story now lives on /how (Make chemistry work). */
+/** Mission story now lives on /how (How it works). */
 export default function MissionPage() {
   redirect('/how')
 }

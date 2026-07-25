@@ -360,7 +360,7 @@ body:has(.dark-sleeplab) {
   align-items: flex-start;
   /* Above mid — clear of the lit cabin, not hard against the wordmark */
   justify-content: flex-start;
-  padding-top: clamp(3.5rem, 24vh, 8.5rem);
+  padding-top: clamp(4.5rem, 30vh, 10.5rem);
   gap: var(--sleeplab-gap);
   min-width: 0;
   max-width: 100%;
@@ -380,11 +380,29 @@ body:has(.dark-sleeplab) {
   line-height: 1.05;
 }
 
-/* Exactly two lines — each span is one locked line */
+/* Brand head lines — lock when multi-line; single line may wrap naturally */
 .dark-sleeplab__brand .dark-sleeplab__statement-lead,
-.dark-sleeplab__brand .dark-sleeplab__statement-rest {
+.dark-sleeplab__brand .dark-sleeplab__statement-rest:not(:only-child) {
   white-space: nowrap;
   overflow-wrap: normal;
+}
+
+.dark-sleeplab__brand .dark-sleeplab__statement-rest:only-child {
+  white-space: normal;
+  overflow-wrap: normal;
+}
+
+.dark-sleeplab__brand-sub {
+  margin: 0;
+  max-width: min(100%, 34ch);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: var(--sleeplab-type-body);
+  font-weight: var(--dd-fw-light, 400);
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  text-align: left;
+  color: rgb(255 255 255 / 0.72);
+  text-shadow: 0 1px 14px rgb(0 0 0 / 0.4);
 }
 
 .dark-sleeplab__brand .dark-sleeplab__cta-stage {
@@ -762,6 +780,20 @@ body:has(.dark-sleeplab) {
     calc(var(--sleeplab-ticker-h) + env(safe-area-inset-top, 0px) + var(--sleeplab-pad-block))
     var(--sleeplab-pad-inline)
     max(var(--sleeplab-pad-block), env(safe-area-inset-bottom, 0px));
+}
+
+.deepdose-shell.seco-shell--dark.dark-sleeplab .dark-sleeplab__network-head {
+  margin: 0;
+  max-width: min(100%, 18ch);
+  font-family: var(--font-inter, var(--seco-font-ui), system-ui, sans-serif);
+  font-size: var(--sleeplab-type-title);
+  font-weight: var(--dd-fw-medium, 500);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  text-align: center;
+  text-wrap: balance;
+  color: #fff;
+  text-shadow: 0 2px 22px rgb(0 0 0 / 0.55);
 }
 
 .dark-sleeplab__offer-row {

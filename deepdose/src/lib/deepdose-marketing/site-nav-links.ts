@@ -2,8 +2,9 @@
 
 /** Marketing header. Product tabs live in APP_BOTTOM_NAV. */
 export const DEEPDOSE_SITE_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'Make chemistry work', href: '/how' },
+  { label: 'How it works', href: '/how' },
+  { label: 'Homekit', href: '/testkit' },
+  { label: 'Pricing', href: '/membership' },
   { label: 'Science', href: '/science' },
 ] as const
 
@@ -18,6 +19,8 @@ export const DEEPDOSE_SPLASH_LINKS = DEEPDOSE_SITE_LINKS
 /** Footer essentials when mounted. */
 export const DEEPDOSE_FOOTER_LINKS = [
   { label: 'Home', href: '/' },
+  { label: 'Homekit', href: '/testkit' },
+  { label: 'Pricing', href: '/membership' },
   { label: 'Share', href: '/grid' },
   { label: 'Dose', href: '/dose' },
   { label: 'Sync', href: '/connect' },

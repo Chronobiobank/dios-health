@@ -61,5 +61,5 @@ export const TESTKIT_STEPS = [
 
 export const TESTKIT_CTA = {
   primary: { label: 'How Homekit works', href: '/tiptraq' },
-  secondary: { label: 'See my profile', href: '/profile' },
+  secondary: { label: 'Pricing', href: '/membership' },
 } as const

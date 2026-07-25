@@ -153,14 +153,21 @@ export function FloatingSleepLabPage() {
                 <div className="dark-sleeplab__brand">
                   <DeepdoseWordmark className="dark-sleeplab__wordmark" />
                   <div className="dark-sleeplab__brand-cluster">
-                    <h1
-                      id="sleeplab-brand-head"
-                      className="dark-sleeplab__statement-body"
-                      aria-label={`${scene.headLines[0]} ${scene.headLines[1]}`}
-                    >
-                      <span className="dark-sleeplab__statement-lead">{scene.headLines[0]}</span>
-                      <span className="dark-sleeplab__statement-rest">{scene.headLines[1]}</span>
+                    <h1 id="sleeplab-brand-head" className="dark-sleeplab__statement-body">
+                      {scene.headLines.map((line, i) => (
+                        <span
+                          key={line}
+                          className={
+                            i === 0 && scene.headLines.length > 1
+                              ? 'dark-sleeplab__statement-lead'
+                              : 'dark-sleeplab__statement-rest'
+                          }
+                        >
+                          {line}
+                        </span>
+                      ))}
                     </h1>
+                    <p className="dark-sleeplab__brand-sub">{scene.sub}</p>
                     <div className="dark-sleeplab__cta-stage">
                       <Link href={scene.primary.href} className="dark-sleeplab__cta dark-sleeplab__cta--solid">
                         {scene.primary.label}
@@ -236,11 +243,14 @@ export function FloatingSleepLabPage() {
             <section
               key={scene.id}
               className="dark-sleeplab__scene dark-sleeplab__scene--cta"
-              aria-label={SLEEPLAB_NETWORK_CTA.label}
+              aria-labelledby="sleeplab-network-head"
             >
               <SceneMedia media={scene.media} />
               <div className="dark-sleeplab__scrim dark-sleeplab__scrim--centre" aria-hidden />
               <div className="dark-sleeplab__cta-stage">
+                <h2 id="sleeplab-network-head" className="dark-sleeplab__network-head">
+                  {SLEEPLAB_NETWORK_CTA.head}
+                </h2>
                 <Link
                   href={SLEEPLAB_NETWORK_CTA.href}
                   className="dark-sleeplab__cta dark-sleeplab__cta--solid"

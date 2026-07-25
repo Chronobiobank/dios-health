@@ -4,15 +4,15 @@ import {
 } from '@/lib/brand/deepdose-brand'
 import { DEEPDOSE_VOICE } from '@/lib/brand/deepdose-voice'
 
-/** Make chemistry work — Screen → Score → Share → Sync. */
+/** How it works — Screen → Score → Share → Sync. */
 
 export const HOW_IT_WORKS_META = {
-  title: 'How',
+  title: 'How it works',
   description: DEEPDOSE_VOICE.homeLede,
 } as const
 
 export const HOW_IT_WORKS_INTRO = {
-  title: 'How Deepdose Works',
+  title: 'How it works',
 } as const
 
 /** Scene tile behind the How loop — couple sleeping. */
@@ -105,11 +105,11 @@ export const HOW_IT_WORKS_PHENOTYPES = {
 } as const
 
 /**
- * Why clocks matter — social jet lag story (illustrative pair).
+ * Why body clocks matter — social jet lag story (illustrative pair).
  * Research: Risner, Katz & Stamoulis, SLEEP (2025) — ABCD cohort SJL × brain structure/networks.
  */
 export const HOW_IT_WORKS_WHY = {
-  title: 'Why Clocks Matter',
+  title: 'Why Body Clocks Matter',
   brain: {
     scans: [
       {

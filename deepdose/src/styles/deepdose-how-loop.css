@@ -52,6 +52,15 @@
   text-align: center;
 }
 
+/* Keep “Why Body Clocks Matter” on one line as a page head */
+#how-why-title .seco-landing__hero-spectrum,
+#founders-why-title .seco-landing__hero-spectrum {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  font-size: clamp(1.35rem, 4.6vw + 0.55rem, var(--type-display-sm, 2.5rem));
+}
+
 .seco-how-page__why .seco-page__title + .seco-page__lede {
   margin-top: 1.15rem;
 }
@@ -421,7 +430,7 @@ a.seco-how-page__story-tile--link:hover .seco-how-page__story-cta {
   text-shadow: 0 1px 6px rgb(0 0 0 / 0.3);
 }
 
-/* Why Clocks Matter — licensed CC-BY SRI figures (stacked) */
+/* Why Body Clocks Matter — licensed CC-BY SRI figures (stacked) */
 .seco-how-brain {
   box-sizing: border-box;
   width: 100%;
