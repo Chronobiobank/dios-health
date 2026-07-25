@@ -96,10 +96,9 @@ export const SLEEPLAB_SCENES = [
     id: 'cta',
     kind: 'cta' as const,
     media: {
-      type: 'video' as const,
-      src: '/couple-in-bed.mp4',
+      type: 'image' as const,
+      src: '/deepdose-bedroom.jpg',
       alt: "Join London's first Circadian Club Circuit",
-      playbackRate: 0.35,
     },
   },
 ] as const
