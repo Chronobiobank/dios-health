@@ -239,8 +239,9 @@ body:has(.dark-sleeplab) {
   object-fit: cover;
   object-position: center center;
   z-index: 0;
-  /* Hidden until playing — blocks iOS play-button flash */
+  /* Fade in once a frame is decoded — never stay black if autoplay is blocked */
   opacity: 0;
+  transition: opacity 0.35s ease;
   pointer-events: none;
   -webkit-appearance: none;
   appearance: none;
@@ -249,25 +250,6 @@ body:has(.dark-sleeplab) {
 .dark-sleeplab__media.is-ready,
 .dark-sleeplab__media--img {
   opacity: 1;
-}
-
-/*
- * Full-bleed mask above the video layer. Scrims are transparent in the centre,
- * so without this iOS can still paint its play glyph through the gap.
- */
-.dark-sleeplab__media-cap {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: transparent;
-  /* Force a compositing layer that sits above WebKit’s overlay play control */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-}
-
-.dark-sleeplab__media-shell:has(video:not(.is-ready)) .dark-sleeplab__media-cap {
-  background: var(--brand-chamber);
 }
 
 /* Strip every WebKit media-control surface (iOS play arrow) */

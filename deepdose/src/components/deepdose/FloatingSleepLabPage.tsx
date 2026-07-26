@@ -35,36 +35,81 @@ function ChamberVideo({
 
   const reveal = useCallback(() => setReady(true), [])
 
-  const start = useCallback(() => {
-    const el = videoRef.current
-    if (!el) return
+  const armInlinePlayback = useCallback((el: HTMLVideoElement) => {
     el.defaultMuted = true
     el.muted = true
     el.setAttribute('muted', '')
     el.playsInline = true
     el.setAttribute('playsinline', '')
-    el.setAttribute('webkit-playsinline', '')
+    el.setAttribute('webkit-playsinline', 'true')
+    el.setAttribute('x-webkit-airplay', 'deny')
+  }, [])
+
+  const start = useCallback(() => {
+    const el = videoRef.current
+    if (!el) return
+    armInlinePlayback(el)
+
+    // Show the first frame as soon as bytes exist — don't wait on autoplay.
+    if (el.readyState >= 2) reveal()
+
     if (reduceMotion) {
       el.pause()
       reveal()
       return
     }
+
     el.playbackRate = playbackRate
     const attempt = () => {
+      armInlinePlayback(el)
+      el.playbackRate = playbackRate
       void el.play().then(reveal).catch(() => {
-        /* Keep opacity 0 — never flash iOS play chrome */
+        // Autoplay blocked: keep the loaded frame visible (controls stripped in CSS).
+        reveal()
       })
     }
+
     if (el.readyState >= 2) attempt()
-    else el.addEventListener('loadeddata', attempt, { once: true })
-  }, [playbackRate, reduceMotion, reveal])
+    else {
+      el.addEventListener('loadeddata', () => {
+        reveal()
+        attempt()
+      }, { once: true })
+    }
+  }, [armInlinePlayback, playbackRate, reduceMotion, reveal])
 
   useEffect(() => {
     start()
   }, [start, src])
 
+  // Retry after first user gesture / tab focus — common iOS autoplay recovery.
+  useEffect(() => {
+    if (reduceMotion || ready) return
+    const el = videoRef.current
+    if (!el) return
+
+    const retry = () => {
+      armInlinePlayback(el)
+      el.playbackRate = playbackRate
+      void el.play().then(reveal).catch(() => {})
+    }
+
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') retry()
+    }
+
+    window.addEventListener('touchstart', retry, { once: true, passive: true })
+    window.addEventListener('click', retry, { once: true })
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      window.removeEventListener('touchstart', retry)
+      window.removeEventListener('click', retry)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+  }, [armInlinePlayback, playbackRate, ready, reduceMotion, reveal])
+
   return (
-    <div className="dark-sleeplab__media-shell" aria-hidden>
+    <div className="dark-sleeplab__media-shell">
       <video
         ref={videoRef}
         className={cn('dark-sleeplab__media', className, ready && 'is-ready')}
@@ -84,8 +129,6 @@ function ChamberVideo({
         onCanPlay={start}
         onPlaying={reveal}
       />
-      {/* Caps iOS native play overlay above the video layer */}
-      <div className="dark-sleeplab__media-cap" aria-hidden />
     </div>
   )
 }
