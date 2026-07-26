@@ -30,104 +30,90 @@ function ChamberVideo({
   priority?: boolean
 }) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [ready, setReady] = useState(false)
+  /** Only paint the <video> while it is actually playing — paused videos show iOS play chrome. */
+  const [playing, setPlaying] = useState(false)
   const reduceMotion = usePrefersReducedMotion()
-
-  const reveal = useCallback(() => setReady(true), [])
 
   const armInlinePlayback = useCallback((el: HTMLVideoElement) => {
     el.defaultMuted = true
     el.muted = true
+    el.volume = 0
     el.setAttribute('muted', '')
     el.playsInline = true
-    el.setAttribute('playsinline', '')
+    el.setAttribute('playsinline', 'true')
     el.setAttribute('webkit-playsinline', 'true')
     el.setAttribute('x-webkit-airplay', 'deny')
+    el.disablePictureInPicture = true
+    el.controls = false
   }, [])
 
-  const start = useCallback(() => {
+  const tryPlay = useCallback(() => {
+    const el = videoRef.current
+    if (!el || reduceMotion) return
+    armInlinePlayback(el)
+    el.playbackRate = playbackRate
+    void el.play().then(() => setPlaying(true)).catch(() => setPlaying(false))
+  }, [armInlinePlayback, playbackRate, reduceMotion])
+
+  useEffect(() => {
     const el = videoRef.current
     if (!el) return
     armInlinePlayback(el)
 
-    // Show the first frame as soon as bytes exist — don't wait on autoplay.
-    if (el.readyState >= 2) reveal()
-
     if (reduceMotion) {
       el.pause()
-      reveal()
+      setPlaying(false)
       return
     }
 
-    el.playbackRate = playbackRate
-    const attempt = () => {
-      armInlinePlayback(el)
-      el.playbackRate = playbackRate
-      void el.play().then(reveal).catch(() => {
-        // Autoplay blocked: keep the loaded frame visible (controls stripped in CSS).
-        reveal()
-      })
+    tryPlay()
+
+    const onPlaying = () => setPlaying(true)
+    const onPause = () => {
+      // Loop can briefly pause — resume without flashing a paused frame (iOS play icon).
+      if (document.hidden) {
+        setPlaying(false)
+        return
+      }
+      tryPlay()
     }
 
-    if (el.readyState >= 2) attempt()
-    else {
-      el.addEventListener('loadeddata', () => {
-        reveal()
-        attempt()
-      }, { once: true })
-    }
-  }, [armInlinePlayback, playbackRate, reduceMotion, reveal])
+    el.addEventListener('playing', onPlaying)
+    el.addEventListener('pause', onPause)
+    el.addEventListener('loadeddata', tryPlay)
+    el.addEventListener('canplay', tryPlay)
 
-  useEffect(() => {
-    start()
-  }, [start, src])
+    const onGesture = () => tryPlay()
+    window.addEventListener('touchstart', onGesture, { passive: true })
+    window.addEventListener('click', onGesture)
 
-  // Retry after first user gesture / tab focus — common iOS autoplay recovery.
-  useEffect(() => {
-    if (reduceMotion || ready) return
-    const el = videoRef.current
-    if (!el) return
-
-    const retry = () => {
-      armInlinePlayback(el)
-      el.playbackRate = playbackRate
-      void el.play().then(reveal).catch(() => {})
-    }
-
-    const onVisible = () => {
-      if (document.visibilityState === 'visible') retry()
-    }
-
-    window.addEventListener('touchstart', retry, { once: true, passive: true })
-    window.addEventListener('click', retry, { once: true })
-    document.addEventListener('visibilitychange', onVisible)
     return () => {
-      window.removeEventListener('touchstart', retry)
-      window.removeEventListener('click', retry)
-      document.removeEventListener('visibilitychange', onVisible)
+      el.removeEventListener('playing', onPlaying)
+      el.removeEventListener('pause', onPause)
+      el.removeEventListener('loadeddata', tryPlay)
+      el.removeEventListener('canplay', tryPlay)
+      window.removeEventListener('touchstart', onGesture)
+      window.removeEventListener('click', onGesture)
     }
-  }, [armInlinePlayback, playbackRate, ready, reduceMotion, reveal])
+  }, [armInlinePlayback, reduceMotion, src, tryPlay])
 
   return (
     <div className="dark-sleeplab__media-shell">
       <video
         ref={videoRef}
-        className={cn('dark-sleeplab__media', className, ready && 'is-ready')}
-        src={src}
+        className={cn('dark-sleeplab__media', className, playing && 'is-playing')}
+        src={`${src}#t=0.001`}
         autoPlay={!reduceMotion}
         muted
         loop={!reduceMotion}
         playsInline
         controls={false}
-        controlsList="nodownload nofullscreen noremoteplayback"
+        controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
         disablePictureInPicture
         disableRemotePlayback
         preload="auto"
         aria-label={alt}
         tabIndex={-1}
-        onLoadedData={start}
-        onCanPlay={start}
-        onPlaying={reveal}
       />
     </div>
   )

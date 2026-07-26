@@ -239,20 +239,31 @@ body:has(.dark-sleeplab) {
   object-fit: cover;
   object-position: center center;
   z-index: 0;
-  /* Fade in once a frame is decoded — never stay black if autoplay is blocked */
-  opacity: 0;
-  transition: opacity 0.35s ease;
   pointer-events: none;
   -webkit-appearance: none;
   appearance: none;
 }
 
-.dark-sleeplab__media.is-ready,
 .dark-sleeplab__media--img {
   opacity: 1;
+  visibility: visible;
 }
 
-/* Strip every WebKit media-control surface (iOS play arrow) */
+/*
+ * Ambient chamber video: invisible unless playing.
+ * A paused <video> is what makes iOS draw the native play arrow — never show that state.
+ */
+.dark-sleeplab video.dark-sleeplab__media {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.dark-sleeplab video.dark-sleeplab__media.is-playing {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Strip every WebKit media-control surface */
 .dark-sleeplab video.dark-sleeplab__media::-webkit-media-controls,
 .dark-sleeplab video.dark-sleeplab__media::-webkit-media-controls-enclosure,
 .dark-sleeplab video.dark-sleeplab__media::-webkit-media-controls-panel,
